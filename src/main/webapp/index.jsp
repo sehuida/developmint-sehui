@@ -88,5 +88,6 @@
   </div>
 </div>
 	<h1>응애~</h1>
+	<a href="/shareList.do">개발지식공유게시판</a>
 </body>
 </html>
