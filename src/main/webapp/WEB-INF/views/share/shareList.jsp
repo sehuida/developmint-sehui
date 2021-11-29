@@ -13,7 +13,7 @@
 	<h2>개발지식 공유 게시판</h2>
 		<!-- Button trigger modal -->
 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-		  Launch demo modal
+		   모달데모
 		</button>
 		
 		<!-- Modal -->

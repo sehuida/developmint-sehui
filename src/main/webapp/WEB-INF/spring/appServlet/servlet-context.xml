@@ -56,6 +56,9 @@
 	
 	<context:component-scan base-package="kr.or.iei" />
 	<context:component-scan base-package="kr.or.share"/>
+	<context:component-scan base-package="kr.or.jobSearch"/>
+	<context:component-scan base-package="kr.or.admin"/>
+	<context:component-scan base-package="kr.or.gosu"/>
 	<context:component-scan base-package="kr.or.common"/>
 	<!--  
 	<context:component-scan base-package="kr.or.member" />
