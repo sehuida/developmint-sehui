@@ -74,17 +74,17 @@
 
 </style>
 <body>
-	<footer class="footer">
+	<footer class="footer" style="border-top: solid 1px black">
 		<div class="container" style="overflow:hidden;">
 			<div style="overflow:hidden;" class="row">
 				<a style="width:130px;position:absolute;left:100px; "  href="/"></a>
 				
 				<div style="" >
-					<ul class="list-unstyled" >
-						<li ><a href="#" style="color:#fff;">이용약관</a></li>
-						<li><a href="#" style="color:#fff;">개인정보취급방침</a></li>
-						<li><a href="#" style="color:#fff;">인재채용</a></li>
-						<li><a href="#" style="color:#fff;">제휴문의</a></li>
+					<ul class="list-unstyled">
+						<li ><a href="#" style="color:black;">이용약관</a></li>
+						<li><a href="#" style="color:black;">개인정보취급방침</a></li>
+						<li><a href="#" style="color:black;">인재채용</a></li>
+						<li><a href="#" style="color:black;">제휴문의</a></li>
 					</ul>
 					<p>대표이사 | 이윤수</p>
 					<p>대표주소 | 서울특별시 영등포구 선유동2로 57 이레빌딩 (구관) 19F, 20F</p>

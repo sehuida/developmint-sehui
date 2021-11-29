@@ -23,7 +23,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav me-auto" style="font-size: 18px;margin-left: 20px">
+      <ul class="navbar-nav me-auto" style="font-size: 18px;margin-left: 20px;font-weight: bold;">
         <li class="nav-item">
           <a class="nav-link " href="#">팀원모집
             <span class="visually-hidden">(current)</span>
@@ -42,21 +42,21 @@
           <a class="nav-link " href="#">공모전</a>
         </li>
       </ul>
-       <ul class="navbar-nav float-end me-5">
+       <ul class="navbar-nav float-end me-3">
     	<c:choose>
 			<c:when test="${empty sessionScope.m }">
 				<li class="nav-item">
-					<a type="button" class="btn btn-secondary btn-lg">로그인</a>
+					<a type="button" class="btn btn-secondary btn-lg">Login</a>
 		        </li>
 				<li class="nav-item">
-					<a type="button" class="btn btn-primary btn-lg">회원가입</a>
+					<a type="button" class="btn btn-link btn-lg" style="color: #fff;">Join</a>
 		        </li>
 			</c:when>
 			<c:otherwise>
 				<c:choose>
 					<c:when test="${not empty sessionScope.m }">
 						<li class="nav-item dropdown float-end me-5">
-				          <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 3rem;"></i> ${sessionScope.m.memberId }님</a>
+				          <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 2.5rem;"></i> ${sessionScope.m.memberId } 님</a>
 				          <div class="dropdown-menu">
 				            <a class="dropdown-item" href="#">MYPAGE</a>
 				            <div class="dropdown-divider"></div>
