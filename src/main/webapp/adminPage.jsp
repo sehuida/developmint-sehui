@@ -54,6 +54,7 @@ img{
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container" style="margin-top:100px">
+		<div></div>
 		<p id="mypage" style="font-weight:bold">마이페이지</p>
 		<br><br><br>
 		
