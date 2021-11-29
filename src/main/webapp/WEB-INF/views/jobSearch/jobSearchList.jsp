@@ -162,9 +162,6 @@
     .apply>span{
         color: rgb(78, 205, 196);
     }
-    .headerImg{
-    background-image: url("/img/jobSearch/jobSearchList.PNG");
-    }
 </style>
 <body>
 <%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
