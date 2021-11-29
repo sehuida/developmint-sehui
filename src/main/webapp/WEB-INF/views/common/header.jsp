@@ -17,42 +17,32 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand mx-auto" href="/"><img src="/resources/img/logo/Develomint_logo.png"></a>
+    <a class="navbar-brand mx-auto" href="/"><img src="/resources/img/logo/Develomint_logo.png" style="margin-left: 300px;"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav mx-auto">
+      <ul class="navbar-nav me-auto" style="font-size: 18px;margin-left: 20px">
         <li class="nav-item">
-          <a class="nav-link active" href="#">팀원모집
+          <a class="nav-link " href="#">팀원모집
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">개발지식공유</a>
+          <a class="nav-link " href="/shareList.do" >개발지식공유</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">구인구직</a>
+          <a class="nav-link " href="/jobSearchList.do">구인구직</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">'고수'의 노하우</a>
+          <a class="nav-link " href="/gosuMain.do">'고수'의 노하우</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">공모전</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </div>
+          <a class="nav-link " href="#">공모전</a>
         </li>
       </ul>
-       <ul class="navbar-nav float-end">
+       <ul class="navbar-nav float-end me-5">
     	<c:choose>
 			<c:when test="${empty sessionScope.m }">
 				<li class="nav-item">
@@ -64,13 +54,13 @@
 			</c:when>
 			<c:otherwise>
 				<c:choose>
-					<c:when test="${sessionScope.m.memberLevel eq 1 }">
-						<li class="nav-item dropdown float-end">
-				          <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope.m.memberId } 님</a>
+					<c:when test="${not empty sessionScope.m }">
+						<li class="nav-item dropdown float-end me-5">
+				          <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 3rem;"></i> ${sessionScope.m.memberId }님</a>
 				          <div class="dropdown-menu">
 				            <a class="dropdown-item" href="#">MYPAGE</a>
 				            <div class="dropdown-divider"></div>
-				            <a class="dropdown-item" href="#">join</a>
+				            <a class="dropdown-item" href="#">LOGOUT</a>
 				          </div>
 				        </li>
 					</c:when>
