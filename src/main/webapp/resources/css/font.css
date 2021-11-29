@@ -1,10 +1,10 @@
 @font-face {
   font-family: "NotoSansKR";
-  src: local("NotoSansKR"), url(/font/NotoSansKR-Regular.otf);
+  src: local("NotoSansKR"), url(/resources/font/NotoSansKR-Regular.otf);
 }
 @font-face {
   font-family: "NotoBold";
-  src: local("NotoSansKR"), url(/font/NotoSansKR-Bold.otf);
+  src: local("NotoSansKR"), url(/resources/font/NotoSansKR-Bold.otf);
 }
 body {
   font-family: "NotoSansKR";
