@@ -38,10 +38,11 @@
         font-weight: 900;
         width: 200px;
         height: 50px;
+        color: white;
+        cursor: pointer;
     }
     .resume>a{
         text-decoration: none;
-        color: white;
     }
     .headerImg{
         float: left;
@@ -161,6 +162,9 @@
     .apply>span{
         color: rgb(78, 205, 196);
     }
+    .headerImg{
+    background-image: url("/img/jobSearch/jobSearchList.PNG");
+    }
 </style>
 <body>
 <%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
@@ -171,10 +175,10 @@
                 <h1>디벨로민트에서</h1>
                 <h1>빠르고 안전하게</h1>
                 <p>애플리케이션 개발, 웹 개발, 일반 소프트웨어 개발, 웹 디자인, 커머스, 쇼핑몰 등</p>
-                <button class="resume"><a href="resumeFrm.do">이력서 작성하기</a></button>
+                <a href="resumeFrm.do"><button class="resume">이력서 작성하기</button></a>
             </div>
             <div class="headerImg">
-                <img src="img/jobSearchList.PNG">
+                <img src="resources/img/jobSearch/jobSearchList.PNG">
             </div>
         </div>
         <div class="jobSearchListMain">
