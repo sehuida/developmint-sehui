@@ -1,9 +1,9 @@
-package kr.or.model.resume.service;
+package kr.or.resume.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.model.resume.dao.ResumeDao;
+import kr.or.resume.dao.ResumeDao;
 
 @Service
 public class ResumeService {
