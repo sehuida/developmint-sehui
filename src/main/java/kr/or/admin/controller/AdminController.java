@@ -24,12 +24,25 @@ public class AdminController {
 	}
 	*/
 	
+	//대시보드로 이동
 	@RequestMapping(value="/dashboard.do")
 	public String dashboard(Model model) {
 		//오늘 날짜 전송
 		LocalDate today = LocalDate.now();
 		model.addAttribute("today",today);
 		return "admin/dashboard";
+	}
+	
+	//전체회원리스트 목록으로 이동
+	@RequestMapping(value="/allMemberList.do")
+	public String allMemberList(Model model) {
+		return "admin/allMemberList";
+	}
+	
+	//신고회원목록으로 이동
+	@RequestMapping(value="/reportMember.do")
+	public String reportMember(Model model) {
+		return "admin/reportMember";
 	}
 	
 }
