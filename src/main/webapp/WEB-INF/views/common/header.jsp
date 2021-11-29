@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-
+<!-- 기본 css  -->
+<link rel="stylesheet" href="/resources/css/default.css">
 <!-- 부트스트랩 minty CSS -->
 <link rel="stylesheet" href="/resources/css/bootstrap.css">
 <!-- 글꼴적용(NotoSans 폰트) -->
@@ -16,26 +17,29 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand mx-auto" href="/"><img src="/resources/img/logo/Develomint_logo.png"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav mx-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Home
+          <a class="nav-link active" href="#">팀원모집
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="#">개발지식공유</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link" href="#">구인구직</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
+          <a class="nav-link" href="#">'고수'의 노하우</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">공모전</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -48,10 +52,32 @@
           </div>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-sm-2" type="text" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
+       <ul class="navbar-nav float-end">
+    	<c:choose>
+			<c:when test="${empty sessionScope.m }">
+				<li class="nav-item">
+					<a type="button" class="btn btn-secondary btn-lg">로그인</a>
+		        </li>
+				<li class="nav-item">
+					<a type="button" class="btn btn-primary btn-lg">회원가입</a>
+		        </li>
+			</c:when>
+			<c:otherwise>
+				<c:choose>
+					<c:when test="${sessionScope.m.memberLevel eq 1 }">
+						<li class="nav-item dropdown float-end">
+				          <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">${sessionScope.m.memberId } 님</a>
+				          <div class="dropdown-menu">
+				            <a class="dropdown-item" href="#">MYPAGE</a>
+				            <div class="dropdown-divider"></div>
+				            <a class="dropdown-item" href="#">join</a>
+				          </div>
+				        </li>
+					</c:when>
+				</c:choose>
+			</c:otherwise>
+		</c:choose>
+		</ul>
     </div>
   </div>
 </nav>

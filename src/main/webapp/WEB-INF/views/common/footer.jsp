@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <style>
+#footer {
+    margin: 5em 0;
+}
 
 .row span {
   position: relative;
@@ -71,7 +74,7 @@
 
 </style>
 <body>
-	<footer id="footer">
+	<footer class="footer">
 		<div class="container" style="overflow:hidden;">
 			<div style="overflow:hidden;" class="row">
 				<a style="width:130px;position:absolute;left:100px; "  href="/"></a>
