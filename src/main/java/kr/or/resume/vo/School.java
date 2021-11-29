@@ -1,4 +1,4 @@
-package kr.or.model.resume.vo;
+package kr.or.resume.vo;
 
 import lombok.Data;
 
