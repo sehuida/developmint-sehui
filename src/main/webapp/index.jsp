@@ -90,5 +90,6 @@
 	<h1>응애~</h1>
 	<a href="/shareList.do">개발지식공유게시판</a>
 	<a href="/jobSearchList.do">구인구직게시판</a>
+	<a href="/gosuMain.do">고수의 노하우</a>
 </body>
 </html>
