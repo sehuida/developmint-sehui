@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <style>
+.container *{
+	text-decoration : none;
+}
 .container>h1 {
 	display: flex;
 	justify-content: center;
