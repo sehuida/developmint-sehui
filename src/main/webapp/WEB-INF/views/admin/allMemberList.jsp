@@ -49,12 +49,10 @@
 	margin-top : 30px;
 	text-align: center;
 }
-
-
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
-	<div class="container" style="margin-top:100px;margin-bottom:100px;">
+	<div class="container" style="margin-top:50px;margin-bottom:100px;">
 		<div class="mainCate">
 		<a href="#" class="cateAtag" onclick="history.go(-1)"><i class="bi bi-chevron-left"></i></a> 
 		<span id="allMember" style="font-weight:bold">전체 회원 조회</span>
@@ -269,13 +267,9 @@
 			</tr>
 		</c:forEach>
 	</table>
-	
+		<button class="btn btn-primary" style="float: right; margin-right:20px;">등급변경</button>
 	</div>
-	<%--  
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
-	 --%>
-	 
-	 
 	 <script>
 	 
 	 	<%--최신순 클릭시--%>
@@ -287,6 +281,7 @@
 	 		$(".newListTbl").css("display","inline-table");
 	 		$("#newList").css("color","#4ECDC4")
 	 	});
+	 	$("#newList").trigger("click");
 	 	
 	 	<%--등급순 클릭시--%>
 	 	$("#gradeList").click(function(){

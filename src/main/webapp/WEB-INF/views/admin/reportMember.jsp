@@ -57,10 +57,18 @@
 	padding: 20px;
 	width: 450px;
 }
+.badge-primary{
+	background-color: #78c2ad;
+}
+.badge-secondary{
+	background-color: #f3969a;
+}
+
+
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
-	<div class="container" style="margin-top:100px;margin-bottom:100px;">
+	<div class="container" style="margin-top:50px;margin-bottom:100px;">
 		<div class="mainCate">
 		<a href="#" class="cateAtag" onclick="history.go(-1)"><i class="bi bi-chevron-left"></i></a> 
 		<span id="reportMember" style="font-weight:bold">신고 회원 조회</span>
@@ -105,14 +113,34 @@
 			</div>
 			<div class="reportMember">
 				<div>
-					<p>음...뭐라도 넣을 예정</p>
+					<p class="rc_title">최근 처리 내역</p>
+					<table class="table">
+						<tr>
+							<th>처리상태</th>
+							<th>신고자</th>
+							<th>신고당한 회원</th>
+						</tr>
+						<tr>
+							<td><span class="badge badge-primary">신고처리</span></td>
+							<td>user01</td>
+							<td>user99</td>
+						</tr>
+						<tr>
+							<td><span class="badge badge-secondary">신고반려</span></td>
+							<td>user01</td>
+							<td>user99</td>
+						</tr>
+						<tr>
+							<td><span class="badge badge-light" style="color:#78c2ad; border:1px solid #78c2ad">허위신고</span></td>
+							<td>user01</td>
+							<td>user99</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>	
 	</div>
-	<%--  
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
-	 --%>
 	 <script>
 	 	$(".selectBox").click(function(){
 	 		var index = $(this).index();

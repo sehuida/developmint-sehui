@@ -45,4 +45,11 @@ public class AdminController {
 		return "admin/reportMember";
 	}
 	
+	//차단회원목록으로 이동
+	@RequestMapping(value="/blockedMember.do")
+	public String blockedMember(Model model) {
+		return "admin/blockedMember";
+	}
+	
+	
 }
