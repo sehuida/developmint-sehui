@@ -42,14 +42,14 @@
           <a class="nav-link " href="/gosuMain.do">'고수'의 노하우</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="#">공모전</a>
+          <a class="nav-link " href="/contestMain.do">공모전</a>
         </li>
       </ul>
        <ul class="navbar-nav float-end me-3">
     	<c:choose>
 			<c:when test="${empty sessionScope.m }">
 				<li class="nav-item">
-					<a type="button" class="btn btn-secondary btn-lg" href="/login.do">Login</a>
+					<a type="button" class="btn btn-secondary btn-lg" href="/loginFrm.do">Login</a>
 		        </li>
 				<li class="nav-item">
 					<a type="button" class="btn btn-link btn-lg" href="/joinFrm.do">Join</a>
