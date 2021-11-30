@@ -69,11 +69,13 @@
         height: 50px;
         padding-left: 15px;
         margin-right: 20px;
+        outline: none;
     }
     .mainCenter>input{
-        width: 300px;
-        height: 45px;
+        width: 330px;
+        height: 50px;
         padding-left: 15px;
+        outline: none;
     }
     .content{
         margin-top: 50px;
@@ -152,6 +154,9 @@
         margin-left: 30px;
         color: rgb(100, 100, 100);
     }
+    .subInfo>span{
+    	font-size: 13px;
+    }
     .situation{
         float: right;
         color: gray;
@@ -199,7 +204,7 @@
                     <option>디자인</option>
                     <option>기획</option>
                 </select>
-                <input type="text" placeholder="검색">
+                <input type="text" placeholder="검색" class="search">
                 <div class="content">
                     <div class="status">모집중</div>
                     <div class="cpName"><a href="companyInfo.do?companyNo=1">케이씨환경서비스(주)</a></div>	<!-- 회사번호 -->
@@ -375,7 +380,7 @@
                     </div>
                 </div>
                 <br>
-                <p>페이징 처리 하기</p>
+                <p class="imsi" style="margin-top: 30px; margin-bottom: 60px; text-align: center">페이징 처리 하기</p>
             </div>
         </div>
     </div>
