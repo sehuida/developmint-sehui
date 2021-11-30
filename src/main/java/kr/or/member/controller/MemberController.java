@@ -36,4 +36,8 @@ public class MemberController {
 		session.invalidate();
 		return "common/main";
 	}
+	@RequestMapping(value="/joinFrm.do")
+	public String joinFrm() {
+		return "member/join";
+	}
 }
