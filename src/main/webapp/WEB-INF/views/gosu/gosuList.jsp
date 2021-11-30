@@ -79,9 +79,24 @@
     display: flex;
     justify-content: center;
 }
+
+.gosu-write-wrap{
+    position: fixed;
+    z-index: 1000;
+    display: flex;
+    align-items:center;
+    justify-content: right;
+    width: 1400px;
+}
+.gosu-write{
+    border: 1px solid black;
+    padding: 20px;
+    display: flex;
+    justify-content: right;
+    background-color: white;
+}
 </style>
 <body>
-
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
     <div class="container">
         <h3><span style="color: rgb(78, 205, 196); ">고수</span>의 노하우</h3>
@@ -98,6 +113,12 @@
             <option value="" >작성자</option>
         </select>
 
+   </div>
+    <div class="gosu-write-wrap">
+       <div class="gosu-write">
+        <h5>고수님의 능력을<br> 마음껏 펼쳐주세요!</h5>
+        <button  class="btn btn-primary">작성하기</button>
+       </div> 
    </div>
     <div class="gosu-wrap">
         <div class="gosu">
