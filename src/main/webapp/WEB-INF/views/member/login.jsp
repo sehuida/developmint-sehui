@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <link rel="stylesheet" href="/resources/css/member/login.css">
 <meta charset="UTF-8">
 <title>Login</title>
@@ -12,7 +12,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <div class="container">
-        <h1 style="font-weight: bold; text-align: center;">로그인</h1><br>
+        <h1 style="font-weight: bold; text-align: center; color:rgb(78, 205, 196);">로그인</h1><br>
         <form action="/loginFrm.do" method="post" id="loginForm">
             <fieldset>
                 <div id="login-l">
