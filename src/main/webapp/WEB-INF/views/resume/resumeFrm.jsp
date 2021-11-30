@@ -132,6 +132,38 @@
 		outline: none;
 	}
 	
+	
+	.selectBtn{
+		text-align: center;
+	}
+	.backBtn{
+		background-color: orange;
+		color: white;
+		width: 150px;
+		height: 60px;
+		font-size: 20px;
+		font-weight: 900;
+		border: none;
+		border-radius: 10px;
+		transition: background-color 0.5s;
+	}
+	.backBtn:hover{
+		background-color: red;
+	}
+	.resumeBtn{
+		background-color: rgb(78, 205, 196);
+		color: white;
+		width: 150px;
+		height: 60px;
+		font-size: 20px;
+		font-weight: 900;
+		border: none;
+		border-radius: 10px;
+		transition: background-color 0.5s;
+	}
+	.resumeBtn:hover{
+		background-color: rgb(0, 174, 255);
+	}
 </style>
 <script>
 	$(function(){
@@ -389,6 +421,10 @@ ruru0907@naver.com			<!-- ${sessionScope.m.email} -->
 			<em>희망 근무지역 선택</em>
 			<div class="grayBox">
 			
+			</div>
+			<div class="selectBtn">
+				<input type="button" class="backBtn" value="취소">
+				<input type="submit" class="resumeBtn" value="등록하기">
 			</div>
 		</form>
 	</div>
