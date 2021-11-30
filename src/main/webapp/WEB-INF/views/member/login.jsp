@@ -13,10 +13,10 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <div class="container">
         <h1 style="font-weight: bold; text-align: center;">로그인</h1><br>
-        <form action="/login.do" method="post" id="loginForm">
+        <form action="/loginFrm.do" method="post" id="loginForm">
             <fieldset>
                 <div id="login-l">
-                    <img src="img/Develomint_logo.png" id="loginlogo">
+                    <img src="resources/img/logo/Develomint_logo.png" id="loginlogo">
                 </div>
                 <div class="form-group">
                     <label for="memberId" class="form-label mt-4">아이디</label>
@@ -30,7 +30,7 @@
                     <button type="submit" class="btn btn-primary">로그인</button>
                 </div>
                 <div class="loginBt">
-                    <a class="btn btn-info">회원가입</a>    
+                    <a class="btn btn-info">회원가입</a>   
                 </div>
                 <div>
                     <a href="#">아이디찾기/비밀번호찾기</a>
