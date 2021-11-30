@@ -12,10 +12,8 @@ import kr.or.member.model.vo.Member;
 
 @Controller
 public class MemberController {
-	
 	@Autowired
 	private MemberService service;
-	
 	
 	@RequestMapping(value="/login.do")
 	public String login() {
@@ -32,5 +30,10 @@ public class MemberController {
 		}
 		model.addAttribute("loc","/");
 		return "common/msg";
+	}
+	@RequestMapping(value="/logout.do")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "common/main";
 	}
 }
