@@ -8,7 +8,7 @@
 <title>구인구직게시판</title>
 </head>
 <style>
-    .container{
+    .contain{
         width: 1200px;
         margin: 0 auto;
     }
@@ -16,17 +16,20 @@
         overflow: hidden;
         margin-left: 100px;
     }
-    .headerText{
+    .headerText1{
         margin-top: 150px;
         margin-right: 100px;
         font-weight: 900;
         font-size: 20px;
         float: left;
     }
-    .headerText>h1{
+    .headerText1>h1{
         margin: 5px 0px;
+        color: black;
+        font-weight: 900;
     }
-    .headerText>p{
+    .headerText1>p{
+    	margin-top: 20px;
         width: 300px;
         color: gray;
         font-size: 13px;
@@ -164,10 +167,10 @@
     }
 </style>
 <body>
-<%-- <jsp:include page="/WEB-INF/views/common/header.jsp" /> --%>
-	<div class="container">
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<div class="contain">
         <div class="jobSearchListHeader">
-            <div class="headerText">
+            <div class="headerText1">
                 <h1>IT구인구직은</h1>
                 <h1>디벨로민트에서</h1>
                 <h1>빠르고 안전하게</h1>
@@ -376,5 +379,6 @@
             </div>
         </div>
     </div>
+        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
