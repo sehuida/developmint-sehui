@@ -15,11 +15,11 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
-	@RequestMapping(value="/login.do")
+	@RequestMapping(value="/loginFrm.do")
 	public String login() {
 		return "member/login";
 	}
-	@RequestMapping(value="/loginFrm.do")
+	@RequestMapping(value="/login.do")
 	public String loginFrm(Member member,HttpSession session,Model model) {
 		Member m = service.selectOneMember(member);
 		if(m != null) {
