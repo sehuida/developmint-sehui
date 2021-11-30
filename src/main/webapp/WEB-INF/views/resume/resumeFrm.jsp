@@ -123,6 +123,14 @@
 		border: 1px solid #dfdfdf;
 		text-align: center;
 	}
+	.selfIntroContentTextarea{
+		margin-left: 50px;
+		padding-top: 30px;
+		padding-left: 20px;
+		width: 700px;
+		border-top: none;
+		outline: none;
+	}
 	
 </style>
 <script>
@@ -367,12 +375,12 @@ ruru0907@naver.com			<!-- ${sessionScope.m.email} -->
 			<em>자기소개서</em>
 			<div class="grayBox">
 				<div class="selfIntro">
-	              	<div class="">
+	              	<div class="selfIntroTitle">
 	                    <input type="text" name="selfIntroTitle" class="textInput" placeholder="자기소개서 제목">
 	                </div>
 	               
-	                <div class="">
-	                    <textarea cols="80" rows="10" name="selfIntroContent" class="textarea" placeholder="자기소개서 내용"></textarea>
+	                <div class="selfIntroContent">
+	                    <textarea cols="80" rows="10" name="selfIntroContent" class="selfIntroContentTextarea" placeholder="자기소개서 내용"></textarea>
 	                </div>
 	                
 	           </div>
@@ -385,11 +393,5 @@ ruru0907@naver.com			<!-- ${sessionScope.m.email} -->
 		</form>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-	<style>
-		.textarea{
-			margin-left: 50px;
-			width: 700px;
-		}
-	</style>
 </body>
 </html>
