@@ -8,11 +8,8 @@
 <title>Insert title here</title>
 </head>
 <style>
-
-.container{
-    min-width: 1200px;
-    width:1200px;
-      margin: 0 auto;
+.container *{
+	text-decoration:none;
 }
 .container>h1{
     display: flex;
@@ -20,6 +17,9 @@
     margin-top: 50px;
     font-size: 55px;
     font-weight: 900;
+}
+.container{
+    min-width: 1200px;
 }
 .container> .g-msg{
     margin: 50px;
@@ -54,7 +54,7 @@
     padding: 10px;
     padding-right: 30px;
     padding-left: 30px;
-    
+    text-align: left;
 }
 .gosu hr{
     max-width: 100%;
@@ -68,8 +68,8 @@
     margin-bottom: 50px;
     background-color: rgb(223, 245, 235);
     left: 0;
-    min-width: 100%;
     padding: 50px;
+    overflow-x: hidden;
 }
 .gosu-person>h3,.gosu-notice>h3, .gosu-status>h3{
     font-size: 30px;
@@ -80,6 +80,9 @@
     text-align: center;
     font-weight: bold;
     
+}
+.gosu button:hover{
+    background-color: rgb(223, 245, 235);
 }
 .g-act{
     display:flex;
@@ -168,9 +171,10 @@ ul#gallery{
     padding: 50px;
   }
   .gosu-status hr{
-      margin-top: 80px;
       margin-bottom: 80px;
 }
+
+  
 .fade {
     -webkit-animation-name: fade;
     -webkit-animation-duration: 1.5s;
@@ -187,22 +191,55 @@ ul#gallery{
     from {opacity: .4} 
     to {opacity: 1}
   }
+  .g-status-border {
+      border: 1px solid #78c2ad;
+      border-radius: 30px;
+      padding: 40px;
+  }
+  .g-status-border>h4 {
+    font-size: 30px;
+    font-weight: 900;
+    color: rgb(78, 205, 196);
+}
+.g-statusContent{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.g-statusContent .g-sc-tbl{
+    width: 350px;
+    margin: 40px;
+    border-width: 2px;
+    border: 2px solid #cae4dc;
+   
+}
+
+.g-statusContent .g-sc-tbl *{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 16px;
+}
+.g-sc-tbl:hover{
+    border: 2px solid #78c2ad ;
+
+}
 </style>
 <body>
 	<%@include file ="/WEB-INF/views/common/header.jsp" %>
-   <div class="container">
+      <div class="container">
         <h1><span style="color: rgb(78, 205, 196); ">고수</span>의 노하우</h1>
     <div class="g-msg">
         고수에게 피드백을 신청해보세요!<br>
         당신의 작품을 평가해줍니다. 마음껏 질문하세요!
     </div>
     <div class="g-plus">
-        <a>더보기</a>
+        <a href="">더보기</a>
     </div>
     <div class="gosu-wrap">
         <div class="gosu">
-            <div class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-                <label>
+            <button class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
                     <table>
                         <tr>
                             <td rowspan="4" class="gosu_img" style="width: 30%;"><img src="/resources/img/gosu/g_img_basic.png" style=" border-radius: 50%;"></td>
@@ -223,12 +260,10 @@ ul#gallery{
                             <td>4.0</td>
                         </tr>
                     </table>
-                </label>
-              </div>
+            </button>
             </div> 
             <div class="gosu">
-                <div class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-                    <label>
+                <button class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
                         <table>
                             <tr>
                                 <td rowspan="4" class="gosu_img" style="width: 30%;"><img src="/resources/img/gosu/g_img_basic.png" style=" border-radius: 50%;"></td>
@@ -249,15 +284,13 @@ ul#gallery{
                                 <td>4.0</td>
                             </tr>
                         </table>
-                    </label>
-                  </div>
+                </button>
             </div>
            
         </div>
         <div class="gosu-wrap">
             <div class="gosu">
-                <div class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-                    <label>
+                <button class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
                         <table>
                             <tr>
                                 <td rowspan="4" class="gosu_img" style="width: 30%;"><img src="/resources/img/gosu/g_img_basic.png" style=" border-radius: 50%;"></td>
@@ -278,12 +311,11 @@ ul#gallery{
                                 <td>4.0</td>
                             </tr>
                         </table>
-                    </label>
-                  </div>
+                </button>
                 </div> 
                 <div class="gosu">
-                    <div class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-                        <label>
+                    <button class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+                    
                             <table>
                                 <tr>
                                     <td rowspan="4" class="gosu_img" style="width: 30%;"><img src="/resources/img/gosu/g_img_basic.png" style=" border-radius: 50%;"></td>
@@ -304,8 +336,8 @@ ul#gallery{
                                     <td>4.0</td>
                                 </tr>
                             </table>
-                        </label>
-                      </div>
+                        </button>
+                    
                 </div>
                
             </div>
@@ -314,9 +346,9 @@ ul#gallery{
             <span class="dot" onclick="currentSlide(2); "></span> 
             <span class="dot" onclick="currentSlide(3); "></span> 
           </div>
-       <div class="gosu-person-wrap" >
+       <div class="gosu-person-wrap " >
            <div class="gosu-person "  >
-           <h3 style="margin-left: 0; margin-top:0;">새로운 <span style="color: rgb(78, 205, 196); ">고수</span>를 소개합니다!</h3>
+           <h3 style="margin-left: 0;">새로운 <span style="color: rgb(78, 205, 196); ">고수</span>를 소개합니다!</h3>
            <div class="g-act">활동 고수&nbsp;&nbsp;<span> 00</span>명</div>
            <div style="display: flex; justify-content: space-between; margin-top: 50px;">
             <div class="gosu-one" >
@@ -342,7 +374,7 @@ ul#gallery{
            
         <h3><span style="color: rgb(78, 205, 196); ">고수</span>의 게시판</h3>
         <div class="g-plus">
-            <a>더보기</a>
+            <a href="">더보기</a>
         </div>
         <div class="g-gall" >
             <ul id="gallery">
@@ -364,8 +396,69 @@ ul#gallery{
         <hr>
         <h3 style="text-align: center;">나의 현황</h3>
         <div class="g-plus">
-            <a>자세히 보기</a>
+            <a href="">자세히 보기</a>
         </div>
+        <div class="g-status-border">
+            <h4 style="margin-top: 30px; margin-left: 40px;">신청한 내역</h4>
+                <div class="g-statusContent">
+                    <table class="g-sc-tbl card text-white bg-primary mb-3">
+                        <tr>
+                            <th colspan="2" style="text-align: right;  padding-right: 0;">진행 중</th>
+                        </tr>
+                        <tr>
+                            <th>고수</th>
+                            <td>아이디(memberId)</td>
+                        </tr>
+                        <tr>
+                            <th>내용</th>
+                            <td>제목(text)</td>
+                        </tr>
+                    </table>
+                    <table class="g-sc-tbl card text-white bg-primary mb-3">
+                        <tr>
+                            <th colspan="2" style="text-align: right; padding-right: 0;">진행 중</th>
+                        </tr>
+                        <tr>
+                            <th>고수</th>
+                            <td>아이디(memberId)</td>
+                        </tr>
+                        <tr>
+                            <th>내용</th>
+                            <td>제목(text)</td>
+                        </tr>
+                    </table>
+                </div>
+                <h4 style="margin-top: 30px; margin-left: 40px;">작성한 고수 리뷰</h4>
+                <div class="g-statusContent">
+
+                    <table class="g-sc-tbl card ">
+                        <tr>
+                            <th colspan="2" style="text-align: right; padding-right: 0;">진행 중</th>
+                        </tr>
+                        <tr>
+                            <th>고수</th>
+                            <td><a href="#" class="card-link">제목제목</a></td>
+                        </tr>
+                        <tr>
+                            <th>내용</th>
+                            <td><a href="#" class="card-link">내용내용</a></td>
+                        </tr>
+                    </table>
+                    <table class="g-sc-tbl card ">
+                        <tr>
+                            <th colspan="2" style="text-align: right; padding-right: 0;">진행 중</th>
+                        </tr>
+                        <tr>
+                            <th>고수</th>
+                            <td><a href="#" class="card-link">제목제목</a></td>
+                        </tr>
+                        <tr>
+                            <th>내용</th>
+                            <td><a href="#" class="card-link">내용내용</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
          </div>
     </div>
      <script>
@@ -395,10 +488,7 @@ ul#gallery{
             slides[slideIndex2 -1].style.display="block";
             dots[slideIndex2 -1].className += " active";  
             }
-    
-            function membership(){
-            	location.href="/membership";
-            }
         </script>
+        <%@include file ="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
