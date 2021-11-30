@@ -14,9 +14,7 @@
 
 </style>
 <body>
-
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
-	
 	<div class="container" style="margin-bottom:100px; " >
 		<%-- 메인 포스터 3개 슬라이드 --%>
 		<div class="slideContest" style="margin-left:100px;">
@@ -27,9 +25,13 @@
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	
+	
+	
+	
+	
+	
 	<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<script>
-	
 	//슬릭슬라이드
 	$('.slideContest').slick({
 		dots : true,				//점 표시

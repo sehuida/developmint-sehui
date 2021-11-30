@@ -62,6 +62,7 @@
 	<context:component-scan base-package="kr.or.resume"/>
 	<context:component-scan base-package="kr.or.common"/>
 	<context:component-scan base-package="kr.or.member" />
+	<context:component-scan base-package="kr.or.contest" />
 	
 	<!--  
 	<context:component-scan base-package="kr.or.board" />
