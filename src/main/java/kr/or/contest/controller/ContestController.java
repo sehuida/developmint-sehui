@@ -12,8 +12,15 @@ public class ContestController {
 	@Autowired
 	private ContestService service;
 	
+	//공모전 메인페이지 이동
 	@RequestMapping(value="/contestMain.do")
 	public String contestMain() {
 		return "contest/contestMain";
+	}
+	
+	//공모전 등록 페이지 이동
+	@RequestMapping(value="insertContestFrm.do")
+	public String insertContestFrm() {
+		return "contest/insertContestFrm";
 	}
 }
