@@ -268,7 +268,7 @@ to {
 			고수에게 피드백을 신청해보세요!<br> 당신의 작품을 평가해줍니다. 마음껏 질문하세요!
 		</div>
 		<div class="g-plus">
-			<a href="">더보기</a>
+			<a href="/gosuList.do">더보기</a>
 		</div>
 		<div class="gosu-wrap">
 			<div class="gosu">
