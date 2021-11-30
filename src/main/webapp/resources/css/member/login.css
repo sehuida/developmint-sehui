@@ -1,7 +1,4 @@
 @charset "UTF-8";
-      body{
-          background-color:rgb(190, 190, 190);
-      }
       #loginlogo{
         width: 170px;
         height: 40px;
@@ -15,6 +12,7 @@
         width: 450px;
         margin: 40px auto;
         padding: 40px 70px 40px 70px;
+        border : 2px solid rgb(78, 205, 196);
       }
       #loginForm div{
           padding: 10px;
