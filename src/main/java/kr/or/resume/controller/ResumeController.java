@@ -16,4 +16,9 @@ public class ResumeController {
 	public String resumeFrm() {
 		return "resume/resumeFrm";
 	}
+	
+	@RequestMapping(value="resumeManage.do")
+	public String resumeManage() {
+		return "resume/resumeManage";
+	}
 }
