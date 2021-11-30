@@ -98,6 +98,7 @@
 			<th>신고당한 횟수</th>
 			<th>가입일</th>
 			<th>등급 변경</th>
+			<th>회원 차단</th>
 		</tr>
 		<c:forEach varStatus="i" begin="0" end="9">
 			<tr class="tblTr ">
@@ -119,6 +120,7 @@
 						<option>마스터</option>
 					</select>
 				</td>
+				<td><button class="btn btn-outline-primary btn-sm" style="color:#4ECDC4; border-color: #4ECDC4">차단하기</button></td>
 			</tr>
 		</c:forEach>
 	</table>

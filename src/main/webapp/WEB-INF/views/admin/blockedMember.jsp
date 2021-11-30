@@ -28,6 +28,22 @@ span{
 	font-size: 19px;
 	margin-right: 5px;
 }
+#searchForm{
+	width: 200px;
+	margin-right: 10px;
+	display: inline-block;
+	
+}
+#searchBox{
+	display: flex;
+	justify-content: flex-end;
+}
+#Modaltitle{
+	margin-top:20px;
+	margin-bottom:20px;
+	font-size: 20px;
+	font-weight: bold;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -37,18 +53,28 @@ span{
 		<span id="blockedMember" style="font-weight:bold">차단 회원 조회</span>
 		</div>
 		<br><br><br>
+		
+		<%--총 차단회원 명 수 --%>
 		<span>총 차단 회원 </span><span id="blockedCount">55</span><span> 명</span>
+		
+		<%--아이디 검색창 --%>
+		<div id="searchBox">
 		<form action="/searchBlockedMember.do" method="post">
-			
+			<input type="text" name="memberId" value="아이디를 입력하세요" class="form-control" id="searchForm">
+			<button class="btn btn-secondary">검색</button>
 		</form>
+		</div>
+		
+		<%--차단회원 테이블 --%>
 		<form action="/unblockMember.do" method="post">
-		<table class="table" style="margin-top:20px;"> 
+		<table class="table" style="margin-top:20px; text-align: center;"> 
 			<tr>
 				<th><input type="checkbox"></th>
 				<th>No.</th>
 				<th>아이디</th>
 				<th>이름</th>
 				<th>이메일</th>
+				<th>등급</th>
 				<th>마지막 신고일</th>
 				<th>내용보기</th>
 			</tr>
@@ -59,14 +85,47 @@ span{
 					<td>user01</td>
 					<td>김수현</td>
 					<td>user1@gmail.com</td>
+					<td>Silver</td>
 					<td>2021-11-30</td>
-					<td><button type="button" class="btn btn-primary btn-sm">자세히</button></td>
+					<td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#memberMoreModal">자세히</button></td>
 				<tr>
 			</c:forEach>
 		</table>
 		<button type="button" class="btn btn-outline-primary"><i class="bi bi-check2-square"></i>차단 해제</button>
 		</form>
+		
+		<!-- 차단회원 내용 Modal -->
+		<div class="modal fade" id="memberMoreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-body">
+		      	<p id="Modaltitle">신고 누적 내용</p>
+		      	<p>아이디 : user01</p>
+		      	<p>이름 : 김수현</p>
+		      	<p>이메일 : user1@gmail.com</p>
+		      	<table class="table" style="margin-top: 20px;">
+		      		<tr>
+		      			<th>신고일</th>
+		      			<th>사유</th>
+		      			<th>댓글 내용</th>
+		      		</tr>
+		      		<c:forEach begin="0" end="4">
+		      			<tr>
+		      				<td>2021-11-30</td>	
+		      				<td>욕설/인신공격</td>
+		      				<td>어쩌구 저쩌구 심한욕</td>
+		      			</tr>
+		      		</c:forEach>
+		      	</table>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	</div>
+	
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
