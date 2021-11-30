@@ -109,7 +109,7 @@
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
-	<div class="container" style="margin-top:100px;margin-bottom:100px;">
+	<div class="container" style="margin-top:50px;margin-bottom:100px;">
 	
 		<div class="mainCate">
 		<a href="#" class="cateAtag" onclick="history.go(-1)"><i class="bi bi-chevron-left"></i></a> 
@@ -192,14 +192,8 @@
 				</div>
 			</div>
 		</div>
-		
-		
-		
-		
-	</div>
-	<%--  
+	</div> 
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
-	 --%>
 	 <script>
 	 <%-- 가입/탈퇴 차트(line타입)--%>
 	 new Chart(document.getElementById("myChart1"), {
