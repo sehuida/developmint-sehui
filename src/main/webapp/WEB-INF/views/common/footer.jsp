@@ -14,7 +14,6 @@
 .row span {
   position: relative;
   margin: 0;
-  color: #fff;
   font-size: 20px;
   line-height: 20px;
 }
@@ -71,27 +70,39 @@
     transform: translate(-2px, 2px);
   }
 }
-
+.row p{
+	margin-bottom: 0;
+	color: #737373;
+	font-size: small;
+}
+.list-unstyled li a{
+	text-decoration: none;
+}
 </style>
 <body>
 	<footer class="footer" style="border-top: solid 1px black">
-		<div class="container" style="overflow:hidden;">
+		<div class="container" style="overflow:hidden;margin-bottom: 30px;">
 			<div style="overflow:hidden;" class="row">
-				<a style="width:130px;position:absolute;left:100px; "  href="/"></a>
 				
-				<div style="" >
-					<ul class="list-unstyled">
-						<li ><a href="#" style="color:black;">이용약관</a></li>
-						<li><a href="#" style="color:black;">개인정보취급방침</a></li>
-						<li><a href="#" style="color:black;">인재채용</a></li>
-						<li><a href="#" style="color:black;">제휴문의</a></li>
+				<div style="text-align: right;" >
+					<ul class="list-unstyled pe-5" style="float: left;font-size: large;">고객센터
+						<li ><a href="/notice.do" style="color:#737373;font-size:15px;">공지사항</a></li>
+						<li><a href="/qnaFrm.do" style="color:#737373;font-size: 15px;">1:1문의</a></li>
 					</ul>
+					<ul class="list-unstyled pe-5" style="float: left">
+						<li ><a href="#" style="color:black;">팀프로젝트 팀원모집</a></li>
+						<li><a href="/gosuMain.do" style="color:black;">'고수'의 노하우</a></li>
+						<li><a href="/shareList.do" style="color:black;">개발지식공유</a></li>
+						<li><a href="/jobSearchList.do" style="color:black;">구인구직</a></li>
+						<li><a href="/contestMain.do" style="color:black;">공모전</a></li>
+					</ul>
+					<a href="/"><img src="/resources/img/logo/Develomint_logo.png"></a><br>
+					<sapn><a href="#" style="color:black;">이용약관</a> <a href="#" style="color:black;">개인정보취급방침</a> <a href="#" style="color:black;">사업자 정보확인</a></sapn>
 					<p>대표이사 | 이윤수</p>
 					<p>대표주소 | 서울특별시 영등포구 선유동2로 57 이레빌딩 (구관) 19F, 20F</p>
 					<p>전화번호 | 02-2163-8560</p>
-					<p>Copyrightⓒ 2021 <span >team mint</span>. All right reserved</p>
+					<p>Copyrightⓒ 2021.<span>DeveloMint</span> .All right reserved</p>
 				</div>
-				
 			</div>
 		</div>
 </footer>

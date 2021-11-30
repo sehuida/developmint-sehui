@@ -15,6 +15,9 @@
 <!-- 부트스트랩용 jQuery cdn방식-->
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.min.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
+<!-- favicon css-->
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid" style="margin-left: 300px;">
     <a class="navbar-brand mx-auto" href="/"><img src="/resources/img/logo/Develomint_logo.png" style="height: 50px"></a>
@@ -39,14 +42,14 @@
           <a class="nav-link " href="/gosuMain.do">'고수'의 노하우</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="#">공모전</a>
+          <a class="nav-link " href="/contestMain.do">공모전</a>
         </li>
       </ul>
        <ul class="navbar-nav float-end me-3">
     	<c:choose>
 			<c:when test="${empty sessionScope.m }">
 				<li class="nav-item">
-					<a type="button" class="btn btn-secondary btn-lg" href="/login.do">Login</a>
+					<a type="button" class="btn btn-secondary btn-lg" href="/loginFrm.do">Login</a>
 		        </li>
 				<li class="nav-item">
 					<a type="button" class="btn btn-link btn-lg" href="/joinFrm.do">Join</a>

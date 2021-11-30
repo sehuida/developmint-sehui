@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Develomint</title>
-
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
