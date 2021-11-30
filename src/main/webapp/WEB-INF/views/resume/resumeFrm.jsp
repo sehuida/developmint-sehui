@@ -23,6 +23,7 @@
 		margin-bottom: 30px;
 	}
 	em{
+		float: left;
 		font-style: normal;
 		font-weight: 900;
 		font-size: 20px;
@@ -58,12 +59,38 @@
 		outline: none;
 		margin-left: 50px;
 	}
+	.smallTextInput{
+		width: 300px;
+		height: 40px;
+		padding-left: 5px;
+		outline: none;
+		margin-left: 50px;
+	}
+	.selectInput{
+		margin-left: 50px;
+		width: 300px;
+		height: 40px;
+	}
+	.dateInput{
+		width: 130px;
+		height: 40px;	
+	}
+	.firstDateInput{
+		margin-left: 50px;
+	}
+	.schoolInfo{
+		width: 800px;
+		float: left;
+	}
+	.schoolInfo>div{
+		margin-bottom: 20px;
+	}
 </style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="contain">
-			<em>기본정보</em>
+		<em>기본정보</em>
 		<div class="grayBox">
 			<h3 id="name">이슬기</h3>
 			<div class="infoType">
@@ -84,8 +111,54 @@ ruru0907@naver.com			<!-- ${sessionScope.m.email} -->
 		<em>이력서 제목</em>
 		<div class="grayBox">
 			<a>제목<span>*</span></a>
-			<input type="text" class="textInput" name="resumeTitle" placeholder="이력서 제목을 입력">
+			<input type="text" class="textInput" name="resumeTitle" placeholder="이력서 제목 입력">
 		</div>
+		
+		<em>학력사항</em>
+		<div class="grayBox">
+			<em>최종학력 정보 입력</em>
+			<br><br>
+			<div class="schoolInfo">
+				<div class="schoolNameData">
+					<div class="schoolName">
+						<a>학교명<span>*</span></a>
+					</div>
+					<div class="schoolNameInput">
+						<input type="text" class="smallTextInput" name="schoolName" placeholder="학교명 입력">
+					</div>
+				</div>
+				<div class="schoolDateData">
+					<div class="schoolDate">
+						<a>재학기간<span>*</span></a>
+					</div>
+					<div class="schoolDateInput">
+						<input type="date" class="dateInput firstDateInput"> ~ <input type="date" class="dateInput">				
+					</div>
+				</div>
+				<div class="schoolLocalData">
+					<div class="schoolLocal">
+						<a>지역<span>*</span></a>
+					</div>
+					<div class="schoolLocalInput">
+						<input type="text" class="smallTextInput" name="schoolName" placeholder="지역 선택">					
+					</div>
+				</div>
+				<div class="schoolMajorData">
+					<div class="schoolMajor">
+						<a>전공</a>
+					</div>
+					<div class="schoolNameInput">
+						<select class="selectInput">
+							<option>전공 선택</option>
+							<option>전기/전자/정보통신공학</option>
+							<option>컴퓨터공학</option>
+							<option>전공 선택</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
