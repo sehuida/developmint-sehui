@@ -15,9 +15,9 @@
 <!-- 부트스트랩용 jQuery cdn방식-->
 <script type="text/javascript" src="/resources/js/bootstrap.bundle.min.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container-fluid">
-    <a class="navbar-brand mx-auto" href="/"><img src="/resources/img/logo/Develomint_logo.png" style="margin-left: 300px;"></a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid" style="margin-left: 300px;">
+    <a class="navbar-brand mx-auto" href="/"><img src="/resources/img/logo/Develomint_logo.png" style="height: 50px"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -49,7 +49,7 @@
 					<a type="button" class="btn btn-secondary btn-lg">Login</a>
 		        </li>
 				<li class="nav-item">
-					<a type="button" class="btn btn-link btn-lg" style="color: #fff;">Join</a>
+					<a type="button" class="btn btn-link btn-lg">Join</a>
 		        </li>
 			</c:when>
 			<c:otherwise>
