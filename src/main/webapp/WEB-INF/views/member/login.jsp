@@ -30,7 +30,7 @@
                     <button type="submit" class="btn btn-primary">로그인</button>
                 </div>
                 <div class="loginBt">
-                    <a class="btn btn-info">회원가입</a>   
+                    <a class="btn btn-info" href="/joinFrm.do">회원가입</a>   
                 </div>
                 <div>
                     <a href="#">아이디찾기/비밀번호찾기</a>
