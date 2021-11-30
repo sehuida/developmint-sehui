@@ -37,17 +37,17 @@
 	</beans:bean>
 	
 	
-	<!-- Mybatis사용 객체 생성 
+	<!-- Mybatis사용 객체 생성  -->
 	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource"/>
-		classpath: 는 src/main/resources 까지
+		<!-- classpath: 는 src/main/resources 까지 -->
 		<beans:property name="mapperLocations" value="classpath:/mapper/**/*SQL.xml"/>
 		<beans:property name="configLocation" value="classpath:mybatis-config.xml"/>
 	</beans:bean>
 	<beans:bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg index="0" ref="sqlSession"/>
 	</beans:bean>
-	-->
+	
 	
 	<!-- JDBCTemplate 객체 생성 -->
 	<beans:bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
