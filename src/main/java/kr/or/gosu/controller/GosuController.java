@@ -24,5 +24,5 @@ public class GosuController {
 	@RequestMapping(value="/gosuList.do")
 	public String gosuList() {
 		return "gosu/gosuList";
-	} 
+	}
 }
