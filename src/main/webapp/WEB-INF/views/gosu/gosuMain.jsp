@@ -256,7 +256,7 @@ to {
 
 .g-sc-tbl td, .g-sc-tbl td>a {
 	text-align: left;
-}
+} 
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
