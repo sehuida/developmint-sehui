@@ -46,10 +46,10 @@
     	<c:choose>
 			<c:when test="${empty sessionScope.m }">
 				<li class="nav-item">
-					<a type="button" class="btn btn-secondary btn-lg">Login</a>
+					<a type="button" class="btn btn-secondary btn-lg" href="/login.do">Login</a>
 		        </li>
 				<li class="nav-item">
-					<a type="button" class="btn btn-link btn-lg">Join</a>
+					<a type="button" class="btn btn-link btn-lg" href="/joinFrm.do">Join</a>
 		        </li>
 			</c:when>
 			<c:otherwise>
@@ -58,9 +58,9 @@
 						<li class="nav-item dropdown float-end me-5">
 				          <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 2.5rem;"></i> ${sessionScope.m.memberId } 님</a>
 				          <div class="dropdown-menu">
-				            <a class="dropdown-item" href="#">MYPAGE</a>
+				            <a class="dropdown-item" href="/mypage.do">MYPAGE</a>
 				            <div class="dropdown-divider"></div>
-				            <a class="dropdown-item" href="#">LOGOUT</a>
+				            <a class="dropdown-item" href="/logout.do">LOGOUT</a>
 				          </div>
 				        </li>
 					</c:when>
