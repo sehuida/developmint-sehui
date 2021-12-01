@@ -149,6 +149,72 @@
     	font-weight: 900;
     }
     
+    input[type="checkbox"] { 
+    	display: none; 
+    } 
+    .label__on-off {
+    	overflow: hidden; 
+    	position: relative; 
+    	display: inline-block; 
+    	width: 58px; height: 26px; 
+    	-webkit-border-radius: 13px; 
+    	-moz-border-radius: 13px; 
+    	border-radius: 13px; 
+    	background-color: #ed4956; 
+    	color: #fff; 
+    	font-weight: bold; 
+    	cursor: pointer; 
+    	-webkit-transition: all .3s; 
+    	-moz-transition: all .3s; 
+    	-ms-transition: all .3s; 
+    	-o-transition: all .3s; 
+    	transition: all .3s; 
+    } 
+    .label__on-off > * {
+    	vertical-align: middle; 
+    	-webkit-transition: all .3s; 
+    	-moz-transition: all .3s; 
+    	-ms-transition: all .3s; 
+    	-o-transition: all .3s; 
+    	transition: all .3s; 
+    	font-size: 14px; 
+    } 
+    .label__on-off .marble { 
+    	position: absolute; 
+    	top: 1px; 
+    	left: 1px; 
+    	display: block;
+    	width: 24px; 
+    	height: 24px; 
+    	background-color: #fff; 
+    	-webkit-border-radius: 50%; 
+    	-moz-border-radius: 50%; 
+    	border-radius: 50%; 
+    	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
+    	-moz-box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
+    	box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
+    } 
+    .label__on-off .on { 
+    	display: none; 
+    	padding-left: 12px; 
+    } 
+    .label__on-off .off { 
+    	padding-left: 30px; line-height: 25px; 
+    } 
+    .input__on-off:checked + .label__on-off { 
+    	background-color: #0bba82; 
+    } 
+    .input__on-off:checked + .label__on-off .on { 
+    	display: inline-block; 
+    } 
+    .input__on-off:checked + .label__on-off .off { 
+    	display: none; 
+    } 
+    .input__on-off:checked + .label__on-off .marble { 
+    	left: 33px; 
+    }
+
+    
 </style>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -260,7 +326,12 @@
 			</ul>
 			<div class="register">
 				<p>대표이력서 등록</p>
-				<span></span>
+				<input type="checkbox" id="switch1" name="switch1" class="input__on-off"> 
+				<label for="switch1" class="label__on-off"> 
+					<span class="marble"></span> 
+					<span class="on">on</span> 
+					<span class="off">off</span> 
+				</label>
 			</div>
 		</div>
 		<hr>

@@ -207,7 +207,7 @@
                 <input type="text" placeholder="검색" class="search">
                 <div class="content">
                     <div class="status">모집중</div>
-                    <div class="cpName"><a href="companyInfo.do?companyNo=1">케이씨환경서비스(주)</a></div>	<!-- 회사번호 -->
+                    <div class="cpName"><a href="companyInfo.do">케이씨환경서비스(주)</a></div>	<!-- 회사번호 -->	<!-- ?companyNo=${c.companyNo} -->
                     <div class="title">
                         <a href="jobSearchView.do?announce_no=1">2021 하반기 경영지원실 신입/경력 채용 공고</a>	<!-- 공고번호 -->
                     </div>
