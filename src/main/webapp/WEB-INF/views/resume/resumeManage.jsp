@@ -213,6 +213,14 @@
     .input__on-off:checked + .label__on-off .marble { 
     	left: 33px; 
     }
+    .register>p{
+    	width: 100px;
+    	margin: 0;
+    	/* display: inline-block; */
+    }
+    /* .ceoResumeChk{
+    	display: inline-block;
+    } */
 
     
 </style>
@@ -271,7 +279,7 @@
 				<span class="requestCount">1</span>		<!-- ${r.getrequestCount} 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
 			</div>
 			<div class="update">
-				<button class="updateResume">수정하기</button>
+				<a href="resumeFrm.do"><button class="updateResume">수정하기</button></a>
 			</div>
 		</div>
 		<div class="resume">
@@ -326,12 +334,14 @@
 			</ul>
 			<div class="register">
 				<p>대표이력서 등록</p>
-				<input type="checkbox" id="switch1" name="switch1" class="input__on-off"> 
-				<label for="switch1" class="label__on-off"> 
-					<span class="marble"></span> 
-					<span class="on">on</span> 
-					<span class="off">off</span> 
-				</label>
+				<div class="ceoResumeChk">
+					<input type="checkbox" id="switch1" name="switch1" class="input__on-off"> 
+					<label for="switch1" class="label__on-off"> 
+						<span class="marble"></span> 
+						<span class="on">on</span> 
+						<span class="off">off</span> 
+					</label>
+				</div>
 			</div>
 		</div>
 		<hr>

@@ -26,4 +26,5 @@ public class Resume {
 	private int workForm;
 	private int money;
 	private String workPlace;
+	private String writeDate;
 }
