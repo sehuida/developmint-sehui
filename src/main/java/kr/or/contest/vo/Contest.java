@@ -20,5 +20,5 @@ public class Contest {
 	private String contestContent;
 	private String contestImg;
 	private int contestStatus;
-	private int contestCount;
+	private int contestCount;	
 }
