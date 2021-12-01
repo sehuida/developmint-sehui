@@ -28,7 +28,7 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto" style="font-size: 18px;margin-left: 20px;font-weight: bold;">
         <li class="nav-item">
-          <a class="nav-link " href="#">팀원모집
+          <a class="nav-link " href="/recruitTeamMember_mainPage.do">팀원모집
             <span class="visually-hidden">(current)</span>
           </a>
         </li>

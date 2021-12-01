@@ -65,6 +65,7 @@
 	<context:component-scan base-package="kr.or.contest" />
 	<context:component-scan base-package="kr.or.notice" />
 	<context:component-scan base-package="kr.or.qna" />
+	<context:component-scan base-package="kr.or.projectTeam" />
 	
 	
 	
