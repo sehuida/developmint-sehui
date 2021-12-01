@@ -30,12 +30,14 @@
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container" style="margin-bottom: 100px; margin-left: 400px;">
 		<p id="mainTitel">공모전 등록</p>
-		<form action="/insertContest.do" method="post">
+		<form action="/insertContest.do" method="post" enctype="multipart/form-data">
+
 			<table class="table" style="width: 1000px;">
 				<tr>
 					<th class="table-active">주최사</th>
 					<td><input type="text" name="contestHost" class="form-control"></td>
 				</tr>
+				
 				<tr>
 					<th class="table-active">공모명</th>
 					<td><input type="text" name="contestTitle" class="form-control"></td>
@@ -43,15 +45,15 @@
 				<tr>
 					<th class="table-active">접수기간</th>
 					<td id="dateTd">
-						<input type="date" class="form-control dateInput" name="contestDate" style="width: 47%">
+						<input type="text" class="form-control dateInput" name="contestDate" style="width: 47%" placeholder="YYYY-MM-DD">
 						<span>　~　</span>
-						<input type="date" class="form-control" name="contestDeadline" style="width: 47%">
+						<input type="text" class="form-control" name="contestDeadline" style="width: 47%" placeholder="YYYY-MM-DD">
 					</td>
 				</tr>
 				<tr>
 					<th class="table-active">공모유형</th>
 					<td>
-						<label style="margin-right:20px;"><input type="radio" name="contestType" alue="1" class="form-check-input" >기획</label> 
+						<label style="margin-right:20px;"><input type="radio" name="contestType" value="1" class="form-check-input" >기획</label> 
 						<label style="margin-right:20px;"><input type="radio" name="contestType" value="2" class="form-check-input">개발</label> 
 						<label><input type="radio" name="contestType" value="3" class="form-check-input">디자인</label>
 					</td>
@@ -59,11 +61,11 @@
 				<tr>
 					<th class="table-active">참가자격</th>
 					<td>
-						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="1" class="form-check-input">대학생</label>
-						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="2" class="form-check-input">대학원생</label> 
-						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="3"class="form-check-input">일반인</label> 
-						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="4" class="form-check-input">고등학생</label> 
-						<label><input type="checkbox" name="contestQualify" value="5" class="form-check-input">제한없음</label>
+						<label style="margin-right:20px;"><input type="radio" name="contestQualify" value="1" class="form-check-input">대학생</label>
+						<label style="margin-right:20px;"><input type="radio" name="contestQualify" value="2" class="form-check-input">대학원생</label> 
+						<label style="margin-right:20px;"><input type="radio" name="contestQualify" value="3"class="form-check-input">일반인</label> 
+						<label style="margin-right:20px;"><input type="radio" name="contestQualify" value="4" class="form-check-input">고등학생</label> 
+						<label><input type="radio" name="contestQualify" value="5" class="form-check-input">제한없음</label>
 						</td>
 				</tr>
 				<tr>
@@ -84,7 +86,7 @@
 				</tr>
 				<tr>
 					<th class="table-active">포스터 이미지</th>
-					<td><input type="file" class="form-control-file" name="contestImg"></td>
+					<td><input type="file" class="form-control-file" name="files"></td>
 				</tr>
 				<tr>
 					<td colspan="2"><i class="bi bi-exclamation-circle-fill"></i>
@@ -97,9 +99,12 @@
 					</th>
 				</tr>
 			</table>
+			<input type="hidden" name="memberId" value="seulgi">
 		</form>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
+<script>
 
+</script>
 </body>
 </html>

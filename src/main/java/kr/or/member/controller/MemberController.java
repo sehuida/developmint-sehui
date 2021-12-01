@@ -1,11 +1,16 @@
 package kr.or.member.controller;
 
+import java.util.ArrayList; 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
@@ -39,5 +44,16 @@ public class MemberController {
 	@RequestMapping(value="/joinFrm.do")
 	public String joinFrm() {
 		return "member/join";
+	}
+	@ResponseBody
+	@RequestMapping(value="/phoneCheck.do")
+	public String idCheck(String phone) {
+		Member m = service.checkPhone(phone);
+		if(m == null) {
+			//ajax로 페이지 이동이 없어야 하므로 ResponseBody 어노테이션을 붙여줘야 데이터 자체로 보내줌
+			return "1";
+		}else {
+			return "0";
+		}
 	}
 }

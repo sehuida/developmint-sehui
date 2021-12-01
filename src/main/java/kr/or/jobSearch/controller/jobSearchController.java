@@ -10,4 +10,9 @@ public class jobSearchController {
 	public String jobSearchList() {
 		return "jobSearch/jobSearchList";
 	}
+	
+	@RequestMapping(value="companyInfo.do")
+	public String companyInfo() {
+		return "jobSearch/companyInfo";
+	}
 }
