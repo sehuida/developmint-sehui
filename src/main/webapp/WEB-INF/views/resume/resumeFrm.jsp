@@ -59,12 +59,21 @@
 	.info{
 		float: left;
 	}
+	.selfIntro{
+		margin: 15px 0px;
+	}
+	.selfIntroTitle{
+		text-align: center;
+	}
 	.textInput{
 		width: 700px;
 		height: 40px;
 		padding-left: 5px;
 		outline: none;
 		margin-left: 50px;
+	}
+	.selfIntroContent{
+		text-align: center;
 	}
 	.smallTextInput{
 		width: 300px;
@@ -124,9 +133,8 @@
 		text-align: center;
 	}
 	.selfIntroContentTextarea{
-		margin-left: 50px;
-		padding-top: 30px;
-		padding-left: 20px;
+		padding-top: 10px;
+		padding-left: 10px;
 		width: 700px;
 		border-top: none;
 		outline: none;
@@ -145,7 +153,7 @@
 		font-weight: 900;
 		border: none;
 		border-radius: 10px;
-		transition: background-color 0.5s;
+		transition: background-color 1s;
 	}
 	.backBtn:hover{
 		background-color: red;
@@ -159,7 +167,7 @@
 		font-weight: 900;
 		border: none;
 		border-radius: 10px;
-		transition: background-color 0.5s;
+		transition: background-color 1s;
 	}
 	.resumeBtn:hover{
 		background-color: rgb(0, 174, 255);
@@ -408,7 +416,7 @@ ruru0907@naver.com			<!-- ${sessionScope.m.email} -->
 			<div class="grayBox">
 				<div class="selfIntro">
 	              	<div class="selfIntroTitle">
-	                    <input type="text" name="selfIntroTitle" class="textInput" placeholder="자기소개서 제목">
+	                    <input type="text" name="selfIntroTitle" class="textInput" style="margin: 0;" placeholder="자기소개서 제목">
 	                </div>
 	               
 	                <div class="selfIntroContent">
