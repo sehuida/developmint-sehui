@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>이력서 작성하기</title>
 <style>
@@ -115,7 +116,7 @@
 	.schoolRadio{
 		display: none;
 	}
-	.schoolLabel{
+	.aducation>label{
 		width: 200px;
 		height: 50px;
 		line-height: 50px;
@@ -172,16 +173,22 @@
 	.resumeBtn:hover{
 		background-color: rgb(0, 174, 255);
 	}
+	
 </style>
+</head>
 <script>
 	$(function(){
-		$(".schoolLabel").click(function(){
-			$(this).css("background-color","rgb(78, 205, 196)");	
+		$(".schoolRadio").change(function(){
+			if($(".schoolRadio").is(":checked")){
+	            $(this).parent().css("background-color","rgb(78, 205, 196)");
+	            $(this).next().css("color","white");
+	        }else{
+	        	$(this).parent().css("background-color","rgb(78, 205, 196)");
+	            $(this).next().css("color","#888");
+	        }
 		});
-		
 	});
 </script>
-</head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="contain">
@@ -215,19 +222,19 @@ ruru0907@naver.com			<!-- ${sessionScope.m.email} -->
 				<em>최종학력 정보 입력</em>
 				<br><br>
 				<div class="aducation">			<!-- radio버튼 display none해주고 라벨로 선택해서 선택시 뒷배경 mint 글씨 흰색으로 변경(아마 자바스크립트로 해야할듯?) -->
-	                <label class="schoolLabel" for="school_type_primary">
+	                <label class="primarySchoolLabel" for="school_type_primary">
 	                    <input name="schoolType" class="schoolRadio" id="school_type_primary" type="radio" value=1>	<!-- value=1 //초졸 -->
 	                    <span class="txt_check">초등학교 졸업</span>
 	                </label>
-	                <label class="schoolLabel" for="school_type_middle">
+	                <label class="middleSchoolLabel" for="school_type_middle">
 	                    <input name="schoolType" class="schoolRadio" id="school_type_middle" type="radio" value=2>		<!-- value=2 //중졸 -->
 	                    <span class="txt_check">중학교 졸업</span>
 	                </label>
-	                <label class="schoolLabel" for="school_type_high">
+	                <label class="highSchoolLabel" for="school_type_high">
 	                    <input name="schoolType" class="schoolRadio" id="school_type_high" type="radio" value=3>		<!-- value=3 //고졸 -->
 	                    <span class="txt_check">고등학교 졸업</span>
 	                </label>
-	                <label class="schoolLabel" for="school_type_univ" style="background-color: rgb(78, 205, 196); color: #ffffff;">	<!-- script완성하면 style 지우기 -->
+	                <label class="univSchoolLabel" for="school_type_univ">
 	                    <input name="schoolType" class="schoolRadio" id="school_type_univ" type="radio" value=4 checked="">		<!-- value=4 //대졸 -->
 	                    <span class="txt_check">대학·대학원 이상 졸업</span>
 	                </label>
@@ -432,7 +439,7 @@ ruru0907@naver.com			<!-- ${sessionScope.m.email} -->
 			</div>
 			<div class="selectBtn">
 				<input type="button" class="backBtn" value="취소">
-				<input type="submit" class="resumeBtn" value="등록하기">
+				<input type="submit" class="resumeBtn" value="저장하기">
 			</div>
 		</form>
 	</div>
