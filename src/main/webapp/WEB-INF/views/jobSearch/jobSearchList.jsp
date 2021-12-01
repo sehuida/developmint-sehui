@@ -223,14 +223,14 @@
                     </div>
                     <div class="mainFooter">
                         <div class="tech">
-                            <span>Java</span> <span>Android</span>
+                            <span>Java</span> <span>Android</span>		<!-- forEach문으로 ${r.tech } -->
                         </div>
                         <div class="subInfo">
                             <span>서울특별시 강남구</span> <span>등록일자 2021.11.23.</span>
                         </div>
                         <div class="situation">
-                            <div class="date">마감 <span>7</span>일 전</div>
-                            <div class="apply">총 <span>2</span>명 지원</div>
+                            <div class="date">마감 <span>7</span>일 전</div>		<!-- 7 -> 마감일-현재일 이거 어캐하지 -->
+                            <div class="apply">총 <span>2</span>명 지원</div>		<!-- 2 -> 지원한 이력서 갯수 count  흠  -->
                         </div>
                     </div>
                 </div>
