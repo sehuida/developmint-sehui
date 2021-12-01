@@ -16,37 +16,37 @@
 overflow: hidden;
 }
 #mainTitel{
-	font-size: 30px;
+	font-size: 40px;
 	font-weight: bold;
 	text-align: center;
 	margin-bottom: 30px;
 	float: left;
 }
 .titleBox>a{
-	margin-top:10px;
+	margin-top:15px;
 	float: right;
 	width: 150px;
-	height: 40px;
+	height: 50px;
 	background-color: #4ECDC4;
 	font-size: 19px;
 	font-weight: bold;
-	line-height: 25px;
+	line-height: 40px;
 }
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container" style="margin-bottom:100px;" >
 	
-		<div class="titleBox">
-			<p id="mainTitel">공모전 게시판</p>
-			<a class="btn btn-primary" href="/insertContestFrm.do">공모등록</a>
-		</div>
-		<%-- 메인 포스터 3개 슬라이드 --%>
-		<div class="slideContest" style="margin-left:80px;">
-			  <div><img src="/resources/img/contest/contestMainImg1.png"></div>
-			  <div><img src="/resources/img/contest/contestMainImg2.png"></div>
-			  <div><img src="/resources/img/contest/contestMainImg3.png"></div>
-		</div>
+	<div class="titleBox">
+		<p id="mainTitel">공모전 게시판</p>
+		<a class="btn btn-primary" href="/insertContestFrm.do">공모등록</a>
+	</div>
+	<%-- 메인 포스터 3개 슬라이드 --%>
+	<div class="slideContest" style="margin-left:80px;">
+		  <div><img src="/resources/img/contest/contestMainImg1.png"></div>
+		  <div><img src="/resources/img/contest/contestMainImg2.png"></div>
+		  <div><img src="/resources/img/contest/contestMainImg3.png"></div>
+	</div>
 		
 		
 		

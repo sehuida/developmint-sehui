@@ -125,8 +125,8 @@
    </div>
     <div class="gosu-write-wrap">
        <div class="gosu-write">
-        <h6>고수님의 능력을<br> 마음껏 펼쳐주세요!</h6>
-        <a class="btn btn-primary">작성하기</a>
+        <h5>고수님의 능력을<br> 마음껏 펼쳐주세요!</h5>
+        <a href="/gosuWriteFrm.do" class="btn btn-primary">작성하기</a>
        </div> 
    </div>
     <div class="gosu-wrap">

@@ -30,5 +30,8 @@ public class GosuController {
 	public String gosuContent() {
 		return "gosu/gosuContent";
 	}
-	
+		@RequestMapping(value="/gosuWriteFrm.do")
+	public String gosuWriteFrm() {
+		return "gosu/gosuWriteFrm";
+	}
 }
