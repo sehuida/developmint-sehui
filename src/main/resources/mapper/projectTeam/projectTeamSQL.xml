@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="projectTeam">
+  <select id="projectList" resultType="pt">
+  		<![CDATA[
+		select 
+			"project_no" as projectNo,
+			"member_no" as projectWriterMemberNo,
+			"recruit_start_date" as rStartDate,
+			"recruit_end_date" as rEndDate,
+			"view_count" as viewCount,
+			"recruit_title" as rTitle,
+			"recruit_content" as rContent,
+			"project_name" as projectName,
+			"project_goal" as projectGoal,
+			"project_reader" as projectReader,
+			"project_status" as projectStatus,
+			"project_start_date" as pStartDate,
+			"project_end_date" as pEndDate,
+			(select filepath from member m where m.member_no = p."member_no") as writerImgPath,
+			(select count(*) from project_dibs) as dibCount,
+            (select count(*) from comments) as commentCount
+		from project p
+		]]>
+  </select>
+</mapper>
