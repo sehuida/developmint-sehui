@@ -1,10 +1,14 @@
 package kr.or.notice.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.notice.service.NoticeService;
+import kr.or.notice.vo.Notice;
 
 @Controller
 public class NoticeController {
@@ -13,7 +17,11 @@ public class NoticeController {
 	private NoticeService service;
 	
 	@RequestMapping(value="/noticeList.do")
-	public String noticeList() {
+	public String noticeList(Model model) {
+		/*
+		 * ArrayList<Notice> list = service.selectNoticeList();
+		 * model.addAttribute("list",list);
+		 */
 		return "notice/noticeList";
 	}
 	
