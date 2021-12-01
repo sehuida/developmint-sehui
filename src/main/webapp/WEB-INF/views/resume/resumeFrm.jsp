@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>이력서 작성하기</title>
 <style>
@@ -177,10 +178,15 @@
 </head>
 <script>
 	$(function(){
-		$(".primarySchoolLabel").click(function(){
-			$(this).css("background-color","rgb(78, 205, 196)");	
+		$(".schoolRadio").change(function(){
+			if($(".schoolRadio").is(":checked")){
+	            $(this).parent().css("background-color","rgb(78, 205, 196)");
+	            $(this).next().css("color","white");
+	        }else{
+	        	$(this).parent().css("background-color","rgb(78, 205, 196)");
+	            $(this).next().css("color","#888");
+	        }
 		});
-		
 	});
 </script>
 <body>
@@ -228,7 +234,7 @@ ruru0907@naver.com			<!-- ${sessionScope.m.email} -->
 	                    <input name="schoolType" class="schoolRadio" id="school_type_high" type="radio" value=3>		<!-- value=3 //고졸 -->
 	                    <span class="txt_check">고등학교 졸업</span>
 	                </label>
-	                <label class="univSchoolLabel" for="school_type_univ" style="background-color: rgb(78, 205, 196); color: #ffffff;">	<!-- script완성하면 style 지우기 -->
+	                <label class="univSchoolLabel" for="school_type_univ">
 	                    <input name="schoolType" class="schoolRadio" id="school_type_univ" type="radio" value=4 checked="">		<!-- value=4 //대졸 -->
 	                    <span class="txt_check">대학·대학원 이상 졸업</span>
 	                </label>
