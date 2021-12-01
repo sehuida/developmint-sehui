@@ -279,7 +279,7 @@ to {
 							<td rowspan="4" class="gosu_img" style="width: 30%;"><img
 								src="/resources/img/gosu/g_img_basic.png"
 								style="border-radius: 50%;"></td>
-							<td><a href="">제목</a></td>
+							<td><a href="/gosuContent.do">제목</a></td>
 						</tr>
 						<tr>
 							<td><hr></td>
