@@ -7,5 +7,6 @@
 	<typeAliases>
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
 		<!-- 아래에 필요한 것들 추가해용 - 진호 -->
+		<typeAlias type="kr.or.contest.vo.Contest" alias="c"/>
 	</typeAliases>	
 </configuration>
