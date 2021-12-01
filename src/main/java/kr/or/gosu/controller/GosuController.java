@@ -25,4 +25,10 @@ public class GosuController {
 	public String gosuList() {
 		return "gosu/gosuList";
 	}
+
+	@RequestMapping(value="/gosuContent.do")
+	public String gosuContent() {
+		return "gosu/gosuContent";
+	}
+	
 }
