@@ -79,6 +79,7 @@
     display: flex;
     justify-content: center;
 }
+
 .gosu-write-wrap{
     position: fixed;
     z-index: 1000;
@@ -88,21 +89,11 @@
     width: 1400px;
 }
 .gosu-write{
-    border: 1px solid rgb(190, 190, 190);
-    padding: 40px;
-    text-align: center;
+    border: 1px solid black;
+    padding: 20px;
+    display: flex;
     justify-content: right;
     background-color: white;
-   
-}
-.gosu-write a{
-    margin-top: 20px;
-    padding: 10px;
-    width: 200px;
-}
-.gosu-write *{
-    font-weight: bold;
-    line-height: 30px;
 }
 </style>
 <body>
@@ -125,8 +116,8 @@
    </div>
     <div class="gosu-write-wrap">
        <div class="gosu-write">
-        <h6>고수님의 능력을<br> 마음껏 펼쳐주세요!</h6>
-        <a class="btn btn-primary">작성하기</a>
+        <h5>고수님의 능력을<br> 마음껏 펼쳐주세요!</h5>
+        <button  class="btn btn-primary">작성하기</button>
        </div> 
    </div>
     <div class="gosu-wrap">
