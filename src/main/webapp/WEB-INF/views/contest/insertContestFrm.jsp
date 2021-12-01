@@ -30,7 +30,7 @@
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container" style="margin-bottom: 100px; margin-left: 400px;">
 		<p id="mainTitel">공모전 등록</p>
-		<form action="/insertContest.do" method="post">
+		<form action="/insertContest.do" method="post" enctype="multipart/form-data">
 			<table class="table" style="width: 1000px;">
 				<tr>
 					<th class="table-active">주최사</th>
@@ -97,6 +97,9 @@
 					</th>
 				</tr>
 			</table>
+			<input type="hidden" name="memberId" vlaue="seulgi">
+
+			
 		</form>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
