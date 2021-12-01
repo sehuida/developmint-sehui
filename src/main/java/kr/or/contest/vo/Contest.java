@@ -11,8 +11,8 @@ public class Contest {
 	private String memberId;
 	private int contestType;
 	private int contestQualify;
-	private Date contestDate;
-	private Date contestDeadline;
+	private String contestDate;
+	private String contestDeadline;
 	private int contestPrize;
 	private String phone;
 	private String email;

@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="contest">
+
 	<insert id="insertContest" parameterType="c">
 		insert into contest values(contest_seq.nextval, #{contestHost}, #{memberId}, #{contestType}, #{contestQualify}, #{contestDate}, #{contestDeadline}, #{contestPrize}, #{phone}, #{email}, #{contestTitle}, #{contestContent}, #{contestImg}, 1, 0)
 	</insert>
+	
+	<select id="contestAllList" resultType="c">
+		select
+			contest_no as contestNo,
+			contest_host as contestHost,
+			member_id as memberId,
+			contest_type as contestType,
+			contest_qualify as contestQualify,
+			contest_date as contestDate,
+			contest_deadline as contestDeadline,
+			contest_prize as contestPrize,
+			phone,
+			email,
+			contest_title as contestTitle,
+			contest_content as contestContent,
+			contest_img as contestImg,
+			contest_status as contestStatus,
+			contest_count as contestCount
+		from contest
+	</select>
 </mapper>

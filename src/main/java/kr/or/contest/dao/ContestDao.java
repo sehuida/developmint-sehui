@@ -1,5 +1,8 @@
 package kr.or.contest.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,5 +19,10 @@ public class ContestDao {
 	public int insertContest(Contest c) {
 		int result = sqlSession.insert("contest.insertContest",c);
 		return result;
+	}
+
+	public ArrayList<Contest> contestAllList() {
+		List<Contest> list = sqlSession.selectList("contest.contestAllList");
+		return (ArrayList<Contest>)list;
 	}
 }

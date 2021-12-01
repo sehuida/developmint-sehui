@@ -1,5 +1,7 @@
 package kr.or.contest.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class ContestService {
 
 	public int insertContest(Contest c) {
 		return dao.insertContest(c);
+	}
+
+	public ArrayList<Contest> contestAllList() {
+		return dao.contestAllList();
 	}
 	
 }
