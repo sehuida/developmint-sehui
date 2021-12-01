@@ -16,5 +16,10 @@ public class MemberService {
 		Member m = dao.selectOneMember(member);
 		return m;
 	}
+
+	public Member checkPhone(String phone) {
+		Member m = dao.checkPhone(phone);
+		return m;
+	}
 	
 }

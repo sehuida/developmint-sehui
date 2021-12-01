@@ -15,6 +15,10 @@ public class MemberDao {
 	public Member selectOneMember(Member member) {
 		return sqlSession.selectOne("member.selectOneMember",member);
 	}
+
+	public Member checkPhone(String phone) {
+		return sqlSession.selectOne("member.checkPhone",phone);
+	}
 	
 	
 }
