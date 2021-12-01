@@ -432,7 +432,7 @@ ruru0907@naver.com			<!-- ${sessionScope.m.email} -->
 			</div>
 			<div class="selectBtn">
 				<input type="button" class="backBtn" value="취소">
-				<input type="submit" class="resumeBtn" value="등록하기">
+				<input type="submit" class="resumeBtn" value="저장하기">
 			</div>
 		</form>
 	</div>
