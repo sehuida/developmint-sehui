@@ -86,7 +86,7 @@
 				
 				<div style="text-align: right;" >
 					<ul class="list-unstyled pe-5" style="float: left;font-size: large;">고객센터
-						<li ><a href="/notice.do" style="color:#737373;font-size:15px;">공지사항</a></li>
+						<li ><a href="/noticeList.do" style="color:#737373;font-size:15px;">공지사항</a></li>
 						<li><a href="/qnaFrm.do" style="color:#737373;font-size: 15px;">1:1문의</a></li>
 					</ul>
 					<ul class="list-unstyled pe-5" style="float: left">
@@ -97,7 +97,7 @@
 						<li><a href="/contestMain.do" style="color:black;">공모전</a></li>
 					</ul>
 					<a href="/"><img src="/resources/img/logo/Develomint_logo.png"></a><br>
-					<sapn><a href="#" style="color:black;">이용약관</a> <a href="#" style="color:black;">개인정보취급방침</a> <a href="#" style="color:black;">사업자 정보확인</a></sapn>
+					<span><a href="#" style="color:black;">이용약관</a> <a href="#" style="color:black;">개인정보취급방침</a> <a href="#" style="color:black;">사업자 정보확인</a></span>
 					<p>대표이사 | 이윤수</p>
 					<p>대표주소 | 서울특별시 영등포구 선유동2로 57 이레빌딩 (구관) 19F, 20F</p>
 					<p>전화번호 | 02-2163-8560</p>
