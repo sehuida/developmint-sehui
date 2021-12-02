@@ -25,4 +25,60 @@
 			contest_count as contestCount
 		from contest
 	</select>
+	
+	<select id="newContestList" resultType="c">
+		select * 
+		from(
+			select rownum as rnum, c.* 
+			from(
+			select 
+				contest_no as contestNo,
+				contest_host as contestHost,
+				member_id as memberId,
+				contest_type as contestType,
+				contest_qualify as contestQualify,
+				contest_date as contestDate,
+				contest_deadline as contestDeadline,
+				contest_prize as contestPrize,
+				phone,
+				email,
+				contest_title as contestTitle,
+				contest_content as contestContent,
+				contest_img as contestImg,
+				contest_status as contestStatus,
+				contest_count as contestCount
+			 from contest order by contest_no desc)c 
+			order by rnum
+			) 
+		where rnum BETWEEN 1 and 8
+		
+	</select>
+	
+	<select id="hotContestList" resultType="c">
+		select * 
+		from(
+			select rownum as rnum, c.* 
+			from(
+			select 
+				contest_no as contestNo,
+				contest_host as contestHost,
+				member_id as memberId,
+				contest_type as contestType,
+				contest_qualify as contestQualify,
+				contest_date as contestDate,
+				contest_deadline as contestDeadline,
+				contest_prize as contestPrize,
+				phone,
+				email,
+				contest_title as contestTitle,
+				contest_content as contestContent,
+				contest_img as contestImg,
+				contest_status as contestStatus,
+				contest_count as contestCount
+			 from contest order by contest_no desc)c 
+			order by rnum
+			) 
+		where rnum BETWEEN 1 and 8
+		
+	</select>
 </mapper>

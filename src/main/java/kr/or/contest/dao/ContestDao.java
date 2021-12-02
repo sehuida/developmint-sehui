@@ -25,4 +25,14 @@ public class ContestDao {
 		List<Contest> list = sqlSession.selectList("contest.contestAllList");
 		return (ArrayList<Contest>)list;
 	}
+
+	public ArrayList<Contest> newContestList() {
+		List<Contest> list = sqlSession.selectList("contest.newContestList");
+		return (ArrayList<Contest>)list;
+	}
+
+	public ArrayList<Contest> hotContestList() {
+		List<Contest> list = sqlSession.selectList("contest.hotContestList");
+		return (ArrayList<Contest>)list;
+	}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,7 @@ overflow: hidden;
 	background-color: #4ECDC4;
 	font-size: 19px;
 	font-weight: bold;
-	line-height: 35px;
+	line-height: 38px;
 }
 .newContestBox{
 	margin-top:30px;
@@ -84,13 +85,25 @@ overflow: hidden;
 	<div>
 		<span class="subEngTitel">NEW</span> <span class="subTitel">최신 공모전</span>
 	</div>
+	<%-- 최신 공모전 리스트 --%>
 	<div class="newContestBox">
-		<c:forEach begin="0" end="7">
+		<c:forEach var="nc" items="${list.newContest }">
 		<div>
-			<a href="/contestView.do"><img src="/resources/img/contest/contest_test.png" width="300px" height="350px" style="margin-right: 20px; margin-top: 20px;"></a>
-			<p class="newTitle">스마트 톡톡 공모전</p>
-			<p class="newcontent">주최 : 부산대학교</p>
-			<p class="newcontent">기간 : 2021-12-01 ~ 2021-12-31</p>
+			<%--공모전 이미지 --%>
+			<a href="/contestView.do"><img src="/resources/img/contest/${nc.contestImg }" width="300px" height="400px" style="margin-right: 20px; margin-top: 20px;"></a>
+			<%--공모전 제목(제목이 18글자가 넘어가면 뒤에는 ...으로 표시 --%>
+			<c:choose>
+				<c:when test="${fn:length(nc.contestTitle) > 18}">
+					<c:set var="subTitle" value="${fn:substring(nc.contestTitle,0,18)}"/>
+					<p class="newTitle">${subTitle }...</p>
+				</c:when>
+				<c:otherwise>
+					<p class="newTitle">${nc.contestTitle }</p>
+				</c:otherwise>
+			</c:choose>
+			
+			<p class="newcontent">주최 : ${nc.contestHost }</p>
+			<p class="newcontent">기간 : ${nc.contestDate } ~ ${nc.contestDeadline }</p>
 		</div>
 		</c:forEach>
 	</div>
@@ -101,14 +114,13 @@ overflow: hidden;
 	<div class="newContestBox" >
 		<c:forEach begin="0" end="3">
 		<div>
-			<img src="/resources/img/contest/contest_test.png" width="300px" height="350px" style="margin-right: 15px; margin-top: 20px;">
+			<img src="/resources/img/contest/contest_test.png" width="300px" height="400px" style="margin-right: 15px; margin-top: 20px;">
 			<p class="newTitle">스마트 톡톡 공모전</p>
 			<p class="newcontent">주최 : 부산대학교</p>
 			<p class="newcontent">기간 : 2021-12-01 ~ 2021-12-31</p>
 		</div>
 		</c:forEach>
 	</div>
-	
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	

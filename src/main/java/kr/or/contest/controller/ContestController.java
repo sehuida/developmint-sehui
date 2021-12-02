@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.contest.service.ContestService;
 import kr.or.contest.vo.Contest;
+import kr.or.contest.vo.ContestList;
 
 @Controller
 public class ContestController {
@@ -27,8 +28,8 @@ public class ContestController {
 	//공모전 메인페이지 이동
 	@RequestMapping(value="/contestMain.do")
 	public String contestMain(Model model) {
-		//공모전 리스트 불러오기
-		ArrayList<Contest> list = service.contestAllList();
+		//공모전 최신리스트, 인기리스트 불러오기
+		ContestList list = service.selectContestList();
 		model.addAttribute("list",list);
 		return "contest/contestMain";
 	}
