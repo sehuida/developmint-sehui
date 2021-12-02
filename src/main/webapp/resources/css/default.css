@@ -12,7 +12,6 @@ body>*{
 }
 .container{
 	margin-top: 30px;
-	min-width: 720px;
 	flex:1;
 }
 .container fieldset>table>tbody>tr>td,.container fieldset>table>tbody>tr>th{
