@@ -49,7 +49,7 @@
             <label class="col-form-label mt-4" for="email">이메일</label>
             <div class="emailWrap">
               <input type="email" class="form-control" placeholder="이메일을 입력하세요" name="email" id="email">
-              <button type="button" class="btn btn-primary" id="memberIdChk">인증번호 받기</button>
+              <button type="button" class="btn btn-primary" id="emailChk">인증번호 받기</button>
             </div>
           </div>
         </fieldset>
@@ -62,7 +62,7 @@
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input agreement" type="checkbox" value="" id="memberAgree">
+            <input class="form-check-input agreement required" type="checkbox" value="" id="memberAgree">
             <label class="form-check-label" for="memberAgree">
              	 회원가입약관(필수)
             </label>
@@ -72,7 +72,7 @@
             </button>
           </div>
           <div class="form-check">
-            <input class="form-check-input agreement" type="checkbox" value="" id="memberData">
+          <input class="form-check-input agreement required" type="checkbox" value="" id="memberData">
             <label class="form-check-label" for="memberData">
               	개인정보취급방침(필수)
             </label>
@@ -193,7 +193,7 @@
   var emailChk = false;
   var emailCodeChk = false;
   var emailChkValidate = false;
-  
+  //$(".required:checked").length;
   //아이디 중복체크
   $("#memberIdChk").on("click", function(){
     var memberId = $("#memberId").val();
@@ -204,14 +204,15 @@
       $(".expResult").eq(0).removeClass("text-success");
       $(".expResult").eq(0).addClass("text-danger");
       $("#memberId").addClass("is-invalid");
+      idChk = false;
       return;
     }
     $.ajax({
-      url : "/memberIdCheck",
+      url : "/memberIdCheck.do",
       data : {memberId : memberId},
       type : "post",
       success : function(data){
-        if(data != null){
+        if(data == 0){
           $(".expResult").eq(0).html("이미 존재하는 아이디 입니다.");
           $("#memberId").removeClass("is-valid");
           $(".expResult").eq(0).removeClass("text-success");
@@ -351,7 +352,38 @@
           phoneChk = false;
         }
       });
-      //이메일 중복체크
+      //이메일 중복체크, 인증메일 발송
+      $("#emailChk").on("click",function(){
+    	 var emailReg = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/;
+    	 var emailVal = $("#email").val();
+    	 
+    	 if(emailReg.test(emailVal)){
+             $.ajax({
+                 url : "/phoneCheck.do",
+                 data : {phone : phoneVal},
+                 type : "post",
+                 success : function(data){
+                   if(data == 0){
+                     $(".expResult").eq(4).html("이미 사용중인 전화번호 입니다.");
+                     $(".expResult").eq(4).removeClass("text-success");
+                     $("#phone").removeClass("is-valid");
+                     $(".expResult").eq(4).addClass("text-danger");
+                     $("#phone").addClass("is-invalid");
+                     phoneChk = false;
+                     return;
+                   }else{
+                     $(".expResult").eq(4).html("");
+                     $(".expResult").eq(4).removeClass("text-danger");
+                     $("#phone").removeClass("is-invalid");
+                     $(".expResult").eq(4).addClass("text-success");
+                     $("#phone").addClass("is-valid");
+                     phoneChk = true;
+                     
+                   }
+                 }
+               });
+    	 }
+      });
   });
 </script>
 </body>

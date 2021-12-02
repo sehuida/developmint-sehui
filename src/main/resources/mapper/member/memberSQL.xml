@@ -27,4 +27,17 @@
   		member_grade as memberGrade
   	from member where phone = #{phone}
   </select>
+  <select id="checkId" parameterType="string" resultType="m">
+  	select
+  		member_no as memberNo,
+  		member_name as memberName,
+  		phone,
+  		member_id as memberId,
+  		member_pw as memberPw,
+  		email,
+  		member_type as memberType,
+  		filepath,
+  		member_grade as memberGrade
+  	from member where member_id = #{memberId}  	
+  </select>
 </mapper>
