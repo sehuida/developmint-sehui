@@ -233,10 +233,10 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="contain">
-		<em>이력서 관리</em>				<!-- if 이력서 없으면 등록된 이력서가 없습니다. -->
+		<em>구인공고 관리</em>				<!-- if 구인글 없을 때 등록된 구인글이 없습니다. -->
 	<c:choose>
 		<c:when test="${empty list }">
-			저장된 이력서가 업슴
+			
 		</c:when>
 		<c:otherwise>
 			
@@ -245,23 +245,22 @@
 		<div class="grayBox">
 			<div class="resumeHeader">
 				<div class="ceoResume">
-					<p>대표이력서</p>
+					<p>등록된 공고</p>
 				</div>
 				<div class="writeDate">
 					<span>2021.11.25</span>	
 				</div>
 			</div>
 				<div class="resumeTitle">
-					<em>이력서 제목</em>	<!-- r.resumeTitle -->
+					<em>java 신입/경력 개발자 채용 </em>	<!-- r.resumeTitle -->
 				</div>
-				
 				<ul class="resumeInfo1">
 	            	<li class="career">
 	            		<div class="resumeInfoImg">
 	            			<img src="resources/img/resume/career.PNG">
 	            		</div>
 	            		<div class="resumeInfoData">
-	            			<span>신입</span>	<!-- r.resumeCareer -->
+	            			<span>신입/경력</span>	<!-- r.resumeCareer -->
 	            		</div>
 	            	</li>   
 	            	<li class="money">
@@ -279,7 +278,7 @@
 							<img src="resources/img/resume/workPlace.PNG">
 						</div>
 						<div class="resumeInfoData">
-							<span>희망지역 : 서울 금천구</span>	<!-- r.resumeworkPlace -->
+							<span>위치 : 서울 금천구</span>	<!-- r.resumeworkPlace -->
 						</div>
 					</li>    					           
 					<li class="workForm">
@@ -287,12 +286,12 @@
 							<img src="resources/img/resume/workForm.PNG">
 						</div>
 						<div class="resumeInfoData">
-							<span>희망 직무·직업 : IT개발·데이터</span>	<!-- r.resumeWorkForm -->
+							<span>직무·직업 : IT개발·데이터</span>	<!-- r.resumeWorkForm -->
 						</div>
 					</li>               
 				</ul>
 			<div class="message">
-				<button class="companyMessage">기업이 보낸 요청</button>		<!-- 웹소켓으로 기업이 이력서 확인 후 합격이면 쪽지 날라가게 만들기 -->
+				<button class="companyMessage">지원 신청 현황</button>		<!-- 일반회원이 지원신청을 했을 경우 count증가하고 이력서 열람할 수 있도록 하기 -> 서류합격? 버튼 누를 시 웹소켓으로 쪽지 보내기 -->
 				<span class="requestCount">1</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
 			</div>
 			<div class="update">
@@ -300,137 +299,12 @@
 			</div>
 		</div>
 		<div class="resume">
-			<a href="resumeFrm.do"><button class="resumeBtn">이력서 작성하기</button></a>
+			<a href="resumeFrm.do"><button class="resumeBtn">구인공고 작성하기</button></a>
 		</div>
 		<div class="resumeExplain">
 			<p>이력서는 최대 10개까지 등록 가능합니다.</p>
 			<p>대표이력서 설정은 1개의 이력서만 가능합니다.</p>
 		</div>
-		<div class="resumeCount">
-			총 1건		<!-- r.resumeCount  내 이력서 갯수 count 가져오기 이것도 vo에 추가해야 하나 -->
-		</div>
-		<hr>
-		<!-- 내 이력서 리스트 보여주는 공간 데이터 가져올 때 forEach로 바꿔주기 -->
-		<c:choose>
-			<c:when test="${empty list }">
-				저장된 이력서가 없습니다.
-			</c:when>
-			<c:otherwise>
-				<c:forEach items="${list }" var="rs" varStatus="i">
-					<div class="myResume" style="margin-bottom: 50px;">
-			<div class="resumeTitle">
-				<em>${resumeTitle }</em>	<!-- rs.resumeTitle 왜 안될까 슈밥ㅇㅁㄴㅇㅁㄴㅇㄴㅁㅇ -->
-			</div>
-			<ul class="resumeInfo1">
-	           	<li class="career">
-	            	<div class="resumeInfoImg">
-	            		<img src="resources/img/resume/career.PNG">
-	            	</div>
-	            	<div class="resumeInfoData">
-	            		<span>신입</span>	<!-- r.resumeCareer -->
-	            	</div>
-	            </li>
-	            <li class="money">
-					<div class="resumeInfoImg">
-						<img src="resources/img/resume/income.PNG">					
-					</div>
-					<div class="resumeInfoData">
-						<span>2,800~3,000만원</span>	<!-- r.resumeMoney -->
-					</div>
-				</li>
-			</ul>
-			<ul class="resumeInfo2">
-				<li class="workPlace">
-					<div class="resumeInfoImg">
-						<img src="resources/img/resume/workPlace.PNG">
-					</div>
-					<div class="resumeInfoData">
-						<span>희망지역 : 서울 금천구</span>	<!-- r.resumeworkPlace -->
-					</div>
-				</li>       					           
-				<li class="workForm">
-					<div class="resumeInfoImg">
-						<img src="resources/img/resume/workFromWhite.PNG">
-					</div>
-					<div class="resumeInfoData">
-						<span>희망 직무·직업 : IT개발·데이터</span>	<!-- r.resumeWorkForm -->
-					</div>
-				</li>                       
-			</ul>
-			<div class="register">
-				<p>대표이력서 등록</p>
-				<div class="ceoResumeChk">
-					<input type="checkbox" id="switch1" name="switch1" class="input__on-off"> 
-					<label for="switch1" class="label__on-off"> 
-						<span class="marble"></span> 
-						<span class="on">on</span> 
-						<span class="off">off</span> 
-					</label>
-				</div>
-			</div>
-		</div>
-		<hr>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-		
-		
-		
-		
-		
-		<div class="myResume" style="margin-bottom: 50px;">
-			<div class="resumeTitle">
-				<em>이력서 제목</em>	<!-- r.resumeTitle -->
-			</div>
-			<ul class="resumeInfo1">
-	           	<li class="career">
-	            	<div class="resumeInfoImg">
-	            		<img src="resources/img/resume/career.PNG">
-	            	</div>
-	            	<div class="resumeInfoData">
-	            		<span>신입</span>	<!-- r.resumeCareer -->
-	            	</div>
-	            </li>
-	            <li class="money">
-					<div class="resumeInfoImg">
-						<img src="resources/img/resume/income.PNG">					
-					</div>
-					<div class="resumeInfoData">
-						<span>2,800~3,000만원</span>	<!-- r.resumeMoney -->
-					</div>
-				</li>
-			</ul>
-			<ul class="resumeInfo2">
-				<li class="workPlace">
-					<div class="resumeInfoImg">
-						<img src="resources/img/resume/workPlace.PNG">
-					</div>
-					<div class="resumeInfoData">
-						<span>희망지역 : 서울 금천구</span>	<!-- r.resumeworkPlace -->
-					</div>
-				</li>       					           
-				<li class="workForm">
-					<div class="resumeInfoImg">
-						<img src="resources/img/resume/workFromWhite.PNG">
-					</div>
-					<div class="resumeInfoData">
-						<span>희망 직무·직업 : IT개발·데이터</span>	<!-- r.resumeWorkForm -->
-					</div>
-				</li>                       
-			</ul>
-			<div class="register">
-				<p>대표이력서 등록</p>
-				<div class="ceoResumeChk">
-					<input type="checkbox" id="switch1" name="switch1" class="input__on-off"> 
-					<label for="switch1" class="label__on-off"> 
-						<span class="marble"></span> 
-						<span class="on">on</span> 
-						<span class="off">off</span> 
-					</label>
-				</div>
-			</div>
-		</div>
-		<hr>
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
