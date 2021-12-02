@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.notice.service.NoticeService;
 import kr.or.notice.vo.Notice;
+import kr.or.notice.vo.NoticePageData;
 
 @Controller
 public class NoticeController {
@@ -17,11 +18,11 @@ public class NoticeController {
 	private NoticeService service;
 	
 	@RequestMapping(value="/noticeList.do")
-	public String noticeList(Model model) {
+	public String noticeList(int reqPage, Model model) {
 		/*
-		 * ArrayList<Notice> list = service.selectNoticeList();
-		 * model.addAttribute("list",list);
-		 */
+		NoticePageData list = service.selectNoticeList(reqPage);
+		model.addAttribute("list",list);
+		*/
 		return "notice/noticeList";
 	}
 	

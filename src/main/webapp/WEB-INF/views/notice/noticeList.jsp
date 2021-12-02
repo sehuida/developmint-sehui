@@ -23,43 +23,37 @@
 				</ul>
 			</div>
 			<div class="contents">
-				<h2>Notice</h2>
+				<div class="title"><h2>Notice</h2></div>
 				<c:if test="${not empty sessionScope.m && sessionScope.m.memberType eq 9}">
 					<a class="btn btn-secondary" href="/nWriteFrm.do">글쓰기</a>
 				</c:if>
 				<table class="table table-hover">
 					<thead>
 						<tr>
-					     	<th scope="col">번호</th>
+					     	<th scope="col" style="width: 10%;">번호</th>
 					     	<th scope="col">제목</th>
-					     	<th scope="col">등록일</th>
+					     	<th scope="col" style="width: 20%;">등록일</th>
 					    </tr>
 				 	</thead>
 				 	<tbody>
-				 		<c:forEach items="${list  }" var="f" varStatus="i">
+				 		<c:forEach items="${list  }" var="n" varStatus="i">
 						<c:choose>
-							<c:when test="${f.priority == 0}">
+							<c:when test="${n.pin == 2}">
 								<tr class="table-light" id=noticeList>
 									<td>${start + i.index-fixPage}</td> 
-									<td style="text-align: left; width: 60%;">
-										<a href='/freeView?freeNo=${f.freeNo}' id="free"> 
-											${f.freeTitle }
-										</a> [${f.ncCount }]</td>
-									<td>${f.freeWriter }</td>
+									<td style="text-align: left;">
+										<a href='/freeView?freeNo=${f.freeNo}' id="free"> ${f.freeTitle }</a>
+									</td>
 									<td>${f.regDate }</td>
-									<td>${f.readCount }</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
 							<tr class="table-default" id="freeNotice" style="background-color: #bdbdbd;">
-									<td><img src="/img/bell2.png" style="width:20px; height:20px;"></td> 
-									<td style="text-align: left; width: 60%;">
-										<a href='/freeView?freeNo=${f.freeNo }' id="free"> 
-											${f.freeTitle }
-										</a></td>
-									<td>${f.freeWriter }</td>
+									<td><i class="bi bi-pin-angle-fill"></i></td> 
+									<td style="text-align: left; ">
+										<a href='/freeView?freeNo=${f.freeNo }' id="free"> ${f.freeTitle }</a>
+									</td>
 									<td>${f.regDate }</td>
-									<td>${f.readCount }</td>
 								</tr>
 							</c:otherwise>
 						</c:choose>
@@ -71,7 +65,7 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$(document).ready(function() {
 		    brandnewNotice();
 		});
@@ -91,6 +85,6 @@
                 }
             });
 		}
-	</script>
+	</script> -->
 </body>
 </html>
