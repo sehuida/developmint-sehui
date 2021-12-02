@@ -7,6 +7,7 @@
 <style>
 .container * {
 	text-decoration: none;
+	color:black;
 }
 
 .container {
@@ -18,11 +19,11 @@
 .container .g-plus {
 	display: flex;
 	justify-content: right;
-	color: rgb(78, 205, 196);
 	text-align: right;
 	font-weight: bold;
+	
+	
 }
-
 .container h4 {
 	font-weight: bold;
 	color: black;
@@ -163,7 +164,7 @@
 							anskddddddddddddanskdddddddddddd</p>
 					</div>
 					<div class="g-plus">
-						<a href="">더보기</a>
+						<a href="" 	style="color: rgb(78, 205, 196);">더보기</a>
 					</div>
 				</div>
 
@@ -194,7 +195,7 @@
 
 					</div>
 					<div class="g-plus">
-						<a href="">더보기</a>
+						<a href="" style="color: rgb(78, 205, 196);">더보기</a>
 					</div>
 				</div>
 
@@ -254,7 +255,7 @@
 					<h4>프로젝트</h4>
 					<div class="g-photo-wrap">
 						<div class="g-photo-one">
-							<button>
+							<button type="button">
 								<dl>
 									<dt>
 										<img src="/resources/img/gosu/g_img_basic.png">
@@ -269,7 +270,7 @@
 							</button>
 						</div>
 						<div class="g-photo-one">
-							<button>
+							<button type="button">
 								<dl>
 									<dt>
 										<img src="/resources/img/gosu/g_img_basic.png">
@@ -284,7 +285,7 @@
 							</button>
 						</div>
 						<div class="g-photo-one">
-							<button>
+							<button type="button" >
 								<dl>
 									<dt>
 										<img src="/resources/img/gosu/g_img_basic.png">
@@ -317,8 +318,7 @@
 		</div>
 		<div style="display: flex; justify-content: center;">
 			<a href="/gosuFeedback.do" class="btn btn-primary"
-				style="width: 200px; margin: 100px; padding: 10px;"><b>피드백
-					신청하기</b></a>
+				style="width: 200px; margin: 100px; padding: 10px;"><b style="color:white">피드백 신청하기</b></a>
 		</div>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>

@@ -79,6 +79,29 @@
 			order by rnum
 			) 
 		where rnum BETWEEN 1 and 8
-		
+	</select>
+	
+	<update id="contestCountUp" parameterType="_int">
+		update contest set CONTEST_COUNT = CONTEST_COUNT+1 where contest_no = #{contestNo}
+	</update>
+	
+	<select id="contestView" parameterType="_int" resultType="c">
+		select
+			contest_no as contestNo,
+			contest_host as contestHost,
+			member_id as memberId,
+			contest_type as contestType,
+			contest_qualify as contestQualify,
+			contest_date as contestDate,
+			contest_deadline as contestDate,
+			contest_prize as contestPrize,
+			phone,
+			email,
+			contest_title as contestTitle,
+			contest_content as contestContent,
+			contest_img as contestImg,
+			contest_status as contestStatus,
+			contest_count as contestCount
+		from contest where contest_no = #{contestNo}
 	</select>
 </mapper>

@@ -89,6 +89,7 @@ public class ContestController {
 			e.printStackTrace();
 		}
 		
+		//중복처리된 파일 이름 넣어주기
 		c.setContestImg(filepath);
 		
 		int result = service.insertContest(c);
@@ -104,8 +105,12 @@ public class ContestController {
 		return "common/msg";
 	}
 	
+	//공모전 상세페이지로 이동
 	@RequestMapping(value="/contestView.do")
-	public String contestView() {
+	public String contestView(int contestNo, Model model) {
+		//공모전 정보 불러오면서 조회수 올려주기
+		Contest con = service.contestView(contestNo);
+		model.addAttribute("c",con);
 		return "contest/contestView";
 	}
 }
