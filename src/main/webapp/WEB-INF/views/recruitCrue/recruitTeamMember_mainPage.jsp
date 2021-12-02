@@ -101,7 +101,7 @@
                             <div id="right_site">
                                 <input type="checkbox" class="navi_checkbox">
                                 <span class="navi_right_font">모집중인 글만 보기</span>
-                                <a href="/recruitTeamMember_datail.do?memberNo=${m.memberNo }"><button type="button" class="btn btn-success" id="navi_button">글 쓰기</button></a>
+                                <a href="/recruitNotice_writeForm.do?memberNo=${m.memberNo }"><button type="button" class="btn btn-success" id="navi_button">글 쓰기</button></a>
                             </div>
                         </div>
                         <div class="rListBox">
