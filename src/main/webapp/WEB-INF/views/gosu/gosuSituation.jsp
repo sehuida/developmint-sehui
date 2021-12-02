@@ -70,7 +70,6 @@
     padding: 20px;
 }
 .review-one p{
-    text-align:center;
     padding: 10px;
     margin: 0;
 
@@ -89,7 +88,7 @@
                 <div>
                     <table>
                         <tr style="font-size: x-small;">
-                            <td style="text-align: left; color: red; padding-top: 20px;"><b>진행 중</b></td>
+                            <td style="text-align: left;  padding-top: 20px;"><b style="color : red;">진행 중</b></td>
                             <td style="padding-top: 20px;">2021.XX.XX</td>
                         </tr>
                         <tr>
@@ -109,7 +108,7 @@
                 <div>
                     <table>
                         <tr style="font-size: x-small;">
-                            <td style="text-align: left; color: red; padding-top: 20px;"><b>진행 중</b></td>
+                            <td style="text-align: left;  padding-top: 20px;"><b style="color : red;">진행 중</b></td>
                             <td style="padding-top: 20px;">2021.XX.XX</td>
                         </tr>
                         <tr>
@@ -131,7 +130,7 @@
                 <div>
                     <table>
                         <tr style="font-size: x-small;">
-                            <td style="text-align: left; color: red; padding-top: 20px;"><b>진행 중</b></td>
+                            <td style="text-align: left;  padding-top: 20px;"><b style="color : red;">진행 중</b></td>
                             <td style="padding-top: 20px;">2021.XX.XX</td>
                         </tr>
                         <tr>
@@ -151,7 +150,7 @@
                 <div>
                     <table>
                         <tr style="font-size: x-small;">
-                            <td style="text-align: left; color: red; padding-top: 20px;"><b>진행 중</b></td>
+                            <td style="text-align: left;  padding-top: 20px;"><b style="color : red;">진행 중</b></td>
                             <td style="padding-top: 20px;">2021.XX.XX</td>
                         </tr>
                         <tr>

@@ -267,7 +267,7 @@ to {
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
-	<div class="container">살려주세요..제발...
+	<div class="container">
 		<h1>
 			<span style="color: rgb(78, 205, 196);">고수</span>의 노하우
 		</h1>
@@ -453,7 +453,7 @@ to {
 				<span style="color: rgb(78, 205, 196);">고수</span>의 게시판
 			</h3>
 			<div class="g-plus">
-				<a href="" style="color: rgb(78, 205, 196);">더보기</a>
+				<a href="/gosuNotice.do" style="color: rgb(78, 205, 196);">더보기</a>
 			</div>
 			<div class="g-gall">
 				<ul id="gallery">
