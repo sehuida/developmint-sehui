@@ -130,36 +130,12 @@
        </div> 
    </div>
     <div class="gosu-wrap">
-        <div class="gosu">
-            <button class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-                    <table>
-                        <tr>
-                            <td rowspan="4" class="gosu_img" style="width: 30%;"><img src="/resources/img/gosu/g_img_basic.png" style=" border-radius: 50%;"></td>
-                            <td><a href="">제목</a></td>
-                        </tr>
-                        <tr>
-                            <td><hr></td>
-                        </tr>
-                        <tr>
-                           
-                            <td> <li>한줄소개</li></td>
-                        </tr>
-                        <tr>
-                            <td> <li>피드백 예상견적</li></td> 
-                        </tr>
-                        <tr>
-                            <td style="text-align: center; font-weight: bold;">고수 xxxx</td>
-                            <td>4.0</td>
-                        </tr>
-                    </table>
-            </button>
-            </div> 
-            <div class="gosu">
-                <button class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+         <div class="gosu">
+                <button type="button" class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
                         <table>
                             <tr>
                                 <td rowspan="4" class="gosu_img" style="width: 30%;"><img src="/resources/img/gosu/g_img_basic.png" style=" border-radius: 50%;"></td>
-                                <td><a href="">제목</a></td>
+                                <td><a href="/gosuContent.do">제목</a></td>
                             </tr>
                             <tr>
                                 <td><hr></td>
@@ -178,12 +154,12 @@
                         </table>
                 </button>
             </div>
-            <div class="gosu">
-                <button class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+             <div class="gosu">
+                <button type="button" class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
                         <table>
                             <tr>
                                 <td rowspan="4" class="gosu_img" style="width: 30%;"><img src="/resources/img/gosu/g_img_basic.png" style=" border-radius: 50%;"></td>
-                                <td><a href="">제목</a></td>
+                                <td><a href="/gosuContent.do">제목</a></td>
                             </tr>
                             <tr>
                                 <td><hr></td>
@@ -202,12 +178,12 @@
                         </table>
                 </button>
             </div>
-            <div class="gosu">
-                <button class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+             <div class="gosu">
+                <button type="button" class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
                         <table>
                             <tr>
                                 <td rowspan="4" class="gosu_img" style="width: 30%;"><img src="/resources/img/gosu/g_img_basic.png" style=" border-radius: 50%;"></td>
-                                <td><a href="">제목</a></td>
+                                <td><a href="/gosuContent.do">제목</a></td>
                             </tr>
                             <tr>
                                 <td><hr></td>
@@ -226,12 +202,12 @@
                         </table>
                 </button>
             </div>
-            <div class="gosu">
-                <button class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+             <div class="gosu">
+                <button type="button" class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
                         <table>
                             <tr>
                                 <td rowspan="4" class="gosu_img" style="width: 30%;"><img src="/resources/img/gosu/g_img_basic.png" style=" border-radius: 50%;"></td>
-                                <td><a href="">제목</a></td>
+                                <td><a href="/gosuContent.do">제목</a></td>
                             </tr>
                             <tr>
                                 <td><hr></td>
@@ -250,12 +226,12 @@
                         </table>
                 </button>
             </div>
-            <div class="gosu">
-                <button class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+             <div class="gosu">
+                <button type="button" class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
                         <table>
                             <tr>
                                 <td rowspan="4" class="gosu_img" style="width: 30%;"><img src="/resources/img/gosu/g_img_basic.png" style=" border-radius: 50%;"></td>
-                                <td><a href="">제목</a></td>
+                                <td><a href="/gosuContent.do">제목</a></td>
                             </tr>
                             <tr>
                                 <td><hr></td>
@@ -274,12 +250,12 @@
                         </table>
                 </button>
             </div>
-            <div class="gosu">
-                <button class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+              <div class="gosu">
+                <button type="button" class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
                         <table>
                             <tr>
                                 <td rowspan="4" class="gosu_img" style="width: 30%;"><img src="/resources/img/gosu/g_img_basic.png" style=" border-radius: 50%;"></td>
-                                <td><a href="">제목</a></td>
+                                <td><a href="/gosuContent.do">제목</a></td>
                             </tr>
                             <tr>
                                 <td><hr></td>
@@ -298,12 +274,12 @@
                         </table>
                 </button>
             </div>
-            <div class="gosu">
-                <button class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+              <div class="gosu">
+                <button type="button" class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
                         <table>
                             <tr>
                                 <td rowspan="4" class="gosu_img" style="width: 30%;"><img src="/resources/img/gosu/g_img_basic.png" style=" border-radius: 50%;"></td>
-                                <td><a href="">제목</a></td>
+                                <td><a href="/gosuContent.do">제목</a></td>
                             </tr>
                             <tr>
                                 <td><hr></td>
@@ -322,12 +298,36 @@
                         </table>
                 </button>
             </div>
-            <div class="gosu">
-                <button class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+             <div class="gosu">
+                <button type="button" class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
                         <table>
                             <tr>
                                 <td rowspan="4" class="gosu_img" style="width: 30%;"><img src="/resources/img/gosu/g_img_basic.png" style=" border-radius: 50%;"></td>
-                                <td><a href="">제목</a></td>
+                                <td><a href="/gosuContent.do">제목</a></td>
+                            </tr>
+                            <tr>
+                                <td><hr></td>
+                            </tr>
+                            <tr>
+                               
+                                <td> <li>한줄소개</li></td>
+                            </tr>
+                            <tr>
+                                <td> <li>피드백 예상견적</li></td> 
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; font-weight: bold;">고수 xxxx</td>
+                                <td>4.0</td>
+                            </tr>
+                        </table>
+                </button>
+            </div>
+           <div class="gosu">
+                <button type="button" class="card border-primary mb-3" style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+                        <table>
+                            <tr>
+                                <td rowspan="4" class="gosu_img" style="width: 30%;"><img src="/resources/img/gosu/g_img_basic.png" style=" border-radius: 50%;"></td>
+                                <td><a href="/gosuContent.do">제목</a></td>
                             </tr>
                             <tr>
                                 <td><hr></td>

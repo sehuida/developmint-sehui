@@ -99,7 +99,7 @@
                             <td> 내용내용</td>
                         </tr>
                         <tr>
-                            <td colspan="2"><a class="btn btn-primary">자세히 보기</a></td>
+                            <td colspan="2"><a href="/gosuTalk.do" class="btn btn-primary">자세히 보기</a></td>
                         </tr>
 
                     </table>
@@ -119,7 +119,7 @@
                             <td> 내용내용</td>
                         </tr>
                         <tr>
-                            <td colspan="2"><a class="btn btn-primary">자세히 보기</a></td>
+                            <td colspan="2"><a href="/gosuTalk.do" class="btn btn-primary">자세히 보기</a></td>
                         </tr>
 
                     </table>
@@ -141,7 +141,7 @@
                             <td> 내용내용</td>
                         </tr>
                         <tr>
-                            <td colspan="2"><a class="btn btn-primary">자세히 보기</a></td>
+                            <td colspan="2"><a href="/gosuTalk.do" class="btn btn-primary">자세히 보기</a></td>
                         </tr>
 
                     </table>
@@ -161,7 +161,7 @@
                             <td> 내용내용</td>
                         </tr>
                         <tr>
-                            <td colspan="2"><a class="btn btn-primary">자세히 보기</a></td>
+                            <td colspan="2"><a href="/gosuTalk.do" class="btn btn-primary">자세히 보기</a></td>
                         </tr>
 
                     </table>

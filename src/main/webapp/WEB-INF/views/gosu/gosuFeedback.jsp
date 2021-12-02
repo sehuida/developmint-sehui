@@ -75,6 +75,10 @@
 input:focus, textarea:focus {
 	outline: none;
 }
+
+.g-content th{
+    background-color: rgb(209, 209, 209);
+}
 </style>
 </head>
 <body>
@@ -87,7 +91,7 @@ input:focus, textarea:focus {
 
 
 		<div class="gosu">
-			<button class="card border-primary mb-3"
+			<button type="button" class="card border-primary mb-3"
 				style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
 				<table>
 					<tr>

@@ -272,14 +272,14 @@ to {
 		</div>
 		<div class="gosu-wrap">
 			<div class="gosu">
-				<button class="card border-primary mb-3"
+				<button type="button" class="card border-primary mb-3"
 					style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
 					<table>
 						<tr>
 							<td rowspan="4" class="gosu_img" style="width: 30%;"><img
 								src="/resources/img/gosu/g_img_basic.png"
 								style="border-radius: 50%;"></td>
-							<td><a href="">제목</a></td>
+							<td><a href="/gosuContent.do">제목</a></td>
 						</tr>
 						<tr>
 							<td><hr></td>
@@ -303,14 +303,14 @@ to {
 				</button>
 			</div>
 			<div class="gosu">
-				<button class="card border-primary mb-3"
+				<button type="button" class="card border-primary mb-3"
 					style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
 					<table>
 						<tr>
 							<td rowspan="4" class="gosu_img" style="width: 30%;"><img
 								src="/resources/img/gosu/g_img_basic.png"
 								style="border-radius: 50%;"></td>
-							<td><a href="">제목</a></td>
+							<td><a href="/gosuContent.do">제목</a></td>
 						</tr>
 						<tr>
 							<td><hr></td>
@@ -337,14 +337,14 @@ to {
 		</div>
 		<div class="gosu-wrap">
 			<div class="gosu">
-				<button class="card border-primary mb-3"
+				<button type="button" class="card border-primary mb-3"
 					style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
 					<table>
 						<tr>
 							<td rowspan="4" class="gosu_img" style="width: 30%;"><img
 								src="/resources/img/gosu/g_img_basic.png"
 								style="border-radius: 50%;"></td>
-							<td><a href="">제목22222</a></td>
+							<td><a href="/gosuContent.do">제목22222</a></td>
 						</tr>
 						<tr>
 							<td><hr></td>
@@ -368,7 +368,7 @@ to {
 				</button>
 			</div>
 			<div class="gosu">
-				<button class="card border-primary mb-3"
+				<button type="button" class="card border-primary mb-3"
 					style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
 
 					<table>
@@ -479,7 +479,7 @@ to {
 			<div class="g-status-border">
 				<h4 style="margin-top: 30px; margin-left: 40px;">신청한 내역</h4>
 				<div class="g-statusContent">
-					<button>
+					<button type="button">
 						<table class="g-sc-tbl card text-white bg-primary mb-3"
 							style="margin-bottom: 0;">
 							<tr>
@@ -496,7 +496,7 @@ to {
 							</tr>
 						</table>
 					</button>
-					<button>
+					<button type="button">
 						<table class="g-sc-tbl card text-white bg-primary mb-3"
 							style="margin-bottom: 0;">
 							<tr>
@@ -516,7 +516,7 @@ to {
 				</div>
 				<h4 style="margin-top: 30px; margin-left: 40px;">작성한 고수 리뷰</h4>
 				<div class="g-statusContent">
-					<button>
+					<button type="button">
 						<table class="g-sc-tbl card bg-light mb-3" >
 						<tboay style="min-width:342px;max-width:342px;">
 							<tr>
@@ -533,7 +533,7 @@ to {
 							</tboay>
 						</table>
 					</button>
-					<button>
+					<button type="button">
 						<table class="g-sc-tbl card bg-light mb-3" >
 						<tboay style="min-width:342px;max-width:342px;">
 							<tr>
