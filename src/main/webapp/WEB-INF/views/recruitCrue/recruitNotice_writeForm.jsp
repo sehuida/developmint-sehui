@@ -6,7 +6,13 @@
 <head>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <link rel="stylesheet" href="/resources/css/projectTeam/writePage.css">
+<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+<script src="/summernote/jquery-3.3.1.js"></script>
+<script src="/summernote/summernote-lite.js"></script>
+<script src="/summernote/lang/summernote-ko-KR.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css" integrity="sha512-Fppbdpv9QhevzDE+UHmdxL4HoW8HantO+rC8oQB2hCofV+dWV2hePnP5SgiWR1Y1vbJeYONZfzQc5iII6sID2Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <meta charset="UTF-8">
 <title>RecruitCrue WriteForm</title>
 </head>
@@ -15,109 +21,175 @@
 	<div class="container" id="projectContainer">
 		<div class="main">
             <div class="returnPage">
-                <a href="#"><img class="return_img" src="/resources/img/recruitTeamProject/writePage/left.png"></a>
+                <a href="/recruitTeamMember_mainPage.do"><img class="return_img" src="/resources/img/recruitTeamProject/writePage/left.png"></a>
             </div>
             <div class="main_content">
-                <div class="writeBox">
-                    <div class="form-group">
-                        <input class="form-control form-control-lg" type="text" placeholder="모집공고 제목을 입력해주세요." id="inputLarge">
-                    </div>
-                    <div class="writeLine">
-                        <div class="titleFlexBox">
-                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/code.png">
-                            <p class="titleText">사용 언어(최대 3개 까지 선택 가능)</p>
-                        </div>
-                        <div class="checkboxFlexList">
-                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                                <input type="checkbox" class="btn-check" id="btncheck1" checked="" autocomplete="off">
-                                <label class="btn btn-primary" for="btncheck1">javascript</label>
-                                <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
-                                <label class="btn btn-primary" for="btncheck2">typescript</label>
-                                <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
-                                <label class="btn btn-primary" for="btncheck3">react</label>
-                                <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
-                                <label class="btn btn-primary" for="btncheck4">vue</label>
-                                <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
-                                <label class="btn btn-primary" for="btncheck5">node.js</label>
-                                <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
-                                <label class="btn btn-primary" for="btncheck6">java</label>
-                                <input type="checkbox" class="btn-check" id="btncheck7" autocomplete="off">
-                                <label class="btn btn-primary" for="btncheck7">spring</label>
-                            </div>
-                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" id="bottomCheckBox">
-                                <input type="checkbox" class="btn-check" id="btncheck8" autocomplete="off">
-                                <label class="btn btn-primary" for="btncheck8">swift</label>
-                                <input type="checkbox" class="btn-check" id="btncheck9" autocomplete="off">
-                                <label class="btn btn-primary" for="btncheck9">kotlin</label>
-                                <input type="checkbox" class="btn-check" id="btncheck10" autocomplete="off">
-                                <label class="btn btn-primary" for="btncheck10">c++</label>
-                                <input type="checkbox" class="btn-check" id="btncheck11" autocomplete="off">
-                                <label class="btn btn-primary" for="btncheck10">go</label>
-                                <input type="checkbox" class="btn-check" id="btncheck12" autocomplete="off">
-                                <label class="btn btn-primary" for="btncheck12">python</label>
-                                <input type="checkbox" class="btn-check" id="btncheck13" autocomplete="off">
-                                <label class="btn btn-primary" for="btncheck13">django</label>
-                                <input type="checkbox" class="btn-check" id="btncheck14" autocomplete="off">
-                                <label class="btn btn-primary" for="btncheck14">flutter</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line"></div>
-                    <div class="writeLine">
-                        <div class="titleFlexBox">
-                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/pending.png">
-                            <p class="titleText">모집마감일(모집일부터 최대 14일)</p>
-                        </div>
-                        <ul class="nav nav-pills">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">날짜를 선택하세요</a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item">2021년 12월 23일</a>
-                                    <a class="dropdown-item">2021년 12월 24일</a>
-                                    <a class="dropdown-item">2021년 12월 25일</a>
-                                    <a class="dropdown-item">2021년 12월 26일</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="line"></div>
-                    <div class="writeLine">
-                        <div class="titleFlexBox">
-                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/title.png">
-                            <p class="titleText">프로젝트명</p>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault">
-                        </div>
-                    </div>
-                    <div class="line"></div>
-                    <div class="writeLine">
-                        <div class="titleFlexBox">
-                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/goal.png">
-                            <p class="titleText">프로젝트 목표(ex. 웹 페이지 정복)</p>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault">
-                        </div>
-                    </div>
-                    <div class="line"></div>
-                    <div class="writeLine">
-                        <div class="titleFlexBox">
-                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/content-creator.png">
-                            <p class="titleText">모집설명</p>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <div class="finalLine"></div>
-                    <div class="submitBtnBox">
-                        <button type="button" class="btn btn-primary btn-lg">제출</button>
-                    </div>
-                </div>
+	            <form action="/writeRecruitTeam.do" method="post" enctype="multipart/form-data">
+		            <div class="writeBox">
+	                    <div class="form-group">
+	                        <input class="form-control form-control-lg" type="text" placeholder="모집공고 제목을 입력해주세요." id="inputLarge">
+	                    </div>
+	                    <div class="writeLine">
+	                        <div class="titleFlexBox">
+	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/code.png">
+	                            <p class="titleText">사용 언어(최대 3개 까지 선택 가능)</p>
+	                        </div>
+	                        <div class="checkboxFlexList">
+	                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+	                                <input type="checkbox" class="btn-check" id="btncheck1" checked="" autocomplete="off">
+	                                <label class="btn btn-primary" for="btncheck1">javascript</label>
+	                                <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+	                                <label class="btn btn-primary" for="btncheck2">typescript</label>
+	                                <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+	                                <label class="btn btn-primary" for="btncheck3">react</label>
+	                                <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+	                                <label class="btn btn-primary" for="btncheck4">vue</label>
+	                                <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
+	                                <label class="btn btn-primary" for="btncheck5">node.js</label>
+	                                <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
+	                                <label class="btn btn-primary" for="btncheck6">java</label>
+	                                <input type="checkbox" class="btn-check" id="btncheck7" autocomplete="off">
+	                                <label class="btn btn-primary" for="btncheck7">spring</label>
+	                            </div>
+	                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" id="bottomCheckBox">
+	                                <input type="checkbox" class="btn-check" id="btncheck8" autocomplete="off">
+	                                <label class="btn btn-primary" for="btncheck8">swift</label>
+	                                <input type="checkbox" class="btn-check" id="btncheck9" autocomplete="off">
+	                                <label class="btn btn-primary" for="btncheck9">kotlin</label>
+	                                <input type="checkbox" class="btn-check" id="btncheck10" autocomplete="off">
+	                                <label class="btn btn-primary" for="btncheck10">c++</label>
+	                                <input type="checkbox" class="btn-check" id="btncheck11" autocomplete="off">
+	                                <label class="btn btn-primary" for="btncheck10">go</label>
+	                                <input type="checkbox" class="btn-check" id="btncheck12" autocomplete="off">
+	                                <label class="btn btn-primary" for="btncheck12">python</label>
+	                                <input type="checkbox" class="btn-check" id="btncheck13" autocomplete="off">
+	                                <label class="btn btn-primary" for="btncheck13">django</label>
+	                                <input type="checkbox" class="btn-check" id="btncheck14" autocomplete="off">
+	                                <label class="btn btn-primary" for="btncheck14">flutter</label>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="line"></div>
+	                    <div class="writeLine">
+	                        <div class="titleFlexBox">
+	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/pending.png">
+	                            <p class="titleText">모집마감일(모집일부터 최대 14일)</p>
+	                        </div>
+	                        <input type="text" id="datePicker" class="form-control" value="날짜를 선택해 주세요">
+	                       <!--  <ul class="nav nav-pills">
+	                            <li class="nav-item dropdown">
+	                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">날짜를 선택하세요</a>
+	                                <div class="dropdown-menu">
+	                                    <a class="dropdown-item">2021년 12월 23일</a>
+	                                    <a class="dropdown-item">2021년 12월 24일</a>
+	                                    <a class="dropdown-item">2021년 12월 25일</a>
+	                                    <a class="dropdown-item">2021년 12월 26일</a>
+	                                </div>
+	                            </li>
+	                        </ul> -->
+	                    </div>
+	                    <div class="line"></div>
+	                    <div class="writeLine">
+	                        <div class="titleFlexBox">
+	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/title.png">
+	                            <p class="titleText">프로젝트명</p>
+	                        </div>
+	                        <div class="form-group">
+	                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault">
+	                        </div>
+	                    </div>
+	                    <div class="line"></div>
+	                    <div class="writeLine">
+	                        <div class="titleFlexBox">
+	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/goal.png">
+	                            <p class="titleText">프로젝트 목표(ex. 웹 페이지 정복)</p>
+	                        </div>
+	                        <div class="form-group">
+	                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault">
+	                        </div>
+	                    </div>
+	                    <div class="line"></div>
+	                    <div class="writeLine">
+	                        <div class="titleFlexBox">
+	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/content-creator.png">
+	                            <p class="titleText">모집설명</p>
+	                        </div>
+	                        <div class="form-group">
+	                            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+	                        </div>
+	                    </div>
+	                    <div class="finalLine"></div>
+	                    <div class="submitBtnBox">
+	                        <button type="submit" class="btn btn-primary btn-lg">제출</button>
+	                    </div>
+	                </div>
+		        </form>
             </div>
         </div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script>
+	$(function(){
+		$("#exampleTextarea").summernote({
+			height : 400,
+			lang : "ko-KR",
+			callbacks:{
+				onImageUpload : function(files){
+					uploadImage(files[0], this);
+				}
+			}
+		});
+	});
+	function uploadImage(file, editor){
+		// form과 같은효과를 내는 객체생성
+		var form = new FormData();
+		form.append("file", file);
+		$.ajax({
+			url : "/rUploadImage.do",
+			type : "post",
+			data : form,
+			processData : false,
+			contentType : false,
+			success : function(data){
+				// 결과로 받은 업로드 경로를 이용해서 에디터에 이미지 추가
+				$(editor).summernote("insertImage", data);
+			}
+		});
+		// processData : 기본값이 true {key:value1, key2:value2, key3:value3}
+		// 				-> 파일전송 시 String이 아닌 파일형태로 전송하기 위해서 기본설정을 제거
+		// contentType : 기본값 "application/x-www-form-urlencodeed; charset=UTF=8"
+		//				-> 파일전송 시 enctype="multipart/form-data" 로 변환하기위해 기본값 제거
+	}
+	
+	$(function() {	
+		$('#datePicker').datepicker({
+		    format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
+		    startDate: '0d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+		    endDate: '+14d',	//달력에서 선택 할 수 있는 가장 느린 날짜. 이후로 선택 불가 ( d : 일 m : 달 y : 년 w : 주)
+		    autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
+		    calendarWeeks : false, //캘린더 옆에 몇 주차인지 보여주는 옵션 기본값 false 보여주려면 true
+		    clearBtn : false, //날짜 선택한 값 초기화 해주는 버튼 보여주는 옵션 기본값 false 보여주려면 true
+		    /* datesDisabled : ['2019-06-24','2019-06-26'],//선택 불가능한 일 설정 하는 배열 위에 있는 format 과 형식이 같아야함. */
+		    /* daysOfWeekDisabled : [0,6],	//선택 불가능한 요일 설정 0 : 일요일 ~ 6 : 토요일
+		    daysOfWeekHighlighted : [3], //강조 되어야 하는 요일 설정 */
+		    disableTouchKeyboard : false,	//모바일에서 플러그인 작동 여부 기본값 false 가 작동 true가 작동 안함.
+		    immediateUpdates: false,	//사용자가 보는 화면으로 바로바로 날짜를 변경할지 여부 기본값 :false 
+		    multidate : false, //여러 날짜 선택할 수 있게 하는 옵션 기본값 :false 
+		    multidateSeparator :",", //여러 날짜를 선택했을 때 사이에 나타나는 글짜 2019-05-01,2019-06-01
+		    templates : {
+		        leftArrow: '&laquo;',
+		        rightArrow: '&raquo;'
+		    }, //다음달 이전달로 넘어가는 화살표 모양 커스텀 마이징 
+		    showWeekDays : true ,// 위에 요일 보여주는 옵션 기본값 : true
+		    title: "마감일 선택",	//캘린더 상단에 보여주는 타이틀
+		    todayHighlight : true ,	//오늘 날짜에 하이라이팅 기능 기본값 :false 
+		    toggleActive : true,	//이미 선택된 날짜 선택하면 기본값 : false인경우 그대로 유지 true인 경우 날짜 삭제
+		    weekStart : 0 ,//달력 시작 요일 선택하는 것 기본값은 0인 일요일 
+		    language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+		    
+		});//datepicker end
+	});//ready end
+	</script>
+	
 </body>
 </html>

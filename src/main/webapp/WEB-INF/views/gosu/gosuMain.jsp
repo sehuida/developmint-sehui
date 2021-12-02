@@ -267,7 +267,7 @@ to {
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
-	<div class="container">
+	<div class="container">살려주세요..제발...
 		<h1>
 			<span style="color: rgb(78, 205, 196);">고수</span>의 노하우
 		</h1>
