@@ -9,6 +9,7 @@
 		<!-- 아래에 필요한 것들 추가해용 - 진호 -->
 		<typeAlias type="kr.or.contest.vo.Contest" alias="c"/>
 		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTeam" alias="pt"/>
+		<typeAlias type="kr.or.resume.vo.Resume" alias="r"/>
 		
 
 	</typeAliases>	
