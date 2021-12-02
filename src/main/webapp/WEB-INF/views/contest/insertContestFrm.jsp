@@ -71,8 +71,8 @@
 					<td>
 						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="대학생" class="form-check-input">대학생</label>
 						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="대학원생" class="form-check-input">대학원생</label> 
-						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="고등학생"class="form-check-input">일반인</label> 
-						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="일반인" class="form-check-input">고등학생</label> 
+						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="고등학생"class="form-check-input">고등학생</label> 
+						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="일반인" class="form-check-input">일반인</label> 
 						<label><input type="checkbox" name="contestQualify" value="제한없음" class="form-check-input">제한없음</label>
 						</td>
 				</tr>
