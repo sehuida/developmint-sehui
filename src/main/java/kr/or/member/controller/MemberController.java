@@ -56,4 +56,14 @@ public class MemberController {
 			return "0";
 		}
 	}
+	@ResponseBody
+	@RequestMapping(value="/memberIdCheck.do")
+	public String memberIdCheck(String memberId) {
+		Member m = service.checkId(memberId);
+		if(m == null) {
+			return "1";
+		}else {
+			return "0";
+		}
+	}
 }
