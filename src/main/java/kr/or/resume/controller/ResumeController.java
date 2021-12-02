@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.or.member.model.vo.Member;
 import kr.or.resume.service.ResumeService;
 import kr.or.resume.vo.Resume;
 
@@ -22,14 +23,22 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="resumeManage.do")
-	public String resumeManage(Model model) {
-		ArrayList<Resume> list = service.selectAllResume();
+	public String resumeManage(Model model, Member m) {
+		ArrayList<Resume> list = service.selectAllResume(m);
+		System.out.println();
 		if(list != null) {
 			model.addAttribute("list", list);
-			System.out.println("잘됨");
+			System.out.println("잘됨");		//테스트 끝나면 sout지우기
 		} else {
 			System.out.println("없음");
 		}
 		return "resume/resumeManage";
+	}
+	
+	@RequestMapping(value="updateResume.do")
+	public String updateResume(int resumeNo, Model model) {
+		Resume r = service.selectOneResume(resumeNo);
+		model.addAttribute("r", r);
+		return "resume/updateResume";
 	}
 }

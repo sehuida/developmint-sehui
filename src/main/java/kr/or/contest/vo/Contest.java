@@ -21,4 +21,8 @@ public class Contest {
 	private String contestImg;
 	private int contestStatus;
 	private int contestCount;	
+	
+	public String getContestContentBr() {
+		return contestContent.replaceAll("\r\n", "<br>");
+	}
 }

@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.contest.service.ContestService;
 import kr.or.contest.vo.Contest;
+import kr.or.contest.vo.ContestList;
 
 @Controller
 public class ContestController {
@@ -27,8 +28,8 @@ public class ContestController {
 	//공모전 메인페이지 이동
 	@RequestMapping(value="/contestMain.do")
 	public String contestMain(Model model) {
-		//공모전 리스트 불러오기
-		ArrayList<Contest> list = service.contestAllList();
+		//공모전 최신리스트, 인기리스트 불러오기
+		ContestList list = service.selectContestList();
 		model.addAttribute("list",list);
 		return "contest/contestMain";
 	}
@@ -88,6 +89,7 @@ public class ContestController {
 			e.printStackTrace();
 		}
 		
+		//중복처리된 파일 이름 넣어주기
 		c.setContestImg(filepath);
 		
 		int result = service.insertContest(c);
@@ -103,8 +105,12 @@ public class ContestController {
 		return "common/msg";
 	}
 	
+	//공모전 상세페이지로 이동
 	@RequestMapping(value="/contestView.do")
-	public String contestView() {
+	public String contestView(int contestNo, Model model) {
+		//공모전 정보 불러오면서 조회수 올려주기
+		Contest con = service.contestView(contestNo);
+		model.addAttribute("c",con);
 		return "contest/contestView";
 	}
 }
