@@ -29,6 +29,7 @@ public class ResumeController {
 		if(list != null) {
 			model.addAttribute("list", list);
 			System.out.println("잘됨");		//테스트 끝나면 sout지우기
+			System.out.println(list);
 		} else {
 			System.out.println("없음");
 		}

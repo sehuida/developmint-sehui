@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <style>
 	.contain{
@@ -318,58 +319,58 @@
 			<c:otherwise>
 				<c:forEach items="${list }" var="rs" varStatus="i">
 					<div class="myResume" style="margin-bottom: 50px;">
-			<div class="resumeTitle">
-				<em>${resumeTitle }</em>	<!-- rs.resumeTitle 왜 안될까 슈밥ㅇㅁㄴㅇㅁㄴㅇㄴㅁㅇ -->
-			</div>
-			<ul class="resumeInfo1">
-	           	<li class="career">
-	            	<div class="resumeInfoImg">
-	            		<img src="resources/img/resume/career.PNG">
-	            	</div>
-	            	<div class="resumeInfoData">
-	            		<span>신입</span>	<!-- r.resumeCareer -->
-	            	</div>
-	            </li>
-	            <li class="money">
-					<div class="resumeInfoImg">
-						<img src="resources/img/resume/income.PNG">					
+						<div class="resumeTitle">
+							<em>${r.ResumeTitle }</em>	<!-- rs.resumeTitle 왜 안될까 슈밥ㅇㅁㄴㅇㅁㄴㅇㄴㅁㅇ -->
+						</div>
+						<ul class="resumeInfo1">
+				           	<li class="career">
+				            	<div class="resumeInfoImg">
+				            		<img src="resources/img/resume/career.PNG">
+				            	</div>
+				            	<div class="resumeInfoData">
+				            		<span>${rs.resumeCareer }</span>	<!-- r.resumeCareer -->
+				            	</div>
+				            </li>
+				            <li class="money">
+								<div class="resumeInfoImg">
+									<img src="resources/img/resume/income.PNG">					
+								</div>
+								<div class="resumeInfoData">
+									<span>2,800~3,000만원</span>	<!-- r.resumeMoney -->
+								</div>
+							</li>
+						</ul>
+						<ul class="resumeInfo2">
+							<li class="workPlace">
+								<div class="resumeInfoImg">
+									<img src="resources/img/resume/workPlace.PNG">
+								</div>
+								<div class="resumeInfoData">
+									<span>희망지역 : 서울 금천구</span>	<!-- r.resumeworkPlace -->
+								</div>
+							</li>       					           
+							<li class="workForm">
+								<div class="resumeInfoImg">
+									<img src="resources/img/resume/workFromWhite.PNG">
+								</div>
+								<div class="resumeInfoData">
+									<span>희망 직무·직업 : IT개발·데이터</span>	<!-- r.resumeWorkForm -->
+								</div>
+							</li>                       
+						</ul>
+						<div class="register">
+							<p>대표이력서 등록</p>
+							<div class="ceoResumeChk">
+								<input type="checkbox" id="switch1" name="switch1" class="input__on-off"> 
+								<label for="switch1" class="label__on-off"> 
+									<span class="marble"></span> 
+									<span class="on">on</span> 
+									<span class="off">off</span> 
+								</label>
+							</div>
+						</div>
 					</div>
-					<div class="resumeInfoData">
-						<span>2,800~3,000만원</span>	<!-- r.resumeMoney -->
-					</div>
-				</li>
-			</ul>
-			<ul class="resumeInfo2">
-				<li class="workPlace">
-					<div class="resumeInfoImg">
-						<img src="resources/img/resume/workPlace.PNG">
-					</div>
-					<div class="resumeInfoData">
-						<span>희망지역 : 서울 금천구</span>	<!-- r.resumeworkPlace -->
-					</div>
-				</li>       					           
-				<li class="workForm">
-					<div class="resumeInfoImg">
-						<img src="resources/img/resume/workFromWhite.PNG">
-					</div>
-					<div class="resumeInfoData">
-						<span>희망 직무·직업 : IT개발·데이터</span>	<!-- r.resumeWorkForm -->
-					</div>
-				</li>                       
-			</ul>
-			<div class="register">
-				<p>대표이력서 등록</p>
-				<div class="ceoResumeChk">
-					<input type="checkbox" id="switch1" name="switch1" class="input__on-off"> 
-					<label for="switch1" class="label__on-off"> 
-						<span class="marble"></span> 
-						<span class="on">on</span> 
-						<span class="off">off</span> 
-					</label>
-				</div>
-			</div>
-		</div>
-		<hr>
+					<hr>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>

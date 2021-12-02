@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>구인구직게시판</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <style>
     .contain{
@@ -193,8 +194,8 @@
                 <a href="loginFrm.do"><button class="resume">이력서 작성하기</button></a>                		
                 	</c:otherwise>
                 </c:choose> --%>
-                <!-- <a href="resumeManage.do"><button class="resume">이력서 작성하기</button></a>   		나중에 choose 주석지우고 이거지우기  -->            		
-			                <a href="announceManage.do"><button class="resume">구인공고 작성하기</button></a>   	<!-- 나중에 choose 주석지우고 이거지우기 -->             		
+                 <a href="resumeManage.do"><button class="resume">이력서 작성하기</button></a>   		<!-- 나중에 choose 주석지우고 이거지우기  -->            		
+			     <!-- <a href="announceManage.do"><button class="resume">구인공고 작성하기</button></a>   -->  	<!-- 나중에 choose 주석지우고 이거지우기 -->             		
             </div>
             <div class="headerImg">
                 <img src="resources/img/jobSearch/jobSearchList.PNG">
