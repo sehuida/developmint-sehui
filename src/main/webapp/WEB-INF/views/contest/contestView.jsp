@@ -47,25 +47,28 @@
 	font-size: 25px;
 	font-weight: bold;
 }
-.contestContentBox>div{
+#conBox{
 	padding : 30px;
 	border: 1px solid #d9d9d9;
 	font-size: 18px;
+}
+.clickBtn{
+	text-align: center;
 }
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container" style="margin-bottom: 100px; margin-left: 400px;">
-		<p id="mainTitel">공모전 상세보기</p>
+		<p id="mainTitel"><a href="/contestMain.do"><i class="bi bi-chevron-left"></i></a>공모전 상세보기</p>
 		<div class="contestTitle" style="margin-top:55px;">
-			<p><i class="bi bi-caret-right-fill"></i>${c.contestTitle }</p>
+			<p><i class="bi bi-chevron-right"></i>${c.contestTitle }</p>
 		</div>
 		<%--공모 이미지+정보 --%>
 		<div class="contestInfoBox">
 			<img src="/resources/img/contest/${c.contestImg }" width="300px;" height="450px;">
 			<div>
 				<p><span>주최</span> : ${c.contestHost }</p>
-				<p><span>접수기간</span> : ${c.contestDate } ~ ${c.contestDate }</p>
+				<p><span>접수기간</span> : ${c.contestDate } ~ ${c.contestDeadline }</p>
 				<c:choose>
 					<c:when test="${c.contestType eq 1}">
 						<p><span>공모유형</span> : 기획</p>
@@ -88,14 +91,20 @@
 		</div>
 		<%--공모 요강 --%>
 		<div class="contestContentBox">
-			<p>공모요강</p>
-			<div>
+			<p><i class="bi bi-check2"></i> 공모요강</p>
+			<div id="conBox">
 				<p>${c.contestContentBr }</p>
+				<%--공모 신청 버튼 --%>
+				<div class="clickBtn">
+					<button class="btn btn-primary btn-lg btn-block" style="margin-top:20px; width: 300px; ">공모 신청</button>
+				</div>
 			</div>
 		</div>
 		
-		
-		
+		<%--로그인 구현 끝나면 댓글창 구현 예정 --%>
+		<div class="commentBox">
+			
+		</div>
 		
 		
 		
