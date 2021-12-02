@@ -254,7 +254,7 @@
 					<h4>프로젝트</h4>
 					<div class="g-photo-wrap">
 						<div class="g-photo-one">
-							<button>
+							<button type="button">
 								<dl>
 									<dt>
 										<img src="/resources/img/gosu/g_img_basic.png">
@@ -269,7 +269,7 @@
 							</button>
 						</div>
 						<div class="g-photo-one">
-							<button>
+							<button type="button">
 								<dl>
 									<dt>
 										<img src="/resources/img/gosu/g_img_basic.png">
@@ -284,7 +284,7 @@
 							</button>
 						</div>
 						<div class="g-photo-one">
-							<button>
+							<button type="button" >
 								<dl>
 									<dt>
 										<img src="/resources/img/gosu/g_img_basic.png">
