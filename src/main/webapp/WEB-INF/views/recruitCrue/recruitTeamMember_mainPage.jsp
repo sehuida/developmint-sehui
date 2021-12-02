@@ -105,23 +105,24 @@
                             </div>
                         </div>
                         <div class="rListBox">
-                            <div class="contentFlexBox">
+                        <c:forEach items="${list }" var="pt">
+                        	<div class="contentFlexBox">
                                 <div class="imgBox">
-                                    <img class="myInfoImg" src="/resources/img/recruitTeamProject/recruitPage/photo.png">
+                                    <img class="myInfoImg" src="${pt.writerImgPath }">
                                 </div>
                                 <div class="contentBox">
                                     <div class="textFlexBox1">
                                         <div class="textContent">
-                                            <p class="contentText">포트폴리오 프로젝트 팀원 구합니다!!adadsadsa</p>
+                                            <p class="contentText">${pt.RTitle }</p>
                                         </div>
                                         <div class="dateType">
-                                            <b>작성일 : </b><span><b>2021 / 11 / 23</b></span>
+                                            <b>작성일 : </b><span><b>${pt.RStartDate }</b></span>
                                         </div>
                                     </div>
                                     <div class="textFlexBox2">
                                         <div></div>
                                         <div class="dateType">
-                                            <b>마감일 : </b><span><b>2021 / 11 / 27</b></span>
+                                            <b>마감일 : </b><span><b>${pt.REndDate }</b></span>
                                         </div>
                                     </div>
                                     <div class="bottomFlexBox">
@@ -132,16 +133,16 @@
                                         </div>
                                         <div class="countBox">
                                             <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/bubble-chat.png">
-                                            <span class="countText">0</span>
+                                            <span class="countText">${pt.commentCount }</span>
                                             <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
-                                            <span class="countText">0</span>
+                                            <span class="countText">${pt.viewCount }</span>
                                             <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/full_hart.png">
-                                            <span class="countText">0</span>
+                                            <span class="countText">${pt.dibCount }</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-    
+                        </c:forEach>
                             <div class="contentFlexBox">
                                 <div class="imgBox">
                                     <img class="myInfoImg" src="/resources/img/recruitTeamProject/recruitPage/photo.png">
