@@ -25,6 +25,14 @@
 .submitBtn{
 	width: 990px;
 }
+.prize{
+	float: left;
+}
+#won{
+	line-height: 35px;
+	margin-left: 5px;
+	font-size: 18px;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -70,7 +78,7 @@
 				</tr>
 				<tr>
 					<th class="table-active">1등 시상금</th>
-					<td><input type="text" name="contestPrize" class="form-control" placeholder="숫자만 입력해주세요"></td>
+					<td><input type="text" name="contestPrize" class="form-control prize" style="width: 47%" placeholder="숫자만 입력해주세요"><span id="won">만원</span></td>
 				</tr>
 				<tr>
 					<th class="table-active">담당자 이메일</th>
@@ -78,7 +86,7 @@
 				</tr>
 				<tr>
 					<th class="table-active">담당자 전화번호</th>
-					<td><input type="text" name="phone" class="form-control"></td>
+					<td><input type="text" name="phone" class="form-control" placeholder="010-XXXX-XXXX"></td>
 				</tr>
 				<tr>
 					<th class="table-active">공모요강</th>

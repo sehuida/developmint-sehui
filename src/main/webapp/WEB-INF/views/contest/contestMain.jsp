@@ -50,7 +50,7 @@ overflow: hidden;
 }
 .newContestBox{
 	margin-top:30px;
-	margin-left: 10px;
+	margin-left: 55px;
 	overflow: hidden;
 	
 }
@@ -82,6 +82,8 @@ overflow: hidden;
 		  <div><img src="/resources/img/contest/contestMainImg3.png"></div>
 	</div>
 	
+	<%-----공모 신청처리 페이지 완성되면 <c:if test="nc.contestStatus == 2> 추가 예정(처리완료된 공모전만 띄우기)"---- --%>
+	
 	<div>
 		<span class="subEngTitel">NEW</span> <span class="subTitel">최신 공모전</span>
 	</div>
@@ -90,7 +92,7 @@ overflow: hidden;
 		<c:forEach var="nc" items="${list.newContest }">
 		<div>
 			<%--공모전 이미지 --%>
-			<a href="/contestView.do"><img src="/resources/img/contest/${nc.contestImg }" width="300px" height="400px" style="margin-right: 20px; margin-top: 20px;"></a>
+			<a href="/contestView.do?contestNo=${nc.contestNo }"><img src="/resources/img/contest/${nc.contestImg }" width="280px" height="400px" style="margin-right: 30px; margin-top: 20px;"></a>
 			<%--공모전 제목(제목이 18글자가 넘어가면 뒤에는 ...으로 표시 --%>
 			<c:choose>
 				<c:when test="${fn:length(nc.contestTitle) > 18}">
@@ -114,7 +116,7 @@ overflow: hidden;
 	<div class="newContestBox" >
 		<c:forEach begin="0" end="3">
 		<div>
-			<img src="/resources/img/contest/contest_test.png" width="300px" height="400px" style="margin-right: 15px; margin-top: 20px;">
+			<img src="/resources/img/contest/contest_test.png" width="280px" height="400px" style="margin-right: 15px; margin-top: 20px;">
 			<p class="newTitle">스마트 톡톡 공모전</p>
 			<p class="newcontent">주최 : 부산대학교</p>
 			<p class="newcontent">기간 : 2021-12-01 ~ 2021-12-31</p>

@@ -35,4 +35,12 @@ public class ContestDao {
 		List<Contest> list = sqlSession.selectList("contest.hotContestList");
 		return (ArrayList<Contest>)list;
 	}
+
+	public int contestCountUp(int contestNo) {
+		return sqlSession.update("contest.contestCountUp", contestNo);
+	}
+
+	public Contest contestView(int contestNo) {
+		return sqlSession.selectOne("contest.contestView",contestNo);
+	}
 }

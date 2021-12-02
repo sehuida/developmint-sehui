@@ -33,5 +33,11 @@ public class ContestService {
 		list.setHotContest(hotContest);
 		return list;
 	}
+
+	public Contest contestView(int contestNo) {
+		int result = dao.contestCountUp(contestNo);
+		Contest con = dao.contestView(contestNo);
+		return con;
+	}
 	
 }
