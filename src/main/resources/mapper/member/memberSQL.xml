@@ -40,4 +40,20 @@
   		member_grade as memberGrade
   	from member where member_id = #{memberId}  	
   </select>
+  <select id="checkEmail" parameterType="string" resultType="m">
+  	select
+  		member_no as memberNo,
+  		member_name as memberName,
+  		phone,
+  		member_id as memberId,
+  		member_pw as memberPw,
+  		email,
+  		member_type as memberType,
+  		filepath,
+  		member_grade as memberGrade
+  	from member where email = #{email}
+  </select>
+  <insert id="insertMember" parameterType="m">
+  	insert into member values(member_seq.nextval,#{memberName},#{phone},#{memberId},#{memberPw},#{email},1,to_char(sysdate,'yyyy-mm-dd'),'',10,'')
+  </insert> 
 </mapper>
