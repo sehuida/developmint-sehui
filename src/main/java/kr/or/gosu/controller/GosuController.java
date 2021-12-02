@@ -38,4 +38,8 @@ public class GosuController {
 	public String gosuSituation() {
 		return "gosu/gosuSituation";
 	}
+	@RequestMapping(value="/gosuFeedback.do")
+	public String gosuFeedback() {
+		return "gosu/gosuFeedback";
+	}
 }
