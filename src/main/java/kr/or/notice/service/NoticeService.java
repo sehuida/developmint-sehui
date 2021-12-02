@@ -15,8 +15,7 @@ public class NoticeService {
 
 	@Autowired
 	private NoticeDao dao;
-
-	/*
+	
 	public NoticePageData selectNoticeList(int reqPage) {
 		ArrayList<Notice> fixlist = dao.selectFin();
 		int numPerPage = 10;	// 1-10 / 11-20 / 21-30 
@@ -38,17 +37,17 @@ public class NoticeService {
 		String pageNavi = "<ul class='pagination pagination-lg'>";
 		if (pageNo != 1) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class='page-link' href='/freeBoard?reqPage=" + (pageNo - 1) + "'>";
+			pageNavi += "<a class='page-link' href='/noticeList?reqPage=" + (pageNo - 1) + "'>";
 			pageNavi += "&lt;</a></li>";
 		}
 		for (int i = 0; i < pageNaviSize; i++) {  // 0,1,2,3,4
 			if (pageNo == reqPage) {
 				pageNavi += "<li class='page-item active'>";
-				pageNavi += "<a class='page-link' href='/freeBoard?reqPage=" + pageNo + "'>";
+				pageNavi += "<a class='page-link' href='/noticeList?reqPage=" + pageNo + "'>";
 				pageNavi += pageNo + "</a></li>";
 			} else {
 				pageNavi += "<li class='page-item'>";
-				pageNavi += "<a class='page-link' href='/freeBoard?reqPage=" + pageNo + "'>";
+				pageNavi += "<a class='page-link' href='/noticeList?reqPage=" + pageNo + "'>";
 				pageNavi += pageNo + "</a></li>";
 			}
 			pageNo++;
@@ -59,7 +58,7 @@ public class NoticeService {
 		// 다음버튼
 		if (pageNo <= totalPage) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class='page-link' href='/freeBoard?reqPage=" + pageNo + "'>";  // 페이지가 이미 1이 증가된 상태로 들어오기때문에 pageNo로 작성
+			pageNavi += "<a class='page-link' href='/noticeList?reqPage=" + pageNo + "'>";  // 페이지가 이미 1이 증가된 상태로 들어오기때문에 pageNo로 작성
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
@@ -68,5 +67,5 @@ public class NoticeService {
 		NoticePageData npd = new NoticePageData(fixlist, fixPage, pageNavi, start, totalCount);
 		return npd;
 	}
-	*/	
+	
 }

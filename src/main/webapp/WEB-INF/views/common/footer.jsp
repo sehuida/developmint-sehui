@@ -86,7 +86,7 @@
 				
 				<div style="text-align: right;" >
 					<ul class="list-unstyled pe-5" style="float: left;font-size: large;">고객센터
-						<li ><a href="/noticeList.do" style="color:#737373;font-size:15px;">공지사항</a></li>
+						<li ><a href="/noticeList.do?reqPage=1" style="color:#737373;font-size:15px;">공지사항</a></li>
 						<li><a href="/qnaFrm.do" style="color:#737373;font-size: 15px;">1:1문의</a></li>
 					</ul>
 					<ul class="list-unstyled pe-5" style="float: left">

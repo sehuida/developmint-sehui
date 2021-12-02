@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="notice">
-	<!-- <select id="selectFin" resultType="n">
+	<select id="selectFin" resultType="n">
 		select 
 			"notice_no" as noticeNo, 
 			"notice_title" as noticeTitle, 
@@ -17,5 +17,5 @@
 				"reg_date" as regDate 
 			FROM notice where "pin" = 1 ORDER BY 1 DESC)N)NN 
 		WHERE RNUM BETWEEN #{start} AND #{end}
-	</select> -->
+	</select>
 </mapper>

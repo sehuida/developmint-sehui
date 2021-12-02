@@ -42,22 +42,22 @@
 								<tr class="table-light" id=noticeList>
 									<td>${start + i.index-fixPage}</td> 
 									<td style="text-align: left;">
-										<a href='/freeView?freeNo=${f.freeNo}' id="free"> ${f.freeTitle }</a>
+										<a href='/noticeView?noticeNo=${n.noticeNo}' id="notice"> ${n.noticeTitle }</a>
 									</td>
-									<td>${f.regDate }</td>
+									<td>${n.regDate }</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
 							<tr class="table-default" id="freeNotice" style="background-color: #bdbdbd;">
 									<td><i class="bi bi-pin-angle-fill"></i></td> 
 									<td style="text-align: left; ">
-										<a href='/freeView?freeNo=${f.freeNo }' id="free"> ${f.freeTitle }</a>
+										<a href='/noticeView?noticeNo=${n.noticeNo }' id="notice"> ${n.noticeTitle }</a>
 									</td>
-									<td>${f.regDate }</td>
+									<td>${n.regDate }</td>
 								</tr>
 							</c:otherwise>
 						</c:choose>
-					</c:forEach>
+						</c:forEach>
 				 	</tbody>
 				</table>
 				<div id="pageNavi">${pageNavi }</div>
