@@ -31,5 +31,10 @@ public class MemberService {
 		Member m = dao.checkEmail(email);
 		return m;
 	}
+
+	public int insertMember(Member member) {
+		int result = dao.insertMember(member);
+		return result;
+	}
 	
 }

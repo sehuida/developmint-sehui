@@ -27,6 +27,10 @@ public class MemberDao {
 	public Member checkEmail(String email) {
 		return sqlSession.selectOne("member.checkEmail",email);
 	}
+
+	public int insertMember(Member member) {
+		return sqlSession.insert("member.insertMember",member);
+	}
 	
 	
 }

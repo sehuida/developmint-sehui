@@ -193,6 +193,5 @@
     </div><!--개인정보 취급방침 modal 끝나는 지점-->
   </div><!--container끝나는 지점-->
   <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-  <script type="text/javascript" src="/resources/js/member/join.js"></script>
-</body>
+  <script type="text/javascript" src="/resources/js/member/join.js"></script></body>
 </html>
