@@ -227,7 +227,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="contain">
-		<em>이력서 관리(아직 대충 틀만)</em>		<!-- if 이력서 없으면 등록된 이력서가 없습니다. -->
+		<em>이력서 관리</em>				<!-- if 이력서 없으면 등록된 이력서가 없습니다. -->
 		<div class="grayBox">
 			<div class="resumeHeader">
 				<div class="ceoResume">
