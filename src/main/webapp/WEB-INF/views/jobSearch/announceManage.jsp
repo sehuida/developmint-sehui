@@ -299,7 +299,7 @@
 			</div>
 		</div>
 		<div class="resume">
-			<a href="resumeFrm.do"><button class="resumeBtn">구인공고 작성하기</button></a>
+			<a href="announceFrm.do"><button class="resumeBtn">구인공고 작성하기</button></a>
 		</div>
 		<div class="resumeExplain">
 			<p>이력서는 최대 10개까지 등록 가능합니다.</p>
