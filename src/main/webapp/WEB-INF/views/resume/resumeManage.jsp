@@ -86,7 +86,7 @@
 		height: 30px;
 		border: none;
 		border-radius: 20px;
-		color: rgb(150, 150, 150);
+		color: rgb(80, 80, 80);
 		font-size: 14px;
 		font-weight: 900;
 		background-color: white;
@@ -227,12 +227,15 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="contain">
+		<em>이력서 관리</em>				<!-- if 이력서 없으면 등록된 이력서가 없습니다. -->
 	<c:choose>
 		<c:when test="${empty list }">
-			
+			이력서 없음
 		</c:when>
+		<c:otherwise>
+			
+		</c:otherwise>
 	</c:choose>
-		<em>이력서 관리</em>				<!-- if 이력서 없으면 등록된 이력서가 없습니다. -->
 		<div class="grayBox">
 			<div class="resumeHeader">
 				<div class="ceoResume">
@@ -284,7 +287,7 @@
 				<span class="requestCount">1</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
 			</div>
 			<div class="update">
-				<a href="resumeFrm.do"><button class="updateResume">수정하기</button></a>
+				<a href="updateResume.do?resumeNo=${r.resumeNo }"><button class="updateResume">수정하기</button></a>
 			</div>
 		</div>
 		<div class="resume">
@@ -299,6 +302,71 @@
 		</div>
 		<hr>
 		<!-- 내 이력서 리스트 보여주는 공간 데이터 가져올 때 forEach로 바꿔주기 -->
+		<c:choose>
+			<c:when test="${empty list }">
+				저장된 이력서가 없습니다.
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${list }" var="rs" varStatus="i">
+					<div class="myResume" style="margin-bottom: 50px;">
+			<div class="resumeTitle">
+				<em>${resumeTitle }</em>	<!-- rs.resumeTitle 왜 안될까 슈밥ㅇㅁㄴㅇㅁㄴㅇㄴㅁㅇ -->
+			</div>
+			<ul class="resumeInfo">
+	           	<li class="career">
+	            	<div class="resumeInfoImg">
+	            		<img src="resources/img/resume/career.PNG">
+	            	</div>
+	            	<div class="resumeInfoData">
+	            		<span>신입</span>	<!-- r.resumeCareer -->
+	            	</div>
+	            </li>         					           
+				<li class="workForm">
+					<div class="resumeInfoImg">
+						<img src="resources/img/resume/workFromWhite.PNG">
+					</div>
+					<div class="resumeInfoData">
+						<span>희망 직무·직업 : IT개발·데이터</span>	<!-- r.resumeWorkForm -->
+					</div>
+				</li>       
+				<li class="money">
+					<div class="resumeInfoImg">
+						<img src="resources/img/resume/income.PNG">					
+					</div>
+					<div class="resumeInfoData">
+						<span>2,800~3,000만원</span>	<!-- r.resumeMoney -->
+					</div>
+				</li>                 	   
+				<li class="workPlace">
+					<div class="resumeInfoImg">
+						<img src="resources/img/resume/workPlace.PNG">
+					</div>
+					<div class="resumeInfoData">
+						<span>희망지역 : 서울 금천구</span>	<!-- r.resumeworkPlace -->
+					</div>
+				</li>                 
+			</ul>
+			<div class="register">
+				<p>대표이력서 등록</p>
+				<div class="ceoResumeChk">
+					<input type="checkbox" id="switch1" name="switch1" class="input__on-off"> 
+					<label for="switch1" class="label__on-off"> 
+						<span class="marble"></span> 
+						<span class="on">on</span> 
+						<span class="off">off</span> 
+					</label>
+				</div>
+			</div>
+		</div>
+		<hr>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
+		
+		
+		
+		
+		
 		<div class="myResume" style="margin-bottom: 50px;">
 			<div class="resumeTitle">
 				<em>이력서 제목</em>	<!-- r.resumeTitle -->
