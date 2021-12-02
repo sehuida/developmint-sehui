@@ -328,7 +328,7 @@
 				            		<img src="resources/img/resume/career.PNG">
 				            	</div>
 				            	<div class="resumeInfoData">
-				            		<span>${rs.resumeCareer }</span>	<!-- r.resumeCareer -->
+				            		<span>${r.resumeCareer }</span>	<!-- r.resumeCareer -->
 				            	</div>
 				            </li>
 				            <li class="money">
