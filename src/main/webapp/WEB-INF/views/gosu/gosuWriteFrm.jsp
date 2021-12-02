@@ -10,6 +10,7 @@
 <style>
 .container * {
 	text-decoration: none;
+	color: black;
 }
 
 .container {

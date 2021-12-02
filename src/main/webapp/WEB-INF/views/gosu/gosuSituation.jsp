@@ -17,6 +17,7 @@
 
 .container *{
 	text-decoration : none;
+	color:black;
 }
 .container{
     min-width: 1200px;
@@ -27,7 +28,7 @@
     font-weight: 900;
     color: rgb(78, 205, 196);
     margin-top: 100px;
-    margin-bottom: 70px;
+    margin-bottom: 100px;
     font-size: 40px;
 }
 .container>div>div>div table td{
@@ -172,7 +173,7 @@
             <div style="margin-bottom:100px;">
                 <div class="review-one" style="width: 80%;">
                     <ul>
-                        <li><span style="color: rgb(78, 205, 196);"> 고수 </span>XXX</li>
+                        <li><b><span style="color: rgb(78, 205, 196);"> 고수 </span>XXX</b></li>
                         <li>별별별별별</li>
                         <li style="color:gray">2021.12.01</li>
                     </ul>

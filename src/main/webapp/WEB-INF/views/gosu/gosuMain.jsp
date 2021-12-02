@@ -8,9 +8,11 @@
 <title>Insert title here</title>
 </head>
 <style>
-.container *{
-	text-decoration : none;
+.container * {
+	text-decoration: none;
+	color: black;
 }
+
 .container>h1 {
 	display: flex;
 	justify-content: center;
@@ -36,10 +38,15 @@
 .container .g-plus {
 	display: flex;
 	justify-content: right;
-	color: rgb(78, 205, 196);
 	text-align: right;
 	font-weight: bold;
 	margin: 20px;
+}
+
+.container .g-plus:hover {
+
+	color:rgb(144, 209, 180);
+	
 }
 
 .gosu {
@@ -256,7 +263,7 @@ to {
 
 .g-sc-tbl td, .g-sc-tbl td>a {
 	text-align: left;
-} 
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -268,7 +275,7 @@ to {
 			고수에게 피드백을 신청해보세요!<br> 당신의 작품을 평가해줍니다. 마음껏 질문하세요!
 		</div>
 		<div class="g-plus">
-			<a href="/gosuList.do">더보기</a>
+			<a href="/gosuList.do" style="color: rgb(78, 205, 196);">더보기</a>
 		</div>
 		<div class="gosu-wrap">
 			<div class="gosu">
@@ -446,7 +453,7 @@ to {
 				<span style="color: rgb(78, 205, 196);">고수</span>의 게시판
 			</h3>
 			<div class="g-plus">
-				<a href="">더보기</a>
+				<a href="" style="color: rgb(78, 205, 196);">더보기</a>
 			</div>
 			<div class="g-gall">
 				<ul id="gallery">
@@ -474,7 +481,7 @@ to {
 			<hr>
 			<h3 style="text-align: center;">나의 현황</h3>
 			<div class="g-plus">
-				<a href="/gosuSituation.do">자세히 보기</a>
+				<a href="/gosuSituation.do" style="color: rgb(78, 205, 196);">자세히 보기</a>
 			</div>
 			<div class="g-status-border">
 				<h4 style="margin-top: 30px; margin-left: 40px;">신청한 내역</h4>
@@ -517,10 +524,11 @@ to {
 				<h4 style="margin-top: 30px; margin-left: 40px;">작성한 고수 리뷰</h4>
 				<div class="g-statusContent">
 					<button type="button">
-						<table class="g-sc-tbl card bg-light mb-3" >
-						<tboay style="min-width:342px;max-width:342px;">
+						<table class="g-sc-tbl card bg-light mb-3">
+							<tboay style="min-width:342px;max-width:342px;">
 							<tr>
-								<th colspan="2"style="text-align: right; padding-right: 0; margin-bottom: 0; min-width:282px;max-width:282px;">진행중</th>
+								<th colspan="2"
+									style="text-align: right; padding-right: 0; margin-bottom: 0; min-width: 282px; max-width: 282px;">진행 중</th>
 							</tr>
 							<tr>
 								<th>고수</th>
@@ -534,10 +542,11 @@ to {
 						</table>
 					</button>
 					<button type="button">
-						<table class="g-sc-tbl card bg-light mb-3" >
-						<tboay style="min-width:342px;max-width:342px;">
+						<table class="g-sc-tbl card bg-light mb-3">
+							<tboay style="min-width:342px;max-width:342px;">
 							<tr>
-								<th colspan="2"style="text-align: right; padding-right: 0; margin-bottom: 0; min-width:282px;max-width:282px;">진행중</th>
+								<th colspan="2"
+									style="text-align: right; padding-right: 0; margin-bottom: 0; min-width: 282px; max-width: 282px;">진행 중</th>
 							</tr>
 							<tr>
 								<th>고수</th>

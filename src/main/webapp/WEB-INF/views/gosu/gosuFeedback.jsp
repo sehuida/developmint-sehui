@@ -9,6 +9,7 @@
 <style>
 .container * {
 	text-decoration: none;
+		color:black;
 }
 
 .container {
@@ -87,9 +88,6 @@ input:focus, textarea:focus {
 		<h3>
 			<span style="color: rgb(78, 205, 196);">고수</span>에게 피드백 신청하기
 		</h3>
-
-
-
 		<div class="gosu">
 			<button type="button" class="card border-primary mb-3"
 				style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
@@ -142,7 +140,7 @@ input:focus, textarea:focus {
 		</div>
 		<div style="display: flex; justify-content: center;">
 			<a class="btn btn-primary"
-				style="width: 200px; margin: 100px; padding: 10px;"><b>피드백
+				style="width: 200px; margin: 100px; padding: 10px;"><b style="color:white">피드백
 					신청하기</b></a>
 		</div>
 	</div>

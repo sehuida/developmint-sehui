@@ -10,6 +10,7 @@
 
 .container *{
 	text-decoration : none;
+	color:black;
 }
 .container{
     min-width: 1200px;
