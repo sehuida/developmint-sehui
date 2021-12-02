@@ -77,9 +77,9 @@ overflow: hidden;
 	</div>
 	<%-- 메인 포스터 3개 슬라이드 --%>
 	<div class="slideContest" style="margin-top: 50px; margin-left:80px; margin-bottom: 100px;">
-		  <div><img src="/resources/img/contest/contestMainImg1.png"></div>
-		  <div><img src="/resources/img/contest/contestMainImg2.png"></div>
-		  <div><img src="/resources/img/contest/contestMainImg3.png"></div>
+		  <div><a href="/contestView.do?contestNo=23"><img src="/resources/img/contest/contestMainImg1.png"></a></div>
+		  <div><a href="/contestView.do?contestNo=21"><img src="/resources/img/contest/contestMainImg2.png"></a></div>
+		  <div><a href="/contestView.do?contestNo=22"><img src="/resources/img/contest/contestMainImg3.png"></a></div>
 	</div>
 	
 	<%-----공모 신청처리 페이지 완성되면 <c:if test="nc.contestStatus == 2> 추가 예정(처리완료된 공모전만 띄우기)"---- --%>
@@ -113,13 +113,25 @@ overflow: hidden;
 	<div  style="margin-top: 100px;">
 		<span class="subEngTitel">HOT</span> <span class="subTitel">인기 공모전</span>
 	</div>
-	<div class="newContestBox" >
-		<c:forEach begin="0" end="3">
+	<%-- 인기 공모전 리스트 --%>
+	<div class="newContestBox">
+		<c:forEach var="hc" items="${list.hotContest }">
 		<div>
-			<img src="/resources/img/contest/contest_test.png" width="280px" height="400px" style="margin-right: 15px; margin-top: 20px;">
-			<p class="newTitle">스마트 톡톡 공모전</p>
-			<p class="newcontent">주최 : 부산대학교</p>
-			<p class="newcontent">기간 : 2021-12-01 ~ 2021-12-31</p>
+			<%--공모전 이미지 --%>
+			<a href="/contestView.do?contestNo=${hc.contestNo }"><img src="/resources/img/contest/${hc.contestImg }" width="280px" height="400px" style="margin-right: 30px; margin-top: 20px;"></a>
+			<%--공모전 제목(제목이 18글자가 넘어가면 뒤에는 ...으로 표시 --%>
+			<c:choose>
+				<c:when test="${fn:length(hc.contestTitle) > 18}">
+					<c:set var="subTitle" value="${fn:substring(hc.contestTitle,0,18)}"/>
+					<p class="newTitle">${subTitle }...</p>
+				</c:when>
+				<c:otherwise>
+					<p class="newTitle">${hc.contestTitle }</p>
+				</c:otherwise>
+			</c:choose>
+			
+			<p class="newcontent">주최 : ${hc.contestHost }</p>
+			<p class="newcontent">기간 : ${hc.contestDate } ~ ${hc.contestDeadline }</p>
 		</div>
 		</c:forEach>
 	</div>

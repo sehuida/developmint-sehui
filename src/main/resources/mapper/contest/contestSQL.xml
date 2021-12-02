@@ -75,10 +75,10 @@
 				contest_img as contestImg,
 				contest_status as contestStatus,
 				contest_count as contestCount
-			 from contest order by contest_no desc)c 
+			 from contest order by contest_count desc)c 
 			order by rnum
 			) 
-		where rnum BETWEEN 1 and 8
+		where rnum BETWEEN 1 and 4
 	</select>
 	
 	<update id="contestCountUp" parameterType="_int">
@@ -93,7 +93,7 @@
 			contest_type as contestType,
 			contest_qualify as contestQualify,
 			contest_date as contestDate,
-			contest_deadline as contestDate,
+			contest_deadline as contestDeadline,
 			contest_prize as contestPrize,
 			phone,
 			email,
