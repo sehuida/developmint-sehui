@@ -26,5 +26,10 @@ public class MemberService {
 		Member m = dao.checkId(memberId);
 		return m;
 	}
+
+	public Member checkEmail(String email) {
+		Member m = dao.checkEmail(email);
+		return m;
+	}
 	
 }

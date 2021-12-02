@@ -23,6 +23,10 @@ public class MemberDao {
 	public Member checkId(String memberId) {
 		return sqlSession.selectOne("member.checkId",memberId);
 	}
+
+	public Member checkEmail(String email) {
+		return sqlSession.selectOne("member.checkEmail",email);
+	}
 	
 	
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import kr.or.member.model.service.MailSender;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 
@@ -65,5 +66,21 @@ public class MemberController {
 		}else {
 			return "0";
 		}
+	}
+	@ResponseBody
+	@RequestMapping(value="/emailCheck.do")
+	public String emailCheck(String email) {
+		Member m = service.checkEmail(email);
+		if(m == null) {
+			return "1";
+		}else {
+			return "0";
+		}
+	}
+	@ResponseBody
+	@RequestMapping(value="/sendMail.do")
+	public String sendMail(String email) {
+		String result = new MailSender().mailSend(email);
+		return result;
 	}
 }
