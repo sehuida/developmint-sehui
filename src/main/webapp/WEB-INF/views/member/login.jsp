@@ -33,7 +33,7 @@
                     <a class="btn btn-info" href="/joinFrm.do">회원가입</a>   
                 </div>
                 <div>
-                    <a href="#">아이디찾기/비밀번호찾기</a>
+                    <a href="/findId.do">아이디찾기/비밀번호찾기</a>
                 </div>
             </fieldset>
         </form>
