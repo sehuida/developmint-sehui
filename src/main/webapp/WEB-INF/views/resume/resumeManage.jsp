@@ -148,6 +148,7 @@
     .myResume{
     	margin-top: 30px;
     	margin-left: 15px;
+    	margin-bottom: 50px;
     }
     .register{
     	margin-top: 30px;
@@ -235,14 +236,16 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="contain">
 		<em>이력서 관리</em>				<!-- if 이력서 없으면 등록된 이력서가 없습니다. -->
-	<c:choose>
+	<%-- <c:choose>
 		<c:when test="${empty list }">
 			저장된 이력서가 업슴
 		</c:when>
 		<c:otherwise>
 			
 		</c:otherwise>
-	</c:choose>
+	</c:choose> --%>
+	
+	
 		<div class="grayBox">
 			<div class="resumeHeader">
 				<div class="ceoResume">
@@ -255,7 +258,6 @@
 				<div class="resumeTitle">
 					<em>이력서 제목</em>	<!-- r.resumeTitle -->
 				</div>
-				
 				<ul class="resumeInfo1">
 	            	<li class="career">
 	            		<div class="resumeInfoImg">
@@ -300,6 +302,8 @@
 				<a href="updateResume.do?resumeNo=${r.resumeNo }"><button class="updateResume">수정하기</button></a>
 			</div>
 		</div>
+		
+		
 		<div class="resume">
 			<a href="resumeFrm.do"><button class="resumeBtn">이력서 작성하기</button></a>
 		</div>
@@ -317,10 +321,10 @@
 				저장된 이력서가 없습니다.
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${list }" var="rs" varStatus="i">
-					<div class="myResume" style="margin-bottom: 50px;">
+				<c:forEach items="${list }" var="rs">
+					<div class="myResume">
 						<div class="resumeTitle">
-							<em>${r.ResumeTitle }</em>	<!-- rs.resumeTitle 왜 안될까 슈밥ㅇㅁㄴㅇㅁㄴㅇㄴㅁㅇ -->
+							<em>${rs.resumeTitle }</em>	<!-- rs.resumeTitle 왜 안될까 슈밥ㅇㅁㄴㅇㅁㄴㅇㄴㅁㅇ -->
 						</div>
 						<ul class="resumeInfo1">
 				           	<li class="career">
@@ -328,7 +332,13 @@
 				            		<img src="resources/img/resume/career.PNG">
 				            	</div>
 				            	<div class="resumeInfoData">
-				            		<span>${r.resumeCareer }</span>	<!-- r.resumeCareer -->
+				            	<c:if test="${rs.career eq 1 }">		<!-- 1 -> 신입 -->
+				            		<span>신입</span>
+				            	</c:if>
+				            	<c:if test="${rs.career eq 2 }">		<!-- 2 -> 경력 -->
+				            		<span>경력</span>
+				            	</c:if>
+				            		
 				            	</div>
 				            </li>
 				            <li class="money">
@@ -336,7 +346,28 @@
 									<img src="resources/img/resume/income.PNG">					
 								</div>
 								<div class="resumeInfoData">
-									<span>2,800~3,000만원</span>	<!-- r.resumeMoney -->
+																		<!-- r.money -->
+									<c:if test="${rs.money eq 1 }">		<!-- 1 -> 회사내규에 따름 -->
+				            			<span>회사내규에 따름</span>
+					            	</c:if>
+					            	<c:if test="${rs.money eq 2 }">		<!-- 2 -> 2000만 ~ 2400만 -->
+					            		<span>2000만 ~ 2400만</span>
+					            	</c:if>
+					            	<c:if test="${rs.money eq 3 }">		<!-- 3 -> 2400만 ~ 2800만 -->
+					            		<span>2400만 ~ 2800만</span>
+					            	</c:if>
+					            	<c:if test="${rs.money eq 4 }">		<!-- 4 -> 2800만 ~ 3200만 -->
+					            		<span>2800만 ~ 3200만</span>
+					            	</c:if>
+					            	<c:if test="${rs.money eq 5 }">		<!-- 5 -> 3200만 ~ 3600만 -->
+					            		<span>3200만 ~ 3600만</span>
+					            	</c:if>
+					            	<c:if test="${rs.money eq 6 }">		<!-- 5 -> 3600만 ~ 4000만 -->
+					            		<span>3600만 ~ 4000만</span>
+					            	</c:if>
+					            	<c:if test="${rs.money eq 7 }">		<!-- 5 -> 4000만 이상 -->
+					            		<span>4000만 이상</span>
+					            	</c:if>
 								</div>
 							</li>
 						</ul>
@@ -346,7 +377,7 @@
 									<img src="resources/img/resume/workPlace.PNG">
 								</div>
 								<div class="resumeInfoData">
-									<span>희망지역 : 서울 금천구</span>	<!-- r.resumeworkPlace -->
+									<span>${rs.workPlace }</span>	<!-- r.resumeworkPlace -->
 								</div>
 							</li>       					           
 							<li class="workForm">
@@ -354,7 +385,22 @@
 									<img src="resources/img/resume/workFromWhite.PNG">
 								</div>
 								<div class="resumeInfoData">
-									<span>희망 직무·직업 : IT개발·데이터</span>	<!-- r.resumeWorkForm -->
+																	<!-- r.resumeWorkForm -->
+									<c:if test="${rs.workForm eq 1 }">		<!-- 1 -> 정규직 -->
+					            		<span>정규직</span>
+					            	</c:if>
+					            	<c:if test="${rs.workForm eq 2 }">		<!-- 2 -> 계약직 -->
+					            		<span>계약직</span>
+					            	</c:if>
+					            	<c:if test="${rs.workForm eq 3 }">		<!-- 3 -> 아르바이트 -->
+					            		<span>아르바이트</span>
+					            	</c:if>
+					            	<c:if test="${rs.workForm eq 4 }">		<!-- 4 -> 인턴 -->
+					            		<span>인턴</span>
+					            	</c:if>
+					            	<c:if test="${rs.workForm eq 5 }">		<!-- 5 -> 프리랜서 -->
+					            		<span>프리랜서</span>
+					            	</c:if>
 								</div>
 							</li>                       
 						</ul>
@@ -377,11 +423,9 @@
 		
 		
 		
-		
-		
-		<div class="myResume" style="margin-bottom: 50px;">
+		<!-- <div class="myResume" style="margin-bottom: 50px;">
 			<div class="resumeTitle">
-				<em>이력서 제목</em>	<!-- r.resumeTitle -->
+				<em>이력서 제목12</em>	r.resumeTitle
 			</div>
 			<ul class="resumeInfo1">
 	           	<li class="career">
@@ -389,7 +433,7 @@
 	            		<img src="resources/img/resume/career.PNG">
 	            	</div>
 	            	<div class="resumeInfoData">
-	            		<span>신입</span>	<!-- r.resumeCareer -->
+	            		<span>신입1</span>	r.resumeCareer
 	            	</div>
 	            </li>
 	            <li class="money">
@@ -397,7 +441,7 @@
 						<img src="resources/img/resume/income.PNG">					
 					</div>
 					<div class="resumeInfoData">
-						<span>2,800~3,000만원</span>	<!-- r.resumeMoney -->
+						<span>2,800~3,000만원</span>	r.resumeMoney
 					</div>
 				</li>
 			</ul>
@@ -407,7 +451,7 @@
 						<img src="resources/img/resume/workPlace.PNG">
 					</div>
 					<div class="resumeInfoData">
-						<span>희망지역 : 서울 금천구</span>	<!-- r.resumeworkPlace -->
+						<span>희망지역 : 서울 금천구</span>	r.resumeworkPlace
 					</div>
 				</li>       					           
 				<li class="workForm">
@@ -415,7 +459,7 @@
 						<img src="resources/img/resume/workFromWhite.PNG">
 					</div>
 					<div class="resumeInfoData">
-						<span>희망 직무·직업 : IT개발·데이터</span>	<!-- r.resumeWorkForm -->
+						<span>희망 직무·직업 : IT개발·데이터</span>	r.resumeWorkForm
 					</div>
 				</li>                       
 			</ul>
@@ -430,8 +474,7 @@
 					</label>
 				</div>
 			</div>
-		</div>
-		<hr>
+		</div> -->
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

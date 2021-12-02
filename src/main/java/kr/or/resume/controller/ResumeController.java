@@ -25,19 +25,14 @@ public class ResumeController {
 	@RequestMapping(value="resumeManage.do")
 	public String resumeManage(Model model, Member m) {
 		ArrayList<Resume> list = service.selectAllResume(m);
-		System.out.println();
-		if(list != null) {
-			model.addAttribute("list", list);
-			System.out.println("잘됨");		//테스트 끝나면 sout지우기
-			System.out.println(list);
-		} else {
-			System.out.println("없음");
-		}
+		model.addAttribute("list", list);
 		return "resume/resumeManage";
 	}
 	
 	@RequestMapping(value="updateResume.do")
-	public String updateResume(int resumeNo, Model model) {
+	public String updateResume(Resume resume, Model model) {
+		int resumeNo = resume.getResumeNo();
+		System.out.println(resumeNo);
 		Resume r = service.selectOneResume(resumeNo);
 		model.addAttribute("r", r);
 		return "resume/updateResume";
