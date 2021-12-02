@@ -25,6 +25,16 @@ public class MemberController {
 	public String login() {
 		return "member/login";
 	}
+	@RequestMapping(value="/join.do")
+	public String join(Member member,HttpSession session) {
+		int result = service.insertMember(member);
+		if(result>0) {
+			Member m = service.selectOneMember(member);
+			session.setAttribute("m", m);
+		}
+		return "common/main";
+	}
+	
 	@RequestMapping(value="/login.do")
 	public String loginFrm(Member member,HttpSession session,Model model) {
 		Member m = service.selectOneMember(member);

@@ -126,6 +126,7 @@
 		</div>
 		<div class="gosu-search">
 
+<<<<<<< HEAD
 			<input type="text" value="" placeholder="내용을 입력해주세요"> <select>
 				<option value="" selected disabled hidden>검색</option>
 				<option value="">제목</option>
