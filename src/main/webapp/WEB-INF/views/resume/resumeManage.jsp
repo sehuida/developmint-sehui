@@ -227,18 +227,23 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="contain">
-		<em>이력서 관리(아직 대충 틀만)</em>		<!-- if 이력서 없으면 등록된 이력서가 없습니다. -->
+	<c:choose>
+		<c:when test="${empty list }">
+			
+		</c:when>
+	</c:choose>
+		<em>이력서 관리</em>				<!-- if 이력서 없으면 등록된 이력서가 없습니다. -->
 		<div class="grayBox">
 			<div class="resumeHeader">
 				<div class="ceoResume">
 					<p>대표이력서</p>
 				</div>
 				<div class="writeDate">
-					<span>2021.11.25</span>		<!-- ${r.getWriteDate } -->
+					<span>2021.11.25</span>	
 				</div>
 			</div>
 				<div class="resumeTitle">
-					<em>이력서 제목</em>	<!-- ${r.getResumeTitle} -->
+					<em>이력서 제목</em>	<!-- r.resumeTitle -->
 				</div>
 				<ul class="resumeInfo">
 	            	<li class="career">
@@ -246,7 +251,7 @@
 	            			<img src="resources/img/resume/career.PNG">
 	            		</div>
 	            		<div class="resumeInfoData">
-	            			<span>신입</span>	<!-- ${r.getResumeCareer} -->
+	            			<span>신입</span>	<!-- r.resumeCareer -->
 	            		</div>
 	            	</li>         					           
 					<li class="workForm">
@@ -254,7 +259,7 @@
 							<img src="resources/img/resume/workForm.PNG">
 						</div>
 						<div class="resumeInfoData">
-							<span>희망 직무·직업 : IT개발·데이터</span>	<!-- ${r.getResumeWorkForm} -->
+							<span>희망 직무·직업 : IT개발·데이터</span>	<!-- r.resumeWorkForm -->
 						</div>
 					</li>       
 					<li class="money">
@@ -262,7 +267,7 @@
 							<img src="resources/img/resume/income.PNG">					
 						</div>
 						<div class="resumeInfoData">
-							<span>2,800~3,000만원</span>	<!-- ${r.getResumeMoney} -->
+							<span>2,800~3,000만원</span>	<!-- r.resumeMoney -->
 						</div>
 					</li>                 	   
 					<li class="workPlace">
@@ -270,13 +275,13 @@
 							<img src="resources/img/resume/workPlace.PNG">
 						</div>
 						<div class="resumeInfoData">
-							<span>희망지역 : 서울 금천구</span>	<!-- ${r.getResumeworkPlace} -->
+							<span>희망지역 : 서울 금천구</span>	<!-- r.resumeworkPlace -->
 						</div>
 					</li>                 
 				</ul>
 			<div class="message">
 				<button class="companyMessage">기업이 보낸 요청</button>		<!-- 웹소켓으로 기업이 이력서 확인 후 합격이면 쪽지 날라가게 만들기 -->
-				<span class="requestCount">1</span>		<!-- ${r.getrequestCount} 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
+				<span class="requestCount">1</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
 			</div>
 			<div class="update">
 				<a href="resumeFrm.do"><button class="updateResume">수정하기</button></a>
@@ -290,13 +295,13 @@
 			<p>대표이력서 설정은 1개의 이력서만 가능합니다.</p>
 		</div>
 		<div class="resumeCount">
-			총 1건		<!-- ${r.getResumeCount } 내 이력서 갯수 count 가져오기 이것도 vo에 추가해야 하나 -->
+			총 1건		<!-- r.resumeCount  내 이력서 갯수 count 가져오기 이것도 vo에 추가해야 하나 -->
 		</div>
 		<hr>
 		<!-- 내 이력서 리스트 보여주는 공간 데이터 가져올 때 forEach로 바꿔주기 -->
 		<div class="myResume" style="margin-bottom: 50px;">
 			<div class="resumeTitle">
-				<em>이력서 제목</em>	<!-- ${r.getResumeTitle} -->
+				<em>이력서 제목</em>	<!-- r.resumeTitle -->
 			</div>
 			<ul class="resumeInfo">
 	           	<li class="career">
@@ -304,7 +309,7 @@
 	            		<img src="resources/img/resume/career.PNG">
 	            	</div>
 	            	<div class="resumeInfoData">
-	            		<span>신입</span>	<!-- ${r.getResumeCareer} -->
+	            		<span>신입</span>	<!-- r.resumeCareer -->
 	            	</div>
 	            </li>         					           
 				<li class="workForm">
@@ -312,7 +317,7 @@
 						<img src="resources/img/resume/workFromWhite.PNG">
 					</div>
 					<div class="resumeInfoData">
-						<span>희망 직무·직업 : IT개발·데이터</span>	<!-- ${r.getResumeWorkForm} -->
+						<span>희망 직무·직업 : IT개발·데이터</span>	<!-- r.resumeWorkForm -->
 					</div>
 				</li>       
 				<li class="money">
@@ -320,7 +325,7 @@
 						<img src="resources/img/resume/income.PNG">					
 					</div>
 					<div class="resumeInfoData">
-						<span>2,800~3,000만원</span>	<!-- ${r.getResumeMoney} -->
+						<span>2,800~3,000만원</span>	<!-- r.resumeMoney -->
 					</div>
 				</li>                 	   
 				<li class="workPlace">
@@ -328,7 +333,7 @@
 						<img src="resources/img/resume/workPlace.PNG">
 					</div>
 					<div class="resumeInfoData">
-						<span>희망지역 : 서울 금천구</span>	<!-- ${r.getResumeworkPlace} -->
+						<span>희망지역 : 서울 금천구</span>	<!-- r.resumeworkPlace -->
 					</div>
 				</li>                 
 			</ul>

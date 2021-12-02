@@ -19,6 +19,10 @@ public class MemberDao {
 	public Member checkPhone(String phone) {
 		return sqlSession.selectOne("member.checkPhone",phone);
 	}
+
+	public Member checkId(String memberId) {
+		return sqlSession.selectOne("member.checkId",memberId);
+	}
 	
 	
 }

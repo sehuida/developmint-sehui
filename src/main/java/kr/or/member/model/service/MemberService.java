@@ -21,5 +21,10 @@ public class MemberService {
 		Member m = dao.checkPhone(phone);
 		return m;
 	}
+
+	public Member checkId(String memberId) {
+		Member m = dao.checkId(memberId);
+		return m;
+	}
 	
 }

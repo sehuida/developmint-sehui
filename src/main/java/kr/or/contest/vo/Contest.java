@@ -10,7 +10,7 @@ public class Contest {
 	private String contestHost;
 	private String memberId;
 	private int contestType;
-	private int contestQualify;
+	private String contestQualify;
 	private String contestDate;
 	private String contestDeadline;
 	private int contestPrize;

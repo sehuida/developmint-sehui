@@ -45,9 +45,9 @@
 				<tr>
 					<th class="table-active">접수기간</th>
 					<td id="dateTd">
-						<input type="text" class="form-control dateInput" name="contestDate" style="width: 47%" placeholder="YYYY-MM-DD">
+						<input type="date" class="form-control dateInput" name="contestDate" style="width: 47%">
 						<span>　~　</span>
-						<input type="text" class="form-control" name="contestDeadline" style="width: 47%" placeholder="YYYY-MM-DD">
+						<input type="date" class="form-control" name="contestDeadline" style="width: 47%">
 					</td>
 				</tr>
 				<tr>
@@ -61,11 +61,11 @@
 				<tr>
 					<th class="table-active">참가자격</th>
 					<td>
-						<label style="margin-right:20px;"><input type="radio" name="contestQualify" value="1" class="form-check-input">대학생</label>
-						<label style="margin-right:20px;"><input type="radio" name="contestQualify" value="2" class="form-check-input">대학원생</label> 
-						<label style="margin-right:20px;"><input type="radio" name="contestQualify" value="3"class="form-check-input">일반인</label> 
-						<label style="margin-right:20px;"><input type="radio" name="contestQualify" value="4" class="form-check-input">고등학생</label> 
-						<label><input type="radio" name="contestQualify" value="5" class="form-check-input">제한없음</label>
+						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="대학생" class="form-check-input">대학생</label>
+						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="대학원생" class="form-check-input">대학원생</label> 
+						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="일반인"class="form-check-input">일반인</label> 
+						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="고등학생" class="form-check-input">고등학생</label> 
+						<label><input type="checkbox" name="contestQualify" value="제한없음" class="form-check-input">제한없음</label>
 						</td>
 				</tr>
 				<tr>

@@ -474,7 +474,7 @@ to {
 			<hr>
 			<h3 style="text-align: center;">나의 현황</h3>
 			<div class="g-plus">
-				<a href="">자세히 보기</a>
+				<a href="/gosuSituation.do">자세히 보기</a>
 			</div>
 			<div class="g-status-border">
 				<h4 style="margin-top: 30px; margin-left: 40px;">신청한 내역</h4>
