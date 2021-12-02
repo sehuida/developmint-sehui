@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="resume">
-	<select id="selectOneResume" parameterType="r" resultType="r">
+	<select id="selectAllResume" resultType="r">
 		select
-			resume_no as resumeNo,
+			r.resume_no as resumeNo,
 			member_no as memberNo,
-			resume
-		from resume
+			resume_title as resumeTitle,
+			r.aducation,
+						school_no as schoolNo,
+						s.resume_no as resumeNo,
+						school_name as schoolName,
+						school_local as schoolLocal,
+						school_start as schoolStart,
+						school_end as schoolEnd,
+						major,
+						s.aducation,
+			career,
+			activity,
+			activity_place as activityPlace,
+			activity_start as activityStart,
+			activity_end as activityEnd,
+			activity_content as activityContent,
+			certi_name as certiName,
+			certi_issue as certiIssue,
+			certi_pass as certiPass,
+			certi_date as certiDate,
+			my_tech as myTech,
+			veterans,
+			military,
+			selfintro_name as selfintroName,
+			selfintro_content as selfintroContent,
+			work_form as workForm,
+			money,
+			work_place as workPlace,
+			write_date as writeDate
+		from resume r
+		join school s
+		on r.resume_no = s.resume_no
 	</select>
 </mapper>

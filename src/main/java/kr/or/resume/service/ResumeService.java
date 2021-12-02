@@ -1,5 +1,7 @@
 package kr.or.resume.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,7 @@ public class ResumeService {
 	@Autowired
 	private ResumeDao dao;
 
-	public Resume selectOneResume(Resume resume) {
-		return dao.selectOneResume(resume);
+	public ArrayList<Resume> selectAllResume() {
+		return dao.selectAllResume();
 	}
 }
