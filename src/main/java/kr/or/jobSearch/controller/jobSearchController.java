@@ -15,4 +15,9 @@ public class jobSearchController {
 	public String companyInfo() {
 		return "jobSearch/companyInfo";
 	}
+	
+	@RequestMapping(value="announceManage.do")
+	public String announceManage() {
+		return "jobSearch/announceManage";
+	}
 }

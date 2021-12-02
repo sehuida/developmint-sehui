@@ -180,7 +180,21 @@
                 <h1>디벨로민트에서</h1>
                 <h1>빠르고 안전하게</h1>
                 <p>애플리케이션 개발, 웹 개발, 일반 소프트웨어 개발, 웹 디자인, 커머스, 쇼핑몰 등</p>
-                <a href="resumeManage.do"><button class="resume">이력서 작성하기</button></a>
+                <%-- <c:choose>
+                	<c:when test="${not empty sessionScope.m.memberId }">
+                		<c:when test="${sessionScope.m.memberLevel eq 1 }">		<!-- 일반회원일 경우 -> 이력서 작성하기 띄우기 -->
+			                <a href="resumeManage.do"><button class="resume">이력서 작성하기</button></a>                		
+                		</c:when>
+                		<c:when test="${sessionScope.m.memberLevel eq 3 }">		<!-- 기업회원일 경우 -> 구인글 작성하기 띄우기 -->
+			                <a href="announceManage.do"><button class="resume">구인글 작성하기</button></a>                		
+                		</c:when>
+                	</c:when>
+                	<c:otherwise>
+                <a href="loginFrm.do"><button class="resume">이력서 작성하기</button></a>                		
+                	</c:otherwise>
+                </c:choose> --%>
+                <!-- <a href="resumeManage.do"><button class="resume">이력서 작성하기</button></a>   		나중에 choose 주석지우고 이거지우기  -->            		
+			                <a href="announceManage.do"><button class="resume">구인공고 작성하기</button></a>   	<!-- 나중에 choose 주석지우고 이거지우기 -->             		
             </div>
             <div class="headerImg">
                 <img src="resources/img/jobSearch/jobSearchList.PNG">
