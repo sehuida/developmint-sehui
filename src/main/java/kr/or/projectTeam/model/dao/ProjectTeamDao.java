@@ -2,6 +2,7 @@ package kr.or.projectTeam.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,4 +19,11 @@ public class ProjectTeamDao {
 		List<ProjectTeam> list = sqlSession.selectList("projectTeam.projectList");
 		return (ArrayList<ProjectTeam>) list;
 	}
+
+	public ArrayList<ProjectTeam> selectAllprojectList(Map<String, Object> map) {
+		List<ProjectTeam> list = sqlSession.selectList("projectTeam.projectList", map);
+		return (ArrayList<ProjectTeam>) list;
+	}
+	
+	
 }

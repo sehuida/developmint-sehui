@@ -30,15 +30,15 @@ public class ContestService {
 		ArrayList<Contest> newContest = dao.newContestList();
 		ArrayList<Contest> hotContest = dao.hotContestList();
 		ContestList list = new ContestList(newContest, hotContest);
-		list.setNewContest(newContest);
-		list.setHotContest(hotContest);
 		return list;
 	}
 
-	public Contest contestView(int contestNo) {
+	public ContestList contestView(int contestNo) {
 		int result = dao.contestCountUp(contestNo);
-		Contest con = dao.contestView(contestNo);
-		return con;
+		Contest contest = dao.contestView(contestNo);
+		ArrayList<Comment> commentList = dao.commentList(contestNo);
+		ContestList list = new ContestList(commentList, contest);
+		return list;
 	}
 	
 	public int insertContestComment(Comment cm) {

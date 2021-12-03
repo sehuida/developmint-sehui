@@ -19,11 +19,17 @@ public class NoticeController {
 	
 	@RequestMapping(value="/noticeList.do")
 	public String noticeList(int reqPage, Model model) {
-		/*
-		NoticePageData list = service.selectNoticeList(reqPage);
-		model.addAttribute("list",list);
-		*/
+		NoticePageData npd = service.selectNoticeList(reqPage);
+		model.addAttribute("list",npd.getFixlist());
+		model.addAttribute("pageNavi",npd.getPageNavi());
+		model.addAttribute("start",npd.getStart());
+		model.addAttribute("totalCount",npd.getTotalCount());
+		model.addAttribute("fixPage",npd.getFixPage());
 		return "notice/noticeList";
 	}
 	
+	@RequestMapping(value="/nWriteFrm.do")
+	public String nWriteFrm() {
+		return "notice/nWriteFrm";
+	}
 }

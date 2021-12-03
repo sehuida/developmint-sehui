@@ -95,6 +95,7 @@
 		height: 40px;	
 		padding-left: 5px;
 		color: rgb(51, 51, 51);
+		font-size: 15px;
 	}
 	.firstDateInput{
 		margin-left: 50px;
@@ -224,8 +225,8 @@
 </script>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<div class="contain">
-		<form action="insertResume.do" method="post">
+	<form action="insertResume.do" method="post">
+		<div class="contain">
 			<em>기본정보</em>
 			<div class="grayBox">
 				<h3 id="name">${sessionScope.m.memberName}</h3>
@@ -239,9 +240,9 @@
 				<div class="info">
 					<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">		<!-- 멤버번호 가져오기 위해서 히든으로 전송 -->
 					<pre>
-${sessionScope.m.memberId}						<!-- ${sessionScope.m.memberId} -->
-${sessionScope.m.email}			<!-- ${sessionScope.m.email} -->
-${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
+${sessionScope.m.memberId}
+${sessionScope.m.email}
+${sessionScope.m.phone}
 					</pre>
 				</div>
 			</div>
@@ -255,21 +256,21 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 			<div class="grayBox">
 				<em>최종학력 정보 입력</em>
 				<br><br>
-				<div class="aducation">			<!-- radio버튼 display none해주고 라벨로 선택해서 선택시 뒷배경 mint 글씨 흰색으로 변경(아마 자바스크립트로 해야할듯?) -->
+				<div class="aducation">			<!-- radio버튼 display none해주고 라벨로 선택해서 선택시 뒷배경 mint 글씨 흰색으로 변경 -->
 	                <label class="primarySchoolLabel" for="school_type_primary">
-	                    <input name="schoolType" class="schoolRadio" id="school_type_primary" type="radio" value=1>	<!-- value=1 //초졸 -->
+	                    <input name="aducation" class="schoolRadio" id="school_type_primary" type="radio" value="1">	<!-- value=1 //초졸 -->
 	                    <span class="txt_check tx1">초등학교 졸업</span>
 	                </label>
 	                <label class="middleSchoolLabel" for="school_type_middle">
-	                    <input name="schoolType" class="schoolRadio" id="school_type_middle" type="radio" value=2>		<!-- value=2 //중졸 -->
+	                    <input name="aducation" class="schoolRadio" id="school_type_middle" type="radio" value="2">		<!-- value=2 //중졸 -->
 	                    <span class="txt_check tx2">중학교 졸업</span>
 	                </label>
 	                <label class="highSchoolLabel" for="school_type_high">
-	                    <input name="schoolType" class="schoolRadio" id="school_type_high" type="radio" value=3>		<!-- value=3 //고졸 -->
+	                    <input name="aducation" class="schoolRadio" id="school_type_high" type="radio" value="3">		<!-- value=3 //고졸 -->
 	                    <span class="txt_check tx3">고등학교 졸업</span>
 	                </label>
 	                <label class="univSchoolLabel" for="school_type_univ">
-	                    <input name="schoolType" class="schoolRadio" id="school_type_univ" type="radio" value=4 checked="">		<!-- value=4 //대졸 -->
+	                    <input name="aducation" class="schoolRadio" id="school_type_univ" type="radio" value="4" checked="">		<!-- value=4 //대졸 -->
 	                    <span class="txt_check tx4">대학·대학원 이상 졸업</span>
 	                </label>
 	            </div>
@@ -288,7 +289,7 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 							<b>재학기간<span>*</span></b>
 						</div>
 						<div class="schoolDateInput">
-							<input type="date" class="dateInput firstDateInput" name="schoolStartDate"> ~ <input type="date" class="dateInput maxDate" name="schoolEndDate">				
+							<input type="month" class="dateInput firstDateInput" name="schoolStart"> ~ <input type="month" class="dateInput maxDate" name="schoolEnd">				
 						</div>
 					</div>
 					<div class="schoolLocalData">
@@ -296,7 +297,7 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 							<b>지역<span>*</span></b>
 						</div>
 						<div class="schoolLocalInput">
-							<input type="text" class="smallTextInput" name="schoolName" placeholder="지역 선택">					
+							<input type="text" class="smallTextInput" name="schoolLocal" placeholder="지역 선택">					
 						</div>
 					</div>
 					<div class="schoolMajorData">		<!-- if value=4(대학생일 경우에만) 전공등록 input이 나오도록 -->
@@ -306,9 +307,9 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 						<div class="schoolNameInput">
 							<select class="selectInput" name="major">
 								<option>전공 선택</option>
-								<option value=1>전기/전자/정보통신공학</option>
-								<option value=2>컴퓨터/시스템공학</option>
-								<option value=3>외 공학계열</option>
+								<option value="1">전기/전자/정보통신공학</option>
+								<option value="2">컴퓨터/시스템공학</option>
+								<option value="3">외 공학계열</option>
 							</select>
 						</div>
 					</div>
@@ -316,16 +317,16 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 			</div>
 			<em>경력사항</em>
 			<div class="grayBox">
-				<div class="careerData">			<!-- radio버튼 display none해주고 라벨로 선택해서 선택시 뒷배경 mint 글씨 흰색으로 변경(아마 자바스크립트로 해야할듯?) -->
+				<div class="careerData">			<!-- radio버튼 display none해주고 라벨로 선택해서 선택시 뒷배경 mint 글씨 흰색으로 변경 -->
 					<div class="career">
 						<b>경력<span>*</span></b>
 					</div>
 	                <label class="carrerLabel" for="junior">
-	                    <input name="carrerType" class="carrerRadio" id="junior" type="radio" value=1>	<!-- value=1 //주니어(신입) -->
+	                    <input name="career" class="carrerRadio" id="junior" type="radio" value="1">	<!-- value=1 //주니어(신입) -->
 	                    <span class="txt_check">신입</span>
 	                </label>
 	                <label class="carrerLabel" for="senior">
-	                    <input name="carrerType" class="carrerRadio" id="senior" type="radio" value=2>		<!-- value=2 //시니어(경력) -->
+	                    <input name="career" class="carrerRadio" id="senior" type="radio" value="2">		<!-- value=2 //시니어(경력) -->
 	                    <span class="txt_check">경력</span>
 	                </label>
 	           </div>
@@ -340,21 +341,21 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 						<div class="activityInput">
 							<select class="selectInput" name="activity">	
 								<option>활동구분 선택</option>
-								<option value=1>교내활동</option>
-								<option value=2>인턴</option>
-								<option value=3>자원봉사</option>
-								<option value=4>아르바이트</option>
-								<option value=5>해외연수</option>
+								<option value="1">교내활동</option>
+								<option value="2">인턴</option>
+								<option value="3">자원봉사</option>
+								<option value="4">아르바이트</option>
+								<option value="5">해외연수</option>
 							</select>
 						</div>
 					</div>
 					
 					<div class="activityNameData">
-						<div class="activityName">
+						<div class="activityPlace">
 							<b>기관/장소</b>
 						</div>
 						<div class="activityNameInput">
-							<input type="text" class="smallTextInput" name="activityName" placeholder="기관/장소 입력">
+							<input type="text" class="smallTextInput" name="activityPlace" placeholder="기관/장소 입력">
 						</div>
 					</div>
 					<div class="activityDateData">
@@ -362,7 +363,7 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 							<b>활동기간</b>
 						</div>
 						<div class="activityDateInput">
-							<input type="date" class="dateInput firstDateInput" name="activityStartDate"> ~ <input type="date" class="dateInput" name="activityEndDate">				
+							<input type="month" class="dateInput firstDateInput" name="activityStart"> ~ <input type="month" class="dateInput" name="activityEnd">				
 						</div>
 					</div>
 					<div class="activityContentData">
@@ -402,9 +403,9 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 						<div class="certiPassInput">
 							<select class="selectInput" name="certiPass">	
 								<option>합격구분 선택</option>
-								<option value=1>필기합격</option>
-								<option value=2>실기합격</option>
-								<option value=3>최종합격</option>
+								<option value="1">필기합격</option>
+								<option value="2">실기합격</option>
+								<option value="3">최종합격</option>
 							</select>
 						</div>
 					</div>
@@ -413,7 +414,7 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 							<b>취득일</b>
 						</div>
 						<div class="certiDateInput">
-							<input type="date" class="dateInput firstDateInput" name="certiDate">			
+							<input type="month" class="dateInput firstDateInput" name="certiDate">			
 						</div>
 					</div>
 				</div>
@@ -440,8 +441,8 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 						</div>
 						<div class="veteransInput">
 							<select class="selectInput" name="veterans">	
-								<option value=1>비대상</option>
-								<option value=2>대상</option>
+								<option value="1">비대상</option>
+								<option value="2">대상</option>
 							</select>
 						</div>
 					</div>
@@ -451,11 +452,11 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 						</div>
 						<div class="militaryInput">
 							<select class="selectInput" name="military">	
-								<option value=1>대상아님</option>
-								<option value=2>미필</option>
-								<option value=3>군필</option>
-								<option value=4>면제</option>
-								<option value=5>복무중</option>
+								<option value="1">대상아님</option>
+								<option value="2">미필</option>
+								<option value="3">군필</option>
+								<option value="4">면제</option>
+								<option value="5">복무중</option>
 							</select>
 						</div>
 					</div>
@@ -467,11 +468,11 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 			<div class="grayBox">
 				<div class="selfIntro">
 	              	<div class="selfIntroTitle">
-	                    <input type="text" name="selfIntroTitle" class="textInput" style="margin: 0;" placeholder="자기소개서 제목">
+	                    <input type="text" name="selfintroName" class="textInput" style="margin: 0;" placeholder="자기소개서 제목">
 	                </div>
 	               
 	                <div class="selfIntroContent">
-	                    <textarea cols="80" rows="10" name="selfIntroContent" class="selfIntroContentTextarea" placeholder="자기소개서 내용"></textarea>
+	                    <textarea cols="80" rows="10" name="selfintroContent" class="selfIntroContentTextarea" placeholder="자기소개서 내용"></textarea>
 	                </div>
 	                
 	           </div>
@@ -485,11 +486,11 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 					</div>
 					<div class="workForm">
 						<select class="selectInput" name="workForm">	
-							<option value=1>정규직</option>
-							<option value=2>계약직</option>
-							<option value=3>아르바이트</option>
-							<option value=4>인턴</option>
-							<option value=5>프리랜서</option>
+							<option value="1">정규직</option>
+							<option value="2">계약직</option>
+							<option value="3">아르바이트</option>
+							<option value="4">인턴</option>
+							<option value="5">프리랜서</option>
 						</select>
 					</div>
 				</div>
@@ -499,13 +500,13 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 					</div>
 					<div class="moneyInput">
 						<select class="selectInput" name="money">	
-							<option value=1>회사내규에 따름</option>
-							<option value=2>2000만 ~ 2400만</option>
-							<option value=3>2400만 ~ 2800만</option>
-							<option value=4>2800만 ~ 3200만</option>
-							<option value=5>3200만 ~ 3600만</option>
-							<option value=6>3600만 ~ 4000만</option>
-							<option value=7>4000만 이상</option>
+							<option value="1">회사내규에 따름</option>
+							<option value="2">2000만 ~ 2400만</option>
+							<option value="3">2400만 ~ 2800만</option>
+							<option value="4">2800만 ~ 3200만</option>
+							<option value="5">3200만 ~ 3600만</option>
+							<option value="6">3600만 ~ 4000만</option>
+							<option value="7">4000만 이상</option>
 						</select>
 					</div>
 				</div>
@@ -522,8 +523,8 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 				<input type="button" onclick="history.go(-1)" class="backBtn" value="돌아가기">
 				<input type="submit" class="resumeBtn" value="저장하기">
 			</div>
-		</form>
-	</div>
+		</div>
+	</form>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

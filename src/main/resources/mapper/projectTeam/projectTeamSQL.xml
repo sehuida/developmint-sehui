@@ -4,6 +4,7 @@
   <select id="projectList" resultType="pt">
   		<![CDATA[
 		select 
+			rownum as rnum,
 			project_no as projectNo,
 			member_no as projectWriterMemberNo,
 			recruit_start_date as rStartDate,
@@ -21,6 +22,7 @@
 			(select count(*) from project_dibs) as dibCount,
             (select count(*) from comments) as commentCount
 		from project p
+		where rnum between start and end
 		]]>
   </select>
 </mapper>

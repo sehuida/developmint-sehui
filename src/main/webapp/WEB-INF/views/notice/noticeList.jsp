@@ -11,7 +11,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<div class="container">
+	<div class="container" style="margin-bottom: 50px;">
 		<div class="area">
 			<div class="nav-sub" style="margin-top: 30px;"><a href="/" class="text-hover">홈</a><span> > </span><a href="noticeList.do" class="text-hover">고객센터</a><span> > </span><span>공지사항</span></div>
 			<div class="title"><h2>CS Center</h2></div>
@@ -23,44 +23,45 @@
 				</ul>
 			</div>
 			<div class="contents">
-				<div class="title"><h2>Notice</h2></div>
+				<div class="title"><h2 style="display: inline-block;">Notice</h2>
 				<c:if test="${not empty sessionScope.m && sessionScope.m.memberType eq 9}">
-					<a class="btn btn-secondary" href="/nWriteFrm.do">글쓰기</a>
+					<a class="btn btn-outline-dark" href="/nWriteFrm.do" style="float: right;margin-right: 10px;">관리자 글쓰기</a>
 				</c:if>
+				</div>
 				<table class="table table-hover">
 					<thead>
 						<tr>
 					     	<th scope="col" style="width: 10%;">번호</th>
-					     	<th scope="col">제목</th>
-					     	<th scope="col" style="width: 20%;">등록일</th>
+					     	<th scope="col" style="text-align: center">제목</th>
+					     	<th scope="col" style="width: 10%;">등록일</th>
 					    </tr>
 				 	</thead>
 				 	<tbody>
 				 		<c:forEach items="${list  }" var="n" varStatus="i">
 						<c:choose>
-							<c:when test="${n.pin == 2}">
-								<tr class="table-light" id=noticeList>
-									<td>${start + i.index-fixPage}</td> 
+							<c:when test="${n.pin eq 2}">
+								<tr class="table-primary" id="noticeList">
+									<td><i class="bi bi-pin-angle-fill"></i></td> 
 									<td style="text-align: left;">
-										<a href='/freeView?freeNo=${f.freeNo}' id="free"> ${f.freeTitle }</a>
+										<a href='/noticeView?noticeNo=${n.noticeNo}' id="noticePin" style="color: #000;"> ${n.noticeTitle }</a>
 									</td>
-									<td>${f.regDate }</td>
+									<td>${n.regDate }</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
-							<tr class="table-default" id="freeNotice" style="background-color: #bdbdbd;">
-									<td><i class="bi bi-pin-angle-fill"></i></td> 
-									<td style="text-align: left; ">
-										<a href='/freeView?freeNo=${f.freeNo }' id="free"> ${f.freeTitle }</a>
+							<tr class="table-light" id="noticeList" style="background-color: #bdbdbd;">
+									<td>${start + i.index-fixPage}</td> 
+									<td style="text-align: center; ">
+										<a href='/noticeView?noticeNo=${n.noticeNo }' style="text-decoration: none;"> ${n.noticeTitle }</a>
 									</td>
-									<td>${f.regDate }</td>
+									<td>${n.regDate }</td>
 								</tr>
 							</c:otherwise>
 						</c:choose>
-					</c:forEach>
+						</c:forEach>
 				 	</tbody>
 				</table>
-				<div id="pageNavi">${pageNavi }</div>
+				<div id="pageNavi" style="display:flex; justify-content: flex-end">${pageNavi }</div>
 			</div>
 		</div>
 	</div>

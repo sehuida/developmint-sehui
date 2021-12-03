@@ -23,6 +23,7 @@ import com.google.gson.JsonObject;
 
 import kr.or.projectTeam.model.service.ProjectTeamService;
 import kr.or.projectTeam.model.vo.ProjectTeam;
+import kr.or.projectTeam.model.vo.projectTeamMainPageData;
 
 @Controller
 public class ProjectTeamController {
@@ -30,10 +31,10 @@ public class ProjectTeamController {
 	private ProjectTeamService service;
 	
 	@RequestMapping(value="/recruitTeamMember_mainPage.do")
-	public String recruitTeamMember(Model model ) {
-		ArrayList<ProjectTeam> list = service.selectAllrecruitProject();
-		model.addAttribute("list", list);
-//		System.out.println(list.get(0).getRTitle());
+	public String recruitTeamMember(Model model, int reqPage) {
+		projectTeamMainPageData ptmpd = service.selectAllrecruitProject(reqPage);
+	// 	ArrayList<ProjectTeam> list = service.selectAllrecruitProject();
+		
 		return "recruitCrue/recruitTeamMember_mainPage";
 	}
 	
