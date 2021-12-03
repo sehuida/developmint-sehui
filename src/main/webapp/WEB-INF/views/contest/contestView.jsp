@@ -62,7 +62,7 @@
 	display: flex;
 }
 .userInfoBox{
-	width: 120px;
+	width: 80px;
 }
 .userInfoBox>p{
 	text-align: center;
@@ -77,7 +77,7 @@
 }
 .textBox>textarea{
 	width: 1000px;
-	height: 146px;
+	height: 100px;
 	resize: none;
 }
 .comentListBox{
@@ -163,14 +163,14 @@
 			<form action="/insertContestComment.do" method="post">
 				<div class="commentBox">
 					<div class="userInfoBox">
-						<img src="/resources/img/userTestImg.png" width="120px;" height="120px;">
+						<img src="/resources/img/userTestImg.png" width="80px;" height="75px;">
 						<p>${sessionScope.m.memberId }</p>
 					</div>
 					<div class="textBox" >
 						<textarea class="form-control" name="commentContent"></textarea>
 					</div>
 					<div>
-						<input type="submit" value="등록" class="btn btn-outline-primary" style="height: 146px; width: 100px; font-weight: bold">
+						<input type="submit" value="등록" class="btn btn-outline-primary" style="height: 100px; width: 100px; font-weight: bold">
 					</div>
 				</div>
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
@@ -191,7 +191,7 @@
 							<span>${cl.memberId }</span>
 							<span>
 							${cl.commentContent }
-							<a href="javascript:void(0)"><i class="bi bi-chat-dots-fill" style="font-size: 20px"></i></a>
+							<a href="javascript:void(0)" class="reComentBtn"><i class="bi bi-chat-dots-fill" style="font-size: 20px"></i></a>
 							</span>
 							<span>${cl.regDate }</span>
 							<%--로그인했을 때만 보여주기 --%>
@@ -205,10 +205,10 @@
 							</c:if>
 						</div>
 						<%--대댓글 창 --%>
-						<div class="recomentBox">
+						<div class="recomentBox" style="display:none">
 							<form action="/insertContestComment.do"></form>
 							<textarea class="form-control" name="commentContent"></textarea>
-							<input type="submit" value="등록" class="btn btn-outline-primary" style="height: 100px; width: 80px; font-weight: bold">
+							<input type="submit" value="등록" class="btn btn-outline-primary" style="height: 100px; width: 80px; font-weight: bold; margin-left:10px; margin-right: 10px">
 							<input type="button" value="취소" class="btn btn-outline-primary" style="height: 100px; width: 80px; font-weight: bold">
 							<div></div>
 						</div>
@@ -218,18 +218,32 @@
 			<%--댓글이 없는경우 --%>
 			<c:otherwise>
 				<div style="text-align: center">
-					<p><i class="bi bi-chat-square-dots" style="font-size: 35px"></i></p>
+					<p><i class="bi bi-chat-square-dots" style="font-size: 35px; display:inline-block;"></i></p>
 					<p style="font-weight: bold">등록된 댓글이 없습니다. 댓글을 남겨보세요!</p>
 				</div>
 			</c:otherwise>
 			</c:choose>
 		</div>
-		
-		
-		
-		
 	</div>
 	
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
+	
+	<script>
+		$(".reComentBtn").click(function(){
+			var index = $(".reComentBtn").index(this);
+			$(".recomentBox").eq(index).css("display","");
+		})
+	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
