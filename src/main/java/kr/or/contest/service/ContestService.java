@@ -41,7 +41,13 @@ public class ContestService {
 		return list;
 	}
 	
+	@Transactional
 	public int insertContestComment(Comment cm) {
 		return dao.insertContestComment(cm);
+	}
+	
+	@Transactional
+	public int updateContestComment(Comment cm) {
+		return dao.updateContestComment(cm);
 	}
 }

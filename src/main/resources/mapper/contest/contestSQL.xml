@@ -123,13 +123,18 @@
   			member_id as memberId,
   			comment_content as commentContent,
   			reg_date as regDate,
-  			board_no as baordNo,
+  			board_no as boardNo,
   			board_type as boardType,
   			comment_type as commentType,
   			comment_ref as commentRef
   		from comments
   		where board_no = #{contestNo} and board_type = 1
+  		order by comment_no
   	</select>
+  	
+  	<update id="updateContestComment" parameterType="cm">
+  		update comments set comment_content = #{commentContent} where comment_no = #{commentNo}
+  	</update>
   
 </mapper>
 

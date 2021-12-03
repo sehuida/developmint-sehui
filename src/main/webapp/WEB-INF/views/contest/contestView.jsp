@@ -109,9 +109,9 @@
 }
 .reComentView>span:nth-of-type(2) {
 	display:inline-block;
-	width: 823px;
+	width: 825px;
 }
-.reCcomentView>span:nth-of-type(3) {
+.reComentView>span:nth-of-type(3) {
 	margin-right: 15px;
 }
 .reComentView>a{
@@ -203,61 +203,83 @@
 			<%--댓글이 있는경우 --%>
 			<c:when test="${not empty list.commentList }">
 				<c:forEach items="${list.commentList }" var="cl">
-					<c:if test="${cl.commentType eq 1 }">
-						<div class="comentView">
-							<span>${cl.memberId }</span>
-							<span>
-							${cl.commentContent }
-							<a href="javascript:void(0)" class="reComentBtn"><i class="bi bi-chat-dots-fill" style="font-size: 20px"></i></a>
-							</span>
-							<span>${cl.regDate }</span>
-							<%--로그인했을 때만 보여주기 --%>
-							<c:if test="${not empty sessionScope.m }">
-								<%--내가 쓴 댓글일 경우만 보여주기 --%>
-								<c:if test="${cl.memberId eq sessionScope.m.memberId }">
-									<a href="#">수정</a>
-									<a href="#">삭제</a>
-								</c:if>
-							<a href="#"><i class="bi bi-exclamation-circle-fill" style="font-size: 20px; padding-top:20px; color:#f3969a;"></i></a>
-							</c:if>
-						</div>
-						<%--대댓글 작성 창 --%>
-						<form action="/insertContestComment.do" method="post">
-							<div class="recomentBox" style="display:none">
-								<textarea class="form-control reText" name="commentContent"></textarea>
-								<input type="submit" value="등록" class="btn btn-outline-primary" style="height: 100px; width: 80px; font-weight: bold; margin-left:10px; margin-right: 10px">
-								<input type="button" value="취소" class="btn btn-outline-secondary cancelBtn" style="height: 100px; width: 80px; font-weight: bold">
-								<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-								<input type="hidden" name="boardNo" value="${list.contest.contestNo }">
-								<input type="hidden" name="boardType" value="1">
-								<input type="hidden" name="commentType" value="2">
-								<input type="hidden" name="commentRef" value="${cl.commentNo }">
-								<div></div>
-							</div>
-						</form>
-						</c:if>
-						<%--대댓글 리스트 --%>
-						<c:if test="${cl.commentType eq 2 }">
-							<div class="reComentView">
-							<i class="bi bi-arrow-return-right" style="margin-left:20px;"></i>
+					<div style="margin-bottom: 20px;">
+						<c:if test="${cl.commentType eq 1 }">
+							<div class="comentView">
 								<span>${cl.memberId }</span>
 								<span>
 								${cl.commentContent }
+								<a href="javascript:void(0)" class="reComentBtn"><i class="bi bi-chat-dots-fill" style="font-size: 20px"></i></a>
 								</span>
 								<span>${cl.regDate }</span>
 								<%--로그인했을 때만 보여주기 --%>
 								<c:if test="${not empty sessionScope.m }">
 									<%--내가 쓴 댓글일 경우만 보여주기 --%>
 									<c:if test="${cl.memberId eq sessionScope.m.memberId }">
-										<a href="#">수정</a>
+										<a href="/updateContestComment.do">수정</a>
 										<a href="#">삭제</a>
 									</c:if>
-								<a href="#"><i class="bi bi-exclamation-circle-fill" style="font-size: 20px; padding-top:20px; color:#f3969a;"></i></a>
+									<a href="#"><i class="bi bi-exclamation-circle-fill" style="font-size: 20px; padding-top:20px; color:#f3969a;"></i></a>
 								</c:if>
 							</div>
-						</c:if>
-					
-				</c:forEach>
+							<%--대댓글 작성 창 --%>
+							<form action="/insertContestComment.do" method="post">
+								<div class="recomentBox">
+									<textarea class="form-control reText" name="commentContent"></textarea>
+									<input type="submit" value="등록" class="btn btn-outline-primary" style="height: 100px; width: 80px; font-weight: bold; margin-left:10px; margin-right: 10px">
+									<input type="button" value="취소" class="btn btn-outline-secondary cancelBtn" style="height: 100px; width: 80px; font-weight: bold">
+									<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+									<input type="hidden" name="boardNo" value="${list.contest.contestNo }">
+									<input type="hidden" name="boardType" value="1">
+									<input type="hidden" name="commentType" value="2">
+									<input type="hidden" name="commentRef" value="${cl.commentNo }">
+								</div>
+							</form>
+							</c:if>
+							<%--대댓글 리스트 --%>
+							<c:forEach items="${list.commentList }" var="rl">
+								<c:if test="${rl.commentType eq 2 && cl.commentNo eq rl.commentRef}">
+									<div class="reComentView">
+									<i class="bi bi-arrow-return-right" style="margin-left:20px;"></i>
+										<span>${rl.memberId }</span>
+										<span>
+										${rl.commentContent }
+										</span>
+										<span>${rl.regDate }</span>
+										<%--로그인했을 때만 보여주기 --%>
+										<c:if test="${not empty sessionScope.m }">
+											<%--내가 쓴 댓글일 경우만 보여주기 --%>
+											<c:if test="${rl.memberId eq sessionScope.m.memberId }">
+												<a href="#" data-bs-toggle="modal" data-bs-target="#updateComment">수정</a>
+												
+												<!-- 댓글 수정  Modal -->
+												<div class="modal fade" id="updateComment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												  <div class="modal-dialog  modal-dialog-centered">
+												    <div class="modal-content">
+												      <div class="modal-body">
+												      	<form action="/updateContestComment.do" method="post">
+												      	<textarea class="form-control reText" name="commentContent">${rl.commentContent }</textarea>
+												      	<input type="hidden" value="${rl.commentNo }" name="commentNo">
+												      	<input type="hidden" value="${rl.boardNo }" name="boardNo">
+												      	<div style="text-align: right; ">
+												      	<button type="submit" class="btn btn-primary">수정</button>
+												        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+												        </div>
+												        </form>
+												      </div>
+												    </div>
+												  </div>
+												</div>
+												
+												<a href="#">삭제</a>
+											</c:if>
+										<a href="#"><i class="bi bi-exclamation-circle-fill" style="font-size: 20px; padding-top:20px; color:#f3969a;"></i></a>
+										</c:if>
+									</div>
+								</c:if>
+							</c:forEach>
+						</div>
+				</c:forEach>	
 			</c:when>
 			<%--댓글이 없는경우 --%>
 			<c:otherwise>
@@ -274,15 +296,15 @@
 	
 	<script>
 		$(".reComentBtn").click(function(){
-			$(".recomentBox").css("display","none");
 			var index = $(".reComentBtn").index(this);
-			$(".recomentBox").eq(index).css("display","");
-			
+			$(".recomentBox").eq(index).toggle();
 		});
+		$(".reComentBtn").trigger('click');
 		$(".cancelBtn").click(function(){
 			var index = $(".cancelBtn").index(this);
 			$(".recomentBox").eq(index).css("display","none");
-		})
+		});
+		
 	</script>
 </body>
 </html>

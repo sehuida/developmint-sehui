@@ -53,4 +53,9 @@ public class ContestDao {
 		List<Comment> list = sqlSession.selectList("contest.commentList", contestNo);
 		return (ArrayList<Comment>)list;
 	}
+
+	public int updateContestComment(Comment cm) {
+		return sqlSession.update("contest.updateContestComment",cm);
+	}
+	
 }

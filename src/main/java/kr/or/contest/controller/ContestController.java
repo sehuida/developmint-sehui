@@ -128,5 +128,19 @@ public class ContestController {
 		return "common/msg";
 	}
 	
+	//댓글수정
+	@RequestMapping(value="/updateContestComment.do")
+	public String updateContestComment(Comment cm, Model model) {
+		int result = service.updateContestComment(cm);
+		if(result>0) {
+			model.addAttribute("msg","댓글수정 완료");	
+		}else {
+			model.addAttribute("msg","댓글수정 실패");
+		}
+		model.addAttribute("loc","/contestView.do?contestNo="+cm.getBoardNo());
+		return "common/msg";
+		
+	}
+	
 	
 }
