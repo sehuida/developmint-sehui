@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.member.controller.RandomPassword;
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Member;
 
@@ -42,6 +43,26 @@ public class MemberService {
 	public String findId(String email) {
 		String memberId = dao.findId(email);
 		return memberId;
+	}
+	
+	public String pwCheck(Member member) {
+		Member m = dao.pwCheck(member);
+		if(m == null) {
+			return null;
+		}else {
+			//임시비밀번호생성
+			//String newPw = new RandomPassword().setPassword(8);
+			//메일전송
+			String newPw = new MailSender().mailSend2(member.getEmail());
+			//리턴임시비밀번호
+			return newPw;
+		}
+	}
+	
+	@Transactional
+	public int resetPwMember(Member member) {
+		int result = dao.resetPwMember(member);
+		return result;
 	}
 	
 }
