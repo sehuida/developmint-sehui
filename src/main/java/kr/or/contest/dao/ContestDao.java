@@ -57,5 +57,9 @@ public class ContestDao {
 	public int updateContestComment(Comment cm) {
 		return sqlSession.update("contest.updateContestComment",cm);
 	}
+
+	public int deleteContestComment(Comment cm) {
+		return sqlSession.delete("contest.deleteContestComment",cm);
+	}
 	
 }

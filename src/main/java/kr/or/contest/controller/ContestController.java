@@ -139,8 +139,24 @@ public class ContestController {
 		}
 		model.addAttribute("loc","/contestView.do?contestNo="+cm.getBoardNo());
 		return "common/msg";
-		
 	}
+	
+	//댓글삭제
+	@RequestMapping(value="/deleteContestComment.do")	
+	public String deleteContestComment(Comment cm, Model model) {
+		int result = service.deleteContestComment(cm);
+		if(result>0) {
+			model.addAttribute("msg","댓글삭제 완료");	
+		}else {
+			model.addAttribute("msg","댓글삭제 실패");
+		}
+		model.addAttribute("loc","/contestView.do?contestNo="+cm.getBoardNo());
+		return "common/msg";
+	}
+	
+	
+	
+	
 	
 	
 }

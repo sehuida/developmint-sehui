@@ -50,4 +50,9 @@ public class ContestService {
 	public int updateContestComment(Comment cm) {
 		return dao.updateContestComment(cm);
 	}
+	
+	@Transactional
+	public int deleteContestComment(Comment cm) {
+		return dao.deleteContestComment(cm);
+	}
 }

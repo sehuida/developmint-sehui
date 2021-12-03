@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <style>
 #mainTitel{
@@ -101,6 +102,10 @@
 	text-decoration: none;
 	color : black;
 }
+.comentView>form>a{
+	text-decoration: none;
+	color : black;
+}
 .reComentView>span:first-of-type {
 	font-weight: bold;
 	display:inline-block;
@@ -115,6 +120,10 @@
 	margin-right: 15px;
 }
 .reComentView>a{
+	text-decoration: none;
+	color : black;
+}
+.reComentView>form>a{
 	text-decoration: none;
 	color : black;
 }
@@ -202,7 +211,7 @@
 			<c:choose>
 			<%--댓글이 있는경우 --%>
 			<c:when test="${not empty list.commentList }">
-				<c:forEach items="${list.commentList }" var="cl">
+				<c:forEach items="${list.commentList }" var="cl" varStatus="i">
 					<div style="margin-bottom: 20px;">
 						<c:if test="${cl.commentType eq 1 }">
 							<div class="comentView">
@@ -216,10 +225,37 @@
 								<c:if test="${not empty sessionScope.m }">
 									<%--내가 쓴 댓글일 경우만 보여주기 --%>
 									<c:if test="${cl.memberId eq sessionScope.m.memberId }">
-										<a href="/updateContestComment.do">수정</a>
-										<a href="#">삭제</a>
+										<a href="#" data-bs-toggle="modal" data-bs-target="#updateComment${i.index }">수정</a>
+							
+											<%--댓글 수정  Modal --%>
+											<div class="modal fade" id="updateComment${i.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											  <div class="modal-dialog  modal-dialog-centered">
+											    <div class="modal-content">
+											      <div class="modal-body">
+											      	<form action="/updateContestComment.do" method="post">
+											      	<textarea class="form-control reText" name="commentContent">${cl.commentContent }</textarea>
+											      	<input type="hidden" value="${cl.commentNo }" name="commentNo">
+											      	<input type="hidden" value="${cl.boardNo }" name="boardNo">
+											      	<div style="text-align: right; ">
+											      	<button type="submit" class="btn btn-primary">수정</button>
+											        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+											        </div>
+											        </form>
+											      </div>
+											    </div>
+											  </div>
+											</div>
+										
+										<%--댓글 삭제 --%>
+										<form action="/deleteContestComment.do" method="post" class="delForm" style="display: inline;">
+											<a href="javascript:void(0);" class="delComment">삭제</a>
+											<input type="hidden" value="${cl.commentNo }" name="commentNo">
+											<input type="hidden" value="${cl.boardNo }" name="boardNo">
+										</form>
 									</c:if>
-									<a href="#"><i class="bi bi-exclamation-circle-fill" style="font-size: 20px; padding-top:20px; color:#f3969a;"></i></a>
+									
+									<%--댓글 신고 --%>
+									<a href="#"><i class="bi bi-exclamation-circle-fill" style="font-size: 20px;color:#f3969a;"></i></a>
 								</c:if>
 							</div>
 							<%--대댓글 작성 창 --%>
@@ -237,7 +273,7 @@
 							</form>
 							</c:if>
 							<%--대댓글 리스트 --%>
-							<c:forEach items="${list.commentList }" var="rl">
+							<c:forEach items="${list.commentList }" var="rl" varStatus="j">
 								<c:if test="${rl.commentType eq 2 && cl.commentNo eq rl.commentRef}">
 									<div class="reComentView">
 									<i class="bi bi-arrow-return-right" style="margin-left:20px;"></i>
@@ -250,10 +286,10 @@
 										<c:if test="${not empty sessionScope.m }">
 											<%--내가 쓴 댓글일 경우만 보여주기 --%>
 											<c:if test="${rl.memberId eq sessionScope.m.memberId }">
-												<a href="#" data-bs-toggle="modal" data-bs-target="#updateComment">수정</a>
+												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#updateReComment${j.index }" class="updateBtn">수정</a>
 												
-												<!-- 댓글 수정  Modal -->
-												<div class="modal fade" id="updateComment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<%--댓글 수정  Modal --%>
+												<div class="modal fade" id="updateReComment${j.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 												  <div class="modal-dialog  modal-dialog-centered">
 												    <div class="modal-content">
 												      <div class="modal-body">
@@ -271,9 +307,14 @@
 												  </div>
 												</div>
 												
-												<a href="#">삭제</a>
+												<%--댓글 삭제 --%>
+												<form action="/deleteContestComment.do" method="post" class="delForm" style="display: inline;">
+													<a href="javascript:void(0);" class="delComment">삭제</a>
+													<input type="hidden" value="${rl.commentNo }" name="commentNo">
+												    <input type="hidden" value="${rl.boardNo }" name="boardNo">
+												</form>
 											</c:if>
-										<a href="#"><i class="bi bi-exclamation-circle-fill" style="font-size: 20px; padding-top:20px; color:#f3969a;"></i></a>
+										<a href="#"><i class="bi bi-exclamation-circle-fill" style="font-size: 20px;color:#f3969a;"></i></a>
 										</c:if>
 									</div>
 								</c:if>
@@ -300,11 +341,22 @@
 			$(".recomentBox").eq(index).toggle();
 		});
 		$(".reComentBtn").trigger('click');
+		
 		$(".cancelBtn").click(function(){
 			var index = $(".cancelBtn").index(this);
 			$(".recomentBox").eq(index).css("display","none");
 		});
 		
+		$(".delComment").click(function(){
+			var result = confirm('댓글을 삭제하시겠습니까?');
+			var index = $(".delComment").index(this);
+			if(result){
+				$(".delForm").eq(index).submit();
+			}
+		});
+		
+
+		 
 	</script>
 </body>
 </html>

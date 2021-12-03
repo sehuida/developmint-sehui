@@ -135,6 +135,10 @@
   	<update id="updateContestComment" parameterType="cm">
   		update comments set comment_content = #{commentContent} where comment_no = #{commentNo}
   	</update>
+  	
+  	<delete id="deleteContestComment" parameterType="cm">
+  		delete from comments where comment_no = #{commentNo}
+  	</delete>
   
 </mapper>
 
