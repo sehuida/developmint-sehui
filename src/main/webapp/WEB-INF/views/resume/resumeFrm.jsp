@@ -316,7 +316,10 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 			</div>
 			<em>경력사항</em>
 			<div class="grayBox">
-				<div class="career">			<!-- radio버튼 display none해주고 라벨로 선택해서 선택시 뒷배경 mint 글씨 흰색으로 변경(아마 자바스크립트로 해야할듯?) -->
+				<div class="careerData">			<!-- radio버튼 display none해주고 라벨로 선택해서 선택시 뒷배경 mint 글씨 흰색으로 변경(아마 자바스크립트로 해야할듯?) -->
+					<div class="career">
+						<b>경력<span>*</span></b>
+					</div>
 	                <label class="carrerLabel" for="junior">
 	                    <input name="carrerType" class="carrerRadio" id="junior" type="radio" value=1>	<!-- value=1 //주니어(신입) -->
 	                    <span class="txt_check">신입</span>
@@ -478,7 +481,7 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 			<div class="grayBox">
 				<div class="conditionData">
 					<div class="condition">
-						<b>근무 형태</b>
+						<b>근무 형태<span>*</span></b>
 					</div>
 					<div class="workForm">
 						<select class="selectInput" name="workForm">	
@@ -492,7 +495,7 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 				</div>
 				<div class="moneyData">
 					<div class="money">
-						<b>연봉</b>
+						<b>연봉<span>*</span></b>
 					</div>
 					<div class="moneyInput">
 						<select class="selectInput" name="money">	
@@ -508,7 +511,7 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 				</div>
 				<div class="workPlaceData">
 					<div class="workPlace">
-						<b>근무 지역</b>
+						<b>근무 지역<span>*</span></b>
 					</div>
 					<div class="workPlaceInput">
 						<input type="text" class="textInput" name="workPlace" placeholder="근무지역 (나중에 바꾸기)">
@@ -516,7 +519,7 @@ ${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 				</div>
 			</div>
 			<div class="selectBtn">
-				<input type="button" class="backBtn" value="취소">
+				<input type="button" onclick="history.go(-1)" class="backBtn" value="돌아가기">
 				<input type="submit" class="resumeBtn" value="저장하기">
 			</div>
 		</form>
