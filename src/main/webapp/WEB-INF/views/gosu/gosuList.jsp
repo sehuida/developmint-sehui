@@ -119,7 +119,7 @@
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
 		<h3>
-			<span style="color: rgb(78, 205, 196);">고수</span>의 노하우
+			<span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다
 		</h3>
 		<div class="g-msg">
 			고수에게 피드백을 신청해보세요!<br> 당신의 작품을 평가해줍니다. 마음껏 질문하세요!
@@ -135,10 +135,10 @@
 		</div>
 		<div class="gosu-write-wrap">
 			<div class="gosu-write">
-				<h5 style="font-size:16px">
+				<h5 style="font-size: small; color: gray;">
 					고수님의 능력을<br> 마음껏 펼쳐주세요!
 				</h5>
-				<a href="/gosuWriteFrm.do" class="btn btn-primary">작성하기</a>
+				<a href="/gosuWriteFrm.do" class="btn btn-primary" style="font-weight:bold;">작성하기</a>
 			</div>
 		</div>
 		<div class="gosu-wrap">
