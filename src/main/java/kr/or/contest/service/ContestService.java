@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.comment.vo.Comment;
 import kr.or.contest.dao.ContestDao;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestList;
@@ -40,4 +41,7 @@ public class ContestService {
 		return con;
 	}
 	
+	public int insertContestComment(Comment cm) {
+		return dao.insertContestComment(cm);
+	}
 }
