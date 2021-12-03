@@ -48,4 +48,9 @@ public class ContestDao {
 	public int insertContestComment(Comment cm) {
 		return sqlSession.insert("contest.insertContestComment",cm);
 	}
+
+	public ArrayList<Comment> commentList(int contestNo) {
+		List<Comment> list = sqlSession.selectList("contest.commentList", contestNo);
+		return (ArrayList<Comment>)list;
+	}
 }

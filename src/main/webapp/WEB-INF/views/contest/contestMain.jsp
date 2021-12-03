@@ -94,10 +94,10 @@ overflow: hidden;
 		<div>
 			<%--공모전 이미지 --%>
 			<a href="/contestView.do?contestNo=${nc.contestNo }"><img src="/resources/img/contest/${nc.contestImg }" width="280px" height="400px" style="margin-right: 30px; margin-top: 20px;"></a>
-			<%--공모전 제목(제목이 18글자가 넘어가면 뒤에는 ...으로 표시 --%>
+			<%--공모전 제목(제목이 16글자가 넘어가면 뒤에는 ...으로 표시 --%>
 			<c:choose>
-				<c:when test="${fn:length(nc.contestTitle) > 18}">
-					<c:set var="subTitle" value="${fn:substring(nc.contestTitle,0,18)}"/>
+				<c:when test="${fn:length(nc.contestTitle) > 16}">
+					<c:set var="subTitle" value="${fn:substring(nc.contestTitle,0,16)}"/>
 					<p class="newTitle">${subTitle }...</p>
 				</c:when>
 				<c:otherwise>
@@ -120,10 +120,10 @@ overflow: hidden;
 		<div>
 			<%--공모전 이미지 --%>
 			<a href="/contestView.do?contestNo=${hc.contestNo }"><img src="/resources/img/contest/${hc.contestImg }" width="280px" height="400px" style="margin-right: 30px; margin-top: 20px;"></a>
-			<%--공모전 제목(제목이 18글자가 넘어가면 뒤에는 ...으로 표시 --%>
+			<%--공모전 제목(제목이 16글자가 넘어가면 뒤에는 ...으로 표시 --%>
 			<c:choose>
-				<c:when test="${fn:length(hc.contestTitle) > 18}">
-					<c:set var="subTitle" value="${fn:substring(hc.contestTitle,0,18)}"/>
+				<c:when test="${fn:length(hc.contestTitle) > 16}">
+					<c:set var="subTitle" value="${fn:substring(hc.contestTitle,0,16)}"/>
 					<p class="newTitle">${subTitle }...</p>
 				</c:when>
 				<c:otherwise>
