@@ -110,8 +110,8 @@ public class ContestController {
 	@RequestMapping(value="/contestView.do")
 	public String contestView(int contestNo, Model model) {
 		//공모전 정보 불러오면서 조회수 올려주기
-		Contest con = service.contestView(contestNo);
-		model.addAttribute("c",con);
+		ContestList list = service.contestView(contestNo);
+		model.addAttribute("list",list);
 		return "contest/contestView";
 	}
 	

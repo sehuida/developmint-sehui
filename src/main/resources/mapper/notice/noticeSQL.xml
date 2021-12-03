@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="notice">
-	<!-- <select id="selectFin" resultType="n">
+	<select id="selectFin" resultType="n">
 		select 
 			"notice_no" as noticeNo, 
 			"notice_title" as noticeTitle, 
-			"reg_date" as regDate 
+			"reg_date" as regDate, 
+			"filename" as filename, 
+			"filepath" as filepath, 
+			"pin"as pin, 
+			"notice_writer" as noticeWriter
 		from notice where "pin"=2 order by 1 desc
 	</select>
 	<select id="selectNoticeList" resultType="n" parameterType="cr">
@@ -14,8 +18,18 @@
 			(SELECT 
 				"notice_no" as noticeNo, 
 				"notice_title" as noticeTitle, 
-				"reg_date" as regDate 
+				"reg_date" as regDate,
+				"filename" as filename, 
+				"filepath" as filepath, 
+				"pin"as pin, 
+				"notice_writer" as noticeWriter
 			FROM notice where "pin" = 1 ORDER BY 1 DESC)N)NN 
 		WHERE RNUM BETWEEN #{start} AND #{end}
-	</select> -->
+	</select>
+	<select id="totalCount" resultType="_int">
+		select count(*)as totalCount from notice
+	</select>
+	<select id="fixPageCount" resultType="_int">
+		select count(*)as fixPageCount from notice where "pin"=2
+	</select>
 </mapper>

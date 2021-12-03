@@ -16,13 +16,12 @@ public class AdminController {
 	@Autowired
 	private AdminService service; 
 	
-	/*
-	 나중에 헤더에 이동경로 추가 예정
+
+	//관리자 페이지로 이동
 	@RequestMapping(value="/adminPage.do")
 	public String adminPage() {
 		return "admin/adminPage";
 	}
-	*/
 	
 	//대시보드로 이동
 	@RequestMapping(value="/dashboard.do")
