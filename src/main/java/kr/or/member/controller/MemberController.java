@@ -40,12 +40,8 @@ public class MemberController {
 		Member m = service.selectOneMember(member);
 		if(m != null) {
 			session.setAttribute("m", m);
-			model.addAttribute("msg","로그인성공");
-		}else {
-			model.addAttribute("msg","아이디 또는 비밀번호를 확인하세요");	
 		}
-		model.addAttribute("loc","/");
-		return "common/msg";
+		return "common/main";
 	}
 	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) {
@@ -102,5 +98,23 @@ public class MemberController {
 	public String idFind(String email) {
 		String memberId = service.findId(email);
 		return memberId;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/findPw.do")
+	public String findPw(Member member) {
+		String m = service.pwCheck(member);
+		if(m == null) {
+			//ajax로 페이지 이동이 없어야 하므로 ResponseBody 어노테이션을 붙여줘야 데이터 자체로 보내줌
+			return "1";
+		}else {
+			member.setMemberPw(m);
+			int result = service.resetPwMember(member);
+			if(result>0) {
+				return m;				
+			}else {
+				return "1";
+			}
+		}
 	}
 }

@@ -38,3 +38,6 @@ textarea{
 	clear:left;
 	margin-bottom:0;
 }
+.bi-person-circle::before {
+	margin-right: 10px;	
+}

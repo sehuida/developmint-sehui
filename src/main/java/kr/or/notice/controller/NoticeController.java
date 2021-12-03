@@ -28,4 +28,13 @@ public class NoticeController {
 		return "notice/noticeList";
 	}
 	
+	@RequestMapping(value="/nWriteFrm.do")
+	public String nWriteFrm() {
+		return "notice/nWriteFrm";
+	}
+	
+	@RequestMapping(value="/noticehome.do")
+	public String nHome() {
+		return "notice//noticeHome";
+	}
 }

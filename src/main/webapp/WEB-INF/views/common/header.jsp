@@ -17,6 +17,12 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
 <!-- favicon css-->
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
+<style>
+	.margin-right{
+	display: flex;
+    align-items: center;
+	}
+</style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid" style="margin-left: 300px;">
@@ -57,26 +63,30 @@
 			</c:when>
 			<c:otherwise>
 				<c:choose>
-					<c:when test="${not empty sessionScope.m }">
+					<c:when test="${not empty sessionScope.m && sessionScope.m.memberType eq 9 }">
 						<li class="nav-item dropdown float-end me-5">
-				          <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 2.5rem;"></i> ${sessionScope.m.memberId } 님</a>
+				          <a class="nav-link dropdown-toggle active margin-right" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="padding: 0;"><i class="bi bi-person-circle" style="font-size: 2.5rem;"></i> ${sessionScope.m.memberId } 님</a>
 				          <div class="dropdown-menu">
-				            <a class="dropdown-item" href="/mypage.do">MYPAGE</a>
+				            <a class="dropdown-item" href="/adminPage.do">ADMIN MYPAGE</a>
 				            <div class="dropdown-divider"></div>
 				            <a class="dropdown-item" href="/logout.do">LOGOUT</a>
 				          </div>
 				        </li>
 					</c:when>
-					<c:when test="${not empty sessionScope.m && sessionScope.m.memberType eq 9}">
-						<li class="nav-item dropdown float-end me-5">
-				          <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 2.5rem;"></i> ${sessionScope.m.memberId } 님</a>
-				          <div class="dropdown-menu">
-				            <a class="dropdown-item" href="/mypage.do">ADMIN MYPAGE</a>
-				            <div class="dropdown-divider"></div>
-				            <a class="dropdown-item" href="/logout.do">LOGOUT</a>
-				          </div>
-				        </li>
-					</c:when>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${not empty sessionScope.m }">
+								<li class="nav-item dropdown float-end me-5">
+						          <a class="nav-link dropdown-toggle active margin-right" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 2.5rem;"></i> ${sessionScope.m.memberId } 님</a>
+						          <div class="dropdown-menu">
+						            <a class="dropdown-item" href="/mypage.do">MYPAGE</a>
+						            <div class="dropdown-divider"></div>
+						            <a class="dropdown-item" href="/logout.do">LOGOUT</a>
+						          </div>
+						        </li>
+							</c:when>
+						</c:choose>
+					</c:otherwise>
 				</c:choose>
 			</c:otherwise>
 		</c:choose>

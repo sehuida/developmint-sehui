@@ -13,20 +13,21 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container" style="margin-bottom: 50px;">
 		<div class="area">
-			<div class="nav-sub" style="margin-top: 30px;"><a href="/" class="text-hover">홈</a><span> > </span><a href="noticeList.do" class="text-hover">고객센터</a><span> > </span><span>공지사항</span></div>
+			<div class="nav-sub" style="margin-top: 30px;"><a href="/" class="text-hover">홈</a><span> > </span><a href="/noticehome.do" class="text-hover">고객센터</a><span> > </span><span>공지사항</span></div>
 			<div class="title"><h2>CS Center</h2></div>
 			<div class="center_tap">
 				<ul>
 					<li><span class="">Tel. 2163-8560</span><br><span class="last-span">평일 9:00~18:00(점심 12:00~13:00)</span></li>
-					<li><a href="/qnaFrm.do" class="text-hover">1:1 Q&A<br><span class="last-span">질문 전 FAQ(자주 묻는 질문)을 먼저 확인해 주세요.</span></a></li>
+					<li><a href="/tocounsel.do" class="text-hover">1:1 Q&A<br><span class="last-span">질문 전 FAQ(자주 묻는 질문)을 먼저 확인해 주세요.</span></a></li>
 					<li><a href="/faq.do" class="text-hover">자주묻는질문<br><span class="last-span">자주묻는질문</span></a></li>
 				</ul>
 			</div>
 			<div class="contents">
-				<div class="title"><h2>Notice</h2></div>
+				<div class="title"><h2 style="display: inline-block;">Notice</h2>
 				<c:if test="${not empty sessionScope.m && sessionScope.m.memberType eq 9}">
-					<a class="btn btn-secondary" href="/nWriteFrm.do">글쓰기</a>
+					<a class="btn btn-outline-dark" href="/nWriteFrm.do" style="float: right;margin-right: 10px;">관리자 글쓰기</a>
 				</c:if>
+				</div>
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -39,10 +40,10 @@
 				 		<c:forEach items="${list  }" var="n" varStatus="i">
 						<c:choose>
 							<c:when test="${n.pin eq 2}">
-								<tr class="table-active" id="noticeList">
+								<tr class="table-primary" id="noticeList">
 									<td><i class="bi bi-pin-angle-fill"></i></td> 
-									<td style="text-align: center;">
-										<a href='/noticeView?noticeNo=${n.noticeNo}' id="noticePin" style="color: #000;"> ${n.noticeTitle }</a>
+									<td style="text-align: left;">
+										<span style="color: #ddd;">[주요공지] </span><a href='/noticeView?noticeNo=${n.noticeNo}' id="noticePin" style="color: #fff;"> ${n.noticeTitle }</a>
 									</td>
 									<td>${n.regDate }</td>
 								</tr>
@@ -50,7 +51,7 @@
 							<c:otherwise>
 							<tr class="table-light" id="noticeList" style="background-color: #bdbdbd;">
 									<td>${start + i.index-fixPage}</td> 
-									<td style="text-align: center; ">
+									<td style="text-align: left; ">
 										<a href='/noticeView?noticeNo=${n.noticeNo }' style="text-decoration: none;"> ${n.noticeTitle }</a>
 									</td>
 									<td>${n.regDate }</td>
@@ -60,7 +61,7 @@
 						</c:forEach>
 				 	</tbody>
 				</table>
-				<div id="pageNavi" style="margin: 0 atuo;">${pageNavi }</div>
+				<div id="pageNavi" style="display:flex; justify-content: flex-end">${pageNavi }</div>
 			</div>
 		</div>
 	</div>

@@ -41,14 +41,7 @@
 	span{
 		color: red;
 	}
-	#name{
-		color: black;
-		font-weight: 900;
-		font-size: 24px;
-		padding-left: 20px;
-		padding-bottom: 10px;
-		
-	}
+	
 	.infoType{
 		float: left;
 	}
@@ -99,33 +92,24 @@
 	.firstDateInput{
 		margin-left: 50px;
 	}
-	.aducation{
+	.category{
 		text-align: center;
 	}
-	.schoolInfo{
-		width: 800px;
-		float: left;
-		margin-top: 25px;
-	}
-	.schoolInfo>div, .activityInfo>div, .certiInfo>div, .benefitInfo>div{
-		margin-bottom: 20px;
-	}
+
 	.txt_check{
 		color: #888;
 	}
-	.schoolRadio{
-		display: none;
-	}
-	.aducation>label{
-		width: 200px;
-		height: 50px;
-		line-height: 50px;
+	.category>label{
+		width: 180px;
+		height: 150px;
+		line-height: 150px;
 		border: 1px solid #dfdfdf;
 		margin-bottom: 20px;
 	}
-	.carrerRadio{
-		display: none;
+	.category>label>input{
+		/* display: none; */
 	}
+
 	.carrerLabel{
 		width: 200px;
 		height: 50px;
@@ -178,15 +162,7 @@
 </head>
 <script>
 	$(function(){
-		$(".schoolRadio").change(function(){
-			if($(".schoolRadio").is(":checked")){
-	            $(this).parent().css("background-color","rgb(78, 205, 196)");
-	            $(this).next().css("color","white");
-	        }else{
-	        	$(this).parent().css("background-color","rgb(78, 205, 196)");
-	            $(this).next().css("color","#888");
-	        }
-		});
+		
 	});
 </script>
 <body>
@@ -196,77 +172,36 @@
 			<em>기본정보</em>
 			<br><br><br>
 			<hr>
-			<em>회사명</em>
 			<div class="grayBox">
 				<b>회사명<span>*</span></b>
 				<input type="text" class="textInput" name="companyTitle" placeholder="회사명 입력">
 			</div>
 			
-			<em>주요 업무 카테고리 ////////// 폼 내용 변경하기</em>
-			
-			<!-- 아래부터 변경 -->
+
 			<div class="grayBox">
-				<em>최종학력 정보 입력</em>
+				<em>주요 업무 카테고리</em>
 				<br><br>
-				<div class="aducation">			<!-- radio버튼 display none해주고 라벨로 선택해서 선택시 뒷배경 mint 글씨 흰색으로 변경(아마 자바스크립트로 해야할듯?) -->
-	                <label class="primarySchoolLabel" for="school_type_primary">
-	                    <input name="schoolType" class="schoolRadio" id="school_type_primary" type="radio" value=1>	<!-- value=1 //초졸 -->
-	                    <span class="txt_check">초등학교 졸업</span>
+				<p>해당하는 주요 업무의 카테고리를 모두 선택해 주세요.</p>
+				<div class="category">
+	                <label class="developLabel" for="develop">
+	                    <input name="develop" class="developCheckBox" id="develop" type="checkBox" value=1>
+	                    <img src="/resources/img/company/develop.PNG">
+	                    <span class="txt_check">개발</span>
 	                </label>
-	                <label class="middleSchoolLabel" for="school_type_middle">
-	                    <input name="schoolType" class="schoolRadio" id="school_type_middle" type="radio" value=2>		<!-- value=2 //중졸 -->
-	                    <span class="txt_check">중학교 졸업</span>
+	                <label class="designLabel" for="design">
+	                    <input name="design" class="designCheckBox" id="design" type="checkBox" value=2>
+	                    <img src="/resources/img/company/design.PNG">
+	                    <span class="txt_check">디자인</span>
 	                </label>
-	                <label class="highSchoolLabel" for="school_type_high">
-	                    <input name="schoolType" class="schoolRadio" id="school_type_high" type="radio" value=3>		<!-- value=3 //고졸 -->
-	                    <span class="txt_check">고등학교 졸업</span>
-	                </label>
-	                <label class="univSchoolLabel" for="school_type_univ">
-	                    <input name="schoolType" class="schoolRadio" id="school_type_univ" type="radio" value=4 checked="">		<!-- value=4 //대졸 -->
-	                    <span class="txt_check">대학·대학원 이상 졸업</span>
+	                <label class="planLabel" for="plan">
+	                    <input name="plan" class="planCheckBox" id="plan" type="checkBox" value=3>
+	                    <img src="/resources/img/company/plan.PNG">
+	                    <span class="txt_check">기획</span>
 	                </label>
 	            </div>
-	            <hr>
-				<div class="schoolInfo">
-					<div class="schoolNameData">
-						<div class="schoolName">
-							<b>학교명<span>*</span></b>
-						</div>
-						<div class="schoolNameInput">
-							<input type="text" class="smallTextInput" name="schoolName" placeholder="학교명 입력">
-						</div>
-					</div>
-					<div class="schoolDateData">
-						<div class="schoolDate">
-							<b>재학기간<span>*</span></b>
-						</div>
-						<div class="schoolDateInput">
-							<input type="date" class="dateInput firstDateInput" name="schoolStartDate"> ~ <input type="date" class="dateInput" name="schoolEndDate">				
-						</div>
-					</div>
-					<div class="schoolLocalData">
-						<div class="schoolLocal">
-							<b>지역<span>*</span></b>
-						</div>
-						<div class="schoolLocalInput">
-							<input type="text" class="smallTextInput" name="schoolName" placeholder="지역 선택">					
-						</div>
-					</div>
-					<div class="schoolMajorData">		<!-- if value=4(대학생일 경우에만) 전공등록 input이 나오도록 -->
-						<div class="schoolMajor">
-							<b>전공</b>
-						</div>
-						<div class="schoolNameInput">
-							<select class="selectInput" name="major">
-								<option>전공 선택</option>
-								<option value=1>전기/전자/정보통신공학</option>
-								<option value=2>컴퓨터/시스템공학</option>
-								<option value=3>외 공학계열</option>
-							</select>
-						</div>
-					</div>
-				</div>
 			</div>
+			
+			<!-- -------- -->
 			<em>경력사항</em>
 			<div class="grayBox">
 				<div class="career">			<!-- radio버튼 display none해주고 라벨로 선택해서 선택시 뒷배경 mint 글씨 흰색으로 변경(아마 자바스크립트로 해야할듯?) -->

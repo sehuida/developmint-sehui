@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <meta charset="UTF-8">
 <title>JoinFrm</title>
 <link rel="stylesheet" href="/resources/css/member/join.css">
