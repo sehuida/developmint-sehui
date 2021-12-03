@@ -71,7 +71,7 @@
 						<li class="nav-item dropdown float-end me-5">
 				          <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 2.5rem;"></i> ${sessionScope.m.memberId } 님</a>
 				          <div class="dropdown-menu">
-				            <a class="dropdown-item" href="/mypage.do">ADMIN MYPAGE</a>
+				            <a class="dropdown-item" href="/adminPage.do">ADMIN MYPAGE</a>
 				            <div class="dropdown-divider"></div>
 				            <a class="dropdown-item" href="/logout.do">LOGOUT</a>
 				          </div>
