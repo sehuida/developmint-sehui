@@ -8,8 +8,8 @@ import lombok.Data;
 public class ProjectTeam {
 	private int projectNo;
 	private int projectWriterMemberNo;
-	private Timestamp rStartDate;
-	private Timestamp rEndDate;
+	private String rStartDate;
+	private String rEndDate;
 	private int viewCount;
 	private String rTitle;
 	private String rContent;
@@ -17,8 +17,8 @@ public class ProjectTeam {
 	private String projectGoal;
 	private String projectReader;
 	private int projectStatus;
-	private Timestamp pStartDate;
-	private Timestamp pEndDate;
+	private String pStartDate;
+	private String pEndDate;
 	private String writerImgPath;
 	private String readerImgPath;
 	private int commentCount;
