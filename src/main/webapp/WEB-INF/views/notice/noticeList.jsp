@@ -43,7 +43,7 @@
 								<tr class="table-primary" id="noticeList">
 									<td><i class="bi bi-pin-angle-fill"></i></td> 
 									<td style="text-align: left;">
-										<a href='/noticeView?noticeNo=${n.noticeNo}' id="noticePin" style="color: #000;"> ${n.noticeTitle }</a>
+										<span style="color: #ddd;">[주요공지] </span><a href='/noticeView?noticeNo=${n.noticeNo}' id="noticePin" style="color: #fff;"> ${n.noticeTitle }</a>
 									</td>
 									<td>${n.regDate }</td>
 								</tr>
@@ -51,7 +51,7 @@
 							<c:otherwise>
 							<tr class="table-light" id="noticeList" style="background-color: #bdbdbd;">
 									<td>${start + i.index-fixPage}</td> 
-									<td style="text-align: center; ">
+									<td style="text-align: left; ">
 										<a href='/noticeView?noticeNo=${n.noticeNo }' style="text-decoration: none;"> ${n.noticeTitle }</a>
 									</td>
 									<td>${n.regDate }</td>
