@@ -137,6 +137,31 @@
 	resize: none;
 	height: 100px;
 }
+.Modaltitle{
+	font-size: 30px;
+	font-weight: bold;
+}
+.reportBox>div>p{
+	margin-bottom: 0;
+	font-size:15px;
+}
+.reportBox>div:first-of-type>p {
+	color:#606060;
+	font-size: 15px;
+}
+.reportBox>div>p>span{
+	font-weight: bold;
+}
+.radioChk{
+	margin-right:5px;
+}
+.reportBox>div:nth-of-type(3)>label {
+	margin-bottom:5px;
+}
+.reportBox>div:nth-of-type(4)>p {
+	font-size: 12px;
+	color:red;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -171,6 +196,7 @@
 				<p><span>신청인원</span> : 30 명</p>
 			</div>
 		</div>
+		<%---------------------------------------------------------------------------- --%>
 		<%--공모 요강 --%>
 		<div class="contestContentBox">
 			<p><i class="bi bi-check2"></i> 공모요강</p>
@@ -182,8 +208,9 @@
 				</div>
 			</div>
 		</div>
-		
+		<%---------------------------------------------------------------------------- --%>
 		<%--댓글창 --%>
+		
 		<%--댓글 입력 창(로그인했을 때 띄우기) --%>
 		<c:if test="${not empty sessionScope.m.memberId }">
 			<form action="/insertContestComment.do" method="post">
@@ -205,6 +232,7 @@
 				<input type="hidden" name="commentType" value="1">
 			</form>
 		</c:if>
+		<%---------------------------------------------------------------------------- --%>
 		
 		<%--댓글리스트 --%>
 		<div class=comentListBox>
@@ -225,6 +253,7 @@
 								<c:if test="${not empty sessionScope.m }">
 									<%--내가 쓴 댓글일 경우만 보여주기 --%>
 									<c:if test="${cl.memberId eq sessionScope.m.memberId }">
+									<%--댓글 수정  --%>
 										<a href="#" data-bs-toggle="modal" data-bs-target="#updateComment${i.index }">수정</a>
 							
 											<%--댓글 수정  Modal --%>
@@ -255,9 +284,54 @@
 									</c:if>
 									
 									<%--댓글 신고 --%>
-									<a href="#"><i class="bi bi-exclamation-circle-fill" style="font-size: 20px;color:#f3969a;"></i></a>
+									<a href="#" data-bs-toggle="modal" data-bs-target="#reportComment${i.index }"><i class="bi bi-exclamation-circle-fill" style="font-size: 20px;color:#f3969a;"></i></a>
+									
+									<%--댓글 신고  Modal --%>
+									<div class="modal fade" id="reportComment${i.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									  <div class="modal-dialog  modal-dialog-centered">
+									    <div class="modal-content">
+									      <div class="modal-body">
+									      	<form action="/reportComment.do" method="post" class="reportBox">
+										      	<p class="Modaltitle">신고 하기</p>
+										      	<div style="border-bottom:1px solid #d9d9d9; padding:5px; margin-bottom: 10px;">
+										      		<p>신고는 반대 의견을 표시하는 기능이 아닙니다.</p>
+										      		<p>글 작성자의 의견에 반대하는 경우 신고대신 [댓글] 기능을 사용해 주세요.</p>
+										      	</div>
+										      	<div style="padding:5px; margin-bottom: 10px;">
+											      	<p><span>신고자 아이디</span> : ${sessionScope.m.memberId}</p>
+											      	<p><span>신고 할 회원</span> : ${cl.memberId }</p>
+											      	<p><span>댓글</span> : ${cl.commentContent }</p>
+										      	</div>
+										      	<div style="margin-bottom: 20px;">
+										      		<p style="margin-bottom: 10px;"><span>신고사유</span></p>
+											      	<label style="margin-right: 70px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="1">영리목적/홍보성</label>
+											      	<label style="margin-right: 20px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="2">음란성/선정성</label>
+											      	<label><input type="radio" class="form-check-input radioChk" name="reportReason" value="3">불법정보</label><br>					      	
+											      	<label style="margin-right: 8px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="4">같은 내용 반복 게시(도배)</label>
+											      	<label style="margin-right: 20px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="5">욕설/인성공격</label>
+											      	<label><input type="radio" class="form-check-input radioChk" name="reportReason" value="6">개인정보누출</label><br>
+											      	<label><input type="radio" class="form-check-input radioChk" name="reportReason" value="7">기타</label><br>
+										      		<textarea class="form-control" style="resize: none;" readonly></textarea>
+										      	</div>
+										      	<div style="margin-bottom: 20px; background-color: #F7F7F7; padding:10px;">
+										      		<p>◈ 이용규칙에 위배되는 댓글을  5회 이상 작성한 회원은 사이트 제한 조치가 취해집니다.</p>
+										      		<p>◈ 허위신고일 경우, 신고자의 서비스 활동이 제한될 수 있으니 유의하시어 신중하게 신고해 주세요.</p>
+										      	</div>
+										      	<button type="submit" class="btn btn-primary">신고</button>
+										        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+								
+									        </form>
+									      </div>
+										  </div>
+									  </div>
+									</div>
+									
 								</c:if>
 							</div>
+							
+							
+		<%---------------------------------------------------------------------------- --%>
+		
 							<%--대댓글 작성 창 --%>
 							<form action="/insertContestComment.do" method="post">
 								<div class="recomentBox">
@@ -272,6 +346,8 @@
 								</div>
 							</form>
 							</c:if>
+							
+		<%---------------------------------------------------------------------------- --%>
 							<%--대댓글 리스트 --%>
 							<c:forEach items="${list.commentList }" var="rl" varStatus="j">
 								<c:if test="${rl.commentType eq 2 && cl.commentNo eq rl.commentRef}">
@@ -286,6 +362,7 @@
 										<c:if test="${not empty sessionScope.m }">
 											<%--내가 쓴 댓글일 경우만 보여주기 --%>
 											<c:if test="${rl.memberId eq sessionScope.m.memberId }">
+											<%--댓글 수정  --%>
 												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#updateReComment${j.index }" class="updateBtn">수정</a>
 												
 												<%--댓글 수정  Modal --%>
@@ -354,9 +431,6 @@
 				$(".delForm").eq(index).submit();
 			}
 		});
-		
-
-		 
 	</script>
 </body>
 </html>
