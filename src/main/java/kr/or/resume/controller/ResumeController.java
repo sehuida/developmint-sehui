@@ -23,8 +23,8 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="resumeManage.do")
-	public String resumeManage(Model model, Member m) {
-		ArrayList<Resume> list = service.selectAllResume(m);
+	public String resumeManage(Model model, int memberNo) {
+		ArrayList<Resume> list = service.selectAllResume(memberNo);
 		model.addAttribute("list", list);
 		return "resume/resumeManage";
 	}

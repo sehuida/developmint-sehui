@@ -25,4 +25,13 @@ public class NoticeDao {
 		List<Notice> list = sqlsession.selectList("notice.selectNoticeList",cr);
 		return (ArrayList<Notice>)list;
 	}
+
+	public int selectTotalCount() {
+		return sqlsession.selectOne("notice.totalCount");
+	}
+
+	public int fixPageCount() {
+		return sqlsession.selectOne("notice.fixPageCount");
+	}
+
 }
