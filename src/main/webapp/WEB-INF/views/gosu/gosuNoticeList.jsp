@@ -106,8 +106,36 @@ ul#gallery>a>li dd {
 #pageNavi {
 	display: flex;
 	justify-content: center;
-	margin-top:100px;
-	margin-bottom:100px;
+	margin-top: 100px;
+	margin-bottom: 100px;
+}
+
+.gosu-write-wrap {
+	position: fixed;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: right;
+	width: 1400px;
+}
+
+.gosu-write {
+	border: 1px solid rgb(190, 190, 190);
+	padding: 40px;
+	text-align: center;
+	justify-content: right;
+	background-color: white;
+}
+
+.gosu-write a {
+	margin-top: 20px;
+	padding: 10px;
+	width: 200px;
+}
+
+.gosu-write * {
+	font-weight: bold;
+	line-height: 30px;
 }
 </style>
 </head>
@@ -126,11 +154,19 @@ ul#gallery>a>li dd {
 			</select>
 
 		</div>
-
+		<div class="gosu-write-wrap">
+			<div class="gosu-write">
+				<h5 style="font-size: small; color: gray;">
+					고수님만의 노하우를<br> 알려주세요!
+				</h5>
+				<a href="/gosuNoticeWriteFrm.do" class="btn btn-primary">노하우
+					작성하기</a>
+			</div>
+		</div>
 		<div>
 			<div class="g-gall">
 				<ul id="gallery">
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -143,7 +179,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -156,7 +192,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -169,7 +205,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -182,7 +218,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -200,7 +236,7 @@ ul#gallery>a>li dd {
 
 			<div class="g-gall">
 				<ul id="gallery">
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -213,7 +249,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -226,7 +262,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -239,7 +275,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -252,77 +288,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-				</ul>
-
-			</div>
-			<div class="g-gall">
-				<ul id="gallery">
-					<a href="">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -340,7 +306,7 @@ ul#gallery>a>li dd {
 			</div>
 			<div class="g-gall">
 				<ul id="gallery">
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -353,7 +319,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -366,7 +332,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -379,7 +345,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -392,7 +358,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -410,7 +376,7 @@ ul#gallery>a>li dd {
 			</div>
 			<div class="g-gall">
 				<ul id="gallery">
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -423,7 +389,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -436,7 +402,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -493,7 +459,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -506,7 +472,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -519,7 +485,7 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>
@@ -532,7 +498,77 @@ ul#gallery>a>li dd {
 							</dl>
 					</li>
 					</a>
-					<a href="">
+					<a href="/gosuNoticeContent.do">
+						<li>
+							<dl>
+								<dt>
+									<img src="/resources/img/gosu/g_img_basic.png">
+								</dt>
+								<dd>
+									<b>제목제목</b>
+								</dd>
+								<dd>내용내용</dd>
+							</dl>
+					</li>
+					</a>
+				</ul>
+
+			</div>
+			<div class="g-gall">
+				<ul id="gallery">
+					<a href="/gosuNoticeContent.do">
+						<li>
+							<dl>
+								<dt>
+									<img src="/resources/img/gosu/g_img_basic.png">
+								</dt>
+								<dd>
+									<b>제목제목</b>
+								</dd>
+								<dd>내용내용</dd>
+							</dl>
+					</li>
+					</a>
+					<a href="/gosuNoticeContent.do">
+						<li>
+							<dl>
+								<dt>
+									<img src="/resources/img/gosu/g_img_basic.png">
+								</dt>
+								<dd>
+									<b>제목제목</b>
+								</dd>
+								<dd>내용내용</dd>
+							</dl>
+					</li>
+					</a>
+					<a href="/gosuNoticeContent.do">
+						<li>
+							<dl>
+								<dt>
+									<img src="/resources/img/gosu/g_img_basic.png">
+								</dt>
+								<dd>
+									<b>제목제목</b>
+								</dd>
+								<dd>내용내용</dd>
+							</dl>
+					</li>
+					</a>
+					<a href="/gosuNoticeContent.do">
+						<li>
+							<dl>
+								<dt>
+									<img src="/resources/img/gosu/g_img_basic.png">
+								</dt>
+								<dd>
+									<b>제목제목</b>
+								</dd>
+								<dd>내용내용</dd>
+							</dl>
+					</li>
+					</a>
+					<a href="/gosuNoticeContent.do">
 						<li>
 							<dl>
 								<dt>

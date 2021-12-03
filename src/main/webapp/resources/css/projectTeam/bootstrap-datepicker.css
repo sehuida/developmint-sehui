@@ -3,7 +3,9 @@
  *
  * Licensed under the Apache License v2.0 (http://www.apache.org/licenses/LICENSE-2.0)
  */
-
+.datepicker datepicker-dropdown dropdown-menu datepicker-orient-right datepicker-orient-top{
+	left : 0px !important;
+}
 .datepicker {
   padding: 4px;
   -webkit-border-radius: 4px;
