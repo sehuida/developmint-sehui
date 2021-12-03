@@ -78,4 +78,11 @@
 		on r.resume_no = s.resume_no
 		from resume
 	</select>
+	
+	<insert id="insertResume" parameterType="map">
+		insert into resume values(resume_seq.nextval, #{memberNo}, #{resumeTitle}, #{aducation}, #{schoolName}, , #{schoolLocal}
+		, #{schoolStart}, #{schoolEnd}, #{major}, #{career}, #{activity}, #{activityPlace}, #{activityStart}, #{activityEnd}, #{activityContent}
+		, #{certiName}, #{certiIssue}, #{certiPass}, #{certiDate}, #{myTech}, #{veterans}, #{military}, #{selfintroName}, #{selfintroContent}
+		, #{workForm}, #{money}, #{workPlace}, #{writeDate})
+	</insert>
 </mapper>
