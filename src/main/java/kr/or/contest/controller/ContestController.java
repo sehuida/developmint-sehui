@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.comment.vo.Comment;
 import kr.or.contest.service.ContestService;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestList;
@@ -109,8 +110,37 @@ public class ContestController {
 	@RequestMapping(value="/contestView.do")
 	public String contestView(int contestNo, Model model) {
 		//공모전 정보 불러오면서 조회수 올려주기
-		Contest con = service.contestView(contestNo);
-		model.addAttribute("c",con);
+		ContestList list = service.contestView(contestNo);
+		model.addAttribute("list",list);
 		return "contest/contestView";
 	}
+	
+	//댓글등록
+	@RequestMapping(value="/insertContestComment.do")
+	public String insertContestComment(Comment cm, Model model) {
+		int result = service.insertContestComment(cm);
+		if(result>0) {
+			model.addAttribute("msg","댓글등록 완료");	
+		}else {
+			model.addAttribute("msg","댓글등록 실패");
+		}
+		model.addAttribute("loc","/contestView.do?contestNo="+cm.getBoardNo());
+		return "common/msg";
+	}
+	
+	//댓글수정
+	@RequestMapping(value="/updateContestComment.do")
+	public String updateContestComment(Comment cm, Model model) {
+		int result = service.updateContestComment(cm);
+		if(result>0) {
+			model.addAttribute("msg","댓글수정 완료");	
+		}else {
+			model.addAttribute("msg","댓글수정 실패");
+		}
+		model.addAttribute("loc","/contestView.do?contestNo="+cm.getBoardNo());
+		return "common/msg";
+		
+	}
+	
+	
 }

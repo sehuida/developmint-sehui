@@ -71,3 +71,14 @@
     width: 50px;
     margin-right: 10px;
 }
+
+#datePicker{
+	width:800px;
+	border: 1px solid #90d1b4;
+}
+.datepicker-orient-top{
+	left:100px !important;
+	width:220px;
+}
+
+

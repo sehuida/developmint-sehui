@@ -56,4 +56,23 @@
   <insert id="insertMember" parameterType="m">
   	insert into member values(member_seq.nextval,#{memberName},#{phone},#{memberId},#{memberPw},#{email},1,to_char(sysdate,'yyyy-mm-dd'),'',10,'')
   </insert> 
+  <select id="findId" parameterType="string" resultType="string">
+  	select member_id as memberId from member where email = #{email}
+  </select>
+  <select id="pwCheck" parameterType="m" resultType="m">
+  	select
+  		member_no as memberNo,
+  		member_name as memberName,
+  		phone,
+  		member_id as memberId,
+  		member_pw as memberPw,
+  		email,
+  		member_type as memberType,
+  		filepath,
+  		member_grade as memberGrade
+  	from member where member_Id = #{memberId} and email = #{email} and phone = #{phone}  	
+  </select>
+  <update id="resetPwMember" parameterType="m">
+  	update member set member_pw = #{memberPw} where member_id = #{memberId}
+  </update>
 </mapper>

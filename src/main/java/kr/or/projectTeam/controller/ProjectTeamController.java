@@ -23,6 +23,7 @@ import com.google.gson.JsonObject;
 
 import kr.or.projectTeam.model.service.ProjectTeamService;
 import kr.or.projectTeam.model.vo.ProjectTeam;
+import kr.or.projectTeam.model.vo.projectTeamMainPageData;
 
 @Controller
 public class ProjectTeamController {
@@ -30,10 +31,22 @@ public class ProjectTeamController {
 	private ProjectTeamService service;
 	
 	@RequestMapping(value="/recruitTeamMember_mainPage.do")
-	public String recruitTeamMember(Model model ) {
-		ArrayList<ProjectTeam> list = service.selectAllrecruitProject();
-		model.addAttribute("list", list);
-//		System.out.println(list.get(0).getRTitle());
+	public String recruitTeamMember(Model model, int reqPage) {
+		projectTeamMainPageData ptmpd = service.selectAllrecruitProject(reqPage);
+		model.addAttribute("list", ptmpd.getList());
+		model.addAttribute("pageNavi", ptmpd.getPageNavi());
+		model.addAttribute("start", ptmpd.getStart());
+		model.addAttribute("pdLangList", ptmpd.getPdLangList());
+		return "recruitCrue/recruitTeamMember_mainPage";
+	}
+	
+	@RequestMapping(value="/recruitTeamMember_mainSelectPage.do")
+	public String recruitTeamMember(Model model, int reqPage, int viewValue, int checkValue) {
+		projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue);
+		model.addAttribute("list", ptmpd.getList());
+		model.addAttribute("pageNavi", ptmpd.getPageNavi());
+		model.addAttribute("start", ptmpd.getStart());
+		model.addAttribute("pdLangList", ptmpd.getPdLangList());
 		return "recruitCrue/recruitTeamMember_mainPage";
 	}
 	

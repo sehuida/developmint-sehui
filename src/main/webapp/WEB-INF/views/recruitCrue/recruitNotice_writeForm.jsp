@@ -5,34 +5,37 @@
 <html>
 <head>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
-<link rel="stylesheet" href="/resources/css/projectTeam/writePage.css">
-<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
-<script src="/summernote/jquery-3.3.1.js"></script>
-<script src="/summernote/summernote-lite.js"></script>
-<script src="/summernote/lang/summernote-ko-KR.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="resources/js/projectTeam/plugin/bootstrap-datepicker.js"></script>
-<link rel="stylesheet" href="resources/css/projectTeam/bootstrap-datepicker.css">
-<script src="resources/js/projectTeam/plugin/bootstrap-datepicker.ko.min.js"></script>
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <meta charset="UTF-8">
 <title>RecruitCrue WriteForm</title>
 </head>
-<script>
 
-$(function(){
-	$("input[type='checkbox']").on("click", function(){
-		let count = $("input:checked[type='checkbox']").length;
-		if(count>3){
-			$(this).prop("checked", false);
-			swal("더 이상 선택하실 수 없어요!", "최대 3개 까지 선택이 가능합니다 :)");
-		}
-	});
-});
-</script>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="/resources/js/projectTeam/plugin/bootstrap-datepicker.js"></script>
+	<script src="/resources/js/projectTeam/plugin/bootstrap-datepicker.ko.min.js"></script>
+	<script src="/resources/summernote/summernote-lite.js"></script>
+	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+	<link rel="stylesheet" href="/resources/css/projectTeam/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="/resources/css/projectTeam/writePage.css">
+
+<script>
+
+	$(function(){
+		$("input[type='checkbox']").on("click", function(){
+			let count = $("input:checked[type='checkbox']").length;
+			if(count>3){
+				$(this).prop("checked", false);
+				swal("더 이상 선택하실 수 없어요!", "최대 3개 까지 선택이 가능합니다 :)");
+			}
+		});
+	});
+	
+</script>
+	
 	<div class="container" id="projectContainer">
 		<div class="main">
             <div class="returnPage">
@@ -90,7 +93,7 @@ $(function(){
 	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/pending.png">
 	                            <p class="titleText">모집마감일(모집일부터 최대 14일)</p>
 	                        </div>
-	                        <input type="text" id="datePicker" class="form-control" value="2021-12-02">
+	                        <input type="text" id="datePicker" class="form-control" value="마감일을 선택해주세요">
 	                       <!--  <ul class="nav nav-pills">
 	                            <li class="nav-item dropdown">
 	                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">날짜를 선택하세요</a>
