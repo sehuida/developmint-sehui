@@ -35,6 +35,13 @@ public class MemberDao {
 	public String findId(String email) {
 		return sqlSession.selectOne("member.findId",email);
 	}
-	
-	
+
+	public Member pwCheck(Member member) {
+		return sqlSession.selectOne("member.pwCheck",member);
+	}
+
+	public int resetPwMember(Member member) {
+		return sqlSession.update("member.resetPwMember",member);
+	}
+
 }

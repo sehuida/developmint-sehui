@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.member.model.vo.Member;
 import kr.or.resume.dao.ResumeDao;
 import kr.or.resume.vo.Resume;
 
@@ -23,8 +22,8 @@ public class ResumeService {
 		return dao.selectOneResume(resumeNo);
 	}
 
-	public int insertResume(Resume r, int memberNo) {
+	public int insertResume(Resume r) {
 		System.out.println("여기 resumeService");
-		return dao.insertResume(r, memberNo);
+		return dao.insertResume(r);
 	}
 }

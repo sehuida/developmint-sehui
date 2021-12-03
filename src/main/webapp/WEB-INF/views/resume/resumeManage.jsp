@@ -305,7 +305,7 @@
 		
 		
 		<div class="resume">
-			<a href="resumeFrm.do"><button class="resumeBtn">이력서 작성하기</button></a>
+			<a href="resumeFrm.do"><button class="resumeBtn">이력서 작성하기</button></a>			<!-- -------- 여기 안되는 부분 ------- -->
 		</div>
 		<div class="resumeExplain">
 			<p>이력서는 최대 10개까지 등록 가능합니다.</p>

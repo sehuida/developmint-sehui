@@ -8,7 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.or.member.model.vo.Member;
 import kr.or.resume.vo.Resume;
 
 @Repository
@@ -26,11 +25,12 @@ public class ResumeDao {
 		return sqlSession.selectOne("resume.selectOneresume", resumeNo);
 	}
 
-	public int insertResume(Resume r, int memberNo) {
+	public int insertResume(Resume r) {
 		System.out.println("여기 resumeDao");
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("r", r);
-		map.put("memberNo", memberNo);
-		return sqlSession.insert("resume.insertResume", map);
+		/*
+		 * HashMap<String, Object> map = new HashMap<String, Object>(); map.put("r", r);
+		 * map.put("memberNo", memberNo);
+		 */
+		return sqlSession.insert("resume.insertResume", r);
 	}
 }
