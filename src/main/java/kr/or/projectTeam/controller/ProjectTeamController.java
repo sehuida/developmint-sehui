@@ -33,8 +33,20 @@ public class ProjectTeamController {
 	@RequestMapping(value="/recruitTeamMember_mainPage.do")
 	public String recruitTeamMember(Model model, int reqPage) {
 		projectTeamMainPageData ptmpd = service.selectAllrecruitProject(reqPage);
-	// 	ArrayList<ProjectTeam> list = service.selectAllrecruitProject();
-		
+		model.addAttribute("list", ptmpd.getList());
+		model.addAttribute("pageNavi", ptmpd.getPageNavi());
+		model.addAttribute("start", ptmpd.getStart());
+		model.addAttribute("pdLangList", ptmpd.getPdLangList());
+		return "recruitCrue/recruitTeamMember_mainPage";
+	}
+	
+	@RequestMapping(value="/recruitTeamMember_mainSelectPage.do")
+	public String recruitTeamMember(Model model, int reqPage, int viewValue, int checkValue) {
+		projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue);
+		model.addAttribute("list", ptmpd.getList());
+		model.addAttribute("pageNavi", ptmpd.getPageNavi());
+		model.addAttribute("start", ptmpd.getStart());
+		model.addAttribute("pdLangList", ptmpd.getPdLangList());
 		return "recruitCrue/recruitTeamMember_mainPage";
 	}
 	

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.projectTeam.model.vo.ProjectTeam;
+import kr.or.projectTeam.model.vo.projectDevLanguage;
 
 @Repository
 public class ProjectTeamDao {
@@ -23,6 +24,25 @@ public class ProjectTeamDao {
 	public ArrayList<ProjectTeam> selectAllprojectList(Map<String, Object> map) {
 		List<ProjectTeam> list = sqlSession.selectList("projectTeam.projectList", map);
 		return (ArrayList<ProjectTeam>) list;
+	}
+
+	public ArrayList<projectDevLanguage> selectAllprojectLangList() {
+		List<projectDevLanguage> list = sqlSession.selectList("projectTeam.projectLangList");
+		return (ArrayList<projectDevLanguage>) list;
+	}
+
+	public int selectTotalCount() {
+			int result = sqlSession.selectOne("projectTeam.projectDefaultCount");
+		return result;
+	}
+
+	public ArrayList<ProjectTeam> selectAllCheckprojectList(Map<String, Object> map) {
+		List<ProjectTeam> list = sqlSession.selectList("projectTeam.projectCheckList", map);
+		return (ArrayList<ProjectTeam>) list;
+	}
+
+	public int selectCheckTotalCount(int viewValue) {
+		return 0;
 	}
 	
 	
