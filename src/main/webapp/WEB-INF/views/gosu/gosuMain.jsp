@@ -286,7 +286,7 @@ to {
 							<td rowspan="4" class="gosu_img" style="width: 30%;"><img
 								src="/resources/img/gosu/g_img_basic.png"
 								style="border-radius: 50%;"></td>
-							<td><a href="">제목</a></td>
+							<td><a href="/gosuContent.do">제목</a></td>
 						</tr>
 						<tr>
 							<td><hr></td>
@@ -317,7 +317,7 @@ to {
 							<td rowspan="4" class="gosu_img" style="width: 30%;"><img
 								src="/resources/img/gosu/g_img_basic.png"
 								style="border-radius: 50%;"></td>
-							<td><a href="">제목</a></td>
+							<td><a href="/gosuContent.do">제목</a></td>
 						</tr>
 						<tr>
 							<td><hr></td>
@@ -453,25 +453,25 @@ to {
 				<span style="color: rgb(78, 205, 196);">고수</span>의 게시판
 			</h3>
 			<div class="g-plus">
-				<a href="/gosuNotice.do" style="color: rgb(78, 205, 196);">더보기</a>
+				<a href="/gosuNoticeList.do" style="color: rgb(78, 205, 196);">더보기</a>
 			</div>
 			<div class="g-gall">
 				<ul id="gallery">
-					<a href=""><li><img
+					<a href="/gosuNoticeContent.do"><li><img
 							src="/resources/img/gosu/g_img_basic.png"></li></a>
-					<a href=""><li><img
+					<a href="/gosuNoticeContent.do"><li><img
 							src="/resources/img/gosu/g_img_basic.png"></li></a>
-					<a href=""><li><img
+					<a href="/gosuNoticeContent.do"><li><img
 							src="/resources/img/gosu/g_img_basic.png"></li></a>
 				</ul>
 			</div>
 			<div class="g-gall">
 				<ul id="gallery">
-					<a href=""><li><img
+					<a href="/gosuNoticeContent.do"><li><img
 							src="/resources/img/gosu/g_img_basic.png"></li></a>
-					<a href=""><li><img
+					<a href="/gosuNoticeContent.do"><li><img
 							src="/resources/img/gosu/g_img_basic.png"></li></a>
-					<a href=""><li><img
+					<a href="/gosuNoticeContent.do"><li><img
 							src="/resources/img/gosu/g_img_basic.png"></li></a>
 				</ul>
 
@@ -486,7 +486,7 @@ to {
 			<div class="g-status-border">
 				<h4 style="margin-top: 30px; margin-left: 40px;">신청한 내역</h4>
 				<div class="g-statusContent">
-					<button>
+					<a href="/gosuTalk.do">
 						<table class="g-sc-tbl card text-white bg-primary mb-3"
 							style="margin-bottom: 0;">
 							<tr>
@@ -502,8 +502,8 @@ to {
 								<td>제목(text)</td>
 							</tr>
 						</table>
-					</button>
-					<button>
+					</a>
+					<a href="/gosuTalk.do">
 						<table class="g-sc-tbl card text-white bg-primary mb-3"
 							style="margin-bottom: 0;">
 							<tr>
@@ -519,11 +519,11 @@ to {
 								<td>제목(text)</td>
 							</tr>
 						</table>
-					</button>
+					</a>
 				</div>
-				<h4 style="margin-top: 30px; margin-left: 40px;">작성한 고수 리뷰</h4>
+				<h4 style="margin-top: 30px; margin-left: 40px;">신청받은 내역</h4>
 				<div class="g-statusContent">
-					<button type="button">
+					<a href="/gosuTalk.do">
 						<table class="g-sc-tbl card bg-light mb-3">
 							<tboay style="min-width:342px;max-width:342px;">
 
@@ -541,9 +541,9 @@ to {
 							</tr>
 							</tboay>
 						</table>
-					</button>
+					</a>
 
-					<button type="button">
+					<a href="/gosuTalk.do">
 						<table class="g-sc-tbl card bg-light mb-3">
 							<tboay style="min-width:342px;max-width:342px;">
 
@@ -561,7 +561,7 @@ to {
 							</tr>
 							</tboay>
 						</table>
-					</button>
+					</a>
 				</div>
 			</div>
 		</div>

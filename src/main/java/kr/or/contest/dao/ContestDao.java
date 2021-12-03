@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.or.comment.vo.Comment;
 import kr.or.contest.vo.Contest;
 
 @Repository
@@ -42,5 +43,9 @@ public class ContestDao {
 
 	public Contest contestView(int contestNo) {
 		return sqlSession.selectOne("contest.contestView",contestNo);
+	}
+	
+	public int insertContestComment(Comment cm) {
+		return sqlSession.insert("contest.insertContestComment",cm);
 	}
 }

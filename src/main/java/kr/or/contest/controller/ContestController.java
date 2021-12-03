@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.comment.vo.Comment;
 import kr.or.contest.service.ContestService;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestList;
@@ -112,5 +113,18 @@ public class ContestController {
 		Contest con = service.contestView(contestNo);
 		model.addAttribute("c",con);
 		return "contest/contestView";
+	}
+	
+	//댓글등록
+	@RequestMapping(value="/insertContestComment.do")
+	public String insertContestComment(Comment cm, Model model) {
+		int result = service.insertContestComment(cm);
+		if(result>0) {
+			model.addAttribute("msg","댓글등록 완료");	
+		}else {
+			model.addAttribute("msg","댓글등록 실패");
+		}
+		model.addAttribute("loc","/contestView.do?contestNo="+cm.getBoardNo());
+		return "common/msg";
 	}
 }

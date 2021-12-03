@@ -10,7 +10,7 @@
 		<typeAlias type="kr.or.contest.vo.Contest" alias="c"/>
 		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTeam" alias="pt"/>
 		<typeAlias type="kr.or.resume.vo.Resume" alias="r"/>
-		
+		<typeAlias type="kr.or.comment.vo.Comment" alias="cm"/>
 
 	</typeAliases>	
 </configuration>

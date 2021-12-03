@@ -23,8 +23,8 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="resumeManage.do")
-	public String resumeManage(Model model, Member m) {
-		ArrayList<Resume> list = service.selectAllResume(m);
+	public String resumeManage(Model model, int memberNo) {
+		ArrayList<Resume> list = service.selectAllResume(memberNo);
 		model.addAttribute("list", list);
 		return "resume/resumeManage";
 	}
@@ -36,5 +36,18 @@ public class ResumeController {
 		Resume r = service.selectOneResume(resumeNo);
 		model.addAttribute("r", r);
 		return "resume/updateResume";
+	}
+	
+	@RequestMapping(value="insertResume.do")
+	public String insertResume(Resume r, int memberNo, Model model) {
+		System.out.println("여기 resumeController");
+		int result = service.insertResume(r, memberNo);
+		if(result != 0) {
+			model.addAttribute("msg","이력서 등록실패");
+		} else {
+			model.addAttribute("msg","이력서 등록성공");			
+		}
+		model.addAttribute("loc","/WEB-INF/views/resume/resumeManage.jsp");
+		return "common/msg";
 	}
 }
