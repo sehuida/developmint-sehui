@@ -127,4 +127,6 @@ public class ContestController {
 		model.addAttribute("loc","/contestView.do?contestNo="+cm.getBoardNo());
 		return "common/msg";
 	}
+	
+	
 }
