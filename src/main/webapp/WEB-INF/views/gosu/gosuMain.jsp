@@ -264,6 +264,34 @@ to {
 .g-sc-tbl td, .g-sc-tbl td>a {
 	text-align: left;
 }
+
+.gosu-write-wrap {
+	position: fixed;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: right;
+	width: 1400px;
+}
+
+.gosu-write {
+	border: 1px solid rgb(190, 190, 190);
+	padding: 40px;
+	text-align: center;
+	justify-content: right;
+	background-color: white;
+}
+
+.gosu-write a {
+	margin-top: 20px;
+	padding: 10px;
+	width: 200px;
+}
+
+.gosu-write * {
+	font-weight: bold;
+	line-height: 30px;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -274,9 +302,18 @@ to {
 		<div class="g-msg">
 			고수에게 피드백을 신청해보세요!<br> 당신의 작품을 평가해줍니다. 마음껏 질문하세요!
 		</div>
+		<div class="gosu-write-wrap">
+			<div class="gosu-write">
+				<h5 style="font-size: small; color: gray;">
+					고수에게<br>개발을 요청하세요!
+				</h5>
+				<a href="/gosuRequest.do" class="btn btn-primary" style="font-weight:bold;">요청서 작성하기</a>
+			</div>
+		</div>
 		<div class="g-plus">
 			<a href="/gosuList.do" style="color: rgb(78, 205, 196);">더보기</a>
 		</div>
+		
 		<div class="gosu-wrap">
 			<div class="gosu">
 				<button class="card border-primary mb-3"
