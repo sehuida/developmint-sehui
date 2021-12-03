@@ -107,7 +107,7 @@
 					</th>
 				</tr>
 			</table>
-			<input type="hidden" name="memberId" value="seulgi">
+			<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 		</form>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>

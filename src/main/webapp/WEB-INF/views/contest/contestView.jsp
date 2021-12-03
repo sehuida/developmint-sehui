@@ -55,13 +55,27 @@
 .clickBtn{
 	text-align: center;
 }
+.commentBox{
+	margin-top:30px;
+	border: 1px solid #d9d9d9;
+	padding:20px;
+}
+.userInfoBox{
+	width: 120px;
+}
+.userInfoBox>p{
+	text-align: center;
+	margin-top: 5px;
+	font-size: 19px;
+	font-weight: bold;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container" style="margin-bottom: 100px; margin-left: 400px;">
 		<p id="mainTitel"><a href="/contestMain.do"><i class="bi bi-chevron-left"></i></a>공모전 상세보기</p>
 		<div class="contestTitle" style="margin-top:55px;">
-			<p><i class="bi bi-chevron-right"></i>${c.contestTitle }</p>
+			<p>${c.contestTitle }</p>
 		</div>
 		<%--공모 이미지+정보 --%>
 		<div class="contestInfoBox">
@@ -101,10 +115,14 @@
 			</div>
 		</div>
 		
-		<%--로그인 구현 끝나면 댓글창 구현 예정 --%>
-		<div class="commentBox">
-			
-		</div>
+		<c:if test="${not empty sessionScope.m.memberId }">
+			<div class="commentBox">
+				<div class="userInfoBox">
+					<img src="/resources/img/userTestImg.png" width="120px;" height="120px;">
+					<p>${sessionScope.m.memberId }</p>
+				</div>
+			</div>
+		</c:if>
 		
 		
 		
