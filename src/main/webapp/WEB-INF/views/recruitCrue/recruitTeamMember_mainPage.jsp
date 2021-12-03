@@ -32,6 +32,24 @@
 	        $(".rBox_Leftnavi_right").css("opacity", "1");
 	        $(".rBox_Leftnavi_left").css("opacity", "0.5");
 	    });
+	    
+	    $(".left_site").children().first().click(function(){
+	    	location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=1";
+	    	if($(".navi_checkbox").is(":checked")){
+				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=1&checkValue=2";
+			} else {
+				location.href="/recruitTeamMember_mainPage.do?reqPage=1&viewValue=1&checkValue=1";
+			}
+	    });
+	    
+		$(".left_site").children().eq(2).click(function(){
+			location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=2";
+			if($(".navi_checkbox").is(":checked")){
+				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=2&checkValue=2";
+			} else {
+				location.href="/recruitTeamMember_mainPage.do?reqPage=1&viewValue=2&checkValue=1";
+			}
+		 });
 	});
 </script>
 <body>
@@ -89,14 +107,14 @@
                     <div class="recruitBox">
                         <div class="rBox_navi">
                             <div id="left_site">
-                                <div class="rBox_Leftnavi_left">
-                                    <img class="rBox_navi_icon" src="/resources/img/recruitTeamProject/recruitPage/newList.png">
-                                    <span class="navi_left_font">최신</span>
-                                </div>
-                                <div class="rBox_Leftnavi_right">
-                                    <img class="rBox_navi_icon" src="/resources/img/recruitTeamProject/recruitPage/pop.png">
-                                    <span class="navi_left_font">인기</span>
-                                </div>
+	                            <div class="rBox_Leftnavi_left">
+	                                   <img class="rBox_navi_icon" src="/resources/img/recruitTeamProject/recruitPage/newList.png">
+	                                   <span class="navi_left_font">최신</span>
+	                            </div>
+	                            <div class="rBox_Leftnavi_right">
+	                                    <img class="rBox_navi_icon" src="/resources/img/recruitTeamProject/recruitPage/pop.png">
+	                                    <span class="navi_left_font">인기</span>
+	                           </div>
                             </div>
                             <div id="right_site">
                                 <input type="checkbox" class="navi_checkbox">

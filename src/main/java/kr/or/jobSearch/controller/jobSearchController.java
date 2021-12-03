@@ -11,17 +11,17 @@ public class jobSearchController {
 		return "jobSearch/jobSearchList";
 	}
 	
-	@RequestMapping(value="companyInfo.do")
+	@RequestMapping(value="/companyInfo.do")
 	public String companyInfo() {
 		return "jobSearch/companyInfo";
 	}
 	
-	@RequestMapping(value="announceManage.do")
+	@RequestMapping(value="/announceManage.do")
 	public String announceManage() {
 		return "jobSearch/announceManage";
 	}
 	
-	@RequestMapping(value="announceFrm.do")
+	@RequestMapping(value="/announceFrm.do")
 	public String announceFrm() {
 		return "jobSearch/announceFrm";
 	}

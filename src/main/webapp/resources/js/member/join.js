@@ -30,6 +30,7 @@
 	 }
   });
   //$(".required:checked").length;
+  
   //아이디 중복체크
   $("#memberIdChk").on("click", function(){
     var memberId = $("#memberId").val();
@@ -90,7 +91,8 @@
       $("#memberPw").on("keyup", function(){
             var pwReg = /^[a-zA-Z0-9]{8,}$/;
             var pwVal = $("#memberPw").val();
-
+            var reVal = $("#memberPwRe").val();
+			
             if(pwReg.test(pwVal)){
               $(".expResult").eq(1).html("");
               $(".expResult").eq(1).removeClass("text-danger");
@@ -98,6 +100,13 @@
               $(".expResult").eq(1).addClass("text-success");
               $("#memberPw").addClass("is-valid");
               pwChk = true;
+              if(pwVal != reVal){
+	              $(".expResult").eq(2).html("비밀번호가 일치하지 않습니다.");
+	              $(".expResult").eq(2).removeClass("text-success");
+	              $("#memberPwRe").removeClass("is-valid");
+	              $(".expResult").eq(2).addClass("text-danger");
+	              $("#memberPwRe").addClass("is-invalid");	                           	
+              }
             }else{
               $(".expResult").eq(1).html("비밀번호는 8자이상 입력해주세요");
               $(".expResult").eq(1).removeClass("text-success");
@@ -106,7 +115,7 @@
               $("#memberPw").addClass("is-invalid");
               pwChk = false;
             }
-          });
+          });  
       // 비밀번호 확인
       $("#memberPwRe").on("change", function(){
           var reVal = $("#memberPwRe").val();

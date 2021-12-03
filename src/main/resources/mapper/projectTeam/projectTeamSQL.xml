@@ -1,28 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="projectTeam">
-  <select id="projectList" resultType="pt">
+  <select id="projectList" parameterType="map" resultType="pt">
   		<![CDATA[
-		select 
-			rownum as rnum,
-			project_no as projectNo,
-			member_no as projectWriterMemberNo,
-			recruit_start_date as rStartDate,
-			recruit_end_date as rEndDate,
-			view_count as viewCount,
-			recruit_title as rTitle,
-			recruit_content as rContent,
-			project_name as projectName,
-			project_goal as projectGoal,
-			project_reader as projectReader,
-			project_status as projectStatus,
-			project_start_date as pStartDate,
-			project_end_date as pEndDate,
+		select * from
+            (select
+            rownum as rnum,
+			p.project_no as projectNo,
+			p.member_no as projectWriterMemberNo,
+			p.recruit_start_date as rStartDate,
+			p.recruit_end_date as rEndDate,
+			p.view_count as viewCount,
+			p.recruit_title as rTitle,
+			p.recruit_content as rContent,
+			p.project_name as projectName,
+			p.project_goal as projectGoal,
+			p.project_reader as projectReader,
+			p.project_status as projectStatus,
+			p.project_start_date as pStartDate,
+			p.project_end_date as pEndDate,
 			(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
 			(select count(*) from project_dibs) as dibCount,
             (select count(*) from comments) as commentCount
-		from project p
-		where rnum between start and end
+		from project p 
+        order by project_No DESC) 
+		where rnum between #{start} and #{end}
 		]]>
   </select>
+  <select id="projectLangList" resultType="pdl">
+  		<![CDATA[
+		select 
+			use_project_lang_no as upln,
+           	project_no as projectNo,
+           	language_no as langNo
+		from use_project_language
+		]]>
+  </select>
+  <select id="projectDefaultCount" resultType="_int">
+  		<![CDATA[
+		select count(*) as cnt from project
+		]]>
+  </select>
+  <select id="projectCheckList" parameterType="map" resultType="pt">
+  		<choose> 
+  			<when test="#{viewValue} == 1">
+	  			select * from
+		            (select
+			            rownum as rnum,
+						p.project_no as projectNo,
+						p.member_no as projectWriterMemberNo,
+						p.recruit_start_date as rStartDate,
+						p.recruit_end_date as rEndDate,
+						p.view_count as viewCount,
+						p.recruit_title as rTitle,
+						p.recruit_content as rContent,
+						p.project_name as projectName,
+						p.project_goal as projectGoal,
+						p.project_reader as projectReader,
+						p.project_status as projectStatus,
+						p.project_start_date as pStartDate,
+						p.project_end_date as pEndDate,
+						(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+						(select count(*) from project_dibs) as dibCount,
+			            (select count(*) from comments) as commentCount
+					from project p 
+	       			order by project_No DESC) 
+				where rnum between #{start} and #{end}
+  			</when>
+  			<when test="#{viewValue} == 2">
+  				select * from
+		            (select
+			            rownum as rnum,
+						p.project_no as projectNo,
+						p.member_no as projectWriterMemberNo,
+						p.recruit_start_date as rStartDate,
+						p.recruit_end_date as rEndDate,
+						p.view_count as viewCount,
+						p.recruit_title as rTitle,
+						p.recruit_content as rContent,
+						p.project_name as projectName,
+						p.project_goal as projectGoal,
+						p.project_reader as projectReader,
+						p.project_status as projectStatus,
+						p.project_start_date as pStartDate,
+						p.project_end_date as pEndDate,
+						(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+						(select count(*) from project_dibs) as dibCount,
+			            (select count(*) from comments) as commentCount
+					from project p 
+	       			order by viewCount DESC, dibCount DESC, commentCount DESC) 
+				where rnum between #{start} and #{end}
+  			</when>
+  		</choose>
+  		<if test="#{viewValue} == 3">
+  			<choose>
+	  			<when test="#{viewValue} == 1">
+		  			select * from
+			            (select
+				            rownum as rnum,
+							p.project_no as projectNo,
+							p.member_no as projectWriterMemberNo,
+							p.recruit_start_date as rStartDate,
+							p.recruit_end_date as rEndDate,
+							p.view_count as viewCount,
+							p.recruit_title as rTitle,
+							p.recruit_content as rContent,
+							p.project_name as projectName,
+							p.project_goal as projectGoal,
+							p.project_reader as projectReader,
+							p.project_status as projectStatus,
+							p.project_start_date as pStartDate,
+							p.project_end_date as pEndDate,
+							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+							(select count(*) from project_dibs) as dibCount,
+				            (select count(*) from comments) as commentCount
+						from project p 
+		       			order by project_No DESC) 
+					where rnum between #{start} and #{end}
+	  			</when>
+	  			<when test="#{viewValue} == 2">
+	  				select * from
+			            (select
+				            rownum as rnum,
+							p.project_no as projectNo,
+							p.member_no as projectWriterMemberNo,
+							p.recruit_start_date as rStartDate,
+							p.recruit_end_date as rEndDate,
+							p.view_count as viewCount,
+							p.recruit_title as rTitle,
+							p.recruit_content as rContent,
+							p.project_name as projectName,
+							p.project_goal as projectGoal,
+							p.project_reader as projectReader,
+							p.project_status as projectStatus,
+							p.project_start_date as pStartDate,
+							p.project_end_date as pEndDate,
+							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+							(select count(*) from project_dibs) as dibCount,
+				            (select count(*) from comments) as commentCount
+						from project p 
+		       			order by viewCount DESC, dibCount DESC, commentCount DESC) 
+					where rnum between #{start} and #{end}
+				</when>
+  			</choose>
+  		</if>
+		
+  </select>
+  
 </mapper>
