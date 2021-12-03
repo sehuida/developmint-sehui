@@ -8,16 +8,9 @@
 <title>Insert title here</title>
 </head>
 <style>
-<<<<<<< HEAD
 .container * {
 	text-decoration: none;
 	color: black;
-}
-=======
->>>>>>> refs/heads/master
-
-.container *{
-	text-decoration : none;
 }
 .container{
     margin-top:50px ;
