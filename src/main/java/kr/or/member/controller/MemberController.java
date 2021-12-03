@@ -93,4 +93,14 @@ public class MemberController {
 		String result = new MailSender().mailSend(email);
 		return result;
 	}
+	@RequestMapping(value="/findId.do")
+	public String findId() {
+		return "member/findId";
+	}
+	@ResponseBody
+	@RequestMapping(value="/idFind.do")
+	public String idFind(String email) {
+		String memberId = service.findId(email);
+		return memberId;
+	}
 }

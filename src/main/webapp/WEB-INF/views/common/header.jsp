@@ -28,7 +28,7 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto" style="font-size: 18px;margin-left: 20px;font-weight: bold;">
         <li class="nav-item">
-          <a class="nav-link " href="/recruitTeamMember_mainPage.do">팀원모집
+          <a class="nav-link " href="/recruitTeamMember_mainPage.do?reqPage=1">팀원모집
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
@@ -62,6 +62,16 @@
 				          <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 2.5rem;"></i> ${sessionScope.m.memberId } 님</a>
 				          <div class="dropdown-menu">
 				            <a class="dropdown-item" href="/mypage.do">MYPAGE</a>
+				            <div class="dropdown-divider"></div>
+				            <a class="dropdown-item" href="/logout.do">LOGOUT</a>
+				          </div>
+				        </li>
+					</c:when>
+					<c:when test="${not empty sessionScope.m && sessionScope.m.memberType eq 9}">
+						<li class="nav-item dropdown float-end me-5">
+				          <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 2.5rem;"></i> ${sessionScope.m.memberId } 님</a>
+				          <div class="dropdown-menu">
+				            <a class="dropdown-item" href="/mypage.do">ADMIN MYPAGE</a>
 				            <div class="dropdown-divider"></div>
 				            <a class="dropdown-item" href="/logout.do">LOGOUT</a>
 				          </div>

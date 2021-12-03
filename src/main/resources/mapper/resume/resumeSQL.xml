@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="resume">
-	<select id="selectAllResume" parameterType="m" resultType="r">
+	<select id="selectAllResume" parameterType="_int" resultType="r">
 		select
-			r.resume_no as resumeNo,
+			resume_no as resumeNo,
 			member_no as memberNo,
 			resume_title as resumeTitle,
-			r.aducation,
-						school_no as schoolNo,
-						s.resume_no as resumeNo,
-						school_name as schoolName,
-						school_local as schoolLocal,
-						school_start as schoolStart,
-						school_end as schoolEnd,
-						major,
-						s.aducation,
+			aducation,
+			school_name as schoolName,
+			school_local as schoolLocal,
+			school_start as schoolStart,
+			school_end as schoolEnd,
+			major,
 			career,
 			activity,
 			activity_place as activityPlace,
@@ -34,26 +31,21 @@
 			money,
 			work_place as workPlace,
 			write_date as writeDate
-		from resume r
-		join school s
-		on r.resume_no = s.resume_no
-		<!-- where member_no = #{memberNo} -->	<!-- 로그인되면 주석 제거 -->
+		from resume
+		where member_no = #{memberNo}
 	</select>
 	
 	<select	id="selectOneResume" parameterType="_int" resultType="r">
 		select
-			r.resume_no as resumeNo,
+			resume_no as resumeNo,
 			member_no as memberNo,
 			resume_title as resumeTitle,
-			r.aducation,
-						school_no as schoolNo,
-						s.resume_no as resumeNo,
-						school_name as schoolName,
-						school_local as schoolLocal,
-						school_start as schoolStart,
-						school_end as schoolEnd,
-						major,
-						s.aducation,
+			aducation,
+			school_name as schoolName,
+			school_local as schoolLocal,
+			school_start as schoolStart,
+			school_end as schoolEnd,
+			major,
 			career,
 			activity,
 			activity_place as activityPlace,
@@ -73,9 +65,13 @@
 			money,
 			work_place as workPlace,
 			write_date as writeDate
-		from resume r
-		join school s
-		on r.resume_no = s.resume_no
 		from resume
 	</select>
+	
+	<insert id="insertResume" parameterType="map">
+		insert into resume values(resume_seq.nextval, #{memberNo}, #{resumeTitle}, #{aducation}, #{schoolName}, #{schoolLocal}
+		, #{schoolStart}, #{schoolEnd}, #{major}, #{career}, #{activity}, #{activityPlace}, #{activityStart}, #{activityEnd}, #{activityContent}
+		, #{certiName}, #{certiIssue}, #{certiPass}, #{certiDate}, #{myTech}, #{veterans}, #{military}, #{selfintroName}, #{selfintroContent}
+		, #{workForm}, #{money}, #{workPlace}, #{writeDate})
+	</insert>
 </mapper>

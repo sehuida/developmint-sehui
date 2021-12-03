@@ -38,5 +38,10 @@ public class MemberService {
 		int result = dao.insertMember(member);
 		return result;
 	}
+
+	public String findId(String email) {
+		String memberId = dao.findId(email);
+		return memberId;
+	}
 	
 }
