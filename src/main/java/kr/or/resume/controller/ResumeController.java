@@ -17,19 +17,19 @@ public class ResumeController {
 	private ResumeService service;
 
 	
-	 @RequestMapping(value="resumeFrm.do") 
+	 @RequestMapping(value="/resumeFrm.do") 
 	 public String resumeFrm() { 
 		 return "resume/resumeFrm"; 
 	 }
 	 
-	@RequestMapping(value="resumeManage.do")
+	@RequestMapping(value="/resumeManage.do")
 	public String resumeManage(Model model, int memberNo) {
 		ArrayList<Resume> list = service.selectAllResume(memberNo);
 		model.addAttribute("list", list);
 		return "resume/resumeManage";
 	}
 	
-	@RequestMapping(value="updateResume.do")
+	@RequestMapping(value="/updateResume.do")
 	public String updateResume(Resume resume, Model model) {
 		int resumeNo = resume.getResumeNo();
 		System.out.println(resumeNo);
@@ -38,7 +38,7 @@ public class ResumeController {
 		return "resume/updateResume";
 	}
 	
-	@RequestMapping(value="insertResume.do")
+	@RequestMapping(value="/insertResume.do")
 	public String insertResume(Resume r, Model model) {
 		System.out.println("여기 resumeController");
 		System.out.println(r);
