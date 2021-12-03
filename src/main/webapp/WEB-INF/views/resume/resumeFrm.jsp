@@ -114,7 +114,7 @@
 		color: #888;
 	}
 	.schoolRadio{
-		display: none;
+		/* display: none; */
 	}
 	.aducation>label{
 		width: 200px;
@@ -124,7 +124,7 @@
 		margin-bottom: 20px;
 	}
 	.carrerRadio{
-		display: none;
+		/* display: none; */
 	}
 	.carrerLabel{
 		width: 200px;
@@ -141,6 +141,9 @@
 		outline: none;
 	}
 	
+	.conditionData, .moneyData{
+		margin-bottom: 20px;
+	}
 	
 	.selectBtn{
 		text-align: center;
@@ -173,29 +176,59 @@
 	.resumeBtn:hover{
 		background-color: rgb(0, 174, 255);
 	}
-	
+	.schoolMajorData{
+		display: none;
+	}
 </style>
 </head>
 <script>
 	$(function(){
+		$(".univSchoolLabel").css("background-color","rgb(78, 205, 196)");			/* 처음에 학력선택 대학 선택되어있게 설정 */
+		$(".univSchoolLabel").css("border","none");
+		$(".univSchoolLabel>span").css("color","white");
+		$(".schoolMajorData").css("display", "block");
+		
 		$(".schoolRadio").change(function(){
-			if($(".schoolRadio").is(":checked")){
-	            $(this).parent().css("background-color","rgb(78, 205, 196)");
-	            $(this).next().css("color","white");
-	        }else{
-	        	$(this).parent().css("background-color","rgb(78, 205, 196)");
+		if($(".schoolRadio").is(":checked")) {
+	         $(this).parent().css("background-color","rgb(78, 205, 196)");
+	         $(this).parent().css("border","none");
+	         $(this).next().css("color","white");			
+		}
+		});
+
+			
+		/* $(".schoolRadio").change(function(){
+			if($(".schoolRadio").is(":uncheck")){
+	        	$(this).parent().css("background-color","rgb(250, 250, 250)");
 	            $(this).next().css("color","#888");
 	        }
-		});
+		}); */
+		
+			
+			/* $(".schoolRadio").click(function(){
+	            
+			    if($(".schoolRadio:checked").val() == 1){
+					$(this).parent().css("background-color","rgb(78, 205, 196)");
+		       		$(this).parent().css("border","none");
+		       	 	$(".tx1").css("color","white");
+		       	 	$(".middleSchoolLabel, .highSchoolLabel, .univSchoolLabel").css("background-color","rgb(250, 250, 250)");
+		       	 	$(".tx1, .tx2, .tx3").css("color","#888");
+			        $(".schoolMajorData").css("display", "none");
+			    } else {
+			        $(".schoolMajorData").css("display", "block");			    	
+			    }
+			}); */
+
+	
 	});
 </script>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="contain">
-		<form action="resumeManage.do" method="post">
+		<form action="insertResume.do" method="post">
 			<em>기본정보</em>
 			<div class="grayBox">
-				<h3 id="name">이슬기</h3>			<!-- ${sessionScope.m.memberName} -->
+				<h3 id="name">${sessionScope.m.memberName}</h3>
 				<div class="infoType">
 					<pre>
 		아이디
@@ -204,10 +237,11 @@
 					</pre>
 				</div>
 				<div class="info">
+					<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">		<!-- 멤버번호 가져오기 위해서 히든으로 전송 -->
 					<pre>
-qwe123						<!-- ${sessionScope.m.memberId} -->
-ruru0907@naver.com			<!-- ${sessionScope.m.email} -->
-010-1234-1234				<!-- ${sessionScope.m.phone} -->
+${sessionScope.m.memberId}						<!-- ${sessionScope.m.memberId} -->
+${sessionScope.m.email}			<!-- ${sessionScope.m.email} -->
+${sessionScope.m.phone}				<!-- ${sessionScope.m.phone} -->
 					</pre>
 				</div>
 			</div>
@@ -224,19 +258,19 @@ ruru0907@naver.com			<!-- ${sessionScope.m.email} -->
 				<div class="aducation">			<!-- radio버튼 display none해주고 라벨로 선택해서 선택시 뒷배경 mint 글씨 흰색으로 변경(아마 자바스크립트로 해야할듯?) -->
 	                <label class="primarySchoolLabel" for="school_type_primary">
 	                    <input name="schoolType" class="schoolRadio" id="school_type_primary" type="radio" value=1>	<!-- value=1 //초졸 -->
-	                    <span class="txt_check">초등학교 졸업</span>
+	                    <span class="txt_check tx1">초등학교 졸업</span>
 	                </label>
 	                <label class="middleSchoolLabel" for="school_type_middle">
 	                    <input name="schoolType" class="schoolRadio" id="school_type_middle" type="radio" value=2>		<!-- value=2 //중졸 -->
-	                    <span class="txt_check">중학교 졸업</span>
+	                    <span class="txt_check tx2">중학교 졸업</span>
 	                </label>
 	                <label class="highSchoolLabel" for="school_type_high">
 	                    <input name="schoolType" class="schoolRadio" id="school_type_high" type="radio" value=3>		<!-- value=3 //고졸 -->
-	                    <span class="txt_check">고등학교 졸업</span>
+	                    <span class="txt_check tx3">고등학교 졸업</span>
 	                </label>
 	                <label class="univSchoolLabel" for="school_type_univ">
 	                    <input name="schoolType" class="schoolRadio" id="school_type_univ" type="radio" value=4 checked="">		<!-- value=4 //대졸 -->
-	                    <span class="txt_check">대학·대학원 이상 졸업</span>
+	                    <span class="txt_check tx4">대학·대학원 이상 졸업</span>
 	                </label>
 	            </div>
 	            <hr>
@@ -254,7 +288,7 @@ ruru0907@naver.com			<!-- ${sessionScope.m.email} -->
 							<b>재학기간<span>*</span></b>
 						</div>
 						<div class="schoolDateInput">
-							<input type="date" class="dateInput firstDateInput" name="schoolStartDate"> ~ <input type="date" class="dateInput" name="schoolEndDate">				
+							<input type="date" class="dateInput firstDateInput" name="schoolStartDate"> ~ <input type="date" class="dateInput maxDate" name="schoolEndDate">				
 						</div>
 					</div>
 					<div class="schoolLocalData">
@@ -385,6 +419,13 @@ ruru0907@naver.com			<!-- ${sessionScope.m.email} -->
 			<em>보유기술 및 능력</em>
 			<div class="grayBox">
 				<!-- 여기 소원누나가 전에 했던 엔터키로 값 받는거 넣기 -->
+				<!-- 우선 임시 인풋 -->
+				<div class="mytech">
+					<b>보유기술</b>
+				</div>
+				<div class="mytechInput">
+					<input type="text" class="textInput" name="mytech" placeholder="보유기술 입력 (ex. 문서작성능력, 비즈니스영어, java등) ///나중에 바꾸기">
+				</div>
 			</div>
 			
 			<em>취업 우대사항</em>
@@ -433,9 +474,46 @@ ruru0907@naver.com			<!-- ${sessionScope.m.email} -->
 	           </div>
 			</div>
 			
-			<em>희망 근무지역 선택</em>
+			<em>희망 근무조건 선택</em>
 			<div class="grayBox">
-			
+				<div class="conditionData">
+					<div class="condition">
+						<b>근무 형태</b>
+					</div>
+					<div class="workForm">
+						<select class="selectInput" name="workForm">	
+							<option value=1>정규직</option>
+							<option value=2>계약직</option>
+							<option value=3>아르바이트</option>
+							<option value=4>인턴</option>
+							<option value=5>프리랜서</option>
+						</select>
+					</div>
+				</div>
+				<div class="moneyData">
+					<div class="money">
+						<b>연봉</b>
+					</div>
+					<div class="moneyInput">
+						<select class="selectInput" name="money">	
+							<option value=1>회사내규에 따름</option>
+							<option value=2>2000만 ~ 2400만</option>
+							<option value=3>2400만 ~ 2800만</option>
+							<option value=4>2800만 ~ 3200만</option>
+							<option value=5>3200만 ~ 3600만</option>
+							<option value=6>3600만 ~ 4000만</option>
+							<option value=7>4000만 이상</option>
+						</select>
+					</div>
+				</div>
+				<div class="workPlaceData">
+					<div class="workPlace">
+						<b>근무 지역</b>
+					</div>
+					<div class="workPlaceInput">
+						<input type="text" class="textInput" name="workPlace" placeholder="근무지역 (나중에 바꾸기)">
+					</div>
+				</div>
 			</div>
 			<div class="selectBtn">
 				<input type="button" class="backBtn" value="취소">
