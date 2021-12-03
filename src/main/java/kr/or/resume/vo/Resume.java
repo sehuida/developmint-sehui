@@ -17,7 +17,7 @@ public class Resume {
 	private int activity;
 	private String activityPlace;
 	private String activityStart;
-	private String activityend;
+	private String activityEnd;
 	private String activityContent;
 	private String certiName;
 	private String certiIssue;
