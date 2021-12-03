@@ -29,7 +29,7 @@ public class ContestService {
 	public ContestList selectContestList() {
 		ArrayList<Contest> newContest = dao.newContestList();
 		ArrayList<Contest> hotContest = dao.hotContestList();
-		ContestList list = new ContestList();
+		ContestList list = new ContestList(newContest, hotContest);
 		list.setNewContest(newContest);
 		list.setHotContest(hotContest);
 		return list;

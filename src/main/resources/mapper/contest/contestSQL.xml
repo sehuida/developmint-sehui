@@ -106,7 +106,7 @@
 	</select>
 	
 	<insert id="insertContestComment" parameterType="cm">
-  	insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate,'yyyy-mm-dd'), #{boardNo}, #{boardType}, #{commentType})
-  </insert>
+  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate,'yyyy-mm-dd'), #{boardNo}, #{boardType}, #{commentType})
+  	</insert>
   
 </mapper>
