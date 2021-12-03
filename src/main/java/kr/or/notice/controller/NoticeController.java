@@ -32,4 +32,9 @@ public class NoticeController {
 	public String nWriteFrm() {
 		return "notice/nWriteFrm";
 	}
+	
+	@RequestMapping(value="/noticehome.do")
+	public String nHome() {
+		return "notice//noticeHome";
+	}
 }
