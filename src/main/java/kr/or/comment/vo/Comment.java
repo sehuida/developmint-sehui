@@ -11,4 +11,5 @@ public class Comment {
 	private int boardNo;
 	private int boardType;
 	private int commentType;
+	private int commentRef;
 }
