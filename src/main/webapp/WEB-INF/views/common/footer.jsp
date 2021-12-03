@@ -90,7 +90,7 @@
 						<li><a href="/qnaFrm.do" style="color:#737373;font-size: 15px;">1:1문의</a></li>
 					</ul>
 					<ul class="list-unstyled pe-5" style="float: left">
-						<li ><a href="#" style="color:black;">팀프로젝트 팀원모집</a></li>
+						<li ><a href="/recruitTeamMember_mainPage.do?reqPage=1" style="color:black;">팀프로젝트 팀원모집</a></li>
 						<li><a href="/gosuMain.do" style="color:black;">'고수'의 노하우</a></li>
 						<li><a href="/shareList.do" style="color:black;">개발지식공유</a></li>
 						<li><a href="/jobSearchList.do" style="color:black;">구인구직</a></li>
