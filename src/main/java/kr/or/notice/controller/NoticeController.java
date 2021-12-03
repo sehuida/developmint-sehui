@@ -35,6 +35,11 @@ public class NoticeController {
 	
 	@RequestMapping(value="/noticehome.do")
 	public String nHome() {
-		return "notice//noticeHome";
+		return "notice/noticeHome";
+	}
+	
+	@RequestMapping(value="/noticeView.do")
+	public String noticeView() {
+		return "notice/notiveView";
 	}
 }
