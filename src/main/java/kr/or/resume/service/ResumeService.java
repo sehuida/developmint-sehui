@@ -15,11 +15,16 @@ public class ResumeService {
 	@Autowired
 	private ResumeDao dao;
 
-	public ArrayList<Resume> selectAllResume(Member m) {
-		return dao.selectAllResume(m);
+	public ArrayList<Resume> selectAllResume(int memberNo) {
+		return dao.selectAllResume(memberNo);
 	}
 
 	public Resume selectOneResume(int resumeNo) {
 		return dao.selectOneResume(resumeNo);
+	}
+
+	public int insertResume(Resume r, int memberNo) {
+		System.out.println("여기 resumeService");
+		return dao.insertResume(r, memberNo);
 	}
 }

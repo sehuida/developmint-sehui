@@ -20,4 +20,9 @@ public class jobSearchController {
 	public String announceManage() {
 		return "jobSearch/announceManage";
 	}
+	
+	@RequestMapping(value="announceFrm.do")
+	public String announceFrm() {
+		return "jobSearch/announceFrm";
+	}
 }

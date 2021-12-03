@@ -8,6 +8,11 @@ public class Resume {
 	private int memberNo;
 	private String resumeTitle;
 	private int aducation;
+	private String schoolName;
+	private String schoolLocal;
+	private String schoolStart;
+	private String schoolEnd;
+	private String major;
 	private int career;
 	private int activity;
 	private String activityPlace;

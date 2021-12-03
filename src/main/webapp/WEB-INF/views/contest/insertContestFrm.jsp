@@ -90,7 +90,7 @@
 				</tr>
 				<tr>
 					<th class="table-active">공모요강</th>
-					<td><textarea id="contestContent" name="contestContent" class="form-control" style="height: 600px"></textarea></td>
+					<td><textarea id="contestContent" name="contestContent" class="form-control" style="height: 600px;resize: none;"></textarea></td>
 				</tr>
 				<tr>
 					<th class="table-active">포스터 이미지</th>
@@ -107,7 +107,7 @@
 					</th>
 				</tr>
 			</table>
-			<input type="hidden" name="memberId" value="seulgi">
+			<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 		</form>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>

@@ -37,11 +37,11 @@ public class ProjectTeamController {
 		return "recruitCrue/recruitTeamMember_mainPage";
 	}
 	
-	@RequestMapping(value="/recruitTeamMember_datail.do")
+	@RequestMapping(value="/recruitNotice_writeForm.do")
 	public String recruitTeamMemberDatail(int memberNo, Model model) {
 		if(memberNo > 0) {
 			model.addAttribute("memberNo", memberNo);
-			return "recruitCrue/recruitTeamMember_mainPage";
+			return "recruitCrue/recruitNotice_writeForm";
 		} else {
 			model.addAttribute("msg","로그인 후 이용가능합니다.");	
 		}

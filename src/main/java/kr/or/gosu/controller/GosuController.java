@@ -46,4 +46,16 @@ public class GosuController {
 	public String gosuTalk() {
 		return "gosu/gosuTalk";
 	}
+	@RequestMapping(value="/gosuNoticeList.do")
+	public String gosuNotice() {
+		return "gosu/gosuNoticeList";
+	}
+	@RequestMapping(value="/gosuNoticeWriteFrm.do")
+	public String gosuNoticeWriteFrm() {
+		return "gosu/gosuNoticeWriteFrm";
+	}
+	@RequestMapping(value="/gosuNoticeContent.do")
+	public String gosuNoticeContent() {
+		return "gosu/gosuNoticeContent";
+	}
 }

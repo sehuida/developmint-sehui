@@ -55,13 +55,38 @@
 .clickBtn{
 	text-align: center;
 }
+.commentBox{
+	margin-top:30px;
+	border: 1px solid #d9d9d9;
+	padding:20px;
+	display: flex;
+}
+.userInfoBox{
+	width: 120px;
+}
+.userInfoBox>p{
+	text-align: center;
+	margin-top: 5px;
+	font-size: 19px;
+	font-weight: bold;
+	margin-bottom: 0px;
+}
+.textBox{
+	margin-left: 20px;
+	margin-right: 20px;
+}
+.textBox>textarea{
+	width: 1000px;
+	height: 146px;
+	resize: none;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container" style="margin-bottom: 100px; margin-left: 400px;">
 		<p id="mainTitel"><a href="/contestMain.do"><i class="bi bi-chevron-left"></i></a>공모전 상세보기</p>
 		<div class="contestTitle" style="margin-top:55px;">
-			<p><i class="bi bi-chevron-right"></i>${c.contestTitle }</p>
+			<p>${c.contestTitle }</p>
 		</div>
 		<%--공모 이미지+정보 --%>
 		<div class="contestInfoBox">
@@ -101,10 +126,32 @@
 			</div>
 		</div>
 		
-		<%--로그인 구현 끝나면 댓글창 구현 예정 --%>
-		<div class="commentBox">
-			
-		</div>
+		<%--댓글창 --%>
+		<%--댓글 입력 창(로그인했을 때 띄우기) --%>
+		<c:if test="${not empty sessionScope.m.memberId }">
+			<form action="/insertContestComment.do" method="post">
+				<div class="commentBox">
+					<div class="userInfoBox">
+						<img src="/resources/img/userTestImg.png" width="120px;" height="120px;">
+						<p>${sessionScope.m.memberId }</p>
+					</div>
+					<div class="textBox" >
+						<textarea class="form-control" name="commentContent"></textarea>
+					</div>
+					<div>
+						<input type="submit" value="등록" class="btn btn-outline-primary" style="height: 146px; width: 100px; font-weight: bold">
+					</div>
+				</div>
+				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+				<input type="hidden" name="boardNo" value="${c.contestNo }">
+				<input type="hidden" name="boardType" value="1">
+				<input type="hidden" name="commentType" value="1">
+			</form>
+		</c:if>
+		
+		<%--댓글리스트 --%>
+	
+		
 		
 		
 		

@@ -5,19 +5,37 @@
 <html>
 <head>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
-<link rel="stylesheet" href="/resources/css/projectTeam/writePage.css">
-<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
-<script src="/summernote/jquery-3.3.1.js"></script>
-<script src="/summernote/summernote-lite.js"></script>
-<script src="/summernote/lang/summernote-ko-KR.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css" integrity="sha512-Fppbdpv9QhevzDE+UHmdxL4HoW8HantO+rC8oQB2hCofV+dWV2hePnP5SgiWR1Y1vbJeYONZfzQc5iII6sID2Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <meta charset="UTF-8">
 <title>RecruitCrue WriteForm</title>
 </head>
+
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="/resources/js/projectTeam/plugin/bootstrap-datepicker.js"></script>
+	<script src="/resources/js/projectTeam/plugin/bootstrap-datepicker.ko.min.js"></script>
+	<script src="/resources/summernote/summernote-lite.js"></script>
+	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+	<link rel="stylesheet" href="/resources/css/projectTeam/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="/resources/css/projectTeam/writePage.css">
+
+<script>
+
+	$(function(){
+		$("input[type='checkbox']").on("click", function(){
+			let count = $("input:checked[type='checkbox']").length;
+			if(count>3){
+				$(this).prop("checked", false);
+				swal("더 이상 선택하실 수 없어요!", "최대 3개 까지 선택이 가능합니다 :)");
+			}
+		});
+	});
+	
+</script>
+	
 	<div class="container" id="projectContainer">
 		<div class="main">
             <div class="returnPage">
@@ -75,7 +93,7 @@
 	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/pending.png">
 	                            <p class="titleText">모집마감일(모집일부터 최대 14일)</p>
 	                        </div>
-	                        <input type="text" id="datePicker" class="form-control" value="날짜를 선택해 주세요">
+	                        <input type="text" id="datePicker" class="form-control" value="마감일을 선택해주세요">
 	                       <!--  <ul class="nav nav-pills">
 	                            <li class="nav-item dropdown">
 	                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">날짜를 선택하세요</a>
@@ -120,6 +138,7 @@
 	                    </div>
 	                    <div class="finalLine"></div>
 	                    <div class="submitBtnBox">
+	                    	<input type="hidden" name="memberNo" value="${memberNo }">
 	                        <button type="submit" class="btn btn-primary btn-lg">제출</button>
 	                    </div>
 	                </div>

@@ -23,23 +23,31 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="resumeManage.do")
-	public String resumeManage(Model model, Member m) {
-		ArrayList<Resume> list = service.selectAllResume(m);
-		System.out.println();
-		if(list != null) {
-			model.addAttribute("list", list);
-			System.out.println("잘됨");		//테스트 끝나면 sout지우기
-			System.out.println(list);
-		} else {
-			System.out.println("없음");
-		}
+	public String resumeManage(Model model, int memberNo) {
+		ArrayList<Resume> list = service.selectAllResume(memberNo);
+		model.addAttribute("list", list);
 		return "resume/resumeManage";
 	}
 	
 	@RequestMapping(value="updateResume.do")
-	public String updateResume(int resumeNo, Model model) {
+	public String updateResume(Resume resume, Model model) {
+		int resumeNo = resume.getResumeNo();
+		System.out.println(resumeNo);
 		Resume r = service.selectOneResume(resumeNo);
 		model.addAttribute("r", r);
 		return "resume/updateResume";
+	}
+	
+	@RequestMapping(value="insertResume.do")
+	public String insertResume(Resume r, int memberNo, Model model) {
+		System.out.println("여기 resumeController");
+		int result = service.insertResume(r, memberNo);
+		if(result != 0) {
+			model.addAttribute("msg","이력서 등록실패");
+		} else {
+			model.addAttribute("msg","이력서 등록성공");			
+		}
+		model.addAttribute("loc","/WEB-INF/views/resume/resumeManage.jsp");
+		return "common/msg";
 	}
 }
