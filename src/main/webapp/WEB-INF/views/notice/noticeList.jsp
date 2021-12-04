@@ -43,7 +43,7 @@
 								<tr class="table-primary" id="noticeList">
 									<td><i class="bi bi-pin-angle-fill" style="color: #f3969a;"></i></td> 
 									<td style="text-align: left;" >
-										<span style="color: #ddd;">[주요공지] </span><a href='/noticeView?noticeNo=${n.noticeNo}' id="noticePin" style="color: #fff;" class="text-decoration-none"> ${n.noticeTitle }</a>
+										<span style="color: #ddd;">[주요공지] </span><a href='/noticeView.do?noticeNo=${n.noticeNo}' id="noticePin" style="color: #fff;" class="text-decoration-none"> ${n.noticeTitle }</a>
 									</td>
 									<td>${n.regDate }</td>
 								</tr>
@@ -52,7 +52,7 @@
 							<tr class="table-light" id="noticeList" style="background-color: #bdbdbd;">
 									<td>${start + i.index-fixPage}</td> 
 									<td style="text-align: left; ">
-										<a href='/noticeView?noticeNo=${n.noticeNo }' style="text-decoration: none;"> ${n.noticeTitle }</a>
+										<a href='/noticeView.do?noticeNo=${n.noticeNo }' style="text-decoration: none;"> ${n.noticeTitle }</a>
 									</td>
 									<td>${n.regDate }</td>
 								</tr>
