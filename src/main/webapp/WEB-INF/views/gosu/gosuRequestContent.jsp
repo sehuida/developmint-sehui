@@ -44,7 +44,8 @@ input:focus, textarea:focus {
 
 .request>div {
 	border-width: 10px;
-	padding: 100px;
+	padding: 50px;
+	width:1000px;
 }
 
 .request h3 {

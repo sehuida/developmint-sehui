@@ -135,9 +135,7 @@ input:focus, textarea:focus {
 		<div class="gosu-mail">
 			<a href="/gosuRequestList.do"><span>1</span>요청서</a>
 		</div>
-		<h3>
-			<span style="color: rgb(78, 205, 196);">고수</span>의 개발
-		</h3>
+	
 			<div class="g-msg">
 			고수에게 요구 사항을 정확하게 전달해주세요!
 		</div>

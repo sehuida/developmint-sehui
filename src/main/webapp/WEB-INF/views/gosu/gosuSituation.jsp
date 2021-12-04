@@ -29,8 +29,8 @@
 .g-sa-wrap h4 {
 	font-weight: 900;
 	color: rgb(78, 205, 196);
-	margin-top: 100px;
-	margin-bottom: 100px;
+	margin-top: 50px;
+	margin-bottom: 50px;
 	font-size: 40px;
 }
 
@@ -51,13 +51,13 @@
 	width: 400px;
 	padding-left: 20px;
 	padding-right: 20px;
+	margin:40px;
 }
 
 .container>div>div {
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
 }
-
 .container>div>div>div table img {
 	border-radius: 50%;
 	width: 80px;
@@ -100,6 +100,12 @@
 	display: block;
 	font-size: 13px;
 }
+
+.g-margin {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	display: flex;
+}
 </style>
 </head>
 <body>
@@ -107,14 +113,14 @@
 	<div class="container">
 		<div class="gosu-mail">
 			<a href="/gosuRequestList.do"><span>1</span>요청서</a>
-	</div>
+		</div>
 		<h1>나의 현황</h1>
 		<hr>
 		<p style="margin-bottom: 100px;">신청하신 전체 내역을 확인하실 수 있습니다.</p>
 		<div class="g-sa-wrap">
 			<h4>신청한 내역</h4>
-			<div>
-				<div>
+			<div class="g-margin">
+				<div class="g-left">
 					<table>
 						<tr style="font-size: x-small;">
 							<td style="text-align: left; padding-top: 20px;"><b
@@ -137,7 +143,7 @@
 					</table>
 				</div>
 
-				<div>
+				<div class="g-right">
 					<table>
 						<tr style="font-size: x-small;">
 							<td style="text-align: left; padding-top: 20px;"><b
@@ -161,8 +167,8 @@
 				</div>
 			</div>
 			<h4>신청받은 내역</h4>
-			<div>
-				<div>
+			<div class="g-margin">
+				<div class="g-left">
 					<table>
 						<tr style="font-size: x-small;">
 							<td style="text-align: left; padding-top: 20px;"><b
@@ -185,7 +191,7 @@
 					</table>
 				</div>
 
-				<div>
+				<div class="g-right">
 					<table>
 						<tr style="font-size: x-small;">
 							<td style="text-align: left; padding-top: 20px;"><b
@@ -224,6 +230,86 @@
 					</div>
 				</div>
 			</div>
+
+			<h4>요청서를 통한 고수 매칭</h4>
+			<div class="g-margin">
+				<div class="g-left">
+					<table>
+						<tr style="font-size: x-small;">
+							<td style="text-align: left; padding-top: 20px;"><b
+								style="color: red;">진행 중</b></td>
+							<td style="padding-top: 20px;">2021.XX.XX</td>
+						</tr>
+						<tr>
+							<td><b><span
+									style="color: rgb(78, 205, 196); font-size: 20px;">고수</span></b></td>
+							<td rowspan="2"><img
+								src="/resources/img/gosu/g_img_basic.png"></td>
+						</tr>
+						<tr>
+							<td style="font-size: 25px;"><b>강세희</b></td>
+						</tr>
+						<tr>
+							<td colspan="2"><a href="/gosuProject.do"
+								class="btn btn-info">자세히 보기</a></td>
+						</tr>
+
+					</table>
+				</div>
+
+				<div class="g-right">
+					<table>
+						<tr style="font-size: x-small;">
+							<td style="text-align: left; padding-top: 20px;"><b
+								style="color: red;">진행 중</b></td>
+							<td style="padding-top: 20px;">2021.XX.XX</td>
+						</tr>
+						<tr>
+							<td><b><span
+									style="color: rgb(78, 205, 196); font-size: 20px;">고수</span></b></td>
+							<td rowspan="2"><img
+								src="/resources/img/gosu/g_img_basic.png"></td>
+						</tr>
+						<tr>
+							<td style="font-size: 25px;"><b>강세희</b></td>
+						</tr>
+						<tr>
+							<td colspan="2"><a href="/gosuProject.do"
+								class="btn btn-info">자세히 보기</a></td>
+						</tr>
+
+					</table>
+				</div>
+
+			</div>
+			<div class="g-margin">
+				<div>
+					<table>
+						<tr style="font-size: x-small;">
+							<td style="text-align: left; padding-top: 20px;"><b
+								style="color: red;">진행 중</b></td>
+							<td style="padding-top: 20px;">2021.XX.XX</td>
+						</tr>
+						<tr>
+							<td><b><span
+									style="color: rgb(78, 205, 196); font-size: 20px;">고수</span></b></td>
+							<td rowspan="2"><img
+								src="/resources/img/gosu/g_img_basic.png"></td>
+						</tr>
+						<tr>
+							<td style="font-size: 25px;"><b>강세희</b></td>
+						</tr>
+						<tr>
+							<td colspan="2"><a href="/gosuProject.do"
+								class="btn btn-info">자세히 보기</a></td>
+						</tr>
+
+					</table>
+				</div>
+				<div style="border: none;">
+				</div>
+			</div>
+
 		</div>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>

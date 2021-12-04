@@ -227,7 +227,6 @@ to {
 .g-status-border>h4 {
 	font-size: 30px;
 	font-weight: 900;
-	color: rgb(78, 205, 196);
 }
 
 .g-statusContent {
@@ -604,7 +603,8 @@ to {
 							</tr>
 							</tboay>
 						</table>
-					</a> <a href="/gosuTalk.do">
+					</a> 
+					<a href="/gosuTalk.do">
 						<table class="g-sc-tbl card bg-light mb-3">
 							<tboay style="min-width:342px;max-width:342px;">
 
@@ -624,7 +624,37 @@ to {
 							</tboay>
 						</table>
 					</a>
+					
 				</div>
+				<hr>
+				<h4 style="margin-top: 30px; margin-left: 40px;"><span style="color: rgb(78, 205, 196)">요청서</span>를 통한 <span style="color: rgb(78, 205, 196)">고수</span> 매칭</h4>
+				<div class="g-statusContent">
+					<a href="/gosuProject.do">
+						<table class="g-sc-tbl card bg-info mb-3">
+							<tboay style="min-width:342px;max-width:342px;">
+
+							<tr>
+								<th>고수</th>
+								<td><span style="color:white;">아이디(memberId)</span></td>
+							</tr>
+						
+							</tboay>
+						</table>
+					</a> 
+					<a href="/gosuProject.do">
+						<table class="g-sc-tbl card bg-info mb-3">
+							<tboay style="min-width:342px;max-width:342px;">
+
+					
+							<tr>
+								<th>고수</th>
+								<td><span style="color:white;">아이디(memberId)</span></td>
+							</tr>
+					
+							</tboay>
+						</table>
+					</a>
+					</div>
 			</div>
 		</div>
 	</div>
