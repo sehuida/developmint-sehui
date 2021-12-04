@@ -233,7 +233,7 @@
 										<td>별별별별별</td>
 									</tr>
 									<tr>
-										<td style="font-size: x-small;">xx개의 리뷰</td>
+										<td style="font-size: small;">xx개의 리뷰</td>
 									</tr>
 								</table>
 							</div>
