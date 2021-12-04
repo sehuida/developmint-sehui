@@ -68,7 +68,6 @@ body {
 
 #gallery {
 	width: 500px;
-	height: 580px;
 	padding: 40px;
 	border-radius: 50px;
 	padding: 40px;
