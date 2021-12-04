@@ -105,7 +105,15 @@
 	              $(".expResult").eq(2).removeClass("text-success");
 	              $("#memberPwRe").removeClass("is-valid");
 	              $(".expResult").eq(2).addClass("text-danger");
-	              $("#memberPwRe").addClass("is-invalid");	                           	
+	              $("#memberPwRe").addClass("is-invalid");
+	              pwreChk = false;	                           	
+              }else{
+               $(".expResult").eq(2).html("비밀번호가 일치합니다.");
+               $(".expResult").eq(2).removeClass("text-danger");
+               $("#memberPwRe").removeClass("is-invalid");
+               $(".expResult").eq(2).addClass("text-success");
+               $("#memberPwRe").addClass("is-valid");
+               pwreChk = true;             
               }
             }else{
               $(".expResult").eq(1).html("비밀번호는 8자이상 입력해주세요");
