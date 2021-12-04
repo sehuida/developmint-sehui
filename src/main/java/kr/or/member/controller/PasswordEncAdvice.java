@@ -30,7 +30,7 @@ public class PasswordEncAdvice {
 		String inputPass = m.getMemberPw();
 		String encPass = enc.encData(inputPass);
 		m.setMemberPw(encPass);
-		System.out.println(encPass);
+		//System.out.println(encPass);
 	}
 	
 	@Pointcut(value="execution(* kr.or.member.model.service..*Service.changePw(..))")

@@ -117,4 +117,8 @@ public class MemberController {
 			}
 		}
 	}
+	@RequestMapping(value="/mypage.do")
+	public String myPage() {
+		return "member/mypage";
+	}
 }
