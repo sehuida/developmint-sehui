@@ -68,6 +68,7 @@ body {
 
 #gallery {
 	width: 500px;
+	height: 580px;
 	padding: 40px;
 	border-radius: 50px;
 	padding: 40px;
@@ -151,6 +152,10 @@ input[type="checkbox"]:checked {
 	float: left;
 	margin: 40px;
 	text-align: center;
+}
+
+.g-seq {
+	padding:0;
 }
 
 .g-seq dt, .g-seq dd {
@@ -297,11 +302,11 @@ input[type="checkbox"]:checked {
 									<label><li><input type="checkbox" name="g6"
 											value="" onclick="setBg(this);">협의 가능해요.</li></label>
 									<label><li><input type="checkbox" name="g6"
-											value="mac" onclick="setBg(this);">가능한 빨리 진행하고 싶어요.</li></label>
+											value="mac" onclick="setBg(this);">가능한 빨리 진행하고 싶어요</li></label>
 									<label><li><input type="checkbox" name="g6"
-											value="linux" onclick="setBg(this);">일주일 이내로 진행하고 싶어요.</li></label>
+											value="linux" onclick="setBg(this);">일주일 이내로 진행하고 싶어요</li></label>
 									<label><li><input type="checkbox" name="g6"
-											value="ios" onclick="setBg(this);">원하는 날짜가 있어요.</li></label>
+											value="ios" onclick="setBg(this);">원하는 날짜가 있어요</li></label>
 									<label><li><input type="checkbox" name="g6"
 											value="gita" onclick="setBg(this);">기타</li></label>
 
@@ -311,7 +316,8 @@ input[type="checkbox"]:checked {
 
 						<li>
 							<h3 class="g-b"
-								style="text-align: center; font-size: large; margin-bottom: 40px;">어떻게 진행하기 원하시나요?</h3>
+								style="text-align: center; font-size: large; margin-bottom: 40px;">기획은
+								어느 정도 되어있나요?</h3>
 							<div class="g-div">
 								<ul>
 									<label><li><input type="checkbox" name="g7"
@@ -418,47 +424,42 @@ input[type="checkbox"]:checked {
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
-		var gCount = 1;
+	var gCount = 1;
 		function setBg(t) {
 			td = t.parentNode;
 			td.style.color = (t.checked) ? "#78c2ad" : "black";
 		}
-		var bar = 0;
+		var bar=0;
 		$(".btn_gallery_next").click(function() {
-			var g1 = $("[name=g" + gCount + "]:checked").length;
-			var g2 = $("[name=g5]").val();
-
+			var g1 = $("[name=g"+gCount+"]:checked").length;
+			
 			$(".g-msg").empty();
-			var html = "";
-			if (g1 == 0 && !(gCount == 5)) {
-
-				html += "옵션을 선택해주세요";
+			var html="";
+			if(g1 == 0){				
+				html+="옵션을 선택해주세요";
 				$(".g-msg").append(html);
-				$(".g-msg").css("color", "red");
+				$(".g-msg").css("color","red");
+				
 				return false;
-
-			} else {
-				if (gCount == 5 && g2 == "") {
-					html += "내용을 입력해주세요";
-					$(".g-msg").append(html);
-					$(".g-msg").css("color", "red");
-					return false;
-				}
+			}else{
+				
 				if (!$("#gallery>li").last().is(":visible")) {
 					$("#gallery>li:visible").hide().next("li").fadeIn("80");
 					$(".btn_gallery_prev").removeClass("off");
 					$(".progress-bar").css("width", (bar += 16) + "%");
 					$(".progress-bar").html(bar + "%");
-					gCount++;
 
 				}
 				if ($("#gallery>li").last().is(":visible")) {
 					$(this).addClass("off");
 					$(".btn_submit").css("display", "inline-block");
 				}
-
+			
+				
+			
 			}
-
+			
+					
 			return false;
 		});
 		$(".btn_gallery_prev").click(function() {
@@ -469,7 +470,6 @@ input[type="checkbox"]:checked {
 				$(".btn_gallery_next").removeClass("off");
 				$(".progress-bar").css("width", (bar -= 16) + "%");
 				$(".progress-bar").html(bar + "%");
-				gCount--;
 
 			}
 			if ($("#gallery>li").first().is(":visible")) {

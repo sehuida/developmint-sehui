@@ -29,15 +29,6 @@ input:focus, textarea:focus {
 	font-weight: 900;
 }
 
-.container>h3 {
-	display: flex;
-	justify-content: center;
-	margin-top: 100px;
-	margin-bottom: 100px;
-	font-size: 40px;
-	font-weight: 900;
-}
-
 .request li {
 	list-style-type: none;
 	padding: 30px;

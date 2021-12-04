@@ -70,4 +70,12 @@ public class GosuController {
 	public String gosuRequestContent() {
 		return "gosu/gosuRequestContent";
 	}
+	@RequestMapping(value="/gosuRequestCostList.do")
+	public String gosuRequestCostList() {
+		return "gosu/gosuRequestCostList";
+	}
+	@RequestMapping(value="/gosuProject.do")
+	public String gosuProject() {
+		return "gosu/gosuProject";
+	}
 }

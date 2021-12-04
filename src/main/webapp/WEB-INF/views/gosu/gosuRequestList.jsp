@@ -62,6 +62,10 @@ input:focus, textarea:focus {
 	width: 90%;
 	border: 1px solid rgb(211, 211, 211);
 }
+.g-one-tbl:hover{
+
+	border: 1px solid black;
+}
 
 .g-one-tbl th {
 	width: 200px;
