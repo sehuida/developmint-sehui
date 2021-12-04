@@ -432,23 +432,30 @@ input[type="checkbox"]:checked {
 		var bar=0;
 		$(".btn_gallery_next").click(function() {
 			var g1 = $("[name=g"+gCount+"]:checked").length;
+			var g2 = $("[name=g5]").val();
 			
 			$(".g-msg").empty();
 			var html="";
-			if(g1 == 0){				
+			if(g1 == 0 && gCount != 5){				
 				html+="옵션을 선택해주세요";
 				$(".g-msg").append(html);
 				$(".g-msg").css("color","red");
 				
 				return false;
 			}else{
-				
+				if (gCount == 5 && g2 == "") {
+					html+="내용을 입력해주세요";
+					$(".g-msg").append(html);
+					$(".g-msg").css("color","red");
+					
+					return false;
+				}
 				if (!$("#gallery>li").last().is(":visible")) {
 					$("#gallery>li:visible").hide().next("li").fadeIn("80");
 					$(".btn_gallery_prev").removeClass("off");
 					$(".progress-bar").css("width", (bar += 16) + "%");
 					$(".progress-bar").html(bar + "%");
-
+					gCount++;
 				}
 				if ($("#gallery>li").last().is(":visible")) {
 					$(this).addClass("off");
@@ -470,6 +477,7 @@ input[type="checkbox"]:checked {
 				$(".btn_gallery_next").removeClass("off");
 				$(".progress-bar").css("width", (bar -= 16) + "%");
 				$(".progress-bar").html(bar + "%");
+				gCount--;
 
 			}
 			if ($("#gallery>li").first().is(":visible")) {
