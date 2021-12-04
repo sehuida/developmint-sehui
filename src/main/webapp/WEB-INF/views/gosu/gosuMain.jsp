@@ -266,6 +266,7 @@ to {
 .gosu-write-wrap {
 	position: fixed;
 	z-index: 1000;
+	margin-left:1200px;
 }
 
 .gosu-write {
@@ -315,12 +316,15 @@ to {
 	<div class="gosu-mail">
 			<a href="/gosuRequestList.do"><span>1</span>요청서</a>
 	</div>
-		
+	<div class="gosu-mail">
+			<a href="/gosuRequestCostList.do"><span>1</span>견적서</a>
+	</div>
 		<h1>
 			<span style="color: rgb(78, 205, 196);">고수</span>의 노하우
 		</h1>
 		<div class="g-msg">
-			고수에게 피드백을 신청해보세요!<br> 당신의 작품을 평가해줍니다. 마음껏 질문하세요!
+			
+			고수에게 개발 요청서를 보내거나 <br> 작품에 대한 피드백을 받을 수 있습니다.<br>당신에게 맞는 고수를 찾아보세요!
 		</div>
 		<div class="gosu-write-wrap">
 			<div class="gosu-write">

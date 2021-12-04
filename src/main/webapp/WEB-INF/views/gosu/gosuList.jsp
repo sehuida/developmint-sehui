@@ -90,6 +90,8 @@
 .gosu-write-wrap {
 	position: fixed;
 	z-index: 1000;
+	
+	margin-left:1200px;
 }
 
 .gosu-write {

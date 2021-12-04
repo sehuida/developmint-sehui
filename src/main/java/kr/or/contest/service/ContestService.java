@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.comment.vo.Comment;
+import kr.or.comment.vo.Report;
 import kr.or.contest.dao.ContestDao;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestList;
@@ -54,5 +55,9 @@ public class ContestService {
 	@Transactional
 	public int deleteContestComment(Comment cm) {
 		return dao.deleteContestComment(cm);
+	}
+
+	public int reportContestComment(Report rp) {
+		return dao.reportContestComment(rp);
 	}
 }
