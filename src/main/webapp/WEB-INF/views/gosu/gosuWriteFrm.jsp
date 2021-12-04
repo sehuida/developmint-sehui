@@ -161,7 +161,7 @@
 								src="/resources/img/gosu/g_img_basic.png" style="width: 250px;"></th>
 						</tr>
 						<tr>
-							<td><span style="color: rgb(78, 205, 196);">제목</span></td>
+							<td><span style="color: rgb(78, 205, 196);">제목 <span style="color: red;">* </span></span></td>
 						</tr>
 						<tr>
 							<td style="font-size: 25px;"><input type="text" name=""></td>
@@ -170,7 +170,7 @@
 							<td><hr></td>
 						</tr>
 						<tr>
-							<td>한줄소개</td>
+							<td>한줄소개 <span style="color: red;">* </span></td>
 						</tr>
 						<tr>
 							<td style="font-size: 25px;"><input type="text" name=""></td>
@@ -178,7 +178,7 @@
 					</table>
 				</div>
 				<div>
-					<h4>상세설명</h4>
+					<h4>상세설명 <span style="color: red;">* </span></h4>
 					<div>
 						<p>
 							<textarea name=""></textarea>
@@ -197,7 +197,7 @@
 
 
 				<div class="gosu-act">
-					<h4>활동 및 자격</h4>
+					<h4>활동 및 자격 <span style="color: red;">* </span></h4>
 					<div style="display: flex; justify-content: center;">
 						<p>
 							<textarea></textarea>
@@ -205,7 +205,7 @@
 					</div>
 				</div>
 				<div class="gosu-project">
-					<h4>프로젝트</h4>
+					<h4>프로젝트 </h4>
 					<div class="g-photo-wrap">
 						<div class="g-photo-one">
 							<button>
@@ -260,7 +260,7 @@
 				<div class="gosu-feedback">
 
 					<h4>
-						피드백 비용 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						피드백 비용 &nb<span style="color: red;">* </span>sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <span><input

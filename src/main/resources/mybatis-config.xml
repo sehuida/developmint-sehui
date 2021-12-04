@@ -15,6 +15,7 @@
 		<typeAlias type="kr.or.notice.vo.Criteria" alias="cr"/>
 		<typeAlias type="kr.or.projectTeam.model.vo.projectDevLanguage" alias="pdl"/>
 		<typeAlias type="kr.or.projectTeam.model.vo.projectTeamMainPageData" alias="ptmpd"/>
-
+		<typeAlias type="kr.or.comment.vo.Report" alias="rp"/>
+		<typeAlias type="kr.or.contest.vo.ContestMember" alias="conmem"/>
 	</typeAliases>	
 </configuration>

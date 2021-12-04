@@ -114,7 +114,7 @@
 }
 .reComentView>span:nth-of-type(2) {
 	display:inline-block;
-	width: 825px;
+	width: 827px;
 }
 .reComentView>span:nth-of-type(3) {
 	margin-right: 15px;
@@ -147,7 +147,7 @@
 }
 .reportBox>div:first-of-type>p {
 	color:#606060;
-	font-size: 15px;
+	font-size: 14px;
 }
 .reportBox>div>p>span{
 	font-weight: bold;
@@ -202,10 +202,48 @@
 			<p><i class="bi bi-check2"></i> 공모요강</p>
 			<div id="conBox">
 				<p>${list.contest.contestContentBr }</p>
+				<%--로그인 됐으면 신청가능 / 로그인 안됐으면 로그인페이지로 이동 --%>
+				<c:choose>
+				<c:when test="${not empty sessionScope.m }">
 				<%--공모 신청 버튼 --%>
 				<div class="clickBtn">
-					<button class="btn btn-primary btn-lg btn-block" style="margin-top:20px; width: 300px; ">공모 신청</button>
+					<button class="btn btn-primary btn-lg btn-block" style="margin-top:20px; width: 300px; " data-bs-toggle="modal" data-bs-target="#contestMember">공모 신청</button>
 				</div>
+				<%--공모 신청  Modal --%>
+				<div class="modal fade" id="contestMember" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog  modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-body">
+								<form action="/insertContestMember.do" method="post">
+									<p style="font-size: 25px; font-weight: bold">공모전 신청</p>
+									<p style="font-size: 22px;">${list.contest.contestTitle }</p>
+									<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;">
+										<p><span style="font-weight: bold">신청자 ID</span> : ${sessionScope.m.memberId }</p>
+										<p><span style="font-weight: bold">신청자 이름</span> : ${sessionScope.m.memberName }</p>
+										<p><span style="font-weight: bold">신청자 전화번호</span> : ${sessionScope.m.phone }</p>
+										<p><span style="font-weight: bold">신청자 E-mail</span> : ${sessionScope.m.email }</p>
+										<p><span style="font-weight: bold">신청자 Git 주소</span> : </p>
+										<input type="text" class="form-control" name="cmGit">
+									</div>
+									<div style="text-align: right; ">
+										<button type="submit" class="btn btn-primary" style="width: 100px;">신청</button>
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
+									</div>
+									<input type="hidden" name="contestNo" value="${list.contest.contestNo }">
+									<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+									<input type="hidden" name="cmStatus" value="1">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				</c:when>
+				<c:otherwise>
+					<div class="clickBtn">
+					<a href="/loginFrm.do" class="btn btn-primary btn-lg btn-block" style="margin-top:20px; width: 300px; ">공모 신청</a>
+				</div>
+				</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 		<%---------------------------------------------------------------------------- --%>
@@ -293,16 +331,15 @@
 									      <div class="modal-body">
 									      	<form action="/reportComment.do" method="post" class="reportBox">
 										      	<p class="Modaltitle">신고 하기</p>
-										      	<div style="border-bottom:1px solid #d9d9d9; padding:5px; margin-bottom: 10px;">
+										      	<div style="border-bottom:1px solid #d9d9d9; padding:5px; margin-bottom: 10px; padding-bottom: 10px;">
 										      		<p>신고는 반대 의견을 표시하는 기능이 아닙니다.</p>
 										      		<p>글 작성자의 의견에 반대하는 경우 신고대신 [댓글] 기능을 사용해 주세요.</p>
 										      	</div>
 										      	<div style="padding:5px; margin-bottom: 10px;">
-											      	<p><span>신고자 아이디</span> : ${sessionScope.m.memberId}</p>
-											      	<p><span>신고 할 회원</span> : ${cl.memberId }</p>
+											      	<p><span>댓글 작성자</span> : ${cl.memberId }</p>
 											      	<p><span>댓글</span> : ${cl.commentContent }</p>
 										      	</div>
-										      	<div style="margin-bottom: 20px;">
+										      	<div style="margin-bottom: 20px; padding:5px;">
 										      		<p style="margin-bottom: 10px;"><span>신고사유</span></p>
 											      	<label style="margin-right: 70px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="1">영리목적/홍보성</label>
 											      	<label style="margin-right: 20px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="2">음란성/선정성</label>
@@ -310,16 +347,22 @@
 											      	<label style="margin-right: 8px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="4">같은 내용 반복 게시(도배)</label>
 											      	<label style="margin-right: 20px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="5">욕설/인성공격</label>
 											      	<label><input type="radio" class="form-check-input radioChk" name="reportReason" value="6">개인정보누출</label><br>
-											      	<label><input type="radio" class="form-check-input radioChk" name="reportReason" value="7">기타</label><br>
-										      		<textarea class="form-control" style="resize: none;" readonly></textarea>
+											      	<label><input type="radio" class="form-check-input radioChk etcBtn" name="reportReason" value="7">기타</label><br>
+										      		<textarea class="form-control etc" style="resize: none;" name="reportEtc"></textarea>
 										      	</div>
 										      	<div style="margin-bottom: 20px; background-color: #F7F7F7; padding:10px;">
 										      		<p>◈ 이용규칙에 위배되는 댓글을  5회 이상 작성한 회원은 사이트 제한 조치가 취해집니다.</p>
 										      		<p>◈ 허위신고일 경우, 신고자의 서비스 활동이 제한될 수 있으니 유의하시어 신중하게 신고해 주세요.</p>
 										      	</div>
-										      	<button type="submit" class="btn btn-primary">신고</button>
-										        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-								
+										      	<div style="text-align: right;">
+										      		<button type="button" class="btn btn-secondary reportBtn" style="width: 100px;">신고</button>
+										        	<button type="button" class="btn btn-primary" style="width: 100px;" data-bs-dismiss="modal">취소</button>
+												</div>
+												<input type="hidden" name="reporterId" value="${sessionScope.m.memberId }">
+												<input type="hidden" name="commentNo" value="${cl.commentNo }">
+												<input type="hidden" name="reportStatus" value="1">
+												<input type="hidden" name="commentContent" value="${cl.commentContent }">
+												<input type="hidden" name="contestNo" value="${cl.boardNo }">
 									        </form>
 									      </div>
 										  </div>
@@ -391,7 +434,53 @@
 												    <input type="hidden" value="${rl.boardNo }" name="boardNo">
 												</form>
 											</c:if>
-										<a href="#"><i class="bi bi-exclamation-circle-fill" style="font-size: 20px;color:#f3969a;"></i></a>
+										<a href="#" data-bs-toggle="modal" data-bs-target="#reportComment${j.index }"><i class="bi bi-exclamation-circle-fill" style="font-size: 20px;color:#f3969a;"></i></a>
+										
+										<%--댓글 신고  Modal --%>
+										<div class="modal fade" id="reportComment${j.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										  <div class="modal-dialog  modal-dialog-centered">
+										    <div class="modal-content">
+										      <div class="modal-body">
+										      	<form action="/reportComment.do" method="post" class="reportBox">
+											      	<p class="Modaltitle">신고 하기</p>
+											      	<div style="border-bottom:1px solid #d9d9d9; padding:5px; margin-bottom: 10px; padding-bottom: 10px;">
+											      		<p>신고는 반대 의견을 표시하는 기능이 아닙니다.</p>
+											      		<p>글 작성자의 의견에 반대하는 경우 신고대신 [댓글] 기능을 사용해 주세요.</p>
+											      	</div>
+											      	<div style="padding:5px; margin-bottom: 10px;">
+												      	<p><span>댓글 작성자</span> : ${rl.memberId }</p>
+												      	<p><span>댓글</span> : ${rl.commentContent }</p>
+											      	</div>
+											      	<div style="margin-bottom: 20px; padding:5px;">
+											      		<p style="margin-bottom: 10px;"><span>신고사유</span></p>
+												      	<label style="margin-right: 70px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="1">영리목적/홍보성</label>
+												      	<label style="margin-right: 20px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="2">음란성/선정성</label>
+												      	<label><input type="radio" class="form-check-input radioChk" name="reportReason" value="3">불법정보</label><br>					      	
+												      	<label style="margin-right: 8px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="4">같은 내용 반복 게시(도배)</label>
+												      	<label style="margin-right: 20px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="5">욕설/인성공격</label>
+												      	<label><input type="radio" class="form-check-input radioChk" name="reportReason" value="6">개인정보누출</label><br>
+												      	<label><input type="radio" class="form-check-input radioChk etcBtn" name="reportReason" value="7">기타</label><br>
+											      		<textarea class="form-control etc" style="resize: none;" name="reportEtc" ></textarea>
+											      	</div>
+											      	<div style="margin-bottom: 20px; background-color: #F7F7F7; padding:10px;">
+											      		<p>◈ 이용규칙에 위배되는 댓글을  5회 이상 작성한 회원은 사이트 제한 조치가 취해집니다.</p>
+											      		<p>◈ 허위신고일 경우, 신고자의 서비스 활동이 제한될 수 있으니 유의하시어 신중하게 신고해 주세요.</p>
+											      	</div>
+											      	<div style="text-align: right;">
+											      		<button type="button" class="btn btn-secondary reportBtn" style="width: 100px;">신고</button>
+											        	<button type="button" class="btn btn-primary" style="width: 100px;" data-bs-dismiss="modal">취소</button>
+													</div>
+													<input type="hidden" name="reporterId" value="${sessionScope.m.memberId }">
+													<input type="hidden" name="commentNo" value="${rl.commentNo }">
+													<input type="hidden" name="reportStatus" value="1">
+													<input type="hidden" name="commentContent" value="${rl.commentContent }">
+													<input type="hidden" name="contestNo" value="${rl.boardNo }">
+										        </form>
+										      </div>
+											  </div>
+										  </div>
+										</div>
+										
 										</c:if>
 									</div>
 								</c:if>
@@ -413,17 +502,20 @@
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	
 	<script>
+		//대댓글 창 토글
 		$(".reComentBtn").click(function(){
 			var index = $(".reComentBtn").index(this);
 			$(".recomentBox").eq(index).toggle();
 		});
 		$(".reComentBtn").trigger('click');
 		
+		//대댓글창 취소 클릭시 닫히기
 		$(".cancelBtn").click(function(){
 			var index = $(".cancelBtn").index(this);
 			$(".recomentBox").eq(index).css("display","none");
 		});
 		
+		//댓글삭제 confirm창 띄우고 ok하면 submit
 		$(".delComment").click(function(){
 			var result = confirm('댓글을 삭제하시겠습니까?');
 			var index = $(".delComment").index(this);
@@ -431,6 +523,30 @@
 				$(".delForm").eq(index).submit();
 			}
 		});
+		
+		//기타버튼 선택 시 textarea 작성가능
+		$("input[name=reportReason]").change(function(){
+			var radioValue = $(this).val();
+			if(radioValue == 7){
+				$(".etc" ).attr('readonly', false);
+			}else{
+				$(".etc" ).attr('readonly', true);
+			}	
+		});
+		
+		//신고버튼 누르면 confirm창 띄우고 ok하면 submit
+		$(".reportBtn").click(function(){
+			var radioCheck = $('input[name=reportReason]').is(":checked");
+			if(!radioCheck){
+				alert("신고사유를 체크해주세요.");
+				return;
+			}
+			var result = confirm('허위신고일 경우, 신고자가 불이익을 받을 수 있습니다. 신고하시겠습니까?');
+			var index = $(".reportBtn").index(this);
+			if(result){
+				$(".reportBox").eq(index).submit();
+			}
+		})
 	</script>
 </body>
 </html>

@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.comment.vo.Comment;
+import kr.or.comment.vo.Report;
 import kr.or.contest.service.ContestService;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestList;
+import kr.or.contest.vo.ContestMember;
 
 @Controller
 public class ContestController {
@@ -153,10 +155,32 @@ public class ContestController {
 		model.addAttribute("loc","/contestView.do?contestNo="+cm.getBoardNo());
 		return "common/msg";
 	}
+
+	//댓글신고
+	@RequestMapping(value="/reportComment.do")
+	public String reportComment(Report rp, Model model, int contestNo) {
+		int result = service.reportContestComment(rp);
+		if(result>0) {
+			model.addAttribute("msg","댓글신고 완료");	
+		}else {
+			model.addAttribute("msg","댓글신고 실패");
+		}
+		model.addAttribute("loc","/contestView.do?contestNo="+contestNo);
+		return "common/msg";
+	}
 	
-	
-	
-	
+	//공모신청
+	@RequestMapping(value="/insertContestMember.do")
+	public String insertContestMember(ContestMember conmem, Model model) {
+		int result = service.insertContestMember(conmem);
+		if(result>0) {
+			model.addAttribute("msg","공모전 신청 완료");	
+		}else {
+			model.addAttribute("msg","공모전 신청 실패");
+		}
+		model.addAttribute("loc","/contestView.do?contestNo="+conmem.getContestNo());
+		return "common/msg";
+	}
 	
 	
 }
