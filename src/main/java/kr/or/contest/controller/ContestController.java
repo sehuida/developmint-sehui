@@ -20,6 +20,7 @@ import kr.or.comment.vo.Report;
 import kr.or.contest.service.ContestService;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestList;
+import kr.or.contest.vo.ContestMember;
 
 @Controller
 public class ContestController {
@@ -168,6 +169,18 @@ public class ContestController {
 		return "common/msg";
 	}
 	
+	//공모신청
+	@RequestMapping(value="/insertContestMember.do")
+	public String insertContestMember(ContestMember conmem, Model model) {
+		int result = service.insertContestMember(conmem);
+		if(result>0) {
+			model.addAttribute("msg","공모전 신청 완료");	
+		}else {
+			model.addAttribute("msg","공모전 신청 실패");
+		}
+		model.addAttribute("loc","/contestView.do?contestNo="+conmem.getContestNo());
+		return "common/msg";
+	}
 	
 	
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.comment.vo.Comment;
 import kr.or.comment.vo.Report;
 import kr.or.contest.vo.Contest;
+import kr.or.contest.vo.ContestMember;
 
 @Repository
 public class ContestDao {
@@ -65,6 +66,10 @@ public class ContestDao {
 
 	public int reportContestComment(Report rp) {
 		return sqlSession.insert("contest.reportContestComment",rp);
+	}
+
+	public int insertContestMember(ContestMember conmem) {
+		return sqlSession.insert("contest.insertContestMember", conmem);
 	}
 	
 }

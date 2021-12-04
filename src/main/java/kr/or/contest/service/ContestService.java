@@ -11,6 +11,7 @@ import kr.or.comment.vo.Report;
 import kr.or.contest.dao.ContestDao;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestList;
+import kr.or.contest.vo.ContestMember;
 
 @Service
 public class ContestService {
@@ -59,5 +60,9 @@ public class ContestService {
 
 	public int reportContestComment(Report rp) {
 		return dao.reportContestComment(rp);
+	}
+
+	public int insertContestMember(ContestMember conmem) {
+		return dao.insertContestMember(conmem);
 	}
 }

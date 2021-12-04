@@ -143,7 +143,10 @@
   	<insert id="reportContestComment" parameterType="rp">
   		insert into report values(report_seq.nextval, #{reporterId}, #{reportReason}, #{reportEtc}, #{commentNo}, to_char(sysdate,'yyyy-mm-dd'), #{reportStatus}, #{commentContent} )
   	</insert>
-  
+  	
+  	<insert id="insertContestMember" parameterType="conmem">
+  		insert into contest_member values(cm_seq.nextval, #{contestNo}, #{memberId}, #{cmGit}, #{cmStatus})
+  	</insert>
 </mapper>
 
 
