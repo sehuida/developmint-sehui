@@ -34,4 +34,8 @@ public class NoticeDao {
 		return sqlsession.selectOne("notice.fixPageCount");
 	}
 
+	public Notice selectOneNotice(int noticeNo) {
+		return sqlsession.selectOne("notice.selectOneNotice",noticeNo);
+	}
+
 }
