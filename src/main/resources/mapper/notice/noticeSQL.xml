@@ -32,4 +32,16 @@
 	<select id="fixPageCount" resultType="_int">
 		select count(*)as fixPageCount from notice where "pin"=2
 	</select>
+	<select id="selectOneNotice" parameterType="_int" resultType="n">
+		select
+			"notice_no" as noticeNo, 
+			"notice_title" as noticeTitle,
+			"notice_content" as noticeContent, 
+			"reg_date" as regDate, 
+			"filename" as filename, 
+			"filepath" as filepath, 
+			"pin"as pin, 
+			"notice_writer" as noticeWriter 
+		from notice where "notice_no" = #{noticeNo }
+	</select>
 </mapper>

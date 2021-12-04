@@ -67,5 +67,11 @@ public class NoticeService {
 		NoticePageData npd = new NoticePageData(fixlist, fixPage, pageNavi, start, totalCount);
 		return npd;
 	}
+
+	public Notice selectOneNotice(int noticeNo) {
+		Notice n = dao.selectOneNotice(noticeNo);
+		return n;
+	}
+
 	
 }

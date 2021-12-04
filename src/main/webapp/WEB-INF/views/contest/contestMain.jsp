@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <!-- Add the slick-theme.css if you want default styling -->
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 </head>
 <style>
 
@@ -66,7 +67,33 @@ overflow: hidden;
 .newcontent{
 	margin: 0;
 }
-
+.contestCate{
+	text-align: right;
+	margin-bottom: 20px;
+}
+.contestCate>a{
+	text-decoration: none;
+	margin-right: 20px;
+	font-size: 18px;
+	color: #595959;
+}
+.contestImgBox{
+	width: 280px;
+	height: 400px;
+	overflow: hidden;
+	margin-right: 30px;   
+}
+.contestImgBox img{
+   height:100%;
+   width: 100%;
+   object-fit:cover;   
+   transform:scale(1.0);        
+   transition: transform .5s; 
+}
+.contestImgBox img:hover{ 
+   transform:scale(1.1);
+   transition: transform .5s;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -83,6 +110,11 @@ overflow: hidden;
 		  <div><a href="/contestView.do?contestNo=22"><img src="/resources/img/contest/contestMainImg3.png"></a></div>
 	</div>
 	
+	<%-- 카테고리 --%>
+	<div class="contestCate">
+		<a href="/allContestList.do"><i class="bi bi-list-ul"></i> 전체보기</a><a href="#"><i class="bi bi-calendar-check"></i> 공모전 캘린더</a>
+	</div>
+	
 	<%-----공모 신청처리 페이지 완성되면 <c:if test="nc.contestStatus == 2> 추가 예정(처리완료된 공모전만 띄우기)"---- --%>
 	
 	<div>
@@ -93,7 +125,9 @@ overflow: hidden;
 		<c:forEach var="nc" items="${list.newContest }">
 		<div>
 			<%--공모전 이미지 --%>
-			<a href="/contestView.do?contestNo=${nc.contestNo }"><img src="/resources/img/contest/${nc.contestImg }" width="280px" height="400px" style="margin-right: 30px; margin-top: 20px;"></a>
+			<div class="contestImgBox">
+				<a href="/contestView.do?contestNo=${nc.contestNo }"><img src="/resources/img/contest/${nc.contestImg }"></a>
+			</div>
 			<%--공모전 제목(제목이 16글자가 넘어가면 뒤에는 ...으로 표시 --%>
 			<c:choose>
 				<c:when test="${fn:length(nc.contestTitle) > 16}">
@@ -119,7 +153,9 @@ overflow: hidden;
 		<c:forEach var="hc" items="${list.hotContest }">
 		<div>
 			<%--공모전 이미지 --%>
-			<a href="/contestView.do?contestNo=${hc.contestNo }"><img src="/resources/img/contest/${hc.contestImg }" width="280px" height="400px" style="margin-right: 30px; margin-top: 20px;"></a>
+			<div class="contestImgBox">
+				<a href="/contestView.do?contestNo=${hc.contestNo }"><img src="/resources/img/contest/${hc.contestImg }"></a>
+			</div>
 			<%--공모전 제목(제목이 16글자가 넘어가면 뒤에는 ...으로 표시 --%>
 			<c:choose>
 				<c:when test="${fn:length(hc.contestTitle) > 16}">

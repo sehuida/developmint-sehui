@@ -1,11 +1,13 @@
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<title>공모전 상세보기</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 </head>
 <style>
 #mainTitel{
@@ -207,7 +209,7 @@
 				<c:when test="${not empty sessionScope.m }">
 				<%--공모 신청 버튼 --%>
 				<div class="clickBtn">
-					<button class="btn btn-primary btn-lg btn-block" style="margin-top:20px; width: 300px; " data-bs-toggle="modal" data-bs-target="#contestMember">공모 신청</button>
+					<button class="btn btn-primary btn-lg btn-block loginClick" style="margin-top:20px; width: 300px; " data-bs-toggle="modal" data-bs-target="#contestMember">공모 신청</button>
 				</div>
 				<%--공모 신청  Modal --%>
 				<div class="modal fade" id="contestMember" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -331,12 +333,12 @@
 									      <div class="modal-body">
 									      	<form action="/reportComment.do" method="post" class="reportBox">
 										      	<p class="Modaltitle">신고 하기</p>
-										      	<div style="border-bottom:1px solid #d9d9d9; padding:5px; margin-bottom: 10px; padding-bottom: 10px;">
+										      	<div style="border-bottom:1px solid #d9d9d9; padding:5px; margin-bottom: 30px; padding-bottom: 10px;">
 										      		<p>신고는 반대 의견을 표시하는 기능이 아닙니다.</p>
 										      		<p>글 작성자의 의견에 반대하는 경우 신고대신 [댓글] 기능을 사용해 주세요.</p>
 										      	</div>
-										      	<div style="padding:5px; margin-bottom: 10px;">
-											      	<p><span>댓글 작성자</span> : ${cl.memberId }</p>
+										      	<div style="padding:5px; margin-bottom: 20px;">
+											      	<p style="margin-bottom: 5px;"><span>댓글 작성자</span> : ${cl.memberId }</p>
 											      	<p><span>댓글</span> : ${cl.commentContent }</p>
 										      	</div>
 										      	<div style="margin-bottom: 20px; padding:5px;">
@@ -498,7 +500,6 @@
 			</c:choose>
 		</div>
 	</div>
-	
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	
 	<script>
@@ -547,6 +548,8 @@
 				$(".reportBox").eq(index).submit();
 			}
 		})
+		
+
 	</script>
 </body>
 </html>

@@ -25,19 +25,19 @@
 			<div class="contents">
 				<div class="title"><h2 style="display: inline-block;">Notice</h2></div>
 				<div class="notice-contents">
-					<h3>${n.noticeTitle }</h3>
-					<span>${n.regDate }/View : ${n.readCount }</span>
+					<h4 style="font-weight: bold;border-bottom: 1px solid #ddd;">${n.noticeTitle }</h4>
+					<span>${n.regDate } / View : ${readCount }</span>
 					<span>
-						<c:if test="${not empty n.noticeFilename }">
+						<%-- <c:if test="${not empty n.noticeFilename }">
 							<img src="/resources/img/notice/file.png" style="color:white;">
 							<a href="/fileDown?noticeNo=${n.noticeNo }">${n.noticeFilename }</a>
-						</c:if>
+						</c:if> --%>
 					</span>
 					<div class="contents-box">
 						${n.noticeContent }
 					</div>
-				</div>
 				<a href="javascript:history.go(-1)" class="btn btn-secondary">목록보기</a>
+				</div>
 			</div>
 		</div>
 	</div>

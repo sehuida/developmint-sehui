@@ -7,4 +7,5 @@ public class projectDevLanguage {
 	private int upln;
 	private int projectNo;
 	private int langNo;
+	private String langImg;
 }

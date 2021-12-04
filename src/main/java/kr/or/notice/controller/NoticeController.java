@@ -39,7 +39,9 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="/noticeView.do")
-	public String noticeView() {
-		return "notice/notiveView";
+	public String noticeView(int noticeNo, Model model) {
+		Notice n = service.selectOneNotice(noticeNo);
+		model.addAttribute("n",n);
+		return "notice/noticeView";
 	}
 }
