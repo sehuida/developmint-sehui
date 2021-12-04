@@ -297,11 +297,11 @@ input[type="checkbox"]:checked {
 									<label><li><input type="checkbox" name="g6"
 											value="" onclick="setBg(this);">협의 가능해요.</li></label>
 									<label><li><input type="checkbox" name="g6"
-											value="mac" onclick="setBg(this);">가능한 빨리 진행하고 싶어요</li></label>
+											value="mac" onclick="setBg(this);">가능한 빨리 진행하고 싶어요.</li></label>
 									<label><li><input type="checkbox" name="g6"
-											value="linux" onclick="setBg(this);">일주일 이내로 진행하고 싶어요</li></label>
+											value="linux" onclick="setBg(this);">일주일 이내로 진행하고 싶어요.</li></label>
 									<label><li><input type="checkbox" name="g6"
-											value="ios" onclick="setBg(this);">원하는 날짜가 있어요</li></label>
+											value="ios" onclick="setBg(this);">원하는 날짜가 있어요.</li></label>
 									<label><li><input type="checkbox" name="g6"
 											value="gita" onclick="setBg(this);">기타</li></label>
 
@@ -311,8 +311,7 @@ input[type="checkbox"]:checked {
 
 						<li>
 							<h3 class="g-b"
-								style="text-align: center; font-size: large; margin-bottom: 40px;">기획은
-								어느 정도 되어있나요?</h3>
+								style="text-align: center; font-size: large; margin-bottom: 40px;">어떻게 진행하기 원하시나요?</h3>
 							<div class="g-div">
 								<ul>
 									<label><li><input type="checkbox" name="g7"

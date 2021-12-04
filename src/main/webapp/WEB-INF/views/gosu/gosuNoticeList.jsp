@@ -159,8 +159,8 @@ ul#gallery>a>li dd {
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
 	<div class="gosu-mail">
-			<a href=""><span>1</span>요청서</a>
-		</div>
+			<a href="/gosuRequestList.do"><span>1</span>요청서</a>
+	</div>
 		<h3>
 			<span style="color: rgb(78, 205, 196);">고수</span>의 게시판
 		</h3>

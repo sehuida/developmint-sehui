@@ -106,8 +106,8 @@
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
 		<div class="gosu-mail">
-			<a href=""><span>1</span>요청서</a>
-		</div>
+			<a href="/gosuRequestList.do"><span>1</span>요청서</a>
+	</div>
 		<h1>나의 현황</h1>
 		<hr>
 		<p style="margin-bottom: 100px;">신청하신 전체 내역을 확인하실 수 있습니다.</p>

@@ -58,8 +58,16 @@ public class GosuController {
 	public String gosuNoticeContent() {
 		return "gosu/gosuNoticeContent";
 	}
-		@RequestMapping(value="/gosuRequest.do")
+	@RequestMapping(value="/gosuRequest.do")
 	public String gosuRequest() {
 		return "gosu/gosuRequest";
+	}
+	@RequestMapping(value="/gosuRequestList.do")
+	public String gosuRequestList() {
+		return "gosu/gosuRequestList";
+	}
+	@RequestMapping(value="/gosuRequestContent.do")
+	public String gosuRequestContent() {
+		return "gosu/gosuRequestContent";
 	}
 }
