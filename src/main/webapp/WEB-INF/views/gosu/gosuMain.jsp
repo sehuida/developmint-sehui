@@ -44,9 +44,7 @@
 }
 
 .container .g-plus:hover {
-
-	color:rgb(144, 209, 180);
-	
+	color: rgb(144, 209, 180);
 }
 
 .gosu {
@@ -84,7 +82,7 @@
 	background-color: rgb(223, 245, 235);
 	left: 0;
 	padding: 50px;
-	overflow-x: hidden;
+	overflow: hidden;
 }
 
 .gosu-person>h3, .gosu-notice>h3, .gosu-status>h3 {
@@ -268,10 +266,6 @@ to {
 .gosu-write-wrap {
 	position: fixed;
 	z-index: 1000;
-	display: flex;
-	align-items: center;
-	justify-content: right;
-	width: 1400px;
 }
 
 .gosu-write {
@@ -292,10 +286,36 @@ to {
 	font-weight: bold;
 	line-height: 30px;
 }
+
+.gosu-mail {
+	display: flex;
+	justify-content: right;
+}
+
+.gosu-mail a {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.gosu-mail span {
+	font-weight: bold;
+	color: white;
+	background-color: red;
+	border-radius: 50%;
+	text-align: center;
+	width: 20px;
+	margin-left: 50px;
+	display: block;
+	font-size: 13px;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
+	<div class="gosu-mail">
+			<a href=""><span>1</span>요청서</a>
+		</div>
+		
 		<h1>
 			<span style="color: rgb(78, 205, 196);">고수</span>의 노하우
 		</h1>
@@ -307,13 +327,14 @@ to {
 				<h5 style="font-size: small; color: gray;">
 					고수에게<br>개발을 요청하세요!
 				</h5>
-				<a href="/gosuRequest.do" class="btn btn-primary" style="font-weight:bold;">요청서 작성하기</a>
+				<a href="/gosuRequest.do" class="btn btn-primary"
+					style="font-weight: bold;">요청서 작성하기</a>
 			</div>
 		</div>
 		<div class="g-plus">
 			<a href="/gosuList.do" style="color: rgb(78, 205, 196);">더보기</a>
 		</div>
-		
+
 		<div class="gosu-wrap">
 			<div class="gosu">
 				<button class="card border-primary mb-3"
@@ -518,7 +539,8 @@ to {
 			<hr>
 			<h3 style="text-align: center;">나의 현황</h3>
 			<div class="g-plus">
-				<a href="/gosuSituation.do" style="color: rgb(78, 205, 196);">자세히 보기</a>
+				<a href="/gosuSituation.do" style="color: rgb(78, 205, 196);">자세히
+					보기</a>
 			</div>
 			<div class="g-status-border">
 				<h4 style="margin-top: 30px; margin-left: 40px;">신청한 내역</h4>
@@ -539,8 +561,7 @@ to {
 								<td>제목(text)</td>
 							</tr>
 						</table>
-					</a>
-					<a href="/gosuTalk.do">
+					</a> <a href="/gosuTalk.do">
 						<table class="g-sc-tbl card text-white bg-primary mb-3"
 							style="margin-bottom: 0;">
 							<tr>
@@ -566,7 +587,8 @@ to {
 
 							<tr>
 								<th colspan="2"
-									style="text-align: right; padding-right: 0; margin-bottom: 0; min-width: 282px; max-width: 282px;">진행 중</th>
+									style="text-align: right; padding-right: 0; margin-bottom: 0; min-width: 282px; max-width: 282px;">진행
+									중</th>
 							</tr>
 							<tr>
 								<th>고수</th>
@@ -578,15 +600,14 @@ to {
 							</tr>
 							</tboay>
 						</table>
-					</a>
-
-					<a href="/gosuTalk.do">
+					</a> <a href="/gosuTalk.do">
 						<table class="g-sc-tbl card bg-light mb-3">
 							<tboay style="min-width:342px;max-width:342px;">
 
 							<tr>
 								<th colspan="2"
-									style="text-align: right; padding-right: 0; margin-bottom: 0; min-width: 282px; max-width: 282px;">진행 중</th>
+									style="text-align: right; padding-right: 0; margin-bottom: 0; min-width: 282px; max-width: 282px;">진행
+									중</th>
 							</tr>
 							<tr>
 								<th>고수</th>

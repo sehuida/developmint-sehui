@@ -90,10 +90,6 @@
 .gosu-write-wrap {
 	position: fixed;
 	z-index: 1000;
-	display: flex;
-	align-items: center;
-	justify-content: right;
-	width: 1400px;
 }
 
 .gosu-write {
@@ -114,10 +110,33 @@
 	font-weight: bold;
 	line-height: 30px;
 }
+  .gosu-mail{
+        display: flex;
+        justify-content: right;
+        
+    }
+    .gosu-mail a{
+        font-weight: bold;
+        font-size: 20px;
+    }
+    .gosu-mail span{
+        font-weight: bold;
+        color: white;
+        background-color: red;
+        border-radius: 50%;
+        text-align: center;
+        width: 20px;
+        margin-left: 50px;
+        display: block;
+        font-size: 13px;
+    } 
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
+	<div class="gosu-mail">
+			<a href=""><span>1</span>요청서</a>
+		</div>
 		<h3>
 			<span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다
 		</h3>
