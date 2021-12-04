@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.comment.vo.Comment;
+import kr.or.comment.vo.Report;
 import kr.or.contest.vo.Contest;
 
 @Repository
@@ -60,6 +61,10 @@ public class ContestDao {
 
 	public int deleteContestComment(Comment cm) {
 		return sqlSession.delete("contest.deleteContestComment",cm);
+	}
+
+	public int reportContestComment(Report rp) {
+		return sqlSession.insert("contest.reportContestComment",rp);
 	}
 	
 }

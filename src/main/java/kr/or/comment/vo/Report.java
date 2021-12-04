@@ -1,4 +1,4 @@
-package kr.or.admin.vo;
+package kr.or.comment.vo;
 
 import lombok.Data;
 
