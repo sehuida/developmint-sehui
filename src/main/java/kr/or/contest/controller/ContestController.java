@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -182,5 +183,28 @@ public class ContestController {
 		return "common/msg";
 	}
 	
+	//공모전 전체보기
+	@RequestMapping(value = "/allContestList.do")
+	public String allContestList(Model model) {
+		return "contest/allContestList";
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
