@@ -123,7 +123,7 @@
                             </div>
                         </div>
                         <div class="rListBox">
-                        <c:forEach items="${list }" var="pt">
+                        <c:forEach items="${list }" var="pt" varStatus="mi">
                         	<div class="contentFlexBox">
                                 <div class="imgBox">
                                     <img class="myInfoImg" src="${pt.writerImgPath }">
@@ -145,9 +145,11 @@
                                     </div>
                                     <div class="bottomFlexBox">
                                         <div class="subImgBox">
-                                            <img class="langImg" src="/resources/img/recruitTeamProject/recruitPage/python.png">
-                                            <img class="langImg" src="/resources/img/recruitTeamProject/recruitPage/django.png">
-                                            <img class="langImg" src="/resources/img/recruitTeamProject/recruitPage/flutter.png">
+	                                        <c:forEach items="${pdLangList }" var="lI"  varStatus="i">
+	                                        	<c:if test="${pt.projectNo eq lI.projectNo }">
+	                                        		<img class="langImg" src="${lI.langImg }">
+	                                           	</c:if>
+	                                        </c:forEach>
                                         </div>
                                         <div class="countBox">
                                             <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/bubble-chat.png">
@@ -161,43 +163,7 @@
                                 </div>
                             </div>
                         </c:forEach>
-                            <div class="contentFlexBox">
-                                <div class="imgBox">
-                                    <img class="myInfoImg" src="/resources/img/recruitTeamProject/recruitPage/photo.png">
-                                </div>
-                                <div class="contentBox">
-                                    <div class="textFlexBox1">
-                                        <div class="textContent">
-                                            <p class="contentText">포트폴리오 프로젝트 팀원 구합니다!!</p>
-                                        </div>
-                                        <div class="dateType">
-                                            <b>작성일 : </b><span><b>2021 / 11 / 23</b></span>
-                                        </div>
-                                    </div>
-                                    <div class="textFlexBox2">
-                                        <div></div>
-                                        <div class="dateType">
-                                            <b>마감일 : </b><span><b>2021 / 11 / 27</b></span>
-                                        </div>
-                                    </div>
-                                    <div class="bottomFlexBox">
-                                        <div class="subImgBox">
-                                            <img class="langImg" src="/resources/img/recruitTeamProject/recruitPage/python.png">
-                                            <img class="langImg" src="/resources/img/recruitTeamProject/recruitPage/django.png">
-                                            <img class="langImg" src="/resources/img/recruitTeamProject/recruitPage/flutter.png">
-                                        </div>
-                                        <div class="countBox">
-                                            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/bubble-chat.png">
-                                            <span class="countText">0</span>
-                                            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
-                                            <span class="countText">0</span>
-                                            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/full_hart.png">
-                                            <span class="countText">0</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div id = "pageNavi">${pageNavi }</div>
                     </div>
                 </div>
             </div>

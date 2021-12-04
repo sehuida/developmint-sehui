@@ -42,7 +42,7 @@ public class ProjectTeamController {
 	
 	@RequestMapping(value="/recruitTeamMember_mainSelectPage.do")
 	public String recruitTeamMember(Model model, int reqPage, int viewValue, int checkValue) {
-		projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue);
+		projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue);
 		model.addAttribute("list", ptmpd.getList());
 		model.addAttribute("pageNavi", ptmpd.getPageNavi());
 		model.addAttribute("start", ptmpd.getStart());
