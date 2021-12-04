@@ -23,7 +23,7 @@ public class Resume {
 	private String certiIssue;
 	private String certiPass;
 	private String certiDate;
-	private String my_tech;
+	private String myTech;
 	private int veterans;
 	private int military;
 	private String selfintroName;
