@@ -114,7 +114,7 @@ overflow: hidden;
 	<%-- 카테고리 --%>
 	<div class="contestCate">
 		<a href="/allContestList.do?reqPage=1&type=0"><i class="bi bi-list-ul"></i> 전체보기</a>
-		<a href="#"><i class="bi bi-calendar-check"></i> 공모전 캘린더</a>
+		<a href="/contestCalendar.do"><i class="bi bi-calendar-check"></i> 공모전 캘린더</a>
 	</div>
 	
 	<%-----공모 신청처리 페이지 완성되면 <c:if test="nc.contestStatus == 2> 추가 예정(처리완료된 공모전만 띄우기)"---- --%>
