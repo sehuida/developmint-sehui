@@ -14,4 +14,5 @@ public class projectTeamMainPageData {
 	private String pageNavi;
 	private int start;
 	private ArrayList<projectDevLanguage> pdLangList;
+	private ArrayList<DevelopLanguage> developLangList;
 }
