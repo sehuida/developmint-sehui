@@ -22,9 +22,9 @@
 					<li><a href="/faq.do" class="text-hover">자주묻는질문<br><span class="last-span">자주묻는질문</span></a></li>
 				</ul>
 			</div>
-			<div class="contents">
-				<div class="title"><h2 style="display: inline-block;">Notice</h2></div>
-				<div class="notice-contents">
+			<div class="contents" style="padding: 20px;">
+				<div class="title" style="border-bottom: none;padding: 0;"><h2 style="display: inline-block;">Notice</h2></div>
+				<div class="notice-contents" style="padding: 20px 0 0 0;border-bottom: none;">
 					<h4 style="font-weight: bold;border-bottom: 1px solid #ddd;">${n.noticeTitle }</h4>
 					<span>${n.regDate } / View : ${readCount }</span>
 					<span>
@@ -36,8 +36,14 @@
 					<div class="contents-box">
 						${n.noticeContent }
 					</div>
-				<a href="javascript:history.go(-1)" class="btn btn-secondary">목록보기</a>
+				<a href="/noticeList.do?reqPage=1" class="btn btn-outline-primary">목록보기</a>
 				</div>
+			</div>
+			<div>
+				<ul class="a-link">
+					<li style="float: left;"><a href="/noticeView.do?noticeNo=${noticeNo-1 }">이전공지</a></li>
+					<li style="float: right: ;"><a href="/noticeView.do?noticeNo=${noticeNo+1 }">다음공지</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>

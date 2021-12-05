@@ -42,6 +42,7 @@ public class NoticeController {
 	public String noticeView(int noticeNo, Model model) {
 		Notice n = service.selectOneNotice(noticeNo);
 		model.addAttribute("n",n);
+		model.addAttribute("noticeNo",noticeNo);
 		return "notice/noticeView";
 	}
 }
