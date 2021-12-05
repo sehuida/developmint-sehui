@@ -250,15 +250,15 @@ input[type="checkbox"]:checked {
 							<div class="g-div">
 								<ul>
 									<label><li><input type="checkbox" name="g3"
-											value="" onclick="setBg(this);">상담 후 결정</li></label>
+											value="gosu1" onclick="setBg(this);">상담 후 결정</li></label>
 									<label><li><input type="checkbox" name="g3"
-											value="mac" onclick="setBg(this);">주니어 (3년 이하)</li></label>
+											value="ju" onclick="setBg(this);">주니어 (3년 이하)</li></label>
 									<label><li><input type="checkbox" name="g3"
-											value="linux" onclick="setBg(this);">미드 (4~9년)</li></label>
+											value="mid" onclick="setBg(this);">미드 (4~9년)</li></label>
 									<label><li><input type="checkbox" name="g3"
-											value="ios" onclick="setBg(this);">시니어(10년 이상)</li></label>
+											value="si" onclick="setBg(this);">시니어(10년 이상)</li></label>
 									<label><li><input type="checkbox" name="g3"
-											value="android" onclick="setBg(this);">기타</li></label>
+											value="gita" onclick="setBg(this);">기타</li></label>
 								</ul>
 							</div>
 						</li>
@@ -269,11 +269,11 @@ input[type="checkbox"]:checked {
 							<div class="g-div">
 								<ul>
 									<label><li><input type="checkbox" name="g4"
-											value="" onclick="setBg(this);">아이디어만 있음</li></label>
+											value="idea" onclick="setBg(this);">아이디어만 있음</li></label>
 									<label><li><input type="checkbox" name="g4"
-											value="mac" onclick="setBg(this);">필요 내용 정리되어 있음</li></label>
+											value="con" onclick="setBg(this);">필요 내용 정리되어 있음</li></label>
 									<label><li><input type="checkbox" name="g4"
-											value="linux" onclick="setBg(this);">상세한 기획 문서 있음</li></label>
+											value="" onclick="setBg(this);">상세한 기획 문서 있음</li></label>
 									<label><li><input type="checkbox" name="g4"
 											value="ios" onclick="setBg(this);">레이아웃, 디자인 등 구성 완료</li></label>
 									<label><li><input type="checkbox" name="g4"

@@ -154,6 +154,7 @@
 			</select>
 
 		</div>
+		<c:if test="${sessionScope.m.memberType eq 2}">
 		<div class="gosu-write-wrap">
 			<div class="gosu-write">
 				<h5 style="font-size: small; color: gray;">
@@ -162,6 +163,7 @@
 				<a href="/gosuWriteFrm.do" class="btn btn-primary" style="font-weight:bold;">작성하기</a>
 			</div>
 		</div>
+		</c:if>
 		<div class="gosu-wrap">
 			<div class="gosu">
 				<button type="button" class="card border-primary mb-3"
