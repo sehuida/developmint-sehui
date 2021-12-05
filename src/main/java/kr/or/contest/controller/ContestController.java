@@ -185,8 +185,21 @@ public class ContestController {
 	
 	//공모전 전체보기
 	@RequestMapping(value = "/allContestList.do")
-	public String allContestList(Model model) {
+	public String allContestList(Model model, int reqPage, int type) {
+		
+		ContestList cList = service.contestCateList(reqPage, type);
+		
+		model.addAttribute("list", cList.getContestList());
+		model.addAttribute("start", cList.getStart());
+		model.addAttribute("pageNavi",cList.getPageNavi());
+		model.addAttribute("type", type);
 		return "contest/allContestList";
+	}
+	
+	//공모전 캘린더
+	@RequestMapping(value="/contestCalendar.do")
+	public String contestCalendar() {
+		return "contest/contestCalendar";
 	}
 	
 }
