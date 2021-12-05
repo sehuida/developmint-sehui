@@ -22,14 +22,18 @@
 		margin-top: 15px;		
 		margin-bottom: 80px;
 	}
+	.step2Box{
+		width: 900px;
+		margin: 0 auto;
+		margin-top: 15px;		
+		margin-bottom: 80px;
+	}
 	em{
 		float: left;
 		font-style: normal;
 		font-weight: 900;
 		font-size: 20px;
 		margin-bottom: 15px;
-		
-		
 	}
 	b{
 		color: rgb(51, 51, 51);
@@ -66,6 +70,7 @@
 		padding-left: 5px;
 		outline: none;
 		margin-left: 50px;
+		font-size: 14px;
 	}
 	.selfIntroContent{
 		text-align: center;
@@ -83,6 +88,7 @@
 		height: 40px;
 		color: rgb(51, 51, 51);
 		outline: none;
+		font-size: 14px;
 	}
 	.dateInput{
 		width: 142px;
@@ -100,16 +106,8 @@
 	.txt_check{
 		color: #888;
 	}
-	.category>label{
-		width: 180px;
-		height: 150px;
-		line-height: 150px;
-		border: 1px solid #dfdfdf;
-		margin-bottom: 20px;
-	}
-	.category>label>input{
-		/* display: none; */
-	}
+	
+	
 
 	.carrerLabel{
 		width: 200px;
@@ -166,11 +164,71 @@
 	}
 	.step{
 		position: relative;
-		bottom: -300px;
-		left: - 50px;
+		bottom: -330px;
+		left: -50px;
 	}
 	.step>ul{
+		list-style: none;
+	}
+	.step>ul>li{
+		font-size: 18px;
+		margin-bottom: 5px;
+		
+	}
+	/* 주요 업무 카테고리 */
+	.category>div{
+		display: inline-block;
+		position: relative;	
+	}
+	.category>div>label{
+		width: 200px;
+		height: 150px;
+		border: 1px solid #dfdfdf;
+		margin-bottom: 20px;
+	}
+	.categoryLabel>img, .categoryLabel>span{
+		position: relative;
+		top: 45px;
+	}
+	.categoryLabel>img{
+		height: 45px;
+	}
+	.category>div>input{
+		/* display: none;  */		/* 나중에 주석 제거 */
+	}
 	
+	/* 분야 */
+	.fields{
+		overflow: hidden;
+		margin-left: 15px;
+	}
+	.fields>div{
+		float: left;
+		margin-left: 15px;
+	}
+	.fields>div>input{
+		display: none;
+	}
+	
+	.fieldsLabel{
+		background-color: #dfdfdf;
+		padding: 1px 10px;
+		color: gray;
+		border-radius: 15px;
+		font-size: 14px;
+	}
+	.announContent{
+		text-align: center;
+	}
+	.announContentTextarea{
+		outline-style: none;
+		padding: 10px;
+		font-size: 14px;
+		margin-top: 30px;
+	}
+	.step2Box>p{
+		font-size: 13px;
+		margin-left: 20px;
 	}
 </style>
 </head>
@@ -192,203 +250,212 @@
 			</ul>
 		</div>
 		<div class="announceData">
-			<form action="resumeManage.do" method="post">
-				<em>기본정보</em>
-				<br><br><br>
-				<hr>
-				<div class="grayBox">
-					<b>회사명<span>*</span></b>
-					<input type="text" class="textInput" name="companyTitle" placeholder="회사명 입력">
-				</div>
-				
-	
-				<div class="grayBox">
-					<em>주요 업무 카테고리</em>
+			<form action="announceManage.do" method="post">
+				<div class="step1">
+					<em>기본정보</em>
+					<br><br><br>
+					<hr>
 					<br><br>
-					<p>해당하는 주요 업무의 카테고리를 모두 선택해 주세요.</p>
-					<div class="category">
-		                <label class="developLabel" for="develop">
-		                    <input name="develop" class="developCheckBox" id="develop" type="checkBox" value=1>
-		                    <img src="/resources/img/company/develop.PNG">
-		                    <span class="txt_check">개발</span>
-		                </label>
-		                <label class="designLabel" for="design">
-		                    <input name="design" class="designCheckBox" id="design" type="checkBox" value=2>
-		                    <img src="/resources/img/company/design.PNG">
-		                    <span class="txt_check">디자인</span>
-		                </label>
-		                <label class="planLabel" for="plan">
-		                    <input name="plan" class="planCheckBox" id="plan" type="checkBox" value=3>
-		                    <img src="/resources/img/company/plan.PNG">
-		                    <span class="txt_check">기획</span>
-		                </label>
-		            </div>
-				</div>
-				
-				<!-- -------- -->
-				<div class="grayBox">
-					<em>경력사항</em>
-					<br><br>
-					<div class="career">			<!-- radio버튼 display none해주고 라벨로 선택해서 선택시 뒷배경 mint 글씨 흰색으로 변경(아마 자바스크립트로 해야할듯?) -->
-		                <label class="carrerLabel" for="junior">
-		                    <input name="carrerType" class="carrerRadio" id="junior" type="radio" value=1>	<!-- value=1 //주니어(신입) -->
-		                    <span class="txt_check">신입</span>
-		                </label>
-		                <label class="carrerLabel" for="senior">
-		                    <input name="carrerType" class="carrerRadio" id="senior" type="radio" value=2>		<!-- value=2 //시니어(경력) -->
-		                    <span class="txt_check">경력</span>
-		                </label>
-		           </div>
-				</div>
-				<div class="grayBox">
-					<em>대외활동</em>
-					<br><br>
-					<div class="activityInfo">
-						<div class="activityData">
-							<div class="activity">
-								<b>활동구분</b>
-							</div>
-							<div class="activityInput">
-								<select class="selectInput" name="activity">	
-									<option>활동구분 선택</option>
-									<option value=1>교내활동</option>
-									<option value=2>인턴</option>
-									<option value=3>자원봉사</option>
-									<option value=4>아르바이트</option>
-									<option value=5>해외연수</option>
-								</select>
-							</div>
-						</div>
-						
-						<div class="activityNameData">
-							<div class="activityName">
-								<b>기관/장소</b>
-							</div>
-							<div class="activityNameInput">
-								<input type="text" class="smallTextInput" name="activityName" placeholder="기관/장소 입력">
-							</div>
-						</div>
-						<div class="activityDateData">
-							<div class="activityDate">
-								<b>활동기간</b>
-							</div>
-							<div class="activityDateInput">
-								<input type="date" class="dateInput firstDateInput" name="activityStartDate"> ~ <input type="date" class="dateInput" name="activityEndDate">				
-							</div>
-						</div>
-						<div class="activityContentData">
-							<div class="activityContent">
-								<b>활동내용</b>
-							</div>
-							<div class="activityContentInput">
-								<input type="text" class="textInput" name="activityContent" placeholder="활동내용 입력">					
-							</div>
-						</div>
-						
+					<div class="grayBox">
+						<em>회사명</em>
+						<br><br>
+						<b>회사명<span>*</span></b>
+						<input type="text" class="textInput" name="companyTitle" placeholder="회사명 입력">
 					</div>
-				</div>
-				<div class="grayBox">
-					<em>자격증/어학/수상내역</em>
-					<br><br>
-					<div class="certiInfo">
-						<div class="certiNameData">
-							<div class="activityName">
-								<b>자격증명</b>
+					
+		
+					<div class="grayBox">
+						<em>주요 업무 카테고리</em>
+						<br><br>
+						<p>해당하는 주요 업무의 카테고리를 모두 선택해 주세요.</p>
+						<div class="category">
+							<div class="develop">
+				                <input name="category" class="developCheckBox" id="develop" type="checkBox" value=1>
+				                <label class="categoryLabel" for="develop">
+				                    <img src="/resources/img/company/develop.PNG"><br>
+				                    <span class="txt_check">개발</span>
+				                </label>
+				                
 							</div>
-							<div class="certiNameInput">
-								<input type="text" class="smallTextInput" name="certiName" placeholder="자격증명 입력">
-							</div>
-						</div>
-						<div class="certiIssueData">
-							<div class="certiIssue">
-								<b>발행처</b>
-							</div>
-							<div class="certiIssueInput">
-								<input type="text" class="smallTextInput" name="certiIssue" placeholder="발행처/기관 입력">					
-							</div>
-						</div>
-						<div class="certiPassData">
-							<div class="certiPass">
-								<b>합격구분</b>
-							</div>
-							<div class="certiPassInput">
-								<select class="selectInput" name="certiPass">	
-									<option>합격구분 선택</option>
-									<option value=1>필기합격</option>
-									<option value=2>실기합격</option>
-									<option value=3>최종합격</option>
-								</select>
-							</div>
-						</div>
-						<div class="certiDateData">
-							<div class="certiDate">
-								<b>취득일</b>
-							</div>
-							<div class="certiDateInput">
-								<input type="date" class="dateInput firstDateInput" name="certiDate">			
-							</div>
-						</div>
+							<div class="design">
+				                <input name="category" class="designCheckBox" id="design" type="checkBox" value=2>
+				                <label class="categoryLabel" for="design">
+				                    <img src="/resources/img/company/design.PNG"><br>
+				                    <span class="txt_check">디자인</span>
+				                </label>
+			                </div>
+			                <div class="plan">
+				                <input name="category" class="planCheckBox" id="plan" type="checkBox" value=3>
+				                <label class="categoryLabel" for="plan">
+				                    <img src="/resources/img/company/plan.PNG"><br>
+				                    <span class="txt_check">기획</span>
+				                </label>
+			                </div>
+			            </div>
 					</div>
+					
+					<div class="grayBox">
+						<em>분야</em>
+						<br><br>
+						<div class="fields">
+							<div class="web">
+				                <input name="fields" class="fieldsCheckBox" id="web" type="checkBox" value=1>
+				                <label class="fieldsLabel" for="web">웹</label>  
+							</div>
+							<div class="app">
+				                <input name="fields" class="fieldsCheckBox" id="app" type="checkBox" value=2>
+				                <label class="fieldsLabel" for="app">어플리케이션</label>
+			                </div>
+			                <div class="com">
+				                <input name="fields" class="fieldsCheckBox" id="com" type="checkBox" value=3>
+				                <label class="fieldsLabel" for="com">커머스, 쇼핑몰</label>
+			                </div>
+			                <div class="com">
+				                <input name="fields" class="fieldsCheckBox" id="sw" type="checkBox" value=4>
+				                <label class="fieldsLabel" for="sw">일반 소프트웨어</label>
+			                </div>
+			                <div class="com">
+				                <input name="fields" class="fieldsCheckBox" id="pub" type="checkBox" value=5>
+				                <label class="fieldsLabel" for="pub">퍼블리싱</label>
+			                </div>
+			                <div class="com">
+				                <input name="fields" class="fieldsCheckBox" id="im" type="checkBox" value=6>
+				                <label class="fieldsLabel" for="im">임베디드</label>
+			                </div>
+			                <div class="com">
+				                <input name="fields" class="fieldsCheckBox" id="game" type="checkBox" value=7>
+				                <label class="fieldsLabel" for="game">게임</label>
+			                </div>
+			                <div class="com">
+				                <input name="fields" class="fieldsCheckBox" id="etc" type="checkBox" value=8>
+				                <label class="fieldsLabel" for="etc">기타</label>
+			                </div>
+			            </div>
+					</div>
+					
+					<div class="grayBox">
+						<em>학력</em>
+						<br><br>
+						<div class="school">
+							<b>최종학력</b>
+						</div>
+						<div class="activityInput">
+							<select class="selectInput" name="activity">	
+								<option value=1>초졸</option>
+								<option value=2>중졸</option>
+								<option value=3>고졸</option>
+								<option value=4 selected="">대졸이상</option>
+							</select>
+						</div>		
+					</div>
+					
+					<div class="grayBox">
+						<em>근무형태</em>
+						<br><br>
+						<div class="school">
+							<b>근무형태</b>
+						</div>
+						<div class="activityInput">
+							<select class="selectInput" name="activity">	
+								<option value=1>정규직</option>
+								<option value=2>계약직</option>
+								<option value=3>아르바이트</option>
+								<option value=4>인턴</option>
+								<option value=4>프리랜서</option>
+							</select>
+						</div>		
+					</div>
+					
+					<!-- 다음버튼 -->
+					
 				</div>
 				
-				<div class="grayBox">
-					<em>보유기술 및 능력</em>
+				<div class="step2">
+					<em>상세정보</em>
+					<br><br><br>
+					<hr>
 					<br><br>
-					<!-- 여기 소원누나가 전에 했던 엔터키로 값 받는거 넣기 -->
-				</div>
-				
-				<div class="grayBox">
-					<em>취업 우대사항</em>
-					<br><br>
-					<div class="benefitInfo">
-						<div class="benefitData">
-							<div class="veterans">
-								<b>보훈대상</b>
-							</div>
-							<div class="veteransInput">
-								<select class="selectInput" name="veterans">	
-									<option value=1>비대상</option>
-									<option value=2>대상</option>
-								</select>
-							</div>
-						</div>
-						<div class="militaryData">
-							<div class="military">
-								<b>병역대상</b>
-							</div>
-							<div class="militaryInput">
-								<select class="selectInput" name="military">	
-									<option value=1>대상아님</option>
-									<option value=2>미필</option>
-									<option value=3>군필</option>
-									<option value=4>면제</option>
-									<option value=5>복무중</option>
-								</select>
-							</div>
-						</div>
+					<div class="step2Box">
+						<h5 style="color: black; font-weight: 900;">상시 업무 내용</h5>
+						<p style="color: rgb(108, 108, 108);">
+							업무 내용을 상세하게 작성해주실수록, 더 적합한 파트너를 만날 수 있습니다.<br>
+							파트너가 알아야 할 유의사항(필수 사항, 전문 경험 등)도 함께 작성해 주세요.
+						</p>
+			            <div class="announContent">
+			                <textarea cols="120" rows="30" name="announContent" class="announContentTextarea" placeholder="  
+
+  <프로젝트의 현재 상황>
+  예시) 프로젝트의 목적, 현재 준비 상황, 진행 계획 등
+
+  <상세한 업무 내용>
+  예시) 사이트의 용도, 주요 기능 List, 작업 분량, 필요한 조건 등
+
+  <참고자료 / 유의사항>
+  예시) 참고사이트, 기타 유의사항 등"></textarea>
+			        	</div>  
+			    	</div>
+			    	
+			    	<div class="step2Box">
+						<h5 style="color: black; font-weight: 900; margin-bottom: 0px;">관련기술</h5>
+						<t style="font-size: 13px;">더 적합한 파트너가 프로젝트를 찾고 지원할 수 있도록 프로젝트와 관련된 기술을 입력해주세요.</t>
+						<br><br>
 						
+						<input type="text" class="textInput" style="width: 800px; margin-left: 0px;" name="skiils" placeholder="추가할 기술명을 입력하세요."><br>
+						<t style="font-size: 13px; margin-left: 30px; color: rgb(108,108,108);">기술명을 입력한 후, 해당하는 기술을 선택하거나 엔터키를 눌러 추가해 주세요.</t>
 					</div>
+					
+					<!-- 이전, 다음버튼 -->	
 				</div>
 				
-				<div class="grayBox">
-					<em>자기소개서</em>
+				<div class="step3">
+					<em>급여 및 근무</em>
+					<br><br><br>
+					<hr>
 					<br><br>
-					<div class="selfIntro">
-		              	<div class="selfIntroTitle">
-		                    <input type="text" name="selfIntroTitle" class="textInput" style="margin: 0;" placeholder="자기소개서 제목">
-		                </div>
-		               
-		                <div class="selfIntroContent">
-		                    <textarea cols="80" rows="10" name="selfIntroContent" class="selfIntroContentTextarea" placeholder="자기소개서 내용"></textarea>
-		                </div>
-		                
-		           </div>
+					<div class="grayBox">
+						<em>급여</em>
+						<br><br>
+						<b>급여</b>
+						<input type="text" class="smallTextInput" name="money" placeholder="급여 입력">
+					</div>
+					
+					<div class="grayBox">
+						<em>학력</em>
+						<br><br>
+						<div class="school">
+							<b>최종학력</b>
+						</div>
+						<div class="activityInput">
+							<select class="selectInput" name="activity">	
+								<option value=1>초졸</option>
+								<option value=2>중졸</option>
+								<option value=3>고졸</option>
+								<option value=4 selected="">대졸이상</option>
+							</select>
+						</div>		
+					</div>
+					
+					<div class="grayBox">
+						<em>근무형태</em>
+						<br><br>
+						<div class="school">
+							<b>근무형태</b>
+						</div>
+						<div class="activityInput">
+							<select class="selectInput" name="activity">	
+								<option value=1>정규직</option>
+								<option value=2>계약직</option>
+								<option value=3>아르바이트</option>
+								<option value=4>인턴</option>
+								<option value=4>프리랜서</option>
+							</select>
+						</div>		
+					</div>
+					
+					<!-- 이전, 등록하기 버튼 -->
+					
 				</div>
 				
-				<div class="grayBox">
-					<em>희망 근무지역 선택</em>
-					<br><br>
-				</div>
 				<div class="selectBtn">
 					<input type="button" class="backBtn" value="취소">
 					<input type="submit" class="resumeBtn" value="저장하기">

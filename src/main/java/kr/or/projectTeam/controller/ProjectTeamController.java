@@ -37,6 +37,7 @@ public class ProjectTeamController {
 		model.addAttribute("pageNavi", ptmpd.getPageNavi());
 		model.addAttribute("start", ptmpd.getStart());
 		model.addAttribute("pdLangList", ptmpd.getPdLangList());
+		model.addAttribute("developLangList", ptmpd.getDevelopLangList());
 		return "recruitCrue/recruitTeamMember_mainPage";
 	}
 	
@@ -47,6 +48,9 @@ public class ProjectTeamController {
 		model.addAttribute("pageNavi", ptmpd.getPageNavi());
 		model.addAttribute("start", ptmpd.getStart());
 		model.addAttribute("pdLangList", ptmpd.getPdLangList());
+		model.addAttribute("developLangList", ptmpd.getDevelopLangList());
+		model.addAttribute("viewValue", viewValue);
+		model.addAttribute("checkValue", checkValue);
 		return "recruitCrue/recruitTeamMember_mainPage";
 	}
 	

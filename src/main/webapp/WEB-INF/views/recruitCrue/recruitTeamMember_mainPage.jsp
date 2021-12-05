@@ -24,32 +24,67 @@
 	        }
 	    });
 	
-	    $(".rBox_Leftnavi_left").click(function(){
+	    /* $(".rBox_Leftnavi_left").click(function(){
 	        $(".rBox_Leftnavi_right").css("opacity", "0.5");
 	        $(".rBox_Leftnavi_left").css("opacity", "1");
 	    });
 	    $(".rBox_Leftnavi_right").click(function(){
 	        $(".rBox_Leftnavi_right").css("opacity", "1");
 	        $(".rBox_Leftnavi_left").css("opacity", "0.5");
-	    });
+	    }); */
 	    
-	    $(".left_site").children().first().click(function(){
-	    	location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=1";
+	    $(".rBox_Leftnavi_left").click(function(){
+	    	/* $(".rBox_Leftnavi_right").css("opacity", "0.5");
+	        $(".rBox_Leftnavi_left").css("opacity", "1");  */
 	    	if($(".navi_checkbox").is(":checked")){
 				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=1&checkValue=2";
 			} else {
-				location.href="/recruitTeamMember_mainPage.do?reqPage=1&viewValue=1&checkValue=1";
+				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=1&checkValue=1";
 			}
 	    });
 	    
-		$(".left_site").children().eq(2).click(function(){
-			location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=2";
+		$(".rBox_Leftnavi_right").click(function(){
+			/* $(".rBox_Leftnavi_right").css("opacity", "1");
+	        $(".rBox_Leftnavi_left").css("opacity", "0.5"); */
 			if($(".navi_checkbox").is(":checked")){
 				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=2&checkValue=2";
+				/* $(window).hashchange(); */
 			} else {
-				location.href="/recruitTeamMember_mainPage.do?reqPage=1&viewValue=2&checkValue=1";
+				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=2&checkValue=1";
 			}
 		 });
+		
+		$(".navi_checkbox").change(function(){
+			if($(".navi_checkbox").is(":checked")){
+				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=1&checkValue=2";
+			} else {
+				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=1&checkValue=1";
+			}
+		});
+		
+		
+		var viewValue = $(".clickCssKeeper").val();
+	    var checkValue = $(".checkCssKeeper").val();
+	    
+	    if(checkValue == 1){
+	    	$(".navi_checkbox").prop("checked", false);
+	    	if(viewValue == 1){
+	    		$(".rBox_Leftnavi_right").css("opacity", "0.5");
+		        $(".rBox_Leftnavi_left").css("opacity", "1"); 
+	    	}else if(viewValue == 2){
+	    		$(".rBox_Leftnavi_right").css("opacity", "1");
+		        $(".rBox_Leftnavi_left").css("opacity", "0.5"); 
+	    	}
+	    } else if(checkValue == 2){
+	    	$(".navi_checkbox").prop("checked", true);
+			if(viewValue == 1){
+				$(".rBox_Leftnavi_right").css("opacity", "0.5");
+		        $(".rBox_Leftnavi_left").css("opacity", "1");
+	    	}else if(viewValue == 2){
+	    		$(".rBox_Leftnavi_right").css("opacity", "1");
+		        $(".rBox_Leftnavi_left").css("opacity", "0.5"); 
+	    	}
+	    }
 	});
 </script>
 <body>
@@ -57,56 +92,21 @@
 	<div class="container" id="projectContainer">
             <div class="main">
                 <div class="languageBox">
+	                <input type="hidden" class="checkCssKeeper" value="${checkValue }">
+		            <input type="hidden" class="clickCssKeeper" value="${viewValue }">
                     <ul class="languageList">
-                        <li class="languageItem">
-                            <img class="language_icon" src="/resources/img/recruitTeamProject/recruitPage/javascript.png" alt="javascript">
+                    <c:forEach items="${developLangList }" var="dll">
+                    	<li class="languageItem">
+                            <img class="language_icon" src="${dll.langImg }" alt="${dll.langName }">
                         </li>
-                        <li class="languageItem">
-                            <img class="language_icon" src="/resources/img/recruitTeamProject/recruitPage/typescript.png" alt="typescript">
-                        </li>
-                        <li class="languageItem">
-                            <img class="language_icon" src="/resources/img/recruitTeamProject/recruitPage/react.png" alt="react">
-                        </li>
-                        <li class="languageItem">
-                            <img class="language_icon" src="/resources/img/recruitTeamProject/recruitPage/vue.png" alt="vue">
-                        </li>
-                        <li class="languageItem">
-                            <img class="language_icon" src="/resources/img/recruitTeamProject/recruitPage/node.js.png" alt="node.js">
-                        </li>
-                        <li class="languageItem">
-                            <img class="language_icon" src="/resources/img/recruitTeamProject/recruitPage/java.png" alt="java">
-                        </li>
-                        <li class="languageItem">
-                            <img class="language_icon" src="/resources/img/recruitTeamProject/recruitPage/spring.png" alt="spring">
-                        </li>
-                        <li class="languageItem">
-                            <img class="language_icon" src="/resources/img/recruitTeamProject/recruitPage/kotlin.png" alt="kotlin">
-                        </li>
-                        <li class="languageItem">
-                            <img class="language_icon" src="/resources/img/recruitTeamProject/recruitPage/c++.png" alt="c++">
-                        </li>
-                        <li class="languageItem">
-                            <img class="language_icon" src="/resources/img/recruitTeamProject/recruitPage/go.png" alt="go">
-                        </li>
-                        <li class="languageItem">
-                            <img class="language_icon" src="/resources/img/recruitTeamProject/recruitPage/python.png" alt="python">
-                        </li>
-                        <li class="languageItem">
-                            <img class="language_icon" src="/resources/img/recruitTeamProject/recruitPage/django.png" alt="django">
-                        </li>
-                        <li class="languageItem">
-                            <img class="language_icon" src="/resources/img/recruitTeamProject/recruitPage/flutter.png" alt="flutter">
-                        </li>
-                        <li class="languageItem">
-                            <img class="language_icon" src="/resources/img/recruitTeamProject/recruitPage/swift.png" alt="swift">
-                        </li>
+                    </c:forEach>
                     </ul>
                     <img id="languageBox_label" src="/resources/img/recruitTeamProject/recruitPage/select_language.png"><span id="label_font1">원하는 언어를 선택해 주세요!</span>
                 </div>
                 <div class="main_wrap">
                     <div class="recruitBox">
                         <div class="rBox_navi">
-                            <div id="left_site">
+                            <div id="left_site" class="left_site">
 	                            <div class="rBox_Leftnavi_left">
 	                                   <img class="rBox_navi_icon" src="/resources/img/recruitTeamProject/recruitPage/newList.png">
 	                                   <span class="navi_left_font">최신</span>
@@ -168,6 +168,7 @@
                 </div>
             </div>
         </div>
+     </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

@@ -40,14 +40,14 @@ overflow: hidden;
 	margin-top:50px;
 }
 .titleBox>a{
-	
 	float: right;
 	width: 150px;
 	height: 50px;
 	background-color: #4ECDC4;
 	font-size: 19px;
 	font-weight: bold;
-	line-height: 38px;
+	line-height: 40px;
+	margin-right: 30px;
 }
 .newContestBox{
 	margin-top:30px;
@@ -74,7 +74,7 @@ overflow: hidden;
 .contestCate>a{
 	text-decoration: none;
 	margin-right: 20px;
-	font-size: 18px;
+	font-size: 20px;
 	color: #595959;
 }
 .contestImgBox{
@@ -103,8 +103,9 @@ overflow: hidden;
 		<p class="mainTitel">공모전 게시판</p>
 		<a class="btn btn-primary" href="/insertContestFrm.do">공모등록</a>
 	</div>
+	
 	<%-- 메인 포스터 3개 슬라이드 --%>
-	<div class="slideContest" style="margin-top: 50px; margin-left:100px; margin-bottom: 100px;">
+	<div class="slideContest" style="margin-top: 50px; margin-left:65px; margin-bottom: 100px;">
 		  <div><a href="/contestView.do?contestNo=23"><img src="/resources/img/contest/contestMainImg1.png"></a></div>
 		  <div><a href="/contestView.do?contestNo=21"><img src="/resources/img/contest/contestMainImg2.png"></a></div>
 		  <div><a href="/contestView.do?contestNo=22"><img src="/resources/img/contest/contestMainImg3.png"></a></div>
@@ -112,7 +113,8 @@ overflow: hidden;
 	
 	<%-- 카테고리 --%>
 	<div class="contestCate">
-		<a href="/allContestList.do"><i class="bi bi-list-ul"></i> 전체보기</a><a href="#"><i class="bi bi-calendar-check"></i> 공모전 캘린더</a>
+		<a href="/allContestList.do?reqPage=1&type=0"><i class="bi bi-list-ul"></i> 전체보기</a>
+		<a href="/contestCalendar.do"><i class="bi bi-calendar-check"></i> 공모전 캘린더</a>
 	</div>
 	
 	<%-----공모 신청처리 페이지 완성되면 <c:if test="nc.contestStatus == 2> 추가 예정(처리완료된 공모전만 띄우기)"---- --%>
@@ -186,7 +188,7 @@ overflow: hidden;
 	$('.slideContest').slick({
 		dots : true,				//점 표시
 		autoplay : true,			//자동슬라이드
-		autoplaySpeed : 5000, 		//자동슬라이드 시간
+		autoplaySpeed : 4500, 		//자동슬라이드 시간
 		pauseOnHover : true,		//자동슬라이스 시 마우스 호버하면 멈춤
 		dotsClass : "slick-dots",	//점 css
 		draggable : true,			//밀어서 넘기기

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.projectTeam.model.dao.ProjectTeamDao;
+import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
 import kr.or.projectTeam.model.vo.projectTeamMainPageData;
@@ -26,6 +27,7 @@ public class ProjectTeamService {
 		map.put("end", end);
 		ArrayList<ProjectTeam> list = dao.selectAllprojectList(map);
 		ArrayList<projectDevLanguage> pdLangList = dao.selectAllprojectLangList();
+		ArrayList<DevelopLanguage> developLangList = dao.selectAllDevelopLangList();
 		
 		int totalCount = dao.selectTotalCount();
 		int totalPage = 0;
@@ -66,7 +68,7 @@ public class ProjectTeamService {
 		}
 		pageNavi += "</ul>";
 		
-		projectTeamMainPageData ptmpd = new projectTeamMainPageData(list, pageNavi, start, pdLangList);
+		projectTeamMainPageData ptmpd = new projectTeamMainPageData(list, pageNavi, start, pdLangList, developLangList);
 		return ptmpd;
 	}
 
@@ -81,8 +83,9 @@ public class ProjectTeamService {
 		map.put("checkValue", checkValue);
 		ArrayList<ProjectTeam> list = dao.selectAllCheckprojectList(map);
 		ArrayList<projectDevLanguage> pdLangList = dao.selectAllprojectLangList();
+		ArrayList<DevelopLanguage> developLangList = dao.selectAllDevelopLangList();
 		
-		int totalCount = dao.selectCheckTotalCount(viewValue);
+		int totalCount = dao.selectCheckTotalCount(map);
 		int totalPage = 0;
 		if(totalCount % numPerPage == 0) {
 			totalPage = totalCount / numPerPage;
@@ -121,7 +124,7 @@ public class ProjectTeamService {
 		}
 		pageNavi += "</ul>";
 		
-		projectTeamMainPageData ptmpd = new projectTeamMainPageData(list, pageNavi, start, pdLangList);
+		projectTeamMainPageData ptmpd = new projectTeamMainPageData(list, pageNavi, start, pdLangList, developLangList);
 		return ptmpd;
 	}
 	

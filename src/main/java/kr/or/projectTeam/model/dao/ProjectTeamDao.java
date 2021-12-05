@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
 
@@ -32,7 +33,12 @@ public class ProjectTeamDao {
 	}
 
 	public int selectTotalCount() {
-			int result = sqlSession.selectOne("projectTeam.projectDefaultCount");
+		int result = sqlSession.selectOne("projectTeam.projectDefaultCount");
+		return result;
+	}
+	
+	public int selectCheckTotalCount(Map<String, Object> map) {
+		int result = sqlSession.selectOne("projectTeam.projectCheckCount", map);
 		return result;
 	}
 
@@ -40,10 +46,15 @@ public class ProjectTeamDao {
 		List<ProjectTeam> list = sqlSession.selectList("projectTeam.projectCheckList", map);
 		return (ArrayList<ProjectTeam>) list;
 	}
-
-	public int selectCheckTotalCount(int viewValue) {
-		return 0;
+	
+	public ArrayList<DevelopLanguage> selectAllDevelopLangList() {
+		List<DevelopLanguage> list = sqlSession.selectList("projectTeam.developLangList");
+		return (ArrayList<DevelopLanguage>) list;
 	}
+
+	
+
+	
 	
 	
 }

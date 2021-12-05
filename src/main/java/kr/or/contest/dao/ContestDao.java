@@ -1,7 +1,9 @@
 package kr.or.contest.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +72,15 @@ public class ContestDao {
 
 	public int insertContestMember(ContestMember conmem) {
 		return sqlSession.insert("contest.insertContestMember", conmem);
+	}
+
+	public ArrayList<Contest> contestCateList(Map<String, Object> map) {
+		List<Contest> list = sqlSession.selectList("contest.contestCateList", map);
+		return (ArrayList<Contest>)list;
+	}
+
+	public int totalCount(int type) {
+		return sqlSession.selectOne("contest.totalCount",type);
 	}
 	
 }

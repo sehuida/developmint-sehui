@@ -89,13 +89,14 @@
 		height: 40px;
 		color: rgb(51, 51, 51);
 		outline: none;
+		font-size: 14px;
 	}
 	.dateInput{
 		width: 142px;
 		height: 40px;	
 		padding-left: 5px;
 		color: rgb(51, 51, 51);
-		font-size: 15px;
+		font-size: 14px;
 	}
 	.firstDateInput{
 		margin-left: 50px;
@@ -135,11 +136,11 @@
 		text-align: center;
 	}
 	.selfIntroContentTextarea{
-		padding-top: 10px;
-		padding-left: 10px;
+		padding: 10px;
 		width: 700px;
 		border-top: none;
 		outline: none;
+		font-size: 14px;
 	}
 	
 	.conditionData, .moneyData{

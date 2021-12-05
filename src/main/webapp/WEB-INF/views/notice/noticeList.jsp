@@ -31,17 +31,17 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-					     	<th scope="col" style="width: 10%;">번호</th>
-					     	<th scope="col" style="text-align: center">제목</th>
-					     	<th scope="col" style="width: 10%;">등록일</th>
-					    </tr>
+					     	<th scope="col" style="width: 10%;text-indent: 1em;">번호</th>
+					     	<th scope="col" style="text-align: center;">제목</th>
+					     	<th scope="col" style="width: 10%;text-indent: 1em;">등록일</th>
+					    </tr> 
 				 	</thead>
 				 	<tbody>
 				 		<c:forEach items="${list  }" var="n" varStatus="i">
 						<c:choose>
 							<c:when test="${n.pin eq 2}">
 								<tr class="table-primary" id="noticeList">
-									<td><i class="bi bi-pin-angle-fill" style="color: #f3969a;"></i></td> 
+									<td style="text-indent: 5px;"><i class="bi bi-pin-angle-fill" style="color: #f3969a;"></i></td> 
 									<td style="text-align: left;" >
 										<span style="color: #ddd;">[주요공지] </span><a href='/noticeView.do?noticeNo=${n.noticeNo}' id="noticePin" style="color: #fff;" class="text-decoration-none"> ${n.noticeTitle }</a>
 									</td>
@@ -50,7 +50,7 @@
 							</c:when>
 							<c:otherwise>
 							<tr class="table-light" id="noticeList" style="background-color: #bdbdbd;">
-									<td>${start + i.index-fixPage}</td> 
+									<td style="text-indent: 1em;">${start + i.index-fixPage}</td> 
 									<td style="text-align: left; ">
 										<a href='/noticeView.do?noticeNo=${n.noticeNo }' style="text-decoration: none;"> ${n.noticeTitle }</a>
 									</td>
