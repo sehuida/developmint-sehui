@@ -11,7 +11,9 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<h2>여긴마이페이지야</h2>
+		<div class="page-wrap">
+			
+		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
