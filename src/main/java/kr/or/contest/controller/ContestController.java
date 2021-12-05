@@ -196,6 +196,12 @@ public class ContestController {
 		return "contest/allContestList";
 	}
 	
+	//공모전 캘린더
+	@RequestMapping(value="/contestCalendar.do")
+	public String contestCalendar() {
+		return "contest/contestCalendar";
+	}
+	
 }
 
 
