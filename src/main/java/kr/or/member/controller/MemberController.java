@@ -40,8 +40,12 @@ public class MemberController {
 		Member m = service.selectOneMember(member);
 		if(m != null) {
 			session.setAttribute("m", m);
+			return "common/main";
+		}else {
+			model.addAttribute("msg","아이디/비밀번호를 다시 확인해주세요");
+			model.addAttribute("loc","/loginFrm.do");
+			return "common/msg";
 		}
-		return "common/main";
 	}
 	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) {
