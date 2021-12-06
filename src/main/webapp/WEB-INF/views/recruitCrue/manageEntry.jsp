@@ -20,6 +20,12 @@
             $(".rBox_Leftnavi_right").css("opacity", "1");
             $(".rBox_Leftnavi_left").css("opacity", "0.5");
         });
+        
+        $(".return_img").click(function(){
+			$(".return_img").css("cursor", "pointer");
+			history.back();
+		});
+        
     });
 </script>
 <body>
@@ -27,7 +33,7 @@
 	<div class="container" id="projectContainer">
 		<div class="main">
             <div class="returnPage">
-                <a href="#"><img class="return_img" src="/resources/img/recruitTeamProject/writePage/left.png"></a>
+                <img class="return_img" src="/resources/img/recruitTeamProject/writePage/left.png">
             </div>
             <div class="main_wrap">
                 <div class="titleFlexBox">

@@ -21,12 +21,17 @@
 .todayInfo{
 	display: flex;
 	justify-content: space-around;
+	background-color: #fafafa;
+	border-radius : 5px;
+	padding-top: 30px;
+	padding-bottom: 30px;
 }
 .todayInfo>div{
 	border : 2px solid #d9d9d9;
 	width: 250px;
 	text-align: center;
 	border-radius: 5px;
+	background-color: #fff;
 	
 }
 .boxLine{
@@ -90,8 +95,6 @@
 }
 .BoardList>div{
 	display: flex;
-	
-	
 }
 .moreTag{
 	margin-left: auto;
@@ -112,7 +115,7 @@
 	<div class="container" style="margin-top:50px;margin-bottom:100px;">
 	
 		<div class="mainCate">
-		<a href="#" class="cateAtag" onclick="history.go(-1)"><i class="bi bi-chevron-left"></i></a> 
+		<a href="/adminPage.do" class="cateAtag" onclick="history.go(-1)"><i class="bi bi-chevron-left"></i></a> 
 		<span id="dashboard" style="font-weight:bold">대시보드</span>
 		</div>
 		<br><br><br>
@@ -123,22 +126,22 @@
 			<div>
 				<p>총 회원</p>
 				<div class="boxLine"></div>
-				<span>100</span><span> 명</span>
+				<span>${todayTotalMember }</span><span> 명</span>
 			</div>
 			<div>
 				<p>가입 회원</p>
 				<div class="boxLine"></div>
-				<span>100</span><span> 명</span>
+				<span>${todayJoinMember }</span><span> 명</span>
 			</div>
 			<div>
 				<p>탈퇴 회원</p>
 				<div class="boxLine"></div>
-				<span>100</span><span> 명</span>
+				<span>${todayOutMember }</span><span> 명</span>
 			</div>
 			<div>
 				<p>총 게시물</p>
 				<div class="boxLine"></div>
-				<span>100</span><span> 명</span>
+				<span>${todayTotalContent }</span><span> 명</span>
 			</div>
 		</div>
 		
@@ -154,7 +157,7 @@
 				<p class="title" style="margin-top:100px; margin-left:70px;">사이트 통계</p>
 				<div id="cateChartBox" >
 					<div class="btns">
-					<button class="btn btn-outline-primary btn1">성별</button><button class="btn btn-outline-primary btn2">등급별</button><button class="btn btn-outline-primary btn3">카테고리별</button>
+					<button class="btn btn-outline-primary btn2">등급별</button><button class="btn btn-outline-primary btn3">카테고리별</button>
 					</div>
 					<canvas id="myChart2" ></canvas>
 				</div>
@@ -195,98 +198,91 @@
 	</div> 
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	 <script>
-	 <%-- 가입/탈퇴 차트(line타입)--%>
-	 new Chart(document.getElementById("myChart1"), {
-		  type: 'line',
-		  data: {
-		    labels: ['2021-11-23','2021-11-24','2021-11-25','2021-11-26','2021-11-27','2021-11-28'],
-		    datasets: [{ 
-		        data: [10,20,5,4,17,50],
-		        label: "가입",
-		        borderColor: "#4ECDC4",
-		        fill: false
-		      }, { 
-		        data: [3,0,5,10,4,6],
-		        label: "탈퇴",
-		        borderColor: "#90D1B4",
-		        fill: false
-		      }
-		    ]
-		  },
-		  options: {
-		    title: {
-		      display: true,
-		      text: 'DeveloMint 회원 가입 / 탈퇴 현황'
-		    }
-		  }
-		});
-	 
-	 <%-- 성별버튼 클릭시 나오는 파이차트--%>
-	 $(".btn1").click(function(){
-		 $(".myChart2").val("");
-		 new Chart(document.getElementById("myChart2"), {
-			    type: 'pie',
-			    data: {
-			      labels: ["남성","여성"],
-			      datasets: [{
-			        label: "Population (millions)",
-			        backgroundColor: ["#4ECDC4", "#90D1B4"],
-			        data: [60,40]
-			      }]
-			    },
-			    options: {
-			      title: {
-			        display: true,
-			        text: 'DeveloMint 회원 성별 통계'
+	 $(function(){
+		 var dateList = '${dateList}';
+		 var stringDate = dateList.toString();
+		 <%-- 가입/탈퇴 차트(line타입)--%>
+		 new Chart(document.getElementById("myChart1"), {
+			  type: 'line',
+			  data: {
+			    labels: ${dateList},
+			    datasets: [{ 
+			        data: ${joinList},
+			        label: "가입",
+			        borderColor: "#4ECDC4",
+			        fill: false
+			      }, { 
+			        data: ${outList},
+			        label: "탈퇴",
+			        borderColor: "#90D1B4",
+			        fill: false
 			      }
+			    ]
+			  },
+			  options: {
+			    title: {
+			      display: true,
+			      text: 'DeveloMint 회원 가입 / 탈퇴 현황'
 			    }
+			  }
 			});
-	 });
-	 $(".btn1").trigger("click");
-	 
-	 <%-- 등급별버튼 클릭시 나오는 파이차트--%>
-	 $(".btn2").click(function(){
-		 $(".myChart2").val("");
-		 new Chart(document.getElementById("myChart2"), {
-			    type: 'pie',
-			    data: {
-			      labels: ["Bronze","Silver","Gold","Platinum","Diamond","Master","Challenger"],
-			      datasets: [{
-			        label: "Population (millions)",
-			        backgroundColor: ["#4ECDC4","#90D1B4","#9cd19f","#B7CD99","#E4ECB7","#EDF6B9","#EDEBE9"],
-			        data: [30,30,15,7,7,6,5]
-			      }]
-			    },
-			    options: {
-			      title: {
-			        display: true,
-			        text: 'DeveloMint 회원 등급 통계'
-			      }
-			    }
-			});
-	 });
-	 
-	 <%-- 카테고리별버튼 클릭시 나오는 파이차트--%>
-	 $(".btn3").click(function(){
-		 $(".myChart2").val("");
-		 new Chart(document.getElementById("myChart2"), {
-			    type: 'pie',
-			    data: {
-			      labels: ["프로젝트 팀원모집","개발지식 공유","구인구직","고수의 노하우","공모전"],
-			      datasets: [{
-			        label: "Population (millions)",
-			        backgroundColor: ["#4ECDC4", "#90D1B4","#9cd19f","#E4ECB7","#EDF6B9"],
-			        data: [20,30,15,15,10]
-			      }]
-			    },
-			    options: {
-			      title: {
-			        display: true,
-			        text: 'DeveloMint 카테고리별 게시물 통계'
-			      }
-			    }
-			});
-	 });
+		 
+		 <%-- 등급별버튼 클릭시 나오는 파이차트--%>
+		 $(".btn2").click(function(){
+			 $(".myChart2").remove();
+			 $(".btn3").css("background-color","#fff");
+			 $(".btn3").css("color","#4ECDC4");
+			 $(".btn3").css("border-color","#4ECDC4");
+			 $(".btn2").css("background-color","#4ECDC4");
+			 $(".btn2").css("color","#fff");
+			 new Chart(document.getElementById("myChart2"), {
+				    type: 'pie',
+				    data: {
+				      labels: ["Bronze","Silver","Gold","Platinum","Diamond","Master","Challenger"],
+				      datasets: [{
+				        label: "Population (millions)",
+				        backgroundColor: ["#4ECDC4","#90D1B4","#9cd19f","#B7CD99","#E4ECB7","#EDF6B9","#EDEBE9"],
+				        data: ${gradeList}
+				      }]
+				    },
+				    options: {
+				      title: {
+				        display: true,
+				        text: 'DeveloMint 회원 등급 통계'
+				      }
+				    }
+				});
+		 });
+		 $(".btn2").trigger("click");
+		 
+		 <%-- 카테고리별버튼 클릭시 나오는 파이차트--%>
+		 $(".btn3").click(function(){
+			 $(".myChart2").remove();
+			 $(".btn2").css("background-color","#fff");
+			 $(".btn2").css("color","#4ECDC4");
+			 $(".btn2").css("border-color","#4ECDC4");
+			 $(".btn3").css("background-color","#4ECDC4");
+			 $(".btn3").css("color","#fff");
+			 new Chart(document.getElementById("myChart2"), {
+				    type: 'pie',
+				    data: {
+				      labels: ["프로젝트 팀원모집","개발지식 공유","구인구직","고수의 노하우","공모전"],
+				      datasets: [{
+				        label: "Population (millions)",
+				        backgroundColor: ["#4ECDC4", "#90D1B4","#9cd19f","#E4ECB7","#EDF6B9"],
+				        data: ${cateList}
+				      }]
+				    },
+				    options: {
+				      title: {
+				        display: true,
+				        text: 'DeveloMint 카테고리별 게시물 통계'
+				      }
+				    }
+				});
+		 });
+		
+	 })
 	
 	 </script>
 </body>

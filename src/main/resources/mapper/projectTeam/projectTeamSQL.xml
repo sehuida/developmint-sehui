@@ -20,8 +20,8 @@
 			p.project_start_date as pStartDate,
 			p.project_end_date as pEndDate,
 			(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-			(select count(*) from project_dibs) as dibCount,
-            (select count(*) from comments) as commentCount
+			(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 		from project p 
         order by project_No DESC) 
 		where rnum between #{start} and #{end}
@@ -68,11 +68,11 @@
 							p.project_start_date as pStartDate,
 							p.project_end_date as pEndDate,
 							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs) as dibCount,
-				            (select count(*) from comments) as commentCount
+							(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 						from project p
 		       			order by project_No DESC) 
-					where rnum between #{start} and #{end}
+					
 	  			</when>
 	  			<when test="viewValue == 2 ">
 	  				select count(*) from
@@ -92,11 +92,11 @@
 							p.project_start_date as pStartDate,
 							p.project_end_date as pEndDate,
 							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs) as dibCount,
-				            (select count(*) from comments) as commentCount
+							(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 						from project p
-		       			order by viewCount DESC, dibCount DESC, commentCount DESC) 
-					where rnum between #{start} and #{end}
+		       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_No DESC) 
+					
 				</when>
   			</choose>
   		</if>
@@ -120,12 +120,12 @@
 							p.project_start_date as pStartDate,
 							p.project_end_date as pEndDate,
 							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs) as dibCount,
-				            (select count(*) from comments) as commentCount
+							(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 						from project p
 						where p.project_status = 1 
 		       			order by project_No DESC) 
-					where rnum between #{start} and #{end}
+					
 	  			</when>
 	  			<when test="viewValue == 2">
 	  				select count(*) from
@@ -145,15 +145,15 @@
 							p.project_start_date as pStartDate,
 							p.project_end_date as pEndDate,
 							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs) as dibCount,
-				            (select count(*) from comments) as commentCount
+							(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 						from project p
 						where p.project_status = 1 
-		       			order by viewCount DESC, dibCount DESC, commentCount DESC) 
-					where rnum between #{start} and #{end}
+		       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_No DESC) 
 				</when>
   			</choose>
   		</if>
+  		
   </select>
   <select id="projectCheckList" parameterType="map" resultType="pt">
   		<if test="checkValue == 1">
@@ -176,8 +176,8 @@
 							p.project_start_date as pStartDate,
 							p.project_end_date as pEndDate,
 							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs) as dibCount,
-				            (select count(*) from comments) as commentCount
+							(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 						from project p
 		       			order by project_No DESC) 
 					where rnum between #{start} and #{end}
@@ -200,10 +200,10 @@
 							p.project_start_date as pStartDate,
 							p.project_end_date as pEndDate,
 							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs) as dibCount,
-				            (select count(*) from comments) as commentCount
+							(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 						from project p
-		       			order by viewCount DESC, dibCount DESC, commentCount DESC) 
+		       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_No DESC) 
 					where rnum between #{start} and #{end}
 				</when>
   			</choose>
@@ -228,8 +228,8 @@
 							p.project_start_date as pStartDate,
 							p.project_end_date as pEndDate,
 							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs) as dibCount,
-				            (select count(*) from comments) as commentCount
+							(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 						from project p
 						where p.project_status = 1 
 		       			order by project_No DESC) 
@@ -253,11 +253,11 @@
 							p.project_start_date as pStartDate,
 							p.project_end_date as pEndDate,
 							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs) as dibCount,
-				            (select count(*) from comments) as commentCount
+							(select count(*) from project_dibs pd where pd.project_no = p.project_no ) as dibCount,
+				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 						from project p
 						where p.project_status = 1 
-		       			order by viewCount DESC, dibCount DESC, commentCount DESC) 
+		       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_no DESC) 
 					where rnum between #{start} and #{end}
 				</when>
   			</choose>

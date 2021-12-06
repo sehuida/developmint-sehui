@@ -79,7 +79,15 @@
 								<li class="nav-item dropdown float-end me-5">
 						          <a class="nav-link dropdown-toggle active margin-right" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle" style="font-size: 2.5rem;"></i> ${sessionScope.m.memberId } 님</a>
 						          <div class="dropdown-menu">
-						            <a class="dropdown-item" href="/mypage.do">MYPAGE</a>
+						          	<c:if test="${sessionScope.m.memberType eq 1 }">
+							            <a class="dropdown-item" href="/mypage.do">MYPAGE</a>
+						          	</c:if>
+						          	<c:if test="${sessionScope.m.memberType eq 2}">
+									    <a class="dropdown-item" href="/mypageGosu.do">MYPAGE</a>	
+									</c:if>
+						          	<c:if test="${sessionScope.m.memberType eq 3}">
+									    <a class="dropdown-item" href="/mypageCom.do">MYPAGE</a>	
+									</c:if>
 						            <div class="dropdown-divider"></div>
 						            <a class="dropdown-item" href="/logout.do">LOGOUT</a>
 						          </div>

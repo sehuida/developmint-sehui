@@ -45,6 +45,7 @@
 	margin-left : 20px;
 	font-size : 17px;
 }
+
 .cateAtag{
 	margin-left: auto;
 }
@@ -100,15 +101,15 @@
 				<a href="#" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
 			</div>
 			
-			<%-- 민주가 만든 공지사항, qna로 이동 예정 --%>
+			<%-- 민주가 만든 공지사항, qna로 이동 --%>
 			<p class="title">게시판 관리</p>
 			<div id="cate">
 				<i class="bi bi-megaphone"></i><span>공지사항</span>
-				<a href="#" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
+				<a href="/noticeList.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
 			</div>
 			<div id="cate">
 				<i class="bi bi-chat-dots"></i><span>QnA</span>
-				<a href="#" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
+				<a href="/tocounsel.do" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
 			</div>
 		</div>
 	</div>

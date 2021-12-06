@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.notice.dao.NoticeDao;
 import kr.or.notice.vo.Criteria;
@@ -71,6 +72,17 @@ public class NoticeService {
 	public Notice selectOneNotice(int noticeNo) {
 		Notice n = dao.selectOneNotice(noticeNo);
 		return n;
+	}
+
+	@Transactional
+	public int insertNotice(Notice n) {
+		int result = dao.insertNotice(n);
+		return result;
+	}
+
+	public ArrayList<Notice> noticeAroundList(int noticeNo) {
+		ArrayList<Notice> nlist = dao.noticeAroundList(noticeNo);
+		return nlist;
 	}
 
 	

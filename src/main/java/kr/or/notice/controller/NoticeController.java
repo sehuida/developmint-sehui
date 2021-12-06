@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.notice.service.NoticeService;
@@ -41,8 +42,15 @@ public class NoticeController {
 	@RequestMapping(value="/noticeView.do")
 	public String noticeView(int noticeNo, Model model) {
 		Notice n = service.selectOneNotice(noticeNo);
+		ArrayList<Notice> nlist = service.noticeAroundList(noticeNo);
 		model.addAttribute("n",n);
 		model.addAttribute("noticeNo",noticeNo);
 		return "notice/noticeView";
+	}
+	
+	@RequestMapping(value="/insertNotice.do")
+	public String insertNotive(Notice n, Model model) {
+		int result = service.insertNotice(n);
+		return "notice/noticeList";
 	}
 }

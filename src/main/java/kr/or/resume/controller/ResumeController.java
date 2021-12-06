@@ -39,16 +39,16 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="/insertResume.do")
-	public String insertResume(Resume r, Model model) {
+	public String insertResume(Resume r, int memberNo, Model model) {
 		System.out.println("여기 resumeController");
 		System.out.println(r);
 		int result = service.insertResume(r);
 		if(result != 0) {
-			model.addAttribute("msg","이력서 등록실패");
+			model.addAttribute("msg","이력서 등록성공");
 		} else {
-			model.addAttribute("msg","이력서 등록성공");			
+			model.addAttribute("msg","이력서 등록실패");			
 		}
-		model.addAttribute("loc","/WEB-INF/views/resume/resumeManage.jsp");
+		model.addAttribute("loc","/resumeManage.do?memberNo="+memberNo);
 		return "common/msg";
 	}
 }

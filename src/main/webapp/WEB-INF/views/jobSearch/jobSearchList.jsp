@@ -187,7 +187,7 @@
 			                <a href="resumeManage.do?memberNo=${sessionScope.m.memberNo }"><button class="resume">이력서 작성하기</button></a>                		
                 		</c:if>
                 		<c:if test="${sessionScope.m.memberType eq 3 }">		<!-- 기업회원일 경우 -> 구인글 작성하기 띄우기 -->
-			                <a href="announceManage.do"><button class="resume">구인글 작성하기</button></a>                		
+			                <a href="announceManage.do?memberNo=${sessionScope.m.memberNo }"><button class="resume">구인글 작성하기</button></a>                		
                 		</c:if>
                 	</c:when>
                 	<c:otherwise>
