@@ -307,7 +307,7 @@ ${sessionScope.m.phone}
 						</div>
 						<div class="schoolNameInput">
 							<select class="selectInput" name="major">
-								<option>전공 선택</option>
+								<option value="0">전공 선택</option>
 								<option value="1">전기/전자/정보통신공학</option>
 								<option value="2">컴퓨터/시스템공학</option>
 								<option value="3">외 공학계열</option>
@@ -341,7 +341,7 @@ ${sessionScope.m.phone}
 						</div>
 						<div class="activityInput">
 							<select class="selectInput" name="activity">	
-								<option>활동구분 선택</option>
+								<option value="0">활동구분 선택</option>
 								<option value="1">교내활동</option>
 								<option value="2">인턴</option>
 								<option value="3">자원봉사</option>
@@ -403,7 +403,7 @@ ${sessionScope.m.phone}
 						</div>
 						<div class="certiPassInput">
 							<select class="selectInput" name="certiPass">	
-								<option>합격구분 선택</option>
+								<option value="0">합격구분 선택</option>
 								<option value="1">필기합격</option>
 								<option value="2">실기합격</option>
 								<option value="3">최종합격</option>
