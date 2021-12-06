@@ -151,6 +151,11 @@
 .return_img{
     width: 80px;
 }
+
+.return_img:hover{
+    cursor: pointer;
+}
+
 .titleFlexBox{
     display: flex;
     margin-bottom: 20px;

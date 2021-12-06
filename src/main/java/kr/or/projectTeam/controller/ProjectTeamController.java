@@ -42,7 +42,14 @@ public class ProjectTeamController {
 	}
 	
 	@RequestMapping(value="/recruitTeamMember_mainSelectPage.do")
-	public String recruitTeamMember(Model model, int reqPage, int viewValue, int checkValue) {
+	public String recruitTeamMember(Model model, int reqPage, int viewValue, int checkValue, String[] langValue) {
+		/*if(langValue != null && delCheckValue == 1) {
+			langList.add(langValue);
+			projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue, langList);
+		} else if(langValue != null && delCheckValue == 2) {
+			langList.remove(langValue);
+			projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue, langList);
+		}*/
 		projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue);
 		model.addAttribute("list", ptmpd.getList());
 		model.addAttribute("pageNavi", ptmpd.getPageNavi());
@@ -51,6 +58,7 @@ public class ProjectTeamController {
 		model.addAttribute("developLangList", ptmpd.getDevelopLangList());
 		model.addAttribute("viewValue", viewValue);
 		model.addAttribute("checkValue", checkValue);
+		model.addAttribute("selectLangList", langValue);
 		return "recruitCrue/recruitTeamMember_mainPage";
 	}
 	
@@ -65,6 +73,8 @@ public class ProjectTeamController {
 		model.addAttribute("loc","/");
 		return "common/msg";
 	}
+	
+	/* @RequestMapping(value="/writeRecruitTeam.do") */
 	
 	@RequestMapping(value="/rUploadImage.do")
 	@ResponseBody

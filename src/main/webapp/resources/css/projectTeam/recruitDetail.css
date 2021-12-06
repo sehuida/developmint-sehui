@@ -6,6 +6,11 @@
     width: 80px;
 }
 
+.return_img:hover{
+    cursor: pointer;
+}
+
+
 .main{
     width: 1200px;
 }
