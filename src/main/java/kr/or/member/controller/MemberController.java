@@ -125,4 +125,8 @@ public class MemberController {
 	public String myPage() {
 		return "member/mypage";
 	}
+	@RequestMapping(value="/updateInfoFrm.do")
+	public String updateInfoFrm() {
+		return "member/updateInfoFrm";
+	}
 }

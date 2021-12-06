@@ -38,4 +38,8 @@ public class NoticeDao {
 		return sqlsession.selectOne("notice.selectOneNotice",noticeNo);
 	}
 
+	public int insertNotice(Notice n) {
+		return sqlsession.insert("notice.insertNotice",n);
+	}
+
 }

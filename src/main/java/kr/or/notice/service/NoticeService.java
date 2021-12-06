@@ -73,5 +73,10 @@ public class NoticeService {
 		return n;
 	}
 
+	public int insertNotice(Notice n) {
+		int result = dao.insertNotice(n);
+		return result;
+	}
+
 	
 }

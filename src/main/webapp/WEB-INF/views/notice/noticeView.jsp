@@ -25,21 +25,26 @@
 			<div class="contents" style="padding: 20px;">
 				<div class="title" style="border-bottom: none;padding: 0;"><h2 style="display: inline-block;">Notice</h2></div>
 				<div class="notice-contents" style="padding: 20px 0 0 0;border-bottom: none;">
+					<!-- 불러온 글제목 -->
 					<h4 style="font-weight: bold;border-bottom: 1px solid #ddd;">${n.noticeTitle }</h4>
+					<!-- 작성일, 읽은 수(테이블 컬럼 추가 해야함) -->
 					<span>${n.regDate } / View : ${readCount }</span>
 					<span>
+						<!-- 첨부파일테이블로 넣어서 사용 -->
 						<%-- <c:if test="${not empty n.noticeFilename }">
 							<img src="/resources/img/notice/file.png" style="color:white;">
 							<a href="/fileDown?noticeNo=${n.noticeNo }">${n.noticeFilename }</a>
 						</c:if> --%>
 					</span>
 					<div class="contents-box">
+						<!-- 이미지 있으면 이미지 출력, 내용잇으면 내용 출력 -->
 						${n.noticeContent }
 					</div>
 				<a href="/noticeList.do?reqPage=1" class="btn btn-outline-primary">목록보기</a>
 				</div>
 			</div>
 			<div>
+				<!-- 이전공지, 다음공지로 넘어가게 내용이 있으면 출력 , 없으면  나타내기 않게하기 -->
 				<ul class="a-link">
 					<li style="float: left;"><a href="/noticeView.do?noticeNo=${noticeNo-1 }">이전공지</a></li>
 					<li style="float: right: ;"><a href="/noticeView.do?noticeNo=${noticeNo+1 }">다음공지</a></li>
