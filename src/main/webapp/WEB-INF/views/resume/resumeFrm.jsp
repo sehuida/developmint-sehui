@@ -116,7 +116,7 @@
 		color: #888;
 	}
 	.schoolRadio{
-		/* display: none; */
+		display: none;
 	}
 	.aducation>label{
 		width: 200px;
@@ -126,7 +126,7 @@
 		margin-bottom: 20px;
 	}
 	.carrerRadio{
-		/* display: none; */
+		display: none;
 	}
 	.carrerLabel{
 		width: 200px;
@@ -188,40 +188,47 @@
 		$(".univSchoolLabel").css("background-color","rgb(78, 205, 196)");			/* 처음에 학력선택 대학 선택되어있게 설정 */
 		$(".univSchoolLabel").css("border","none");
 		$(".univSchoolLabel>span").css("color","white");
-		$(".schoolMajorData").css("display", "block");
+		$(".schoolMajorData").css("display","block");
 		
 		$(".schoolRadio").change(function(){
-		if($(".schoolRadio").is(":checked")) {
+			/* 선택된 라디오 민트색으로 변경 */
 	         $(this).parent().css("background-color","rgb(78, 205, 196)");
+	         $(this).parent().css("border","1px solid rgb(78, 205, 196)");
 	         $(this).parent().css("border","none");
-	         $(this).next().css("color","white");			
-		}
+	         $(this).next().css("color","white");
+	         $("schoolMajorData").css("display","none");
+	         /* 선택 안된 라디오 기존색으로 변경 */
+	         $(this).parent().siblings().css("background-color","rgb(250, 250, 250)");
+	         $(this).parent().siblings().css("border" ,"1px solid #dfdfdf");
+	         $(this).parent().siblings().find("span").css("color","#888");
 		});
-
+	         
 			
-		/* $(".schoolRadio").change(function(){
-			if($(".schoolRadio").is(":uncheck")){
-	        	$(this).parent().css("background-color","rgb(250, 250, 250)");
-	            $(this).next().css("color","#888");
-	        }
-		}); */
+	    /* 선택된 라디오가 초,중,고졸일 경우 major div display: none */
+		$(".schoolRadio").eq(0).click(function(){
+ 			$(".schoolMajorData").css("display","none");	        	 
+         });
+		$(".schoolRadio").eq(1).click(function(){
+ 			$(".schoolMajorData").css("display","none");	        	 
+         });
+		$(".schoolRadio").eq(2).click(function(){
+ 			$(".schoolMajorData").css("display","none");	        	 
+         });
 		
+	    /* 선택된 라디오가 대학이상일 경우 major div display: block */
+	    $(".schoolRadio").eq(3).click(function(){
+			$(".schoolMajorData").css("display","block");	        	 
+	    });
+		
+		$(".carrerRadio").change(function(){
+			$(this).parent().css("border","1px solid rgb(78, 205, 198)");
+			$(this).next().css("color","rgb(78, 205, 198)");
 			
-			/* $(".schoolRadio").click(function(){
-	            
-			    if($(".schoolRadio:checked").val() == 1){
-					$(this).parent().css("background-color","rgb(78, 205, 196)");
-		       		$(this).parent().css("border","none");
-		       	 	$(".tx1").css("color","white");
-		       	 	$(".middleSchoolLabel, .highSchoolLabel, .univSchoolLabel").css("background-color","rgb(250, 250, 250)");
-		       	 	$(".tx1, .tx2, .tx3").css("color","#888");
-			        $(".schoolMajorData").css("display", "none");
-			    } else {
-			        $(".schoolMajorData").css("display", "block");			    	
-			    }
-			}); */
+			$(this).parent().siblings("label").css("border","1px solid #dfdfdf");
+			$(this).parent().siblings("label").find("span").css("color","#888");
+		});
+		
 
-	
 	});
 </script>
 <body>
@@ -307,7 +314,7 @@ ${sessionScope.m.phone}
 						</div>
 						<div class="schoolNameInput">
 							<select class="selectInput" name="major">
-								<option>전공 선택</option>
+								<option value="0">전공 선택</option>
 								<option value="1">전기/전자/정보통신공학</option>
 								<option value="2">컴퓨터/시스템공학</option>
 								<option value="3">외 공학계열</option>
@@ -324,11 +331,11 @@ ${sessionScope.m.phone}
 					</div>
 	                <label class="carrerLabel" for="junior">
 	                    <input name="career" class="carrerRadio" id="junior" type="radio" value="1">	<!-- value=1 //주니어(신입) -->
-	                    <span class="txt_check">신입</span>
+	                    <span class="careerText" style="color: gray;">신입</span>
 	                </label>
 	                <label class="carrerLabel" for="senior">
 	                    <input name="career" class="carrerRadio" id="senior" type="radio" value="2">		<!-- value=2 //시니어(경력) -->
-	                    <span class="txt_check">경력</span>
+	                    <span class="careerText" style="color: gray;">경력</span>
 	                </label>
 	           </div>
 			</div>
@@ -341,7 +348,7 @@ ${sessionScope.m.phone}
 						</div>
 						<div class="activityInput">
 							<select class="selectInput" name="activity">	
-								<option>활동구분 선택</option>
+								<option value="0">활동구분 선택</option>
 								<option value="1">교내활동</option>
 								<option value="2">인턴</option>
 								<option value="3">자원봉사</option>
@@ -403,7 +410,7 @@ ${sessionScope.m.phone}
 						</div>
 						<div class="certiPassInput">
 							<select class="selectInput" name="certiPass">	
-								<option>합격구분 선택</option>
+								<option value="0">합격구분 선택</option>
 								<option value="1">필기합격</option>
 								<option value="2">실기합격</option>
 								<option value="3">최종합격</option>
