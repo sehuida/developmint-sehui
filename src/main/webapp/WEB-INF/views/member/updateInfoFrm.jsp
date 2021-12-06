@@ -81,6 +81,7 @@
 	<script>
 		$(function(){
 			$(".resgin").on("click",function(){
+				var memberId = $("#memberId").val();
 				swal({
 				    title: "회원탈퇴를 진행하시겠습니까?",
 				    text: "회원 탈퇴를 진행하실경우, 정보 복구는 어렵습니다.",
@@ -89,7 +90,7 @@
 				    dangerMode: true
 				}).then((willDelete) => {
 				    if (willDelete) {
-				        var memberId = $(".memberId").val();
+				        
 				        $.ajax({
 				            url: "/resignMember.do",
 				            data: {
@@ -100,7 +101,7 @@
 				            	if(data == 1){
 				        			swal("회원탈퇴가 완료되셨습니다.", {icon: "success"});
 				            	}else{
-				            		swal("회원탈퇴에 실패했습니다.", {icon:"warining"});
+				            		swal("회원탈퇴에 실패했습니다.", {icon:"warning"});
 				            	}
 				            }
 				        });

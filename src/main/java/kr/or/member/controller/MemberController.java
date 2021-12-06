@@ -131,9 +131,10 @@ public class MemberController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/resignMember.do")
-	public String resginMember(String memberId) {
+	public String resginMember(String memberId,HttpSession session) {
 		int result = service.resignMember(memberId);
 		if(result>0) {
+			session.invalidate();
 			return "1";
 		}else {
 			return "0";
