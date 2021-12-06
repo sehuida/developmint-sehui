@@ -2,6 +2,7 @@ package kr.or.gosu.vo;
 
 import kr.or.contest.vo.Contest;
 import kr.or.member.model.vo.Member;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data

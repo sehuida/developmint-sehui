@@ -3,7 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<% ArrayList<GosuProject> gProjectList = new ArrayList<GosuProject>(); %>
+<%
+	ArrayList<GosuProject> gProjectList = new ArrayList<GosuProject>();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,9 +114,33 @@
 	background-color: transparent;
 }
 
+.g-photo-one * {
+	width: 200px;
+}
+.g-photo-one img {
+	height: 200px;
+}
+
+.g-photo-one .g-b {
+	height: 30px;
+	overflow: hidden;
+	display: block;;
+	text-overflow:ellipsis;
+	text-align: center;
+}
+
+.g-photo-one .g-p {
+	text-align: center;
+	display: block;
+	height: 50px;
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+
 .g-photo-wrap {
 	display: flex;
 	justify-content: space-around;
+	 flex-wrap: wrap;
 }
 
 .container input {
@@ -177,7 +203,8 @@
 .hrm-btn-wrap a {
 	margin: 30px;
 	margin-top: 50px;
-	width: 50px;
+	padding:10px;
+	width:100px;
 }
 
 .hrm-content b {
@@ -189,7 +216,7 @@
 
 .hrm-content textarea {
 	width: 800px;
-	padding:10px;
+	padding: 10px;
 }
 
 .hrm-content input {
@@ -197,11 +224,13 @@
 	margin-bottom: 50px;
 	width: 800px;
 }
+
 #gimage_container {
 	text-align: center;
 }
-#gimage_container img{
-width: 300px;
+
+#gimage_container img {
+	width: 300px;
 }
 </style>
 <body>
@@ -213,9 +242,8 @@ width: 300px;
 		<h4>
 			&gt; &nbsp;<span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다!
 		</h4>
+		<form action="/gosuWrite.do" method="post" enctype="multipart/form-data">
 		<div style="text-align: right; margin-top: 50px;">
-			<form action="/gosuWrite.do" method="post"
-				enctype="multipart/form-data">
 				<input type="hidden" name="gsouNo"
 					value="${sessionScope.m.memberNo }">
 		</div>
@@ -268,7 +296,7 @@ width: 300px;
 				<div class="gosu-photos">
 					<h4>사진</h4>
 					<div style="overflow: hidden;">
-						<input type="file" name="files" multiple>
+						<input type="file" name="photoFilepath" multiple>
 					</div>
 
 				</div>
@@ -286,55 +314,9 @@ width: 300px;
 				</div>
 				<div class="gosu-project">
 					<h4>프로젝트</h4>
-					<div class="g-photo-wrap">
-						<div class="g-photo-one">
-							<button>
-								<dl>
-									<dt>
-										<img src="/resources/img/gosu/g_img_basic.png">
-									</dt>
-									<dd>
-										<b style="font-size: 19px;">제목제목</b>
-									</dd>
-									<dd>
-										<p>내용내용내용</p>
-									</dd>
-								</dl>
-							</button>
-						</div>
-						<div class="g-photo-one">
-							<button>
-								<dl>
-									<dt>
-										<img src="/resources/img/gosu/g_img_basic.png">
-									</dt>
-									<dd>
-										<b style="font-size: 19px;">제목제목</b>
-									</dd>
-									<dd>
-										<p>내용내용내용</p>
-									</dd>
-								</dl>
-							</button>
-						</div>
-						<div class="g-photo-one">
-							<button>
-								<dl>
-									<dt>
-										<img src="/resources/img/gosu/g_img_basic.png">
-									</dt>
-									<dd>
-										<b style="font-size: 19px;">제목제목</b>
-									</dd>
-									<dd>
-										<p>내용내용내용</p>
-									</dd>
-								</dl>
-							</button>
-						</div>
-					</div>
+					<div class="g-photo-wrap"></div>
 					<div style="display: flex; justify-content: center;">
-						<a id="gProject" class="btn btn-primary" onclick="gProject();">추가하기</a>
+						<a id="gProject" class="btn btn-primary"style="padding:10px; width:100px;">추가하기</a>
 					</div>
 				</div>
 				<div class="gosu-feedback">
@@ -351,103 +333,121 @@ width: 300px;
 				<div id="hrm-modal">
 					<h3 style="color: white;">프로젝트 추가하기</h3>
 					<div class="hrm-content">
-						<b>메인사진</b> <input type="file" class="gprojectFilepath" id="gprojectFilepath"
-							name="gprojectFilepath"><br>
+						<b>메인사진</b> <input type="file" class="gprojectFilepath"
+							id="gprojectFilepath" name="gprojectFilepath" accept="image/*" ><br>
 						<div id="gimage_container"></div>
-						<b>제목</b><input type="text" class="gprojectTitle" id="gprojectTitle"
-							name="gprojectTitle" placeholder="내용을 입력해주세요."><br>
+						<b>제목</b><input type="text" class="gprojectTitle"
+							id="gprojectTitle" name="gprojectTitle[]" placeholder="내용을 입력해주세요."><br>
 						<b style="float: left;">내용</b>
-						<textarea cols="80" class="gprojectContent" id="gprojectContent" name="gprojectContent"
-							placeholder="내용을 입력해주세요."></textarea>
+						<textarea cols="80" class="gprojectContent" id="gprojectContent"
+							name="gprojectContent[]" placeholder="내용을 입력해주세요."></textarea>
 						<br>
 					</div>
 					<div class="hrm-btn-wrap">
 						<a id="hrm-close" class="btn btn-outline-success">취소</a> <a
-							id="gProjectArr" class="btn btn-primary">확인</a>
+							id="gProjectArr" class="btn btn-primary" onclick="gProjectArr();">확인</a>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div style="display: flex; justify-content: center;">
-			<a class="btn btn-primary"
-				style="width: 200px; margin: 100px; padding: 10px;">작성하기</a>
+			<button type="submit" class="btn btn-primary"
+				style="width: 200px; margin: 100px; padding: 10px;">작성하기</button>
 		</div>
 		</form>
 	</div>
 	<script>
-		$("#gProject").click(function() {	
+		$("#gProject").click(function() {
 			var gprojectTitle = $("#gprojectTitle");
 			var gprojectContent = $("#gprojectContent");
 			var gprojectFilepath = $("#gprojectFilepath");
 			gprojectTitle.val("");
 			gprojectContent.val("");
+			gprojectFilepath.val("");
+			$("#gimage_container").empty();
 			$(".hrm-wrap").css("display", "flex");
-		
-			
+
 		});
 		$("#hrm-close").click(function() {
-		
+
 			$(".hrm-wrap").css("display", "none");
-			
+
 		});
-		$("#gProjectArr").click(function() {
-			 
+
+		$(function() {
+
+			var gprojectFilepath = $("#gprojectFilepath");
+			var upload = document.querySelector('#gprojectFilepath');
+			var preview = document.querySelector('#gimage_container');
+		
+			upload.addEventListener('change', function(e) {
+				$("#gimage_container").empty();
+				var get_file = e.target.files;
+				var image = document.createElement('img');
+				var reader = new FileReader();
+				reader.onload = (function(aImg) {
+					return function(e) {
+
+						
+						aImg.src = e.target.result;
+						var html = "";
+						var div = $(".g-photo-wrap");
+						html += "<div class='g-photo-one'><dl>";
+						html += "<dt id='gimg'><img></dt>";
+						html += "<dd><b class='g-b' style='font-size: 19px;'></b></dd>";
+						html += "<dd><p class='g-p'></p></dd>";
+						html += "</dl></div>";
+						div.append(html);
+						
+						$(".g-photo-one").last().find("#gimg>img").attr("src", e.target.result);
+					}
+				})(image)
+
+				if (get_file) {
+					reader.readAsDataURL(get_file[0]);
+				}
+
+				preview.appendChild(image);	
+				
+			});
+
+
+		});
+		function gProjectArr() {
 			var gprojectTitle = $("#gprojectTitle").val();
+			console.log(gprojectTitle);
 			var gprojectContent = $("#gprojectContent").val();
+			console.log(gprojectContent);
+
 			var gprojectFilepath = $("#gprojectFilepath");
 			
-			var html = "";
-			var div = $(".g-photo-wrap");
-			html+="<div class='g-photo-one'><button><dl>";
-			html+="<dt id='gimg'></dt>";
-			html+="<dd><b style='font-size: 19px;'>"+gprojectTitle+"</b></dd>";
-			html+="<dd><p>"+gprojectContent+"</p></dd>";
-			html+="</dl></button></div>";
-			div.append(html);
-			var idx = $(".g-photo-one").index(this);
-			var upload = document.querySelector("#gprojectFilepath");
-			var preview = document.querySelector("#gimg");
-		    upload.addEventListener('change',function (e) {
-		        var get_file = e.target.files;
-		        var image = document.createElement('img');
-		        var reader = new FileReader();
-		        reader.onload = (function (aImg) {
-		            return function (e) {
-		                aImg.src = e.target.result;
-		            }
-		        })(image)
-		 
-		        if(get_file){
-		            reader.readAsDataURL(get_file[0]);
-		        }
-		 
-		        preview.appendChild(image);
-		    });
-		
-			$(".hrm-wrap").css("display", "none");
-		
-		});
-		$(function(){
-			var upload = document.querySelector('#gprojectFilepath');
-		    var preview = document.querySelector('#gimage_container');
-		 	
-		    upload.addEventListener('change',function (e) {
-		        var get_file = e.target.files;
-		        var image = document.createElement('img');
-		        var reader = new FileReader();
-		        reader.onload = (function (aImg) {
-		            return function (e) {
-		                aImg.src = e.target.result;
-		            }
-		        })(image)
-		 
-		        if(get_file){
-		            reader.readAsDataURL(get_file[0]);
-		        }
-		 
-		        preview.appendChild(image);
-		    })
-		});
+			var form = new FormData();
+			var files = $("#gprojectFilepath")[0].files[0];
+			console.log(files);
+			form.append("gprojectFilepath",files);
+			 $.ajax({
+					url : "/gProjectAjax.do"
+					, type : "post"
+					, data : form
+					, processData : false
+					, contentType : false
+					, success : function(data) {
+						
+						$(".g-photo-one").last().append("<input type='hidden' name='gprojectFilepath' value='"+data+"'>");
+						
+					}
+			 });
+
+				var gb = $(".g-photo-one").last().find(".g-b");
+				console.log(gb);
+				gb.append(gprojectTitle);
+
+				var gp = $(".g-photo-one").last().find(".g-p");
+				console.log(gp);
+				gp.append(gprojectContent);
+				$(".hrm-wrap").css("display", "none");
+			
+		}
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
