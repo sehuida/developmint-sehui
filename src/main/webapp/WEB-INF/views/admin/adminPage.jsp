@@ -45,6 +45,7 @@
 	margin-left : 20px;
 	font-size : 17px;
 }
+
 .cateAtag{
 	margin-left: auto;
 }

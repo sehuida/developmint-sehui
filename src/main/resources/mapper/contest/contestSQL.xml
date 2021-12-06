@@ -249,7 +249,7 @@
 			contest_count as contestCount
 		from contest 
 		 <![CDATA[
-		where contest_deadline >= #{contestDeadline}
+		where contest_deadline >= #{contestDeadline} order by contest_deadline
 		  ]]>
   	</select>
 </mapper>
