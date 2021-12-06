@@ -42,6 +42,7 @@ public class NoticeController {
 	@RequestMapping(value="/noticeView.do")
 	public String noticeView(int noticeNo, Model model) {
 		Notice n = service.selectOneNotice(noticeNo);
+		ArrayList<Notice> nlist = service.noticeAroundList(noticeNo);
 		model.addAttribute("n",n);
 		model.addAttribute("noticeNo",noticeNo);
 		return "notice/noticeView";
