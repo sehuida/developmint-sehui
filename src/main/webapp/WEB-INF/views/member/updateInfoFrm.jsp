@@ -13,8 +13,6 @@
 		margin: 0 auto;
         padding : 20px;
         margin-bottom: 100px;
-        border: 1px solid #aeaeae;		
-        border-radius: 10px;
         margin-top: 50px;
 	}
 	.update-top {
@@ -26,6 +24,10 @@
 	.update-middle>form>div{
 		width: 400px;
 		margin: 0 auto;
+	}
+	.pageBtn{
+		display: flex;
+		justify-content: space-around;
 	}
 </style>
 </head>
@@ -50,7 +52,7 @@
 					<div class="form-group">
 					  <fieldset>
 					    <label class="form-label mt-4" for="memberId">아이디</label>
-					    <input class="form-control" name="memberName" id="memberId" type="text" value="${sessionScope.m.memberId }" readonly="">
+					    <input class="form-control" name="memberId" id="memberId" type="text" value="${sessionScope.m.memberId }" readonly="">
 					  </fieldset>
 					</div>
 					<div class="form-group">
@@ -65,15 +67,26 @@
 					  <label class="col-form-label mt-4" for="phone">전화번호</label>
 					  <input type="text" class="form-control" name="phone" id="phone" value="${sessionScope.m.phone }">
 					</div>
-					<div class="form-group"  style="margin-top: 30px;">
+					<div class="form-group pageBtn"  style="margin-top: 30px;">
 						<a href="/changePwFrm.do">비밀번호 변경하기</a>
 						<input type="submit" class="btn btn-primary" value="변경하기">	
-						<a href="/deleteMember.do" class="btn btn-danger">회원탈퇴</a>		  					
+						<button class="btn btn-danger resgin">회원탈퇴</button>		  					
 					</div>
 		        </form>
 			  </div><!--update-middle 끝나는 지점  -->
 			</div><!--update-wrap 끝나는 지점  -->
 		</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script>
+		$(function(){
+			$(".resgin").on("click",function(){
+				var memberId = $(".memberId").val();
+				
+				$.ajax({
+						
+				});
+			});
+		});
+	</script>
 </body>
 </html>
