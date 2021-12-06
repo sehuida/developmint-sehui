@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +8,16 @@
 <title>Develomint</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <link rel="stylesheet" href="/resources/css/notice/noticeList.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<script src="/summernote/jquery-3.3.1.js"></script>
+	<script src="/summernote/summernote-lite.js"></script>
+	<script src="/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/summernote/summernote-lite.css">
+	
+
 	<div class="container" style="margin-bottom: 50px;">
 		<div class="area">
 			<div class="nav-sub" style="margin-top: 30px;"><a href="/" class="text-hover">홈</a><span> > </span><a href="/noticehome.do" class="text-hover">고객센터</a><span> > </span><span>공지사항</span></div>
@@ -21,14 +29,93 @@
 					<li><a href="/faq.do" class="text-hover">자주묻는질문<br><span class="last-span">자주묻는질문</span></a></li>
 				</ul>
 			</div>
+			<c:if test="${sessionScope.m.memberType eq 9 }">
 			<div class="contents" style="padding: 20px;">
 				<div class="title" style="border-bottom: none;padding: 0;"><h2 style="display: inline-block;">Notice Write</h2></div>
-				<div class="notice-contents" style="padding: 20px 0 0 0;border-bottom: none;">
-					
+				<div class="notice-contents" style="padding: 0;border-bottom: none;">
+					<form action="/insertNotice.do" method="post" enctype="multipart/form-data">
+						<fieldset>
+						<label class="col-form-label mt-4" for="noticeTitle"><i class="bi bi-toggles" style="font-size: 1.2em;"></i> 상단게시물 고정유무<span style="color: #f3969a;font-size: ">*</span></label>
+					    <div class="form-check form-switch">
+				        	<input class="form-check-input" type="checkbox" id="pin" checked="2">
+				        	<label class="form-check-label" for="pin">상단게시물 고정</label>
+				      	</div>
+						<div class="form-group">
+						  <label class="col-form-label mt-4" for="noticeWriter"><i class="bi bi-hand-index" style="font-size: 1.2em;"></i> 작성자<span style="color: #f3969a;">*</span></label>
+						  <input type="text" class="form-control" id="noticeWriter" value="${sessionScope.m.memberId }" readonly>
+						</div>
+						<div class="form-group">
+						  <label class="col-form-label mt-4" for="noticeTitle"><i class="bi bi-pencil" style="font-size: 1.2em;"></i> 공지 제목<span style="color: #f3969a;">*</span></label>
+						  <input type="text" class="form-control" placeholder="제목을 입력하세요" id="noticeTitle" required>
+						</div>
+						<div class="form-group">
+					      <label for="formFile" class="form-label mt-4"><i class="bi bi-files" style="font-size: 1.2em;"></i> 첨부파일<span style="font-size: small;color: #999;"> *첨부파일은 한개만 가능합니다</span></label>
+					      <input class="form-control" type="file" id="formFile">
+					    </div>
+						<div class="form-group">
+							<label class="col-form-label mt-4" for="noticeContent"><i class="bi bi-pencil-square" style="font-size: 1.2em;"></i> 공지 내용<span style="color: #f3969a;">*</span></label>
+                            <textarea class="form-control" id="noticeContent" rows="20" name="noticeContent" placeholder="내용을 입력하세요" required></textarea>
+                            <span style="color: #f3969a;float: left;">*는 필수 입력사항입니다.</span>
+                        </div>
+                        <div class="form-group" style="padding: 10px 0 0 0;float: right;">
+                        	<button type="submit" class="btn btn-primary" id="nWriteBtn">Submit</button>
+                        </div>
+                         </fieldset>
+					</form>
 				</div>
 			</div>
+			</c:if>
 		</div>
 	</div>
+	<script>
+	$(function(){
+		$("#noticeContent").summernote({
+			height : 400,
+			lang : "ko-KR",
+			callbacks :{
+				onImageUpload : function(files){
+					uploadImage(files[0],this);	
+				}
+			}
+		});
+	});
+	function uploadImage(file,editor){
+		var form = new FormData();
+		form.append("file",file);
+		$.ajax({
+			url : "/uploadImage.do",
+			type :"post",		//file전송을 위해 ajax를 할떄는 type을 post로 해줘야한다
+			data : form,
+			processData : false,
+			contentType : false,
+			success : function(data){
+				//console.log(data);
+				$(editor).summernote("insertImage",data);
+			}
+		});
+	}
+	$("#nWriteBtn").click(function(){
+		 if($("#noticeTitle").val()!=null&&$("#noticeContent").val()!=null){
+			 swal({
+				   title: "가입성공!",
+				   text: "공지사항이 등록되었습니다.",
+				   icon: "success", //"info,success,warning,error" 중 택1
+				   button: "둘러보기",
+				})
+			 .then((value) => {
+			 	$("form").submit();			 
+			 });
+		 }else{
+			 swal({
+				   title: "가입실패",
+				   text: "입력값을  다시 확인해주세요.",
+				   icon: "warning", //"info,success,warning,error" 중 택1
+				   button: "돌아가기",
+				})
+			 return false;
+		 }
+	  });
+</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
