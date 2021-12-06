@@ -44,4 +44,8 @@ public class MemberDao {
 		return sqlSession.update("member.resetPwMember",member);
 	}
 
+	public int resignMember(String memberId) {
+		return sqlSession.delete("member.resignMember",memberId);
+	}
+
 }

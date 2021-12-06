@@ -129,4 +129,14 @@ public class MemberController {
 	public String updateInfoFrm() {
 		return "member/updateInfoFrm";
 	}
+	@ResponseBody
+	@RequestMapping(value="/resignMember.do")
+	public String resginMember(String memberId) {
+		int result = service.resignMember(memberId);
+		if(result>0) {
+			return "1";
+		}else {
+			return "0";
+		}
+	}
 }

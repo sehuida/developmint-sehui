@@ -65,4 +65,10 @@ public class MemberService {
 		return result;
 	}
 	
+	@Transactional
+	public int resignMember(String memberId) {
+		int result = dao.resignMember(memberId);
+		return result;
+	}
+	
 }
