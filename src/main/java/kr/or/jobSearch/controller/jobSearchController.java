@@ -1,7 +1,12 @@
 package kr.or.jobSearch.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.or.resume.vo.Resume;
 
 @Controller
 public class jobSearchController {
@@ -16,13 +21,12 @@ public class jobSearchController {
 		return "jobSearch/companyInfo";
 	}
 	
-	@RequestMapping(value="/announceManage.do")
-	public String announceManage() {
-		return "jobSearch/announceManage";
-	}
+	
 	
 	@RequestMapping(value="/announceFrm.do")
 	public String announceFrm() {
 		return "jobSearch/announceFrm";
 	}
+	
 }
+		
