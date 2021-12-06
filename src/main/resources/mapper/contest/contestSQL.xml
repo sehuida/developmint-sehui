@@ -228,6 +228,30 @@
   			</otherwise>
   		</choose>
   	</select>
+  	
+  	<!-- 공모전 날짜 검색 결과 -->
+  	<select id="searchContest" parameterType="string" resultType="c">
+  		select
+			contest_no as contestNo,
+			contest_host as contestHost,
+			member_id as memberId,
+			contest_type as contestType,
+			contest_qualify as contestQualify,
+			contest_date as contestDate,
+			contest_deadline as contestDeadline,
+			contest_prize as contestPrize,
+			phone,
+			email,
+			contest_title as contestTitle,
+			contest_content as contestContent,
+			contest_img as contestImg,
+			contest_status as contestStatus,
+			contest_count as contestCount
+		from contest 
+		 <![CDATA[
+		where contest_deadline >= #{contestDeadline}
+		  ]]>
+  	</select>
 </mapper>
 
 

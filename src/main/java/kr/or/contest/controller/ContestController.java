@@ -14,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 import kr.or.comment.vo.Comment;
 import kr.or.comment.vo.Report;
@@ -198,8 +201,18 @@ public class ContestController {
 	
 	//공모전 캘린더
 	@RequestMapping(value="/contestCalendar.do")
-	public String contestCalendar() {
+	public String contestCalendar(Model model) {
+		LocalDate today = LocalDate.now();
+		model.addAttribute("today",today);
 		return "contest/contestCalendar";
+	}
+	
+	//공모전 날짜 검색
+	@ResponseBody
+	@RequestMapping(value="/searchContest.do", produces = "application/json;charset=utf-8")
+	public String searchContest(String contestDeadline) {
+		ArrayList<Contest> list = service.searchContest(contestDeadline);
+		return new Gson().toJson(list);
 	}
 	
 }
