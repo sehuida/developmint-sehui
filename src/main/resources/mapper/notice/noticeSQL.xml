@@ -44,4 +44,10 @@
 			"notice_writer" as noticeWriter 
 		from notice where "notice_no" = #{noticeNo }
 	</select>
+	<select id="noticeAroundList" parameterType="_int" resultType="n">
+		select
+		    "notice_no" as noticeNo, 
+		    "notice_title" as noticeTitle
+		from notice where "notice_no" between (#{noticeNo}-2) and (#{noticeNo}+2);
+	</select>
 </mapper>

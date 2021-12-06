@@ -42,4 +42,9 @@ public class NoticeDao {
 		return sqlsession.insert("notice.insertNotice",n);
 	}
 
+	public ArrayList<Notice> noticeAroundList(int noticeNo) {
+		List<Notice> nlist = sqlsession.selectList("notice.noticeAroundList",noticeNo);
+		return (ArrayList<Notice>)nlist;
+	}
+
 }
