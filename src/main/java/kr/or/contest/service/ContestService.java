@@ -83,7 +83,6 @@ public class ContestService {
 		
 		//페이지 네비게이션 제작
 		int totalCount = dao.totalCount(type);
-		System.out.println(totalCount);
 		
 		//전체 페이지 수 계산
 		int totalPage = 0;
@@ -128,6 +127,10 @@ public class ContestService {
 		ContestList list = new ContestList(contestList, start, pageNavi);
 		
 		return list;
+	}
+
+	public ArrayList<Contest> searchContest(String contestDeadline) {
+		return dao.searchContest(contestDeadline);
 	}
 }
 
