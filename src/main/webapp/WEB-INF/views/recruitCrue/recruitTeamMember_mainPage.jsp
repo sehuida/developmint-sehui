@@ -12,30 +12,81 @@
 </head>
 <script>
 	$(function(){
+		var selectLangList = $(".selectLangList");
+		var arr = new Array();
+		for(var i=0;i<selectLangList.length;i++){
+			arr.push(selectLangList.eq(i).html());
+		}
+		var langCount = $(".language_icon").length;
+		var langValue;
+		var viewValue = $(".clickCssKeeper").val();
+	    var checkValue = $(".checkCssKeeper").val();
+		// delCheckValue -> 1 언어취소 안한상태 / 2 언어취소 한 상태(재클릭) / 3 언어선택 자체를 안한 초기상태
+		
 	    $(".language_icon").click(function(){
+	    	langValue = $(this).attr("alt");
+	    	if($.inArray(langValue, arr) != -1){
+	    		arr.splice($.inArray(langValue, arr),1);
+	    	}else{
+	    		arr.push(langValue);
+	    	}
+	    	
 	        if($(".language_icon_disabled").length == 0 ){
+	        	var url = "/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue="+viewValue+"&checkValue="+checkValue;
+	 	        $(".languageList").css("background-color", "#90d1b44f");
 	            $(".language_icon").addClass("language_icon_disabled");
 	            $(this).toggleClass("language_icon_disabled");
+	            if(!($(this).hasClass("language_icon_disabled"))){
+	            	for(var i = 0; i < arr.length; i++ ){
+	            		var addData = '&langValue='+arr[i];
+	            		url += addData;
+	            	}
+	            	location.href= url;
+		            
+	            } else {
+	            	for(var i = 0; i < arr.length; i++ ){
+	            		var addData = '&langValue='+arr[i];
+	            		url += addData;
+	            	}
+	            	location.href= url;
+		            // location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue="+viewValue+"&checkValue="+checkValue+"&langValue="+langValue;
+	            }
 	        } else {
-	            $(this).toggleClass("language_icon_disabled");
+	        	$(this).toggleClass("language_icon_disabled");
+	        	if(!($(this).hasClass("language_icon_disabled"))){
+	        		for(var i = 0; i < arr.length; i++ ){
+	            		var addData = '&langValue='+arr[i];
+	            		url += addData;
+	            	}
+	            	location.href= url;
+	            } else {
+	            	for(var i = 0; i < arr.length; i++ ){
+	            		var addData = '&langValue='+arr[i];
+	            		url += addData;
+	            	}
+	            	location.href= url;
+	            }
 	        }
 	        if($(".language_icon_disabled").length == 14){
+	        	$(".languageList").css("background-color", "white");
 	            $(".language_icon_disabled").removeClass("language_icon_disabled");
+	            location.href=url;
 	        }
 	    });
 	
-	    /* $(".rBox_Leftnavi_left").click(function(){
-	        $(".rBox_Leftnavi_right").css("opacity", "0.5");
-	        $(".rBox_Leftnavi_left").css("opacity", "1");
-	    });
-	    $(".rBox_Leftnavi_right").click(function(){
-	        $(".rBox_Leftnavi_right").css("opacity", "1");
-	        $(".rBox_Leftnavi_left").css("opacity", "0.5");
-	    }); */
+	    if(arr != null){
+	    	$(".languageList").css("background-color", "#90d1b44f");
+	    	$(".language_icon").addClass("language_icon_disabled");
+	    	for(var i = 0; i < arr.length; i++){
+	    		if($.inArray(($(".language_icon_disabled").eq(i).attr("alt")), arr) != -1){
+	    			$(".language_icon_disabled").eq(i).removeClass("language_icon_disabled");
+	    		}
+	    	}
+	    }else {
+	    	$(".languageList").css("background-color", "white");
+	    }
 	    
 	    $(".rBox_Leftnavi_left").click(function(){
-	    	/* $(".rBox_Leftnavi_right").css("opacity", "0.5");
-	        $(".rBox_Leftnavi_left").css("opacity", "1");  */
 	    	if($(".navi_checkbox").is(":checked")){
 				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=1&checkValue=2";
 			} else {
@@ -44,11 +95,8 @@
 	    });
 	    
 		$(".rBox_Leftnavi_right").click(function(){
-			/* $(".rBox_Leftnavi_right").css("opacity", "1");
-	        $(".rBox_Leftnavi_left").css("opacity", "0.5"); */
 			if($(".navi_checkbox").is(":checked")){
 				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=2&checkValue=2";
-				/* $(window).hashchange(); */
 			} else {
 				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=2&checkValue=1";
 			}
@@ -63,8 +111,7 @@
 		});
 		
 		
-		var viewValue = $(".clickCssKeeper").val();
-	    var checkValue = $(".checkCssKeeper").val();
+		
 	    
 	    if(checkValue == 1){
 	    	$(".navi_checkbox").prop("checked", false);
@@ -92,8 +139,16 @@
 	<div class="container" id="projectContainer">
             <div class="main">
                 <div class="languageBox">
-	                <input type="hidden" class="checkCssKeeper" value="${checkValue }">
-		            <input type="hidden" class="clickCssKeeper" value="${viewValue }">
+                <c:choose>
+                	<c:when test="${empty viewValue }">
+                		<input type="hidden" class="checkCssKeeper" value="1">
+		            	<input type="hidden" class="clickCssKeeper" value="1">
+                	</c:when>
+                	<c:otherwise>
+                		<input type="hidden" class="checkCssKeeper" value="${checkValue }">
+		            	<input type="hidden" class="clickCssKeeper" value="${viewValue }">
+                	</c:otherwise>
+                </c:choose>
                     <ul class="languageList">
                     <c:forEach items="${developLangList }" var="dll">
                     	<li class="languageItem">
@@ -169,6 +224,9 @@
             </div>
         </div>
      </div>
+     <c:forEach items="${selectLangList }" varStatus="i">
+     	<span class="selectLangList">${selectLangList[i.index]}</span>
+     </c:forEach>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

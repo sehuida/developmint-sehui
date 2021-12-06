@@ -33,23 +33,23 @@ public class AdminDao {
 
 	public List<Integer> gradeList() {
 		List<Integer> gradeList = new ArrayList<Integer>();
-		gradeList.add(sqlSession.selectOne("admin.bronzeCount"));
-		gradeList.add(sqlSession.selectOne("admin.silverCount"));
-		gradeList.add(sqlSession.selectOne("admin.goldCount"));
-		gradeList.add(sqlSession.selectOne("admin.platinumCount"));
-		gradeList.add(sqlSession.selectOne("admin.diamondCount"));
-		gradeList.add(sqlSession.selectOne("admin.masterCount"));
-		gradeList.add(sqlSession.selectOne("admin.challengerCount"));
+		gradeList.add((Integer)sqlSession.selectOne("admin.bronzeCount"));
+		gradeList.add((Integer)sqlSession.selectOne("admin.silverCount"));
+		gradeList.add((Integer)sqlSession.selectOne("admin.goldCount"));
+		gradeList.add((Integer)sqlSession.selectOne("admin.platinumCount"));
+		gradeList.add((Integer)sqlSession.selectOne("admin.diamondCount"));
+		gradeList.add((Integer)sqlSession.selectOne("admin.masterCount"));
+		gradeList.add((Integer)sqlSession.selectOne("admin.challengerCount"));
 		return gradeList;
 	}
 
 	public List<Integer> cateList() {
 		List<Integer> cateList = new ArrayList<Integer>();
-		cateList.add(sqlSession.selectOne("admin.projectCount"));
-		cateList.add(sqlSession.selectOne("admin.shareCount"));
-		cateList.add(sqlSession.selectOne("admin.resumeCount"));
-		cateList.add(sqlSession.selectOne("admin.gosuCount"));
-		cateList.add(sqlSession.selectOne("admin.contestCount"));
+		cateList.add((Integer)sqlSession.selectOne("admin.projectCount"));
+		cateList.add((Integer)sqlSession.selectOne("admin.shareCount"));
+		cateList.add((Integer)sqlSession.selectOne("admin.resumeCount"));
+		cateList.add((Integer)sqlSession.selectOne("admin.gosuCount"));
+		cateList.add((Integer)sqlSession.selectOne("admin.contestCount"));
 		return cateList;
 	}
 

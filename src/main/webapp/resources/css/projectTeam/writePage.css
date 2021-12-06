@@ -5,6 +5,10 @@
 .return_img{
     width: 80px;
 }
+.return_img:hover{
+    cursor: pointer;
+}
+
 .main_content{
     margin: 0 auto;
     margin-top: 80px;

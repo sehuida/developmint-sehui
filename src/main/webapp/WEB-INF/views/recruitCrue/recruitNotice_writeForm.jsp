@@ -23,29 +23,42 @@
 	<link rel="stylesheet" href="/resources/css/projectTeam/writePage.css">
 
 <script>
-
 	$(function(){
 		$("input[type='checkbox']").on("click", function(){
-			let count = $("input:checked[type='checkbox']").length;
+			var count = $(".btn-check:checked").length;
+			console.log(count);
 			if(count>3){
 				$(this).prop("checked", false);
 				swal("더 이상 선택하실 수 없어요!", "최대 3개 까지 선택이 가능합니다 :)");
 			}
 		});
+	
+		$(".return_img").click(function(){
+			$(".return_img").css("cursor", "pointer");
+			history.back();
+		});
+		
+		var arr = new Array();
+		$(".btn-check:checked").next().each(function(){
+			arr.push(this.value);
+		});
+		$("#arrayParam").val(arr);
+		
 	});
+	
 	
 </script>
 	
 	<div class="container" id="projectContainer">
 		<div class="main">
             <div class="returnPage">
-                <a href="/recruitTeamMember_mainPage.do"><img class="return_img" src="/resources/img/recruitTeamProject/writePage/left.png"></a>
+                <img class="return_img" src="/resources/img/recruitTeamProject/writePage/left.png">
             </div>
             <div class="main_content">
 	            <form action="/writeRecruitTeam.do" method="post" enctype="multipart/form-data">
 		            <div class="writeBox">
 	                    <div class="form-group">
-	                        <input class="form-control form-control-lg" type="text" placeholder="모집공고 제목을 입력해주세요." id="inputLarge">
+	                        <input class="form-control form-control-lg" type="text" placeholder="모집공고 제목을 입력해주세요." id="inputLarge" name="boardTitle" maxlength="30">
 	                    </div>
 	                    <div class="writeLine">
 	                        <div class="titleFlexBox">
@@ -54,7 +67,7 @@
 	                        </div>
 	                        <div class="checkboxFlexList">
 	                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-	                                <input type="checkbox" class="btn-check" id="btncheck1" checked="" autocomplete="off">
+	                                <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
 	                                <label class="btn btn-primary" for="btncheck1">javascript</label>
 	                                <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
 	                                <label class="btn btn-primary" for="btncheck2">typescript</label>
@@ -87,13 +100,14 @@
 	                            </div>
 	                        </div>
 	                    </div>
+	                    <input type="hidden" id="arrayParam" name="arrayParam">
 	                    <div class="line"></div>
 	                    <div class="writeLine">
 	                        <div class="titleFlexBox">
 	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/pending.png">
 	                            <p class="titleText">모집마감일(모집일부터 최대 14일)</p>
 	                        </div>
-	                        <input type="text" id="datePicker" class="form-control" value="마감일을 선택해주세요">
+	                        <input type="text" id="datePicker" class="form-control" placeholder="마감일을 선택해주세요" name="boardDeadLine">
 	                       <!--  <ul class="nav nav-pills">
 	                            <li class="nav-item dropdown">
 	                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">날짜를 선택하세요</a>
@@ -113,7 +127,7 @@
 	                            <p class="titleText">프로젝트명</p>
 	                        </div>
 	                        <div class="form-group">
-	                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault">
+	                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault" maxlength="40">
 	                        </div>
 	                    </div>
 	                    <div class="line"></div>
@@ -123,7 +137,7 @@
 	                            <p class="titleText">프로젝트 목표(ex. 웹 페이지 정복)</p>
 	                        </div>
 	                        <div class="form-group">
-	                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault">
+	                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault" maxlength="60">
 	                        </div>
 	                    </div>
 	                    <div class="line"></div>
@@ -133,7 +147,7 @@
 	                            <p class="titleText">모집설명</p>
 	                        </div>
 	                        <div class="form-group">
-	                            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+	                            <textarea class="form-control" id="exampleTextarea" rows="3" name="boardContent"></textarea>
 	                        </div>
 	                    </div>
 	                    <div class="finalLine"></div>
@@ -152,13 +166,51 @@
 		$("#exampleTextarea").summernote({
 			height : 400,
 			lang : "ko-KR",
+			focus: true,
+			toolbar:[ 
+				['fontsize', ['fontsize']], 
+				['style', ['bold', 'italic', 'underline','strikethrough', 'clear']], 
+				['color', ['forecolor','color']], 
+				['table', ['table']], 
+				['para', ['ul', 'ol', 'paragraph']], 
+				['height', ['height']], 
+				['insert',['picture','link','video']], 
+				['view', ['fullscreen', 'codeview', 'help']] 
+				], 
+			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'], 
+			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
 			callbacks:{
 				onImageUpload : function(files){
 					uploadImage(files[0], this);
+				},
+				onChange:function(contents, $editable){ //텍스트 글자수 및 이미지등록개수 
+					setContentsLength(contents, 0); 
 				}
 			}
 		});
 	});
+	
+	function setContentsLength(str, index) { 
+		var status = false; 
+		var textCnt = 0; //총 글자수 
+		var maxCnt = 500; //최대 글자수 
+		var editorText = f_SkipTags_html(str); //에디터에서 태그를 삭제하고 내용만 가져오기 
+		editorText = editorText.replace(/\s/gi,""); //줄바꿈 제거 
+		editorText = editorText.replace(/&nbsp;/gi, ""); //공백제거 
+		
+		textCnt = editorText.length; 
+			if(maxCnt > 0) { 
+				if(textCnt > maxCnt) { 
+					status = true; 
+				} 
+			} 
+			
+			if(status) { 
+				var msg = "등록오류 : 글자수는 최대 "+maxCnt+"까지 등록이 가능합니다. / 현재 글자수 : "+textCnt+"자"; 
+			} 
+	}
+
+	
 	function uploadImage(file, editor){
 		// form과 같은효과를 내는 객체생성
 		var form = new FormData();
