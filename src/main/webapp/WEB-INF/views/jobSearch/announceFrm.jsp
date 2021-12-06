@@ -194,7 +194,7 @@
 		height: 45px;
 	}
 	.category>div>input{
-		/* display: none;  */		/* 나중에 주석 제거 */
+		display: none;
 	}
 	
 	/* 분야 */
@@ -212,7 +212,7 @@
 	
 	.fieldsLabel{
 		background-color: #dfdfdf;
-		padding: 1px 10px;
+		padding: 5px 15px;
 		color: gray;
 		border-radius: 15px;
 		font-size: 14px;
@@ -234,7 +234,11 @@
 </head>
 <script>
 	$(function(){
-		
+		$(".categoryCheckBox").change(function(){
+			$(this).next().css("border","3px solid rgb(78,205,196)");
+			$(this).next().find("span").css("font-weight","900");
+			$(this).parent().siblings().find("label").css("border","1px solid gray");
+		});
 	});
 </script>
 <body>
@@ -270,7 +274,7 @@
 						<p>해당하는 주요 업무의 카테고리를 모두 선택해 주세요.</p>
 						<div class="category">
 							<div class="develop">
-				                <input name="category" class="developCheckBox" id="develop" type="checkBox" value=1>
+				                <input name="category" class="categoryCheckBox" id="develop" type="checkBox" value=1>
 				                <label class="categoryLabel" for="develop">
 				                    <img src="/resources/img/company/develop.PNG"><br>
 				                    <span class="txt_check">개발</span>
@@ -278,14 +282,14 @@
 				                
 							</div>
 							<div class="design">
-				                <input name="category" class="designCheckBox" id="design" type="checkBox" value=2>
+				                <input name="category" class="categoryCheckBox" id="design" type="checkBox" value=2>
 				                <label class="categoryLabel" for="design">
 				                    <img src="/resources/img/company/design.PNG"><br>
 				                    <span class="txt_check">디자인</span>
 				                </label>
 			                </div>
 			                <div class="plan">
-				                <input name="category" class="planCheckBox" id="plan" type="checkBox" value=3>
+				                <input name="category" class="categoryCheckBox" id="plan" type="checkBox" value=3>
 				                <label class="categoryLabel" for="plan">
 				                    <img src="/resources/img/company/plan.PNG"><br>
 				                    <span class="txt_check">기획</span>
@@ -420,17 +424,18 @@
 					</div>
 					
 					<div class="grayBox">
-						<em>학력</em>
+						<em>근무 일시</em>
 						<br><br>
 						<div class="school">
-							<b>최종학력</b>
+							<b>근무 횟수</b>
 						</div>
 						<div class="activityInput">
 							<select class="selectInput" name="activity">	
-								<option value=1>초졸</option>
-								<option value=2>중졸</option>
-								<option value=3>고졸</option>
-								<option value=4 selected="">대졸이상</option>
+								<option value=0>근무 횟수 선택</option>
+								<option value=1>주 4일</option>
+								<option value=2>주 5일</option>
+								<option value=3>주 6일</option>
+								<option value=5>주말</option>
 							</select>
 						</div>		
 					</div>
