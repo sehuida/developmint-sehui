@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>UpdateInfo</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 	.update-wrap{
 		width: 700px;
@@ -69,8 +70,8 @@
 					</div>
 					<div class="form-group pageBtn"  style="margin-top: 30px;">
 						<a href="/changePwFrm.do">비밀번호 변경하기</a>
-						<input type="submit" class="btn btn-primary" value="변경하기">	
-						<button class="btn btn-danger resgin">회원탈퇴</button>		  					
+						<button type="submit" class="btn btn-primary">정보변경</button>	
+						<button type="button" class="btn btn-danger resgin">회원탈퇴</button>		  					
 					</div>
 		        </form>
 			  </div><!--update-middle 끝나는 지점  -->
@@ -80,13 +81,39 @@
 	<script>
 		$(function(){
 			$(".resgin").on("click",function(){
-				var memberId = $(".memberId").val();
-				
-				$.ajax({
-						
-				});
-			});
-		});
+				var memberId = $("#memberId").val();
+				swal({
+				    title: "회원탈퇴를 진행하시겠습니까?",
+				    text: "회원 탈퇴를 진행하실경우, 정보 복구는 어렵습니다.",
+				    icon: "error",
+				    buttons: ["돌아가기", "탈퇴하기"],
+				    dangerMode: true
+				}).then((willDelete) => {
+				    if (willDelete) {
+				        
+				        $.ajax({
+				            url: "/resignMember.do",
+				            data: {
+				                memberId: memberId
+				            },
+				            type: "post",
+				            success: function (data) {
+				            	if(data == 1){
+				        			swal("회원탈퇴가 완료되셨습니다.", {icon: "success"});
+				            	}else{
+				            		swal("회원탈퇴에 실패했습니다.", {icon:"warning"});
+				            	}
+				            }
+				        });
+				    } else {
+				        swal({
+				        	text: "탈퇴가 취소되었습니다.",
+				        	button: "돌아가기"
+				        });
+				    }//else문 종료
+				});//then delete 문 종료
+			});//resign on click 문 종료
+		});//$ 펑션 종료
 	</script>
 </body>
 </html>

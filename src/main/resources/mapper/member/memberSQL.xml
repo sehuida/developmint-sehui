@@ -75,4 +75,7 @@
   <update id="resetPwMember" parameterType="m">
   	update member set member_pw = #{memberPw} where member_id = #{memberId}
   </update>
+  <delete id="resignMember" parameterType="string">
+  	delete from member where member_id=#{memberId}
+  </delete>
 </mapper>
