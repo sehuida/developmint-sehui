@@ -50,6 +50,8 @@ public class AdminController {
 		model.addAttribute("dateList",td.getDateList());
 		model.addAttribute("joinList",td.getJoinList());
 		model.addAttribute("outList",td.getOutList());
+		model.addAttribute("gradeList",td.getGradeList());
+		model.addAttribute("cateList",td.getCateList());
 		return "admin/dashboard";
 	}
 	

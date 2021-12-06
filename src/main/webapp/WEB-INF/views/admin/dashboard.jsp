@@ -21,12 +21,17 @@
 .todayInfo{
 	display: flex;
 	justify-content: space-around;
+	background-color: #fafafa;
+	border-radius : 5px;
+	padding-top: 30px;
+	padding-bottom: 30px;
 }
 .todayInfo>div{
 	border : 2px solid #d9d9d9;
 	width: 250px;
 	text-align: center;
 	border-radius: 5px;
+	background-color: #fff;
 	
 }
 .boxLine{
@@ -90,8 +95,6 @@
 }
 .BoardList>div{
 	display: flex;
-	
-	
 }
 .moreTag{
 	margin-left: auto;
@@ -154,7 +157,7 @@
 				<p class="title" style="margin-top:100px; margin-left:70px;">사이트 통계</p>
 				<div id="cateChartBox" >
 					<div class="btns">
-					<button class="btn btn-outline-primary btn1">성별</button><button class="btn btn-outline-primary btn2">등급별</button><button class="btn btn-outline-primary btn3">카테고리별</button>
+					<button class="btn btn-outline-primary btn2">등급별</button><button class="btn btn-outline-primary btn3">카테고리별</button>
 					</div>
 					<canvas id="myChart2" ></canvas>
 				</div>
@@ -224,32 +227,14 @@
 			  }
 			});
 		 
-		 <%-- 성별버튼 클릭시 나오는 파이차트--%>
-		 $(".btn1").click(function(){
-			 $(".myChart2").val("");
-			 new Chart(document.getElementById("myChart2"), {
-				    type: 'pie',
-				    data: {
-				      labels: ["남성","여성"],
-				      datasets: [{
-				        label: "Population (millions)",
-				        backgroundColor: ["#4ECDC4", "#90D1B4"],
-				        data: [60,40]
-				      }]
-				    },
-				    options: {
-				      title: {
-				        display: true,
-				        text: 'DeveloMint 회원 성별 통계'
-				      }
-				    }
-				});
-		 });
-		 $(".btn1").trigger("click");
-		 
 		 <%-- 등급별버튼 클릭시 나오는 파이차트--%>
 		 $(".btn2").click(function(){
-			 $(".myChart2").val("");
+			 $(".myChart2").remove();
+			 $(".btn3").css("background-color","#fff");
+			 $(".btn3").css("color","#4ECDC4");
+			 $(".btn3").css("border-color","#4ECDC4");
+			 $(".btn2").css("background-color","#4ECDC4");
+			 $(".btn2").css("color","#fff");
 			 new Chart(document.getElementById("myChart2"), {
 				    type: 'pie',
 				    data: {
@@ -257,7 +242,7 @@
 				      datasets: [{
 				        label: "Population (millions)",
 				        backgroundColor: ["#4ECDC4","#90D1B4","#9cd19f","#B7CD99","#E4ECB7","#EDF6B9","#EDEBE9"],
-				        data: [30,30,15,7,7,6,5]
+				        data: ${gradeList}
 				      }]
 				    },
 				    options: {
@@ -268,10 +253,16 @@
 				    }
 				});
 		 });
+		 $(".btn2").trigger("click");
 		 
 		 <%-- 카테고리별버튼 클릭시 나오는 파이차트--%>
 		 $(".btn3").click(function(){
-			 $(".myChart2").val("");
+			 $(".myChart2").remove();
+			 $(".btn2").css("background-color","#fff");
+			 $(".btn2").css("color","#4ECDC4");
+			 $(".btn2").css("border-color","#4ECDC4");
+			 $(".btn3").css("background-color","#4ECDC4");
+			 $(".btn3").css("color","#fff");
 			 new Chart(document.getElementById("myChart2"), {
 				    type: 'pie',
 				    data: {
@@ -279,7 +270,7 @@
 				      datasets: [{
 				        label: "Population (millions)",
 				        backgroundColor: ["#4ECDC4", "#90D1B4","#9cd19f","#E4ECB7","#EDF6B9"],
-				        data: [20,30,15,15,10]
+				        data: ${cateList}
 				      }]
 				    },
 				    options: {

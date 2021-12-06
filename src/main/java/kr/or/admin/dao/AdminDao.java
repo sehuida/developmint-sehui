@@ -30,4 +30,28 @@ public class AdminDao {
 	public int todayTotalContent() {
 		return sqlSession.selectOne("admin.todayTotalContent");
 	}
+
+	public List<Integer> gradeList() {
+		List<Integer> gradeList = new ArrayList<Integer>();
+		gradeList.add(sqlSession.selectOne("admin.bronzeCount"));
+		gradeList.add(sqlSession.selectOne("admin.silverCount"));
+		gradeList.add(sqlSession.selectOne("admin.goldCount"));
+		gradeList.add(sqlSession.selectOne("admin.platinumCount"));
+		gradeList.add(sqlSession.selectOne("admin.diamondCount"));
+		gradeList.add(sqlSession.selectOne("admin.masterCount"));
+		gradeList.add(sqlSession.selectOne("admin.challengerCount"));
+		return gradeList;
+	}
+
+	public List<Integer> cateList() {
+		List<Integer> cateList = new ArrayList<Integer>();
+		cateList.add(sqlSession.selectOne("admin.projectCount"));
+		cateList.add(sqlSession.selectOne("admin.shareCount"));
+		cateList.add(sqlSession.selectOne("admin.resumeCount"));
+		cateList.add(sqlSession.selectOne("admin.gosuCount"));
+		cateList.add(sqlSession.selectOne("admin.contestCount"));
+		return cateList;
+	}
+
+	
 }

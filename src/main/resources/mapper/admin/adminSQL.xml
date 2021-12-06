@@ -28,4 +28,44 @@
 		(SELECT COUNT(*) FROM GOSU_NOTICE)E
 		FROM DUAL)
 	</select>
+	
+	<!-- 등급별 회원 수 -->
+	<select id="bronzeCount" resultType="_int">
+		select count(*) from member where member_grade BETWEEN 1 and 20
+	</select>
+	<select id="silverCount" resultType="_int">
+		select count(*) from member where member_grade BETWEEN 21 and 40
+	</select>
+	<select id="goldCount" resultType="_int">
+		select count(*) from member where member_grade BETWEEN 41 and 60
+	</select>
+	<select id="platinumCount" resultType="_int">
+		select count(*) from member where member_grade BETWEEN 61 and 80
+	</select>
+	<select id="diamondCount" resultType="_int">
+		select count(*) from member where member_grade BETWEEN 81 and 110
+	</select>
+	<select id="masterCount" resultType="_int">
+		select count(*) from member where member_grade BETWEEN 111 and 140
+	</select>
+	<select id="challengerCount" resultType="_int">
+		select count(*) from member where member_grade BETWEEN 141 and 170
+	</select>
+	
+	<!-- 카테고리별 게시물 수 -->
+	<select id="projectCount" resultType="_int">
+		select count(*) from PROJECT
+	</select>
+	<select id="shareCount" resultType="_int">
+		select count(*) from SHARE_BOARD
+	</select>
+	<select id="resumeCount" resultType="_int">
+		select count(*) from ANNOUNCEMENT
+	</select>
+	<select id="gosuCount" resultType="_int">
+		select count(*) from GOSU_NOTICE
+	</select>
+	<select id="contestCount" resultType="_int">
+		select count(*) from CONTEST
+	</select>
 </mapper>
