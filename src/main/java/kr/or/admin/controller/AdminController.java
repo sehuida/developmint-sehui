@@ -1,14 +1,22 @@
 package kr.or.admin.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.admin.service.AdminService;
+import kr.or.admin.vo.TotalData;
 
 @Controller
 public class AdminController {
@@ -16,7 +24,7 @@ public class AdminController {
 	@Autowired
 	private AdminService service; 
 	
-
+	
 	//관리자 페이지로 이동
 	@RequestMapping(value="/adminPage.do")
 	public String adminPage() {
@@ -29,6 +37,19 @@ public class AdminController {
 		//오늘 날짜 전송
 		LocalDate today = LocalDate.now();
 		model.addAttribute("today",today);
+		//오늘 날짜 String으로 변환
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String sToday = today.format(formatter);
+		//통계자료
+		TotalData td = service.totaldata(sToday);
+		
+		model.addAttribute("todayTotalMember",td.getTodayTotalMember());
+		model.addAttribute("todayJoinMember",td.getTodayJoinMember());
+		model.addAttribute("todayOutMember",td.getTodayOutMember());
+		model.addAttribute("todayTotalContent",td.getTodayTotalContent());
+		model.addAttribute("dateList",td.getDateList());
+		model.addAttribute("joinList",td.getJoinList());
+		model.addAttribute("outList",td.getOutList());
 		return "admin/dashboard";
 	}
 	

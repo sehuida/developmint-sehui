@@ -8,12 +8,13 @@
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 </head>
 <style>
-#mainTitel{
-	font-size: 30px;
-	font-weight: bold;
-	margin-bottom: 30px;
-	margin-top: 50px;
-}
+.titleBox{
+		font-size: 30px;
+		font-weight: bold;
+		margin-bottom: 80px;
+		margin-top:50px;
+	}
+
 .dateInput{
 	float: left;
 }
@@ -38,7 +39,9 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container" style="margin-bottom: 100px; margin-left: 400px;">
-		<p id="mainTitel">공모전 등록</p>
+		<div class="titleBox">
+			<a href="/contestMain.do"><i class="bi bi-chevron-left"></i></a><span>공모전 등록</span>
+		</div>
 		<form action="/insertContest.do" method="post" enctype="multipart/form-data">
 
 			<table class="table" style="width: 1000px;">
