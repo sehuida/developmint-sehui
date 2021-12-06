@@ -18,5 +18,8 @@
 		<typeAlias type="kr.or.comment.vo.Report" alias="rp"/>
 		<typeAlias type="kr.or.contest.vo.ContestMember" alias="conmem"/>
 		<typeAlias type="kr.or.projectTeam.model.vo.DevelopLanguage" alias="ddl"/>
+		<typeAlias type="kr.or.gosu.vo.Gosu" alias="g"/>
+		<typeAlias type="kr.or.gosu.vo.GosuPhoto" alias="gph"/>
+		<typeAlias type="kr.or.gosu.vo.GosuProject" alias="gpr"/>
 	</typeAliases>	
 </configuration>

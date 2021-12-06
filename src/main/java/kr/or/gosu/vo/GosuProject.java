@@ -1,5 +1,6 @@
 package kr.or.gosu.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
