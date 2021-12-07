@@ -67,7 +67,10 @@ public class MemberService {
 	
 	@Transactional
 	public int resignMember(String memberId) {
-		int result = dao.resignMember(memberId);
+		int result = 0;
+		Member m = dao.checkId(memberId);
+		result += dao.insertDelete(m);
+		result += dao.resignMember(memberId);
 		return result;
 	}
 	
