@@ -141,7 +141,7 @@
 			<div>
 				<p>총 게시물</p>
 				<div class="boxLine"></div>
-				<span>${todayTotalContent }</span><span> 명</span>
+				<span>${todayTotalContent }</span><span> 개</span>
 			</div>
 		</div>
 		
@@ -238,7 +238,7 @@
 			 new Chart(document.getElementById("myChart2"), {
 				    type: 'pie',
 				    data: {
-				      labels: ["Bronze","Silver","Gold","Platinum","Diamond","Master","Challenger"],
+				      labels: ["브론즈","실버","골드","플레티넘","다이아","마스터","챌린저"],
 				      datasets: [{
 				        label: "Population (millions)",
 				        backgroundColor: ["#4ECDC4","#90D1B4","#9cd19f","#B7CD99","#E4ECB7","#EDF6B9","#EDEBE9"],
