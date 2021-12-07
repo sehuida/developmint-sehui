@@ -63,28 +63,28 @@
 	<div class="totalBox">
 		<div>
 			<p>총 회원</p>
-			<span>100</span><span> 명</span>
+			<span>${totalCount[0] }</span><span> 명</span>
 		</div>
 		<div>
 			<p>일반 회원</p>
-			<span>100</span><span> 명</span>
+			<span>${totalCount[1] }</span><span> 명</span>
 		</div>
 		<div>
 			<p>고수 회원</p>
-			<span>100</span><span> 명</span>
+			<span>${totalCount[2] }</span><span> 명</span>
 		</div>
 		<div>
 			<p>기업 회원</p>
-			<span>100</span><span> 명</span>
+			<span>${totalCount[3] }</span><span> 명</span>
 		</div>
 	</div>
 	
 	<%--조회 카테고리 --%>
-	<a href="javascript:void(0)" id="newList" class="listTag">최신순</a>
-	<a href="javascript:void(0)" id="gradeList" class="listTag">등급순</a>
-	<a href="javascript:void(0)" id="memberList" class="listTag">일반회원</a>
-	<a href="javascript:void(0)" id="gosuList" class="listTag">고수회원</a>
-	<a href="javascript:void(0)" id="companyList" class="listTag">기업회원</a>
+	<a href="/allMemberList.do?reqPage=1&type=0&list=member_no" id="newList" class="listTag">최신순</a>
+	<a href="/allMemberList.do?reqPage=1&type=0&list=member_grade" id="gradeList" class="listTag">등급순</a>
+	<a href="/allMemberList.do?reqPage=1&type=1&list=member_no" id="memberList" class="listTag">일반회원</a>
+	<a href="/allMemberList.do?reqPage=1&type=2&list=member_no" id="gosuList" class="listTag">고수회원</a>
+	<a href="/allMemberList.do?reqPage=1&type=3&list=member_no" id="companyList" class="listTag">기업회원</a>
 	
 	<%--조회 리스트 테이블 --%>
 	<%--최신순(전체회원조회) --%>
@@ -92,7 +92,7 @@
 		<tr>
 			<th>No.</th>
 			<th>아이디</th>
-			<th>총 게시글</th>
+			<th>이름</th>
 			<th>등급</th>
 			<th>포인트</th>
 			<th>신고당한 횟수</th>
@@ -100,15 +100,37 @@
 			<th>등급 변경</th>
 			<th>회원 차단</th>
 		</tr>
-		<c:forEach varStatus="i" begin="0" end="9">
+		<c:forEach items="${memberList }" var="ml" varStatus="i">
 			<tr class="tblTr ">
 				<td>${i.count }</td>
-				<td>user${i.count }</td>
-				<td>${i.count }</td>
-				<td>Bronze</td>
-				<td>10</td>
+				<td>${ml.memberId }</td>
+				<td>${ml.memberName}</td>
+				<c:choose>
+					<c:when test="${ml.memberGrade > 0 && ml.memberGrade < 21 }">
+						<td><img src="/resources/img/member/rank/bronze.png" width="35px" height="35px;">브론즈</td>
+					</c:when>
+					<c:when test="${ml.memberGrade > 21 && ml.memberGrade < 40 }">
+						<td><img src="/resources/img/member/rank/silver.png" width="35px" height="35px;">실버</td>
+					</c:when>
+					<c:when test="${ml.memberGrade > 41 && ml.memberGrade < 60 }">
+						<td><img src="/resources/img/member/rank/gold.png" width="35px" height="35px;">골드</td>
+					</c:when>
+					<c:when test="${ml.memberGrade > 61 && ml.memberGrade < 80 }">
+						<td><img src="/resources/img/member/rank/platinum.png" width="35px" height="35px;">플레티넘</td>
+					</c:when>
+					<c:when test="${ml.memberGrade > 81 && ml.memberGrade < 110 }">
+						<td><img src="/resources/img/member/rank/diamond.png" width="35px" height="35px;">다이아</td>
+					</c:when>
+					<c:when test="${ml.memberGrade > 111 && ml.memberGrade < 140 }">
+						<td><img src="/resources/img/member/rank/master.png" width="35px" height="35px;">마스터</td>
+					</c:when>
+					<c:when test="${ml.memberGrade > 141 && ml.memberGrade < 170 }">
+						<td><img src="/resources/img/member/rank/challenger.png" width="35px" height="35px;">챌린저</td>
+					</c:when>
+				</c:choose>
+				<td>${ml.memberGrade }</td>
 				<td>3</td>
-				<td>2021-11-29</td>
+				<td>${ml.enrollDate }</td>
 				<td>
 					<select> 
 						<option>브론즈</option>
@@ -124,207 +146,12 @@
 			</tr>
 		</c:forEach>
 	</table>
-
-	<%--등급순(전체회원조회) --%>
-	<table class="table gradeListTbl" style="display:none">
-		<tr>
-			<th>No.</th>
-			<th>아이디</th>
-			<th>총 게시글</th>
-			<th>등급</th>
-			<th>포인트</th>
-			<th>신고당한 횟수</th>
-			<th>가입일</th>
-			<th>등급 변경</th>
-			
-		</tr>
-		<c:forEach varStatus="i" begin="0" end="9">
-			<tr class="tblTr">
-				<td>${i.count }</td>
-				<td>user${i.count }</td>
-				<td>${i.count }</td>
-				<td>Master</td>
-				<td>120</td>
-				<td>3</td>
-				<td>2021-11-29</td>
-				<td>
-					<select>
-						<option>브론즈</option>
-						<option>실버</option>
-						<option>골드</option>
-						<option>플레티넘</option>
-						<option>다이아</option>
-						<option>챌린저</option>
-						<option>마스터</option>
-					</select>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
-	
-	<%--일반회원(게시물 수) --%>
-	<table class="table memberistTbl" style="display:none">
-		<tr>
-			<th>No.</th>
-			<th>아이디</th>
-			<th>총 게시글</th>
-			<th>등급</th>
-			<th>포인트</th>
-			<th>신고당한 횟수</th>
-			<th>가입일</th>
-			<th>등급 변경</th>
-		</tr>
-		<c:forEach varStatus="i" begin="0" end="9">
-			<tr class="tblTr">
-				<td>${i.count }</td>
-				<td>user${i.count }</td>
-				<td>${i.count }</td>
-				<td>Platinum</td>
-				<td>65</td>
-				<td>3</td>
-				<td>2021-11-29</td>
-				<td>
-					<select>
-						<option>브론즈</option>
-						<option>실버</option>
-						<option>골드</option>
-						<option>플레티넘</option>
-						<option>다이아</option>
-						<option>챌린저</option>
-						<option>마스터</option>
-					</select>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
-	
-	<%--고수회원 --%>
-	<table class="table gosuListTbl" style="display:none">
-		<tr>
-			<th>No.</th>
-			<th>아이디</th>
-			<th>노하우 게시글</th>
-			<th>피드백 진행</th>
-			<th>피드백 완료</th>
-			<th>완료율</th>
-			<th>가입일</th>
-			<th>등급 변경</th>
-		</tr>
-		<c:forEach varStatus="i" begin="0" end="9">
-			<tr class="tblTr">
-				<td>${i.count }</td>
-				<td>user${i.count }</td>
-				<td>${i.count }</td>
-				<td>10</td>
-				<td>5</td>
-				<td>50%</td>
-				<td>2021-11-29</td>
-				<td>
-					<select>
-						<option>브론즈</option>
-						<option>실버</option>
-						<option>골드</option>
-						<option>플레티넘</option>
-						<option>다이아</option>
-						<option>챌린저</option>
-						<option>마스터</option>
-					</select>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
-	
-	<%--기업회원 --%>
-	<table class="table companyListTbl" style="display:none">
-		<tr>
-			<th>No.</th>
-			<th>아이디</th>
-			<th>기업명</th>
-			<th>대표자 명</th>
-			<th>업종</th>
-			<th>구인게시물 수</th>
-			<th>가입일</th>
-			<th>등급 변경</th>
-		</tr>
-		<c:forEach varStatus="i" begin="0" end="9">
-			<tr class="tblTr">
-				<td>${i.count }</td>
-				<td>user${i.count }</td>
-				<td>develomint</td>
-				<td>김진호</td>
-				<td>개발</td>
-				<td>5</td>
-				<td>2021-11-29</td>
-				<td>
-					<select>
-						<option>브론즈</option>
-						<option>실버</option>
-						<option>골드</option>
-						<option>플레티넘</option>
-						<option>다이아</option>
-						<option>챌린저</option>
-						<option>마스터</option>
-					</select>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
 		<button class="btn btn-primary" style="float: right; margin-right:20px;">등급변경</button>
+		<div id="pageNavi" style="text-align: center; margin-top:50px;"  >${pageNavi }</div>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	 <script>
 	 
-	 	<%--최신순 클릭시--%>
-	 	$("#newList").click(function(){
-	 		<%--초기화--%>
-	 		$(".table").css("display","none");
-	 		$(".listTag").css("color","black")
-	 		<%--테이블 띄우고 카테고리 색 바뀌기--%>
-	 		$(".newListTbl").css("display","inline-table");
-	 		$("#newList").css("color","#4ECDC4")
-	 	});
-	 	$("#newList").trigger("click");
-	 	
-	 	<%--등급순 클릭시--%>
-	 	$("#gradeList").click(function(){
-	 		<%--초기화--%>
-	 		$(".table").css("display","none");
-	 		$(".listTag").css("color","black");
-	 		<%--테이블 띄우고 카테고리 색 바뀌기--%>
-	 		$(".gradeListTbl").css("display","inline-table");
-	 		$("#gradeList").css("color","#4ECDC4");
-	 	});
-	 	
-	 	<%--일반회원 클릭시--%>
-	 	$("#memberList").click(function(){
-	 		<%--초기화--%>
-	 		$(".table").css("display","none");
-	 		$(".listTag").css("color","black");
-	 		<%--테이블 띄우고 카테고리 색 바뀌기--%>
-	 		$(".memberistTbl").css("display","inline-table");
-	 		$("#memberList").css("color","#4ECDC4");
-	 	});
-	 	
-	 	<%--고수회원 클릭시--%>
-	 	$("#gosuList").click(function(){
-	 		<%--초기화--%>
-	 		$(".table").css("display","none");
-	 		$(".listTag").css("color","black");
-	 		<%--테이블 띄우고 카테고리 색 바뀌기--%>
-	 		$(".gosuListTbl").css("display","inline-table");
-	 		$("#gosuList").css("color","#4ECDC4");
-	 	});
-	 	
-	 	<%--기업회원 클릭시--%>
-	 	$("#companyList").click(function(){
-	 		<%--초기화--%>
-	 		$(".table").css("display","none");
-	 		$(".listTag").css("color","black");
-	 		<%--테이블 띄우고 카테고리 색 바뀌기--%>
-	 		$(".companyListTbl").css("display","inline-table");
-	 		$("#companyList").css("color","#4ECDC4");
-	 	});
-	 	
 	 	
 	 	
 	 	

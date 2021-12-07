@@ -68,4 +68,69 @@
 	<select id="contestCount" resultType="_int">
 		select count(*) from CONTEST
 	</select>
+	
+	<!-- 전체회원 조회 -->
+	<select id="allMemberList" parameterType="map" resultType="m">
+		select * 
+		from(select rownum as rnum, m.* 
+		from(
+		select 
+			member_no as memberNo,
+			member_name as memberName,
+			phone,
+			member_id as memberId,
+			member_pw as memberPw,
+			email,
+			member_type as memberType,
+			enroll_date as enrollDate,
+			filepath,
+			member_grade as memberGrade
+		from member
+		<trim prefix="where">
+			<if test="type == 1">
+				member_type = 1
+			</if>
+			<if test="type == 2">
+				member_type = 2
+			</if>
+			<if test="type == 3">
+				member_type = 3
+			</if>
+		</trim>
+		 order by #{list} desc)m order by rnum) 
+		where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 전체회원 수 -->
+	<select id="allMemberCount" parameterType="map" resultType="_int">
+		select count(*) from member
+		<trim prefix="where">
+			<if test="type == 1">
+				member_type = 1
+			</if>
+			<if test="type == 2">
+				member_type = 2
+			</if>
+			<if test="type == 3">
+				member_type = 3
+			</if>
+		</trim>
+	</select>
+	
+	<!-- 타입별 멤버 수  -->
+	<select id="totalUser" resultType="_int">
+		select count(*) from member where member_type = 1
+	</select>
+	<select id="totalGosu" resultType="_int">
+		select count(*) from member where member_type = 2
+	</select>
+	<select id="totalCompany" resultType="_int">
+		select count(*) from member where member_type =3
+	</select>
+	
+	
+	
+	
+	
+	
 </mapper>

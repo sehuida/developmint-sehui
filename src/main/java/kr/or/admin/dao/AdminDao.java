@@ -10,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.contest.vo.Contest;
 import kr.or.member.model.vo.Member;
 
 @Repository
@@ -63,6 +64,15 @@ public class AdminDao {
 
 	public int allMemberCount(Map<String, Object> map) {
 		return sqlSession.selectOne("admin.allMemberCount", map);
+	}
+
+	public List<Integer> totalCountList() {
+		List<Integer> totalList = new ArrayList<Integer>();
+		totalList.add((Integer)sqlSession.selectOne("admin.todayTotalMember"));
+		totalList.add((Integer)sqlSession.selectOne("admin.totalUser"));
+		totalList.add((Integer)sqlSession.selectOne("admin.totalGosu"));
+		totalList.add((Integer)sqlSession.selectOne("admin.totalCompany"));
+		return totalList;
 	}
 
 	

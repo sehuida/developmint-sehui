@@ -63,6 +63,7 @@ public class AdminController {
 		model.addAttribute("memberList", tm.getAllMemberList());
 		model.addAttribute("start",tm.getStart());
 		model.addAttribute("pageNavi",tm.getPageNavi());
+		model.addAttribute("totalCount",tm.getTotalCountList());
 		return "admin/allMemberList";
 	}
 	
