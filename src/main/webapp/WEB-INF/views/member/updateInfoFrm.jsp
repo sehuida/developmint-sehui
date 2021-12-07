@@ -99,10 +99,17 @@
 				            type: "post",
 				            success: function (data) {
 				            	if(data == 1){
-				        			swal("회원탈퇴가 완료되셨습니다.", {icon: "success"});
+				                    swal({
+				                        title: '회원탈퇴완료',
+				                        text: '디벨로민트를 이용해주셔서 감사합니다.',
+				                        icon: 'success'
+				                      }).then(function(){
+				                    	 window.location = "/"; 
+				                      });
 				            	}else{
 				            		swal("회원탈퇴에 실패했습니다.", {icon:"warning"});
 				            	}
+				    
 				            }
 				        });
 				    } else {

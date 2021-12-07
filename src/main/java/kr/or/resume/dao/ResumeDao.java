@@ -33,4 +33,8 @@ public class ResumeDao {
 		 */
 		return sqlSession.insert("resume.insertResume", r);
 	}
+
+	public int selectCountResume(int memberNo) {
+		return sqlSession.selectOne("resume.selectCountResume", memberNo);
+	}
 }

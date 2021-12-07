@@ -101,7 +101,9 @@ overflow: hidden;
 	
 	<div class="titleBox">
 		<p class="mainTitel">공모전 게시판</p>
-		<a class="btn btn-primary" href="/insertContestFrm.do">공모등록</a>
+		<c:if test="${not empty sessionScope.m }">
+			<a class="btn btn-primary" href="/insertContestFrm.do">공모등록</a>
+		</c:if>
 	</div>
 	
 	<%-- 메인 포스터 3개 슬라이드 --%>

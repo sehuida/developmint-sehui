@@ -3,7 +3,9 @@ package kr.or.gosu.vo;
 import kr.or.contest.vo.Contest;
 import kr.or.member.model.vo.Member;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+
 
 @Data
 public class Gosu {
@@ -15,7 +17,8 @@ public class Gosu {
 	private String gosuAct;
 	private int gosuCost;
 	private String gosuDate;
-	
+	private String gosuId;
+	private String gosuImg;
 	
 	public String getGosuExplainBr(){
 		return gosuExplain.replaceAll("\r\n", "<br>");

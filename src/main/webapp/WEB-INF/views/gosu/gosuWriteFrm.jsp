@@ -287,7 +287,7 @@
 					</h4>
 					<div>
 						<p>
-							<textarea name="" gosuExplain></textarea>
+							<textarea name="gosuExplain" ></textarea>
 						</p>
 					</div>
 
@@ -306,7 +306,7 @@
 					<h4>
 						활동 및 자격 <span style="color: red;">* </span>
 					</h4>
-					<div style="display: flex; justify-content: center;">
+					<div >
 						<p>
 							<textarea name="gosuAct"></textarea>
 						</p>
@@ -334,13 +334,13 @@
 					<h3 style="color: white;">프로젝트 추가하기</h3>
 					<div class="hrm-content">
 						<b>메인사진</b> <input type="file" class="gprojectFilepath"
-							id="gprojectFilepath" name="gprojectFilepath" accept="image/*" ><br>
+							id="gprojectFilepath" accept="image/*" ><br>
 						<div id="gimage_container"></div>
 						<b>제목</b><input type="text" class="gprojectTitle"
-							id="gprojectTitle" name="gprojectTitle[]" placeholder="내용을 입력해주세요."><br>
+							id="gprojectTitle"  placeholder="내용을 입력해주세요."><br>
 						<b style="float: left;">내용</b>
 						<textarea cols="80" class="gprojectContent" id="gprojectContent"
-							name="gprojectContent[]" placeholder="내용을 입력해주세요."></textarea>
+							placeholder="내용을 입력해주세요."></textarea>
 						<br>
 					</div>
 					<div class="hrm-btn-wrap">
@@ -425,6 +425,8 @@
 			var files = $("#gprojectFilepath")[0].files[0];
 			console.log(files);
 			form.append("gprojectFilepath",files);
+			form.append("gprojectContent",gprojectContent);
+			form.append("gprojectTitle",gprojectTitle);
 			 $.ajax({
 					url : "/gProjectAjax.do"
 					, type : "post"
@@ -432,8 +434,13 @@
 					, processData : false
 					, contentType : false
 					, success : function(data) {
-						
-						$(".g-photo-one").last().append("<input type='hidden' name='gprojectFilepath' value='"+data+"'>");
+						console.log(data);
+						console.log(data.gprojectFilepath);
+						console.log(data.gprojectTitle);
+						console.log(data.gprojectContent);
+						$(".g-photo-one").last().append("<input type='hidden' name='gprojectFilepath' value='"+data.gprojectFilepath+"'>");
+						$(".g-photo-one").last().append("<input type='hidden' name='gprojectTitle' value='"+data.gprojectTitle+"'>");
+						$(".g-photo-one").last().append("<input type='hidden' name='gprojectContent' value='"+data.gprojectContent+"'>");
 						
 					}
 			 });
