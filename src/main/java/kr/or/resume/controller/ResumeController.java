@@ -56,4 +56,13 @@ public class ResumeController {
 		model.addAttribute("loc","/resumeManage.do?memberNo="+memberNo);
 		return "common/msg";
 	}
+	
+	@RequestMapping(value="/ceoResume.do")
+	public String ceoResume(int ceoResume, Model model) {
+		model.addAttribute("ceoResume", ceoResume);
+		return "resume/resumeManage";
+	}
+	
+	
+	
 }

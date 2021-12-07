@@ -260,7 +260,20 @@
 			}
 		});
 		
+		$(".input__on-off").click(function(){
+			$.ajax({
+				url : "/ceoResume.do",
+				method : post,
+				data : {
+					ceoResume : 1,
+				},
+				success : function(data) {
+					console.log($.trim(data));
+				}
+			});
+		});
 		
+
 	});
 </script>
 
@@ -337,7 +350,7 @@
 		
 		
 		<div class="resume">
-			<a href="resumeFrm.do"><button class="resumeBtn">이력서 작성하기</button></a>			<!-- -------- 여기 안되는 부분 ------- -->
+			<a href="resumeFrm.do"><button class="resumeBtn">이력서 작성하기</button></a>
 		</div>
 		<div class="resumeExplain">
 			<p>이력서는 최대 10개까지 등록 가능합니다.</p>
@@ -355,7 +368,6 @@
 		</c:choose>
 		</div>
 		<hr style="width: 885px;">
-		<!-- 내 이력서 리스트 보여주는 공간 데이터 가져올 때 forEach로 바꿔주기 -->
 		<c:choose>
 			<c:when test="${empty list }">
 				<div class="noResume">
@@ -365,7 +377,6 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${list }" var="rs" varStatus="i">
-					<%-- <input type="hidden" name="ceoResume" class="selectCeoResume" value="${rs.ceoResume }")> --%>
 					<div class="myResume">
 							<div class="wd">
 								<span style="font-size: 13px; color: gray;">${rs.writeDate }</span>	
@@ -468,61 +479,6 @@
 			</c:otherwise>
 		</c:choose>
 		</div>
-		
-		
-		
-		<!-- <div class="myResume" style="margin-bottom: 50px;">
-			<div class="resumeTitle">
-				<em>이력서 제목12</em>	r.resumeTitle
-			</div>
-			<ul class="resumeInfo1">
-	           	<li class="career">
-	            	<div class="resumeInfoImg">
-	            		<img src="resources/img/resume/career.PNG">
-	            	</div>
-	            	<div class="resumeInfoData">
-	            		<span>신입1</span>	r.resumeCareer
-	            	</div>
-	            </li>
-	            <li class="money">
-					<div class="resumeInfoImg">
-						<img src="resources/img/resume/income.PNG">					
-					</div>
-					<div class="resumeInfoData">
-						<span>2,800~3,000만원</span>	r.resumeMoney
-					</div>
-				</li>
-			</ul>
-			<ul class="resumeInfo2">
-				<li class="workPlace">
-					<div class="resumeInfoImg">
-						<img src="resources/img/resume/workPlace.PNG">
-					</div>
-					<div class="resumeInfoData">
-						<span>희망지역 : 서울 금천구</span>	r.resumeworkPlace
-					</div>
-				</li>       					           
-				<li class="workForm">
-					<div class="resumeInfoImg">
-						<img src="resources/img/resume/workFromWhite.PNG">
-					</div>
-					<div class="resumeInfoData">
-						<span>희망 직무·직업 : IT개발·데이터</span>	r.resumeWorkForm
-					</div>
-				</li>                       
-			</ul>
-			<div class="register">
-				<p>대표이력서 등록</p>
-				<div class="ceoResumeChk">
-					<input type="checkbox" id="switch1" name="switch1" class="input__on-off"> 
-					<label for="switch1" class="label__on-off"> 
-						<span class="marble"></span> 
-						<span class="on">on</span> 
-						<span class="off">off</span> 
-					</label>
-				</div>
-			</div>
-		</div> -->
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
