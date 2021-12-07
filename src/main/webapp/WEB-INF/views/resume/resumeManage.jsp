@@ -155,6 +155,10 @@
     	margin-left: 20px;
     	font-size: 13px;
     	font-weight: 900;
+    	float: right;
+    	position: relative;
+    	top: -180px;
+    	left: -200px;
     }
     
     input[type="checkbox"] { 
@@ -164,7 +168,7 @@
     	overflow: hidden; 
     	position: relative; 
     	display: inline-block; 
-    	width: 58px; height: 26px; 
+    	width: 50px; height: 20px; 
     	-webkit-border-radius: 13px; 
     	-moz-border-radius: 13px; 
     	border-radius: 13px; 
@@ -185,15 +189,14 @@
     	-ms-transition: all .3s; 
     	-o-transition: all .3s; 
     	transition: all .3s; 
-    	font-size: 14px; 
+    	font-size: 13px; 
     } 
     .label__on-off .marble { 
     	position: absolute; 
-    	top: 1px; 
-    	left: 1px; 
+    	left: -1.5px; 
     	display: block;
-    	width: 24px; 
-    	height: 24px; 
+    	width: 20px; 
+    	height: 20px; 
     	background-color: #fff; 
     	-webkit-border-radius: 50%; 
     	-moz-border-radius: 50%; 
@@ -207,14 +210,21 @@
     	padding-left: 12px; 
     } 
     .label__on-off .off { 
-    	padding-left: 30px; line-height: 25px; 
-    } 
+    	padding-left: 25px; line-height: 10px; 
+    }
+    .on, .off{
+    	position: relative;
+    	top: -3px;
+    }
     .input__on-off:checked + .label__on-off { 
     	background-color: #0bba82; 
     } 
     .input__on-off:checked + .label__on-off .on { 
     	display: inline-block; 
     } 
+    .input__on-off{
+    	display: none;
+    }
     .input__on-off:checked + .label__on-off .off { 
     	display: none; 
     } 
@@ -229,9 +239,31 @@
     /* .ceoResumeChk{
     	display: inline-block;
     } */
-
-    
+	.noResume{
+		width: 800px;
+		margin: 0 auto;
+		margin-top: 40px;
+		text-align: center;
+	}
+    .allResume{
+    	
+    }
 </style>
+<script>
+	$(function(){
+		$(".resumeBtn").click(function(e){
+			var count = $(".count").html();
+			if($(".count").html() > 10) {
+				alert("이력서는 10개까지만 등록이 가능합니다.");
+				e.preventDefault();
+				console.log(count);
+			}
+		});
+		
+		
+	});
+</script>
+
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="contain">
@@ -245,7 +277,7 @@
 		</c:otherwise>
 	</c:choose> --%>
 	
-	
+		<!-- 대표이력서 ceoResume == 1 -->
 		<div class="grayBox">
 			<div class="resumeHeader">
 				<div class="ceoResume">
@@ -311,20 +343,35 @@
 			<p>이력서는 최대 10개까지 등록 가능합니다.</p>
 			<p>대표이력서 설정은 1개의 이력서만 가능합니다.</p>
 		</div>
+		<div class="allResume">
 		<div class="resumeCount">
-			총 1건		<!-- r.resumeCount  내 이력서 갯수 count 가져오기 이것도 vo에 추가해야 하나 -->
+		<c:choose>
+			<c:when test="${count eq null }">
+			총 0건
+			</c:when>
+			<c:otherwise>
+			총 <p class="count" style="margin: 0; display: inline;">${count }</p>건		
+			</c:otherwise>
+		</c:choose>
 		</div>
-		<hr>
+		<hr style="width: 885px;">
 		<!-- 내 이력서 리스트 보여주는 공간 데이터 가져올 때 forEach로 바꿔주기 -->
 		<c:choose>
 			<c:when test="${empty list }">
+				<div class="noResume">
+					<img src="/resources/img/resume/no.JPG" style="width: 50px; height: 50px;"><br><br>
 				저장된 이력서가 없습니다.
+				</div>
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${list }" var="rs">
+				<c:forEach items="${list }" var="rs" varStatus="i">
+					<%-- <input type="hidden" name="ceoResume" class="selectCeoResume" value="${rs.ceoResume }")> --%>
 					<div class="myResume">
+							<div class="wd">
+								<span style="font-size: 13px; color: gray;">${rs.writeDate }</span>	
+							</div>
 						<div class="resumeTitle">
-							<em>${rs.resumeTitle }</em>	<!-- rs.resumeTitle 왜 안될까 슈밥ㅇㅁㄴㅇㅁㄴㅇㄴㅁㅇ -->
+							<em>${rs.resumeTitle }</em>	
 						</div>
 						<ul class="resumeInfo1">
 				           	<li class="career">
@@ -407,19 +454,20 @@
 						<div class="register">
 							<p>대표이력서 등록</p>
 							<div class="ceoResumeChk">
-								<input type="checkbox" id="switch1" name="switch1" class="input__on-off"> 
-								<label for="switch1" class="label__on-off"> 
+								<input type="radio" id="switch${i.count }" name="switch1" class="input__on-off">
+								<label for="switch${i.count }" class="label__on-off"> 
 									<span class="marble"></span> 
 									<span class="on">on</span> 
 									<span class="off">off</span> 
 								</label>
 							</div>
-						</div>
+						</div>					
 					</div>
 					<hr>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
+		</div>
 		
 		
 		

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>기업소개</title>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b0b0a9f222f0ab356e278f15c5fdc64"></script>
 </head>
 <style>
 	.contain{
