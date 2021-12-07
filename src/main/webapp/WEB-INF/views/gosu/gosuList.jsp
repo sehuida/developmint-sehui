@@ -37,16 +37,16 @@
 .gosu {
 	display: flex;
 	justify-content: center;
+	margin-bottom: 70px;
 }
 
 .gosu table {
 	width: 100%;
 }
 
-.gosu .gosu_img {
+.gosu img {
 	text-align: center;
-	width: 300px;
-	height: 200px;
+	width: 200px;
 }
 
 .gosu td {
@@ -90,8 +90,7 @@
 .gosu-write-wrap {
 	position: fixed;
 	z-index: 1000;
-	
-	margin-left:1200px;
+	margin-left: 1200px;
 }
 
 .gosu-write {
@@ -107,38 +106,46 @@
 	padding: 10px;
 	width: 200px;
 }
-
+.gosu li{
+	list-style-type: none;
+}
 .gosu-write * {
 	font-weight: bold;
 	line-height: 30px;
 }
-  .gosu-mail{
-        display: flex;
-        justify-content: right;
-        
-    }
-    .gosu-mail a{
-        font-weight: bold;
-        font-size: 20px;
-    }
-    .gosu-mail span{
-        font-weight: bold;
-        color: white;
-        background-color: red;
-        border-radius: 50%;
-        text-align: center;
-        width: 20px;
-        margin-left: 50px;
-        display: block;
-        font-size: 13px;
-    } 
+
+.gosu-mail {
+	display: flex;
+	justify-content: right;
+}
+
+.gosu-mail a {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.gosu-mail span {
+	font-weight: bold;
+	color: white;
+	background-color: red;
+	border-radius: 50%;
+	text-align: center;
+	width: 20px;
+	margin-left: 50px;
+	display: block;
+	font-size: 13px;
+}
+.gtitle{
+	font-size: 30px;
+	font-weight: 900;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-	<div class="gosu-mail">
+		<div class="gosu-mail">
 			<a href="/gosuRequestList.do"><span>1</span>요청서</a>
-	</div>
+		</div>
 		<h3>
 			<span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다
 		</h3>
@@ -155,295 +162,60 @@
 
 		</div>
 		<c:if test="${sessionScope.m.memberType eq 2}">
-		<div class="gosu-write-wrap">
-			<div class="gosu-write">
-				<h5 style="font-size: small; color: gray;">
-					고수님의 능력을<br> 마음껏 펼쳐주세요!
-				</h5>
-				<a href="/gosuWriteFrm.do" class="btn btn-primary" style="font-weight:bold;">작성하기</a>
+			<div class="gosu-write-wrap">
+				<div class="gosu-write">
+					<h5 style="font-size: small; color: gray;">
+						고수님의 능력을<br> 마음껏 펼쳐주세요!
+					</h5>
+					<a href="/gosuWriteFrm.do" class="btn btn-primary"
+						style="font-weight: bold;">작성하기</a>
+				</div>
 			</div>
-		</div>
 		</c:if>
+
 		<div class="gosu-wrap">
-			<div class="gosu">
-				<button type="button" class="card border-primary mb-3"
-					style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-					<table>
-						<tr>
-							<td rowspan="4" class="gosu_img" style="width: 30%;"><img
-								src="/resources/img/gosu/g_img_basic.png"
-								style="border-radius: 50%;"></td>
-							<td><a href="/gosuContent.do">제목</a></td>
-						</tr>
-						<tr>
-							<td><hr></td>
-						</tr>
-						<tr>
+			<c:forEach items="${gList }" var="g" varStatus="i">
+				<div class="gosu">
+					<button type="button" class="card border-primary mb-3"
+						style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+						<table>
+							<tr>
+								<c:if test="${empty g.gosuImg }">
+									<td rowspan="4" class="gosu_img" style="width: 30%;"><img
+										src="/resources/img/gosu/g_img_basic.png"
+										style="border-radius: 50%;"></td>
+								</c:if>
+								<c:if test="${not empty g.gosuImg }">
+									<th rowspan="4" style="padding: 40px;"><img
+										src="${g.gosuImg }" style="width: 250px;"></th>
+								</c:if>
 
-							<td>
-								<li>한줄소개</li>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<li>피드백 예상견적</li>
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align: center; font-weight: bold;">고수 xxxx</td>
-							<td>4.0</td>
-						</tr>
-					</table>
-				</button>
-			</div>
-			<div class="gosu">
-				<button type="button" class="card border-primary mb-3"
-					style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-					<table>
-						<tr>
-							<td rowspan="4" class="gosu_img" style="width: 30%;"><img
-								src="/resources/img/gosu/g_img_basic.png"
-								style="border-radius: 50%;"></td>
-							<td><a href="/gosuContent.do">제목</a></td>
-						</tr>
-						<tr>
-							<td><hr></td>
-						</tr>
-						<tr>
 
-							<td>
-								<li>한줄소개</li>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<li>피드백 예상견적</li>
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align: center; font-weight: bold;">고수 xxxx</td>
-							<td>4.0</td>
-						</tr>
-					</table>
-				</button>
-			</div>
-			<div class="gosu">
-				<button type="button" class="card border-primary mb-3"
-					style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-					<table>
-						<tr>
-							<td rowspan="4" class="gosu_img" style="width: 30%;"><img
-								src="/resources/img/gosu/g_img_basic.png"
-								style="border-radius: 50%;"></td>
-							<td><a href="/gosuContent.do">제목</a></td>
-						</tr>
-						<tr>
-							<td><hr></td>
-						</tr>
-						<tr>
+								<td><a href="/gosuContent.do?gNo=${g.ggsouNo}" class="gtitle">${g.gosuTitle }</a></td>
+							</tr>
+							<tr>
+								<td><hr></td>
+							</tr>
+							<tr>
 
-							<td>
-								<li>한줄소개</li>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<li>피드백 예상견적</li>
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align: center; font-weight: bold;">고수 xxxx</td>
-							<td>4.0</td>
-						</tr>
-					</table>
-				</button>
-			</div>
-			<div class="gosu">
-				<button type="button" class="card border-primary mb-3"
-					style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-					<table>
-						<tr>
-							<td rowspan="4" class="gosu_img" style="width: 30%;"><img
-								src="/resources/img/gosu/g_img_basic.png"
-								style="border-radius: 50%;"></td>
-							<td><a href="/gosuContent.do">제목</a></td>
-						</tr>
-						<tr>
-							<td><hr></td>
-						</tr>
-						<tr>
-
-							<td>
-								<li>한줄소개</li>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<li>피드백 예상견적</li>
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align: center; font-weight: bold;">고수 xxxx</td>
-							<td>4.0</td>
-						</tr>
-					</table>
-				</button>
-			</div>
-			<div class="gosu">
-				<button type="button" class="card border-primary mb-3"
-					style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-					<table>
-						<tr>
-							<td rowspan="4" class="gosu_img" style="width: 30%;"><img
-								src="/resources/img/gosu/g_img_basic.png"
-								style="border-radius: 50%;"></td>
-							<td><a href="/gosuContent.do">제목</a></td>
-						</tr>
-						<tr>
-							<td><hr></td>
-						</tr>
-						<tr>
-
-							<td>
-								<li>한줄소개</li>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<li>피드백 예상견적</li>
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align: center; font-weight: bold;">고수 xxxx</td>
-							<td>4.0</td>
-						</tr>
-					</table>
-				</button>
-			</div>
-			<div class="gosu">
-				<button type="button" class="card border-primary mb-3"
-					style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-					<table>
-						<tr>
-							<td rowspan="4" class="gosu_img" style="width: 30%;"><img
-								src="/resources/img/gosu/g_img_basic.png"
-								style="border-radius: 50%;"></td>
-							<td><a href="/gosuContent.do">제목</a></td>
-						</tr>
-						<tr>
-							<td><hr></td>
-						</tr>
-						<tr>
-
-							<td>
-								<li>한줄소개</li>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<li>피드백 예상견적</li>
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align: center; font-weight: bold;">고수 xxxx</td>
-							<td>4.0</td>
-						</tr>
-					</table>
-				</button>
-			</div>
-			<div class="gosu">
-				<button type="button" class="card border-primary mb-3"
-					style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-					<table>
-						<tr>
-							<td rowspan="4" class="gosu_img" style="width: 30%;"><img
-								src="/resources/img/gosu/g_img_basic.png"
-								style="border-radius: 50%;"></td>
-							<td><a href="/gosuContent.do">제목</a></td>
-						</tr>
-						<tr>
-							<td><hr></td>
-						</tr>
-						<tr>
-
-							<td>
-								<li>한줄소개</li>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<li>피드백 예상견적</li>
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align: center; font-weight: bold;">고수 xxxx</td>
-							<td>4.0</td>
-						</tr>
-					</table>
-				</button>
-			</div>
-			<div class="gosu">
-				<button type="button" class="card border-primary mb-3"
-					style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-					<table>
-						<tr>
-							<td rowspan="4" class="gosu_img" style="width: 30%;"><img
-								src="/resources/img/gosu/g_img_basic.png"
-								style="border-radius: 50%;"></td>
-							<td><a href="/gosuContent.do">제목</a></td>
-						</tr>
-						<tr>
-							<td><hr></td>
-						</tr>
-						<tr>
-
-							<td>
-								<li>한줄소개</li>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<li>피드백 예상견적</li>
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align: center; font-weight: bold;">고수 xxxx</td>
-							<td>4.0</td>
-						</tr>
-					</table>
-				</button>
-			</div>
-			<div class="gosu">
-				<button type="button" class="card border-primary mb-3"
-					style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-					<table>
-						<tr>
-							<td rowspan="4" class="gosu_img" style="width: 30%;"><img
-								src="/resources/img/gosu/g_img_basic.png"
-								style="border-radius: 50%;"></td>
-							<td><a href="/gosuContent.do">제목</a></td>
-						</tr>
-						<tr>
-							<td><hr></td>
-						</tr>
-						<tr>
-
-							<td>
-								<li>한줄소개</li>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<li>피드백 예상견적</li>
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align: center; font-weight: bold;">고수 xxxx</td>
-							<td>4.0</td>
-						</tr>
-					</table>
-				</button>
-			</div>
+								<td>
+									<li><b>한줄소개</b> : ${g.gosuSelf }</li>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<li><b>비용</b> : ${g.gosuCost }</li>
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align: center; font-weight: bold;"><span
+									style="color: rgb(78, 205, 196);">고수</span> ${g.gosuId }</td>
+								<td>4.0</td>
+							</tr>
+						</table>
+					</button>
+				</div>
+			</c:forEach>
 
 		</div>
 		<div id="pageNavi"></div>
