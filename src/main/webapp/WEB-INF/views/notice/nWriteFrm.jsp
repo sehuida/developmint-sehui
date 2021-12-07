@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    <c:set var="today" value="<%=new java.util.Date()%>"/>
+    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,11 +16,11 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<script src="/summernote/jquery-3.3.1.js"></script>
-	<script src="/summernote/summernote-lite.js"></script>
-	<script src="/summernote/lang/summernote-ko-KR.js"></script>
-	<link rel="stylesheet" href="/summernote/summernote-lite.css">
-	
+	<script src="/resources/summernote/summernote-lite.js"></script>
+	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+	<link rel="stylesheet" href="/resources/css/projectTeam/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="/resources/css/projectTeam/writePage.css">
 
 	<div class="container" style="margin-bottom: 50px;">
 		<div class="area">
@@ -31,7 +35,7 @@
 			</div>
 			<c:if test="${sessionScope.m.memberType eq 9 }">
 			<div class="contents" style="padding: 20px;">
-				<div class="title" style="border-bottom: none;padding: 0;"><h2 style="display: inline-block;">Notice Write</h2></div>
+				<div class="title" style="border-bottom: none;padding: 0;"><h2 style="display: inline-block;">Notice Write</h2> 작성날짜 <fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></div>
 				<div class="notice-contents" style="padding: 0;border-bottom: none;">
 					<form action="/insertNotice.do" method="post" enctype="multipart/form-data">
 						<fieldset>
@@ -54,7 +58,7 @@
 					    </div>
 						<div class="form-group">
 							<label class="col-form-label mt-4" for="noticeContent"><i class="bi bi-pencil-square" style="font-size: 1.2em;"></i> 공지 내용<span style="color: #f3969a;">*</span></label>
-                            <textarea class="form-control" id="noticeContent" rows="20" name="noticeContent" placeholder="내용을 입력하세요" required></textarea>
+                            <textarea class="form-control" id="noticeContent" rows="20" name="noticeContent" required ></textarea>
                             <span style="color: #f3969a;float: left;">*는 필수 입력사항입니다.</span>
                         </div>
                         <div class="form-group" style="padding: 10px 0 0 0;float: right;">
@@ -70,8 +74,9 @@
 	<script>
 	$(function(){
 		$("#noticeContent").summernote({
-			height : 400,
+			height : 800,
 			lang : "ko-KR",
+			placeholder: '최대 2048자까지 쓸 수 있습니다',
 			callbacks :{
 				onImageUpload : function(files){
 					uploadImage(files[0],this);	
@@ -80,16 +85,18 @@
 		});
 	});
 	function uploadImage(file,editor){
-		var form = new FormData();
-		form.append("file",file);
+		data = new FormData();
+		data.append("file",file);
 		$.ajax({
 			url : "/uploadImage.do",
 			type :"post",		//file전송을 위해 ajax를 할떄는 type을 post로 해줘야한다
-			data : form,
+			data : data,
+			enctype : 'multipart/form-data',
 			processData : false,
 			contentType : false,
 			success : function(data){
-				//console.log(data);
+				console.log(data);
+				
 				$(editor).summernote("insertImage",data);
 			}
 		});
