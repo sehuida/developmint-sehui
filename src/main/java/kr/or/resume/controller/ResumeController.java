@@ -25,11 +25,6 @@ public class ResumeController {
 	@RequestMapping(value="/resumeManage.do")
 	public String resumeManage(Model model, int memberNo) {
 		ArrayList<Resume> list = service.selectAllResume(memberNo);
-		if(!list.isEmpty()) {
-			int count = service.selectResumeCount(memberNo);			
-			model.addAttribute("count", count);
-			System.out.println("count : " +count);
-		}
 		model.addAttribute("list", list);
 		return "resume/resumeManage";
 	}

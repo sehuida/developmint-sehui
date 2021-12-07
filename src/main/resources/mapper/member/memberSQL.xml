@@ -78,7 +78,4 @@
   <delete id="resignMember" parameterType="string">
   	delete from member where member_id=#{memberId}
   </delete>
-  <insert id="insertDelete" parameterType="m">
-  	insert into delete_member values(#{memberNo},#{memberId},to_char(sysdate,'yyyy-mm-dd'))
-  </insert>
 </mapper>

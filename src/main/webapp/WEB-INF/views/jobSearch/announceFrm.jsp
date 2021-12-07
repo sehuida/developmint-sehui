@@ -369,7 +369,7 @@
 						<em>회사명</em>
 						<br><br>
 						<b>회사명</b>
-						<input type="text" class="textInput" id="companyTitle" name="companyName" placeholder="회사명 입력">
+						<input type="text" class="textInput" id="companyTitle" name="companyTitle" placeholder="회사명 입력">
 					</div>
 					
 		
@@ -601,8 +601,11 @@
 						</div>
 						<div class="militaryInput">
 							<select class="selectInput" id="military" name="military">	
-								<option value=1>군필</option>
-								<option value=2>상관없음</option>
+								<option value=1>대상아님</option>
+								<option value=2>군필</option>
+								<option value=3>미필</option>
+								<option value=4>면제</option>
+								<option value=5>복무중</option>
 							</select>
 						</div>	
 					</div>
