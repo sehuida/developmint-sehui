@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.admin.dao.AdminDao;
 import kr.or.admin.vo.TotalData;
+import kr.or.admin.vo.TotalMember;
 
 @Service
 public class AdminService {
@@ -67,5 +68,10 @@ public class AdminService {
 		
 		TotalData td = new TotalData(todayTotalMember, todayJoinMember, todayOutMember, todayTotalContent, dateList, joinList, outList, gradeList, cateList);
 		return td;
+	}
+
+	public TotalMember totalMember(int reqPage, int type, String list) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
