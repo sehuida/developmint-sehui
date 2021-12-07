@@ -125,7 +125,7 @@
 					</div>
 				</div>
 				<div class="profiles">
-					<a href="/updateInfoFrm.do"><img src="/resources/img/member/right-arrow.png" style="width: 30px; height:30px;"></a>
+					<a href="/updateInfoFrm.do"><img src="/resources/img/member/right-arrow.png" style="width: 30px; height:30px;" class="arrow"></a>
 				</div>
 			</div>
 			<div class="page-middle">
