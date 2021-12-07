@@ -53,5 +53,14 @@ public class AdminDao {
 		return cateList;
 	}
 
+	public ArrayList<Member> allMemberList(Map<String, Object> map) {
+		List<Member> list = sqlSession.selectList("admin.allMemberList",map);
+		return (ArrayList<Member>)list;
+	}
+
+	public int allMemberCount(Map<String, Object> map) {
+		return sqlSession.selectOne("admin.allMemberCount", map);
+	}
+
 	
 }

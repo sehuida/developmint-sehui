@@ -140,4 +140,8 @@ public class MemberController {
 			return "0";
 		}
 	}
+	@RequestMapping(value="/certification.do")
+	public String certification() {
+		return "member/certification";
+	}
 }

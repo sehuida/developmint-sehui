@@ -38,17 +38,27 @@ public class GosuController {
 	private GosuService service;
 
 	@RequestMapping(value = "/gosuMain.do")
-	public String gosuMain() {
+	public String gosuMain(Model model) {
+		ArrayList<Gosu> g = service.selectGosuList();
+		model.addAttribute("gList",g);
 		return "gosu/gosuMain";
 	}
 
 	@RequestMapping(value = "/gosuList.do")
-	public String gosuList() {
+	public String gosuList(Model model) {
+		ArrayList<Gosu> g = service.selectGosuList();
+		model.addAttribute("gList",g);
 		return "gosu/gosuList";
 	}
 
 	@RequestMapping(value = "/gosuContent.do")
-	public String gosuContent() {
+	public String gosuContent(int gNo,Model model) {
+		Gosu gosu = service.selectGosuOne(gNo);
+		ArrayList<GosuProject> gprList =service.selectGosuProject(gNo);
+		ArrayList<GosuPhoto> gptList =service.selectGosuPhoto(gNo);
+		model.addAttribute("gosu",gosu);
+		model.addAttribute("gprojectList",gprList);
+		model.addAttribute("gphotoList",gptList);
 		return "gosu/gosuContent";
 	}
 
@@ -58,12 +68,20 @@ public class GosuController {
 	}
 
 	@RequestMapping(value = "/gosuWrite.do")
-	public String gosuWrite(Gosu g, MultipartFile[] photoFilepath, MultipartFile[] gprojectFilepath,
-			GosuProject[] gProject, HttpServletRequest request, Model model) {
-
+	public String gosuWrite(Gosu g, MultipartFile[] photoFilepath,
+			String[] gprojectContent,String[] gprojectTitle,String[] gprojectFilepath, HttpServletRequest request, Model model) {
+		System.out.println(gprojectContent.length);
+		System.out.println(gprojectTitle.length);
+		System.out.println(gprojectFilepath.length);
 		ArrayList<GosuPhoto> photoList = new ArrayList<GosuPhoto>();
 		ArrayList<GosuProject> projectList = new ArrayList<GosuProject>();
-		
+		for (int i =0; i<gprojectContent.length;i++) {
+			GosuProject gp = new GosuProject();
+			gp.setGprojectContent(gprojectContent[i]);
+			gp.setGprojectTitle(gprojectTitle[i]);
+			gp.setGprojectFilepath(gprojectFilepath[i]);
+			projectList.add(gp);
+		}
 		if (photoFilepath[0].isEmpty()) {
 		} else {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/gosu/gosuPhoto/");
@@ -103,46 +121,7 @@ public class GosuController {
 				
 			}
 		}
-		if (gprojectFilepath[0].isEmpty()) {
-		} else {
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/gosu/gosuProjects/");
-			for (MultipartFile file : gprojectFilepath) {
-				String filename = file.getOriginalFilename();
-				String onlyFilename = filename.substring(0, filename.indexOf("."));
-				String extention = filename.substring(filename.indexOf("."));
-				String filepath = null;
-				int count = 0;
-				while (true) {
-					if (count == 0) {
-						filepath = onlyFilename + extention;
-					} else {
-						filepath = onlyFilename + "_" + count + extention;
-					}
-					File checkFile = new File(savePath + filepath);
-					if (!checkFile.exists()) {
-						break;
-					}
-					count++;
-				}
-				try {
-					FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
-					BufferedOutputStream bos = new BufferedOutputStream(fos);
-					byte[] bytes = file.getBytes();
-					bos.write(bytes);
-					bos.close();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				GosuProject gproject = new GosuProject();
-				gproject.setGprojectFilepath(filepath);
-
-				projectList.add(gproject);
-				
-			}
-		}
-		int result = service.insertGosu(g,photoList,projectList,gProject);
+		int result = service.insertGosu(g,photoList,projectList);
 		if(result == -1 || result !=projectList.size()) {
 			model.addAttribute("msg", "등록 실패");
 		}else {
@@ -154,12 +133,12 @@ public class GosuController {
 
 	@ResponseBody
 	@RequestMapping(value = "/gProjectAjax.do", produces = "application/json;charset=utf-8")
-	public String gProjectAjax(MultipartHttpServletRequest req, HttpSession session, HttpServletRequest request) {
+	public Object gProjectAjax(MultipartHttpServletRequest req, HttpSession session, HttpServletRequest request, String gprojectTitle,String gprojectContent) {
 		//Iterator<String> itr =  req.getFileNames();
 		//MultipartFile files = req.getFile(itr.next());
 		// 파일이 여러개일경우 위와같이 사용 할 수 있다
 		// 단일 파일일 경우 html의 name에 설정된 이름으로 파일을 가져올 수 있다.
-
+		
 		String path = request.getSession().getServletContext().getRealPath("/resources/upload/gosuProject/");
 
 		MultipartFile file = req.getFile("gprojectFilepath");
@@ -199,8 +178,16 @@ public class GosuController {
 			e.printStackTrace();
 		}
 		System.out.println(file.getOriginalFilename());
-
-		return file.getOriginalFilename();
+		System.out.println("path : "+path);
+		System.out.println("filepath : "+filepath);
+		
+		
+		GosuProject g = new GosuProject();
+		g.setGprojectContent(gprojectTitle);
+		g.setGprojectTitle(gprojectContent);
+		g.setGprojectFilepath("/resources/upload/gosuProject/" + filepath);
+		Gson gson = new Gson();
+		return  gson.toJson(g);
 	}
 
 	@RequestMapping(value = "/gosuSituation.do")

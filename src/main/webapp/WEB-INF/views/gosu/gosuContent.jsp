@@ -99,31 +99,124 @@
 	border: none;
 	background-color: transparent;
 }
+.g-photo-one * {
+	width: 200px;
+}
+.g-photo-one img {
+	height: 200px;
+}
+
+.g-photo-one .g-b {
+	height: 30px;
+	overflow: hidden;
+	display: block;;
+	text-overflow:ellipsis;
+	text-align: center;
+}
+
+.g-photo-one .g-p {
+	text-align: center;
+	display: block;
+	height: 50px;
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
 
 .g-photo-wrap {
 	display: flex;
 	justify-content: space-around;
+	 flex-wrap: wrap;
 }
-  .gosu-mail{
-        display: flex;
-        justify-content: right;
-        
-    }
-    .gosu-mail a{
-        font-weight: bold;
-        font-size: 20px;
-    }
-    .gosu-mail span{
-        font-weight: bold;
-        color: white;
-        background-color: red;
-        border-radius: 50%;
-        text-align: center;
-        width: 20px;
-        margin-left: 50px;
-        display: block;
-        font-size: 13px;
-    } 
+.gosu-mail {
+	display: flex;
+	justify-content: right;
+}
+
+.gosu-mail a {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.gosu-mail span {
+	font-weight: bold;
+	color: white;
+	background-color: red;
+	border-radius: 50%;
+	text-align: center;
+	width: 20px;
+	margin-left: 50px;
+	display: block;
+	font-size: 13px;
+}
+
+.hrm-wrap {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10000;
+}
+
+.hrm-btn-wrap {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+#hrm-modal h3 {
+	background-color: #78c2ad;
+	padding: 30px;
+	font-weight: 900;
+	text-align: center;
+}
+
+#hrm-modal {
+	background-color: white;
+}
+
+.hrm-btn-wrap a {
+	margin: 30px;
+	margin-top: 50px;
+	padding: 10px;
+	width: 100px;
+}
+
+.hrm-content b {
+	font-size: 20px;
+	margin-right: 50px;
+	margin-bottom: 100px;
+	margin-left: 50px;
+}
+
+.hrm-content textarea {
+	width: 800px;
+	padding: 10px;
+}
+
+.hrm-content input {
+	padding: 10px;
+	margin-bottom: 50px;
+	width: 800px;
+}
+
+#gimage_container {
+	text-align: center;
+}
+
+#gimage_container img {
+	width: 300px;
+}
+.gphs{
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -131,28 +224,35 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-	<div class="gosu-mail">
+		<div class="gosu-mail">
 			<a href="/gosuRequestList.do"><span>1</span>요청서</a>
-	</div>
+		</div>
 		<h4>
 			&gt; &nbsp;<span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다!
 		</h4>
 		<div style="text-align: right; margin-top: 50px;">
-			<span style="color:gray;">2021.12.01</span>
+			<span style="color: gray;">${gosu.gosuDate}</span>
 		</div>
 		<div style="display: flex; justify-content: center;">
 			<div class="gosu-content-wrap">
 				<div class="gosu">
 					<table>
 						<tr>
-							<th rowspan="6" style="padding: 40px; padding-right: 100px;"><img
-								src="/resources/img/gosu/g_img_basic.png" style="width: 250px;"></th>
+
+							<c:if test="${empty gosu.gosuImg }">
+								<th rowspan="6" style="padding: 40px; padding-right: 100px;"><img
+									src="/resources/img/gosu/g_img_basic.png" style="width: 250px;"></th>
+							</c:if>
+							<c:if test="${not empty gosu.gosuImg }">
+								<th rowspan="6" style="padding: 40px; padding-right: 100px;"><img
+									src="${gosu.gosuImg }" style="width: 250px;"></th>
+							</c:if>
 						</tr>
 						<tr>
-							<td><span>고수</span> xxxx</td>
+							<td><span>고수</span> ${gosu.gosuId }</td>
 						</tr>
 						<tr>
-							<td style="font-size: 25px;">제목제목제목제목제목제목제목제목</td>
+							<td style="font-size: 25px;">${gosu.gosuTitle }</td>
 						</tr>
 						<tr>
 							<td><hr></td>
@@ -161,28 +261,14 @@
 							<td>한줄소개</td>
 						</tr>
 						<tr>
-							<td style="font-size: 25px;">한줄소개소개한줄소개소개한줄소개소개</td>
+							<td style="font-size: 25px;">${gosu.gosuSelf }</td>
 						</tr>
 					</table>
 				</div>
 				<div>
 					<h4>상세설명</h4>
 					<div>
-						<p>anskddddddddddanskddddddddddddansk
-							anskddddddddddddddddddddddddanskddddddddddddanskdddddddddddddd
-							anskddddddddddddanskddddddddddanskddddddddddddansk
-							anskddddddddddddddddddddddddanskddddddddddddanskdddddddddddddd
-							anskdddddddddddd
-							anskddddddddddddanskddddddddddanskddddddddddddansk
-							anskddddddddddddddddddddddddanskddddddddddddanskdddddddddddddd
-							anskdddddddddddd
-							anskddddddddddddanskddddddddddanskddddddddddddansk
-							anskddddddddddddddddddddddddanskddddddddddddanskdddddddddddddd
-							anskdddddddddddd
-							anskddddddddddddanskddddddddddanskddddddddddddansk
-							anskddddddddddddddddddddddddanskddddddddddddanskdddddddddddddd
-							anskdddddddddddd anskdddddddddddd anskdddddddddddd
-							anskddddddddddddanskdddddddddddd</p>
+						<p>${gosu.gosuExplainBr }</p>
 					</div>
 					<div class="g-plus">
 						<a href="">더보기</a>
@@ -191,29 +277,12 @@
 
 				<div class="gosu-photos">
 					<h4>사진</h4>
-					<div style="overflow: hidden;">
+					<div class="gphs">
 						<ul>
-							<li><a><img src="/resources/img/gosu/g_img_basic.png"></a></li>
-							<li><a><img src="/resources/img/gosu/g_img_basic.png"></a></li>
-							<li><a><img src="/resources/img/gosu/g_img_basic.png"></a></li>
-							<li><a><img src="/resources/img/gosu/g_img_basic.png"></a></li>
-							<li><a><img src="/resources/img/gosu/g_img_basic.png"></a></li>
+						<c:forEach items="${gphotoList }" var="gph" varStatus="i"><!--나중에 수정해라...  -->
+							<li><a><img src="/resources/upload/gosu/gosuPhoto/${gph.photoFilepath }"></a></li>
+						</c:forEach>
 						</ul>
-						<ul>
-							<li><a><img src="/resources/img/gosu/g_img_basic.png"></a></li>
-							<li><a><img src="/resources/img/gosu/g_img_basic.png"></a></li>
-							<li><a><img src="/resources/img/gosu/g_img_basic.png"></a></li>
-							<li><a><img src="/resources/img/gosu/g_img_basic.png"></a></li>
-							<li><a><img src="/resources/img/gosu/g_img_basic.png"></a></li>
-						</ul>
-						<ul>
-							<li><a><img src="/resources/img/gosu/g_img_basic.png"></a></li>
-							<li><a><img src="/resources/img/gosu/g_img_basic.png"></a></li>
-							<li><a><img src="/resources/img/gosu/g_img_basic.png"></a></li>
-							<li><a><img src="/resources/img/gosu/g_img_basic.png"></a></li>
-							<li><a><img src="/resources/img/gosu/g_img_basic.png"></a></li>
-						</ul>
-
 					</div>
 					<div class="g-plus">
 						<a href="">더보기</a>
@@ -268,58 +337,30 @@
 				</div>
 				<div class="gosu-act">
 					<h4>활동 및 자격</h4>
-					<div style="display: flex; justify-content: center;">
-						<p>anskddddddddddanskddddddddddddansk</p>
+					<div >
+						<p>${gosu.gosuActBr }</p>
 					</div>
 				</div>
 				<div class="gosu-project">
 					<h4>프로젝트</h4>
 					<div class="g-photo-wrap">
-						<div class="g-photo-one">
-							<button type="button">
-								<dl>
-									<dt>
-										<img src="/resources/img/gosu/g_img_basic.png">
-									</dt>
-									<dd>
-										<b style="font-size: 19px;">제목제목</b>
-									</dd>
-									<dd>
-										<p>내용내용내용</p>
-									</dd>
-								</dl>
-							</button>
-						</div>
-						<div class="g-photo-one">
-							<button type="button">
-								<dl>
-									<dt>
-										<img src="/resources/img/gosu/g_img_basic.png">
-									</dt>
-									<dd>
-										<b style="font-size: 19px;">제목제목</b>
-									</dd>
-									<dd>
-										<p>내용내용내용</p>
-									</dd>
-								</dl>
-							</button>
-						</div>
-						<div class="g-photo-one">
-							<button type="button" >
-								<dl>
-									<dt>
-										<img src="/resources/img/gosu/g_img_basic.png">
-									</dt>
-									<dd>
-										<b style="font-size: 19px;">제목제목</b>
-									</dd>
-									<dd>
-										<p>내용내용내용</p>
-									</dd>
-								</dl>
-							</button>
-						</div>
+						<c:forEach items="${gprojectList }" var="gpr" varStatus="i">
+							<div class="g-photo-one">
+								<button type="button" id="gProject">
+									<dl>
+										<dt>
+											<img src="${gpr.gprojectFilepath }">
+										</dt>
+										<dd>
+											<b  class="g-b" style="font-size: 19px;">${gpr.gprojectTitle }</b>
+										</dd>
+										<dd>
+											<p class="g-p">${gpr.gprojectContent }</p>
+										</dd>
+									</dl>
+								</button>
+							</div>
+						</c:forEach>
 					</div>
 					<div style="display: flex; justify-content: center;">
 						<a class="btn btn-primary">더보기</a>
@@ -328,12 +369,29 @@
 				<div class="gosu-feedback">
 
 					<h4>
-						피드백 비용 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <span>100,000원</span>
+						<span style="margin-right: 100px;">피드백 비용 </span> <span style="color:red; font-size: 40px;">${gosu.gosuCost }
+							&nbsp; &nbsp;</span>원
 					</h4>
 
+				</div>
+				<div class="hrm-wrap" style="display: none; margin: 0;">
+					<div id="hrm-modal">
+						<h3 style="color: white;">프로젝트</h3>
+						<div class="hrm-content">
+							<b>메인사진</b> <input type="file" class="gprojectFilepath"
+								id="gprojectFilepath" accept="image/*"><br>
+							<div id="gimage_container"></div>
+							<b>제목</b><input type="text" class="gprojectTitle"
+								id="gprojectTitle" placeholder="내용을 입력해주세요."><br> <b
+								style="float: left;">내용</b>
+							<textarea cols="80" class="gprojectContent" id="gprojectContent"
+								placeholder="내용을 입력해주세요."></textarea>
+							<br>
+						</div>
+						<div class="hrm-btn-wrap">
+							<a id="hrm-close" class="btn btn-outline-success">확인</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -343,6 +401,17 @@
 					신청하기</b></a>
 		</div>
 	</div>
+	<script>
+		$("#gProject").click(function() {
+			$(".hrm-wrap").css("display", "flex");
+
+		});
+		$("#hrm-close").click(function() {
+
+			$(".hrm-wrap").css("display", "none");
+
+		});
+	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>
