@@ -381,7 +381,14 @@
 							<form action="/insertContestComment.do" method="post">
 								<div class="recomentBox">
 									<textarea class="form-control reText" name="commentContent"></textarea>
-									<input type="submit" value="등록" class="btn btn-outline-primary" style="height: 100px; width: 80px; font-weight: bold; margin-left:10px; margin-right: 10px">
+									<c:choose>
+										<c:when test="${not empty sessionScope.m }">
+											<input type="submit" value="등록" class="btn btn-outline-primary" style="height: 100px; width: 80px; font-weight: bold; margin-left:10px; margin-right: 10px">
+										</c:when>
+										<c:otherwise>
+											<input type="button" value="등록" class="btn btn-outline-primary noMember" style="height: 100px; width: 80px; font-weight: bold; margin-left:10px; margin-right: 10px">
+										</c:otherwise>
+									</c:choose>
 									<input type="button" value="취소" class="btn btn-outline-secondary cancelBtn" style="height: 100px; width: 80px; font-weight: bold">
 									<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 									<input type="hidden" name="boardNo" value="${list.contest.contestNo }">
@@ -547,6 +554,12 @@
 			if(result){
 				$(".reportBox").eq(index).submit();
 			}
+		})
+		
+		//로그인 안하면 댓글 작성 안됨
+		$(".noMember").click(function(){
+			alert("로그인 후 작성이 가능합니다.");
+			location.href="/loginFrm.do";
 		})
 		
 
