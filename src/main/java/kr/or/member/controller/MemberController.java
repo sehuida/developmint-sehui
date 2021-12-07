@@ -133,15 +133,11 @@ public class MemberController {
 	@RequestMapping(value="/resignMember.do")
 	public String resginMember(String memberId,HttpSession session) {
 		int result = service.resignMember(memberId);
-		if(result>1) {
+		if(result>0) {
 			session.invalidate();
 			return "1";
 		}else {
 			return "0";
 		}
-	}
-	@RequestMapping(value="/certification.do")
-	public String certification() {
-		return "member/certification";
 	}
 }
