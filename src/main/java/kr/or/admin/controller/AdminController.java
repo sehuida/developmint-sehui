@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.admin.service.AdminService;
 import kr.or.admin.vo.TotalData;
+import kr.or.admin.vo.TotalMember;
 
 @Controller
 public class AdminController {
@@ -57,7 +58,11 @@ public class AdminController {
 	
 	//전체회원리스트 목록으로 이동
 	@RequestMapping(value="/allMemberList.do")
-	public String allMemberList(Model model) {
+	public String allMemberList(Model model, int reqPage, int type, String list) {
+		TotalMember tm = service.totalMember(reqPage,type,list);
+		model.addAttribute("memberList", tm.getAllMemberList());
+		model.addAttribute("start",tm.getStart());
+		model.addAttribute("pageNavi",tm.getPageNavi());
 		return "admin/allMemberList";
 	}
 	
