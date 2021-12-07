@@ -48,8 +48,4 @@ public class MemberDao {
 		return sqlSession.delete("member.resignMember",memberId);
 	}
 
-	public int insertDelete(Member m) {
-		return sqlSession.insert("member.insertDelete",m);
-	}
-
 }

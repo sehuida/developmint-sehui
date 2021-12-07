@@ -1,7 +1,9 @@
 package kr.or.gosu.vo;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 public class GosuProject {
@@ -10,7 +12,11 @@ public class GosuProject {
 	private String gprojectTitle;
 	private String gprojectContent;
 	private String gprojectFilepath;
+	
 	public String getGprojectContentBr(){
 		return gprojectContent.replaceAll("\r\n", "<br>");
 	}
+
+
+
 }

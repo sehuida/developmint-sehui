@@ -2,7 +2,9 @@ package kr.or.gosu.service;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.gosu.dao.GosuDao;
 import kr.or.gosu.vo.Gosu;
@@ -11,11 +13,15 @@ import kr.or.gosu.vo.GosuProject;
 
 @Service
 public class GosuService {
+	@Autowired
 	private GosuDao dao;
 
-	public int insertGosu(Gosu g, ArrayList<GosuPhoto> photoList, ArrayList<GosuProject> projectList,
-			GosuProject[] gProject) {
+
+	@Transactional
+	public int insertGosu(Gosu g, ArrayList<GosuPhoto> photoList, ArrayList<GosuProject> projectList) {
+		System.out.println(g.getGgsouNo());
 		int gosuResult = dao.insertGosu(g); 
+		System.out.println(g.getGgsouNo());
 		int photoResult = 0;
 		int projectResult = 0;
 		
@@ -32,6 +38,38 @@ public class GosuService {
 			return -1;
 		}
 		return projectResult;
+	}
+
+
+	public ArrayList<Gosu> selectGosuList() {
+		ArrayList<Gosu> list = dao.selectGosuList();
+		for(Gosu g : list) {
+			int gosuNo = g.getGsouNo();
+		
+			g.setGosuId(dao.selectGosuId(gosuNo));
+			g.setGosuImg(dao.selectGosuImg(gosuNo));
+		}
+		return list;
+	}
+
+
+	public Gosu selectGosuOne(int ggosuNo) {
+		Gosu gosu = dao.selectGosuOne(ggosuNo);
+		gosu.setGosuId(dao.selectGosuId(gosu.getGsouNo()));
+		gosu.setGosuImg(dao.selectGosuImg(gosu.getGsouNo()));
+		return gosu;
+	}
+
+
+	public ArrayList<GosuProject> selectGosuProject(int gNo) {
+		ArrayList<GosuProject> gList = dao.selectGosuProject(gNo);
+		return gList;
+	}
+
+
+	public ArrayList<GosuPhoto> selectGosuPhoto(int gNo) {
+		ArrayList<GosuPhoto> gList = dao.selectGosuPhoto(gNo);
+		return gList;
 	}
 
 	
