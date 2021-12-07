@@ -48,221 +48,285 @@
 		]]>
   </select>
   <select id="projectCheckCount" parameterType="map" resultType="_int">
-  		<if test="checkValue == 1">
-  			<choose>
-	  			<when test="viewValue == 1">
-		  			select count(*) from
-			            (select
-				            rownum as rnum,
-							p.project_no as projectNo,
-							p.member_no as projectWriterMemberNo,
-							p.recruit_start_date as rStartDate,
-							p.recruit_end_date as rEndDate,
-							p.view_count as viewCount,
-							p.recruit_title as rTitle,
-							p.recruit_content as rContent,
-							p.project_name as projectName,
-							p.project_goal as projectGoal,
-							p.project_reader as projectReader,
-							p.project_status as projectStatus,
-							p.project_start_date as pStartDate,
-							p.project_end_date as pEndDate,
-							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
-				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
-						from project p
-		       			order by project_No DESC) 
-					
-	  			</when>
-	  			<when test="viewValue == 2 ">
-	  				select count(*) from
-			            (select
-				            rownum as rnum,
-							p.project_no as projectNo,
-							p.member_no as projectWriterMemberNo,
-							p.recruit_start_date as rStartDate,
-							p.recruit_end_date as rEndDate,
-							p.view_count as viewCount,
-							p.recruit_title as rTitle,
-							p.recruit_content as rContent,
-							p.project_name as projectName,
-							p.project_goal as projectGoal,
-							p.project_reader as projectReader,
-							p.project_status as projectStatus,
-							p.project_start_date as pStartDate,
-							p.project_end_date as pEndDate,
-							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
-				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
-						from project p
-		       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_No DESC) 
-					
-				</when>
-  			</choose>
-  		</if>
-  		<if test="checkValue == 2">
-  			<choose>
-	  			<when test="viewValue == 1">
-		  			select count(*) from
-			            (select
-				            rownum as rnum,
-							p.project_no as projectNo,
-							p.member_no as projectWriterMemberNo,
-							p.recruit_start_date as rStartDate,
-							p.recruit_end_date as rEndDate,
-							p.view_count as viewCount,
-							p.recruit_title as rTitle,
-							p.recruit_content as rContent,
-							p.project_name as projectName,
-							p.project_goal as projectGoal,
-							p.project_reader as projectReader,
-							p.project_status as projectStatus,
-							p.project_start_date as pStartDate,
-							p.project_end_date as pEndDate,
-							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
-				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
-						from project p
-						where p.project_status = 1 
-		       			order by project_No DESC) 
-					
-	  			</when>
-	  			<when test="viewValue == 2">
-	  				select count(*) from
-			            (select
-				            rownum as rnum,
-							p.project_no as projectNo,
-							p.member_no as projectWriterMemberNo,
-							p.recruit_start_date as rStartDate,
-							p.recruit_end_date as rEndDate,
-							p.view_count as viewCount,
-							p.recruit_title as rTitle,
-							p.recruit_content as rContent,
-							p.project_name as projectName,
-							p.project_goal as projectGoal,
-							p.project_reader as projectReader,
-							p.project_status as projectStatus,
-							p.project_start_date as pStartDate,
-							p.project_end_date as pEndDate,
-							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
-				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
-						from project p
-						where p.project_status = 1 
-		       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_No DESC) 
-				</when>
-  			</choose>
-  		</if>
+  
+   
+  	<choose>
+  		<when test="langList.isEmpty() or langList == null">
+  			<if test="checkValue == 1">
+  				select count(*) from project
+	  		</if>
+	  		<if test="checkValue == 2">
+	  			select count(*) from project where project_status = 1
+	  		</if>
+  		</when>
+  		<otherwise>
+  			<if test="checkValue == 1">
+  				select count(*) from project where project_no in (
+								(select project_no from use_project_language where language_no in (select project_no from use_project_language where language_no in 
+	                            (select language_no from develop_language where language_name in (
+							<foreach collection="langList" item="lang" open="(" close=")" separator=",">
+								#{lang}
+							</foreach>
+	                            )))))
+	  		</if>
+	  		<if test="checkValue == 2">
+	  			select count(*) from project where project_status = 1 and project_no in (
+								(select project_no from use_project_language where language_no in (select project_no from use_project_language where language_no in 
+	                            (select language_no from develop_language where language_name in (
+							<foreach collection="langList" item="lang" open="(" close=")" separator=",">
+								#{lang}
+							</foreach>
+	                            )))))
+	  		</if>
+  		</otherwise>
+  	</choose>
   		
   </select>
   <select id="projectCheckList" parameterType="map" resultType="pt">
-  		<if test="checkValue == 1">
-  			<choose>
-	  			<when test="viewValue == 1">
-		  			select * from
-			            (select
-				            rownum as rnum,
-							p.project_no as projectNo,
-							p.member_no as projectWriterMemberNo,
-							p.recruit_start_date as rStartDate,
-							p.recruit_end_date as rEndDate,
-							p.view_count as viewCount,
-							p.recruit_title as rTitle,
-							p.recruit_content as rContent,
-							p.project_name as projectName,
-							p.project_goal as projectGoal,
-							p.project_reader as projectReader,
-							p.project_status as projectStatus,
-							p.project_start_date as pStartDate,
-							p.project_end_date as pEndDate,
-							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
-				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
-						from project p
-		       			order by project_No DESC) 
-					where rnum between #{start} and #{end}
-	  			</when>
-	  			<when test="viewValue == 2">
-	  				select * from
-			            (select
-				            rownum as rnum,
-							p.project_no as projectNo,
-							p.member_no as projectWriterMemberNo,
-							p.recruit_start_date as rStartDate,
-							p.recruit_end_date as rEndDate,
-							p.view_count as viewCount,
-							p.recruit_title as rTitle,
-							p.recruit_content as rContent,
-							p.project_name as projectName,
-							p.project_goal as projectGoal,
-							p.project_reader as projectReader,
-							p.project_status as projectStatus,
-							p.project_start_date as pStartDate,
-							p.project_end_date as pEndDate,
-							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
-				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
-						from project p
-		       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_No DESC) 
-					where rnum between #{start} and #{end}
-				</when>
-  			</choose>
-  		</if>
-  		<if test="checkValue == 2">
-  			<choose>
-	  			<when test="viewValue == 1">
-		  			select * from
-			            (select
-				            rownum as rnum,
-							p.project_no as projectNo,
-							p.member_no as projectWriterMemberNo,
-							p.recruit_start_date as rStartDate,
-							p.recruit_end_date as rEndDate,
-							p.view_count as viewCount,
-							p.recruit_title as rTitle,
-							p.recruit_content as rContent,
-							p.project_name as projectName,
-							p.project_goal as projectGoal,
-							p.project_reader as projectReader,
-							p.project_status as projectStatus,
-							p.project_start_date as pStartDate,
-							p.project_end_date as pEndDate,
-							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
-				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
-						from project p
-						where p.project_status = 1 
-		       			order by project_No DESC) 
-					where rnum between #{start} and #{end}
-	  			</when>
-	  			<when test="viewValue == 2">
-	  				select * from
-			            (select
-				            rownum as rnum,
-							p.project_no as projectNo,
-							p.member_no as projectWriterMemberNo,
-							p.recruit_start_date as rStartDate,
-							p.recruit_end_date as rEndDate,
-							p.view_count as viewCount,
-							p.recruit_title as rTitle,
-							p.recruit_content as rContent,
-							p.project_name as projectName,
-							p.project_goal as projectGoal,
-							p.project_reader as projectReader,
-							p.project_status as projectStatus,
-							p.project_start_date as pStartDate,
-							p.project_end_date as pEndDate,
-							(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-							(select count(*) from project_dibs pd where pd.project_no = p.project_no ) as dibCount,
-				            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
-						from project p
-						where p.project_status = 1 
-		       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_no DESC) 
-					where rnum between #{start} and #{end}
-				</when>
-  			</choose>
-  		</if>
-		
+  	<choose>
+  		<when test="langList == null">
+  			<if test="checkValue == 1">
+	  			<choose>
+		  			<when test="viewValue == 1">
+			  			select * from
+				            (select
+					            rownum as rnum,
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+			       			order by project_No DESC) 
+						where rnum between #{start} and #{end}
+		  			</when>
+		  			<when test="viewValue == 2">
+		  				select * from
+				            (select
+					            rownum as rnum,
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+			       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_no DESC) 
+						where rnum between #{start} and #{end}
+					</when>
+	  			</choose>
+	  		</if>
+	  		<if test="checkValue == 2">
+	  			<choose>
+		  			<when test="viewValue == 1">
+			  			select * from
+				            (select
+					            rownum as rnum,
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+							where p.project_status = 1 
+			       			order by project_No DESC) 
+						where rnum between #{start} and #{end}
+		  			</when>
+		  			<when test="viewValue == 2">
+		  				select * from
+				            (select
+					            rownum as rnum,
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no ) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+							where p.project_status = 1 
+			       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_no DESC) 
+						where rnum between #{start} and #{end}
+					</when>
+	  			</choose>
+	  		</if>
+  		</when>
+  		<otherwise>
+  			<if test="checkValue == 1">
+	  			<choose>
+		  			<when test="viewValue == 1">
+			  			 select * from  
+                        	(select
+					            rownum as rnum,
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+                            where p.project_no in (
+								(select project_no from use_project_language where language_no in (select project_no from use_project_language where language_no in 
+	                            (select language_no from develop_language where language_name in( 
+		                            <foreach collection="langList" item="lang" open="(" close=")" separator=",">
+		                            	#{lang}
+		                            </foreach>
+	                            )))))
+                            order by p.project_no DESC)
+                        where rnum between #{start} and #{end}
+		  			</when>
+		  			<when test="viewValue == 2">
+		  				select * from
+				            (select
+					            rownum as rnum,
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+							where p.project_no in(
+								(select project_no from use_project_language where language_no in (select project_no from use_project_language where language_no in 
+	                            (select language_no from develop_language where language_name in (
+									<foreach collection="langList" item="lang" open="(" close=")" separator=",">
+										#{lang}
+									</foreach>
+	                            )))))
+			       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_no DESC) 
+						where rnum between #{start} and #{end}
+					</when>
+	  			</choose>
+	  		</if>
+	  		<if test="checkValue == 2">
+	  			<choose>
+		  			<when test="viewValue == 1">
+			  			select * from
+				            (select
+					            rownum as rnum,
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+							where p.project_status = 1 and p.project_no in (
+								(select project_no from use_project_language where language_no in (select project_no from use_project_language where language_no in 
+	                            (select language_no from develop_language where language_name in (
+									<foreach collection="langList" item="lang" open="(" close=")" separator=",">
+										#{lang}
+									</foreach>
+	                            )))))
+			       			order by project_No DESC) 
+						where rnum between #{start} and #{end}
+		  			</when>
+		  			<when test="viewValue == 2">
+		  				select * from
+				            (select
+					            rownum as rnum,
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no ) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+							where p.project_status = 1 and p.project_no in (
+								(select project_no from use_project_language where language_no in (select project_no from use_project_language where language_no in 
+	                            (select language_no from develop_language where language_name in (
+									<foreach collection="langList" item="lang" open="(" close=")" separator=",">
+										#{lang}
+									</foreach>
+	                            )))))
+			       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_no DESC) 
+						where rnum between #{start} and #{end}
+					</when>
+	  			</choose>
+	  		</if>
+  		</otherwise>
+  	</choose>
   </select>
   
 </mapper>

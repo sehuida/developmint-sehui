@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,16 +51,32 @@ public class ProjectTeamController {
 			langList.remove(langValue);
 			projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue, langList);
 		}*/
-		projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue);
-		model.addAttribute("list", ptmpd.getList());
-		model.addAttribute("pageNavi", ptmpd.getPageNavi());
-		model.addAttribute("start", ptmpd.getStart());
-		model.addAttribute("pdLangList", ptmpd.getPdLangList());
-		model.addAttribute("developLangList", ptmpd.getDevelopLangList());
-		model.addAttribute("viewValue", viewValue);
-		model.addAttribute("checkValue", checkValue);
-		model.addAttribute("selectLangList", langValue);
-		return "recruitCrue/recruitTeamMember_mainPage";
+		if(langValue.length == 0) {
+			projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue);
+			model.addAttribute("list", ptmpd.getList());
+			model.addAttribute("pageNavi", ptmpd.getPageNavi());
+			model.addAttribute("start", ptmpd.getStart());
+			model.addAttribute("pdLangList", ptmpd.getPdLangList());
+			model.addAttribute("developLangList", ptmpd.getDevelopLangList());
+			model.addAttribute("viewValue", viewValue);
+			model.addAttribute("checkValue", checkValue);
+			model.addAttribute("selectLangList", langValue);
+			return "recruitCrue/recruitTeamMember_mainPage";
+		} else {
+			ArrayList<String> langList = new ArrayList<String>(Arrays.asList(langValue));
+		
+			
+			projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue, langList);
+			model.addAttribute("list", ptmpd.getList());
+			model.addAttribute("pageNavi", ptmpd.getPageNavi());
+			model.addAttribute("start", ptmpd.getStart());
+			model.addAttribute("pdLangList", ptmpd.getPdLangList());
+			model.addAttribute("developLangList", ptmpd.getDevelopLangList());
+			model.addAttribute("viewValue", viewValue);
+			model.addAttribute("checkValue", checkValue);
+			model.addAttribute("selectLangList", langValue);
+			return "recruitCrue/recruitTeamMember_mainPage";
+		}
 	}
 	
 	@RequestMapping(value="/recruitNotice_writeForm.do")

@@ -21,7 +21,6 @@
 		var langValue;
 		var viewValue = $(".clickCssKeeper").val();
 	    var checkValue = $(".checkCssKeeper").val();
-		// delCheckValue -> 1 언어취소 안한상태 / 2 언어취소 한 상태(재클릭) / 3 언어선택 자체를 안한 초기상태
 		
 	    $(".language_icon").click(function(){
 	    	langValue = $(this).attr("alt");
@@ -36,6 +35,7 @@
 	 	        $(".languageList").css("background-color", "#90d1b44f");
 	            $(".language_icon").addClass("language_icon_disabled");
 	            $(this).toggleClass("language_icon_disabled");
+	            
 	            if(!($(this).hasClass("language_icon_disabled"))){
 	            	for(var i = 0; i < arr.length; i++ ){
 	            		var addData = '&langValue='+arr[i];
@@ -52,39 +52,41 @@
 		            // location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue="+viewValue+"&checkValue="+checkValue+"&langValue="+langValue;
 	            }
 	        } else {
+	        	var url = "/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue="+viewValue+"&checkValue="+checkValue;
 	        	$(this).toggleClass("language_icon_disabled");
 	        	if(!($(this).hasClass("language_icon_disabled"))){
 	        		for(var i = 0; i < arr.length; i++ ){
 	            		var addData = '&langValue='+arr[i];
 	            		url += addData;
 	            	}
-	            	location.href= url;
+	            	//location.href= url;
 	            } else {
 	            	for(var i = 0; i < arr.length; i++ ){
 	            		var addData = '&langValue='+arr[i];
 	            		url += addData;
 	            	}
-	            	location.href= url;
+	            	//location.href= url;
 	            }
 	        }
 	        if($(".language_icon_disabled").length == 14){
+	        	var url = "/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue="+viewValue+"&checkValue="+checkValue;
 	        	$(".languageList").css("background-color", "white");
 	            $(".language_icon_disabled").removeClass("language_icon_disabled");
-	            location.href=url;
+	            //location.href=url;
 	        }
 	    });
 	
-	    if(arr != null){
+	    /*if(selectLangList != null){
 	    	$(".languageList").css("background-color", "#90d1b44f");
 	    	$(".language_icon").addClass("language_icon_disabled");
-	    	for(var i = 0; i < arr.length; i++){
-	    		if($.inArray(($(".language_icon_disabled").eq(i).attr("alt")), arr) != -1){
+	    	for(var i = 0; i < selectLangList.length; i++){
+	    		if($.inArray(($(".language_icon_disabled").eq(i).attr("alt")), selectLangList) != -1){
 	    			$(".language_icon_disabled").eq(i).removeClass("language_icon_disabled");
 	    		}
 	    	}
 	    }else {
 	    	$(".languageList").css("background-color", "white");
-	    }
+	    }*/
 	    
 	    $(".rBox_Leftnavi_left").click(function(){
 	    	if($(".navi_checkbox").is(":checked")){
@@ -109,9 +111,6 @@
 				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=1&checkValue=1";
 			}
 		});
-		
-		
-		
 	    
 	    if(checkValue == 1){
 	    	$(".navi_checkbox").prop("checked", false);
@@ -224,9 +223,11 @@
             </div>
         </div>
      </div>
+     <div style="display:none;">
      <c:forEach items="${selectLangList }" varStatus="i">
      	<span class="selectLangList">${selectLangList[i.index]}</span>
      </c:forEach>
+     </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
