@@ -32,4 +32,5 @@ public class Resume {
 	private int money;
 	private String workPlace;
 	private String writeDate;
+	private int ceoResume;
 }
