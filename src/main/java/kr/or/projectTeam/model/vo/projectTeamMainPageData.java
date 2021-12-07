@@ -15,4 +15,5 @@ public class projectTeamMainPageData {
 	private int start;
 	private ArrayList<projectDevLanguage> pdLangList;
 	private ArrayList<DevelopLanguage> developLangList;
+	private ArrayList<String> langList;
 }
