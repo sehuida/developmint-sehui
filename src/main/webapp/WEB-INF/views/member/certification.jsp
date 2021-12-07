@@ -6,13 +6,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Develomints</title>
-<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<div class="container">
-		<button type="button" class="btn btn-secondary" title="" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-bs-original-title="Popover Title">Right</button>
-	</div>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+		<jsp:include page="/WEB-INF/views/common/header2.jsp"/>
+		<div class="container">
+		<div>
+	        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top">
+	            Tooltip on top
+	          </button>
+	          <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="right" title="Tooltip on right">
+	            Tooltip on right
+	          </button>
+	          <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom">
+	            Tooltip on bottom
+	          </button>
+	          <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="left" title="Tooltip on left">
+	            Tooltip on left
+	          </button>
+	          </div>
+		</div>
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+		<script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+		</script>	
 </body>
 </html>
