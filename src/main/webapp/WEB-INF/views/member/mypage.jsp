@@ -152,11 +152,11 @@
 				</div>
 			</div>
 			<div class="page-bottom">
-				<a href="#" class="btn btn-primary btn-sm">회사인증</a>
-				<a href="#" class="btn btn-info btn-sm">기업고객 전환</a>
+				<a href="/certification.do" class="btn btn-primary btn-sm">회사인증</a>
+				<a href="/companyMember.do" class="btn btn-info btn-sm">기업고객 전환</a>
 			</div>
 		</div>
-	 </div>
+	 </div>	 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
