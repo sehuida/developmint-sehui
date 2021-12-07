@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -101,7 +102,7 @@ public class AdminService {
 		
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
 
-		String pageNavi = "<ul class='pagination pagination-lg' style='justify-content: center;'>";
+		String pageNavi = "<ul class='pagination' style='justify-content: center;'>";
 		if(pageNo != 1) {
 			pageNavi += "<li class='page-item'>";
 			pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/allMemberList.do?reqPage="+(pageNo-1)+"&type="+type+"&list="+list+"'>";
@@ -135,6 +136,25 @@ public class AdminService {
 		TotalMember tm = new TotalMember(allMemberList, start, pageNavi, totalCountList);
 		
 		return tm;
+	}
+
+	public boolean chkChangeLevel(String memberId, String level) {
+		StringTokenizer st1 = new StringTokenizer(memberId,"/");
+		StringTokenizer st2 = new StringTokenizer(level,"/");
+		boolean result = true;
+		while(st1.hasMoreTokens()) {
+			String id = st1.nextToken();
+			String grade = st2.nextToken();
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("id", id);
+			map.put("grade", grade);
+			int result1 = dao.chkChangeLevel(map);
+			if(result1 == 0) {
+				result = false;
+				break;
+			}
+		}
+		return result;
 	}
 }
 
