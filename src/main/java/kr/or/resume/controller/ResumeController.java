@@ -58,8 +58,9 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="/ceoResume.do")
-	public String ceoResume(int ceoResume, Model model) {
-		model.addAttribute("ceoResume", ceoResume);
+	public String ceoResume(int resumeNo, int memberNo, Model model) {
+		int reset = service.resetCeoResume(resumeNo, memberNo);
+		System.out.println("reset : " + reset);
 		return "resume/resumeManage";
 	}
 	
