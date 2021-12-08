@@ -55,14 +55,16 @@
 }
 
 .gosu-photos ul li {
-	float: left;
+	
 	list-style-type: none;
 	margin: 10px;
 }
+.gosu-photos ul{
 
-.gosu-photos {
-	overflow: hidden;
-}
+flex-wrap: wrap;
+	display: flex;
+	justify-content: space-around;
+	}
 
 .gosu-photos ul li img {
 	width: 120px;
@@ -280,7 +282,7 @@
 					<div class="gphs">
 						<ul>
 						<c:forEach items="${gphotoList }" var="gph" varStatus="i"><!--나중에 수정해라...  -->
-							<li><a><img src="/resources/upload/gosu/gosuPhoto/${gph.photoFilepath }"></a></li>
+							<li><a><img src="${gph.photoFilepath }"></a></li>
 						</c:forEach>
 						</ul>
 					</div>
