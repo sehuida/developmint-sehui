@@ -1,6 +1,7 @@
 package kr.or.resume.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,4 +31,21 @@ public class ResumeService {
 	public int selectResumeCount(int memberNo) {
 		return dao.selectCountResume(memberNo);
 	}
+
+	
+	 public int resetCeoResume(int resumeNo, int memberNo) { 
+		 int reset = dao.resetCeoResume(memberNo);
+		 if(reset > 0) {
+			 int ceoResume = dao.updateCeoResume(resumeNo);
+			 return ceoResume; 
+		 } else {
+			 return 0; 			 
+		 }
+	 }
+	 
+
+	/*
+	 * public int updateCeoResume(int resumeNo) { return
+	 * dao.updateCeoResume(resumeNo); }
+	 */
 }

@@ -75,5 +75,9 @@ public class AdminDao {
 		return totalList;
 	}
 
+	public int chkChangeLevel(Map<String, Object> map) {
+		return sqlSession.update("admin.chkChangeLevel", map);
+	}
+
 	
 }

@@ -79,5 +79,32 @@ public class AdminController {
 		return "admin/blockedMember";
 	}
 	
-	
+	//선택회원 등급 변경
+	@RequestMapping(value="/chkChangeLevel.do")
+	public String chkChangeLevel(Model model, String memberId, String level) {
+		boolean result = service.chkChangeLevel(memberId, level);
+		if(result) {
+			model.addAttribute("msg","변경성공");
+		}else {
+			model.addAttribute("msg","변경실패");
+		}
+		model.addAttribute("loc","/allMemberList.do?reqPage=1&type=0&list=member_no");
+		return "common/msg";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -48,10 +48,8 @@
 		]]>
   </select>
   <select id="projectCheckCount" parameterType="map" resultType="_int">
-  
-   
   	<choose>
-  		<when test="langList.isEmpty() or langList == null">
+  		<when test="langList == null">
   			<if test="checkValue == 1">
   				select count(*) from project
 	  		</if>
@@ -62,21 +60,21 @@
   		<otherwise>
   			<if test="checkValue == 1">
   				select count(*) from project where project_no in (
-								(select project_no from use_project_language where language_no in (select project_no from use_project_language where language_no in 
-	                            (select language_no from develop_language where language_name in (
-							<foreach collection="langList" item="lang" open="(" close=")" separator=",">
-								#{lang}
-							</foreach>
-	                            )))))
+								(select project_no from use_project_language where language_no in
+	                            (select language_no from develop_language where language_name in 
+									<foreach collection="langList" item="lang" open="(" close=")" separator=",">
+										#{lang}
+									</foreach>
+	                            )))
 	  		</if>
 	  		<if test="checkValue == 2">
 	  			select count(*) from project where project_status = 1 and project_no in (
-								(select project_no from use_project_language where language_no in (select project_no from use_project_language where language_no in 
-	                            (select language_no from develop_language where language_name in (
-							<foreach collection="langList" item="lang" open="(" close=")" separator=",">
-								#{lang}
-							</foreach>
-	                            )))))
+								(select project_no from use_project_language where language_no in
+	                            (select language_no from develop_language where language_name in 
+									<foreach collection="langList" item="lang" open="(" close=")" separator=",">
+										#{lang}
+									</foreach>
+	                            )))
 	  		</if>
   		</otherwise>
   	</choose>
@@ -217,12 +215,12 @@
 					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 							from project p
                             where p.project_no in (
-								(select project_no from use_project_language where language_no in (select project_no from use_project_language where language_no in 
-	                            (select language_no from develop_language where language_name in( 
-		                            <foreach collection="langList" item="lang" open="(" close=")" separator=",">
-		                            	#{lang}
-		                            </foreach>
-	                            )))))
+								(select project_no from use_project_language where language_no in
+	                            (select language_no from develop_language where language_name in 
+									<foreach collection="langList" item="lang" open="(" close=")" separator=",">
+										#{lang}
+									</foreach>
+	                            )))
                             order by p.project_no DESC)
                         where rnum between #{start} and #{end}
 		  			</when>
@@ -248,12 +246,12 @@
 					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 							from project p
 							where p.project_no in(
-								(select project_no from use_project_language where language_no in (select project_no from use_project_language where language_no in 
-	                            (select language_no from develop_language where language_name in (
+								(select project_no from use_project_language where language_no in
+	                            (select language_no from develop_language where language_name in 
 									<foreach collection="langList" item="lang" open="(" close=")" separator=",">
 										#{lang}
 									</foreach>
-	                            )))))
+	                            )))
 			       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_no DESC) 
 						where rnum between #{start} and #{end}
 					</when>
@@ -283,12 +281,12 @@
 					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 							from project p
 							where p.project_status = 1 and p.project_no in (
-								(select project_no from use_project_language where language_no in (select project_no from use_project_language where language_no in 
-	                            (select language_no from develop_language where language_name in (
+								(select project_no from use_project_language where language_no in
+	                            (select language_no from develop_language where language_name in 
 									<foreach collection="langList" item="lang" open="(" close=")" separator=",">
 										#{lang}
 									</foreach>
-	                            )))))
+	                            )))
 			       			order by project_No DESC) 
 						where rnum between #{start} and #{end}
 		  			</when>
@@ -314,12 +312,12 @@
 					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 							from project p
 							where p.project_status = 1 and p.project_no in (
-								(select project_no from use_project_language where language_no in (select project_no from use_project_language where language_no in 
-	                            (select language_no from develop_language where language_name in (
+								(select project_no from use_project_language where language_no in
+	                            (select language_no from develop_language where language_name in 
 									<foreach collection="langList" item="lang" open="(" close=")" separator=",">
 										#{lang}
 									</foreach>
-	                            )))))
+	                            )))
 			       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_no DESC) 
 						where rnum between #{start} and #{end}
 					</when>
