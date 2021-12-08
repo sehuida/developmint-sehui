@@ -48,7 +48,7 @@
 						<label for="formFile" class="form-label" style="border-radius: 40%; overflow: hidden;"><img src="/resources/img/member/profile.png" id="pic" style="width: 80px; height:80px;"></label>
 					</c:when>
 					<c:otherwise>
-						<label for="formFile" class="form-label" style="border-radius: 40%; overflow: hidden;"><img src="/resources/upload/member/${sessionScope.m.filepath }" id="pic" style="width: 90px; height:90px;"></label>
+						<label for="formFile" class="form-label" style="border-radius: 40%; overflow: hidden;"><img src="/resources/upload/member/${sessionScope.m.filepath }" id="pic" style="width: 100px; height:100px;"></label>
 					</c:otherwise>
 				</c:choose>
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">

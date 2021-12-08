@@ -273,6 +273,9 @@ public class MemberController {
 			return "0";
 		}
 	}
-		
+	@RequestMapping(value ="/changePwFrm.do")
+	public String changePwFrm() {
+		return "member/changePwFrm";
+	}
 	
 }
