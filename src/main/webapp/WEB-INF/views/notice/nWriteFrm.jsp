@@ -59,8 +59,8 @@
 						<div class="form-group">
 							<label class="col-form-label mt-4" for="noticeContent"><i class="bi bi-pencil-square" style="font-size: 1.2em;"></i> 공지 내용<span style="color: #f3969a;">*</span></label>
                             <textarea class="form-control" id="noticeContent" rows="20" name="noticeContent" required ></textarea>
-                            <span style="color: #f3969a;float: left;">*는 필수 입력사항입니다.</span>
-                            <span style="color: #f3969a;float: left;" id="maxContentPost"></span>
+                            <p style="color: #f3969a;">*는 필수 입력사항입니다.</p>
+                          	<span style="color: #f3969a;font-weight: bold;">남은 글자 수<span id="maxContentPost"></span></span>
                         </div>
                         <div class="form-group" style="padding: 10px 0 0 0;float: right;">
                         	<button type="submit" class="btn btn-primary" id="nWriteBtn">Submit</button>
@@ -80,7 +80,7 @@
 		  	maxHeight: 700,
 		  	focus: true,
 			lang : "ko-KR",
-			placeholder: '최대 2048자까지 쓸 수 있습니다',
+			placeholder: '최대 3000자까지 쓸 수 있습니다',
 			toolbar: [
 			    // [groupName, [list of button]]
 			    ['fontname', ['fontname']],
@@ -101,7 +101,7 @@
 				},
 				onKeydown: function (e) { 
                     var t = e.currentTarget.innerText; 
-                    if (t.trim().length >= 2048) {
+                    if (t.trim().length >= 3000) {
                         //delete keys, arrow keys, copy, cut, select all
                         if (e.keyCode != 8 && !(e.keyCode >=37 && e.keyCode <=40) && e.keyCode != 46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e.ctrlKey) && !(e.keyCode == 65 && e.ctrlKey))
                         e.preventDefault(); 
@@ -109,33 +109,33 @@
                 },
                 onKeyup: function (e) {
                     var t = e.currentTarget.innerText;
-                    $('#maxContentPost').val(2048 - t.trim().length);
-                    console.log($('#maxContentPost').val());
+                    $('#maxContentPost').text(3000 - t.trim().length);
+                    console.log($('#maxContentPost').text());
                 },
                 onPaste: function (e) {
                     var t = e.currentTarget.innerText;
                     var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
                     e.preventDefault();
                     var maxPaste = bufferText.length;
-                    if(t.length + bufferText.length > 2048){
-                        maxPaste = 2048 - t.length;
+                    if(t.length + bufferText.length > 3000){
+                        maxPaste = 3000 - t.length;
                     }
                     if(maxPaste > 0){
                         document.execCommand('insertText', false, bufferText.substring(0, maxPaste));
                     }
-                    $('#maxContentPost').(2048 - t.length);
-                    console.log($('#maxContentPost').val());
+                    $('#maxContentPost').text(3000 - t.length);
+                    console.log($('#maxContentPost').text());
                 }
 				
 			}
 		});
 		
-		function keyDownSize(obj){
+		/* function keyDownSize(obj){
 			if(obj.val().length > 500) {
 	            obj.val(obj.val().substring(0, 500));
 	            //$('#test_cnt').html("(100 / 100)");
 	        }
-		}
+		} */
 					
 		/* $("#noticeContent").on('keyup',function(){
 			if($(this).val().length > 500){
