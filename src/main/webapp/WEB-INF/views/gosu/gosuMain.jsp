@@ -1,6 +1,13 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	ArrayList<Integer> list = new ArrayList<Integer>();
+for (int i = 0; i < 10; i++) {
+	list.add(i);
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +57,6 @@
 .gosu {
 	display: flex;
 	justify-content: center;
-	
 	margin: 70px;
 }
 
@@ -63,9 +69,10 @@
 	width: 200px;
 }
 
-.gosu li{
+.gosu li {
 	list-style-type: none;
 }
+
 .gosu td {
 	padding: 10px;
 	padding-right: 30px;
@@ -89,10 +96,11 @@
 	overflow: hidden;
 }
 
-.gtitle{
+.gtitle {
 	font-size: 30px;
 	font-weight: 900;
 }
+
 .gosu-person>h3, .gosu-notice>h3, .gosu-status>h3 {
 	font-size: 30px;
 	font-weight: 900;
@@ -102,6 +110,11 @@
 .gosu-one {
 	text-align: center;
 	font-weight: bold;
+}
+
+.gosu-one img {
+	width: 225px;
+	height: 225px;
 }
 
 .gosu button:hover {
@@ -125,19 +138,19 @@
 
 ul#gallery {
 	display: flex;
-	justify-content: space-between;
+	flex-wrap: wrap;
 	margin-top: 30px;
 	list-style: none;
 	padding: 0;
-	width: 80%;
+	margin: 0 auto;
+	width: 1140px;
 }
 
 ul#gallery>a>li {
 	position: relative;
-	background-color: #000;
-	width: 200px;
-	height: 200px;
-	margin: 5px;
+	width: 300px;
+	height: 300px;
+	margin: 40px;
 	overflow: hidden;
 }
 
@@ -153,7 +166,7 @@ ul#gallery>a>li::after {
 	border: 2px solid #fff;
 	transform: translate(-50%, -50%);
 	text-align: center;
-	content: '제목';
+	content: '';
 	font-size: 35px;
 	color: #fff;
 	opacity: 0;
@@ -273,7 +286,7 @@ to {
 .gosu-write-wrap {
 	position: fixed;
 	z-index: 1000;
-	margin-left:1200px;
+	margin-left: 1200px;
 }
 
 .gosu-write {
@@ -320,18 +333,19 @@ to {
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-	<div class="gosu-mail">
+		<div class="gosu-mail">
 			<a href="/gosuRequestList.do"><span>1</span>요청서</a>
-	</div>
-	<div class="gosu-mail">
+		</div>
+		<div class="gosu-mail">
 			<a href="/gosuRequestCostList.do"><span>1</span>견적서</a>
-	</div>
+		</div>
 		<h1>
 			<span style="color: rgb(78, 205, 196);">고수</span>의 노하우
 		</h1>
 		<div class="g-msg">
-			
-			고수에게 개발 요청서를 보내거나 <br> 작품에 대한 피드백을 받을 수 있습니다.<br>당신에게 맞는 고수를 찾아보세요!
+
+			고수에게 개발 요청서를 보내거나 <br> 작품에 대한 피드백을 받을 수 있습니다.<br>당신에게 맞는
+			고수를 찾아보세요!
 		</div>
 		<div class="gosu-write-wrap">
 			<div class="gosu-write">
@@ -345,246 +359,252 @@ to {
 		<div class="g-plus">
 			<a href="/gosuList.do" style="color: rgb(78, 205, 196);">더보기</a>
 		</div>
-
-		
-			<c:forEach items="${gList }" var="g" varStatus="i">
-			<c:if test="${i.index%2 == 0 }">
-			<div class="gosu-wrap">
-			</c:if>
-				<div class="gosu">
-					<button type="button" class="card border-primary mb-3"
-						style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-						<table>
-							<tr>
-								<c:if test="${empty g.gosuImg }">
-									<td rowspan="4" class="gosu_img" style="width: 30%;"><img
-										src="/resources/img/gosu/g_img_basic.png"
-										style="border-radius: 50%;"></td>
-								</c:if>
-								<c:if test="${not empty g.gosuImg }">
-									<th rowspan="4" style="padding: 40px;"><img
-										src="${g.gosuImg }" style="width: 250px;"></th>
-								</c:if>
-
-
-								<td><a href="/gosuContent.do?gNo=${g.ggsouNo}" class="gtitle">${g.gosuTitle }</a></td>
-							</tr>
-							<tr>
-								<td><hr></td>
-							</tr>
-							<tr>
-
-								<td>
-									<li><b>한줄소개</b> : ${g.gosuSelf }</li>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<li><b>비용</b> : ${g.gosuCost }</li>
-								</td>
-							</tr>
-							<tr>
-								<td style="text-align: center; font-weight: bold;"><span
-									style="color: rgb(78, 205, 196);">고수</span> ${g.gosuId }</td>
-								<td>4.0</td>
-							</tr>
-						</table>
-					</button>
-				</div>
-				<c:if test="${i.index%2 == 0 }">
-				</div>
+		<%--
+			<c:set var="i" value="0" />
+		<c:set var="j" value="3" />
+		<table border="1">
+			<c:forEach items="${list }" var="list">
+				<c:if test="${i%j == 0 }">
+					<tr>
 				</c:if>
-				
+				<td>${list }</td>
+				<c:if test="${i%j == j-1 }">
+					</tr>
+				</c:if>
+				<c:set var="i" value="${i+1 }" />
 			</c:forEach>
-		
-		
-		<div style="text-align: center">
-			<span class="dot" onclick="currentSlide(1); "></span> <span
-				class="dot" onclick="currentSlide(2); "></span> <span class="dot"
-				onclick="currentSlide(3); "></span>
-		</div>
-		<div class="gosu-person-wrap ">
-			<div class="gosu-person ">
-				<h3 style="margin-left: 0;">
-					새로운 <span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다!
-				</h3>
-				<div class="g-act">
-					활동 고수&nbsp;&nbsp;<span> 00</span>명
-				</div>
-				<div
-					style="display: flex; justify-content: space-between; margin-top: 50px;">
-					<div class="gosu-one">
-						<img src="/resources/img/gosu/g_img_basic.png"
-							style="border-radius: 50%;">
-						<div style="margin-top: 20px;">고수 이름</div>
-					</div>
-					<div class="gosu-one">
-						<img src="/resources/img/gosu/g_img_basic.png"
-							style="border-radius: 50%;">
-						<div style="margin-top: 20px;">고수 이름</div>
-					</div>
-					<div class="gosu-one">
-						<img src="/resources/img/gosu/g_img_basic.png"
-							style="border-radius: 50%;">
-						<div style="margin-top: 20px;">고수 이름</div>
-					</div>
-					<div class="gosu-one">
-						<img src="/resources/img/gosu/g_img_basic.png"
-							style="border-radius: 50%;">
-						<div style="margin-top: 20px;">고수 이름</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="gosu-notice">
+		</table>
 
-			<h3>
-				<span style="color: rgb(78, 205, 196);">고수</span>의 게시판
+		
+		 --%>
+	
+		<c:forEach items="${gList }" var="g" varStatus="i">
+			<c:if test="${i.index%2 == 0 }">
+				<div class="gosu-wrap">
+			</c:if>
+			<div class="gosu">
+				<button type="button" class="card border-primary mb-3"
+					style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+					<table>
+						<tr>
+							<c:if test="${empty g.gosuImg }">
+								<td rowspan="4" class="gosu_img" style="width: 30%;"><img
+									src="/resources/img/gosu/g_img_basic.png"
+									style="border-radius: 50%;"></td>
+							</c:if>
+							<c:if test="${not empty g.gosuImg }">
+								<th rowspan="4" style="padding: 40px;"><img
+									src="${g.gosuImg }" style="width: 250px;"></th>
+							</c:if>
+
+
+							<td><a href="/gosuContent.do?gNo=${g.ggsouNo}"
+								class="gtitle">${g.gosuTitle }</a></td>
+						</tr>
+						<tr>
+							<td><hr></td>
+						</tr>
+						<tr>
+
+							<td>
+								<li><b>한줄소개</b> : ${g.gosuSelf }</li>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<li><b>비용</b> : ${g.gosuCost }</li>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-weight: bold;"><span
+								style="color: rgb(78, 205, 196);">고수</span> ${g.gosuId }</td>
+							<td>4.0</td>
+						</tr>
+					</table>
+				</button>
+			</div>
+			<c:if test="${i.index%2 == 0 }">
+	</div>
+	</c:if>
+	</c:forEach>
+
+
+	<div style="text-align: center">
+		<span class="dot" onclick="currentSlide(1); "></span> <span
+			class="dot" onclick="currentSlide(2); "></span> <span class="dot"
+			onclick="currentSlide(3); "></span>
+	</div>
+	<div class="gosu-person-wrap ">
+		<div class="gosu-person ">
+			<h3 style="margin-left: 0;">
+				새로운 <span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다!
 			</h3>
-			<div class="g-plus">
-				<a href="/gosuNoticeList.do" style="color: rgb(78, 205, 196);">더보기</a>
+
+
+
+			<div class="g-act">
+				활동 고수&nbsp;&nbsp;<span> ${gosuCount }</span>명
 			</div>
-			<div class="g-gall">
-				<ul id="gallery">
-					<a href="/gosuNoticeContent.do"><li><img
-							src="/resources/img/gosu/g_img_basic.png"></li></a>
-					<a href="/gosuNoticeContent.do"><li><img
-							src="/resources/img/gosu/g_img_basic.png"></li></a>
-					<a href="/gosuNoticeContent.do"><li><img
-							src="/resources/img/gosu/g_img_basic.png"></li></a>
-				</ul>
-			</div>
-			<div class="g-gall">
-				<ul id="gallery">
-					<a href="/gosuNoticeContent.do"><li><img
-							src="/resources/img/gosu/g_img_basic.png"></li></a>
-					<a href="/gosuNoticeContent.do"><li><img
-							src="/resources/img/gosu/g_img_basic.png"></li></a>
-					<a href="/gosuNoticeContent.do"><li><img
-							src="/resources/img/gosu/g_img_basic.png"></li></a>
-				</ul>
+			<div
+				style="display: flex; justify-content: space-between; margin-top: 50px;">
 
-			</div>
-		</div>
-		<div class="gosu-status">
-			<hr>
-			<h3 style="text-align: center;">나의 현황</h3>
-			<div class="g-plus">
-				<a href="/gosuSituation.do" style="color: rgb(78, 205, 196);">자세히
-					보기</a>
-			</div>
-			<div class="g-status-border">
-				<h4 style="margin-top: 30px; margin-left: 40px;">신청한 내역</h4>
-				<div class="g-statusContent">
-					<a href="/gosuTalk.do">
-						<table class="g-sc-tbl card text-white bg-primary mb-3"
-							style="margin-bottom: 0;">
-							<tr>
-								<th colspan="2" style="text-align: right; padding-right: 0;">진행
-									중</th>
-							</tr>
-							<tr>
-								<th>고수</th>
-								<td>아이디(memberId)</td>
-							</tr>
-							<tr>
-								<th>내용</th>
-								<td>제목(text)</td>
-							</tr>
-						</table>
-					</a> <a href="/gosuTalk.do">
-						<table class="g-sc-tbl card text-white bg-primary mb-3"
-							style="margin-bottom: 0;">
-							<tr>
-								<th colspan="2" style="text-align: right; padding-right: 0;">진행
-									중</th>
-							</tr>
-							<tr>
-								<th>고수</th>
-								<td>아이디(memberId)</td>
-							</tr>
-							<tr>
-								<th>내용</th>
-								<td>제목(text)</td>
-							</tr>
-						</table>
-					</a>
-				</div>
-				<h4 style="margin-top: 30px; margin-left: 40px;">신청받은 내역</h4>
-				<div class="g-statusContent">
-					<a href="/gosuTalk.do">
-						<table class="g-sc-tbl card bg-light mb-3">
-							<tboay style="min-width:342px;max-width:342px;">
+				<c:forEach items="${newGosuList }" var="ngl" varStatus="i">
+					<div class="gosu-one">
+						<c:if test="${empty ngl.gosuImg }">
+							<img src="/resources/img/gosu/g_img_basic.png"
+								style="border-radius: 50%;">
+						</c:if>
+						<c:if test="${not empty ngl.gosuImg }">
+							<img src="${ngl.gosuImg }" style="border-radius: 50%;">
+						</c:if>
 
-							<tr>
-								<th colspan="2"
-									style="text-align: right; padding-right: 0; margin-bottom: 0; min-width: 282px; max-width: 282px;">진행
-									중</th>
-							</tr>
-							<tr>
-								<th>고수</th>
-								<td>아이디(memberId)</td>
-							</tr>
-							<tr>
-								<th>내용</th>
-								<td>내용내용</td>
-							</tr>
-							</tboay>
-						</table>
-					</a> 
-					<a href="/gosuTalk.do">
-						<table class="g-sc-tbl card bg-light mb-3">
-							<tboay style="min-width:342px;max-width:342px;">
-
-							<tr>
-								<th colspan="2"
-									style="text-align: right; padding-right: 0; margin-bottom: 0; min-width: 282px; max-width: 282px;">진행
-									중</th>
-							</tr>
-							<tr>
-								<th>고수</th>
-								<td>아이디(memberId)</td>
-							</tr>
-							<tr>
-								<th>내용</th>
-								<td>내용내용</td>
-							</tr>
-							</tboay>
-						</table>
-					</a>
-					
-				</div>
-				<hr>
-				<h4 style="margin-top: 30px; margin-left: 40px;"><span style="color: rgb(78, 205, 196)">요청서</span>를 통한 <span style="color: rgb(78, 205, 196)">고수</span> 매칭</h4>
-				<div class="g-statusContent">
-					<a href="/gosuProject.do">
-						<table class="g-sc-tbl card bg-info mb-3">
-							<tboay style="min-width:342px;max-width:342px;">
-
-							<tr>
-								<th>고수</th>
-								<td><span style="color:white;">아이디(memberId)</span></td>
-							</tr>
-						
-							</tboay>
-						</table>
-					</a> 
-					<a href="/gosuProject.do">
-						<table class="g-sc-tbl card bg-info mb-3">
-							<tboay style="min-width:342px;max-width:342px;">
-
-					
-							<tr>
-								<th>고수</th>
-								<td><span style="color:white;">아이디(memberId)</span></td>
-							</tr>
-					
-							</tboay>
-						</table>
-					</a>
+						<div style="margin-top: 20px;">${ngl.gosuId }</div>
 					</div>
+
+				</c:forEach>
 			</div>
 		</div>
+	</div>
+	<div class="gosu-notice">
+
+		<h3>
+			<span style="color: rgb(78, 205, 196);">고수</span>의 게시판
+		</h3>
+		<div class="g-plus">
+			<a href="/gosuNoticeList.do" style="color: rgb(78, 205, 196);">더보기</a>
+		</div>
+		<div class="g-gall">
+			<ul id="gallery">
+				<c:forEach items="${gNoticeList }" var="gnl" varStatus="i">
+
+					<a href="/gosuNoticeContent.do?gnn=${gnl.gnoticeNo }"><li><img
+							src="${gnl.gnoticePhoto }"></li></a>
+				</c:forEach>
+
+			</ul>
+		</div>
+
+	</div>
+	<div class="gosu-status">
+		<hr>
+		<h3 style="text-align: center;">나의 현황</h3>
+		<div class="g-plus">
+			<a href="/gosuSituation.do" style="color: rgb(78, 205, 196);">자세히
+				보기</a>
+		</div>
+		<div class="g-status-border">
+			<h4 style="margin-top: 30px; margin-left: 40px;">신청한 내역</h4>
+			<div class="g-statusContent">
+				<a href="/gosuTalk.do">
+					<table class="g-sc-tbl card text-white bg-primary mb-3"
+						style="margin-bottom: 0;">
+						<tr>
+							<th colspan="2" style="text-align: right; padding-right: 0;">진행
+								중</th>
+						</tr>
+						<tr>
+							<th>고수</th>
+							<td>아이디(memberId)</td>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td>제목(text)</td>
+						</tr>
+					</table>
+				</a> <a href="/gosuTalk.do">
+					<table class="g-sc-tbl card text-white bg-primary mb-3"
+						style="margin-bottom: 0;">
+						<tr>
+							<th colspan="2" style="text-align: right; padding-right: 0;">진행
+								중</th>
+						</tr>
+						<tr>
+							<th>고수</th>
+							<td>아이디(memberId)</td>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td>제목(text)</td>
+						</tr>
+					</table>
+				</a>
+			</div>
+			<h4 style="margin-top: 30px; margin-left: 40px;">신청받은 내역</h4>
+			<div class="g-statusContent">
+				<a href="/gosuTalk.do">
+					<table class="g-sc-tbl card bg-light mb-3">
+						<tboay style="min-width:342px;max-width:342px;">
+
+						<tr>
+							<th colspan="2"
+								style="text-align: right; padding-right: 0; margin-bottom: 0; min-width: 282px; max-width: 282px;">진행
+								중</th>
+						</tr>
+						<tr>
+							<th>고수</th>
+							<td>아이디(memberId)</td>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td>내용내용</td>
+						</tr>
+						</tboay>
+					</table>
+				</a> <a href="/gosuTalk.do">
+					<table class="g-sc-tbl card bg-light mb-3">
+						<tboay style="min-width:342px;max-width:342px;">
+
+						<tr>
+							<th colspan="2"
+								style="text-align: right; padding-right: 0; margin-bottom: 0; min-width: 282px; max-width: 282px;">진행
+								중</th>
+						</tr>
+						<tr>
+							<th>고수</th>
+							<td>아이디(memberId)</td>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td>내용내용</td>
+						</tr>
+						</tboay>
+					</table>
+				</a>
+
+			</div>
+			<hr>
+			<h4 style="margin-top: 30px; margin-left: 40px;">
+				<span style="color: rgb(78, 205, 196)">요청서</span>를 통한 <span
+					style="color: rgb(78, 205, 196)">고수</span> 매칭
+			</h4>
+			<div class="g-statusContent">
+				<a href="/gosuProject.do">
+					<table class="g-sc-tbl card bg-info mb-3">
+						<tboay style="min-width:342px;max-width:342px;">
+
+						<tr>
+							<th>고수</th>
+							<td><span style="color: white;">아이디(memberId)</span></td>
+						</tr>
+
+						</tboay>
+					</table>
+				</a> <a href="/gosuProject.do">
+					<table class="g-sc-tbl card bg-info mb-3">
+						<tboay style="min-width:342px;max-width:342px;">
+
+
+						<tr>
+							<th>고수</th>
+							<td><span style="color: white;">아이디(memberId)</span></td>
+						</tr>
+
+						</tboay>
+					</table>
+				</a>
+			</div>
+		</div>
+	</div>
 	</div>
 	<script>
 		var slideIndex2 = 1;

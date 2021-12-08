@@ -51,11 +51,12 @@ input:focus, textarea:focus {
 
 ul#gallery {
 	display: flex;
-	justify-content: space-between;
+	flex-wrap:wrap;
 	margin-top: 30px;
 	list-style: none;
 	padding: 0;
-	width: 80%;
+	margin:0 auto;
+	width:1140px;
 }
 
 ul#gallery>a>li dt {
@@ -101,6 +102,11 @@ ul#gallery>a>li:hover::after {
 
 ul#gallery>a>li dd {
 	padding: 5px;
+	
+	height: 30px;
+	width: 190px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 #pageNavi {
@@ -113,7 +119,6 @@ ul#gallery>a>li dd {
 .gosu-write-wrap {
 	position: fixed;
 	z-index: 1000;
-	
 	margin-left:1200px;
 }
 
@@ -175,6 +180,7 @@ ul#gallery>a>li dd {
 			</select>
 
 		</div>
+		<c:if test="${sessionScope.m.memberType eq 2}">
 		<div class="gosu-write-wrap">
 			<div class="gosu-write">
 				<h5 style="font-size: small; color: gray;">
@@ -184,427 +190,30 @@ ul#gallery>a>li dd {
 					작성하기</a>
 			</div>
 		</div>
+		</c:if>
 		<div>
+		
+			
 			<div class="g-gall">
-				<ul id="gallery">
-					<a href="/gosuNoticeContent.do">
+			  <ul id="gallery">
+			  <c:forEach items="${gNoticeList }" var="gnl" varStatus="i">
+				<a href="/gosuNoticeContent.do?gnn=${gnl.gnoticeNo }">
 						<li>
 							<dl>
 								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
+									<img src="${gnl.gnoticePhoto }">	
 								</dt>
 								<dd>
-									<b>제목제목</b>
+									<b>${gnl.gnoticeTitle }</b>
 								</dd>
-								<dd>내용내용</dd>
+								<dd>${gnl.gnoticeContent }</dd>
 							</dl>
 					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
+				</a>
+				</c:forEach>
 				</ul>
 			</div>
-
-			<div class="g-gall">
-				<ul id="gallery">
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-				</ul>
-
-			</div>
-			<div class="g-gall">
-				<ul id="gallery">
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-				</ul>
-
-			</div>
-			<div class="g-gall">
-				<ul id="gallery">
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-				</ul>
-
-			</div>
-			<div class="g-gall">
-				<ul id="gallery">
-					<a href="">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-				</ul>
-
-			</div>
-			<div class="g-gall">
-				<ul id="gallery">
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-					<a href="/gosuNoticeContent.do">
-						<li>
-							<dl>
-								<dt>
-									<img src="/resources/img/gosu/g_img_basic.png">
-								</dt>
-								<dd>
-									<b>제목제목</b>
-								</dd>
-								<dd>내용내용</dd>
-							</dl>
-					</li>
-					</a>
-				</ul>
-
-			</div>
+			
 		</div>
 		<div id="pageNavi"></div>
 	</div>
