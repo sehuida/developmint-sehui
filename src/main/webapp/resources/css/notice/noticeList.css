@@ -51,19 +51,25 @@
 }
 .a-link{
 	display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
     padding-left: 20px;
     padding-right: 20px;
-    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid #ddd;	
+    padding-top: 20px;
 }
 .a-link > li {
 	list-style: none;
 	text-indent: inherit;
+	
 }
 .a-link > li >a{
 	text-decoration: none;
 }
 .a-link > li >a:hover {
+	text-decoration: underline;
+}
+.a-active{
+	font-weight: bold;
 	text-decoration: underline;
 }
