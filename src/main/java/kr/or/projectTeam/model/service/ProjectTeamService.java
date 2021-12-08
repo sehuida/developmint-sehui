@@ -158,34 +158,39 @@ public class ProjectTeamService {
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
 		
-		String pdNaviUrl1 = "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+(pageNo-1)+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"'";
-		String pdNaviUrl2 = "<a class = 'page-link' href='/recruitTeamMember_mainPage.do?reqPage="+pageNo+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"'";
-		String pdNaviUrl3 = "<a class = 'page-link' href='/recruitTeamMember_mainPage.do?reqPage="+pageNo+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"'";
-		String pdNaviUrl4 = "<a class = 'page-link' href='/recruitTeamMember_mainPage.do?reqPage="+pageNo+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"'";
-		for(int i = 0; i < langList.size(); i++) {
-			String addData = "&langValue="+langList.get(i);
-			pdNaviUrl1 += addData;
-			pdNaviUrl2 += addData;
-			pdNaviUrl3 += addData;
-			pdNaviUrl4 += addData;
-		}
-		pdNaviUrl1 += ">";
-		pdNaviUrl2 += ">";
-		pdNaviUrl3 += ">";
-		pdNaviUrl4 += ">";
-		
 		String pageNavi = "<ul class='pagination pagination-lg'>";
 		if(pageNo != 1) {
+			String pdNaviUrl1 = "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+(pageNo-1)+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"";
+			for(int i = 0; i < langList.size(); i++) {
+				String addData = "&langValue="+langList.get(i);
+				pdNaviUrl1 += addData;
+			}
+			pdNaviUrl1 += "'>";
+			
 			pageNavi += "<li class='page-item'>";
 			pageNavi += pdNaviUrl1;
 			pageNavi += "&lt;</a></li>";
 		}// 페이지 숫자
 		for(int i=0; i < pageNaviSize; i++) {
 			if(pageNo == reqPage) {
+				String pdNaviUrl2 = "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"";
+				for(int j = 0; j < langList.size(); j++) {
+					String addData = "&langValue="+langList.get(j);
+					pdNaviUrl2 += addData;
+				}
+				pdNaviUrl2 += "'>";
+				
 				pageNavi += "<li class='page-item active'>";
 				pageNavi += pdNaviUrl2;
 				pageNavi += pageNo + "</a></li>";
 			} else {
+				String pdNaviUrl3 = "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"";
+				for(int j = 0; j < langList.size(); j++) {
+					String addData = "&langValue="+langList.get(j);
+					pdNaviUrl3 += addData;
+				}
+				pdNaviUrl3 += "'>";
+				
 				pageNavi += "<li class='page-item'>";
 				pageNavi += pdNaviUrl3;
 				pageNavi += pageNo + "</a></li>";
@@ -197,6 +202,13 @@ public class ProjectTeamService {
 		}
 		// 다음 버튼
 		if(pageNo <= totalPage) {
+			String pdNaviUrl4 = "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"";
+			for(int i = 0; i < langList.size(); i++) {
+				String addData = "&langValue="+langList.get(i);
+				pdNaviUrl4 += addData;
+			}
+			pdNaviUrl4 += "'>";
+			
 			pageNavi += "<li class='page-item'>";
 			pageNavi += pdNaviUrl4;
 			pageNavi += "&gt;</a></li>";
