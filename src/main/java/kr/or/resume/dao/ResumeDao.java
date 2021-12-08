@@ -49,5 +49,14 @@ public class ResumeDao {
 	public Resume selectCeoResume(int ceoResume) {
 		return sqlSession.selectOne("resume.selectCeoResume", ceoResume);
 	}
+
+	public int updateResume(Resume r, int resumeNo) {
+		/*
+		 * HashMap<String, Object> map = new HashMap<String, Object>(); map.put("r", r);
+		 * map.put("resumeNo", resumeNo); System.out.println(map); return
+		 * sqlSession.update("resume.updateResume", map);
+		 */
+		return 0;
+	}
 	 
 }

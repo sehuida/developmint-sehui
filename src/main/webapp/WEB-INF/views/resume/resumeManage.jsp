@@ -432,8 +432,8 @@
 							<span class="requestCount">1</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
 						</div>
 						<div class="update">
-							<a href="resumeView.do?resumeNo=${r.resumeNo }"><button class="resumeView">이력서 보기</button></a>
-							<a href="updateResume.do?resumeNo=${r.resumeNo }"><button class="updateResume">수정하기</button></a>
+							<a href="resumeView.do?ceoResume=${r.ceoResume }"><button class="resumeView">이력서 보기</button></a>
+							<a href="updateResumeFrm.do?ceoResume=${r.ceoResume }"><button class="updateResume">수정하기</button></a>
 						</div>
 					</div>
 				</c:otherwise>
