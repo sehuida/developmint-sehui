@@ -47,6 +47,14 @@ public class ResumeService {
 			 return null;
 		 }
 	 }
+
+	public Resume selectCeoResume(int ceoResume) {
+		return dao.selectCeoResume(ceoResume);
+	}
+
+	public int updateResume(Resume r, int resumeNo) {
+		return dao.updateResume(r, resumeNo);
+	}
 	 
 
 	/*

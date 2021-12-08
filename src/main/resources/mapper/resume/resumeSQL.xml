@@ -121,4 +121,34 @@
 		where ceo_resume = #{ceoResume}
 	</select>
 	
+	<!-- <update id="updateResume" parameterMap="map">
+		update resume set
+			resume_title = #{resumeTitle},
+			aducation = #{aducation},
+			school_name = #{schoolName},
+			school_local = #{schoolLocal},
+			school_start = #{schoolStart},
+			school_end = #{schoolEnd},
+			major = #{major},
+			career = #{career},
+			activity = #{activity},
+			activity_place = #{activityPlace},
+			activity_start = #{activityStart},
+			activity_end = #{activityEnd},
+			activity_content = #{activityContent},
+			certi_name = #{certiName},
+			certi_issue = #{certiIssue},
+			certi_pass = #{certiPass},
+			certi_date = #{certiDate},
+			my_tech = #{myTech},
+			veterans = #{veterans},
+			military = #{military},
+			selfintro_name = #{selfintroName},
+			selfintro_content = #{selfintroContent},
+			work_form = #{workForm},
+			money = #{money},
+			work_place = #{workPlace},
+		where resumeNo = #{resumeNo}
+	</update> -->
+	
 </mapper>
