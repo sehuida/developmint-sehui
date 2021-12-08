@@ -1,7 +1,13 @@
 package kr.or.member.controller;
 
-import java.util.ArrayList; 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +15,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
 import kr.or.member.model.service.MailSender;
 import kr.or.member.model.service.MemberService;
+import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.Member;
 
 @Controller
@@ -143,5 +151,56 @@ public class MemberController {
 	@RequestMapping(value="/certification.do")
 	public String certification() {
 		return "member/certification";
+	}
+	@RequestMapping(value="/certificationWrite.do")
+	public String certification(int memberNo,MultipartFile files,HttpServletRequest request,Model model) {
+		CertiVO file = new CertiVO();
+		if(!files.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/certification/");
+			String filename = files.getOriginalFilename();
+			String onlyFilename = filename.substring(0,filename.indexOf("."));
+			String extention = filename.substring(filename.indexOf("."));
+			String filepath = null;
+			int count=0;
+			while(true) {
+				if(count == 0 ) {
+					filepath = onlyFilename+extention;
+				}else {
+					filepath = onlyFilename+"_"+count+extention;
+				}
+				File checkFile = new File(savePath+filepath);
+				if(!checkFile.exists()) {
+					break;
+				}
+				count++;
+			}
+			try {
+				//중복처리가 끝난 파일명(filepath)로 파일을 업로드
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				//업로드 속도증가를 위한 보조스트림
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				//파일업로드
+				byte[] bytes = files.getBytes();
+				bos.write(bytes);
+				bos.close();
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			file.setFilepath(filepath);
+			file.setMemberNo(memberNo);
+		}
+		int result = service.insertCertification(file);
+		if(result>0) {
+			model.addAttribute("msg", "등록성공");
+		}else {
+			model.addAttribute("msg","등록실패");		
+		}
+		model.addAttribute("loc", "/");
+		return "common/msg";
 	}
 }
