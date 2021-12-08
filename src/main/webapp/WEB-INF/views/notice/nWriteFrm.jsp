@@ -60,6 +60,7 @@
 							<label class="col-form-label mt-4" for="noticeContent"><i class="bi bi-pencil-square" style="font-size: 1.2em;"></i> 공지 내용<span style="color: #f3969a;">*</span></label>
                             <textarea class="form-control" id="noticeContent" rows="20" name="noticeContent" required ></textarea>
                             <span style="color: #f3969a;float: left;">*는 필수 입력사항입니다.</span>
+                            <span style="color: #f3969a;float: left;" id="maxContentPost"></span>
                         </div>
                         <div class="form-group" style="padding: 10px 0 0 0;float: right;">
                         	<button type="submit" class="btn btn-primary" id="nWriteBtn">Submit</button>
@@ -74,15 +75,95 @@
 	<script>
 	$(function(){
 		$("#noticeContent").summernote({
-			height : 800,
+			height : 700,
+			minHeight: 700,             // 최소 높이
+		  	maxHeight: 700,
+		  	focus: true,
 			lang : "ko-KR",
 			placeholder: '최대 2048자까지 쓸 수 있습니다',
+			toolbar: [
+			    // [groupName, [list of button]]
+			    ['fontname', ['fontname']],
+			    ['fontsize', ['fontsize']],
+			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+			    ['color', ['forecolor','color']],
+			    ['table', ['table']],
+			    ['para', ['ul', 'ol', 'paragraph']],
+			    ['height', ['height']],
+			    ['insert',['picture','link','video']],
+			    ['view', ['fullscreen', 'help']]
+			  ],
+			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
 			callbacks :{
 				onImageUpload : function(files){
 					uploadImage(files[0],this);	
-				}
+				},
+				onKeydown: function (e) { 
+                    var t = e.currentTarget.innerText; 
+                    if (t.trim().length >= 2048) {
+                        //delete keys, arrow keys, copy, cut, select all
+                        if (e.keyCode != 8 && !(e.keyCode >=37 && e.keyCode <=40) && e.keyCode != 46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e.ctrlKey) && !(e.keyCode == 65 && e.ctrlKey))
+                        e.preventDefault(); 
+                    } 
+                },
+                onKeyup: function (e) {
+                    var t = e.currentTarget.innerText;
+                    $('#maxContentPost').val(2048 - t.trim().length);
+                    console.log($('#maxContentPost').val());
+                },
+                onPaste: function (e) {
+                    var t = e.currentTarget.innerText;
+                    var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                    e.preventDefault();
+                    var maxPaste = bufferText.length;
+                    if(t.length + bufferText.length > 2048){
+                        maxPaste = 2048 - t.length;
+                    }
+                    if(maxPaste > 0){
+                        document.execCommand('insertText', false, bufferText.substring(0, maxPaste));
+                    }
+                    $('#maxContentPost').(2048 - t.length);
+                    console.log($('#maxContentPost').val());
+                }
+				
 			}
 		});
+		
+		function keyDownSize(obj){
+			if(obj.val().length > 500) {
+	            obj.val(obj.val().substring(0, 500));
+	            //$('#test_cnt').html("(100 / 100)");
+	        }
+		}
+					
+		/* $("#noticeContent").on('keyup',function(){
+			if($(this).val().length > 500){
+				$(this).val($(this).val().substring(0,500);
+			}
+		}); */
+		
+		$("#nWriteBtn").click(function(){
+			 if($("#noticeTitle").val()!=null&&$("#noticeContent").val()!=null){
+				 swal({
+					   title: "가입성공!",
+					   text: "공지사항이 등록되었습니다.",
+					   icon: "success", //"info,success,warning,error" 중 택1
+					   button: "둘러보기",
+					})
+				 .then((value) => {
+				 	$("form").submit();			 
+				 });
+			 }else{
+				 swal({
+					   title: "가입실패",
+					   text: "입력값을  다시 확인해주세요.",
+					   icon: "warning", //"info,success,warning,error" 중 택1
+					   button: "돌아가기",
+					})
+				 return false;
+			 }
+		  });
 	});
 	function uploadImage(file,editor){
 		data = new FormData();
@@ -101,27 +182,7 @@
 			}
 		});
 	}
-	$("#nWriteBtn").click(function(){
-		 if($("#noticeTitle").val()!=null&&$("#noticeContent").val()!=null){
-			 swal({
-				   title: "가입성공!",
-				   text: "공지사항이 등록되었습니다.",
-				   icon: "success", //"info,success,warning,error" 중 택1
-				   button: "둘러보기",
-				})
-			 .then((value) => {
-			 	$("form").submit();			 
-			 });
-		 }else{
-			 swal({
-				   title: "가입실패",
-				   text: "입력값을  다시 확인해주세요.",
-				   icon: "warning", //"info,success,warning,error" 중 택1
-				   button: "돌아가기",
-				})
-			 return false;
-		 }
-	  });
+	
 </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

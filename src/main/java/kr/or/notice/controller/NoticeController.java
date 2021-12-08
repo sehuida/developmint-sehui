@@ -60,6 +60,7 @@ public class NoticeController {
 		ArrayList<Notice> nlist = service.noticeAroundList(noticeNo);
 		model.addAttribute("n",n);
 		model.addAttribute("noticeNo",noticeNo);
+		model.addAttribute("nlist",nlist);
 		return "notice/noticeView";
 	}
 	

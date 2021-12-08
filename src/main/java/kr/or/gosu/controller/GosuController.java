@@ -115,7 +115,7 @@ public class GosuController {
 					e.printStackTrace();
 				}
 				GosuPhoto gphoto = new GosuPhoto();
-				gphoto.setPhotoFilepath(filepath);
+				gphoto.setPhotoFilepath("/resources/upload/gosu/gosuPhoto/"+filepath);
 
 				photoList.add(gphoto);
 				

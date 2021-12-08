@@ -1,12 +1,16 @@
 package kr.or.member.model.service;
 
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.member.controller.RandomPassword;
 import kr.or.member.model.dao.MemberDao;
+import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.Member;
 
 @Service
@@ -72,6 +76,10 @@ public class MemberService {
 		result += dao.insertDelete(m);
 		result += dao.resignMember(memberId);
 		return result;
+	}
+	@Transactional
+	public int insertCertification(CertiVO file) {
+		return dao.insertCertification(file);
 	}
 	
 }
