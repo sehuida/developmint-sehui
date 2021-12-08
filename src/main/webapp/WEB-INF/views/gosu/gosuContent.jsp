@@ -55,16 +55,10 @@
 }
 
 .gosu-photos ul li {
-	
 	list-style-type: none;
 	margin: 10px;
 }
-.gosu-photos ul{
 
-flex-wrap: wrap;
-	display: flex;
-	justify-content: space-around;
-	}
 
 .gosu-photos ul li img {
 	width: 120px;
@@ -101,9 +95,11 @@ flex-wrap: wrap;
 	border: none;
 	background-color: transparent;
 }
+
 .g-photo-one * {
 	width: 200px;
 }
+
 .g-photo-one img {
 	height: 200px;
 }
@@ -111,8 +107,8 @@ flex-wrap: wrap;
 .g-photo-one .g-b {
 	height: 30px;
 	overflow: hidden;
-	display: block;;
-	text-overflow:ellipsis;
+	display: block;
+	text-overflow: ellipsis;
 	text-align: center;
 }
 
@@ -121,14 +117,15 @@ flex-wrap: wrap;
 	display: block;
 	height: 50px;
 	overflow: hidden;
-	text-overflow:ellipsis;
+	text-overflow: ellipsis;
 }
 
 .g-photo-wrap {
 	display: flex;
 	justify-content: space-around;
-	 flex-wrap: wrap;
+	flex-wrap: wrap;
 }
+
 .gosu-mail {
 	display: flex;
 	justify-content: right;
@@ -214,10 +211,21 @@ flex-wrap: wrap;
 #gimage_container img {
 	width: 300px;
 }
-.gphs{
+
+.gphs {
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
+}
+
+.gosu-photos ul {
 	flex-wrap: wrap;
+	display: flex;
+	width: 800px;
+	margin:0 auto;
+}
+
+.gphs ul{
+ padding:0;
 }
 </style>
 <meta charset="UTF-8">
@@ -281,9 +289,10 @@ flex-wrap: wrap;
 					<h4>사진</h4>
 					<div class="gphs">
 						<ul>
-						<c:forEach items="${gphotoList }" var="gph" varStatus="i"><!--나중에 수정해라...  -->
-							<li><a><img src="${gph.photoFilepath }"></a></li>
-						</c:forEach>
+							<c:forEach items="${gphotoList }" var="gph" varStatus="i">
+								<!--나중에 수정해라...  -->
+								<li><a><img src="${gph.photoFilepath }"></a></li>
+							</c:forEach>
 						</ul>
 					</div>
 					<div class="g-plus">
@@ -339,7 +348,7 @@ flex-wrap: wrap;
 				</div>
 				<div class="gosu-act">
 					<h4>활동 및 자격</h4>
-					<div >
+					<div>
 						<p>${gosu.gosuActBr }</p>
 					</div>
 				</div>
@@ -354,7 +363,7 @@ flex-wrap: wrap;
 											<img src="${gpr.gprojectFilepath }">
 										</dt>
 										<dd>
-											<b  class="g-b" style="font-size: 19px;">${gpr.gprojectTitle }</b>
+											<b class="g-b" style="font-size: 19px;">${gpr.gprojectTitle }</b>
 										</dd>
 										<dd>
 											<p class="g-p">${gpr.gprojectContent }</p>
@@ -371,7 +380,8 @@ flex-wrap: wrap;
 				<div class="gosu-feedback">
 
 					<h4>
-						<span style="margin-right: 100px;">피드백 비용 </span> <span style="color:red; font-size: 40px;">${gosu.gosuCost }
+						<span style="margin-right: 100px;">피드백 비용 </span> <span
+							style="color: red; font-size: 40px;">${gosu.gosuCost }
 							&nbsp; &nbsp;</span>원
 					</h4>
 

@@ -33,15 +33,28 @@ public class ResumeService {
 	}
 
 	
-	 public int resetCeoResume(int resumeNo, int memberNo) { 
+	 public Resume resetCeoResume(int resumeNo, int memberNo) { 
 		 int reset = dao.resetCeoResume(memberNo);
 		 if(reset > 0) {
 			 int ceoResume = dao.updateCeoResume(resumeNo);
-			 return ceoResume; 
+			 if(ceoResume > 0) {
+				 Resume resume = dao.selectCeoResume(ceoResume);
+				 return resume; 
+			 } else {
+				 return null;
+			 }
 		 } else {
-			 return 0; 			 
+			 return null;
 		 }
 	 }
+
+	public Resume selectCeoResume(int ceoResume) {
+		return dao.selectCeoResume(ceoResume);
+	}
+
+	public int updateResume(Resume r, int resumeNo) {
+		return dao.updateResume(r, resumeNo);
+	}
 	 
 
 	/*

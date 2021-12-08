@@ -30,7 +30,8 @@
 			work_form as workForm,
 			money,
 			work_place as workPlace,
-			write_date as writeDate
+			write_date as writeDate,
+			ceo_resume as ceoResume
 		from resume
 		where member_no = #{memberNo}
 	</select>
@@ -84,4 +85,70 @@
 	<update id="updateCeoResume" parameterType="_int">
 		update resume set ceo_resume = 1 where resume_no = #{resumeNo}
 	</update>
+	
+	<select id="selectCeoResume" parameterType="_int" resultType="r">
+		select
+			resume_no as resumeNo,
+			member_no as memberNo,
+			resume_title as resumeTitle,
+			aducation,
+			school_name as schoolName,
+			school_local as schoolLocal,
+			school_start as schoolStart,
+			school_end as schoolEnd,
+			major,
+			career,
+			activity,
+			activity_place as activityPlace,
+			activity_start as activityStart,
+			activity_end as activityEnd,
+			activity_content as activityContent,
+			certi_name as certiName,
+			certi_issue as certiIssue,
+			certi_pass as certiPass,
+			certi_date as certiDate,
+			my_tech as myTech,
+			veterans,
+			military,
+			selfintro_name as selfintroName,
+			selfintro_content as selfintroContent,
+			work_form as workForm,
+			money,
+			work_place as workPlace,
+			write_date as writeDate,
+			ceo_resume as ceoResume
+		from resume
+		where ceo_resume = #{ceoResume}
+	</select>
+	
+	<!-- <update id="updateResume" parameterMap="map">
+		update resume set
+			resume_title = #{resumeTitle},
+			aducation = #{aducation},
+			school_name = #{schoolName},
+			school_local = #{schoolLocal},
+			school_start = #{schoolStart},
+			school_end = #{schoolEnd},
+			major = #{major},
+			career = #{career},
+			activity = #{activity},
+			activity_place = #{activityPlace},
+			activity_start = #{activityStart},
+			activity_end = #{activityEnd},
+			activity_content = #{activityContent},
+			certi_name = #{certiName},
+			certi_issue = #{certiIssue},
+			certi_pass = #{certiPass},
+			certi_date = #{certiDate},
+			my_tech = #{myTech},
+			veterans = #{veterans},
+			military = #{military},
+			selfintro_name = #{selfintroName},
+			selfintro_content = #{selfintroContent},
+			work_form = #{workForm},
+			money = #{money},
+			work_place = #{workPlace},
+		where resumeNo = #{resumeNo}
+	</update> -->
+	
 </mapper>

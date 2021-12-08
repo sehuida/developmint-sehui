@@ -114,7 +114,7 @@
 		overflow: hidden;
 		float: right;	
 	}
-	.updateResume{
+	.updateResume, .resumeView{
 		border: none;
 		width: 100px;
 		height: 45px;
@@ -122,6 +122,16 @@
 		border-radius: 10px;
 		color: rgb(78, 205, 196);
 		background-color: white;
+		margin-right: 10px;
+		transition: background-color 1s;
+	}
+	.updateResume:hover{
+		background-color: rgb(78, 205, 196);
+		color: white;
+	}
+	.resumeView:hover{
+		background-color: rgb(78, 205, 196);
+		color: white;
 	}
 	.resumeBtn{
         background-color: rgb(78, 205, 196);
@@ -272,11 +282,49 @@
 					memberNo : memberNo
 				},
 				success : function(data) {
-					console.log(data);
+					$(".writeDate").eq(0).find("span").html(data.writeDate);
+					$(".resumeTitle").eq(0).find("em").html(data.resumeTitle);
+					if(data.career == 1) {
+						$(".car").eq(0).find("span").html("신입");						
+					} else if(data.career == 2) {
+						$(".car").eq(0).find("span").html("경력");												
+					}
+					if(data.money == 1) {
+					$(".mon").eq(0).find("span").html("회사내규에 따름");
+					} else if (data.money == 2) {
+					$(".mon").eq(0).find("span").html("2000만 ~ 2400만");
+					} else if (data.money == 3) {
+					$(".mon").eq(0).find("span").html("2400만 ~ 2800만");
+					} else if (data.money == 4) {
+					$(".mon").eq(0).find("span").html("2800만 ~ 3200만");
+					} else if (data.money == 5) {
+					$(".mon").eq(0).find("span").html("3200만 ~ 3600만");	
+					} else if (data.money == 6) {
+					$(".mon").eq(0).find("span").html("3600만 ~ 4000만");
+					} else if (data.money == 7) {
+					$(".mon").eq(0).find("span").html("4000만 이상");
+					}
+					$(".wp").eq(0).find("span").html(data.workPlace);
+					if(data.workForm == 1) {
+						$(".wf").eq(0).find("span").html("정규직");						
+					}
+					else if(data.workForm == 2) {
+						$(".wf").eq(0).find("span").html("계약직");						
+					}
+					else if(data.workForm == 3) {
+						$(".wf").eq(0).find("span").html("아르바이트");						
+					}
+					else if(data.workForm == 4) {
+						$(".wf").eq(0).find("span").html("인턴");						
+					}
+					else if(data.workForm == 5) {
+						$(".wf").eq(0).find("span").html("프리랜서");						
+					}
 				}
 			});
 		});
-	
+		
+		
 	});
 </script>
 
@@ -284,73 +332,113 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="contain">
 		<em>이력서 관리</em>				<!-- if 이력서 없으면 등록된 이력서가 없습니다. -->
-	<%-- <c:choose>
-		<c:when test="${empty list }">
-			저장된 이력서가 업슴
-		</c:when>
-		<c:otherwise>
-			
-		</c:otherwise>
-	</c:choose> --%>
-	
 		<!-- 대표이력서 ceoResume == 1 -->
-		<div class="grayBox">
-			<div class="resumeHeader">
-				<div class="ceoResume">
-					<p>대표이력서</p>
-				</div>
-				<div class="writeDate">
-					<span>2021.11.25</span>	
-				</div>
-			</div>
-				<div class="resumeTitle">
-					<em>이력서 제목</em>	<!-- r.resumeTitle -->
-				</div>
-				<ul class="resumeInfo1">
-	            	<li class="career">
-	            		<div class="resumeInfoImg">
-	            			<img src="resources/img/resume/career.PNG">
-	            		</div>
-	            		<div class="resumeInfoData">
-	            			<span>신입</span>	<!-- r.resumeCareer -->
-	            		</div>
-	            	</li>   
-	            	<li class="money">
-						<div class="resumeInfoImg">
-							<img src="resources/img/resume/income.PNG">					
+		<c:forEach items="${list }" var="r" varStatus="i">
+			<c:choose>
+				<c:when test="${r.ceoResume eq 0 }">		<!-- 1 -> 0 으로 바꿔주기 -->
+				
+				</c:when>
+				<c:otherwise>
+					<div class="grayBox">
+						<div class="resumeHeader">
+							<div class="ceoResume">
+								<p>대표이력서</p>
+							</div>
+							<div class="writeDate">
+								<span>${r.writeDate }</span>	
+							</div>
 						</div>
-						<div class="resumeInfoData">
-							<span>2,800~3,000만원</span>	<!-- r.resumeMoney -->
+							<div class="resumeTitle">
+								<em>${r.resumeTitle }</em>	<!-- r.resumeTitle -->
+							</div>
+							<ul class="resumeInfo1">
+				            	<li class="career">
+				            		<div class="resumeInfoImg">
+				            			<img src="resources/img/resume/career.PNG">
+				            		</div>
+				            		<div class="resumeInfoData car">
+				            			<c:if test="${r.career eq 1 }">
+											<span>신입</span>
+										</c:if>
+										<c:if test="${r.career eq 2 }">
+											<span>경력</span>
+										</c:if>
+				            		</div>
+				            	</li>   
+				            	<li class="money">
+									<div class="resumeInfoImg">
+										<img src="resources/img/resume/income.PNG">					
+									</div>
+									<div class="resumeInfoData mon">
+										<c:if test="${r.money eq 1 }">		<!-- 1 -> 회사내규에 따름 -->
+				            				<span>회사내규에 따름</span>
+						            	</c:if>
+						            	<c:if test="${r.money eq 2 }">		<!-- 2 -> 2000만 ~ 2400만 -->
+						            		<span>2000만 ~ 2400만</span>
+						            	</c:if>
+						            	<c:if test="${r.money eq 3 }">		<!-- 3 -> 2400만 ~ 2800만 -->
+						            		<span>2400만 ~ 2800만</span>
+						            	</c:if>
+						            	<c:if test="${r.money eq 4 }">		<!-- 4 -> 2800만 ~ 3200만 -->
+						            		<span>2800만 ~ 3200만</span>
+						            	</c:if>
+						            	<c:if test="${r.money eq 5 }">		<!-- 5 -> 3200만 ~ 3600만 -->
+						            		<span>3200만 ~ 3600만</span>
+						            	</c:if>
+						            	<c:if test="${r.money eq 6 }">		<!-- 6 -> 3600만 ~ 4000만 -->
+						            		<span>3600만 ~ 4000만</span>
+						            	</c:if>
+						            	<c:if test="${r.money eq 7 }">		<!-- 7 -> 4000만 이상 -->
+						            		<span>4000만 이상</span>
+						            	</c:if>
+									</div>
+								</li>  
+							</ul>
+							<ul	class="resumeInfo2">  
+							<li class="workPlace">
+									<div class="resumeInfoImg">
+										<img src="resources/img/resume/workPlace.PNG">
+									</div>
+									<div class="resumeInfoData wp">
+										<span>희망지역 : ${r.workPlace }</span>	<!-- r.workPlace -->
+									</div>
+								</li>    					           
+								<li class="workForm">
+									<div class="resumeInfoImg">
+										<img src="resources/img/resume/workForm.PNG">
+									</div>
+									<div class="resumeInfoData wf">
+										<span>희망 근무형태 : </span>
+										<c:if test="${r.workForm eq 1 }">			
+				            			<span>정규직</span>
+					            		</c:if>
+					            		<c:if test="${r.workForm eq 2 }">			
+					            			<span>계약직</span>
+					            		</c:if>
+					            		<c:if test="${r.workForm eq 3 }">			
+					            			<span>아르바이트</span>
+					            		</c:if>
+					            		<c:if test="${r.workForm eq 4 }">			
+					            			<span>인턴</span>
+					            		</c:if>
+					            		<c:if test="${r.workForm eq 5 }">			
+					            			<span>프리랜서</span>
+					            		</c:if>
+									</div>
+								</li>               
+							</ul>
+						<div class="message">
+							<button class="companyMessage">기업이 보낸 요청</button>		<!-- 웹소켓으로 기업이 이력서 확인 후 합격이면 쪽지 날라가게 만들기 -->
+							<span class="requestCount">1</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
 						</div>
-					</li>  
-				</ul>
-				<ul	class="resumeInfo2">  
-				<li class="workPlace">
-						<div class="resumeInfoImg">
-							<img src="resources/img/resume/workPlace.PNG">
+						<div class="update">
+							<a href="resumeView.do?ceoResume=${r.ceoResume }"><button class="resumeView">이력서 보기</button></a>
+							<a href="updateResumeFrm.do?ceoResume=${r.ceoResume }"><button class="updateResume">수정하기</button></a>
 						</div>
-						<div class="resumeInfoData">
-							<span>희망지역 : 서울 금천구</span>	<!-- r.resumeworkPlace -->
-						</div>
-					</li>    					           
-					<li class="workForm">
-						<div class="resumeInfoImg">
-							<img src="resources/img/resume/workForm.PNG">
-						</div>
-						<div class="resumeInfoData">
-							<span>희망 직무·직업 : IT개발·데이터</span>	<!-- r.resumeWorkForm -->
-						</div>
-					</li>               
-				</ul>
-			<div class="message">
-				<button class="companyMessage">기업이 보낸 요청</button>		<!-- 웹소켓으로 기업이 이력서 확인 후 합격이면 쪽지 날라가게 만들기 -->
-				<span class="requestCount">1</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
-			</div>
-			<div class="update">
-				<a href="updateResume.do?resumeNo=${r.resumeNo }"><button class="updateResume">수정하기</button></a>
-			</div>
-		</div>
-		
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
 		
 		<div class="resume">
 			<a href="resumeFrm.do"><button class="resumeBtn">이력서 작성하기</button></a>

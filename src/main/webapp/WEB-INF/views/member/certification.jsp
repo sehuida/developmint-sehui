@@ -23,7 +23,7 @@
 								<img src="/resources/img/member/user.png" style="width: 60px; height:60px;">				
 							</c:when>
 							<c:otherwise>
-								<img src="/resources/img/member/upload/${sessionScope.m.filepath }">
+								<img src="/resources/upload/member/${sessionScope.m.filepath }" style="width: 80px; height:80px; border-radius:7px;">
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -36,13 +36,13 @@
 						</div>
 					</div>
 					<div class="profiles-r">
-						<p>* 사원증 사진을 첨부해주시면, 관리자가 확인 후, 인증해 드립니다.</p>
+						<p class="text-muted">* 사원증 사진을 첨부해주시면, 관리자가 확인 후, 인증해 드립니다.</p>
 					</div>					
 				</div>
 				<div class="certi-bottom">
 					<form action="/certificationWrite.do" method="post" enctype="multipart/form-data">
 					    <div class="form-group">
-					      <label for="formFile" class="form-label mt-4">* 빛이 반사되지 않는곳에서 사진을 찍으면 승인 될 확률이 높습니다.</label>
+					      <label for="formFile" class="form-label mt-4 text-info">* 빛이 반사되지 않는곳에서 사진을 찍으면 승인 될 확률이 높습니다.</label>
 					      <input class="form-control" type="file" id="formFile" name="files" multiple> 
 					      <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 					    </div>
