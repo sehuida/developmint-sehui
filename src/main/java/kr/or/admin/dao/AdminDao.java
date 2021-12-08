@@ -89,9 +89,25 @@ public class AdminDao {
 		return sqlSession.selectOne("admin.reportCount");
 	}
 
-	public List<String> memberIdList() {
-		List<String> list = sqlSession.selectList("admin.memberIdList");
+	public List<String> memberIdList(Map<String, Object> map) {
+		List<String> list = sqlSession.selectList("admin.memberIdList", map);
 		return list;
+	}
+
+	public int memberReportCount(String id) {
+		return sqlSession.selectOne("admin.memberReportCount",id);
+	}
+
+	public int canselReport(int reportNo) {
+		return sqlSession.update("admin.canselReport", reportNo);
+	}
+
+	public int reportInsert(int reportNo) {
+		return sqlSession.update("admin.reportInsert", reportNo);
+	}
+
+	public int falseReport(int reportNo) {
+		return sqlSession.update("admin.falseReport", reportNo);
 	}
 
 }

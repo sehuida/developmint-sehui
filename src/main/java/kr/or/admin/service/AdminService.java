@@ -213,11 +213,28 @@ public class AdminService {
 		}
 		pageNavi += "</ul>";		
 		
-		List<String> memberId = dao.memberIdList();
-		TotalMember tm = new TotalMember(start, pageNavi, allReportList, memberId);
+		List<String> memberId = dao.memberIdList(map);
+		TotalMember tm = new TotalMember(start, pageNavi, allReportList, memberId, totalCount);
+
 		
 		return tm;		
 		
+	}
+
+	public int memberReportCount(String id) {
+		return dao.memberReportCount(id);
+	}
+
+	public int canselReport(int reportNo) {
+		return dao.canselReport(reportNo);
+	}
+
+	public int reportInsert(int reportNo) {
+		return dao.reportInsert(reportNo);
+	}
+
+	public int falseReport(int reportNo) {
+		return dao.falseReport(reportNo);
 	}
 }
 
