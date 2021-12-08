@@ -95,22 +95,22 @@ input:focus, textarea:focus {
 			&gt; &nbsp;<span style="color: rgb(78, 205, 196);">고수</span>의 게시판
 			작성하기
 		</h4>
-
-
+	<form action="/gosuNoticeWrite.do" method="post"  enctype="multipart/form-data">
+	<input type="hidden" name="writeId" value="${sessionScope.m.memberId }">
 		<div class="g-content g-center">
 			<div>
 				<table>
 					<tr>
 						<th>첨부파일 <span style="color: red;">* </span></th>
-						<td><input type="file" name="" style="width: 100%;"></td>
+						<td><input type="file" name="files" style="width: 100%;"></td>
 					</tr>
 					<tr>
 						<th>제목 <span style="color: red;">* </span></th>
-						<td><input type="text" name="" style="width: 100%;"></td>
+						<td><input type="text" name="gnoticeTitle" style="width: 100%;"></td>
 					</tr>
 					<tr>
 						<th>내용 <span style="color: red;"> * </span></th>
-						<td><textarea cols="100" rows="30" name=""
+						<td><textarea cols="100" rows="30" name="gnoticeContent"
 								placeholder="* 고수님만의 노하우를 작성해주세요!"></textarea></td>
 					</tr>
 
@@ -118,11 +118,13 @@ input:focus, textarea:focus {
 			</div>
 		</div>
 		<div class="g-center">
-			<a class="btn btn-info"
-				style="width: 200px; margin: 100px; padding: 10px;font-weight:bold;">취소</a> <a
+			<a href="/gosuNoticeList.do" class="btn btn-info"
+				style="width: 200px; margin: 100px; padding: 10px;font-weight:bold;">취소</a> 
+				<button type="submit"
 				class="btn btn-primary"
-				style="width: 200px; margin: 100px; padding: 10px;font-weight:bold;">확인</a>
+				style="width: 200px; margin: 100px; padding: 10px;font-weight:bold;">확인</button>
 		</div>
+		</form>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>

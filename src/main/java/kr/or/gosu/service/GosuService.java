@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.gosu.dao.GosuDao;
 import kr.or.gosu.vo.Gosu;
+import kr.or.gosu.vo.GosuNotice;
 import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
 
@@ -70,6 +71,43 @@ public class GosuService {
 	public ArrayList<GosuPhoto> selectGosuPhoto(int gNo) {
 		ArrayList<GosuPhoto> gList = dao.selectGosuPhoto(gNo);
 		return gList;
+	}
+
+
+	public int insertGosuNotice(GosuNotice gNotice) {
+		int result = dao.insertGosuNotice(gNotice); 
+		return result;
+	}
+
+
+	public GosuNotice selectGosuNoticeOne(int gnoticeNo) {
+		GosuNotice gNotice = dao.selectGosuNoticeOne(gnoticeNo);
+		gNotice.setWriteImg(dao.selectGosuImg(gNotice.getWriteId()));
+		return gNotice;
+	}
+
+
+	public ArrayList<GosuNotice> selectGosuNoticeList() {
+		ArrayList<GosuNotice> list = dao.selectGosuNoticeList();
+		return list;
+	}
+
+
+	public ArrayList<GosuNotice> selectGosuNoticeList2() {
+		ArrayList<GosuNotice> list = dao.selectGosuNoticeList2();
+		return list;
+	}
+
+
+	public ArrayList<Gosu> selectNewGosuList() {
+		ArrayList<Gosu> list = dao.selectNewGosuList();
+		return list;
+	}
+
+
+	public int selectGosuCount() {
+		int gosuCount = dao.selectGosuCount();
+		return gosuCount;
 	}
 
 	

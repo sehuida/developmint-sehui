@@ -34,10 +34,16 @@
 	margin-bottom: 40px;
 	margin-bottom: 50px;
 }
-
+.g-img img{
+	width:952px;
+	} 
 .g-img {
-	width: 100% padding:20px;
+	width:100%;
+	padding:20px;
 	margin-top: 100px;
+	
+	display: flex;
+	justify-content: center;
 }
 
 .g-center {
@@ -68,73 +74,80 @@
 .gosu dt {
 	font-size: 25px;
 }
-  .gosu-mail{
-        display: flex;
-        justify-content: right;
-        
-    }
-    .gosu-mail a{
-        font-weight: bold;
-        font-size: 20px;
-    }
-    .gosu-mail span{
-        font-weight: bold;
-        color: white;
-        background-color: red;
-        border-radius: 50%;
-        text-align: center;
-        width: 20px;
-        margin-left: 50px;
-        display: block;
-        font-size: 13px;
-    } 
+
+.gosu-mail {
+	display: flex;
+	justify-content: right;
+}
+
+.gosu-mail a {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.gosu-mail span {
+	font-weight: bold;
+	color: white;
+	background-color: red;
+	border-radius: 50%;
+	text-align: center;
+	width: 20px;
+	margin-left: 50px;
+	display: block;
+	font-size: 13px;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-	<div class="gosu-mail">
+		<div class="gosu-mail">
 			<a href="/gosuRequestList.do"><span>1</span>요청서</a>
-	</div>
+		</div>
 		<h4>
 			&gt; &nbsp;<span style="color: rgb(78, 205, 196);">고수</span>의 게시판
 		</h4>
 		<div style="text-align: right; margin-top: 50px;">
-			<span>2021.12.01</span>
+			<span>${gNotice.gnoticeDate}</span>
 		</div>
 		<div class="g-center">
 			<div class="g-img">
-				<img src="/resources/img/gosu/exImg.jpg">
+				<img src="${gNotice.gnoticePhoto}">
 			</div>
 
 		</div>
 		<div>
 			<div class="gosu">
 				<dl>
-					<dt style="font-size: 40px; margin-bottom: 30px;">제목제목제목</dt>
+					<dt style="font-size: 40px; margin-bottom: 30px;">${gNotice.gnoticeTitle}</dt>
 					<dt>
 						<table>
 							<tr>
-								<td rowspan="2"><img src="/resources/img/gosu/g_img_basic.png"></td>
-								<th>아이디</th>
+								<c:if test="${empty gNotice.writeImg }">
+									<td rowspan="2"><img src="/resources/img/gosu/g_img_basic.png"></td>
+								</c:if>
+								<c:if test="${not empty gNotice.writeImg }">
+									<td rowspan="2"><img src="${gNotice.writeImg }"></td>
+								</c:if>
+							
+								<th>${gNotice.writeId }</th>
 							</tr>
 							<tr>
-								<td style="font-size: large; color: gray;">2021.XX.XX</td>
+								<td style="font-size: large; color: gray;">${gNotice.gnoticeDate}</td>
 							</tr>
 
 						</table>
 					</dt>
 					<dd>
-						<p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-							내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</p>
+						<p>${gNotice.gnoticeContent}</p>
 					</dd>
 				</dl>
 			</div>
 		</div>
 		<div class="g-center">
 			<a class="btn btn-info"
-				style="width: 200px; margin: 100px; padding: 10px; font-weight:bold;">피드백
-					신청하기</a> <a class="btn btn-primary"
-				style="width: 200px; margin: 100px; padding: 10px; font-weight:bold;">뒤로가기</a>
+				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">피드백
+				신청하기</a> <a class="btn btn-primary"
+				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">뒤로가기</a>
 		</div>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
