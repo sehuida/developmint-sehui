@@ -94,11 +94,11 @@
 			<th>아이디</th>
 			<th>이름</th>
 			<th>등급</th>
+			<th>이메일</th>
 			<th>포인트</th>
-			<th>신고당한 횟수</th>
+			<th>회원유형</th>
 			<th>가입일</th>
 			<th>등급 변경</th>
-			<th>회원 차단</th>
 		</tr>
 		<c:forEach items="${memberList }" var="ml" varStatus="i">
 			<tr class="tblTr">
@@ -128,8 +128,25 @@
 						<td><img src="/resources/img/member/rank/challenger.png" width="35px" height="35px;">챌린저</td>
 					</c:when>
 				</c:choose>
+				<td>${ml.email }</td>
 				<td>${ml.memberGrade }</td>
-				<td>3</td>
+				<c:choose>
+					<c:when test="${ml.memberType == 1 }">
+						<td>일반회원</td>
+					</c:when>
+					<c:when test="${ml.memberType == 2 }">
+						<td>고수회원</td>
+					</c:when>
+					<c:when test="${ml.memberType == 3 }">
+						<td>기업회원</td>
+					</c:when>
+					<c:when test="${ml.memberType == 4 }">
+						<td>차단회원</td>
+					</c:when>
+					<c:when test="${ml.memberType == 9 }">
+						<td>관리자</td>
+					</c:when>
+				</c:choose>
 				<td>${ml.enrollDate }</td>
 				<td>
 					<select class="selLevle form-control"> 
@@ -142,7 +159,6 @@
 						<option>챌린저</option>
 					</select>
 				</td>
-				<td><button class="btn btn-outline-primary btn-sm" style="color:#4ECDC4; border-color: #4ECDC4">차단하기</button></td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -183,7 +199,8 @@
 			location.href="/chkChangeLevel.do?memberId="+memberId.join("/")+"&level="+level.join("/");	
 		}
 	 });
-	 	
+	 
+
 	 	
 	 	
 	 	

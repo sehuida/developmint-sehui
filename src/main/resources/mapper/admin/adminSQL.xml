@@ -157,8 +157,32 @@
 		where member_id = #{id}
 	</update>
 	
+	<select id="allReportList" parameterType="map" resultType="rp">
+		select * 
+		from(
+			select rownum as rnum, r.* 
+			from(
+				select 
+					report_no as repoartNo,
+					reporter_id as reporterId,
+					report_reason as reportReason,
+					report_etc as reportEtc,
+					comment_no as commentNo,
+					report_date as reportDate,
+					report_status as reportStatus,
+					comment_content as commentContent
+				from REPORT order by REPORT_no desc)r 
+			order by rnum) 
+		where rnum BETWEEN #{start} and #{end}
+	</select>
 	
+	<select id="reportCount" resultType="_int">
+		select count(*) from report 
+	</select>
 	
-	
-	
+	<select id="memberIdList" resultType="string">
+		select c.MEMBER_ID as memberId from report 
+		join COMMENTS c using(COMMENT_NO)
+	</select>
+
 </mapper>
