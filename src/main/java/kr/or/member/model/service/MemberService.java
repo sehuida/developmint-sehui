@@ -82,4 +82,13 @@ public class MemberService {
 		return dao.insertCertification(file);
 	}
 	
+	@Transactional
+	public int updateMyInfo(Member m) {
+		return dao.updateMyInfo(m);
+	}
+
+	public int updateProfile(Member m) {
+		return dao.updateProfile(m);
+	}
+	
 }

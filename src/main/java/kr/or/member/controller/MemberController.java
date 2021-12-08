@@ -137,6 +137,25 @@ public class MemberController {
 	public String updateInfoFrm() {
 		return "member/updateInfoFrm";
 	}
+	@RequestMapping(value="/updateMyInfo.do")
+	public String updateMyInfo(Member m,Model model,HttpSession session) {
+		int result = service.updateMyInfo(m);
+		if(result>0) {
+			model.addAttribute("title", "변경성공!");
+			model.addAttribute("msg", "회원 정보가 변경되었습니다.");
+			model.addAttribute("loc", "/mypage.do");
+			model.addAttribute("icon", "success");
+			Member member = service.checkId(m.getMemberId());
+			session.setAttribute("m", member);
+		}else {
+			model.addAttribute("title", "변경실패");
+			model.addAttribute("msg", "회원 정보가 변경실패하셨습니다.");
+			model.addAttribute("loc", "/mypage.do");
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/resignMember.do")
 	public String resginMember(String memberId,HttpSession session) {
@@ -152,6 +171,7 @@ public class MemberController {
 	public String certification() {
 		return "member/certification";
 	}
+	
 	@RequestMapping(value="/certificationWrite.do")
 	public String certification(int memberNo,MultipartFile files,HttpServletRequest request,Model model) {
 		CertiVO file = new CertiVO();
@@ -203,4 +223,59 @@ public class MemberController {
 		model.addAttribute("loc", "/");
 		return "common/msg";
 	}
+	@ResponseBody
+	@RequestMapping("/uploadProfile.do")
+	public String uploadProfile(MultipartFile files,String memberId,HttpServletRequest request,Model model) {
+		Member m = new Member();
+		if(!files.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
+			String filename = files.getOriginalFilename();
+			String onlyFilename = filename.substring(0,filename.indexOf("."));
+			String extention = filename.substring(filename.indexOf("."));
+			String filepath = null;
+			int count=0;
+			while(true) {
+				if(count == 0 ) {
+					filepath = onlyFilename+extention;
+				}else {
+					filepath = onlyFilename+"_"+count+extention;
+				}
+				File checkFile = new File(savePath+filepath);
+				if(!checkFile.exists()) {
+					break;
+				}
+				count++;
+			}
+			try {
+				//중복처리가 끝난 파일명(filepath)로 파일을 업로드
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				//업로드 속도증가를 위한 보조스트림
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				//파일업로드
+				byte[] bytes = files.getBytes();
+				bos.write(bytes);
+				bos.close();
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			m.setFilepath(filepath);
+			m.setMemberId(memberId);
+		}
+		int result = service.updateProfile(m);
+		if(result>0) {
+			return "1";
+		}else {
+			return "0";
+		}
+	}
+	@RequestMapping(value ="/changePwFrm.do")
+	public String changePwFrm() {
+		return "member/changePwFrm";
+	}
+	
 }

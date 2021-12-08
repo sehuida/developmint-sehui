@@ -24,6 +24,11 @@
 	.profiles{
 		display : flex;
 		align-items: center;
+		border-radius: 60%; 
+		overflow: hidden;
+	}
+	.profiles img{
+	    object-fit: cover;			
 	}
 	.profiile-h{
 		margin-left: 20px;
@@ -87,7 +92,7 @@
 							<img src="/resources/img/member/user.png" style="width: 60px; height:60px;">				
 						</c:when>
 						<c:otherwise>
-							<img src="/resources/img/member/upload/${sessionScope.m.filepath }">
+							<img src="/resources/upload/member/${sessionScope.m.filepath }" style="width: 80px; height:80px; ">
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -125,7 +130,7 @@
 					</div>
 				</div>
 				<div class="profiles">
-					<a href="/updateInfoFrm.do"><img src="/resources/img/member/right-arrow.png" style="width: 30px; height:30px;" class="arrow"></a>
+					<a href="/updateInfoFrm.do" data-bs-toggle="tooltip" data-bs-placement="top" title="정보수정하기"><img src="/resources/img/member/right-arrow.png" style="width: 30px; height:30px;" class="arrow"></a>
 				</div>
 			</div>
 			<div class="page-middle">
@@ -158,5 +163,15 @@
 		</div>
 	 </div>	 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script>
+		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+		  return new bootstrap.Tooltip(tooltipTriggerEl)
+		})
+		var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+		var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  		return new bootstrap.Popover(popoverTriggerEl)
+		})
+	</script>
 </body>
 </html>
