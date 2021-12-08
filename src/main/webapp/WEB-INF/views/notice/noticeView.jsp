@@ -45,9 +45,17 @@
 			</div>
 			<div>
 				<!-- 이전공지, 다음공지로 넘어가게 내용이 있으면 출력 , 없으면  나타내기 않게하기 -->
-				<ul class="a-link">
-					<li style="float: left;"><a href="/noticeView.do?noticeNo=${noticeNo-1 }">이전공지</a></li>
-					<li style="float: right: ;"><a href="/noticeView.do?noticeNo=${noticeNo+1 }">다음공지</a></li>
+				<ul class="a-link"><span style="font-size: x-large;">CS center/Notice <span style="font-size: small;color: #999;">카테고리의 다른글</span></span>
+					<c:forEach var="nlist" items="${nlist }">
+						<c:choose>
+							<c:when test="${n.noticeNo eq nlist.noticeNo}">
+								<li><a href="/noticeView.do?noticeNo=${nlist.noticeNo }" class="a-active">${nlist.noticeNo} ${nlist.noticeTitle } <span style="font-size: small;color: #999;">${nlist.regDate }</span></a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="/noticeView.do?noticeNo=${nlist.noticeNo }">${nlist.noticeNo} ${nlist.noticeTitle } <span style="font-size: small;color: #999;">${nlist.regDate }</span></a></li>
+							</c:otherwise>						
+						</c:choose>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>

@@ -3,7 +3,9 @@ package kr.or.member.model.dao;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.Member;
 
 @Repository
@@ -50,6 +52,18 @@ public class MemberDao {
 
 	public int insertDelete(Member m) {
 		return sqlSession.insert("member.insertDelete",m);
+	}
+	
+	public int insertCertification(CertiVO file) {
+		return sqlSession.insert("member.insertCertification",file);
+	}
+
+	public int updateMyInfo(Member m) {
+		return sqlSession.insert("member.updateMyInfo",m);
+	}
+
+	public int updateProfile(Member m) {
+		return sqlSession.update("member.updateProfile",m);
 	}
 
 }

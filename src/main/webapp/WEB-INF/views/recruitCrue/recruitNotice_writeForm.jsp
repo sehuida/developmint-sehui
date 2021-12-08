@@ -29,7 +29,7 @@
 			console.log(count);
 			if(count>3){
 				$(this).prop("checked", false);
-				swal("더 이상 선택하실 수 없어요!", "최대 3개 까지 선택이 가능합니다 :)");
+				swal("더 이상 선택하실 수 없어요!", "최대 3개 까지 선택이 가능합니다.");
 			}
 		});
 	
@@ -146,8 +146,10 @@
 	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/content-creator.png">
 	                            <p class="titleText">모집설명</p>
 	                        </div>
+	                        <h4 id="maxContentPost" style="text-align:right"></h4>
 	                        <div class="form-group">
-	                            <textarea class="form-control" id="exampleTextarea" rows="3" name="boardContent"></textarea>
+	                            <!-- <textarea class="form-control" id="exampleTextarea" rows="3" name="boardContent"></textarea> -->
+	                            <div class="form-group" id="summernote" name="boardContent"></div>
 	                        </div>
 	                    </div>
 	                    <div class="finalLine"></div>
@@ -163,53 +165,57 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
 	$(function(){
-		$("#exampleTextarea").summernote({
+		 
+		$("#summernote").summernote({
 			height : 400,
 			lang : "ko-KR",
 			focus: true,
 			toolbar:[ 
-				['fontsize', ['fontsize']], 
-				['style', ['bold', 'italic', 'underline','strikethrough', 'clear']], 
-				['color', ['forecolor','color']], 
-				['table', ['table']], 
-				['para', ['ul', 'ol', 'paragraph']], 
-				['height', ['height']], 
-				['insert',['picture','link','video']], 
-				['view', ['fullscreen', 'codeview', 'help']] 
-				], 
+						['fontname', ['fontname']],
+						['fontsize', ['fontsize']], 
+						['style', ['bold', 'italic', 'underline','strikethrough', 'clear']], 
+						['color', ['forecolor','color']], 
+						['table', ['table']], 
+						['para', ['ul', 'ol', 'paragraph']], 
+						['height', ['height']], 
+						['insert',['picture','link']], 
+						['view', ['fullscreen', 'codeview', 'help']] 
+					], 
 			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'], 
 			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+			placeholder: '프로젝트 공고내용을 자세히 작성해주세요..!',
 			callbacks:{
-				onImageUpload : function(files){
-					uploadImage(files[0], this);
-				},
-				onChange:function(contents, $editable){ //텍스트 글자수 및 이미지등록개수 
-					setContentsLength(contents, 0); 
-				}
+				onKeydown: function (e) { 
+                     var t = e.currentTarget.innerText; 
+                     if (t.trim().length >= 500) {
+                         //delete keys, arrow keys, copy, cut, select all
+                         if (e.keyCode != 8 && !(e.keyCode >=37 && e.keyCode <=40) && e.keyCode != 46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e.ctrlKey) && !(e.keyCode == 65 && e.ctrlKey))
+                         e.preventDefault(); 
+                     } 
+                 },
+                 onKeyup: function (e) {
+                     var t = e.currentTarget.innerText;
+                     $('#maxContentPost').text(500 - t.trim().length);
+                 },
+                 onPaste: function (e) {
+                     var t = e.currentTarget.innerText;
+                     var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+                     e.preventDefault();
+                     var maxPaste = bufferText.length;
+                     if(t.length + bufferText.length > 500){
+                         maxPaste = 500 - t.length;
+                     }
+                     if(maxPaste > 0){
+                         document.execCommand('insertText', false, bufferText.substring(0, maxPaste));
+                     }
+                     $('#maxContentPost').text(500 - t.length);
+                 },
+                 onImageUpload : function(files){
+ 					uploadImage(files[0], this);
+ 				},
 			}
 		});
 	});
-	
-	function setContentsLength(str, index) { 
-		var status = false; 
-		var textCnt = 0; //총 글자수 
-		var maxCnt = 500; //최대 글자수 
-		var editorText = f_SkipTags_html(str); //에디터에서 태그를 삭제하고 내용만 가져오기 
-		editorText = editorText.replace(/\s/gi,""); //줄바꿈 제거 
-		editorText = editorText.replace(/&nbsp;/gi, ""); //공백제거 
-		
-		textCnt = editorText.length; 
-			if(maxCnt > 0) { 
-				if(textCnt > maxCnt) { 
-					status = true; 
-				} 
-			} 
-			
-			if(status) { 
-				var msg = "등록오류 : 글자수는 최대 "+maxCnt+"까지 등록이 가능합니다. / 현재 글자수 : "+textCnt+"자"; 
-			} 
-	}
-
 	
 	function uploadImage(file, editor){
 		// form과 같은효과를 내는 객체생성

@@ -19,20 +19,20 @@
 }
 .reportBox{
 	display: flex;
+	margin-bottom: 30px;
 }
-.reportList>div{
+.reportList>div>div{
 	border: 1px solid #d9d9d9;
-	width: 300px;
-	padding: 10px;
+	width: 500px;
+	padding: 15px;
 	margin-bottom: 10px;
 }
 .reportContent{
 	margin-left:20px;
 	border: 1px solid #d9d9d9;
 	padding: 20px;
-	width: 500px;
 }
-.reportList>div>p{
+.reportList>div>div>p{
 	font-weight: bold;
 }
 .reportDate{
@@ -55,7 +55,6 @@
 	margin-left:20px;
 	border: 1px solid #d9d9d9;
 	padding: 20px;
-	width: 450px;
 }
 .badge-primary{
 	background-color: #78c2ad;
@@ -77,30 +76,78 @@
 		
 		<div class="reportBox">
 			<div class="reportList">
-				<c:forEach begin="0" end="4">
-				<div class="selectBox">
-					<p>욕설/인신공격</p>
-					<span>user01</span><span class="reportDate">2021-11-29</span>
+				<div style="height: 650px;">
+					<c:forEach items="${reportList }" var="r" varStatus="i">
+					<div class="selectBox">
+					<c:choose>
+						<c:when test="${r.reportReason == 1 }">
+							<p>영리목적/홍보성</p>
+						</c:when>
+						<c:when test="${r.reportReason == 2 }">
+							<p>음란성/선정성</p>
+						</c:when>
+						<c:when test="${r.reportReason == 3 }">
+							<p>불법정보</p>
+						</c:when>
+						<c:when test="${r.reportReason == 4 }">
+							<p>같은 내용 반복 게시(도배)</p>
+						</c:when>
+						<c:when test="${r.reportReason == 5 }">
+							<p>욕설/인신공격</p>
+						</c:when>
+						<c:when test="${r.reportReason == 6 }">
+							<p>개인정보누출</p>
+						</c:when>
+						<c:when test="${r.reportReason == 7 }">
+							<p>기타</p>
+						</c:when>
+					</c:choose>
+						<span>${memberId[i.index] }</span><span class="reportDate">${r.reportDate }</span>
+					</div>
+					</c:forEach>
 				</div>
-				</c:forEach>
+				<div id="pageNavi" style="text-align: center; margin-top:50px; border: 0px"  >${pageNavi }</div>
 			</div>
-			<div class="reportContent">
+			<c:forEach items="${reportList }" var="r" varStatus="i">
+			<div class="reportContent" style="display:none">
 				<div>
 					<p class="rc_title">신고회원 확인</p>
 					<br>
-					<p>신고자 : user01</p>
-					<p>신고당한 회원 : user999</p>
-					<p>신고일 : 2021-11-29</p>
+					<p>신고자 : ${r.reporterId }</p>
+					<p>신고당한 회원 : ${memberId[i.index] }</p>
+					<p>신고일 : ${r.reportDate }</p>
 					<br>
 					<br>
 					<p class="rc_title">신고사유</p>
 					<br>
-					<p>욕설/인신공격</p>
+					<c:choose>
+						<c:when test="${r.reportReason == 1 }">
+							<p>영리목적/홍보성</p>
+						</c:when>
+						<c:when test="${r.reportReason == 2 }">
+							<p>음란성/선정성</p>
+						</c:when>
+						<c:when test="${r.reportReason == 3 }">
+							<p>불법정보</p>
+						</c:when>
+						<c:when test="${r.reportReason == 4 }">
+							<p>같은 내용 반복 게시(도배)</p>
+						</c:when>
+						<c:when test="${r.reportReason == 5 }">
+							<p>욕설/인신공격</p>
+						</c:when>
+						<c:when test="${r.reportReason == 6 }">
+							<p>개인정보누출</p>
+						</c:when>
+						<c:when test="${r.reportReason == 7 }">
+							<p>기타</p>
+						</c:when>
+					</c:choose>
 					<br>
 					<br>
 					<p class="rc_title">댓글내용</p>
 					<br>
-					<p>어쩌구 저쩌구 심한말</p>
+					<p>${r.commentContent }</p>
 					<br><br>
 					<div class="spanBox">
 					<span>user999</span><span> 회원은 총 </span><span>2</span><span>번 신고를 당했습니다.</span>
@@ -111,7 +158,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="reportMember">
+			</c:forEach>
+		</div>	
+		<div class="reportMember">
 				<div>
 					<p class="rc_title">최근 처리 내역</p>
 					<table class="table">
@@ -138,7 +187,6 @@
 					</table>
 				</div>
 			</div>
-		</div>	
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	 <script>
@@ -148,6 +196,11 @@
 	 		$(".selectBox").eq(index).css("border-left","7px solid #4ECDC4");
 	 	});
 	 	 $(".selectBox").eq(0).trigger("click");
+	 	 
+	 	 $(".reportBox").click(function(){
+	 		var index = $(this).index();
+	 		$(".reportContent").eq(index).css("display","block");
+	 	 })
 	 </script>
 </body>
 </html>
