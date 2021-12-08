@@ -45,5 +45,9 @@ public class ResumeDao {
 	public int updateCeoResume(int resumeNo) {
 		return sqlSession.update("resume.updateCeoResume", resumeNo); 
 	}
+
+	public Resume selectCeoResume(int ceoResume) {
+		return sqlSession.selectOne("resume.selectCeoResume", ceoResume);
+	}
 	 
 }

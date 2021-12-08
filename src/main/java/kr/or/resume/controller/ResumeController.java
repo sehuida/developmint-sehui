@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.resume.service.ResumeService;
 import kr.or.resume.vo.Resume;
@@ -28,7 +29,6 @@ public class ResumeController {
 		if(!list.isEmpty()) {
 			int count = service.selectResumeCount(memberNo);			
 			model.addAttribute("count", count);
-			System.out.println("count : " +count);
 		}
 		model.addAttribute("list", list);
 		return "resume/resumeManage";
@@ -58,10 +58,11 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="/ceoResume.do")
-	public String ceoResume(int resumeNo, int memberNo, Model model) {
-		int reset = service.resetCeoResume(resumeNo, memberNo);
-		System.out.println("reset : " + reset);
-		return "resume/resumeManage";
+	@ResponseBody
+	public Resume ceoResume(int resumeNo, int memberNo) {
+		Resume resume = service.resetCeoResume(resumeNo, memberNo);
+		
+		return resume;
 	}
 	
 	
