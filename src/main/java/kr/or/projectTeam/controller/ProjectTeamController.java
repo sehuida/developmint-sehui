@@ -1,6 +1,9 @@
 package kr.or.projectTeam.controller;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -51,7 +54,7 @@ public class ProjectTeamController {
 			langList.remove(langValue);
 			projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue, langList);
 		}*/
-		if(langValue.length == 0) {
+		if(langValue == null) {
 			projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue);
 			model.addAttribute("list", ptmpd.getList());
 			model.addAttribute("pageNavi", ptmpd.getPageNavi());
@@ -64,8 +67,6 @@ public class ProjectTeamController {
 			return "recruitCrue/recruitTeamMember_mainPage";
 		} else {
 			ArrayList<String> langList = new ArrayList<String>(Arrays.asList(langValue));
-		
-			
 			projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue, langList);
 			model.addAttribute("list", ptmpd.getList());
 			model.addAttribute("pageNavi", ptmpd.getPageNavi());
@@ -95,8 +96,7 @@ public class ProjectTeamController {
 	
 	@RequestMapping(value="/rUploadImage.do")
 	@ResponseBody
-	public String rUploadImage(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request) {
-		JsonObject jsonObject = new JsonObject();
+	public String rUploadImage( MultipartFile multipartFile, HttpServletRequest request) {
 		 /*
 			* String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
 		*/
@@ -109,19 +109,20 @@ public class ProjectTeamController {
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
 		// 파일 확장자
 		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-		File targetFile = new File(fileRoot + savedFileName);
 		try {
-			InputStream fileStream = multipartFile.getInputStream();
-			FileUtils.copyInputStreamToFile(fileStream, targetFile);
-			jsonObject.addProperty("url", "/resources/attachment/projectTeam/recruitTeamNotice"+savedFileName);
-			jsonObject.addProperty("responseCode", "success");
+			FileOutputStream fos = new FileOutputStream(new File(fileRoot + savedFileName));
+			//업로드 속도증가를 위한 보조스트림
+			BufferedOutputStream bos = new BufferedOutputStream(fos);
+			//파일 업로드
+			byte[] bytes = multipartFile.getBytes();
+			bos.write(bytes);
+			bos.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
-			FileUtils.deleteQuietly(targetFile);
-			jsonObject.addProperty("responseCode", "error");
 			e.printStackTrace();
 		}
-		String a = jsonObject.toString();
-		return a;
+		return "/resources/attachment/projectTeam/recruitTeamNotice/"+savedFileName;
 		
 		
 	}

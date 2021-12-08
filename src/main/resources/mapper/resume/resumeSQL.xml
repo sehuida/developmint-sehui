@@ -76,4 +76,12 @@
 	<select id="selectCountResume" parameterType="_int" resultType="_int">
 		select count(*) from resume where member_no = #{memberNo}
 	</select>
+	
+	<update id="resetCeoResume" parameterType="_int">
+		update resume set ceo_resume = 0 where member_no = #{memberNo}
+	</update>
+	
+	<update id="updateCeoResume" parameterType="_int">
+		update resume set ceo_resume = 1 where resume_no = #{resumeNo}
+	</update>
 </mapper>

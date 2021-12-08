@@ -37,4 +37,13 @@ public class ResumeDao {
 	public int selectCountResume(int memberNo) {
 		return sqlSession.selectOne("resume.selectCountResume", memberNo);
 	}
+
+	public int resetCeoResume(int memberNo) { 
+		return sqlSession.update("resume.resetCeoResume", memberNo); 
+	}
+	
+	public int updateCeoResume(int resumeNo) {
+		return sqlSession.update("resume.updateCeoResume", resumeNo); 
+	}
+	 
 }

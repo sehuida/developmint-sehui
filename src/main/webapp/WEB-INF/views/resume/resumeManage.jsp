@@ -38,7 +38,7 @@
 		
 	}
 	.resumeTitle{
-		margin-bottom: 15px;
+		margin-bottom: 30px;
 	}
 	em{
 		font-style: normal;
@@ -261,19 +261,22 @@
 		});
 		
 		$(".input__on-off").click(function(){
+			var resumeNo = $(this).siblings(".resumeNo").val();
+			var memberNo = $(this).siblings(".memberNo").val();
+			console.log("resumeNo : " + resumeNo);
+			console.log("memberNo : " + memberNo);
 			$.ajax({
 				url : "/ceoResume.do",
-				method : post,
 				data : {
-					ceoResume : 1,
+					resumeNo : resumeNo,
+					memberNo : memberNo
 				},
 				success : function(data) {
-					console.log($.trim(data));
+					console.log(data);
 				}
 			});
 		});
-		
-
+	
 	});
 </script>
 
@@ -465,7 +468,9 @@
 						<div class="register">
 							<p>대표이력서 등록</p>
 							<div class="ceoResumeChk">
-								<input type="radio" id="switch${i.count }" name="switch1" class="input__on-off">
+								<input type="hidden" name="memberNo" class="memberNo" value="${sessionScope.m.memberNo }">
+								<input type="hidden" value="${rs.resumeNo }" class="resumeNo" name="resumeNo">			<!-- aaaaaaaaaaaaaaaaaaaaaaaaa -->
+								<input type="radio" id="switch${i.count }" name="switch1" class="input__on-off" ondblclick="this.checked=false">
 								<label for="switch${i.count }" class="label__on-off"> 
 									<span class="marble"></span> 
 									<span class="on">on</span> 
