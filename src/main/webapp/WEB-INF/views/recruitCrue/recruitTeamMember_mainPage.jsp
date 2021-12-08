@@ -59,13 +59,13 @@
 	            		var addData = '&langValue='+arr[i];
 	            		url += addData;
 	            	}
-	            	//location.href= url;
+	            	location.href= url;
 	            } else {
 	            	for(var i = 0; i < arr.length; i++ ){
 	            		var addData = '&langValue='+arr[i];
 	            		url += addData;
 	            	}
-	            	//location.href= url;
+	            	location.href= url;
 	            }
 	        }
 	        if($(".language_icon_disabled").length == 14){
@@ -76,17 +76,17 @@
 	        }
 	    });
 	
-	    /*if(selectLangList != null){
+	    if( arr.length != 0){
 	    	$(".languageList").css("background-color", "#90d1b44f");
 	    	$(".language_icon").addClass("language_icon_disabled");
-	    	for(var i = 0; i < selectLangList.length; i++){
-	    		if($.inArray(($(".language_icon_disabled").eq(i).attr("alt")), selectLangList) != -1){
-	    			$(".language_icon_disabled").eq(i).removeClass("language_icon_disabled");
+	    	for(var i = 0; i < $(".language_icon").length; i++){	    		
+	    		for(var j=0;j<arr.length;j++){
+		    		if($(".language_icon").eq(i).attr("alt") == arr[j]){
+		    			$(".language_icon").eq(i).removeClass("language_icon_disabled");
+		    		}
 	    		}
 	    	}
-	    }else {
-	    	$(".languageList").css("background-color", "white");
-	    }*/
+	    }
 	    
 	    $(".rBox_Leftnavi_left").click(function(){
 	    	if($(".navi_checkbox").is(":checked")){
