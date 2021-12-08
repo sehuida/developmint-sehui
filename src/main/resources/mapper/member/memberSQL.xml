@@ -81,4 +81,7 @@
   <insert id="insertDelete" parameterType="m">
   	insert into delete_member values(#{memberNo},#{memberId},to_char(sysdate,'yyyy-mm-dd'))
   </insert>
+  <insert id="insertCertification" parameterType="cvo">
+  	insert into certification values(cer_seq.nextval,#{memberNo},#{filepath},'N')
+  </insert>
 </mapper>

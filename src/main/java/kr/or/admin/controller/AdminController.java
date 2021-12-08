@@ -69,7 +69,12 @@ public class AdminController {
 	
 	//신고회원목록으로 이동
 	@RequestMapping(value="/reportMember.do")
-	public String reportMember(Model model) {
+	public String reportMember(Model model, int reqPage) {
+		TotalMember tm = service.totalReposrtList(reqPage);
+		model.addAttribute("reportList", tm.getAllReportList());
+		model.addAttribute("start",tm.getStart());
+		model.addAttribute("pageNavi",tm.getPageNavi());
+		model.addAttribute("memberId",tm.getMemberId());
 		return "admin/reportMember";
 	}
 	
@@ -91,6 +96,8 @@ public class AdminController {
 		model.addAttribute("loc","/allMemberList.do?reqPage=1&type=0&list=member_no");
 		return "common/msg";
 	}
+	
+	
 }
 
 

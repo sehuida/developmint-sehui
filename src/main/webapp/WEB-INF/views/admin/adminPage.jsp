@@ -84,7 +84,7 @@
 			</div>
 			<div id="cate">
 				<i class="bi bi-exclamation-circle"></i><span>신고 회원 처리</span>
-				<a href="/reportMember.do" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
+				<a href="/reportMember.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
 			</div>
 			<div id="cate">
 				<i class="bi bi-person-dash-fill"></i><span>차단 회원 관리</span>

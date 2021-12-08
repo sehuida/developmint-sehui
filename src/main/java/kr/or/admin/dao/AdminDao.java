@@ -10,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.comment.vo.Report;
 import kr.or.contest.vo.Contest;
 import kr.or.member.model.vo.Member;
 
@@ -79,5 +80,25 @@ public class AdminDao {
 		return sqlSession.update("admin.chkChangeLevel", map);
 	}
 
-	
+	public ArrayList<Report> allReportList(Map<String, Object> map) {
+		List<Report> list = sqlSession.selectList("admin.allReportList",map);
+		return (ArrayList<Report>)list;
+	}
+
+	public int reportCount() {
+		return sqlSession.selectOne("admin.reportCount");
+	}
+
+	public List<String> memberIdList() {
+		List<String> list = sqlSession.selectList("admin.memberIdList");
+		return list;
+	}
+
 }
+
+
+
+
+
+
+
