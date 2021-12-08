@@ -24,28 +24,38 @@
 
 <script>
 	$(function(){
+		
+		var resultArr = [false, false, false, false, false, false, false, false];
 		$("input[type='checkbox']").on("click", function(){
 			var count = $(".btn-check:checked").length;
-			console.log(count);
 			if(count>3){
 				$(this).prop("checked", false);
-				swal("더 이상 선택하실 수 없어요!", "최대 3개 까지 선택이 가능합니다.");
+				swal("선택 값 초과", "최대 3개 까지 선택이 가능합니다.", "warning");
 			}
 		});
+		
+		
 	
 		$(".return_img").click(function(){
 			$(".return_img").css("cursor", "pointer");
 			history.back();
 		});
 		
-		var arr = new Array();
-		$(".btn-check:checked").next().each(function(){
-			arr.push(this.value);
-		});
-		$("#arrayParam").val(arr);
-		
 	});
 	
+	function checkValue(){
+        if(!($(".btn-check:checked").length == 0) && ($("#datePicker").val() == "") && ($("#inputLarge").val() == "") && ($("input[name=projectTitle]").val() == "")
+        		&& ($("input[name=projectGoal]").val() == "")) && ($("input[name=boardContent]").val() == ""))) {
+        	swal("체크하지 않거나 입력되지 않은 값이 있습니다.", "비어있는 입력값이 있는지 다시 한번 확인해주세요!", "warning");
+        	return false;
+        } 
+        
+        if($('#maxContentPost').text < 0){
+        	swal("입력값 초과", "모집설명에서 입력값이 허용치를 초과하였습니다, 다시 작성해주세요.", "warning");
+        	return false;
+        }
+        
+    }
 	
 </script>
 	
@@ -55,7 +65,7 @@
                 <img class="return_img" src="/resources/img/recruitTeamProject/writePage/left.png">
             </div>
             <div class="main_content">
-	            <form action="/writeRecruitTeam.do" method="post" enctype="multipart/form-data">
+	            <form action="/writeRecruitTeam.do" method="post" enctype="multipart/form-data" onsubmit="return checkValue();">
 		            <div class="writeBox">
 	                    <div class="form-group">
 	                        <input class="form-control form-control-lg" type="text" placeholder="모집공고 제목을 입력해주세요." id="inputLarge" name="boardTitle" maxlength="30">
@@ -67,40 +77,39 @@
 	                        </div>
 	                        <div class="checkboxFlexList">
 	                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-	                                <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+	                                <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" name="chk" value="javascript">
 	                                <label class="btn btn-primary" for="btncheck1">javascript</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+	                                <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off" name="chk" value="typescript">
 	                                <label class="btn btn-primary" for="btncheck2">typescript</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+	                                <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off" name="chk" value="react">
 	                                <label class="btn btn-primary" for="btncheck3">react</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+	                                <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off" name="chk" value="vue">
 	                                <label class="btn btn-primary" for="btncheck4">vue</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off">
+	                                <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off" name="chk" value="node.js">
 	                                <label class="btn btn-primary" for="btncheck5">node.js</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off">
+	                                <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off" name="chk" value="java">
 	                                <label class="btn btn-primary" for="btncheck6">java</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck7" autocomplete="off">
+	                                <input type="checkbox" class="btn-check" id="btncheck7" autocomplete="off" name="chk" value="spring">
 	                                <label class="btn btn-primary" for="btncheck7">spring</label>
 	                            </div>
 	                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" id="bottomCheckBox">
-	                                <input type="checkbox" class="btn-check" id="btncheck8" autocomplete="off">
+	                                <input type="checkbox" class="btn-check" id="btncheck8" autocomplete="off" name="chk" value="swift">
 	                                <label class="btn btn-primary" for="btncheck8">swift</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck9" autocomplete="off">
+	                                <input type="checkbox" class="btn-check" id="btncheck9" autocomplete="off" name="chk" value="kotlin">
 	                                <label class="btn btn-primary" for="btncheck9">kotlin</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck10" autocomplete="off">
+	                                <input type="checkbox" class="btn-check" id="btncheck10" autocomplete="off" name="chk" value="c++">
 	                                <label class="btn btn-primary" for="btncheck10">c++</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck11" autocomplete="off">
+	                                <input type="checkbox" class="btn-check" id="btncheck11" autocomplete="off" name="chk" value="go">
 	                                <label class="btn btn-primary" for="btncheck10">go</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck12" autocomplete="off">
+	                                <input type="checkbox" class="btn-check" id="btncheck12" autocomplete="off" name="chk" value="python">
 	                                <label class="btn btn-primary" for="btncheck12">python</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck13" autocomplete="off">
+	                                <input type="checkbox" class="btn-check" id="btncheck13" autocomplete="off" name="chk" value="django">
 	                                <label class="btn btn-primary" for="btncheck13">django</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck14" autocomplete="off">
+	                                <input type="checkbox" class="btn-check" id="btncheck14" autocomplete="off" name="chk" value="flutter">
 	                                <label class="btn btn-primary" for="btncheck14">flutter</label>
 	                            </div>
 	                        </div>
 	                    </div>
-	                    <input type="hidden" id="arrayParam" name="arrayParam">
 	                    <div class="line"></div>
 	                    <div class="writeLine">
 	                        <div class="titleFlexBox">
@@ -127,7 +136,7 @@
 	                            <p class="titleText">프로젝트명</p>
 	                        </div>
 	                        <div class="form-group">
-	                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault" maxlength="40">
+	                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault" name="projectTitle" maxlength="40">
 	                        </div>
 	                    </div>
 	                    <div class="line"></div>
@@ -137,7 +146,7 @@
 	                            <p class="titleText">프로젝트 목표(ex. 웹 페이지 정복)</p>
 	                        </div>
 	                        <div class="form-group">
-	                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault" maxlength="60">
+	                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault" name="projectGoal" maxlength="60">
 	                        </div>
 	                    </div>
 	                    <div class="line"></div>
@@ -146,16 +155,16 @@
 	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/content-creator.png">
 	                            <p class="titleText">모집설명</p>
 	                        </div>
-	                        <h4 id="maxContentPost" style="text-align:right"></h4>
+	                        <h4 id="maxContentPost" style="text-align:left"></h4>
+	                        
 	                        <div class="form-group">
-	                            <!-- <textarea class="form-control" id="exampleTextarea" rows="3" name="boardContent"></textarea> -->
-	                            <div class="form-group" id="summernote" name="boardContent"></div>
+	                            <textarea class="form-control" id="summernote" rows="3" name="boardContent"></textarea>
 	                        </div>
 	                    </div>
 	                    <div class="finalLine"></div>
 	                    <div class="submitBtnBox">
 	                    	<input type="hidden" name="memberNo" value="${memberNo }">
-	                        <button type="submit" class="btn btn-primary btn-lg">제출</button>
+	                        <button type="submit" class="btn btn-primary btn-lg" onclick="return checkValue();">제출</button>
 	                    </div>
 	                </div>
 		        </form>
@@ -167,9 +176,10 @@
 	$(function(){
 		 
 		$("#summernote").summernote({
-			height : 400,
+			height : 700,
 			lang : "ko-KR",
-			focus: true,
+			focus: false,
+			placeholder: '프로젝트 공고내용을 자세히 작성해주세요..!',
 			toolbar:[ 
 						['fontname', ['fontname']],
 						['fontsize', ['fontsize']], 
@@ -183,11 +193,13 @@
 					], 
 			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'], 
 			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-			placeholder: '프로젝트 공고내용을 자세히 작성해주세요..!',
 			callbacks:{
+				onImageUpload : function(files){
+ 					uploadImage(files[0], this);
+ 				},
 				onKeydown: function (e) { 
                      var t = e.currentTarget.innerText; 
-                     if (t.trim().length >= 500) {
+                     if (t.trim().length >= 1000) {
                          //delete keys, arrow keys, copy, cut, select all
                          if (e.keyCode != 8 && !(e.keyCode >=37 && e.keyCode <=40) && e.keyCode != 46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e.ctrlKey) && !(e.keyCode == 65 && e.ctrlKey))
                          e.preventDefault(); 
@@ -195,47 +207,40 @@
                  },
                  onKeyup: function (e) {
                      var t = e.currentTarget.innerText;
-                     $('#maxContentPost').text(500 - t.trim().length);
+                     
                  },
                  onPaste: function (e) {
                      var t = e.currentTarget.innerText;
                      var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
                      e.preventDefault();
                      var maxPaste = bufferText.length;
-                     if(t.length + bufferText.length > 500){
-                         maxPaste = 500 - t.length;
+                     if(t.length + bufferText.length > 1000){
+                         maxPaste = 1000 - t.length;
                      }
                      if(maxPaste > 0){
                          document.execCommand('insertText', false, bufferText.substring(0, maxPaste));
                      }
-                     $('#maxContentPost').text(500 - t.length);
+                     $('#maxContentPost').text(1000 - t.length);
                  },
-                 onImageUpload : function(files){
- 					uploadImage(files[0], this);
- 				},
+                 
 			}
 		});
 	});
 	
 	function uploadImage(file, editor){
-		// form과 같은효과를 내는 객체생성
-		var form = new FormData();
-		form.append("file", file);
+		data = new FormData();
+		data.append("file",file);
 		$.ajax({
 			url : "/rUploadImage.do",
-			type : "post",
-			data : form,
+			type :"post",		//file전송을 위해 ajax를 할떄는 type을 post로 해줘야한다
+			data : data,
+			enctype : 'multipart/form-data',
 			processData : false,
 			contentType : false,
 			success : function(data){
-				// 결과로 받은 업로드 경로를 이용해서 에디터에 이미지 추가
-				$(editor).summernote("insertImage", data);
+				$(editor).summernote("insertImage",data);
 			}
 		});
-		// processData : 기본값이 true {key:value1, key2:value2, key3:value3}
-		// 				-> 파일전송 시 String이 아닌 파일형태로 전송하기 위해서 기본설정을 제거
-		// contentType : 기본값 "application/x-www-form-urlencodeed; charset=UTF=8"
-		//				-> 파일전송 시 enctype="multipart/form-data" 로 변환하기위해 기본값 제거
 	}
 	
 	$(function() {	

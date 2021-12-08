@@ -10,16 +10,22 @@
 <meta charset="UTF-8">
 <title>Recruit Crue Detail</title>
 </head>
+<script>
+	$(".return_img").click(function(){
+		$(".return_img").css("cursor", "pointer");
+		history.back();
+	});
+</script>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="projectContainer">
 		<div class="main">
             <div class="returnPage">
-                <a href="#"><img class="return_img" src="/resources/img/recruitTeamProject/writePage/left.png"></a>
+                <img class="return_img" src="/resources/img/recruitTeamProject/writePage/left.png">
             </div>
             <div class="main_wrap">
                 <div class="titleBox">
-                    <p class="titleText">Node.js, React, MongoDB, Docker, AWS 스터디원 모집</p>
+                    <p class="titleText"></p>
                 </div>
                 <div class="noticeInfoFlexBox">
                     <div class="memberInfo">
