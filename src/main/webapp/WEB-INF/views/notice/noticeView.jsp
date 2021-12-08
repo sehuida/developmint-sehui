@@ -40,19 +40,19 @@
 						<!-- 이미지 있으면 이미지 출력, 내용잇으면 내용 출력 -->
 						${n.noticeContent }
 					</div>
-				<a href="/noticeList.do?reqPage=1" class="btn btn-outline-primary" >목록보기</a>
+				<a href="/noticeList.do?reqPage=1" class="btn btn-outline-primary">목록보기</a>
 				</div>
 			</div>
 			<div>
 				<!-- 이전공지, 다음공지로 넘어가게 내용이 있으면 출력 , 없으면  나타내기 않게하기 -->
-				<ul class="a-link">
+				<ul class="a-link"><span style="font-size: x-large;">CS center/Notice <span style="font-size: small;color: #999;">카테고리의 다른글</span></span>
 					<c:forEach var="nlist" items="${nlist }">
 						<c:choose>
 							<c:when test="${n.noticeNo eq nlist.noticeNo}">
-								<li><a href="/noticeView.do?noticeNo=${nlist.noticeNo }" class="a-active">${nlist.noticeNo} ${nlist.noticeTitle }</a></li>
+								<li><a href="/noticeView.do?noticeNo=${nlist.noticeNo }" class="a-active">${nlist.noticeNo} ${nlist.noticeTitle } <span style="font-size: small;color: #999;">${nlist.regDate }</span></a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="/noticeView.do?noticeNo=${nlist.noticeNo }">${nlist.noticeNo} ${nlist.noticeTitle }</a></li>
+								<li><a href="/noticeView.do?noticeNo=${nlist.noticeNo }">${nlist.noticeNo} ${nlist.noticeTitle } <span style="font-size: small;color: #999;">${nlist.regDate }</span></a></li>
 							</c:otherwise>						
 						</c:choose>
 					</c:forEach>

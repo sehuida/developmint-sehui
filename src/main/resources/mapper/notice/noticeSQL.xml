@@ -47,7 +47,8 @@
 	<select id="noticeAroundList" parameterType="_int" resultType="n">
 		select
 		    "notice_no" as noticeNo, 
-		    "notice_title" as noticeTitle
+		    "notice_title" as noticeTitle,
+		    "reg_date" as regDate
 		<![CDATA[
 		from notice where "notice_no" between (#{noticeNo}-2) and (#{noticeNo}+2)
 		]]>
