@@ -51,7 +51,7 @@ public class ProjectTeamController {
 			langList.remove(langValue);
 			projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue, langList);
 		}*/
-		if(langValue.length == 0) {
+		if(langValue == null) {
 			projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue);
 			model.addAttribute("list", ptmpd.getList());
 			model.addAttribute("pageNavi", ptmpd.getPageNavi());
@@ -64,8 +64,6 @@ public class ProjectTeamController {
 			return "recruitCrue/recruitTeamMember_mainPage";
 		} else {
 			ArrayList<String> langList = new ArrayList<String>(Arrays.asList(langValue));
-		
-			
 			projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue, langList);
 			model.addAttribute("list", ptmpd.getList());
 			model.addAttribute("pageNavi", ptmpd.getPageNavi());
