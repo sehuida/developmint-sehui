@@ -51,12 +51,12 @@
 	width: 400px;
 	padding-left: 20px;
 	padding-right: 20px;
-	margin: 40px;
+	margin: 70px;
 }
 
 .container>div>div {
 	display: flex;
-	justify-content: space-around;
+	
 	flex-wrap: wrap;
 }
 
@@ -107,6 +107,8 @@
 	margin-top: 50px;
 	margin-bottom: 50px;
 	display: flex;
+	margin:0 auto;
+	width:1080px;
 }
 </style>
 </head>
@@ -305,29 +307,7 @@
 
 					</table>
 				</div>
-					<div>
-					<table>
-						<tr style="font-size: x-small;">
-							<td style="text-align: left; padding-top: 20px;"><b
-								style="color: red;">진행 중</b></td>
-							<td style="padding-top: 20px;">2021.XX.XX</td>
-						</tr>
-						<tr>
-							<td><b><span
-									style="color: rgb(78, 205, 196); font-size: 20px;">고수</span></b></td>
-							<td rowspan="2"><img
-								src="/resources/img/gosu/g_img_basic.png"></td>
-						</tr>
-						<tr>
-							<td style="font-size: 25px;"><b>강세희</b></td>
-						</tr>
-						<tr>
-							<td colspan="2"><a href="/gosuProject.do"
-								class="btn btn-info">자세히 보기</a></td>
-						</tr>
-
-					</table>
-				</div>
+				
 			</div>
 
 

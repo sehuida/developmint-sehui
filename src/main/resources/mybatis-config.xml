@@ -22,6 +22,7 @@
 		<typeAlias type="kr.or.gosu.vo.Gosu" alias="g"/>
 		<typeAlias type="kr.or.gosu.vo.GosuPhoto" alias="gph"/>
 		<typeAlias type="kr.or.gosu.vo.GosuProject" alias="gpr"/>
+		<typeAlias type="kr.or.gosu.vo.GosuNotice" alias="gn"/>
 		<typeAlias type="kr.or.member.model.vo.CertiVO" alias="cvo"/>
 	</typeAliases>	
 </configuration>

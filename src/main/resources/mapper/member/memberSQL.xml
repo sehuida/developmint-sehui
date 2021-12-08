@@ -84,4 +84,10 @@
   <insert id="insertCertification" parameterType="cvo">
   	insert into certification values(cer_seq.nextval,#{memberNo},#{filepath},'N')
   </insert>
+  <update id="updateMyInfo" parameterType="m">
+  	update member set member_name = #{memberName} , phone = #{phone} where member_id=#{memberId}
+  </update>
+  <update id="updateProfile" parameterType="m">
+  	update member set filepath = #{filepath} where member_id = #{memberId}
+  </update>
 </mapper>

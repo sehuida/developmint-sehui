@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.resume.service.ResumeService;
 import kr.or.resume.vo.Resume;
@@ -28,19 +29,30 @@ public class ResumeController {
 		if(!list.isEmpty()) {
 			int count = service.selectResumeCount(memberNo);			
 			model.addAttribute("count", count);
-			System.out.println("count : " +count);
 		}
 		model.addAttribute("list", list);
 		return "resume/resumeManage";
 	}
 	
-	@RequestMapping(value="/updateResume.do")
+	@RequestMapping(value="/updateResumeFrm.do")
 	public String updateResume(Resume resume, Model model) {
-		int resumeNo = resume.getResumeNo();
-		System.out.println(resumeNo);
-		Resume r = service.selectOneResume(resumeNo);
+		Resume r = service.selectCeoResume(resume.getCeoResume());
 		model.addAttribute("r", r);
-		return "resume/updateResume";
+		return "resume/updateResumeFrm";
+	}
+	
+	@RequestMapping(value="/updateResume.do")
+	public String updateResume(Resume r, int resumeNo, Model model) {
+		int result = service.updateResume(r, resumeNo);
+		if(result > 0) {
+			model.addAttribute("msg","이력서 수정완료");
+			//model.addAttribute("loc", "/WEB-INF/views/resume/resumeManage.jsp");
+		} else {
+			model.addAttribute("msg","이력서 수정실패");
+		}
+		System.out.println(r);
+		System.out.println(resumeNo);
+		return "common/msg";
 	}
 	
 	@RequestMapping(value="/insertResume.do")
@@ -58,10 +70,11 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="/ceoResume.do")
-	public String ceoResume(int resumeNo, int memberNo, Model model) {
-		int reset = service.resetCeoResume(resumeNo, memberNo);
-		System.out.println("reset : " + reset);
-		return "resume/resumeManage";
+	@ResponseBody
+	public Resume ceoResume(int resumeNo, int memberNo) {
+		Resume resume = service.resetCeoResume(resumeNo, memberNo);
+		
+		return resume;
 	}
 	
 	

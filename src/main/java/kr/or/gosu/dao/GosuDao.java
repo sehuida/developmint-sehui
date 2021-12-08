@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.gosu.vo.Gosu;
+import kr.or.gosu.vo.GosuNotice;
 import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
 
@@ -56,6 +57,37 @@ public class GosuDao {
 	public ArrayList<GosuPhoto> selectGosuPhoto(int gNo) {
 		List<GosuPhoto> list = sqlSession.selectList("gosu.selectGosuPhotoList",gNo);
 		return (ArrayList<GosuPhoto>)list;
+	}
+
+	public int insertGosuNotice(GosuNotice gNotice) {
+		return sqlSession.insert("gosu.insertGosuNotice",gNotice);
+	}
+
+	public GosuNotice selectGosuNoticeOne(int gnoticeNo) {
+		return sqlSession.selectOne("gosu.selectGosuNoticeOne",gnoticeNo);
+	}
+
+	public ArrayList<GosuNotice> selectGosuNoticeList() {
+		List<GosuNotice> list = sqlSession.selectList("gosu.selectGosuNoticeList");
+		return (ArrayList<GosuNotice>)list;
+	}
+
+	public String selectGosuImg(String writeId) {
+		return sqlSession.selectOne("gosu.getGosuImg2",writeId);
+	}
+
+	public ArrayList<GosuNotice> selectGosuNoticeList2() {
+		List<GosuNotice> list = sqlSession.selectList("gosu.selectGosuNoticeList2");
+		return (ArrayList<GosuNotice>)list;
+	}
+
+	public ArrayList<Gosu> selectNewGosuList() {
+		List<Gosu> list = sqlSession.selectList("gosu.selectNewGosuList");
+		return (ArrayList<Gosu>)list;
+	}
+
+	public int selectGosuCount() {
+		return sqlSession.selectOne("gosu.selectGosuCount");
 	}
 
 }

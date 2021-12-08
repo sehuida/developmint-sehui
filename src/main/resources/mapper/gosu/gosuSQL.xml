@@ -1,67 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="gosu">
-	<insert id="insertGosu" parameterType="g" >
-	insert into gosu values(gosu_seq.nextval,#{gsouNo},#{gosuTitle},#{gosuSelf},#{gosuExplain},#{gosuAct},#{gosuCost},to_char(sysdate,'yyyy-mm-dd'))
-  	<selectKey resultType="_int" order="AFTER" keyProperty="ggsouNo">
+	<insert id="insertGosu" parameterType="g">
+		insert into gosu
+		values(gosu_seq.nextval,#{gsouNo},#{gosuTitle},#{gosuSelf},#{gosuExplain},#{gosuAct},#{gosuCost},to_char(sysdate,'yyyy-mm-dd'))
+		<selectKey resultType="_int" order="AFTER"
+			keyProperty="ggsouNo">
 			select max(ggosu_no) from gosu
-	</selectKey>	
-  </insert> 
-  <insert id="insertGPhoto" parameterType="gph">
-	insert into gosu_photo values(gosu_gph.nextval,#{ggsouNo},#{photoFilepath})
-  </insert> 
-  <insert id="insertGProject" parameterType="gpr">
-	insert into gosu_project values(gosu_gpr.nextval,#{ggsouNo},#{gprojectTitle},#{gprojectContent},#{gprojectFilepath})
-  </insert> 
-  <select id="gosuList" resultType="g">
-  		select
-			ggosu_no as ggsouNo,
-			gosu_no as gsouNo,
-			gosu_title as gosuTitle,
-			gosu_self as gosuSelf,
-			gosu_explain as gosuExplain,
-			gosu_act as gosuAct,
-			gosu_cost as gosuCost,
-			gosu_date as gosuDate
-		from gosu 
-  </select>
-  <select id="getGosuId" parameterType="_int" resultType="string">
+		</selectKey>
+	</insert>
+	<insert id="insertGPhoto" parameterType="gph">
+		insert into gosu_photo
+		values(gosu_gph.nextval,#{ggsouNo},#{photoFilepath})
+	</insert>
+	<insert id="insertGProject" parameterType="gpr">
+		insert into
+		gosu_project
+		values(gosu_gpr.nextval,#{ggsouNo},#{gprojectTitle},#{gprojectContent},#{gprojectFilepath})
+	</insert>
+	<select id="gosuList" resultType="g">
+		select * from (select rownum as rnum , r.* from (
 		select
-			member_id as gosuId
+		ggosu_no as ggsouNo,
+		gosu_no as gsouNo,
+		gosu_title as gosuTitle,
+		gosu_self as gosuSelf,
+		gosu_explain as gosuExplain,
+		gosu_act as gosuAct,
+		gosu_cost as gosuCost,
+		gosu_date as gosuDate
+		from gosu
+		order by 1 desc )r)rr
+	</select>
+	<select id="getGosuId" parameterType="_int" resultType="string">
+		select
+		member_id as gosuId
 		from member where member_no = #{gosuNo}
 	</select>
-	  <select id="getGosuImg" parameterType="_int" resultType="string">
+	<select id="getGosuImg" parameterType="_int" resultType="string">
 		select
-			filepath as gosuImg
+		filepath as gosuImg
 		from member where member_no = #{gosuNo}
 	</select>
-	  <select id="selectGosuOne" parameterType="_int" resultType="g">
+	<select id="selectGosuOne" parameterType="_int" resultType="g">
 		select
-			ggosu_no as ggsouNo,
-			gosu_no as gsouNo,
-			gosu_title as gosuTitle,
-			gosu_self as gosuSelf,
-			gosu_explain as gosuExplain,
-			gosu_act as gosuAct,
-			gosu_cost as gosuCost,
-			gosu_date as gosuDate
-		from gosu where ggosu_no = #{ggosuNo}
+		ggosu_no as ggsouNo,
+		gosu_no as gsouNo,
+		gosu_title as gosuTitle,
+		gosu_self as gosuSelf,
+		gosu_explain as gosuExplain,
+		gosu_act as gosuAct,
+		gosu_cost as gosuCost,
+		gosu_date as gosuDate
+		from gosu where ggosu_no =
+		#{ggosuNo}
 	</select>
-	  <select id="selectGosuProjectList" parameterType="_int" resultType="gpr">
+	<select id="selectGosuProjectList" parameterType="_int"
+		resultType="gpr">
 		select
-			gproject_no  as gprojectNo,
-			ggosu_no as ggsouNo,
-			gproject_title as gprojectTitle,
-			gproject_content as gprojectContent,
-			filepath as gprojectFilepath
-		from gosu_project where ggosu_no = #{ggsouNo}
+		gproject_no as gprojectNo,
+		ggosu_no as ggsouNo,
+		gproject_title as gprojectTitle,
+		gproject_content as gprojectContent,
+		filepath as gprojectFilepath
+		from gosu_project where ggosu_no =
+		#{ggsouNo}
 	</select>
-	  <select id="selectGosuPhotoList" parameterType="_int" resultType="gph">
+	<select id="selectGosuPhotoList" parameterType="_int"
+		resultType="gph">
 		select
-			file_no  as fileNo,
-			ggosu_no as ggsouNo,
-			filepath as photoFilepath
+		file_no as fileNo,
+		ggosu_no as ggsouNo,
+		filepath as
+		photoFilepath
 		from gosu_photo where ggosu_no = #{ggsouNo}
 	</select>
-		
+	<insert id="insertGosuNotice" parameterType="gn">
+		insert into
+		gosu_notice
+		values(gosu_n_seq.nextval,#{writeId},#{gnoticeTitle},#{gnoticeContent},#{gnoticePhoto},to_char(sysdate,'yyyy-mm-dd'))
+	</insert>
+	<select id="selectGosuNoticeOne" parameterType="_int"
+		resultType="gn">
+		select
+		gnotice_no as gnoticeNo,
+		member_id as writeId,
+		gnotice_title as gnoticeTitle,
+		gnotice_content as gnoticeContent,
+		gnotice_photo as gnoticePhoto,
+		gnotice_date as gnoticeDate
+		from
+		gosu_notice where gnotice_no = #{gnoticeNo}
+	</select>
+	<select id="selectGosuNoticeList" resultType="gn">
+
+		select * from (select rownum as rnum , r.*
+		from (
+		select
+		gnotice_no as gnoticeNo,
+		member_id as writeId,
+		gnotice_title as gnoticeTitle,
+		gnotice_content as gnoticeContent,
+		gnotice_photo as gnoticePhoto,
+		gnotice_date as gnoticeDate
+		from gosu_notice order by 1 desc )r)rr
+	</select>
+	<select id="getGosuImg2" parameterType="string"
+		resultType="string">
+		select
+		filepath as writeImg
+		from member where member_id =
+		#{writeId}
+	</select>
+	<select id="selectGosuNoticeList2" resultType="gn">
+		select * from
+		(select rownum as rnum , r.*
+		from (
+		select
+		gnotice_no as gnoticeNo,
+		gnotice_photo as gnoticePhoto
+		from gosu_notice order by 1
+		desc )r)rr where rnum between 1 and 6
+	</select>
+	<select id="selectNewGosuList" resultType="g">
+		select * from (select rownum as rnum , r.* from (select 
+		member_no as gosuNo,
+		member_id as gosuId,
+		filepath as gosuImg
+		from member where member_type=2 order by 1 desc )r)rr where rnum between 1
+		and 4
+	</select>
+	
+	<select id="selectGosuCount"
+		resultType="_int">
+	select 
+		count(*)
+		from member where member_type=2 
+	</select>
 </mapper>

@@ -58,4 +58,12 @@ public class MemberDao {
 		return sqlSession.insert("member.insertCertification",file);
 	}
 
+	public int updateMyInfo(Member m) {
+		return sqlSession.insert("member.updateMyInfo",m);
+	}
+
+	public int updateProfile(Member m) {
+		return sqlSession.update("member.updateProfile",m);
+	}
+
 }
