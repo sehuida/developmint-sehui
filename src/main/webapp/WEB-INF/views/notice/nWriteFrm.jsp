@@ -41,26 +41,25 @@
 						<fieldset>
 						<label class="col-form-label mt-4" for="noticeTitle"><i class="bi bi-toggles" style="font-size: 1.2em;"></i> 상단게시물 고정유무<span style="color: #f3969a;font-size: ">*</span></label>
 					    <div class="form-check form-switch">
-				        	<input class="form-check-input" type="checkbox" id="pin" checked="2">
+				        	<input class="form-check-input" type="checkbox" id="pin" name="pin" value="1">
 				        	<label class="form-check-label" for="pin">상단게시물 고정</label>
 				      	</div>
 						<div class="form-group">
 						  <label class="col-form-label mt-4" for="noticeWriter"><i class="bi bi-hand-index" style="font-size: 1.2em;"></i> 작성자<span style="color: #f3969a;">*</span></label>
-						  <input type="text" class="form-control" id="noticeWriter" value="${sessionScope.m.memberId }" readonly>
+						  <input type="text" class="form-control" id="noticeWriter" name="noticeWriter" value="${sessionScope.m.memberId }" readonly>
 						</div>
 						<div class="form-group">
 						  <label class="col-form-label mt-4" for="noticeTitle"><i class="bi bi-pencil" style="font-size: 1.2em;"></i> 공지 제목<span style="color: #f3969a;">*</span></label>
-						  <input type="text" class="form-control" placeholder="제목을 입력하세요" id="noticeTitle" required>
+						  <input type="text" class="form-control" placeholder="제목을 입력하세요" id="noticeTitle" name="noticeTitle" required>
 						</div>
 						<div class="form-group">
-					      <label for="formFile" class="form-label mt-4"><i class="bi bi-files" style="font-size: 1.2em;"></i> 첨부파일<span style="font-size: small;color: #999;"> *첨부파일은 한개만 가능합니다</span></label>
-					      <input class="form-control" type="file" id="formFile">
+					      <label for="formFile" class="form-label mt-4"><i class="bi bi-files" style="font-size: 1.2em;"></i> 첨부파일<span style="font-size: small;color: #999;"> *파일첨부는 한 개만 가능합니다</span></label>
+					      <input class="form-control" type="file" name="files" multiple>
 					    </div>
 						<div class="form-group">
-							<label class="col-form-label mt-4" for="noticeContent"><i class="bi bi-pencil-square" style="font-size: 1.2em;"></i> 공지 내용<span style="color: #f3969a;">*</span></label>
+							<label class="col-form-label mt-4" for="noticeContent"><i class="bi bi-pencil-square" style="font-size: 1.2em;"></i> 공지 내용<span style="color: #f3969a;">*</span><span style="color: #f3969a;font-weight: bold;padding-left: 20px;">남은 글자 수<span id="maxContentPost">3000</span></span></label>
                             <textarea class="form-control" id="noticeContent" rows="20" name="noticeContent" required ></textarea>
                             <p style="color: #f3969a;">*는 필수 입력사항입니다.</p>
-                          	<span style="color: #f3969a;font-weight: bold;">남은 글자 수<span id="maxContentPost"></span></span>
                         </div>
                         <div class="form-group" style="padding: 10px 0 0 0;float: right;">
                         	<button type="submit" class="btn btn-primary" id="nWriteBtn">Submit</button>
@@ -75,9 +74,9 @@
 	<script>
 	$(function(){
 		$("#noticeContent").summernote({
-			height : 700,
-			minHeight: 700,             // 최소 높이
-		  	maxHeight: 700,
+			height : 500,
+			minHeight: 500,             // 최소 높이
+		  	maxHeight: 500,
 		  	focus: true,
 			lang : "ko-KR",
 			placeholder: '최대 3000자까지 쓸 수 있습니다',

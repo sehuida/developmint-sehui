@@ -1,16 +1,21 @@
 package kr.or.notice.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,10 +70,85 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="/insertNotice.do")
-	public String insertNotive(Notice n, Model model) {
+	public String insertNotive(Notice n, HttpServletRequest request, MultipartFile files, Model model) {
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
+		//사용자가 올린 파일명
+		String filename = files.getOriginalFilename();
+		//올린 파일명에서 확장자 앞까지 자르기 
+		String onlyFilename = filename.substring(0,filename.indexOf("."));
+		//올린 파일명에서 확장자 부분 자르기
+		String extention = filename.substring(filename.indexOf("."));
+		
+		//실제 업로드할 파일명
+		String filepath = null;
+		//중복 파일 뒤에 붙여줄 숫자
+		int count = 0;
+		//중복된 파일이 없을 때까지 반복(파일명 중복시 숫자 붙이는 코드)
+		while(true) {
+			if(count == 0) {
+				filepath = onlyFilename+extention;
+			}else {
+				filepath = onlyFilename+"_"+count+extention;
+			}
+			//파일 경로안에 중복된 파일이 있는지 체크
+			File checkFile = new File(savePath+filepath);
+			if(!checkFile.exists()) {
+				break;
+			}
+			count++;
+		}
+		
+		//중복처리가 끝나면 파일 업로드
+		try {
+			FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+			BufferedOutputStream bos = new BufferedOutputStream(fos);
+			byte[] bytes = files.getBytes();
+			bos.write(bytes);
+			bos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//중복처리된 파일 이름 넣어주기
+		n.setFilepath(filepath);
+		
 		int result = service.insertNotice(n);
-		return "notice/noticeList";
+		
+		if(result>0) {
+			model.addAttribute("msg","등록 성공");
+		}else {
+			model.addAttribute("msg", "등록실패");
+		}
+
+		model.addAttribute("msg","관리자 승인 후 등록됩니다.");
+		model.addAttribute("loc","/noticeList.do?reqPage=1");
+		return "common/msg";
 	}
+	
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="/fileDown.do") public void filedownload(int noticeNo,
+	 * MultipartFile file, HttpServletRequest req, Model model, HttpServletResponse
+	 * rep) {
+	 * 
+	 * Notice n = service.selectOneNotice(noticeNo); String contextRoot = new
+	 * HttpServletRequestWrapper(req).getRealPath("/"); String saveDirectory =
+	 * contextRoot+"upload/notice/";//파일경로 String filepath =
+	 * saveDirectory+n.getFilepath();//파일패스로 지정
+	 * 
+	 * System.out.println("다운로드 파일 전체 경로 : "+filepath); FileInputStream fis; try {
+	 * fis = new FileInputStream(filepath); } catch (FileNotFoundException e) { //
+	 * TODO Auto-generated catch block e.printStackTrace(); }//가져오는것
+	 * BufferedInputStream bis = new BufferedInputStream(fis);
+	 * 
+	 * 
+	 * }
+	 */
 	
 	@ResponseBody
 	@RequestMapping(value="/uploadImage.do")
@@ -96,7 +176,7 @@ public class NoticeController {
 			e.printStackTrace();
 		}
 		/*-----------------------------------------------------------------*/
-		
+		System.out.println(fileRoot + savedFileName);
 		return "/resources/upload/notice/"+savedFileName;
 	}
 }

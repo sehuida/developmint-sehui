@@ -53,4 +53,14 @@
 		from notice where "notice_no" between (#{noticeNo}-2) and (#{noticeNo}+2)
 		]]>
 	</select>
+	<insert id="insertNotice" parameterType="n" >
+		<choose>
+			<when test="pin == 1">
+				INSERT INTO NOTICE VALUES(NOTICE_SEQ.NEXTVAL,#{noticeTitle},#{noticeContent},to_char(sysdate,'yyyy-mm-dd'),#{filename},#{filepath},1,#{noticeWriter})
+			</when>
+			<otherwise>
+				INSERT INTO NOTICE VALUES(NOTICE_SEQ.NEXTVAL,#{noticeTitle},#{noticeContent},to_char(sysdate,'yyyy-mm-dd'),#{filename},#{filepath},2,#{noticeWriter})
+			</otherwise>
+		</choose>
+	</insert>
 </mapper>

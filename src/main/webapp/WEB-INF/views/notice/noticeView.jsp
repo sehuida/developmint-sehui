@@ -31,10 +31,12 @@
 					<span>${n.regDate } / View : ${readCount }</span>
 					<span>
 						<!-- 첨부파일테이블로 넣어서 사용 -->
-						<%-- <c:if test="${not empty n.noticeFilename }">
-							<img src="/resources/img/notice/file.png" style="color:white;">
-							<a href="/fileDown?noticeNo=${n.noticeNo }">${n.noticeFilename }</a>
-						</c:if> --%>
+						<c:choose>
+							<c:when test="${not empty n.filepath }">
+								<img src="/resources/img/notice/file.png" style="color:white;">
+								<a href="/fileDown.do?noticeNo=${n.noticeNo }">${n.filename }</a>
+							</c:when>
+						</c:choose>
 					</span>
 					<div class="contents-box">
 						<!-- 이미지 있으면 이미지 출력, 내용잇으면 내용 출력 -->
