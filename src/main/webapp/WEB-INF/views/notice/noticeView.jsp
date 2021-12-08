@@ -40,14 +40,22 @@
 						<!-- 이미지 있으면 이미지 출력, 내용잇으면 내용 출력 -->
 						${n.noticeContent }
 					</div>
-				<a href="/noticeList.do?reqPage=1" class="btn btn-outline-primary">목록보기</a>
+				<a href="/noticeList.do?reqPage=1" class="btn btn-outline-primary" >목록보기</a>
 				</div>
 			</div>
 			<div>
 				<!-- 이전공지, 다음공지로 넘어가게 내용이 있으면 출력 , 없으면  나타내기 않게하기 -->
 				<ul class="a-link">
-					<li style="float: left;"><a href="/noticeView.do?noticeNo=${noticeNo-1 }">이전공지</a></li>
-					<li style="float: right: ;"><a href="/noticeView.do?noticeNo=${noticeNo+1 }">다음공지</a></li>
+					<c:forEach var="nlist" items="${nlist }">
+						<c:choose>
+							<c:when test="${n.noticeNo eq nlist.noticeNo}">
+								<li><a href="/noticeView.do?noticeNo=${nlist.noticeNo }" class="a-active">${nlist.noticeNo} ${nlist.noticeTitle }</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="/noticeView.do?noticeNo=${nlist.noticeNo }">${nlist.noticeNo} ${nlist.noticeTitle }</a></li>
+							</c:otherwise>						
+						</c:choose>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>

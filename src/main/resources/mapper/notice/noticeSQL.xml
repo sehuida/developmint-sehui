@@ -48,6 +48,8 @@
 		select
 		    "notice_no" as noticeNo, 
 		    "notice_title" as noticeTitle
-		from notice where "notice_no" between (#{noticeNo}-2) and (#{noticeNo}+2);
+		<![CDATA[
+		from notice where "notice_no" between (#{noticeNo}-2) and (#{noticeNo}+2)
+		]]>
 	</select>
 </mapper>
