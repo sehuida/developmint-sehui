@@ -163,7 +163,7 @@
 			select rownum as rnum, r.* 
 			from(
 				select 
-					report_no as repoartNo,
+					report_no as reportNo,
 					reporter_id as reporterId,
 					report_reason as reportReason,
 					report_etc as reportEtc,
@@ -171,18 +171,48 @@
 					report_date as reportDate,
 					report_status as reportStatus,
 					comment_content as commentContent
-				from REPORT order by REPORT_no desc)r 
+				from REPORT where report_status = 1 order by REPORT_no desc)r 
 			order by rnum) 
 		where rnum BETWEEN #{start} and #{end}
 	</select>
 	
 	<select id="reportCount" resultType="_int">
-		select count(*) from report 
+		select count(*) from report where report_status = 1
 	</select>
 	
-	<select id="memberIdList" resultType="string">
-		select c.MEMBER_ID as memberId from report 
-		join COMMENTS c using(COMMENT_NO)
+	<select id="memberIdList" parameterType="map" resultType="string">
+		select memberId from(select rownum as rnum, c.MEMBER_ID as memberId
+		from report 
+		join COMMENTS c using(COMMENT_NO))
+		where rnum BETWEEN #{start} and #{end}
 	</select>
+	
+	<select id="memberReportCount" parameterType="string" resultType="_int">
+		select count(id) from(select c.MEMBER_ID as id, report.REPORT_STATUS rs
+		from report 
+		join COMMENTS c using(COMMENT_NO))
+		where id = #{id} and rs = 2
+	</select>
+	
+	<update id="canselReport" parameterType="_int">
+		update REPORT set REPORT_STATUS = 3 where REPORT_NO = #{reportNo}
+	</update>
+	
+	<update id="reportInsert" parameterType="_int">
+		update REPORT set REPORT_STATUS = 2 where REPORT_NO = #{reportNo}
+	</update>
+	
+	<update id="falseReport" parameterType="_int">
+		update REPORT set REPORT_STATUS = 4 where REPORT_NO = #{reportNo}
+	</update>
+	
+	
 
 </mapper>
+
+
+
+
+
+
+
