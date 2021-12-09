@@ -70,4 +70,8 @@ public class MemberDao {
 		return sqlSession.update("member.changePwMember",m);
 	}
 
+	public int addCompany(Member m) {
+		return sqlSession.update("member.addCompnay",m);
+	}
+
 }

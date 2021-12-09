@@ -94,5 +94,9 @@ public class MemberService {
 	public int changePwMember(Member m) {
 		return dao.changePwMember(m);
 	}
+
+	public int addCompany(Member m) {
+		return dao.addCompany(m);
+	}
 	
 }
