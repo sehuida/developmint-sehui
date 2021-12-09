@@ -11,6 +11,8 @@ import kr.or.projectTeam.model.dao.ProjectTeamDao;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
+import kr.or.projectTeam.model.vo.ProjectTeamNoticeComment;
+import kr.or.projectTeam.model.vo.ProjectTeamNoticeViewData;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
 import kr.or.projectTeam.model.vo.projectTeamMainPageData;
 
@@ -233,6 +235,19 @@ public class ProjectTeamService {
 	public ArrayList<DevelopLanguage> selectAllDevelopLang() {
 			ArrayList<DevelopLanguage> dlList = dao.selectAllDevelopLangList();
 		return dlList;
+	}
+
+	public ProjectTeamNoticeViewData selectOneNotice(int projectNo) {
+		int result = dao.updateReadCount(projectNo);
+		if(result <= 0) {
+			return null;
+		}
+		ProjectTeam pt = dao.selectOneNotice(projectNo);
+		ArrayList<ProjectTeamNoticeComment> list = dao.selectCommentList(projectNo);
+		ArrayList<projectDevLanguage> pdLangList = dao.selectAllprojectLangList();
+		ProjectTeamNoticeViewData ptnvd = new ProjectTeamNoticeViewData(list, pt, pdLangList);
+		return ptnvd;
+		
 	}
 
 	

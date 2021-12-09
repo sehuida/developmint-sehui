@@ -23,4 +23,6 @@ public class ProjectTeam {
 	private String readerImgPath;
 	private int commentCount;
 	private int dibCount;
+	private String projectWriterId;
+	private int projectWriterGrade;
 }
