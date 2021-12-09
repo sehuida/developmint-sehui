@@ -60,6 +60,11 @@ public class ResumeService {
 	public Member selectOneMember(int memberNo) {
 		return dao.selectOneMember(memberNo);
 	}
+
+	/*	지원한 회사 리스트 가져오기
+	 * public ArrayList<Resume> selectAllAnnounce(int memberNo) { return
+	 * dao.selectAllAnnounce(memberNo); }
+	 */
 	 
 
 	/*

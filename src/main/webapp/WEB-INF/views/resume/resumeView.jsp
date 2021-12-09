@@ -8,8 +8,15 @@
 <title>Insert title here</title>
 </head>
 <style>
+	.contain{
+		width: 1000px;
+		margin: 0 auto;
+		margin-top: 100px;
+		margin-bottom: 100px;
+	}
 	.memberName{
 		margin: 10px;
+		margin-bottom: 0px;
 		font-size: 20px;
 		font-weight: 900;
 	}
@@ -19,7 +26,7 @@
 	}
 	.info{
 		overflow: hidden;
-		margin-left: 140px;
+		margin-left: 20px;
 		margin-bottom: 30px;
 	}
 	.infoBox{
@@ -71,7 +78,7 @@
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<div class="container">
+	<div class="contain">
 		<div class="resumeTitle">
 			<p style="font-size: 24px; color: black; font-weight: 900;">${r.resumeTitle }</p>
 		</div>
@@ -154,6 +161,9 @@
 						</c:if>
 		            </div>
 		        </div>
+		</div>
+		<div class="a">
+			a
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

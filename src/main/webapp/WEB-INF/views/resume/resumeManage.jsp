@@ -264,7 +264,11 @@
     .wrap{
     	margin: 50px 0px;
     	height: 230px;
-    	border: 1px solid gray;
+    	border: 1px solid #dfdfdf;
+    }
+    .resumeTitle>a{
+    	color: black;
+    	text-decoration: none;
     }
 </style>
 <script>
@@ -439,7 +443,7 @@
 								</li>               
 							</ul>
 						<div class="message">
-							<button class="companyMessage">기업이 보낸 요청</button>		<!-- 웹소켓으로 기업이 이력서 확인 후 합격이면 쪽지 날라가게 만들기 -->
+							<a href="applicationCompany.do?memberNo=${sessionScope.m.memberNo }"><button class="companyMessage">지원한 회사 목록</button></a>		<!-- 웹소켓으로 기업이 이력서 확인 후 합격이면 쪽지 날라가게 만들기 -->
 							<span class="requestCount">1</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
 						</div>
 						<div class="update">
@@ -487,7 +491,7 @@
 								<span style="font-size: 13px; color: gray;">${rs.writeDate }</span>	
 							</div>
 							<div class="resumeTitle">
-								<em>${rs.resumeTitle }</em>	
+								<a href="#"><em>${rs.resumeTitle }</em></a>	
 							</div>
 							<div class="register">
 								<p>대표이력서 등록</p>
