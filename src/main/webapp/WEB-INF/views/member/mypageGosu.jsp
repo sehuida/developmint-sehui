@@ -99,10 +99,34 @@
 				<div class="profile-h">
 					<div>
 						<span>[${sessionScope.m.memberName}]님</span>
-						<span>등급 : 기업고객<img src="/resources/img/member/management.png" style="width: 35px; height:35px; margin-left: 20px;"></span>
+						<c:choose>
+							<c:when test="${sessionScope.m.memberGrade >=1 && sessionScope.m.memberGrade <= 20 }">
+								<span>등급 : 브론즈<img src="/resources/img/member/rank/bronze.png" style="width: 35px; height:35px;"></span>
+							</c:when>
+							<c:when test="${sessionScope.m.memberGrade >=21 && sessionScope.m.memberGrade <= 40 }">
+								<span>등급 : 실버<img src="/resources/img/member/rank/silver.png" style="width: 35px; height:35px;"></span>
+							</c:when>
+							<c:when test="${sessionScope.m.memberGrade >=41 && sessionScope.m.memberGrade <= 60 }">
+								<span>등급 : 골드<img src="/resources/img/member/rank/gold.png" style="width: 35px; height:35px;"></span>
+							</c:when>
+							<c:when test="${sessionScope.m.memberGrade >=61 && sessionScope.m.memberGrade <= 80 }">
+								<span>등급 : 플래티넘<img src="/resources/img/member/rank/platinum.png" style="width: 35px; height:35px;"></span>
+							</c:when>
+							<c:when test="${sessionScope.m.memberGrade >=81 && sessionScope.m.memberGrade <= 110 }">
+								<span>등급 : 다이아몬드<img src="/resources/img/member/rank/diamond.png" style="width: 35px; height:35px;"></span>
+							</c:when>
+							<c:when test="${sessionScope.m.memberGrade >=111 && sessionScope.m.memberGrade <= 140 }">
+								<span>등급 : 마스터<img src="/resources/img/member/rank/master.png" style="width: 35px; height:35px;"></span>
+							</c:when>
+							<c:when test="${sessionScope.m.memberGrade >=141 && sessionScope.m.memberGrade <= 170 }">
+								<span>등급 : 챌린저<img src="/resources/img/member/rank/challenger.png" style="width: 35px; height:35px;"></span>
+							</c:when>								
+						</c:choose>
 					</div>
 					<div>
 						<span>이메일:${sessionScope.m.email }</span>
+						<a href="/resumeManage.do?memberNo=${sessionScope.m.memberNo }" class="btn btn-primary btn-sm">이력서 관리</a>
+						<a href="#" class="btn btn-primary btn-sm">입사 신청내역</a>
 					</div>
 				</div>
 				<div class="profiles">
@@ -113,17 +137,35 @@
 				<h4 style="font-family: NotoBold; margin-bottom: 20px;">커뮤니티</h4>
 				<div>
 					<img src="/resources/img/member/notes.png">
-					<a class="pageLists" href="/applicationStatus.do">구인신청 내역 확인</a>
-					<a href="/applicationStatus.do"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
+					<a class="pageLists" href="#">작성게시물 / 댓글보기</a>
+					<a href="#"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
 				</div>
 				<div>
 					<img src="/resources/img/member/multiple-users-silhouette.png">
-					<a class="pageLists" href="/announceManage.do?memberNo=${sessionScope.m.memberNo }">구인공고보기</a>
-					<a href="/announceManage.do?memberNo=${sessionScope.m.memberNo } "><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
+					<a class="pageLists" href="#">팀원신청 / 찜한 내역 확인하기</a>
+					<a href="#"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
+				</div>
+				<div>
+					<img src="/resources/img/member/ask.png">
+					<a class="pageLists" href="/gosuSituation.do">고수의 노하우 신청내역</a>
+					<a href="/gosuSituation.do"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
+				</div>
+				<div>
+					<img src="/resources/img/member/podium.png">
+					<a class="pageLists" href="#">공모전 신청내역</a>
+					<a href="#"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
 				</div>
 			</div>
+			<div class="page-middle">
+					<div>
+						<img src="/resources/img/member/chat.png">
+						<a class="pageLists" href="/gosuNoticeList.do">고수의 노하우</a>
+						<a href="/gosuNoticeList.do"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
+					</div>		
+			</div>
 			<div class="page-bottom">
-				<a href="/companyMember.do" class="btn btn-info btn-sm">기업변경 하기</a>
+				<a href="/certification.do" class="btn btn-primary btn-sm">회사인증</a>
+				<a href="/companyMember.do" class="btn btn-info btn-sm">기업고객 전환</a>
 			</div>
 		</div>
 	 </div>	 

@@ -315,4 +315,9 @@ public class MemberController {
 	public String mypageCom() {
 		return "member/mypageCom";
 	}
+	@RequestMapping(value="/mypageGosu.do")
+	public String mypageGosu() {
+		return "member/mypageGosu";
+	}
+	
 }
