@@ -55,12 +55,15 @@
 	</select>
 	<insert id="insertNotice" parameterType="n" >
 		<choose>
-			<when test="pin == 1">
-				INSERT INTO NOTICE VALUES(NOTICE_SEQ.NEXTVAL,#{noticeTitle},#{noticeContent},to_char(sysdate,'yyyy-mm-dd'),#{filename},#{filepath},1,#{noticeWriter})
+			<when test="pin == 2">
+				INSERT INTO NOTICE VALUES(NOTICE_SEQ.NEXTVAL,#{noticeTitle},#{noticeContent},to_char(sysdate,'yyyy-mm-dd'),#{filename},#{filepath},2,#{noticeWriter})
 			</when>
 			<otherwise>
-				INSERT INTO NOTICE VALUES(NOTICE_SEQ.NEXTVAL,#{noticeTitle},#{noticeContent},to_char(sysdate,'yyyy-mm-dd'),#{filename},#{filepath},2,#{noticeWriter})
+				INSERT INTO NOTICE VALUES(NOTICE_SEQ.NEXTVAL,#{noticeTitle},#{noticeContent},to_char(sysdate,'yyyy-mm-dd'),#{filename},#{filepath},1,#{noticeWriter})
 			</otherwise>
 		</choose>
 	</insert>
+	<delete id="deleteNoticeNo" parameterType="_int">
+		delete from notice where "notice_no" = #{noticeNo}
+	</delete>
 </mapper>

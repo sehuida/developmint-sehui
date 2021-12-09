@@ -47,4 +47,8 @@ public class NoticeDao {
 		return (ArrayList<Notice>)nlist;
 	}
 
+	public int deleteNoticeNo(int noticeNo) {
+		return sqlsession.delete("notice.deleteNoticeNo",noticeNo);
+	}
+
 }
