@@ -88,22 +88,28 @@
 					};
 
 					$.ajax(settings).done(function (response) {
+					  	
 					  var valid = response.data[0].valid;
 					  if(valid == "01"){
+						  console.log(memberVal);
+						  console.log(comNo);
 						  $.ajax({
 							 url : "/addCompany.do",
 							 data : {memberId : memberVal , comNo : comNo},
 							 type : "post",
 							 success : function(data){
 								 if(data == 1){
-									 window.location = "/"; 
-								 }else{
 					                    swal({
 					                        title: '기업인증완료!',
 					                        icon: 'success'
 					                      }).then(function(){
 					                    	 window.location = "/mypage.do"; 
-					                      });								 
+					                      });
+								 }else{
+					                    swal({
+					                        title: '귀사는 저희 페이지에 연동되어있지 않습니다.',
+					                        icon: 'error'
+					                      });							 
 								 }
 							 }
 						  });
