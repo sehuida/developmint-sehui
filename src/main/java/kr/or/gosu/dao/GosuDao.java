@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.gosu.vo.Gosu;
+import kr.or.gosu.vo.GosuFeedback;
 import kr.or.gosu.vo.GosuNotice;
 import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
@@ -92,6 +93,23 @@ public class GosuDao {
 
 	public GosuProject selectGProject(int pNo) {
 		return sqlSession.selectOne("gosu.selectGProject",pNo);
+	}
+
+	public int insertGosuFeedback(GosuFeedback gf) {
+		return sqlSession.insert("gosu.insertGosuFeedback",gf);
+	}
+
+	public GosuFeedback selectFeedbackOne(int fbNo) {
+		return sqlSession.selectOne("gosu.selectFeedbackOne",fbNo);
+	}
+
+	public ArrayList<GosuFeedback> selectGosuFeedbackList(String memberId) {
+		List<GosuFeedback> list = sqlSession.selectList("gosu.selectGosuFeedbackList",memberId);
+		return (ArrayList<GosuFeedback>)list;
+	}
+
+	public String selectGosuId2(int ggosuNo) {
+		return sqlSession.selectOne("gosu.getGosuId2",ggosuNo);
 	}
 
 }

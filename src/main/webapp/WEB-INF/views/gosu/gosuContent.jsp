@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,7 +59,6 @@
 	list-style-type: none;
 	margin: 10px;
 }
-
 
 .gosu-photos ul li img {
 	width: 120px;
@@ -161,18 +161,16 @@
 	justify-content: center;
 	z-index: 10000;
 }
-.hrm-content img{
- width: 80%;
-}
-.hrm-content{
- text-align: center;
- 
 
+.hrm-content img {
+	width: 80%;
 }
+
 .hrm-btn-wrap {
 	width: 100%;
 	display: flex;
 	justify-content: center;
+		
 }
 
 #hrm-modal h3 {
@@ -228,11 +226,22 @@
 	flex-wrap: wrap;
 	display: flex;
 	width: 800px;
-	margin:0 auto;
+	margin: 0 auto;
 }
 
-.gphs ul{
- padding:0;
+.g-style {
+	text-align: center;
+	margin: 10px;
+	padding: 30px;
+	display: flex;
+	justify-content: center;
+}
+
+.gphs ul {
+	padding: 0;
+}
+.gphs img{
+	height: 120px;
 }
 </style>
 <meta charset="UTF-8">
@@ -364,16 +373,17 @@
 					<div class="g-photo-wrap">
 						<c:forEach items="${gprojectList }" var="gpr" varStatus="i">
 							<div class="g-photo-one">
-								<button type="button" id="gProject" onclick="pAjax(${gpr.gprojectNo});">
+								<button type="button" id="gProject"
+									onclick="pAjax(${gpr.gprojectNo});">
 									<dl>
 										<dt>
 											<img src="${gpr.gprojectFilepath }">
 										</dt>
 										<dd>
-											<b class="g-b" style="font-size: 19px;">${gpr.gprojectTitle }</b>
+											<b class="g-b" style="font-size: 19px;">${gpr.gprojectContent }</b>
 										</dd>
 										<dd>
-											<p class="g-p">${gpr.gprojectContent }</p>
+											<p class="g-p">${gpr.gprojectTitle }</p>
 										</dd>
 									</dl>
 								</button>
@@ -397,13 +407,22 @@
 					<div id="hrm-modal">
 						<h3 style="color: white;">프로젝트</h3>
 						<div class="hrm-content">
-							<b style="text-align: left;">메인사진</b><br>
-							<img src="" id="gprojectFilepath"><br>
-							<div id="gimage_container"></div><br>
-							<b style="float: left;">제목</b><br>
-							<p id="gprojectTitle"></p><br> 
-							<b style="float: left;">내용</b><br>
-								<p id="gprojectContent"></p>
+							<div style="margin-top: 30px;">
+								<b>메인사진</b>
+							</div>
+							<br>
+							<div class="g-style">
+								<img id="gprojectFilepath" style="width: 600px;">
+							</div>
+							<br> <b>제목</b><br>
+							<div class="g-style">
+								<p id="gprojectTitle" style="width: 500px;"></p>
+							</div>
+							<br> <b>내용</b><br>
+							<div class="g-style">
+								<p id="gprojectContent" style="width: 500px;"></p>
+							</div>
+
 							<br>
 						</div>
 						<div class="hrm-btn-wrap">
@@ -414,7 +433,7 @@
 			</div>
 		</div>
 		<div style="display: flex; justify-content: center;">
-			<a href="/gosuFeedback.do" class="btn btn-primary"
+			<a href="/gosuFeedback.do?ggNo=${gosu.ggsouNo }" class="btn btn-primary"
 				style="width: 200px; margin: 100px; padding: 10px;"><b>피드백
 					신청하기</b></a>
 		</div>
@@ -423,6 +442,7 @@
 		$("#hrm-close").click(function() {
 
 			$(".hrm-wrap").css("display", "none");
+			$('body').css("overflow", "scroll");
 
 		});
 		function pAjax(pNo) {
@@ -435,12 +455,15 @@
 						$("#gprojectTitle").append(data.gprojectContent);
 						$("#gprojectContent").append(data.gprojectTitleBr);
 						$("#gprojectFilepath").attr("src", data.gprojectFilepath);
+						$('body').css("overflow", "hidden");
+						$('.hrm-wrap').css("overflow", "scroll");
 						$(".hrm-wrap").css("display", "flex");
 						
 					}
 			 });
 		}
-	</script>
+		
+		</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>

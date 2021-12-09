@@ -19,16 +19,19 @@
 		values(gosu_gpr.nextval,#{ggsouNo},#{gprojectTitle},#{gprojectContent},#{gprojectFilepath})
 	</insert>
 	<select id="gosuList" resultType="g">
-		select * from (select rownum as rnum , r.* from (
+		select * from (select rownum as
+		rnum , r.* from (
 		select
 		ggosu_no as ggsouNo,
 		gosu_no as gsouNo,
 		gosu_title as gosuTitle,
 		gosu_self as gosuSelf,
-		gosu_explain as gosuExplain,
+		gosu_explain as
+		gosuExplain,
 		gosu_act as gosuAct,
 		gosu_cost as gosuCost,
-		gosu_date as gosuDate
+		gosu_date as
+		gosuDate
 		from gosu
 		order by 1 desc )r)rr
 	</select>
@@ -36,6 +39,14 @@
 		select
 		member_id as gosuId
 		from member where member_no = #{gosuNo}
+	</select>
+	<select id="getGosuId2" parameterType="_int" resultType="string">
+		select
+		member_id as gosuId
+		from member where member_no = (select
+		gosu_no
+		from gosu where
+		ggosu_no = #{ggosuNo})
 	</select>
 	<select id="getGosuImg" parameterType="_int" resultType="string">
 		select
@@ -94,15 +105,18 @@
 	</select>
 	<select id="selectGosuNoticeList" resultType="gn">
 
-		select * from (select rownum as rnum , r.*
+		select * from
+		(select rownum as rnum , r.*
 		from (
 		select
 		gnotice_no as gnoticeNo,
 		member_id as writeId,
 		gnotice_title as gnoticeTitle,
-		gnotice_content as gnoticeContent,
+		gnotice_content as
+		gnoticeContent,
 		gnotice_photo as gnoticePhoto,
-		gnotice_date as gnoticeDate
+		gnotice_date as
+		gnoticeDate
 		from gosu_notice order by 1 desc )r)rr
 	</select>
 	<select id="getGosuImg2" parameterType="string"
@@ -120,22 +134,24 @@
 		gnotice_no as gnoticeNo,
 		gnotice_photo as gnoticePhoto
 		from gosu_notice order by 1
-		desc )r)rr where rnum between 1 and 6
+		desc )r)rr
+		where rnum between 1 and 6
 	</select>
 	<select id="selectNewGosuList" resultType="g">
-		select * from (select rownum as rnum , r.* from (select 
+		select * from (select
+		rownum as rnum , r.* from (select
 		member_no as gosuNo,
 		member_id as gosuId,
 		filepath as gosuImg
-		from member where member_type=2 order by 1 desc )r)rr where rnum between 1
+		from member where
+		member_type=2 order by 1 desc )r)rr where rnum between 1
 		and 4
 	</select>
-	
-	<select id="selectGosuCount"
-		resultType="_int">
-	select 
+
+	<select id="selectGosuCount" resultType="_int">
+		select
 		count(*)
-		from member where member_type=2 
+		from member where member_type=2
 	</select>
 	<select id="selectGProject" parameterType="_int"
 		resultType="gpr">
@@ -145,6 +161,46 @@
 		gproject_title as gprojectTitle,
 		gproject_content as gprojectContent,
 		filepath as gprojectFilepath
-		from gosu_project  where gproject_no = #{gNo}
+		from gosu_project where gproject_no =
+		#{gNo}
+	</select>
+
+	<insert id="insertGosuFeedback" parameterType="gf">
+		insert into
+		gosu_feedback
+		values(GOSU_FB_SEQ.nextval,#{ggosuNo},#{feedbackContent},#{feedbackTitle},to_char(sysdate,'yyyy-mm-dd'),1,#{memberId})
+		<selectKey resultType="_int" order="AFTER"
+			keyProperty="feedbackNo">
+			select max(FEEDBACK_NO) from gosu_feedback
+		</selectKey>
+	</insert>
+
+	<select id="selectFeedbackOne" parameterType="_int"
+		resultType="gf">
+		select
+		FEEDBACK_NO as feedbackNo,
+		GGOSU_NO as ggosuNo,
+		FEEDBACK_CONTENT as feedbackContent,
+		FEEDBACK_TITLE as feedbackTitle,
+		FEEDBACK_DATE as feedbackDate,
+		FEEDBACK_NUM as feedbackNum,
+		MEMBER_ID as
+		memberId
+		from
+		gosu_feedback where FEEDBACK_NO = #{fbNo}
+	</select>
+	<select id="selectGosuFeedbackList" resultType="gf">
+		select
+		FEEDBACK_NO as feedbackNo,
+		GGOSU_NO as ggosuNo,
+		FEEDBACK_CONTENT as
+		feedbackContent,
+		FEEDBACK_TITLE as feedbackTitle,
+		FEEDBACK_DATE as
+		feedbackDate,
+		FEEDBACK_NUM as feedbackNum,
+		MEMBER_ID as memberId
+		from
+		gosu_feedback where MEMBER_ID = #{memberId}
 	</select>
 </mapper>

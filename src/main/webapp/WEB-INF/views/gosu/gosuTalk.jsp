@@ -124,8 +124,9 @@ input:focus, textarea:focus {
 			<span style="color: rgb(78, 205, 196);">신청한 내역</span>
 		</h3>
 		<div class="g-feedback">
-			<h3>Q. &nbsp;미묘한 교향악이다</h3>
-			<span>피드백내용내욘애내앵요ㅐ요ㅐ요ㅐ요애ㅛ애</span>
+		
+			<h3>Q. &nbsp;${gfOne.feedbackTitle }</h3>
+			<span>${gfOne.feedbackContentBr }</span>
 		</div>
 
 		<div class="talk-wrap">

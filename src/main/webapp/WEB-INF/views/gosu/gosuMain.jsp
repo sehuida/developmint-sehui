@@ -474,6 +474,7 @@ to {
 		</div>
 
 	</div>
+	<c:if test="${not empty sessionScope.m }">
 	<div class="gosu-status">
 		<hr>
 		<h3 style="text-align: center;">나의 현황</h3>
@@ -484,39 +485,25 @@ to {
 		<div class="g-status-border">
 			<h4 style="margin-top: 30px; margin-left: 40px;">신청한 내역</h4>
 			<div class="g-statusContent">
+			
+				<c:forEach items="${gosuTalkList }" var="gtl" varStatus="i">
 				<a href="/gosuTalk.do">
 					<table class="g-sc-tbl card text-white bg-primary mb-3"
 						style="margin-bottom: 0;">
 						<tr>
-							<th colspan="2" style="text-align: right; padding-right: 0;">진행
-								중</th>
+							<th colspan="2" style="text-align: right; padding-right: 0;">${gtl.feedbackNum }</th>
 						</tr>
 						<tr>
 							<th>고수</th>
-							<td>아이디(memberId)</td>
+							<td>${gtl.gosuId }</td>
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td>제목(text)</td>
+							<td>${gtl.feedbackTitle }</td>
 						</tr>
 					</table>
-				</a> <a href="/gosuTalk.do">
-					<table class="g-sc-tbl card text-white bg-primary mb-3"
-						style="margin-bottom: 0;">
-						<tr>
-							<th colspan="2" style="text-align: right; padding-right: 0;">진행
-								중</th>
-						</tr>
-						<tr>
-							<th>고수</th>
-							<td>아이디(memberId)</td>
-						</tr>
-						<tr>
-							<th>내용</th>
-							<td>제목(text)</td>
-						</tr>
-					</table>
-				</a>
+				</a> 
+				</c:forEach>
 			</div>
 			<h4 style="margin-top: 30px; margin-left: 40px;">신청받은 내역</h4>
 			<div class="g-statusContent">
@@ -594,6 +581,7 @@ to {
 			</div>
 		</div>
 	</div>
+	</c:if>
 	</div>
 	<script>
 		var slideIndex2 = 1;
