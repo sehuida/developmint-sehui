@@ -2,12 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%
-	ArrayList<Integer> list = new ArrayList<Integer>();
-for (int i = 0; i < 10; i++) {
-	list.add(i);
-}
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,13 +73,16 @@ for (int i = 0; i < 10; i++) {
 	padding-right: 30px;
 	padding-left: 30px;
 	text-align: left;
+	
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .gosu hr {
 	max-width: 100%;
 	font-weight: bold;
-	background-color: rgb(199, 199, 199);
-	height: 1px;
+	background-color: black;
+	height: 3px;
 }
 
 .gosu-person-wrap {
@@ -281,6 +279,10 @@ to {
 
 .g-sc-tbl td, .g-sc-tbl td>a {
 	text-align: left;
+	
+	
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .gosu-write-wrap {
@@ -359,27 +361,10 @@ to {
 		<div class="g-plus">
 			<a href="/gosuList.do" style="color: rgb(78, 205, 196);">더보기</a>
 		</div>
-		<%--
-			<c:set var="i" value="0" />
-		<c:set var="j" value="3" />
-		<table border="1">
-			<c:forEach items="${list }" var="list">
-				<c:if test="${i%j == 0 }">
-					<tr>
-				</c:if>
-				<td>${list }</td>
-				<c:if test="${i%j == j-1 }">
-					</tr>
-				</c:if>
-				<c:set var="i" value="${i+1 }" />
-			</c:forEach>
-		</table>
-
-		
-		 --%>
-	
-		<c:forEach items="${gList }" var="g" varStatus="i">
-			<c:if test="${i.index%2 == 0 }">
+		<c:set var="i" value="0" />
+		<c:set var="j" value="2" />
+		<c:forEach items="${gList }" var="g">
+			<c:if test="${i%j == 0 }">
 				<div class="gosu-wrap">
 			</c:if>
 			<div class="gosu">
@@ -388,17 +373,17 @@ to {
 					<table>
 						<tr>
 							<c:if test="${empty g.gosuImg }">
-								<td rowspan="4" class="gosu_img" style="width: 30%;"><img
+								<td rowspan="4" class="gosu_img" style="padding: 40px; text-align: center;" ><img
 									src="/resources/img/gosu/g_img_basic.png"
-									style="border-radius: 50%;"></td>
+									style="border-radius: 50%; width: 200px; height: 200px;"></td>
 							</c:if>
 							<c:if test="${not empty g.gosuImg }">
-								<th rowspan="4" style="padding: 40px;"><img
-									src="${g.gosuImg }" style="width: 250px;"></th>
+								<td rowspan="4" style="padding: 40px; text-align: center;"><img
+									src="${g.gosuImg }" style="border-radius: 50%; width: 200px; height: 200px;"></td>
 							</c:if>
 
 
-							<td><a href="/gosuContent.do?gNo=${g.ggsouNo}"
+							<td style="width: 600px;"><a href="/gosuContent.do?gNo=${g.ggsouNo}"
 								class="gtitle">${g.gosuTitle }</a></td>
 						</tr>
 						<tr>
@@ -423,10 +408,14 @@ to {
 					</table>
 				</button>
 			</div>
-			<c:if test="${i.index%2 == 0 }">
-	</div>
-	</c:if>
-	</c:forEach>
+			<c:if test="${i%j == j-1 }">
+				</div>
+			</c:if>
+			<c:set var="i" value="${i+1 }" />
+		</c:forEach>
+
+
+	
 
 
 	<div style="text-align: center">

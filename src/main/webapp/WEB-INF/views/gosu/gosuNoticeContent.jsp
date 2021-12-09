@@ -147,7 +147,7 @@
 			<a class="btn btn-info"
 				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">피드백
 				신청하기</a> <a class="btn btn-primary"
-				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">뒤로가기</a>
+				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;" onclick="history.back();">뒤로가기</a>
 		</div>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>

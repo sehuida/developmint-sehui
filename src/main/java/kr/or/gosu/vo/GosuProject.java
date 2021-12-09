@@ -17,6 +17,8 @@ public class GosuProject {
 		return gprojectContent.replaceAll("\r\n", "<br>");
 	}
 
-
+	public String getGprojectTitleBr(){
+		return gprojectTitle.replaceAll("\r\n", "<br>");
+	}
 
 }
