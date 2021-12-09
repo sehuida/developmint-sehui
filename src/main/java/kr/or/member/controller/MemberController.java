@@ -311,4 +311,13 @@ public class MemberController {
 			return "0";
 		}
 	}
+	@RequestMapping(value="/mypageCom.do")
+	public String mypageCom() {
+		return "member/mypageCom";
+	}
+	@RequestMapping(value="/mypageGosu.do")
+	public String mypageGosu() {
+		return "member/mypageGosu";
+	}
+	
 }
