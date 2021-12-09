@@ -80,17 +80,17 @@
 	</div>
 	
 	<%--조회 카테고리 --%>
-	<a href="/allMemberList.do?reqPage=1&type=0&list=member_no" id="newList" class="listTag">최신순</a>
-	<a href="/allMemberList.do?reqPage=1&type=0&list=member_grade" id="gradeList" class="listTag">등급순</a>
-	<a href="/allMemberList.do?reqPage=1&type=1&list=member_no" id="memberList" class="listTag">일반회원</a>
-	<a href="/allMemberList.do?reqPage=1&type=2&list=member_no" id="gosuList" class="listTag">고수회원</a>
-	<a href="/allMemberList.do?reqPage=1&type=3&list=member_no" id="companyList" class="listTag">기업회원</a>
+	<a href="/allMemberList.do?reqPage=1&type=0&list=1" id="newList" class="listTag">최신순</a>
+	<a href="/allMemberList.do?reqPage=1&type=0&list=2" id="gradeList" class="listTag">등급순</a>
+	<a href="/allMemberList.do?reqPage=1&type=1&list=1" id="memberList" class="listTag">일반회원</a>
+	<a href="/allMemberList.do?reqPage=1&type=2&list=1" id="gosuList" class="listTag">고수회원</a>
+	<a href="/allMemberList.do?reqPage=1&type=3&list=1" id="companyList" class="listTag">기업회원</a>
 	
 	<%--조회 리스트 테이블 --%>
 	<%--최신순(전체회원조회) --%>
 	<table class="table newListTbl ">
 		<tr>
-			<th><input type="checkbox" id="checkAll" class="form-check-input"></th>
+			<th><input type="checkbox" id="checkAll" class="form-check-input" style="zoom: 1.2;"></th>
 			<th>아이디</th>
 			<th>이름</th>
 			<th>등급</th>
@@ -102,7 +102,7 @@
 		</tr>
 		<c:forEach items="${memberList }" var="ml" varStatus="i">
 			<tr class="tblTr">
-				<td><input type="checkbox" class="form-check-input chk"></td>
+				<td><input type="checkbox" class="form-check-input chk" style="zoom: 1.2;"></td>
 				<td>${ml.memberId }</td>
 				<td>${ml.memberName}</td>
 				<c:choose>
@@ -200,8 +200,32 @@
 		}
 	 });
 	 
+	 $('.chk').change(function(){
+		 var index = $('.chk').index(this);
+		 var checkBoxCheck = $('.chk').is(":checked");
+		 if(checkBoxCheck){
+			$(".tblTr").eq(index).css("background-color","rgba(78,205,196,0.1)")
+		}else{
+			$(".tblTr").eq(index).css("background-color","#fff")
+		}
+	 });
+	 
+	 $(function(){
+		 var type = '${type}';
+		 var list = '${list}';
+		 if(type == 0 && list == 1){
+			 $(".listTag").eq(0).css("color","#4ECDC4");
+		 }else if(type == 0 && list == 2){
+			 $(".listTag").eq(1).css("color","#4ECDC4");
+		 }else if(type == 1 && list == 1){
+			 $(".listTag").eq(2).css("color","#4ECDC4");
+		 }else if(type == 2 && list == 1){
+			 $(".listTag").eq(3).css("color","#4ECDC4");
+		 }else if(type == 3 && list == 1){
+			 $(".listTag").eq(4).css("color","#4ECDC4");
+		 }
+	 })
 
-	 	
 	 	
 	 	
 	 </script>
