@@ -56,17 +56,17 @@
 					      <label for="formFile" class="form-label mt-4"><i class="bi bi-files" style="font-size: 1.2em;"></i> 첨부파일<span style="font-size: small;color: #999;"> *파일첨부는 한 개만 가능합니다</span></label>
 					      <input type="hidden" name="status" value="1">
 							<c:choose>
-								<c:when test="${not empty n.noticeFilename }">
-									<img src="/img/file.png" width="16px" class="delFile">
-									<span class="delFile">${n.noticeFilename }</span>
+								<c:when test="${not empty n.filename }">
+									<img src="/resources/img/file.png" width="16px" class="delFile">
+									<span class="delFile">${n.filename }</span>
 									<button type="button" id="delBtn" class="btn btn-primary btn-sm delFile">삭제
 									</button>
-									<input type="file" name="upfile" style="display:none;">
-									<input type="hidden" name="oldFilename" value="${n.noticeFilename }">
-									<input type="hidden" name="oldFilepath" value="${n.noticeFilepath }">
+									<input type="file" name="upfile" style="display:none;" class="form-control" id="formFile">
+									<input type="hidden" name="oldFilename" value="${n.filename }">
+									<input type="hidden" name="oldFilepath" value="${n.filepath }">
 								</c:when>
 								<c:otherwise>
-									<input type="file" name="upfile">
+									<input type="file" id="formFile" name="upfile" class="form-control">
 								</c:otherwise>
 							</c:choose>
 					    </div>
@@ -86,6 +86,13 @@
 		</div>
 	</div>
 	<script>
+		$("#delBtn").click(function(){
+			$(".delFile").hide();
+			$(this).next().show();
+			$("#img-x").attr("src","");
+			$("[name=status]").val(2);
+		});	
+	
 		$(function(){
 			$("#pin").click(function(){
 			if($("#pin").is(':checked')== true){
@@ -168,7 +175,7 @@
 		}); */
 		
 		$("#nWriteBtn").click(function(){
-			 if($("#noticeTitle").val()!=null&&$("#noticeContent").val()!=null){
+			 if($("#noticeTitle").val()!=""&&$("#noticeContent").val()!=""){
 				 swal({
 					   title: "수정성공!",
 					   text: "공지사항이 수정되었습니다.",

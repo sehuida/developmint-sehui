@@ -154,7 +154,7 @@
 		}); */
 		
 		$("#nWriteBtn").click(function(){
-			 if($("#noticeTitle").val()!=null&&$("#noticeContent").val()!=null){
+			 if($("#noticeTitle").val()!=""&&$("#noticeContent").val()!=""){
 				 swal({
 					   title: "등록성공!",
 					   text: "공지사항이 등록되었습니다.",
