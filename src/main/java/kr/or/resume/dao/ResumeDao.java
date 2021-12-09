@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.member.model.vo.Member;
 import kr.or.resume.vo.Resume;
 
 @Repository
@@ -53,6 +54,10 @@ public class ResumeDao {
 	public int updateCeoResume(Resume r) {
 		System.out.println("여기 dao resume : " + r);
 		return sqlSession.update("resume.updateResume", r);
+	}
+
+	public Member selectOneMember(int memberNo) {
+		return sqlSession.selectOne("resume.selectOneMember", memberNo);
 	}
 	 
 }

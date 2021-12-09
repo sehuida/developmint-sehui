@@ -151,4 +151,13 @@
 		where resume_no = #{resumeNo}
 	</update>
 	
+	<select id="selectOneMember" parameterType="_int" resultType="m">
+		select
+			member_name as memberName,
+			phone,
+			email
+		from member
+		where member_no = #{memberNo}
+	</select>
+	
 </mapper>

@@ -114,7 +114,7 @@
 		overflow: hidden;
 		float: right;	
 	}
-	.updateResume, .resumeView{
+	.updateResume, .ceoResumeView{
 		border: none;
 		width: 100px;
 		height: 45px;
@@ -129,7 +129,7 @@
 		background-color: rgb(78, 205, 196);
 		color: white;
 	}
-	.resumeView:hover{
+	.ceoResumeView:hover{
 		background-color: rgb(78, 205, 196);
 		color: white;
 	}
@@ -435,7 +435,8 @@
 							<span class="requestCount">1</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
 						</div>
 						<div class="update">
-							<a href="resumeView.do?ceoResume=${r.ceoResume }"><button class="resumeView">이력서 보기</button></a>
+							
+							<a href="ceoResumeView.do?ceoResume=${r.ceoResume }"><button class="ceoResumeView">이력서 보기</button></a>
 							<a href="updateResumeFrm.do?ceoResume=${r.ceoResume }"><button class="updateResume">수정하기</button></a>
 						</div>
 					</div>
@@ -551,7 +552,7 @@
 										<img src="resources/img/resume/workFromWhite.PNG">
 									</div>
 									<div class="resumeInfoData">
-																		<!-- r.resumeWorkForm -->
+										<!-- r.resumeWorkForm -->
 										<c:if test="${rs.workForm eq 1 }">		<!-- 1 -> 정규직 -->
 						            		<span>정규직</span>
 						            	</c:if>
