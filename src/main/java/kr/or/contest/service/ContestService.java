@@ -59,11 +59,13 @@ public class ContestService {
 	public int deleteContestComment(Comment cm) {
 		return dao.deleteContestComment(cm);
 	}
-
+	
+	@Transactional
 	public int reportContestComment(Report rp) {
 		return dao.reportContestComment(rp);
 	}
-
+	
+	@Transactional
 	public int insertContestMember(ContestMember conmem) {
 		return dao.insertContestMember(conmem);
 	}

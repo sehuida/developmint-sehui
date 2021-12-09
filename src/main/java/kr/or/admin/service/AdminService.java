@@ -14,6 +14,7 @@ import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.admin.dao.AdminDao;
 import kr.or.admin.vo.TotalData;
@@ -75,7 +76,7 @@ public class AdminService {
 		return td;
 	}
 
-	public TotalMember totalMember(int reqPage, int type, String list) {
+	public TotalMember totalMember(int reqPage, int type, int list) {
 		//한페이지에 보여줄 회원 수
 		int numPerPage = 10;
 		int end = reqPage*numPerPage;
@@ -214,7 +215,9 @@ public class AdminService {
 		pageNavi += "</ul>";		
 		
 		List<String> memberId = dao.memberIdList(map);
-		TotalMember tm = new TotalMember(start, pageNavi, allReportList, memberId, totalCount);
+		ArrayList<Report> report5List = dao.report5List();
+		List<String> report5ListMember = dao.report5ListMember();
+		TotalMember tm = new TotalMember(start, pageNavi, allReportList, memberId, totalCount, report5List, report5ListMember);
 
 		
 		return tm;		
@@ -224,17 +227,30 @@ public class AdminService {
 	public int memberReportCount(String id) {
 		return dao.memberReportCount(id);
 	}
-
+	
+	@Transactional
 	public int canselReport(int reportNo) {
 		return dao.canselReport(reportNo);
 	}
-
-	public int reportInsert(int reportNo) {
-		return dao.reportInsert(reportNo);
+	
+	@Transactional
+	public int reportInsert(int reportNo, String memberId) {
+		int result = dao.reportInsert(reportNo);
+		int result1 = 0;
+		if(result>0) {
+			result1 = dao.memberGradeChange1(memberId);
+		}
+		return result1;
 	}
-
-	public int falseReport(int reportNo) {
-		return dao.falseReport(reportNo);
+	
+	@Transactional
+	public int falseReport(int reportNo, String memberId) {
+		int result = dao.falseReport(reportNo);
+		int result1 = 0;
+		if(result>0) {
+			result1 = dao.memberGradeChange2(memberId);
+		}
+		return result1;
 	}
 }
 

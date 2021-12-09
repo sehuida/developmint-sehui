@@ -97,7 +97,16 @@
 				member_type = 3
 			</if>
 		</trim>
-		 order by #{list} desc)m order by rnum) 
+		 order by
+		 <choose> 
+		 	<when test="list == 1">
+		 		member_no
+		 	</when>
+		 	<when test="list == 2">
+		 		member_grade
+		 	</when>
+		 </choose>
+		  desc)m order by rnum) 
 		where rnum BETWEEN #{start} and #{end}
 	</select>
 	
@@ -133,30 +142,31 @@
 		update member set member_grade =
 		<choose>
 			<when test="grade == '브론즈'">
-				10
+				10, member_type = 1
 			</when>
 			<when test="grade == '실버'">
-				21
+				21, member_type = 1
 			</when>
 			<when test="grade == '골드'">
-				41
+				41, member_type = 1
 			</when>
 			<when test="grade == '플레티넘'">
-				61
+				61, member_type = 1
 			</when>
 			<when test="grade == '다이아'">
-				81
+				81, member_type = 2
 			</when>
 			<when test="grade == '마스터'">
-				111
+				111, member_type = 2
 			</when>
 			<when test="grade == '챌린저'">
-				141
+				141, member_type = 2
 			</when>
 		</choose>
 		where member_id = #{id}
 	</update>
 	
+	<!-- 신고 목록 조회 -->
 	<select id="allReportList" parameterType="map" resultType="rp">
 		select * 
 		from(
@@ -177,10 +187,12 @@
 		where rnum BETWEEN #{start} and #{end}
 	</select>
 	
+	<!-- 총 신고 수 -->
 	<select id="reportCount" resultType="_int">
 		select count(*) from report where report_status = 1
 	</select>
 	
+	<!-- 신고된 아이디 리스트 조회 -->
 	<select id="memberIdList" parameterType="map" resultType="string">
 		select memberId from(select rownum as rnum, c.MEMBER_ID as memberId, R.REPORT_STATUS as status
 		from report r 
@@ -189,6 +201,7 @@
 		where rnum BETWEEN #{start} and #{end}
 	</select>
 	
+	<!-- 해당 아이디 신고 횟수 조회-->
 	<select id="memberReportCount" parameterType="string" resultType="_int">
 		select count(id) from(select c.MEMBER_ID as id, report.REPORT_STATUS rs
 		from report 
@@ -196,19 +209,76 @@
 		where id = #{id} and rs = 2
 	</select>
 	
+	<!-- 신고 반려 처리 -->
 	<update id="canselReport" parameterType="_int">
-		update REPORT set REPORT_STATUS = 3, enroll_date = to_char(sysdate,'yyyy-mm-dd') where REPORT_NO = #{reportNo}
+		update REPORT set REPORT_STATUS = 3, enroll_date = to_char(SYSDATE,'YYYY/MM/DD HH:MI:SS') where REPORT_NO = #{reportNo}
 	</update>
 	
+	<!-- 신고 처리 -->
 	<update id="reportInsert" parameterType="_int">
-		update REPORT set REPORT_STATUS = 2, enroll_date = to_char(sysdate,'yyyy-mm-dd')  where REPORT_NO = #{reportNo}
+		update REPORT set REPORT_STATUS = 2, enroll_date = to_char(SYSDATE,'YYYY/MM/DD HH:MI:SS') where REPORT_NO = #{reportNo}
 	</update>
 	
+	<!-- 신고 처리시 -5점, 81점 이하일 경우 고수 박탈 -->
+	<update id="memberGradeChange1" parameterType="string">
+	 <![CDATA[
+		update member set 
+		member_grade = case when member_grade<=5 then 1 else member_grade-5 end,
+		member_type = case when (member_grade-5)<81 then 1 else 2 end
+		where member_id = #{value}
+		  ]]>
+	</update>
+	
+	<!-- 허위신고 처리 -->
 	<update id="falseReport" parameterType="_int">
-		update REPORT set REPORT_STATUS = 4, enroll_date = to_char(sysdate,'yyyy-mm-dd')  where REPORT_NO = #{reportNo}
+		update REPORT set REPORT_STATUS = 4, enroll_date = to_char(SYSDATE,'YYYY/MM/DD HH:MI:SS')  where REPORT_NO = #{reportNo}
 	</update>
 	
+	<!-- 허위신고 처리시 -3점, 81점 이하일 경우 고수 박탈 -->
+	<update id="memberGradeChange2" parameterType="string">
+	<![CDATA[
+		update member set 
+		member_grade = case when member_grade<=3 then 1 else member_grade-3 end,
+		member_type = case when (member_grade-3)<81 then 1 else 2 end
+		where member_id = #{value}
+		]]>
+	</update>
 	
+	<select id="report5List" resultType="rp">
+		select * 
+		from(
+			select rownum as rnum, r.* 
+			from(
+				select 
+					report_no as reportNo,
+					reporter_id as reporterId,
+					report_reason as reportReason,
+					report_etc as reportEtc,
+					comment_no as commentNo,
+					report_date as reportDate,
+					report_status as reportStatus,
+					comment_content as commentContent,
+					enroll_date as enrollDate
+				from REPORT where report_status != 1 order by enroll_date desc)r 
+			order by rnum) 
+		where rnum BETWEEN 1 and 5
+	</select>
+	
+	<!-- 신고된 아이디 리스트 조회 -->
+	<select id="report5ListMember" resultType="string">
+		select memberId 
+		from(
+			select 
+				rownum as rnum, 
+				c.MEMBER_ID as memberId, 
+				R.REPORT_STATUS as status,
+				R.enroll_date as enrollDate
+		from report r 
+		join COMMENTS c using(COMMENT_NO)
+		where R.REPORT_STATUS != 1
+		order by r.ENROLL_DATE desc)
+		where rnum BETWEEN 1 and 5
+	</select>
 
 </mapper>
 

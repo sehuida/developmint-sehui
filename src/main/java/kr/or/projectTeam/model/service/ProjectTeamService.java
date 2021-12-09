@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kr.or.projectTeam.model.dao.ProjectTeamDao;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectTeam;
+import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
 import kr.or.projectTeam.model.vo.projectTeamMainPageData;
 
@@ -217,6 +218,24 @@ public class ProjectTeamService {
 		
 		projectTeamMainPageData ptmpd = new projectTeamMainPageData(list, pageNavi, start, pdLangList, developLangList, langList);
 		return ptmpd;
+	}
+
+
+	public int writeRecruitTeam1(ProjectTeam pt, int memberNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("pt", pt);
+		int result = dao.writeRecruitTeam(map);
+		return result;
+	}
+
+	public int writeRecruitTeam2(ArrayList<ProjectTeamFileVO> flist, ProjectTeam pt, int memberNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("pt", pt);
+		map.put("flist", flist);
+		int result = dao.writeRecruitTeam(map);
+		return result;
 	}
 	
 }

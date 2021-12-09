@@ -110,6 +110,24 @@ public class AdminDao {
 		return sqlSession.update("admin.falseReport", reportNo);
 	}
 
+	public int memberGradeChange1(String memberId) {
+		return sqlSession.update("admin.memberGradeChange1", memberId);
+	}
+
+	public int memberGradeChange2(String memberId) {
+		return sqlSession.update("admin.memberGradeChange2", memberId);
+	}
+
+	public ArrayList<Report> report5List() {
+		List<Report> list = sqlSession.selectList("admin.report5List");
+		return (ArrayList<Report>)list;
+	}
+
+	public List<String> report5ListMember() {
+		List<String> list = sqlSession.selectList("admin.report5ListMember");
+		return list;
+	}
+
 }
 
 

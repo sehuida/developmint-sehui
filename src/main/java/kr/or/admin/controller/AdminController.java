@@ -59,12 +59,14 @@ public class AdminController {
 	
 	//전체회원리스트 목록으로 이동
 	@RequestMapping(value="/allMemberList.do")
-	public String allMemberList(Model model, int reqPage, int type, String list) {
+	public String allMemberList(Model model, int reqPage, int type, int list) {
 		TotalMember tm = service.totalMember(reqPage,type,list);
 		model.addAttribute("memberList", tm.getAllMemberList());
 		model.addAttribute("start",tm.getStart());
 		model.addAttribute("pageNavi",tm.getPageNavi());
 		model.addAttribute("totalCount",tm.getTotalCountList());
+		model.addAttribute("type",type);
+		model.addAttribute("list",list);
 		return "admin/allMemberList";
 	}
 	
@@ -77,6 +79,8 @@ public class AdminController {
 		model.addAttribute("pageNavi",tm.getPageNavi());
 		model.addAttribute("memberId",tm.getMemberId());
 		model.addAttribute("totalCount", tm.getTotalCount());
+		model.addAttribute("report5List", tm.getReport5List());
+		model.addAttribute("report5ListMember", tm.getReport5ListMember());
 		return "admin/reportMember";
 	}
 	
@@ -95,7 +99,7 @@ public class AdminController {
 		}else {
 			model.addAttribute("msg","변경실패");
 		}
-		model.addAttribute("loc","/allMemberList.do?reqPage=1&type=0&list=member_no");
+		model.addAttribute("loc","/allMemberList.do?reqPage=1&type=0&list=1");
 		return "common/msg";
 	}
 	
@@ -122,8 +126,8 @@ public class AdminController {
 
 	//신고 처리
 	@RequestMapping(value="/reportInsert.do")
-	public String reportInsert(Model model, int reportNo) {
-		int result = service.reportInsert(reportNo);
+	public String reportInsert(Model model, int reportNo, String memberId) {
+		int result = service.reportInsert(reportNo, memberId);
 		if(result>0) {
 			model.addAttribute("msg","신고 처리되었습니다.");
 		}else {
@@ -135,8 +139,8 @@ public class AdminController {
 	
 	//허위 신고 처리
 	@RequestMapping(value="/falseReport.do")
-	public String falseReport(Model model, int reportNo) {
-		int result = service.falseReport(reportNo);
+	public String falseReport(Model model, int reportNo, String memberId) {
+		int result = service.falseReport(reportNo, memberId);
 		if(result>0) {
 			model.addAttribute("msg","허위신고로 처리되었습니다.");
 		}else {

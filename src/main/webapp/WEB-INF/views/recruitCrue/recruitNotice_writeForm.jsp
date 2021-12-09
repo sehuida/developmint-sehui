@@ -25,7 +25,6 @@
 <script>
 	$(function(){
 		
-		var resultArr = [false, false, false, false, false, false, false, false];
 		$("input[type='checkbox']").on("click", function(){
 			var count = $(".btn-check:checked").length;
 			if(count>3){
@@ -44,8 +43,7 @@
 	});
 	
 	function checkValue(){
-        if(!($(".btn-check:checked").length == 0) && ($("#datePicker").val() == "") && ($("#inputLarge").val() == "") && ($("input[name=projectTitle]").val() == "")
-        		&& ($("input[name=projectGoal]").val() == "")) && ($("input[name=boardContent]").val() == ""))) {
+        if(!($(".btn-check:checked").length == 0) && ($("#datePicker").val() == "") && ($("#inputLarge").val() == "") && ($("input[name=projectTitle]").val() == "") && ($("input[name=projectGoal]").val() == "") && ($("input[name=boardContent]").val() == "")) {
         	swal("체크하지 않거나 입력되지 않은 값이 있습니다.", "비어있는 입력값이 있는지 다시 한번 확인해주세요!", "warning");
         	return false;
         } 
@@ -68,7 +66,7 @@
 	            <form action="/writeRecruitTeam.do" method="post" enctype="multipart/form-data" onsubmit="return checkValue();">
 		            <div class="writeBox">
 	                    <div class="form-group">
-	                        <input class="form-control form-control-lg" type="text" placeholder="모집공고 제목을 입력해주세요." id="inputLarge" name="boardTitle" maxlength="30">
+	                        <input class="form-control form-control-lg" type="text" placeholder="모집공고 제목을 입력해주세요." id="inputLarge" name="rTitle" maxlength="30">
 	                    </div>
 	                    <div class="writeLine">
 	                        <div class="titleFlexBox">
@@ -100,7 +98,7 @@
 	                                <input type="checkbox" class="btn-check" id="btncheck10" autocomplete="off" name="chk" value="c++">
 	                                <label class="btn btn-primary" for="btncheck10">c++</label>
 	                                <input type="checkbox" class="btn-check" id="btncheck11" autocomplete="off" name="chk" value="go">
-	                                <label class="btn btn-primary" for="btncheck10">go</label>
+	                                <label class="btn btn-primary" for="btncheck11">go</label>
 	                                <input type="checkbox" class="btn-check" id="btncheck12" autocomplete="off" name="chk" value="python">
 	                                <label class="btn btn-primary" for="btncheck12">python</label>
 	                                <input type="checkbox" class="btn-check" id="btncheck13" autocomplete="off" name="chk" value="django">
@@ -116,7 +114,7 @@
 	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/pending.png">
 	                            <p class="titleText">모집마감일(모집일부터 최대 14일)</p>
 	                        </div>
-	                        <input type="text" id="datePicker" class="form-control" placeholder="마감일을 선택해주세요" name="boardDeadLine">
+	                        <input type="text" id="datePicker" class="form-control" placeholder="마감일을 선택해주세요" name="rEndDate">
 	                       <!--  <ul class="nav nav-pills">
 	                            <li class="nav-item dropdown">
 	                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">날짜를 선택하세요</a>
@@ -136,7 +134,7 @@
 	                            <p class="titleText">프로젝트명</p>
 	                        </div>
 	                        <div class="form-group">
-	                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault" name="projectTitle" maxlength="40">
+	                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault" name="projectName" maxlength="40">
 	                        </div>
 	                    </div>
 	                    <div class="line"></div>
@@ -158,12 +156,13 @@
 	                        <h4 id="maxContentPost" style="text-align:left"></h4>
 	                        
 	                        <div class="form-group">
-	                            <textarea class="form-control" id="summernote" rows="3" name="boardContent"></textarea>
+	                            <textarea class="form-control" id="summernote" rows="3" name="rContent"></textarea>
 	                        </div>
 	                    </div>
 	                    <div class="finalLine"></div>
 	                    <div class="submitBtnBox">
 	                    	<input type="hidden" name="memberNo" value="${memberNo }">
+	                    	<input type="hidden" name="files" multiple> 
 	                        <button type="submit" class="btn btn-primary btn-lg" onclick="return checkValue();">제출</button>
 	                    </div>
 	                </div>
@@ -230,6 +229,7 @@
 	function uploadImage(file, editor){
 		data = new FormData();
 		data.append("file",file);
+		var fileData = $("input[name=files]").val();
 		$.ajax({
 			url : "/rUploadImage.do",
 			type :"post",		//file전송을 위해 ajax를 할떄는 type을 post로 해줘야한다
@@ -238,7 +238,10 @@
 			processData : false,
 			contentType : false,
 			success : function(data){
+				console.log(data);
 				$(editor).summernote("insertImage",data);
+				fileData = data;
+				
 			}
 		});
 	}

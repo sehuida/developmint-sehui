@@ -88,7 +88,7 @@
 	text-align: center;
 }
 .selectBox{
-  transition: all 0.4s cubic-bezier(.5, .24, 0, 1);
+  transition: all .2s cubic-bezier(0.77, 0, 0, 0);
 }
 
 </style>
@@ -194,17 +194,19 @@
 					<div class="btnBox">
 					<div>
 					<form action="/cancleReport.do" method="post" class="cancleReportForm">
-						<button type="button" class="btn btn-secondary canselReport" style="width:220px; margin:3px">신고반려</button>
+						<button type="button" class="btn btn-secondary canselReport" style="width:250px; margin:3px">신고반려</button>
 						<input type="hidden" name="reportNo" value="${r.reportNo }">
 					</form> 
 					<form action="/reportInsert.do" method="post" class="reportBtnForm">
-						<button type="button" class="btn btn-primary reportBtn" style="width:220px; margin:3px">신고 처리</button>
+						<button type="button" class="btn btn-primary reportBtn" style="width:250px; margin:3px">신고 처리</button>
 						<input type="hidden" name="reportNo" value="${r.reportNo }">
+						<input type="hidden" name="memberId" value="${memberId[i.index] }">
 					</form>
 					</div>
 					<form action="/falseReport.do" method="post" class="falseReportForm">
-						<button type="button" class="btn btn-outline-primary falseBtn"style="width:450px; margin-top:10px">허위 신고</button>
+						<button type="button" class="btn btn-outline-primary falseBtn"style="width:500px; margin-top:10px">허위 신고</button>
 						<input type="hidden" name="reportNo" value="${r.reportNo }">
+						<input type="hidden" name="memberId" value="${r.reporterId }">
 					</form> 
 					</div>
 				</div>
@@ -219,22 +221,50 @@
 							<th>처리상태</th>
 							<th>신고자</th>
 							<th>신고당한 회원</th>
+							<th>신고사유</th>
+							<th>신고처리 날짜</th>
 						</tr>
+						<c:forEach items="${report5List }" var="r" varStatus="i">
 						<tr>
-							<td><span class="badge badge-primary">신고처리</span></td>
-							<td>user01</td>
-							<td>user99</td>
+							<c:choose>
+								<c:when test="${r.reportStatus == 2 }">
+									<td><span class="badge badge-primary">신고처리</span></td>
+								</c:when>
+								<c:when test="${r.reportStatus == 3 }">
+									<td><span class="badge badge-secondary">신고반려</span></td>
+								</c:when>
+								<c:when test="${r.reportStatus == 4 }">
+									<td><span class="badge badge-light" style="color:#78c2ad; border:1px solid #78c2ad">허위신고</span></td>
+								</c:when>
+							</c:choose>
+							<td>${r.reporterId }</td>
+							<td>${report5ListMember[i.index] }</td>
+							<c:choose>
+								<c:when test="${r.reportReason == 1 }">
+									<td>영리목적/홍보성</td>
+								</c:when>
+								<c:when test="${r.reportReason == 2 }">
+									<td>음란성/선정성</td>
+								</c:when>
+								<c:when test="${r.reportReason == 3 }">
+									<td>불법정보</td>
+								</c:when>
+								<c:when test="${r.reportReason == 4 }">
+									<td>같은 내용 반복 게시(도배)</td>
+								</c:when>
+								<c:when test="${r.reportReason == 5 }">
+									<td>욕설/인신공격</td>
+								</c:when>
+								<c:when test="${r.reportReason == 6 }">
+									<td>개인정보누출</td>
+								</c:when>
+								<c:when test="${r.reportReason == 7 }">
+									<td>기타사유 : ${r.commentContent }</td>
+								</c:when>
+							</c:choose>
+							<td>${r.enrollDate}</td>
 						</tr>
-						<tr>
-							<td><span class="badge badge-secondary">신고반려</span></td>
-							<td>user01</td>
-							<td>user99</td>
-						</tr>
-						<tr>
-							<td><span class="badge badge-light" style="color:#78c2ad; border:1px solid #78c2ad">허위신고</span></td>
-							<td>user01</td>
-							<td>user99</td>
-						</tr>
+						</c:forEach>
 					</table>
 				</div>
 			</div>
@@ -244,7 +274,9 @@
 	 	$(".selectBox").click(function(){
 	 		var index = $(this).index();
 	 		$(".selectBox").css("border","1px solid #d9d9d9");
+	 		$(".selectBox").css("background-color","#fff");
 	 		$(".selectBox").eq(index).css("border","3px solid #4ECDC4");
+	 		$(".selectBox").eq(index).css("background-color","rgba(78,205,196,0.05)");
 	 		$(".reportContent").hide();
 	 		var index = $(this).index();
 	 		$(".reportContent").eq(index).css("display","block");
@@ -266,7 +298,7 @@
 	 	$(".canselReport").click(function(){
 	 		var index = $(this).index();
 	 		swal({
-	 			  title: "신고처리",
+	 			  title: "신고반려",
 	 			  text: "해당 신고를 반려처리 하시겠습니까?",
 	 			  icon: "warning",
 	 			  buttons: true,
@@ -281,18 +313,34 @@
 	 	
 	 	$(".reportBtn").click(function(){
 	 		var index = $(this).index();
-	 		swal({
-	 			  title: "신고처리",
-	 			  text: "해당 회원을 신고처리 하시겠습니까?",
-	 			  icon: "warning",
-	 			  buttons: true,
-	 			  dangerMode: true,
-	 			})
-	 			.then((willDelete) => {
-	 			  if (willDelete) {
-	 			   $(".reportBtnForm").eq(index).submit();	
-	 			  }
-	 			});
+	 		var rpCount = $(".rpCount").eq(index).html();
+	 		if(rpCount == 4){
+	 			swal({
+		 			  title: "신고처리(로그인차단)",
+		 			  text: "해당회원을 신고처리 하시면 로그인이 차단됩니다. 신고처리 하시겠습니까?",
+		 			  icon: "warning",
+		 			  buttons: true,
+		 			  dangerMode: true,
+		 			})
+		 			.then((willDelete) => {
+		 			  if (willDelete) {
+		 			   $(".reportBtnForm").eq(index).submit();	
+		 			  }
+		 			});
+	 		}else{
+	 			swal({
+		 			  title: "신고처리",
+		 			  text: "해당 회원을 신고처리 하시겠습니까?",
+		 			  icon: "warning",
+		 			  buttons: true,
+		 			  dangerMode: true,
+		 			})
+		 			.then((willDelete) => {
+		 			  if (willDelete) {
+		 			   $(".reportBtnForm").eq(index).submit();	
+		 			  }
+		 			});
+	 		}
 	 	})
 	 	 
 	 	$(".falseBtn").click(function(){
