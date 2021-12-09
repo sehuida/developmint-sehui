@@ -233,7 +233,7 @@
 </script>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<form action="updateResume.do" method="post">
+	<form action="updateCeoResume.do" method="post">
 		<div class="contain">
 			<em>기본정보</em>
 			<div class="grayBox">
@@ -246,7 +246,8 @@
 					</pre>
 				</div>
 				<div class="info">
-					<input type="hidden" name="resumeNo" value="${r.resumeNo }">		<!-- 멤버번호 가져오기 위해서 히든으로 전송 -->
+					<input type="hidden" name="resumeNo" value="${r.resumeNo }">		<!-- 이력서번호 가져오기 위해서 히든으로 전송 -->
+					<input type="hidden" name="resumeNo" value="${sessionScope.m.memberNo }">		<!-- 멤버번호 가져오기 위해서 히든으로 전송 -->
 					<pre>
 ${sessionScope.m.memberId}
 ${sessionScope.m.email}
@@ -313,7 +314,7 @@ ${sessionScope.m.phone}
 							<b>전공</b>
 						</div>
 						<div class="schoolNameInput">
-							<select class="selectInput" name="major" value="${major }">
+							<select class="selectInput" name="major">
 								<option value="0">전공 선택</option>
 								<option value="1">전기/전자/정보통신공학</option>
 								<option value="2">컴퓨터/시스템공학</option>

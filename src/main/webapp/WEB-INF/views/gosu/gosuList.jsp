@@ -54,13 +54,16 @@
 	padding-right: 30px;
 	padding-left: 30px;
 	text-align: left;
+	
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .gosu hr {
 	max-width: 100%;
 	font-weight: bold;
-	background-color: rgb(199, 199, 199);
-	height: 1px;
+	background-color: black;
+	height: 3px;
 }
 
 .gosu-search {
@@ -181,17 +184,17 @@
 						<table>
 							<tr>
 								<c:if test="${empty g.gosuImg }">
-									<td rowspan="4" class="gosu_img" style="width: 30%;"><img
+									<td rowspan="4" class="gosu_img" style="padding: 40px; text-align: center;"><img
 										src="/resources/img/gosu/g_img_basic.png"
-										style="border-radius: 50%;"></td>
+										style="border-radius: 50%; width: 200px; height: 200px;"></td>
 								</c:if>
 								<c:if test="${not empty g.gosuImg }">
-									<th rowspan="4" style="padding: 40px;"><img
-										src="${g.gosuImg }" style="width: 250px;"></th>
+									<td rowspan="4" style="padding: 40px; text-align: center;"><img
+										src="${g.gosuImg }" style="border-radius: 50%; width: 200px; height: 200px;"></td>
 								</c:if>
 
 
-								<td><a href="/gosuContent.do?gNo=${g.ggsouNo}" class="gtitle">${g.gosuTitle }</a></td>
+								<td style="width: 750px;"><a href="/gosuContent.do?gNo=${g.ggsouNo}" class="gtitle">${g.gosuTitle }</a></td>
 							</tr>
 							<tr>
 								<td><hr></td>

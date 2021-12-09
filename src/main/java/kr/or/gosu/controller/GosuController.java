@@ -139,6 +139,12 @@ public class GosuController {
 		model.addAttribute("loc", "/");
 		return "common/msg";
 	}
+	@ResponseBody
+	@RequestMapping(value = "/gpAjax.do")
+	public GosuProject gpAjax(int pNo) {
+		GosuProject gpr =service.selectGProject(pNo);
+		return  gpr;
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/gProjectAjax.do", produces = "application/json;charset=utf-8")

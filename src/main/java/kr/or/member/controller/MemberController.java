@@ -277,5 +277,47 @@ public class MemberController {
 	public String changePwFrm() {
 		return "member/changePwFrm";
 	}
+	@ResponseBody
+	@RequestMapping(value ="/checkPw.do")
+	public String checkPw(Member m) {
+		Member member = service.selectOneMember(m);
+		if(member != null) {
+			return "1";
+		}else {
+			return "0";
+		}
+	}
+	@RequestMapping(value="/chanePw.do")
+	public String chanePw(Member m,HttpSession session) {
+		int result = service.changePwMember(m);
+		if(result>0) {
+			session.invalidate();
+			return "common/main";
+		}else {
+			return "member/changePwFrm";
+		}
+	}
+	@RequestMapping(value="/companyMember.do")
+	public String companyMember() {
+		return "member/companyMember";
+	}
+	@ResponseBody
+	@RequestMapping(value="/addCompany.do")
+	public String addCompnay(Member m) {
+		int result = service.addCompany(m);
+		if(result>0) {
+			return "1";
+		}else {
+			return "0";
+		}
+	}
+	@RequestMapping(value="/mypageCom.do")
+	public String mypageCom() {
+		return "member/mypageCom";
+	}
+	@RequestMapping(value="/mypageGosu.do")
+	public String mypageGosu() {
+		return "member/mypageGosu";
+	}
 	
 }

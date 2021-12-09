@@ -13,4 +13,5 @@ public class Report {
 	public String reportDate;
 	public int reportStatus;
 	public String commentContent;
+	public String enrollDate;
 }
