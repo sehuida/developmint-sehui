@@ -41,17 +41,17 @@ public class ResumeController {
 		return "resume/updateResumeFrm";
 	}
 	
-	@RequestMapping(value="/updateResume.do")
-	public String updateResume(Resume r, int resumeNo, Model model) {
-		int result = service.updateResume(r, resumeNo);
+	@RequestMapping(value="/updateCeoResume.do")
+	public String updateCeoResume(Resume r, int memberNo, Model model) {
+		System.out.println(r);
+		int result = service.updateCeoResume(r);
 		if(result > 0) {
 			model.addAttribute("msg","이력서 수정완료");
-			//model.addAttribute("loc", "/WEB-INF/views/resume/resumeManage.jsp");
+			model.addAttribute("loc", "/resumeManage.do?memberNo="+memberNo);
 		} else {
 			model.addAttribute("msg","이력서 수정실패");
 		}
 		System.out.println(r);
-		System.out.println(resumeNo);
 		return "common/msg";
 	}
 	

@@ -37,9 +37,6 @@
 		padding-top: 3px;
 		
 	}
-	.resumeTitle{
-		margin-bottom: 30px;
-	}
 	em{
 		font-style: normal;
 		font-weight: 900;
@@ -52,6 +49,9 @@
 	.resumeInfo1, .resumeInfo2{
 		width: 900px;
 		overflow: hidden;
+	}
+	.resumeInfo2{
+		margin-bottom: 30px;
 	}
 	.resumeInfo1>li, .resumeInfo2>li{
 		color: rgb(158, 158, 158);
@@ -156,19 +156,18 @@
     	margin-left: 20px;
     }
     .myResume{
-    	margin-top: 30px;
+    	overflow: hidden;
     	margin-left: 15px;
     	margin-bottom: 50px;
     }
     .register{
-    	margin-top: 30px;
     	margin-left: 20px;
     	font-size: 13px;
     	font-weight: 900;
     	float: right;
     	position: relative;
-    	top: -180px;
-    	left: -200px;
+    	top: -30px;
+    	left: -50px;
     }
     
     input[type="checkbox"] { 
@@ -255,8 +254,8 @@
 		margin-top: 40px;
 		text-align: center;
 	}
-    .allResume{
-    	
+    .wd{
+    	margin-top: 10px;
     }
 </style>
 <script>
@@ -348,7 +347,7 @@
 								<span>${r.writeDate }</span>	
 							</div>
 						</div>
-							<div class="resumeTitle">
+							<div class="resumeTitle" style="margin-bottom: 30px;">
 								<em>${r.resumeTitle }</em>	<!-- r.resumeTitle -->
 							</div>
 							<ul class="resumeInfo1">
@@ -458,7 +457,7 @@
 			</c:otherwise>
 		</c:choose>
 		</div>
-		<hr style="width: 885px;">
+		<hr>
 		<c:choose>
 			<c:when test="${empty list }">
 				<div class="noResume">
@@ -467,108 +466,110 @@
 				</div>
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${list }" var="rs" varStatus="i">
 					<div class="myResume">
+						<div class="smallBox" style="width: 800px; margin: 0 auto;">
+				<c:forEach items="${list }" var="rs" varStatus="i">
 							<div class="wd">
 								<span style="font-size: 13px; color: gray;">${rs.writeDate }</span>	
 							</div>
-						<div class="resumeTitle">
-							<em>${rs.resumeTitle }</em>	
-						</div>
-						<ul class="resumeInfo1">
-				           	<li class="career">
-				            	<div class="resumeInfoImg">
-				            		<img src="resources/img/resume/career.PNG">
-				            	</div>
-				            	<div class="resumeInfoData">
-				            	<c:if test="${rs.career eq 1 }">		<!-- 1 -> 신입 -->
-				            		<span>신입</span>
-				            	</c:if>
-				            	<c:if test="${rs.career eq 2 }">		<!-- 2 -> 경력 -->
-				            		<span>경력</span>
-				            	</c:if>
-				            		
-				            	</div>
-				            </li>
-				            <li class="money">
-								<div class="resumeInfoImg">
-									<img src="resources/img/resume/income.PNG">					
-								</div>
-								<div class="resumeInfoData">
-																		<!-- r.money -->
-									<c:if test="${rs.money eq 1 }">		<!-- 1 -> 회사내규에 따름 -->
-				            			<span>회사내규에 따름</span>
-					            	</c:if>
-					            	<c:if test="${rs.money eq 2 }">		<!-- 2 -> 2000만 ~ 2400만 -->
-					            		<span>2000만 ~ 2400만</span>
-					            	</c:if>
-					            	<c:if test="${rs.money eq 3 }">		<!-- 3 -> 2400만 ~ 2800만 -->
-					            		<span>2400만 ~ 2800만</span>
-					            	</c:if>
-					            	<c:if test="${rs.money eq 4 }">		<!-- 4 -> 2800만 ~ 3200만 -->
-					            		<span>2800만 ~ 3200만</span>
-					            	</c:if>
-					            	<c:if test="${rs.money eq 5 }">		<!-- 5 -> 3200만 ~ 3600만 -->
-					            		<span>3200만 ~ 3600만</span>
-					            	</c:if>
-					            	<c:if test="${rs.money eq 6 }">		<!-- 5 -> 3600만 ~ 4000만 -->
-					            		<span>3600만 ~ 4000만</span>
-					            	</c:if>
-					            	<c:if test="${rs.money eq 7 }">		<!-- 5 -> 4000만 이상 -->
-					            		<span>4000만 이상</span>
-					            	</c:if>
-								</div>
-							</li>
-						</ul>
-						<ul class="resumeInfo2">
-							<li class="workPlace">
-								<div class="resumeInfoImg">
-									<img src="resources/img/resume/workPlace.PNG">
-								</div>
-								<div class="resumeInfoData">
-									<span>${rs.workPlace }</span>	<!-- r.resumeworkPlace -->
-								</div>
-							</li>       					           
-							<li class="workForm">
-								<div class="resumeInfoImg">
-									<img src="resources/img/resume/workFromWhite.PNG">
-								</div>
-								<div class="resumeInfoData">
-																	<!-- r.resumeWorkForm -->
-									<c:if test="${rs.workForm eq 1 }">		<!-- 1 -> 정규직 -->
-					            		<span>정규직</span>
-					            	</c:if>
-					            	<c:if test="${rs.workForm eq 2 }">		<!-- 2 -> 계약직 -->
-					            		<span>계약직</span>
-					            	</c:if>
-					            	<c:if test="${rs.workForm eq 3 }">		<!-- 3 -> 아르바이트 -->
-					            		<span>아르바이트</span>
-					            	</c:if>
-					            	<c:if test="${rs.workForm eq 4 }">		<!-- 4 -> 인턴 -->
-					            		<span>인턴</span>
-					            	</c:if>
-					            	<c:if test="${rs.workForm eq 5 }">		<!-- 5 -> 프리랜서 -->
-					            		<span>프리랜서</span>
-					            	</c:if>
-								</div>
-							</li>                       
-						</ul>
-						<div class="register">
-							<p>대표이력서 등록</p>
-							<div class="ceoResumeChk">
-								<input type="hidden" name="memberNo" class="memberNo" value="${sessionScope.m.memberNo }">
-								<input type="hidden" value="${rs.resumeNo }" class="resumeNo" name="resumeNo">			<!-- aaaaaaaaaaaaaaaaaaaaaaaaa -->
-								<input type="radio" id="switch${i.count }" name="switch1" class="input__on-off" ondblclick="this.checked=false">
-								<label for="switch${i.count }" class="label__on-off"> 
-									<span class="marble"></span> 
-									<span class="on">on</span> 
-									<span class="off">off</span> 
-								</label>
+							<div class="resumeTitle">
+								<em>${rs.resumeTitle }</em>	
 							</div>
-						</div>					
-					</div>
+							<div class="register">
+								<p>대표이력서 등록</p>
+								<div class="ceoResumeChk">
+									<input type="hidden" name="memberNo" class="memberNo" value="${sessionScope.m.memberNo }">
+									<input type="hidden" value="${rs.resumeNo }" class="resumeNo" name="resumeNo">			<!-- aaaaaaaaaaaaaaaaaaaaaaaaa -->
+									<input type="radio" id="switch${i.count }" name="switch1" class="input__on-off" ondblclick="this.checked=false">
+									<label for="switch${i.count }" class="label__on-off"> 
+										<span class="marble"></span> 
+										<span class="on">on</span> 
+										<span class="off">off</span> 
+									</label>
+								</div>
+							</div>	
+							<ul class="resumeInfo1">
+					           	<li class="career">
+					            	<div class="resumeInfoImg">
+					            		<img src="resources/img/resume/career.PNG">
+					            	</div>
+					            	<div class="resumeInfoData">
+					            	<c:if test="${rs.career eq 1 }">		<!-- 1 -> 신입 -->
+					            		<span>신입</span>
+					            	</c:if>
+					            	<c:if test="${rs.career eq 2 }">		<!-- 2 -> 경력 -->
+					            		<span>경력</span>
+					            	</c:if>
+					            		
+					            	</div>
+					            </li>
+					            <li class="money">
+									<div class="resumeInfoImg">
+										<img src="resources/img/resume/income.PNG">					
+									</div>
+									<div class="resumeInfoData">
+																			<!-- r.money -->
+										<c:if test="${rs.money eq 1 }">		<!-- 1 -> 회사내규에 따름 -->
+					            			<span>회사내규에 따름</span>
+						            	</c:if>
+						            	<c:if test="${rs.money eq 2 }">		<!-- 2 -> 2000만 ~ 2400만 -->
+						            		<span>2000만 ~ 2400만</span>
+						            	</c:if>
+						            	<c:if test="${rs.money eq 3 }">		<!-- 3 -> 2400만 ~ 2800만 -->
+						            		<span>2400만 ~ 2800만</span>
+						            	</c:if>
+						            	<c:if test="${rs.money eq 4 }">		<!-- 4 -> 2800만 ~ 3200만 -->
+						            		<span>2800만 ~ 3200만</span>
+						            	</c:if>
+						            	<c:if test="${rs.money eq 5 }">		<!-- 5 -> 3200만 ~ 3600만 -->
+						            		<span>3200만 ~ 3600만</span>
+						            	</c:if>
+						            	<c:if test="${rs.money eq 6 }">		<!-- 5 -> 3600만 ~ 4000만 -->
+						            		<span>3600만 ~ 4000만</span>
+						            	</c:if>
+						            	<c:if test="${rs.money eq 7 }">		<!-- 5 -> 4000만 이상 -->
+						            		<span>4000만 이상</span>
+						            	</c:if>
+									</div>
+								</li>
+							</ul>
+							<ul class="resumeInfo2">
+								<li class="workPlace">
+									<div class="resumeInfoImg">
+										<img src="resources/img/resume/workPlace.PNG">
+									</div>
+									<div class="resumeInfoData">
+										<span>${rs.workPlace }</span>	<!-- r.resumeworkPlace -->
+									</div>
+								</li>       					           
+								<li class="workForm">
+									<div class="resumeInfoImg">
+										<img src="resources/img/resume/workFromWhite.PNG">
+									</div>
+									<div class="resumeInfoData">
+																		<!-- r.resumeWorkForm -->
+										<c:if test="${rs.workForm eq 1 }">		<!-- 1 -> 정규직 -->
+						            		<span>정규직</span>
+						            	</c:if>
+						            	<c:if test="${rs.workForm eq 2 }">		<!-- 2 -> 계약직 -->
+						            		<span>계약직</span>
+						            	</c:if>
+						            	<c:if test="${rs.workForm eq 3 }">		<!-- 3 -> 아르바이트 -->
+						            		<span>아르바이트</span>
+						            	</c:if>
+						            	<c:if test="${rs.workForm eq 4 }">		<!-- 4 -> 인턴 -->
+						            		<span>인턴</span>
+						            	</c:if>
+						            	<c:if test="${rs.workForm eq 5 }">		<!-- 5 -> 프리랜서 -->
+						            		<span>프리랜서</span>
+						            	</c:if>
+									</div>
+								</li>                       
+							</ul>
 					<hr>
 				</c:forEach>
+						</div>			
+					</div>
 			</c:otherwise>
 		</c:choose>
 		</div>
