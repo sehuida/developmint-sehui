@@ -121,7 +121,7 @@
 		where ceo_resume = #{ceoResume}
 	</select>
 	
-	<!-- <update id="updateResume" parameterMap="map">
+	<update id="updateResume" parameterType="r">
 		update resume set
 			resume_title = #{resumeTitle},
 			aducation = #{aducation},
@@ -147,8 +147,8 @@
 			selfintro_content = #{selfintroContent},
 			work_form = #{workForm},
 			money = #{money},
-			work_place = #{workPlace},
-		where resumeNo = #{resumeNo}
-	</update> -->
+			work_place = #{workPlace}
+		where resume_no = #{resumeNo}
+	</update>
 	
 </mapper>
