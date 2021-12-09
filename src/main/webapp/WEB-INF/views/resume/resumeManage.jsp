@@ -166,7 +166,7 @@
     	font-weight: 900;
     	float: right;
     	position: relative;
-    	top: -30px;
+    	top: -40px;
     	left: -50px;
     }
     
@@ -255,7 +255,11 @@
 		text-align: center;
 	}
     .wd{
-    	margin-top: 10px;
+    	margin-top: 20px;
+    	margin-left: 10px;
+    }
+    .resumeTitle{
+    	margin-left: 10px;    	
     }
 </style>
 <script>
@@ -566,7 +570,7 @@
 									</div>
 								</li>                       
 							</ul>
-					<hr>
+							<hr>
 				</c:forEach>
 						</div>			
 					</div>
