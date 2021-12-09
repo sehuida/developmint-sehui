@@ -256,10 +256,15 @@
 	}
     .wd{
     	margin-top: 20px;
-    	margin-left: 10px;
+    	margin-left: 30px;
     }
     .resumeTitle{
-    	margin-left: 10px;    	
+    	margin-left: 30px;    	
+    }
+    .wrap{
+    	margin: 50px 0px;
+    	height: 230px;
+    	border: 1px solid gray;
     }
 </style>
 <script>
@@ -360,6 +365,7 @@
 				            			<img src="resources/img/resume/career.PNG">
 				            		</div>
 				            		<div class="resumeInfoData car">
+				            			<em style="font-size: 16px;">경력 : </em>
 				            			<c:if test="${r.career eq 1 }">
 											<span>신입</span>
 										</c:if>
@@ -373,6 +379,7 @@
 										<img src="resources/img/resume/income.PNG">					
 									</div>
 									<div class="resumeInfoData mon">
+										<em style="font-size: 16px;">연봉 : </em>
 										<c:if test="${r.money eq 1 }">		<!-- 1 -> 회사내규에 따름 -->
 				            				<span>회사내규에 따름</span>
 						            	</c:if>
@@ -400,10 +407,11 @@
 							<ul	class="resumeInfo2">  
 							<li class="workPlace">
 									<div class="resumeInfoImg">
-										<img src="resources/img/resume/workPlace.PNG">
+										<img src="resources/img/resume/workPlace.png">
 									</div>
 									<div class="resumeInfoData wp">
-										<span>희망지역 : ${r.workPlace }</span>	<!-- r.workPlace -->
+										<em style="font-size: 16px;">희망지역 :</em>
+										<span>${r.workPlace }</span>	<!-- r.workPlace -->
 									</div>
 								</li>    					           
 								<li class="workForm">
@@ -411,7 +419,7 @@
 										<img src="resources/img/resume/workForm.PNG">
 									</div>
 									<div class="resumeInfoData wf">
-										<span>희망 근무형태 : </span>
+										<em style="font-size: 16px;">희망 근무형태 : </em>
 										<c:if test="${r.workForm eq 1 }">			
 				            			<span>정규직</span>
 					            		</c:if>
@@ -474,6 +482,7 @@
 					<div class="myResume">
 						<div class="smallBox" style="width: 800px; margin: 0 auto;">
 				<c:forEach items="${list }" var="rs" varStatus="i">
+					<div class="wrap">
 							<div class="wd">
 								<span style="font-size: 13px; color: gray;">${rs.writeDate }</span>	
 							</div>
@@ -499,6 +508,7 @@
 					            		<img src="resources/img/resume/career.PNG">
 					            	</div>
 					            	<div class="resumeInfoData">
+					            	<em style="font-size: 16px; font-weight: normal;">경력 : </em>
 					            	<c:if test="${rs.career eq 1 }">		<!-- 1 -> 신입 -->
 					            		<span>신입</span>
 					            	</c:if>
@@ -510,10 +520,10 @@
 					            </li>
 					            <li class="money">
 									<div class="resumeInfoImg">
-										<img src="resources/img/resume/income.PNG">					
+										<img src="resources/img/resume/money.PNG" style="width:16px; height: 23px; margin-left: 2px;">					
 									</div>
 									<div class="resumeInfoData">
-																			<!-- r.money -->
+										<em style="font-size: 16px; font-weight: normal;">연봉 : </em>			<!-- r.money -->
 										<c:if test="${rs.money eq 1 }">		<!-- 1 -> 회사내규에 따름 -->
 					            			<span>회사내규에 따름</span>
 						            	</c:if>
@@ -541,9 +551,10 @@
 							<ul class="resumeInfo2">
 								<li class="workPlace">
 									<div class="resumeInfoImg">
-										<img src="resources/img/resume/workPlace.PNG">
+										<img src="resources/img/resume/workPlace.png">
 									</div>
 									<div class="resumeInfoData">
+										<em style="font-size: 16px; font-weight: normal;">희망지역 : </em>
 										<span>${rs.workPlace }</span>	<!-- r.resumeworkPlace -->
 									</div>
 								</li>       					           
@@ -553,6 +564,7 @@
 									</div>
 									<div class="resumeInfoData">
 										<!-- r.resumeWorkForm -->
+										<em style="font-size: 16px; font-weight: normal;">희망 근무형태 : </em>
 										<c:if test="${rs.workForm eq 1 }">		<!-- 1 -> 정규직 -->
 						            		<span>정규직</span>
 						            	</c:if>
@@ -571,7 +583,8 @@
 									</div>
 								</li>                       
 							</ul>
-							<hr>
+							
+							</div>
 				</c:forEach>
 						</div>			
 					</div>
