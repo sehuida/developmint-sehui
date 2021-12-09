@@ -91,5 +91,10 @@ public class NoticeService {
 		return result;
 	}
 
+	@Transactional
+	public int updateNoticeNo(Notice n) {
+		return dao.updateNoticeNo(n);
+	}
+
 	
 }

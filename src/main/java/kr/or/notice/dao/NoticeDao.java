@@ -51,4 +51,8 @@ public class NoticeDao {
 		return sqlsession.delete("notice.deleteNoticeNo",noticeNo);
 	}
 
+	public int updateNoticeNo(Notice n) {
+		return sqlsession.update("notice.updateNoticeNo",n);
+	}
+
 }

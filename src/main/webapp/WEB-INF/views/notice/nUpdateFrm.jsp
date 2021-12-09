@@ -37,7 +37,7 @@
 			<div class="contents" style="padding: 20px;">
 				<div class="title" style="border-bottom: none;padding: 0;"><h2 style="display: inline-block;">Notice Write</h2> 작성날짜 <fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></div>
 				<div class="notice-contents" style="padding: 0;border-bottom: none;">
-					<form action="/insertNotice.do" method="post" enctype="multipart/form-data">
+					<form action="/updateNoticeNo.do" method="post" enctype="multipart/form-data">
 						<fieldset>
 						<label class="col-form-label mt-4" for="noticeTitle"><i class="bi bi-toggles" style="font-size: 1.2em;"></i> 상단게시물 고정유무<span style="color: #f3969a;font-size: ">*</span></label>
 					    <div class="form-check form-switch">
@@ -59,14 +59,13 @@
 								<c:when test="${not empty n.filename }">
 									<img src="/resources/img/file.png" width="16px" class="delFile">
 									<span class="delFile">${n.filename }</span>
-									<button type="button" id="delBtn" class="btn btn-primary btn-sm delFile">삭제
-									</button>
-									<input type="file" name="upfile" style="display:none;" class="form-control" id="formFile">
+									<button type="button" id="delBtn" class="btn btn-primary btn-sm delFile">삭제</button>
+									<input type="file" name="files" style="display:none;" class="form-control" id="formFile" multiple>
 									<input type="hidden" name="oldFilename" value="${n.filename }">
 									<input type="hidden" name="oldFilepath" value="${n.filepath }">
 								</c:when>
 								<c:otherwise>
-									<input type="file" id="formFile" name="upfile" class="form-control">
+									<input type="file" id="formFile" name="files" class="form-control" multiple>
 								</c:otherwise>
 							</c:choose>
 					    </div>
@@ -86,12 +85,11 @@
 		</div>
 	</div>
 	<script>
-		$("#delBtn").click(function(){
+		$("#delBtn").click(function() {
 			$(".delFile").hide();
 			$(this).next().show();
-			$("#img-x").attr("src","");
 			$("[name=status]").val(2);
-		});	
+		});
 	
 		$(function(){
 			$("#pin").click(function(){

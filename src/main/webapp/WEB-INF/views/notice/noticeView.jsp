@@ -26,7 +26,7 @@
 				<div class="title" style="border-bottom: none;padding: 0;"><h2 style="display: inline-block;">Notice</h2>
 				<c:if test="${not empty sessionScope.m && sessionScope.m.memberType eq 9}">
 					<a class="btn btn-primary" href="javascript:void(0)" onclick="deleteNoticeNo(this,'${n.noticeNo}');" style="float: right;">삭제</a>
-					<a class="btn btn-outline-primary" href="/updateNoticeNo.do?noticeNo=${n.noticeNo }" style="float: right;margin-right: 10px;">수정</a>
+					<a class="btn btn-outline-primary" href="/updateNoticeFrm.do?noticeNo=${n.noticeNo }" style="float: right;margin-right: 10px;">수정</a>
 				</c:if>
 				</div>
 				<div class="notice-contents" style="padding: 20px 0 0 0;border-bottom: none;">

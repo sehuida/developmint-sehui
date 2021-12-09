@@ -195,10 +195,75 @@ public class NoticeController {
 		return "common/msg";
 	}
 	
-	@RequestMapping(value="/updateNoticeNo.do")
-	public String updateNoticeNo(int noticeNo, Model model) {
+	@RequestMapping(value="/updateNoticeFrm.do")
+	public String updateNoticeFrm(int noticeNo, Model model) {
 		Notice n = service.selectOneNotice(noticeNo);
 		model.addAttribute("n",n);
 		return "notice/nUpdateFrm";
+	}
+	
+	@RequestMapping(value="updateNoticeNo.do")
+	public String updateNoticeNo(int status, String oldFilename, String oldFilepath, Notice n, Model model, HttpServletRequest request, MultipartFile files) {
+		if(!files.isEmpty()) {
+			
+			
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
+			//사용자가 올린 파일명
+			String filename = files.getOriginalFilename();
+			System.out.println(filename);
+			//올린 파일명에서 확장자 앞까지 자르기 
+			String onlyFilename = filename.substring(0,filename.indexOf("."));
+			//올린 파일명에서 확장자 부분 자르기
+			String extention = filename.substring(filename.indexOf("."));
+			
+			//실제 업로드할 파일명
+			String filepath = null;
+			//중복 파일 뒤에 붙여줄 숫자
+			int count = 0;
+			//중복된 파일이 없을 때까지 반복(파일명 중복시 숫자 붙이는 코드)
+			while(true) {
+				if(count == 0) {
+					filepath = onlyFilename+extention;
+				}else {
+					filepath = onlyFilename+"_"+count+extention;
+				}
+				//파일 경로안에 중복된 파일이 있는지 체크
+				File checkFile = new File(savePath+filepath);
+				if(!checkFile.exists()) {
+					break;
+				}
+				count++;
+			}
+			
+			//중복처리가 끝나면 파일 업로드
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = files.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(status==2) {
+				File delFile = new File(savePath+"/"+oldFilepath);
+				delFile.delete();
+			}else if(oldFilename != null) {
+				n.setFilename(oldFilename);
+				n.setFilepath(oldFilepath);
+			}
+		}
+		int result = service.updateNoticeNo(n);
+		model.addAttribute("loc","/noticeView.do?noticeNo="+n.getNoticeNo());
+		if(result>0) {
+			model.addAttribute("msg","수정이 완료되었습니다.");
+		}else {
+			model.addAttribute("msg", "삭제실패~ 에러발생~~");
+		}
+		return "common/msg";
 	}
 }
