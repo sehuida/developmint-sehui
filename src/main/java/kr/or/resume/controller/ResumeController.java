@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.member.model.vo.Member;
 import kr.or.resume.service.ResumeService;
 import kr.or.resume.vo.Resume;
 
@@ -41,17 +42,17 @@ public class ResumeController {
 		return "resume/updateResumeFrm";
 	}
 	
-	@RequestMapping(value="/updateResume.do")
-	public String updateResume(Resume r, int resumeNo, Model model) {
-		int result = service.updateResume(r, resumeNo);
+	@RequestMapping(value="/updateCeoResume.do")
+	public String updateCeoResume(Resume r, int memberNo, Model model) {
+		System.out.println(r);
+		int result = service.updateCeoResume(r);
 		if(result > 0) {
 			model.addAttribute("msg","이력서 수정완료");
-			//model.addAttribute("loc", "/WEB-INF/views/resume/resumeManage.jsp");
+			model.addAttribute("loc", "/resumeManage.do?memberNo="+memberNo);
 		} else {
 			model.addAttribute("msg","이력서 수정실패");
 		}
 		System.out.println(r);
-		System.out.println(resumeNo);
 		return "common/msg";
 	}
 	
@@ -77,6 +78,15 @@ public class ResumeController {
 		return resume;
 	}
 	
+	@RequestMapping(value="/ceoResumeView.do")
+	public String ceoResumeView(Resume r, Model model) {
+		int ceoResume = r.getCeoResume();
+		Resume resume = service.selectCeoResume(ceoResume);
+		Member m = service.selectOneMember(resume.getMemberNo());
+		model.addAttribute("r", resume);
+		model.addAttribute("m", m);		
+		return "resume/resumeView";
+	}
 	
 	
 }

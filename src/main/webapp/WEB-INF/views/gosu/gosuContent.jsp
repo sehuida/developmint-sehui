@@ -161,7 +161,14 @@
 	justify-content: center;
 	z-index: 10000;
 }
+.hrm-content img{
+ width: 80%;
+}
+.hrm-content{
+ text-align: center;
+ 
 
+}
 .hrm-btn-wrap {
 	width: 100%;
 	display: flex;
@@ -357,7 +364,7 @@
 					<div class="g-photo-wrap">
 						<c:forEach items="${gprojectList }" var="gpr" varStatus="i">
 							<div class="g-photo-one">
-								<button type="button" id="gProject">
+								<button type="button" id="gProject" onclick="pAjax(${gpr.gprojectNo});">
 									<dl>
 										<dt>
 											<img src="${gpr.gprojectFilepath }">
@@ -390,14 +397,13 @@
 					<div id="hrm-modal">
 						<h3 style="color: white;">프로젝트</h3>
 						<div class="hrm-content">
-							<b>메인사진</b> <input type="file" class="gprojectFilepath"
-								id="gprojectFilepath" accept="image/*"><br>
-							<div id="gimage_container"></div>
-							<b>제목</b><input type="text" class="gprojectTitle"
-								id="gprojectTitle" placeholder="내용을 입력해주세요."><br> <b
-								style="float: left;">내용</b>
-							<textarea cols="80" class="gprojectContent" id="gprojectContent"
-								placeholder="내용을 입력해주세요."></textarea>
+							<b style="text-align: left;">메인사진</b><br>
+							<img src="" id="gprojectFilepath"><br>
+							<div id="gimage_container"></div><br>
+							<b style="float: left;">제목</b><br>
+							<p id="gprojectTitle"></p><br> 
+							<b style="float: left;">내용</b><br>
+								<p id="gprojectContent"></p>
 							<br>
 						</div>
 						<div class="hrm-btn-wrap">
@@ -414,15 +420,26 @@
 		</div>
 	</div>
 	<script>
-		$("#gProject").click(function() {
-			$(".hrm-wrap").css("display", "flex");
-
-		});
 		$("#hrm-close").click(function() {
 
 			$(".hrm-wrap").css("display", "none");
 
 		});
+		function pAjax(pNo) {
+			 $.ajax({
+					url : "/gpAjax.do"
+					, type : "post"
+					, data : {"pNo":pNo}
+					, success : function(data) {
+						console.log(data);
+						$("#gprojectTitle").append(data.gprojectContent);
+						$("#gprojectContent").append(data.gprojectTitleBr);
+						$("#gprojectFilepath").attr("src", data.gprojectFilepath);
+						$(".hrm-wrap").css("display", "flex");
+						
+					}
+			 });
+		}
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
