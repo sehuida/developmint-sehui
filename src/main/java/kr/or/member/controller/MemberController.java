@@ -311,4 +311,8 @@ public class MemberController {
 			return "0";
 		}
 	}
+	@RequestMapping(value="/mypageCom.do")
+	public String mypageCom() {
+		return "member/mypageCom";
+	}
 }
