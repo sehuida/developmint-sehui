@@ -277,5 +277,24 @@ public class MemberController {
 	public String changePwFrm() {
 		return "member/changePwFrm";
 	}
-	
+	@ResponseBody
+	@RequestMapping(value ="/checkPw.do")
+	public String checkPw(Member m) {
+		Member member = service.selectOneMember(m);
+		if(member != null) {
+			return "1";
+		}else {
+			return "0";
+		}
+	}
+	@RequestMapping(value="/chanePw.do")
+	public String chanePw(Member m,HttpSession session) {
+		int result = service.changePwMember(m);
+		if(result>0) {
+			session.invalidate();
+			return "common/main";
+		}else {
+			return "member/changePwFrm";
+		}
+	}
 }

@@ -66,4 +66,8 @@ public class MemberDao {
 		return sqlSession.update("member.updateProfile",m);
 	}
 
+	public int changePwMember(Member m) {
+		return sqlSession.update("member.changePwMember",m);
+	}
+
 }

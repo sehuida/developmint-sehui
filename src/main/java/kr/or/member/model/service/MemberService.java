@@ -90,5 +90,9 @@ public class MemberService {
 	public int updateProfile(Member m) {
 		return dao.updateProfile(m);
 	}
+
+	public int changePwMember(Member m) {
+		return dao.changePwMember(m);
+	}
 	
 }
