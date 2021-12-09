@@ -90,4 +90,8 @@ public class GosuDao {
 		return sqlSession.selectOne("gosu.selectGosuCount");
 	}
 
+	public GosuProject selectGProject(int pNo) {
+		return sqlSession.selectOne("gosu.selectGProject",pNo);
+	}
+
 }

@@ -110,5 +110,11 @@ public class GosuService {
 		return gosuCount;
 	}
 
+
+	public GosuProject selectGProject(int pNo) {
+		GosuProject gList = dao.selectGProject(pNo);
+		return gList;
+	}
+
 	
 }

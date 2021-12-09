@@ -137,4 +137,14 @@
 		count(*)
 		from member where member_type=2 
 	</select>
+	<select id="selectGProject" parameterType="_int"
+		resultType="gpr">
+		select
+		gproject_no as gprojectNo,
+		ggosu_no as ggsouNo,
+		gproject_title as gprojectTitle,
+		gproject_content as gprojectContent,
+		filepath as gprojectFilepath
+		from gosu_project  where gproject_no = #{gNo}
+	</select>
 </mapper>
