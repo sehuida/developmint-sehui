@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>신고 회원 조회</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
 .mainCate{
@@ -35,6 +36,7 @@
 	padding-top: 30px;
 	width: 775px;
 }
+
 .reportList>div>div>p{
 	font-weight: bold;
 }
@@ -85,6 +87,9 @@
 .falseReportForm{
 	text-align: center;
 }
+.selectBox{
+  transition: all 0.4s cubic-bezier(.5, .24, 0, 1);
+}
 
 </style>
 <body>
@@ -127,7 +132,7 @@
 												<p>기타</p>
 											</c:when>
 										</c:choose>
-										<span>${memberId[i.index] }</span><span class="reportDate">${r.reportDate }</span>
+										<span class="memId">${memberId[i.index] }</span><span class="reportDate">${r.reportDate }</span>
 									</div>
 								</c:if>
 							</c:forEach>
@@ -238,8 +243,8 @@
 	 <script>
 	 	$(".selectBox").click(function(){
 	 		var index = $(this).index();
-	 		$(".selectBox").css("border-left","1px solid #d9d9d9");
-	 		$(".selectBox").eq(index).css("border-left","7px solid #4ECDC4");
+	 		$(".selectBox").css("border","1px solid #d9d9d9");
+	 		$(".selectBox").eq(index).css("border","3px solid #4ECDC4");
 	 		$(".reportContent").hide();
 	 		var index = $(this).index();
 	 		$(".reportContent").eq(index).css("display","block");
@@ -260,26 +265,50 @@
 	 	 
 	 	$(".canselReport").click(function(){
 	 		var index = $(this).index();
-	 		var checkConfirm = confirm("해당 신고를 반려처리 하시겠습니까?");
-			if(checkConfirm){
-				$(".cancleReportForm").eq(index).submit();	
-			}
+	 		swal({
+	 			  title: "신고처리",
+	 			  text: "해당 신고를 반려처리 하시겠습니까?",
+	 			  icon: "warning",
+	 			  buttons: true,
+	 			  dangerMode: true,
+	 			})
+	 			.then((willDelete) => {
+	 			  if (willDelete) {
+	 				 $(".cancleReportForm").eq(index).submit();	
+	 			  }
+	 			});
 	 	})
 	 	
 	 	$(".reportBtn").click(function(){
 	 		var index = $(this).index();
-	 		var checkConfirm = confirm("해당 신고를 처리 하시겠습니까?");
-			if(checkConfirm){
-				$(".reportBtnForm").eq(index).submit();	
-			}
+	 		swal({
+	 			  title: "신고처리",
+	 			  text: "해당 회원을 신고처리 하시겠습니까?",
+	 			  icon: "warning",
+	 			  buttons: true,
+	 			  dangerMode: true,
+	 			})
+	 			.then((willDelete) => {
+	 			  if (willDelete) {
+	 			   $(".reportBtnForm").eq(index).submit();	
+	 			  }
+	 			});
 	 	})
 	 	 
 	 	$(".falseBtn").click(function(){
 	 		var index = $(this).index();
-	 		var checkConfirm = confirm("해당신고를 허위신고로 처리 하시겠습니까?");
-			if(checkConfirm){
-				$(".falseReportForm").eq(index).submit();	
-			}
+	 		swal({
+	 			  title: "허위 신고",
+	 			  text: "해당 신고를 허위신고로 처리하시겠습니까?",
+	 			  icon: "warning",
+	 			  buttons: true,
+	 			  dangerMode: true,
+	 			})
+	 			.then((willDelete) => {
+	 			  if (willDelete) {
+	 				 $(".falseReportForm").eq(index).submit();	
+	 			  }
+	 			});
 	 	})
 	 </script>
 </body>
