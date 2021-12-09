@@ -50,15 +50,29 @@
 						</div>
 						<div class="form-group">
 						  <label class="col-form-label mt-4" for="noticeTitle"><i class="bi bi-pencil" style="font-size: 1.2em;"></i> 공지 제목<span style="color: #f3969a;">*</span></label>
-						  <input type="text" class="form-control" placeholder="제목을 입력하세요" id="noticeTitle" name="noticeTitle" required>
+						  <input type="text" class="form-control" placeholder="제목을 입력하세요" id="noticeTitle" name="noticeTitle" required value="${n.noticeTitle }">
 						</div>
 						<div class="form-group">
 					      <label for="formFile" class="form-label mt-4"><i class="bi bi-files" style="font-size: 1.2em;"></i> 첨부파일<span style="font-size: small;color: #999;"> *파일첨부는 한 개만 가능합니다</span></label>
-					      <input class="form-control" type="file" name="files" multiple>
+					      <input type="hidden" name="status" value="1">
+							<c:choose>
+								<c:when test="${not empty n.noticeFilename }">
+									<img src="/img/file.png" width="16px" class="delFile">
+									<span class="delFile">${n.noticeFilename }</span>
+									<button type="button" id="delBtn" class="btn btn-primary btn-sm delFile">삭제
+									</button>
+									<input type="file" name="upfile" style="display:none;">
+									<input type="hidden" name="oldFilename" value="${n.noticeFilename }">
+									<input type="hidden" name="oldFilepath" value="${n.noticeFilepath }">
+								</c:when>
+								<c:otherwise>
+									<input type="file" name="upfile">
+								</c:otherwise>
+							</c:choose>
 					    </div>
 						<div class="form-group">
 							<label class="col-form-label mt-4" for="noticeContent"><i class="bi bi-pencil-square" style="font-size: 1.2em;"></i> 공지 내용<span style="color: #f3969a;">*</span><span style="color: #f3969a;font-weight: bold;padding-left: 20px;">남은 글자 수<span id="maxContentPost">3000</span></span></label>
-                            <textarea class="form-control" id="noticeContent" rows="20" name="noticeContent" required ></textarea>
+                            <textarea class="form-control" id="noticeContent" rows="20" name="noticeContent" required >${n.noticeContent }</textarea>
                             <p style="color: #f3969a;">*는 필수 입력사항입니다.</p>
                         </div>
                         <div class="form-group" style="padding: 10px 0 0 0;float: right;">
