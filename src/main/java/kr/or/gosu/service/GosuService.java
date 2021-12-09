@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.gosu.dao.GosuDao;
 import kr.or.gosu.vo.Gosu;
+import kr.or.gosu.vo.GosuFeedback;
 import kr.or.gosu.vo.GosuNotice;
 import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
@@ -114,6 +115,28 @@ public class GosuService {
 	public GosuProject selectGProject(int pNo) {
 		GosuProject gList = dao.selectGProject(pNo);
 		return gList;
+	}
+
+
+	public int insertGosuFeedback(GosuFeedback gf) {
+		int result = dao.insertGosuFeedback(gf); 
+		return result;
+	}
+
+
+	public GosuFeedback selectFeedbackOne(int fbNo) {
+		GosuFeedback gosuFeedback = dao.selectFeedbackOne(fbNo);
+		return gosuFeedback;
+	}
+
+
+	public ArrayList<GosuFeedback> selectGosuFeedbackList(String memberId) {
+		ArrayList<GosuFeedback> list = dao.selectGosuFeedbackList(memberId);
+		for(GosuFeedback g : list) {
+			int ggosuNo = g.getGgosuNo();
+			g.setGosuId(dao.selectGosuId2(ggosuNo));
+		}
+		return list;
 	}
 
 	

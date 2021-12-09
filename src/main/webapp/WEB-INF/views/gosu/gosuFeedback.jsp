@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <style>
 .container * {
 	text-decoration: none;
@@ -113,47 +116,58 @@ input:focus, textarea:focus {
 		</h3>
 		<div class="gosu">
 			<button type="button" class="card border-primary mb-3"
-				style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-				<table>
-					<tr>
-						<td rowspan="4" class="gosu_img" style="width: 30%;"><img
-							src="/resources/img/gosu/g_img_basic.png"
-							style="border-radius: 50%;"></td>
-						<td><a href="">제목</a></td>
-					</tr>
-					<tr>
-						<td><hr></td>
-					</tr>
-					<tr>
+						style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+						<table>
+							<tr>
+								<c:if test="${empty gosu.gosuImg }">
+									<td rowspan="4" class="gosu_img" style="padding: 40px; text-align: center;"><img
+										src="/resources/img/gosu/g_img_basic.png"
+										style="border-radius: 50%; width: 200px; height: 200px;"></td>
+								</c:if>
+								<c:if test="${not empty gosu.gosuImg }">
+									<td rowspan="4" style="padding: 40px; text-align: center;"><img
+										src="${gosu.gosuImg }" style="border-radius: 50%; width: 200px; height: 200px;"></td>
+								</c:if>
 
-						<td>
-							<li>한줄소개</li>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<li>피드백 예상견적</li>
-						</td>
-					</tr>
-					<tr>
-						<td style="text-align: center; font-weight: bold;">고수 xxxx</td>
-						<td>4.0</td>
-					</tr>
-				</table>
-			</button>
+
+								<td style="width: 750px;"><a href="/gosuContent.do?gNo=${gosu.ggsouNo}" class="gtitle">${gosu.gosuTitle }</a></td>
+							</tr>
+							<tr>
+								<td><hr></td>
+							</tr>
+							<tr>
+
+								<td>
+									<li><b>한줄소개</b> : ${gosu.gosuSelf }</li>
+									<input type="hidden" value="${gosu.gosuTitle }" id="gfTitle">
+									<input type="hidden" value="${gosu.ggsouNo }" id="ggsouNo">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<li><b>비용</b> : ${gosu.gosuCost }</li>
+									<input type="hidden" value="${gosu.gosuCost }" id="gfCost">
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align: center; font-weight: bold;"><span
+									style="color: rgb(78, 205, 196);">고수</span> ${gosu.gosuId }</td>
+								<td>4.0</td>
+							</tr>
+						</table>
+					</button>
 		</div>
 		<div class="g-content">
 			<div>
 				<table border="1">
 					<tr>
 						<th>제목 <span style="color: red;">* </span></th>
-						<td><input type="text" name="" style="width: 100%;"></td>
+						<td><input type="text" style="width: 100%;" id="gosuFeedbackTitle"></td>
 					</tr>
 					<tr>
 						<th>내용 <span style="color: red;"> * </span></th>
-						<td><textarea cols="100" rows="30" name=""
-								placeholder="
-                        * 피드백 받고 싶은 내용에 대해 자세하게 적어주세요!
+						<td><textarea cols="100" rows="30" id="gosuFeedbackContent"
+								placeholder=" * 피드백 받고 싶은 내용에 대해 자세하게 적어주세요!
                         
                         "></textarea></td>
 					</tr>
@@ -162,11 +176,56 @@ input:focus, textarea:focus {
 			</div>
 		</div>
 		<div style="display: flex; justify-content: center;">
-			<a class="btn btn-primary"
+			<button type="button" id="gRequestCostBtn" class="btn btn-primary"
 				style="width: 200px; margin: 100px; padding: 10px;"><b style="color:white">피드백
-					신청하기</b></a>
+					신청하기</b></button>
 		</div>
+		
+	<input type="hidden" value="${sessionScope.m.memberId }" id="mId">
 	</div>
+	
+	<script>
+	$("#gRequestCostBtn").click(function(){
+
+		var IMP = window.IMP;
+		  IMP.init('imp37172515');
+		  var cost = $("#gfCost").val();
+		  console.log(cost);
+		  var mId = $("#mId").val();
+		  var gfTitle = $("#gfTitle").val();
+		IMP.request_pay({
+		    pg : 'kakao', 
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : gfTitle,
+		    amount : cost, //판매 가격
+		    buyer_name : mId
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        var msg = '결제가 완료되었습니다.';
+		        var ggsouNo = $("#ggsouNo").val();
+		        var gosuFeedbackTitle =$("#gosuFeedbackTitle").val();
+		        var gosuFeedbackContent = $("#gosuFeedbackContent").val();
+		   		 $.ajax({
+					url : "/gosuFeedbackInsert.do"
+					, type : "post"
+					, data : {"ggsouNo":ggsouNo,"memberId":mId,"gosuFeedbackTitle":gosuFeedbackTitle,"gosuFeedbackContent":gosuFeedbackContent}
+					, success : function(data) {
+						console.log(data);
+						location.href="/gosuTalk.do?fbNo="+data;
+					}
+			 });
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		    
+		
+	})
+	});
+	
+	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>
