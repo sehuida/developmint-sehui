@@ -74,4 +74,8 @@ public class MemberDao {
 		return sqlSession.update("member.addCompnay",m);
 	}
 
+	public int checkCompany(Member m) {
+		return sqlSession.selectOne("member.checkCompany",m);
+	}
+
 }

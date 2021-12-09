@@ -86,17 +86,26 @@ public class MemberService {
 	public int updateMyInfo(Member m) {
 		return dao.updateMyInfo(m);
 	}
-
+	
+	@Transactional
 	public int updateProfile(Member m) {
 		return dao.updateProfile(m);
 	}
 
+	@Transactional
 	public int changePwMember(Member m) {
 		return dao.changePwMember(m);
 	}
 
+	@Transactional
 	public int addCompany(Member m) {
-		return dao.addCompany(m);
+		int result = dao.checkCompany(m);
+		if(result>0) {
+			m.setComNo(Integer.toString(result));
+			return dao.addCompany(m);			
+		}else {
+			return 0;
+		}
 	}
 	
 }
