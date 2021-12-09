@@ -328,28 +328,21 @@
   </select>
   <insert id="writeRecruitTeam" parameterType="map">
   	<choose>
-  		<when test="rootChange == 1">
-  			insert into project values(project_seq.nextval, #{memberNo}, to_char(sysdate,'yyyy-mm-dd'), #{pt.rEndDate}, 0, #{pt.rTitle}, #{pt.rContent}, #{projectName}, #{projectGoal}, (select member_id from member where member_no = #{memberNo}), 1, null, null)
+  		<when test="insertLangValue == 1">
+	  		insert into project values(project_seq.nextval, #{memberNo}, to_char(sysdate,'yyyy-mm-dd'), #{pt.rEndDate}, 0, #{pt.rTitle}, #{pt.rContent}, #{projectName}, #{projectGoal}, (select member_id from member where member_no = #{memberNo}), 1, null, null)
   		</when>
-  		<when test="rootChange == 2">
-  		insert into attachment values
-  		<foreach collection="flist" item="f" separator=",">
-  			(atm_seq.nextval, #{memberNo}, 3, (select project_no from project where recruit_title = #{pt.rTitle} and member_no = #{memberNo}), #{fl.fileName}, #{fl.filePath})
-  		</foreach>
-  			<!-- insert into attachment(file_no, member_no, board_type, board_no, file_name, file_path) 
-  			select atm_seq.nextval, a.* from
-  			<foreach collection="flist" item="f" separator="UNION ALL" open="(" close=") a">
-  				select 
-  					#{memberNo} as member_no,
-  					3 as board_type,
-  					(select project_no from project where recruit_title = #{pt.rTitle} and member_no = #{memberNo}) as board_no,
-  					#{fl.fileName} as file_name, 
-  					#{fl.filePath} as file_path
-  				from dual
+  		<when test="insertLangValue == 2">
+  			insert into use_project_language(use_project_lang_no, project_no, language_no)
+  			select up_lang_seq.nextval, A.* from (
+  				<foreach collection="langList" item="lang" separator="UNION ALL ">
+  					select (select project_no from project where member_no=#{memberNo} and recruit_title = #{pt.rTitle}) as project_no,
+  						(select language_no from develop_language where language_name = #{lang}) as language_no
+  					from dual
+  				</foreach>) A
+  			<!-- insert into use_project_language values
+  			<foreach collection="langList" item="langLisg" index="index" separator=",">
+  				(up_lang_seq.nextval, (select project_no from project where member_no=#{memberNo} and recruit_title = #{pt.rTitle}), (select language_no from develop_language where language_name = #{langLisg}))
   			</foreach> -->
-  			<!-- <foreach collection="flist" item="fl" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL;">
-  				into attachment values(atm_seq.nextval, #{memberNo}, 3, (select project_no from project where recruit_title = #{pt.rTitle} and member_no = #{memberNo}), #{fl.fileName}, #{fl.filePath})
-  			</foreach>  -->
   		</when>
   	</choose>
   </insert>

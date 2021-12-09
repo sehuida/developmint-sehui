@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.JsonObject;
 
 import kr.or.projectTeam.model.service.ProjectTeamService;
+import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.projectTeam.model.vo.projectTeamMainPageData;
@@ -84,8 +85,10 @@ public class ProjectTeamController {
 	
 	@RequestMapping(value="/recruitNotice_writeForm.do")
 	public String recruitTeamMemberDatail(int memberNo, Model model) {
+		ArrayList<DevelopLanguage> dlList = service.selectAllDevelopLang();
 		if(memberNo > 0) {
 			model.addAttribute("memberNo", memberNo);
+			model.addAttribute("dlList", dlList);
 			return "recruitCrue/recruitNotice_writeForm";
 		} else {
 			model.addAttribute("msg","로그인 후 이용가능합니다.");	
@@ -125,73 +128,17 @@ public class ProjectTeamController {
 	}
 	
 	@RequestMapping(value="/writeRecruitTeam.do")
-	public String writeRecruitTeam(MultipartFile[] files, HttpServletRequest request, Model model, ProjectTeam pt, int memberNo) {
+	public String writeRecruitTeam(HttpServletRequest request, Model model, ProjectTeam pt, int memberNo, String[] chk) {
+		ArrayList<String> langList = new ArrayList<String>(Arrays.asList(chk));
 		
-		if(!ServletFileUpload.isMultipartContent(request)) {
+		int result = service.writeRecruitTeam(pt, memberNo, langList);
+		if(result > 0) {
+			model.addAttribute("msg", "모집공고 등록 완료되었습니다.");
+		} else {
 			model.addAttribute("msg", "모집공고 작성 오류[고객센터에 문의 부탁드립니다.]");
-			model.addAttribute("loc","/recruitTeamMember_mainPage.do?reqPage=1");
-			return "common/msg";
 		}
-		
-		ArrayList<ProjectTeamFileVO> flist = new ArrayList<ProjectTeamFileVO>();
-		ProjectTeamFileVO ptf = new ProjectTeamFileVO();
-		
-		if(files[0].isEmpty()) {
-			int result = service.writeRecruitTeam1(pt, memberNo);
-			if(result > 0) {
-				model.addAttribute("msg", "모집공고 등록 완료되었습니다.");
-			} else {
-				model.addAttribute("msg", "모집공고 작성 오류[고객센터에 문의 부탁드립니다.]");
-			}
-			model.addAttribute("loc","/recruitTeamMember_mainPage.do?reqPage=1");
-			return "common/msg";
-		}else {
-			String saveRoot = request.getSession().getServletContext().getRealPath("/resources/upload/projectTeam/recruitTeamNotice/");
-			for(MultipartFile file : files) {
-				String filename = file.getOriginalFilename();
-				String onlyFilename = filename.substring(0, filename.indexOf("."));
-				String extention = filename.substring(filename.indexOf("."));
-				String filepath = null;
-				int count = 0;
-				while(true) {
-					if(count == 0) {
-						filepath = onlyFilename + extention;
-					} else {
-						filepath = onlyFilename + "_" + count + extention;
-					}
-					File checkFile = new File(saveRoot + filepath);
-					if(!checkFile.exists()) {
-						break;
-					}
-					count++;
-				}
-				try {
-					FileOutputStream fos = new FileOutputStream(new File(saveRoot + filepath));
-					//업로드 속도증가를 위한 보조스트림
-					BufferedOutputStream bos = new BufferedOutputStream(fos);
-					//파일 업로드
-					byte[] bytes = file.getBytes();
-					bos.write(bytes);
-					bos.close();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				ptf.setFileName(filename);
-				ptf.setFilePath(filepath);
-				flist.add(ptf);
-				
-			}
-			int result = service.writeRecruitTeam2(flist, pt, memberNo);
-			if(result > 0) {
-				model.addAttribute("msg", "모집공고 등록 완료되었습니다.");
-			} else {
-				model.addAttribute("msg", "모집공고 작성 오류[고객센터에 문의 부탁드립니다.]");
-			}
-			model.addAttribute("loc","/recruitTeamMember_mainPage.do?reqPage=1");
-			return "common/msg";
-		}
+		model.addAttribute("loc","/recruitTeamMember_mainPage.do?reqPage=1");
+		return "common/msg";
 		
 	}
 }

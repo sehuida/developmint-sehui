@@ -221,21 +221,19 @@ public class ProjectTeamService {
 	}
 
 
-	public int writeRecruitTeam1(ProjectTeam pt, int memberNo) {
+	public int writeRecruitTeam(ProjectTeam pt, int memberNo, ArrayList<String> langList) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo);
 		map.put("pt", pt);
+		map.put("langList", langList);
 		int result = dao.writeRecruitTeam(map);
 		return result;
 	}
 
-	public int writeRecruitTeam2(ArrayList<ProjectTeamFileVO> flist, ProjectTeam pt, int memberNo) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("memberNo", memberNo);
-		map.put("pt", pt);
-		map.put("flist", flist);
-		int result = dao.writeRecruitTeam(map);
-		return result;
+	public ArrayList<DevelopLanguage> selectAllDevelopLang() {
+			ArrayList<DevelopLanguage> dlList = dao.selectAllDevelopLangList();
+		return dlList;
 	}
+
 	
 }

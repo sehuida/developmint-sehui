@@ -75,36 +75,22 @@
 	                        </div>
 	                        <div class="checkboxFlexList">
 	                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-	                                <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" name="chk" value="javascript">
-	                                <label class="btn btn-primary" for="btncheck1">javascript</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off" name="chk" value="typescript">
-	                                <label class="btn btn-primary" for="btncheck2">typescript</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off" name="chk" value="react">
-	                                <label class="btn btn-primary" for="btncheck3">react</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off" name="chk" value="vue">
-	                                <label class="btn btn-primary" for="btncheck4">vue</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off" name="chk" value="node.js">
-	                                <label class="btn btn-primary" for="btncheck5">node.js</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off" name="chk" value="java">
-	                                <label class="btn btn-primary" for="btncheck6">java</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck7" autocomplete="off" name="chk" value="spring">
-	                                <label class="btn btn-primary" for="btncheck7">spring</label>
+	                            	<c:forEach items="${dlList }" var="dll" begin="0" end="7" step="1">
+	                            		<input type="checkbox" class="btn-check" id="${dll.langName }" autocomplete="off" name="chk" value="${dll.langName }">
+	                                	<label class="btn btn-primary" for="${dll.langName }" >${dll.langName }</label>
+	                            	</c:forEach>
 	                            </div>
 	                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" id="bottomCheckBox">
-	                                <input type="checkbox" class="btn-check" id="btncheck8" autocomplete="off" name="chk" value="swift">
-	                                <label class="btn btn-primary" for="btncheck8">swift</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck9" autocomplete="off" name="chk" value="kotlin">
-	                                <label class="btn btn-primary" for="btncheck9">kotlin</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck10" autocomplete="off" name="chk" value="c++">
-	                                <label class="btn btn-primary" for="btncheck10">c++</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck11" autocomplete="off" name="chk" value="go">
-	                                <label class="btn btn-primary" for="btncheck11">go</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck12" autocomplete="off" name="chk" value="python">
-	                                <label class="btn btn-primary" for="btncheck12">python</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck13" autocomplete="off" name="chk" value="django">
-	                                <label class="btn btn-primary" for="btncheck13">django</label>
-	                                <input type="checkbox" class="btn-check" id="btncheck14" autocomplete="off" name="chk" value="flutter">
-	                                <label class="btn btn-primary" for="btncheck14">flutter</label>
+	                                <c:forEach items="${dlList }" var="dll" begin="8" end="15" step="1">
+	                            		<input type="checkbox" class="btn-check" id="${dll.langName }" autocomplete="off" name="chk" value="${dll.langName }">
+	                                	<label class="btn btn-primary" for="${dll.langName }" >${dll.langName }</label>
+	                            	</c:forEach>
+	                            </div>
+	                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" id="bottomCheckBox">
+	                                <c:forEach items="${dlList }" var="dll" begin="16" end="23" step="1">
+	                            		<input type="checkbox" class="btn-check" id="${dll.langName }" autocomplete="off" name="chk" value="${dll.langName }">
+	                                	<label class="btn btn-primary" for="${dll.langName }" >${dll.langName }</label>
+	                            	</c:forEach>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -162,7 +148,6 @@
 	                    <div class="finalLine"></div>
 	                    <div class="submitBtnBox">
 	                    	<input type="hidden" name="memberNo" value="${memberNo }">
-	                    	<input type="hidden" name="files" multiple> 
 	                        <button type="submit" class="btn btn-primary btn-lg" onclick="return checkValue();">제출</button>
 	                    </div>
 	                </div>
@@ -238,9 +223,7 @@
 			processData : false,
 			contentType : false,
 			success : function(data){
-				console.log(data);
 				$(editor).summernote("insertImage",data);
-				fileData = data;
 				
 			}
 		});
