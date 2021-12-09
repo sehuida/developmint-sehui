@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ import com.google.gson.JsonObject;
 
 import kr.or.projectTeam.model.service.ProjectTeamService;
 import kr.or.projectTeam.model.vo.ProjectTeam;
+import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.projectTeam.model.vo.projectTeamMainPageData;
 
 @Controller
@@ -92,29 +94,26 @@ public class ProjectTeamController {
 		return "common/msg";
 	}
 	
-	/* @RequestMapping(value="/writeRecruitTeam.do") */
-	
 	@RequestMapping(value="/rUploadImage.do")
 	@ResponseBody
-	public String rUploadImage( MultipartFile multipartFile, HttpServletRequest request) {
+	public String rUploadImage( MultipartFile file, HttpServletRequest request) {
 		 /*
 			* String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
 		*/
 				
 		// 내부경로로 저장
-		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		String fileRoot = contextRoot+"resources/attachment/projectTeam/recruitTeamNotice";
+		String saveRoot = request.getSession().getServletContext().getRealPath("/resources/upload/projectTeam/editor/");
 		
-		String originalFileName = multipartFile.getOriginalFilename(); 	//오리지날 파일명
+		String originalFileName = file.getOriginalFilename(); 	//오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
 		// 파일 확장자
 		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
 		try {
-			FileOutputStream fos = new FileOutputStream(new File(fileRoot + savedFileName));
+			FileOutputStream fos = new FileOutputStream(new File(saveRoot + savedFileName));
 			//업로드 속도증가를 위한 보조스트림
 			BufferedOutputStream bos = new BufferedOutputStream(fos);
 			//파일 업로드
-			byte[] bytes = multipartFile.getBytes();
+			byte[] bytes = file.getBytes();
 			bos.write(bytes);
 			bos.close();
 		} catch (FileNotFoundException e) {
@@ -122,8 +121,77 @@ public class ProjectTeamController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "/resources/attachment/projectTeam/recruitTeamNotice/"+savedFileName;
+		return "/resources/upload/projectTeam/editor/"+savedFileName;
+	}
+	
+	@RequestMapping(value="/writeRecruitTeam.do")
+	public String writeRecruitTeam(MultipartFile[] files, HttpServletRequest request, Model model, ProjectTeam pt, int memberNo) {
 		
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			model.addAttribute("msg", "모집공고 작성 오류[고객센터에 문의 부탁드립니다.]");
+			model.addAttribute("loc","/recruitTeamMember_mainPage.do?reqPage=1");
+			return "common/msg";
+		}
+		
+		ArrayList<ProjectTeamFileVO> flist = new ArrayList<ProjectTeamFileVO>();
+		ProjectTeamFileVO ptf = new ProjectTeamFileVO();
+		
+		if(files[0].isEmpty()) {
+			int result = service.writeRecruitTeam1(pt, memberNo);
+			if(result > 0) {
+				model.addAttribute("msg", "모집공고 등록 완료되었습니다.");
+			} else {
+				model.addAttribute("msg", "모집공고 작성 오류[고객센터에 문의 부탁드립니다.]");
+			}
+			model.addAttribute("loc","/recruitTeamMember_mainPage.do?reqPage=1");
+			return "common/msg";
+		}else {
+			String saveRoot = request.getSession().getServletContext().getRealPath("/resources/upload/projectTeam/recruitTeamNotice/");
+			for(MultipartFile file : files) {
+				String filename = file.getOriginalFilename();
+				String onlyFilename = filename.substring(0, filename.indexOf("."));
+				String extention = filename.substring(filename.indexOf("."));
+				String filepath = null;
+				int count = 0;
+				while(true) {
+					if(count == 0) {
+						filepath = onlyFilename + extention;
+					} else {
+						filepath = onlyFilename + "_" + count + extention;
+					}
+					File checkFile = new File(saveRoot + filepath);
+					if(!checkFile.exists()) {
+						break;
+					}
+					count++;
+				}
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(saveRoot + filepath));
+					//업로드 속도증가를 위한 보조스트림
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					//파일 업로드
+					byte[] bytes = file.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				ptf.setFileName(filename);
+				ptf.setFilePath(filepath);
+				flist.add(ptf);
+				
+			}
+			int result = service.writeRecruitTeam2(flist, pt, memberNo);
+			if(result > 0) {
+				model.addAttribute("msg", "모집공고 등록 완료되었습니다.");
+			} else {
+				model.addAttribute("msg", "모집공고 작성 오류[고객센터에 문의 부탁드립니다.]");
+			}
+			model.addAttribute("loc","/recruitTeamMember_mainPage.do?reqPage=1");
+			return "common/msg";
+		}
 		
 	}
 }

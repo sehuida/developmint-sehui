@@ -156,8 +156,8 @@
 		$("#nWriteBtn").click(function(){
 			 if($("#noticeTitle").val()!=null&&$("#noticeContent").val()!=null){
 				 swal({
-					   title: "등록성공!",
-					   text: "공지사항이 등록되었습니다.",
+					   title: "수정성공!",
+					   text: "공지사항이 수정되었습니다.",
 					   icon: "success", //"info,success,warning,error" 중 택1
 					   button: "둘러보기",
 					})
@@ -166,7 +166,7 @@
 				 });
 			 }else{
 				 swal({
-					   title: "등록실패",
+					   title: "수정실패",
 					   text: "입력값을  다시 확인해주세요.",
 					   icon: "warning", //"info,success,warning,error" 중 택1
 					   button: "돌아가기",

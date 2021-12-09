@@ -36,4 +36,10 @@ public class AnnounceController {
 		return "common/msg";
 	}
 	
+	@RequestMapping(value="/applicationStatus.do")
+	public String applicationStatus() {
+		
+		return "jobSearch/applicationStatus";
+	}
+	
 }

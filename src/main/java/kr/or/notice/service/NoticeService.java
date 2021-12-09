@@ -85,5 +85,11 @@ public class NoticeService {
 		return nlist;
 	}
 
+	@Transactional
+	public int deleteNoticeNo(int noticeNo) {
+		int result = dao.deleteNoticeNo(noticeNo);
+		return result;
+	}
+
 	
 }

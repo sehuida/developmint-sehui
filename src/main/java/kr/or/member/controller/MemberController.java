@@ -297,4 +297,27 @@ public class MemberController {
 			return "member/changePwFrm";
 		}
 	}
+	@RequestMapping(value="/companyMember.do")
+	public String companyMember() {
+		return "member/companyMember";
+	}
+	@ResponseBody
+	@RequestMapping(value="/addCompany.do")
+	public String addCompnay(Member m) {
+		int result = service.addCompany(m);
+		if(result>0) {
+			return "1";
+		}else {
+			return "0";
+		}
+	}
+	@RequestMapping(value="/mypageCom.do")
+	public String mypageCom() {
+		return "member/mypageCom";
+	}
+	@RequestMapping(value="/mypageGosu.do")
+	public String mypageGosu() {
+		return "member/mypageGosu";
+	}
+	
 }

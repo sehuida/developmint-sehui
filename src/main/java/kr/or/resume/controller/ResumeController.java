@@ -88,5 +88,11 @@ public class ResumeController {
 		return "resume/resumeView";
 	}
 	
+	@RequestMapping(value="/applicationCompany.do")
+	public String applicationCompany(int memberNo) {
+		/* ArrayList<Resume> list = service.selectAllAnnounce(memberNo); */
+		System.out.println("지원현황 페이지 resumeNo : "+memberNo);
+		return "resume/applicationCompany";
+	}
 	
 }
