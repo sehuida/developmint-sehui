@@ -170,7 +170,8 @@
 					comment_no as commentNo,
 					report_date as reportDate,
 					report_status as reportStatus,
-					comment_content as commentContent
+					comment_content as commentContent,
+					enroll_date as enrollDate
 				from REPORT where report_status = 1 order by REPORT_no desc)r 
 			order by rnum) 
 		where rnum BETWEEN #{start} and #{end}
@@ -181,9 +182,10 @@
 	</select>
 	
 	<select id="memberIdList" parameterType="map" resultType="string">
-		select memberId from(select rownum as rnum, c.MEMBER_ID as memberId
-		from report 
-		join COMMENTS c using(COMMENT_NO))
+		select memberId from(select rownum as rnum, c.MEMBER_ID as memberId, R.REPORT_STATUS as status
+		from report r 
+		join COMMENTS c using(COMMENT_NO)
+		where R.REPORT_STATUS = 1)
 		where rnum BETWEEN #{start} and #{end}
 	</select>
 	
@@ -195,15 +197,15 @@
 	</select>
 	
 	<update id="canselReport" parameterType="_int">
-		update REPORT set REPORT_STATUS = 3 where REPORT_NO = #{reportNo}
+		update REPORT set REPORT_STATUS = 3, enroll_date = to_char(sysdate,'yyyy-mm-dd') where REPORT_NO = #{reportNo}
 	</update>
 	
 	<update id="reportInsert" parameterType="_int">
-		update REPORT set REPORT_STATUS = 2 where REPORT_NO = #{reportNo}
+		update REPORT set REPORT_STATUS = 2, enroll_date = to_char(sysdate,'yyyy-mm-dd')  where REPORT_NO = #{reportNo}
 	</update>
 	
 	<update id="falseReport" parameterType="_int">
-		update REPORT set REPORT_STATUS = 4 where REPORT_NO = #{reportNo}
+		update REPORT set REPORT_STATUS = 4, enroll_date = to_char(sysdate,'yyyy-mm-dd')  where REPORT_NO = #{reportNo}
 	</update>
 	
 	

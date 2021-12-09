@@ -90,4 +90,13 @@
   <update id="updateProfile" parameterType="m">
   	update member set filepath = #{filepath} where member_id = #{memberId}
   </update>
+  <update id="changePwMember" parameterType="m">
+  	update member set member_pw = #{memberPw} where member_id = #{memberId}
+  </update>
+  <update id="addCompnay" parameterType="m">
+ 	update member set com_no=#{comNo}, member_type=3 where member_id = #{memberId}
+  </update>
+  <select id="checkCompany" parameterType="m" resultType="_int">
+  	select company_no from company where business_no=#{comNo}
+  </select>
 </mapper>

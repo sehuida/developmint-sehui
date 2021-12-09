@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.member.model.vo.Member;
 import kr.or.resume.service.ResumeService;
 import kr.or.resume.vo.Resume;
 
@@ -77,6 +78,21 @@ public class ResumeController {
 		return resume;
 	}
 	
+	@RequestMapping(value="/ceoResumeView.do")
+	public String ceoResumeView(Resume r, Model model) {
+		int ceoResume = r.getCeoResume();
+		Resume resume = service.selectCeoResume(ceoResume);
+		Member m = service.selectOneMember(resume.getMemberNo());
+		model.addAttribute("r", resume);
+		model.addAttribute("m", m);		
+		return "resume/resumeView";
+	}
 	
+	@RequestMapping(value="/applicationCompany.do")
+	public String applicationCompany(int memberNo) {
+		/* ArrayList<Resume> list = service.selectAllAnnounce(memberNo); */
+		System.out.println("지원현황 페이지 resumeNo : "+memberNo);
+		return "resume/applicationCompany";
+	}
 	
 }

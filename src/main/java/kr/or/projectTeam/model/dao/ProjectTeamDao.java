@@ -52,6 +52,22 @@ public class ProjectTeamDao {
 		return (ArrayList<DevelopLanguage>) list;
 	}
 
+	public int writeRecruitTeam(Map<String, Object> map) {
+		int rootChange = 1;
+		int finalResult = 0;
+		map.put("rootChange", rootChange);
+		if(map.containsKey("flist")) {
+		int firstResult = sqlSession.insert("projectTeam.writeRecruitTeam", map);
+			if(firstResult > 0) {
+				map.replace("rootChange", 2);
+				finalResult = sqlSession.insert("projectTeam.writeRecruitTeam", map);
+			}
+		} else {
+			finalResult = sqlSession.insert("projectTeam.writeRecruitTeam", map);
+		}
+		return finalResult;
+	}
+
 	
 
 	

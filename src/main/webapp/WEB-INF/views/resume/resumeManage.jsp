@@ -114,7 +114,7 @@
 		overflow: hidden;
 		float: right;	
 	}
-	.updateResume, .resumeView{
+	.updateResume, .ceoResumeView{
 		border: none;
 		width: 100px;
 		height: 45px;
@@ -129,7 +129,7 @@
 		background-color: rgb(78, 205, 196);
 		color: white;
 	}
-	.resumeView:hover{
+	.ceoResumeView:hover{
 		background-color: rgb(78, 205, 196);
 		color: white;
 	}
@@ -166,7 +166,7 @@
     	font-weight: 900;
     	float: right;
     	position: relative;
-    	top: -30px;
+    	top: -40px;
     	left: -50px;
     }
     
@@ -255,7 +255,20 @@
 		text-align: center;
 	}
     .wd{
-    	margin-top: 10px;
+    	margin-top: 20px;
+    	margin-left: 30px;
+    }
+    .resumeTitle{
+    	margin-left: 30px;    	
+    }
+    .wrap{
+    	margin: 50px 0px;
+    	height: 230px;
+    	border: 1px solid #dfdfdf;
+    }
+    .resumeTitle>a{
+    	color: black;
+    	text-decoration: none;
     }
 </style>
 <script>
@@ -356,6 +369,7 @@
 				            			<img src="resources/img/resume/career.PNG">
 				            		</div>
 				            		<div class="resumeInfoData car">
+				            			<em style="font-size: 16px;">경력 : </em>
 				            			<c:if test="${r.career eq 1 }">
 											<span>신입</span>
 										</c:if>
@@ -369,6 +383,7 @@
 										<img src="resources/img/resume/income.PNG">					
 									</div>
 									<div class="resumeInfoData mon">
+										<em style="font-size: 16px;">연봉 : </em>
 										<c:if test="${r.money eq 1 }">		<!-- 1 -> 회사내규에 따름 -->
 				            				<span>회사내규에 따름</span>
 						            	</c:if>
@@ -396,10 +411,11 @@
 							<ul	class="resumeInfo2">  
 							<li class="workPlace">
 									<div class="resumeInfoImg">
-										<img src="resources/img/resume/workPlace.PNG">
+										<img src="resources/img/resume/workPlace.png">
 									</div>
 									<div class="resumeInfoData wp">
-										<span>희망지역 : ${r.workPlace }</span>	<!-- r.workPlace -->
+										<em style="font-size: 16px;">희망지역 :</em>
+										<span>${r.workPlace }</span>	<!-- r.workPlace -->
 									</div>
 								</li>    					           
 								<li class="workForm">
@@ -407,7 +423,7 @@
 										<img src="resources/img/resume/workForm.PNG">
 									</div>
 									<div class="resumeInfoData wf">
-										<span>희망 근무형태 : </span>
+										<em style="font-size: 16px;">희망 근무형태 : </em>
 										<c:if test="${r.workForm eq 1 }">			
 				            			<span>정규직</span>
 					            		</c:if>
@@ -427,11 +443,12 @@
 								</li>               
 							</ul>
 						<div class="message">
-							<button class="companyMessage">기업이 보낸 요청</button>		<!-- 웹소켓으로 기업이 이력서 확인 후 합격이면 쪽지 날라가게 만들기 -->
+							<a href="applicationCompany.do?memberNo=${sessionScope.m.memberNo }"><button class="companyMessage">지원한 회사 목록</button></a>		<!-- 웹소켓으로 기업이 이력서 확인 후 합격이면 쪽지 날라가게 만들기 -->
 							<span class="requestCount">1</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
 						</div>
 						<div class="update">
-							<a href="resumeView.do?ceoResume=${r.ceoResume }"><button class="resumeView">이력서 보기</button></a>
+							
+							<a href="ceoResumeView.do?ceoResume=${r.ceoResume }"><button class="ceoResumeView">이력서 보기</button></a>
 							<a href="updateResumeFrm.do?ceoResume=${r.ceoResume }"><button class="updateResume">수정하기</button></a>
 						</div>
 					</div>
@@ -469,11 +486,12 @@
 					<div class="myResume">
 						<div class="smallBox" style="width: 800px; margin: 0 auto;">
 				<c:forEach items="${list }" var="rs" varStatus="i">
+					<div class="wrap">
 							<div class="wd">
 								<span style="font-size: 13px; color: gray;">${rs.writeDate }</span>	
 							</div>
 							<div class="resumeTitle">
-								<em>${rs.resumeTitle }</em>	
+								<a href="#"><em>${rs.resumeTitle }</em></a>	
 							</div>
 							<div class="register">
 								<p>대표이력서 등록</p>
@@ -494,6 +512,7 @@
 					            		<img src="resources/img/resume/career.PNG">
 					            	</div>
 					            	<div class="resumeInfoData">
+					            	<em style="font-size: 16px; font-weight: normal;">경력 : </em>
 					            	<c:if test="${rs.career eq 1 }">		<!-- 1 -> 신입 -->
 					            		<span>신입</span>
 					            	</c:if>
@@ -505,10 +524,10 @@
 					            </li>
 					            <li class="money">
 									<div class="resumeInfoImg">
-										<img src="resources/img/resume/income.PNG">					
+										<img src="resources/img/resume/money.PNG" style="width:16px; height: 23px; margin-left: 2px;">					
 									</div>
 									<div class="resumeInfoData">
-																			<!-- r.money -->
+										<em style="font-size: 16px; font-weight: normal;">연봉 : </em>			<!-- r.money -->
 										<c:if test="${rs.money eq 1 }">		<!-- 1 -> 회사내규에 따름 -->
 					            			<span>회사내규에 따름</span>
 						            	</c:if>
@@ -536,9 +555,10 @@
 							<ul class="resumeInfo2">
 								<li class="workPlace">
 									<div class="resumeInfoImg">
-										<img src="resources/img/resume/workPlace.PNG">
+										<img src="resources/img/resume/workPlace.png">
 									</div>
 									<div class="resumeInfoData">
+										<em style="font-size: 16px; font-weight: normal;">희망지역 : </em>
 										<span>${rs.workPlace }</span>	<!-- r.resumeworkPlace -->
 									</div>
 								</li>       					           
@@ -547,7 +567,8 @@
 										<img src="resources/img/resume/workFromWhite.PNG">
 									</div>
 									<div class="resumeInfoData">
-																		<!-- r.resumeWorkForm -->
+										<!-- r.resumeWorkForm -->
+										<em style="font-size: 16px; font-weight: normal;">희망 근무형태 : </em>
 										<c:if test="${rs.workForm eq 1 }">		<!-- 1 -> 정규직 -->
 						            		<span>정규직</span>
 						            	</c:if>
@@ -566,7 +587,8 @@
 									</div>
 								</li>                       
 							</ul>
-					<hr>
+							
+							</div>
 				</c:forEach>
 						</div>			
 					</div>

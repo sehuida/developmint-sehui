@@ -14,4 +14,5 @@ public class Member {
 	private String enrollDate;
 	private String filepath;
 	private int memberGrade;
+	private String comNo;
 }
