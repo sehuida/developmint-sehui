@@ -200,11 +200,13 @@
 	
 	<!-- 신고된 아이디 리스트 조회 -->
 	<select id="memberIdList" parameterType="map" resultType="string">
-		select memberId from(select rownum as rnum, c.MEMBER_ID as memberId, R.REPORT_STATUS as status
+		select rt.memberId from(select memberId, rownum as rnum
+		from(select c.MEMBER_ID as memberId, R.REPORT_STATUS, R.REPORT_NO
 		from report r 
 		join COMMENTS c using(COMMENT_NO)
-		where R.REPORT_STATUS = 1)
-		where rnum BETWEEN #{start} and #{end}
+		where R.REPORT_STATUS = 1
+		order by R.REPORT_NO desc))rt
+        where rnum BETWEEN #{start} and #{end}
 	</select>
 	
 	<!-- 해당 아이디 신고 횟수 조회-->
@@ -226,13 +228,22 @@
 	</update>
 	
 	<!-- 신고 처리시 -5점, 81점 이하일 경우 고수 박탈 -->
-	<update id="memberGradeChange1" parameterType="string">
+	<update id="memberGradeChange1" parameterType="map">
 	 <![CDATA[
 		update member set 
 		member_grade = case when member_grade<=5 then 1 else member_grade-5 end,
-		member_type = case when (member_grade-5)<81 then 1 else 2 end
-		where member_id = #{value}
-		  ]]>
+	]]>
+	<choose>
+		<when test="rpCount >= 5">
+			member_type = 4
+		</when>
+		 <otherwise>
+		  <![CDATA[
+			 member_type = case when (member_grade-5)<81 then 1 else 2 end
+			 ]]>
+		</otherwise>
+	</choose>
+		 where member_id = #{memberId}
 	</update>
 	
 	<!-- 허위신고 처리 -->

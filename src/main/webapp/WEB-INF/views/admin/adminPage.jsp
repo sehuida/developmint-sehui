@@ -87,7 +87,7 @@
 			</div>
 			<div id="cate">
 				<i class="bi bi-person-dash-fill"></i><span>차단 회원 관리</span>
-				<a href="/blockedMember.do" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
+				<a href="/blockedMember.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
 			</div>
 			
 			<p class="title">공모전</p>

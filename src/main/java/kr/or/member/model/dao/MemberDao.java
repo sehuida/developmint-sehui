@@ -1,6 +1,7 @@
 package kr.or.member.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -86,9 +87,13 @@ public class MemberDao {
 		return sqlSession.update("member.delProfile",m);
 	}
 
-	public ArrayList<GosuNotice> gosuNoticeLists(Member m) {
-		List<GosuNotice> list = sqlSession.selectList("member.gosuNoticeList",m);
+	public ArrayList<GosuNotice> gosuNoticeLists(HashMap<String, Object> map) {
+		List<GosuNotice> list = sqlSession.selectList("member.gosuNoticeList",map);
 		return (ArrayList<GosuNotice>)list;
+	}
+
+	public int gosuTotalCount(String memberId) {
+		return sqlSession.selectOne("member.gosuTotalCount",memberId);
 	}
 
 }

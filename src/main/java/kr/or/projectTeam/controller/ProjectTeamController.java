@@ -144,11 +144,15 @@ public class ProjectTeamController {
 	}
 	
 	@RequestMapping(value="/recruitTeamMember.do")
-	public String selectOneNotice(Model model, int projectNo, int memberNo) {
+	public String selectOneNotice(Model model, int projectNo, Integer memberNo) {
+		if(memberNo == null) {
+			memberNo = -1;
+		}
 		ProjectTeamNoticeViewData ptnvd = service.selectOneNotice(projectNo, memberNo);
 		model.addAttribute("commentList", ptnvd.getList());
 		model.addAttribute("pt", ptnvd.getPt());
 		model.addAttribute("pdLangList", ptnvd.getPdLangList());
+		model.addAttribute("memberNo", memberNo);
 		return "recruitCrue/recruitTeamMember_detail";
 		
 	}

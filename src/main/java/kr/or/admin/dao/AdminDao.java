@@ -110,8 +110,8 @@ public class AdminDao {
 		return sqlSession.update("admin.falseReport", reportNo);
 	}
 
-	public int memberGradeChange1(String memberId) {
-		return sqlSession.update("admin.memberGradeChange1", memberId);
+	public int memberGradeChange1(Map<String, Object> map) {
+		return sqlSession.update("admin.memberGradeChange1", map);
 	}
 
 	public int memberGradeChange2(String memberId) {
@@ -126,6 +126,11 @@ public class AdminDao {
 	public List<String> report5ListMember() {
 		List<String> list = sqlSession.selectList("admin.report5ListMember");
 		return list;
+	}
+
+	public ArrayList<Member> allblockedList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

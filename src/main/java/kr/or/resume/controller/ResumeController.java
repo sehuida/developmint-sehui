@@ -68,7 +68,7 @@ public class ResumeController {
 			model.addAttribute("icon", "error");
 		}
 		model.addAttribute("loc","/resumeManage.do?memberNo="+memberNo);
-		return "resume/swalMsg";
+		return "member/swalMsg";
 	}
 	
 	@RequestMapping(value="/ceoResume.do")

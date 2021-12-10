@@ -1,6 +1,7 @@
 package kr.or.member.model.service;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.gosu.vo.GosuNotice;
 import kr.or.member.controller.RandomPassword;
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.CertiVO;
+import kr.or.member.model.vo.GosuNoticePage;
 import kr.or.member.model.vo.Member;
 
 @Service
@@ -111,6 +114,60 @@ public class MemberService {
 	@Transactional
 	public int delProfile(Member m) {
 		return dao.delProfile(m);
+	}
+
+	public GosuNoticePage gosuNoticeLists(Member m, int reqPage) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int numPerPage = 5;
+		int end = reqPage*numPerPage;
+		int start = end - numPerPage + 1;
+		
+		map.put("memberId", m.getMemberId());
+		map.put("start",start);
+		map.put("end",end);
+		ArrayList<GosuNotice> list = dao.gosuNoticeLists(map);
+		
+		int totalCount = dao.gosuTotalCount(m.getMemberId());
+		int totalPage = 0;
+		if(totalCount%numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage+1;
+		}
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		
+		String pageNavi = "<ul class='pagination pagination-lg'>";
+				
+				if(pageNo != 1) {
+					pageNavi += "<li class=\"page-item\">";
+					pageNavi += "<a class=\"page-link\" href='/noticeList?reqPage="+(pageNo-1)+"'>&laquo;</a></li>";
+				}
+				
+				for(int i=0;i<pageNaviSize;i++){
+					if(pageNo == reqPage) {
+						pageNavi += "<li class=\"page-item active\">";
+						pageNavi += "<a class='page-link' href='/noticeList?reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+					} else {
+						pageNavi += "<li class='page-item'>";
+						pageNavi += "<a class='page-link' href='/noticeList?reqPage="+pageNo+"'>";
+						pageNavi += pageNo+"</a></li>";
+					}
+					pageNo++;
+					if(pageNo>totalPage) {
+						break;
+					}
+				}
+				if(pageNo <= totalPage) {
+					pageNavi += "<li class='page-item'>";
+					pageNavi += "<a class='page-link' href='/noticeList?reqPage="+pageNo+"'>";
+					pageNavi += "&raquo;</a></li>";
+				}
+				pageNavi += "</ul>";
+				
+				GosuNoticePage gnp = new GosuNoticePage(list,pageNavi,start);
+				return gnp;
 	}
 	
 }
