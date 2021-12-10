@@ -166,7 +166,7 @@
 											</c:if></td>
 									</tr>
 									<tr>
-										<td><span  style="height: 50px;">${gtl.feedbackContent }</span></td>
+										<td><span  style="height: 50px;width : 230px;">${gtl.feedbackContent }</span></td>
 									</tr>
 									<tr>
 										<td colspan="2"><a style="margin-top:0;"
@@ -224,7 +224,7 @@
 											</c:if></td>
 									</tr>
 									<tr>
-										<td><span  style="height: 50px;">${gtl.feedbackContent }</span></td>
+										<td><span  style="height: 50px;width : 230px;">${gtl.feedbackContent }</span></td>
 									</tr>
 									<tr>
 										<td colspan="2"><a
@@ -278,7 +278,7 @@
 								src="/resources/img/gosu/g_img_basic.png"></td>
 						</tr>
 						<tr>
-							<td style="font-size: 25px;"><b>강세희</b></td>
+							<td style="font-size: 25px;width : 240px;"><b>강세희</b></td>
 						</tr>
 						<tr>
 							<td colspan="2"><a href="/gosuProject.do"
@@ -302,7 +302,7 @@
 								src="/resources/img/gosu/g_img_basic.png"></td>
 						</tr>
 						<tr>
-							<td style="font-size: 25px;"><b>강세희</b></td>
+							<td style="font-size: 25px;width : 240px;"><b>강세희</b></td>
 						</tr>
 						<tr>
 							<td colspan="2"><a href="/gosuProject.do"
@@ -325,7 +325,7 @@
 								src="/resources/img/gosu/g_img_basic.png"></td>
 						</tr>
 						<tr>
-							<td style="font-size: 25px;"><b>강세희</b></td>
+							<td style="font-size: 25px;width : 240px;"><b>강세희</b></td>
 						</tr>
 						<tr>
 							<td colspan="2"><a href="/gosuProject.do"

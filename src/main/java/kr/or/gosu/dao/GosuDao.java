@@ -139,5 +139,10 @@ public class GosuDao {
 		return sqlSession.selectOne("gosu.selectMemberId",feedbackNo);
 	}
 
+	public ArrayList<Gosu> selectgosuWriteList(String gosuId) {
+		List<Gosu> list = sqlSession.selectList("gosu.selectgosuWriteList",gosuId);
+		return (ArrayList<Gosu>)list;
+	}
+
 
 }

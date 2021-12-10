@@ -256,7 +256,7 @@
 	background-color: gray;
 	position: fixed;
 	z-index: 10000;
-	background: rgba(0,0,0, 0.5);
+	background: rgba(0, 0, 0, 0.5);
 }
 
 .bigPicture {
@@ -297,7 +297,8 @@
 							</c:if>
 							<c:if test="${not empty gosu.gosuImg }">
 								<th rowspan="6" style="padding: 40px; padding-right: 100px;"><img
-									src="/resources/upload/member/${gosu.gosuImg }" style="width: 250px;"></th>
+									src="/resources/upload/member/${gosu.gosuImg }"
+									style="width: 250px;"></th>
 							</c:if>
 						</tr>
 						<tr>
@@ -332,7 +333,7 @@
 					<div class="gphs">
 						<ul>
 							<c:forEach items="${gphotoList }" var="gph" varStatus="i">
-						
+
 								<li><a><img src="${gph.photoFilepath }"></a></li>
 							</c:forEach>
 						</ul>
@@ -458,13 +459,16 @@
 				</div>
 			</div>
 		</div>
-		
-		<div style="display: flex; justify-content: center;">
-			<a href="/gosuFeedback.do?ggNo=${gosu.ggsouNo }"
-				class="btn btn-primary"
-				style="width: 200px; margin: 100px; padding: 10px;"><b>피드백
-					신청하기</b></a>
-		</div>
+		<c:if test="${not empty sessionScope.m.memberNo }">
+			<c:if test="${sessionScope.m.memberNo ne gosu.gsouNo}">
+				<div style="display: flex; justify-content: center;">
+					<a href="/gosuFeedback.do?ggNo=${gosu.ggsouNo }"
+						class="btn btn-primary"
+						style="width: 200px; margin: 100px; padding: 10px;"><b>피드백
+							신청하기</b> </a>
+				</div>
+			</c:if>
+		</c:if>
 		<div class='bigPictureWrapper'>
 			<div class='bigPicture'></div>
 		</div>
