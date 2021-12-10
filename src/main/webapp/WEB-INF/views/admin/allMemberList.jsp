@@ -49,6 +49,16 @@
 	margin-top : 30px;
 	text-align: center;
 }
+#searchBox>form{
+	display: flex;
+	justify-content: flex-end;
+	overflow: hidden;
+}
+#searchBox>form>[name="memberId"]{
+	float: left;
+	width: 200px;
+	margin-right: 10px;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -86,6 +96,13 @@
 	<a href="/allMemberList.do?reqPage=1&type=2&list=1" id="gosuList" class="listTag">고수회원</a>
 	<a href="/allMemberList.do?reqPage=1&type=3&list=1" id="companyList" class="listTag">기업회원</a>
 	
+	<%--아이디 검색 --%>
+	<div id="searchBox">
+		<form action="/searchId.do" method="post" >
+			<input type="text" name="memberId" placeholder="아이디를 입력하세요" class="form-control mr-sm-2">
+			<input type="submit" value="검색" class="btn btn-info">
+		</form>
+	</div>
 	<%--조회 리스트 테이블 --%>
 	<%--최신순(전체회원조회) --%>
 	<table class="table newListTbl ">

@@ -99,4 +99,7 @@
   <select id="checkCompany" parameterType="m" resultType="_int">
   	select company_no from company where business_no=#{comNo}
   </select>
+  <update id="delProfile" parameterType="m">
+  	update member set filepath = '' where member_id = #{memberId}
+  </update>
 </mapper>

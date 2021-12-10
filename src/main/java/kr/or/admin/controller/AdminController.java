@@ -59,8 +59,8 @@ public class AdminController {
 	
 	//전체회원리스트 목록으로 이동
 	@RequestMapping(value="/allMemberList.do")
-	public String allMemberList(Model model, int reqPage, int type, int list) {
-		TotalMember tm = service.totalMember(reqPage,type,list);
+	public String allMemberList(Model model, int reqPage, int type, int list, String memberId) {
+		TotalMember tm = service.totalMember(reqPage,type,list,memberId);
 		model.addAttribute("memberList", tm.getAllMemberList());
 		model.addAttribute("start",tm.getStart());
 		model.addAttribute("pageNavi",tm.getPageNavi());
@@ -150,8 +150,18 @@ public class AdminController {
 		return "common/msg";
 	}
 	
-	
-	
+	//아이디 검색
+	@RequestMapping(value="/searchId.do")
+	public String searchId(Model model, int reqPage, int type, int list, String memberId) {
+		TotalMember tm = service.totalMember(reqPage,type,list,memberId);
+		model.addAttribute("memberList", tm.getAllMemberList());
+		model.addAttribute("start",tm.getStart());
+		model.addAttribute("pageNavi",tm.getPageNavi());
+		model.addAttribute("totalCount",tm.getTotalCountList());
+		model.addAttribute("type",type);
+		model.addAttribute("list",list);
+		return "admin/allMemberList";
+	}
 }
 
 

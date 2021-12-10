@@ -108,4 +108,9 @@ public class MemberService {
 		}
 	}
 	
+	@Transactional
+	public int delProfile(Member m) {
+		return dao.delProfile(m);
+	}
+	
 }
