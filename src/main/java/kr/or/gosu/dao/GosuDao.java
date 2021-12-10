@@ -9,6 +9,7 @@ import kr.or.gosu.vo.GosuFeedback;
 import kr.or.gosu.vo.GosuNotice;
 import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
+import kr.or.gosu.vo.GosuTalk;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,5 +112,28 @@ public class GosuDao {
 	public String selectGosuId2(int ggosuNo) {
 		return sqlSession.selectOne("gosu.getGosuId2",ggosuNo);
 	}
+
+	public int insertGosuTalk(GosuTalk gt) {
+		return sqlSession.insert("gosu.insertGosuTalk",gt);
+	}
+
+	public int updateFeedbackNum(int feedbackNo) {
+		return sqlSession.update("gosu.updateFeedbackNum",feedbackNo);
+	}
+
+	public ArrayList<GosuTalk> selectGosuTalk(int fbNo) {
+		List<GosuTalk> list = sqlSession.selectList("gosu.selectGosuTalkList",fbNo);
+		return (ArrayList<GosuTalk>)list;
+	}
+
+	public ArrayList<GosuFeedback> selectGosuFeedbackList2(String memberId) {
+		List<GosuFeedback> list = sqlSession.selectList("gosu.selectGosuFeedbackList2",memberId);
+		return (ArrayList<GosuFeedback>)list;
+	}
+
+	public int talkStop(int feedbackNo) {
+		return sqlSession.update("gosu.talkStop",feedbackNo);
+	}
+
 
 }

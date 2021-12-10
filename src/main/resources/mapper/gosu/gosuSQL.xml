@@ -45,7 +45,8 @@
 		member_id as gosuId
 		from member where member_no = (select
 		gosu_no
-		from gosu where
+		from
+		gosu where
 		ggosu_no = #{ggosuNo})
 	</select>
 	<select id="getGosuImg" parameterType="_int" resultType="string">
@@ -141,17 +142,20 @@
 		select * from (select
 		rownum as rnum , r.* from (select
 		member_no as gosuNo,
-		member_id as gosuId,
+		member_id as
+		gosuId,
 		filepath as gosuImg
 		from member where
-		member_type=2 order by 1 desc )r)rr where rnum between 1
+		member_type=2 order by 1
+		desc )r)rr where rnum between 1
 		and 4
 	</select>
 
 	<select id="selectGosuCount" resultType="_int">
 		select
 		count(*)
-		from member where member_type=2
+		from
+		member where member_type=2
 	</select>
 	<select id="selectGProject" parameterType="_int"
 		resultType="gpr">
@@ -203,4 +207,57 @@
 		from
 		gosu_feedback where MEMBER_ID = #{memberId}
 	</select>
+
+	<insert id="insertGosuTalk" parameterType="gt">
+		insert into
+		gosu_talk
+		values(gosu_t_SEQ.nextval,#{feedbackNo},#{writer},#{talkContent},to_char(sysdate,'yyyy-mm-dd'),#{filepath},#{filename})
+
+	</insert>
+
+	<update id="updateFeedbackNum" parameterType="_int">
+		update
+		gosu_feedback set
+		FEEDBACK_NUM = 2 where FEEDBACK_NO = #{feedbackNo}
+	</update>
+	<select id="selectGosuTalkList" parameterType="_int"
+		resultType="gt">
+		select
+		TALK_NO as talkNo,
+		FEEDBACK_NO as feedbackNo,
+		WRITER as
+		writer,
+		TALK_CONTENT as talkContent,
+		TALK_DATE as talkDate,
+		FILEPATH,
+		FILENAME
+		from
+		gosu_talk where FEEDBACK_NO = #{fbNo}
+	</select>
+	<select id="selectGosuFeedbackList2" parameterType="string"
+		resultType="gf">
+		select
+		FEEDBACK_NO as feedbackNo,
+		GGOSU_NO as ggosuNo,
+		FEEDBACK_CONTENT as
+		feedbackContent,
+		FEEDBACK_TITLE as feedbackTitle,
+		FEEDBACK_DATE as
+		feedbackDate,
+		FEEDBACK_NUM as feedbackNum,
+		MEMBER_ID as
+		memberId
+		from
+		gosu_feedback
+		where ggosu_no=
+		(select ggosu_no from gosu where
+		gosu_no = (select member_no
+		from member where
+		member_id=#{memberId}))
+	</select>
+	<update id="talkStop" parameterType="_int">
+		update
+		gosu_feedback set
+		FEEDBACK_NUM = 3 where FEEDBACK_NO = #{feedbackNo}
+	</update>
 </mapper>

@@ -59,16 +59,13 @@
 			<br><br><br>
 			
 			<%-- 관리자 정보 --%>
-			<!-- ${sessionScope.m} 정보로 수정 예정 / 진호 마이페이지로 연결 예정-->
 			<div class="adminInfoBox">
 				<div class="adminImg">
 					<img src="/resources/upload/member/${sessionScope.m.filepath }">
 				</div>
 				<div class="adminInfo">
-					<a href = "updateInfoFrm.do">
-					<span style="font-weight:bold">관리자 </span><span>님</span>
-					</a>
-					<p>admin@gmail.com</p>
+					<span style="font-weight:bold">${sessionScope.m.memberName } </span><span>님</span>
+					<p>${sessionScope.m.email } </p>
 				</div>
 			</div>
 			
@@ -82,7 +79,7 @@
 			<p class="title">회원관리</p>
 			<div id="cate">
 				<i class="bi bi-list-ul"></i><span>전체 회원 조회</span>
-				<a href="/allMemberList.do?reqPage=1&type=0&list=1" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
+				<a href="/allMemberList.do?reqPage=1&type=0&list=1&id=null" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
 			</div>
 			<div id="cate">
 				<i class="bi bi-exclamation-circle"></i><span>신고 회원 처리</span>
