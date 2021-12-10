@@ -96,7 +96,7 @@
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container" style="margin-top:50px;margin-bottom:100px;">
 		<div class="mainCate">
-		<a href="#" class="cateAtag" onclick="history.go(-1)"><i class="bi bi-chevron-left"></i></a> 
+		<a href="/adminPage.do" class="cateAtag"><i class="bi bi-chevron-left"></i></a> 
 		<span id="reportMember" style="font-weight:bold">신고 회원 조회</span>
 		</div>
 		<br><br><br>
@@ -318,6 +318,19 @@
 	 			swal({
 		 			  title: "신고처리(로그인차단)",
 		 			  text: "해당회원을 신고처리 하시면 로그인이 차단됩니다. 신고처리 하시겠습니까?",
+		 			  icon: "warning",
+		 			  buttons: true,
+		 			  dangerMode: true,
+		 			})
+		 			.then((willDelete) => {
+		 			  if (willDelete) {
+		 				 $(".reportBtnForm").eq(index).submit();	
+		 			  }
+		 			});
+	 		}else if(rpCount >= 5){
+	 			swal({
+		 			  title: "차단회원 신고처리",
+		 			  text: "이미 차단된 회원입니다. 신고처리 하시겠습니까?",
 		 			  icon: "warning",
 		 			  buttons: true,
 		 			  dangerMode: true,
