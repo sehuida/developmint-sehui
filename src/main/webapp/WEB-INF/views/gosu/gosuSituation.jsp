@@ -61,6 +61,8 @@
 
 .container>div>div>div table img {
 	border-radius: 50%;
+	border: 1px solid beige;
+	height: 80px;
 	width: 80px;
 }
 
@@ -147,14 +149,17 @@
 									</tr>
 									<tr>
 										<td><b>${gtl.feedbackTitle }</b></td>
-										<td rowspan="2">
-										<c:if test="${empty gtl.gosuImg }">
+										<td rowspan="2"><c:if test="${empty gtl.gosuImg }">
 												<img src="/resources/img/gosu/g_img_basic.png">
-											</c:if> 
-											<c:if test="${not empty gtl.gosuImg  }">
+												<br>
+												<span
+													style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.gosuId }</span>
+											</c:if> <c:if test="${not empty gtl.gosuImg  }">
 												<img src="/resources/upload/member/${gtl.gosuImg  }">
-											</c:if>
-										</td>
+												<br>
+												<span
+													style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.gosuId }</span>
+											</c:if></td>
 									</tr>
 									<tr>
 										<td>${gtl.feedbackContent }</td>
@@ -202,13 +207,19 @@
 									</tr>
 									<tr>
 										<td><b>${gtl.feedbackTitle }</b></td>
-										<td rowspan="2">
-										<c:if test="${empty gtl.memberImg }">
-												<img src="/resources/img/gosu/g_img_basic.png">
+										<td rowspan="2"><c:if test="${empty gtl.memberImg }">
+												<img 
+													src="/resources/img/gosu/g_img_basic.png">
+												<br>
+												<span
+													style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.memberId }</span>
 											</c:if> <c:if test="${not empty gtl.memberImg  }">
-												<img src="/resources/upload/member/${gtl.memberImg  }">
-											</c:if>
-										</td>
+												<img 
+													src="/resources/upload/member/${gtl.memberImg  }">
+												<br>
+												<span
+													style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.memberId }</span>
+											</c:if></td>
 									</tr>
 									<tr>
 										<td>${gtl.feedbackContent }</td>
@@ -226,7 +237,7 @@
 					<c:otherwise>
 						<span
 							style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">아직
-							신청한 내역이 없습니다!</span>
+							신청받은 내역이 없습니다!</span>
 					</c:otherwise>
 				</c:choose>
 

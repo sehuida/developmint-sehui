@@ -337,8 +337,9 @@ input:focus, textarea:focus {
 				},
 				success : function(data) {
 					if (data > 0) {
+						location.reload();
 					} else {
-
+						console.log("에러");
 					}
 				}
 			});

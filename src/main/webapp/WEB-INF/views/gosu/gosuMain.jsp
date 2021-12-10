@@ -441,11 +441,12 @@ to {
 				<c:forEach items="${newGosuList }" var="ngl" varStatus="i">
 					<div class="gosu-one">
 						<c:if test="${empty ngl.gosuImg }">
-							<img src="/resources/img/gosu/g_img_basic.png"
+							<img src="/resources/img/member/user.png"
 								style="border-radius: 50%;">
 						</c:if>
 						<c:if test="${not empty ngl.gosuImg }">
-							<img src="/resources/upload/member/${ngl.gosuImg }" style="border-radius: 50%;">
+							<img src="/resources/upload/member/${ngl.gosuImg }"
+								style="border-radius: 50%;">
 						</c:if>
 
 						<div style="margin-top: 20px;">${ngl.gosuId }</div>
@@ -516,13 +517,13 @@ to {
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
-						<span style="font-size: 20px;">아직 신청한 내역이 없습니다!</span>
+							<span style="font-size: 20px;">아직 신청한 내역이 없습니다!</span>
 						</c:otherwise>
 					</c:choose>
 
 				</div>
 				<h4 style="margin-top: 30px; margin-left: 40px;">신청받은 내역</h4>
-						<div class="g-statusContent">
+				<div class="g-statusContent">
 					<c:choose>
 						<c:when test="${not empty gosuTalkList2 }">
 							<c:forEach items="${gosuTalkList2 }" var="gtl" varStatus="i">
@@ -552,12 +553,12 @@ to {
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
-						<span style="font-size: 20px;">아직 신청받은 내역이 없습니다!</span>
+							<span style="font-size: 20px;">아직 신청받은 내역이 없습니다!</span>
 						</c:otherwise>
 					</c:choose>
 
 				</div>
-				
+
 				<hr>
 				<h4 style="margin-top: 30px; margin-left: 40px;">
 					<span style="color: rgb(78, 205, 196)">요청서</span>를 통한 <span
