@@ -59,5 +59,9 @@ public class ResumeDao {
 	public Member selectOneMember(int memberNo) {
 		return sqlSession.selectOne("resume.selectOneMember", memberNo);
 	}
+
+	public Resume selectResume(int resumeNo) {
+		return sqlSession.selectOne("resume.selectResume", resumeNo);
+	}
 	 
 }

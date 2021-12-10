@@ -50,9 +50,11 @@ public class MemberController {
 			session.setAttribute("m", m);
 			return "common/main";
 		}else {
-			model.addAttribute("msg","아이디/비밀번호를 다시 확인해주세요");
-			model.addAttribute("loc","/loginFrm.do");
-			return "common/msg";
+			model.addAttribute("title", "로그인 실패");
+			model.addAttribute("msg", "입력 정보를 확인해주세요.");
+			model.addAttribute("loc", "/loginFrm.do");
+			model.addAttribute("icon", "error");
+			return "member/swalMsg";
 		}
 	}
 	@RequestMapping(value="/logout.do")
@@ -225,7 +227,7 @@ public class MemberController {
 	}
 	@ResponseBody
 	@RequestMapping("/uploadProfile.do")
-	public String uploadProfile(MultipartFile files,String memberId,HttpServletRequest request,Model model) {
+	public String uploadProfile(MultipartFile files,String memberId,HttpServletRequest request,Model model,HttpSession session) {
 		Member m = new Member();
 		if(!files.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/member/");
@@ -268,6 +270,8 @@ public class MemberController {
 		}
 		int result = service.updateProfile(m);
 		if(result>0) {
+			Member member = service.checkId(m.getMemberId());
+			session.setAttribute("m", member);
 			return "1";
 		}else {
 			return "0";
@@ -303,7 +307,7 @@ public class MemberController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/addCompany.do")
-	public String addCompnay(Member m) {
+	public String addCompnay(Member m,HttpSession session) {
 		int result = service.addCompany(m);
 		if(result>0) {
 			return "1";
@@ -319,5 +323,20 @@ public class MemberController {
 	public String mypageGosu() {
 		return "member/mypageGosu";
 	}
-	
+	@RequestMapping(value="/gosuKnowhow.do")
+	public String gosuNoticeLists() {
+		return "member/gosuKnowhow";
+	}
+	@ResponseBody
+	@RequestMapping(value="/delProfile.do")
+	public String delProfile(Member m,HttpSession session) {
+		int result = service.delProfile(m);
+		if(result>0) {
+			Member member = service.checkId(m.getMemberId());
+			session.setAttribute("m", member);
+			return "1";			
+		}else {
+			return "0";
+		}
+	}
 }

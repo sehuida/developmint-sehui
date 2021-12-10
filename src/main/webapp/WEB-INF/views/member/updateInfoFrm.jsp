@@ -17,7 +17,9 @@
         margin-top: 50px;
 	}
 	.update-top {
-		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 	.update-top img:hover{
 		cursor: pointer;
@@ -35,6 +37,9 @@
 		display: flex;
 		justify-content: space-around;
 	}
+	.proDel{
+		margin-left: 40px;
+	}
 </style>
 </head>
 <body>
@@ -45,10 +50,11 @@
 			  <div class="update-top">
 				<c:choose>
 					<c:when test="${sessionScope.m.filepath eq null }">
-						<label for="formFile" class="form-label" style="border-radius: 40%; overflow: hidden;"><img src="/resources/img/member/profile.png" id="pic" style="width: 80px; height:80px;"></label>
+						<label for="formFile" class="form-label" style="border-radius: 40%; overflow: hidden;" data-bs-toggle="tooltip" data-bs-placement="top" title="프로필사진 추가"><img src="/resources/img/member/profile.png" id="pic" style="width: 80px; height:80px;"></label>
 					</c:when>
 					<c:otherwise>
-						<label for="formFile" class="form-label" style="border-radius: 40%; overflow: hidden;"><img src="/resources/upload/member/${sessionScope.m.filepath }" id="pic" style="width: 100px; height:100px;"></label>
+						<label for="formFile" class="form-label" style="border-radius: 40%; overflow: hidden;" data-bs-toggle="tooltip" data-bs-placement="top" title="프로필 변경"><img src="/resources/upload/member/${sessionScope.m.filepath }" id="pic" style="width: 100px; height:100px;"></label>
+						<button type="button" class="btn btn-danger proDel">프로필 삭제</button>
 					</c:otherwise>
 				</c:choose>
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
@@ -168,6 +174,39 @@
 				}
 			} 
 		}
+		$(".proDel").click(function(){
+
+			var memberId = $("#memberId").val();
+
+			$.ajax({
+				type:"POST",
+				url:"/delProfile.do",
+				data:{memberId : memberId},
+				success:function(data){
+					if(data == 1){
+						swal({
+					        title: '프로필 삭제완료',
+					        text: '',
+					        icon: 'success'
+					      }).then(function(){
+					    	  window.location = "/updateInfoFrm.do";
+	                      });						
+						
+					}
+				}
+			});
+			
+		});
+	</script>
+	<script>
+		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+		  return new bootstrap.Tooltip(tooltipTriggerEl)
+		})
+		var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+		var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+			return new bootstrap.Popover(popoverTriggerEl)
+		})	
 	</script>
 	<script type="text/javascript" src="/resources/js/member/updateMyInfo.js"></script>
 </body>
