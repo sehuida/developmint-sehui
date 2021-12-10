@@ -2,21 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="admin">
 	
-	<!-- Today 총 회원 -->
-	<select id="todayTotalMember" resultType="_int">
-		select count(*) from member
-	</select>
-	
-	<!-- Today 가입 회원 -->
-	<select id="todayJoinMember" parameterType="string" resultType="_int">
-		select count(*) from member where enroll_date = #{sToday}
-	</select>
-	
-	<!-- Today 탈퇴 회원 -->
-	<select id="todayOutMember" parameterType="string" resultType="_int">
-		select count(*) from delete_member where dm_date = #{sToday}
-	</select>
-	
 	<!-- Today 총 게시물 -->
 	<select id="todayTotalContent" resultType="_int">
 		SELECT SUM(A+B+C+D+E) 
@@ -219,12 +204,12 @@
 	
 	<!-- 신고 반려 처리 -->
 	<update id="canselReport" parameterType="_int">
-		update REPORT set REPORT_STATUS = 3, enroll_date = to_char(SYSDATE,'YYYY/MM/DD HH:MI:SS') where REPORT_NO = #{reportNo}
+		update REPORT set REPORT_STATUS = 3, enroll_date = to_char(SYSDATE,'YYYY/MM/DD HH24:MI:SS') where REPORT_NO = #{reportNo}
 	</update>
 	
 	<!-- 신고 처리 -->
 	<update id="reportInsert" parameterType="_int">
-		update REPORT set REPORT_STATUS = 2, enroll_date = to_char(SYSDATE,'YYYY/MM/DD HH:MI:SS') where REPORT_NO = #{reportNo}
+		update REPORT set REPORT_STATUS = 2, enroll_date = to_char(SYSDATE,'YYYY/MM/DD HH24:MI:SS') where REPORT_NO = #{reportNo}
 	</update>
 	
 	<!-- 신고 처리시 -5점, 81점 이하일 경우 고수 박탈 -->
@@ -248,7 +233,7 @@
 	
 	<!-- 허위신고 처리 -->
 	<update id="falseReport" parameterType="_int">
-		update REPORT set REPORT_STATUS = 4, enroll_date = to_char(SYSDATE,'YYYY/MM/DD HH:MI:SS')  where REPORT_NO = #{reportNo}
+		update REPORT set REPORT_STATUS = 4, enroll_date = to_char(SYSDATE,'YYYY/MM/DD HH24:MI:SS')  where REPORT_NO = #{reportNo}
 	</update>
 	
 	<!-- 허위신고 처리시 -3점, 81점 이하일 경우 고수 박탈 -->
