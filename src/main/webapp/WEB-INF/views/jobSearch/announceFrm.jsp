@@ -609,7 +609,7 @@
 					
 					<!-- 이전, 등록하기 버튼 -->
 					<div class="selectBtn">
-						<input type="submit" onclick="window.scrollTo(0,0);" class="resumeBtn" value="등록">
+						<input type="submit" class="resumeBtn" value="등록">
 						<input type="button" onclick="window.scrollTo(0,0);" class="backBtn2" value="< 이전">
 					</div>
 				</div>
