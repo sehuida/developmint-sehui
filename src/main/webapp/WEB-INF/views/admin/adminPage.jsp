@@ -62,10 +62,12 @@
 			<!-- ${sessionScope.m} 정보로 수정 예정 / 진호 마이페이지로 연결 예정-->
 			<div class="adminInfoBox">
 				<div class="adminImg">
-					<img src="/resources/img/userTestImg.png">
+					<img src="/resources/upload/member/${sessionScope.m.filepath }">
 				</div>
 				<div class="adminInfo">
+					<a href = "updateInfoFrm.do">
 					<span style="font-weight:bold">관리자 </span><span>님</span>
+					</a>
 					<p>admin@gmail.com</p>
 				</div>
 			</div>
