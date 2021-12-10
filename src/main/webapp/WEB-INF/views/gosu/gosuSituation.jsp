@@ -35,11 +35,15 @@
 }
 
 .container>div>div>div table td {
-	width: 75%;
+	
 	padding: 10px;
 	text-align: center;
+	}
+.container>div>div>div table td>span {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
-
 .container>div>div>div table a {
 	margin-top: 20px;
 	width: 200px;
@@ -145,12 +149,12 @@
 												style="color: gray;">진행 완료</b></td>
 										</c:if>
 
-										<td style="padding-top: 20px;">${gtl.feedbackDate }</td>
+										<td >${gtl.feedbackDate }</td>
 									</tr>
 									<tr>
 										<td><b>${gtl.feedbackTitle }</b></td>
-										<td rowspan="2"><c:if test="${empty gtl.gosuImg }">
-												<img src="/resources/img/gosu/g_img_basic.png">
+										<td rowspan="2" style="padding-right:0;"><c:if test="${empty gtl.gosuImg }">
+												<img src="/resources/img/gosu/g_img_basic.png" >
 												<br>
 												<span
 													style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.gosuId }</span>
@@ -162,10 +166,10 @@
 											</c:if></td>
 									</tr>
 									<tr>
-										<td>${gtl.feedbackContent }</td>
+										<td><span  style="height: 50px;">${gtl.feedbackContent }</span></td>
 									</tr>
 									<tr>
-										<td colspan="2"><a
+										<td colspan="2"><a style="margin-top:0;"
 											href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
 											class="btn btn-primary">자세히 보기</a></td>
 									</tr>
@@ -207,22 +211,20 @@
 									</tr>
 									<tr>
 										<td><b>${gtl.feedbackTitle }</b></td>
-										<td rowspan="2"><c:if test="${empty gtl.memberImg }">
-												<img 
-													src="/resources/img/gosu/g_img_basic.png">
+										<td rowspan="2" style="padding-right:0;"><c:if test="${empty gtl.memberImg }">
+												<img src="/resources/img/gosu/g_img_basic.png">
 												<br>
 												<span
 													style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.memberId }</span>
 											</c:if> <c:if test="${not empty gtl.memberImg  }">
-												<img 
-													src="/resources/upload/member/${gtl.memberImg  }">
+												<img src="/resources/upload/member/${gtl.memberImg  }">
 												<br>
 												<span
 													style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.memberId }</span>
 											</c:if></td>
 									</tr>
 									<tr>
-										<td>${gtl.feedbackContent }</td>
+										<td><span  style="height: 50px;">${gtl.feedbackContent }</span></td>
 									</tr>
 									<tr>
 										<td colspan="2"><a
