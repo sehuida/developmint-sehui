@@ -25,7 +25,7 @@
 			<div class="contents">
 				<div class="title"><h2 style="display: inline-block;">Notice</h2>
 				<c:if test="${not empty sessionScope.m && sessionScope.m.memberType eq 9}">
-					<a class="btn btn-outline-dark" href="/nWriteFrm.do" style="float: right;margin-right: 10px;">공지 선택삭제</a>
+					<!-- <a class="btn btn-outline-dark" href="/nWriteFrm.do" style="float: right;margin-right: 10px;">공지 선택삭제</a> -->
 					<a class="btn btn-outline-dark" href="/nWriteFrm.do" style="float: right;margin-right: 10px;">관리자 글쓰기</a>
 				</c:if>
 				</div>
