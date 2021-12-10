@@ -379,7 +379,7 @@ to {
 							</c:if>
 							<c:if test="${not empty g.gosuImg }">
 								<td rowspan="4" style="padding: 40px; text-align: center;"><img
-									src="${g.gosuImg }"
+									src="/resources/upload/member/${g.gosuImg }"
 									style="border-radius: 50%; width: 200px; height: 200px;"></td>
 							</c:if>
 
@@ -445,7 +445,7 @@ to {
 								style="border-radius: 50%;">
 						</c:if>
 						<c:if test="${not empty ngl.gosuImg }">
-							<img src="${ngl.gosuImg }" style="border-radius: 50%;">
+							<img src="/resources/upload/member/${ngl.gosuImg }" style="border-radius: 50%;">
 						</c:if>
 
 						<div style="margin-top: 20px;">${ngl.gosuId }</div>
@@ -552,7 +552,7 @@ to {
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
-						<span style="font-size: 20px;">아직 신청한 내역이 없습니다!</span>
+						<span style="font-size: 20px;">아직 신청받은 내역이 없습니다!</span>
 						</c:otherwise>
 					</c:choose>
 

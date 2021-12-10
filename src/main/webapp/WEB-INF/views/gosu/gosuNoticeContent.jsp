@@ -126,7 +126,7 @@
 									<td rowspan="2"><img src="/resources/img/gosu/g_img_basic.png"></td>
 								</c:if>
 								<c:if test="${not empty gNotice.writeImg }">
-									<td rowspan="2"><img src="${gNotice.writeImg }"></td>
+									<td rowspan="2"><img src="/resources/upload/member/${gNotice.writeImg }"></td>
 								</c:if>
 							
 								<th>${gNotice.writeId }</th>

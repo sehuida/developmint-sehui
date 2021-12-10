@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
-import kr.or.gosu.vo.GosuNotice;
 import kr.or.member.model.service.MailSender;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.CertiVO;
@@ -325,9 +324,7 @@ public class MemberController {
 		return "member/mypageGosu";
 	}
 	@RequestMapping(value="/gosuKnowhow.do")
-	public String gosuNoticeLists(Member m,Model model,int reqPage) {
-		ArrayList<GosuNotice> list = service.gosuNoticeLists(m,reqPage);
-		model.addAttribute("list",list);
+	public String gosuNoticeLists() {
 		return "member/gosuKnowhow";
 	}
 	@ResponseBody

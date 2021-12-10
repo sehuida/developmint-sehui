@@ -12,7 +12,10 @@ public class GosuFeedback {
 	private int feedbackNum;
 	private String memberId;
 	private String gosuId;
+	private String gosuImg;
+	private String memberImg;
 
+	
 	public String getFeedbackContentBr(){
 		return feedbackContent.replaceAll("\r\n", "<br>");
 	}

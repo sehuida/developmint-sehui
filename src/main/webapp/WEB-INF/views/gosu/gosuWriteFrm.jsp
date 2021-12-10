@@ -258,7 +258,7 @@
 							</c:if>
 							<c:if test="${not empty sessionScope.m.filepath }">
 								<th rowspan="6" style="padding: 40px; padding-right: 100px;"><img
-									src="${sessionScope.m.filepath }" style="width: 250px;"></th>
+									src="/resources/upload/member/${sessionScope.m.filepath }" style="width: 250px;"></th>
 							</c:if>
 						</tr>
 						<tr>
