@@ -19,9 +19,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
+import kr.or.gosu.vo.GosuNotice;
 import kr.or.member.model.service.MailSender;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.CertiVO;
+import kr.or.member.model.vo.GosuNoticePage;
 import kr.or.member.model.vo.Member;
 
 @Controller
@@ -324,7 +326,11 @@ public class MemberController {
 		return "member/mypageGosu";
 	}
 	@RequestMapping(value="/gosuKnowhow.do")
-	public String gosuNoticeLists() {
+	public String gosuNoticeLists(Member m,Model model,int reqPage) {
+		GosuNoticePage gnp = service.gosuNoticeLists(m,reqPage);
+		model.addAttribute("list",gnp.getList());
+		model.addAttribute("pageNavi",gnp.getPageNavi());
+		model.addAttribute("start",gnp.getStart());
 		return "member/gosuKnowhow";
 	}
 	@ResponseBody

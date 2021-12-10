@@ -102,8 +102,10 @@
   <update id="delProfile" parameterType="m">
   	update member set filepath = '' where member_id = #{memberId}
   </update>
-  <select id="gosuNoticeList" parameterType="m" resultType="gn">
-  	select
+  <select id="gosuNoticeList" parameterType="map" resultType="gn">
+	select * from(
+	select rownum as rnum,g.* from
+	(select
   		gnotice_no as gnoticeNo,
   		member_id as writeId,
   		gnotice_title as gnoticeTitle,
@@ -112,6 +114,9 @@
   		gnotice_date as gnoticeDate
   	from gosu_notice 
   	where member_Id=#{memberId}
-  	order by gnoticeNo desc;
+  	order by gnoticeNo desc)g) where rnum between #{start} and #{end}
+  </select>
+  <select id="gosuTotalCount" parameterType="string" resultType="_int">
+  	select count(*) from gosu_notice where member_id=#{memberId}
   </select>
 </mapper>
