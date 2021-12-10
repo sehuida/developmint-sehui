@@ -361,7 +361,7 @@
 							</div>
 						</div>
 							<div class="resumeTitle" style="margin-bottom: 30px;">
-								<em>${r.resumeTitle }</em>	<!-- r.resumeTitle -->
+								<a href="ceoResumeView.do?ceoResume=${r.ceoResume }"><em>${r.resumeTitle }</em></a>	<!-- r.resumeTitle -->
 							</div>
 							<ul class="resumeInfo1">
 				            	<li class="career">
@@ -486,12 +486,13 @@
 					<div class="myResume">
 						<div class="smallBox" style="width: 800px; margin: 0 auto;">
 				<c:forEach items="${list }" var="rs" varStatus="i">
+					<c:if test="${rs.ceoResume eq 0 }">
 					<div class="wrap">
 							<div class="wd">
 								<span style="font-size: 13px; color: gray;">${rs.writeDate }</span>	
 							</div>
 							<div class="resumeTitle">
-								<a href="#"><em>${rs.resumeTitle }</em></a>	
+								<a href="resumeView.do?resumeNo=${rs.resumeNo }"><em>${rs.resumeTitle }</em></a>	
 							</div>
 							<div class="register">
 								<p>대표이력서 등록</p>
@@ -587,8 +588,8 @@
 									</div>
 								</li>                       
 							</ul>
-							
-							</div>
+						</div>
+					</c:if>
 				</c:forEach>
 						</div>			
 					</div>

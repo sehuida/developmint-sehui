@@ -37,7 +37,7 @@
 			<div class="contents" style="padding: 20px;">
 				<div class="title" style="border-bottom: none;padding: 0;"><h2 style="display: inline-block;">Notice Write</h2> 작성날짜 <fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></div>
 				<div class="notice-contents" style="padding: 0;border-bottom: none;">
-					<form action="/insertNotice.do" method="post" enctype="multipart/form-data">
+					<form action="/updateNoticeNo.do" method="post" enctype="multipart/form-data">
 						<fieldset>
 						<label class="col-form-label mt-4" for="noticeTitle"><i class="bi bi-toggles" style="font-size: 1.2em;"></i> 상단게시물 고정유무<span style="color: #f3969a;font-size: ">*</span></label>
 					    <div class="form-check form-switch">
@@ -56,17 +56,16 @@
 					      <label for="formFile" class="form-label mt-4"><i class="bi bi-files" style="font-size: 1.2em;"></i> 첨부파일<span style="font-size: small;color: #999;"> *파일첨부는 한 개만 가능합니다</span></label>
 					      <input type="hidden" name="status" value="1">
 							<c:choose>
-								<c:when test="${not empty n.noticeFilename }">
-									<img src="/img/file.png" width="16px" class="delFile">
-									<span class="delFile">${n.noticeFilename }</span>
-									<button type="button" id="delBtn" class="btn btn-primary btn-sm delFile">삭제
-									</button>
-									<input type="file" name="upfile" style="display:none;">
-									<input type="hidden" name="oldFilename" value="${n.noticeFilename }">
-									<input type="hidden" name="oldFilepath" value="${n.noticeFilepath }">
+								<c:when test="${not empty n.filename }">
+									<img src="/resources/img/file.png" width="16px" class="delFile">
+									<span class="delFile">${n.filename }</span>
+									<button type="button" id="delBtn" class="btn btn-primary btn-sm delFile">삭제</button>
+									<input type="file" name="upFile" style="display:none;" class="form-control" id="formFile" multiple>
+									<input type="hidden" name="oldFilename" value="${n.filename }">
+									<input type="hidden" name="oldFilepath" value="${n.filepath }">
 								</c:when>
 								<c:otherwise>
-									<input type="file" name="upfile">
+									<input type="file" id="formFile" name="upFile" class="form-control" multiple>
 								</c:otherwise>
 							</c:choose>
 					    </div>
@@ -76,6 +75,7 @@
                             <p style="color: #f3969a;">*는 필수 입력사항입니다.</p>
                         </div>
                         <div class="form-group" style="padding: 10px 0 0 0;float: right;">
+                        	<input type="hidden" name="noticeNo" value="${n.noticeNo }">
                         	<button type="submit" class="btn btn-primary" id="nWriteBtn">Submit</button>
                         </div>
                          </fieldset>
@@ -86,7 +86,14 @@
 		</div>
 	</div>
 	<script>
+	
 		$(function(){
+			$("#delBtn").click(function() {
+				$(".delFile").hide();
+				$(this).next().show();
+				$("[name=status]").val(2);
+			});
+			
 			$("#pin").click(function(){
 			if($("#pin").is(':checked')== true){
 				$("#pin").attr('value',2);
@@ -168,7 +175,7 @@
 		}); */
 		
 		$("#nWriteBtn").click(function(){
-			 if($("#noticeTitle").val()!=null&&$("#noticeContent").val()!=null){
+			 if($("#noticeTitle").val()!=""&&$("#noticeContent").val()!=""){
 				 swal({
 					   title: "수정성공!",
 					   text: "공지사항이 수정되었습니다.",

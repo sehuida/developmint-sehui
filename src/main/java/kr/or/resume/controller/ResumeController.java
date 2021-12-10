@@ -85,7 +85,7 @@ public class ResumeController {
 		Member m = service.selectOneMember(resume.getMemberNo());
 		model.addAttribute("r", resume);
 		model.addAttribute("m", m);		
-		return "resume/resumeView";
+		return "resume/ceoResumeView";
 	}
 	
 	@RequestMapping(value="/applicationCompany.do")
@@ -93,6 +93,15 @@ public class ResumeController {
 		/* ArrayList<Resume> list = service.selectAllAnnounce(memberNo); */
 		System.out.println("지원현황 페이지 resumeNo : "+memberNo);
 		return "resume/applicationCompany";
+	}
+	
+	@RequestMapping(value="/resumeView.do")
+	public String resumeView(int resumeNo, Model model) {
+		Resume resume = service.selectResume(resumeNo);
+		Member m = service.selectOneMember(resume.getMemberNo());
+		model.addAttribute("r", resume);
+		model.addAttribute("m", m);
+		return "resume/resumeView";
 	}
 	
 }

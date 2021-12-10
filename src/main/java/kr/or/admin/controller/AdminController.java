@@ -59,8 +59,8 @@ public class AdminController {
 	
 	//전체회원리스트 목록으로 이동
 	@RequestMapping(value="/allMemberList.do")
-	public String allMemberList(Model model, int reqPage, int type, int list) {
-		TotalMember tm = service.totalMember(reqPage,type,list);
+	public String allMemberList(Model model, int reqPage, int type, int list, String id) {
+		TotalMember tm = service.totalMember(reqPage,type,list,id);
 		model.addAttribute("memberList", tm.getAllMemberList());
 		model.addAttribute("start",tm.getStart());
 		model.addAttribute("pageNavi",tm.getPageNavi());
@@ -150,8 +150,7 @@ public class AdminController {
 		return "common/msg";
 	}
 	
-	
-	
+
 }
 
 

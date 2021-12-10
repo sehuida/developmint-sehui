@@ -49,6 +49,16 @@
 	margin-top : 30px;
 	text-align: center;
 }
+#searchBox{
+	display: flex;
+	justify-content: flex-end;
+	overflow: hidden;
+}
+#searchBox>[name="memberId"]{
+	float: left;
+	width: 200px;
+	margin-right: 10px;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -80,11 +90,17 @@
 	</div>
 	
 	<%--조회 카테고리 --%>
-	<a href="/allMemberList.do?reqPage=1&type=0&list=1" id="newList" class="listTag">최신순</a>
-	<a href="/allMemberList.do?reqPage=1&type=0&list=2" id="gradeList" class="listTag">등급순</a>
-	<a href="/allMemberList.do?reqPage=1&type=1&list=1" id="memberList" class="listTag">일반회원</a>
-	<a href="/allMemberList.do?reqPage=1&type=2&list=1" id="gosuList" class="listTag">고수회원</a>
-	<a href="/allMemberList.do?reqPage=1&type=3&list=1" id="companyList" class="listTag">기업회원</a>
+	<a href="/allMemberList.do?reqPage=1&type=0&list=1&id=null" id="newList" class="listTag">최신순</a>
+	<a href="/allMemberList.do?reqPage=1&type=0&list=2&id=null" id="gradeList" class="listTag">등급순</a>
+	<a href="/allMemberList.do?reqPage=1&type=1&list=1&id=null" id="memberList" class="listTag">일반회원</a>
+	<a href="/allMemberList.do?reqPage=1&type=2&list=1&id=null" id="gosuList" class="listTag">고수회원</a>
+	<a href="/allMemberList.do?reqPage=1&type=3&list=1&id=null" id="companyList" class="listTag">기업회원</a>
+	
+	<%--아이디 검색 --%>
+	<div id="searchBox">
+		<input type="text" name="memberId" id="idInput" placeholder="아이디를 입력하세요" class="form-control mr-sm-2">
+		<input type="button" value="검색" class="btn btn-info searchBtn" style="background-color: #4ECDC4">
+	</div>
 	
 	<%--조회 리스트 테이블 --%>
 	<%--최신순(전체회원조회) --%>
@@ -102,7 +118,7 @@
 		</tr>
 		<c:forEach items="${memberList }" var="ml" varStatus="i">
 			<tr class="tblTr">
-				<td><input type="checkbox" class="form-check-input chk" style="zoom: 1.2;"></td>
+				<td><input type="checkbox" class="form-check-input chk" style="zoom: 1.2;" onclick="setBgcolor(this)"></td>
 				<td>${ml.memberId }</td>
 				<td>${ml.memberName}</td>
 				<c:choose>
@@ -162,7 +178,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-		<button class="btn btn-primary changeBtn" style="float: right; margin-right:20px;">등급변경</button>
+		<button class="btn btn-secondary changeBtn" style="float: right; margin-right:20px;">등급변경</button>
 		<div id="pageNavi" style="text-align: center; margin-top:50px;"  >${pageNavi }</div>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
@@ -176,6 +192,7 @@
 	    }
 	});
 	 
+	 //선택회원 등급변경
 	 $(".changeBtn").click(function(){
 		var inputs = $(".chk:checked");
 		var memberId = new Array(); //회원번호 저장할 배열
@@ -183,10 +200,8 @@
 		
 		inputs.each(function(idx,item){
 			var memberNo = $(item).parent().next().html();
-			console.log(memberNo);
 			memberId.push(memberNo);
 			var memberLevel = $(item).parent().parent().find("select").val();
-			console.log(memberLevel);
 			level.push(memberLevel);
 		});
 		var checkBoxCheck = $('.chk').is(":checked");
@@ -200,16 +215,20 @@
 		}
 	 });
 	 
-	 $('.chk').change(function(){
-		 var index = $('.chk').index(this);
-		 var checkBoxCheck = $('.chk').is(":checked");
-		 if(checkBoxCheck){
-			$(".tblTr").eq(index).css("background-color","rgba(78,205,196,0.1)")
-		}else{
-			$(".tblTr").eq(index).css("background-color","#fff")
-		}
+	 //체크박스 선택시 색바꾸기
+	 function setBgcolor(t){
+		 tr = t.parentNode.parentNode;
+		 tr.style.backgroundColor = (t.checked) ? "rgba(78,205,196,0.1)" : "#fff";
+		 
+	 }
+	 
+	 //아이디 검색버튼 클릭시 넘겨주기
+	 $(".searchBtn").click(function(){
+		 var id = $("#idInput").val();
+		 location.href="/allMemberList.do?reqPage=1&type=4&list=1&id="+id;
 	 });
 	 
+	 //카테고리 색
 	 $(function(){
 		 var type = '${type}';
 		 var list = '${list}';
@@ -225,7 +244,8 @@
 			 $(".listTag").eq(4).css("color","#4ECDC4");
 		 }
 	 })
-
+	
+	 
 	 	
 	 	
 	 </script>

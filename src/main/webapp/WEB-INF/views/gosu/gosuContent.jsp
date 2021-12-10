@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
- 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -170,7 +170,6 @@
 	width: 100%;
 	display: flex;
 	justify-content: center;
-		
 }
 
 #hrm-modal h3 {
@@ -240,8 +239,35 @@
 .gphs ul {
 	padding: 0;
 }
-.gphs img{
+
+.gphs img {
 	height: 120px;
+}
+
+.bigPictureWrapper {
+	position: absolute;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: gray;
+	position: fixed;
+	z-index: 10000;
+	background: rgba(0,0,0, 0.5);
+}
+
+.bigPicture {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.bigPicture img {
+	width: 600px;
 }
 </style>
 <meta charset="UTF-8">
@@ -306,7 +332,7 @@
 					<div class="gphs">
 						<ul>
 							<c:forEach items="${gphotoList }" var="gph" varStatus="i">
-								<!--나중에 수정해라...  -->
+						
 								<li><a><img src="${gph.photoFilepath }"></a></li>
 							</c:forEach>
 						</ul>
@@ -432,13 +458,47 @@
 				</div>
 			</div>
 		</div>
+		
 		<div style="display: flex; justify-content: center;">
-			<a href="/gosuFeedback.do?ggNo=${gosu.ggsouNo }" class="btn btn-primary"
+			<a href="/gosuFeedback.do?ggNo=${gosu.ggsouNo }"
+				class="btn btn-primary"
 				style="width: 200px; margin: 100px; padding: 10px;"><b>피드백
 					신청하기</b></a>
 		</div>
+		<div class='bigPictureWrapper'>
+			<div class='bigPicture'></div>
+		</div>
 	</div>
 	<script>
+	$(document).ready(function (e){
+			$(document).on("click",".gphs img",function(){
+				var path = $(this).attr('src')
+				showImage(path);
+			});//end click event
+			
+			function showImage(fileCallPath){
+			    
+			    $(".bigPictureWrapper").css("display","flex").show();
+			    
+			    $(".bigPicture")
+			    .html("<img src='"+fileCallPath+"' >")
+			    .animate({width:'100%', height: '100%'}, 1000);
+			    
+			  }//end fileCallPath
+			  
+			$(".bigPictureWrapper").on("click", function(e){
+			    $(".bigPicture").animate({width:'0%', height: '0%'}, 1000);
+			    setTimeout(function(){
+			      $('.bigPictureWrapper').hide();
+			    }, 1000);
+			  });//end bigWrapperClick event
+			$(".bigPictureWrapper").on("click", function(e){
+			    $(".bigPicture").animate({width:'0%', height: '0%'}, 1000);
+			    setTimeout(function(){
+			      $('.bigPictureWrapper').hide();
+			    }, 1000);
+			  });
+		})
 		$("#hrm-close").click(function() {
 
 			$(".hrm-wrap").css("display", "none");
