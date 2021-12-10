@@ -78,4 +78,8 @@ public class MemberDao {
 		return sqlSession.selectOne("member.checkCompany",m);
 	}
 
+	public int delProfile(Member m) {
+		return sqlSession.update("member.delProfile",m);
+	}
+
 }

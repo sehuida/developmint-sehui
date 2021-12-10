@@ -159,8 +159,8 @@
 			<div class="page-middle">
 					<div>
 						<img src="/resources/img/member/chat.png">
-						<a class="pageLists" href="/gosuNoticeList.do">고수의 노하우</a>
-						<a href="/gosuNoticeList.do"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
+						<a class="pageLists" href="/gosuKnowhow.do">고수의 노하우</a>
+						<a href="/gosuKnowhow.do"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
 					</div>		
 			</div>
 			<div class="page-bottom">
