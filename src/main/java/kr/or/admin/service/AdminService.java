@@ -76,7 +76,7 @@ public class AdminService {
 		return td;
 	}
 
-	public TotalMember totalMember(int reqPage, int type, int list, String memberId) {
+	public TotalMember totalMember(int reqPage, int type, int list, String id) {
 		//한페이지에 보여줄 회원 수
 		int numPerPage = 10;
 		int end = reqPage*numPerPage;
@@ -88,6 +88,8 @@ public class AdminService {
 		map.put("end", end);
 		map.put("type", type);
 		map.put("list", list);
+		map.put("id", id);
+		System.out.println(map);
 		ArrayList<Member> allMemberList = dao.allMemberList(map);		
 		
 		//페이지 네비게이션 제작
@@ -107,17 +109,17 @@ public class AdminService {
 		String pageNavi = "<ul class='pagination' style='justify-content: center;'>";
 		if(pageNo != 1) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/allMemberList.do?reqPage="+(pageNo-1)+"&type="+type+"&list="+list+"'>";
+			pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/allMemberList.do?reqPage="+(pageNo-1)+"&type="+type+"&list="+list+"&id="+id+"'>";
 			pageNavi += "&lt;</a></li>";
 		}// 페이지 숫자
 		for(int i=0; i < pageNaviSize; i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li class='page-item active'>";
-				pageNavi += "<a class = 'page-link' style='background-color : #4ECDC4; border-color : #4ECDC4;' href='/allMemberList.do?reqPage="+pageNo+"&type="+type+"&list="+list+"'>";
+				pageNavi += "<a class = 'page-link' style='background-color : #4ECDC4; border-color : #4ECDC4;' href='/allMemberList.do?reqPage="+pageNo+"&type="+type+"&list="+list+"&id="+id+"'>";
 				pageNavi += pageNo + "</a></li>";
 			} else {
 				pageNavi += "<li class='page-item'>";
-				pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/allMemberList.do?reqPage="+pageNo+"&type="+type+"&list="+list+"'>";
+				pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/allMemberList.do?reqPage="+pageNo+"&type="+type+"&list="+list+"&id="+id+"'>";
 				pageNavi += pageNo + "</a></li>";
 			}
 			pageNo++;
@@ -128,7 +130,7 @@ public class AdminService {
 		// 다음 버튼
 		if(pageNo <= totalPage) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/allMemberList.do?reqPage="+pageNo+"&type="+type+"&list="+list+"'>";
+			pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/allMemberList.do?reqPage="+pageNo+"&type="+type+"&list="+list+"&id="+id+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";	

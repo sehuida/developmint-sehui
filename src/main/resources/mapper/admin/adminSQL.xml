@@ -97,7 +97,7 @@
 				member_type = 3
 			</if>
 			<if test="type == 4">
-				member_id = '%'||#{memberId}||'%' 
+				member_id like '%'||#{id}||'%' 
 			</if>
 		</trim>
 		 order by
@@ -125,6 +125,9 @@
 			</if>
 			<if test="type == 3">
 				member_type = 3
+			</if>
+			<if test="type == 4">
+				member_id like '%'||#{id}||'%' 
 			</if>
 		</trim>
 	</select>
