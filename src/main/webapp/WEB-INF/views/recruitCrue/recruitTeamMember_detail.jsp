@@ -7,6 +7,11 @@
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <link rel="stylesheet" href="/resources/css/projectTeam/recruitDetail.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/mojs/latest/mo.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/DrawSVGPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 <meta charset="UTF-8">
 <title>Recruit Crue Detail</title>
 </head>
@@ -38,7 +43,7 @@
                     			<img class="profileImg" src="/resources/img/recruitTeamProject/common/user.png">
                     		</c:when>
                     		<c:otherwise>
-                    			<img class="profileImg" src="${pt.writerImgPath}">
+                    			<img class="profileImg" src="/resources/upload/member/${pt.writerImgPath }">
                     		</c:otherwise>
                     	</c:choose>
                         <p class="memberIdText">${pt.projectWriterId}</p>
@@ -80,7 +85,9 @@
                         </c:forEach>
                     </div>
                     <div class="deadBtnBox">
-                        <button type="button" class="btn btn-primary">모집 마감</button>
+	                    <c:if test="${sessionScope.m.memberNo eq pt.projectWriterMemberNo}">
+	                    	<button type="button" class="btn btn-primary">모집 마감</button>
+	                    </c:if>
                     </div>
                 </div>
                 <div class="line"></div>
@@ -89,23 +96,36 @@
                 </div>
                 <div class="bottomContentFlexBox">
                     <div class="bottomContentFlexBox_btnBox">
-                        <button type="button" class="btn btn-primary">수정</button>
-                        <button type="button" class="btn btn-primary">삭제</button>
-                        <button type="button" class="btn btn-primary">프로젝트 지원</button>
-                        <button type="button" class="btn btn-primary">지원자 관리</button>
+                    	<c:choose>
+                    		<c:when test="${sessionScope.m.memberNo eq pt.projectWriterMemberNo}">
+                    			<button type="button" class="btn btn-primary">수정</button>
+		                        <button type="button" class="btn btn-primary">삭제</button>
+		                        <button type="button" class="btn btn-primary">지원자 관리</button>
+                    		</c:when>
+                    		<c:otherwise>
+                    			<button type="button" class="btn btn-primary">프로젝트 지원</button>
+                    		</c:otherwise>
+                    	</c:choose>
                     </div>
                     <div class="bottomContentFlexBox_iconBox">
                         <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
-                        <span class="countText">0</span>
-                        <img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png">
-                        <span class="countText">0</span>
+                        <span class="countText">${pt.viewCount }</span>
+                        <c:choose>
+                        	<c:when test="${pt.dibCountClickValue ne 0 }">
+                        		<img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png">
+                        	</c:when>
+                        	<c:otherwise>
+                        		<img class="countImg" src="/resources/img/recruitTeamProject/common/empty_hart.png">
+                        	</c:otherwise>
+                        </c:choose>
+                        <span class="countText">${pt.dibCount }</span>
                     </div>
                 </div>
                 
             </div>
             <div class="commentWriteBox">
                 <div class="commentTitle">
-                    <p class="commentTitleText"><span>0</span>개의 댓글이 있습니다.</p>
+                    <p class="commentTitleText"><span>${pt.commentCount }</span>개의 댓글이 있습니다.</p>
                 </div>
                 <div class="form-group">
                     <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요."></textarea>
