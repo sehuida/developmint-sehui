@@ -11,10 +11,14 @@
 <title>Recruit Crue Detail</title>
 </head>
 <script>
-	$(".return_img").click(function(){
-		$(".return_img").css("cursor", "pointer");
-		history.back();
+
+	$(function(){
+		$(".return_img").click(function(){
+			$(".return_img").css("cursor", "pointer");
+			history.back();
+		});
 	});
+	
 </script>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -25,24 +29,55 @@
             </div>
             <div class="main_wrap">
                 <div class="titleBox">
-                    <p class="titleText"></p>
+                    <p class="titleText">${pt.RTitle }</p>
                 </div>
                 <div class="noticeInfoFlexBox">
                     <div class="memberInfo">
-                        <img class="profileImg" src="/resources/img/recruitTeamProject/common/user.png">
-                        <p class="memberIdText">MemberId</p>
-                        <img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/diamond.png">
+                    	<c:choose>
+                    		<c:when test="${pt.writerImgPath eq null}">
+                    			<img class="profileImg" src="/resources/img/recruitTeamProject/common/user.png">
+                    		</c:when>
+                    		<c:otherwise>
+                    			<img class="profileImg" src="${pt.writerImgPath}">
+                    		</c:otherwise>
+                    	</c:choose>
+                        <p class="memberIdText">${pt.projectWriterId}</p>
+                        <c:choose>
+							<c:when test="${pt.projectWriterGrade >=1 && pt.projectWriterGrade <= 20 }">
+								<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/bronze.png">
+							</c:when>
+							<c:when test="${pt.projectWriterGrade >=21 && pt.projectWriterGrade <= 40 }">
+								<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/silver.png">
+							</c:when>
+							<c:when test="${pt.projectWriterGrade >=41 && pt.projectWriterGrade <= 60 }">
+								<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/gold.png">
+							</c:when>
+							<c:when test="${pt.projectWriterGrade >=61 && pt.projectWriterGrade <= 80 }">
+								<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/platinum.png">
+							</c:when>
+							<c:when test="${pt.projectWriterGrade >=81 && pt.projectWriterGrade <= 110 }">
+								<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/diamond.png">
+							</c:when>
+							<c:when test="${pt.projectWriterGrade >=111 && pt.projectWriterGrade <= 140 }">
+								<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/master.png">
+							</c:when>
+							<c:when test="${pt.projectWriterGrade >=141 && pt.projectWriterGrade <= 170 }">
+								<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/challenger.png">
+							</c:when>								
+						</c:choose>
                     </div>
                     <div class="writeDate">
-                        <b>2021 / 11 / 23</b>
+                        <b>${pt.RStartDate }</b>
                     </div>
                 </div>
                 <div class="noticeInfoFlexBox2">
                     <div class="userLanguage">
                         <b class="useLang">사용 언어 : </b>
-                        <span class="badge rounded-pill bg-primary" id="languageIcon">node.js</span>
-                        <span class="badge rounded-pill bg-primary" id="languageIcon">react</span>
-                        <span class="badge rounded-pill bg-primary" id="languageIcon">javascript</span>
+                        <c:forEach items="${pdLangList }" var="li"  varStatus="i">
+                        	<c:if test="${pt.projectNo eq li.projectNo }">
+                        		<span class="badge rounded-pill bg-primary" id="languageIcon">${li.langName }</span>
+                        	</c:if>
+                        </c:forEach>
                     </div>
                     <div class="deadBtnBox">
                         <button type="button" class="btn btn-primary">모집 마감</button>
@@ -50,13 +85,7 @@
                 </div>
                 <div class="line"></div>
                 <div class="datailContent">
-                    Node.js, React, MongoDB,Docker, AWS 스터디원을 모집합니다.
-                    5주간 이론/실습을 겸하고
-                    2주간 AI 플랫폼을 활용한 프로젝트로 실력을 탄탄하게 올립니다.
-                    스터디 기간: 12월 7일(화)~ 22년 1월 20일(목), 화목 19:00-22:00 7주/ 14회
-                    모집기간:  ~ 11/27
-                    참여방법: 대면, 비대면 선택 가능                        
-                    비용 없습니다! 스터디 종료하면 네이버, 카카오보다 높은 연봉으로 대우합니다.
+                    ${pt.RContent }
                 </div>
                 <div class="bottomContentFlexBox">
                     <div class="bottomContentFlexBox_btnBox">
@@ -68,7 +97,7 @@
                     <div class="bottomContentFlexBox_iconBox">
                         <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
                         <span class="countText">0</span>
-                        <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/full_hart.png">
+                        <img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png">
                         <span class="countText">0</span>
                     </div>
                 </div>

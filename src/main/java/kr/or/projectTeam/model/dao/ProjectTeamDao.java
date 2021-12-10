@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectTeam;
+import kr.or.projectTeam.model.vo.ProjectTeamNoticeComment;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
 
 @Repository
@@ -62,6 +63,19 @@ public class ProjectTeamDao {
 			result = sqlSession.insert("projectTeam.writeRecruitTeam", map);
 		}
 		return result;
+	}
+
+	public int updateReadCount(int projectNo) {
+		return sqlSession.update("projectTeam.updateReadCount", projectNo);
+	}
+
+	public ProjectTeam selectOneNotice(int projectNo) {
+		return sqlSession.selectOne("projectTeam.selectOneNotice", projectNo);
+	}
+
+	public ArrayList<ProjectTeamNoticeComment> selectCommentList(int projectNo) {
+		List<ProjectTeamNoticeComment> list = sqlSession.selectList("projectTeam.selectCommentList", projectNo);
+		return (ArrayList<ProjectTeamNoticeComment>) list;
 	}
 
 

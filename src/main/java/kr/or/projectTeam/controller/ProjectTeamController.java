@@ -30,6 +30,7 @@ import kr.or.projectTeam.model.service.ProjectTeamService;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
+import kr.or.projectTeam.model.vo.ProjectTeamNoticeViewData;
 import kr.or.projectTeam.model.vo.projectTeamMainPageData;
 
 @Controller
@@ -139,6 +140,15 @@ public class ProjectTeamController {
 		}
 		model.addAttribute("loc","/recruitTeamMember_mainPage.do?reqPage=1");
 		return "common/msg";
+	}
+	
+	@RequestMapping(value="/recruitTeamMember.do")
+	public String selectOneNotice(Model model, int projectNo) {
+		ProjectTeamNoticeViewData ptnvd = service.selectOneNotice(projectNo);
+		model.addAttribute("commentList", ptnvd.getList());
+		model.addAttribute("pt", ptnvd.getPt());
+		model.addAttribute("pdLangList", ptnvd.getPdLangList());
+		return "recruitCrue/recruitTeamMember_detail";
 		
 	}
 }

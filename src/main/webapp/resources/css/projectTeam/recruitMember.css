@@ -222,3 +222,7 @@
 	/* margin: 0 auto; */
 	justify-content: center;
 }
+
+.clickRecruitTeamTag{
+	text-decoration: none;
+}

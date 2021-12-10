@@ -25,5 +25,6 @@
 		<typeAlias type="kr.or.gosu.vo.GosuNotice" alias="gn"/>
 		<typeAlias type="kr.or.member.model.vo.CertiVO" alias="cvo"/>
 		<typeAlias type="kr.or.gosu.vo.GosuFeedback" alias="gf"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTeamNoticeComment" alias="ptnc"/>
 	</typeAliases>	
 </configuration>
