@@ -58,16 +58,17 @@ public class ResumeController {
 	
 	@RequestMapping(value="/insertResume.do")
 	public String insertResume(Resume r, int memberNo, Model model) {
-		System.out.println("여기 resumeController");
-		System.out.println(r);
 		int result = service.insertResume(r);
 		if(result != 0) {
-			model.addAttribute("msg","이력서 등록성공");
+			model.addAttribute("title", "이력서 등록성공");
+			model.addAttribute("icon", "success");
 		} else {
-			model.addAttribute("msg","이력서 등록실패");			
+			model.addAttribute("title", "이력서 등록실패");
+			model.addAttribute("msg", "입력 정보를 확인해주세요.");
+			model.addAttribute("icon", "error");
 		}
 		model.addAttribute("loc","/resumeManage.do?memberNo="+memberNo);
-		return "common/msg";
+		return "resume/swalMsg";
 	}
 	
 	@RequestMapping(value="/ceoResume.do")
@@ -103,5 +104,11 @@ public class ResumeController {
 		model.addAttribute("m", m);
 		return "resume/resumeView";
 	}
+	
+	/*
+	 * @RequestMapping(value="/noData.do") public String noData(String icon, String
+	 * title, Model model) { model.addAttribute("title", title);
+	 * model.addAttribute("icon", icon); return "resume/swalMsg"; }
+	 */
 	
 }
