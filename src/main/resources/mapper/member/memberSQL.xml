@@ -102,4 +102,16 @@
   <update id="delProfile" parameterType="m">
   	update member set filepath = '' where member_id = #{memberId}
   </update>
+  <select id="gosuNoticeList" parameterType="m" resultType="gn">
+  	select
+  		gnotice_no as gnoticeNo,
+  		member_id as writeId,
+  		gnotice_title as gnoticeTitle,
+  		gnotice_content as gnoticeContent,
+  		gnotice_photo as gnoticePhoto,
+  		gnotice_date as gnoticeDate
+  	from gosu_notice 
+  	where member_Id=#{memberId}
+  	order by gnoticeNo desc;
+  </select>
 </mapper>
