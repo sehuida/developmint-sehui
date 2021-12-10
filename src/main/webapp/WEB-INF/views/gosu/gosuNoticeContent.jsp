@@ -34,14 +34,15 @@
 	margin-bottom: 40px;
 	margin-bottom: 50px;
 }
-.g-img img{
-	width:952px;
-	} 
+
+.g-img img {
+	width: 952px;
+}
+
 .g-img {
-	width:100%;
-	padding:20px;
+	width: 100%;
+	padding: 20px;
 	margin-top: 100px;
-	
 	display: flex;
 	justify-content: center;
 }
@@ -96,6 +97,48 @@
 	display: block;
 	font-size: 13px;
 }
+
+.hrm-wrap {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10000;
+}
+
+#hrm-modal {
+	background-color: white;
+	width: 800px;
+	overflow: scroll;
+}
+
+
+.hrm-btn-wrap {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.hrm-btn-wrap a {
+	margin: 30px;
+	margin-top: 50px;
+	padding: 10px;
+	width: 100px;
+}
+
+.g-style {
+	text-align: center;
+	margin: 10px;
+	padding: 30px;
+	display: flex;
+	justify-content: center;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -123,13 +166,16 @@
 						<table>
 							<tr>
 								<c:if test="${empty gNotice.writeImg }">
-									<td rowspan="2"><img src="/resources/img/gosu/g_img_basic.png"></td>
+									<td rowspan="2"><img
+										src="/resources/img/gosu/g_img_basic.png"></td>
 								</c:if>
 								<c:if test="${not empty gNotice.writeImg }">
-									<td rowspan="2"><img src="/resources/upload/member/${gNotice.writeImg }"></td>
+									<td rowspan="2"><img
+										src="/resources/upload/member/${gNotice.writeImg }"></td>
 								</c:if>
-							
+
 								<th>${gNotice.writeId }</th>
+								<input type="hidden" value="${gNotice.writeId }" id="gosuId">
 							</tr>
 							<tr>
 								<td style="font-size: large; color: gray;">${gNotice.gnoticeDate}</td>
@@ -144,12 +190,46 @@
 			</div>
 		</div>
 		<div class="g-center">
-			<a class="btn btn-info"
+			<a id="feedbackListAjax" class="btn btn-info"
 				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">피드백
 				신청하기</a> <a class="btn btn-primary"
-				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;" onclick="history.back();">뒤로가기</a>
+				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
+				onclick="history.back();">뒤로가기</a>
+		</div>
+		<div class="hrm-wrap" style="display: none; margin: 0;">
+			<div id="hrm-modal">
+				<div class="hrm-content">
+					<br>
+					<div class="g-style">
+					
+						<c:if test="${not empty gosuWriteList}">
+			  			<c:forEach items="${gosuWriteList }" var="g" varStatus="i">
+							<a class="btn btn-success" style="font-size: 30px; " href="/gosuContent.do?gNo=${g.ggsouNo}">${g.gosuTitle }</a>
+						</c:forEach>
+						</c:if>
+						<c:if test="${empty gosuWriteList}">
+							<span style="font-size: 30px; " >아직 고수님께서 소개글을 등록하지 않았네요!</span>
+						</c:if>
+					</div>
+				</div>
+				<div class="hrm-btn-wrap">
+					<a id="hrm-close" class="btn btn-outline-success">확인</a>
+				</div>
+			</div>
 		</div>
 	</div>
+	<script>
+		$("#feedbackListAjax").click(function() {
+		
+			$(".hrm-wrap").css("display", "flex");
+		});
+
+		$("#hrm-close").click(function() {
+
+			$(".hrm-wrap").css("display", "none");
+
+		});
+	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>

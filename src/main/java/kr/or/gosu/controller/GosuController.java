@@ -388,7 +388,10 @@ public class GosuController {
 	@RequestMapping(value = "/gosuNoticeContent.do")
 	public String gosuNoticeContent(int gnn, Model model) {
 		GosuNotice gNotice = service.selectGosuNoticeOne(gnn);
+		ArrayList<Gosu> gosuWriteList = service.selectgosuWriteList(gNotice.getWriteId());
 		model.addAttribute("gNotice", gNotice);
+		model.addAttribute("gosuWriteList", gosuWriteList);
+		
 		return "gosu/gosuNoticeContent";
 	}
 

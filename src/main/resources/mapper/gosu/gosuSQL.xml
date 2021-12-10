@@ -250,7 +250,8 @@
 		from
 		gosu_feedback
 		where ggosu_no=
-		(select ggosu_no from gosu where
+		(select ggosu_no from gosu
+		where
 		gosu_no = (select member_no
 		from member where
 		member_id=#{memberId}))
@@ -260,11 +261,31 @@
 		gosu_feedback set
 		FEEDBACK_NUM = 3 where FEEDBACK_NO = #{feedbackNo}
 	</update>
-	<select id="selectMemberId" parameterType="_int" resultType="String">
+	<select id="selectMemberId" parameterType="_int"
+		resultType="String">
 		select
 		MEMBER_ID as memberId
 		from
-		gosu_feedback where FEEDBACK_NO = #{feedbackNo}
+		gosu_feedback where
+		FEEDBACK_NO = #{feedbackNo}
 	</select>
-	
+	<select id="selectgosuWriteList" parameterType="string"
+		resultType="g">
+		select
+		ggosu_no as ggsouNo,
+		gosu_no as gsouNo,
+		gosu_title as gosuTitle,
+		gosu_self as gosuSelf,
+		gosu_explain as
+		gosuExplain,
+		gosu_act as gosuAct,
+		gosu_cost as gosuCost,
+		gosu_date as
+		gosuDate
+		from(select * from gosu) where gosu_no=
+		(select
+		member_no from member where member_id=#{memberId})
+
+	</select>
+
 </mapper>
