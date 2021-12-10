@@ -118,7 +118,6 @@ public class MemberService {
 
 	public GosuNoticePage gosuNoticeLists(Member m, int reqPage) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
 		int numPerPage = 5;
 		int end = reqPage*numPerPage;
 		int start = end - numPerPage + 1;
@@ -142,16 +141,16 @@ public class MemberService {
 				
 				if(pageNo != 1) {
 					pageNavi += "<li class=\"page-item\">";
-					pageNavi += "<a class=\"page-link\" href='/noticeList?reqPage="+(pageNo-1)+"'>&laquo;</a></li>";
+					pageNavi += "<a class=\"page-link\" href='/gosuKnowhow.do?reqPage="+(pageNo-1)+"&memberId="+(m.getMemberId())+"'>&laquo;</a></li>";
 				}
 				
 				for(int i=0;i<pageNaviSize;i++){
 					if(pageNo == reqPage) {
 						pageNavi += "<li class=\"page-item active\">";
-						pageNavi += "<a class='page-link' href='/noticeList?reqPage="+pageNo+"'>"+pageNo+"</a></li>";
+						pageNavi += "<a class='page-link' href='/gosuKnowhow.do?reqPage="+pageNo+"&memberId="+(m.getMemberId())+"'>"+pageNo+"</a></li>";
 					} else {
 						pageNavi += "<li class='page-item'>";
-						pageNavi += "<a class='page-link' href='/noticeList?reqPage="+pageNo+"'>";
+						pageNavi += "<a class='page-link' href='/gosuKnowhow.do?reqPage="+pageNo+"&memberId="+(m.getMemberId())+"'>";
 						pageNavi += pageNo+"</a></li>";
 					}
 					pageNo++;
@@ -161,7 +160,7 @@ public class MemberService {
 				}
 				if(pageNo <= totalPage) {
 					pageNavi += "<li class='page-item'>";
-					pageNavi += "<a class='page-link' href='/noticeList?reqPage="+pageNo+"'>";
+					pageNavi += "<a class='page-link' href='/gosuKnowhow.do?reqPage="+pageNo+"&memberId="+(m.getMemberId())+"'>";
 					pageNavi += "&raquo;</a></li>";
 				}
 				pageNavi += "</ul>";

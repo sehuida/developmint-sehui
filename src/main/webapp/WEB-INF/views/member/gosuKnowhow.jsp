@@ -20,13 +20,16 @@
 					<tr>
 						<td>${start+i.index }</td>
 						<td>
-							<a href="/">${gn.gnoticeTitle }</a>
+							<a href="/gosuNoticeContent.do?gnn=${gn.gnoticeNo }">${gn.gnoticeTitle }</a>
 						</td>
 						<td>${gn.writeId }</td>
 						<td>${gn.gnoticeDate }</td>
 					</tr>
 				</c:forEach>
 			</table>
+			<div id="pageNavi">
+				${pageNavi }
+			</div>
 		</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
