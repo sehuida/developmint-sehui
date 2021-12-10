@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="admin">
+
+	<!-- Today 총 회원 -->
+	<select id="todayTotalMember" resultType="_int">
+		select count(*) from member
+	</select>
+	
+	<!-- Today 가입 회원 -->
+	<select id="todayJoinMember" parameterType="string" resultType="_int">
+		select count(*) from member where enroll_date = #{sToday}
+	</select>
+	
+	<!-- Today 탈퇴 회원 -->
+	<select id="todayOutMember" parameterType="string" resultType="_int">
+		select count(*) from delete_member where dm_date = #{sToday}
+	</select>
 	
 	<!-- Today 총 게시물 -->
 	<select id="todayTotalContent" resultType="_int">
