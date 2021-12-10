@@ -32,8 +32,8 @@ public class AdminDao {
 		return sqlSession.selectOne("admin.todayOutMember", sToday);
 	}
 
-	public int todayTotalContent() {
-		return sqlSession.selectOne("admin.todayTotalContent");
+	public int todayTotalContent(String sToday) {
+		return sqlSession.selectOne("admin.todayTotalContent", sToday);
 	}
 
 	public List<Integer> gradeList() {
@@ -128,6 +128,14 @@ public class AdminDao {
 		return list;
 	}
 
+	public int yesterDayTotalMember(String ydate) {
+		return sqlSession.selectOne("admin.yesterDayTotalMember", ydate);
+	}
+
+	public int yesterDayTotalBoard(String ydate) {
+		return sqlSession.selectOne("admin.yesterDayTotalBoard", ydate);
+	}
+	
 	public ArrayList<Member> allblockedList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return null;

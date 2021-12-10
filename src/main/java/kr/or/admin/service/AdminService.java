@@ -33,7 +33,7 @@ public class AdminService {
 		int todayTotalMember = dao.todayTotalMember();
 		int todayJoinMember = dao.todayJoinMember(sToday);
 		int todayOutMember = dao.todayOutMember(sToday);
-		int todayTotalContent = dao.todayTotalContent();
+		int todayTotalContent = dao.todayTotalContent(sToday);
 		
 		//6일전 ~ 오늘 날짜 리스트/가입수/탈퇴수 List
 		List<String> dateList = new ArrayList<String>();
@@ -61,6 +61,19 @@ public class AdminService {
 		    dateList.add(date);
 		}
 		
+		//어제 총 회원 / 어제 총 게시물 불러오기
+		//오늘날짜 불러오기
+	  	Calendar cal = Calendar.getInstance();
+	    cal.setTime(new Date());
+	    //String으로 포맷
+	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	    //오늘날짜에서 i만큼 빼주기
+	   	cal.add(Calendar.DATE, -1);
+	   	String ydate =  df.format(cal.getTime());
+	   	//해당날짜 가입 회원 구하고 리스트에 넣기
+	    int yesterDayTotalMember = dao.yesterDayTotalMember(ydate);
+	    int yesterDayTotalBoard = dao.yesterDayTotalBoard(ydate);
+		
 		//등급별 회원 수 List
 		List<Integer> gradeList = new ArrayList<Integer>();
 		gradeList = dao.gradeList();
@@ -72,7 +85,7 @@ public class AdminService {
 		HashMap<String, Object> date = new HashMap<String, Object>();
 		date.put("dateList", dateList);
 		
-		TotalData td = new TotalData(todayTotalMember, todayJoinMember, todayOutMember, todayTotalContent, dateList, joinList, outList, gradeList, cateList);
+		TotalData td = new TotalData(todayTotalMember, todayJoinMember, todayOutMember, todayTotalContent, dateList, joinList, outList, gradeList, cateList, yesterDayTotalMember, yesterDayTotalBoard); 
 		return td;
 	}
 
@@ -89,7 +102,6 @@ public class AdminService {
 		map.put("type", type);
 		map.put("list", list);
 		map.put("id", id);
-		System.out.println(map);
 		ArrayList<Member> allMemberList = dao.allMemberList(map);		
 		
 		//페이지 네비게이션 제작

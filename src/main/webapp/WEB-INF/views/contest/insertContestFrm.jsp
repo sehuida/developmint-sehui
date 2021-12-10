@@ -55,10 +55,8 @@
 					<td><input type="text" name="contestTitle" class="form-control"></td>
 				</tr>
 				<tr>
-					<th class="table-active">접수기간</th>
+					<th class="table-active">공모마감</th>
 					<td id="dateTd">
-						<input type="date" class="form-control dateInput" name="contestDate" style="width: 47%">
-						<span>　~　</span>
 						<input type="date" class="form-control" id="mindate" min="" name="contestDeadline" style="width: 47%">
 					</td>
 				</tr>
