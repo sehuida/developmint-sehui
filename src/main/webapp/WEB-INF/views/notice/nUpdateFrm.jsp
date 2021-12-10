@@ -60,12 +60,12 @@
 									<img src="/resources/img/file.png" width="16px" class="delFile">
 									<span class="delFile">${n.filename }</span>
 									<button type="button" id="delBtn" class="btn btn-primary btn-sm delFile">삭제</button>
-									<input type="file" name="files" style="display:none;" class="form-control" id="formFile" multiple>
+									<input type="file" name="upFile" style="display:none;" class="form-control" id="formFile" multiple>
 									<input type="hidden" name="oldFilename" value="${n.filename }">
 									<input type="hidden" name="oldFilepath" value="${n.filepath }">
 								</c:when>
 								<c:otherwise>
-									<input type="file" id="formFile" name="files" class="form-control" multiple>
+									<input type="file" id="formFile" name="upFile" class="form-control" multiple>
 								</c:otherwise>
 							</c:choose>
 					    </div>
@@ -75,6 +75,7 @@
                             <p style="color: #f3969a;">*는 필수 입력사항입니다.</p>
                         </div>
                         <div class="form-group" style="padding: 10px 0 0 0;float: right;">
+                        	<input type="hidden" name="noticeNo" value="${n.noticeNo }">
                         	<button type="submit" class="btn btn-primary" id="nWriteBtn">Submit</button>
                         </div>
                          </fieldset>
@@ -85,13 +86,14 @@
 		</div>
 	</div>
 	<script>
-		$("#delBtn").click(function() {
-			$(".delFile").hide();
-			$(this).next().show();
-			$("[name=status]").val(2);
-		});
 	
 		$(function(){
+			$("#delBtn").click(function() {
+				$(".delFile").hide();
+				$(this).next().show();
+				$("[name=status]").val(2);
+			});
+			
 			$("#pin").click(function(){
 			if($("#pin").is(':checked')== true){
 				$("#pin").attr('value',2);
