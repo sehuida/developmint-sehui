@@ -131,59 +131,41 @@ public class NoticeController {
 	
 	@ResponseBody
 	@RequestMapping(value="/fileDown.do")
-	public void filedownload(int noticeNo, HttpServletRequest req, Model model, HttpServletResponse rep) {
+	public void filedownload(int noticeNo, HttpServletRequest req, Model model, HttpServletResponse rep) throws IOException {
 		Notice n = service.selectOneNotice(noticeNo); 
-		String savePath = req.getSession().getServletContext().getRealPath("/resources/img/contest/");
+		String savePath = req.getSession().getServletContext().getRealPath("/resources/upload/notice/");
 		//파일경로 
 		String file = savePath+n.getFilepath();
 		System.out.println("다운로드 파일 전체 경로 : "+file); 
 		
-		try {
-			FileInputStream fis = new FileInputStream(file);
-			BufferedInputStream bis = new BufferedInputStream(fis);
-			ServletOutputStream sos = rep.getOutputStream();
-			BufferedOutputStream bos = new BufferedOutputStream(sos);
-			byte[] bytes = file.getBytes();
-			
-			while(true) {
-				int read = bis.read();
-				if(read != -1) {
-					bos.write(read);
-				}else {
-					break;
-				}
-			}
-			bis.close();
-			bos.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		FileInputStream fis = new FileInputStream(file);
+		BufferedInputStream bis = new BufferedInputStream(fis);
 		
+		ServletOutputStream sos = rep.getOutputStream();
+		BufferedOutputStream bos = new BufferedOutputStream(sos);
+			
 		String resFilename = "";
 		boolean bool = req.getHeader("user-agent").indexOf("MSIE") != -1 || req.getHeader("user-agent").indexOf("Trident") != -1;
 		System.out.println("IE 여부 : "+bool);
 		if(bool) {
-			try {
-				resFilename = URLEncoder.encode(n.getFilename(), "utf-8");
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			resFilename = URLEncoder.encode(n.getFilename(), "utf-8");
 			resFilename = resFilename.replaceAll("////", "%20"); // 파일명에 "//" 가 있으면 %20으로 바꾸는 구문
 		}else {
-			try {
-				resFilename = new String(n.getFilename().getBytes("utf-8"),"ISO-8859-1");
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			resFilename = new String(n.getFilename().getBytes("utf-8"),"ISO-8859-1");
 		}
 		rep.setContentType("application/octet-stream");
 		rep.setHeader("Content-Disposition", "attachment;filename="+resFilename);
+		
+		while(true) {
+			int read = bis.read();
+			if(read != -1) {
+				bos.write(read);
+			}else {
+				break;
+			}
+		}
+		bis.close();
+		bos.close();
   	}
   
 	 
