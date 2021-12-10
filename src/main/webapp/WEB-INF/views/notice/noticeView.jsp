@@ -26,22 +26,22 @@
 				<div class="title" style="border-bottom: none;padding: 0;"><h2 style="display: inline-block;">Notice</h2>
 				<c:if test="${not empty sessionScope.m && sessionScope.m.memberType eq 9}">
 					<a class="btn btn-primary" href="javascript:void(0)" onclick="deleteNoticeNo(this,'${n.noticeNo}');" style="float: right;">삭제</a>
-					<a class="btn btn-outline-primary" href="/updateNoticeNo.do?noticeNo=${n.noticeNo }" style="float: right;margin-right: 10px;">수정</a>
+					<a class="btn btn-outline-primary" href="/updateNoticeFrm.do?noticeNo=${n.noticeNo }" style="float: right;margin-right: 10px;">수정</a>
 				</c:if>
 				</div>
 				<div class="notice-contents" style="padding: 20px 0 0 0;border-bottom: none;">
 					<!-- 불러온 글제목 -->
 					<h4 style="font-weight: bold;border-bottom: 1px solid #ddd;">${n.noticeTitle }</h4>
 					<!-- 작성일, 읽은 수(테이블 컬럼 추가 해야함) -->
-					<span>${n.regDate } / View : ${readCount }</span>
+					<span>${n.regDate } / View : ${readCount } /</span>
 					<p>
 						<!-- 첨부파일테이블로 넣어서 사용 -->
-						<c:choose>
-							<c:when test="${not empty n.filepath }">
-								<img src="/resources/img/notice/file.png" style="color:white;">
-								<a href="/fileDown.do?noticeNo=${n.noticeNo }">${n.filename }</a>
-							</c:when>
-						</c:choose>
+						<c:if test="${not empty n.filename }">
+							<!-- <img src="/resources/img/notice/file.png" style="color:white;"> -->
+							File : 
+							<a href="/fileDown.do?noticeNo=${n.noticeNo }">${n.filename }</a>
+							<%-- <a href="javascript:void(0)" onclick="downFile(this);">${n.filename }</a> --%>
+						</c:if>
 					</p>
 					<div class="contents-box">
 						<!-- 이미지 있으면 이미지 출력, 내용잇으면 내용 출력 -->
@@ -68,6 +68,11 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		/* function downFile(obj){
+			$(obj).attr('href' , '/resources/upload/notice/'+${n.filepath});
+		    $(obj).attr('download' , ${n.filename});
+		} */
+	
 		function deleteNoticeNo(obj,noticeNo){
 			if(confirm("게시글을 삭제하시겠습니까?")){
 				location.href="/deleteNoticeNo.do?noticeNo="+${n.noticeNo };
