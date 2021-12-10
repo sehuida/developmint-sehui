@@ -18,14 +18,16 @@
 	</select>
 	
 	<!-- Today 총 게시물 -->
-	<select id="todayTotalContent" resultType="_int">
-		SELECT SUM(A+B+C+D+E) 
-		FROM(SELECT
-		(SELECT COUNT(*) FROM SHARE_BOARD)A, 
-		(SELECT COUNT(*) FROM PROJECT)B, 
-		(SELECT COUNT(*) FROM ANNOUNCEMENT)C, 
-		(SELECT COUNT(*) FROM CONTEST)D, 
-		(SELECT COUNT(*) FROM GOSU_NOTICE)E
+	<select id="todayTotalContent" parameterType="string" resultType="_int">
+		select sum(A+B+C+D+E+F+G) from
+		(SELECT
+		(SELECT COUNT(*) FROM SHARE_BOARD where REG_DATE = #{sToday})A, 
+		(SELECT COUNT(*) FROM PROJECT where recruit_start_date = #{sToday})B, 
+		(SELECT COUNT(*) FROM notice where "reg_date" = #{sToday})C,
+		(SELECT COUNT(*) FROM CONTEST where CONTEST_DATE = #{sToday})D, 
+		(SELECT COUNT(*) FROM GOSU_NOTICE where gnotice_date = #{sToday})E,
+		(SELECT COUNT(*) FROM QNA where "reg_date" = #{sToday})F,
+		(SELECT COUNT(*) FROM NON_MEMBER_QNA where "reg_date" = #{sToday})G
 		FROM DUAL)
 	</select>
 	
@@ -296,6 +298,51 @@
 		where R.REPORT_STATUS != 1
 		order by r.ENROLL_DATE desc)
 		where rnum BETWEEN 1 and 5
+	</select>
+	
+	<!-- Today 총 회원 -->
+	<select id="yesterDayTotalMember" parameterType="string" resultType="_int">
+		select count(*) from member where enroll_date BETWEEN '2021-11-29' and #{ydate}
+	</select>
+	
+	<!-- Today 총 게시물 -->
+	<select id="yesterDayTotalBoard" parameterType="string" resultType="_int">
+		select sum(A+B+C+D+E+F+G) from
+		(SELECT
+		(SELECT COUNT(*) FROM SHARE_BOARD where REG_DATE = #{ydate})A, 
+		(SELECT COUNT(*) FROM PROJECT where recruit_start_date = #{ydate})B, 
+		(SELECT COUNT(*) FROM notice where "reg_date" = #{ydate})C,
+		(SELECT COUNT(*) FROM CONTEST where CONTEST_DATE = #{ydate})D, 
+		(SELECT COUNT(*) FROM GOSU_NOTICE where gnotice_date = #{ydate})E,
+		(SELECT COUNT(*) FROM QNA where "reg_date" = #{ydate})F,
+		(SELECT COUNT(*) FROM NON_MEMBER_QNA where "reg_date" = #{ydate})G
+		FROM DUAL)
+	</select>
+	
+	<!-- 차단회원 리스트 불러오기 -->
+	<select id="allblockedList" parameterType="map" resultType="m">
+		select * 
+		from(select rownum as rnum, m.* 
+		from(
+		select 
+			member_no as memberNo,
+			member_name as memberName,
+			phone,
+			member_id as memberId,
+			member_pw as memberPw,
+			email,
+			member_type as memberType,
+			enroll_date as enrollDate,
+			filepath,
+			member_grade as memberGrade
+		from member
+		where member_type = 4
+		 order by member_no desc)m order by rnum) 
+		where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<select id="totalBlockedCount" resultType="_int"> 
+		select count(*) from member where member_type = 4
 	</select>
 
 </mapper>

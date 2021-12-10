@@ -241,26 +241,30 @@ to {
 	border: 1px solid #78c2ad;
 	border-radius: 30px;
 	padding: 40px;
+	
 }
 
 .g-status-border>h4 {
 	font-size: 30px;
 	font-weight: 900;
+	margin-top:50px;
+	margin-bottom:50px;
+	margin-left: 40px;
 }
 
 .g-statusContent {
 	display: flex;
-	justify-content: space-between;
+	width: 900px;
+	margin:0 auto;
 	flex-wrap: wrap;
-	margin: 40px;
 }
 
-.g-statusContent .g-sc-tbl {
+.g-statusContent>a{
+	width :350px;
+	margin : 50px;
 	border-width: 2px;
-	border: 2px solid #cae4dc;
-	margin: 0px;
+	
 }
-
 .g-statusContent .g-sc-tbl * {
 	padding-left: 30px;
 	padding-right: 30px;
@@ -268,7 +272,6 @@ to {
 	padding-bottom: 10px;
 	font-size: 16px;
 }
-
 .g-sc-tbl:hover {
 	border: 2px solid #78c2ad;
 }
@@ -485,14 +488,14 @@ to {
 					보기</a>
 			</div>
 			<div class="g-status-border">
-				<h4 style="margin-top: 30px; margin-left: 40px;">신청한 내역</h4>
+				<h4 style="margin-top:40px;">신청한 내역</h4>
 				<div class="g-statusContent">
 					<c:choose>
 						<c:when test="${not empty gosuTalkList }">
 							<c:forEach items="${gosuTalkList }" var="gtl" varStatus="i">
 								<a href="/gosuTalk.do?fbNo=${gtl.feedbackNo }">
 									<table class="g-sc-tbl card text-white bg-primary mb-3"
-										style="margin-bottom: 0;">
+										>
 										<tr>
 											<th colspan="2" style="text-align: right; padding-right: 0;">
 												<c:if test="${gtl.feedbackNum eq 1 }">
@@ -522,7 +525,7 @@ to {
 					</c:choose>
 
 				</div>
-				<h4 style="margin-top: 30px; margin-left: 40px;">신청받은 내역</h4>
+				<h4 >신청받은 내역</h4>
 				<div class="g-statusContent">
 					<c:choose>
 						<c:when test="${not empty gosuTalkList2 }">
@@ -559,8 +562,8 @@ to {
 
 				</div>
 
-				<hr>
-				<h4 style="margin-top: 30px; margin-left: 40px;">
+				<hr style="margin-top:100px;">
+				<h4 >
 					<span style="color: rgb(78, 205, 196)">요청서</span>를 통한 <span
 						style="color: rgb(78, 205, 196)">고수</span> 매칭
 				</h4>

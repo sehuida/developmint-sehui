@@ -54,6 +54,8 @@ public class AdminController {
 			model.addAttribute("outList",td.getOutList());
 			model.addAttribute("gradeList",td.getGradeList());
 			model.addAttribute("cateList",td.getCateList());
+			model.addAttribute("yesterDayTotalMember", td.getYesterDayTotalMember());
+			model.addAttribute("yesterDayTotalBoard", td.getYesterDayTotalBoard());
 			return "admin/dashboard";
 		}
 		
@@ -88,6 +90,9 @@ public class AdminController {
 		@RequestMapping(value="/blockedMember.do")
 		public String blockedMember(Model model, int reqPage) {
 			TotalMember tm = service.totalBlockedMemberList(reqPage);
+			model.addAttribute("pageNavi", tm.getPageNavi());
+			model.addAttribute("allblockedList", tm.getAllblockedList());
+			model.addAttribute("totalCount",tm.getTotalCount());
 			return "admin/blockedMember";
 		}
 		
@@ -128,8 +133,6 @@ public class AdminController {
 		//신고 처리
 		@RequestMapping(value="/reportInsert.do")
 		public String reportInsert(Model model, int reportNo, String memberId) {
-			System.out.println(reportNo);
-			System.out.println(memberId);
 			int result = service.reportInsert(reportNo, memberId);
 			if(result>0) {
 				model.addAttribute("msg","신고 처리되었습니다.");

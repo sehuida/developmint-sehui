@@ -178,5 +178,12 @@ public class GosuService {
 		return result;
 	}
 
+
+	public ArrayList<Gosu> selectgosuWriteList(String gosuId) {
+		ArrayList<Gosu> list = dao.selectgosuWriteList(gosuId);
+		
+		return list;
+	}
+
 	
 }

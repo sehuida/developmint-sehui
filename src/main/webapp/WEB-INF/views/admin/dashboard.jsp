@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,39 +22,66 @@
 .todayInfo{
 	display: flex;
 	justify-content: space-around;
-	background-color: #fafafa;
-	border-radius : 5px;
+	border-radius : 3px;
 	padding-top: 30px;
 	padding-bottom: 30px;
 }
 .todayInfo>div{
-	border : 2px solid #d9d9d9;
+	
 	width: 250px;
-	text-align: center;
-	border-radius: 5px;
+	padding-left : 20px;
+	border-radius: 3px;
 	background-color: #fff;
 	
 }
-.boxLine{
-	border : 1px solid #d9d9d9;
-	width: 200px;
-	margin: 0 auto;
+.iconBox{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	float: right;
+	margin-top: 20px;
+	margin-right: 20px;
+	text-align: center
 }
-.todayInfo>div>p{
-	font-size: 20px;
+.todayInfo>div:first-child{
+	border-left: 7px solid #fc766a;
+	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+}
+.todayInfo>div:nth-child(2){
+	border-left: 7px solid #f4a100 ;
+	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+}
+.todayInfo>div:nth-child(3){
+	border-left: 7px solid #5b84b1;
+	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+}
+.todayInfo>div:nth-child(4){
+
+	border-left: 7px solid #00cfd5;
+	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+}
+
+.todayInfo>div>p:first-of-type{
+	font-size: 23px;
 	font-weight: bold;
 	margin-top:15px;
+	margin-bottom: 0px;
 }
 .todayInfo>div>span:first-of-type {
-	font-size: 20px;
-	margin-top: 15px;
+	font-size: 15px;
+	margin-top: 0px;
 	margin-bottom: 15px;
 	display: inline-block;
-	font-weight: bold;
+	color: #727272;
 }
 .title{
 	font-weight: bold;
 	margin-bottom : 30px;
+	background-color: #f8f9fc;
+	height: 40px;
+	padding-left: 10px;
+	line-height: 40px;
+	color:#1A1B3D;
 }
 .cate2Box{
 	display: flex;
@@ -61,7 +89,7 @@
 	padding-bottom: 70px;
 }
 #chartBox{
-	border: 1px solid #d9d9d9;
+	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
 	height: 450px;
 	width: 860px;
 	border-radius : 5px;
@@ -72,15 +100,20 @@
 #cateChartBox{
 	margin-left:70px;
 	width: 350px;
-	border: 1px solid #d9d9d9;
+	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
 	height: 450px;
 	border-radius : 5px;
+	padding-top: 10px;
 }
 .btns{
 	display: flex;
 	justify-content: space-evenly;
 	margin-top: 15px;
 	margin-bottom: 15px;
+}
+.btns>button{
+	border: 2px solid #4ECDC4;
+	font-weight: bold;
 }
 .cate3Box>div{
 	display: flex;
@@ -115,7 +148,7 @@
 	<div class="container" style="margin-top:50px;margin-bottom:100px;">
 	
 		<div class="mainCate">
-		<a href="/adminPage.do" class="cateAtag" onclick="history.go(-1)"><i class="bi bi-chevron-left"></i></a> 
+		<a href="/adminPage.do" class="cateAtag"><i class="bi bi-chevron-left"></i></a> 
 		<span id="dashboard" style="font-weight:bold">대시보드</span>
 		</div>
 		<br><br><br>
@@ -124,40 +157,133 @@
 		<p class="title">TODAY ${today }</p>
 		<div class="todayInfo">
 			<div>
-				<p>총 회원</p>
-				<div class="boxLine"></div>
-				<span>${todayTotalMember }</span><span> 명</span>
+				<div class="iconBox" style="background-color: #fc766a"><i class="bi bi-people-fill" style="color:#fff"></i></div>
+				<p>${todayTotalMember }</p>
+				<span>총 회원</span>
+				<c:choose>
+					<c:when test="${todayTotalMember == yesterDayTotalMember}">
+						<p><span style="font-weight: bold">0%</span><span style="font-size: 13px;"> from yesterday</span></p>
+					</c:when>
+					<c:when test="${todayTotalMember > yesterDayTotalMember}">
+						<p>
+							<span style="color:blue; font-weight: bold">
+								<fmt:formatNumber value="${((todayTotalMember-yesterDayTotalMember)/yesterDayTotalMember) * 100}" pattern=""/> %
+							</span>
+							<span style="color:blue; font-weight: bold">↑</span>
+							<span style="font-size: 13px;"> from yesterday</span>
+						</p>
+					</c:when>
+					<c:when test="${todayTotalMember < yesterDayTotalMember}">
+						<p>
+							<span style="color:red; font-weight: bold">
+								<fmt:formatNumber value="${((todayTotalMember-yesterDayTotalMember)/yesterDayTotalMember) * 100}" pattern=""/> %
+							</span>
+							<span style="color:red; font-weight: bold">↓</span>
+							<span style="font-size: 13px;"> from yesterday</span>
+						</p>
+					</c:when>
+				</c:choose>
 			</div>
 			<div>
-				<p>가입 회원</p>
-				<div class="boxLine"></div>
-				<span>${todayJoinMember }</span><span> 명</span>
+				<div class="iconBox" style="background-color: #f4a100"><i class="bi bi-person-plus-fill" style="color:#fff"></i></div>
+				<p>${todayJoinMember }</p>
+				<span>가입 회원</span>
+				<c:choose>
+					<c:when test="${todayJoinMember == joinList[4]}">
+						<p><span style="font-weight: bold">0%</span><span style="font-size: 13px;"> from yesterday</span></p>
+					</c:when>
+					<c:when test="${todayJoinMember > joinList[4]}">
+						<p>
+							<span style="color:blue; font-weight: bold">
+								<fmt:formatNumber value="${((todayJoinMember-joinList[4])/joinList[4]) * 100}" pattern=""/> %
+							</span>
+							<span style="color:blue; font-weight: bold">↑</span>
+							<span style="font-size: 13px;"> from yesterday</span>
+						</p>
+					</c:when>
+					<c:when test="${todayJoinMember < joinList[4]}">
+						<p>
+							<span style="color:red; font-weight: bold">
+								<fmt:formatNumber value="${((todayJoinMember-joinList[4])/joinList[4]) * 100}" pattern=""/> %
+							</span>
+							<span style="color:red; font-weight: bold">↓</span>
+							<span style="font-size: 13px;"> from yesterday</span>
+						</p>
+					</c:when>
+				</c:choose>
 			</div>
 			<div>
-				<p>탈퇴 회원</p>
-				<div class="boxLine"></div>
-				<span>${todayOutMember }</span><span> 명</span>
+				<div class="iconBox" style="background-color: #5b84b1"><i class="bi bi-person-dash-fill" style="color:#fff"></i></div>
+				<p>${todayOutMember }</p>
+				<span>탈퇴 회원</span>
+				<c:choose>
+					<c:when test="${todayOutMember == outList[4]}">
+						<p><span style="font-weight: bold">0%</span><span style="font-size: 13px;"> from yesterday</span></p>
+					</c:when>
+					<c:when test="${todayOutMember > outList[4]}">
+						<p>
+							<span style="color:blue; font-weight: bold">
+								<fmt:formatNumber value="${((todayOutMember-outList[4])/outList[4]) * 100}" pattern=""/> %
+							</span>
+							<span style="color:blue; font-weight: bold">↑</span>
+							<span style="font-size: 13px;"> from yesterday</span>
+						</p>
+					</c:when>
+					<c:when test="${todayOutMember < outList[4]}">
+						<p>
+							<span style="color:red; font-weight: bold">
+								<fmt:formatNumber value="${((todayOutMember-outList[4])/outList[4]) * 100}" pattern=""/> %
+							</span>
+							<span style="color:red; font-weight: bold">↓</span>
+							<span style="font-size: 13px;"> from yesterday</span>
+						</p>
+					</c:when>
+				</c:choose>
 			</div>
 			<div>
-				<p>총 게시물</p>
-				<div class="boxLine"></div>
-				<span>${todayTotalContent }</span><span> 개</span>
+				<div class="iconBox" style="background-color: #00cfd5"><i class="bi bi-list-ul" style="color:#fff"></i></div>
+				<p>${todayTotalContent }</p>
+				<span>New 게시물</span>
+				<c:choose>
+					<c:when test="${todayTotalContent == yesterDayTotalBoard}">
+						<p><span style="font-weight: bold">0%</span><span style="font-size: 13px;"> from yesterday</span></p>
+					</c:when>
+					<c:when test="${todayTotalContent > yesterDayTotalBoard}">
+						<p>
+							<span style="color:blue; font-weight: bold">
+								<fmt:formatNumber value="${((todayTotalContent-yesterDayTotalBoard)/yesterDayTotalBoard) * 100}" pattern=""/> %
+							</span>
+							<span style="color:blue; font-weight: bold">↑</span>
+							<span style="font-size: 13px;"> from yesterday</span>
+						</p>
+					</c:when>
+					<c:when test="${todayTotalContent < yesterDayTotalBoard}">
+						<p>
+							<span style="color:red; font-weight: bold">
+								<fmt:formatNumber value="${((todayTotalContent-yesterDayTotalBoard)/yesterDayTotalBoard) * 100}" pattern=""/> %
+							</span>
+							<span style="color:red; font-weight: bold">↓</span>
+							<span style="font-size: 13px;"> from yesterday</span>
+						</p>
+					</c:when>
+				</c:choose>
 			</div>
 		</div>
 		
 		<%--회원 가입/탈퇴현황 + 사이트 통계 --%>
 		<div class="cate2Box">
 			<div class="joinDelete">
-				<p class="title" style="margin-top:100px;">회원 가입/탈회 현황</p>
+				<p class="title" style="margin-top:50px;">회원 가입/탈회 현황</p>
 				<div id="chartBox" >
 					<canvas id="myChart1" ></canvas>
 				</div>
 			</div>
 			<div id="cateChart">
-				<p class="title" style="margin-top:100px; margin-left:70px;">사이트 통계</p>
+				<p class="title" style="margin-top:50px; margin-left:70px;">사이트 통계</p>
 				<div id="cateChartBox" >
 					<div class="btns">
-					<button class="btn btn-outline-primary btn2">등급별</button><button class="btn btn-outline-primary btn3">카테고리별</button>
+						<button class="btn btn-outline-primary btn2">등급별</button>
+						<button class="btn btn-outline-primary btn3">카테고리별</button>
 					</div>
 					<canvas id="myChart2" ></canvas>
 				</div>
@@ -169,7 +295,8 @@
 			<div>
 				<div class="BoardList" style="margin-top:50px;">
 					<div>
-					<p class="title">공지사항</p><a href="#" class="moreTag"><p class="title">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
+					<p class="title" style="background-color: #fff">공지사항</p>
+					<a href="#" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
 					</div>
 					<c:forEach var="i" begin="0" end="5">
 					<a href="#" class="newBoard"><span>최신 공지사항 입니다.</span></a><span class="newBoardDate">2021-11-29</span><br>
@@ -178,7 +305,8 @@
 				
 				<div class="BoardList" style="margin-top:50px;">
 					<div>
-					<p class="title">QnA</p><a href="#" class="moreTag"><p class="title">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
+					<p class="title" style="background-color: #fff">QnA</p>
+					<a href="#" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
 					</div>
 					<c:forEach var="i" begin="0" end="5">
 					<a href="#" class="newBoard"><span>최신 QnA 입니다.</span></a><span class="newBoardDate">2021-11-29</span><br>
@@ -187,7 +315,8 @@
 				
 				<div class="BoardList" style="margin-top:50px;">
 					<div>
-					<p class="title">QnA</p><a href="#" class="moreTag"><p class="title">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
+					<p class="title" style="background-color: #fff">QnA</p>
+					<a href="#" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
 					</div>
 					<c:forEach var="i" begin="0" end="5">
 					<a href="#" class="newBoard"><span>최신 QnA 입니다.</span></a><span class="newBoardDate">2021-11-29</span><br>
@@ -214,7 +343,7 @@
 			      }, { 
 			        data: ${outList},
 			        label: "탈퇴",
-			        borderColor: "#90D1B4",
+			        borderColor: "#f3969a",
 			        fill: false
 			      }
 			    ]
@@ -226,6 +355,7 @@
 			    }
 			  }
 			});
+
 		 
 		 <%-- 등급별버튼 클릭시 나오는 파이차트--%>
 		 $(".btn2").click(function(){
@@ -241,7 +371,7 @@
 				      labels: ["브론즈","실버","골드","플레티넘","다이아","마스터","챌린저"],
 				      datasets: [{
 				        label: "Population (millions)",
-				        backgroundColor: ["#4ECDC4","#90D1B4","#9cd19f","#B7CD99","#E4ECB7","#EDF6B9","#EDEBE9"],
+				        backgroundColor: ["#4ECDC4","#269489","#5b84b1","#f67148","#fc766a","#f4a100","#e6d412"],
 				        data: ${gradeList}
 				      }]
 				    },
@@ -269,7 +399,7 @@
 				      labels: ["프로젝트 팀원모집","개발지식 공유","구인구직","고수의 노하우","공모전"],
 				      datasets: [{
 				        label: "Population (millions)",
-				        backgroundColor: ["#4ECDC4", "#90D1B4","#9cd19f","#E4ECB7","#EDF6B9"],
+				        backgroundColor: ["#4ECDC4","#269489","#f67148","#f4a100","#e6d412"],
 				        data: ${cateList}
 				      }]
 				    },

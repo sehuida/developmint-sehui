@@ -15,10 +15,12 @@ public class TotalData {
 	private List<Integer> outList;
 	private List<Integer> gradeList;
 	private List<Integer> cateList;
+	private int yesterDayTotalMember;
+	private int yesterDayTotalBoard;
 	
 	public TotalData(int todayTotalMember, int todayJoinMember, int todayOutMember, int todayTotalContent,
 			List<String> dateList, List<Integer> joinList, List<Integer> outList, List<Integer> gradeList,
-			List<Integer> cateList) {
+			List<Integer> cateList, int yesterDayTotalMember, int yesterDayTotalBoard) {
 		super();
 		this.todayTotalMember = todayTotalMember;
 		this.todayJoinMember = todayJoinMember;
@@ -29,7 +31,10 @@ public class TotalData {
 		this.outList = outList;
 		this.gradeList = gradeList;
 		this.cateList = cateList;
+		this.yesterDayTotalMember = yesterDayTotalMember;
+		this.yesterDayTotalBoard = yesterDayTotalBoard;
 	}
+	
 	
 	
 }
