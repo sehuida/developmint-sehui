@@ -137,8 +137,12 @@ public class AdminDao {
 	}
 	
 	public ArrayList<Member> allblockedList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Member> list = sqlSession.selectList("admin.allblockedList",map);
+		return (ArrayList<Member>)list;
+	}
+
+	public int totalBlockedCount() {
+		return sqlSession.selectOne("admin.totalBlockedCount");
 	}
 
 }

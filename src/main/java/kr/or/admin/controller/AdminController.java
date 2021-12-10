@@ -90,6 +90,9 @@ public class AdminController {
 		@RequestMapping(value="/blockedMember.do")
 		public String blockedMember(Model model, int reqPage) {
 			TotalMember tm = service.totalBlockedMemberList(reqPage);
+			model.addAttribute("pageNavi", tm.getPageNavi());
+			model.addAttribute("allblockedList", tm.getAllblockedList());
+			model.addAttribute("totalCount",tm.getTotalCount());
 			return "admin/blockedMember";
 		}
 		

@@ -318,6 +318,32 @@
 		(SELECT COUNT(*) FROM NON_MEMBER_QNA where "reg_date" = #{ydate})G
 		FROM DUAL)
 	</select>
+	
+	<!-- 차단회원 리스트 불러오기 -->
+	<select id="allblockedList" parameterType="map" resultType="m">
+		select * 
+		from(select rownum as rnum, m.* 
+		from(
+		select 
+			member_no as memberNo,
+			member_name as memberName,
+			phone,
+			member_id as memberId,
+			member_pw as memberPw,
+			email,
+			member_type as memberType,
+			enroll_date as enrollDate,
+			filepath,
+			member_grade as memberGrade
+		from member
+		where member_type = 4
+		 order by member_no desc)m order by rnum) 
+		where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<select id="totalBlockedCount" resultType="_int"> 
+		select count(*) from member where member_type = 4
+	</select>
 
 </mapper>
 

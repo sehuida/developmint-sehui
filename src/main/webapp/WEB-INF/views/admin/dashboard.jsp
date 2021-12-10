@@ -89,7 +89,7 @@
 	padding-bottom: 70px;
 }
 #chartBox{
-	border: 1px solid #d9d9d9;
+	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
 	height: 450px;
 	width: 860px;
 	border-radius : 5px;
@@ -100,9 +100,10 @@
 #cateChartBox{
 	margin-left:70px;
 	width: 350px;
-	border: 1px solid #d9d9d9;
+	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
 	height: 450px;
 	border-radius : 5px;
+	padding-top: 10px;
 }
 .btns{
 	display: flex;

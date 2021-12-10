@@ -55,7 +55,7 @@ span{
 		<br><br><br>
 		
 		<%--총 차단회원 명 수 --%>
-		<span>총 차단 회원 </span><span id="blockedCount">55</span><span> 명</span>
+		<span>총 차단 회원 </span><span id="blockedCount">${totalCount }</span><span> 명</span>
 		
 		<%--아이디 검색창 --%>
 		<div id="searchBox">
@@ -70,28 +70,47 @@ span{
 		<table class="table" style="margin-top:20px; text-align: center;"> 
 			<tr>
 				<th><input type="checkbox"></th>
-				<th>No.</th>
 				<th>아이디</th>
 				<th>이름</th>
 				<th>이메일</th>
 				<th>등급</th>
-				<th>마지막 신고일</th>
 				<th>내용보기</th>
 			</tr>
-			<c:forEach varStatus="i" begin="1" end="10">
+			<c:forEach items="${allblockedList }" var="b">
 				<tr>
 					<td><input type="checkbox"></td>
-					<td>${i.count }</td>
-					<td>user01</td>
-					<td>김수현</td>
-					<td>user1@gmail.com</td>
-					<td>Silver</td>
-					<td>2021-11-30</td>
+					<td>${b.memberId }</td>
+					<td>${b.memberName }</td>
+					<td>${b.email }</td>
+					<c:choose>
+						<c:when test="${b.memberGrade > 0 && b.memberGrade < 21 }">
+							<td><img src="/resources/img/member/rank/bronze.png" width="35px" height="35px;">브론즈</td>
+						</c:when>
+						<c:when test="${b.memberGrade >= 21 && b.memberGrade <= 40 }">
+							<td><img src="/resources/img/member/rank/silver.png" width="35px" height="35px;">실버</td>
+						</c:when>
+						<c:when test="${b.memberGrade >= 41 && b.memberGrade <= 60 }">
+							<td><img src="/resources/img/member/rank/gold.png" width="35px" height="35px;">골드</td>
+						</c:when>
+						<c:when test="${b.memberGrade >= 61 && b.memberGrade <= 80 }">
+							<td><img src="/resources/img/member/rank/platinum.png" width="35px" height="35px;">플레티넘</td>
+						</c:when>
+						<c:when test="${b.memberGrade >= 81 && b.memberGrade <= 110 }">
+							<td><img src="/resources/img/member/rank/diamond.png" width="35px" height="35px;">다이아</td>
+						</c:when>
+						<c:when test="${b.memberGrade >= 111 && b.memberGrade <= 140 }">
+							<td><img src="/resources/img/member/rank/master.png" width="35px" height="35px;">마스터</td>
+						</c:when>
+						<c:when test="${b.memberGrade >= 141 && b.memberGrade <= 170 }">
+							<td><img src="/resources/img/member/rank/challenger.png" width="35px" height="35px;">챌린저</td>
+						</c:when>
+					</c:choose>
 					<td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#memberMoreModal">자세히</button></td>
 				<tr>
 			</c:forEach>
 		</table>
 		<button type="button" class="btn btn-outline-primary"><i class="bi bi-check2-square"></i>차단 해제</button>
+		<div id="pageNavi" style="text-align: center; margin-top:50px;"  >${pageNavi }</div>
 		</form>
 		
 		<!-- 차단회원 내용 Modal -->
