@@ -4,7 +4,7 @@
 	
 	<!-- 공모전 등록 -->
 	<insert id="insertContest" parameterType="c">
-		insert into contest values(contest_seq.nextval, #{contestHost}, #{memberId}, #{contestType}, #{contestQualify}, #{contestDate}, #{contestDeadline}, #{contestPrize}, #{phone}, #{email}, #{contestTitle}, #{contestContent}, #{contestImg}, 1, 0)
+		insert into contest values(contest_seq.nextval, #{contestHost}, #{memberId}, #{contestType}, #{contestQualify}, to_char(sysdate,'yyyy-mm-dd'), #{contestDeadline}, #{contestPrize}, #{phone}, #{email}, #{contestTitle}, #{contestContent}, #{contestImg}, 1, 0)
 	</insert>
 	
 	<!-- 공모전 전체목록 불러오기 -->
