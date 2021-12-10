@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -17,16 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.google.gson.JsonObject;
 
 import kr.or.notice.service.NoticeService;
 import kr.or.notice.vo.Notice;
@@ -123,37 +119,55 @@ public class NoticeController {
 		int result = service.insertNotice(n);
 
 		if (result > 0) {
-			model.addAttribute("msg", "등록 성공");
+			model.addAttribute("msg", "공지등록 성공");
 		} else {
-			model.addAttribute("msg", "등록실패");
+			model.addAttribute("msg", "공지등록 실패");
 		}
 
 		model.addAttribute("loc", "/noticeList.do?reqPage=1");
 		return "common/msg";
 	}
 
-	/*
+	
 	@ResponseBody
 	@RequestMapping(value="/fileDown.do")
-	public void filedownload(int noticeNo,MultipartFile file, HttpServletRequest req, Model model, HttpServletResponse rep) {
+	public void filedownload(int noticeNo, HttpServletRequest req, Model model, HttpServletResponse rep) throws IOException {
 		Notice n = service.selectOneNotice(noticeNo); 
-		String contextRoot = new HttpServletRequestWrapper(req).getRealPath("/"); 
-		String saveDirectory = contextRoot+"resources/upload/notice/";
+		String savePath = req.getSession().getServletContext().getRealPath("/resources/upload/notice/");
 		//파일경로 
-		String filepath = saveDirectory+n.getFilepath();//파일패스로 지정
-				
-		System.out.println("다운로드 파일 전체 경로 : "+filepath); 
-		FileInputStream fis;
-		try {
-			fis = new FileInputStream(filepath);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		String file = savePath+n.getFilepath();
+		System.out.println("다운로드 파일 전체 경로 : "+file); 
+		
+		FileInputStream fis = new FileInputStream(file);
 		BufferedInputStream bis = new BufferedInputStream(fis);
-	  
+		
+		ServletOutputStream sos = rep.getOutputStream();
+		BufferedOutputStream bos = new BufferedOutputStream(sos);
+			
+		String resFilename = "";
+		boolean bool = req.getHeader("user-agent").indexOf("MSIE") != -1 || req.getHeader("user-agent").indexOf("Trident") != -1;
+		System.out.println("IE 여부 : "+bool);
+		if(bool) {
+			resFilename = URLEncoder.encode(n.getFilename(), "utf-8");
+			resFilename = resFilename.replaceAll("////", "%20"); // 파일명에 "//" 가 있으면 %20으로 바꾸는 구문
+		}else {
+			resFilename = new String(n.getFilename().getBytes("utf-8"),"ISO-8859-1");
+		}
+		rep.setContentType("application/octet-stream");
+		rep.setHeader("Content-Disposition", "attachment;filename="+resFilename);
+		
+		while(true) {
+			int read = bis.read();
+			if(read != -1) {
+				bos.write(read);
+			}else {
+				break;
+			}
+		}
+		bis.close();
+		bos.close();
   	}
-  */
+  
 	 
 
 	@ResponseBody
@@ -192,7 +206,7 @@ public class NoticeController {
 		if (result > 0) {
 			model.addAttribute("msg", "삭제가 완료되었습니다.");
 		} else {
-			model.addAttribute("msg", "삭제실패~ 에러발생~~");
+			model.addAttribute("msg", "삭제실패~ 에러발생~~고객센터문의바람~~");
 		}
 		model.addAttribute("loc", "/noticeList.do?reqPage=1");
 		return "common/msg";
@@ -271,7 +285,7 @@ public class NoticeController {
 		if (result > 0) {
 			model.addAttribute("msg", "수정이 완료되었습니다.");
 		} else {
-			model.addAttribute("msg", "삭제실패~ 에러발생~~");
+			model.addAttribute("msg", "삭제실패~ 에러발생~~고객센터 문의바람~~");
 		}
 		return "common/msg";
 	}

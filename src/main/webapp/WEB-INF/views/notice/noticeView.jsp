@@ -40,6 +40,7 @@
 							<!-- <img src="/resources/img/notice/file.png" style="color:white;"> -->
 							File : 
 							<a href="/fileDown.do?noticeNo=${n.noticeNo }">${n.filename }</a>
+							<%-- <a href="javascript:void(0)" onclick="downFile(this);">${n.filename }</a> --%>
 						</c:if>
 					</p>
 					<div class="contents-box">
@@ -67,6 +68,11 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		/* function downFile(obj){
+			$(obj).attr('href' , '/resources/upload/notice/'+${n.filepath});
+		    $(obj).attr('download' , ${n.filename});
+		} */
+	
 		function deleteNoticeNo(obj,noticeNo){
 			if(confirm("게시글을 삭제하시겠습니까?")){
 				location.href="/deleteNoticeNo.do?noticeNo="+${n.noticeNo };
