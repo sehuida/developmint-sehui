@@ -76,7 +76,7 @@ public class AdminService {
 		return td;
 	}
 
-	public TotalMember totalMember(int reqPage, int type, int list) {
+	public TotalMember totalMember(int reqPage, int type, int list, String memberId) {
 		//한페이지에 보여줄 회원 수
 		int numPerPage = 10;
 		int end = reqPage*numPerPage;
