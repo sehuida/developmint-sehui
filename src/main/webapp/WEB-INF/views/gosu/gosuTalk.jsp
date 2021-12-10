@@ -164,7 +164,7 @@ input:focus, textarea:focus {
 							</table>
 						</div>
 					</c:when>
-					<c:otherwise>
+					<c:otherwise>ㅇㅇㅇ
 						<div class="talk-one">
 							<table>
 								<tr>
