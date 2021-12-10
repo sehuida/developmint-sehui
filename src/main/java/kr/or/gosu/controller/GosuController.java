@@ -29,6 +29,7 @@ import kr.or.gosu.vo.GosuFeedback;
 import kr.or.gosu.vo.GosuNotice;
 import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
+import kr.or.gosu.vo.GosuTalk;
 import kr.or.member.model.vo.Member;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -48,23 +49,24 @@ public class GosuController {
 	private GosuService service;
 
 	@RequestMapping(value = "/gosuMain.do")
-	public String gosuMain(Model model, @SessionAttribute(required = false) Member m ) {
-	
+	public String gosuMain(Model model, @SessionAttribute(required = false) Member m) {
+
 		ArrayList<Gosu> g = service.selectGosuList();
 		ArrayList<GosuNotice> gNoticeList = service.selectGosuNoticeList2();
 		ArrayList<Gosu> newGosu = service.selectNewGosuList();
 		int gosuCount = service.selectGosuCount();
-		if(m != null) {
-			System.out.println("getId : "+m.getMemberId());
-		
-		ArrayList<GosuFeedback> gf = service.selectGosuFeedbackList(m.getMemberId());
-		model.addAttribute("gosuTalkList", gf);
+		if (m != null) {
+			System.out.println("getId : " + m.getMemberId());
+			ArrayList<GosuFeedback> gf = service.selectGosuFeedbackList(m.getMemberId());
+			ArrayList<GosuFeedback> gf2 = service.selectGosuFeedbackList2(m.getMemberId());
+			model.addAttribute("gosuTalkList", gf);
+			model.addAttribute("gosuTalkList2", gf2);
 		}
 		model.addAttribute("gList", g);
 		model.addAttribute("gNoticeList", gNoticeList);
 		model.addAttribute("newGosuList", newGosu);
 		model.addAttribute("gosuCount", gosuCount);
-		
+
 		return "gosu/gosuMain";
 	}
 
@@ -220,16 +222,23 @@ public class GosuController {
 	}
 
 	@RequestMapping(value = "/gosuSituation.do")
-	public String gosuSituation() {
+	public String gosuSituation(@SessionAttribute Member m, Model model) {
+		System.out.println("getId : " + m.getMemberId());
+		ArrayList<GosuFeedback> gf = service.selectGosuFeedbackList(m.getMemberId());
+		ArrayList<GosuFeedback> gf2 = service.selectGosuFeedbackList2(m.getMemberId());
+		model.addAttribute("gosuTalkList", gf);
+		model.addAttribute("gosuTalkList2", gf2);
+
 		return "gosu/gosuSituation";
 	}
 
 	@RequestMapping(value = "/gosuFeedback.do")
-	public String gosuFeedback(int ggNo,Model model) {
+	public String gosuFeedback(int ggNo, Model model) {
 		Gosu gosu = service.selectGosuOne(ggNo);
-		model.addAttribute("gosu",gosu);
+		model.addAttribute("gosu", gosu);
 		return "gosu/gosuFeedback";
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/gosuFeedbackInsert.do")
 		public int gosuFeedbackInsert(int ggsouNo, String gosuFeedbackTitle, String gosuFeedbackContent, String memberId, Model model) {
@@ -243,11 +252,77 @@ public class GosuController {
 			return gf.getFeedbackNo();
 		}
 
+	@ResponseBody
+	@RequestMapping(value = "/talkStopAjax.do")
+	public int talkStopAjax(int feedbackNo,Model model) {
+		int result = service.talkStop(feedbackNo);
+		return result;
+	}
+
 	@RequestMapping(value = "/gosuTalk.do")
 	public String gosuTalk(int fbNo, Model model) {
 		GosuFeedback gf = service.selectFeedbackOne(fbNo);
-		model.addAttribute("gfOne",gf);
+		ArrayList<GosuTalk> gtList = service.selectGosuTalk(fbNo);
+		model.addAttribute("gfOne", gf);
+		model.addAttribute("gtList", gtList);
 		return "gosu/gosuTalk";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/talkBtnAjax.do")
+	public int gosuTalkInsert(MultipartHttpServletRequest req, HttpSession session, HttpServletRequest request,
+			String talkContent, String writer, @RequestParam(required = false, defaultValue = "0") int feedbackNo,
+			Model model) {
+		System.out.println("talkContent : " + talkContent);
+		System.out.println("writer : " + writer);
+		System.out.println("feedbackNo : " + feedbackNo);
+		GosuTalk gt = new GosuTalk();
+		gt.setFeedbackNo(feedbackNo);
+		gt.setTalkContent(talkContent);
+		gt.setWriter(writer);
+		MultipartFile files = req.getFile("talkFile");
+		if (files == null) {
+
+		} else {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/gosu/gosuTalk/");
+			String filename = files.getOriginalFilename();
+			String onlyFilename = filename.substring(0, filename.indexOf("."));
+			String extention = filename.substring(filename.indexOf("."));
+			String filepath = null;
+			int count = 0;
+			while (true) {
+				if (count == 0) {
+					filepath = onlyFilename + extention;
+				} else {
+					filepath = onlyFilename + "_" + count + extention;
+				}
+				File checkFile = new File(savePath + filepath);
+				if (!checkFile.exists()) {
+					break;
+				}
+				count++;
+			}
+
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = files.getBytes();
+				bos.write(bytes);
+				bos.close();
+				gt.setFilepath("/resources/upload/gosu/gosuTalk/" + filepath);
+				gt.setFilename(filename);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		int result = service.insertGosuTalk(gt);
+
+		return result;
 	}
 
 	@RequestMapping(value = "/gosuNoticeList.do")

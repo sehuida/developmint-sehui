@@ -58,16 +58,17 @@ public class ResumeController {
 	
 	@RequestMapping(value="/insertResume.do")
 	public String insertResume(Resume r, int memberNo, Model model) {
-		System.out.println("여기 resumeController");
-		System.out.println(r);
 		int result = service.insertResume(r);
 		if(result != 0) {
-			model.addAttribute("msg","이력서 등록성공");
+			model.addAttribute("title", "이력서 등록성공");
+			model.addAttribute("icon", "success");
 		} else {
-			model.addAttribute("msg","이력서 등록실패");			
+			model.addAttribute("title", "이력서 등록실패");
+			model.addAttribute("msg", "입력 정보를 확인해주세요.");
+			model.addAttribute("icon", "error");
 		}
 		model.addAttribute("loc","/resumeManage.do?memberNo="+memberNo);
-		return "common/msg";
+		return "resume/swalMsg";
 	}
 	
 	@RequestMapping(value="/ceoResume.do")
@@ -85,7 +86,7 @@ public class ResumeController {
 		Member m = service.selectOneMember(resume.getMemberNo());
 		model.addAttribute("r", resume);
 		model.addAttribute("m", m);		
-		return "resume/resumeView";
+		return "resume/ceoResumeView";
 	}
 	
 	@RequestMapping(value="/applicationCompany.do")
@@ -94,5 +95,20 @@ public class ResumeController {
 		System.out.println("지원현황 페이지 resumeNo : "+memberNo);
 		return "resume/applicationCompany";
 	}
+	
+	@RequestMapping(value="/resumeView.do")
+	public String resumeView(int resumeNo, Model model) {
+		Resume resume = service.selectResume(resumeNo);
+		Member m = service.selectOneMember(resume.getMemberNo());
+		model.addAttribute("r", resume);
+		model.addAttribute("m", m);
+		return "resume/resumeView";
+	}
+	
+	/*
+	 * @RequestMapping(value="/noData.do") public String noData(String icon, String
+	 * title, Model model) { model.addAttribute("title", title);
+	 * model.addAttribute("icon", icon); return "resume/swalMsg"; }
+	 */
 	
 }

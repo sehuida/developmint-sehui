@@ -12,6 +12,7 @@ import kr.or.gosu.vo.GosuFeedback;
 import kr.or.gosu.vo.GosuNotice;
 import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
+import kr.or.gosu.vo.GosuTalk;
 
 @Service
 public class GosuService {
@@ -137,6 +138,39 @@ public class GosuService {
 			g.setGosuId(dao.selectGosuId2(ggosuNo));
 		}
 		return list;
+	}
+
+
+	public int insertGosuTalk(GosuTalk gt) {
+		int result = dao.insertGosuTalk(gt); 
+		GosuFeedback gosuFeedback = dao.selectFeedbackOne(gt.getFeedbackNo());
+		if(gosuFeedback.getFeedbackNum()==1) {
+			int feedbackNumResult = dao.updateFeedbackNum(gt.getFeedbackNo());
+		}
+		return result;
+	}
+
+
+	public ArrayList<GosuTalk> selectGosuTalk(int fbNo) {
+		ArrayList<GosuTalk> list = dao.selectGosuTalk(fbNo);
+		for(GosuTalk g : list) {
+			String writer = g.getWriter();
+			g.setGosuImg(dao.selectGosuImg(writer));
+		}
+		return list;
+	}
+
+
+	public ArrayList<GosuFeedback> selectGosuFeedbackList2(String memberId) {
+		ArrayList<GosuFeedback> list = dao.selectGosuFeedbackList2(memberId);
+		
+		return list;
+	}
+
+
+	public int talkStop(int feedbackNo) {
+		int result = dao.talkStop(feedbackNo);
+		return result;
 	}
 
 	

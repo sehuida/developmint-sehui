@@ -58,6 +58,7 @@ public class ProjectTeamController {
 			langList.remove(langValue);
 			projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue, langList);
 		}*/
+		
 		if(langValue == null) {
 			projectTeamMainPageData ptmpd = service.selectAllrecruitSelectProject(reqPage, viewValue, checkValue);
 			model.addAttribute("list", ptmpd.getList());
@@ -143,8 +144,8 @@ public class ProjectTeamController {
 	}
 	
 	@RequestMapping(value="/recruitTeamMember.do")
-	public String selectOneNotice(Model model, int projectNo) {
-		ProjectTeamNoticeViewData ptnvd = service.selectOneNotice(projectNo);
+	public String selectOneNotice(Model model, int projectNo, int memberNo) {
+		ProjectTeamNoticeViewData ptnvd = service.selectOneNotice(projectNo, memberNo);
 		model.addAttribute("commentList", ptnvd.getList());
 		model.addAttribute("pt", ptnvd.getPt());
 		model.addAttribute("pdLangList", ptnvd.getPdLangList());

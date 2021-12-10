@@ -1,10 +1,14 @@
 package kr.or.member.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.gosu.vo.GosuNotice;
 import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.Member;
 
@@ -80,6 +84,11 @@ public class MemberDao {
 
 	public int delProfile(Member m) {
 		return sqlSession.update("member.delProfile",m);
+	}
+
+	public ArrayList<GosuNotice> gosuNoticeLists(Member m) {
+		List<GosuNotice> list = sqlSession.selectList("member.gosuNoticeList",m);
+		return (ArrayList<GosuNotice>)list;
 	}
 
 }

@@ -1,6 +1,7 @@
 package kr.or.member.model.service;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.gosu.vo.GosuNotice;
 import kr.or.member.controller.RandomPassword;
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.CertiVO;
@@ -111,6 +113,11 @@ public class MemberService {
 	@Transactional
 	public int delProfile(Member m) {
 		return dao.delProfile(m);
+	}
+
+	public ArrayList<GosuNotice> gosuNoticeLists(Member m, int reqPage) {
+		ArrayList<GosuNotice> list = dao.gosuNoticeLists(m);
+		return list;
 	}
 	
 }

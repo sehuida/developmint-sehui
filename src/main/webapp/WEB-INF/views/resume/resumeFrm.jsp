@@ -228,8 +228,32 @@
 			$(this).parent().siblings("label").find("span").css("color","#888");
 		});
 		
-
+		
+		/* not null데이터가 입력되지 않은 상태로 저장하기 버튼을 누를 시 페이지 이동기능 멈추고 값을 입력하라는 메세지 출력 */
+		$(".resumeBtn").click(function(e){
+			if($("#title").val=="" || $("#school").val()=="" || $("#start").val=="" || $("#end").val()=="" || $("#workForm").val()=="" || $("#money").val=="" || $("#workPlace").val()=="") {
+				e.preventDefault();
+				alert("필수정보를 입력해주세요.");
+				window.scrollTo(0,0);
+				/*
+				swalMsg 쓰고싶은데 어캐쓰는지 모르겄다..ㅁㅇ.ㅁㄴㅇ.ㅁㄴㅇ.ㄴㅁㅇ..
+				$.ajax({
+					url : "/noData.do",
+					data : {
+						icon : "error",
+						title : "필수정보를 입력해주세요"
+					},
+					success : function(data) {
+						
+					}
+				}); */
+			}
+		});
+		
+		
 	});
+			
+
 </script>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -258,7 +282,7 @@ ${sessionScope.m.phone}
 			<em>이력서 제목</em>
 			<div class="grayBox">
 				<b>제목<span>*</span></b>
-				<input type="text" class="textInput" name="resumeTitle" placeholder="이력서 제목 입력">
+				<input type="text" class="textInput" id="title" name="resumeTitle" placeholder="이력서 제목 입력">
 			</div>
 			
 			<em>학력사항</em>
@@ -290,7 +314,7 @@ ${sessionScope.m.phone}
 							<b>학교명<span>*</span></b>
 						</div>
 						<div class="schoolNameInput">
-							<input type="text" class="smallTextInput" name="schoolName" placeholder="학교명 입력">
+							<input type="text" class="smallTextInput" id="school" name="schoolName" placeholder="학교명 입력">
 						</div>
 					</div>
 					<div class="schoolDateData">
@@ -298,7 +322,7 @@ ${sessionScope.m.phone}
 							<b>재학기간<span>*</span></b>
 						</div>
 						<div class="schoolDateInput">
-							<input type="month" class="dateInput firstDateInput" name="schoolStart"> ~ <input type="month" class="dateInput maxDate" name="schoolEnd">				
+							<input type="month" class="dateInput firstDateInput" id="start" name="schoolStart"> ~ <input type="month" class="dateInput maxDate" id="end" name="schoolEnd">				
 						</div>
 					</div>
 					<div class="schoolLocalData">
@@ -494,7 +518,7 @@ ${sessionScope.m.phone}
 						<b>근무 형태<span>*</span></b>
 					</div>
 					<div class="workForm">
-						<select class="selectInput" name="workForm">	
+						<select class="selectInput" name="workForm" id="workFrom">	
 							<option value="1">정규직</option>
 							<option value="2">계약직</option>
 							<option value="3">아르바이트</option>
@@ -508,7 +532,7 @@ ${sessionScope.m.phone}
 						<b>연봉<span>*</span></b>
 					</div>
 					<div class="moneyInput">
-						<select class="selectInput" name="money">	
+						<select class="selectInput" name="money" id="money">	
 							<option value="1">회사내규에 따름</option>
 							<option value="2">2000만 ~ 2400만</option>
 							<option value="3">2400만 ~ 2800만</option>
@@ -524,7 +548,7 @@ ${sessionScope.m.phone}
 						<b>근무 지역<span>*</span></b>
 					</div>
 					<div class="workPlaceInput">
-						<input type="text" class="textInput" name="workPlace" placeholder="근무지역 (나중에 바꾸기)">
+						<input type="text" class="textInput" id="workPlace" name="workPlace" placeholder="근무지역 (나중에 바꾸기)">
 					</div>
 				</div>
 			</div>

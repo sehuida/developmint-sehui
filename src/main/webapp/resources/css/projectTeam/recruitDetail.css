@@ -63,6 +63,7 @@
 #languageIcon{
     position: relative;
     bottom: 2px;
+    font-size: 18px;
 }
 
 .line{
@@ -144,3 +145,30 @@
 .updateText{
     text-decoration: none;
 }
+
+.bottomContentFlexBox_iconBox{
+	display: flex;
+}
+
+
+/* 좋아요 클릭 모션 */
+
+/* .like-container {
+  filter: url("#filter");
+}
+
+.like-cnt {
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.3);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 75px;
+  z-index: 10;
+}
+.like-btn {
+  color: #fff;
+}
+ */

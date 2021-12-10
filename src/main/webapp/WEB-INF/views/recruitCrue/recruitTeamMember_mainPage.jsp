@@ -104,13 +104,13 @@
 			}
 		 });
 		
-		$(".navi_checkbox").change(function(){
+		/* $(".navi_checkbox").change(function(){
 			if($(".navi_checkbox").is(":checked")){
 				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=1&checkValue=2";
 			} else {
 				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=1&checkValue=1";
 			}
-		});
+		}); */
 	    
 	    if(checkValue == 1){
 	    	$(".navi_checkbox").prop("checked", false);
@@ -178,15 +178,15 @@
                         </div>
                         <div class="rListBox">
                         <c:forEach items="${list }" var="pt" varStatus="mi">
-                        	<a href="/recruitTeamMember.do?projectNo=${pt.projectNo }" class="clickRecruitTeamTag">
+                        	<a href="/recruitTeamMember.do?projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" class="clickRecruitTeamTag">
 	                        	<div class="contentFlexBox">
 	                                <div class="imgBox">
 	                                	<c:choose>
 	                                		<c:when test="${pt.writerImgPath eq null}">
-	                                			<img class="myInfoImg" src="/resources/img/recruitTeamProject/photo.png">
+	                                			<img class="myInfoImg" src="/resources/img/member/user.png">
 	                                		</c:when>
 	                                		<c:otherwise>
-	                                			<img class="myInfoImg" src="${pt.writerImgPath }">
+	                                			<img class="myInfoImg" src="/resources/upload/member/${pt.writerImgPath }">
 	                                		</c:otherwise>
 	                                	</c:choose> 
 	                                </div>
