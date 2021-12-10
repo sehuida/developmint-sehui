@@ -60,12 +60,12 @@
 									<img src="/resources/img/file.png" width="16px" class="delFile">
 									<span class="delFile">${n.filename }</span>
 									<button type="button" id="delBtn" class="btn btn-primary btn-sm delFile">삭제</button>
-									<input type="file" name="files" style="display:none;" class="form-control" id="formFile" multiple>
+									<input type="file" name="upFile" style="display:none;" class="form-control" id="formFile" multiple>
 									<input type="hidden" name="oldFilename" value="${n.filename }">
 									<input type="hidden" name="oldFilepath" value="${n.filepath }">
 								</c:when>
 								<c:otherwise>
-									<input type="file" id="formFile" name="files" class="form-control" multiple>
+									<input type="file" id="formFile" name="upFile" class="form-control" multiple>
 								</c:otherwise>
 							</c:choose>
 					    </div>

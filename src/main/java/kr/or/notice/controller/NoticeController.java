@@ -116,6 +116,7 @@ public class NoticeController {
 			
 			//중복처리된 파일 이름 넣어주기
 			n.setFilepath(filepath);
+			n.setFilename(filename);
 			
 		}
 		
@@ -127,7 +128,6 @@ public class NoticeController {
 			model.addAttribute("msg", "등록실패");
 		}
 
-		model.addAttribute("msg","관리자 승인 후 등록됩니다.");
 		model.addAttribute("loc","/noticeList.do?reqPage=1");
 		return "common/msg";
 	}
@@ -203,13 +203,13 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="updateNoticeNo.do")
-	public String updateNoticeNo(int status, String oldFilename, String oldFilepath, Notice n, Model model, HttpServletRequest request, MultipartFile files) {
-		if(!files.isEmpty()) {
+	public String updateNoticeNo(int status, String oldFilename, String oldFilepath, Notice n, Model model, HttpServletRequest request, MultipartFile upFile) {
+		if(!upFile.isEmpty()) {
 			//경로 설정
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
 			
 			//사용자가 올린 파일명
-			String filename = files.getOriginalFilename();
+			String filename = upFile.getOriginalFilename();
 			System.out.println(filename);
 			//올린 파일명에서 확장자 앞까지 자르기 
 			String onlyFilename = filename.substring(0,filename.indexOf("."));
@@ -239,7 +239,7 @@ public class NoticeController {
 			try {
 				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
-				byte[] bytes = files.getBytes();
+				byte[] bytes = upFile.getBytes();
 				bos.write(bytes);
 				bos.close();
 			} catch (FileNotFoundException e) {
@@ -249,7 +249,7 @@ public class NoticeController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			n.setFilename(filename);
 			n.setFilepath(filepath);
 			
 			//status의 상태에 따라 처리
