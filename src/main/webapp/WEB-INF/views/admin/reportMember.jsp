@@ -150,14 +150,14 @@
 			<c:forEach items="${reportList }" var="r" varStatus="i">
 			<div class="reportContent" style="display:none">
 				<div>
-					<p class="rc_title">신고회원 확인</p>
+					<p class="rc_title"><i class="bi bi-check2"></i> 신고회원 확인</p>
 					<br>
 					<p>신고자 : ${r.reporterId }</p>
 					<p>신고당한 회원 : <span class="id">${memberId[i.index] }</span></p>
 					<p>신고일 : ${r.reportDate }</p>
 					<br>
 					<br>
-					<p class="rc_title">신고사유</p>
+					<p class="rc_title"><i class="bi bi-check2"></i> 신고사유</p>
 					<br>
 					<c:choose>
 						<c:when test="${r.reportReason == 1 }">
@@ -184,7 +184,7 @@
 					</c:choose>
 					<br>
 					<br>
-					<p class="rc_title">댓글내용</p>
+					<p class="rc_title"><i class="bi bi-check2"></i> 댓글내용</p>
 					<br>
 					<p>${r.commentContent }</p>
 					<br><br>
@@ -195,7 +195,7 @@
 					<div>
 					<form action="/cancleReport.do" method="post" class="cancleReportForm">
 						<button type="button" class="btn btn-secondary canselReport" style="width:250px; margin:3px">신고반려</button>
-						<input type="hidden" name="reportNo" value="${r.reportNo }">
+						<input type="hidden" name="reportNo" value="${r.reportNo }" class="">
 					</form> 
 					<form action="/reportInsert.do" method="post" class="reportBtnForm">
 						<button type="button" class="btn btn-primary reportBtn" style="width:250px; margin:3px">신고 처리</button>
@@ -272,7 +272,7 @@
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	 <script>
 	 	$(".selectBox").click(function(){
-	 		var index = $(this).index();
+	 		var index = $(".selectBox").index(this);
 	 		$(".selectBox").css("border","1px solid #d9d9d9");
 	 		$(".selectBox").css("background-color","#fff");
 	 		$(".selectBox").eq(index).css("border","3px solid #4ECDC4");
@@ -296,7 +296,7 @@
 	 	$(".selectBox").eq(0).trigger("click");
 	 	 
 	 	$(".canselReport").click(function(){
-	 		var index = $(this).index();
+	 		var index = $(".canselReport").index(this);
 	 		swal({
 	 			  title: "신고반려",
 	 			  text: "해당 신고를 반려처리 하시겠습니까?",
@@ -312,7 +312,7 @@
 	 	})
 	 	
 	 	$(".reportBtn").click(function(){
-	 		var index = $(this).index();
+	 		var index = $(".reportBtn").index(this);
 	 		var rpCount = $(".rpCount").eq(index).html();
 	 		if(rpCount == 4){
 	 			swal({
@@ -357,7 +357,7 @@
 	 	})
 	 	 
 	 	$(".falseBtn").click(function(){
-	 		var index = $(this).index();
+	 		var index = $(".falseBtn").index(this);
 	 		swal({
 	 			  title: "허위 신고",
 	 			  text: "해당 신고를 허위신고로 처리하시겠습니까?",
