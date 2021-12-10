@@ -69,8 +69,8 @@ public class ProjectTeamDao {
 		return sqlSession.update("projectTeam.updateReadCount", projectNo);
 	}
 
-	public ProjectTeam selectOneNotice(int projectNo) {
-		return sqlSession.selectOne("projectTeam.selectOneNotice", projectNo);
+	public ProjectTeam selectOneNotice(Map<String, Object> map) {
+		return sqlSession.selectOne("projectTeam.selectOneNotice", map);
 	}
 
 	public ArrayList<ProjectTeamNoticeComment> selectCommentList(int projectNo) {

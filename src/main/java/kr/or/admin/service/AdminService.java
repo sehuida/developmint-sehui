@@ -217,6 +217,7 @@ public class AdminService {
 		pageNavi += "</ul>";		
 		
 		List<String> memberId = dao.memberIdList(map);
+		System.out.println(memberId);
 		ArrayList<Report> report5List = dao.report5List();
 		List<String> report5ListMember = dao.report5ListMember();
 		TotalMember tm = new TotalMember(start, pageNavi, allReportList, memberId, totalCount, report5List, report5ListMember);
@@ -238,9 +239,13 @@ public class AdminService {
 	@Transactional
 	public int reportInsert(int reportNo, String memberId) {
 		int result = dao.reportInsert(reportNo);
+		int rpCount = dao.memberReportCount(memberId);
 		int result1 = 0;
 		if(result>0) {
-			result1 = dao.memberGradeChange1(memberId);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("rpCount", rpCount);
+			map.put("memberId", memberId);
+			result1 = dao.memberGradeChange1(map);
 		}
 		return result1;
 	}
@@ -253,6 +258,27 @@ public class AdminService {
 			result1 = dao.memberGradeChange2(memberId);
 		}
 		return result1;
+	}
+
+	public TotalMember totalBlockedMemberList(int reqPage) {
+		//한페이지에 보여줄 차단회원
+		int numPerPage = 6;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		
+		//한페이지에서 보여줄 게시물 목록 조회
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		ArrayList<Member> allReportList = dao.allblockedList(map);
+		
+		
+		
+		
+		
+		
+		
+		return null;
 	}
 }
 
