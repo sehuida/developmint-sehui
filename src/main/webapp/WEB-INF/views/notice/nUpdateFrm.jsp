@@ -92,6 +92,7 @@
 				$(".delFile").hide();
 				$(this).next().show();
 				$("[name=status]").val(2);
+				console.log($("[name=status]").val());
 			});
 			
 			$("#pin").click(function(){

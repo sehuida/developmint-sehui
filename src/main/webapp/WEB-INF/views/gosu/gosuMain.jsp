@@ -332,7 +332,6 @@ to {
 }
 </style>
 <body>
-ggggggggggggggggggggggggggggggggggg
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
 		<div class="gosu-mail">
