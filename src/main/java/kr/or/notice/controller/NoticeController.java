@@ -205,9 +205,9 @@ public class NoticeController {
 	@RequestMapping(value="updateNoticeNo.do")
 	public String updateNoticeNo(int status, String oldFilename, String oldFilepath, Notice n, Model model, HttpServletRequest request, MultipartFile files) {
 		if(!files.isEmpty()) {
-			
-			
+			//경로 설정
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
+			
 			//사용자가 올린 파일명
 			String filename = files.getOriginalFilename();
 			System.out.println(filename);
@@ -249,6 +249,10 @@ public class NoticeController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
+			n.setFilepath(filepath);
+			
+			//status의 상태에 따라 처리
 			if(status==2) {
 				File delFile = new File(savePath+"/"+oldFilepath);
 				delFile.delete();
@@ -256,6 +260,7 @@ public class NoticeController {
 				n.setFilename(oldFilename);
 				n.setFilepath(oldFilepath);
 			}
+			
 		}
 		int result = service.updateNoticeNo(n);
 		model.addAttribute("loc","/noticeView.do?noticeNo="+n.getNoticeNo());

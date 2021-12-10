@@ -34,15 +34,13 @@
 					<h4 style="font-weight: bold;border-bottom: 1px solid #ddd;">${n.noticeTitle }</h4>
 					<!-- 작성일, 읽은 수(테이블 컬럼 추가 해야함) -->
 					<span>${n.regDate } / View : ${readCount }</span>
-					<p>
+					<span>
 						<!-- 첨부파일테이블로 넣어서 사용 -->
-						<c:choose>
-							<c:when test="${not empty n.filepath }">
-								<img src="/resources/img/notice/file.png" style="color:white;">
-								<a href="/fileDown.do?noticeNo=${n.noticeNo }">${n.filename }</a>
-							</c:when>
-						</c:choose>
-					</p>
+						<c:if test="${not empty n.filename }">
+							<img src="/resources/img/notice/file.png" style="color:white;">
+							<a href="/fileDown.do?noticeNo=${n.noticeNo }">${n.filename }</a>
+						</c:if>
+					</span>
 					<div class="contents-box">
 						<!-- 이미지 있으면 이미지 출력, 내용잇으면 내용 출력 -->
 						${n.noticeContent }
