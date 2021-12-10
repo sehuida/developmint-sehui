@@ -154,6 +154,31 @@ public class ProjectTeamController {
 		model.addAttribute("pdLangList", ptnvd.getPdLangList());
 		model.addAttribute("memberNo", memberNo);
 		return "recruitCrue/recruitTeamMember_detail";
-		
 	}
+	
+	@RequestMapping(value="/updateRecruitFrm.do")
+	public String updateOneNoticeFrm(Model model, int projectNo, Integer memberNo) {
+		if(memberNo == null) {
+			memberNo = -1;
+		}
+		ProjectTeamNoticeViewData ptnvd = service.selectOneNotice(projectNo, memberNo);
+		model.addAttribute("commentList", ptnvd.getList());
+		model.addAttribute("pt", ptnvd.getPt());
+		model.addAttribute("pdLangList", ptnvd.getPdLangList());
+		model.addAttribute("memberNo", memberNo);
+		return "recruitCrue/recruitNoticeUpdateForm";
+	}
+	
+	/*
+	 * @RequestMapping(value="/updateRecruitNotice.do") public String
+	 * updateOneNotice(HttpServletRequest request, Model model, ProjectTeam pt, int
+	 * memberNo, String[] chk) { ArrayList<String> langList = new
+	 * ArrayList<String>(Arrays.asList(chk));
+	 * 
+	 * int result = service.updateRecruitTeam(pt, memberNo, langList); if(result >
+	 * 0) { model.addAttribute("msg", "수정 완료되었습니다."); } else {
+	 * model.addAttribute("msg", "수정 실패하였습니다."); }
+	 * model.addAttribute("loc","/recruitTeamMember_mainPage.do?reqPage=1"); return
+	 * "common/msg"; }
+	 */
 }

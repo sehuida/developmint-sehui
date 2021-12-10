@@ -93,7 +93,7 @@
                     <div class="bottomContentFlexBox_btnBox">
                     	<c:choose>
                     		<c:when test="${sessionScope.m.memberNo eq pt.projectWriterMemberNo}">
-                    			<button type="button" class="btn btn-primary">수정</button>
+                    			<a href="updateRecruitFrm.do?memberNo=${pt.projectWriterMemberNo }&projectNo=${pt.projectNo}"><button type="button" class="btn btn-primary">수정</button></a>
 		                        <button type="button" class="btn btn-primary">삭제</button>
 		                        <button type="button" class="btn btn-primary">지원자 관리</button>
                     		</c:when>
@@ -214,7 +214,7 @@
                                 </a>
                             </div>
                             <div class="updateFunction">
-                                <a href="#" class="updateText">편집</a>
+                                <a href="#" class="updateText">수정</a>
                                 <a href="#" class="updateText">삭제</a>
                             </div>
                             <div class="updateTextBox">
