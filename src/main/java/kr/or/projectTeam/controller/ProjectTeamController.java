@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 
+import kr.or.member.model.vo.Member;
 import kr.or.projectTeam.model.service.ProjectTeamService;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectTeam;
@@ -158,6 +159,7 @@ public class ProjectTeamController {
 	
 	@RequestMapping(value="/updateRecruitFrm.do")
 	public String updateOneNoticeFrm(Model model, int projectNo, Integer memberNo) {
+		ArrayList<DevelopLanguage> dlList = service.selectAllDevelopLang();
 		if(memberNo == null) {
 			memberNo = -1;
 		}
@@ -166,19 +168,45 @@ public class ProjectTeamController {
 		model.addAttribute("pt", ptnvd.getPt());
 		model.addAttribute("pdLangList", ptnvd.getPdLangList());
 		model.addAttribute("memberNo", memberNo);
+		model.addAttribute("dlList", dlList);
 		return "recruitCrue/recruitNoticeUpdateForm";
 	}
 	
-	/*
-	 * @RequestMapping(value="/updateRecruitNotice.do") public String
-	 * updateOneNotice(HttpServletRequest request, Model model, ProjectTeam pt, int
-	 * memberNo, String[] chk) { ArrayList<String> langList = new
-	 * ArrayList<String>(Arrays.asList(chk));
-	 * 
-	 * int result = service.updateRecruitTeam(pt, memberNo, langList); if(result >
-	 * 0) { model.addAttribute("msg", "수정 완료되었습니다."); } else {
-	 * model.addAttribute("msg", "수정 실패하였습니다."); }
-	 * model.addAttribute("loc","/recruitTeamMember_mainPage.do?reqPage=1"); return
-	 * "common/msg"; }
-	 */
+	
+	  @RequestMapping(value="/updateRecruitNotice.do") 
+	  public String updateOneNotice(HttpServletRequest request, Model model, ProjectTeam pt, int memberNo, String[] chk, int projectNo) { 
+		  ArrayList<String> langList = new ArrayList<String>(Arrays.asList(chk));
+	  
+		  int result = service.updateRecruitTeam(pt, memberNo, langList, projectNo); 
+		  if(result > 0) { 
+			  model.addAttribute("title", "수정성공!");
+			  model.addAttribute("msg", "수정 완료되었습니다.");
+			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("icon", "success");
+		  } else {
+			  model.addAttribute("title", "변경실패");
+			  model.addAttribute("msg", "수정 실패하였습니다.");
+			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("icon", "warning");
+		  }
+		  return "member/swalMsg"; 
+	  }
+	  
+	  @RequestMapping(value="/deleteRecruit.do") 
+	  public String deleteOneNotice(Model model, int projectNo, int memberNo) { 
+		  int result = service.deleteOneNotice(projectNo); 
+		  if(result > 0) { 
+			  model.addAttribute("title", "삭제 성공");
+			  model.addAttribute("msg", "삭제 완료되었습니다.");
+			  model.addAttribute("loc","/recruitCrue/recruitTeamMember_mainPage?reqPage=1");
+			  model.addAttribute("icon", "success");
+		  } else {
+			  model.addAttribute("title", "삭제 실패");
+			  model.addAttribute("msg", "삭제 실패하였습니다.");
+			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("icon", "warning");
+		  }
+		  return "member/swalMsg"; 
+	  }
+	 
 }

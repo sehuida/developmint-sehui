@@ -398,5 +398,21 @@
   	from comments
   	where board_no = #{projectNo} and board_type = 3
   </select>
+  <update id="updateRecruitTeam" parameterType="map">
+	  		update project set 
+		  		recruit_end_date = #{pt.rEndDate}, 
+		  		RECRUIT_TITLE = #{pt.rTitle}, 
+		  		RECRUIT_CONTENT = #{pt.rContent},
+		  		PROJECT_NAME = #{pt.projectName},
+		  		PROJECT_GOAL = #{pt.projectGoal}
+  			where project_no = #{projectNo}
+  </update>
   
+  <delete id="deleteLangList" parameterType="map">
+  		delete from use_project_language where project_no = #{projectNo}
+  </delete>
+  
+  <delete id="deleteOneNotice" parameterType="_int">
+  		delete from project where project_no = #{projectNo}
+  </delete>
 </mapper>

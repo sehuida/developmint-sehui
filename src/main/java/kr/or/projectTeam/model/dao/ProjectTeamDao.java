@@ -78,6 +78,24 @@ public class ProjectTeamDao {
 		return (ArrayList<ProjectTeamNoticeComment>) list;
 	}
 
+	public int updateRecruitTeam(Map<String, Object> map) {
+		int result = 0;
+		int tempResult = sqlSession.update("projectTeam.updateRecruitTeam", map);
+		if(tempResult > 0) {
+			int tempResult2 = sqlSession.delete("projectTeam.deleteLangList", map);
+			if(tempResult2 > 0) {
+				int insertLangValue = 2;
+				map.put("insertLangValue", insertLangValue);
+				result = sqlSession.insert("projectTeam.writeRecruitTeam", map);
+			}
+		}
+		return result;
+	}
+
+	public int deleteOneNotice(int projectNo) {
+		return sqlSession.delete("projectTeam.deleteOneNotice", projectNo);
+	}
+
 	
 
 	

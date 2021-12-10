@@ -253,5 +253,20 @@ public class ProjectTeamService {
 		
 	}
 
+	public int updateRecruitTeam(ProjectTeam pt, int memberNo, ArrayList<String> langList, int projectNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("projectNo", projectNo);
+		map.put("pt", pt);
+		map.put("langList", langList);
+		int result = dao.updateRecruitTeam(map);
+		return result;
+	}
+
+	public int deleteOneNotice(int projectNo) {
+		int result = dao.deleteOneNotice(projectNo);
+		return result;
+	}
+
 	
 }

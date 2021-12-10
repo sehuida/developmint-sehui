@@ -94,7 +94,7 @@
                     	<c:choose>
                     		<c:when test="${sessionScope.m.memberNo eq pt.projectWriterMemberNo}">
                     			<a href="updateRecruitFrm.do?memberNo=${pt.projectWriterMemberNo }&projectNo=${pt.projectNo}"><button type="button" class="btn btn-primary">수정</button></a>
-		                        <button type="button" class="btn btn-primary">삭제</button>
+		                        <a href="deleteRecruit.do?memberNo=${pt.projectWriterMemberNo }&projectNo=${pt.projectNo}"> <button type="button" class="btn btn-primary">삭제</button></a>
 		                        <button type="button" class="btn btn-primary">지원자 관리</button>
                     		</c:when>
                     		<c:otherwise>
