@@ -102,17 +102,17 @@ public class ProjectTeamService {
 		String pageNavi = "<ul class='pagination pagination-lg'>";
 		if(pageNo != 1) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+(pageNo-1)+"&viewValue="+viewValue+"&checkValue="+checkValue+"'>";
+			pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+(pageNo-1)+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"'>";
 			pageNavi += "&lt;</a></li>";
 		}// 페이지 숫자
 		for(int i=0; i < pageNaviSize; i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li class='page-item active'>";
-				pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+viewValue+"&checkValue="+checkValue+"'>";
+				pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainPage.do?reqPage="+pageNo+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"'>";
 				pageNavi += pageNo + "</a></li>";
 			} else {
 				pageNavi += "<li class='page-item'>";
-				pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+viewValue+"&checkValue="+checkValue+"'>";
+				pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainPage.do?reqPage="+pageNo+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"'>";
 				pageNavi += pageNo + "</a></li>";
 			}
 			pageNo++;
@@ -123,7 +123,7 @@ public class ProjectTeamService {
 		// 다음 버튼
 		if(pageNo <= totalPage) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+viewValue+"&checkValue="+checkValue+"'>";
+			pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainPage.do?reqPage="+pageNo+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
@@ -163,7 +163,7 @@ public class ProjectTeamService {
 		
 		String pageNavi = "<ul class='pagination pagination-lg'>";
 		if(pageNo != 1) {
-			String pdNaviUrl1 = "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+(pageNo-1)+"&viewValue="+viewValue+"&checkValue="+checkValue+"";
+			String pdNaviUrl1 = "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+(pageNo-1)+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"";
 			for(int i = 0; i < langList.size(); i++) {
 				String addData = "&langValue="+langList.get(i);
 				pdNaviUrl1 += addData;
@@ -176,7 +176,7 @@ public class ProjectTeamService {
 		}// 페이지 숫자
 		for(int i=0; i < pageNaviSize; i++) {
 			if(pageNo == reqPage) {
-				String pdNaviUrl2 = "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+viewValue+"&checkValue="+checkValue+"";
+				String pdNaviUrl2 = "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"";
 				for(int j = 0; j < langList.size(); j++) {
 					String addData = "&langValue="+langList.get(j);
 					pdNaviUrl2 += addData;
@@ -187,7 +187,7 @@ public class ProjectTeamService {
 				pageNavi += pdNaviUrl2;
 				pageNavi += pageNo + "</a></li>";
 			} else {
-				String pdNaviUrl3 = "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+viewValue+"&checkValue="+checkValue+"";
+				String pdNaviUrl3 = "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"";
 				for(int j = 0; j < langList.size(); j++) {
 					String addData = "&langValue="+langList.get(j);
 					pdNaviUrl3 += addData;
@@ -205,7 +205,7 @@ public class ProjectTeamService {
 		}
 		// 다음 버튼
 		if(pageNo <= totalPage) {
-			String pdNaviUrl4 = "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+viewValue+"&checkValue="+checkValue+"";
+			String pdNaviUrl4 = "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+(viewValue)+"&checkValue="+(checkValue)+"";
 			for(int i = 0; i < langList.size(); i++) {
 				String addData = "&langValue="+langList.get(i);
 				pdNaviUrl4 += addData;
@@ -237,15 +237,12 @@ public class ProjectTeamService {
 		return dlList;
 	}
 
-	public ProjectTeamNoticeViewData selectOneNotice(int projectNo, int memberNo) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("memberNo", memberNo);
-		map.put("projectNo", projectNo);
+	public ProjectTeamNoticeViewData selectOneNotice(int projectNo) {
 		int result = dao.updateReadCount(projectNo);
 		if(result <= 0) {
 			return null;
 		}
-		ProjectTeam pt = dao.selectOneNotice(map);
+		ProjectTeam pt = dao.selectOneNotice(projectNo);
 		ArrayList<ProjectTeamNoticeComment> list = dao.selectCommentList(projectNo);
 		ArrayList<projectDevLanguage> pdLangList = dao.selectAllprojectLangList();
 		ProjectTeamNoticeViewData ptnvd = new ProjectTeamNoticeViewData(list, pt, pdLangList);

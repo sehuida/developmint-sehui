@@ -126,7 +126,7 @@ input:focus, textarea:focus {
 								</c:if>
 								<c:if test="${not empty gosu.gosuImg }">
 									<td rowspan="4" style="padding: 40px; text-align: center;"><img
-										src="${gosu.gosuImg }" style="border-radius: 50%; width: 200px; height: 200px;"></td>
+										src="/resources/upload/member/${gosu.gosuImg }" style="border-radius: 50%; width: 200px; height: 200px;"></td>
 								</c:if>
 
 

@@ -297,7 +297,7 @@
 							</c:if>
 							<c:if test="${not empty gosu.gosuImg }">
 								<th rowspan="6" style="padding: 40px; padding-right: 100px;"><img
-									src="${gosu.gosuImg }" style="width: 250px;"></th>
+									src="/resources/upload/member/${gosu.gosuImg }" style="width: 250px;"></th>
 							</c:if>
 						</tr>
 						<tr>

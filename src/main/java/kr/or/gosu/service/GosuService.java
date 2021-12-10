@@ -136,6 +136,7 @@ public class GosuService {
 		for(GosuFeedback g : list) {
 			int ggosuNo = g.getGgosuNo();
 			g.setGosuId(dao.selectGosuId2(ggosuNo));
+			g.setGosuImg(dao.selectGosuImg(g.getGosuId()));
 		}
 		return list;
 	}
@@ -156,6 +157,7 @@ public class GosuService {
 		for(GosuTalk g : list) {
 			String writer = g.getWriter();
 			g.setGosuImg(dao.selectGosuImg(writer));
+			g.setMemberImg(dao.selectGosuImg(writer));
 		}
 		return list;
 	}
@@ -163,7 +165,10 @@ public class GosuService {
 
 	public ArrayList<GosuFeedback> selectGosuFeedbackList2(String memberId) {
 		ArrayList<GosuFeedback> list = dao.selectGosuFeedbackList2(memberId);
-		
+		for(GosuFeedback g : list) {
+			g.setMemberId(dao.selectMemberId(g.getFeedbackNo()));
+			g.setMemberImg(dao.selectGosuImg(g.getMemberId()));
+		}
 		return list;
 	}
 

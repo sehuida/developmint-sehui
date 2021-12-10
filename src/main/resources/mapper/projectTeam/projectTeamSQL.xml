@@ -4,8 +4,9 @@
 
   <select id="projectList" parameterType="map" resultType="pt">
   		<![CDATA[
-		select rownum as rnum, a.* from
+		select * from
             (select
+            rownum as rnum,
 			p.project_no as projectNo,
 			p.member_no as projectWriterMemberNo,
 			p.recruit_start_date as rStartDate,
@@ -23,8 +24,8 @@
 			(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
             (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 		from project p 
-        order by project_No DESC) a
-		where rownum between #{start} and #{end}
+        order by project_No DESC) 
+		where rnum between #{start} and #{end}
 		]]>
   </select>
   <select id="projectLangList" resultType="pdl">
@@ -88,9 +89,9 @@
   			<if test="checkValue == 1">
 	  			<choose>
 		  			<when test="viewValue == 1">
-		  			select * from (
-			  			select rownum as rnum, a.* from
+			  			select * from
 				            (select
+					            rownum as rnum,
 								p.project_no as projectNo,
 								p.member_no as projectWriterMemberNo,
 								p.recruit_start_date as rStartDate,
@@ -108,13 +109,13 @@
 								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
 					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 							from project p
-			       			order by project_No DESC) a)
-						where rownum between #{start} and #{end}
+			       			order by project_No DESC) 
+						where rnum between #{start} and #{end}
 		  			</when>
 		  			<when test="viewValue == 2">
-		  			select * from (
-		  				select rownum as rnum, a.* from
+		  				select * from
 				            (select
+					            rownum as rnum,
 								p.project_no as projectNo,
 								p.member_no as projectWriterMemberNo,
 								p.recruit_start_date as rStartDate,
@@ -132,19 +133,17 @@
 								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
 					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 							from project p
-							order by viewCount DESC, dibCount DESC, commentCount DESC, projectNo DESC 
-							) a)
-						where rownum between #{start} and #{end}
-			       		
+			       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_no DESC) 
+						where rnum between #{start} and #{end}
 					</when>
 	  			</choose>
 	  		</if>
 	  		<if test="checkValue == 2">
 	  			<choose>
 		  			<when test="viewValue == 1">
-		  			select * from (
-			  			select rownum as rnum, a.* from
+			  			select * from
 				            (select
+					            rownum as rnum,
 								p.project_no as projectNo,
 								p.member_no as projectWriterMemberNo,
 								p.recruit_start_date as rStartDate,
@@ -163,13 +162,13 @@
 					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 							from project p
 							where p.project_status = 1 
-			       			order by project_No DESC) a)
-						where rownum between #{start} and #{end}
+			       			order by project_No DESC) 
+						where rnum between #{start} and #{end}
 		  			</when>
 		  			<when test="viewValue == 2">
-		  			select * from (
-		  				select rownum as rnum, a.* from
+		  				select * from
 				            (select
+					            rownum as rnum,
 								p.project_no as projectNo,
 								p.member_no as projectWriterMemberNo,
 								p.recruit_start_date as rStartDate,
@@ -187,10 +186,9 @@
 								(select count(*) from project_dibs pd where pd.project_no = p.project_no ) as dibCount,
 					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
 							from project p
-							where p.project_status = 1
-							order by viewCount DESC, dibCount DESC, commentCount DESC, projectNo DESC
-							) a)
-						where rownum between #{start} and #{end}
+							where p.project_status = 1 
+			       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_no DESC) 
+						where rnum between #{start} and #{end}
 					</when>
 	  			</choose>
 	  		</if>
@@ -199,9 +197,9 @@
   			<if test="checkValue == 1">
 	  			<choose>
 		  			<when test="viewValue == 1">
-		  			select * from (
-			  			 select rownum as rnum, a.* from  
+			  			 select * from  
                         	(select
+					            rownum as rnum,
 								p.project_no as projectNo,
 								p.member_no as projectWriterMemberNo,
 								p.recruit_start_date as rStartDate,
@@ -226,13 +224,13 @@
 										#{lang}
 									</foreach>
 	                            )))
-                            order by p.project_no DESC) a)
-                        where rownum between #{start} and #{end}
+                            order by p.project_no DESC)
+                        where rnum between #{start} and #{end}
 		  			</when>
 		  			<when test="viewValue == 2">
-		  			select * from (
-		  				select rownum as rnum, a.* from
+		  				select * from
 				            (select
+					            rownum as rnum,
 								p.project_no as projectNo,
 								p.member_no as projectWriterMemberNo,
 								p.recruit_start_date as rStartDate,
@@ -257,19 +255,17 @@
 										#{lang}
 									</foreach>
 	                            )))
-	                        order by viewCount DESC, dibCount DESC, commentCount DESC, projectNo DESC
-	                        ) a)
-						where rownum between #{start} and #{end}
-						 
+			       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_no DESC) 
+						where rnum between #{start} and #{end}
 					</when>
 	  			</choose>
 	  		</if>
 	  		<if test="checkValue == 2">
 	  			<choose>
 		  			<when test="viewValue == 1">
-		  			select * from (
-			  			select rownum as rnum, a.* from
+			  			select * from
 				            (select
+					            rownum as rnum,
 								p.project_no as projectNo,
 								p.member_no as projectWriterMemberNo,
 								p.recruit_start_date as rStartDate,
@@ -294,13 +290,13 @@
 										#{lang}
 									</foreach>
 	                            )))
-			       			order by project_No DESC) a)
-						where rownum between #{start} and #{end}
+			       			order by project_No DESC) 
+						where rnum between #{start} and #{end}
 		  			</when>
 		  			<when test="viewValue == 2">
-		  			select * from (
-		  				select rownum as rnum, a.* from
+		  				select * from
 				            (select
+					            rownum as rnum,
 								p.project_no as projectNo,
 								p.member_no as projectWriterMemberNo,
 								p.recruit_start_date as rStartDate,
@@ -325,8 +321,8 @@
 										#{lang}
 									</foreach>
 	                            )))
-	                            order by viewCount DESC, dibCount DESC, commentCount DESC, projectNo DESC ) a)
-						where rownum between #{start} and #{end}
+			       			order by viewCount DESC, dibCount DESC, commentCount DESC, project_no DESC) 
+						where rnum between #{start} and #{end}
 					</when>
 	  			</choose>
 	  		</if>
@@ -359,7 +355,7 @@
   	update project set view_count = view_count + 1 where project_no = #{projectNo}
   </update>
   
-  <select id="selectOneNotice" parameterType="map" resultType="pt">
+  <select id="selectOneNotice" parameterType="_int" resultType="pt">
   	select 
 			p.project_no as projectNo,
 			p.member_no as projectWriterMemberNo,
@@ -375,11 +371,10 @@
 			p.project_start_date as pStartDate,
 			p.project_end_date as pEndDate,
 			(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-			(select count(*) from project_dibs pd where pd.project_no = #{projectNo}) as dibCount,
-            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = #{projectNo}) as commentCount,
+			(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount,
             (select member_id from member m where m.member_no = p.member_no) as projectWriterId,
-            (select member_grade from member m where m.member_no = p.member_no) as projectWriterGrade,
-            (select count(*) from project_dibs pd where pd.project_no = #{projectNo} and pd.member_no = #{memberNo}) as dibCountClickValue
+            (select member_grade from member m where m.member_no = p.member_no) as projectWriterGrade
 	from project p 
 	where project_no = #{projectNo}
   </select>

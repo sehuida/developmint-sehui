@@ -190,7 +190,7 @@
 								</c:if>
 								<c:if test="${not empty g.gosuImg }">
 									<td rowspan="4" style="padding: 40px; text-align: center;"><img
-										src="${g.gosuImg }" style="border-radius: 50%; width: 200px; height: 200px;"></td>
+										src="/resources/upload/member/${g.gosuImg }" style="border-radius: 50%; width: 200px; height: 200px;"></td>
 								</c:if>
 
 
