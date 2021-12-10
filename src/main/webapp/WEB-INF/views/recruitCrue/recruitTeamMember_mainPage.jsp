@@ -189,7 +189,7 @@
 	                                		</c:otherwise>
 	                                	</c:choose> 
 	                                </div>
-                        			<a href="/recruitTeamMember.do?projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" class="clickRecruitTeamTag">
+                        			<a href="/selectOneNotice.do?projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" class="clickRecruitTeamTag">
 		                                <div class="contentBox">
 		                                    <div class="textFlexBox1">
 		                                        <div class="textContent">

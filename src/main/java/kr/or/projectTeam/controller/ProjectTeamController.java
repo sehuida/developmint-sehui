@@ -41,6 +41,7 @@ public class ProjectTeamController {
 	
 	@RequestMapping(value="/recruitTeamMember_mainPage.do")
 	public String recruitTeamMember(Model model, int reqPage) {
+		service.updateStatus();
 		projectTeamMainPageData ptmpd = service.selectAllrecruitProject(reqPage);
 		model.addAttribute("list", ptmpd.getList());
 		model.addAttribute("pageNavi", ptmpd.getPageNavi());
@@ -144,7 +145,7 @@ public class ProjectTeamController {
 		return "common/msg";
 	}
 	
-	@RequestMapping(value="/recruitTeamMember.do")
+	@RequestMapping(value="/selectOneNotice.do")
 	public String selectOneNotice(Model model, int projectNo, Integer memberNo) {
 		if(memberNo == null) {
 			memberNo = -1;

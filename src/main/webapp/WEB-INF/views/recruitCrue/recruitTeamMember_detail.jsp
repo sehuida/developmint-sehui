@@ -93,13 +93,22 @@
                     <div class="bottomContentFlexBox_btnBox">
                     	<c:choose>
                     		<c:when test="${sessionScope.m.memberNo eq pt.projectWriterMemberNo}">
-                    			<a href="updateRecruitFrm.do?memberNo=${pt.projectWriterMemberNo }&projectNo=${pt.projectNo}"><button type="button" class="btn btn-primary">수정</button></a>
-		                        <a href="deleteRecruit.do?memberNo=${pt.projectWriterMemberNo }&projectNo=${pt.projectNo}"> <button type="button" class="btn btn-primary">삭제</button></a>
-		                        <button type="button" class="btn btn-primary">지원자 관리</button>
+                    			<c:choose>
+                    				<c:when test="${pt.projectStatus == 1 }">
+                    					<a href="updateRecruitFrm.do?memberNo=${pt.projectWriterMemberNo }&projectNo=${pt.projectNo}"><button type="button" class="btn btn-primary">수정</button></a>
+				                        <a href="deleteRecruit.do?memberNo=${pt.projectWriterMemberNo }&projectNo=${pt.projectNo}"> <button type="button" class="btn btn-primary">삭제</button></a>
+				                        <button type="button" class="btn btn-primary">지원자 관리</button>
+                    				</c:when>
+                    				<c:otherwise>
+                    					<a href="updateRecruitFrm.do?memberNo=${pt.projectWriterMemberNo }&projectNo=${pt.projectNo}"><button type="button" class="btn btn-primary" disabled="disabled">수정</button></a>
+				                        <a href="deleteRecruit.do?memberNo=${pt.projectWriterMemberNo }&projectNo=${pt.projectNo}"> <button type="button" class="btn btn-primary" disabled="disabled">삭제</button></a>
+				                        <button type="button" class="btn btn-primary" disabled="disabled">지원자 관리</button>
+                    				</c:otherwise>
+                    			</c:choose>
                     		</c:when>
                     		<c:otherwise>
                     			<c:choose>
-                    				<c:when test="${memberNo == -1 }">
+                    				<c:when test="${memberNo == -1 || pt.projectStatus != 1}">
                     					<button type="button" class="btn btn-primary" disabled="disabled">프로젝트 지원</button>
                     				</c:when>
                     				<c:otherwise>
@@ -134,7 +143,6 @@
 		                        </c:choose>
                         	</c:otherwise>
                         </c:choose>
-                        
                         <span class="countText">${pt.dibCount }</span>
                     </div>
                 </div>

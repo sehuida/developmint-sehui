@@ -1,6 +1,9 @@
 package kr.or.projectTeam.model.dao;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -94,6 +97,13 @@ public class ProjectTeamDao {
 
 	public int deleteOneNotice(int projectNo) {
 		return sqlSession.delete("projectTeam.deleteOneNotice", projectNo);
+	}
+
+	public int updateStatus() {
+		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date nowDate = new Date();
+		String today = sdFormat.format(nowDate);
+		return sqlSession.update("projectTeam.updateStatus", today);
 	}
 
 	

@@ -415,4 +415,8 @@
   <delete id="deleteOneNotice" parameterType="_int">
   		delete from project where project_no = #{projectNo}
   </delete>
+  
+  <update id="updateStatus" parameterType="String">
+  		update project set project_status = 2 where recruit_end_date like #{today}
+  </update>
 </mapper>

@@ -268,5 +268,10 @@ public class ProjectTeamService {
 		return result;
 	}
 
+	public int updateStatus() {
+		int result = dao.updateStatus();
+		return result;
+	}
+
 	
 }
