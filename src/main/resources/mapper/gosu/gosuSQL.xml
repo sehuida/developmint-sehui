@@ -260,4 +260,11 @@
 		gosu_feedback set
 		FEEDBACK_NUM = 3 where FEEDBACK_NO = #{feedbackNo}
 	</update>
+	<select id="selectMemberId" parameterType="_int" resultType="String">
+		select
+		MEMBER_ID as memberId
+		from
+		gosu_feedback where FEEDBACK_NO = #{feedbackNo}
+	</select>
+	
 </mapper>

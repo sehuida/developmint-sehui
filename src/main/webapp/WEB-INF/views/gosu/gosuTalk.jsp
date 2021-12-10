@@ -172,7 +172,7 @@ input:focus, textarea:focus {
 											test="${empty gtl.gosuImg }">
 											<img src="/resources/img/gosu/g_img_basic.png">
 										</c:if> <c:if test="${not empty gtl.gosuImg }">
-											<img src="${gtl.gosuImg }">
+											<img src="/resources/upload/member/${gtl.gosuImg }">
 										</c:if></th>
 									<th style="font-size: 30px;">${gtl.writer }</th>
 									<td

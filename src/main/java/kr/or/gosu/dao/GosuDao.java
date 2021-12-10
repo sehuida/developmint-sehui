@@ -135,5 +135,9 @@ public class GosuDao {
 		return sqlSession.update("gosu.talkStop",feedbackNo);
 	}
 
+	public String selectMemberId(int feedbackNo) {
+		return sqlSession.selectOne("gosu.selectMemberId",feedbackNo);
+	}
+
 
 }

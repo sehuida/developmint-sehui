@@ -12,6 +12,7 @@ public class GosuTalk {
 	private String filepath;
 	private String filename;
 	private String gosuImg;
+	private String memberImg;
 	
 	public String getTalkContentBr(){
 		return talkContent.replaceAll("\r\n", "<br>");
