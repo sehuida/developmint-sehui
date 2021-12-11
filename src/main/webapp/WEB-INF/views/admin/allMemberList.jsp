@@ -91,11 +91,11 @@
 	</div>
 	
 	<%--조회 카테고리 --%>
-	<a href="/allMemberList.do?reqPage=1&type=0&list=1&id=null" id="newList" class="listTag">최신순</a>
-	<a href="/allMemberList.do?reqPage=1&type=0&list=2&id=null" id="gradeList" class="listTag">등급순</a>
-	<a href="/allMemberList.do?reqPage=1&type=1&list=1&id=null" id="memberList" class="listTag">일반회원</a>
-	<a href="/allMemberList.do?reqPage=1&type=2&list=1&id=null" id="gosuList" class="listTag">고수회원</a>
-	<a href="/allMemberList.do?reqPage=1&type=3&list=1&id=null" id="companyList" class="listTag">기업회원</a>
+	<a href="/allMemberList.do?reqPage=1&type=0&list=1" id="newList" class="listTag">최신순</a>
+	<a href="/allMemberList.do?reqPage=1&type=0&list=2" id="gradeList" class="listTag">등급순</a>
+	<a href="/allMemberList.do?reqPage=1&type=1&list=1" id="memberList" class="listTag">일반회원</a>
+	<a href="/allMemberList.do?reqPage=1&type=2&list=1" id="gosuList" class="listTag">고수회원</a>
+	<a href="/allMemberList.do?reqPage=1&type=3&list=1" id="companyList" class="listTag">기업회원</a>
 	
 	<%--아이디 검색 --%>
 	<div id="searchBox">

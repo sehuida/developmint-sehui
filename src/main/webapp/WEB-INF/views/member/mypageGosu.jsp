@@ -160,7 +160,7 @@
 					<div>
 						<img src="/resources/img/member/chat.png">
 						<a class="pageLists" href="/gosuKnowhow.do?reqPage=1&memberId=${sessionScope.m.memberId }">고수의 노하우</a>
-						<a href="/gosuKnowhow.do"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
+						<a href="/gosuKnowhow.do?reqPage=1&memberId=${sessionScope.m.memberId }"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
 					</div>		
 			</div>
 			<div class="page-bottom">

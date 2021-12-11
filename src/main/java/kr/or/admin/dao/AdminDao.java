@@ -141,9 +141,38 @@ public class AdminDao {
 		return (ArrayList<Member>)list;
 	}
 
-	public int totalBlockedCount() {
-		return sqlSession.selectOne("admin.totalBlockedCount");
+	public int totalBlockedCount(Map<String, Object> map) {
+		return sqlSession.selectOne("admin.totalBlockedCount", map);
 	}
+	
+	public List<String> blockedMemberId(Map<String, Object> map) {
+		return sqlSession.selectList("admin.blockedMemberId",map);
+	}
+
+	public List<String> lastReportDate(String memberId) {
+		return sqlSession.selectList("admin.lastReportDate",memberId);
+	}
+
+	public ArrayList<Report> memberReportView(String id) {
+		List<Report> list = sqlSession.selectList("admin.memberReportView",id);
+		return (ArrayList<Report>)list;
+	}
+
+	public List<Integer> concelReportNo(String id) {
+		return sqlSession.selectList("admin.concelReportNo",id);
+	}
+
+	public int cancelReportMember(int no) {
+		return sqlSession.update("admin.cancelReportMember", no);
+	}
+
+	public int changeType(String id) {
+		return sqlSession.update("admin.changeType", id);
+	}
+	
+
+
+	
 
 }
 

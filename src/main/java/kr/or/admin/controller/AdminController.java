@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.or.admin.service.AdminService;
 import kr.or.admin.vo.TotalData;
 import kr.or.admin.vo.TotalMember;
+import kr.or.comment.vo.Report;
 
 @Controller
 public class AdminController {
@@ -88,11 +89,12 @@ public class AdminController {
 		
 		//차단회원목록으로 이동
 		@RequestMapping(value="/blockedMember.do")
-		public String blockedMember(Model model, int reqPage) {
-			TotalMember tm = service.totalBlockedMemberList(reqPage);
+		public String blockedMember(Model model, int reqPage, String id) {
+			TotalMember tm = service.totalBlockedMemberList(reqPage,id);
 			model.addAttribute("pageNavi", tm.getPageNavi());
 			model.addAttribute("allblockedList", tm.getAllblockedList());
 			model.addAttribute("totalCount",tm.getTotalCount());
+			model.addAttribute("lastReport",tm.getLastReport());
 			return "admin/blockedMember";
 		}
 		
@@ -153,6 +155,27 @@ public class AdminController {
 				model.addAttribute("msg","처리 실패하였습니다.");
 			}
 			model.addAttribute("loc","/reportMember.do?reqPage=1");
+			return "common/msg";
+		}
+		
+		//선택회원 신고 리스트
+		@ResponseBody
+		@RequestMapping(value="/memberReportView.do")
+		public ArrayList<Report> memberReportView(String id) {
+			ArrayList<Report> memberReportView = service.memberReportView(id);
+			return memberReportView;
+		}
+		
+		//선택회원 차단 해제
+		@RequestMapping(value="/cancelBlocked.do")
+		public String cancelBlocked(String memberId, Model model) {
+			boolean result = service.cancelBlocked(memberId);
+			if(result) {
+				model.addAttribute("msg","차단 해제 되었습니다.");
+			}else {
+				model.addAttribute("msg","차단 해제 실패");
+			}
+			model.addAttribute("loc","/blockedMember.do?reqPage=1");
 			return "common/msg";
 		}
 
