@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.or.admin.service.AdminService;
 import kr.or.admin.vo.TotalData;
 import kr.or.admin.vo.TotalMember;
+import kr.or.comment.vo.Report;
 
 @Controller
 public class AdminController {
@@ -88,11 +89,12 @@ public class AdminController {
 		
 		//차단회원목록으로 이동
 		@RequestMapping(value="/blockedMember.do")
-		public String blockedMember(Model model, int reqPage) {
-			TotalMember tm = service.totalBlockedMemberList(reqPage);
+		public String blockedMember(Model model, int reqPage, String id) {
+			TotalMember tm = service.totalBlockedMemberList(reqPage,id);
 			model.addAttribute("pageNavi", tm.getPageNavi());
 			model.addAttribute("allblockedList", tm.getAllblockedList());
 			model.addAttribute("totalCount",tm.getTotalCount());
+			model.addAttribute("lastReport",tm.getLastReport());
 			return "admin/blockedMember";
 		}
 		
@@ -154,6 +156,14 @@ public class AdminController {
 			}
 			model.addAttribute("loc","/reportMember.do?reqPage=1");
 			return "common/msg";
+		}
+		
+		//선택회원 신고 리스트
+		@ResponseBody
+		@RequestMapping(value="/memberReportView.do")
+		public ArrayList<Report> memberReportView(String id) {
+			ArrayList<Report> memberReportView = service.memberReportView(id);
+			return memberReportView;
 		}
 
 }

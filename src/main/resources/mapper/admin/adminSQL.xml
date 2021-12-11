@@ -336,15 +336,72 @@
 			filepath,
 			member_grade as memberGrade
 		from member
+		where member_type = 4 
+		<if test="id != null">
+			and member_id like '%'||#{id}||'%' 
+		</if>
+		 order by member_no desc)m order by rnum) 
+		where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 총 차단 회원 -->
+	<select id="totalBlockedCount" parameterType="map" resultType="_int"> 
+		select count(*) from member where member_type = 4
+		<if test="id != null">
+			and member_id like '%'||#{id}||'%' 
+		</if>
+	</select>
+	
+	<!-- 차단 회원 아이디 목록 -->
+	<select id="blockedMemberId" parameterType="map" resultType="string">
+		select memberId
+		from(select rownum as rnum, m.* 
+		from(
+		select 
+			member_no as memberNo,
+			member_name as memberName,
+			phone,
+			member_id as memberId,
+			member_pw as memberPw,
+			email,
+			member_type as memberType,
+			enroll_date as enrollDate,
+			filepath,
+			member_grade as memberGrade
+		from member
 		where member_type = 4
 		 order by member_no desc)m order by rnum) 
 		where rnum BETWEEN #{start} and #{end}
 	</select>
 	
-	<select id="totalBlockedCount" resultType="_int"> 
-		select count(*) from member where member_type = 4
+	<!-- 마지막 신고일 계산 -->
+	<select id="lastReportDate" parameterType="string" resultType="string">
+		select ENROLL_DATE from(select rownum as rnum, R.ENROLL_DATE from report r
+		left join COMMENTS c using(COMMENT_NO)
+		left join member m using(member_id) 
+		where member_id = #{memberId} and report_status = 2
+		order by enroll_date desc)
+		where rnum = 5
 	</select>
-
+	
+	<!-- 회원 한명 신고 리스트 -->
+	<select id="memberReportView" parameterType="string" resultType="rp">
+		select r.* 
+		from(select      
+					report.report_no as reportNo,
+					report.reporter_id as reporterId,
+					report.report_reason as reportReason,
+					report.report_etc as reportEtc,
+					report.comment_no as commentNo,
+					report.report_date as reportDate,
+					report.report_status as reportStatus,
+					report.comment_content as commentContent,
+					report.ENROLL_DATE as enrollDate
+        from report)r
+        left join comments c on(R.COMMENTNO = COMMENT_NO)
+        where C.MEMBER_ID = #{value} and reportStatus = 2
+        order by enrollDate desc
+	</select>
 </mapper>
 
 

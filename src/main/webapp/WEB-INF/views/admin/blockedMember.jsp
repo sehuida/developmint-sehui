@@ -44,6 +44,21 @@ span{
 	font-size: 20px;
 	font-weight: bold;
 }
+.infoBox{
+	display: flex;
+}
+.infoBox>img{
+	margin-right: 30px;
+}
+.title{
+	font-weight: bold;
+	margin-bottom : 30px;
+	background-color: #f8f9fc;
+	height: 40px;
+	padding-left: 10px;
+	line-height: 40px;
+	color:#1A1B3D;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -59,29 +74,30 @@ span{
 		
 		<%--아이디 검색창 --%>
 		<div id="searchBox">
-		<form action="/searchBlockedMember.do" method="post">
-			<input type="text" name="memberId" value="아이디를 입력하세요" class="form-control" id="searchForm">
-			<button class="btn btn-secondary">검색</button>
-		</form>
+			<input type="text" name="memberId" placeholder="아이디를 입력하세요" class="form-control" id="searchForm">
+			<button class="btn btn-secondary searchBtn">검색</button>
 		</div>
 		
 		<%--차단회원 테이블 --%>
 		<form action="/unblockMember.do" method="post">
 		<table class="table" style="margin-top:20px; text-align: center;"> 
 			<tr>
-				<th><input type="checkbox"></th>
+				<th><input type="checkbox" id="checkAll" class="form-check-input" style="zoom: 1.2;"></th>
 				<th>아이디</th>
 				<th>이름</th>
+				<th>전화번호</th>
 				<th>이메일</th>
 				<th>등급</th>
+				<th>차단날짜</th>
 				<th>내용보기</th>
 			</tr>
-			<c:forEach items="${allblockedList }" var="b">
+			<c:forEach items="${allblockedList }" var="b" varStatus="i">
 				<tr>
 					<td><input type="checkbox"></td>
-					<td>${b.memberId }</td>
-					<td>${b.memberName }</td>
-					<td>${b.email }</td>
+					<td class="reId">${b.memberId }</td>
+					<td class="rename">${b.memberName }</td>
+					<td>${b.phone }</td>
+					<td class="remail">${b.email }</td>
 					<c:choose>
 						<c:when test="${b.memberGrade > 0 && b.memberGrade < 21 }">
 							<td><img src="/resources/img/member/rank/bronze.png" width="35px" height="35px;">브론즈</td>
@@ -105,37 +121,24 @@ span{
 							<td><img src="/resources/img/member/rank/challenger.png" width="35px" height="35px;">챌린저</td>
 						</c:when>
 					</c:choose>
-					<td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#memberMoreModal">자세히</button></td>
+					<td>${lastReport[i.index] }</td>
+					<td><button type="button" class="btn btn-primary reportViewBtn" data-bs-toggle="modal" data-bs-target="#memberMoreModal${i.index }">자세히</button></td>
 				<tr>
+				
 			</c:forEach>
 		</table>
 		<button type="button" class="btn btn-outline-primary"><i class="bi bi-check2-square"></i>차단 해제</button>
 		<div id="pageNavi" style="text-align: center; margin-top:50px;"  >${pageNavi }</div>
 		</form>
 		
-		<!-- 차단회원 내용 Modal -->
-		<div class="modal fade" id="memberMoreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<!-- 내용보기 Modal -->
+		<c:forEach items="${allblockedList }" var="b" varStatus="i">
+		<p class="imgpath" style="display:none;">${b.filepath }</p>
+		<div class="modal fade" id="memberMoreModal${i.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
-		    <div class="modal-content">
+		    <div class="modal-content" style="border-radius: 0.3rem;">
 		      <div class="modal-body">
-		      	<p id="Modaltitle">신고 누적 내용</p>
-		      	<p>아이디 : user01</p>
-		      	<p>이름 : 김수현</p>
-		      	<p>이메일 : user1@gmail.com</p>
-		      	<table class="table" style="margin-top: 20px;">
-		      		<tr>
-		      			<th>신고일</th>
-		      			<th>사유</th>
-		      			<th>댓글 내용</th>
-		      		</tr>
-		      		<c:forEach begin="0" end="4">
-		      			<tr>
-		      				<td>2021-11-30</td>	
-		      				<td>욕설/인신공격</td>
-		      				<td>어쩌구 저쩌구 심한욕</td>
-		      			</tr>
-		      		</c:forEach>
-		      	</table>
+		      	
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
@@ -143,9 +146,80 @@ span{
 		    </div>
 		  </div>
 		</div>
+		</c:forEach>
 	</div>
 	
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
+	<script type="text/javascript">
+		$(".reportViewBtn").click(function(){
+			var index = $(".reportViewBtn").index(this);
+			var reId = $(".reId").eq(index).html();
+			var rename = $(".rename").eq(index).html();
+			var remail = $(".remail").eq(index).html();
+			var imgpath = $(".imgpath").eq(index).html();
+			console.log(imgpath);
+			$.ajax({
+	 			url : "/memberReportView.do",
+				type : 'post',
+				data : {id:reId},
+				success : function(data){
+					$(".modal-body").empty();
+					var mb = '<p id="Modaltitle">신고 누적 내용</p>';
+					mb += '<p class="title">차단 회원 정보</p>'
+					mb += '<div class="infoBox">';
+					if(imgpath == ""){
+						mb += '<img src="/resources/img/member/user.png" style="width: 120px; height:120px;">';	
+					}else{
+						mb += '<img src="/resources/upload/member/'+imgpath+'" style="width: 120px; height:120px;">';
+					}
+					mb += '<div>'
+					mb += '<p>아이디 : '+reId+'</p>';
+					mb += '<p>이름 : '+rename+'</p>';
+					mb += '<p>이메일 : '+remail+'</p>';
+					mb += '</div>'
+					mb += '</div>';
+					mb += '<p class="title" style="margin-top:30px; margin-bottom: 10px">신고 댓글 정보</p>'
+					$(".modal-body").append(mb);
+					var tbl = '<table class="table" style="margin-top: 20px;">';
+					tbl += '<tr>';
+					tbl += '<th>신고일</th><th>사유</th><th>댓글 내용</th>';
+					tbl += '</tr>';
+					for(var i = 0; i<data.length; i++){
+						tbl += '<tr>';
+						tbl += '<td>'+data[i].reportDate+'</td>';
+						if(data[i].reportReason == 1){
+							tbl += '<td>영리목적/홍보성</td>';
+						}else if(data[i].reportReason == 2){
+							tbl += '<td>음란성/선정성</td>';
+						}else if(data[i].reportReason == 3){
+							tbl += '<td>불법정보</td>';
+						}else if(data[i].reportReason == 4){
+							tbl += '<td>도배</td>';
+						}else if(data[i].reportReason == 5){
+							tbl += '<td>욕설/인신공격</td>';
+						}else if(data[i].reportReason == 6){
+							tbl += '<td>개인정보누출</td>';
+						}else if(data[i].reportReason == 7){
+							tbl += '<td>기타</td>';
+						}
+						if(data[i].commentContent.length > 16){
+							var string = data[i].commentContent;
+							var substring = string.substring(0,16);	
+							tbl += '<td>'+substring+'...</td>';
+						}else{
+							tbl += '<td>'+data[i].commentContent+'</td>';
+						}
+					}
+					$(".modal-body").append(tbl);
+				}
+	 		})
+		})
+		
+		$(".searchBtn").click(function(){
+			 var id = $("#searchForm").val();
+			 location.href="/blockedMember.do?reqPage=1&id="+id;
+		})
+	</script>
 </body>
 </html>
 

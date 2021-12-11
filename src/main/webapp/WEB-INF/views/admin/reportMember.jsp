@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>신고 회원 조회</title>
+<title>신고 회원 처리</title>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
@@ -106,11 +106,11 @@
 	<div class="container" style="margin-top:50px;margin-bottom:100px;">
 		<div class="mainCate">
 		<a href="/adminPage.do" class="cateAtag"><i class="bi bi-chevron-left"></i></a> 
-		<span id="reportMember" style="font-weight:bold">신고 회원 조회</span>
+		<span id="reportMember" style="font-weight:bold">신고 회원 처리</span>
 		</div>
 		<br><br><br>
 		
-		<p class="title">신고 회원 처리</p>
+		<p class="title">신고 조회/처리</p>
 		<div class="reportBox">
 			<div class="reportList">
 				<c:choose>
