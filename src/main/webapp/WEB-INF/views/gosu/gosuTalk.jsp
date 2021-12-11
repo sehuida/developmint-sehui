@@ -29,12 +29,15 @@ input:focus, textarea:focus {
 }
 
 .talk-wrap {
+	padding-top: 100px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	margin-top: 100px;
 	margin-bottom: 100px;
+	background-color: #f4f5f6;
+	display: flex;
 }
 
 .g-feedback h3 {
@@ -48,10 +51,11 @@ input:focus, textarea:focus {
 }
 
 .talk-one {
-	border: 4px solid rgb(144, 209, 180);
+	border: 1px solid gray;
 	width: 80%;
 	padding-top: 40px;
 	margin-bottom: 100px;
+	background-color: white;
 }
 
 .talk-one table img {
@@ -118,7 +122,7 @@ input:focus, textarea:focus {
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
 		<div class="gosu-mail">
-			<a href="/gosuRequestList.do"><span>1</span>요청서</a>
+			<a href="/gosuRequestList.do">요청서</a>
 		</div>
 		<h3>
 			<c:choose>
@@ -137,65 +141,80 @@ input:focus, textarea:focus {
 			<span>${gfOne.feedbackContentBr }</span>
 		</div>
 
-		<div class="talk-wrap">
+		<c:choose>
+			<c:when test="${gfOne.feedbackNum eq 1}">
+				<div class="talk-sub">
+					<h2 style="font-weight: 900; color: #cacaca; margin:150px;">대화를 시작해보세요!</h2>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="talk-wrap">
+					<c:forEach items="${gtList }" var="gtl" varStatus="i">
+						<c:choose>
+							<c:when test="${gtl.writer eq sessionScope.m.memberId }">
+								<div class="talk-one talk-me">
+									<table>
+										<tr>
 
+											<c:if test="${not empty gtl.filename }">
+												<th colspan="2"
+													style="text-align: left; padding-left: 50px;">첨부파일
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>${gtl.filename }</a>
+												</th>
 
-			<c:forEach items="${gtList }" var="gtl" varStatus="i">
-				<c:choose>
-					<c:when test="${gtl.writer eq sessionScope.m.memberId }">
-						<div class="talk-one talk-me">
-							<table>
-								<tr>
+											</c:if>
+											<td
+												style="text-align: right; padding-right: 50px; color: gray;">${gtl.talkDate }</td>
+										</tr>
 
-									<c:if test="${not empty gtl.filename }">
-										<th colspan="2" style="text-align: left; padding-left: 50px;">첨부파일
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>${gtl.filename }</a>
-										</th>
+										<tr>
+											<td colspan="3" style="text-align: center; padding: 40px;"><p
+													style="border: 1px solid gray; padding: 30px;">${gtl.talkContentBr }</p></td>
+										</tr>
+									</table>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="talk-one">
+									<table>
+										<tr>
+											<th style="text-align: right; width: 150px;"><c:if
+													test="${empty gtl.gosuImg }">
+													<img src="/resources/img/gosu/g_img_basic.png">
+												</c:if> <c:if test="${not empty gtl.gosuImg }">
+													<img src="/resources/upload/member/${gtl.gosuImg }">
+												</c:if></th>
+											<th style="font-size: 30px;"><c:choose>
+													<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
+														<span style="color: rgb(78, 205, 196);">질문자</span>
+													</c:when>
+													<c:otherwise>
+														<span style="color: rgb(78, 205, 196);">고수</span>
+													</c:otherwise>
+												</c:choose> ${gtl.writer }</th>
+											<td
+												style="text-align: right; padding-right: 50px; color: gray;">${gtl.talkDate }</td>
+										</tr>
+										<tr>
+											<c:if test="${not empty gtl.filename }">
+												<th style="text-align: right;">첨부파일</th>
+												<td colspan="2"><a>${gtl.filename }</a></td>
+											</c:if>
+										</tr>
+										<tr>
+											<td colspan="3" style="text-align: center; padding: 40px;"><p
+													style="border: 1px solid gray; padding: 30px;">${gtl.talkContentBr }</p></td>
+										</tr>
+									</table>
+								</div>
+							</c:otherwise>
+						</c:choose>
 
-									</c:if>
-									<td
-										style="text-align: right; padding-right: 50px; color: gray;">${gtl.talkDate }</td>
-								</tr>
+					</c:forEach>
 
-								<tr>
-									<td colspan="3" style="text-align: center; padding: 40px;"><p
-											style="border: 1px solid gray; padding: 30px;">${gtl.talkContentBr }</p></td>
-								</tr>
-							</table>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div class="talk-one">
-							<table>
-								<tr>
-									<th style="text-align: right; width: 150px;"><c:if
-											test="${empty gtl.gosuImg }">
-											<img src="/resources/img/gosu/g_img_basic.png">
-										</c:if> <c:if test="${not empty gtl.gosuImg }">
-											<img src="/resources/upload/member/${gtl.gosuImg }">
-										</c:if></th>
-									<th style="font-size: 30px;">${gtl.writer }</th>
-									<td
-										style="text-align: right; padding-right: 50px; color: gray;">${gtl.talkDate }</td>
-								</tr>
-								<tr>
-									<c:if test="${not empty gtl.filename }">
-										<th style="text-align: right;">첨부파일</th>
-										<td colspan="2"><a>${gtl.filename }</a></td>
-									</c:if>
-								</tr>
-								<tr>
-									<td colspan="3" style="text-align: center; padding: 40px;"><p
-											style="border: 1px solid gray; padding: 30px;">${gtl.talkContentBr }</p></td>
-								</tr>
-							</table>
-						</div>
-					</c:otherwise>
-				</c:choose>
-
-			</c:forEach>
-
-		</div>
+				</div>
+			</c:otherwise>
+		</c:choose>
 		<hr>
 		<c:choose>
 			<c:when test="${gfOne.feedbackNum eq 3}">
@@ -217,15 +236,14 @@ input:focus, textarea:focus {
 
 					</c:when>
 					<c:otherwise>
-						<div style="display: flex; justify-content: center; margin-top: 100px;margin-bottom: 100px;">
+						<div
+							style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
 							<div>
 								<h2 style="font-weight: 900; width: 100%; text-align: center;">고수님께서
 									완료한 피드백입니다!</h2>
-								<br>
-								<br> <span
+								<br> <br> <span
 									style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">리뷰</span>
-								<br>
-								<br>
+								<br> <br>
 								<table>
 									<tr>
 										<td colspan="2">별별별별별 &nbsp;&nbsp;&nbsp;</td>

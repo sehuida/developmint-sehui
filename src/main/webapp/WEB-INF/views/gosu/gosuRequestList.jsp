@@ -62,8 +62,8 @@ input:focus, textarea:focus {
 	width: 90%;
 	border: 1px solid rgb(211, 211, 211);
 }
-.g-one-tbl:hover{
 
+.g-one-tbl:hover {
 	border: 1px solid black;
 }
 
@@ -87,106 +87,33 @@ input:focus, textarea:focus {
 		<h3>
 			<span style="color: rgb(78, 205, 196);">디벨로민트</span>에서 연결된 요청리스트
 		</h3>
+		
 		<div class="requestList">
 			<table>
-				<tr>
-					<td><a href="/gosuRequestContent.do">
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="2"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th>강세희</th>
-									<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2">dsafilengksel</td>
-								</tr>
-							</table>
-					</a></td>
-				</tr>
-				<tr>
-					<td><a href="/gosuRequestContent.do">
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="2"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th>강세희</th>
-									<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2">dsafilengksel</td>
-								</tr>
-							</table>
-					</a></td>
-				</tr>
-				<tr>
-					<td><a href="/gosuRequestContent.do">
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="2"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th>강세희</th>
-									<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2">dsafilengksel</td>
-								</tr>
-							</table>
-					</a></td>
-				</tr>
-				<tr>
-					<td><a href="/gosuRequestContent.do">
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="2"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th>강세희</th>
-									<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2">dsafilengksel</td>
-								</tr>
-							</table>
-					</a></td>
-				</tr>
-				<tr>
-					<td><a href="/gosuRequestContent.do">
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="2"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th>강세희</th>
-									<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2">dsafilengksel</td>
-								</tr>
-							</table>
-					</a></td>
-				</tr>
-				<tr>
-					<td><a href="/gosuRequestContent.do">
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="2"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th>강세희</th>
-									<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2">dsafilengksel</td>
-								</tr>
-							</table>
-					</a></td>
-				</tr>
-				<tr>
-					<td><a href="/gosuRequestContent.do">
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="2"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th>강세희</th>
-									<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2">dsafilengksel</td>
-								</tr>
-							</table>
-					</a></td>
-				</tr>
+				<c:forEach items="${memberRequestList }" var="mrl" varStatus="i">
+					<tr>
+						<td><a href="/gosuRequestContent.do?mrn=${mrl.requestNo }">
+								<table class="g-one-tbl">
+									<tr>
+										<th rowspan="2">
+										<c:if test="${empty mrl.requestWriterImg }">
+										<img src="/resources/img/gosu/g_img_basic.png">
+										</c:if>
+										<c:if test="${not empty mrl.requestWriterImg }">
+										<img src="/resources/upload/member/${mrl.requestWriterImg }">
+										</c:if>
+										</th>
+										<th>${mrl.requestWriterId }</th>
+										<td style="text-align: right;">${mrl.requsetDate}</td>
+									</tr>
+									<tr>
+										<td colspan="2">요청서를 확인해보세요!</td>
+									</tr>
+								</table>
+						</a></td>
+					</tr>
+				</c:forEach>
+
 			</table>
 
 

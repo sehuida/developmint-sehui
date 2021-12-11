@@ -241,30 +241,29 @@ to {
 	border: 1px solid #78c2ad;
 	border-radius: 30px;
 	padding: 40px;
-	
 }
 
 .g-status-border>h4 {
 	font-size: 30px;
 	font-weight: 900;
-	margin-top:50px;
-	margin-bottom:50px;
+	margin-top: 50px;
+	margin-bottom: 50px;
 	margin-left: 40px;
 }
 
 .g-statusContent {
 	display: flex;
 	width: 900px;
-	margin:0 auto;
+	margin: 0 auto;
 	flex-wrap: wrap;
 }
 
-.g-statusContent>a{
-	width :350px;
-	margin : 50px;
+.g-statusContent>a {
+	width: 350px;
+	margin: 50px;
 	border-width: 2px;
-	
 }
+
 .g-statusContent .g-sc-tbl * {
 	padding-left: 30px;
 	padding-right: 30px;
@@ -272,8 +271,9 @@ to {
 	padding-bottom: 10px;
 	font-size: 16px;
 }
+
 .g-sc-tbl:hover {
-	border: 2px solid #78c2ad;
+	border: 1px solid #78c2ad;
 }
 
 .g-statusContent button {
@@ -337,29 +337,34 @@ to {
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-		<div class="gosu-mail">
-			<a href="/gosuRequestList.do"><span>1</span>요청서</a>
-		</div>
-		<div class="gosu-mail">
-			<a href="/gosuRequestCostList.do"><span>1</span>견적서</a>
-		</div>
+		<c:if test="${sessionScope.m.memberType eq 2}">
+			<div class="gosu-mail">
+				<a href="/gosuRequestList.do">요청서</a>
+			</div>
+		</c:if>
+		<c:if test="${sessionScope.m.memberType eq 1}">
+			<div class="gosu-mail">
+				<a href="/gosuRequestCostList.do">견적서</a>
+			</div>
+		</c:if>
 		<h1>
 			<span style="color: rgb(78, 205, 196);">고수</span>의 노하우
 		</h1>
 		<div class="g-msg">
-
 			고수에게 개발 요청서를 보내거나 <br> 작품에 대한 피드백을 받을 수 있습니다.<br>당신에게 맞는
 			고수를 찾아보세요!
 		</div>
-		<div class="gosu-write-wrap">
-			<div class="gosu-write">
-				<h5 style="font-size: small; color: gray;">
-					고수에게<br>개발을 요청하세요!
-				</h5>
-				<a href="/gosuRequest.do" class="btn btn-primary"
-					style="font-weight: bold;">요청서 작성하기</a>
+		<c:if test="${sessionScope.m.memberType eq 1}">
+			<div class="gosu-write-wrap">
+				<div class="gosu-write">
+					<h5 style="font-size: small; color: gray;">
+						고수에게<br>개발을 요청하세요!
+					</h5>
+					<a href="/gosuRequest.do" class="btn btn-primary"
+						style="font-weight: bold;">요청서 작성하기</a>
+				</div>
 			</div>
-		</div>
+		</c:if>
 		<div class="g-plus">
 			<a href="/gosuList.do" style="color: rgb(78, 205, 196);">더보기</a>
 		</div>
@@ -488,14 +493,13 @@ to {
 					보기</a>
 			</div>
 			<div class="g-status-border">
-				<h4 style="margin-top:40px;">신청한 내역</h4>
+				<h4 style="margin-top: 40px;">신청한 내역</h4>
 				<div class="g-statusContent">
 					<c:choose>
 						<c:when test="${not empty gosuTalkList }">
 							<c:forEach items="${gosuTalkList }" var="gtl" varStatus="i">
 								<a href="/gosuTalk.do?fbNo=${gtl.feedbackNo }">
-									<table class="g-sc-tbl card text-white bg-primary mb-3"
-										>
+									<table class="g-sc-tbl card text-white bg-primary mb-3">
 										<tr>
 											<th colspan="2" style="text-align: right; padding-right: 0;">
 												<c:if test="${gtl.feedbackNum eq 1 }">
@@ -509,7 +513,7 @@ to {
 										</tr>
 										<tr>
 											<th>고수</th>
-											<td style="width: 190px;">${gtl.gosuId }</td>
+											<td style="width: 180px;">${gtl.gosuId }</td>
 										</tr>
 										<tr>
 											<th>내용</th>
@@ -525,45 +529,47 @@ to {
 					</c:choose>
 
 				</div>
-				<h4 >신청받은 내역</h4>
-				<div class="g-statusContent">
-					<c:choose>
-						<c:when test="${not empty gosuTalkList2 }">
-							<c:forEach items="${gosuTalkList2 }" var="gtl" varStatus="i">
-								<a href="/gosuTalk.do?fbNo=${gtl.feedbackNo }">
-									<table class="g-sc-tbl card bg-light mb-3">
-										<tr>
-											<th colspan="2" style="text-align: right; padding-right: 0;">
-												<c:if test="${gtl.feedbackNum eq 1 }">
-													<span style="color: blue; padding-right: 0;">진행 전</span>
-												</c:if> <c:if test="${gtl.feedbackNum eq 2 }">
-													<span style="color: red; padding-right: 0;">진행 중</span>
-												</c:if> <c:if test="${gtl.feedbackNum eq 3 }">
-													<span style="color: gray; padding-right: 0;">진행 완료</span>
-												</c:if>
-											</th>
-										</tr>
-										<tr>
-											<th>질문자</th>
-											<td style="width: 190px;">${gtl.memberId }</td>
-										</tr>
-										<tr>
-											<th>내용</th>
-											<td>${gtl.feedbackTitle }</td>
-										</tr>
-									</table>
-								</a>
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							<span style="font-size: 20px;">아직 신청받은 내역이 없습니다!</span>
-						</c:otherwise>
-					</c:choose>
 
-				</div>
+				<c:if test="${sessionScope.m.memberType eq 2}">
+					<h4>신청받은 내역</h4>
+					<div class="g-statusContent">
+						<c:choose>
+							<c:when test="${not empty gosuTalkList2 }">
+								<c:forEach items="${gosuTalkList2 }" var="gtl" varStatus="i">
+									<a href="/gosuTalk.do?fbNo=${gtl.feedbackNo }">
+										<table class="g-sc-tbl card bg-light mb-3">
+											<tr>
+												<th colspan="2" style="text-align: right; padding-right: 0;">
+													<c:if test="${gtl.feedbackNum eq 1 }">
+														<span style="color: blue; padding-right: 0;">진행 전</span>
+													</c:if> <c:if test="${gtl.feedbackNum eq 2 }">
+														<span style="color: red; padding-right: 0;">진행 중</span>
+													</c:if> <c:if test="${gtl.feedbackNum eq 3 }">
+														<span style="color: gray; padding-right: 0;">진행 완료</span>
+													</c:if>
+												</th>
+											</tr>
+											<tr>
+												<th>질문자</th>
+												<td style="width: 180px;">${gtl.memberId }</td>
+											</tr>
+											<tr>
+												<th>내용</th>
+												<td>${gtl.feedbackTitle }</td>
+											</tr>
+										</table>
+									</a>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<span style="font-size: 20px;">아직 신청받은 내역이 없습니다!</span>
+							</c:otherwise>
+						</c:choose>
 
-				<hr style="margin-top:100px;">
-				<h4 >
+					</div>
+				</c:if>
+				<hr style="margin-top: 100px;">
+				<h4>
 					<span style="color: rgb(78, 205, 196)">요청서</span>를 통한 <span
 						style="color: rgb(78, 205, 196)">고수</span> 매칭
 				</h4>

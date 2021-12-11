@@ -154,7 +154,7 @@ input[type="checkbox"]:checked {
 }
 
 .g-seq {
-	padding:0;
+	padding: 0;
 }
 
 .g-seq dt, .g-seq dd {
@@ -167,7 +167,6 @@ input[type="checkbox"]:checked {
 	font-weight: 900;
 	font-size: 20px;
 }
-
 </style>
 </head>
 <body>
@@ -198,7 +197,7 @@ input[type="checkbox"]:checked {
 						class="progress-bar progress-bar-striped progress-bar-animated"
 						role="progressbar" aria-valuemin="0" aria-valuemax="100">0%</div>
 				</div>
-				<form action="">
+				<form action="/gosuRequestdo.do">
 					<ul id="gallery">
 
 						<li>
@@ -208,20 +207,22 @@ input[type="checkbox"]:checked {
 								플랫폼을 원하시나요?</h3>
 							<div class="g-div">
 								<ul>
-									<label><li><input type="checkbox" name="g1"
-											value="windows" onclick="setBg(this);">Windows</li></label>
-									<label><li><input type="checkbox" name="g1"
-											value="mac" onclick="setBg(this);">Mac</li></label>
-									<label><li><input type="checkbox" name="g1"
-											value="linux" onclick="setBg(this);">Linux</li></label>
-									<label><li><input type="checkbox" name="g1"
-											value="ios" onclick="setBg(this);">iOS</li></label>
-									<label><li><input type="checkbox" name="g1"
-											value="android" onclick="setBg(this);">Android</li></label>
-									<label><li><input type="checkbox" name="g1"
-											value="gosu1" onclick="setBg(this);">고수와 상담 후 결정할게요</li></label>
-									<label><li><input type="checkbox" name="g1"
-											value="gita" onclick="setBg(this);">기타</li></label>
+									<label><li><input type="checkbox" name="request1"
+											class="checkSelect1" value="Windows" onclick="setBg(this);">Windows</li></label>
+									<label><li><input type="checkbox" name="request1"
+											class="checkSelect1" value="Mac" onclick="setBg(this);">Mac</li></label>
+									<label><li><input type="checkbox" name="request1"
+											class="checkSelect1" value="Linux" onclick="setBg(this);">Linux</li></label>
+									<label><li><input type="checkbox" name="request1"
+											class="checkSelect1" value="iOS" onclick="setBg(this);">iOS</li></label>
+									<label><li><input type="checkbox" name="request1"
+											class="checkSelect1" value="Android" onclick="setBg(this);">Android</li></label>
+									<label><li><input type="checkbox" name="request1"
+											class="checkSelect1" value="고수와
+											상담 후 결정할게요." onclick="setBg(this);">고수와
+											상담 후 결정할게요.</li></label>
+									<label><li><input type="checkbox" name="request1"
+											class="checkSelect1" value="기타" onclick="setBg(this);">기타</li></label>
 								</ul>
 							</div>
 						</li>
@@ -231,14 +232,15 @@ input[type="checkbox"]:checked {
 								종류의 개발을 원하시나요?</h3>
 							<div class="g-div">
 								<ul>
-									<label><li><input type="checkbox" name="g2"
-											value="program" onclick="setBg(this);">일반 프로그램</li></label>
-									<label><li><input type="checkbox" name="g2"
-											value="game" onclick="setBg(this);">게임</li></label>
-									<label><li><input type="checkbox" name="g2"
-											value="im" onclick="setBg(this);">임베디드</li></label>
-									<label><li><input type="checkbox" name="g2"
-											value="gita" onclick="setBg(this);">기타</li></label>
+									<label><li><input type="checkbox" name="request2"
+											class="checkSelect2" value="일반프로그램" onclick="setBg(this);">일반
+											프로그램</li></label>
+									<label><li><input type="checkbox" name="request2"
+											class="checkSelect2" value="게임" onclick="setBg(this);">게임</li></label>
+									<label><li><input type="checkbox" name="request2"
+											class="checkSelect2" value="임베디드" onclick="setBg(this);">임베디드</li></label>
+									<label><li><input type="checkbox" name="request2"
+											class="checkSelect2" value="기타" onclick="setBg(this);">기타</li></label>
 
 								</ul>
 							</div>
@@ -249,16 +251,21 @@ input[type="checkbox"]:checked {
 								숙련도의 개발자가 있으신가요?</h3>
 							<div class="g-div">
 								<ul>
-									<label><li><input type="checkbox" name="g3"
-											value="gosu1" onclick="setBg(this);">상담 후 결정</li></label>
-									<label><li><input type="checkbox" name="g3"
-											value="ju" onclick="setBg(this);">주니어 (3년 이하)</li></label>
-									<label><li><input type="checkbox" name="g3"
-											value="mid" onclick="setBg(this);">미드 (4~9년)</li></label>
-									<label><li><input type="checkbox" name="g3"
-											value="si" onclick="setBg(this);">시니어(10년 이상)</li></label>
-									<label><li><input type="checkbox" name="g3"
-											value="gita" onclick="setBg(this);">기타</li></label>
+									<label><li><input type="checkbox"
+											name="request3[]" class="checkSelect3" value="상담 후 결정"
+											onclick="setBg(this);">상담 후 결정</li></label>
+									<label><li><input type="checkbox"
+											name="request3[]" class="checkSelect3" value="주니어 (3년 이하)"
+											onclick="setBg(this);">주니어 (3년 이하)</li></label>
+									<label><li><input type="checkbox"
+											name="request3[]" class="checkSelect3" value="미드 (4~9년)"
+											onclick="setBg(this);">미드 (4~9년)</li></label>
+									<label><li><input type="checkbox"
+											name="request3[]" class="checkSelect3" value="시니어(10년 이상)"
+											onclick="setBg(this);">시니어(10년 이상)</li></label>
+									<label><li><input type="checkbox"
+											name="request3[]" class="checkSelect3" value="기타"
+											onclick="setBg(this);">기타</li></label>
 								</ul>
 							</div>
 						</li>
@@ -268,17 +275,70 @@ input[type="checkbox"]:checked {
 								어느 정도 되어있나요?</h3>
 							<div class="g-div">
 								<ul>
-									<label><li><input type="checkbox" name="g4"
-											value="idea" onclick="setBg(this);">아이디어만 있음</li></label>
-									<label><li><input type="checkbox" name="g4"
-											value="con" onclick="setBg(this);">필요 내용 정리되어 있음</li></label>
-									<label><li><input type="checkbox" name="g4"
-											value="" onclick="setBg(this);">상세한 기획 문서 있음</li></label>
-									<label><li><input type="checkbox" name="g4"
-											value="ios" onclick="setBg(this);">레이아웃, 디자인 등 구성 완료</li></label>
-									<label><li><input type="checkbox" name="g4"
-											value="android" onclick="setBg(this);">기타</li></label>
+									<label><li><input type="checkbox"
+											name="request4[]" class="checkSelect4" value="아이디어만 있음."
+											onclick="setBg(this);">아이디어만 있음.</li></label>
+									<label><li><input type="checkbox"
+											name="request4[]" class="checkSelect4" value="필요 내용 정리되어 있음."
+											onclick="setBg(this);">필요 내용 정리되어 있음.</li></label>
+									<label><li><input type="checkbox"
+											name="request4[]" class="checkSelect4" value="상세한 기획 문서 있음."
+											onclick="setBg(this);">상세한 기획 문서 있음.</li></label>
+									<label><li><input type="checkbox"
+											name="request4[]" class="checkSelect4" value="레이아웃, 디자인 등 구성 완료."
+											onclick="setBg(this);">레이아웃, 디자인 등 구성 완료.</li></label>
+									<label><li><input type="checkbox"
+											name="request4[]" class="checkSelect4" value="기타"
+											onclick="setBg(this);">기타</li></label>
 
+								</ul>
+							</div>
+						</li>
+
+						<li>
+							<h3 class="g-b"
+								style="text-align: center; font-size: large; margin-bottom: 40px;">언제까지
+								작업이 완료되어야 하나요?</h3>
+							<div class="g-div">
+								<ul>
+									<label><li><input type="checkbox"
+											name="request5[]" class="checkSelect5" value="협의 가능해요."
+											onclick="setBg(this);">협의 가능해요.</li></label>
+									<label><li><input type="checkbox"
+											name="request5[]" class="checkSelect5" value="가능한 빨리 진행하고 싶어요."
+											onclick="setBg(this);">가능한 빨리 진행하고 싶어요.</li></label>
+									<label><li><input type="checkbox"
+											name="request5[]" class="checkSelect5" value="일주일 이내로 진행하고 싶어요."
+											onclick="setBg(this);">일주일 이내로 진행하고 싶어요.</li></label>
+									<label><li><input type="checkbox"
+											name="request5[]" class="checkSelect5" value="원하는 날짜가 있어요."
+											onclick="setBg(this);">원하는 날짜가 있어요.</li></label>
+									<label><li><input type="checkbox"
+											name="request5[]" class="checkSelect5" value="기타"
+											onclick="setBg(this);">기타</li></label>
+
+								</ul>
+							</div>
+						</li>
+
+						<li>
+							<h3 class="g-b"
+								style="text-align: center; font-size: large; margin-bottom: 40px;">기획은
+								어느 정도 되어있나요?</h3>
+							<div class="g-div">
+								<ul>
+									<label><li><input type="checkbox"
+											name="request6[]" class="checkSelect6" value="어떤 방식이든 상관없어요."
+											onclick="setBg(this);">어떤 방식이든 상관없어요.</li></label>
+									<label><li><input type="checkbox"
+											name="request6[]" class="checkSelect6" value="온라인 진행 원해요."
+											onclick="setBg(this);">온라인 진행 원해요.</li></label>
+									<label><li><input type="checkbox"
+											name="request6[]" class="checkSelect6" value="제가 있는 곳으로 와주세요."
+											onclick="setBg(this);">제가 있는 곳으로 와주세요.</li></label>
+									<label><li><input type="checkbox"
+											name="request6[]" class="checkSelect6" value="고수가 있는 곳으로 갈게요."
+											onclick="setBg(this);">고수가 있는 곳으로 갈게요.</li></label>
 								</ul>
 							</div>
 						</li>
@@ -287,47 +347,9 @@ input[type="checkbox"]:checked {
 								style="text-align: center; font-size: large; margin-bottom: 40px;">개발
 								내용과 참고 사항에 대해 상세히 알려주세요.</h3>
 							<div class="g-div">
-								<input type="text" name="g5"
+								<input type="text" name="requestContent7" class="checkSelect7"
 									style="width: 100%; padding: 20px; font-size: small;"
 									placeholder="필요 요소, 주요 기능 리스트 등 자유롭게 남겨주세요.">
-							</div>
-						</li>
-						<li>
-							<h3 class="g-b"
-								style="text-align: center; font-size: large; margin-bottom: 40px;">언제까지
-								작업이 완료되어야 하나요?</h3>
-							<div class="g-div">
-								<ul>
-									<label><li><input type="checkbox" name="g6"
-											value="" onclick="setBg(this);">협의 가능해요.</li></label>
-									<label><li><input type="checkbox" name="g6"
-											value="mac" onclick="setBg(this);">가능한 빨리 진행하고 싶어요</li></label>
-									<label><li><input type="checkbox" name="g6"
-											value="linux" onclick="setBg(this);">일주일 이내로 진행하고 싶어요</li></label>
-									<label><li><input type="checkbox" name="g6"
-											value="ios" onclick="setBg(this);">원하는 날짜가 있어요</li></label>
-									<label><li><input type="checkbox" name="g6"
-											value="gita" onclick="setBg(this);">기타</li></label>
-
-								</ul>
-							</div>
-						</li>
-
-						<li>
-							<h3 class="g-b"
-								style="text-align: center; font-size: large; margin-bottom: 40px;">기획은
-								어느 정도 되어있나요?</h3>
-							<div class="g-div">
-								<ul>
-									<label><li><input type="checkbox" name="g7"
-											value="" onclick="setBg(this);">어떤 방식이든 상관없어요.</li></label>
-									<label><li><input type="checkbox" name="g7"
-											value="mac" onclick="setBg(this);">온라인 진행 원해요.</li></label>
-									<label><li><input type="checkbox" name="g7"
-											value="linux" onclick="setBg(this);">제가 있는 곳으로 와주세요.</li></label>
-									<label><li><input type="checkbox" name="g7"
-											value="ios" onclick="setBg(this);">고수가 있는 곳으로 갈게요.</li></label>
-								</ul>
 							</div>
 						</li>
 						<div id="btn_gallery">
@@ -335,11 +357,18 @@ input[type="checkbox"]:checked {
 							<a href="#"
 								class="btn_gallery_prev off btn btn-outline-success g-btn">이전</a>
 							<a href="#" class="btn_gallery_next btn btn-primary g-btn">다음</a>
-							<a href="#" class="btn_submit btn btn-info  g-btn g-b"
-								style="display: none;">완료</a>
+							<button href="submit" class="btn_submit btn btn-info  g-btn g-b"
+								style="display: none;">완료</button>
 						</div>
 					</ul>
-
+					<input type="hidden" name="requestContent1" id="requestContent1">
+					<input type="hidden" name="requestContent2" id="requestContent2">
+					<input type="hidden" name="requestContent3" id="requestContent3">
+					<input type="hidden" name="requestContent4" id="requestContent4">
+					<input type="hidden" name="requestContent5" id="requestContent5">
+					<input type="hidden" name="requestContent6" id="requestContent6">
+					<input type="hidden" value="${sessionScope.m.memberNo }"
+						name="requestWriterNo">
 				</form>
 			</div>
 			<div class="g-text-wrap">
@@ -423,30 +452,30 @@ input[type="checkbox"]:checked {
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
-	var gCount = 1;
+		var gCount = 1;
 		function setBg(t) {
 			td = t.parentNode;
 			td.style.color = (t.checked) ? "#78c2ad" : "black";
 		}
-		var bar=0;
+		var bar = 0;
 		$(".btn_gallery_next").click(function() {
-			var g1 = $("[name=g"+gCount+"]:checked").length;
-			var g2 = $("[name=g5]").val();
-			
+			var g1 = $(".checkSelect" + gCount + ":checked").length;
+			var g2 = $(".checkSelect7").val();
+			console.log(g1);
 			$(".g-msg").empty();
-			var html="";
-			if(g1 == 0 && gCount != 5){				
-				html+="옵션을 선택해주세요";
+			var html = "";
+			if (g1 == 0 && gCount != 7) {
+				html += "옵션을 선택해주세요";
 				$(".g-msg").append(html);
-				$(".g-msg").css("color","red");
-				
+				$(".g-msg").css("color", "red");
+
 				return false;
-			}else{
-				if (gCount == 5 && g2 == "") {
-					html+="내용을 입력해주세요";
+			} else {
+				if (gCount == 7 && g2 == "") {
+					html += "내용을 입력해주세요";
 					$(".g-msg").append(html);
-					$(".g-msg").css("color","red");
-					
+					$(".g-msg").css("color", "red");
+
 					return false;
 				}
 				if (!$("#gallery>li").last().is(":visible")) {
@@ -454,18 +483,33 @@ input[type="checkbox"]:checked {
 					$(".btn_gallery_prev").removeClass("off");
 					$(".progress-bar").css("width", (bar += 16) + "%");
 					$(".progress-bar").html(bar + "%");
+
+					console.log($(".checkSelect"+gCount+ ":checked").length);
+					var send_array = Array();
+					var send_cnt = 0;
+					var chkbox = $(".checkSelect"+gCount);
+					for (i = 0; i < chkbox.length; i++) {
+						if (chkbox[i].checked== true) {
+							send_array[send_cnt] = chkbox[i].value;
+
+							console.log("send_array[send_cnt] : "+send_array[send_cnt]);
+							send_cnt++;
+						}
+
+					}
+					$("#requestContent"+gCount).val(send_array);
+
+					console.log($("#requestContent"+gCount).val());
 					gCount++;
 				}
 				if ($("#gallery>li").last().is(":visible")) {
 					$(this).addClass("off");
 					$(".btn_submit").css("display", "inline-block");
 				}
-			
 				
-			
+
 			}
-			
-					
+
 			return false;
 		});
 		$(".btn_gallery_prev").click(function() {

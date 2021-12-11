@@ -35,15 +35,16 @@
 }
 
 .container>div>div>div table td {
-	
 	padding: 10px;
 	text-align: center;
-	}
+}
+
 .container>div>div>div table td>span {
 	display: block;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
 .container>div>div>div table a {
 	margin-top: 20px;
 	width: 200px;
@@ -122,7 +123,7 @@
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
 		<div class="gosu-mail">
-			<a href="/gosuRequestList.do"><span>1</span>요청서</a>
+			<a href="/gosuRequestList.do">요청서</a>
 		</div>
 		<h1>나의 현황</h1>
 		<hr>
@@ -149,12 +150,13 @@
 												style="color: gray;">진행 완료</b></td>
 										</c:if>
 
-										<td >${gtl.feedbackDate }</td>
+										<td>${gtl.feedbackDate }</td>
 									</tr>
 									<tr>
 										<td><b>${gtl.feedbackTitle }</b></td>
-										<td rowspan="2" style="padding-right:0;"><c:if test="${empty gtl.gosuImg }">
-												<img src="/resources/img/gosu/g_img_basic.png" >
+										<td rowspan="2" style="padding-right: 0;"><c:if
+												test="${empty gtl.gosuImg }">
+												<img src="/resources/img/gosu/g_img_basic.png">
 												<br>
 												<span
 													style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.gosuId }</span>
@@ -166,10 +168,10 @@
 											</c:if></td>
 									</tr>
 									<tr>
-										<td><span  style="height: 50px;width : 230px;">${gtl.feedbackContent }</span></td>
+										<td><span style="height: 50px; width: 230px;">${gtl.feedbackContent }</span></td>
 									</tr>
 									<tr>
-										<td colspan="2"><a style="margin-top:0;"
+										<td colspan="2"><a style="margin-top: 0;"
 											href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
 											class="btn btn-primary">자세히 보기</a></td>
 									</tr>
@@ -186,65 +188,67 @@
 				</c:choose>
 			</div>
 
-			<h4>신청받은 내역</h4>
-			<div class="g-margin">
-				<c:choose>
-					<c:when test="${not empty gosuTalkList2 }">
-						<c:forEach items="${gosuTalkList2 }" var="gtl" varStatus="i">
-							<div>
-								<table>
-									<tr style="font-size: x-small;">
-										<c:if test="${gtl.feedbackNum eq 1 }">
-											<td style="text-align: left; padding-top: 20px;"><b
-												style="color: blue;">진행 전</b></td>
-										</c:if>
-										<c:if test="${gtl.feedbackNum eq 2 }">
-											<td style="text-align: left; padding-top: 20px;"><b
-												style="color: red;">진행 중</b></td>
-										</c:if>
-										<c:if test="${gtl.feedbackNum eq 3 }">
-											<td style="text-align: left; padding-top: 20px;"><b
-												style="color: gray;">진행 완료</b></td>
-										</c:if>
+			<c:if test="${sessionScope.m.memberType eq 2}">
+				<h4>신청받은 내역</h4>
+				<div class="g-margin">
+					<c:choose>
+						<c:when test="${not empty gosuTalkList2 }">
+							<c:forEach items="${gosuTalkList2 }" var="gtl" varStatus="i">
+								<div>
+									<table>
+										<tr style="font-size: x-small;">
+											<c:if test="${gtl.feedbackNum eq 1 }">
+												<td style="text-align: left; padding-top: 20px;"><b
+													style="color: blue;">진행 전</b></td>
+											</c:if>
+											<c:if test="${gtl.feedbackNum eq 2 }">
+												<td style="text-align: left; padding-top: 20px;"><b
+													style="color: red;">진행 중</b></td>
+											</c:if>
+											<c:if test="${gtl.feedbackNum eq 3 }">
+												<td style="text-align: left; padding-top: 20px;"><b
+													style="color: gray;">진행 완료</b></td>
+											</c:if>
 
-										<td style="padding-top: 20px;">${gtl.feedbackDate }</td>
-									</tr>
-									<tr>
-										<td><b>${gtl.feedbackTitle }</b></td>
-										<td rowspan="2" style="padding-right:0;"><c:if test="${empty gtl.memberImg }">
-												<img src="/resources/img/gosu/g_img_basic.png">
-												<br>
-												<span
-													style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.memberId }</span>
-											</c:if> <c:if test="${not empty gtl.memberImg  }">
-												<img src="/resources/upload/member/${gtl.memberImg  }">
-												<br>
-												<span
-													style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.memberId }</span>
-											</c:if></td>
-									</tr>
-									<tr>
-										<td><span  style="height: 50px;width : 230px;">${gtl.feedbackContent }</span></td>
-									</tr>
-									<tr>
-										<td colspan="2"><a
-											href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
-											class="btn btn-primary">자세히 보기</a></td>
-									</tr>
+											<td style="padding-top: 20px;">${gtl.feedbackDate }</td>
+										</tr>
+										<tr>
+											<td><b>${gtl.feedbackTitle }</b></td>
+											<td rowspan="2" style="padding-right: 0;"><c:if
+													test="${empty gtl.memberImg }">
+													<img src="/resources/img/gosu/g_img_basic.png">
+													<br>
+													<span
+														style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.memberId }</span>
+												</c:if> <c:if test="${not empty gtl.memberImg  }">
+													<img src="/resources/upload/member/${gtl.memberImg  }">
+													<br>
+													<span
+														style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.memberId }</span>
+												</c:if></td>
+										</tr>
+										<tr>
+											<td><span style="height: 50px; width: 230px;">${gtl.feedbackContent }</span></td>
+										</tr>
+										<tr>
+											<td colspan="2"><a
+												href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
+												class="btn btn-primary">자세히 보기</a></td>
+										</tr>
 
-								</table>
-							</div>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<span
-							style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">아직
-							신청받은 내역이 없습니다!</span>
-					</c:otherwise>
-				</c:choose>
+									</table>
+								</div>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<span
+								style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">아직
+								신청받은 내역이 없습니다!</span>
+						</c:otherwise>
+					</c:choose>
 
-			</div>
-
+				</div>
+			</c:if>
 
 			<h4>작성한 리뷰</h4>
 			<div style="margin-bottom: 100px;">
@@ -278,7 +282,7 @@
 								src="/resources/img/gosu/g_img_basic.png"></td>
 						</tr>
 						<tr>
-							<td style="font-size: 25px;width : 240px;"><b>강세희</b></td>
+							<td style="font-size: 25px; width: 240px;"><b>강세희</b></td>
 						</tr>
 						<tr>
 							<td colspan="2"><a href="/gosuProject.do"
@@ -302,7 +306,7 @@
 								src="/resources/img/gosu/g_img_basic.png"></td>
 						</tr>
 						<tr>
-							<td style="font-size: 25px;width : 240px;"><b>강세희</b></td>
+							<td style="font-size: 25px; width: 240px;"><b>강세희</b></td>
 						</tr>
 						<tr>
 							<td colspan="2"><a href="/gosuProject.do"
@@ -325,7 +329,7 @@
 								src="/resources/img/gosu/g_img_basic.png"></td>
 						</tr>
 						<tr>
-							<td style="font-size: 25px;width : 240px;"><b>강세희</b></td>
+							<td style="font-size: 25px; width: 240px;"><b>강세희</b></td>
 						</tr>
 						<tr>
 							<td colspan="2"><a href="/gosuProject.do"
@@ -336,8 +340,6 @@
 				</div>
 
 			</div>
-
-
 		</div>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>

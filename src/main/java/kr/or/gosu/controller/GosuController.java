@@ -29,6 +29,7 @@ import kr.or.gosu.vo.GosuFeedback;
 import kr.or.gosu.vo.GosuNotice;
 import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
+import kr.or.gosu.vo.GosuRequest;
 import kr.or.gosu.vo.GosuTalk;
 import kr.or.member.model.vo.Member;
 
@@ -241,20 +242,21 @@ public class GosuController {
 
 	@ResponseBody
 	@RequestMapping(value = "/gosuFeedbackInsert.do")
-		public int gosuFeedbackInsert(int ggsouNo, String gosuFeedbackTitle, String gosuFeedbackContent, String memberId, Model model) {
-			GosuFeedback gf = new GosuFeedback();
-			gf.setFeedbackContent(gosuFeedbackContent);
-			gf.setMemberId(memberId);
-			gf.setFeedbackTitle(gosuFeedbackTitle);
-			gf.setGgosuNo(ggsouNo);
-			int result = service.insertGosuFeedback(gf);
-			
-			return gf.getFeedbackNo();
-		}
+	public int gosuFeedbackInsert(int ggsouNo, String gosuFeedbackTitle, String gosuFeedbackContent, String memberId,
+			Model model) {
+		GosuFeedback gf = new GosuFeedback();
+		gf.setFeedbackContent(gosuFeedbackContent);
+		gf.setMemberId(memberId);
+		gf.setFeedbackTitle(gosuFeedbackTitle);
+		gf.setGgosuNo(ggsouNo);
+		int result = service.insertGosuFeedback(gf);
+
+		return gf.getFeedbackNo();
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/talkStopAjax.do")
-	public int talkStopAjax(int feedbackNo,Model model) {
+	public int talkStopAjax(int feedbackNo, Model model) {
 		int result = service.talkStop(feedbackNo);
 		return result;
 	}
@@ -391,7 +393,7 @@ public class GosuController {
 		ArrayList<Gosu> gosuWriteList = service.selectgosuWriteList(gNotice.getWriteId());
 		model.addAttribute("gNotice", gNotice);
 		model.addAttribute("gosuWriteList", gosuWriteList);
-		
+
 		return "gosu/gosuNoticeContent";
 	}
 
@@ -400,13 +402,29 @@ public class GosuController {
 		return "gosu/gosuRequest";
 	}
 
+	@RequestMapping(value = "/gosuRequestdo.do")
+	public String gosuRequestDo(GosuRequest gr,Model model) {
+		int result = service.insertGosuRequest(gr);
+		if(result > 0) {
+			System.out.println("성공");
+		}else {
+			System.out.println("실패");
+				
+		}
+		return "gosu/gosuRequestCostList";
+	}
+
 	@RequestMapping(value = "/gosuRequestList.do")
-	public String gosuRequestList() {
+	public String gosuRequestList(Model model) {
+		ArrayList<GosuRequest> memberRequestList = service.selectMemberRequestList();
+		model.addAttribute("memberRequestList",memberRequestList);
 		return "gosu/gosuRequestList";
 	}
 
 	@RequestMapping(value = "/gosuRequestContent.do")
-	public String gosuRequestContent() {
+	public String gosuRequestContent(int mrn,Model model) {
+		GosuRequest gr = service.selectGosuRequestContent(mrn);
+		model.addAttribute("grOne",gr);
 		return "gosu/gosuRequestContent";
 	}
 

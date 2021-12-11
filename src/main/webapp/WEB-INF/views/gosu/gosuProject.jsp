@@ -133,7 +133,7 @@ input:focus, textarea:focus {
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
 		<div class="gosu-mail">
-			<a href="/gosuRequestList.do"><span>1</span>요청서</a>
+			<a href="/gosuRequestList.do">요청서</a>
 		</div>
 	
 			<div class="g-msg">

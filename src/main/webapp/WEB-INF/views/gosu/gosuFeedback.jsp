@@ -109,7 +109,7 @@ input:focus, textarea:focus {
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
 <div class="gosu-mail">
-			<a href="/gosuRequestList.do"><span>1</span>요청서</a>
+			<a href="/gosuRequestList.do">요청서</a>
 	</div>
 		<h3>
 			<span style="color: rgb(78, 205, 196);">고수</span>에게 피드백 신청하기

@@ -274,18 +274,49 @@
 		select
 		ggosu_no as ggsouNo,
 		gosu_no as gsouNo,
-		gosu_title as gosuTitle,
+		gosu_title as
+		gosuTitle,
 		gosu_self as gosuSelf,
 		gosu_explain as
 		gosuExplain,
-		gosu_act as gosuAct,
+		gosu_act as
+		gosuAct,
 		gosu_cost as gosuCost,
 		gosu_date as
 		gosuDate
-		from(select * from gosu) where gosu_no=
+		from(select * from
+		gosu) where gosu_no=
 		(select
-		member_no from member where member_id=#{memberId})
+		member_no from member where
+		member_id=#{memberId})
 
 	</select>
+	<insert id="insertGosuRequest" parameterType="gr">
+		insert into
+		gosu_request
+		values(GOSU_REQUEST_SEQ.nextval,#{requestWriterNo},#{requestContent1},#{requestContent2},#{requestContent3},#{requestContent4},#{requestContent5},#{requestContent6},#{requestContent7},to_char(sysdate,'yyyy-mm-dd'))
 
+	</insert>
+	<select id="selectMemberRequestList" resultType="gr">
+		select
+		REQUEST_NO as requestNo,
+		REQUEST_WRITER_NO as requestWriterNo,
+		REQUEST_DATE as requsetDate
+		from gosu_request
+	</select>
+	<select id="selectGosuRequestContent" parameterType="_int"
+		resultType="gr">
+		select
+		REQUEST_NO as requestNo,
+		REQUEST_WRITER_NO as requestWriterNo,
+		REQUEST_CONTENT1 as requestContent1,
+		REQUEST_CONTENT2 as requestContent2,
+		REQUEST_CONTENT3 as requestContent3,
+		REQUEST_CONTENT4 as requestContent4,
+		REQUEST_CONTENT5 as requestContent5,
+		REQUEST_CONTENT6 as requestContent6,
+		REQUEST_CONTENT7 as requestContent7,
+		REQUEST_DATE as requsetDate
+		from gosu_request where REQUEST_NO = #{mrn}
+	</select>
 </mapper>
