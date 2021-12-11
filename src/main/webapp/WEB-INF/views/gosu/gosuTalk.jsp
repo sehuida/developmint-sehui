@@ -121,9 +121,16 @@ input:focus, textarea:focus {
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-		<div class="gosu-mail">
-			<a href="/gosuRequestList.do">요청서</a>
-		</div>
+		<c:if test="${sessionScope.m.memberType eq 2}">
+			<div class="gosu-mail">
+				<a href="/gosuRequestList.do">요청서</a>
+			</div>
+		</c:if>
+		<c:if test="${sessionScope.m.memberType eq 1}">
+			<div class="gosu-mail">
+				<a href="/gosuRequestCostList.do">견적서</a>
+			</div>
+		</c:if>
 		<h3>
 			<c:choose>
 				<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
@@ -144,7 +151,8 @@ input:focus, textarea:focus {
 		<c:choose>
 			<c:when test="${gfOne.feedbackNum eq 1}">
 				<div class="talk-sub">
-					<h2 style="font-weight: 900; color: #cacaca; margin:150px;">대화를 시작해보세요!</h2>
+					<h2 style="font-weight: 900; color: #cacaca; margin: 150px;">대화를
+						시작해보세요!</h2>
 				</div>
 			</c:when>
 			<c:otherwise>

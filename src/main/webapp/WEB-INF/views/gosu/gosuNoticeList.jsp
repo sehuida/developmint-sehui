@@ -51,12 +51,12 @@ input:focus, textarea:focus {
 
 ul#gallery {
 	display: flex;
-	flex-wrap:wrap;
+	flex-wrap: wrap;
 	margin-top: 30px;
 	list-style: none;
 	padding: 0;
-	margin:0 auto;
-	width:1140px;
+	margin: 0 auto;
+	width: 1140px;
 }
 
 ul#gallery>a>li dt {
@@ -102,7 +102,6 @@ ul#gallery>a>li:hover::after {
 
 ul#gallery>a>li dd {
 	padding: 5px;
-	
 	height: 30px;
 	width: 190px;
 	overflow: hidden;
@@ -119,7 +118,7 @@ ul#gallery>a>li dd {
 .gosu-write-wrap {
 	position: fixed;
 	z-index: 1000;
-	margin-left:1200px;
+	margin-left: 1200px;
 }
 
 .gosu-write {
@@ -140,34 +139,43 @@ ul#gallery>a>li dd {
 	font-weight: bold;
 	line-height: 30px;
 }
-  .gosu-mail{
-        display: flex;
-        justify-content: right;
-        
-    }
-    .gosu-mail a{
-        font-weight: bold;
-        font-size: 20px;
-    }
-    .gosu-mail span{
-        font-weight: bold;
-        color: white;
-        background-color: red;
-        border-radius: 50%;
-        text-align: center;
-        width: 20px;
-        margin-left: 50px;
-        display: block;
-        font-size: 13px;
-    } 
+
+.gosu-mail {
+	display: flex;
+	justify-content: right;
+}
+
+.gosu-mail a {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.gosu-mail span {
+	font-weight: bold;
+	color: white;
+	background-color: red;
+	border-radius: 50%;
+	text-align: center;
+	width: 20px;
+	margin-left: 50px;
+	display: block;
+	font-size: 13px;
+}
 </style>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-	<div class="gosu-mail">
-			<a href="/gosuRequestList.do">요청서</a>
-	</div>
+		<c:if test="${sessionScope.m.memberType eq 2}">
+			<div class="gosu-mail">
+				<a href="/gosuRequestList.do">요청서</a>
+			</div>
+		</c:if>
+		<c:if test="${sessionScope.m.memberType eq 1}">
+			<div class="gosu-mail">
+				<a href="/gosuRequestCostList.do">견적서</a>
+			</div>
+		</c:if>
 		<h3>
 			<span style="color: rgb(78, 205, 196);">고수</span>의 게시판
 		</h3>
@@ -181,39 +189,39 @@ ul#gallery>a>li dd {
 
 		</div>
 		<c:if test="${sessionScope.m.memberType eq 2}">
-		<div class="gosu-write-wrap">
-			<div class="gosu-write">
-				<h5 style="font-size: small; color: gray;">
-					고수님만의 노하우를<br> 알려주세요!
-				</h5>
-				<a href="/gosuNoticeWriteFrm.do" class="btn btn-primary">노하우
-					작성하기</a>
+			<div class="gosu-write-wrap">
+				<div class="gosu-write">
+					<h5 style="font-size: small; color: gray;">
+						고수님만의 노하우를<br> 알려주세요!
+					</h5>
+					<a href="/gosuNoticeWriteFrm.do" class="btn btn-primary">노하우
+						작성하기</a>
+				</div>
 			</div>
-		</div>
 		</c:if>
 		<div>
-		
-			
+
+
 			<div class="g-gall">
-			  <ul id="gallery">
-			  <c:forEach items="${gNoticeList }" var="gnl" varStatus="i">
-				<a href="/gosuNoticeContent.do?gnn=${gnl.gnoticeNo }">
-						<li>
-							<dl>
-								<dt>
-									<img src="${gnl.gnoticePhoto }">	
-								</dt>
-								<dd>
-									<b>${gnl.gnoticeTitle }</b>
-								</dd>
-								<dd>${gnl.gnoticeContent }</dd>
-							</dl>
-					</li>
-				</a>
-				</c:forEach>
+				<ul id="gallery">
+					<c:forEach items="${gNoticeList }" var="gnl" varStatus="i">
+						<a href="/gosuNoticeContent.do?gnn=${gnl.gnoticeNo }">
+							<li>
+								<dl>
+									<dt>
+										<img src="${gnl.gnoticePhoto }">
+									</dt>
+									<dd>
+										<b>${gnl.gnoticeTitle }</b>
+									</dd>
+									<dd>${gnl.gnoticeContent }</dd>
+								</dl>
+						</li>
+						</a>
+					</c:forEach>
 				</ul>
 			</div>
-			
+
 		</div>
 		<div id="pageNavi"></div>
 	</div>
