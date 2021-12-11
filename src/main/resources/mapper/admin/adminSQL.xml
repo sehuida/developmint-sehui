@@ -402,6 +402,26 @@
         where C.MEMBER_ID = #{value} and reportStatus = 2
         order by enrollDate desc
 	</select>
+	
+	<!-- 신고번호 조회-->
+	<select id="concelReportNo" parameterType="string" resultType="_int">
+		select report_no from(select rr.* from(select rownum as rnum, r.* from(select * from report 
+        left join comments c using(comment_no)
+        where member_id = #{value} and report_status = 2
+        order by enroll_date desc)r)rr
+        where rnum >= 5)
+	</select>
+	
+	<!-- 신고취소 -->
+	<update id="cancelReportMember" parameterType="_int">
+		update report set report_status = 5  where report_no = #{no}
+	</update>
+	
+	<!-- 타입 변경 -->
+	<update id="changeType" parameterType="string">
+		update member set member_type = 1, member_grade = 10  where member_id = #{value}
+	</update>
+	
 </mapper>
 
 

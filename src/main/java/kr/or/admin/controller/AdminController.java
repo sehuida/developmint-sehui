@@ -165,6 +165,19 @@ public class AdminController {
 			ArrayList<Report> memberReportView = service.memberReportView(id);
 			return memberReportView;
 		}
+		
+		//선택회원 차단 해제
+		@RequestMapping(value="/cancelBlocked.do")
+		public String cancelBlocked(String memberId, Model model) {
+			boolean result = service.cancelBlocked(memberId);
+			if(result) {
+				model.addAttribute("msg","차단 해제 되었습니다.");
+			}else {
+				model.addAttribute("msg","차단 해제 실패");
+			}
+			model.addAttribute("loc","/blockedMember.do?reqPage=1");
+			return "common/msg";
+		}
 
 }
 

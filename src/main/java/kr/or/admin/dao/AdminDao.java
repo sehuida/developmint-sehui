@@ -157,6 +157,18 @@ public class AdminDao {
 		List<Report> list = sqlSession.selectList("admin.memberReportView",id);
 		return (ArrayList<Report>)list;
 	}
+
+	public List<Integer> concelReportNo(String id) {
+		return sqlSession.selectList("admin.concelReportNo",id);
+	}
+
+	public int cancelReportMember(int no) {
+		return sqlSession.update("admin.cancelReportMember", no);
+	}
+
+	public int changeType(String id) {
+		return sqlSession.update("admin.changeType", id);
+	}
 	
 
 

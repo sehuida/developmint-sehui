@@ -343,6 +343,27 @@ public class AdminService {
 	public ArrayList<Report> memberReportView(String id) {
 		return dao.memberReportView(id);
 	}
+
+	public boolean cancelBlocked(String memberId) {
+		StringTokenizer st1 = new StringTokenizer(memberId,"/");
+		boolean result = true;
+		int result1 = 0;
+		int result2 = 0;
+		while(st1.hasMoreTokens()) {
+			String id = st1.nextToken();
+			List<Integer> list = dao.concelReportNo(id);
+			for(int i=0;i<list.size();i++) {
+				int no = list.get(i);
+				result1 = dao.cancelReportMember(no);
+			}
+			result2 = dao.changeType(id);
+			if(result2 == 0) {
+				result = false;
+				break;
+			}
+		}
+		return result;
+	}
 }
 
 

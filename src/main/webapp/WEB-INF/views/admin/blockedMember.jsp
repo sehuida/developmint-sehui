@@ -79,7 +79,7 @@ span{
 		</div>
 		
 		<%--차단회원 테이블 --%>
-		<form action="/unblockMember.do" method="post">
+
 		<table class="table" style="margin-top:20px; text-align: center;"> 
 			<tr>
 				<th><input type="checkbox" id="checkAll" class="form-check-input" style="zoom: 1.2;"></th>
@@ -93,7 +93,7 @@ span{
 			</tr>
 			<c:forEach items="${allblockedList }" var="b" varStatus="i">
 				<tr>
-					<td><input type="checkbox"></td>
+					<td><input type="checkbox" class="form-check-input chk" style="zoom: 1.2;" onclick="setBgcolor(this)"></td>
 					<td class="reId">${b.memberId }</td>
 					<td class="rename">${b.memberName }</td>
 					<td>${b.phone }</td>
@@ -127,9 +127,9 @@ span{
 				
 			</c:forEach>
 		</table>
-		<button type="button" class="btn btn-outline-primary"><i class="bi bi-check2-square"></i>차단 해제</button>
+		<button type="button" class="btn btn-outline-primary cancelBtn"><i class="bi bi-check2-square"></i>차단 해제</button>
 		<div id="pageNavi" style="text-align: center; margin-top:50px;"  >${pageNavi }</div>
-		</form>
+
 		
 		<!-- 내용보기 Modal -->
 		<c:forEach items="${allblockedList }" var="b" varStatus="i">
@@ -150,14 +150,15 @@ span{
 	</div>
 	
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
+	
 	<script type="text/javascript">
+		//자세히 버튼 클릭시 정보 띄워주기
 		$(".reportViewBtn").click(function(){
 			var index = $(".reportViewBtn").index(this);
 			var reId = $(".reId").eq(index).html();
 			var rename = $(".rename").eq(index).html();
 			var remail = $(".remail").eq(index).html();
 			var imgpath = $(".imgpath").eq(index).html();
-			console.log(imgpath);
 			$.ajax({
 	 			url : "/memberReportView.do",
 				type : 'post',
@@ -215,10 +216,47 @@ span{
 	 		})
 		})
 		
+		//아이디 검색 버튼 클릭시
 		$(".searchBtn").click(function(){
 			 var id = $("#searchForm").val();
 			 location.href="/blockedMember.do?reqPage=1&id="+id;
 		})
+		
+		 //체크박스 선택시 색바꾸기
+		 function setBgcolor(t){
+		 tr = t.parentNode.parentNode;
+		 tr.style.backgroundColor = (t.checked) ? "rgba(78,205,196,0.1)" : "#fff"; 
+	 	}
+		
+		//체크박스 전체 선택
+		 $("#checkAll").click(function(){
+			if($("#checkAll").prop("checked")){
+		           $(".chk").prop("checked",true);
+		    }else{
+		           $(".chk").prop("checked",false);
+		    }
+		});
+		
+		//선택회원 차단해제
+		 $(".cancelBtn").click(function(){
+			var inputs = $(".chk:checked");
+			var memberId = new Array(); //회원번호 저장할 배열
+			
+			inputs.each(function(idx,item){
+				var id = $(item).parent().next().html();;
+				memberId.push(id);
+			});
+			
+			var checkBoxCheck = $('.chk').is(":checked");
+			if(!checkBoxCheck){
+				alert("차단해제할 회원을 선택해주세요.");
+				return;
+			}
+			var checkConfirm = confirm("선택한 회원을 차단해제 하시겠습니까?");
+			if(checkConfirm){
+				location.href="/cancelBlocked.do?memberId="+memberId.join("/");
+			}
+		 });
 	</script>
 </body>
 </html>
