@@ -271,7 +271,7 @@ public class AdminService {
 		return result1;
 	}
 
-	public TotalMember totalBlockedMemberList(int reqPage) {
+	public TotalMember totalBlockedMemberList(int reqPage, String id) {
 		//한페이지에 보여줄 차단회원
 		int numPerPage = 6;
 		int end = reqPage*numPerPage;
@@ -281,10 +281,11 @@ public class AdminService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("id", id);
 		ArrayList<Member> allblockedList = dao.allblockedList(map);
 		
 		//페이지 네비게이션 제작
-		int totalCount = dao.totalBlockedCount();
+		int totalCount = dao.totalBlockedCount(map);
 		
 		//전체 페이지 수 계산
 		int totalPage = 0;
@@ -300,17 +301,17 @@ public class AdminService {
 		String pageNavi = "<ul class='pagination' style='justify-content: center;'>";
 		if(pageNo != 1) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/blockedMember.do?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/blockedMember.do?reqPage="+(pageNo-1)+"&id="+id+"'>";
 			pageNavi += "&lt;</a></li>";
 		}// 페이지 숫자
 		for(int i=0; i < pageNaviSize; i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li class='page-item active'>";
-				pageNavi += "<a class = 'page-link' style='background-color : #4ECDC4; border-color : #4ECDC4;' href='/blockedMember.do?reqPage="+pageNo+"'>";
+				pageNavi += "<a class = 'page-link' style='background-color : #4ECDC4; border-color : #4ECDC4;' href='/blockedMember.do?reqPage="+pageNo+"&id="+id+"'>";
 				pageNavi += pageNo + "</a></li>";
 			} else {
 				pageNavi += "<li class='page-item'>";
-				pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/blockedMember.do?reqPage="+pageNo+"'>";
+				pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/blockedMember.do?reqPage="+pageNo+"&id="+id+"'>";
 				pageNavi += pageNo + "</a></li>";
 			}
 			pageNo++;
@@ -321,13 +322,26 @@ public class AdminService {
 		// 다음 버튼
 		if(pageNo <= totalPage) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/blockedMember.do?reqPage="+pageNo+"'>";
+			pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/blockedMember.do?reqPage="+pageNo+"&id="+id+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";		
 		
-		TotalMember tm = new TotalMember(pageNavi, allblockedList, start, totalCount);
+		
+		List<String> blockedMemberId = dao.blockedMemberId(map);
+		List<String> lastReport = new ArrayList<String>();
+		for(int i=0;i<blockedMemberId.size();i++) {
+			lastReport.addAll(dao.lastReportDate(blockedMemberId.get(i)));
+		}
+		
+		
+		
+		TotalMember tm = new TotalMember(pageNavi, allblockedList, start, totalCount, lastReport);
 		return tm;		
+	}
+
+	public ArrayList<Report> memberReportView(String id) {
+		return dao.memberReportView(id);
 	}
 }
 
