@@ -242,6 +242,8 @@
 		<h4>
 			&gt; &nbsp;<span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다!
 		</h4>
+		<div style="color:red;">고수 소개글은 하나만 작성이 가능하며, 수정 삭제가 불가능합니다!<br> 신중하게 작성해주시길 바랍니다.</div>
+			
 		<form action="/gosuWrite.do" method="post" enctype="multipart/form-data">
 		<div style="text-align: right; margin-top: 50px;">
 				<input type="hidden" name="gsouNo"
