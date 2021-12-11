@@ -273,5 +273,37 @@ public class ProjectTeamService {
 		return result;
 	}
 
+	public int insertComment(String commentContent, int boardNo, String memberId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("commentContent", commentContent);
+		map.put("boardNo", boardNo);
+		map.put("memberId", memberId);
+		int result = dao.insertComment(map);
+		return result;
+	}
+
+	public int deleteComment(int commentNo) {
+		int result = dao.deleteComment(commentNo);
+		return result;
+	}
+
+	public int updateComment(int commentNo, String commentContent) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("commentContent", commentContent);
+		map.put("commentNo", commentNo);
+		int result = dao.updateComment(map);
+		return result;
+	}
+
+	public int reCommentInsert(String commentContent, int boardNo, String memberId, int commentNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("commentContent", commentContent);
+		map.put("boardNo", boardNo);
+		map.put("memberId", memberId);
+		map.put("commentNo", commentNo);
+		int result = dao.reCommentInsert(map);
+		return result;
+	}
+
 	
 }

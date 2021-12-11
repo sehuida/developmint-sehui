@@ -106,6 +106,22 @@ public class ProjectTeamDao {
 		return sqlSession.update("projectTeam.updateStatus", today);
 	}
 
+	public int insertComment(Map<String, Object> map) {
+		return sqlSession.insert("projectTeam.insertComment", map);
+	}
+
+	public int deleteComment(int commentNo) {
+		return sqlSession.delete("projectTeam.deleteComment", commentNo);
+	}
+
+	public int updateComment(Map<String, Object> map) {
+		return sqlSession.update("projectTeam.updateComment", map);
+	}
+
+	public int reCommentInsert(Map<String, Object> map) {
+		return sqlSession.insert("projectTeam.reCommentInsert", map);
+	}
+
 	
 
 	

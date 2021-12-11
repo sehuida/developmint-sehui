@@ -387,15 +387,16 @@
   
   <select id="selectCommentList" parameterType="_int" resultType="ptnc">
   	select 
-  		comment_no as commentNo,
-  		member_id as memberId,
-  		comment_content as commentContent,
-  		reg_date as regDate,
-  		board_no as boardNo,
-  		board_type as boardType,
-  		comment_type as commentType,
-  		comment_ref as commentRef
-  	from comments
+  		c.comment_no as commentNo,
+  		c.member_id as memberId,
+  		c.comment_content as commentContent,
+  		c.reg_date as regDate,
+  		c.board_no as boardNo,
+  		c.board_type as boardType,
+  		c.comment_type as commentType,
+  		c.comment_ref as commentRef,
+  		(select filepath from member m where m.member_id = c.member_id) as writerImgPath
+  	from comments c
   	where board_no = #{projectNo} and board_type = 3
   </select>
   <update id="updateRecruitTeam" parameterType="map">
@@ -419,4 +420,21 @@
   <update id="updateStatus" parameterType="String">
   		update project set project_status = 2 where recruit_end_date like #{today}
   </update>
+  
+  <insert id="insertComment" parameterType="map">
+  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'yyyy-mm-dd hh24:mi'), #{boardNo}, 3, 1, null)
+  </insert>
+  
+  <delete id="deleteComment" parameterType="_int">
+  		delete from comments where COMMENT_NO = #{commentNo}
+  </delete>
+  
+  <update id="updateComment" parameterType="map">
+  		update comments set COMMENT_CONTENT = #{commentContent} where COMMENT_NO = #{commentNo}
+  </update>
+  
+  <insert id="reCommentInsert" parameterType="map">
+  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'yyyy-mm-dd hh24:mi'), #{boardNo}, 3, 2, #{commentNo})
+  </insert>
+  
 </mapper>

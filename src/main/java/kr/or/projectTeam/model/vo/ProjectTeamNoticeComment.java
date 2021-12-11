@@ -12,4 +12,5 @@ public class ProjectTeamNoticeComment {
 	private int boardType;
 	private int commentType;
 	private int commentRef;
+	private String writerImgPath;
 }

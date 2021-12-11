@@ -23,6 +23,7 @@
 	<link rel="stylesheet" href="/resources/css/projectTeam/writePage.css">
 
 <script>
+	var result = false;
 	$(function(){
 		
 		$("input[type='checkbox']").on("click", function(){
@@ -33,7 +34,14 @@
 			}
 		});
 		
-		
+		 $('#maxContentPost').change(function(){
+	        	if($('#maxContentPost').text == '-1'){
+	            	result = false;
+	            }
+	        	if($('#maxContentPost').text == '0'){
+	        		result = true;
+	            }
+	     });
 	
 		$(".return_img").click(function(){
 			$(".return_img").css("cursor", "pointer");
@@ -43,15 +51,15 @@
 	});
 	
 	function checkValue(){
-        if(!($(".btn-check:checked").length == 0) && ($("#datePicker").val() == "") && ($("#inputLarge").val() == "") && ($("input[name=projectTitle]").val() == "") && ($("input[name=projectGoal]").val() == "") && ($("input[name=boardContent]").val() == "")) {
+        if(($(".btn-check:checked").length == 0) || ($("#datePicker").val() == "") || ($("#inputLarge").val() == "") || ($("input[name=projectTitle]").val() == "") || ($("input[name=projectGoal]").val() == "") || ($("input[name=boardContent]").val() == "")) {
         	swal("체크하지 않거나 입력되지 않은 값이 있습니다.", "비어있는 입력값이 있는지 다시 한번 확인해주세요!", "warning");
         	return false;
         } 
+       if(result == false){
+    	   swal("입력값 초과", "모집설명에서 입력값이 허용치를 초과하였습니다.", "warning");
+    	   return false;
+       }
         
-        if($('#maxContentPost').text < 0){
-        	swal("입력값 초과", "모집설명에서 입력값이 허용치를 초과하였습니다, 다시 작성해주세요.", "warning");
-        	return false;
-        }
         
     }
 	
@@ -139,8 +147,7 @@
 	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/content-creator.png">
 	                            <p class="titleText">모집설명</p>
 	                        </div>
-	                        <h4 id="maxContentPost" style="text-align:left"></h4>
-	                        
+	                        <span>입력 가능 글자 수 : </span><b id="maxContentPost" style="text-align:left"></b>
 	                        <div class="form-group">
 	                            <textarea class="form-control" id="summernote" rows="3" name="rContent"></textarea>
 	                        </div>
@@ -191,6 +198,7 @@
                  },
                  onKeyup: function (e) {
                      var t = e.currentTarget.innerText;
+                     $('#maxContentPost').text(1000 - t.trim().length);
                      
                  },
                  onPaste: function (e) {
