@@ -31,6 +31,11 @@
 			$(this).parent().parent().parent().css("display", "none");
 		});
 		
+		$("#updateReComment").click(function(){
+			$("#updateReComment").css("cursor", "pointer");
+			$(this).parent().next().css("display", "block");
+		});
+		
 	});
 	
 </script>
@@ -288,15 +293,18 @@
 			                            <div class="updateFunction">
 					                    	<c:choose>
 					                    		<c:when test="${sessionScope.m.memberId == cl.memberId }">
-					                    			<p class="updateText">수정</p>
-					                        		<p class="updateText">삭제</p>
+					                    			<p class="updateText" id="updateReComment">수정</p>
+					                        		<a href="/deleteComment.do?commentNo=${cll.commentNo }&projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}"><p class="updateText">삭제</p></a> 
 					                    		</c:when>
 					                    	</c:choose>
 					                    </div>
 			                            <div class="updateReCommentTextBox">
-			                                <form action="updateReComment.do" method="post">
+			                                <form action="/updateComment.do" method="post">
 				                                <div class="form-group">
-				                                    <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요." maxlength="49"></textarea>
+				                                    <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요." name="commentContent" maxlength="49"></textarea>
+				                                    <input type="hidden" name="commentNo" value="${cll.commentNo }">
+						                            <input type="hidden" name="projectNo" value="${pt.projectNo }">
+					                				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 				                                </div>
 				                                <div class="commentBtnBox">
 				                                    <button type="submit" class="btn btn-outline-primary">수정</button>
