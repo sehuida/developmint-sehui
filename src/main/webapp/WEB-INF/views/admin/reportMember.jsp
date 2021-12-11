@@ -142,7 +142,7 @@
 												<p>기타</p>
 											</c:when>
 										</c:choose>
-										<span class="memId">${memberId[i.index] }</span><span class="reportDate">${r.reportDate }</span>
+										<span class="memId">${r.commentId }</span><span class="reportDate">${r.reportDate }</span>
 									</div>
 								</c:if>
 							</c:forEach>
@@ -163,7 +163,7 @@
 					<p class="rc_title"><i class="bi bi-check2"></i> 신고회원 확인</p>
 					<br>
 					<p>신고자 : ${r.reporterId }</p>
-					<p>신고당한 회원 : <span class="id">${memberId[i.index] }</span></p>
+					<p>신고당한 회원 : <span class="id">${r.commentId }</span></p>
 					<p>신고일 : ${r.reportDate }</p>
 					<br>
 					<br>
@@ -210,7 +210,7 @@
 					<form action="/reportInsert.do" method="post" class="reportBtnForm">
 						<button type="button" class="btn btn-primary reportBtn" style="width:250px; margin:3px">신고 처리</button>
 						<input type="hidden" name="reportNo" value="${r.reportNo }">
-						<input type="hidden" name="memberId" value="${memberId[i.index] }">
+						<input type="hidden" name="memberId" value="${r.commentId }">
 					</form>
 					</div>
 					<form action="/falseReport.do" method="post" class="falseReportForm">
@@ -248,7 +248,7 @@
 								</c:when>
 							</c:choose>
 							<td>${r.reporterId }</td>
-							<td>${report5ListMember[i.index] }</td>
+							<td>${r.commentId }</td>
 							<c:choose>
 								<c:when test="${r.reportReason == 1 }">
 									<td>영리목적/홍보성</td>

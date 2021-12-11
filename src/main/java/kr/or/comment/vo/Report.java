@@ -10,6 +10,7 @@ public class Report {
 	public int reportReason;
 	public String reportEtc;
 	public int commentNo;
+	public String commentId;
 	public String reportDate;
 	public int reportStatus;
 	public String commentContent;

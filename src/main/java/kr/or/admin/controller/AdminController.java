@@ -80,10 +80,8 @@ public class AdminController {
 			model.addAttribute("reportList", tm.getAllReportList());
 			model.addAttribute("start",tm.getStart());
 			model.addAttribute("pageNavi",tm.getPageNavi());
-			model.addAttribute("memberId",tm.getMemberId());
 			model.addAttribute("totalCount", tm.getTotalCount());
 			model.addAttribute("report5List", tm.getReport5List());
-			model.addAttribute("report5ListMember", tm.getReport5ListMember());
 			return "admin/reportMember";
 		}
 		

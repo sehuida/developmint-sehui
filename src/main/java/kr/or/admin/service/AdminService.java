@@ -228,10 +228,8 @@ public class AdminService {
 		}
 		pageNavi += "</ul>";		
 		
-		List<String> memberId = dao.memberIdList(map);
 		ArrayList<Report> report5List = dao.report5List();
-		List<String> report5ListMember = dao.report5ListMember();
-		TotalMember tm = new TotalMember(start, pageNavi, allReportList, memberId, totalCount, report5List, report5ListMember);
+		TotalMember tm = new TotalMember(start, pageNavi, allReportList, totalCount, report5List);
 
 		
 		return tm;		

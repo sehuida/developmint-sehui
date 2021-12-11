@@ -17,7 +17,6 @@ public class TotalMember {
 	private List<String> memberId;
 	private int totalCount;
 	private ArrayList<Report> report5List;
-	private List<String> report5ListMember;
 	private ArrayList<Member> allblockedList;
 	private List<String> lastReport;
 	
@@ -28,16 +27,14 @@ public class TotalMember {
 		this.pageNavi = pageNavi;
 		this.totalCountList = totalCountList;
 	}
-	public TotalMember(int start, String pageNavi, ArrayList<Report> allReportList, List<String> memberId,
-			int totalCount, ArrayList<Report> report5List, List<String> report5ListMember) {
+	public TotalMember(int start, String pageNavi, ArrayList<Report> allReportList, 
+			int totalCount, ArrayList<Report> report5List) {
 		super();
 		this.start = start;
 		this.pageNavi = pageNavi;
 		this.allReportList = allReportList;
-		this.memberId = memberId;
 		this.totalCount = totalCount;
 		this.report5List = report5List;
-		this.report5ListMember = report5ListMember;
 	}
 	public TotalMember(String pageNavi, ArrayList<Member> allblockedList, int start, int totalCount, List<String> lastReport) {
 		super();

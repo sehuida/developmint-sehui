@@ -89,11 +89,6 @@ public class AdminDao {
 		return sqlSession.selectOne("admin.reportCount");
 	}
 
-	public List<String> memberIdList(Map<String, Object> map) {
-		List<String> list = sqlSession.selectList("admin.memberIdList", map);
-		return list;
-	}
-
 	public int memberReportCount(String id) {
 		return sqlSession.selectOne("admin.memberReportCount",id);
 	}
@@ -123,10 +118,6 @@ public class AdminDao {
 		return (ArrayList<Report>)list;
 	}
 
-	public List<String> report5ListMember() {
-		List<String> list = sqlSession.selectList("admin.report5ListMember");
-		return list;
-	}
 
 	public int yesterDayTotalMember(String ydate) {
 		return sqlSession.selectOne("admin.yesterDayTotalMember", ydate);
