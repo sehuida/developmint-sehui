@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%
-	char comma = ',';
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -211,15 +209,15 @@ input:focus, textarea:focus {
 				},
 				success : function(data) {
 					console.log(data);
-					if(data>0){
+					if (data > 0) {
 						alert("견적서를 보냈습니다!");
-						location.href="/gosuMain.do";
-					}else{
+						location.href = "/gosuMain.do";
+					} else {
 
 						alert("견적서를 보내지 못했습니다. 관리자에게 문의해주세요");
-						location.href="/";
+						location.href = "/";
 					}
-					
+
 				}
 			});
 		});

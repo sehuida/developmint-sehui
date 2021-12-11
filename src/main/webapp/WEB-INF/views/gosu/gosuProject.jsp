@@ -31,10 +31,10 @@ input:focus, textarea:focus {
 .talk-wrap {
 	display: flex;
 	flex-direction: column;
-	padding:50px;
+	padding: 50px;
 	margin-top: 100px;
 	margin-bottom: 100px;
-	background-color:rgb(250, 250, 250);
+	background-color: rgb(250, 250, 250);
 }
 
 .g-feedback h3 {
@@ -52,7 +52,7 @@ input:focus, textarea:focus {
 	width: 80%;
 	padding-top: 40px;
 	margin-bottom: 100px;
-	align-self:flex-start;
+	align-self: flex-start;
 	background-color: white;
 	border-radius: 100px;
 }
@@ -72,9 +72,9 @@ input:focus, textarea:focus {
 
 .talk-me {
 	border-radius: 100px;
-	background-color:  rgb(245, 245, 245);
+	background-color: rgb(245, 245, 245);
 	border: 1px solid gray;
-	align-self:flex-end !important;
+	align-self: flex-end !important;
 }
 
 .talk-me p {
@@ -132,13 +132,18 @@ input:focus, textarea:focus {
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-		<div class="gosu-mail">
-			<a href="/gosuRequestList.do">요청서</a>
-		</div>
-	
-			<div class="g-msg">
-			고수에게 요구 사항을 정확하게 전달해주세요!
-		</div>
+		<c:if test="${sessionScope.m.memberType eq 2}">
+			<div class="gosu-mail">
+				<a href="/gosuRequestList.do">요청서</a>
+			</div>
+		</c:if>
+		<c:if test="${sessionScope.m.memberType eq 1}">
+			<div class="gosu-mail">
+				<a href="/gosuRequestCostList.do">견적서</a>
+			</div>
+		</c:if>
+
+		<div class="g-msg">고수에게 요구 사항을 정확하게 전달해주세요!</div>
 
 		<div class="talk-wrap">
 			<div class="talk-one">
@@ -156,7 +161,7 @@ input:focus, textarea:focus {
 					</tr>
 					<tr>
 						<td colspan="3" style="text-align: center; padding: 40px;"><p
-								style=" padding: 30px;">ddddddddddddddddddddddddddddd
+								style="padding: 30px;">ddddddddddddddddddddddddddddd
 								dddddddddddddddddddddddddddddddddd
 								ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 								dddddddddddddddddddddddddddddddddd
@@ -176,7 +181,7 @@ input:focus, textarea:focus {
 					</tr>
 					<tr>
 						<td colspan="3" style="text-align: center; padding: 40px;"><p
-								style=" padding: 30px;">ddddddddddddddddddddddddddddd
+								style="padding: 30px;">ddddddddddddddddddddddddddddd
 								dddddddddddddddddddddddddddddddddd
 								ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 								dddddddddddddddddddddddddddddddddd
@@ -201,7 +206,7 @@ input:focus, textarea:focus {
 					</tr>
 					<tr>
 						<td colspan="3" style="text-align: center; padding: 40px;"><p
-								style=" padding: 30px;">ddddddddddddddddddddddddddddd
+								style="padding: 30px;">ddddddddddddddddddddddddddddd
 								dddddddddddddddddddddddddddddddddd
 								ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 								dddddddddddddddddddddddddddddddddd
@@ -221,7 +226,7 @@ input:focus, textarea:focus {
 					</tr>
 					<tr>
 						<td colspan="3" style="text-align: center; padding: 40px;"><p
-								style=" padding: 30px;">ddddddddddddddddddddddddddddd
+								style="padding: 30px;">ddddddddddddddddddddddddddddd
 								dddddddddddddddddddddddddddddddddd
 								ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 								dddddddddddddddddddddddddddddddddd
@@ -246,7 +251,7 @@ input:focus, textarea:focus {
 					</tr>
 					<tr>
 						<td colspan="3" style="text-align: center; padding: 40px;"><p
-								style=" padding: 30px;">ddddddddddddddddddddddddddddd
+								style="padding: 30px;">ddddddddddddddddddddddddddddd
 								dddddddddddddddddddddddddddddddddd
 								ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
 								dddddddddddddddddddddddddddddddddd

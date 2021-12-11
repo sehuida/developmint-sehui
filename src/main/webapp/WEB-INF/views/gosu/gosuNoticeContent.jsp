@@ -118,7 +118,6 @@
 	overflow: scroll;
 }
 
-
 .hrm-btn-wrap {
 	width: 100%;
 	display: flex;
@@ -143,9 +142,16 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-		<div class="gosu-mail">
-			<a href="/gosuRequestList.do">요청서</a>
-		</div>
+		<c:if test="${sessionScope.m.memberType eq 2}">
+			<div class="gosu-mail">
+				<a href="/gosuRequestList.do">요청서</a>
+			</div>
+		</c:if>
+		<c:if test="${sessionScope.m.memberType eq 1}">
+			<div class="gosu-mail">
+				<a href="/gosuRequestCostList.do">견적서</a>
+			</div>
+		</c:if>
 		<h4>
 			&gt; &nbsp;<span style="color: rgb(78, 205, 196);">고수</span>의 게시판
 		</h4>
@@ -189,10 +195,14 @@
 				</dl>
 			</div>
 		</div>
+
 		<div class="g-center">
-			<a id="feedbackListAjax" class="btn btn-info"
-				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">피드백
-				신청하기</a> <a class="btn btn-primary"
+			<c:if test="${sessionScope.m.memberId ne gNotice.writeId}">
+				<a id="feedbackListAjax" class="btn btn-info"
+					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">피드백
+					신청하기</a>
+			</c:if>
+			<a class="btn btn-primary"
 				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
 				onclick="history.back();">뒤로가기</a>
 		</div>
@@ -201,14 +211,15 @@
 				<div class="hrm-content">
 					<br>
 					<div class="g-style">
-					
+
 						<c:if test="${not empty gosuWriteList}">
-			  			<c:forEach items="${gosuWriteList }" var="g" varStatus="i">
-							<a class="btn btn-success" style="font-size: 30px; " href="/gosuContent.do?gNo=${g.ggsouNo}">${g.gosuTitle }</a>
-						</c:forEach>
+							<c:forEach items="${gosuWriteList }" var="g" varStatus="i">
+								<a class="btn btn-success" style="font-size: 30px;"
+									href="/gosuContent.do?gNo=${g.ggsouNo}">${g.gosuTitle }</a>
+							</c:forEach>
 						</c:if>
 						<c:if test="${empty gosuWriteList}">
-							<span style="font-size: 30px; " >아직 고수님께서 소개글을 등록하지 않았네요!</span>
+							<span style="font-size: 30px;">아직 고수님께서 소개글을 등록하지 않았네요!</span>
 						</c:if>
 					</div>
 				</div>
@@ -220,7 +231,7 @@
 	</div>
 	<script>
 		$("#feedbackListAjax").click(function() {
-		
+
 			$(".hrm-wrap").css("display", "flex");
 		});
 

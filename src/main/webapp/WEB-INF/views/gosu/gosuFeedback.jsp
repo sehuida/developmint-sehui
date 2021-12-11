@@ -108,9 +108,16 @@ input:focus, textarea:focus {
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-<div class="gosu-mail">
-			<a href="/gosuRequestList.do">요청서</a>
-	</div>
+		<c:if test="${sessionScope.m.memberType eq 2}">
+			<div class="gosu-mail">
+				<a href="/gosuRequestList.do">요청서</a>
+			</div>
+		</c:if>
+		<c:if test="${sessionScope.m.memberType eq 1}">
+			<div class="gosu-mail">
+				<a href="/gosuRequestCostList.do">견적서</a>
+			</div>
+		</c:if>
 		<h3>
 			<span style="color: rgb(78, 205, 196);">고수</span>에게 피드백 신청하기
 		</h3>

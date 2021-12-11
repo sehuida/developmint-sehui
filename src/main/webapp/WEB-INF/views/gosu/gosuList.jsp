@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	int itest = 0;
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +57,6 @@
 	padding-right: 30px;
 	padding-left: 30px;
 	text-align: left;
-	
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
@@ -109,9 +111,11 @@
 	padding: 10px;
 	width: 200px;
 }
-.gosu li{
+
+.gosu li {
 	list-style-type: none;
 }
+
 .gosu-write * {
 	font-weight: bold;
 	line-height: 30px;
@@ -138,7 +142,8 @@
 	display: block;
 	font-size: 13px;
 }
-.gtitle{
+
+.gtitle {
 	font-size: 30px;
 	font-weight: 900;
 }
@@ -146,9 +151,16 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-		<div class="gosu-mail">
-			<a href="/gosuRequestList.do">요청서</a>
-		</div>
+		<c:if test="${sessionScope.m.memberType eq 2}">
+			<div class="gosu-mail">
+				<a href="/gosuRequestList.do">요청서</a>
+			</div>
+		</c:if>
+		<c:if test="${sessionScope.m.memberType eq 1}">
+			<div class="gosu-mail">
+				<a href="/gosuRequestCostList.do">견적서</a>
+			</div>
+		</c:if>
 		<h3>
 			<span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다
 		</h3>
@@ -165,6 +177,19 @@
 
 		</div>
 		<c:if test="${sessionScope.m.memberType eq 2}">
+
+			<c:forEach items="${gList }" var="g" varStatus="i">
+				<c:if test="${g.gosuId eq sessionScope.m.memberId  }">
+					<%
+						itest++;
+					%>
+
+				</c:if>
+
+			</c:forEach>
+			<%
+				if (itest == 0) {
+			%>
 			<div class="gosu-write-wrap">
 				<div class="gosu-write">
 					<h5 style="font-size: small; color: gray;">
@@ -174,6 +199,10 @@
 						style="font-weight: bold;">작성하기</a>
 				</div>
 			</div>
+			<%
+				}
+			%>
+
 		</c:if>
 
 		<div class="gosu-wrap">
@@ -184,17 +213,20 @@
 						<table>
 							<tr>
 								<c:if test="${empty g.gosuImg }">
-									<td rowspan="4" class="gosu_img" style="padding: 40px; text-align: center;"><img
+									<td rowspan="4" class="gosu_img"
+										style="padding: 40px; text-align: center;"><img
 										src="/resources/img/gosu/g_img_basic.png"
 										style="border-radius: 50%; width: 200px; height: 200px;"></td>
 								</c:if>
 								<c:if test="${not empty g.gosuImg }">
 									<td rowspan="4" style="padding: 40px; text-align: center;"><img
-										src="/resources/upload/member/${g.gosuImg }" style="border-radius: 50%; width: 200px; height: 200px;"></td>
+										src="/resources/upload/member/${g.gosuImg }"
+										style="border-radius: 50%; width: 200px; height: 200px;"></td>
 								</c:if>
 
 
-								<td style="width: 750px;"><a href="/gosuContent.do?gNo=${g.ggsouNo}" class="gtitle">${g.gosuTitle }</a></td>
+								<td style="width: 750px;"><a
+									href="/gosuContent.do?gNo=${g.ggsouNo}" class="gtitle">${g.gosuTitle }</a></td>
 							</tr>
 							<tr>
 								<td><hr></td>
