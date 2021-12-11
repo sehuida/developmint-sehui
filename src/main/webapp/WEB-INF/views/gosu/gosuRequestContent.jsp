@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<% char comma = ','; %>
+<%
+	char comma = ',';
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,10 +36,12 @@ input:focus, textarea:focus {
 	list-style-type: none;
 	padding: 30px;
 }
-.request{
-	margin-top:100px;
-	margin-bottom:100px;
+
+.request {
+	margin-top: 100px;
+	margin-bottom: 100px;
 }
+
 .request, .g-center {
 	display: flex;
 	justify-content: center;
@@ -46,12 +50,12 @@ input:focus, textarea:focus {
 .request>div {
 	border-width: 10px;
 	padding: 50px;
-	width:1000px;
+	width: 1000px;
 }
 
 .request h3 {
 	font-size: 20px !important;
-	font-weight: 600 ;
+	font-weight: 600;
 	color: gray !important;
 }
 
@@ -63,6 +67,53 @@ input:focus, textarea:focus {
 .request p {
 	margin-right: 50px;
 }
+
+.g-style {
+	text-align: center;
+	margin: 10px;
+	padding: 30px;
+	display: flex;
+	justify-content: center;
+}
+
+.hrm-wrap {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10000;
+}
+
+#hrm-modal {
+	background-color: white;
+	width: 800px;
+	padding: 30px;
+}
+
+.hrm-btn-wrap {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.hrm-btn-wrap a {
+	margin: 30px;
+	margin-top: 50px;
+	padding: 10px;
+	width: 100px;
+}
+
+.hrm-content span {
+	margin: 40px;
+	font-size: 30px;
+	font-weight: 900;
+}
 </style>
 
 
@@ -70,41 +121,33 @@ input:focus, textarea:focus {
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
 		<h3>
-			<span style="color: rgb(78, 205, 196);margin-right:10px;">${grOne.requestWriterId}</span>님의 요청서
+			<span style="color: rgb(78, 205, 196); margin-right: 10px;">${grOne.requestWriterId}</span>님의
+			요청서
 		</h3>
 		<div class="request">
 			<div class="card border-primary mb-3">
 				<ul style="padding: 0;">
 					<li>
-						<h3>어떤 플랫폼을 원하시나요?</h3> 
-						${grOne.requestContent1Br}
-						<br>
+						<h3>어떤 플랫폼을 원하시나요?</h3> ${grOne.requestContent1Br} <br>
 					</li>
 					<li>
-						<h3>어떤 종류의 개발을 원하시나요?</h3> 
-						${grOne.requestContent2Br}<br> 
+						<h3>어떤 종류의 개발을 원하시나요?</h3> ${grOne.requestContent2Br}<br>
 					</li>
 					<li>
-						<h3>원하는 숙련도의 개발자가 있으신가요?</h3>
-						${grOne.requestContent3Br}<br> 
+						<h3>원하는 숙련도의 개발자가 있으신가요?</h3> ${grOne.requestContent3Br}<br>
 					</li>
 					<li>
-						<h3>기획은 어느 정도 되어있나요?</h3> 
-						${grOne.requestContent4Br}<br> 
+						<h3>기획은 어느 정도 되어있나요?</h3> ${grOne.requestContent4Br}<br>
 					</li>
 					<li>
-						<h3>개발 내용과 참고 사항에 대해 상세히 알려주세요.</h3>
-						${grOne.requestContent7}<br> 
+						<h3>개발 내용과 참고 사항에 대해 상세히 알려주세요.</h3> ${grOne.requestContent7}<br>
 
 					</li>
 					<li>
-						<h3>언제까지 작업이 완료되어야 하나요?</h3>
-						
-						${grOne.requestContent5Br}<br> 
+						<h3>언제까지 작업이 완료되어야 하나요?</h3> ${grOne.requestContent5Br}<br>
 					</li>
 					<li>
-						<h3>어떻게 진행하기 원하시나요?</h3> 
-						${grOne.requestContent6Br}<br> 
+						<h3>어떻게 진행하기 원하시나요?</h3> ${grOne.requestContent6Br}<br>
 					</li>
 
 				</ul>
@@ -115,15 +158,74 @@ input:focus, textarea:focus {
 		</div>
 		<div class="g-center">
 			<a class="btn btn-info"
-				style="width: 200px; margin: 100px; padding: 10px; font-weight: 900;"onclick="history.back();">뒤로가기</a>
-			<a class="btn btn-primary"
+				style="width: 200px; margin: 100px; padding: 10px; font-weight: 900;"
+				onclick="history.back();">뒤로가기</a> <a class="btn btn-primary"
+				id="costSendModal"
 				style="width: 200px; margin: 100px; padding: 10px; font-weight: 900;">견적보내기</a>
 		</div>
-		<script>
-		
-		</script>
+		<div class="hrm-wrap" style="display: none; margin: 0;">
+			<div id="hrm-modal">
+				<div class="hrm-content">
+					<br> <span>질문자에게 보낼 내용</span>
+					<p style="margin-left: 40px;">질문자에게 고수님만의 능력을 어필해보세요!</p>
+					<div class="g-style">
+						<textarea rows="5" cols="100" id="contentSend"></textarea>
+
+					</div>
+					<br> <span>견적비용</span>
+					<div class="g-style">
+						<input type="text" id="costSend" placeholder="숫자만 입력하세요.">&nbsp;&nbsp;
+						원 <input type="hidden" value="${grOne.requestNo }"
+							id="requestNoSend"> <input type="hidden"
+							value="${sessionScope.m.memberNo }" id="gosuNoSend">
+					</div>
+				</div>
+				<div class="hrm-btn-wrap">
+
+					<a id="costSendAjax" class="btn btn-success">확인</a> <a
+						id="hrm-close" class="btn btn-outline-success">취소</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$("#hrm-close").click(function() {
+			$(".hrm-wrap").css("display", "none");
+		});
+		$("#costSendModal").click(function() {
+			$(".hrm-wrap").css("display", "flex");
+		});
+
+		$("#costSendAjax").click(function() {
+			var requestNo = $("#requestNoSend").val();
+			var gosuNo = $("#gosuNoSend").val();
+			var cost = $("#costSend").val();
+			var content = $("#contentSend").val();
+			$.ajax({
+				url : "/gosuRequestCostInsert.do",
+				data : {
+					"requestNo" : requestNo,
+					"gosuNo" : gosuNo,
+					"cost" : cost,
+					"content" : content
+				},
+				success : function(data) {
+					console.log(data);
+					if(data>0){
+						alert("견적서를 보냈습니다!");
+						location.href="/gosuMain.do";
+					}else{
+
+						alert("견적서를 보내지 못했습니다. 관리자에게 문의해주세요");
+						location.href="/";
+					}
+					
+				}
+			});
+		});
+	</script>
 
 
-		<%@include file="/WEB-INF/views/common/footer.jsp"%>
+	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>

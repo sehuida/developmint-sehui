@@ -30,6 +30,7 @@ import kr.or.gosu.vo.GosuNotice;
 import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
 import kr.or.gosu.vo.GosuRequest;
+import kr.or.gosu.vo.GosuRequestCost;
 import kr.or.gosu.vo.GosuTalk;
 import kr.or.member.model.vo.Member;
 
@@ -427,7 +428,20 @@ public class GosuController {
 		model.addAttribute("grOne",gr);
 		return "gosu/gosuRequestContent";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "/gosuRequestCostInsert.do")
+	public int gosuRequestCostInsert(int requestNo,int gosuNo,int cost,String content, Model model) {
+		GosuRequestCost grc = new GosuRequestCost();
+		grc.setCost(cost);
+		grc.setCostContent(content);
+		grc.setGosuNo(gosuNo);
+		grc.setRequestNo(requestNo);
+		int result = service.gosuRequestCostInsert(grc);
+		return result;
+	}
+	
+	
 	@RequestMapping(value = "/gosuRequestCostList.do")
 	public String gosuRequestCostList() {
 		return "gosu/gosuRequestCostList";

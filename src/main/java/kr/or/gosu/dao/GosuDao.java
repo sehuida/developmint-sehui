@@ -10,6 +10,7 @@ import kr.or.gosu.vo.GosuNotice;
 import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
 import kr.or.gosu.vo.GosuRequest;
+import kr.or.gosu.vo.GosuRequestCost;
 import kr.or.gosu.vo.GosuTalk;
 
 import java.util.ArrayList;
@@ -156,6 +157,10 @@ public class GosuDao {
 
 	public GosuRequest selectGosuRequestContent(int mrn) {
 		return sqlSession.selectOne("gosu.selectGosuRequestContent",mrn);
+	}
+
+	public int gosuRequestCostInsert(GosuRequestCost grc) {
+		return sqlSession.insert("gosu.gosuRequestCostInsert",grc);
 	}
 
 

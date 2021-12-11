@@ -319,4 +319,9 @@
 		REQUEST_DATE as requsetDate
 		from gosu_request where REQUEST_NO = #{mrn}
 	</select>
+	<insert id="gosuRequestCostInsert" parameterType="grc">
+		insert into
+		gosu_request_cost
+		values(GOSU_REQUEST_COST_SEQ.nextval,#{gosuNo},#{requestNo},#{costContent},#{cost},to_char(sysdate,'yyyy-mm-dd'))
+	</insert>
 </mapper>

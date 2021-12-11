@@ -28,5 +28,6 @@
 		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTeamNoticeComment" alias="ptnc"/>
 		<typeAlias type="kr.or.gosu.vo.GosuTalk" alias="gt"/>
 		<typeAlias type="kr.or.gosu.vo.GosuRequest" alias="gr"/>
+		<typeAlias type="kr.or.gosu.vo.GosuRequestCost" alias="grc"/>
 	</typeAliases>	
 </configuration>
