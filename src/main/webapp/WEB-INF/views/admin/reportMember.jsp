@@ -24,29 +24,30 @@
 }
 .reportList>div>div{
 	border: 1px solid #d9d9d9;
-	width: 500px;
+	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+	width: 550px;
 	padding: 15px;
 	margin-bottom: 10px;
 }
 .reportContent>div{
 	margin-left:20px;
-	border: 1px solid #d9d9d9;
+	border: 3px solid rgba(78,205,196,0.1);
+	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
 	padding: 20px;
 	padding-left: 50px;
 	padding-top: 30px;
-	width: 775px;
+	width: 725px;
 }
-
+.rc_title{
+	font-weight: bold;
+	font-size: 20px;
+}
 .reportList>div>div>p{
 	font-weight: bold;
 }
 .reportDate{
 	float: right;
 	margin-right: 7px;
-}
-.rc_title{
-	font-weight: bold;
-	font-size: 20px;
 }
 .spanBox{
 	text-align: center;
@@ -59,7 +60,6 @@
 	justify-content : center;
 }
 .reportMember{
-	margin-left:20px;
 	border: 1px solid #d9d9d9;
 	padding: 20px;
 }
@@ -90,6 +90,15 @@
 .selectBox{
   transition: all .2s cubic-bezier(0.77, 0, 0, 0);
 }
+.title{
+	font-weight: bold;
+	margin-bottom : 30px;
+	background-color: #f8f9fc;
+	height: 40px;
+	padding-left: 10px;
+	line-height: 40px;
+	color:#1A1B3D;
+}
 
 </style>
 <body>
@@ -101,6 +110,7 @@
 		</div>
 		<br><br><br>
 		
+		<p class="title">신고 회원 처리</p>
 		<div class="reportBox">
 			<div class="reportList">
 				<c:choose>
@@ -213,9 +223,9 @@
 			</div>
 			</c:forEach>
 		</div>	
+		<p class="title" style="margin-top: 50px;">최근 처리 내역</p>
 		<div class="reportMember">
 				<div>
-					<p class="rc_title">최근 처리 내역</p>
 					<table class="table">
 						<tr>
 							<th>처리상태</th>

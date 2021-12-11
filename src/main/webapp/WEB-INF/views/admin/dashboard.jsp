@@ -157,6 +157,7 @@
 		<p class="title">TODAY ${today }</p>
 		<div class="todayInfo">
 			<div>
+				<%--총회원 / 어제 기준 증감률 표시--%>
 				<div class="iconBox" style="background-color: #fc766a"><i class="bi bi-people-fill" style="color:#fff"></i></div>
 				<p>${todayTotalMember }</p>
 				<span>총 회원</span>
@@ -185,6 +186,7 @@
 				</c:choose>
 			</div>
 			<div>
+				<%--가입회원 / 어제 기준 증감률 표시--%>
 				<div class="iconBox" style="background-color: #f4a100"><i class="bi bi-person-plus-fill" style="color:#fff"></i></div>
 				<p>${todayJoinMember }</p>
 				<span>가입 회원</span>
@@ -213,6 +215,7 @@
 				</c:choose>
 			</div>
 			<div>
+				<%--탈퇴회원 / 어제 기준 증감률 표시--%>
 				<div class="iconBox" style="background-color: #5b84b1"><i class="bi bi-person-dash-fill" style="color:#fff"></i></div>
 				<p>${todayOutMember }</p>
 				<span>탈퇴 회원</span>
@@ -241,6 +244,7 @@
 				</c:choose>
 			</div>
 			<div>
+				<%--새로운 게시물 / 어제 기준 증감률 표시--%>
 				<div class="iconBox" style="background-color: #00cfd5"><i class="bi bi-list-ul" style="color:#fff"></i></div>
 				<p>${todayTotalContent }</p>
 				<span>New 게시물</span>
@@ -285,7 +289,9 @@
 						<button class="btn btn-outline-primary btn2">등급별</button>
 						<button class="btn btn-outline-primary btn3">카테고리별</button>
 					</div>
-					<canvas id="myChart2" ></canvas>
+					<div class="clearChart">
+						<canvas id="myChart2" ></canvas>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -359,13 +365,15 @@
 		 
 		 <%-- 등급별버튼 클릭시 나오는 파이차트--%>
 		 $(".btn2").click(function(){
-			 $(".myChart2").remove();
+			 $("#myChart2").remove();
+			 var canvasHtml = '<canvas id="myChart2" ></canvas>';
+			 $(".clearChart").append(canvasHtml);
 			 $(".btn3").css("background-color","#fff");
 			 $(".btn3").css("color","#4ECDC4");
 			 $(".btn3").css("border-color","#4ECDC4");
 			 $(".btn2").css("background-color","#4ECDC4");
 			 $(".btn2").css("color","#fff");
-			 new Chart(document.getElementById("myChart2"), {
+			 var myChart = new Chart(document.getElementById("myChart2"), {
 				    type: 'pie',
 				    data: {
 				      labels: ["브론즈","실버","골드","플레티넘","다이아","마스터","챌린저"],
@@ -387,13 +395,15 @@
 		 
 		 <%-- 카테고리별버튼 클릭시 나오는 파이차트--%>
 		 $(".btn3").click(function(){
-			 $(".myChart2").remove();
+			 $("#myChart2").remove();
+			 var canvasHtml = '<canvas id="myChart2" ></canvas>';
+			 $(".clearChart").append(canvasHtml);
 			 $(".btn2").css("background-color","#fff");
 			 $(".btn2").css("color","#4ECDC4");
 			 $(".btn2").css("border-color","#4ECDC4");
 			 $(".btn3").css("background-color","#4ECDC4");
 			 $(".btn3").css("color","#fff");
-			 new Chart(document.getElementById("myChart2"), {
+			 var myChart = new Chart(document.getElementById("myChart2"), {
 				    type: 'pie',
 				    data: {
 				      labels: ["프로젝트 팀원모집","개발지식 공유","구인구직","고수의 노하우","공모전"],

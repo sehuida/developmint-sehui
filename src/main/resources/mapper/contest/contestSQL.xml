@@ -50,7 +50,11 @@
 				contest_img as contestImg,
 				contest_status as contestStatus,
 				contest_count as contestCount
-			 from contest order by contest_no desc)c 
+			 from contest 
+			 <![CDATA[
+			 where contest_deadline >= to_char(sysdate,'yyyy-mm-dd')
+			  ]]>
+			 order by contest_no desc)c 
 			order by rnum
 			) 
 		where rnum BETWEEN 1 and 8
@@ -79,7 +83,11 @@
 				contest_img as contestImg,
 				contest_status as contestStatus,
 				contest_count as contestCount
-			 from contest order by contest_count desc)c 
+			 from contest 
+			  <![CDATA[
+			 where contest_deadline >= to_char(sysdate,'yyyy-mm-dd')
+			  ]]>
+			 order by contest_count desc)c 
 			order by rnum
 			) 
 		where rnum BETWEEN 1 and 4
@@ -183,7 +191,11 @@
 						contest_img as contestImg,
 						contest_status as contestStatus,
 						contest_count as contestCount
-					 from contest order by contest_no desc)c 
+					 from contest 
+					  <![CDATA[
+					 where contest_deadline >= to_char(sysdate,'yyyy-mm-dd')
+					  ]]>
+					 order by contest_no desc)c 
 					order by rnum
 					) 
 				where rnum BETWEEN #{start} and #{end}
@@ -209,7 +221,12 @@
 						contest_img as contestImg,
 						contest_status as contestStatus,
 						contest_count as contestCount
-					 from contest where contest_type = #{type} order by contest_no desc)c 
+					 from contest 
+					 where contest_type = #{type} and 
+					 <![CDATA[
+					 contest_deadline >= to_char(sysdate,'yyyy-mm-dd')
+					  ]]>
+					 order by contest_no desc)c 
 					order by rnum
 					) 
 				where rnum BETWEEN #{start} and #{end}

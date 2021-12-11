@@ -60,7 +60,7 @@
 			<a href="/contestMain.do"><i class="bi bi-chevron-left"></i></a><span>공모전 캘린더</span>
 		</div>
 		<div class="dateBox">
-			<input type="date" class="form-control" name="contestDeadline" value="${today }" min="${today }" style="width: 300px;">
+			<input type="date" class="form-control" name="contestDeadline" value="${today }" style="width: 300px;">
 			<button id="searchDate" class="form-control" style="width: 100px; margin-left: 10px;">검색</button>
 		</div>
 		<div id="contestBox">
