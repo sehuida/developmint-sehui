@@ -160,13 +160,21 @@ public class AdminDao {
 	public int changeType(String id) {
 		return sqlSession.update("admin.changeType", id);
 	}
+
+	public ArrayList<Contest> contestList(Map<String, Object> map) {
+		List<Contest> list = sqlSession.selectList("admin.contestList",map);
+		return (ArrayList<Contest>)list;
+	}
+
+	public int totalContestCount() {
+		return sqlSession.selectOne("admin.totalContestCount");
+	}
 	
 
 
 	
 
 }
-
 
 
 

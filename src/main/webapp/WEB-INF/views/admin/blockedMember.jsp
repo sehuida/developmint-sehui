@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>DeveloMint 차단회원 관리</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 </head>
 <style>
 .mainCate{

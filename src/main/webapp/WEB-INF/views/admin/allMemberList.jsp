@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>DeveloMint 전체 회원 조회</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 </head>
 <style>
 .mainCate{

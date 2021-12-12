@@ -20,6 +20,7 @@ import kr.or.admin.service.AdminService;
 import kr.or.admin.vo.TotalData;
 import kr.or.admin.vo.TotalMember;
 import kr.or.comment.vo.Report;
+import kr.or.contest.vo.ContestList;
 
 @Controller
 public class AdminController {
@@ -175,6 +176,16 @@ public class AdminController {
 			}
 			model.addAttribute("loc","/blockedMember.do?reqPage=1");
 			return "common/msg";
+		}
+		
+		//공모전 등록 내역으로 가기
+		@RequestMapping(value="/contestEnrollList.do")
+		public String contestEnrollList(Model model, int reqPage) {
+			ContestList cl = service.contestEnrollList(reqPage);
+			model.addAttribute("list",cl.getContestList());
+			model.addAttribute("totalCount",cl.getTotalCount());
+			model.addAttribute("pageNavi",cl.getPageNavi());
+			return "admin/contestEnrollList";
 		}
 
 }

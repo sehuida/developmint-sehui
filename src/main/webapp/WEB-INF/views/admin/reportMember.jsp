@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>신고 회원 처리</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
