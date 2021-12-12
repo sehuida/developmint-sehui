@@ -29,7 +29,9 @@ import com.google.gson.JsonObject;
 import kr.or.member.model.vo.Member;
 import kr.or.projectTeam.model.service.ProjectTeamService;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
+import kr.or.projectTeam.model.vo.ProjectEntry;
 import kr.or.projectTeam.model.vo.ProjectTeam;
+import kr.or.projectTeam.model.vo.ProjectTeamApplyPageData;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeViewData;
 import kr.or.projectTeam.model.vo.projectTeamMainPageData;
@@ -312,5 +314,56 @@ public class ProjectTeamController {
 		  }
 		  return "member/swalMsg"; 
 	  }
+	  
+	  @RequestMapping(value="/insertApplyProjectFrm.do")
+		public String insertApplyProjectFrm(int memberNo, Model model, int projectNo) {
+			ArrayList<DevelopLanguage> dlList = service.selectAllDevelopLang();
+			if(memberNo > 0) {
+				model.addAttribute("memberNo", memberNo);
+				model.addAttribute("dlList", dlList);
+				model.addAttribute("projectNo", projectNo);
+				return "recruitCrue/applyTeam_writeForm";
+			} else {
+				model.addAttribute("title", "비회원 서비스 이용 불가");
+				model.addAttribute("msg", "로그인 후 이용이 가능합니다.");
+				model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+				model.addAttribute("icon", "warning");
+				return "member/swalMsg";
+			}
+		}
+	  
+	  @RequestMapping(value="/insertApplyProject.do")
+		public String insertApplyProject(HttpServletRequest request, Model model, ProjectEntry pta, int memberNo, String[] chk, int projectNo) {
+			ArrayList<String> langList = new ArrayList<String>(Arrays.asList(chk));
+			
+			int result = service.insertApplyProject(pta, langList);
+			if(result > 0) { 
+				  model.addAttribute("title", "지원 성공");
+				  model.addAttribute("msg", "성공적으로 프로젝트 지원에 성공하였습니다.");
+				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+				  model.addAttribute("icon", "success");
+			  } else {
+				  model.addAttribute("title", "지원 실패");
+				  model.addAttribute("msg", "프로젝트 지원에 실패하였습니다.");
+				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+				  model.addAttribute("icon", "warning");
+			  }
+			  return "member/swalMsg"; 
+		}
+	  
+	  @RequestMapping(value="/manageEntry.do")
+		public String manageEntry(Model model, int reqPage, int viewValue, int memberNo, int projectNo) {
+			
+			ProjectTeamApplyPageData ptapd = service.selectAllManageEntry(reqPage, viewValue, projectNo);
+			model.addAttribute("entryList", ptapd.getEntryList());
+			model.addAttribute("pageNavi", ptapd.getPageNavi());
+			model.addAttribute("start", ptapd.getStart());
+			model.addAttribute("udLangList", ptapd.getUdLangList());
+			model.addAttribute("developLangList", ptapd.getDevelopLangList());
+			model.addAttribute("viewValue", viewValue);			
+			model.addAttribute("availableNum", ptapd.getEntryList().get(0).getAvailableNum());
+			return "recruitCrue/manageEntry";
+			
+		}
 	 
 }

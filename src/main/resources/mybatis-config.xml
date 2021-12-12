@@ -29,5 +29,7 @@
 		<typeAlias type="kr.or.gosu.vo.GosuTalk" alias="gt"/>
 		<typeAlias type="kr.or.gosu.vo.GosuRequest" alias="gr"/>
 		<typeAlias type="kr.or.gosu.vo.GosuRequestCost" alias="grc"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.ProjectEntry" alias="pe"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.UseDevelopLanguage" alias="udl"/>
 	</typeAliases>	
 </configuration>

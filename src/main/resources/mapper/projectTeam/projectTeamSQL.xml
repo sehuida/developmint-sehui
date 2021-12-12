@@ -445,4 +445,85 @@
   		delete from project_dibs where project_no = #{projectNo} and member_no=#{memberNo}
   </delete>
   
+  <insert id="insertApplyProject" parameterType="map">
+  	<choose>
+  		<when test="insertLangValue == 1">
+	  		insert into project_entry values(entry_seq.nextval, #{pta.memberNo}, #{pta.projectNo}, #{pta.ambition}, #{pta.applyContent}, to_char(sysdate,'yyyy-mm-dd'), 1)
+  		</when>
+  		<when test="insertLangValue == 2">
+  			insert into use_develop_language(use_lang_no, member_no, language_no, project_no, usecase)
+  			select ulang_seq.nextval, A.* from (
+  				<foreach collection="langList" item="lang" separator="UNION ALL ">
+  					select 
+  						#{pta.memberNo} as member_no,
+  						(select language_no from develop_language where language_name = #{lang}) as language_no,
+  						#{pta.projectNo} as project_no,
+  						1 as usecase
+  					from dual
+  				</foreach>) A
+  		</when>
+  	</choose>
+  </insert>
+  
+  <select id="selectAllManageEntry" parameterType="map" resultType="pe">
+  	<choose>
+  		<when test="viewValue == 1">
+  			select * from (
+			  			select rownum as rnum, a.* from
+				            (select
+								pe.ENTRY_NO as entryNo,
+								pe.member_no as memberNo,
+								pe.PROJECT_NO as projectNo,
+								pe.AMBITION as ambition,
+								pe.APPLY_CONTENT as applyContent,
+								pe.APPLY_DATE as applyDate,
+								pe.ENTRY_STATUS as entryStatus,
+								(select filepath from member m where m.member_no = pe.member_no) as imgPath,
+					            (select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
+					            (select member_id from member m where m.member_no = pe.member_no) as memberId,
+					            (select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
+					            (select count(*) from project_entry pee where pee.entryStatus = 3 and pee.ENTRY_NO = pe.ENTRY_NO) as availableNum
+							from project_entry pe
+			       			order by ENTRY_NO DESC) a)
+						where rnum between #{start} and #{end}
+  		</when>
+  		<otherwise>
+  			select * from (
+			  			select rownum as rnum, a.* from
+				            (select
+								pe.ENTRY_NO as entryNo,
+								pe.member_no as memberNo,
+								pe.PROJECT_NO as projectNo,
+								pe.AMBITION as ambition,
+								pe.APPLY_CONTENT as applyContent,
+								pe.APPLY_DATE as applyDate,
+								pe.ENTRY_STATUS as entryStatus,
+								(select filepath from member m where m.member_no = pe.member_no) as imgPath,
+					            (select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
+					            (select member_id from member m where m.member_no = pe.member_no) as memberId,
+					            (select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
+					            (select count(*) from project_entry pee where pee.entryStatus = 3 and pee.ENTRY_NO = pe.ENTRY_NO) as availableNum
+							from project_entry pe
+			       			order by memberGrade DESC , entryNo DESC) a)
+						where rnum between #{start} and #{end}
+  		</otherwise>
+  	</choose>
+  </select>
+  
+  <select id="selectAllUseDevelopLangList" resultType="udl">
+		 select 
+			u.use_lang_no as useLangNo,
+			u.member_no as memberNo,
+           	u.project_no as projectNo,
+           	u.language_no as languageNo,
+           	u.usecase, 
+           	(select language_img from develop_language d where d.language_no = u.language_no) as langImg, 
+           	(select language_name from develop_language d where d.language_no = u.language_no) as langName 
+		from use_develop_language u
+  </select>
+  
+  <select id="selectentryTotalCount" parameterType="_int" resultType="_int">
+		select count(*) as cnt from project_entry where entry_no = #{entryNo} and entry_status = 1;
+  </select>
+  
 </mapper>

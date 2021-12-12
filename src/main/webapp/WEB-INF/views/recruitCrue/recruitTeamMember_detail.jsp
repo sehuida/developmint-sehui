@@ -121,7 +121,7 @@
                     				<c:when test="${pt.projectStatus == 1 }">
                     					<a href="updateRecruitFrm.do?memberNo=${pt.projectWriterMemberNo }&projectNo=${pt.projectNo}"><button type="button" class="btn btn-primary">수정</button></a>
 				                        <a href="deleteRecruit.do?memberNo=${pt.projectWriterMemberNo }&projectNo=${pt.projectNo}"> <button type="button" class="btn btn-primary">삭제</button></a>
-				                        <button type="button" class="btn btn-primary">지원자 관리</button>
+				                        <a href="manageEntry.do?memberNo=${pt.projectWriterMemberNo }&projectNo=${pt.projectNo}&viewValue=1&reqPage=1"><button type="button" class="btn btn-primary">지원자 관리</button></a>
                     				</c:when>
                     				<c:otherwise>
                     					<a href="updateRecruitFrm.do?memberNo=${pt.projectWriterMemberNo }&projectNo=${pt.projectNo}"><button type="button" class="btn btn-primary" disabled="disabled">수정</button></a>
@@ -136,7 +136,7 @@
                     					<button type="button" class="btn btn-primary" disabled="disabled">프로젝트 지원</button>
                     				</c:when>
                     				<c:otherwise>
-                    					<button type="button" class="btn btn-primary">프로젝트 지원</button>
+                    					<a href="/insertApplyProjectFrm.do?memberNo=${sessionScope.m.memberNo }&projectNo=${pt.projectNo}"><button type="button" class="btn btn-primary">프로젝트 지원</button></a>
                     				</c:otherwise>
                     			</c:choose>
                     		</c:otherwise>
