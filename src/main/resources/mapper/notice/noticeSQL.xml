@@ -79,11 +79,22 @@
 		]]>
 	</select>
 	<select id="selectRnumList" parameterType="_int" resultType="rn">
-		<![CDATA[
-		select * from(select ROWNUM as rnum, n.* from(select "notice_no" as noticeNo, 
-		    "notice_title" as noticeTitle,
-		    "reg_date" as regDate from notice order by 1 desc)n) 
-		where rnum between (#{rnum}-2) and (#{rnum}+2)
-		]]>
+		<choose>
+			<when test="_parameter lt 3">
+				<![CDATA[
+					select * from(select ROWNUM as rnum, n.* from(select "notice_no" as noticeNo, 
+				    "notice_title" as noticeTitle,
+				    "reg_date" as regDate from notice order by 1 desc)n) where rnum  BETWEEN 1 and 5
+		    	]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+					select * from(select ROWNUM as rnum, n.* from(select "notice_no" as noticeNo, 
+				    "notice_title" as noticeTitle,
+				    "reg_date" as regDate from notice order by 1 desc)n) 
+					where rnum between (#{rnum}-2) and (#{rnum}+2)
+				]]>
+			</otherwise>
+		</choose>
 	</select>
 </mapper>
