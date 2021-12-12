@@ -235,7 +235,7 @@
     	display: none;
     }
     .input__on-off:checked + .label__on-off .off { 
-    	display: none; 
+    	display: none;
     } 
     .input__on-off:checked + .label__on-off .marble { 
     	left: 33px; 
@@ -273,6 +273,18 @@
 </style>
 <script>
 	$(function(){
+		if($(".ceoResume").val() == 1) {
+			/* $(this).siblings */$(".input__on-off").prop('checked',true);
+			/* ceoResume == 1 인게 보여야함
+				switch${i.count }
+			
+			for(int i = 0; i<5; i++) {
+					
+			}
+			*/
+		}
+		
+		
 		$(".resumeBtn").click(function(e){
 			var count = $(".count").html();
 			if($(".count").html() > 10) {
@@ -293,7 +305,7 @@
 					resumeNo : resumeNo,
 					memberNo : memberNo
 				},
-				success : function(data) {
+				success : function(data) {		/* 대표이력서로 등록 시 아작스로 대표이력서 정보 화면이동 없이 바꾸어주기 */
 					$(".writeDate").eq(0).find("span").html(data.writeDate);
 					$(".resumeTitle").eq(0).find("em").html(data.resumeTitle);
 					if(data.career == 1) {
@@ -332,6 +344,9 @@
 					else if(data.workForm == 5) {
 						$(".wf").eq(0).find("span").html("프리랜서");						
 					}
+					
+					/* 1. 대표이력서로 선택되면 일반에서 사라지고 원래 등록되어있던 대표이력서가 일반이력서에 나와야함 */
+					/* or 2. 대표이력서 체크되어있는거는 switch css on으로 켜져있도록 */
 				}
 			});
 		});
@@ -351,6 +366,7 @@
 				
 				</c:when>
 				<c:otherwise>
+					
 					<div class="grayBox">
 						<div class="resumeHeader">
 							<div class="ceoResume">
@@ -483,10 +499,10 @@
 				</div>
 			</c:when>
 			<c:otherwise>
-					<div class="myResume">
+				<div class="myResume">
 						<div class="smallBox" style="width: 800px; margin: 0 auto;">
 				<c:forEach items="${list }" var="rs" varStatus="i">
-					<c:if test="${rs.ceoResume eq 0 }">
+					<%-- <c:if test="${rs.ceoResume eq 0 }"> --%>		<!-- 대표이력서는 일반이력서 목록에 안나오도록 설정 -->
 					<div class="wrap">
 							<div class="wd">
 								<span style="font-size: 13px; color: gray;">${rs.writeDate }</span>	
@@ -497,9 +513,10 @@
 							<div class="register">
 								<p>대표이력서 등록</p>
 								<div class="ceoResumeChk">
+									<input type="hidden" class="ceoResume" id="ceoResume" value="${rs.ceoResume }" name="ceoResume">
 									<input type="hidden" name="memberNo" class="memberNo" value="${sessionScope.m.memberNo }">
 									<input type="hidden" value="${rs.resumeNo }" class="resumeNo" name="resumeNo">			<!-- aaaaaaaaaaaaaaaaaaaaaaaaa -->
-									<input type="radio" id="switch${i.count }" name="switch1" class="input__on-off" ondblclick="this.checked=false">
+									<input type="radio" id="switch${i.count }" name="switch1" class="input__on-off">	<!--  ondblclick="this.checked=false" 더블클릭시 체크해제 (아직 안댐) -->
 									<label for="switch${i.count }" class="label__on-off"> 
 										<span class="marble"></span> 
 										<span class="on">on</span> 
@@ -589,10 +606,10 @@
 								</li>                       
 							</ul>
 						</div>
-					</c:if>
+					<%-- </c:if> --%>
 				</c:forEach>
-						</div>			
-					</div>
+					</div>			
+				</div>
 			</c:otherwise>
 		</c:choose>
 		</div>
