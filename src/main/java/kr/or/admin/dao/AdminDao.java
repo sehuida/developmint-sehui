@@ -181,6 +181,15 @@ public class AdminDao {
 	public int contestNO(int contestNo) {
 		return sqlSession.update("admin.contestNO", contestNo);
 	}
+
+	public ArrayList<Contest> contestDateList(Map<String, Object> map) {
+		List<Contest> list = sqlSession.selectList("admin.contestDateList",map);
+		return (ArrayList<Contest>)list;
+	}
+
+	public int totalContestDateCount(String date) {
+		return sqlSession.selectOne("admin.totalContestDateCount",date);
+	}
 	
 
 

@@ -32,7 +32,9 @@ public class AdminController {
 	
 	//관리자 페이지로 이동
 		@RequestMapping(value="/adminPage.do")
-		public String adminPage() {
+		public String adminPage(Model model) {
+			LocalDate today = LocalDate.now();
+			model.addAttribute("today",today);
 			return "admin/adminPage";
 		}
 		
@@ -223,6 +225,20 @@ public class AdminController {
 			model.addAttribute("loc","/contestEnrollList.do?reqPage=1");
 			return "common/msg";
 		}
+
+		//공모전 신청 회원 보기
+		@RequestMapping(value="/contestEnrollMember.do")
+		public String contestEnrollMember(Model model, int reqPage, String date) {
+			LocalDate today = LocalDate.now();
+			model.addAttribute("today",today);
+			ContestList cl = service.contestEnrollMember(reqPage,date);
+			model.addAttribute("list",cl.getContestList());
+			model.addAttribute("pageNavi",cl.getPageNavi());
+			model.addAttribute("date",date);
+			model.addAttribute("totalCount",cl.getTotalCount());
+			return "admin/contestEnrollMember";
+		}
+
 
 }
 

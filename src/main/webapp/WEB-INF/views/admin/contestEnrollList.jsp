@@ -60,6 +60,23 @@
 	margin-top: 15px;
 	margin-bottom: 5px;
 }
+#noList{
+	margin-top : 40px;
+	width: 100%;
+	height: 500px;
+	border: 2px solid #d9d9d9;
+	text-align: center;
+	padding-top: 175px;
+	
+}
+#noList>p:first-child>i{
+	font-size: 40px;
+	color:#4ECDC4
+}
+#noList>p:last-child{
+	font-size: 30px;
+	font-weight: bold;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -74,6 +91,8 @@
 		<p id="unprocessed">미처리 공모 수 : <span>${totalCount }</span> 건</p>
 		
 		<%--미처리 공모 리스트 --%>
+		<c:choose>
+		<c:when test="${ totalCount != 0}">
 		<div class="contestBox">
 			<c:forEach items="${list }" var="c">
 			<div class="infoBox">
@@ -95,6 +114,14 @@
 			</c:forEach>
 		</div>
 		<div id="pageNavi" style="text-align: center" >${pageNavi }</div>
+		</c:when>
+		<c:when test="${totalCount == 0}">
+			<div id="noList">
+				<p><i class="bi bi-trophy"></i></p>
+				<p>등록 대기중인 공모전이 없습니다.</p>
+			</div>
+		</c:when>
+		</c:choose>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
