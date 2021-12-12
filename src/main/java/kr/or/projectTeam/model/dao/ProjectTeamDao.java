@@ -122,6 +122,14 @@ public class ProjectTeamDao {
 		return sqlSession.insert("projectTeam.reCommentInsert", map);
 	}
 
+	public int insertDibCount(Map<String, Object> map) {
+		return sqlSession.insert("projectTeam.insertDibCount", map);
+	}
+
+	public int deleteDibCount(Map<String, Object> map) {
+		return sqlSession.delete("projectTeam.deleteDibCount", map);
+	}
+
 	
 
 	

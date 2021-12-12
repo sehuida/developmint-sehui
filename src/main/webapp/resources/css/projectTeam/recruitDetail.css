@@ -110,6 +110,7 @@
     font-weight: 900;
 }
 .commentBtnBox{
+	z-index : 100;
     margin-top: 15px;
     float: right;
 }
@@ -117,6 +118,7 @@
 .commmentInfoFlexBox{
     margin-top: 80px;
     display: flex;
+    z-index : 100;
 }
 .commentDate{
     font-weight: 600;
@@ -132,7 +134,8 @@
 
 .nestedCommentFlexBox{
     display: flex;
-    margin-top: 20px;
+    z-index: 5;
+    height: 140px;
 }
 .nestedCommnetImg{
     width: 60px;
@@ -141,6 +144,7 @@
 .nestedCommentBox{
     position: relative;
     bottom: 80px;
+    z-index: 15;
 }
 .updateText{
     text-decoration: none;
@@ -152,14 +156,39 @@
 
 .updateTextBox{
 	display: none;
+	margin-top : 20px;
+	margin-bottom : 10px;
 }
 .reCommentTextBox{
 	display: none;
+	margin-top : 20px;
+	margin-bottom : 10px;
 }
 .updateReCommentTextBox{
 	display: none;
 }
 
+.updateFunction{
+	display : flex;
+	margin-bottom : 10px;
+	z-index: 101;
+}
+.updateText{
+	color : #90d1b4;
+	margin-left : 10px;
+	margin-right : 10px;
+	text-decoration: none;
+	z-index: 100;
+}
+.nestedCommentBox{
+	z-index: 10;
+}
+#deleteReComment{
+	text-decoration: none;
+}
+#deleteReComment:hover{
+	font-weight: 700;
+}
 
 /* 좋아요 클릭 모션 */
 

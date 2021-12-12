@@ -217,12 +217,12 @@ public class ProjectTeamController {
 		  if(result > 0) { 
 			  model.addAttribute("title", "댓글 등록 성공");
 			  model.addAttribute("msg", "댓글 등록 완료되었습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "success");
 		  } else {
 			  model.addAttribute("title", "댓글 등록 실패");
 			  model.addAttribute("msg", "댓글 등록 실패하였습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "warning");
 		  }
 		  return "member/swalMsg"; 
@@ -234,12 +234,12 @@ public class ProjectTeamController {
 		  if(result > 0) { 
 			  model.addAttribute("title", "댓글 삭제 성공");
 			  model.addAttribute("msg", "댓글 삭제 완료되었습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "success");
 		  } else {
 			  model.addAttribute("title", "댓글 삭제 실패");
 			  model.addAttribute("msg", "댓글 삭제 실패하였습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "warning");
 		  }
 		  return "member/swalMsg"; 
@@ -251,12 +251,12 @@ public class ProjectTeamController {
 		  if(result > 0) { 
 			  model.addAttribute("title", "댓글 수정 성공");
 			  model.addAttribute("msg", "댓글 수정 완료되었습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "success");
 		  } else {
 			  model.addAttribute("title", "댓글 수정 실패");
 			  model.addAttribute("msg", "댓글 수정 실패하였습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "warning");
 		  }
 		  return "member/swalMsg"; 
@@ -268,17 +268,49 @@ public class ProjectTeamController {
 		  if(result > 0) { 
 			  model.addAttribute("title", "대댓글 등록 성공");
 			  model.addAttribute("msg", "대댓글 등록 완료되었습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "success");
 		  } else {
 			  model.addAttribute("title", "대댓글 등록 실패");
 			  model.addAttribute("msg", "대댓글 등록 실패하였습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "warning");
 		  }
 		  return "member/swalMsg"; 
 	  }
 	  
+	  @RequestMapping(value="/insertDibCount.do")   
+	  public String insertDibCount(Model model, int projectNo, int memberNo) {
+		  int result = service.insertDibCount(projectNo, memberNo); 
+		  if(result > 0) { 
+			  model.addAttribute("title", "찜 하기 성공");
+			  model.addAttribute("msg", "해당 게시물을 찜했습니다!");
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("icon", "success");
+		  } else {
+			  model.addAttribute("title", "찜 하기 실패");
+			  model.addAttribute("msg", "찜 하기에 실패하였습니다.");
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("icon", "warning");
+		  }
+		  return "member/swalMsg"; 
+	  }
 	  
+	  @RequestMapping(value="/deleteDibCount.do")   
+	  public String deleteDibCount(Model model, int projectNo, int memberNo) {
+		  int result = service.deleteDibCount(projectNo, memberNo); 
+		  if(result > 0) { 
+			  model.addAttribute("title", "찜 취소");
+			  model.addAttribute("msg", "해당 게시물에 찜한 내역을 취소했습니다.");
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("icon", "success");
+		  } else {
+			  model.addAttribute("title", "찜 취소 실패");
+			  model.addAttribute("msg", "찜 취소하는 것에 실패하였습니다.");
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("icon", "warning");
+		  }
+		  return "member/swalMsg"; 
+	  }
 	 
 }

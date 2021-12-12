@@ -305,5 +305,21 @@ public class ProjectTeamService {
 		return result;
 	}
 
+	public int insertDibCount(int projectNo, int memberNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("projectNo", projectNo);
+		map.put("memberNo", memberNo);
+		int result = dao.insertDibCount(map);
+		return result;
+	}
+
+	public int deleteDibCount(int projectNo, int memberNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("projectNo", projectNo);
+		map.put("memberNo", memberNo);
+		int result = dao.deleteDibCount(map);
+		return result;
+	}
+
 	
 }
