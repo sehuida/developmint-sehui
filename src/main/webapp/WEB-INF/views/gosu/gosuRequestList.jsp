@@ -107,7 +107,7 @@ input:focus, textarea:focus {
 										<td style="text-align: right;">${mrl.requsetDate}</td>
 									</tr>
 									<tr>
-										<td colspan="2">요청서를 확인해보세요!</td>
+										<td colspan="2">${mrl.requestContent7}</td>
 									</tr>
 								</table>
 						</a></td>

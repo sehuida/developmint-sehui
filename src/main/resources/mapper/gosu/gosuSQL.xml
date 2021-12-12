@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="gosu">
 	<insert id="insertGosu" parameterType="g">
-		insert into gosu
-		values(gosu_seq.nextval,#{gsouNo},#{gosuTitle},#{gosuSelf},#{gosuExplain},#{gosuAct},#{gosuCost},to_char(sysdate,'yyyy-mm-dd'))
+	insert into gosu
+	values(gosu_seq.nextval,#{gsouNo},#{gosuTitle},#{gosuSelf},#{gosuExplain},#{gosuAct},#{gosuCost},to_char(sysdate,'yyyy-mm-dd'))
 		<selectKey resultType="_int" order="AFTER"
 			keyProperty="ggsouNo">
 			select max(ggosu_no) from gosu
@@ -301,6 +302,8 @@
 		select
 		REQUEST_NO as requestNo,
 		REQUEST_WRITER_NO as requestWriterNo,
+		REQUEST_CONTENT7
+		as requestContent7,
 		REQUEST_DATE as requsetDate
 		from gosu_request
 	</select>
@@ -308,20 +311,38 @@
 		resultType="gr">
 		select
 		REQUEST_NO as requestNo,
-		REQUEST_WRITER_NO as requestWriterNo,
+		REQUEST_WRITER_NO as
+		requestWriterNo,
 		REQUEST_CONTENT1 as requestContent1,
-		REQUEST_CONTENT2 as requestContent2,
+		REQUEST_CONTENT2
+		as requestContent2,
 		REQUEST_CONTENT3 as requestContent3,
 		REQUEST_CONTENT4 as requestContent4,
-		REQUEST_CONTENT5 as requestContent5,
+		REQUEST_CONTENT5 as
+		requestContent5,
 		REQUEST_CONTENT6 as requestContent6,
-		REQUEST_CONTENT7 as requestContent7,
+		REQUEST_CONTENT7
+		as requestContent7,
 		REQUEST_DATE as requsetDate
-		from gosu_request where REQUEST_NO = #{mrn}
+		from gosu_request where
+		REQUEST_NO = #{mrn}
 	</select>
 	<insert id="gosuRequestCostInsert" parameterType="grc">
 		insert into
 		gosu_request_cost
-		values(GOSU_REQUEST_COST_SEQ.nextval,#{gosuNo},#{requestNo},#{costContent},#{cost},to_char(sysdate,'yyyy-mm-dd'))
+		values(GOSU_REQUEST_COST_SEQ.nextval,#{gosuNo},#{requestNo},#{costContent},#{cost},to_char(sysdate,'yyyy-mm-dd'),#{memberId})
 	</insert>
+	<select id="selectGosuRequestCostList" resultType="grc" parameterType="string">
+		select
+		COST_NO as costNo,
+		GOSU_NO as gosuNo,
+		REQUEST_NO
+		as requestNo,
+		COST_CONTENT as costContent,
+		cost,
+		COST_DATE as costDate,
+		MEMBER_ID as memberId
+		from gosu_request_cost
+		where member_id =#{memberId}
+	</select>
 </mapper>

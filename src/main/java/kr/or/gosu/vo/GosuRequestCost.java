@@ -10,6 +10,7 @@ public class GosuRequestCost {
 	private String costContent;
 	private int cost;
 	private String costDate;
+	private String memberId;
 	private String gosuImg;
 	private String gosuId;
 	

@@ -176,6 +176,7 @@ input:focus, textarea:focus {
 						원 <input type="hidden" value="${grOne.requestNo }"
 							id="requestNoSend"> <input type="hidden"
 							value="${sessionScope.m.memberNo }" id="gosuNoSend">
+							<input type="hidden" value="${grOne.requestWriterId}" id="memberIdSend">
 					</div>
 				</div>
 				<div class="hrm-btn-wrap">
@@ -199,13 +200,15 @@ input:focus, textarea:focus {
 			var gosuNo = $("#gosuNoSend").val();
 			var cost = $("#costSend").val();
 			var content = $("#contentSend").val();
+			var memberId = $("#memberIdSend").val();
 			$.ajax({
 				url : "/gosuRequestCostInsert.do",
 				data : {
 					"requestNo" : requestNo,
 					"gosuNo" : gosuNo,
 					"cost" : cost,
-					"content" : content
+					"content" : content,
+					"memberId" : memberId
 				},
 				success : function(data) {
 					console.log(data);
