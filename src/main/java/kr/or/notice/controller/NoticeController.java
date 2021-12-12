@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.notice.service.NoticeService;
 import kr.or.notice.vo.Notice;
 import kr.or.notice.vo.NoticePageData;
+import kr.or.notice.vo.Rnum;
 
 @Controller
 public class NoticeController {
@@ -57,11 +58,15 @@ public class NoticeController {
 
 	@RequestMapping(value = "/noticeView.do")
 	public String noticeView(int noticeNo, Model model) {
+		//상세보기를위해 1개 글만 가지로 오기
 		Notice n = service.selectOneNotice(noticeNo);
-		ArrayList<Notice> nlist = service.noticeAroundList(noticeNo);
+		//rnum구하기
+		Rnum rn = service.selectRnum(noticeNo);
+		//rnum으로 5개글만뽑아오기
+		ArrayList<Rnum> rlist = service.selectRnumList(rn.getRnum());
 		model.addAttribute("n", n);
-		model.addAttribute("noticeNo", noticeNo);
-		model.addAttribute("nlist", nlist);
+		model.addAttribute("rnum",rn.getRnum());
+		model.addAttribute("rlist",rlist);
 		return "notice/noticeView";
 	}
 

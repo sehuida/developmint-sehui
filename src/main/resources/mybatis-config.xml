@@ -29,5 +29,7 @@
 		<typeAlias type="kr.or.gosu.vo.GosuTalk" alias="gt"/>
 		<typeAlias type="kr.or.gosu.vo.GosuRequest" alias="gr"/>
 		<typeAlias type="kr.or.gosu.vo.GosuRequestCost" alias="grc"/>
+		<typeAlias type="kr.or.notice.vo.Rnum" alias="rn"/>  
+		<typeAlias type="kr.or.qna.vo.Qna" alias="q"/>  
 	</typeAliases>	
 </configuration>
