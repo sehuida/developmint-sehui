@@ -15,6 +15,7 @@ public class ContestList {
 	private int start;
 	private String pageNavi;
 	private int totalCount;
+	private ArrayList<ContestMember> cmList;
 	
 	public ContestList(ArrayList<Comment> commentList, Contest contest) {
 		super();
@@ -42,6 +43,17 @@ public class ContestList {
 		this.totalCount = totalCount;
 		this.pageNavi = pageNavi;
 	}
+
+	public ContestList(ArrayList<Contest> contestList, String pageNavi, int totalCount,
+			ArrayList<ContestMember> cmList) {
+		super();
+		this.contestList = contestList;
+		this.pageNavi = pageNavi;
+		this.totalCount = totalCount;
+		this.cmList = cmList;
+	}
+	
+	
 
 	
 	

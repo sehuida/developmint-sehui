@@ -169,6 +169,27 @@ public class AdminDao {
 	public int totalContestCount() {
 		return sqlSession.selectOne("admin.totalContestCount");
 	}
+
+	public Contest enrollContestView(int contestNo) {
+		return sqlSession.selectOne("contest.contestView", contestNo);
+	}
+
+	public int contestOK(int contestNo) {
+		return sqlSession.update("admin.contestOK", contestNo);
+	}
+
+	public int contestNO(int contestNo) {
+		return sqlSession.update("admin.contestNO", contestNo);
+	}
+
+	public ArrayList<Contest> contestDateList(Map<String, Object> map) {
+		List<Contest> list = sqlSession.selectList("admin.contestDateList",map);
+		return (ArrayList<Contest>)list;
+	}
+
+	public int totalContestDateCount(String date) {
+		return sqlSession.selectOne("admin.totalContestDateCount",date);
+	}
 	
 
 

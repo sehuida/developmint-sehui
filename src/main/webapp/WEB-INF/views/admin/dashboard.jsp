@@ -164,12 +164,12 @@
 				<span>총 회원</span>
 				<c:choose>
 					<c:when test="${todayTotalMember == yesterDayTotalMember}">
-						<p><span style="font-weight: bold">0%</span><span style="font-size: 13px;"> from yesterday</span></p>
+						<p><span style="font-weight: bold">0 member</span><span style="font-size: 13px;"> from yesterday</span></p>
 					</c:when>
 					<c:when test="${todayTotalMember > yesterDayTotalMember}">
 						<p>
 							<span style="color:blue; font-weight: bold">
-								<fmt:formatNumber value="${((todayTotalMember-yesterDayTotalMember)/yesterDayTotalMember) * 100}" pattern=""/> %
+								${todayTotalMember - yesterDayTotalMember} member
 							</span>
 							<span style="color:blue; font-weight: bold">↑</span>
 							<span style="font-size: 13px;"> from yesterday</span>
@@ -178,7 +178,7 @@
 					<c:when test="${todayTotalMember < yesterDayTotalMember}">
 						<p>
 							<span style="color:red; font-weight: bold">
-								<fmt:formatNumber value="${((todayTotalMember-yesterDayTotalMember)/yesterDayTotalMember) * 100}" pattern=""/> %
+								${todayTotalMember - yesterDayTotalMember} member
 							</span>
 							<span style="color:red; font-weight: bold">↓</span>
 							<span style="font-size: 13px;"> from yesterday</span>
@@ -193,12 +193,12 @@
 				<span>가입 회원</span>
 				<c:choose>
 					<c:when test="${todayJoinMember == joinList[4]}">
-						<p><span style="font-weight: bold">0%</span><span style="font-size: 13px;"> from yesterday</span></p>
+						<p><span style="font-weight: bold">0 member</span><span style="font-size: 13px;"> from yesterday</span></p>
 					</c:when>
 					<c:when test="${todayJoinMember > joinList[4]}">
 						<p>
 							<span style="color:blue; font-weight: bold">
-								<fmt:formatNumber value="${((todayJoinMember-joinList[4])/joinList[4]) * 100}" pattern=""/> %
+								${todayJoinMember - joinList[4]} member
 							</span>
 							<span style="color:blue; font-weight: bold">↑</span>
 							<span style="font-size: 13px;"> from yesterday</span>
@@ -207,7 +207,7 @@
 					<c:when test="${todayJoinMember < joinList[4]}">
 						<p>
 							<span style="color:red; font-weight: bold">
-								<fmt:formatNumber value="${((todayJoinMember-joinList[4])/joinList[4]) * 100}" pattern=""/> %
+								${todayJoinMember - joinList[4]} member
 							</span>
 							<span style="color:red; font-weight: bold">↓</span>
 							<span style="font-size: 13px;"> from yesterday</span>
@@ -222,12 +222,12 @@
 				<span>탈퇴 회원</span>
 				<c:choose>
 					<c:when test="${todayOutMember == outList[4]}">
-						<p><span style="font-weight: bold">0%</span><span style="font-size: 13px;"> from yesterday</span></p>
+						<p><span style="font-weight: bold">0 member</span><span style="font-size: 13px;"> from yesterday</span></p>
 					</c:when>
 					<c:when test="${todayOutMember > outList[4]}">
 						<p>
 							<span style="color:blue; font-weight: bold">
-								<fmt:formatNumber value="${((todayOutMember-outList[4])/outList[4]) * 100}" pattern=""/> %
+								${todayOutMember - outList[4]} member
 							</span>
 							<span style="color:blue; font-weight: bold">↑</span>
 							<span style="font-size: 13px;"> from yesterday</span>
@@ -236,7 +236,7 @@
 					<c:when test="${todayOutMember < outList[4]}">
 						<p>
 							<span style="color:red; font-weight: bold">
-								<fmt:formatNumber value="${((todayOutMember-outList[4])/outList[4]) * 100}" pattern=""/> %
+								${todayOutMember - outList[4]} member
 							</span>
 							<span style="color:red; font-weight: bold">↓</span>
 							<span style="font-size: 13px;"> from yesterday</span>
@@ -251,12 +251,12 @@
 				<span>New 게시물</span>
 				<c:choose>
 					<c:when test="${todayTotalContent == yesterDayTotalBoard}">
-						<p><span style="font-weight: bold">0%</span><span style="font-size: 13px;"> from yesterday</span></p>
+						<p><span style="font-weight: bold">0 post</span><span style="font-size: 13px;"> from yesterday</span></p>
 					</c:when>
 					<c:when test="${todayTotalContent > yesterDayTotalBoard}">
 						<p>
 							<span style="color:blue; font-weight: bold">
-								<fmt:formatNumber value="${((todayTotalContent-yesterDayTotalBoard)/yesterDayTotalBoard) * 100}" pattern=""/> %
+								${todayTotalContent - yesterDayTotalBoard} post
 							</span>
 							<span style="color:blue; font-weight: bold">↑</span>
 							<span style="font-size: 13px;"> from yesterday</span>
@@ -265,7 +265,7 @@
 					<c:when test="${todayTotalContent < yesterDayTotalBoard}">
 						<p>
 							<span style="color:red; font-weight: bold">
-								<fmt:formatNumber value="${((todayTotalContent-yesterDayTotalBoard)/yesterDayTotalBoard) * 100}" pattern=""/> %
+								${todayTotalContent - yesterDayTotalBoard} post
 							</span>
 							<span style="color:red; font-weight: bold">↓</span>
 							<span style="font-size: 13px;"> from yesterday</span>

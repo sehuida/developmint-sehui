@@ -98,7 +98,7 @@
 			</div>
 			<div id="cate">
 				<i class="bi bi-people-fill" style="color:#4ECDC4;"></i><span>공모전 신청 회원 보기</span>
-				<a href="#" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
+				<a href="/contestEnrollMember.do?reqPage=1&date=${today }" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			
 			<%-- 민주가 만든 공지사항, qna로 이동 --%>

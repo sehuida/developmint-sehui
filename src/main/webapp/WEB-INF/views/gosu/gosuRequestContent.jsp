@@ -155,11 +155,19 @@ input:focus, textarea:focus {
 
 		</div>
 		<div class="g-center">
+			<c:if test="${not empty grcOne }">
+				<span style="color : red;">이미 견적서를 보낸 요청서입니다.</span>
+			</c:if>
+		</div>
+		<div class="g-center">
 			<a class="btn btn-info"
 				style="width: 200px; margin: 100px; padding: 10px; font-weight: 900;"
-				onclick="history.back();">뒤로가기</a> <a class="btn btn-primary"
+				onclick="history.back();">뒤로가기</a> 
+				<c:if test="${empty grcOne }">
+				<a class="btn btn-primary"
 				id="costSendModal"
 				style="width: 200px; margin: 100px; padding: 10px; font-weight: 900;">견적보내기</a>
+				</c:if>
 		</div>
 		<div class="hrm-wrap" style="display: none; margin: 0;">
 			<div id="hrm-modal">
