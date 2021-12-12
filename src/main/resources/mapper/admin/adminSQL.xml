@@ -438,6 +438,42 @@
 	<update id="contestNO" parameterType="_int">
 		update contest set contest_status = 3 where contest_no = #{contestNo}
 	</update>
+	
+	<!-- 해당날짜 공모전 불러오기 -->
+	<select id="contestDateList" parameterType="map" resultType="c">
+		select * 
+				from(
+					select rownum as rnum, c.* 
+					from(
+					select 
+						contest_no as contestNo,
+						contest_host as contestHost,
+						member_id as memberId,
+						contest_type as contestType,
+						contest_qualify as contestQualify,
+						contest_date as contestDate,
+						contest_deadline as contestDeadline,
+						contest_prize as contestPrize,
+						phone,
+						email,
+						contest_title as contestTitle,
+						contest_content as contestContent,
+						contest_img as contestImg,
+						contest_status as contestStatus,
+						contest_count as contestCount
+					 from contest 
+					 where contest_status = 2
+					 and contest_deadline = #{date}
+					 order by contestDate)c 
+					order by rnum
+					) 
+				where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 해당날짜 공모전 개수 -->
+	<select id="totalContestDateCount" parameterType="string" resultType="_int">
+		select count(*) from contest where contest_status = 2 and contest_deadline = #{value}
+	</select>
 </mapper>
 
 
