@@ -167,5 +167,9 @@ public class GosuDao {
 		return (ArrayList<GosuRequestCost>)list;
 	}
 
+	public GosuRequestCost selectRequestNoGosuNo(GosuRequestCost grc) {
+		return sqlSession.selectOne("gosu.selectRequestNoGosuNo",grc);
+	}
+
 
 }

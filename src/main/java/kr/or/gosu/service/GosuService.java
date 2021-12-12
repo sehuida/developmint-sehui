@@ -71,7 +71,7 @@ public class GosuService {
 		ArrayList<GosuPhoto> gList = dao.selectGosuPhoto(gNo);
 		return gList;
 	}
-
+	@Transactional
 	public int insertGosuNotice(GosuNotice gNotice) {
 		int result = dao.insertGosuNotice(gNotice);
 		return result;
@@ -107,7 +107,7 @@ public class GosuService {
 		GosuProject gList = dao.selectGProject(pNo);
 		return gList;
 	}
-
+	@Transactional
 	public int insertGosuFeedback(GosuFeedback gf) {
 		int result = dao.insertGosuFeedback(gf);
 		return result;
@@ -127,7 +127,7 @@ public class GosuService {
 		}
 		return list;
 	}
-
+	@Transactional
 	public int insertGosuTalk(GosuTalk gt) {
 		int result = dao.insertGosuTalk(gt);
 		GosuFeedback gosuFeedback = dao.selectFeedbackOne(gt.getFeedbackNo());
@@ -155,7 +155,7 @@ public class GosuService {
 		}
 		return list;
 	}
-
+	@Transactional
 	public int talkStop(int feedbackNo) {
 		int result = dao.talkStop(feedbackNo);
 		return result;
@@ -166,7 +166,7 @@ public class GosuService {
 
 		return list;
 	}
-
+	@Transactional
 	public int insertGosuRequest(GosuRequest gr) {
 		int result = dao.insertGosuRequest(gr);
 		return result;
@@ -187,7 +187,7 @@ public class GosuService {
 		
 		return gosuRequest;
 	}
-
+	@Transactional
 	public int gosuRequestCostInsert(GosuRequestCost grc) {
 		int result = dao.gosuRequestCostInsert(grc);
 		return result;
@@ -200,6 +200,11 @@ public class GosuService {
 			g.setGosuId(dao.selectGosuId(g.getGosuNo()));
 		}
 		return list;
+	}
+
+	public GosuRequestCost selectRequestNoGosuNo(GosuRequestCost grc) {
+		GosuRequestCost requestNoGosuNo = dao.selectRequestNoGosuNo(grc);	
+		return requestNoGosuNo;
 	}
 
 }
