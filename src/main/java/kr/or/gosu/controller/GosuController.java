@@ -391,7 +391,7 @@ public class GosuController {
 	@RequestMapping(value = "/gosuNoticeContent.do")
 	public String gosuNoticeContent(int gnn, Model model) {
 		GosuNotice gNotice = service.selectGosuNoticeOne(gnn);
-		ArrayList<Gosu> gosuWriteList = service.selectgosuWriteList(gNotice.getWriteId());
+		Gosu gosuWriteList = service.selectgosuWriteList(gNotice.getWriteId());
 		model.addAttribute("gNotice", gNotice);
 		model.addAttribute("gosuWriteList", gosuWriteList);
 
@@ -431,19 +431,22 @@ public class GosuController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/gosuRequestCostInsert.do")
-	public int gosuRequestCostInsert(int requestNo,int gosuNo,int cost,String content, Model model) {
+	public int gosuRequestCostInsert(int requestNo,int gosuNo,int cost,String content,String memberId, Model model) {
 		GosuRequestCost grc = new GosuRequestCost();
 		grc.setCost(cost);
 		grc.setCostContent(content);
 		grc.setGosuNo(gosuNo);
 		grc.setRequestNo(requestNo);
+		grc.setMemberId(memberId);
 		int result = service.gosuRequestCostInsert(grc);
 		return result;
 	}
 	
 	
 	@RequestMapping(value = "/gosuRequestCostList.do")
-	public String gosuRequestCostList() {
+	public String gosuRequestCostList(@SessionAttribute(required = false) Member m,Model model) {
+		ArrayList<GosuRequestCost> memberRequestCostList = service.selectGosuRequestCostList(m.getMemberId());
+		model.addAttribute("memberRequestCostList",memberRequestCostList);
 		return "gosu/gosuRequestCostList";
 	}
 

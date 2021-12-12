@@ -161,8 +161,8 @@ public class GosuService {
 		return result;
 	}
 
-	public ArrayList<Gosu> selectgosuWriteList(String gosuId) {
-		ArrayList<Gosu> list = dao.selectgosuWriteList(gosuId);
+	public Gosu selectgosuWriteList(String gosuId) {
+		Gosu list = dao.selectgosuWriteList(gosuId);
 
 		return list;
 	}
@@ -191,6 +191,15 @@ public class GosuService {
 	public int gosuRequestCostInsert(GosuRequestCost grc) {
 		int result = dao.gosuRequestCostInsert(grc);
 		return result;
+	}
+
+	public ArrayList<GosuRequestCost> selectGosuRequestCostList(String memberId) {
+		ArrayList<GosuRequestCost> list = dao.selectGosuRequestCostList(memberId);
+		for (GosuRequestCost g : list) {
+			g.setGosuImg(dao.selectGosuImg(g.getGosuNo()));
+			g.setGosuId(dao.selectGosuId(g.getGosuNo()));
+		}
+		return list;
 	}
 
 }

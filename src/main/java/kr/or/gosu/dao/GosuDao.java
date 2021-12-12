@@ -141,9 +141,8 @@ public class GosuDao {
 		return sqlSession.selectOne("gosu.selectMemberId",feedbackNo);
 	}
 
-	public ArrayList<Gosu> selectgosuWriteList(String gosuId) {
-		List<Gosu> list = sqlSession.selectList("gosu.selectgosuWriteList",gosuId);
-		return (ArrayList<Gosu>)list;
+	public Gosu selectgosuWriteList(String gosuId) {
+		return sqlSession.selectOne("gosu.selectgosuWriteList",gosuId);
 	}
 
 	public int insertGosuRequest(GosuRequest gr) {
@@ -161,6 +160,11 @@ public class GosuDao {
 
 	public int gosuRequestCostInsert(GosuRequestCost grc) {
 		return sqlSession.insert("gosu.gosuRequestCostInsert",grc);
+	}
+
+	public ArrayList<GosuRequestCost> selectGosuRequestCostList(String memberId) {
+		List<GosuRequestCost> list = sqlSession.selectList("gosu.selectGosuRequestCostList",memberId);
+		return (ArrayList<GosuRequestCost>)list;
 	}
 
 

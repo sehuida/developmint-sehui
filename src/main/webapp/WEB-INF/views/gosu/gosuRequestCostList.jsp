@@ -58,7 +58,7 @@ input:focus, textarea:focus {
 .g-one-tbl {
 	width: 90%;
 	border: 1px solid rgb(211, 211, 211);
-	margin-bottom:50px;
+	margin-bottom: 50px;
 }
 
 .g-one-tbl:hover {
@@ -87,289 +87,37 @@ input:focus, textarea:focus {
 		</h3>
 		<div class="requestList">
 			<table>
-				<tr>
-					<td>
-						<table class="g-one-tbl">
-							<tr>
-								<th rowspan="3"><img
-									src="/resources/img/gosu/g_img_basic.png"></th>
-								<th><span style="color: rgb(78, 205, 196);">고수</span>강세희</th>
-								<td style="text-align: right;">2021.XX.XX</td>
-							</tr>
-							<tr>
-								<td colspan="2" style="max-width: 1000px;">dsafilengkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilengksel</td>
 
-							</tr>
-							<tr>
-								<th>비용 100,000원</th>
-								<td style="display: flex; justify-content: right;"><a
-									href="/gosuProject.do" class="btn btn-primary"
-									style="width: 150px;">진행하기</a></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<table class="g-one-tbl">
-							<tr>
-								<th rowspan="3"><img
-									src="/resources/img/gosu/g_img_basic.png"></th>
-								<th><span style="color: rgb(78, 205, 196);">고수</span>강세희</th>
-								<td style="text-align: right;">2021.XX.XX</td>
-							</tr>
-							<tr>
-								<td colspan="2" style="max-width: 1000px;">dsafilengkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilengksel</td>
 
-							</tr>
-							<tr>
-								<th>비용 100,000원</th>
-								<td style="display: flex; justify-content: right;"><a
-									href="/gosuProject.do" class="btn btn-primary"
-									style="width: 150px;">진행하기</a></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
+				<c:forEach items="${memberRequestCostList }" var="mrcl"
+					varStatus="i">
+					<tr>
+						<td>
 							<table class="g-one-tbl">
 								<tr>
-									<th rowspan="3"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th><span style="color: rgb(78, 205, 196);">고수</span>강세희</th>
-				 				<td style="text-align: right;">2021.XX.XX</td>
+									<th rowspan="3"><c:if test="${empty mrcl.gosuImg }">
+											<img src="/resources/img/gosu/g_img_basic.png">
+										</c:if> <c:if test="${not empty mrcl.gosuImg }">
+											<img src="/resources/upload/member/${mrcl.gosuImg}">
+										</c:if></th>
+									<th><span style="color: rgb(78, 205, 196);">고수</span>${mrcl.gosuId }</th>
+									<td style="text-align: right;">${mrcl.costDate }</td>
 								</tr>
 								<tr>
-									<td colspan="2" style="max-width:1000px;">dsafilengkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilengksel</td>
-									
+									<td colspan="2" style="max-width: 1000px;">${mrcl.costContentBr }</td>
+
 								</tr>
-								<tr >
-									<th>비용  100,000원</th>
-									<td style="display:flex;justify-content: right;"><a href="/gosuProject.do" class="btn btn-primary" style="width:150px; ">진행하기</a></td>
+								<tr>
+									<th>비용 ${mrcl.cost}원</th>
+									<td style="display: flex; justify-content: right;"><a
+										href="/gosuProject.do" class="btn btn-primary"
+										style="width: 150px;">진행하기</a></td>
 								</tr>
 							</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="3"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th><span style="color: rgb(78, 205, 196);">고수</span>강세희</th>
-				 				<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2" style="max-width:1000px;">dsafilengkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilengksel</td>
-									
-								</tr>
-								<tr >
-									<th>비용  100,000원</th>
-									<td style="display:flex;justify-content: right;"><a href="/gosuProject.do" class="btn btn-primary" style="width:150px; ">진행하기</a></td>
-								</tr>
-							</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="3"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th><span style="color: rgb(78, 205, 196);">고수</span>강세희</th>
-				 				<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2" style="max-width:1000px;">dsafilengkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilengksel</td>
-									
-								</tr>
-								<tr >
-									<th>비용  100,000원</th>
-									<td style="display:flex;justify-content: right;"><a href="/gosuProject.do" class="btn btn-primary" style="width:150px; ">진행하기</a></td>
-								</tr>
-							</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="3"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th><span style="color: rgb(78, 205, 196);">고수</span>강세희</th>
-				 				<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2" style="max-width:1000px;">dsafilengkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilengksel</td>
-									
-								</tr>
-								<tr >
-									<th>비용  100,000원</th>
-									<td style="display:flex;justify-content: right;"><a href="/gosuProject.do" class="btn btn-primary" style="width:150px; ">진행하기</a></td>
-								</tr>
-							</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="3"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th><span style="color: rgb(78, 205, 196);">고수</span>강세희</th>
-				 				<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2" style="max-width:1000px;">dsafilengkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilengksel</td>
-									
-								</tr>
-								<tr >
-									<th>비용  100,000원</th>
-									<td style="display:flex;justify-content: right;"><a href="/gosuProject.do" class="btn btn-primary" style="width:150px; ">진행하기</a></td>
-								</tr>
-							</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="3"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th><span style="color: rgb(78, 205, 196);">고수</span>강세희</th>
-				 				<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2" style="max-width:1000px;">dsafilengkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilengksel</td>
-									
-								</tr>
-								<tr >
-									<th>비용  100,000원</th>
-									<td style="display:flex;justify-content: right;"><a href="/gosuProject.do" class="btn btn-primary" style="width:150px; ">진행하기</a></td>
-								</tr>
-							</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="3"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th><span style="color: rgb(78, 205, 196);">고수</span>강세희</th>
-				 				<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2" style="max-width:1000px;">dsafilengkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilengksel</td>
-									
-								</tr>
-								<tr >
-									<th>비용  100,000원</th>
-									<td style="display:flex;justify-content: right;"><a href="/gosuProject.do" class="btn btn-primary" style="width:150px; ">진행하기</a></td>
-								</tr>
-							</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="3"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th><span style="color: rgb(78, 205, 196);">고수</span>강세희</th>
-				 				<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2" style="max-width:1000px;">dsafilengkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilengksel</td>
-									
-								</tr>
-								<tr >
-									<th>비용  100,000원</th>
-									<td style="display:flex;justify-content: right;"><a href="/gosuProject.do" class="btn btn-primary" style="width:150px; ">진행하기</a></td>
-								</tr>
-							</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="3"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th><span style="color: rgb(78, 205, 196);">고수</span>강세희</th>
-				 				<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2" style="max-width:1000px;">dsafilengkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilengksel</td>
-									
-								</tr>
-								<tr >
-									<th>비용  100,000원</th>
-									<td style="display:flex;justify-content: right;"><a href="/gosuProject.do" class="btn btn-primary" style="width:150px; ">진행하기</a></td>
-								</tr>
-							</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="3"><img src="/resources/img/gosu/g_img_basic.png"></th>
-									<th><span style="color: rgb(78, 205, 196);">고수</span>강세희</th>
-				 				<td style="text-align: right;">2021.XX.XX</td>
-								</tr>
-								<tr>
-									<td colspan="2" style="max-width:1000px;">dsafilengkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilen
-									kseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilenkseldsafilengksel</td>
-									
-								</tr>
-								<tr >
-									<th>비용  100,000원</th>
-									<td style="display:flex;justify-content: right;"><a href="/gosuProject.do" class="btn btn-primary" style="width:150px; ">진행하기</a></td>
-								</tr>
-							</table>
-					</td>
-				</tr>
-				
+						</td>
+					</tr>
+				</c:forEach>
+
 			</table>
 
 
