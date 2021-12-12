@@ -171,5 +171,9 @@ public class GosuDao {
 		return sqlSession.selectOne("gosu.selectRequestNoGosuNo",grc);
 	}
 
+	public GosuRequestCost selectGosuRequestCost(int costNo) {
+		return sqlSession.selectOne("gosu.selectGosuRequestCost",costNo);
+	}
+
 
 }

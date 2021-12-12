@@ -455,7 +455,12 @@ public class GosuController {
 		model.addAttribute("memberRequestCostList",memberRequestCostList);
 		return "gosu/gosuRequestCostList";
 	}
-
+	@ResponseBody
+	@RequestMapping(value = "/selectGosuRequestCost.do")
+	public GosuRequestCost selectGosuRequestCost(int costNo, Model model) {
+		GosuRequestCost gpc = service.selectGosuRequestCost(costNo);
+		return gpc;
+	}
 	@RequestMapping(value = "/gosuProject.do")
 	public String gosuProject() {
 		return "gosu/gosuProject";
