@@ -78,6 +78,7 @@ overflow: hidden;
 	color: #595959;
 }
 .contestImgBox{
+	box-shadow: 0px 1px 5px -2px rgb(0 0 0 / 20%), 0px 0px 4px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
 	width: 280px;
 	height: 400px;
 	overflow: hidden;

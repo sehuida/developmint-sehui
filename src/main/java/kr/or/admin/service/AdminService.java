@@ -21,6 +21,7 @@ import kr.or.admin.vo.TotalData;
 import kr.or.admin.vo.TotalMember;
 import kr.or.comment.vo.Report;
 import kr.or.contest.vo.Contest;
+import kr.or.contest.vo.ContestList;
 import kr.or.member.model.vo.Member;
 
 @Service
@@ -361,6 +362,77 @@ public class AdminService {
 			}
 		}
 		return result;
+	}
+
+	public ContestList contestEnrollList(int reqPage) {
+		//한페이지에 보여줄 공모전
+		int numPerPage = 8;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		
+		//한페이지에서 보여줄 게시물 목록 조회
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		ArrayList<Contest> contestList = dao.contestList(map);
+		
+		//페이지 네비게이션 제작
+		int totalCount = dao.totalContestCount();
+		
+		//전체 페이지 수 계산
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage+1;
+		}
+		int pageNaviSize = 5;
+		
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+
+		String pageNavi = "<ul class='pagination pagination-lg' style='justify-content: center;'>";
+		if(pageNo != 1) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/contestEnrollList.do?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "&lt;</a></li>";
+		}// 페이지 숫자
+		for(int i=0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='page-item active'>";
+				pageNavi += "<a class = 'page-link' style='background-color : #4ECDC4; border-color : #4ECDC4;' href='/contestEnrollList.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			} else {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/contestEnrollList.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음 버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/contestEnrollList.do?reqPage="+pageNo+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";		
+		
+		ContestList cl = new ContestList(contestList, start, totalCount, pageNavi);
+		return cl;
+	}
+
+	public Contest enrollContestView(int contestNo) {
+		return dao.enrollContestView(contestNo);
+	}
+
+	public int contestOK(int contestNo) {
+		return dao.contestOK(contestNo);
+	}
+
+	public int contestNO(int contestNo) {
+		return dao.contestNO(contestNo);
 	}
 }
 

@@ -160,13 +160,33 @@ public class AdminDao {
 	public int changeType(String id) {
 		return sqlSession.update("admin.changeType", id);
 	}
+
+	public ArrayList<Contest> contestList(Map<String, Object> map) {
+		List<Contest> list = sqlSession.selectList("admin.contestList",map);
+		return (ArrayList<Contest>)list;
+	}
+
+	public int totalContestCount() {
+		return sqlSession.selectOne("admin.totalContestCount");
+	}
+
+	public Contest enrollContestView(int contestNo) {
+		return sqlSession.selectOne("contest.contestView", contestNo);
+	}
+
+	public int contestOK(int contestNo) {
+		return sqlSession.update("admin.contestOK", contestNo);
+	}
+
+	public int contestNO(int contestNo) {
+		return sqlSession.update("admin.contestNO", contestNo);
+	}
 	
 
 
 	
 
 }
-
 
 
 

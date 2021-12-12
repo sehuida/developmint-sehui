@@ -394,6 +394,50 @@
 		update member set member_type = 1, member_grade = 10  where member_id = #{value}
 	</update>
 	
+	<!-- 공모전 리스트 불러오기 -->
+	<select id="contestList" parameterType="map" resultType="c">
+		select * 
+				from(
+					select rownum as rnum, c.* 
+					from(
+					select 
+						contest_no as contestNo,
+						contest_host as contestHost,
+						member_id as memberId,
+						contest_type as contestType,
+						contest_qualify as contestQualify,
+						contest_date as contestDate,
+						contest_deadline as contestDeadline,
+						contest_prize as contestPrize,
+						phone,
+						email,
+						contest_title as contestTitle,
+						contest_content as contestContent,
+						contest_img as contestImg,
+						contest_status as contestStatus,
+						contest_count as contestCount
+					 from contest 
+					 where contest_status = 1
+					 order by contestDate)c 
+					order by rnum
+					) 
+				where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 공모전 신청 수 -->
+	<select id="totalContestCount" resultType="_int">
+		select count(*) from contest where CONTEST_STATUS = 1
+	</select>
+	
+	<!-- 공모 승인 -->
+	<update id="contestOK" parameterType="_int">
+		update contest set contest_status = 2 where contest_no = #{contestNo}
+	</update>
+	
+	<!-- 공모 반려 -->
+	<update id="contestNO" parameterType="_int">
+		update contest set contest_status = 3 where contest_no = #{contestNo}
+	</update>
 </mapper>
 
 

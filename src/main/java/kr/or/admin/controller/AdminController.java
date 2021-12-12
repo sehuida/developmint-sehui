@@ -20,6 +20,8 @@ import kr.or.admin.service.AdminService;
 import kr.or.admin.vo.TotalData;
 import kr.or.admin.vo.TotalMember;
 import kr.or.comment.vo.Report;
+import kr.or.contest.vo.Contest;
+import kr.or.contest.vo.ContestList;
 
 @Controller
 public class AdminController {
@@ -174,6 +176,51 @@ public class AdminController {
 				model.addAttribute("msg","차단 해제 실패");
 			}
 			model.addAttribute("loc","/blockedMember.do?reqPage=1");
+			return "common/msg";
+		}
+		
+		//공모전 등록 내역으로 가기
+		@RequestMapping(value="/contestEnrollList.do")
+		public String contestEnrollList(Model model, int reqPage) {
+			ContestList cl = service.contestEnrollList(reqPage);
+			model.addAttribute("list",cl.getContestList());
+			model.addAttribute("totalCount",cl.getTotalCount());
+			model.addAttribute("pageNavi",cl.getPageNavi());
+			return "admin/contestEnrollList";
+		}
+		
+		//공모전 등록내용 상세보기
+		@RequestMapping(value="/enrollContestView.do")
+		public String enrollContestView(Model model, int contestNo) {
+			Contest c = service.enrollContestView(contestNo);
+			model.addAttribute("c",c);
+			return "admin/enrollContestView";
+		}
+		
+		//공모전 승인
+		@RequestMapping(value="/contestOK.do")
+		public String contestOK(int contestNo, Model model) {
+			int result = service.contestOK(contestNo);
+			if(result>0) {
+				model.addAttribute("msg","공모 승인 되었습니다.");
+			}else {
+				model.addAttribute("msg","공모 승인 실패");
+			}
+			model.addAttribute("loc","/contestEnrollList.do?reqPage=1");
+			return "common/msg";
+		}
+		
+		
+		//공모전 반려
+		@RequestMapping(value="/contestNO.do")
+		public String contestNO(int contestNo, Model model) {
+			int result = service.contestNO(contestNo);
+			if(result>0) {
+				model.addAttribute("msg","공모 반려 되었습니다.");
+			}else {
+				model.addAttribute("msg","공모 반려 실패");
+			}
+			model.addAttribute("loc","/contestEnrollList.do?reqPage=1");
 			return "common/msg";
 		}
 

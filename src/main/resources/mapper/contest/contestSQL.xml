@@ -54,6 +54,7 @@
 			 <![CDATA[
 			 where contest_deadline >= to_char(sysdate,'yyyy-mm-dd')
 			  ]]>
+			  and contest_status = 2
 			 order by contest_no desc)c 
 			order by rnum
 			) 
@@ -87,6 +88,7 @@
 			  <![CDATA[
 			 where contest_deadline >= to_char(sysdate,'yyyy-mm-dd')
 			  ]]>
+			  and contest_status = 2
 			 order by contest_count desc)c 
 			order by rnum
 			) 
@@ -195,6 +197,7 @@
 					  <![CDATA[
 					 where contest_deadline >= to_char(sysdate,'yyyy-mm-dd')
 					  ]]>
+					  and contest_status = 2
 					 order by contest_no desc)c 
 					order by rnum
 					) 
@@ -226,6 +229,7 @@
 					 <![CDATA[
 					 contest_deadline >= to_char(sysdate,'yyyy-mm-dd')
 					  ]]>
+					  and contest_status = 2
 					 order by contest_no desc)c 
 					order by rnum
 					) 
@@ -238,10 +242,10 @@
   	<select id="totalCount" parameterType="_int" resultType="_int">
   		<choose>
   			<when test="value == 0">
-  				select count(*) as totalCount from contest
+  				select count(*) as totalCount from contest where contest_status = 2
   			</when>
   			<otherwise>
-  				select count(*) as totalCount from contest where contest_type = #{type}
+  				select count(*) as totalCount from contest where contest_type = #{type} and contest_status = 2
   			</otherwise>
   		</choose>
   	</select>
@@ -266,7 +270,10 @@
 			contest_count as contestCount
 		from contest 
 		 <![CDATA[
-		where contest_deadline >= #{contestDeadline} order by contest_deadline
+		where contest_deadline >= #{contestDeadline} and
+		contest_date <= #{contestDeadline}
+		and contest_status = 2
+		order by contest_deadline
 		  ]]>
   	</select>
 </mapper>

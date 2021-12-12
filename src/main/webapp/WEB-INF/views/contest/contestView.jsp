@@ -168,7 +168,7 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container" style="margin-bottom: 100px; margin-left: 400px;">
-		<p id="mainTitel"><a href="/contestMain.do"><i class="bi bi-chevron-left"></i></a>공모전 상세보기</p>
+		<p id="mainTitel"><a href="#" onClick="history.back()"><i class="bi bi-chevron-left"></i></a>공모전 상세보기</p>
 		<div class="contestTitle" style="margin-top:55px;">
 			<p>${c.contestTitle }</p>
 		</div>

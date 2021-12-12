@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>DeveloMint 관리자 페이지</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 </head>
 <style>
 .adminImg>img{
@@ -32,7 +33,7 @@
 }
 .bi{
 	font-size:30px;
-	color:#4ECDC4;
+	
 }
 #cate{
 	display:flex;
@@ -72,43 +73,43 @@
 			<!-- 관리자페이지 카테고리 -->
 			<p class="title">전체현황</p>
 			<div id="cate">
-				<i class="bi bi-clipboard-data"></i><span>대시보드</span>
-				<a href="/dashboard.do" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
+				<i class="bi bi-clipboard-data" style="color:#4ECDC4;"></i><span>대시보드</span>
+				<a href="/dashboard.do" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			
 			<p class="title">회원관리</p>
 			<div id="cate">
-				<i class="bi bi-list-ul"></i><span>전체 회원 조회</span>
-				<a href="/allMemberList.do?reqPage=1&type=0&list=1" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
+				<i class="bi bi-list-ul" style="color:#4ECDC4;"></i><span>전체 회원 조회</span>
+				<a href="/allMemberList.do?reqPage=1&type=0&list=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			<div id="cate">
-				<i class="bi bi-exclamation-circle"></i><span>신고 회원 처리</span>
-				<a href="/reportMember.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
+				<i class="bi bi-exclamation-circle" style="color:#4ECDC4;"></i><span>신고 회원 처리</span>
+				<a href="/reportMember.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			<div id="cate">
-				<i class="bi bi-person-dash-fill"></i><span>차단 회원 관리</span>
-				<a href="/blockedMember.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
+				<i class="bi bi-person-dash-fill" style="color:#4ECDC4;"></i><span>차단 회원 관리</span>
+				<a href="/blockedMember.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			
 			<p class="title">공모전</p>
 			<div id="cate">
-				<i class="bi bi-trophy"></i><span>공모전 동록 내역 보기</span>
-				<a href="#" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
+				<i class="bi bi-trophy" style="color:#4ECDC4;"></i><span>공모전 등록 내역</span>
+				<a href="/contestEnrollList.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			<div id="cate">
-				<i class="bi bi-people-fill"></i><span>공모전 신청 회원 보기</span>
-				<a href="#" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
+				<i class="bi bi-people-fill" style="color:#4ECDC4;"></i><span>공모전 신청 회원 보기</span>
+				<a href="#" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			
 			<%-- 민주가 만든 공지사항, qna로 이동 --%>
 			<p class="title">게시판 관리</p>
 			<div id="cate">
-				<i class="bi bi-megaphone"></i><span>공지사항</span>
-				<a href="/noticeList.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
+				<i class="bi bi-megaphone" style="color:#4ECDC4;"></i><span>공지사항</span>
+				<a href="/noticeList.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			<div id="cate">
-				<i class="bi bi-chat-dots"></i><span>QnA</span>
-				<a href="/tocounsel.do" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
+				<i class="bi bi-chat-dots" style="color:#4ECDC4;"></i><span>QnA</span>
+				<a href="/tocounsel.do" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 		</div>
 	</div>
