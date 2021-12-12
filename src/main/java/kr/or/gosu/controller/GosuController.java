@@ -423,9 +423,15 @@ public class GosuController {
 	}
 
 	@RequestMapping(value = "/gosuRequestContent.do")
-	public String gosuRequestContent(int mrn,Model model) {
+	public String gosuRequestContent(int mrn,@SessionAttribute(required = false) Member m,Model model) {
 		GosuRequest gr = service.selectGosuRequestContent(mrn);
+		
+		GosuRequestCost grc = new GosuRequestCost();
+		grc.setRequestNo(gr.getRequestNo());
+		grc.setGosuNo(m.getMemberNo());
+		GosuRequestCost grc2=service.selectRequestNoGosuNo(grc);
 		model.addAttribute("grOne",gr);
+		model.addAttribute("grcOne",grc2);
 		return "gosu/gosuRequestContent";
 	}
 	
@@ -449,7 +455,12 @@ public class GosuController {
 		model.addAttribute("memberRequestCostList",memberRequestCostList);
 		return "gosu/gosuRequestCostList";
 	}
-
+	@ResponseBody
+	@RequestMapping(value = "/selectGosuRequestCost.do")
+	public GosuRequestCost selectGosuRequestCost(int costNo, Model model) {
+		GosuRequestCost gpc = service.selectGosuRequestCost(costNo);
+		return gpc;
+	}
 	@RequestMapping(value = "/gosuProject.do")
 	public String gosuProject() {
 		return "gosu/gosuProject";

@@ -428,6 +428,16 @@
 	<select id="totalContestCount" resultType="_int">
 		select count(*) from contest where CONTEST_STATUS = 1
 	</select>
+	
+	<!-- 공모 승인 -->
+	<update id="contestOK" parameterType="_int">
+		update contest set contest_status = 2 where contest_no = #{contestNo}
+	</update>
+	
+	<!-- 공모 반려 -->
+	<update id="contestNO" parameterType="_int">
+		update contest set contest_status = 3 where contest_no = #{contestNo}
+	</update>
 </mapper>
 
 

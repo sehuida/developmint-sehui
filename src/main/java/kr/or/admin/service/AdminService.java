@@ -422,6 +422,18 @@ public class AdminService {
 		ContestList cl = new ContestList(contestList, start, totalCount, pageNavi);
 		return cl;
 	}
+
+	public Contest enrollContestView(int contestNo) {
+		return dao.enrollContestView(contestNo);
+	}
+
+	public int contestOK(int contestNo) {
+		return dao.contestOK(contestNo);
+	}
+
+	public int contestNO(int contestNo) {
+		return dao.contestNO(contestNo);
+	}
 }
 
 
