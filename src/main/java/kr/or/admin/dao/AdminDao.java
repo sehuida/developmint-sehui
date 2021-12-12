@@ -89,11 +89,6 @@ public class AdminDao {
 		return sqlSession.selectOne("admin.reportCount");
 	}
 
-	public List<String> memberIdList(Map<String, Object> map) {
-		List<String> list = sqlSession.selectList("admin.memberIdList", map);
-		return list;
-	}
-
 	public int memberReportCount(String id) {
 		return sqlSession.selectOne("admin.memberReportCount",id);
 	}
@@ -123,10 +118,6 @@ public class AdminDao {
 		return (ArrayList<Report>)list;
 	}
 
-	public List<String> report5ListMember() {
-		List<String> list = sqlSession.selectList("admin.report5ListMember");
-		return list;
-	}
 
 	public int yesterDayTotalMember(String ydate) {
 		return sqlSession.selectOne("admin.yesterDayTotalMember", ydate);
@@ -141,9 +132,38 @@ public class AdminDao {
 		return (ArrayList<Member>)list;
 	}
 
-	public int totalBlockedCount() {
-		return sqlSession.selectOne("admin.totalBlockedCount");
+	public int totalBlockedCount(Map<String, Object> map) {
+		return sqlSession.selectOne("admin.totalBlockedCount", map);
 	}
+	
+	public List<String> blockedMemberId(Map<String, Object> map) {
+		return sqlSession.selectList("admin.blockedMemberId",map);
+	}
+
+	public List<String> lastReportDate(String memberId) {
+		return sqlSession.selectList("admin.lastReportDate",memberId);
+	}
+
+	public ArrayList<Report> memberReportView(String id) {
+		List<Report> list = sqlSession.selectList("admin.memberReportView",id);
+		return (ArrayList<Report>)list;
+	}
+
+	public List<Integer> concelReportNo(String id) {
+		return sqlSession.selectList("admin.concelReportNo",id);
+	}
+
+	public int cancelReportMember(int no) {
+		return sqlSession.update("admin.cancelReportMember", no);
+	}
+
+	public int changeType(String id) {
+		return sqlSession.update("admin.changeType", id);
+	}
+	
+
+
+	
 
 }
 

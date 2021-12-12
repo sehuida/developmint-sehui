@@ -150,6 +150,16 @@
 	display: flex;
 }
 
+.updateTextBox{
+	display: none;
+}
+.reCommentTextBox{
+	display: none;
+}
+.updateReCommentTextBox{
+	display: none;
+}
+
 
 /* 좋아요 클릭 모션 */
 

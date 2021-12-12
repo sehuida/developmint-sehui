@@ -365,6 +365,7 @@
 												<input type="hidden" name="reportStatus" value="1">
 												<input type="hidden" name="commentContent" value="${cl.commentContent }">
 												<input type="hidden" name="contestNo" value="${cl.boardNo }">
+												<input type="hidden" name="commentId" value="${cl.memberId }">
 									        </form>
 									      </div>
 										  </div>
@@ -484,6 +485,7 @@
 													<input type="hidden" name="reportStatus" value="1">
 													<input type="hidden" name="commentContent" value="${rl.commentContent }">
 													<input type="hidden" name="contestNo" value="${rl.boardNo }">
+													<input type="hidden" name="commentId" value="${rl.memberId }">
 										        </form>
 										      </div>
 											  </div>

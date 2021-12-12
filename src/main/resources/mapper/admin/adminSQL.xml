@@ -186,6 +186,7 @@
 					report_reason as reportReason,
 					report_etc as reportEtc,
 					comment_no as commentNo,
+					comment_id as commentId,
 					report_date as reportDate,
 					report_status as reportStatus,
 					comment_content as commentContent,
@@ -200,23 +201,9 @@
 		select count(*) from report where report_status = 1
 	</select>
 	
-	<!-- 신고된 아이디 리스트 조회 -->
-	<select id="memberIdList" parameterType="map" resultType="string">
-		select rt.memberId from(select memberId, rownum as rnum
-		from(select c.MEMBER_ID as memberId, R.REPORT_STATUS, R.REPORT_NO
-		from report r 
-		join COMMENTS c using(COMMENT_NO)
-		where R.REPORT_STATUS = 1
-		order by R.REPORT_NO desc))rt
-        where rnum BETWEEN #{start} and #{end}
-	</select>
-	
 	<!-- 해당 아이디 신고 횟수 조회-->
 	<select id="memberReportCount" parameterType="string" resultType="_int">
-		select count(id) from(select c.MEMBER_ID as id, report.REPORT_STATUS rs
-		from report 
-		join COMMENTS c using(COMMENT_NO))
-		where id = #{id} and rs = 2
+		select count(*) from report where comment_id = #{id} and report_status = 2
 	</select>
 	
 	<!-- 신고 반려 처리 -->
@@ -275,28 +262,13 @@
 					report_reason as reportReason,
 					report_etc as reportEtc,
 					comment_no as commentNo,
+					comment_id as commentId,
 					report_date as reportDate,
 					report_status as reportStatus,
 					comment_content as commentContent,
 					enroll_date as enrollDate
 				from REPORT where report_status != 1 order by enroll_date desc)r 
 			order by rnum) 
-		where rnum BETWEEN 1 and 5
-	</select>
-	
-	<!-- 최근 신고 목록 아이디 조회 -->
-	<select id="report5ListMember" resultType="string">
-		select memberId 
-		from(
-			select 
-				rownum as rnum, 
-				c.MEMBER_ID as memberId, 
-				R.REPORT_STATUS as status,
-				R.enroll_date as enrollDate
-		from report r 
-		join COMMENTS c using(COMMENT_NO)
-		where R.REPORT_STATUS != 1
-		order by r.ENROLL_DATE desc)
 		where rnum BETWEEN 1 and 5
 	</select>
 	
@@ -336,15 +308,92 @@
 			filepath,
 			member_grade as memberGrade
 		from member
+		where member_type = 4 
+		<if test="id != null">
+			and member_id like '%'||#{id}||'%' 
+		</if>
+		 order by member_no desc)m order by rnum) 
+		where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 총 차단 회원 -->
+	<select id="totalBlockedCount" parameterType="map" resultType="_int"> 
+		select count(*) from member where member_type = 4
+		<if test="id != null">
+			and member_id like '%'||#{id}||'%' 
+		</if>
+	</select>
+	
+	<!-- 차단 회원 아이디 목록 -->
+	<select id="blockedMemberId" parameterType="map" resultType="string">
+		select memberId
+		from(select rownum as rnum, m.* 
+		from(
+		select 
+			member_no as memberNo,
+			member_name as memberName,
+			phone,
+			member_id as memberId,
+			member_pw as memberPw,
+			email,
+			member_type as memberType,
+			enroll_date as enrollDate,
+			filepath,
+			member_grade as memberGrade
+		from member
 		where member_type = 4
 		 order by member_no desc)m order by rnum) 
 		where rnum BETWEEN #{start} and #{end}
 	</select>
 	
-	<select id="totalBlockedCount" resultType="_int"> 
-		select count(*) from member where member_type = 4
+	<!-- 마지막 신고일 계산 -->
+	<select id="lastReportDate" parameterType="string" resultType="string">
+		select ENROLL_DATE from(select rownum as rnum, ENROLL_DATE from report 
+		where comment_id = #{memberId} and report_status = 2
+		order by enroll_date desc)
+		where rnum = 1
 	</select>
-
+	
+	<!-- 회원 한명 신고 리스트 -->
+	<select id="memberReportView" parameterType="string" resultType="rp">
+		select 
+			report_no as reportNo,
+			reporter_id as reporterId,
+			report_reason as reportReason,
+			report_etc as reportEtc,
+			comment_no as commentNo,
+			comment_id as commentId,
+			report_date as reportDate,
+			report_status as reportStatus,
+			comment_content as commentContent,
+			enroll_date as enrollDate
+		from report where comment_id = #{value} and report_status = 2 
+		order by enroll_Date desc
+	</select>
+	
+	<!-- 신고번호 조회-->
+	<select id="concelReportNo" parameterType="string" resultType="_int">
+		select report_no 
+		from(
+			select rownum as rnum, r.* 
+			from(
+				select report_no 
+				from report 
+				where COMMENT_ID = #{value} and REPORT_STATUS = 2 
+				order by enroll_date desc)r) 
+		where rnum >= 5
+	</select>
+	
+	<!-- 신고취소 -->
+	<update id="cancelReportMember" parameterType="_int">
+		update report set report_status = 5  where report_no = #{no}
+	</update>
+	
+	<!-- 타입 변경 -->
+	<update id="changeType" parameterType="string">
+		update member set member_type = 1, member_grade = 10  where member_id = #{value}
+	</update>
+	
 </mapper>
 
 

@@ -17,6 +17,25 @@
 			$(".return_img").css("cursor", "pointer");
 			history.back();
 		});
+		
+		$("#updateComment1").click(function(){
+			$("#updateComment1").css("cursor", "pointer");
+			$(this).parent().parent().next().css("display", "block");
+		});
+		
+		$("#insertReComment1").click(function(){
+			$("#insertReComment1").css("cursor", "pointer");
+			$(this).parent().parent().next().next().css("display", "block");
+		});
+		$("#cancelBtn1").click(function(){
+			$(this).parent().parent().parent().css("display", "none");
+		});
+		
+		$("#updateReComment").click(function(){
+			$("#updateReComment").css("cursor", "pointer");
+			$(this).parent().next().css("display", "block");
+		});
+		
 	});
 	
 </script>
@@ -152,91 +171,154 @@
                 <div class="commentTitle">
                     <p class="commentTitleText"><span>${pt.commentCount }</span>개의 댓글이 있습니다.</p>
                 </div>
-                <div class="form-group">
-                	<c:choose>
-                		<c:when test="${memberNo == -1 }">
-                			<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="로그인 후 작성 가능합니다." disabled="disabled"></textarea>
-                		</c:when>
-                		<c:otherwise>
-                			<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요."></textarea>
-                		</c:otherwise>
-                	</c:choose>
-                </div>
-                <div class="commentBtnBox">
-                	<c:choose>
-                		<c:when test="${memberNo == -1 }">
-                			 <button type="button" class="btn btn-outline-primary" disabled="disabled">등록</button>
-                		</c:when>
-                		<c:otherwise>
-                			 <button type="button" class="btn btn-outline-primary">등록</button>
-                		</c:otherwise>
-                	</c:choose>
-                   
-                </div>
+                <form action="/insertComment.do" method="post">
+                	<div class="form-group">
+	                	<c:choose>
+	                		<c:when test="${memberNo == -1 }">
+	                			<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="로그인 후 작성 가능합니다." disabled="disabled"></textarea>
+	                		</c:when>
+	                		<c:otherwise>
+	                			<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요." name="commentContent" maxlength="49"></textarea>
+	                			<input type="hidden" name="boardNo" value="${pt.projectNo }">
+	                			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+	                			<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+	                		</c:otherwise>
+	                	</c:choose>
+	                </div>
+	                <div class="commentBtnBox">
+	                	<c:choose>
+	                		<c:when test="${memberNo == -1 }">
+	                			 <button type="button" class="btn btn-outline-primary" disabled="disabled">등록</button>
+	                		</c:when>
+	                		<c:otherwise>
+	                			 <button type="submit" class="btn btn-outline-primary">등록</button>
+	                			 <button type="reset" class="btn btn-outline-primary">초기화</button>
+	                		</c:otherwise>
+	                	</c:choose>
+	                </div>
+                </form>
             </div>
             <div class="commentBox">
-                <div class="commmentInfoFlexBox">
-                    <div class="profileImgBox">
-                        <img class="profileImg" src="/resources/img/recruitTeamProject/common/user.png">
-                    </div>
-                    <p class="memberIdText">MemberId</p>
-                    <p class="commentDate">2021-11-28 21:03</p>
-                </div>
-                <div class="commentContent">
-                    <div class="list-group">
-                        <a class="list-group-item list-group-item-action flex-column align-items-start active">
-                            <p class="mb-1">AWS 내 돈 나가나요?</p>
-                        </a>
-                    </div>
-                    <div class="updateFunction">
-                        <a href="#" class="updateText">편집</a>
-                        <a href="#" class="updateText">삭제</a>
-                        <a href="#" class="updateText">대댓글 달기</a>
-                    </div>
-                    <div class="updateTextBox">
-                        <div class="form-group">
-                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요."></textarea>
-                        </div>
-                        <div class="commentBtnBox">
-                            <button type="button" class="btn btn-outline-primary">취소</button>
-                            <button type="button" class="btn btn-outline-primary">등록</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="nestedCommentFlexBox">
-                    <div class="nestedCommnetImgBox">
-                        <img src="/resources/img/recruitTeamProject/common/left-arrow.png" class="nestedCommnetImg">
-                    </div>
-                    <div class="nestedCommentBox">
-                        <div class="commmentInfoFlexBox">
-                            <div class="profileImgBox">
-                                <img class="profileImg" src="/resources/img/recruitTeamProject/common/user.png">
-                            </div>
-                            <p class="memberIdText">MemberId</p>
-                            <p class="commentDate">2021-11-28 21:16</p>
-                        </div>
-                        <div class="commentContent">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <p class="mb-1">네 나갑니다.</p>
-                                </a>
-                            </div>
-                            <div class="updateFunction">
-                                <a href="#" class="updateText">수정</a>
-                                <a href="#" class="updateText">삭제</a>
-                            </div>
-                            <div class="updateTextBox">
-                                <div class="form-group">
-                                    <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요."></textarea>
-                                </div>
-                                <div class="commentBtnBox">
-                                    <button type="button" class="btn btn-outline-primary">취소</button>
-                                    <button type="button" class="btn btn-outline-primary">등록</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            	<c:forEach items="${commentList }" var="cl">
+            		<div class="commmentInfoFlexBox">
+	                    <div class="profileImgBox">
+	                    	<c:choose>
+	                    		<c:when test="${cl.writerImgPath eq null}">
+	                    			<img class="profileImg" src="/resources/img/recruitTeamProject/common/user.png">
+	                    		</c:when>
+	                    		<c:otherwise>
+	                    			<img class="profileImg" src="/resources/upload/member/${cl.writerImgPath }">
+	                    		</c:otherwise>
+	                    	</c:choose>
+	                    </div>
+	                    <p class="memberIdText">${cl.memberId }</p>
+	                    <p class="commentDate">${cl.regDate }</p>
+	                </div>
+	                <div class="commentContent">
+	                    <div class="list-group">
+	                        <a class="list-group-item list-group-item-action flex-column align-items-start active">
+	                            <p class="mb-1">${cl.commentContent }</p>
+	                        </a>
+	                    </div>
+	                    <div class="updateFunction">
+	                    	<c:choose>
+	                    		<c:when test="${sessionScope.m.memberId == cl.memberId }">
+	                    			<p class="updateText" id="updateComment1">수정</p>
+	                        		<a href="/deleteComment.do?commentNo=${cl.commentNo }&projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" class="updateText" id="deleteBtn1">삭제</a>
+	                    		</c:when>
+	                    		<c:when test="${sessionScope.m.memberId == cl.memberId && memberNo != -1 }">
+	                    			<p class="updateText" id="insertReComment1">대댓글 달기</p>
+	                    		</c:when>
+	                    	</c:choose>
+	                    </div>
+	                    <div class="updateTextBox">
+	                    	<form action="updateComment.do" method="post">
+		                        <div class="form-group">
+		                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요." name="commentContent" maxlength="49"></textarea>
+		                            <input type="hidden" name="commentNo" value="${cl.commentNo }">
+		                            <input type="hidden" name="projectNo" value="${pt.projectNo }">
+	                				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+		                        </div>
+		                        <div class="commentBtnBox">
+		                        	<button type="submit" class="btn btn-outline-primary">수정</button>
+		                            <button type="reset" class="btn btn-outline-primary">초기화</button>
+		                            <button type="button" class="btn btn-outline-primary" id="cancelBtn1">취소</button>
+		                        </div>
+	                        </form>
+	                    </div>
+	                    <div class="reCommentTextBox">
+	                    	<form action="reCommentInsert.do" method="post">
+		                        <div class="form-group">
+		                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요." name="commentContent" maxlength="49"></textarea>
+		                            <input type="hidden" name="boardNo" value="${pt.projectNo }">
+		                            <input type="hidden" name="commentNo" value="${cl.commentNo }">
+	                				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+	                				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+		                        </div>
+		                        <div class="commentBtnBox">
+		                        	<button type="submit" class="btn btn-outline-primary">등록</button>
+		                            <button type="reset" class="btn btn-outline-primary">초기화</button>
+		                            <button type="button" class="btn btn-outline-primary" id="cancelBtn1">취소</button>
+		                        </div>
+	                        </form>
+	                    </div>
+	                </div>
+	                <c:forEach items="${commentList }" var="cll">
+	                	<c:if test="${cll.commentType == 2 && cl.commentNo == cll.commentRef}">
+	                		<div class="nestedCommentFlexBox">
+			                    <div class="nestedCommnetImgBox">
+			                        <img src="/resources/img/recruitTeamProject/common/left-arrow.png" class="nestedCommnetImg">
+			                    </div>
+			                    <div class="nestedCommentBox">
+			                        <div class="commmentInfoFlexBox">
+			                            <div class="profileImgBox">
+					                    	<c:choose>
+					                    		<c:when test="${cll.writerImgPath eq null}">
+					                    			<img class="profileImg" src="/resources/img/recruitTeamProject/common/user.png">
+					                    		</c:when>
+					                    		<c:otherwise>
+					                    			<img class="profileImg" src="/resources/upload/member/${cll.writerImgPath }">
+					                    		</c:otherwise>
+					                    	</c:choose>
+					                    </div>
+			                            <p class="memberIdText">${cll.memberId }</p>
+			                            <p class="commentDate">${cll.regDate }</p>
+			                        </div>
+			                        <div class="commentContent">
+			                            <div class="list-group">
+			                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+			                                    <p class="mb-1">${cll.commentContent }</p>
+			                                </a>
+			                            </div>
+			                            <div class="updateFunction">
+					                    	<c:choose>
+					                    		<c:when test="${sessionScope.m.memberId == cl.memberId }">
+					                    			<p class="updateText" id="updateReComment">수정</p>
+					                        		<a href="/deleteComment.do?commentNo=${cll.commentNo }&projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}"><p class="updateText">삭제</p></a> 
+					                    		</c:when>
+					                    	</c:choose>
+					                    </div>
+			                            <div class="updateReCommentTextBox">
+			                                <form action="/updateComment.do" method="post">
+				                                <div class="form-group">
+				                                    <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요." name="commentContent" maxlength="49"></textarea>
+				                                    <input type="hidden" name="commentNo" value="${cll.commentNo }">
+						                            <input type="hidden" name="projectNo" value="${pt.projectNo }">
+					                				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+				                                </div>
+				                                <div class="commentBtnBox">
+				                                    <button type="submit" class="btn btn-outline-primary">수정</button>
+						                            <button type="reset" class="btn btn-outline-primary">초기화</button>
+						                            <button type="button" class="btn btn-outline-primary" id="cancelBtn">취소</button>
+				                                </div>
+			                                </form>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+	                	</c:if>
+	                </c:forEach>
+            	</c:forEach>
             </div>
         </div>
 	</div>

@@ -84,6 +84,7 @@ public class ResumeController {
 		int ceoResume = r.getCeoResume();
 		Resume resume = service.selectCeoResume(ceoResume);
 		Member m = service.selectOneMember(resume.getMemberNo());
+		System.out.println("resumeView 확인 r : " + resume);
 		model.addAttribute("r", resume);
 		model.addAttribute("m", m);		
 		return "resume/ceoResumeView";

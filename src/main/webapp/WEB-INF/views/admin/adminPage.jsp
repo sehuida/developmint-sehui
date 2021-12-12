@@ -79,10 +79,10 @@
 			<p class="title">회원관리</p>
 			<div id="cate">
 				<i class="bi bi-list-ul"></i><span>전체 회원 조회</span>
-				<a href="/allMemberList.do?reqPage=1&type=0&list=1&id=null" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
+				<a href="/allMemberList.do?reqPage=1&type=0&list=1" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
 			</div>
 			<div id="cate">
-				<i class="bi bi-exclamation-circle"></i><span>신고 회원 조회</span>
+				<i class="bi bi-exclamation-circle"></i><span>신고 회원 처리</span>
 				<a href="/reportMember.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right"></i></a>
 			</div>
 			<div id="cate">
