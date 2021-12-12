@@ -359,5 +359,19 @@
 		from
 		gosu_request_cost where REQUEST_NO = #{requestNo} and GOSU_NO =#{gosuNo}
 	</select>
+	<select id="selectGosuRequestCost" parameterType="int"
+		resultType="grc">
+		select
+		COST_NO as costNo,
+		GOSU_NO as gosuNo,
+		REQUEST_NO
+		as requestNo,
+		COST_CONTENT as costContent,
+		cost,
+		COST_DATE as costDate,
+		MEMBER_ID as memberId
+		from
+		gosu_request_cost where COST_NO = #{costNo}
+	</select>
 	
 </mapper>

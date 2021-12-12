@@ -207,4 +207,10 @@ public class GosuService {
 		return requestNoGosuNo;
 	}
 
+	public GosuRequestCost selectGosuRequestCost(int costNo) {
+		GosuRequestCost gosuRequestCost = dao.selectGosuRequestCost(costNo);
+		gosuRequestCost.setGosuId(dao.selectGosuId(gosuRequestCost.getGosuNo()));
+		return gosuRequestCost;
+	}
+
 }

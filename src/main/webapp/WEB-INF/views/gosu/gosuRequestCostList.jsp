@@ -78,6 +78,62 @@ input:focus, textarea:focus {
 	display: flex;
 	justify-content: center;
 }
+
+.g-style {
+	text-align: center;
+	margin: 10px;
+	display: flex;
+	justify-content: center;
+}
+
+.hrm-wrap {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10000;
+}
+
+#hrm-modal {
+	background-color: white;
+	width: 800px;
+	padding: 30px;
+}
+
+.hrm-btn-wrap {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.hrm-btn-wrap a {
+	margin: 30px;
+	margin-top: 50px;
+	padding: 10px;
+	width: 100px;
+}
+
+.hrm-content span {
+	font-size: 30px;
+	font-weight: 900;
+}
+
+.hrm-content input {
+	border: none;
+	background: transparent;
+	text-align: center;
+}
+.hrm-content td, .hrm-content th {
+	font-size: 30px;
+	font-weight: 900;
+	width: 400px;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -109,9 +165,11 @@ input:focus, textarea:focus {
 								</tr>
 								<tr>
 									<th>비용 ${mrcl.cost}원</th>
-									<td style="display: flex; justify-content: right;"><a
-										href="/gosuProject.do" class="btn btn-primary"
-										style="width: 150px;">진행하기</a></td>
+									<td style="display: flex; justify-content: right;">
+										<button type="button"
+											onclick="gosuProjectJSPAjax(${mrcl.costNo});"
+											class="btn btn-primary" style="width: 150px;">진행하기</button>
+									</td>
 								</tr>
 							</table>
 						</td>
@@ -119,12 +177,102 @@ input:focus, textarea:focus {
 				</c:forEach>
 
 			</table>
-
-
 		</div>
+		<div class="hrm-wrap" style="display: none; margin: 0;">
+			<div id="hrm-modal">
+				<div class="hrm-content">
+					<br>&nbsp;&nbsp;&nbsp;&nbsp; <span>결제하시겠습니까?</span> <br> <br> <br>
+					<div class="g-style">
+						<table>
+							<tr>
+								<th><span style="color: rgb(78, 205, 196);">고수</span></th>
+								<td><input type="text" id="gosuIdSend" disabled></td>
+							</tr>
+							<tr>
+								<th>날짜</th>
+								<td><input type="text" id="costDateSend" disabled>
+								</td>
+							</tr>
+							<tr>
+								<th>내용</th>
+								<td><input type="text" id="contentSend" disabled>
+								</td>
+							</tr>
+							<tr>
+								<th>견적비용</th>
+								<td><input type="text" id="costSend" disabled>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+				</div>
+				<div class="hrm-btn-wrap">
+
+					<a  class="btn btn-success">결제 진행</a> <a
+						id="hrm-close" class="btn btn-outline-success">취소</a>
+				</div>
+			</div>
+		</div>
+
 
 		<div id="pageNavi"></div>
 	</div>
+	<script>
+		$("#hrm-close").click(function() {
+			$(".hrm-wrap").css("display", "none");
+		});
+		function gosuProjectJSPAjax(costNo){
+			$(".hrm-wrap").css("display", "flex");
+			$.ajax({
+				url : "/selectGosuRequestCost.do",
+				data : {
+					"costNo" : costNo
+				},
+				success : function(data) {
+					console.log(data);
+					$("#costSend").val(data.cost+" 원");
+					$("#contentSend").val(data.costContentBr);
+					$("#gosuIdSend").val(data.gosuId);
+					$("#costDateSend").val(data.costDate);
+
+				}
+			});
+			
+			
+		};
+
+		$("#costSendAjax").click(function() {
+			var requestNo = $("#requestNoSend").val();
+			var gosuNo = $("#gosuNoSend").val();
+			var cost = $("#costSend").val();
+			var content = $("#contentSend").val();
+			var memberId = $("#memberIdSend").val();
+			$.ajax({
+				url : "/gosuRequestCostInsert.do",
+				data : {
+					"requestNo" : requestNo,
+					"gosuNo" : gosuNo,
+					"cost" : cost,
+					"content" : content,
+					"memberId" : memberId
+				},
+				success : function(data) {
+					console.log(data);
+					if (data > 0) {
+						alert("견적서를 보냈습니다!");
+						location.href = "/gosuMain.do";
+					} else {
+
+						alert("견적서를 보내지 못했습니다. 관리자에게 문의해주세요");
+						location.href = "/";
+					}
+
+				}
+			});
+		});
+	</script>
+
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>

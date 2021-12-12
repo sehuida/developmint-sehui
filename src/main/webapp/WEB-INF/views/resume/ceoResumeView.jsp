@@ -79,10 +79,8 @@
 	.title{
 		margin-top: 100px;
 	}
-	.schoolInfo{
-		margin: 0 auto;
-		width: 1020px;
-		padding: 30px 0px;
+	.siTable{
+		height: 100px;		
 	}
 	.si>th, .si>td{
 		padding: 0px 100px;
@@ -92,6 +90,52 @@
 	}
 	.bar{
 		border-top: 2px solid #666;
+	}
+	.certiTable{
+		width: 1000px;
+	}
+	.sf{
+		width: 1000px;
+		border: 1px solid #888;
+		border-top: none;
+	}
+	.sf>p{
+		padding: 0px 40px;
+		padding-top: 30px;
+		padding-bottom: 10px;
+		font-size: 15px;
+	}
+	.selectBtn{
+		margin-top: 50px;
+		text-align: center;
+	}
+	.backBtn{
+		background-color: orange;
+		color: white;
+		width: 150px;
+		height: 60px;
+		font-size: 20px;
+		font-weight: 900;
+		border: none;
+		border-radius: 10px;
+		transition: background-color 1s;
+	}
+	.backBtn:hover{
+		background-color: red;
+	}
+	.updateResume{
+		background-color: rgb(78, 205, 196);
+		color: white;
+		width: 150px;
+		height: 60px;
+		font-size: 20px;
+		font-weight: 900;
+		border: none;
+		border-radius: 10px;
+		transition: background-color 1s;
+	}
+	.updateResume:hover{
+		background-color: rgb(0, 174, 255);
 	}
 </style>
 <body>
@@ -212,10 +256,10 @@
 			</span></h3>
 			<div class="bar"></div>
 			<div class="schoolInfo">
-				<table class="siTable">
-	                	<tr class="si" style="text-align: center;">
-	                        <th>재학기간</th>
-	                        <th>학교명</th>
+				<table class="siTable" style=" width:1000px; border: 1px solid #888; border-top: none;">
+	                	<tr class="si" style="text-align: center; background-color: #F7F7F7;">
+	                        <th style="border-righr: 1px solid #888">재학기간</th>
+	                        <th style="border-righr: 1px solid #888">학교명</th>
 	                        <th>전공</th>
 	                    </tr>
 	                    <tr class="si">
@@ -256,17 +300,97 @@
 			<div class="myTech title">
 				<h3>보유기술</h3>
 				<div class="bar"></div>
-				<table class="techTable">
+				<table class="techTable" style="border: 1px solid #888; border-top: none;">
 					<tr>
-						<th>보유기술</th>
+						<th style="background-color: #F7F7F7; width: 1000px; text-align: center; height: 50px;">보유기술</th>
 					</tr>
 					<tr>
-						<td>${r.myTech }</td>			<!-- css하기   귀차너 -->
+						<%-- <c:forEach items="${r.myTech }" var="rs" varStatus="i">
+							
+						</c:forEach> --%>
+						<td style="padding: 5px 10px; height: 50px;">${r.myTech }</td>							
 					</tr>
 				</table>
 			</div>
 		</c:if>
 		
+		<c:if test="${not empty r.military }">
+			<div class="military title">
+				<h3>취업우대사항</h3>
+				<div class="bar"></div>
+				<table class="militaryTable" style="width: 1000px;">
+					<tr style="border: 1px solid #888;">
+						<th style="background-color: #F7F7F7; width: 150px; height: 60px; text-align: center;">병역대상</th>
+							<c:if test="${r.military eq 1 }">
+								<td style="padding-left: 15px;">대상아님</td>
+							</c:if>
+							<c:if test="${r.military eq 2 }">
+								<td style="padding-left: 15px;">군필</td>
+							</c:if>
+							<c:if test="${r.military eq 3 }">
+								<td style="padding-left: 15px;">미필</td>
+							</c:if>
+							<c:if test="${r.military eq 4 }">
+								<td style="padding-left: 15px;">면제</td>
+							</c:if>
+							<c:if test="${r.military eq 5 }">
+								<td style="padding-left: 15px;">복무중</td>
+							</c:if>
+					</tr>
+					<c:if test="${not empty r.veterans }">
+						<c:if test="${r.veterans eq 2 }">
+							<tr>
+								<th>보훈대상</th>
+								<td>대상자</td>
+							</tr>						
+						</c:if>
+					</c:if>
+				</table>
+			</div>
+		</c:if>
+		
+		<c:if test="${not empty r.certiName }">
+			<div class="certi title">
+				<h3>자격증</h3>
+				<div class="bar"></div>
+				<table class="certiTable">
+					<tr style="border: 1px solid #888; border-top: none; height: 50px; background-color: #F7F7F7;">
+						<th style="text-align: center; border-right: 1px solid #888">취득일</th>
+						<th style="text-align: center; border-right: 1px solid #888">자격증명</th>
+						<th style="text-align: center; border-right: 1px solid #888">발행처</th>
+						<th style="text-align: center;">합격</th>
+					</tr>
+					<tr style="border: 1px solid #888; border-top: none; height: 50px;">
+					<td style="text-align: center; border-right: 1px solid #888">${r.certiDate }</td>
+					<td style="text-align: center; border-right: 1px solid #888">${r.certiName }</td>
+					<td style="text-align: center; border-right: 1px solid #888">${r.certiIssue }</td>
+					<c:if test="${r.certiPass eq 1 }">
+						<td style="text-align: center;">필기합격</td>
+					</c:if>
+					<c:if test="${r.certiPass eq 2 }">
+						<td style="text-align: center;">실기합격</td>
+					</c:if>
+					<c:if test="${r.certiPass eq 3 }">
+						<td style="text-align: center;">최종합격</td>
+					</c:if>
+				</table>
+			</div>
+		</c:if>
+		
+		<c:if test="${not empty r.selfintroName }">
+			<div class="selfintro title">
+				<h3>자기소개서</h3>
+				<div class="bar"></div>
+				<div class="sf">
+					<p style="font-size: 16px; font-weight: 900;">[${r.selfintroName }]</p>
+					<p style="padding-top: 0px;">${r.selfintroContent }</p>			
+				</div>
+			</div>
+		</c:if>
+		<div class="selectBtn">
+			<input type="button" onclick="history.go(-1)" class="backBtn" value="돌아가기">
+			<a href="updateResumeFrm.do?ceoResume=${r.ceoResume }"><button class="updateResume">수정하기</button></a>
+		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
