@@ -1,5 +1,6 @@
 package kr.or.admin.service;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -10,7 +11,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.StringTokenizer;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -448,8 +459,15 @@ public class AdminService {
 		map.put("start", start);
 		map.put("end", end);
 		map.put("date", date);
-		ArrayList<Contest> contestList = dao.contestDateList(map);		
-
+		ArrayList<Contest> contestList = dao.contestDateList(map);	
+		
+		List<Integer> contestMemberCount = new ArrayList<Integer>();
+		
+		for(int i = 0;i<contestList.size();i++) {
+			contestMemberCount.add(dao.contestMemberCount(contestList.get(i).getContestNo()));
+		}
+		
+		
 		//페이지 네비게이션 제작
 		int totalCount = dao.totalContestDateCount(date);
 		
@@ -493,16 +511,93 @@ public class AdminService {
 		}
 		pageNavi += "</ul>";	
 		
-		ContestList cl = new ContestList(contestList, start, totalCount, pageNavi);
-		
-		
-		
+		ContestList cl = new ContestList(contestList, start, pageNavi, totalCount, contestMemberCount);
 		
 		return cl;
 	}
 
 	public ArrayList<ContestMemberList> searchContestMember(int contestNo) {
 		return dao.searchContestMember(contestNo);
+	}
+	
+	@Transactional
+	public boolean MemberEnrollContest(String memberId, int status, int contestNo, String email) {
+		
+		StringTokenizer st1 = new StringTokenizer(memberId,"/");
+		boolean result = true;
+		int result1 = 0;
+		while(st1.hasMoreTokens()) {
+			String id = st1.nextToken();
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("id", id);
+			map.put("status", status);
+			map.put("contestNo", contestNo);
+			result1 = dao.MemberEnrollContest(map);
+			if(result1 == 0) {
+				result = false;
+				break;
+			}
+		}
+		if(email != null) {
+			//회원목록 불러오기
+			ArrayList<ContestMemberList> cmList = dao.enrollMemberList(contestNo);
+			
+			String mailContent = "<p>-----------------------------------</p>";
+			for(int i=0;i<cmList.size();i++) {
+				mailContent += "<h4>"+(i+1)+".</h4>";
+				mailContent +=  "<p> 회원 아아디 : "+cmList.get(i).getMemberId()+"</p>";
+				mailContent += "<p> 회원 이메일 : "+cmList.get(i).getEmail()+"</p>";
+				mailContent += "<p> 회원 전화번호 : "+cmList.get(i).getPhone()+"</p>";
+				mailContent += "<p> 회원 깃주소 : "+cmList.get(i).getCmGit()+"</p>";
+			}
+			
+			
+			
+			//이메일 설정
+			Properties prop = System.getProperties();
+			prop.put("mail.smtp.host", "smtp.gmail.com");
+			prop.put("mail.smtp.port", 587);
+			prop.put("mail.smtp.auth", "true");
+			prop.put("mail.smtp.starttls.enable", true);
+			prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
+			prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+			
+			//인증정보설정(gmail 로그인)
+			Session session = Session.getDefaultInstance(prop, new Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					PasswordAuthentication pa = new PasswordAuthentication("develeomints@gmail.com", "ehdrn1234!");
+					return pa;
+				}
+			});
+			
+			//이메일을 작성해서 전송하는 객체 생성
+			MimeMessage msg = new MimeMessage(session);
+			
+			
+			try {
+				msg.setSentDate(new Date());		//메일 전송날짜 설정
+				//보내는사람 정보
+				msg.setFrom(new InternetAddress("develeomints@gmail.com","Develomints"));
+				//받는사람정보
+				InternetAddress to = new InternetAddress(email);
+				msg.setRecipient(Message.RecipientType.TO, to);
+				//이메일 제목설정
+				msg.setSubject("공모전 신청 회원 목록","UTF-8");
+				//이메일 내용설정
+				msg.setContent("<h3>공모전 신청회원 목록입니다.</h3><br><br>"+mailContent+"<p>-----------------------------------</p>"
+						,"text/html;charset=UTF-8");
+				//이메일 전송
+				Transport.send(msg);
+				result = true;
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 }
 

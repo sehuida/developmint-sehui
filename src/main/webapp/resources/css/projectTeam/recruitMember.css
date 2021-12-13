@@ -13,6 +13,11 @@
     padding-right: 30px;
     
 }
+
+.rListBox{
+	margin-top: 100px;
+}
+
 .language_icon{
     opacity: 1;
     width: 60px;
@@ -122,6 +127,7 @@
 .contentBox{
     width: 600px;
     border: 2px solid #90d1b4;
+    margin-right: 120px;
 }
 .textFlexBox1{
     display: flex;
@@ -166,6 +172,15 @@
 	margin-left : 10px;
     width: 20px;
     height: 20px;
+}
+
+.countBox img:nth-last-child(){
+	position: relative;
+	top : 10px;
+}
+.countImg:nth-last-child(){
+	position: relative;
+	top : 10px;
 }
 
 .countBox{

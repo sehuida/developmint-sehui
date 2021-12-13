@@ -285,6 +285,8 @@
 		}
 		
 		
+		
+		
 		$(".resumeBtn").click(function(e){
 			var count = $(".count").html();
 			if($(".count").html() > 10) {

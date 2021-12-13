@@ -33,12 +33,12 @@
 				swal("선택 값 초과", "최대 3개 까지 선택이 가능합니다.", "warning");
 			}
 		});
-		
-		 $('#maxContentPost').change(function(){
-	        	if($('#maxContentPost').text < 0){
+		 
+		 $('#maxContentPost').on('DOMSubtreeModified propertychange',function(){
+	        	if($('#maxContentPost').text() < 0){
 	            	result = false;
 	            }
-	        	if($('#maxContentPost').text >= 0){
+	        	if($('#maxContentPost').text() >= 0){
 	        		result = true;
 	            }
 	     });
@@ -192,7 +192,6 @@
 			contentType : false,
 			success : function(data){
 				$(editor).summernote("insertImage",data);
-				
 			}
 		});
 	}

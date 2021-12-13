@@ -196,6 +196,19 @@ public class AdminDao {
 		List<ContestMemberList> list = sqlSession.selectList("admin.searchContestMember",contestNo);
 		return (ArrayList<ContestMemberList>)list;
 	}
+
+	public int MemberEnrollContest(Map<String, Object> map) {
+		return sqlSession.update("admin.MemberEnrollContest",map);
+	}
+
+	public Integer contestMemberCount(int contestNo) {
+		return sqlSession.selectOne("admin.contestMemberCount",contestNo);
+	}
+
+	public ArrayList<ContestMemberList> enrollMemberList(int contestNo) {
+		List<ContestMemberList> list = sqlSession.selectList("admin.enrollMemberList",contestNo);
+		return (ArrayList<ContestMemberList>)list;
+	}
 	
 
 

@@ -105,7 +105,14 @@
                     </div>
                     <div class="deadBtnBox">
 	                    <c:if test="${sessionScope.m.memberNo eq pt.projectWriterMemberNo}">
-	                    	<button type="button" class="btn btn-primary">모집 마감</button>
+	                    	<c:choose>
+	                    		<c:when test="${pt.projectStatus == 1 }">
+			                    	<a href="closeRecruitTeam.do?projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}"><button type="button" class="btn btn-primary">모집 마감</button></a>
+	                    		</c:when>
+	                    		<c:otherwise>
+	                    			<button type="button" class="btn btn-primary" disabled="disabled">모집 마감</button>
+	                    		</c:otherwise>
+	                    	</c:choose>
 	                    </c:if>
                     </div>
                 </div>
@@ -132,7 +139,7 @@
                     		</c:when>
                     		<c:otherwise>
                     			<c:choose>
-                    				<c:when test="${memberNo == -1 || pt.projectStatus != 1}">
+                    				<c:when test="${memberNo == -1 || pt.projectStatus != 1 || pt.applyValue ne 0}">
                     					<button type="button" class="btn btn-primary" disabled="disabled">프로젝트 지원</button>
                     				</c:when>
                     				<c:otherwise>
@@ -144,33 +151,32 @@
                     </div>
                     <div class="bottomContentFlexBox_iconBox">
                         <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
-                        <span class="countText">${pt.viewCount }</span>
+                        <span class="countText" style="position: relative; top: 13px; margin-right: 20px;">${pt.viewCount }</span>
                         <c:choose>
                         	<c:when test="${memberNo == -1 }">
                         		<c:choose>
 		                        	<c:when test="${pt.dibCountClickValue ne 0 }">
-		                        		<img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png">
+		                        		<img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png" style="position: relative; top: 3px;">
 		                        	</c:when>
 		                        	<c:otherwise>
-		                        		<img class="countImg" src="/resources/img/recruitTeamProject/common/empty_hart.png">
+		                        		<img class="countImg" src="/resources/img/recruitTeamProject/common/empty_hart.png" style="position: relative; top: 3px;">
 		                        	</c:otherwise>
 		                        </c:choose>
                         	</c:when>
                         	<c:otherwise>
                         		<c:choose>
 		                        	<c:when test="${pt.dibCountClickValue ne 0 }">
-		                        		<a href="/deleteDibCount.do?memberNo=${sessionScope.m.memberNo }&projectNo=${pt.projectNo}"><img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png"></a>
+		                        		<a href="/deleteDibCount.do?memberNo=${sessionScope.m.memberNo }&projectNo=${pt.projectNo}"><img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png" style="position: relative; top: 3px;"></a>
 		                        	</c:when>
 		                        	<c:otherwise>
-		                        		<a href="/insertDibCount.do?memberNo=${sessionScope.m.memberNo }&projectNo=${pt.projectNo}"><img class="countImg" src="/resources/img/recruitTeamProject/common/empty_hart.png"></a>
+		                        		<a href="/insertDibCount.do?memberNo=${sessionScope.m.memberNo }&projectNo=${pt.projectNo}"><img class="countImg" src="/resources/img/recruitTeamProject/common/empty_hart.png" style="position: relative; top: 3px;"></a>
 		                        	</c:otherwise>
 		                        </c:choose>
                         	</c:otherwise>
                         </c:choose>
-                        <span class="countText">${pt.dibCount }</span>
+                        <span class="countText" style="position: relative; top: 13px;">${pt.dibCount }</span>
                     </div>
                 </div>
-                
             </div>
             <div class="commentWriteBox">
                 <div class="commentTitle">
@@ -182,6 +188,9 @@
 	                		<c:when test="${memberNo == -1 }">
 	                			<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="로그인 후 작성 가능합니다." disabled="disabled"></textarea>
 	                		</c:when>
+	                		<c:when test="${pt.projectStatus != 1 }">
+	                			<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="마감된 공고에는 댓글을 다실 수 없습니다." disabled="disabled"></textarea>
+	                		</c:when>
 	                		<c:otherwise>
 	                			<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요." name="commentContent" maxlength="49"></textarea>
 	                			<input type="hidden" name="boardNo" value="${pt.projectNo }">
@@ -192,7 +201,7 @@
 	                </div>
 	                <div class="commentBtnBox">
 	                	<c:choose>
-	                		<c:when test="${memberNo == -1 }">
+	                		<c:when test="${memberNo == -1 || pt.projectStatus != 1}">
 	                			 <button type="button" class="btn btn-outline-primary" disabled="disabled">등록</button>
 	                		</c:when>
 	                		<c:otherwise>
@@ -230,7 +239,7 @@
 		                    	<c:choose>
 		                    		<c:when test="${sessionScope.m.memberId == cl.memberId }">
 		                    			<a href="javascript:void(0);" class="updateText" id="updateComment">수정</a>
-		                        		<a href="/deleteComment.do?commentNo=${cl.commentNo }&projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" class="updateText" id="deleteBtn1">삭제</a>
+		                        		<a href="/deleteComment.do?commentNo=${cl.commentNo }&projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" class="updateText" id="deleteBtn1" >삭제</a>
 		                    		</c:when>
 		                    		<c:when test="${sessionScope.m.memberId != cl.memberId && memberNo != -1 }">
 		                    			<a href="javascript:void(0);" class="updateText" id="insertReComment" >대댓글 달기</a>
@@ -239,33 +248,62 @@
 		                    </div>
 		                    <div class="updateTextBox" id="updateTextBox">
 		                    	<form action="updateComment.do" method="post">
-			                        <div class="form-group">
-			                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요." name="commentContent" maxlength="49"></textarea>
-			                            <input type="hidden" name="commentNo" value="${cl.commentNo }">
-			                            <input type="hidden" name="projectNo" value="${pt.projectNo }">
-		                				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
-			                        </div>
-			                        <div class="commentBtnBox">
-			                        	<button type="submit" class="btn btn-outline-primary">수정</button>
-			                            <button type="reset" class="btn btn-outline-primary">초기화</button>
-			                            <button type="button" class="btn btn-outline-primary" id="cancelBtn1">취소</button>
-			                        </div>
+		                    		<c:choose>
+		                    			<c:when test="${pt.projectStatus != 1 }">
+		                    				<div class="form-group">
+					                            <textarea class="form-control" id="exampleTextarea" rows="3" value="${cl.commentContent }" name="commentContent" maxlength="49" disabled="disabled"></textarea>
+					                            <input type="hidden" name="commentNo" value="${cl.commentNo }">d }">
+					                        </div>
+					                        <div class="commentBtnBox">
+					                        	<button type="submit" class="btn btn-outline-primary" disabled="disabled">수정</button>
+					                            <button type="reset" class="btn btn-outline-primary">초기화</button>
+					                            <button type="button" class="btn btn-outline-primary" id="cancelBtn1">취소</button>
+					                        </div>
+		                    			</c:when>
+		                    			<c:otherwise>
+					                        <div class="form-group">
+					                            <textarea class="form-control" id="exampleTextarea" rows="3" value="${cl.commentContent }" name="commentContent" maxlength="49"></textarea>
+					                            <input type="hidden" name="commentNo" value="${cl.commentNo }">
+					                            <input type="hidden" name="projectNo" value="${pt.projectNo }">
+				                				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+					                        </div>
+					                        <div class="commentBtnBox">
+					                        	<button type="submit" class="btn btn-outline-primary">수정</button>
+					                            <button type="reset" class="btn btn-outline-primary">초기화</button>
+					                            <button type="button" class="btn btn-outline-primary" id="cancelBtn1">취소</button>
+					                        </div>
+		                    			</c:otherwise>
+		                    		</c:choose>
 		                        </form>
 		                    </div>
 		                    <div class="reCommentTextBox" id="reCommentTextBox">
 		                    	<form action="reCommentInsert.do" method="post">
-			                        <div class="form-group">
-			                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요." name="commentContent" maxlength="49"></textarea>
-			                            <input type="hidden" name="boardNo" value="${pt.projectNo }">
-			                            <input type="hidden" name="commentNo" value="${cl.commentNo }">
-		                				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-		                				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
-			                        </div>
-			                        <div class="commentBtnBox">
-			                        	<button type="submit" class="btn btn-outline-primary">등록</button>
-			                            <button type="reset" class="btn btn-outline-primary">초기화</button>
-			                            <button type="button" class="btn btn-outline-primary" id="cancelBtn2">취소</button>
-			                        </div>
+		                    		<c:choose>
+		                    			<c:when test="${pt.projectStatus != 1 }">
+		                    				<div class="form-group">
+					                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="마감된 공고에서는 댓글을 다실 수 없습니다." name="commentContent" maxlength="49" disabled="disabled"></textarea>
+					                        </div>
+					                        <div class="commentBtnBox">
+					                        	<button type="submit" class="btn btn-outline-primary" disabled="disabled">등록</button>
+					                            <button type="reset" class="btn btn-outline-primary">초기화</button>
+					                            <button type="button" class="btn btn-outline-primary" id="cancelBtn2">취소</button>
+					                        </div>
+		                    			</c:when>
+		                    			<c:otherwise>
+					                        <div class="form-group">
+					                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요." name="commentContent" maxlength="49"></textarea>
+					                            <input type="hidden" name="boardNo" value="${pt.projectNo }">
+					                            <input type="hidden" name="commentNo" value="${cl.commentNo }">
+				                				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+				                				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+					                        </div>
+					                        <div class="commentBtnBox">
+					                        	<button type="submit" class="btn btn-outline-primary">등록</button>
+					                            <button type="reset" class="btn btn-outline-primary">초기화</button>
+					                            <button type="button" class="btn btn-outline-primary" id="cancelBtn2">취소</button>
+					                        </div>
+		                    			</c:otherwise>
+		                    		</c:choose>
 		                        </form>
 		                    </div>
 		                </div>
@@ -307,17 +345,32 @@
 					                    </div>
 			                            <div class="updateReCommentTextBox" id="updateReCommentTextBox">
 			                                <form action="/updateComment.do" method="post">
-				                                <div class="form-group">
-				                                    <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요." name="commentContent" maxlength="49"></textarea>
-				                                    <input type="hidden" name="commentNo" value="${cll.commentNo }">
-						                            <input type="hidden" name="projectNo" value="${pt.projectNo }">
-					                				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
-				                                </div>
-				                                <div class="commentBtnBox">
-				                                    <button type="submit" class="btn btn-outline-primary">수정</button>
-						                            <button type="reset" class="btn btn-outline-primary">초기화</button>
-						                            <button type="button" class="btn btn-outline-primary" id="cancelBtn3">취소</button>
-				                                </div>
+				                                
+				                                <c:choose>
+				                                	<c:when test="${pt.projectStatus != 1 }">
+				                                		<div class="form-group">
+						                                    <textarea class="form-control" id="exampleTextarea" rows="3" name="commentContent" maxlength="49" value="${cll.commentContent }" disabled="disabled"></textarea>
+						                                </div>
+						                                <div class="commentBtnBox">
+						                                    <button type="submit" class="btn btn-outline-primary" disabled="disabled">수정</button>
+								                            <button type="reset" class="btn btn-outline-primary">초기화</button>
+								                            <button type="button" class="btn btn-outline-primary" id="cancelBtn3">취소</button>
+						                                </div>
+				                                	</c:when>
+				                                	<c:otherwise>
+						                                <div class="form-group">
+						                                    <textarea class="form-control" id="exampleTextarea" rows="3" value="${cll.commentContent }" name="commentContent" maxlength="49"></textarea>
+						                                    <input type="hidden" name="commentNo" value="${cll.commentNo }">
+								                            <input type="hidden" name="projectNo" value="${pt.projectNo }">
+							                				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+						                                </div>
+						                                <div class="commentBtnBox">
+						                                    <button type="submit" class="btn btn-outline-primary">수정</button>
+								                            <button type="reset" class="btn btn-outline-primary">초기화</button>
+								                            <button type="button" class="btn btn-outline-primary" id="cancelBtn3">취소</button>
+						                                </div>
+				                                	</c:otherwise>
+				                                </c:choose>
 			                                </form>
 			                            </div>
 			                        </div>

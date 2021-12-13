@@ -120,14 +120,14 @@
 		<c:choose>
 			<c:when test="${totalCount != 0 }">
 				<div>
-					<c:forEach items="${list }" var="c">
+					<c:forEach items="${list }" var="c" varStatus="i">
 						<div class="contestBox">
 							<div class="imgBox">
 								<img src="/resources/img/contest/${c.contestImg }">
 							</div>
 							<div class="infoBox">
 								<p>${c.contestTitle }</p>
-								<p>신청회원 : <span>20</span> 명</p>
+								<p>신청회원 : <span>${cmc[i.index] }</span> 명</p>
 								<p>
 									<span><i class="bi bi-bookmark" style="font-size: 20px;"></i> ${c.contestHost }</span> | 
 									<c:choose>
@@ -151,6 +151,7 @@
 						</div>
 						<div class="contestMemberView" style="display:none"></div>
 						<p style="display: none" class="contestNo">${c.contestNo }</p>
+						<p style="display: none" class="hostEmail">${c.email }</p>
 					</c:forEach>			
 				</div>
 				<div id="pageNavi" style="text-align: center; margin-top:50px;"  >${pageNavi }</div>
@@ -163,7 +164,6 @@
 				</div>
 			</c:otherwise>
 		</c:choose>
-		
 		
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
@@ -179,12 +179,18 @@
 	tr.style.backgroundColor = (t.checked) ? "rgba(78,205,196,0.1)" : "#fff"; 
 	}
 	
+	
+	//신청회원 보기
 	$(".clickP").click(function(){
+		$(".contestMemberView").hide();
+		$(".clickP").show();
 		var index = $(".clickP").index(this);
-		$(".contestMemberView").eq(index).toggle();
+		$(".contestMemberView").eq(index).show();
+		$(".clickP").eq(index).hide();
 		$(".contestMemberView").eq(index).html("");
 		var contestNo = $(".contestNo").eq(index).html();
 		
+		//신청자 불러오기
 		$.ajax({
 			url : "/searchContestMember.do",
 			type : 'post',
@@ -196,7 +202,7 @@
 				}else{
 					var tbl = '<table class="table" style="margin-top: 20px;">';
 					tbl += '<tr>';
-					tbl += '<th><input type="checkbox" id="checkAll" class="form-check-input" style="zoom: 1.2;"></th><th>회원 ID</th><th>전화번호</th><th>이메일</th><th>깃주소</th>';
+					tbl += '<th></th><th>회원 ID</th><th>전화번호</th><th>이메일</th><th>깃주소</th>';
 					tbl += '</tr>';
 					for(var i = 0; i<data.length; i++){
 						tbl += '<tr>';
@@ -207,23 +213,74 @@
 						tbl += '<td>'+data[i].cmGit+'</td>';
 						tbl += '</tr>';
 					}
-					var btn = '<button class="btn btn-primary checkEnroll">선택 회원 승인</button>';
-					btn += '<button class="btn btn-secondary ">선택 회원 반려</button>';
+					var btn = '<button class="btn btn-primary allEnroll">전체 회원 승인</button>';
+					btn += '<button class="btn btn-primary checkEnroll">선택 회원 승인</button>';
+					btn += '<button class="btn btn-secondary noEnroll">선택 회원 반려</button>';
 					$(".contestMemberView").eq(index).append(tbl);
 					$(".contestMemberView").eq(index).append(btn);
+	
 					
-					//체크박스 전체선택
-					$("#checkAll").click(function(){
-						if($("#checkAll").prop("checked")){
-					           $(".chk").prop("checked",true);
-					    }else{
-					           $(".chk").prop("checked",false);
-					    }
-					});
-					
-					$(".checkEnroll").click(function(){
+					//전체회원 승인
+					$(".allEnroll").click(function(){
 						var memberId = new Array();
+						var index2 = $(".allEnroll").index(this);
+						var contestNo = data[index2].contestNo;
+						var email = $(".hostEmail").eq(index2).html();
+							for(var i = 0; i<data.length; i++){
+								memberId.push(data[i].memberId);
+							}
+						var checkConfirm = confirm("전체 회원을 승인하시겠습니까?");
+						if(checkConfirm){
+							location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=2&contestNo="+contestNo+"&date=${date}&email="+email;	
+						}
 					})	
+					
+					//선택회원 승인
+					$(".checkEnroll").click(function(){
+						var inputs = $(".chk:checked");
+						var index2 = $(".checkEnroll").index(this);
+						var contestNo = data[index2].contestNo;
+						var email = $(".hostEmail").eq(index2).html();
+						var memberId = new Array();
+						inputs.each(function(idx,item){
+							var memberNo = $(item).parent().next().html();
+							memberId.push(memberNo);
+						});
+						var checkBoxCheck = $('.chk').is(":checked");
+						if(!checkBoxCheck){
+							alert("승인할 회원을 선택해주세요.");
+							return;
+						}
+						var checkConfirm = confirm("선택 회원을 승인하시겠습니까?");
+						if(checkConfirm){
+							location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=2&contestNo="+contestNo+"&date=${date}&email="+email;
+						}
+					})	
+					
+					//선택회원 반려
+					$(".noEnroll").click(function(){
+						var inputs = $(".chk:checked");
+						var index2 = $(".noEnroll").index(this);
+						var contestNo = data[index2].contestNo;
+						var memberId = new Array();
+						inputs.each(function(idx,item){
+							var memberNo = $(item).parent().next().html();
+							memberId.push(memberNo);
+						});
+						var checkBoxCheck = $('.chk').is(":checked");
+						if(!checkBoxCheck){
+							alert("반려할 회원을 선택해주세요.");
+							return;
+						}
+						var checkConfirm = confirm("선택 회원을 반려하시겠습니까?");
+						if(checkConfirm){
+							location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=3&contestNo="+contestNo+"&date=${date}email=";
+						}
+						
+						
+						
+					})	
+					
 				}
 			}
 		});

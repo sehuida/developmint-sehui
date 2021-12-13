@@ -34,11 +34,11 @@
 			}
 		});
 		
-		 $('#maxContentPost').change(function(){
-	        	if($('#maxContentPost').text < 0){
+		 $('#maxContentPost').on('DOMSubtreeModified propertychange',function(){
+	        	if($('#maxContentPost').text() < 0){
 	            	result = false;
 	            }
-	        	if($('#maxContentPost').text >= 0){
+	        	if($('#maxContentPost').text() >= 0){
 	        		result = true;
 	            }
 	     });
@@ -50,7 +50,7 @@
 	});
 	
 	function checkValue(){
-        if(($(".btn-check:checked").length == 0) || ($("#datePicker").val() == "") || ($("#inputLarge").val() == "") || ($("input[name=projectTitle]").val() == "") || ($("input[name=projectGoal]").val() == "") || ($("input[name=rContent]").val() == "") {
+        if(($(".btn-check:checked").length == 0) || ($("#datePicker").val() == "") || ($("#inputLarge").val() == "") || ($("input[name=projectTitle]").val() == "") || ($("input[name=projectGoal]").val() == "") || ($("input[name=rContent]").val() == "")) {
         	swal("체크하지 않거나 입력되지 않은 값이 있습니다.", "비어있는 입력값이 있는지 다시 한번 확인해주세요!", "warning");
         	return false;
         } 

@@ -24,6 +24,7 @@ import kr.or.member.model.service.MailSender;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.ContestPage;
+import kr.or.member.model.vo.CrewListPage;
 import kr.or.member.model.vo.GosuNoticePage;
 import kr.or.member.model.vo.Member;
 
@@ -353,5 +354,21 @@ public class MemberController {
 		model.addAttribute("pageNavi",ctp.getPageNavi());
 		model.addAttribute("start",ctp.getStart());
 		return "member/mycontestPage";
+	}
+	@RequestMapping(value="/crewList.do")
+	public String crewList(Member m,Model model,int reqPage,int type) {
+		if(type==0) {
+			//팀원 신청한 내역
+			CrewListPage clp = service.crewList(m, reqPage);
+			model.addAttribute("list",clp.getCrewList());
+			model.addAttribute("pageNavi",clp.getPageNavi());
+			model.addAttribute("start",clp.getStart());
+			model.addAttribute("type", type);
+		}else if(type==1) {
+			//팀원 신청 받은내역
+		}else if(type==2) {
+			//찜한 내역
+		}
+		return "member/crewList";
 	}
 }

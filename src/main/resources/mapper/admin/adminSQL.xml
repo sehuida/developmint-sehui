@@ -490,6 +490,33 @@
 		where contest_no = #{contestNo} and
 		CM_STATUS = 1
 	</select>
+	
+	<!-- 공모 등록 -->
+	<update id="MemberEnrollContest" parameterType="map">
+		update contest_member set CM_STATUS = #{status} where contest_no = #{contestNo} and member_id = #{id}
+	</update>
+	
+	<!-- 공모 신청 인원  -->
+	<select id="contestMemberCount" parameterType="_int" resultType="_int">
+		select count(*) from contest_member where CONTEST_NO = #{contestNo} and CM_STATUS = 1
+	</select>
+	
+	<!-- 해당 공모 신청 완료 리스트 -->
+	<select id="enrollMemberList" parameterType="_int" resultType="cml">
+		select 
+			cm_no as cmNo, 
+			CONTEST_NO as contestNo, 
+			MEMBER_ID as memberId, 
+			CM_GIT as cmGit, 
+			CM_STATUS as cmStatus,
+			email,
+			phone
+		from contest_member
+		join member using(member_id)
+		where contest_no = #{contestNo} and
+		CM_STATUS = 2
+	</select>
+	
 </mapper>
 
 

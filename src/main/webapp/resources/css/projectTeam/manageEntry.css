@@ -6,6 +6,18 @@
     width: 80px;
 }
 
+.return_img:hover{
+    cursor: pointer;
+}
+
+.recruitBox{
+	margin-top: 50px;
+}
+
+.rListBox{
+	margin-top: 120px;
+}
+
 .rBox_navi{
     display: flex;
     flex-direction: row;
@@ -75,6 +87,7 @@
     display: flex;
     justify-content: center;
     margin-top: 50px;
+    margin-right: 80px;
 }
 
 .contentBox{
@@ -96,6 +109,12 @@
     display: flex;
     justify-content: space-between;
     margin-right: 15px;
+}
+
+.rankImg{
+	width: 60px;
+	height: 60px;
+	margin-right: 45px;
 }
 
 .textContent{
@@ -128,12 +147,12 @@
     justify-content: space-between;
 }
 .mSubImgBox{
-    margin-left: 60px;
+    margin-left: 30px;
 }
 
 .langImg{
     position: relative;
-    top: 20px;
+    top: 10px;
     width: 40px;
     height: 40px;
     margin-left: 10px;
@@ -183,15 +202,16 @@
     position: relative;
     left: 280px;
     top: 10px;
+    margin-right: 60px;
 }
 .btnBox>button{
-    margin-right: 30px;
+    margin-left: 10px;
 }
 
 #pageNavi{
 	display:flex;
 	font-size : 20px;
-	margin-top : 30px;
+	margin-top : 60px;
 	margin-left : 35%;
 	margin-bottom : 80px;
 	width:420px;

@@ -171,6 +171,17 @@
     .apply>span{
         color: rgb(78, 205, 196);
     }
+    .search{
+    	position: absolute;
+    }
+    #searchImg{
+    	width: 20px;
+    	height: 20px;
+    	position: relative;
+    	left: 290px;
+    	top: -4px;
+    	cursor: pointer;
+    }
 </style>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -194,8 +205,6 @@
                 <a href="loginFrm.do"><button class="resume">이력서 작성하기</button></a>                		
                 	</c:otherwise>
                 </c:choose>
-               <!--   <a href="resumeManage.do"><button class="resume">이력서 작성하기</button></a>   		나중에 choose 주석지우고 이거지우기             		
-			     <a href="announceManage.do"><button class="resume">구인공고 작성하기</button></a>    	나중에 choose 주석지우고 이거지우기     -->         		
             </div>
             <div class="headerImg">
                 <img src="resources/img/jobSearch/jobSearchList.PNG">
@@ -211,7 +220,16 @@
                     <option>지역 선택</option>
                     <option>서울</option>
                     <option>경기</option>
+                    <option>인천</option>
+                    <option>강원</option>
+                    <option>충남</option>
+                    <option>충북</option>
+                    <option>경북</option>
                     <option>부산</option>
+                    <option>경남</option>
+                    <option>전북</option>
+                    <option>전남</option>
+                    <option>제주</option>
                 </select>
                 <select>
                     <option>직업 선택</option>
@@ -219,36 +237,119 @@
                     <option>디자인</option>
                     <option>기획</option>
                 </select>
-                <input type="text" placeholder="검색" class="search">
-                <div class="content">
-                    <div class="status">모집중</div>
-                    <div class="cpName"><a href="companyInfo.do">케이씨환경서비스(주)</a></div>	<!-- 회사번호 -->	<!-- ?companyNo=${c.companyNo} -->
-                    <div class="title">
-                        <a href="jobSearchView.do?announce_no=1">2021 하반기 경영지원실 신입/경력 채용 공고</a>	<!-- 공고번호 -->
-                    </div>
-                    <div class="info">
-                        <div class="humanInfo">
-                            <span>경력</span> <span>신입·경력</span><br>
-                            <span>학력</span> <span>대졸(4년제) 이상</span>
-                        </div>
-                        <div class="workInfo">
-                            <span>|</span><span>개발</span><br>
-                            <span>|</span><span>애플리케이션</span>
-                        </div>
-                    </div>
-                    <div class="mainFooter">
-                        <div class="tech">
-                            <span>Java</span> <span>Android</span>		<!-- forEach문으로 ${r.tech } -->
-                        </div>
-                        <div class="subInfo">
-                            <span>서울특별시 강남구</span> <span>등록일자 2021.11.23.</span>
-                        </div>
-                        <div class="situation">
-                            <div class="date">마감 <span>7</span>일 전</div>		<!-- 7 -> 마감일-현재일 이거 어캐하지 -->
-                            <div class="apply">총 <span>2</span>명 지원</div>		<!-- 2 -> 지원한 이력서 갯수 count  흠  -->
-                        </div>
-                    </div>
-                </div>
+                <input type="text" placeholder="검색 //나중에 돋보기 이미지로 변경" class="search"><img id="searchImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
+                
+                <c:forEach items="${list }" var="a" varStatus="i">
+	                <div class="content">
+	                    <div class="status">모집중</div>
+	                    <div class="cpName"><a href="companyInfo.do">${a.companyName }</a></div>	
+	                    <div class="title">
+	                        <a href="jobSearchView.do?announce_no=1">${a.announceTitle }</a>	
+	                    </div>
+	                    <div class="info">
+	                        <div class="humanInfo">
+	                            <span>경력</span> 
+	                            <c:if test="${a.career eq 1}">
+	                            	<span>신입</span>
+	                            </c:if>
+	                            <c:if test="${a.career eq 2}">
+	                            	<span>경력</span>
+	                            </c:if>
+	                            <br>
+	                            <span>학력</span> 
+	                            <c:if test="${a.school eq 1}">
+		                            <span>초등학교 졸업</span>
+	                            </c:if>
+	                            <c:if test="${a.school eq 2}">
+		                            <span>중학교 졸업</span>
+	                            </c:if>
+	                            <c:if test="${a.school eq 3}">
+		                            <span>고등학교 졸업</span>
+	                            </c:if>
+	                            <c:if test="${a.school eq 4}">
+		                            <span>대학교 졸업 이상</span>
+	                            </c:if>
+	                        </div>
+	                        <div class="workInfo">
+	                            <span>|</span>
+	                            <c:if test="${a.workForm eq 1}">
+	                            	<span>정규직</span>
+	                            </c:if>
+	                            <c:if test="${a.workForm eq 2}">
+	                            	<span>계약직</span>
+	                            </c:if>
+	                            <c:if test="${a.workForm eq 3}">
+	                            	<span>아르바이트</span>
+	                            </c:if>
+	                            <c:if test="${a.workForm eq 4}">
+	                            	<span>인턴</span>
+	                            </c:if>
+	                            <c:if test="${a.workForm eq 5}">
+	                            	<span>프리랜서</span>
+	                            </c:if>
+	                            <br>
+	                            <span>|</span>
+	                            <c:if test="${a.category eq 1}">
+	                            <span>개발</span>	                            	
+	                            </c:if>
+	                            <c:if test="${a.category eq 2}">
+	                            <span>디자인</span>	                            	
+	                            </c:if>
+	                            <c:if test="${a.category eq 3}">
+	                            <span>기획</span>	                            	
+	                            </c:if>
+	                        </div>
+	                    </div>
+	                    <div class="mainFooter">
+	                        <div class="tech">
+	                            <span>${a.skills }</span>
+	                        </div>
+	                        <div class="subInfo">
+	                            <span><c:if test="${a.workPlace eq 1 }">
+	                            	서울
+	                            </c:if>
+	                            <c:if test="${a.workPlace eq 2 }">
+	                            	경기
+	                            </c:if>
+	                            <c:if test="${a.workPlace eq 3 }">
+	                            	인천
+	                            </c:if>
+	                            <c:if test="${a.workPlace eq 4 }">
+	                            	강원
+	                            </c:if>
+	                            <c:if test="${a.workPlace eq 5 }">
+	                            	충남
+	                            </c:if>
+	                            <c:if test="${a.workPlace eq 6 }">
+	                            	충북
+	                            </c:if>
+	                            <c:if test="${a.workPlace eq 7 }">
+	                            	경북
+	                            </c:if>
+	                            <c:if test="${a.workPlace eq 8 }">
+	                            	부산
+	                            </c:if>
+	                            <c:if test="${a.workPlace eq 9 }">
+	                            	경남
+	                            </c:if>
+	                            <c:if test="${a.workPlace eq 10 }">
+	                            	전북
+	                            </c:if>
+	                            <c:if test="${a.workPlace eq 11 }">
+	                            	전남
+	                            </c:if>
+	                            <c:if test="${a.workPlace eq 12 }">
+	                            	제주
+	                            </c:if></span> <span style="margin-left: 20px;">등록일자 ${a.writeDate }</span>
+	                        </div>
+	                        <div class="situation">
+	                            <div class="date">마감 <span>7</span>일 전</div>		<!-- 7 -> 마감일-현재일 이거 어캐하지 -->
+	                            <div class="apply">총 <span>2</span>명 지원</div>		<!-- 2 -> 지원한 이력서 갯수 count  흠  -->
+	                        </div>
+	                    </div>
+	                </div>
+                </c:forEach>
+                
                 <div class="content">
                     <div class="status">모집중</div>
                     <div class="cpName"><a href="companyInfo.do?companyNo=1">케이씨환경서비스(주)</a></div>

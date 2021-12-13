@@ -336,7 +336,7 @@ public class ProjectTeamController {
 		public String insertApplyProject(HttpServletRequest request, Model model, ProjectEntry pta, int memberNo, String[] chk, int projectNo) {
 			ArrayList<String> langList = new ArrayList<String>(Arrays.asList(chk));
 			
-			int result = service.insertApplyProject(pta, langList);
+			int result = service.insertApplyProject(pta, langList, projectNo);
 			if(result > 0) { 
 				  model.addAttribute("title", "지원 성공");
 				  model.addAttribute("msg", "성공적으로 프로젝트 지원에 성공하였습니다.");
@@ -362,8 +362,44 @@ public class ProjectTeamController {
 			model.addAttribute("developLangList", ptapd.getDevelopLangList());
 			model.addAttribute("viewValue", viewValue);			
 			model.addAttribute("availableNum", ptapd.getEntryList().get(0).getAvailableNum());
+			model.addAttribute("memberNo", memberNo);
+			model.addAttribute("projectNo", projectNo);
 			return "recruitCrue/manageEntry";
 			
 		}
+	  
+	  @RequestMapping(value="/selectMember.do")
+		public String selectMember(Model model, int entryNo, int memberNo, int projectNo) {
+			int result = service.selectMember(entryNo, memberNo);
+			if(result > 0) { 
+				  model.addAttribute("title", "최종 선발대기 등록 성공");
+				  model.addAttribute("msg", "선택하신 지원자분을 최종 선발대기인원으로 등록하였습니다.");
+				  model.addAttribute("loc","/manageEntry.do?memberNo="+memberNo+"&projectNo="+projectNo+"&reqPage=1&viewValue=1");
+				  model.addAttribute("icon", "success");
+			  } else {
+				  model.addAttribute("title", "선발대기 등록 실패");
+				  model.addAttribute("msg", "최종 선발대기인원으로 등록하는데 실패하였습니다.");
+				  model.addAttribute("loc","/manageEntry.do?memberNo="+memberNo+"&projectNo="+projectNo+"&reqPage=1&viewValue=1");
+				  model.addAttribute("icon", "warning");
+			  }
+			  return "member/swalMsg"; 
+		}
+	  
+	  @RequestMapping(value="/closeRecruitTeam.do")
+	  public String closeRecruitTeam(Model model, int projectNo, int memberNo) {
+		  int result = service.closeRecruitTeam(projectNo, memberNo);
+			if(result > 0) { 
+				  model.addAttribute("title", "모집 마감 완료");
+				  model.addAttribute("msg", "모집 마감되었고 지금부터 프로젝트가 시작됩니다.");
+				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+				  model.addAttribute("icon", "success");
+			  } else {
+				  model.addAttribute("title", "모집 마감 실패");
+				  model.addAttribute("msg", "모집 마감에 실패하였습니다.");
+				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+				  model.addAttribute("icon", "warning");
+			  }
+			  return "member/swalMsg"; 
+	  }
 	 
 }

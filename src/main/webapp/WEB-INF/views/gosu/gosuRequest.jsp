@@ -177,11 +177,11 @@ input[type="checkbox"]:checked {
 				<h1 class="g-b" style="color: white; margin-top: 40px;">개발 요청서
 					작성하기</h1>
 				<div>
-					<h5 style="color: white;">7,468</h5>
+					<h5 style="color: white;">${countGosu }</h5>
 					<p style="color: white;">활동 고수</p>
 				</div>
 				<div>
-					<h5 style="color: white;">12,677</h5>
+					<h5 style="color: white;">${countRequest }</h5>
 					<p style="color: white;">누적 요청서</p>
 				</div>
 			</div>
@@ -197,7 +197,7 @@ input[type="checkbox"]:checked {
 						class="progress-bar progress-bar-striped progress-bar-animated"
 						role="progressbar" aria-valuemin="0" aria-valuemax="100">0%</div>
 				</div>
-				<form action="/gosuRequestdo.do">
+				<form action="/gosuRequestdo.do" id="btn-submit">
 					<ul id="gallery">
 
 						<li>
@@ -219,8 +219,8 @@ input[type="checkbox"]:checked {
 											class="checkSelect1" value="Android" onclick="setBg(this);">Android</li></label>
 									<label><li><input type="checkbox" name="request1"
 											class="checkSelect1" value="고수와
-											상담 후 결정할게요." onclick="setBg(this);">고수와
-											상담 후 결정할게요.</li></label>
+											상담 후 결정할게요."
+											onclick="setBg(this);">고수와 상담 후 결정할게요.</li></label>
 									<label><li><input type="checkbox" name="request1"
 											class="checkSelect1" value="기타" onclick="setBg(this);">기타</li></label>
 								</ul>
@@ -285,8 +285,9 @@ input[type="checkbox"]:checked {
 											name="request4[]" class="checkSelect4" value="상세한 기획 문서 있음."
 											onclick="setBg(this);">상세한 기획 문서 있음.</li></label>
 									<label><li><input type="checkbox"
-											name="request4[]" class="checkSelect4" value="레이아웃, 디자인 등 구성 완료."
-											onclick="setBg(this);">레이아웃, 디자인 등 구성 완료.</li></label>
+											name="request4[]" class="checkSelect4"
+											value="레이아웃, 디자인 등 구성 완료." onclick="setBg(this);">레이아웃,
+											디자인 등 구성 완료.</li></label>
 									<label><li><input type="checkbox"
 											name="request4[]" class="checkSelect4" value="기타"
 											onclick="setBg(this);">기타</li></label>
@@ -305,11 +306,13 @@ input[type="checkbox"]:checked {
 											name="request5[]" class="checkSelect5" value="협의 가능해요."
 											onclick="setBg(this);">협의 가능해요.</li></label>
 									<label><li><input type="checkbox"
-											name="request5[]" class="checkSelect5" value="가능한 빨리 진행하고 싶어요."
-											onclick="setBg(this);">가능한 빨리 진행하고 싶어요.</li></label>
+											name="request5[]" class="checkSelect5"
+											value="가능한 빨리 진행하고 싶어요." onclick="setBg(this);">가능한
+											빨리 진행하고 싶어요.</li></label>
 									<label><li><input type="checkbox"
-											name="request5[]" class="checkSelect5" value="일주일 이내로 진행하고 싶어요."
-											onclick="setBg(this);">일주일 이내로 진행하고 싶어요.</li></label>
+											name="request5[]" class="checkSelect5"
+											value="일주일 이내로 진행하고 싶어요." onclick="setBg(this);">일주일
+											이내로 진행하고 싶어요.</li></label>
 									<label><li><input type="checkbox"
 											name="request5[]" class="checkSelect5" value="원하는 날짜가 있어요."
 											onclick="setBg(this);">원하는 날짜가 있어요.</li></label>
@@ -334,11 +337,13 @@ input[type="checkbox"]:checked {
 											name="request6[]" class="checkSelect6" value="온라인 진행 원해요."
 											onclick="setBg(this);">온라인 진행 원해요.</li></label>
 									<label><li><input type="checkbox"
-											name="request6[]" class="checkSelect6" value="제가 있는 곳으로 와주세요."
-											onclick="setBg(this);">제가 있는 곳으로 와주세요.</li></label>
+											name="request6[]" class="checkSelect6"
+											value="제가 있는 곳으로 와주세요." onclick="setBg(this);">제가 있는
+											곳으로 와주세요.</li></label>
 									<label><li><input type="checkbox"
-											name="request6[]" class="checkSelect6" value="고수가 있는 곳으로 갈게요."
-											onclick="setBg(this);">고수가 있는 곳으로 갈게요.</li></label>
+											name="request6[]" class="checkSelect6"
+											value="고수가 있는 곳으로 갈게요." onclick="setBg(this);">고수가 있는
+											곳으로 갈게요.</li></label>
 								</ul>
 							</div>
 						</li>
@@ -357,7 +362,7 @@ input[type="checkbox"]:checked {
 							<a href="#"
 								class="btn_gallery_prev off btn btn-outline-success g-btn">이전</a>
 							<a href="#" class="btn_gallery_next btn btn-primary g-btn">다음</a>
-							<button href="submit" class="btn_submit btn btn-info  g-btn g-b"
+							<button type="submit" class="btn_submit btn btn-info  g-btn g-b"
 								style="display: none;">완료</button>
 						</div>
 					</ul>
@@ -460,8 +465,7 @@ input[type="checkbox"]:checked {
 		var bar = 0;
 		$(".btn_gallery_next").click(function() {
 			var g1 = $(".checkSelect" + gCount + ":checked").length;
-			var g2 = $(".checkSelect7").val();
-			console.log(g1);
+
 			$(".g-msg").empty();
 			var html = "";
 			if (g1 == 0 && gCount != 7) {
@@ -471,42 +475,50 @@ input[type="checkbox"]:checked {
 
 				return false;
 			} else {
-				if (gCount == 7 && g2 == "") {
-					html += "내용을 입력해주세요";
-					$(".g-msg").append(html);
-					$(".g-msg").css("color", "red");
 
-					return false;
-				}
 				if (!$("#gallery>li").last().is(":visible")) {
 					$("#gallery>li:visible").hide().next("li").fadeIn("80");
 					$(".btn_gallery_prev").removeClass("off");
 					$(".progress-bar").css("width", (bar += 16) + "%");
 					$(".progress-bar").html(bar + "%");
 
-					console.log($(".checkSelect"+gCount+ ":checked").length);
 					var send_array = Array();
 					var send_cnt = 0;
-					var chkbox = $(".checkSelect"+gCount);
-					for (i = 0; i < chkbox.length; i++) {
-						if (chkbox[i].checked== true) {
-							send_array[send_cnt] = chkbox[i].value;
+					var chkbox = $(".checkSelect" + gCount);
+					if (gCount != 7) {
+						for (i = 0; i < chkbox.length; i++) {
+							if (chkbox[i].checked == true) {
+								send_array[send_cnt] = chkbox[i].value;
 
-							console.log("send_array[send_cnt] : "+send_array[send_cnt]);
-							send_cnt++;
+								send_cnt++;
+							}
+
 						}
+						$("#requestContent" + gCount).val(send_array);
 
 					}
-					$("#requestContent"+gCount).val(send_array);
-
-					console.log($("#requestContent"+gCount).val());
 					gCount++;
+
 				}
+
 				if ($("#gallery>li").last().is(":visible")) {
+				
 					$(this).addClass("off");
 					$(".btn_submit").css("display", "inline-block");
+					$('#btn-submit').submit(function() {
+						$(".g-msg").empty();
+						var html = "";
+						console.log($("input[name=requestContent7]").val());
+						if ($("input[name=requestContent7]").val()=="") {
+							console.log(gCount);
+							html += "내용을 입력해주세요";
+							$(".g-msg").append(html);
+							$(".g-msg").css("color", "red");
+							return false;
+						}
+					});
+
 				}
-				
 
 			}
 
@@ -514,6 +526,7 @@ input[type="checkbox"]:checked {
 		});
 		$(".btn_gallery_prev").click(function() {
 			$(".g-msg").empty();
+
 			if (!$("#gallery>li").first().is(":visible")) {
 				$(".btn_submit").css("display", "none");
 				$("#gallery>li:visible").hide().prev("li").fadeIn("80");

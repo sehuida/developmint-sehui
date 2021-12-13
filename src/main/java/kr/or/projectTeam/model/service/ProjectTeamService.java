@@ -324,10 +324,11 @@ public class ProjectTeamService {
 		return result;
 	}
 	
-	public int insertApplyProject(ProjectEntry pta, ArrayList<String> langList) {
+	public int insertApplyProject(ProjectEntry pta, ArrayList<String> langList, int projectNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pta", pta);
 		map.put("langList", langList);
+		map.put("projectNo", projectNo);
 		int result = dao.insertApplyProject(map);
 		return result;
 	}
@@ -387,6 +388,27 @@ public class ProjectTeamService {
 		
 		ProjectTeamApplyPageData ptapd = new ProjectTeamApplyPageData(entryList, pageNavi, start, developLangList, udLangList);
 		return ptapd;
+	}
+
+	public int selectMember(int entryNo, int memberNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("entryNo", entryNo);
+		map.put("memberNo", memberNo);
+		int result = dao.selectMember(map);
+		return result;
+	}
+
+	public int closeRecruitTeam(int projectNo, int memberNo) {
+		ArrayList<ProjectEntry> finalList = dao.selectFinalMember(projectNo);
+		for(int i = 0; i < finalList.size(); i++) {
+			System.out.println(finalList.get(i));
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("finalList", finalList);
+		map.put("projectNo", projectNo);
+		map.put("memberNo", memberNo);
+		int result = dao.closeRecruitTeam(map);
+		return result;
 	}
 
 	

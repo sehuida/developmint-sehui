@@ -14,6 +14,9 @@ import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
 import kr.or.gosu.vo.GosuRequest;
 import kr.or.gosu.vo.GosuRequestCost;
+import kr.or.gosu.vo.GosuRequestCount;
+import kr.or.gosu.vo.GosuRequestProject;
+import kr.or.gosu.vo.GosuRequestProjectSub;
 import kr.or.gosu.vo.GosuTalk;
 
 @Service
@@ -211,6 +214,32 @@ public class GosuService {
 		GosuRequestCost gosuRequestCost = dao.selectGosuRequestCost(costNo);
 		gosuRequestCost.setGosuId(dao.selectGosuId(gosuRequestCost.getGosuNo()));
 		return gosuRequestCost;
+	}
+
+	public GosuRequestCount selectGosuCountRequestCount() {
+		GosuRequestCount gosuRequestCount = new GosuRequestCount();
+		gosuRequestCount.setCountGosu(dao.selectGosuCount());
+		gosuRequestCount.setCountRequest(dao.selectRequestCount());		
+		return gosuRequestCount;
+	}
+	@Transactional
+	public int insertGosuRequestProjectSub(GosuRequestProjectSub grps) {
+		int result = dao.insertGosuRequestProjectSub(grps);
+		return result;
+	}
+
+	public ArrayList<GosuRequestProject> selectGosuRequestProjectOne(int rpsNo) {
+		ArrayList<GosuRequestProject> list = dao.selectGosuRequestProjectOne(rpsNo);
+		for (GosuRequestProject g : list) {
+			g.setWriterImg(dao.selectGosuImg(g.getMemberNo()));
+			g.setWriterId(dao.selectGosuId(g.getMemberNo()));
+		}
+		return list;
+	}
+
+	public GosuRequestProjectSub selectGosuRequestProjectSub(int rpsNo) {
+		GosuRequestProjectSub grps = dao.selectGosuRequestProjectSub(rpsNo);	
+		return grps;
 	}
 
 }
