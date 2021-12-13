@@ -17,6 +17,7 @@
 		<typeAlias type="kr.or.projectTeam.model.vo.projectTeamMainPageData" alias="ptmpd"/>
 		<typeAlias type="kr.or.comment.vo.Report" alias="rp"/>
 		<typeAlias type="kr.or.contest.vo.ContestMember" alias="conmem"/>
+		<typeAlias type="kr.or.contest.vo.ContestMemberList" alias="cml"/>
 		<typeAlias type="kr.or.projectTeam.model.vo.DevelopLanguage" alias="ddl"/>
 		<typeAlias type="kr.or.announce.vo.Announce" alias="a"/>
 		<typeAlias type="kr.or.gosu.vo.Gosu" alias="g"/>

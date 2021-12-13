@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>공모전 신청 회원</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 </head>
 <style>
 .mainCate{
@@ -76,6 +77,19 @@
 	text-align: center;
 	padding-top: 70px;
 }
+.clickP:hover {
+	color:#4ECDC4;
+	cursor: pointer;
+}
+.contestMemberView{
+	width: 800px;
+	margin:0 auto;
+	box-shadow: 0px 1px 5px -2px rgb(0 0 0 / 20%), 0px 0px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+	margin-top: 20px;
+	border-radius: 5px;
+	padding:10px;
+}
+
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -85,7 +99,7 @@
 			<span id="allMember" style="font-weight:bold">공모전 신청 회원</span>
 		</div>
 		<br><br><br>
-		
+	
 		<%--공모전 달력 --%>
 		<div class="dateBox">
 			<input type="date" class="form-control" name="contestDeadline" value="${date }" style="width: 300px;">
@@ -118,12 +132,14 @@
 									</c:choose>
 								</p>
 								<p><i class="bi bi-person-bounding-box" style="font-size: 20px; margin-right: 5px;"></i>${c.contestQualify }</p>
-								<p><i class="bi bi-envelope" style="font-size: 20px;"></i>${c.email }</p>
+								<p><i class="bi bi-envelope" style="font-size: 20px; margin-right: 5px;"></i>${c.email }</p>
 							</div>
 							<div class="viewBtn">
-								<p>신청 회원 보기 <i class="bi bi-caret-down-fill" style="font-size: 20px;"></i></p>
+								<p class="clickP">신청 회원 보기 <i class="bi bi-caret-down-fill" style="font-size: 20px;"></i></p>
 							</div>
 						</div>
+						<div class="contestMemberView" style="display:none">gg</div>
+						<p style="display: none" class="contestNo">${c.contestNo }</p>
 					</c:forEach>			
 				</div>
 				<div id="pageNavi" style="text-align: center; margin-top:50px;"  >${pageNavi }</div>
@@ -134,6 +150,7 @@
 					<p style="margin-top:10px;">마감 예정인 공모전이 없습니다.</p>
 					<p>날짜를 선택하여 신청 회원을 확인해보세요.</p>
 				</div>
+				
 			</c:otherwise>
 		</c:choose>
 		
@@ -144,6 +161,23 @@
 	$("#searchDate").click(function(){
 		var contestDeadline = $("input[name=contestDeadline]").val();
 		location.href="/contestEnrollMember.do?reqPage=1&date="+contestDeadline;
+	})
+	
+	$(".clickP").click(function(){
+		var index = $(".clickP").index(this);
+		$(".contestMemberView").eq(index).toggle();
+		
+		var contestNo = $(".contestNo").eq(index).html();
+		
+		$.ajax({
+			url : "/searchContestMember.do",
+			type : 'post',
+			data : {contestNo:contestNo},
+			success : function(data){
+				
+			}
+		});
+		
 	})
 	
 	</script>
