@@ -16,7 +16,7 @@ public class JobSearchDao {
 	private SqlSessionTemplate sqlSession;
 
 	public ArrayList<Announce> selectAllAnnounce() {
-		List list = sqlSession.selectList("announce.selectAllAnnounce");
+		List list = sqlSession.selectList("announce.allAnnounce");
 		return (ArrayList<Announce>)list;
 	}
 	

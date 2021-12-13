@@ -18,7 +18,8 @@
 			end_date as endDate,
 			veterans,
 			military,
-			write_date as writeDate
+			write_date as writeDate,
+			career
 		from announcement
 		where member_no = #{memberNo}
 	</select>
@@ -28,7 +29,7 @@
 		, #{announceTitle}, #{announceContent}, #{skills}, #{money}, #{workPlace}, #{endDate}, #{veterans}, #{military}, to_char(sysdate,'yyyy-mm-dd'))
 	</insert>
 	
-	<select id="selectAllAnnounce" resultType="a">
+	<select id="allAnnounce" resultType="a">
 		select
 			announce_no as announceNo,
 			member_no as memberNo,
@@ -45,7 +46,8 @@
 			end_date as endDate,
 			veterans,
 			military,
-			write_date as writeDate
+			write_date as writeDate,
+			career
 		from announcement
 	</select>
 	

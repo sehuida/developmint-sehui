@@ -20,4 +20,5 @@ public class Announce {
 	private int veterans;
 	private int military;
 	private String writeDate;
+	private String career;
 }

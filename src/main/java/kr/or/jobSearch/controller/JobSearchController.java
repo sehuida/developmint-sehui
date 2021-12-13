@@ -18,8 +18,10 @@ public class JobSearchController {
 	private JobSearchService service;
 
 	@RequestMapping(value="/jobSearchList.do")
-	public String jobSearchList() {
+	public String jobSearchList(Model model) {
 		ArrayList<Announce> list = service.selectAllAnnounce();
+		model.addAttribute("list",list);
+		System.out.println("jobSearchList list : " + list);
 		return "jobSearch/jobSearchList";
 	}
 	
