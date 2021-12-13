@@ -134,4 +134,16 @@
   <select id="contestCounts" parameterType="string" resultType="_int">
   	select count(*) from contest_member where member_id=#{memberId}
   </select>
+  <select id="crewList" parameterType="map" resultType="crewVO">
+ 		select * from(
+  		select rownum as rnum,pt.* from
+  		
+		(select
+		    apply_date as applyDate,
+		    entry_status as entryStatus,
+		    project_no as projectNo,
+            (select recruit_title from project pj where pj.project_no = pte.project_no) as recruitTitle
+		from project_Entry pte where member_no=#{memberNo}
+		order by 1 desc)pt) where rnum between #{start} and #{end}
+  </select>
 </mapper>

@@ -87,5 +87,9 @@ public class ContestDao {
 		List<Contest> list = sqlSession.selectList("contest.searchContest", contestDeadline);
 		return (ArrayList<Contest>)list;
 	}
+
+	public int enrollCount(int contestNo) {
+		return sqlSession.selectOne("contest.enrollCount",contestNo);
+	}
 	
 }

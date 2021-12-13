@@ -118,6 +118,7 @@ public class ContestController {
 		//공모전 정보 불러오면서 조회수 올려주기
 		ContestList list = service.contestView(contestNo);
 		model.addAttribute("list",list);
+		model.addAttribute("enrollCount",list.getEnrollCount());
 		return "contest/contestView";
 	}
 	

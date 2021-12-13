@@ -496,7 +496,7 @@
 	</update>
 	
 	<select id="contestMemberCount" parameterType="_int" resultType="_int">
-		select count(*) from contest_member where CONTEST_NO = #{contestNo}
+		select count(*) from contest_member where CONTEST_NO = #{contestNo} and CM_STATUS = 1
 	</select>
 </mapper>
 

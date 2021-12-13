@@ -194,8 +194,7 @@
 				<p><span>담당자 이메일</span> : ${list.contest.email }</p>
 				<p><span>담당자 전화번호</span> : ${list.contest.phone }</p>
 				<p><span>조회수</span> : ${list.contest.contestCount } 회</p>
-				<%--신청인원은 추후 데이터 가져올 예정 --%>
-				<p><span>신청인원</span> : 30 명</p>
+				<p><span>신청인원</span> : ${enrollCount } 명</p>
 			</div>
 		</div>
 		<%---------------------------------------------------------------------------- --%>

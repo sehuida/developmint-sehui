@@ -451,6 +451,7 @@ public class AdminService {
 		ArrayList<Contest> contestList = dao.contestDateList(map);	
 		
 		List<Integer> contestMemberCount = new ArrayList<Integer>();
+		
 		for(int i = 0;i<contestList.size();i++) {
 			contestMemberCount.add(dao.contestMemberCount(contestList.get(i).getContestNo()));
 		}

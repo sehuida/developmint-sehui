@@ -18,11 +18,13 @@ public class ContestList {
 	private int totalCount;
 	private ArrayList<ContestMember> cmList;
 	private List<Integer> contestMemberCount;
+	private int enrollCount; 
 	
-	public ContestList(ArrayList<Comment> commentList, Contest contest) {
+	public ContestList(ArrayList<Comment> commentList, Contest contest, int enrollCount) {
 		super();
 		this.commentList = commentList;
 		this.contest = contest;
+		this.enrollCount = enrollCount;
 	}
 
 	public ContestList(ArrayList<Contest> newContest, ArrayList<Contest> hotContest) {

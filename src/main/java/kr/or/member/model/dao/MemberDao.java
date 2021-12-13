@@ -14,8 +14,10 @@ import kr.or.contest.vo.ContestList;
 import kr.or.contest.vo.ContestMember;
 import kr.or.gosu.vo.GosuNotice;
 import kr.or.member.model.vo.CertiVO;
+import kr.or.member.model.vo.CrewVO;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MyContest;
+import kr.or.projectTeam.model.vo.ProjectTeam;
 
 @Repository
 public class MemberDao {
@@ -107,6 +109,11 @@ public class MemberDao {
 
 	public int contestCount(String memberId) {
 		return sqlSession.selectOne("member.contestCounts",memberId);
+	}
+
+	public ArrayList<CrewVO> crewList(HashMap<String, Object> map) {
+		List<CrewVO> list = sqlSession.selectList("member.crewList",map);
+		return (ArrayList<CrewVO>)list;
 	}
 
 }

@@ -182,7 +182,7 @@
 
 	
 	
-	
+	//신청회원 보기
 	$(".clickP").click(function(){
 		$(".contestMemberView").hide();
 		$(".clickP").show();
@@ -192,6 +192,7 @@
 		$(".contestMemberView").eq(index).html("");
 		var contestNo = $(".contestNo").eq(index).html();
 		
+		//신청자 불러오기
 		$.ajax({
 			url : "/searchContestMember.do",
 			type : 'post',

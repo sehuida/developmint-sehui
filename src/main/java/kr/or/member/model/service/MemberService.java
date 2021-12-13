@@ -17,9 +17,12 @@ import kr.or.member.controller.RandomPassword;
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.ContestPage;
+import kr.or.member.model.vo.CrewListPage;
+import kr.or.member.model.vo.CrewVO;
 import kr.or.member.model.vo.GosuNoticePage;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MyContest;
+import kr.or.projectTeam.model.vo.ProjectTeam;
 
 @Service
 public class MemberService {
@@ -225,6 +228,61 @@ public class MemberService {
 				
 				ContestPage ctp = new ContestPage(list, pageNavi, start);
 				return ctp;
+	}
+
+	public CrewListPage crewList(Member m, int reqPage) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int numPerPage = 5;
+		int end = reqPage*numPerPage;
+		int start = end - numPerPage + 1;
+		
+		map.put("memberNo", m.getMemberNo());
+		map.put("start",start);
+		map.put("end",end);
+		
+		ArrayList<CrewVO> list = dao.crewList(map);
+		
+		int totalCount = dao.contestCount(m.getMemberId());
+		int totalPage = 0;
+		if(totalCount%numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage+1;
+		}
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		
+		String pageNavi = "<ul class='pagination pagination-lg'>";
+				
+				if(pageNo != 1) {
+					pageNavi += "<li class=\"page-item\">";
+					pageNavi += "<a class=\"page-link\" href='/crewList.do?type=0&reqPage="+(pageNo-1)+"&memberNo="+(m.getMemberNo())+"'>&laquo;</a></li>";
+				}
+				
+				for(int i=0;i<pageNaviSize;i++){
+					if(pageNo == reqPage) {
+						pageNavi += "<li class=\"page-item active\">";
+						pageNavi += "<a class='page-link' href='/crewList.do?type=0&reqPage="+pageNo+"&memberNo="+(m.getMemberNo())+"'>"+pageNo+"</a></li>";
+					} else {
+						pageNavi += "<li class='page-item'>";
+						pageNavi += "<a class='page-link' href='/crewList.do?type=0&reqPage="+pageNo+"&memberNo="+(m.getMemberNo())+"'>";
+						pageNavi += pageNo+"</a></li>";
+					}
+					pageNo++;
+					if(pageNo>totalPage) {
+						break;
+					}
+				}
+				if(pageNo <= totalPage) {
+					pageNavi += "<li class='page-item'>";
+					pageNavi += "<a class='page-link' href='/crewList.do?type=0&reqPage="+pageNo+"&memberNo="+(m.getMemberNo())+"'>";
+					pageNavi += "&raquo;</a></li>";
+				}
+				pageNavi += "</ul>";
+				
+				CrewListPage clp = new CrewListPage(list, pageNavi, start);
+				return clp;
 	}
 	
 }

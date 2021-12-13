@@ -8,35 +8,17 @@
 <title>Develomints</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<style>
-	.page-wrap{
-		width: 700px;
-		margin: 0 auto;
-		text-align: center;		
-	}
-	#pageNavi>ul{
-		justify-content: center;
-	}
-	.page-wrap>table{
-		margin-top: 100px;
-		margin-bottom: 60px;
-	}
-	.page-top{
-		display: flex;
-		justify-content: space-between;
-	}
-	.notting{
-		font-size: 25px;
-		font-weight: bold;
-	}
-</style>
+<link rel="stylesheet" href="/resources/css/member/viewPages.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
 			<div class="page-wrap">
 				<div class="page-top">
-					<span style="text-align: left; font-family: NotoBold; font-size: 30px;">공모전 신청내역</span>
+					<div class="page-topImg">
+						<span style="text-align: left; font-family: NotoBold; font-size: 30px;">공모전 신청내역</span>
+						<img src="/resources/img/member/podium.png" style="width: 50px; height: 50px; margin-left: 10px;">				
+					</div>
 					<c:choose>
 						<c:when test="${sessionScope.m.memberType eq 2 }">
 							<a href="/mypageGosu.do" class="btn btn-warning" style="height: 40px;">뒤로가기</a>															
@@ -99,7 +81,7 @@
 			
 			if($("#notting").val() == 0){
 				swal({
-			        title: '작성글이 없습니다',
+			        title: '신청내역이 없습니다',
 			        text: '',
 			        icon: 'warning',
 			        button : '돌아가기'
