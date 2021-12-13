@@ -1,0 +1,11 @@
+package kr.or.member.model.vo;
+
+import lombok.Data;
+
+@Data
+public class CrewVO {
+	private int rnum;
+	private String applyDate;
+	private int entryStatus;
+	private String recruitTitle;
+}
