@@ -35,5 +35,7 @@
 		<typeAlias type="kr.or.notice.vo.Rnum" alias="rn"/>  
 		<typeAlias type="kr.or.qna.vo.Qna" alias="q"/>
 		<typeAlias type="kr.or.member.model.vo.MyContest" alias="myc"/>  
+		<typeAlias type="kr.or.gosu.vo.GosuRequestProject" alias="grp"/>
+		<typeAlias type="kr.or.gosu.vo.GosuRequestProjectSub" alias="grps"/>
 	</typeAliases>	
 </configuration>
