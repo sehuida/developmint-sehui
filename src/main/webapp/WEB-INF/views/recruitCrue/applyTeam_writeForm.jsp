@@ -41,6 +41,7 @@
 	        	if($('#maxContentPost').text() >= 0){
 	        		result = true;
 	            }
+	        	console.log(result);
 	     });
 	
 		$(".return_img").click(function(){
