@@ -171,6 +171,17 @@
     .apply>span{
         color: rgb(78, 205, 196);
     }
+    .search{
+    	position: absolute;
+    }
+    #searchImg{
+    	width: 20px;
+    	height: 20px;
+    	position: relative;
+    	left: 290px;
+    	top: -4px;
+    	cursor: pointer;
+    }
 </style>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -194,8 +205,6 @@
                 <a href="loginFrm.do"><button class="resume">이력서 작성하기</button></a>                		
                 	</c:otherwise>
                 </c:choose>
-               <!--   <a href="resumeManage.do"><button class="resume">이력서 작성하기</button></a>   		나중에 choose 주석지우고 이거지우기             		
-			     <a href="announceManage.do"><button class="resume">구인공고 작성하기</button></a>    	나중에 choose 주석지우고 이거지우기     -->         		
             </div>
             <div class="headerImg">
                 <img src="resources/img/jobSearch/jobSearchList.PNG">
@@ -211,7 +220,16 @@
                     <option>지역 선택</option>
                     <option>서울</option>
                     <option>경기</option>
+                    <option>인천</option>
+                    <option>강원</option>
+                    <option>충남</option>
+                    <option>충북</option>
+                    <option>경북</option>
                     <option>부산</option>
+                    <option>경남</option>
+                    <option>전북</option>
+                    <option>전남</option>
+                    <option>제주</option>
                 </select>
                 <select>
                     <option>직업 선택</option>
@@ -219,7 +237,7 @@
                     <option>디자인</option>
                     <option>기획</option>
                 </select>
-                <input type="text" placeholder="검색" class="search">
+                <input type="text" placeholder="검색 //나중에 돋보기 이미지로 변경" class="search"><img id="searchImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
                 
                 <c:forEach items="${list }" var="a" varStatus="i">
 	                <div class="content">
