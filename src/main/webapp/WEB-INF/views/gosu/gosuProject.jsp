@@ -146,143 +146,89 @@ input:focus, textarea:focus {
 		<div class="g-msg">고수에게 요구 사항을 정확하게 전달해주세요!</div>
 
 		<div class="talk-wrap">
-			<div class="talk-one">
-				<table>
-					<tr>
-						<th style="text-align: right; width: 150px;"><img
-							src="/resources/img/gosu/g_img_basic.png"></th>
-						<th style="font-size: 30px;"><span
-							style="color: rgb(78, 205, 196);">고수 </span> XXX</th>
-						<td style="text-align: right; padding-right: 50px; color: gray;">2021.XX.XX</td>
-					</tr>
-					<tr>
-						<th style="text-align: right;">첨부파일</th>
-						<td colspan="2"><input type="file"></td>
-					</tr>
-					<tr>
-						<td colspan="3" style="text-align: center; padding: 40px;"><p
-								style="padding: 30px;">ddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd</p></td>
-					</tr>
-				</table>
-			</div>
-			<div class="talk-one talk-me">
-				<table>
+		
+			<c:choose>
+			<c:when test="${empty grplist }">
+				<div class="talk-sub">
+					<h2 style="font-weight: 900; color: #cacaca; margin: 150px;">대화를
+						시작해보세요!</h2>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="talk-wrap">
+					<c:forEach items="${grplist }" var="gtl" varStatus="i">
+						<c:choose>
+							<c:when test="${gtl.memberNo eq sessionScope.m.memberNo }">
+								<div class="talk-one talk-me">
+									<table>
+										<tr>
 
-					<tr>
-						<th style="text-align: right;">첨부파일</th>
-						<td><input type="file"></td>
-						<td style="text-align: right; padding-right: 50px; color: gray;">2021.XX.XX</td>
-					</tr>
-					<tr>
-						<td colspan="3" style="text-align: center; padding: 40px;"><p
-								style="padding: 30px;">ddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd</p></td>
-					</tr>
-				</table>
-			</div>
-			<div class="talk-one">
-				<table>
-					<tr>
-						<th style="text-align: right; width: 150px;"><img
-							src="/resources/img/gosu/g_img_basic.png"></th>
-						<th style="font-size: 30px;"><span
-							style="color: rgb(78, 205, 196);">고수 </span> XXX</th>
-						<td style="text-align: right; padding-right: 50px; color: gray;">2021.XX.XX</td>
-					</tr>
-					<tr>
-						<th style="text-align: right;">첨부파일</th>
-						<td colspan="2"><input type="file"></td>
-					</tr>
-					<tr>
-						<td colspan="3" style="text-align: center; padding: 40px;"><p
-								style="padding: 30px;">ddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd</p></td>
-					</tr>
-				</table>
-			</div>
-			<div class="talk-one talk-me">
-				<table>
+											<c:if test="${not empty gtl.filename }">
+												<th colspan="2"
+													style="text-align: left; padding-left: 50px;">첨부파일
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>${gtl.filename }</a>
+												</th>
 
-					<tr>
-						<th style="text-align: right;">첨부파일</th>
-						<td><input type="file"></td>
-						<td style="text-align: right; padding-right: 50px; color: gray;">2021.XX.XX</td>
-					</tr>
-					<tr>
-						<td colspan="3" style="text-align: center; padding: 40px;"><p
-								style="padding: 30px;">ddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd</p></td>
-					</tr>
-				</table>
-			</div>
-			<div class="talk-one">
-				<table>
-					<tr>
-						<th style="text-align: right; width: 150px;"><img
-							src="/resources/img/gosu/g_img_basic.png"></th>
-						<th style="font-size: 30px;"><span
-							style="color: rgb(78, 205, 196);">고수 </span> XXX</th>
-						<td style="text-align: right; padding-right: 50px; color: gray;">2021.XX.XX</td>
-					</tr>
-					<tr>
-						<th style="text-align: right;">첨부파일</th>
-						<td colspan="2"><input type="file"></td>
-					</tr>
-					<tr>
-						<td colspan="3" style="text-align: center; padding: 40px;"><p
-								style="padding: 30px;">ddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd</p></td>
-					</tr>
-				</table>
-			</div>
-			<div class="talk-one talk-me">
-				<table>
+											</c:if>
+											<td
+												style="text-align: right; padding-right: 50px; color: gray;">${gtl.requestProjectDate }</td>
+										</tr>
 
-					<tr>
-						<th style="text-align: right;">첨부파일</th>
-						<td><input type="file"></td>
-						<td style="text-align: right; padding-right: 50px; color: gray;">2021.XX.XX</td>
-					</tr>
-					<tr>
-						<td colspan="3" style="text-align: center; padding: 40px;"><p
-								style="padding: 30px;">ddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd
-								dddddddddddddddddddddddddddddddddd</p></td>
-					</tr>
-				</table>
-			</div>
+										<tr>
+											<td colspan="3" style="text-align: center; padding: 40px;"><p
+													style="border: 1px solid gray; padding: 30px;">${gtl.requestProjectContentBr }</p></td>
+										</tr>
+									</table>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="talk-one">
+									<table>
+										<tr>
+											<th style="text-align: right; width: 150px;"><c:if
+													test="${empty gtl.gosuImg }">
+													<img src="/resources/img/gosu/g_img_basic.png">
+												</c:if> <c:if test="${not empty gtl.writerImg }">
+													<img src="/resources/upload/member/${gtl.writerImg}">
+												</c:if></th>
+											<th style="font-size: 30px;"><c:choose>
+													<c:when test="${sessionScope.m.memberId ne grpsOne.memberId}">
+														<span style="color: rgb(78, 205, 196);">질문자</span>
+													</c:when>
+													<c:otherwise>
+														<span style="color: rgb(78, 205, 196);">고수</span>
+													</c:otherwise>
+												</c:choose> ${gtl.writerId }</th>
+											<td
+												style="text-align: right; padding-right: 50px; color: gray;">${gtl.requestProjectDate }</td>
+										</tr>
+										<tr>
+											<c:if test="${not empty gtl.filename }">
+												<th style="text-align: right;">첨부파일</th>
+												<td colspan="2"><a>${gtl.filename }</a></td>
+											</c:if>
+										</tr>
+										<tr>
+											<td colspan="3" style="text-align: center; padding: 40px;"><p
+													style="border: 1px solid gray; padding: 30px;">${gtl.requestProjectContentBr }</p></td>
+										</tr>
+									</table>
+								</div>
+							</c:otherwise>
+						</c:choose>
+
+					</c:forEach>
+
+				</div>
+			</c:otherwise>
+		</c:choose>
+		
+		
+			
 		</div>
 		<hr>
+		
+		
 		<span style="color: gray; font-size: small;">* 전송할 내용을 아래에
 			입력해주세요<br> * 첨부파일은 한 번에 하나씩만 전송 가능합니다.
 		</span> <br> <br> <br>
@@ -308,6 +254,57 @@ input:focus, textarea:focus {
 			</div>
 		</div>
 	</div>
+	<script>
+		$("#talkBtnAjax2").click(function() {
+			var talkContent = $("#talkContent").val();
+			var writer = $("#writer").val();
+			var feedbackNo = $("#feedbackNo").val();
+
+			var form = new FormData();
+			var files = $("#talkFile")[0].files[0];
+			console.log(files);
+			form.append("talkFile", files);
+			form.append("talkContent", talkContent);
+			form.append("writer", writer);
+			form.append("feedbackNo", feedbackNo);
+
+			$.ajax({
+
+				url : "/talkBtnAjax.do",
+				type : "post",
+				processData : false,
+				contentType : false,
+				data : form,
+				success : function(data) {
+					if (data > 0) {
+						console.log("등록성공");
+						location.reload();
+					} else {
+
+						console.log("등록실패");
+					}
+				}
+			});
+		});
+		$("#talkStopAjax2").click(function() {
+			var feedbackNo = $("#feedbackNo").val();
+
+			$.ajax({
+
+				url : "/talkStopAjax.do",
+				data : {
+					"feedbackNo" : feedbackNo
+				},
+				success : function(data) {
+					if (data > 0) {
+						location.reload();
+					} else {
+						console.log("에러");
+					}
+				}
+			});
+		});
+	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>

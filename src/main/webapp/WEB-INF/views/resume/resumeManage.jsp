@@ -285,6 +285,8 @@
 		}
 		
 		
+		
+		
 		$(".resumeBtn").click(function(e){
 			var count = $(".count").html();
 			if($(".count").html() > 10) {
@@ -360,10 +362,23 @@
 	<div class="contain">
 		<em>이력서 관리</em>				<!-- if 이력서 없으면 등록된 이력서가 없습니다. -->
 		<!-- 대표이력서 ceoResume == 1 -->
+		<c:if test="${empty list }">
+			<div class="grayBox">
+						<div class="resumeHeader">
+							<div class="ceoResume">
+								<p style="margin-bottom: 10px;">대표이력서</p>
+							</div><br><br>
+							<div class="resumeTitle" style="margin-bottom: 30px;">
+								<em style="font-size:20px; color: #666;">대표 이력서가 없습니다.</em><br>
+								<em style="font-size:20px; color: #666;">이력서를 작성하시고 대표 이력서 버튼을 on으로 설정하시면 대표 이력서로 등록됩니다.</em>
+							</div>
+						</div>
+					</div>
+		</c:if>
 		<c:forEach items="${list }" var="r" varStatus="i">
 			<c:choose>
-				<c:when test="${r.ceoResume eq 0 }">		<!-- 1 -> 0 으로 바꿔주기 -->
-				
+				<c:when test="${r.ceoResume eq 0 }">
+					
 				</c:when>
 				<c:otherwise>
 					

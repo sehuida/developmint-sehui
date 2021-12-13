@@ -53,13 +53,13 @@
 			<div>
 				<!-- 이전공지, 다음공지로 넘어가게 내용이 있으면 출력 , 없으면  나타내기 않게하기 -->
 				<ul class="a-link"><span style="font-size: x-large;">CS center/Notice <span style="font-size: small;color: #999;">카테고리의 다른글</span></span>
-					<c:forEach var="nlist" items="${nlist }">
+					<c:forEach var="rlist" items="${rlist }">
 						<c:choose>
-							<c:when test="${n.noticeNo eq nlist.noticeNo}">
-								<li><a href="/noticeView.do?noticeNo=${nlist.noticeNo }" class="a-active">${nlist.noticeNo} ${nlist.noticeTitle } <span style="font-size: small;color: #999;">${nlist.regDate }</span></a></li>
+							<c:when test="${rnum eq rlist.rnum}">
+								<li><a href="/noticeView.do?noticeNo=${rlist.noticeNo }" class="a-active">${rlist.rnum} ${rlist.noticeTitle } <span style="font-size: small;color: #999;">${rlist.regDate }</span></a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="/noticeView.do?noticeNo=${nlist.noticeNo }">${nlist.noticeNo} ${nlist.noticeTitle } <span style="font-size: small;color: #999;">${nlist.regDate }</span></a></li>
+								<li><a href="/noticeView.do?noticeNo=${rlist.noticeNo }">${rlist.rnum} ${rlist.noticeTitle } <span style="font-size: small;color: #999;">${rlist.regDate }</span></a></li>
 							</c:otherwise>						
 						</c:choose>
 					</c:forEach>

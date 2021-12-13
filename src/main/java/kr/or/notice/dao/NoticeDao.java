@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.notice.vo.Criteria;
 import kr.or.notice.vo.Notice;
+import kr.or.notice.vo.Rnum;
 
 @Repository
 public class NoticeDao {
@@ -53,6 +54,15 @@ public class NoticeDao {
 
 	public int updateNoticeNo(Notice n) {
 		return sqlsession.update("notice.updateNoticeNo",n);
+	}
+
+	public Rnum selectRnum(int noticeNo) {
+		return sqlsession.selectOne("notice.selectRnum",noticeNo);
+	}
+
+	public ArrayList<Rnum> selectRnumList(int rnum) {
+		List<Rnum> rlist = sqlsession.selectList("notice.selectRnumList",rnum);
+		return (ArrayList<Rnum>)rlist;
 	}
 
 }

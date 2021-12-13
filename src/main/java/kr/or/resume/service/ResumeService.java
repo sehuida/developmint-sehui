@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.announce.vo.Announce;
 import kr.or.member.model.vo.Member;
 import kr.or.resume.dao.ResumeDao;
 import kr.or.resume.vo.Resume;
@@ -65,10 +66,13 @@ public class ResumeService {
 		return dao.selectResume(resumeNo);
 	}
 
-	/*	지원한 회사 리스트 가져오기
-	 * public ArrayList<Resume> selectAllAnnounce(int memberNo) { return
-	 * dao.selectAllAnnounce(memberNo); }
-	 */
+	/* 지원한 회사 리스트 가져오기 */
+	 public ArrayList<Announce> selectAllAnnounce(int memberNo) {
+		 ArrayList<Announce> list = dao.selectAnnounceNo(memberNo);
+		 System.out.println(list);
+		 return dao.selectAllAnnounce(list); 
+	 }
+	 
 	 
 
 	/*
