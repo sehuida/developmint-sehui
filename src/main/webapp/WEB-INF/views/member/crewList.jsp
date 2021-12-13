@@ -9,6 +9,29 @@
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" href="/resources/css/member/viewPages.css">
+<style>
+	.page-select{
+		margin-top:40px;
+		width: 450px;
+	}
+	.page-select ol{
+		justify-content: space-around;
+	}
+	.breadcrumb-item + .breadcrumb-item::before{
+		content: none !important;
+	}
+	.page-wrap>table{
+		margin-top: 50px;
+	}
+	.page-select{
+		font-size: 20px;
+		font-family: NotoBold;
+	}
+	.actives{
+		border-bottom: 7px solid #ffce67;
+		color: #fff;		
+	}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -27,6 +50,27 @@
 							<a href="/mypage.do" class="btn btn-warning" style="height: 40px;">뒤로가기</a>
 						</c:otherwise>
 					</c:choose>
+				</div>
+				<div class="page-select">
+					<ol class="breadcrumb projectSelect">
+						<c:choose>
+							<c:when test="${type eq 0}">
+								 <li class="breadcrumb-item actives">신청한 내역</li>
+								 <li class="breadcrumb-item"><a href="#">신청받은 내역</a></li>
+								 <li class="breadcrumb-item"><a href="#">찜한내역</a></li>							
+							</c:when>
+							<c:when test="${type eq 1 }">
+								 <li class="breadcrumb-item"><a href="#">신청한 내역</a></li>
+								 <li class="breadcrumb-item actives">신청받은 내역</li>
+								 <li class="breadcrumb-item"><a href="#">찜한내역</a></li>							
+							</c:when>
+							<c:when test="${type eq 1 }">
+								 <li class="breadcrumb-item"><a href="#">신청한 내역</a></li>
+								 <li class="breadcrumb-item"><a href="#">신청받은 내역</a></li>
+								 <li class="breadcrumb-item actives">찜한내역</li>							
+							</c:when>						
+						</c:choose>
+					</ol>					
 				</div>
 						<table class="table table-hover">
 							<tr class="table-primary">

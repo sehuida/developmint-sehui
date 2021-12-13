@@ -257,16 +257,16 @@ public class MemberService {
 				
 				if(pageNo != 1) {
 					pageNavi += "<li class=\"page-item\">";
-					pageNavi += "<a class=\"page-link\" href='/crewList.do?type=0&reqPage="+(pageNo-1)+"&memberId="+(m.getMemberId())+"'>&laquo;</a></li>";
+					pageNavi += "<a class=\"page-link\" href='/crewList.do?type=0&reqPage="+(pageNo-1)+"&memberNo="+(m.getMemberNo())+"'>&laquo;</a></li>";
 				}
 				
 				for(int i=0;i<pageNaviSize;i++){
 					if(pageNo == reqPage) {
 						pageNavi += "<li class=\"page-item active\">";
-						pageNavi += "<a class='page-link' href='/crewList.do?type=0&reqPage="+pageNo+"&memberId="+(m.getMemberId())+"'>"+pageNo+"</a></li>";
+						pageNavi += "<a class='page-link' href='/crewList.do?type=0&reqPage="+pageNo+"&memberNo="+(m.getMemberNo())+"'>"+pageNo+"</a></li>";
 					} else {
 						pageNavi += "<li class='page-item'>";
-						pageNavi += "<a class='page-link' href='/crewList.do?type=0&reqPage="+pageNo+"&memberId="+(m.getMemberId())+"'>";
+						pageNavi += "<a class='page-link' href='/crewList.do?type=0&reqPage="+pageNo+"&memberNo="+(m.getMemberNo())+"'>";
 						pageNavi += pageNo+"</a></li>";
 					}
 					pageNo++;
@@ -276,7 +276,7 @@ public class MemberService {
 				}
 				if(pageNo <= totalPage) {
 					pageNavi += "<li class='page-item'>";
-					pageNavi += "<a class='page-link' href='/crewList.do?type=0&reqPage="+pageNo+"&memberId="+(m.getMemberId())+"'>";
+					pageNavi += "<a class='page-link' href='/crewList.do?type=0&reqPage="+pageNo+"&memberNo="+(m.getMemberNo())+"'>";
 					pageNavi += "&raquo;</a></li>";
 				}
 				pageNavi += "</ul>";

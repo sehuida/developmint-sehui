@@ -369,17 +369,17 @@ public class ProjectTeamController {
 		}
 	  
 	  @RequestMapping(value="/selectMember.do")
-		public String selectMember(Model model, int entryNo, int memberNo) {
+		public String selectMember(Model model, int entryNo, int memberNo, int projectNo) {
 			int result = service.selectMember(entryNo, memberNo);
 			if(result > 0) { 
-				  model.addAttribute("title", "선발대기 등록 성공");
-				  model.addAttribute("msg", "선택하신 지원자분을 선발대기인원으로 등록하였습니다.");
-				  model.addAttribute("loc","/manageEntry.do?reqPage=1&viewValue=1");
+				  model.addAttribute("title", "최종 선발대기 등록 성공");
+				  model.addAttribute("msg", "선택하신 지원자분을 최종 선발대기인원으로 등록하였습니다.");
+				  model.addAttribute("loc","/manageEntry.do?memberNo="+memberNo+"&projectNo="+projectNo+"&reqPage=1&viewValue=1");
 				  model.addAttribute("icon", "success");
 			  } else {
 				  model.addAttribute("title", "선발대기 등록 실패");
-				  model.addAttribute("msg", "선발대기인원으로 등록하는데 실패하였습니다.");
-				  model.addAttribute("loc","/manageEntry.do?reqPage=1&viewValue=1");
+				  model.addAttribute("msg", "최종 선발대기인원으로 등록하는데 실패하였습니다.");
+				  model.addAttribute("loc","/manageEntry.do?memberNo="+memberNo+"&projectNo="+projectNo+"&reqPage=1&viewValue=1");
 				  model.addAttribute("icon", "warning");
 			  }
 			  return "member/swalMsg"; 
