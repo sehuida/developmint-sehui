@@ -31,21 +31,38 @@
 		<div class="container">
 			<div class="page-wrap">
 				<div class="page-top">
-					<span style="text-align: left; font-family: NotoBold; font-size: 30px;">고수의 노하우 작성글</span>
+					<span style="text-align: left; font-family: NotoBold; font-size: 30px;">공모전 신청내역</span>
 					<a href="/mypageGosu.do" class="btn btn-warning" style="height: 40px;">뒤로가기</a>			
 				</div>
 					<table class="table table-hover">
 						<tr class="table-primary">
-							<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th>
+							<th>번호</th><th>공모전명</th><th>마감여부</th><th>신청상태</th>
 						</tr>
-						<c:forEach items="${list }" var="gn" varStatus="i">
+						<c:forEach items="${list }" var="ct" varStatus="i">
 							<tr>
 								<td>${start+i.index }</td>
 								<td>
-									<a href="/gosuNoticeContent.do?gnn=${gn.gnoticeNo }">${gn.gnoticeTitle }</a>
+									<a href="/contestView.do?contestNo=${ct.contestNo }">${ct.contestTitle }</a>
 								</td>
-								<td>${gn.writeId }</td>
-								<td>${gn.gnoticeDate }</td>
+								<c:choose>
+									<c:when test="${ct.contestDeadline eq '마감' }">
+										<td class="text-danger">마감</td>
+									</c:when>
+									<c:otherwise>
+										<td>${ct.contestDeadline }</td>									
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${ct.cmStatus eq 1 }">
+										<td>처리중</td>
+									</c:when>
+									<c:when test="${ct.cmStatus eq 2 }">
+										<td>신청완료</td>
+									</c:when>
+									<c:otherwise>
+										<td>신청반려</td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 						</c:forEach>
 					</table>			

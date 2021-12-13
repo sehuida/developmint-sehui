@@ -119,4 +119,19 @@
   <select id="gosuTotalCount" parameterType="string" resultType="_int">
   	select count(*) from gosu_notice where member_id=#{memberId}
   </select>
+  <select id="contestMemberList" parameterType="map" resultType="myc">
+    select * from(
+    select rownum as rnum,cc.* from
+    (select
+ 						contest_no as contestNo,
+						case when  <![CDATA[contest_deadline <= to_char(sysdate,'yyyy-mm-dd')]]> then '마감'
+                        else contest_deadline
+                        end as contestDeadLine,
+                        contest_title as contestTitle,
+                        (select cm_status from contest_member cm where cm.contest_no = c.contest_no and member_id=#{memberId}) as cmStatus                    
+    from contest c where contest_no in (select contest_no as contestNo from contest_member where member_id='user01') order by 1)cc) where rnum between #{start} and #{end}
+  </select>
+  <select id="contestCounts" parameterType="string" resultType="_int">
+  	select count(*) from contest_member where member_id=#{memberId}
+  </select>
 </mapper>
