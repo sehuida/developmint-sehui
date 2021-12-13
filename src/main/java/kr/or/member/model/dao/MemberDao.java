@@ -9,9 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.contest.vo.Contest;
+import kr.or.contest.vo.ContestList;
+import kr.or.contest.vo.ContestMember;
 import kr.or.gosu.vo.GosuNotice;
 import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.MyContest;
 
 @Repository
 public class MemberDao {
@@ -94,6 +98,15 @@ public class MemberDao {
 
 	public int gosuTotalCount(String memberId) {
 		return sqlSession.selectOne("member.gosuTotalCount",memberId);
+	}
+
+	public ArrayList<MyContest> contestMemberList(HashMap<String, Object> map) {
+		List<MyContest> list = sqlSession.selectList("member.contestMemberList",map);
+		return (ArrayList<MyContest>)list;
+	}
+
+	public int contestCount(String memberId) {
+		return sqlSession.selectOne("member.contestCounts",memberId);
 	}
 
 }

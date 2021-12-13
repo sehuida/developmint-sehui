@@ -37,7 +37,6 @@
 					</ul>
 					<!-- 폼돌아가는구간 -->
 					<div class="section_form">
-						<!-- [D] 주문확인 -->
 						<div class="harf_area">
 							<header class="n-section-title">
 								<h2 class="tit">문의 작성</h2>
@@ -68,19 +67,41 @@
 									<tr>
 										<th scope="row">작성자</th>
 										<td>
-											<input type="text" class="n-input" name="user_nm" value="김민주">
+											<c:choose>
+												<c:when test="${not empty sessionScope.m }">
+													<input type="text" class="n-input" name="user_nm" value="${sessionScope.m.memberName }" >
+												</c:when>
+												<c:otherwise>
+													<input type="text" class="n-input" name="user_nm" placeholder="작성자를 입력해주세요.">
+												</c:otherwise>
+											</c:choose>
+											
 										</td>
 									</tr>
 									<tr class="n-same-row">
 										<th scope="row">휴대전화</th>
 										<td>
-											<input type="text" class="n-input" name="mobile" value="010-8794-7512">
+											<c:choose>
+												<c:when test="${not empty sessionScope.m }">
+													<input type="text" class="n-input" name="mobile" value="${sessionScope.m.phone }">
+												</c:when>
+												<c:otherwise>
+													<input type="text" class="n-input" name="mobile" placeholder="예)010-0000-0000">
+												</c:otherwise>
+											</c:choose>
 										</td>
 									</tr>
 									<tr class="n-same-row">
 										<th scope="row">이메일</th>
 										<td>
-											<input type="text" class="n-input" name="email" value="skskmjo2398@naver.com">
+											<c:choose>
+												<c:when test="${not empty sessionScope.m }">
+													<input type="email" class="n-input" name="email" value="${sessionScope.m.email }">
+												</c:when>
+												<c:otherwise>
+													<input type="email" class="n-input" name="email" placeholder="예)examEmail@gmail.com">
+												</c:otherwise>
+											</c:choose>
 										</td>
 									</tr>
 									<tr>
@@ -107,11 +128,10 @@
 								</tbody>
 							</table>
 						</div>
-						<!-- //[D] 주문확인 -->
 						<!-- faq 오른쪽 -->
 						<div id="faq_list" class="harf_area"></div>
-						<!-- //faq 오른쪽 -->
 					</div>
+					<!-- 폼돌아가는구간 끝  -->
 					<!-- 버튼 -->
 					<div class="n-btn-group">
 						<a href="javascript:void(0)" onClick="cancel(); return false;" class="n-btn btn-lighter">취소</a>

@@ -126,7 +126,7 @@
 					<div>
 						<span>이메일:${sessionScope.m.email }</span>
 						<a href="/resumeManage.do?memberNo=${sessionScope.m.memberNo }" class="btn btn-primary btn-sm">이력서 관리</a>
-						<a href="#" class="btn btn-primary btn-sm">입사 신청내역</a>
+						<a href="/applicationCompany.do?memberNo=${sessionScope.m.memberNo } " class="btn btn-primary btn-sm">입사 신청내역</a>
 					</div>
 				</div>
 				<div class="profiles">
@@ -152,8 +152,8 @@
 				</div>
 				<div>
 					<img src="/resources/img/member/podium.png">
-					<a class="pageLists" href="#">공모전 신청내역</a>
-					<a href="#"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
+					<a class="pageLists" href="/mycontestPage.do?reqPage=1&memberId=${sessionScope.m.memberId }">공모전 신청내역</a>
+					<a href="/mycontestPage.do?reqPage=1&memberId=${sessionScope.m.memberId }"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
 				</div>
 			</div>
 			<div class="page-middle">
