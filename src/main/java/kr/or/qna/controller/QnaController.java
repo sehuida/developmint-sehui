@@ -17,4 +17,9 @@ public class QnaController {
 		return "qna/counsel";
 	}
 	
+	@RequestMapping(value="/faq.do")
+	public String tofaq() {
+		return "faq/faqList";
+	}
+	
 }

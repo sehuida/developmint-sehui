@@ -10,6 +10,7 @@ import kr.or.notice.dao.NoticeDao;
 import kr.or.notice.vo.Criteria;
 import kr.or.notice.vo.Notice;
 import kr.or.notice.vo.NoticePageData;
+import kr.or.notice.vo.Rnum;
 
 @Service
 public class NoticeService {
@@ -94,6 +95,15 @@ public class NoticeService {
 	@Transactional
 	public int updateNoticeNo(Notice n) {
 		return dao.updateNoticeNo(n);
+	}
+
+	public Rnum selectRnum(int noticeNo) {
+		return dao.selectRnum(noticeNo);
+	}
+
+	public ArrayList<Rnum> selectRnumList(int rnum) {
+		ArrayList<Rnum> rlist = dao.selectRnumList(rnum);
+		return rlist;
 	}
 
 	
