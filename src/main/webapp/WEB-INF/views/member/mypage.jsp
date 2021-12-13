@@ -7,78 +7,7 @@
 <meta charset="UTF-8">
 <title>Develomints</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
-<style>
-	.page-wrap{
-		width: 700px;
-		margin: 0 auto;
-        padding : 20px;
-        margin-bottom: 100px;
-	}
-	.page-top{
-        display: flex;
-        justify-content: space-around;
-        margin-bottom: 20px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid #a6adad;
-	}
-	.profiles{
-		display : flex;
-		align-items: center;
-		border-radius: 60%; 
-		overflow: hidden;
-	}
-	.profiles img{
-	    object-fit: cover;			
-	}
-	.profiile-h{
-		margin-left: 20px;
-	}
-	.profile-h>div{
-		margin-bottom: 10px;
-	}
-	.profile-h>div:last-child *{
-		margin-right: 10px;
-	}
-	.page-top{
-		margin-top: 20px;
-	}
-	.page-middle{
-		border-bottom: 1px solid #a6adad;
-	}
-	.page-middle img{
-		width: 40px;
-		height: 40px;
-	}
-	.page-middle div{
-        display: flex;
-        justify-content: space-between;
-        padding: 0 40px 0 40px;
-        margin-top: 50px;
-        margin-bottom: 50px;
-	}
-	.page-bottom{
-		margin-top: 30px;
-		margin-left: 30px;
-	}
-	.page-bottom>a{
-		margin-right: 20px;
-	}
-	.arrow{
-		transition: all ease 0.4s;
-	}
-	.arrow:hover{
-		transform: rotate(90deg);
-	}
-	.pageLists{
-		width:400px; 
-		line-height: 2; 
-		text-decoration: none; 
-		color: black;
-	}
-	.pageLists:hover{
-		color:#78c2ad;
-	}
-</style>
+<link rel="stylesheet" href="/resources/css/member/myPage.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -142,8 +71,8 @@
 				</div>
 				<div>
 					<img src="/resources/img/member/multiple-users-silhouette.png">
-					<a class="pageLists" href="#">팀원신청 / 찜한 내역 확인하기</a>
-					<a href="#"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
+					<a class="pageLists" href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=0">팀원신청 / 찜한 내역 확인하기</a>
+					<a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=0"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
 				</div>
 				<div>
 					<img src="/resources/img/member/ask.png">

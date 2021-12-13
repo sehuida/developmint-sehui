@@ -173,7 +173,10 @@ public class ProjectTeamDao {
 		if(updateResult1 > 0) {
 			int updateResult2 = sqlSession.update("projectTeam.updateFinalRecruitTeam2", map);
 			if(updateResult2 > 0) {
-				result = sqlSession.insert("projectTeam.insertFinalTeamMember", map);
+				int writerInsertResult = sqlSession.insert("projectTeam.insertFinalTeamWriter", map);
+				if(writerInsertResult > 0) {
+					result = sqlSession.insert("projectTeam.insertFinalTeamMember", map);
+				}
 			}
 		}
 		return result;

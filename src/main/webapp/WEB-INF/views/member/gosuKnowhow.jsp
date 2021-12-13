@@ -8,31 +8,17 @@
 <title>Develomints</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<style>
-	.page-wrap{
-		width: 700px;
-		margin: 0 auto;
-		text-align: center;		
-	}
-	#pageNavi>ul{
-		justify-content: center;
-	}
-	.page-wrap>table{
-		margin-top: 100px;
-		margin-bottom: 60px;
-	}
-	.page-top{
-		display: flex;
-		justify-content: space-between;
-	}
-</style>
+<link rel="stylesheet" href="/resources/css/member/viewPages.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
 			<div class="page-wrap">
 				<div class="page-top">
-					<span style="text-align: left; font-family: NotoBold; font-size: 30px;">고수의 노하우 작성글</span>
+					<div>
+						<span style="text-align: left; font-family: NotoBold; font-size: 30px;">고수의 노하우 작성글</span>
+						<img src="/resources/img/member/notes.png" style="width: 50px; height: 50px; margin-left: 10px;">					
+					</div>
 					<a href="/mypageGosu.do" class="btn btn-warning" style="height: 40px;">뒤로가기</a>			
 				</div>
 				<c:if test="${empty list }">

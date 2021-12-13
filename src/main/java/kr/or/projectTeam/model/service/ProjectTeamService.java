@@ -403,6 +403,7 @@ public class ProjectTeamService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("finalList", finalList);
 		map.put("projectNo", projectNo);
+		map.put("memberNo", memberNo);
 		int result = dao.closeRecruitTeam(map);
 		return result;
 	}

@@ -33,7 +33,7 @@ public class MailSender {
 		//인증정보설정(gmail 로그인)
 		Session session = Session.getDefaultInstance(prop, new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				PasswordAuthentication pa = new PasswordAuthentication("zkhsz85@gmail.com", "suarez0607!");
+				PasswordAuthentication pa = new PasswordAuthentication("develeomints@gmail.com", "ehdrn1234!");
 				return pa;
 			}
 		});
@@ -44,7 +44,7 @@ public class MailSender {
 		try {
 			msg.setSentDate(new Date());		//메일 전송날짜 설정
 			//보내는사람 정보
-			msg.setFrom(new InternetAddress("khdsaclass@gmail.com","KH 당산 A클래스"));
+			msg.setFrom(new InternetAddress("develeomints@gmail.com","디벨로민츠"));
 			//받는사람정보
 			InternetAddress to = new InternetAddress(email);
 			msg.setRecipient(Message.RecipientType.TO, to);
@@ -65,6 +65,7 @@ public class MailSender {
 		
 		return result;
 	}
+	
 	
 	public String mailSend(String email) {
 		boolean result = false;
@@ -103,7 +104,7 @@ public class MailSender {
 		//인증정보설정(gmail 로그인)
 		Session session = Session.getDefaultInstance(prop, new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				PasswordAuthentication pa = new PasswordAuthentication("khprjteam2@gmail.com", "tpalvmfhwprxm");
+				PasswordAuthentication pa = new PasswordAuthentication("develeomints@gmail.com", "ehdrn1234!");
 				return pa;
 			}
 		});
@@ -114,7 +115,7 @@ public class MailSender {
 		try {
 			msg.setSentDate(new Date());		//메일 전송날짜 설정
 			//보내는사람 정보
-			msg.setFrom(new InternetAddress("khprjteam2@gmail.com","Develomints"));
+			msg.setFrom(new InternetAddress("develeomints@gmail.com","Develomints"));
 			//받는사람정보
 			InternetAddress to = new InternetAddress(email);
 			msg.setRecipient(Message.RecipientType.TO, to);
@@ -176,7 +177,7 @@ public class MailSender {
 		//인증정보설정(gmail 로그인)
 		Session session = Session.getDefaultInstance(prop, new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				PasswordAuthentication pa = new PasswordAuthentication("khprjteam2@gmail.com", "tpalvmfhwprxm");
+				PasswordAuthentication pa = new PasswordAuthentication("develeomints@gmail.com", "ehdrn1234!");
 				return pa;
 			}
 		});
@@ -187,7 +188,7 @@ public class MailSender {
 		try {
 			msg.setSentDate(new Date());		//메일 전송날짜 설정
 			//보내는사람 정보
-			msg.setFrom(new InternetAddress("khprjteam2@gmail.com","Develomints"));
+			msg.setFrom(new InternetAddress("develeomints@gmail.com","Develomints"));
 			//받는사람정보
 			InternetAddress to = new InternetAddress(email);
 			msg.setRecipient(Message.RecipientType.TO, to);

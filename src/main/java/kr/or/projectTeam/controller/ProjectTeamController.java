@@ -390,7 +390,7 @@ public class ProjectTeamController {
 		  int result = service.closeRecruitTeam(projectNo, memberNo);
 			if(result > 0) { 
 				  model.addAttribute("title", "모집 마감 완료");
-				  model.addAttribute("msg", "모집이 마감되고 프로젝트가 시작되었습니다.");
+				  model.addAttribute("msg", "모집 마감되었고 지금부터 프로젝트가 시작됩니다.");
 				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
 				  model.addAttribute("icon", "success");
 			  } else {
