@@ -40,8 +40,9 @@ public class ContestService {
 	public ContestList contestView(int contestNo) {
 		int result = dao.contestCountUp(contestNo);
 		Contest contest = dao.contestView(contestNo);
+		int enrollCount = dao.enrollCount(contestNo);
 		ArrayList<Comment> commentList = dao.commentList(contestNo);
-		ContestList list = new ContestList(commentList, contest);
+		ContestList list = new ContestList(commentList, contest, enrollCount);
 		return list;
 	}
 	

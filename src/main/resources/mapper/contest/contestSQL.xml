@@ -276,6 +276,10 @@
 		order by contest_deadline
 		  ]]>
   	</select>
+  	
+  	<select id="enrollCount" parameterType="_int" resultType="_int">
+  		select count(*) from contest_member where contest_no = #{contestNo}
+  	</select>
 </mapper>
 
 
