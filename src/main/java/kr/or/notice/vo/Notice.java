@@ -12,5 +12,6 @@ public class Notice {
 	private String filepath;
 	private int pin;
 	private String noticeWriter;
+	private int readCount;
 	
 }
