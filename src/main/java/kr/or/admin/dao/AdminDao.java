@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.comment.vo.Report;
 import kr.or.contest.vo.Contest;
+import kr.or.contest.vo.ContestMemberList;
 import kr.or.member.model.vo.Member;
 
 @Repository
@@ -189,6 +190,11 @@ public class AdminDao {
 
 	public int totalContestDateCount(String date) {
 		return sqlSession.selectOne("admin.totalContestDateCount",date);
+	}
+
+	public ArrayList<ContestMemberList> searchContestMember(int contestNo) {
+		List<ContestMemberList> list = sqlSession.selectList("admin.searchContestMember",contestNo);
+		return (ArrayList<ContestMemberList>)list;
 	}
 	
 

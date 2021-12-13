@@ -24,7 +24,7 @@
 		margin-bottom: 80px;
 	}
 .contestBox{
-	width: 800px;
+	width: 900px;
 	margin:0 auto;
 	height: 250px;
 	margin-top: 40px;
@@ -40,7 +40,7 @@
 }
 .infoBox{
 	padding: 20px;
-	width: 420px;
+	width: 520px;
 }
 .infoBox>p:first-child {
 	font-size: 20px;
@@ -82,13 +82,24 @@
 	cursor: pointer;
 }
 .contestMemberView{
-	width: 800px;
+	width: 900px;
 	margin:0 auto;
 	box-shadow: 0px 1px 5px -2px rgb(0 0 0 / 20%), 0px 0px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
 	margin-top: 20px;
 	border-radius: 5px;
 	padding:10px;
+	text-align: center;
 }
+.nomember{
+	font-size: 20px;
+	margin-top: 15px;
+	font-weight: bold;
+	
+}
+.btn{
+	margin: 10px;
+}
+
 
 </style>
 <body>
@@ -138,7 +149,7 @@
 								<p class="clickP">신청 회원 보기 <i class="bi bi-caret-down-fill" style="font-size: 20px;"></i></p>
 							</div>
 						</div>
-						<div class="contestMemberView" style="display:none">gg</div>
+						<div class="contestMemberView" style="display:none"></div>
 						<p style="display: none" class="contestNo">${c.contestNo }</p>
 					</c:forEach>			
 				</div>
@@ -150,7 +161,6 @@
 					<p style="margin-top:10px;">마감 예정인 공모전이 없습니다.</p>
 					<p>날짜를 선택하여 신청 회원을 확인해보세요.</p>
 				</div>
-				
 			</c:otherwise>
 		</c:choose>
 		
@@ -163,10 +173,16 @@
 		location.href="/contestEnrollMember.do?reqPage=1&date="+contestDeadline;
 	})
 	
+	//체크박스 선택시 색바꾸기
+	function setBgcolor(t){
+	tr = t.parentNode.parentNode;
+	tr.style.backgroundColor = (t.checked) ? "rgba(78,205,196,0.1)" : "#fff"; 
+	}
+	
 	$(".clickP").click(function(){
 		var index = $(".clickP").index(this);
 		$(".contestMemberView").eq(index).toggle();
-		
+		$(".contestMemberView").eq(index).html("");
 		var contestNo = $(".contestNo").eq(index).html();
 		
 		$.ajax({
@@ -174,12 +190,47 @@
 			type : 'post',
 			data : {contestNo:contestNo},
 			success : function(data){
-				
+				if(data.length == 0){
+					var p = '<p class="nomember">신청자가 없습니다.</p>'
+					$(".contestMemberView").eq(index).append(p);
+				}else{
+					var tbl = '<table class="table" style="margin-top: 20px;">';
+					tbl += '<tr>';
+					tbl += '<th><input type="checkbox" id="checkAll" class="form-check-input" style="zoom: 1.2;"></th><th>회원 ID</th><th>전화번호</th><th>이메일</th><th>깃주소</th>';
+					tbl += '</tr>';
+					for(var i = 0; i<data.length; i++){
+						tbl += '<tr>';
+						tbl += '<td><input type="checkbox" class="form-check-input chk" style="zoom: 1.2;" onclick="setBgcolor(this)"></td>';
+						tbl += '<td>'+data[i].memberId+'</td>';
+						tbl += '<td>'+data[i].phone+'</td>';
+						tbl += '<td>'+data[i].email+'</td>';
+						tbl += '<td>'+data[i].cmGit+'</td>';
+						tbl += '</tr>';
+					}
+					var btn = '<button class="btn btn-primary checkEnroll">선택 회원 승인</button>';
+					btn += '<button class="btn btn-secondary ">선택 회원 반려</button>';
+					$(".contestMemberView").eq(index).append(tbl);
+					$(".contestMemberView").eq(index).append(btn);
+					
+					//체크박스 전체선택
+					$("#checkAll").click(function(){
+						if($("#checkAll").prop("checked")){
+					           $(".chk").prop("checked",true);
+					    }else{
+					           $(".chk").prop("checked",false);
+					    }
+					});
+					
+					$(".checkEnroll").click(function(){
+						var memberId = new Array();
+					})	
+				}
 			}
 		});
 		
-	})
-	
+		
+		
+	});
 	</script>
 </body>
 </html>

@@ -11,4 +11,5 @@ public class ContestMemberList {
 	private int cmStatus;
 	private String phone;
 	private String email;
+
 }

@@ -474,6 +474,22 @@
 	<select id="totalContestDateCount" parameterType="string" resultType="_int">
 		select count(*) from contest where contest_status = 2 and contest_deadline = #{value}
 	</select>
+	
+	<!-- 공모 회원 리스트 불러오기 -->
+	<select id="searchContestMember" parameterType="_int" resultType="cml">
+		select 
+			cm_no as cmNo, 
+			CONTEST_NO as contestNo, 
+			MEMBER_ID as memberId, 
+			CM_GIT as cmGit, 
+			CM_STATUS as cmStatus,
+			email,
+			phone
+		from contest_member
+		join member using(member_id)
+		where contest_no = #{contestNo} and
+		CM_STATUS = 1
+	</select>
 </mapper>
 
 
