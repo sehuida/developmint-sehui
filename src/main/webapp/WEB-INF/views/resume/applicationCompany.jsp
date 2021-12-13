@@ -49,7 +49,12 @@
     vertical-align: top;
     background: rgb(78, 205, 196);
 }
-
+	.status{
+		overflow: hidden;
+	}
+	.stbtn{
+		float: left;
+	}
 
 	
 </style>
@@ -59,21 +64,66 @@
 			<em>입사지원 현황</em>
 			<ul class="tabWrap">
         		<li class="select"><a href="#" class="tab">전체<span class="badge">0</span></a></li>
-        		<li><a href="#" class="tab">지원서 작성중<span class="badge">0</span></a></li>
     		</ul>
     		
     		<div class="status">
-	            <div class="item new _dashboardDiv select">
-	            	<button type="button" class="_dashboardBtn"><em>지원완료</em><span class="num">1</span></button>
+	            <div class="stbtn">
+	            	<button type="button" class="btn"><em>지원완료</em><span class="num">1</span></button>
 	            </div>
-	            <div class="item">
-	            	<button type="button" class="_dashboardBtn"><em>전형 진행중</em><span class="num">0</span></button>
-	            </div>
-	            <div class="item">
-	            	<button type="button" class="_dashboardBtn"><em>최종발표</em><span class="num">0</span></button>
+	            <div class="stbtn">
+	            	<button type="button" class="btn"><em>최종발표</em><span class="num">0</span></button>
 	            </div>
         	</div>
-		</div>
+        	
+        	<hr>
+        	
+        	<c:choose>
+        		<c:when test="${empty list }">
+        			<!-- 지원내역 없음 -->
+        		</c:when>
+        		<c:otherwise>
+        			<c:forEach items="${list }" var="a" varStatus="i">
+        				<!-- 아래거 포리치로 출력	 -->
+        			</c:forEach>
+        		</c:otherwise>
+        	</c:choose>
+        	<form name="list_form" id="list_form">
+        		<div class="list_status">
+                	<div class="row _apply_list " id="apply_list_297745997">
+			            <div class="col_date">2021.12.12 22:13</div>
+			            <div class="col_summary">
+			                <strong class="corp">
+                            	<a href="/#">
+									㈜한국비즈넷
+                                </a>
+                            </strong>
+                			<div class="recruit ">
+                            	<a href="#">
+                            	<div class="toolTipWrap2">
+                                	<span class="">소프트웨어 개발자</span>
+                                	<div class="toolTip2 top_left">
+                                    	<span class="tail"></span>
+                                    	<div class="toolTipCont">
+                                        	해당 공고는 삭제되었습니다
+                                    	</div>
+                                	</div>
+                            	</div>
+                    			</a>
+                			</div>
+                            <div class="status">
+                    			<em class="txt_status">지원완료</em>
+                            </div>
+            			</div>
+			            <div class="col_btns">
+			                <div class="action">
+			                	<span class="date_end"></span>
+			                </div>
+			                <button type="button" class="btn_history _applicant_history">지원내역</button>
+			            </div>
+        			</div>
+            	</div>
+    		</form>
+    	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
