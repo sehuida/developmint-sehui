@@ -158,6 +158,27 @@ public class ProjectTeamDao {
 		return sqlSession.selectOne("projectTeam.selectentryTotalCount");
 	}
 
+	public int selectMember(Map<String, Object> map) {
+		return sqlSession.update("projectTeam.selectMember", map);
+	}
+
+	public ArrayList<ProjectEntry> selectFinalMember(int projectNo) {
+		List<ProjectEntry> finalList = sqlSession.selectList("projectTeam.selectAllFinalEntry", projectNo);
+		return (ArrayList<ProjectEntry>) finalList;
+	}
+
+	public int closeRecruitTeam(Map<String, Object> map) {
+		int result = 0;
+		int updateResult1 = sqlSession.update("projectTeam.updateFinalRecruitTeam", map);
+		if(updateResult1 > 0) {
+			int updateResult2 = sqlSession.update("projectTeam.updateFinalRecruitTeam2", map);
+			if(updateResult2 > 0) {
+				result = sqlSession.insert("projectTeam.insertFinalTeamMember", map);
+			}
+		}
+		return result;
+	}
+
 	
 
 	

@@ -380,7 +380,8 @@
             (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = #{projectNo}) as commentCount,
             (select member_id from member m where m.member_no = p.member_no) as projectWriterId,
             (select member_grade from member m where m.member_no = p.member_no) as projectWriterGrade,
-            (select count(*) from project_dibs pd where pd.project_no = #{projectNo} and pd.member_no = #{memberNo}) as dibCountClickValue
+            (select count(*) from project_dibs pd where pd.project_no = #{projectNo} and pd.member_no = #{memberNo}) as dibCountClickValue,
+            (select count(*) from project_entry where member_no = #{memberNo} and project_no=#{projectNo}) as applyValue
 	from project p 
 	where project_no = #{projectNo}
   </select>
@@ -448,7 +449,7 @@
   <insert id="insertApplyProject" parameterType="map">
   	<choose>
   		<when test="insertLangValue == 1">
-	  		insert into project_entry values(entry_seq.nextval, #{pta.memberNo}, #{pta.projectNo}, #{pta.ambition}, #{pta.applyContent}, to_char(sysdate,'yyyy-mm-dd'), 1)
+	  		insert into project_entry values(entry_seq.nextval, #{pta.memberNo}, #{projectNo}, #{pta.ambition}, #{pta.applyContent}, to_char(sysdate,'yyyy-mm-dd'), 1)
   		</when>
   		<when test="insertLangValue == 2">
   			insert into use_develop_language(use_lang_no, member_no, language_no, project_no, usecase)
@@ -457,7 +458,7 @@
   					select 
   						#{pta.memberNo} as member_no,
   						(select language_no from develop_language where language_name = #{lang}) as language_no,
-  						#{pta.projectNo} as project_no,
+  						#{projectNo} as project_no,
   						1 as usecase
   					from dual
   				</foreach>) A
@@ -482,7 +483,7 @@
 					            (select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
 					            (select member_id from member m where m.member_no = pe.member_no) as memberId,
 					            (select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
-					            (select count(*) from project_entry pee where pee.entryStatus = 3 and pee.ENTRY_NO = pe.ENTRY_NO) as availableNum
+					            (select count(*) from project_entry pee where pee.entry_Status = 3 and pee.ENTRY_NO = pe.ENTRY_NO) as availableNum
 							from project_entry pe
 			       			order by ENTRY_NO DESC) a)
 						where rnum between #{start} and #{end}
@@ -502,7 +503,7 @@
 					            (select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
 					            (select member_id from member m where m.member_no = pe.member_no) as memberId,
 					            (select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
-					            (select count(*) from project_entry pee where pee.entryStatus = 3 and pee.ENTRY_NO = pe.ENTRY_NO) as availableNum
+					            (select count(*) from project_entry pee where pee.entry_Status = 3 and pee.ENTRY_NO = pe.ENTRY_NO) as availableNum
 							from project_entry pe
 			       			order by memberGrade DESC , entryNo DESC) a)
 						where rnum between #{start} and #{end}
@@ -523,7 +524,27 @@
   </select>
   
   <select id="selectentryTotalCount" parameterType="_int" resultType="_int">
-		select count(*) as cnt from project_entry where entry_no = #{entryNo} and entry_status = 1;
+		select count(*) as cnt from project_entry where entry_no = #{entryNo} and entry_status = 1
   </select>
+  
+  <update id="selectMember" parameterType="map">
+  		update project_entry set entry_status = 3 where entry_no = #{entryNo} and member_no = #{memberNo}
+  </update>
+  
+  <select id="selectAllFinalEntry">
+  		select member_no from project_entry where entry_status = 3 and project_no = #{projectNo}
+  </select>
+  
+  <update id="updateFinalRecruitTeam" parameterType="map">
+  		update project set project_status = 2 where project_no = #{projectNo}
+  </update>
+  
+  <update id="updateFinalRecruitTeam2" parameterType="map">
+  		update project_entry set entry_status = 4 where memberNo in (
+  		<foreach collection="finalList" item="fl">
+  			#{fl}
+  		</foreach>)
+  </update>
+  	
   
 </mapper>

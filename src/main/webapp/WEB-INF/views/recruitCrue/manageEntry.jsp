@@ -12,24 +12,35 @@
 </head>
 <script>
     $(function(){
-    	
+    	var memberNo = $(".urlMemberNo").val();
+    	var projectNo = $(".urlProjectNo").val();
+    	var viewValue = $(".viewValue").val();
     	$(".return_img").click(function(){
 			history.back();
 		});
     	
         $(".rBox_Leftnavi_left").click(function(){
-            $(".rBox_Leftnavi_right").css("opacity", "0.5");
-            $(".rBox_Leftnavi_left").css("opacity", "1");
-            location.href="/manageEntry.do??reqPage=1&viewValue=1";
+            /* $(".rBox_Leftnavi_right").css("opacity", "0.5");
+            $(".rBox_Leftnavi_left").css("opacity", "1"); */
+            var url = "/manageEntry.do?reqPage=1&viewValue=1&memberNo="+memberNo+"&projectNo="+projectNo;
+            location.href = url;
         });
         $(".rBox_Leftnavi_right").click(function(){
-            $(".rBox_Leftnavi_right").css("opacity", "1");
-            $(".rBox_Leftnavi_left").css("opacity", "0.5");
-            location.href="/manageEntry.do??reqPage=1&viewValue=2";
+            /* $(".rBox_Leftnavi_right").css("opacity", "1");
+            $(".rBox_Leftnavi_left").css("opacity", "0.5"); */
+            var url = "/manageEntry.do?reqPage=1&viewValue=2&memberNo="+memberNo+"&projectNo="+projectNo;
+            location.href = url;
         });
         
+        if(viewValue == 1){
+        	$(".rBox_Leftnavi_right").css("opacity", "0.5");
+            $(".rBox_Leftnavi_left").css("opacity", "1");
+        }else {
+        	$(".rBox_Leftnavi_right").css("opacity", "1");
+            $(".rBox_Leftnavi_left").css("opacity", "0.5");
+        }
+        
         $(".return_img").click(function(){
-			$(".return_img").css("cursor", "pointer");
 			history.back();
 		});
         
@@ -38,6 +49,9 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="projectContainer">
+		<input type="hidden" class="urlMemberNo" value="${memberNo }">
+		<input type="hidden" class="urlProjectNo" value="${projectNo }">
+		<input type="hidden" class="viewValue" value="${viewValue }">
 		<div class="main">
             <div class="returnPage">
                 <img class="return_img" src="/resources/img/recruitTeamProject/writePage/left.png">
@@ -86,10 +100,16 @@
                                         <b>지원일 : </b><span><b>${el.applyDate}</b></span>
                                     </div>
                                 </div>
+                                 <div class="textFlexBox2">
+		                              <div></div>
+		                              <div class="dateType">
+		                                   <b>지원자 아이디 : </b><span><b>${el.memberId }</b></span>
+		                              </div>
+		                        </div>
                                 <div class="bottomFlexBox">
                                     <div class="mSubImgBox">
                                     	<c:forEach items="${udLangList }" var="udl"  varStatus="i">
-			                                 <c:if test="${el.memberNo eq udl.memberNo }">
+			                                 <c:if test="${el.memberNo eq udl.memberNo && el.projectNo eq udl.projectNo}">
 			                                     <img class="langImg" src="${udl.langImg }">
 			                                 </c:if>
 			                             </c:forEach>
@@ -123,8 +143,16 @@
                             </div>
                         </div>
                         <div class="btnBox">
-                            <button type="button" class="btn btn-secondary">탈락</button>
-                            <button type="button" class="btn btn-primary">선발</button>
+                        	<c:choose>
+                        		<c:when test="${availableNum == 6}">
+                            		<button type="button" class="btn btn-primary" disabled="disabled">선발</button>
+                        			<button type="button" class="btn btn-secondary">탈락</button>
+                        		</c:when>
+                        		<c:otherwise>
+                            		<a href="selectMember.do?entryNo=${el.entryNo }&membeNo=${el.memberNo}"><button type="button" class="btn btn-primary">선발</button></a>
+                        			<button type="button" class="btn btn-secondary">탈락</button>
+                        		</c:otherwise>
+                        	</c:choose>
                         </div>
                     </c:forEach>
                     <div id = "pageNavi">${pageNavi }</div>
