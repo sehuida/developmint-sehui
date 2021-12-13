@@ -151,6 +151,7 @@
 						</div>
 						<div class="contestMemberView" style="display:none"></div>
 						<p style="display: none" class="contestNo">${c.contestNo }</p>
+						<p style="display: none" class="hostEmail">${c.email }</p>
 					</c:forEach>			
 				</div>
 				<div id="pageNavi" style="text-align: center; margin-top:50px;"  >${pageNavi }</div>
@@ -163,7 +164,6 @@
 				</div>
 			</c:otherwise>
 		</c:choose>
-		
 		
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
@@ -178,8 +178,6 @@
 	tr = t.parentNode.parentNode;
 	tr.style.backgroundColor = (t.checked) ? "rgba(78,205,196,0.1)" : "#fff"; 
 	}
-	
-
 	
 	
 	//신청회원 보기
@@ -227,12 +225,13 @@
 						var memberId = new Array();
 						var index2 = $(".allEnroll").index(this);
 						var contestNo = data[index2].contestNo;
+						var email = $(".hostEmail").eq(index2).html();
 							for(var i = 0; i<data.length; i++){
 								memberId.push(data[i].memberId);
 							}
 						var checkConfirm = confirm("전체 회원을 승인하시겠습니까?");
 						if(checkConfirm){
-							location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=2&contestNo="+contestNo+"&date=${date}";	
+							location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=2&contestNo="+contestNo+"&date=${date}&email="+email;	
 						}
 					})	
 					
@@ -241,6 +240,7 @@
 						var inputs = $(".chk:checked");
 						var index2 = $(".checkEnroll").index(this);
 						var contestNo = data[index2].contestNo;
+						var email = $(".hostEmail").eq(index2).html();
 						var memberId = new Array();
 						inputs.each(function(idx,item){
 							var memberNo = $(item).parent().next().html();
@@ -253,7 +253,7 @@
 						}
 						var checkConfirm = confirm("선택 회원을 승인하시겠습니까?");
 						if(checkConfirm){
-							location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=2&contestNo="+contestNo+"&date=${date}";	
+							location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=2&contestNo="+contestNo+"&date=${date}&email="+email;
 						}
 					})	
 					
@@ -274,7 +274,7 @@
 						}
 						var checkConfirm = confirm("선택 회원을 반려하시겠습니까?");
 						if(checkConfirm){
-							location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=3&contestNo="+contestNo+"&date=${date}";
+							location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=3&contestNo="+contestNo+"&date=${date}email=";
 						}
 						
 						
