@@ -170,14 +170,19 @@ public class ProjectTeamDao {
 	public int closeRecruitTeam(Map<String, Object> map) {
 		int result = 0;
 		int updateResult1 = sqlSession.update("projectTeam.updateFinalRecruitTeam", map);
+		System.out.println(updateResult1);
 		if(updateResult1 > 0) {
 			int updateResult2 = sqlSession.update("projectTeam.updateFinalRecruitTeam2", map);
 			if(updateResult2 > 0) {
 				int writerInsertResult = sqlSession.insert("projectTeam.insertFinalTeamWriter", map);
 				if(writerInsertResult > 0) {
 					result = sqlSession.insert("projectTeam.insertFinalTeamMember", map);
-				}
+				} System.out.println("writerInsertResult 작동안됨");
+			} else {
+				System.out.println("updateResult2 작동안됨");
 			}
+		} else {
+			System.out.println("updateResult1 작동안됨");
 		}
 		return result;
 	}
