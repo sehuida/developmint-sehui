@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.announce.vo.Announce;
 import kr.or.member.model.vo.Member;
 import kr.or.resume.vo.Resume;
 
@@ -63,5 +64,19 @@ public class ResumeDao {
 	public Resume selectResume(int resumeNo) {
 		return sqlSession.selectOne("resume.selectResume", resumeNo);
 	}
+
+	public ArrayList<Announce> selectAnnounceNo(int memberNo) {
+		List list = sqlSession.selectList("resume.selectAnnounceNo", memberNo);
+		return (ArrayList<Announce>)list;
+	}
+	
+	public ArrayList<Announce> selectAllAnnounce(ArrayList<Announce> announceNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("list", announceNo);
+		List list = sqlSession.selectList("resume.selectAllAnnounce", map);
+		return (ArrayList<Announce>)list;
+	}
+
+	
 	 
 }

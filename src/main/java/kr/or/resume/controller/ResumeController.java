@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.announce.vo.Announce;
 import kr.or.member.model.vo.Member;
 import kr.or.resume.service.ResumeService;
 import kr.or.resume.vo.Resume;
@@ -92,8 +93,8 @@ public class ResumeController {
 	
 	@RequestMapping(value="/applicationCompany.do")
 	public String applicationCompany(int memberNo) {
-		/* ArrayList<Resume> list = service.selectAllAnnounce(memberNo); */
-		System.out.println("지원현황 페이지 resumeNo : "+memberNo);
+		ArrayList<Announce> list = service.selectAllAnnounce(memberNo);
+		System.out.println("list : "+ list);
 		return "resume/applicationCompany";
 	}
 	
