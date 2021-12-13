@@ -1,6 +1,7 @@
 package kr.or.contest.vo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import kr.or.comment.vo.Comment;
 import lombok.Data;
@@ -16,6 +17,7 @@ public class ContestList {
 	private String pageNavi;
 	private int totalCount;
 	private ArrayList<ContestMember> cmList;
+	private List<Integer> contestMemberCount;
 	
 	public ContestList(ArrayList<Comment> commentList, Contest contest) {
 		super();
@@ -52,6 +54,17 @@ public class ContestList {
 		this.totalCount = totalCount;
 		this.cmList = cmList;
 	}
+
+	public ContestList(ArrayList<Contest> contestList, int start, String pageNavi, int totalCount,
+			List<Integer> contestMemberCount) {
+		super();
+		this.contestList = contestList;
+		this.start = start;
+		this.pageNavi = pageNavi;
+		this.totalCount = totalCount;
+		this.contestMemberCount = contestMemberCount;
+	}
+	
 	
 	
 

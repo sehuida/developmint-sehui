@@ -448,8 +448,14 @@ public class AdminService {
 		map.put("start", start);
 		map.put("end", end);
 		map.put("date", date);
-		ArrayList<Contest> contestList = dao.contestDateList(map);		
-
+		ArrayList<Contest> contestList = dao.contestDateList(map);	
+		
+		List<Integer> contestMemberCount = new ArrayList<Integer>();
+		for(int i = 0;i<contestList.size();i++) {
+			contestMemberCount.add(dao.contestMemberCount(contestList.get(i).getContestNo()));
+		}
+		
+		
 		//페이지 네비게이션 제작
 		int totalCount = dao.totalContestDateCount(date);
 		
@@ -493,16 +499,34 @@ public class AdminService {
 		}
 		pageNavi += "</ul>";	
 		
-		ContestList cl = new ContestList(contestList, start, totalCount, pageNavi);
-		
-		
-		
+		ContestList cl = new ContestList(contestList, start, pageNavi, totalCount, contestMemberCount);
 		
 		return cl;
 	}
 
 	public ArrayList<ContestMemberList> searchContestMember(int contestNo) {
 		return dao.searchContestMember(contestNo);
+	}
+	
+	@Transactional
+	public boolean MemberEnrollContest(String memberId, int status, int contestNo) {
+		
+		StringTokenizer st1 = new StringTokenizer(memberId,"/");
+		boolean result = true;
+		int result1 = 0;
+		while(st1.hasMoreTokens()) {
+			String id = st1.nextToken();
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("id", id);
+			map.put("status", status);
+			map.put("contestNo", contestNo);
+			result1 = dao.MemberEnrollContest(map);
+			if(result1 == 0) {
+				result = false;
+				break;
+			}
+		}
+		return result;
 	}
 }
 

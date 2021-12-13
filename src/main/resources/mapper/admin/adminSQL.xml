@@ -490,6 +490,14 @@
 		where contest_no = #{contestNo} and
 		CM_STATUS = 1
 	</select>
+	
+	<update id="MemberEnrollContest" parameterType="map">
+		update contest_member set CM_STATUS = #{status} where contest_no = #{contestNo} and member_id = #{id}
+	</update>
+	
+	<select id="contestMemberCount" parameterType="_int" resultType="_int">
+		select count(*) from contest_member where CONTEST_NO = #{contestNo}
+	</select>
 </mapper>
 
 
