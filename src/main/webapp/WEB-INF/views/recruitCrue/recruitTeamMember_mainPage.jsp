@@ -218,7 +218,7 @@
 		                                            <span class="countText">${pt.commentCount }</span>
 		                                            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
 		                                            <span class="countText">${pt.viewCount }</span>
-		                                            <img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png">
+		                                            <img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png" style="position: relative; top: 3px;">
 		                                            <span class="countText">${pt.dibCount }</span>
 		                                        </div>
 		                                    </div>

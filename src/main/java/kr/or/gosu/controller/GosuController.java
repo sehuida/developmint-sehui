@@ -31,6 +31,9 @@ import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
 import kr.or.gosu.vo.GosuRequest;
 import kr.or.gosu.vo.GosuRequestCost;
+import kr.or.gosu.vo.GosuRequestCount;
+import kr.or.gosu.vo.GosuRequestProject;
+import kr.or.gosu.vo.GosuRequestProjectSub;
 import kr.or.gosu.vo.GosuTalk;
 import kr.or.member.model.vo.Member;
 
@@ -399,18 +402,24 @@ public class GosuController {
 	}
 
 	@RequestMapping(value = "/gosuRequest.do")
-	public String gosuRequest() {
+	public String gosuRequest(Model model) {
+		GosuRequestCount grc = service.selectGosuCountRequestCount();
+		model.addAttribute("countGosu", grc.getCountGosu());
+		model.addAttribute("countRequest", grc.getCountRequest());
 		return "gosu/gosuRequest";
 	}
 
 	@RequestMapping(value = "/gosuRequestdo.do")
-	public String gosuRequestDo(GosuRequest gr,Model model) {
+	public String gosuRequestDo(GosuRequest gr, Model model, @SessionAttribute(required = false) Member m) {
 		int result = service.insertGosuRequest(gr);
-		if(result > 0) {
+		if (result > 0) {
 			System.out.println("성공");
-		}else {
+			ArrayList<GosuRequestCost> memberRequestCostList = service.selectGosuRequestCostList(m.getMemberId());
+			model.addAttribute("memberRequestCostList", memberRequestCostList);
+
+		} else {
 			System.out.println("실패");
-				
+
 		}
 		return "gosu/gosuRequestCostList";
 	}
@@ -418,26 +427,27 @@ public class GosuController {
 	@RequestMapping(value = "/gosuRequestList.do")
 	public String gosuRequestList(Model model) {
 		ArrayList<GosuRequest> memberRequestList = service.selectMemberRequestList();
-		model.addAttribute("memberRequestList",memberRequestList);
+		model.addAttribute("memberRequestList", memberRequestList);
 		return "gosu/gosuRequestList";
 	}
 
 	@RequestMapping(value = "/gosuRequestContent.do")
-	public String gosuRequestContent(int mrn,@SessionAttribute(required = false) Member m,Model model) {
+	public String gosuRequestContent(int mrn, @SessionAttribute(required = false) Member m, Model model) {
 		GosuRequest gr = service.selectGosuRequestContent(mrn);
-		
+
 		GosuRequestCost grc = new GosuRequestCost();
 		grc.setRequestNo(gr.getRequestNo());
 		grc.setGosuNo(m.getMemberNo());
-		GosuRequestCost grc2=service.selectRequestNoGosuNo(grc);
-		model.addAttribute("grOne",gr);
-		model.addAttribute("grcOne",grc2);
+		GosuRequestCost grc2 = service.selectRequestNoGosuNo(grc);
+		model.addAttribute("grOne", gr);
+		model.addAttribute("grcOne", grc2);
 		return "gosu/gosuRequestContent";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/gosuRequestCostInsert.do")
-	public int gosuRequestCostInsert(int requestNo,int gosuNo,int cost,String content,String memberId, Model model) {
+	public int gosuRequestCostInsert(int requestNo, int gosuNo, int cost, String content, String memberId,
+			Model model) {
 		GosuRequestCost grc = new GosuRequestCost();
 		grc.setCost(cost);
 		grc.setCostContent(content);
@@ -447,22 +457,40 @@ public class GosuController {
 		int result = service.gosuRequestCostInsert(grc);
 		return result;
 	}
-	
-	
+
 	@RequestMapping(value = "/gosuRequestCostList.do")
-	public String gosuRequestCostList(@SessionAttribute(required = false) Member m,Model model) {
+	public String gosuRequestCostList(@SessionAttribute(required = false) Member m, Model model) {
 		ArrayList<GosuRequestCost> memberRequestCostList = service.selectGosuRequestCostList(m.getMemberId());
-		model.addAttribute("memberRequestCostList",memberRequestCostList);
+		model.addAttribute("memberRequestCostList", memberRequestCostList);
 		return "gosu/gosuRequestCostList";
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/selectGosuRequestCost.do")
 	public GosuRequestCost selectGosuRequestCost(int costNo, Model model) {
 		GosuRequestCost gpc = service.selectGosuRequestCost(costNo);
 		return gpc;
 	}
+
+
+	@ResponseBody
+	@RequestMapping(value = "/gosuRequestProjectSubAjax.do")
+	public int gosuRequestProjectSubAjax(int requestNo,int costNo,Model model) {
+		
+		GosuRequestProjectSub grps = new GosuRequestProjectSub();
+		grps.setCostNo(costNo);
+		grps.setRequestNo(requestNo);
+		int result = service.insertGosuRequestProjectSub(grps);
+		return result;
+	}
+
 	@RequestMapping(value = "/gosuProject.do")
-	public String gosuProject() {
+	public String gosuProject(int rpsNo,Model model ) {
+		GosuRequestProjectSub grps = service.selectGosuRequestProjectSub(rpsNo);
+		ArrayList<GosuRequestProject> grp = service.selectGosuRequestProjectOne(rpsNo);
+		model.addAttribute("grplist" ,grp);
+		model.addAttribute("grpsOne" ,grps);
+		
 		return "gosu/gosuProject";
 	}
 }

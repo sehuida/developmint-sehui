@@ -110,11 +110,7 @@
                             	<a href="#">㈜한국비즈넷</a>
                             </strong>
                 			<div class="recruit">
-                            	<a href="#">
-	                            	<div class="announce">
-	                                	<span class="">소프트웨어 개발자</span>
-	                            	</div>
-                    			</a>
+                            	<a href="#"><span class="">소프트웨어 개발자</span></a>
                 			</div>
             			</div>
                             <div class="status left">
@@ -138,11 +134,7 @@
                             	<a href="#">㈜한국비즈넷</a>
                             </strong>
                 			<div class="recruit">
-                            	<a href="#">
-	                            	<div class="announce">
-	                                	<span class="">소프트웨어 개발자</span>
-	                            	</div>
-                    			</a>
+                            	<a href="#"><span class="">소프트웨어 개발자</span></a>
                 			</div>
             			</div>
                             <div class="status left">

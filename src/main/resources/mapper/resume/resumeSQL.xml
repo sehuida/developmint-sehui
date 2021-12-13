@@ -195,4 +195,23 @@
 		where resume_no = #{resumeNo }
 	</select>
 	
+	<select id="selectAnnounceNo" parameterType="_int" resultType="_int">
+		select
+			announce_no as announceNo
+		from application
+		where member_no = #{memberNo}
+	</select>
+	
+	<select id="selectAllAnnounce" parameterType="map" resultType="a">
+	<!-- <foreach collection="list" item="list" open="(" close=")" separator=","> -->
+		select
+			company_name as companyName,
+			announce_title as announceTitle,
+			write_date as writeDate
+		from announcement
+		where announce_no = #{announceNo}
+	<!-- </foreach> -->
+	</select>
+	
+	
 </mapper>
