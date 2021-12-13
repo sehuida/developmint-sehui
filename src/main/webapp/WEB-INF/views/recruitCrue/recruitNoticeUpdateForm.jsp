@@ -44,7 +44,6 @@
      	});
 	
 		$(".return_img").click(function(){
-			$(".return_img").css("cursor", "pointer");
 			history.back();
 		});
 		

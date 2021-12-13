@@ -29,7 +29,9 @@ import com.google.gson.JsonObject;
 import kr.or.member.model.vo.Member;
 import kr.or.projectTeam.model.service.ProjectTeamService;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
+import kr.or.projectTeam.model.vo.ProjectEntry;
 import kr.or.projectTeam.model.vo.ProjectTeam;
+import kr.or.projectTeam.model.vo.ProjectTeamApplyPageData;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeViewData;
 import kr.or.projectTeam.model.vo.projectTeamMainPageData;
@@ -217,12 +219,12 @@ public class ProjectTeamController {
 		  if(result > 0) { 
 			  model.addAttribute("title", "댓글 등록 성공");
 			  model.addAttribute("msg", "댓글 등록 완료되었습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "success");
 		  } else {
 			  model.addAttribute("title", "댓글 등록 실패");
 			  model.addAttribute("msg", "댓글 등록 실패하였습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "warning");
 		  }
 		  return "member/swalMsg"; 
@@ -234,12 +236,12 @@ public class ProjectTeamController {
 		  if(result > 0) { 
 			  model.addAttribute("title", "댓글 삭제 성공");
 			  model.addAttribute("msg", "댓글 삭제 완료되었습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "success");
 		  } else {
 			  model.addAttribute("title", "댓글 삭제 실패");
 			  model.addAttribute("msg", "댓글 삭제 실패하였습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "warning");
 		  }
 		  return "member/swalMsg"; 
@@ -251,12 +253,12 @@ public class ProjectTeamController {
 		  if(result > 0) { 
 			  model.addAttribute("title", "댓글 수정 성공");
 			  model.addAttribute("msg", "댓글 수정 완료되었습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "success");
 		  } else {
 			  model.addAttribute("title", "댓글 수정 실패");
 			  model.addAttribute("msg", "댓글 수정 실패하였습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "warning");
 		  }
 		  return "member/swalMsg"; 
@@ -268,17 +270,100 @@ public class ProjectTeamController {
 		  if(result > 0) { 
 			  model.addAttribute("title", "대댓글 등록 성공");
 			  model.addAttribute("msg", "대댓글 등록 완료되었습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "success");
 		  } else {
 			  model.addAttribute("title", "대댓글 등록 실패");
 			  model.addAttribute("msg", "대댓글 등록 실패하였습니다.");
-			  model.addAttribute("loc","/recruitTeamMember.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
 			  model.addAttribute("icon", "warning");
 		  }
 		  return "member/swalMsg"; 
 	  }
 	  
+	  @RequestMapping(value="/insertDibCount.do")   
+	  public String insertDibCount(Model model, int projectNo, int memberNo) {
+		  int result = service.insertDibCount(projectNo, memberNo); 
+		  if(result > 0) { 
+			  model.addAttribute("title", "찜 하기 성공");
+			  model.addAttribute("msg", "해당 게시물을 찜했습니다!");
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("icon", "success");
+		  } else {
+			  model.addAttribute("title", "찜 하기 실패");
+			  model.addAttribute("msg", "찜 하기에 실패하였습니다.");
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("icon", "warning");
+		  }
+		  return "member/swalMsg"; 
+	  }
 	  
+	  @RequestMapping(value="/deleteDibCount.do")   
+	  public String deleteDibCount(Model model, int projectNo, int memberNo) {
+		  int result = service.deleteDibCount(projectNo, memberNo); 
+		  if(result > 0) { 
+			  model.addAttribute("title", "찜 취소");
+			  model.addAttribute("msg", "해당 게시물에 찜한 내역을 취소했습니다.");
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("icon", "success");
+		  } else {
+			  model.addAttribute("title", "찜 취소 실패");
+			  model.addAttribute("msg", "찜 취소하는 것에 실패하였습니다.");
+			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("icon", "warning");
+		  }
+		  return "member/swalMsg"; 
+	  }
+	  
+	  @RequestMapping(value="/insertApplyProjectFrm.do")
+		public String insertApplyProjectFrm(int memberNo, Model model, int projectNo) {
+			ArrayList<DevelopLanguage> dlList = service.selectAllDevelopLang();
+			if(memberNo > 0) {
+				model.addAttribute("memberNo", memberNo);
+				model.addAttribute("dlList", dlList);
+				model.addAttribute("projectNo", projectNo);
+				return "recruitCrue/applyTeam_writeForm";
+			} else {
+				model.addAttribute("title", "비회원 서비스 이용 불가");
+				model.addAttribute("msg", "로그인 후 이용이 가능합니다.");
+				model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+				model.addAttribute("icon", "warning");
+				return "member/swalMsg";
+			}
+		}
+	  
+	  @RequestMapping(value="/insertApplyProject.do")
+		public String insertApplyProject(HttpServletRequest request, Model model, ProjectEntry pta, int memberNo, String[] chk, int projectNo) {
+			ArrayList<String> langList = new ArrayList<String>(Arrays.asList(chk));
+			
+			int result = service.insertApplyProject(pta, langList);
+			if(result > 0) { 
+				  model.addAttribute("title", "지원 성공");
+				  model.addAttribute("msg", "성공적으로 프로젝트 지원에 성공하였습니다.");
+				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+				  model.addAttribute("icon", "success");
+			  } else {
+				  model.addAttribute("title", "지원 실패");
+				  model.addAttribute("msg", "프로젝트 지원에 실패하였습니다.");
+				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+				  model.addAttribute("icon", "warning");
+			  }
+			  return "member/swalMsg"; 
+		}
+	  
+	  @RequestMapping(value="/manageEntry.do")
+		public String manageEntry(Model model, int reqPage, int viewValue, int memberNo, int projectNo) {
+			
+			ProjectTeamApplyPageData ptapd = service.selectAllManageEntry(reqPage, viewValue, projectNo);
+			model.addAttribute("entryList", ptapd.getEntryList());
+			model.addAttribute("pageNavi", ptapd.getPageNavi());
+			model.addAttribute("start", ptapd.getStart());
+			model.addAttribute("udLangList", ptapd.getUdLangList());
+			model.addAttribute("developLangList", ptapd.getDevelopLangList());
+			model.addAttribute("viewValue", viewValue);			
+			model.addAttribute("availableNum", ptapd.getEntryList().get(0).getAvailableNum());
+			return "recruitCrue/manageEntry";
+			
+		}
 	 
 }

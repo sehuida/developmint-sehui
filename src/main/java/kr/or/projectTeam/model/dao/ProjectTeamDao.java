@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.projectTeam.model.vo.DevelopLanguage;
+import kr.or.projectTeam.model.vo.ProjectEntry;
 import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeComment;
+import kr.or.projectTeam.model.vo.UseDevelopLanguage;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
 
 @Repository
@@ -120,6 +122,40 @@ public class ProjectTeamDao {
 
 	public int reCommentInsert(Map<String, Object> map) {
 		return sqlSession.insert("projectTeam.reCommentInsert", map);
+	}
+
+	public int insertDibCount(Map<String, Object> map) {
+		return sqlSession.insert("projectTeam.insertDibCount", map);
+	}
+
+	public int deleteDibCount(Map<String, Object> map) {
+		return sqlSession.delete("projectTeam.deleteDibCount", map);
+	}
+
+	public int insertApplyProject(Map<String, Object> map) {
+		int insertLangValue = 1;
+		map.put("insertLangValue", insertLangValue);
+		int result = 0;
+		int tempResult = sqlSession.insert("projectTeam.insertApplyProject", map);
+		if(tempResult > 0) {
+			map.replace("insertLangValue", 2);
+			result = sqlSession.insert("projectTeam.insertApplyProject", map);
+		}
+		return result;
+	}
+
+	public ArrayList<ProjectEntry> selectAllManageEntry(Map<String, Object> map) {
+		List<ProjectEntry> list = sqlSession.selectList("projectTeam.selectAllManageEntry", map);
+		return (ArrayList<ProjectEntry>) list;
+	}
+
+	public ArrayList<UseDevelopLanguage> selectAllUseDevelopLangList(int projectNo) {
+		List<UseDevelopLanguage> list = sqlSession.selectList("projectTeam.selectAllUseDevelopLangList");
+		return (ArrayList<UseDevelopLanguage>) list;
+	}
+
+	public int selectentryTotalCount(int entryNo) {
+		return sqlSession.selectOne("projectTeam.selectentryTotalCount");
 	}
 
 	

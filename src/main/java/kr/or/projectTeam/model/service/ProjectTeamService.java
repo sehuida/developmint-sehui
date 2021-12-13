@@ -9,10 +9,13 @@ import org.springframework.stereotype.Service;
 
 import kr.or.projectTeam.model.dao.ProjectTeamDao;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
+import kr.or.projectTeam.model.vo.ProjectEntry;
 import kr.or.projectTeam.model.vo.ProjectTeam;
+import kr.or.projectTeam.model.vo.ProjectTeamApplyPageData;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeComment;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeViewData;
+import kr.or.projectTeam.model.vo.UseDevelopLanguage;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
 import kr.or.projectTeam.model.vo.projectTeamMainPageData;
 
@@ -303,6 +306,87 @@ public class ProjectTeamService {
 		map.put("commentNo", commentNo);
 		int result = dao.reCommentInsert(map);
 		return result;
+	}
+
+	public int insertDibCount(int projectNo, int memberNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("projectNo", projectNo);
+		map.put("memberNo", memberNo);
+		int result = dao.insertDibCount(map);
+		return result;
+	}
+
+	public int deleteDibCount(int projectNo, int memberNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("projectNo", projectNo);
+		map.put("memberNo", memberNo);
+		int result = dao.deleteDibCount(map);
+		return result;
+	}
+	
+	public int insertApplyProject(ProjectEntry pta, ArrayList<String> langList) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pta", pta);
+		map.put("langList", langList);
+		int result = dao.insertApplyProject(map);
+		return result;
+	}
+
+	public ProjectTeamApplyPageData selectAllManageEntry(int reqPage, int viewValue, int projectNo) {
+		int numPerPage = 5;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("viewValue", viewValue);
+		map.put("projectNo", projectNo);
+		ArrayList<ProjectEntry> entryList = dao.selectAllManageEntry(map);
+		ArrayList<UseDevelopLanguage> udLangList = dao.selectAllUseDevelopLangList(projectNo);
+		ArrayList<DevelopLanguage> developLangList = dao.selectAllDevelopLangList();
+		int entryNo = entryList.get(0).getEntryNo();
+		
+		int totalCount = dao.selectentryTotalCount(entryNo);
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		} else {
+			totalPage = totalCount / numPerPage + 1;
+		}
+		
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
+		String pageNavi = "<ul class='pagination pagination-lg'>";
+		if(pageNo != 1) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/manageEntry.do?reqPage="+(pageNo-1)+"&viewValue="+viewValue+"'>";
+			pageNavi += "&lt;</a></li>";
+		}// 페이지 숫자
+		for(int i=0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='page-item active'>";
+				pageNavi += "<a class = 'page-link' href='/manageEntry.do?reqPage="+pageNo+"&viewValue="+viewValue+"'>";
+				pageNavi += pageNo + "</a></li>";
+			} else {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/manageEntry.do?reqPage="+pageNo+"&viewValue="+viewValue+"'>";
+				pageNavi += pageNo + "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음 버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/manageEntry.do?reqPage="+pageNo+"&viewValue="+viewValue+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		
+		ProjectTeamApplyPageData ptapd = new ProjectTeamApplyPageData(entryList, pageNavi, start, developLangList, udLangList);
+		return ptapd;
 	}
 
 	
