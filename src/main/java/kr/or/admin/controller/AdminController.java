@@ -252,8 +252,8 @@ public class AdminController {
 		
 		//공모전 신청회원 승인/반려
 		@RequestMapping(value="/MemberEnrollContest.do")
-		public String MemberEnrollContest(String memberId, int status, int contestNo, String date,  Model model) {
-			boolean result = service.MemberEnrollContest(memberId,status,contestNo);
+		public String MemberEnrollContest(String memberId, int status, int contestNo, String date, String email,  Model model) {
+			boolean result = service.MemberEnrollContest(memberId,status,contestNo,email);
 			if(result) {
 				model.addAttribute("msg","처리 완료 되었습니다.");
 			}else {

@@ -479,10 +479,11 @@
 					            (select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
 					            (select member_id from member m where m.member_no = pe.member_no) as memberId,
 					            (select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
-					            (select count(*) from project_entry pee where pee.entry_Status = 3 and pee.ENTRY_NO = pe.ENTRY_NO) as availableNum
+					            (select count(*) from project_entry pee where pee.entry_Status = 3 and pee.PROJECT_NO = pe.PROJECT_NO) as availableNum
 							from project_entry pe
+							where pe.project_no = #{projectNo}
 			       			order by ENTRY_NO DESC) a)
-						where rnum between #{start} and #{end}
+						where rnum between #{start} and #{end} 
   		</when>
   		<otherwise>
   			select * from (
@@ -499,8 +500,9 @@
 					            (select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
 					            (select member_id from member m where m.member_no = pe.member_no) as memberId,
 					            (select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
-					            (select count(*) from project_entry pee where pee.entry_Status = 3 and pee.ENTRY_NO = pe.ENTRY_NO) as availableNum
+					            (select count(*) from project_entry pee where pee.entry_Status = 3 and pee.PROJECT_NO = pe.PROJECT_NO) as availableNum
 							from project_entry pe
+							where pe.project_no = #{projectNo}
 			       			order by memberGrade DESC , entryNo DESC) a)
 						where rnum between #{start} and #{end}
   		</otherwise>
@@ -527,19 +529,19 @@
   		update project_entry set entry_status = 3 where entry_no = #{entryNo} and member_no = #{memberNo}
   </update>
   
-  <select id="selectAllFinalEntry">
-  		select member_no from project_entry where entry_status = 3 and project_no = #{projectNo}
+  <select id="selectAllFinalEntry" parameterType="_int" resultType="pe">
+  		select member_no as memberNo from project_entry where entry_status = 3 and project_no = #{projectNo}
   </select>
   
   <update id="updateFinalRecruitTeam" parameterType="map">
   		update project set project_status = 2 where project_no = #{projectNo}
   </update>
   
-  <update id="updateFinalRecruitTeam2" parameterType="map">
-  		update project_entry set entry_status = 4 where memberNo in (
-  		<foreach collection="finalList" item="fl">
-  			#{fl}
-  		</foreach>)
+  <update id="updateFinalRecruitTeam2" parameterType="map" >
+  		update project_entry set entry_status = 4 where member_no in 
+  		<foreach collection="finalList" item="fl" separator="," open="(" close=")">
+  			#{fl.memberNo}
+  		</foreach>
   </update>
   
   <insert id="insertDibCount" parameterType="map">

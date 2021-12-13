@@ -400,6 +400,9 @@ public class ProjectTeamService {
 
 	public int closeRecruitTeam(int projectNo, int memberNo) {
 		ArrayList<ProjectEntry> finalList = dao.selectFinalMember(projectNo);
+		for(int i = 0; i < finalList.size(); i++) {
+			System.out.println(finalList.get(i));
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("finalList", finalList);
 		map.put("projectNo", projectNo);

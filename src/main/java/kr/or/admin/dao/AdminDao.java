@@ -204,6 +204,11 @@ public class AdminDao {
 	public Integer contestMemberCount(int contestNo) {
 		return sqlSession.selectOne("admin.contestMemberCount",contestNo);
 	}
+
+	public ArrayList<ContestMemberList> enrollMemberList(int contestNo) {
+		List<ContestMemberList> list = sqlSession.selectList("admin.enrollMemberList",contestNo);
+		return (ArrayList<ContestMemberList>)list;
+	}
 	
 
 
