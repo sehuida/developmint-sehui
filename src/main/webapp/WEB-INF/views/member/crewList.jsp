@@ -8,35 +8,17 @@
 <title>Develomints</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<style>
-	.page-wrap{
-		width: 700px;
-		margin: 0 auto;
-		text-align: center;		
-	}
-	#pageNavi>ul{
-		justify-content: center;
-	}
-	.page-wrap>table{
-		margin-top: 100px;
-		margin-bottom: 60px;
-	}
-	.page-top{
-		display: flex;
-		justify-content: space-between;
-	}
-	.notting{
-		font-size: 25px;
-		font-weight: bold;
-	}
-</style>
+<link rel="stylesheet" href="/resources/css/member/viewPages.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
 			<div class="page-wrap">
 				<div class="page-top">
-					<span style="text-align: left; font-family: NotoBold; font-size: 30px;">공모전 신청내역</span>
+					<div class="page-topImg">
+						<span style="text-align: left; font-family: NotoBold; font-size: 30px;">프로젝트신청내역</span>
+						<img src="/resources/img/member/multiple-users-silhouette.png" style="width: 50px; height: 50px; margin-left: 10px;">					
+					</div>
 					<c:choose>
 						<c:when test="${sessionScope.m.memberType eq 2 }">
 							<a href="/mypageGosu.do" class="btn btn-warning" style="height: 40px;">뒤로가기</a>															
@@ -54,21 +36,21 @@
 								<tr>
 									<td>${start+i.index }</td>
 									<td>
-										<a href="#">${crew.recruitTitle }</a>
+										<a href="/selectOneNotice.do?projectNo=${crew.projectNo }&memberNo=${session.m.memberNo}">${crew.recruitTitle }</a>
 									</td>
 									<td>${crew.applyDate }</td>
 									<c:choose>
-										<c:when test="${crew.enrtyStatus eq 1 }">
-											<td>확인중</td>
+										<c:when test="${crew.entryStatus eq 1 }">
+											<td class="text-info">확인중</td>
 										</c:when>
-										<c:when test="${crew.enrtyStatus eq 2 }">
-											<td>탈락</td>
+										<c:when test="${crew.entryStatus eq 2 }">
+											<td class="text-danger">탈락</td>
 										</c:when>
-										<c:when test="${crew.enrtyStatus eq 3 }">
-											<td>최종대기</td>
+										<c:when test="${crew.entryStatus eq 3 }">
+											<td class="text-warning">최종대기</td>
 										</c:when>
-										<c:when test="${crew.enrtyStatus eq 4 }">
-											<td>최종선발</td>
+										<c:when test="${crew.entryStatus eq 4 }">
+											<td class="text-success">최종선발</td>
 										</c:when>																													
 									</c:choose>
 								</tr>
