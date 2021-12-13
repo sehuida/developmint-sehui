@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.or.resume.vo.Resume;
 
 @Controller
-public class jobSearchController {
+public class JobSearchController {
 
 	@RequestMapping(value="/jobSearchList.do")
 	public String jobSearchList() {
