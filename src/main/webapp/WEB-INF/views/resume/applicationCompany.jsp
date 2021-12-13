@@ -17,7 +17,7 @@
 	}
 	.tabWrap {
 	    display: block;
-	    padding: 10px 20px 10px 0;
+	    padding: 50px 20px 10px 0;
 	    font-size: 20px;
 	    font-weight: bold;
 	    letter-spacing: -1px;
@@ -30,32 +30,46 @@
 		color: #888;
 	}
 	.tabWrap li {
-    float: left;
-    padding-right: 20px;
+	    float: left;
+	    padding-right: 20px;
 	}
 	
 	.tabWrap .tab .badge {
-    display: inline-block;
-    margin: 0 0 0 8px;
-    padding: 0 12px 0 13px;
-    min-width: 36px;
-    height: 28px;
-    line-height: 25px;
-    border-radius: 14px;
-    box-sizing: border-box;
-    color: #fff;
-    font-size: 16px;
-    letter-spacing: 0;
-    vertical-align: top;
-    background: rgb(78, 205, 196);
-}
+	    display: inline-block;
+	    margin: 0 0 0 8px;
+	    padding: 0 12px 0 13px;
+	    min-width: 36px;
+	    height: 28px;
+	    line-height: 25px;
+	    border-radius: 14px;
+	    box-sizing: border-box;
+	    color: #fff;
+	    font-size: 16px;
+	    letter-spacing: 0;
+	    vertical-align: top;
+	    background: rgb(78, 205, 196);
+	}
 	.status{
 		overflow: hidden;
 	}
 	.stbtn{
 		float: left;
 	}
-
+	.listStatus{
+	}
+	.info{
+		display: flex;
+		padding: 32px;
+		justify-content: center;
+		align-items: center;
+	}
+	.left{
+		flex-grow: 1;
+		text-align: center;
+	}
+	.appStatus{
+		font-size: 20px;
+	}
 	
 </style>
 <body>
@@ -63,7 +77,7 @@
 		<div class="container">
 			<em>입사지원 현황</em>
 			<ul class="tabWrap">
-        		<li class="select"><a href="#" class="tab">전체<span class="badge">0</span></a></li>
+        		<li class="select"><a href="#" class="tab">전체<span class="badge">2</span></a></li>
     		</ul>
     		
     		<div class="status">
@@ -87,40 +101,61 @@
         			</c:forEach>
         		</c:otherwise>
         	</c:choose>
-        	<form name="list_form" id="list_form">
-        		<div class="list_status">
-                	<div class="row _apply_list " id="apply_list_297745997">
-			            <div class="col_date">2021.12.12 22:13</div>
-			            <div class="col_summary">
+        	<form name="listForm" id="listForm">
+        		<div class="listStatus">
+                	<div class="info">
+			            <div class="date left">2021.12.12 22:13</div>
+			            <div class="summary left">
 			                <strong class="corp">
-                            	<a href="/#">
-									㈜한국비즈넷
-                                </a>
+                            	<a href="#">㈜한국비즈넷</a>
                             </strong>
-                			<div class="recruit ">
+                			<div class="recruit">
                             	<a href="#">
-                            	<div class="toolTipWrap2">
-                                	<span class="">소프트웨어 개발자</span>
-                                	<div class="toolTip2 top_left">
-                                    	<span class="tail"></span>
-                                    	<div class="toolTipCont">
-                                        	해당 공고는 삭제되었습니다
-                                    	</div>
-                                	</div>
-                            	</div>
+	                            	<div class="announce">
+	                                	<span class="">소프트웨어 개발자</span>
+	                            	</div>
                     			</a>
                 			</div>
-                            <div class="status">
-                    			<em class="txt_status">지원완료</em>
-                            </div>
             			</div>
-			            <div class="col_btns">
+                            <div class="status left">
+                    			<em class="appStatus">지원완료</em>
+                            </div>
+			            <div class="btns left">
 			                <div class="action">
-			                	<span class="date_end"></span>
+			                	<span class="dateEnd"></span>
 			                </div>
-			                <button type="button" class="btn_history _applicant_history">지원내역</button>
+			                <button type="button" class="history">지원내역</button>
 			            </div>
         			</div>
+			        <hr>
+            	</div>
+            	
+            	<div class="listStatus">
+                	<div class="info">
+			            <div class="date left">2021.12.12 22:13</div>
+			            <div class="summary left">
+			                <strong class="corp">
+                            	<a href="#">㈜한국비즈넷</a>
+                            </strong>
+                			<div class="recruit">
+                            	<a href="#">
+	                            	<div class="announce">
+	                                	<span class="">소프트웨어 개발자</span>
+	                            	</div>
+                    			</a>
+                			</div>
+            			</div>
+                            <div class="status left">
+                    			<em class="appStatus">지원완료</em>
+                            </div>
+			            <div class="btns left">
+			                <div class="action">
+			                	<span class="dateEnd"></span>
+			                </div>
+			                <button type="button" class="history">지원내역</button>
+			            </div>
+        			</div>
+			        <hr>
             	</div>
     		</form>
     	</div>
