@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <style>
 .container * {
@@ -129,6 +130,7 @@ input:focus, textarea:focus {
 	background: transparent;
 	text-align: center;
 }
+
 .hrm-content td, .hrm-content th {
 	font-size: 30px;
 	font-weight: 900;
@@ -141,47 +143,60 @@ input:focus, textarea:focus {
 		<h3>
 			<span style="color: rgb(78, 205, 196);">고수에게 </span> &nbsp;받은 견적서
 		</h3>
+
 		<div class="requestList">
-			<table>
+			<c:choose>
+				<c:when test="${empty memberRequestCostList }">
+					<span
+						style="font-size: 30px; font-weight: 900; color: gray; margin-top: 100px;">아직
+						도착한 견적서가 없어요!</span>
+
+				</c:when>
+				<c:otherwise>
+					<table>
 
 
-				<c:forEach items="${memberRequestCostList }" var="mrcl"
-					varStatus="i">
-					<tr>
-						<td>
-							<table class="g-one-tbl">
-								<tr>
-									<th rowspan="3"><c:if test="${empty mrcl.gosuImg }">
-											<img src="/resources/img/gosu/g_img_basic.png">
-										</c:if> <c:if test="${not empty mrcl.gosuImg }">
-											<img src="/resources/upload/member/${mrcl.gosuImg}">
-										</c:if></th>
-									<th><span style="color: rgb(78, 205, 196);">고수</span>${mrcl.gosuId }</th>
-									<td style="text-align: right;">${mrcl.costDate }</td>
-								</tr>
-								<tr>
-									<td colspan="2" style="max-width: 1000px;">${mrcl.costContentBr }</td>
+						<c:forEach items="${memberRequestCostList }" var="mrcl"
+							varStatus="i">
+							<tr>
+								<td>
+									<table class="g-one-tbl">
+										<tr>
+											<th rowspan="3"><c:if test="${empty mrcl.gosuImg }">
+													<img src="/resources/img/gosu/g_img_basic.png">
+												</c:if> <c:if test="${not empty mrcl.gosuImg }">
+													<img src="/resources/upload/member/${mrcl.gosuImg}">
+												</c:if></th>
+											<th><span style="color: rgb(78, 205, 196);">고수</span>${mrcl.gosuId }</th>
+											<td style="text-align: right;">${mrcl.costDate }</td>
+										</tr>
+										<tr>
+											<td colspan="2" style="max-width: 1000px;">${mrcl.costContentBr }</td>
 
-								</tr>
-								<tr>
-									<th>비용 ${mrcl.cost}원</th>
-									<td style="display: flex; justify-content: right;">
-										<button type="button"
-											onclick="gosuProjectJSPAjax(${mrcl.costNo});"
-											class="btn btn-primary" style="width: 150px;">진행하기</button>
-									</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</c:forEach>
+										</tr>
+										<tr>
+											<th>비용 ${mrcl.cost}원</th>
+											<td style="display: flex; justify-content: right;">
+												<button type="button"
+													onclick="gosuProjectJSPAjax(${mrcl.costNo});"
+													class="btn btn-primary" style="width: 150px;">진행하기</button>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</c:forEach>
 
-			</table>
+					</table>
+
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<div class="hrm-wrap" style="display: none; margin: 0;">
 			<div id="hrm-modal">
 				<div class="hrm-content">
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; <span>결제하시겠습니까?</span> <br> <br> <br>
+					<br>&nbsp;&nbsp;&nbsp;&nbsp; <span>결제하시겠습니까?</span> <br>
+					<br> <br>
 					<div class="g-style">
 						<table>
 							<tr>
@@ -195,13 +210,17 @@ input:focus, textarea:focus {
 							</tr>
 							<tr>
 								<th>내용</th>
-								<td><input type="text" id="contentSend" disabled>
-								</td>
+								<td><input type="text" id="contentSend" disabled></td>
 							</tr>
 							<tr>
 								<th>견적비용</th>
-								<td><input type="text" id="costSend" disabled>
-								</td>
+								<td><input type="text" id="costSend" disabled></td>
+								<input type="hidden" id="requestNo">
+								<input type="hidden" id="costNo">
+								<input type="hidden" id="ggmemberId">
+								<input type="hidden" id="ggcostContent">
+
+
 							</tr>
 						</table>
 					</div>
@@ -209,7 +228,7 @@ input:focus, textarea:focus {
 				</div>
 				<div class="hrm-btn-wrap">
 
-					<a  class="btn btn-success">결제 진행</a> <a
+					<a id="projectCostAjax" class="btn btn-success">결제 진행</a> <a
 						id="hrm-close" class="btn btn-outline-success">취소</a>
 				</div>
 			</div>
@@ -231,46 +250,65 @@ input:focus, textarea:focus {
 				},
 				success : function(data) {
 					console.log(data);
-					$("#costSend").val(data.cost+" 원");
+					$("#costSend").val(data.cost);
 					$("#contentSend").val(data.costContentBr);
 					$("#gosuIdSend").val(data.gosuId);
 					$("#costDateSend").val(data.costDate);
 
+					$("#costNo").val(data.costNo);
+					$("#requestNo").val(data.requestNo);
+					$("#ggmemberId").val(data.memberId);
+					$("#ggcostContent").val(data.costContent);
 				}
 			});
 			
 			
 		};
 
-		$("#costSendAjax").click(function() {
-			var requestNo = $("#requestNoSend").val();
-			var gosuNo = $("#gosuNoSend").val();
-			var cost = $("#costSend").val();
-			var content = $("#contentSend").val();
-			var memberId = $("#memberIdSend").val();
-			$.ajax({
-				url : "/gosuRequestCostInsert.do",
-				data : {
-					"requestNo" : requestNo,
-					"gosuNo" : gosuNo,
-					"cost" : cost,
-					"content" : content,
-					"memberId" : memberId
-				},
-				success : function(data) {
-					console.log(data);
-					if (data > 0) {
-						alert("견적서를 보냈습니다!");
-						location.href = "/gosuMain.do";
-					} else {
+		$("#projectCostAjax").click(function(){
+			
+			var gfTitle = $("#ggcostContent").val();
+			var mId = $("#ggmemberId").val();
+			 var cost = $("#costSend").val();
+			var IMP = window.IMP;
+			  IMP.init('imp37172515');
+			  console.log(cost);
+			IMP.request_pay({
+			    pg : 'kakao', 
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : gfTitle,
+			    amount : cost, //판매 가격
+			    buyer_name : mId
+			}, function(rsp) {
+			    if ( rsp.success ) {
+			        var msg = '결제가 완료되었습니다.';
+						var costNo = $("#costNo").val();
+						var requestNo = $("#requestNo").val();
+			   		 $.ajax({
+						url : "/gosuRequestProjectSubAjax.do"
+						, type : "post"
+						, data : {
 
-						alert("견적서를 보내지 못했습니다. 관리자에게 문의해주세요");
-						location.href = "/";
-					}
-
-				}
-			});
+							"requestNo" : requestNo,
+							"costNo" : costNo,
+							}
+						, success : function(data) {
+							console.log(data);
+							location.href="/gosuProject.do?rpsNo="+data;
+						}
+				 });
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			    alert(msg);
+			    
+			
+		})
 		});
+		
+		
 	</script>
 
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>

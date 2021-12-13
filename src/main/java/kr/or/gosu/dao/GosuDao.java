@@ -11,6 +11,9 @@ import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
 import kr.or.gosu.vo.GosuRequest;
 import kr.or.gosu.vo.GosuRequestCost;
+import kr.or.gosu.vo.GosuRequestCount;
+import kr.or.gosu.vo.GosuRequestProject;
+import kr.or.gosu.vo.GosuRequestProjectSub;
 import kr.or.gosu.vo.GosuTalk;
 
 import java.util.ArrayList;
@@ -173,6 +176,23 @@ public class GosuDao {
 
 	public GosuRequestCost selectGosuRequestCost(int costNo) {
 		return sqlSession.selectOne("gosu.selectGosuRequestCost",costNo);
+	}
+
+	public int selectRequestCount() {
+		return sqlSession.selectOne("gosu.selectRequestCount");
+	}
+
+	public int insertGosuRequestProjectSub(GosuRequestProjectSub grps) {
+		return sqlSession.insert("gosu.insertGosuRequestProjectSub",grps);
+	}
+
+	public ArrayList<GosuRequestProject> selectGosuRequestProjectOne(int rpsNo) {
+		List<GosuRequestProject> list = sqlSession.selectList("gosu.selectGosuRequestProjectOne",rpsNo);
+		return (ArrayList<GosuRequestProject>)list;
+	}
+
+	public GosuRequestProjectSub selectGosuRequestProjectSub(int rpsNo) {
+		return sqlSession.selectOne("gosu.selectGosuRequestProjectSub",rpsNo);
 	}
 
 

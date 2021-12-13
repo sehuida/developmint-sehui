@@ -3,8 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="gosu">
 	<insert id="insertGosu" parameterType="g">
-	insert into gosu
-	values(gosu_seq.nextval,#{gsouNo},#{gosuTitle},#{gosuSelf},#{gosuExplain},#{gosuAct},#{gosuCost},to_char(sysdate,'yyyy-mm-dd'))
+		insert into gosu
+		values(gosu_seq.nextval,#{gsouNo},#{gosuTitle},#{gosuSelf},#{gosuExplain},#{gosuAct},#{gosuCost},to_char(sysdate,'yyyy-mm-dd'))
 		<selectKey resultType="_int" order="AFTER"
 			keyProperty="ggsouNo">
 			select max(ggosu_no) from gosu
@@ -299,51 +299,75 @@
 
 	</insert>
 	<select id="selectMemberRequestList" resultType="gr">
+		select * from
+		(select rownum as rnum , r.*
+		from (
 		select
-		REQUEST_NO as requestNo,
+		REQUEST_NO as
+		requestNo,
 		REQUEST_WRITER_NO as requestWriterNo,
 		REQUEST_CONTENT7
-		as requestContent7,
+		as
+		requestContent7,
 		REQUEST_DATE as requsetDate
-		from gosu_request
+		from gosu_request order by
+		1
+		desc )r)rr
+
+
+
 	</select>
 	<select id="selectGosuRequestContent" parameterType="_int"
 		resultType="gr">
+
 		select
 		REQUEST_NO as requestNo,
 		REQUEST_WRITER_NO as
 		requestWriterNo,
 		REQUEST_CONTENT1 as requestContent1,
 		REQUEST_CONTENT2
-		as requestContent2,
+		as
+		requestContent2,
 		REQUEST_CONTENT3 as requestContent3,
-		REQUEST_CONTENT4 as requestContent4,
+		REQUEST_CONTENT4
+		as requestContent4,
 		REQUEST_CONTENT5 as
 		requestContent5,
 		REQUEST_CONTENT6 as requestContent6,
 		REQUEST_CONTENT7
-		as requestContent7,
+		as
+		requestContent7,
 		REQUEST_DATE as requsetDate
 		from gosu_request where
 		REQUEST_NO = #{mrn}
+
 	</select>
 	<insert id="gosuRequestCostInsert" parameterType="grc">
 		insert into
 		gosu_request_cost
 		values(GOSU_REQUEST_COST_SEQ.nextval,#{gosuNo},#{requestNo},#{costContent},#{cost},to_char(sysdate,'yyyy-mm-dd'),#{memberId})
 	</insert>
-	<select id="selectGosuRequestCostList" resultType="grc" parameterType="string">
+	<select id="selectGosuRequestCostList" resultType="grc"
+		parameterType="string">
+		select * from
+		(select rownum as rnum , r.*
+		from (
 		select
 		COST_NO as costNo,
 		GOSU_NO as gosuNo,
 		REQUEST_NO
-		as requestNo,
+		as
+		requestNo,
 		COST_CONTENT as costContent,
 		cost,
 		COST_DATE as costDate,
-		MEMBER_ID as memberId
+		MEMBER_ID as
+		memberId
 		from gosu_request_cost
-		where member_id =#{memberId}
+		where member_id
+		=#{memberId}order by
+		1
+		desc )r)rr
 	</select>
 	<select id="selectRequestNoGosuNo" parameterType="grc"
 		resultType="grc">
@@ -351,21 +375,24 @@
 		COST_NO as costNo,
 		GOSU_NO as gosuNo,
 		REQUEST_NO
-		as requestNo,
+		as
+		requestNo,
 		COST_CONTENT as costContent,
 		cost,
 		COST_DATE as costDate,
 		MEMBER_ID as memberId
 		from
-		gosu_request_cost where REQUEST_NO = #{requestNo} and GOSU_NO =#{gosuNo}
+		gosu_request_cost where REQUEST_NO =
+		#{requestNo} and GOSU_NO =#{gosuNo}
 	</select>
-	<select id="selectGosuRequestCost" parameterType="int"
+	<select id="selectGosuRequestCost" parameterType="_int"
 		resultType="grc">
 		select
 		COST_NO as costNo,
 		GOSU_NO as gosuNo,
 		REQUEST_NO
-		as requestNo,
+		as
+		requestNo,
 		COST_CONTENT as costContent,
 		cost,
 		COST_DATE as costDate,
@@ -373,5 +400,53 @@
 		from
 		gosu_request_cost where COST_NO = #{costNo}
 	</select>
-	
+
+	<select id="selectRequestCount" resultType="_int">
+		select count(*) from
+		gosu_request
+	</select>
+	<insert id="insertGosuRequestProjectSub" parameterType="grps">
+		insert into
+		gosu_request_project_sub
+		values(g_request_project_sub_seq.nextval,#{requestNo},#{costNo},1,to_char(sysdate,'yyyy-mm-dd'))
+		<selectKey resultType="_int" order="AFTER"
+			keyProperty="requestProjectSubNo">
+			select max(REQUEST_PROJECT_SUB_NO) from
+			gosu_request_project_sub
+		</selectKey>
+	</insert>
+	<select id="selectGosuRequestProjectOne" resultType="grp"
+		parameterType="_int">
+		select
+		REQUEST_PROJECT_NO as requestProjectNo,
+		MEMBER_NO
+		as memberNo,
+		REQUEST_PROJECT_CONTENT as requestProjectContent,
+		REQUEST_PROJECT_DATE as requestProjectDate,
+		FILEPATH,
+		FILENAME,
+		REQUEST_PROJECT_SUB_NO as requestProjectSubNo
+		from gosu_request_project
+		where REQUEST_PROJECT_SUB_NO
+		=#{rpsNo}
+	</select>
+	<select id="selectGosuRequestProjectSub" resultType="grps"
+		parameterType="_int">
+
+		select
+		a.REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
+		a.REQUEST_NO as requestNo,
+		a.COST_NO as costNo,
+		a.REQUEST_PROJECT_SUB_NUM as
+		requestProjectSubNum,
+		a.REQUEST_PROJECT_SUB_DATE as requestProjectSubDate,
+		B.member_id as memberId
+		FROM
+		gosu_request_project_sub A
+		JOIN gosu_request_cost B
+		ON A.cost_no =
+		B.cost_no
+		WHERE A.REQUEST_PROJECT_SUB_NO = #{rpsNo}
+
+	</select>
 </mapper>
