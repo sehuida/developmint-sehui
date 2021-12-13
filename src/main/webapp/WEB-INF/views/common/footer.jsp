@@ -87,7 +87,7 @@
 				<div style="text-align: right;" >
 					<ul class="list-unstyled pe-5" style="float: left;font-size: large;">고객센터
 						<li ><a href="/noticeList.do?reqPage=1" style="color:#737373;font-size:15px;">공지사항</a></li>
-						<li><a href="/tocounsel.do" style="color:#737373;font-size: 15px;">1:1문의</a></li>
+						<li><a href="/n_counsel.do" style="color:#737373;font-size: 15px;">1:1문의</a></li>
 					</ul>
 					<ul class="list-unstyled pe-5" style="float: left">
 						<li ><a href="/recruitTeamMember_mainPage.do?reqPage=1" style="color:black;">팀프로젝트 팀원모집</a></li>

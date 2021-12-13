@@ -2,3 +2,13 @@
 .contents{
 	padding: 20px;
 }
+.btn-file{
+	width: 65px;
+    height: 65px;
+    margin: 0 5px 5px 0;
+    background-image: url(/resources/img/qna/bg_upload.png);
+    background-repeat: no-repeat;
+    border: none;
+    font-size: 0;
+    line-height: 0;
+}

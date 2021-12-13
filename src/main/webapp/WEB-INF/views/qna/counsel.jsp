@@ -19,11 +19,36 @@
 			<div class="center_tap">
 				<ul style="margin-bottom: 0;">
 					<li><span class="">Tel. 2163-8560</span><br><span class="last-span">평일 9:00~18:00(점심 12:00~13:00)</span></li>
-					<li><a href="/tocounsel.do" class="text-hover">1:1 Q&A<br><span class="last-span">질문 전 FAQ(자주 묻는 질문)을 먼저 확인해 주세요.</span></a></li>
+					<li><a href="/n_counsel.do" class="text-hover">1:1 Q&A<br><span class="last-span">질문 전 FAQ(자주 묻는 질문)을 먼저 확인해 주세요.</span></a></li>
 					<li><a href="/faq.do" class="text-hover">자주묻는질문<br><span class="last-span">자주묻는질문</span></a></li>
 				</ul>
 			</div>
-			<form action="/counsel_save.do" method="post" enctype="multipart/form-data">
+			<div class="question1">
+			  <!--  확인 Modal-->
+				<div class="modal" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document" style="top: 30%">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title">비회원Q&A 전용</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true"></span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <p>현재 로그인이 되어있지 않습니다.</p>
+				        <p>로그인 후 1:1 Q&A 진행하시겠습니까?</p>
+				        <p>* 아니요 선택시 비회원Q&A로 진행됩니다.</p>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-primary btn_yes">예</button>
+				        <button type="button" class="btn btn-secondary btn_no" data-bs-dismiss="modal">아니오</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+			<!-- 모달 끝  -->
+			<form action="/counsel_save.do" method="post" enctype="multipart/form-data" id="f1" name="f1">
 				<div class="contents">
 					<!-- 제목 -->
 					<h3>1:1 Q&A</h3>
@@ -68,40 +93,14 @@
 										<th scope="row">작성자</th>
 										<td>
 											<c:choose>
-												<c:when test="${not empty sessionScope.m }">
-													<input type="text" class="n-input" name="user_nm" value="${sessionScope.m.memberName }" >
+												<c:when test="${empty sessionScope.m }">
+													<input type="email" class="n-input" name="email" placeholder="예)examEmail@gmail.com">
 												</c:when>
 												<c:otherwise>
-													<input type="text" class="n-input" name="user_nm" placeholder="작성자를 입력해주세요.">
+													<input type="text" class="n-input" name="user_nm" value="${sessionScope.m.memberId }" >
 												</c:otherwise>
 											</c:choose>
 											
-										</td>
-									</tr>
-									<tr class="n-same-row">
-										<th scope="row">휴대전화</th>
-										<td>
-											<c:choose>
-												<c:when test="${not empty sessionScope.m }">
-													<input type="text" class="n-input" name="mobile" value="${sessionScope.m.phone }">
-												</c:when>
-												<c:otherwise>
-													<input type="text" class="n-input" name="mobile" placeholder="예)010-0000-0000">
-												</c:otherwise>
-											</c:choose>
-										</td>
-									</tr>
-									<tr class="n-same-row">
-										<th scope="row">이메일</th>
-										<td>
-											<c:choose>
-												<c:when test="${not empty sessionScope.m }">
-													<input type="email" class="n-input" name="email" value="${sessionScope.m.email }">
-												</c:when>
-												<c:otherwise>
-													<input type="email" class="n-input" name="email" placeholder="예)examEmail@gmail.com">
-												</c:otherwise>
-											</c:choose>
 										</td>
 									</tr>
 									<tr>
@@ -139,8 +138,121 @@
 					</div>
 				</div>
 			</form>
+			<form action="">
+				<input type="file" id="Filedata" class="input_file" onchange="uploadImage();" style="display: none !important;" />
+			</form>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script type="text/javascript">
+		 $(function(){
+			if(${empty sessionScope.m }){
+				$('#testModal').modal("show");
+				$(".btn_yes").click(function(){
+					location.href ="/loginFrm.do";
+				});
+				
+			}
+				
+			
+		}); 
+		function cancel() {
+			if(confirm('취소하시겠습니까?')){
+				history.back();
+			}
+		}
+		function qna_add() {
+			var f1 = $('#f1');
+
+			if (f1.data('submitted') === true) {
+				return false;
+			} else {
+				f1.data('submitted', true);
+			}
+
+			var qa_msg =stripSpecialCharacters($('#f1 [name=qa_msg]').val());
+
+			try {
+				if($('#f1 [name=qa_kind]').val() == '') {
+					alert('문의유형을 선택해 주십시오.');
+					$('#f1 [name=qa_kind]').focus();
+					throw new Error("invalid");
+				}
+
+				if(isRequiredOrderNo($('#f1 [name=qa_kind]').val()) && $("#f1 [name='ord_no']").val() == '') {
+					alert('주문번호를 선택해 주십시오.');
+					$('#f1 [name=ord_no]').focus();
+					throw new Error("invalid");
+				}
+
+				if($.trim($('#f1 [name=user_nm]').val()) == '') {
+					alert('작성자를 입력해 주십시오.');
+					$('#f1 [name=user_nm]').focus();
+					throw new Error("invalid");
+				}
+
+				var pattern_kor = /[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+				if(pattern_kor.test($.trim($('#f1 [name=user_nm]').val()))) {
+					alert('작성자를 한글로 입력해 주십시오.');
+					$('#f1 [name=user_nm]').focus();
+					throw new Error("invalid");
+				}
+
+				if($.trim($('#f1 [name=email]').val()) == '') {
+					alert('이메일주소를 입력하세요.');
+					throw new Error("invalid");
+				} else {
+					var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+					if(!filter.test($('#f1 [name=email]').val())) {
+						alert('올바른 이메일 형식으로 입력해 주십시오.');
+						throw new Error("invalid");
+					}
+				}
+
+				if($.trim($('#f1 [name=subject]').val()) == '') {
+					alert('제목을 입력해 주십시오.');
+					$('#f1 [name=subject]').focus();
+					throw new Error("invalid");
+				}
+
+				if(!$.trim($('#f1 [name=qa_msg]').val())) {
+					alert('문의내용을 입력해 주십시오.');
+					$('#f1 [name=qa_msg]').focus();
+					throw new Error("invalid");
+				}
+
+				// 금지어 체크
+				// var txt = $('form[name=f1] [name=subject]').val() +'|'+ $('form[name=f1] [name=qa_msg]').val();
+				if(!chkBlackKeyword($('form[name=f1] [name=subject]').val())) {
+					$('form[name=f1] [name=subject]').focus();
+					throw new Error("invalid");
+				}
+				if(!chkBlackKeyword($('form[name=f1] [name=qa_msg]').val())) {
+					$('form[name=f1] [name=qa_msg]').focus();
+					throw new Error("invalid");
+				}
+			} catch (e) {
+				f1.data('submitted', false);
+				return false;
+			}
+
+			// 파일 업로드 컨텐츠 넣기
+			var file_contents = "";
+			$.each($('#file_show li'), function(index, item) {
+				var img_src = $(this).children('img').attr('src');
+				file_contents += '<br/><img src="'+ img_src +'"/>';
+			});
+
+			if(file_contents){
+				$('#f1 [name=image_yn]').val('Y');
+			}
+
+			var contents = qa_msg + file_contents;
+			$('#f1 [name=qa_msg]').val(contents);
+
+			f1.submit();
+		}
+
+	</script>
 </body>
 </html>
