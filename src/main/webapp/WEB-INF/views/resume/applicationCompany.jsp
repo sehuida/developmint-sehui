@@ -17,7 +17,7 @@
 	}
 	.tabWrap {
 	    display: block;
-	    padding: 10px 20px 10px 0;
+	    padding: 50px 20px 10px 0;
 	    font-size: 20px;
 	    font-weight: bold;
 	    letter-spacing: -1px;
@@ -30,27 +30,46 @@
 		color: #888;
 	}
 	.tabWrap li {
-    float: left;
-    padding-right: 20px;
+	    float: left;
+	    padding-right: 20px;
 	}
 	
 	.tabWrap .tab .badge {
-    display: inline-block;
-    margin: 0 0 0 8px;
-    padding: 0 12px 0 13px;
-    min-width: 36px;
-    height: 28px;
-    line-height: 25px;
-    border-radius: 14px;
-    box-sizing: border-box;
-    color: #fff;
-    font-size: 16px;
-    letter-spacing: 0;
-    vertical-align: top;
-    background: rgb(78, 205, 196);
-}
-
-
+	    display: inline-block;
+	    margin: 0 0 0 8px;
+	    padding: 0 12px 0 13px;
+	    min-width: 36px;
+	    height: 28px;
+	    line-height: 25px;
+	    border-radius: 14px;
+	    box-sizing: border-box;
+	    color: #fff;
+	    font-size: 16px;
+	    letter-spacing: 0;
+	    vertical-align: top;
+	    background: rgb(78, 205, 196);
+	}
+	.status{
+		overflow: hidden;
+	}
+	.stbtn{
+		float: left;
+	}
+	.listStatus{
+	}
+	.info{
+		display: flex;
+		padding: 32px;
+		justify-content: center;
+		align-items: center;
+	}
+	.left{
+		flex-grow: 1;
+		text-align: center;
+	}
+	.appStatus{
+		font-size: 20px;
+	}
 	
 </style>
 <body>
@@ -58,22 +77,88 @@
 		<div class="container">
 			<em>입사지원 현황</em>
 			<ul class="tabWrap">
-        		<li class="select"><a href="#" class="tab">전체<span class="badge">0</span></a></li>
-        		<li><a href="#" class="tab">지원서 작성중<span class="badge">0</span></a></li>
+        		<li class="select"><a href="#" class="tab">전체<span class="badge">2</span></a></li>
     		</ul>
     		
     		<div class="status">
-	            <div class="item new _dashboardDiv select">
-	            	<button type="button" class="_dashboardBtn"><em>지원완료</em><span class="num">1</span></button>
+	            <div class="stbtn">
+	            	<button type="button" class="btn"><em>지원완료</em><span class="num">1</span></button>
 	            </div>
-	            <div class="item">
-	            	<button type="button" class="_dashboardBtn"><em>전형 진행중</em><span class="num">0</span></button>
-	            </div>
-	            <div class="item">
-	            	<button type="button" class="_dashboardBtn"><em>최종발표</em><span class="num">0</span></button>
+	            <div class="stbtn">
+	            	<button type="button" class="btn"><em>최종발표</em><span class="num">0</span></button>
 	            </div>
         	</div>
-		</div>
+        	
+        	<hr>
+        	
+        	<c:choose>
+        		<c:when test="${empty list }">
+        			<!-- 지원내역 없음 -->
+        		</c:when>
+        		<c:otherwise>
+        			<c:forEach items="${list }" var="a" varStatus="i">
+        				<!-- 아래거 포리치로 출력	 -->
+        			</c:forEach>
+        		</c:otherwise>
+        	</c:choose>
+        	<form name="listForm" id="listForm">
+        		<div class="listStatus">
+                	<div class="info">
+			            <div class="date left">2021.12.12 22:13</div>
+			            <div class="summary left">
+			                <strong class="corp">
+                            	<a href="#">㈜한국비즈넷</a>
+                            </strong>
+                			<div class="recruit">
+                            	<a href="#">
+	                            	<div class="announce">
+	                                	<span class="">소프트웨어 개발자</span>
+	                            	</div>
+                    			</a>
+                			</div>
+            			</div>
+                            <div class="status left">
+                    			<em class="appStatus">지원완료</em>
+                            </div>
+			            <div class="btns left">
+			                <div class="action">
+			                	<span class="dateEnd"></span>
+			                </div>
+			                <button type="button" class="history">지원내역</button>
+			            </div>
+        			</div>
+			        <hr>
+            	</div>
+            	
+            	<div class="listStatus">
+                	<div class="info">
+			            <div class="date left">2021.12.12 22:13</div>
+			            <div class="summary left">
+			                <strong class="corp">
+                            	<a href="#">㈜한국비즈넷</a>
+                            </strong>
+                			<div class="recruit">
+                            	<a href="#">
+	                            	<div class="announce">
+	                                	<span class="">소프트웨어 개발자</span>
+	                            	</div>
+                    			</a>
+                			</div>
+            			</div>
+                            <div class="status left">
+                    			<em class="appStatus">지원완료</em>
+                            </div>
+			            <div class="btns left">
+			                <div class="action">
+			                	<span class="dateEnd"></span>
+			                </div>
+			                <button type="button" class="history">지원내역</button>
+			            </div>
+        			</div>
+			        <hr>
+            	</div>
+    		</form>
+    	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

@@ -23,6 +23,7 @@ import kr.or.gosu.vo.GosuNotice;
 import kr.or.member.model.service.MailSender;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.CertiVO;
+import kr.or.member.model.vo.ContestPage;
 import kr.or.member.model.vo.GosuNoticePage;
 import kr.or.member.model.vo.Member;
 
@@ -344,5 +345,13 @@ public class MemberController {
 		}else {
 			return "0";
 		}
+	}
+	@RequestMapping(value="/mycontestPage.do")
+	public String mycontestPage(Member m,Model model,int reqPage) {
+		ContestPage ctp = service.contestList(m,reqPage);
+		model.addAttribute("list",ctp.getList());
+		model.addAttribute("pageNavi",ctp.getPageNavi());
+		model.addAttribute("start",ctp.getStart());
+		return "member/mycontestPage";
 	}
 }

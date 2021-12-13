@@ -22,6 +22,8 @@ import kr.or.admin.vo.TotalMember;
 import kr.or.comment.vo.Report;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestList;
+import kr.or.contest.vo.ContestMember;
+import kr.or.contest.vo.ContestMemberList;
 
 @Controller
 public class AdminController {
@@ -237,6 +239,14 @@ public class AdminController {
 			model.addAttribute("date",date);
 			model.addAttribute("totalCount",cl.getTotalCount());
 			return "admin/contestEnrollMember";
+		}
+		
+		//공모전 신청 회원 리스트 출력
+		@ResponseBody
+		@RequestMapping(value="searchContestMember")
+		public ArrayList<ContestMemberList> searchContestMember(int contestNo, Model model){
+			ArrayList<ContestMemberList> mList = service.searchContestMember(contestNo);
+			return mList;
 		}
 
 

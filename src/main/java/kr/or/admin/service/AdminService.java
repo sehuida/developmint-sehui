@@ -22,6 +22,8 @@ import kr.or.admin.vo.TotalMember;
 import kr.or.comment.vo.Report;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestList;
+import kr.or.contest.vo.ContestMember;
+import kr.or.contest.vo.ContestMemberList;
 import kr.or.member.model.vo.Member;
 
 @Service
@@ -497,6 +499,10 @@ public class AdminService {
 		
 		
 		return cl;
+	}
+
+	public ArrayList<ContestMemberList> searchContestMember(int contestNo) {
+		return dao.searchContestMember(contestNo);
 	}
 }
 
