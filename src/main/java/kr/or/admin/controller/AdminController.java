@@ -238,6 +238,7 @@ public class AdminController {
 			model.addAttribute("pageNavi",cl.getPageNavi());
 			model.addAttribute("date",date);
 			model.addAttribute("totalCount",cl.getTotalCount());
+			model.addAttribute("cmc",cl.getContestMemberCount());
 			return "admin/contestEnrollMember";
 		}
 		
@@ -247,6 +248,19 @@ public class AdminController {
 		public ArrayList<ContestMemberList> searchContestMember(int contestNo, Model model){
 			ArrayList<ContestMemberList> mList = service.searchContestMember(contestNo);
 			return mList;
+		}
+		
+		//공모전 신청회원 승인/반려
+		@RequestMapping(value="/MemberEnrollContest.do")
+		public String MemberEnrollContest(String memberId, int status, int contestNo, String date,  Model model) {
+			boolean result = service.MemberEnrollContest(memberId,status,contestNo);
+			if(result) {
+				model.addAttribute("msg","처리 완료 되었습니다.");
+			}else {
+				model.addAttribute("msg","처리 실패");
+			}
+			model.addAttribute("loc","/contestEnrollMember.do?reqPage=1&date="+date);
+			return "common/msg";
 		}
 
 
