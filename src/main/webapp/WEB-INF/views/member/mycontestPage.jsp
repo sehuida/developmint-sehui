@@ -37,7 +37,14 @@
 			<div class="page-wrap">
 				<div class="page-top">
 					<span style="text-align: left; font-family: NotoBold; font-size: 30px;">공모전 신청내역</span>
-					<a href="/mypageGosu.do" class="btn btn-warning" style="height: 40px;">뒤로가기</a>			
+					<c:choose>
+						<c:when test="${sessionScope.m.memberType eq 2 }">
+							<a href="/mypageGosu.do" class="btn btn-warning" style="height: 40px;">뒤로가기</a>															
+						</c:when>
+						<c:otherwise>
+							<a href="/mypage.do" class="btn btn-warning" style="height: 40px;">뒤로가기</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<c:choose>
 					<c:when test="${empty list }">
