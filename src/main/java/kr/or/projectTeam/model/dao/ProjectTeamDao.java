@@ -42,7 +42,7 @@ public class ProjectTeamDao {
 		int result = sqlSession.selectOne("projectTeam.projectDefaultCount");
 		return result;
 	}
-	
+
 	public int selectCheckTotalCount(Map<String, Object> map) {
 		int result = sqlSession.selectOne("projectTeam.projectCheckCount", map);
 		return result;
@@ -52,7 +52,7 @@ public class ProjectTeamDao {
 		List<ProjectTeam> list = sqlSession.selectList("projectTeam.projectCheckList", map);
 		return (ArrayList<ProjectTeam>) list;
 	}
-	
+
 	public ArrayList<DevelopLanguage> selectAllDevelopLangList() {
 		List<DevelopLanguage> list = sqlSession.selectList("projectTeam.developLangList");
 		return (ArrayList<DevelopLanguage>) list;
@@ -63,7 +63,7 @@ public class ProjectTeamDao {
 		map.put("insertLangValue", insertLangValue);
 		int result = 0;
 		int tempResult = sqlSession.insert("projectTeam.writeRecruitTeam", map);
-		if(tempResult > 0) {
+		if (tempResult > 0) {
 			map.replace("insertLangValue", 2);
 			result = sqlSession.insert("projectTeam.writeRecruitTeam", map);
 		}
@@ -86,9 +86,9 @@ public class ProjectTeamDao {
 	public int updateRecruitTeam(Map<String, Object> map) {
 		int result = 0;
 		int tempResult = sqlSession.update("projectTeam.updateRecruitTeam", map);
-		if(tempResult > 0) {
+		if (tempResult > 0) {
 			int tempResult2 = sqlSession.delete("projectTeam.deleteLangList", map);
-			if(tempResult2 > 0) {
+			if (tempResult2 > 0) {
 				int insertLangValue = 2;
 				map.put("insertLangValue", insertLangValue);
 				result = sqlSession.insert("projectTeam.writeRecruitTeam", map);
@@ -137,7 +137,7 @@ public class ProjectTeamDao {
 		map.put("insertLangValue", insertLangValue);
 		int result = 0;
 		int tempResult = sqlSession.insert("projectTeam.insertApplyProject", map);
-		if(tempResult > 0) {
+		if (tempResult > 0) {
 			map.replace("insertLangValue", 2);
 			result = sqlSession.insert("projectTeam.insertApplyProject", map);
 		}
@@ -168,30 +168,27 @@ public class ProjectTeamDao {
 	}
 
 	public int closeRecruitTeam(Map<String, Object> map) {
-		int result = 0;
-		int updateResult1 = sqlSession.update("projectTeam.updateFinalRecruitTeam", map);
-		System.out.println(updateResult1);
-		if(updateResult1 > 0) {
-			int updateResult2 = sqlSession.update("projectTeam.updateFinalRecruitTeam2", map);
-			if(updateResult2 > 0) {
-				int writerInsertResult = sqlSession.insert("projectTeam.insertFinalTeamWriter", map);
-				if(writerInsertResult > 0) {
-					result = sqlSession.insert("projectTeam.insertFinalTeamMember", map);
-				} System.out.println("writerInsertResult 작동안됨");
-			} else {
-				System.out.println("updateResult2 작동안됨");
-			}
-		} else {
-			System.out.println("updateResult1 작동안됨");
-		}
-		return result;
+		return sqlSession.insert("projectTeam.insertFinalTeamMember", map);
 	}
 
-	
+	public int updateFinalRecruitTeam(Map<String, Object> map) {
+		return sqlSession.update("projectTeam.updateFinalRecruitTeam", map);
+	}
 
-	
+	public int updateFinalRecruitTeam2(Map<String, Object> map) {
+		return sqlSession.update("projectTeam.updateFinalRecruitTeam2", map);
+	}
 
-	
-	
-	
+	public int insertFinalTeamWriter(Map<String, Object> map) {
+		return sqlSession.insert("projectTeam.insertFinalTeamWriter", map);
+	}
+
+	public int deleteTeamMember(int entryNo) {
+		return sqlSession.update("projectTeam.deleteTeamMember", entryNo);
+	}
+
+	public ArrayList<ProjectEntry> manageFinalEntryFrm(Map<String, Object> map) {
+		List<ProjectEntry> finalMemberList = sqlSession.selectList("projectTeam.manageFinalEntryFrm", map);
+		return (ArrayList<ProjectEntry>) finalMemberList;
+	}
 }

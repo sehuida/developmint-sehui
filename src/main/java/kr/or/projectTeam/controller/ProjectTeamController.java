@@ -368,7 +368,7 @@ public class ProjectTeamController {
 			
 		}
 	  
-	  @RequestMapping(value="/selectMember.do")
+	  @RequestMapping(value="/selectTeamMember.do")
 		public String selectMember(Model model, int entryNo, int memberNo, int projectNo) {
 			int result = service.selectMember(entryNo, memberNo);
 			if(result > 0) { 
@@ -401,5 +401,34 @@ public class ProjectTeamController {
 			  }
 			  return "member/swalMsg"; 
 	  }
+	  
+	  @RequestMapping(value="/deleteTeamMember.do")
+	  public String deleteTeamMember(Model model, int projectNo, int memberNo, int entryNo) {
+		  int result = service.deleteTeamMember(entryNo);
+			if(result > 0) { 
+				  model.addAttribute("title", "지원자 탈락 완료");
+				  model.addAttribute("msg", "해당 지원자는 탈락되었습니다. ");
+				  model.addAttribute("loc","/manageEntry.do?memberNo="+memberNo+"&projectNo="+projectNo+"&reqPage=1&viewValue=1");
+				  model.addAttribute("icon", "success");
+			  } else {
+				  model.addAttribute("title", "지원자 탈락 완료");
+				  model.addAttribute("msg", "지원자 탈락 과정에 오류가 발생되었습니다.");
+				  model.addAttribute("loc","/manageEntry.do?memberNo="+memberNo+"&projectNo="+projectNo+"&reqPage=1&viewValue=1");
+				  model.addAttribute("icon", "warning");
+			  }
+			  return "member/swalMsg"; 
+	  }
 	 
+	  @RequestMapping(value="/manageFinalEntryFrm.do")
+		public String manageFinalEntryFrm(Model model, int projectNo, int memberNo, int viewValue) {
+		  	ProjectTeamApplyPageData ptapd = service.manageFinalEntryFrm(projectNo, viewValue);
+			model.addAttribute("entryList", ptapd.getEntryList());
+			model.addAttribute("udLangList", ptapd.getUdLangList());
+			model.addAttribute("developLangList", ptapd.getDevelopLangList());
+			model.addAttribute("availableNum", ptapd.getEntryList().get(0).getAvailableNum());
+			model.addAttribute("memberNo", memberNo);
+			model.addAttribute("projectNo", projectNo);
+			model.addAttribute("viewValue", viewValue);	
+			return "recruitCrue/manageFinalEntry";
+		}
 }

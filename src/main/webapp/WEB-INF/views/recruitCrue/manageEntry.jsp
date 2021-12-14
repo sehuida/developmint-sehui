@@ -16,7 +16,7 @@
     	var projectNo = $(".urlProjectNo").val();
     	var viewValue = $(".viewValue").val();
     	$(".return_img").click(function(){
-			history.back();
+    		location.href ="/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo;
 		});
     	
         $(".rBox_Leftnavi_left").click(function(){
@@ -75,6 +75,7 @@
                             </div>
                         </div>
                         <div id="right_site">
+                            <a href="/manageFinalEntryFrm.do?memberNo=${el.memberNo}&projectNo=${el.projectNo}&viewValue=1"><button type="button" class="btn btn-primary" id="rightSiteBtn">최종선발 대기인원 관리</button></a>
                             <b id="rightFont">선발 가능 인원 : </b><span class="navi_right_font">${availableNum } / 6</span>
                         </div>
                     </div>
@@ -147,11 +148,11 @@
 	                        	<c:choose>
 	                        		<c:when test="${availableNum == 6}">
 	                            		<button type="button" class="btn btn-primary" disabled="disabled">선발</button>
-	                        			<button type="button" class="btn btn-secondary">탈락</button>
+	                        			<a href="/deleteTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}"><button type="button" class="btn btn-secondary">탈락</button></a>
 	                        		</c:when>
 	                        		<c:otherwise>
-	                            		<a href="selectMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}"><button type="button" class="btn btn-primary">선발</button></a>
-	                        			<button type="button" class="btn btn-secondary">탈락</button>
+	                            		<a href="/selectTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}"><button type="button" class="btn btn-primary">선발</button></a>
+	                        			<a href="/deleteTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}"><button type="button" class="btn btn-secondary">탈락</button></a>
 	                        		</c:otherwise>
 	                        	</c:choose>
 	                        </div>

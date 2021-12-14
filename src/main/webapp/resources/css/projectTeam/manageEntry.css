@@ -219,4 +219,9 @@
 	justify-content: center;
 }
 
+#rightSiteBtn{
+	position: relative;
+	bottom: 3px;
+	margin-right: 10px;
+}
 

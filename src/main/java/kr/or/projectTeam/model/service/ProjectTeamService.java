@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.projectTeam.model.dao.ProjectTeamDao;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
@@ -397,18 +398,44 @@ public class ProjectTeamService {
 		int result = dao.selectMember(map);
 		return result;
 	}
-
+	@Transactional
 	public int closeRecruitTeam(int projectNo, int memberNo) {
 		ArrayList<ProjectEntry> finalList = dao.selectFinalMember(projectNo);
-		for(int i = 0; i < finalList.size(); i++) {
-			System.out.println(finalList.get(i));
-		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("finalList", finalList);
 		map.put("projectNo", projectNo);
 		map.put("memberNo", memberNo);
-		int result = dao.closeRecruitTeam(map);
+		int result = 0;
+		int updateResult1 = dao.updateFinalRecruitTeam(map);
+		if (updateResult1 > 0) {
+			int updateResult2 = dao.updateFinalRecruitTeam2(map);
+			if (updateResult2 > 0) {
+				int writerInsertResult = dao.insertFinalTeamWriter(map);
+				if (writerInsertResult > 0) {
+					result = dao.closeRecruitTeam(map);
+				}
+			}
+		}
 		return result;
+	}
+
+	public int deleteTeamMember(int entryNo) {
+		int result = dao.deleteTeamMember(entryNo);
+		return result;
+	}
+
+	public ProjectTeamApplyPageData manageFinalEntryFrm(int projectNo, int viewValue) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("viewValue", viewValue);
+		map.put("projectNo", projectNo);
+		ArrayList<ProjectEntry> entryList = dao.manageFinalEntryFrm(map);
+		ArrayList<UseDevelopLanguage> udLangList = dao.selectAllUseDevelopLangList(projectNo);
+		ArrayList<DevelopLanguage> developLangList = dao.selectAllDevelopLangList();
+		int entryNo = entryList.get(0).getEntryNo();
+		String pageNavi= null;
+		int start = 0;
+		ProjectTeamApplyPageData ptapd = new ProjectTeamApplyPageData(entryList, pageNavi, start, developLangList, udLangList);
+		return ptapd;
 	}
 
 	
