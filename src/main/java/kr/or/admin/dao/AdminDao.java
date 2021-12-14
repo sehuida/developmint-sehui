@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.comment.vo.Report;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestMemberList;
+import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.Member;
 
 @Repository
@@ -208,6 +209,19 @@ public class AdminDao {
 	public ArrayList<ContestMemberList> enrollMemberList(int contestNo) {
 		List<ContestMemberList> list = sqlSession.selectList("admin.enrollMemberList",contestNo);
 		return (ArrayList<ContestMemberList>)list;
+	}
+
+	public ArrayList<CertiVO> certiList(Map<String, Object> map) {
+		List<CertiVO> list = sqlSession.selectList("admin.certiList",map);
+		return (ArrayList<CertiVO>)list;
+	}
+
+	public int totalcertiMemberCount() {
+		return sqlSession.selectOne("admin.totalcertiMemberCount");
+	}
+
+	public Member memberInfoList(int memberNo) {
+		return sqlSession.selectOne("admin.memberInfoList",memberNo);
 	}
 	
 
