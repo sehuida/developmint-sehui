@@ -57,12 +57,12 @@
 							<c:when test="${type eq 0}">
 								 <li class="breadcrumb-item actives">신청한 내역</li>
 								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=1">내 프로젝트</a></li>
-								 <li class="breadcrumb-item"><a href="#">찜한내역</a></li>							
+								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=2">찜한내역</a></li>							
 							</c:when>
 							<c:when test="${type eq 1 }">
 								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=0">신청한 내역</a></li>
 								 <li class="breadcrumb-item actives">내 프로젝트</li>
-								 <li class="breadcrumb-item"><a href="#">찜한내역</a></li>							
+								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=2">찜한내역</a></li>							
 							</c:when>
 							<c:when test="${type eq 2 }">
 								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=0">신청한 내역</a></li>
@@ -128,6 +128,7 @@
 						</table>						
 					</c:when>
 					<c:when test="${type eq 2 }">
+						
 					</c:when>
 				</c:choose>
 				<div id="pageNavi">

@@ -374,6 +374,7 @@ public class MemberController {
 			model.addAttribute("type", type);
 		}else if(type==2) {
 			//찜한 내역
+			
 		}
 		return "member/crewList";
 	}
