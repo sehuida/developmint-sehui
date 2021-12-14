@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.or.comment.vo.Report;
+import kr.or.company.vo.Company;
 import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.Member;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class TotalMember {
 	private List<String> lastReport;
 	private ArrayList<CertiVO> certiList;
 	private ArrayList<Member> memberInfoList;
+	private ArrayList<Company> companyList;
 	
 	public TotalMember(ArrayList<Member> allMemberList, int start, String pageNavi, List<Integer> totalCountList) {
 		super();
@@ -47,12 +49,13 @@ public class TotalMember {
 		this.totalCount = totalCount;
 		this.lastReport = lastReport;
 	}
-	public TotalMember(String pageNavi, int totalCount, ArrayList<CertiVO> certiList,ArrayList<Member> memberInfoList) {
+	public TotalMember(String pageNavi, int totalCount, ArrayList<CertiVO> certiList,ArrayList<Member> memberInfoList, ArrayList<Company> companyList) {
 		super();
 		this.pageNavi = pageNavi;
 		this.totalCount = totalCount;
 		this.certiList = certiList;
 		this.memberInfoList = memberInfoList;
+		this.companyList = companyList;
 	}
 	
 	

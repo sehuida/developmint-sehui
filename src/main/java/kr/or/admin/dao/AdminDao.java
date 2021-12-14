@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.comment.vo.Report;
+import kr.or.company.vo.Company;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestMemberList;
 import kr.or.member.model.vo.CertiVO;
@@ -222,6 +223,11 @@ public class AdminDao {
 
 	public Member memberInfoList(int memberNo) {
 		return sqlSession.selectOne("admin.memberInfoList",memberNo);
+	}
+
+	public ArrayList<Company> companyList() {
+		List<Company> list = sqlSession.selectList("admin.companyList");
+		return (ArrayList<Company>)list;
 	}
 	
 

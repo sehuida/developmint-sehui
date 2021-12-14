@@ -271,6 +271,7 @@ public class AdminController {
 			model.addAttribute("count",tm.getTotalCount());
 			model.addAttribute("pageNavi",tm.getPageNavi());
 			model.addAttribute("memlist", tm.getMemberInfoList());
+			model.addAttribute("companyList",tm.getCompanyList());
 			
 			return "admin/companyEnroll";
 		}

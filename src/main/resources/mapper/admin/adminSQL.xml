@@ -538,6 +538,7 @@
 		select count(*) from CERTIFICATION where approve = 'N'
 	</select>
 	
+	<!-- 회사인증 신청한 멤버 리스트-->
 	<select id="memberInfoList" parameterType="_int" resultType="m">
 		select 
 			member_no as memberNo,
@@ -552,6 +553,14 @@
 			member_grade as memberGrade
 		from member
 		where member_no = ${value}
+	</select>
+	
+	<!-- 회사 리스트 -->
+	<select id="companyList" resultType="com">
+		select
+			company_no as companyNo,
+			company_name as companyName
+		from company
 	</select>
 	
 </mapper>
