@@ -17,6 +17,8 @@ import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.CrewVO;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MyContest;
+import kr.or.member.model.vo.ProjectLikes;
+import kr.or.member.model.vo.ProjectPageVO;
 import kr.or.projectTeam.model.vo.ProjectTeam;
 
 @Repository
@@ -110,10 +112,31 @@ public class MemberDao {
 	public int contestCount(String memberId) {
 		return sqlSession.selectOne("member.contestCounts",memberId);
 	}
-
+	
 	public ArrayList<CrewVO> crewList(HashMap<String, Object> map) {
 		List<CrewVO> list = sqlSession.selectList("member.crewList",map);
 		return (ArrayList<CrewVO>)list;
+	}
+	public int crewListCount(int memberNo) {
+		return sqlSession.selectOne("member.crewListCount",memberNo);
+	}
+
+	public ArrayList<ProjectPageVO> myproject(HashMap<String, Object> map) {
+		List<ProjectPageVO> list = sqlSession.selectList("member.myproject",map);
+		return (ArrayList<ProjectPageVO>)list;
+	}
+
+	public int myproejtCount(int memberNo) {
+		return sqlSession.selectOne("member.myprojectCount",memberNo);
+	}
+
+	public ArrayList<ProjectLikes> projectLikes(HashMap<String, Object> map) {
+		List<ProjectLikes> list = sqlSession.selectList("member.projectLikes",map);
+		return (ArrayList<ProjectLikes>)list;
+	}
+
+	public int projectLikeCount(int memberNo) {
+		return sqlSession.selectOne("member.projectLikesCnt",memberNo);
 	}
 
 }

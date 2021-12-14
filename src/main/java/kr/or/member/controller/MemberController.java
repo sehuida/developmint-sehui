@@ -27,6 +27,8 @@ import kr.or.member.model.vo.ContestPage;
 import kr.or.member.model.vo.CrewListPage;
 import kr.or.member.model.vo.GosuNoticePage;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.MyProjectPage;
+import kr.or.member.model.vo.ProjectLikesPage;
 
 @Controller
 public class MemberController {
@@ -365,9 +367,19 @@ public class MemberController {
 			model.addAttribute("start",clp.getStart());
 			model.addAttribute("type", type);
 		}else if(type==1) {
-			//팀원 신청 받은내역
+			//내 프로젝트 목록
+			MyProjectPage mpj = service.myproject(m, reqPage);
+			model.addAttribute("list",mpj.getList());
+			model.addAttribute("pageNavi",mpj.getPageNavi());
+			model.addAttribute("start",mpj.getStart());
+			model.addAttribute("type", type);
 		}else if(type==2) {
 			//찜한 내역
+			ProjectLikesPage plp = service.projectLikes(m, reqPage);
+			model.addAttribute("list",plp.getList());
+			model.addAttribute("pageNavi",plp.getPageNavi());
+			model.addAttribute("start",plp.getStart());
+			model.addAttribute("type", type);
 		}
 		return "member/crewList";
 	}
