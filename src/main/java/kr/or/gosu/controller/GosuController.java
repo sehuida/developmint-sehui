@@ -64,6 +64,13 @@ public class GosuController {
 			System.out.println("getId : " + m.getMemberId());
 			ArrayList<GosuFeedback> gf = service.selectGosuFeedbackList(m.getMemberId());
 			ArrayList<GosuFeedback> gf2 = service.selectGosuFeedbackList2(m.getMemberId());
+			if(m.getMemberType() ==1) {
+				ArrayList<GosuRequestProjectSub> grpsList = service.selectGosuRequestProjectSubList(m.getMemberNo());
+				model.addAttribute("grpsList", grpsList);
+			}else if(m.getMemberType() ==2) {
+				ArrayList<GosuRequestProjectSub> grpsList = service.selectGosuRequestProjectSubList2(m.getMemberNo());
+				model.addAttribute("grpsList", grpsList);
+			}
 			model.addAttribute("gosuTalkList", gf);
 			model.addAttribute("gosuTalkList2", gf2);
 		}

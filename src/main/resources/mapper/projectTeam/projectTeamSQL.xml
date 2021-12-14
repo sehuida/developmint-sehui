@@ -539,7 +539,7 @@
   
   <update id="updateFinalRecruitTeam2" parameterType="map" >
   		update project_entry set entry_status = 4 where member_no in 
-  		<foreach collection="finalList" item="fl" separator="," open="(" close=")">
+  		<foreach collection="finalList" item="fl" index="i" separator="," open="(" close=")">
   			#{fl.memberNo}
   		</foreach>
   </update>

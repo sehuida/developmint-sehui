@@ -195,5 +195,15 @@ public class GosuDao {
 		return sqlSession.selectOne("gosu.selectGosuRequestProjectSub",rpsNo);
 	}
 
+	public ArrayList<GosuRequestProjectSub> selectGosuRequestProjectSubList(int memberNo) {
+		List<GosuRequestProjectSub> list = sqlSession.selectList("gosu.selectGosuRequestProjectSubList",memberNo);
+		return (ArrayList<GosuRequestProjectSub>)list;
+	}
+
+	public ArrayList<GosuRequestProjectSub> selectGosuRequestProjectSubList2(int memberNo) {
+		List<GosuRequestProjectSub> list = sqlSession.selectList("gosu.selectGosuRequestProjectSubList2",memberNo);
+		return (ArrayList<GosuRequestProjectSub>)list;
+	}
+
 
 }

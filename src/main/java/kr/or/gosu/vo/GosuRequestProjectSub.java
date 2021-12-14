@@ -9,7 +9,10 @@ public class GosuRequestProjectSub {
 	private int costNo;
 	private int requestProjectSubNum;
 	private String requestProjectSubDate;
-	private int memberId;
+	private String requestWriterId;
+	private String gosuId;
+	private String requestWriterImg;
+	private String gosuImg;
 	
 	
 }
