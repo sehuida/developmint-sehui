@@ -107,6 +107,18 @@ public class ResumeController {
 		return "resume/resumeView";
 	}
 	
+	@RequestMapping(value="/deleteResume.do")
+	public String deleteResume(int resumeNo, Resume r, Model model) {
+		int result = service.deleteResume(resumeNo);
+		if(result > 0) {
+			model.addAttribute("msg","이력서가 삭제되었습니다.");
+		} else {
+			model.addAttribute("msg","이력서 삭제 에러");			
+		}
+		model.addAttribute("loc","/resumeManage.do?memberNo="+r.getMemberNo());
+		return "common/msg";
+	}
+	
 	/*
 	 * @RequestMapping(value="/noData.do") public String noData(String icon, String
 	 * title, Model model) { model.addAttribute("title", title);

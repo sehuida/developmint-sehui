@@ -72,6 +72,10 @@ public class ResumeService {
 		 System.out.println(list);
 		 return dao.selectAllAnnounce(list); 
 	 }
+
+	public int deleteResume(int resumeNo) {
+		return dao.deleteResume(resumeNo);
+	}
 	 
 	 
 
