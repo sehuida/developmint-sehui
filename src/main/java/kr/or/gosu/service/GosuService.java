@@ -230,10 +230,7 @@ public class GosuService {
 
 	public ArrayList<GosuRequestProject> selectGosuRequestProjectOne(int rpsNo) {
 		ArrayList<GosuRequestProject> list = dao.selectGosuRequestProjectOne(rpsNo);
-		for (GosuRequestProject g : list) {
-			g.setWriterImg(dao.selectGosuImg(g.getMemberNo()));
-			g.setWriterId(dao.selectGosuId(g.getMemberNo()));
-		}
+	
 		return list;
 	}
 
@@ -253,6 +250,17 @@ public class GosuService {
 	
 		return list;
 	}
-	
+
+	public int insertGosuRequestProject(GosuRequestProject grp) {
+		int result = dao.insertGosuRequestProject(grp);
+		return result;
+	}
+
+	@Transactional
+	public int talkStop2(int requestProjectSubNo) {
+		int result = dao.talkStop2(requestProjectSubNo);
+		return result;
+	}
+
 
 }
