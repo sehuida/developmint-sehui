@@ -116,6 +116,10 @@ input:focus, textarea:focus {
 	display: block;
 	font-size: 13px;
 }
+#gstar{
+	width: 30px;
+	margin-bottom:30px;
+}
 </style>
 </head>
 <body>
@@ -254,7 +258,12 @@ input:focus, textarea:focus {
 								<br> <br>
 								<table>
 									<tr>
-										<td colspan="2">별별별별별 &nbsp;&nbsp;&nbsp;</td>
+										<td colspan="2"><img id="gstar"
+											src="/resources/img/gosu/stars_02.png"> <img id="gstar"
+											src="/resources/img/gosu/stars_01.png"> <img id="gstar"
+											src="/resources/img/gosu/stars_01.png"> <img id="gstar"
+											src="/resources/img/gosu/stars_01.png"> <img id="gstar"
+											src="/resources/img/gosu/stars_01.png"></td>
 									</tr>
 									<tr>
 										<td><textarea cols="70"></textarea></td>
