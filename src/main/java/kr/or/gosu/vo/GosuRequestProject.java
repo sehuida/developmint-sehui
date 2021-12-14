@@ -11,6 +11,14 @@ public class GosuRequestProject {
 	private String filepath;
 	private String filename;
 	private int requestProjectSubNo;
-	private String writerId;
-	private String writerImg;
+	private String memberImg;
+	private String memberId;
+	
+	
+	
+	
+	public String getRequestProjectContentBr(){
+		return requestProjectContent.replaceAll(",", "<br>");
+	}
+
 }
