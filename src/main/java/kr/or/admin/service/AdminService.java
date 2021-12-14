@@ -31,6 +31,7 @@ import kr.or.admin.dao.AdminDao;
 import kr.or.admin.vo.TotalData;
 import kr.or.admin.vo.TotalMember;
 import kr.or.comment.vo.Report;
+import kr.or.company.vo.Company;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestList;
 import kr.or.contest.vo.ContestMember;
@@ -662,8 +663,9 @@ public class AdminService {
 		}
 		pageNavi += "</ul>";	
 		
+		ArrayList<Company> companyList = dao.companyList();
 		
-		TotalMember tm = new TotalMember(pageNavi, totalCount, certiList, memberInfoList);
+		TotalMember tm = new TotalMember(pageNavi, totalCount, certiList, memberInfoList, companyList);
 		
 		
 		return tm;

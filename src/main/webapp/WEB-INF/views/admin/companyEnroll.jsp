@@ -23,12 +23,16 @@
 	flex-wrap: wrap;
 }
 .memberBox{
-	border: 1px solid #898989;
+	border: 1px solid #6666;
 	margin-left: 20px;
 	width: 600px;
-	border-radius: 5px;
+	border-radius: 3px;
 	display: flex;
 	margin-top: 20px;
+}
+.memberBox:hover{
+	border: 1px solid #4ECDC4;
+	box-shadow: 0px 1px 1px -2px rgb(0 0 0 / 20%), 0px 0px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
 }
 .imgBox{
 	width: 200px;
@@ -62,6 +66,7 @@
 	margin-left: 20px;
 }
 
+
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -89,8 +94,23 @@
 					<div class="infoBox">
 						 <span class="infoTitle"><i class="bi bi-person-fill" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>회원이름 : </span><span>${memlist[i.index].memberName }</span><br>
 						 <span class="infoTitle"><i class="bi bi-envelope" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>이메일 : </span><span>${memlist[i.index].email }</span><br>
+						 <div class="inputBox">
+							 <form action="/enrollMemberCompany.do" class="enrollForm">
+								<span><i class="bi bi-briefcase" style="font-size: 20px; color: #898989; margin-right: 5px;"></i></span><span class="infoTitle" style="margin-top: 20px; display: inline-block;">회사 선택</span>
+								<select class="form-control selectForm" style="margin-top:7px"> 
+									<option>회사를 선택하세요.</option>
+									<c:forEach items="${companyList }" var="com">
+										<option value="${com.companyNo }">${com.companyName }</option>
+									</c:forEach>
+								</select>
+								
+							</form>
+						</div>
 					</div>
-					<div class="certiBtn"><button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#certiModal${i.index }">인증 사진</button></div>
+					<div>
+						<div class="certiBtn"><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#certiModal${i.index }">인증 사진</button></div>
+						<button class="btn btn-outline-primary enrollBtn" style="margin-top: 70px; margin-right: 5px;">인증</button><button class="btn btn-outline-secondary noEnrollBtn"  style="margin-top: 70px;">반려</button>
+					</div>
 				</div>
 			</c:forEach>
 		</div>
@@ -103,9 +123,6 @@
 		    <div class="modal-content" style="border-radius: 0.3rem;">
 		      <div class="modal-body">
 		      	<img src="/resources/upload/certification/${c.filepath }" width="470">
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
 		      </div>
 		    </div>
 		  </div>

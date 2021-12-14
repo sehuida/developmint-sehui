@@ -24,8 +24,9 @@
 	.resumeHeader{
 		overflow: hidden;
 	}
-	.ceoResume>p{
+	.ceoAnnounce>p{
 		color: rgb(78, 205, 196);
+		font-weight: 900;
 		float: left;
 	}
 	.writeDate{
@@ -36,7 +37,8 @@
 		padding-top: 3px;
 		
 	}
-	.resumeTitle{
+	.announceTitle{
+		margin-left: 30px;
 		margin-bottom: 15px;
 	}
 	em{
@@ -45,28 +47,28 @@
 		font-size: 20px;
 		margin-bottom: 15px;
 	}
-	.resumeInfo1{
+	.announceInfo1{
 		margin-bottom: 0;
 	}
-	.resumeInfo1, .resumeInfo2{
+	.announceInfo1, .announceInfo2{
 		width: 900px;
 		overflow: hidden;
 	}
-	.resumeInfo1>li, .resumeInfo2>li{
+	.announceInfo1>li, .announceInfo2>li{
 		color: rgb(158, 158, 158);
 		list-style: none;
 		overflow: hidden;
 	}
-	.resumeInfo1>li>div, .resumeInfo2>li>div{
+	.announceInfo1>li>div, .announceInfo2>li>div{
 		float: left;
 	}
-	.resumeInfoImg{
+	.announceInfoImg{
 		width: 40px;
 	}
-	.resumeInfoImg>img{
+	.announceInfoImg>img{
 		width: 20px;
 	}
-	.resumeInfoData{
+	.announceInfoData{
 		margin-left: 30px;
 	}
 	.money, .career{
@@ -154,79 +156,11 @@
     	font-size: 13px;
     	font-weight: 900;
     }
-    
-    input[type="checkbox"] { 
-    	display: none; 
-    } 
-    .label__on-off {
-    	overflow: hidden; 
-    	position: relative; 
-    	display: inline-block; 
-    	width: 58px; height: 26px; 
-    	-webkit-border-radius: 13px; 
-    	-moz-border-radius: 13px; 
-    	border-radius: 13px; 
-    	background-color: #ed4956; 
-    	color: #fff; 
-    	font-weight: bold; 
-    	cursor: pointer; 
-    	-webkit-transition: all .3s; 
-    	-moz-transition: all .3s; 
-    	-ms-transition: all .3s; 
-    	-o-transition: all .3s; 
-    	transition: all .3s; 
-    } 
-    .label__on-off > * {
-    	vertical-align: middle; 
-    	-webkit-transition: all .3s; 
-    	-moz-transition: all .3s; 
-    	-ms-transition: all .3s; 
-    	-o-transition: all .3s; 
-    	transition: all .3s; 
-    	font-size: 14px; 
-    } 
-    .label__on-off .marble { 
-    	position: absolute; 
-    	top: 1px; 
-    	left: 1px; 
-    	display: block;
-    	width: 24px; 
-    	height: 24px; 
-    	background-color: #fff; 
-    	-webkit-border-radius: 50%; 
-    	-moz-border-radius: 50%; 
-    	border-radius: 50%; 
-    	-webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
-    	-moz-box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
-    	box-shadow: 0 0 10px rgba(0, 0, 0, .3); 
-    } 
-    .label__on-off .on { 
-    	display: none; 
-    	padding-left: 12px; 
-    } 
-    .label__on-off .off { 
-    	padding-left: 30px; line-height: 25px; 
-    } 
-    .input__on-off:checked + .label__on-off { 
-    	background-color: #0bba82; 
-    } 
-    .input__on-off:checked + .label__on-off .on { 
-    	display: inline-block; 
-    } 
-    .input__on-off:checked + .label__on-off .off { 
-    	display: none; 
-    } 
-    .input__on-off:checked + .label__on-off .marble { 
-    	left: 33px; 
-    }
+
     .register>p{
     	width: 100px;
     	margin: 0;
-    	/* display: inline-block; */
     }
-    /* .ceoResumeChk{
-    	display: inline-block;
-    } */
 
     
 </style>
@@ -234,13 +168,13 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="contain">
 		<em>구인공고 관리</em>				<!-- if 구인글 없을 때 등록된 구인글이 없습니다. -->
-		<c:if test="${empty list }">
+		<c:if test="${empty a }">
 			<div class="grayBox">
 				<div class="announceHeader">
 					<div class="resiterAnnounce">
 						<p style="margin-bottom: 10px;">대표이력서</p>
-					</div><br><br>
-					<div class="announceTitle" style="margin-bottom: 30px;">
+					</div>
+					<div class="announceTitle" style="margin-bottom: 30px; margin-left: 30px;">
 						<em style="font-size:20px; color: #666;">등록된 구인공고가 없습니다.</em><br>
 						<em style="font-size:20px; color: #666;">아래에 버튼을 눌러 구인공고를 작성해주세요.</em>
 					</div>
@@ -257,49 +191,64 @@
 	</c:choose>
 		<div class="grayBox">
 			<div class="resumeHeader">
-				<div class="ceoResume">
+				<div class="ceoAnnounce">
 					<p>등록된 공고</p>
 				</div>
 				<div class="writeDate">
-					<span>2021.11.25</span>	
+					<span>${a.writeDate }</span>	
 				</div>
 			</div>
-				<div class="resumeTitle">
-					<em>java 신입/경력 개발자 채용 </em>	<!-- r.resumeTitle -->
+				<div class="announceTitle">
+					<em>${a.announceTitle }</em>	<!-- r.resumeTitle -->
 				</div>
-				<ul class="resumeInfo1">
+				<ul class="announceInfo1">
 	            	<li class="career">
-	            		<div class="resumeInfoImg">
+	            		<div class="announceInfoImg">
 	            			<img src="resources/img/resume/career.PNG">
 	            		</div>
-	            		<div class="resumeInfoData">
-	            			<span>신입/경력</span>	<!-- r.resumeCareer -->
+	            		<div class="announceInfoData">
+	            			<c:if test="${a.career eq 1 }">
+	            				<span>신입</span>
+	            			</c:if>
+	            			<c:if test="${a.career eq 2 }">
+	            				<span>경력</span>
+	            			</c:if>
 	            		</div>
 	            	</li>   
 	            	<li class="money">
-						<div class="resumeInfoImg">
+						<div class="announceInfoImg">
 							<img src="resources/img/resume/income.PNG">					
 						</div>
-						<div class="resumeInfoData">
-							<span>2,800~3,000만원</span>	<!-- r.resumeMoney -->
+						<div class="announceInfoData">
+							<span>${a.money } &#8361;</span>	<!-- r.resumeMoney -->
 						</div>
 					</li>  
 				</ul>
-				<ul	class="resumeInfo2">  
+				<ul	class="announceInfo2">  
 				<li class="workPlace">
-						<div class="resumeInfoImg">
+						<div class="announceInfoImg">
 							<img src="resources/img/resume/workPlaceGray.PNG" style="width:19px; height: 24px;">
 						</div>
-						<div class="resumeInfoData">
+						<div class="announceInfoData">
 							<span>위치 : 서울 금천구</span>	<!-- r.resumeworkPlace -->
 						</div>
 					</li>    					           
 					<li class="workForm">
-						<div class="resumeInfoImg">
+						<div class="announceInfoImg">
 							<img src="resources/img/resume/workForm.PNG">
 						</div>
-						<div class="resumeInfoData">
-							<span>직무·직업 : IT개발·데이터</span>	<!-- r.resumeWorkForm -->
+						<div class="announceInfoData">
+							<span>직무·직업 : 
+								<c:if test="${a.category eq 1 }">
+									IT개발
+								</c:if> 
+								<c:if test="${a.category eq 2 }">
+									웹 디자인
+								</c:if> 
+								<c:if test="${a.category eq 3 }">
+									프로젝트 기획
+								</c:if> 
+							</span>	<!-- r.resumeWorkForm -->
 						</div>
 					</li>               
 				</ul>

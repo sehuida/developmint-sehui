@@ -1,16 +1,21 @@
 package kr.or.projectTeam.model.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.projectTeam.model.dao.ProjectTeamDao;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectEntry;
 import kr.or.projectTeam.model.vo.ProjectTeam;
+import kr.or.projectTeam.model.vo.ProjectTeamApplicantViewData;
 import kr.or.projectTeam.model.vo.ProjectTeamApplyPageData;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeComment;
@@ -343,7 +348,7 @@ public class ProjectTeamService {
 		map.put("viewValue", viewValue);
 		map.put("projectNo", projectNo);
 		ArrayList<ProjectEntry> entryList = dao.selectAllManageEntry(map);
-		ArrayList<UseDevelopLanguage> udLangList = dao.selectAllUseDevelopLangList(projectNo);
+		ArrayList<UseDevelopLanguage> udLangList = dao.selectAllUseDevelopLangList();
 		ArrayList<DevelopLanguage> developLangList = dao.selectAllDevelopLangList();
 		int entryNo = entryList.get(0).getEntryNo();
 		
@@ -397,18 +402,92 @@ public class ProjectTeamService {
 		int result = dao.selectMember(map);
 		return result;
 	}
-
+	@Transactional
 	public int closeRecruitTeam(int projectNo, int memberNo) {
-		ArrayList<ProjectEntry> finalList = dao.selectFinalMember(projectNo);
-		for(int i = 0; i < finalList.size(); i++) {
-			System.out.println(finalList.get(i));
-		}
+		ArrayList<Integer> finalList = dao.selectFinalMember(projectNo);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("finalList", finalList);
 		map.put("projectNo", projectNo);
 		map.put("memberNo", memberNo);
-		int result = dao.closeRecruitTeam(map);
+		int result = 0;
+		int updateResult1 = dao.updateFinalRecruitTeam(map);
+		if (updateResult1 > 0) {
+			int updateResult2 = dao.updateFinalRecruitTeam2(map);
+			if (updateResult2 > 0) {
+				int writerInsertResult = dao.insertFinalTeamWriter(map);
+				if (writerInsertResult > 0) {
+					result = dao.closeRecruitTeam(map);
+				}
+			}
+		}
 		return result;
+	}
+
+	public int deleteTeamMember(int entryNo) {
+		int result = dao.deleteTeamMember(entryNo);
+		return result;
+	}
+	
+	public ProjectTeamApplyPageData manageFinalEntryFrm(int projectNo, int viewValue) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("viewValue", viewValue);
+		map.put("projectNo", projectNo);
+		ArrayList<ProjectEntry> entryList = dao.manageFinalEntryFrm(map);
+		ArrayList<UseDevelopLanguage> udLangList = dao.selectAllUseDevelopLangList();
+		ArrayList<DevelopLanguage> developLangList = dao.selectAllDevelopLangList();
+		int entryNo = entryList.get(0).getEntryNo();
+		String pageNavi= null;
+		int start = 0;
+		ProjectTeamApplyPageData ptapd = new ProjectTeamApplyPageData(entryList, pageNavi, start, developLangList, udLangList);
+		return ptapd;
+	}
+	
+	@Transactional
+	public int projectStartProcess() {
+		
+		int result = 0;
+		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date nowDate = new Date();
+		String today = sdFormat.format(nowDate);
+		ArrayList<Integer> startProjectList = dao.selectStartProjectList(today);
+		ArrayList<Integer> startProjectMemberList = dao.startProjectMemberList(startProjectList);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startProjectList", startProjectList);
+		map.put("startProjectMemberList", startProjectMemberList);
+		int updateEntryResult = dao.updateEntryResult(map);
+		ArrayList<ProjectEntry> startProjectListFinalList = dao.startProjectListFinal(map);
+		if(updateEntryResult > 0) {
+			result = dao.insertTeamMember(startProjectListFinalList);
+		}
+		return result;
+	}
+
+	public int insertFinalTeamMember(int entryNo, int projectNo, int memberNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("entryNo", entryNo);
+		map.put("projectNo", projectNo);
+		map.put("memberNo", memberNo);
+		int result = 0;
+		int updateResult = dao.updateFinalTeamMember(entryNo);
+		if(updateResult > 0) {
+			result = dao.insertFinalTeamMember2(map);
+		}
+		return result;
+	}
+
+	public int returnTeamMember(int entryNo) {
+		int result = dao.returnTeamMember(entryNo);
+		return result;
+	}
+
+	public ProjectTeamApplicantViewData selectOneApplicant(int entryNo) {
+		ProjectEntry pe = dao.selectOneApplicant(entryNo);
+		ArrayList<ProjectTeamNoticeComment> commentList = dao.selectApplyCommentList(entryNo);
+		ArrayList<UseDevelopLanguage> udlList = dao.selectAllUseDevelopLangList();
+		ProjectTeamApplicantViewData ptavd = new ProjectTeamApplicantViewData(commentList, pe, udlList);
+		return ptavd;
 	}
 
 	

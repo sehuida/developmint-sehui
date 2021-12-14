@@ -10,6 +10,40 @@
 <meta charset="UTF-8">
 <title>apply content detail</title>
 </head>
+<script>
+
+	$(function(){
+		$(".return_img").click(function(){
+			location.href="/recruitTeamMember_mainPage.do?reqPage=1";
+		});
+		
+		$("#updateComment").click(function(){
+			$("#updateTextBox").css("display", "block");
+		});
+		$("#cancelBtn1").click(function(){
+			$("#updateTextBox").css("display", "none");
+		});
+		
+		$("#insertReComment").click(function(){
+			/* $("#reCommentTextBox").css("display", "block"); */
+			$("#reCommentTextBox").show();
+		});
+		
+		$("#cancelBtn2").click(function(){
+			/* $("#reCommentTextBox").css("display", "none"); */
+			$("#reCommentTextBox").hide();
+		});
+		
+		$("#updateReComment").click(function(){
+			$("#updateReCommentTextBox").show();
+		});
+		$("#cancelBtn3").click(function(){
+			$("#updateReCommentTextBox").hide();
+		});
+		
+	});
+	
+</script>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="projectContainer">

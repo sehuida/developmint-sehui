@@ -16,14 +16,19 @@ public class AnnounceDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<Announce> selectAllAnnounce(int memberNo) {
-		List list = sqlSession.selectList("announce.selectAllAnnounce", memberNo);
-		return (ArrayList<Announce>)list;
-	}
+	/*
+	 * public ArrayList<Announce> selectAllAnnounce(int memberNo) { List list =
+	 * sqlSession.selectList("announce.selectAllAnnounce", memberNo); return
+	 * (ArrayList<Announce>)list; }
+	 */
 	
 	public int insertAnnounce(Announce a) {
 		System.out.println("여기 announceDao");
 		return sqlSession.insert("announce.insertAnnounce", a);
+	}
+
+	public Announce selectAllAnnounce(int memberNo) {
+		return sqlSession.selectOne("announce.selectAnnounce", memberNo);
 	}
 
 }
