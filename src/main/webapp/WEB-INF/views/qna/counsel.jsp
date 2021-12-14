@@ -73,17 +73,17 @@
 	                                        <div class="bg-select">
 												<select name="qa_kind">
 													<option value="">문의유형 선택</option>
-													<option value="8">로그인관련</option>
-													<option value="9">계정관련</option>
-													<option value="10">결제관련</option>
-													<option value="11">환불관련</option>
-													<option value="20">커뮤니티관련</option>
+													<option value="7">로그인관련</option>
+													<option value="8">계정관련</option>
+													<option value="9">결제관련</option>
+													<option value="10">환불관련</option>
+													<option value="11">커뮤니티관련</option>
 													<option value="12">공모전관련</option>
-													<option value="15">구인잡관련</option>
-													<option value="16">기타 문의</option>
-													<option value="17">신고</option>
-													<option value="19">기능/작동 오류</option>
-													<option value="21">이벤트</option>
+													<option value="13">구인잡관련</option>
+													<option value="14">기타 문의</option>
+													<option value="21">신고</option>
+													<option value="22">기능/작동 오류</option>
+													<option value="20">이벤트</option>
 												</select>
 											</div>
 										</td>
@@ -178,11 +178,6 @@
 					throw new Error("invalid");
 				}
 
-				if(isRequiredOrderNo($('#f1 [name=qa_kind]').val()) && $("#f1 [name='ord_no']").val() == '') {
-					alert('주문번호를 선택해 주십시오.');
-					$('#f1 [name=ord_no]').focus();
-					throw new Error("invalid");
-				}
 
 				if($.trim($('#f1 [name=user_nm]').val()) == '') {
 					alert('작성자를 입력해 주십시오.');
@@ -197,16 +192,6 @@
 					throw new Error("invalid");
 				}
 
-				if($.trim($('#f1 [name=email]').val()) == '') {
-					alert('이메일주소를 입력하세요.');
-					throw new Error("invalid");
-				} else {
-					var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-					if(!filter.test($('#f1 [name=email]').val())) {
-						alert('올바른 이메일 형식으로 입력해 주십시오.');
-						throw new Error("invalid");
-					}
-				}
 
 				if($.trim($('#f1 [name=subject]').val()) == '') {
 					alert('제목을 입력해 주십시오.');
