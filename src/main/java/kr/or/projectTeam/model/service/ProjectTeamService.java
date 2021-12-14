@@ -1,6 +1,9 @@
 package kr.or.projectTeam.model.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -400,7 +403,7 @@ public class ProjectTeamService {
 	}
 	@Transactional
 	public int closeRecruitTeam(int projectNo, int memberNo) {
-		ArrayList<ProjectEntry> finalList = dao.selectFinalMember(projectNo);
+		ArrayList<Integer> finalList = dao.selectFinalMember(projectNo);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("finalList", finalList);
 		map.put("projectNo", projectNo);
@@ -423,7 +426,7 @@ public class ProjectTeamService {
 		int result = dao.deleteTeamMember(entryNo);
 		return result;
 	}
-
+	
 	public ProjectTeamApplyPageData manageFinalEntryFrm(int projectNo, int viewValue) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("viewValue", viewValue);
@@ -436,6 +439,46 @@ public class ProjectTeamService {
 		int start = 0;
 		ProjectTeamApplyPageData ptapd = new ProjectTeamApplyPageData(entryList, pageNavi, start, developLangList, udLangList);
 		return ptapd;
+	}
+	
+	@Transactional
+	public int projectStartProcess() {
+		
+		int result = 0;
+		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date nowDate = new Date();
+		String today = sdFormat.format(nowDate);
+		ArrayList<Integer> startProjectList = dao.selectStartProjectList(today);
+		ArrayList<Integer> startProjectMemberList = dao.startProjectMemberList(startProjectList);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startProjectList", startProjectList);
+		map.put("startProjectMemberList", startProjectMemberList);
+		int updateEntryResult = dao.updateEntryResult(map);
+		ArrayList<ProjectEntry> startProjectListFinal = dao.startProjectListFinal(map);
+		if(updateEntryResult > 0) {
+			result = dao.insertTeamMember(startProjectListFinal);
+		}
+		return result;
+	}
+
+	public int insertFinalTeamMember(int entryNo, int projectNo, int memberNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("entryNo", entryNo);
+		map.put("projectNo", projectNo);
+		map.put("memberNo", memberNo);
+		int result = 0;
+		int updateResult = dao.updateFinalTeamMember(entryNo);
+		if(updateResult > 0) {
+			result = dao.insertFinalTeamMember(map);
+		}
+		return result;
+	}
+
+	public int returnTeamMember(int entryNo) {
+		int result = dao.returnTeamMember(entryNo);
+		return result;
 	}
 
 	

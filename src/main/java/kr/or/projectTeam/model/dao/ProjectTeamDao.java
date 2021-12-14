@@ -162,9 +162,9 @@ public class ProjectTeamDao {
 		return sqlSession.update("projectTeam.selectMember", map);
 	}
 
-	public ArrayList<ProjectEntry> selectFinalMember(int projectNo) {
-		List<ProjectEntry> finalList = sqlSession.selectList("projectTeam.selectAllFinalEntry", projectNo);
-		return (ArrayList<ProjectEntry>) finalList;
+	public ArrayList<Integer> selectFinalMember(int projectNo) {
+		List<Integer> finalList = sqlSession.selectList("projectTeam.selectAllFinalEntry", projectNo);
+		return (ArrayList<Integer>) finalList;
 	}
 
 	public int closeRecruitTeam(Map<String, Object> map) {
@@ -190,5 +190,41 @@ public class ProjectTeamDao {
 	public ArrayList<ProjectEntry> manageFinalEntryFrm(Map<String, Object> map) {
 		List<ProjectEntry> finalMemberList = sqlSession.selectList("projectTeam.manageFinalEntryFrm", map);
 		return (ArrayList<ProjectEntry>) finalMemberList;
+	}
+
+	public ArrayList<Integer> selectStartProjectList(String today) {
+		List<Integer> startProjectList = sqlSession.selectList("projectTeam.selectStartProjectList", today);
+		return (ArrayList<Integer>) startProjectList;
+	}
+
+	public ArrayList<Integer> startProjectMemberList(ArrayList<Integer> startProjectList) {
+		List<Integer> startProjectMemberList = sqlSession.selectList("projectTeam.startProjectMemberList", startProjectList);
+		return (ArrayList<Integer>) startProjectMemberList;
+	}
+
+	public int updateEntryResult(Map<String, Object> map) {
+		return sqlSession.update("projectTeam.updateEntryResult", map);
+	}
+
+
+	public ArrayList<ProjectEntry> startProjectListFinal(Map<String, Object> map) {
+		List<ProjectEntry> startProjectFinalList = sqlSession.selectList("projectTeam.startProjectListFinal", map);
+		return (ArrayList<ProjectEntry>) startProjectFinalList;
+	}
+
+	public int insertTeamMember(ArrayList<ProjectEntry> startProjectListFinal) {
+		return sqlSession.insert("projectTeam.insertTeamMember", startProjectListFinal);
+	}
+
+	public int insertFinalTeamMember(Map<String, Object> map) {
+		return sqlSession.insert("projectTeam.insertFinalTeamMember", map);
+	}
+
+	public int returnTeamMember(int entryNo) {
+		return sqlSession.update("projectTeam.returnTeamMember", entryNo);
+	}
+
+	public int updateFinalTeamMember(int entryNo) {
+		return sqlSession.update("projectTeam.updateFinalTeamMember", entryNo);
 	}
 }

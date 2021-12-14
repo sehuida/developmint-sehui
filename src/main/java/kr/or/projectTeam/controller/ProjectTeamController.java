@@ -43,7 +43,10 @@ public class ProjectTeamController {
 	
 	@RequestMapping(value="/recruitTeamMember_mainPage.do")
 	public String recruitTeamMember(Model model, int reqPage) {
-		service.updateStatus();
+		int result1 = service.updateStatus();
+		if(result1 > 0) {
+			int result2 = service.projectStartProcess();
+		}
 		projectTeamMainPageData ptmpd = service.selectAllrecruitProject(reqPage);
 		model.addAttribute("list", ptmpd.getList());
 		model.addAttribute("pageNavi", ptmpd.getPageNavi());
@@ -149,7 +152,10 @@ public class ProjectTeamController {
 	
 	@RequestMapping(value="/selectOneNotice.do")
 	public String selectOneNotice(Model model, int projectNo, Integer memberNo) {
-		service.updateStatus();
+		int result1 = service.updateStatus();
+		if(result1 > 0) {
+			int result2 = service.projectStartProcess();
+		}
 		if(memberNo == null) {
 			memberNo = -1;
 		}
@@ -431,4 +437,38 @@ public class ProjectTeamController {
 			model.addAttribute("viewValue", viewValue);	
 			return "recruitCrue/manageFinalEntry";
 		}
+	  
+	  @RequestMapping(value="/selectFinalTeamMember.do")
+	  public String selectFinalTeamMember(Model model, int projectNo, int memberNo, int entryNo, int viewValue) {
+		  int result = service.insertFinalTeamMember(entryNo, projectNo, memberNo);
+			if(result > 0) { 
+				  model.addAttribute("title", "지원자 최종 선발");
+				  model.addAttribute("msg", "해당 지원자는 프로젝트 팀원으로 최종 선발되었습니다.");
+				  model.addAttribute("loc","/manageFinalEntryFrm.do?memberNo="+memberNo+"&projectNo="+projectNo+"&viewValue="+viewValue);
+				  model.addAttribute("icon", "success");
+			  } else {
+				  model.addAttribute("title", "지원자 최종 선발 실패");
+				  model.addAttribute("msg", "지원자 최종 선발 과정에 오류가 발생되었습니다.");
+				  model.addAttribute("loc","/manageFinalEntryFrm.do?memberNo="+memberNo+"&projectNo="+projectNo+"&viewValue="+viewValue);
+				  model.addAttribute("icon", "warning");
+			  }
+			  return "member/swalMsg"; 
+	  }
+	  
+	  @RequestMapping(value="/returnTeamMember.do")
+	  public String returnTeamMember(Model model, int projectNo, int memberNo, int entryNo, int viewValue) {
+		  int result = service.returnTeamMember(entryNo);
+			if(result > 0) { 
+				  model.addAttribute("title", "지원 대기로 전환");
+				  model.addAttribute("msg", "해당 지원자는 지원자 관리에서 다시 확인해볼 수 있습니다.");
+				  model.addAttribute("loc","/manageFinalEntryFrm.do?memberNo="+memberNo+"&projectNo="+projectNo+"&viewValue="+viewValue);
+				  model.addAttribute("icon", "success");
+			  } else {
+				  model.addAttribute("title", "지원자 전환 실패");
+				  model.addAttribute("msg", "지원자 전환 과정에서 오류가 발생되었습니다.");
+				  model.addAttribute("loc","/manageFinalEntryFrm.do?memberNo="+memberNo+"&projectNo="+projectNo+"&viewValue="+viewValue);
+				  model.addAttribute("icon", "warning");
+			  }
+			  return "member/swalMsg"; 
+	  }
 }

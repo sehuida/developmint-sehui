@@ -80,7 +80,7 @@
                     </div>
                     <div class="rListBox">
                     <c:forEach items="${entryList }" var="el" varStatus="mi">
-                    	<c:if test="${el.entryStatus == 1}">
+                    	<c:if test="${el.entryStatus == 3}">
                     		<div class="contentFlexBox">
 	                            <div class="imgBox">
 	                                <c:choose>
@@ -144,16 +144,8 @@
 	                            </div>
 	                        </div>
 	                        <div class="btnBox">
-	                        	<c:choose>
-	                        		<c:when test="${availableNum == 6}">
-	                            		<button type="button" class="btn btn-primary" disabled="disabled">선발</button>
-	                        			<a href="/deleteTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}"><button type="button" class="btn btn-secondary">탈락</button></a>
-	                        		</c:when>
-	                        		<c:otherwise>
-	                            		<a href="/selectTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}"><button type="button" class="btn btn-primary">선발</button></a>
-	                        			<a href="/deleteTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}"><button type="button" class="btn btn-secondary">탈락</button></a>
-	                        		</c:otherwise>
-	                        	</c:choose>
+	                            <a href="/selectFinalTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}&viewValue=${viewValue}"><button type="button" class="btn btn-primary">최종선발</button></a>
+	                        	<a href="/returnTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}&viewValue=${viewValue}"><button type="button" class="btn btn-secondary">대기인원으로 전환</button></a>
 	                        </div>
                     	</c:if>
                     </c:forEach>
