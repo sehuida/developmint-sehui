@@ -231,7 +231,7 @@ public class GosuController {
 		g.setGprojectFilepath("/resources/upload/gosuProject/" + filepath);
 		Gson gson = new Gson();
 		return gson.toJson(g);
-	}
+	}//dd
 
 	@RequestMapping(value = "/gosuSituation.do")
 	public String gosuSituation(@SessionAttribute Member m, Model model) {
