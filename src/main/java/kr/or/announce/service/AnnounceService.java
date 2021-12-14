@@ -19,7 +19,12 @@ public class AnnounceService {
 		return dao.insertAnnounce(a);
 	}
 
-	public ArrayList<Announce> selectAllannounce(int memberNo) {
+	public Announce selectAllannounce(int memberNo) {
 		return dao.selectAllAnnounce(memberNo);
 	}
+
+	/*
+	 * public ArrayList<Announce> selectAllannounce(int memberNo) { return
+	 * dao.selectAllAnnounce(memberNo); }
+	 */
 }
