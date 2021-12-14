@@ -17,8 +17,10 @@ public class AnnounceController {
 
 	@RequestMapping(value="/announceManage.do")
 	public String announceManage(Model model, int memberNo) {
-		ArrayList<Announce> list = service.selectAllannounce(memberNo);
-		model.addAttribute("list", list);
+		/* ArrayList<Announce> list = service.selectAllannounce(memberNo); */
+		Announce announce = service.selectAllannounce(memberNo);
+		System.out.println("announce : " +announce);
+		model.addAttribute("a", announce);
 		return "jobSearch/announceManage";
 	}
 	
