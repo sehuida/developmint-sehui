@@ -92,56 +92,58 @@
 		                               	</c:otherwise>
 		                            </c:choose> 
 	                            </div>
-	                            <div class="contentBox">
-	                                <div class="textFlexBox1">
-	                                    <div class="textContent">
-	                                        <p class="contentText">${el.ambition}</p>
-	                                    </div>
-	                                    <div class="dateType">
-	                                        <b>지원일 : </b><span><b>${el.applyDate}</b></span>
-	                                    </div>
-	                                </div>
-	                                 <div class="textFlexBox2">
-			                              <div></div>
-			                              <div class="dateType">
-			                                   <b>지원자 아이디 : </b><span><b>${el.memberId }</b></span>
-			                              </div>
-			                        </div>
-	                                <div class="bottomFlexBox">
-	                                    <div class="mSubImgBox">
-	                                    	<c:forEach items="${udLangList }" var="udl"  varStatus="i">
-				                                 <c:if test="${el.memberNo eq udl.memberNo && el.projectNo eq udl.projectNo}">
-				                                     <img class="langImg" src="${udl.langImg }">
-				                                 </c:if>
-				                             </c:forEach>
-	                                    </div>
-	                                    <div class="rankImg">
-	                                        <c:choose>
-												<c:when test="${el.memberGrade >=1 && el.memberGrade <= 20 }">
-													<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/bronze.png">
-												</c:when>
-												<c:when test="${el.memberGrade >=21 && el.memberGrade <= 40 }">
-													<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/silver.png">
-												</c:when>
-												<c:when test="${el.memberGrade >=41 && el.memberGrade <= 60 }">
-													<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/gold.png">
-												</c:when>
-												<c:when test="${el.memberGrade >=61 && el.memberGrade <= 80 }">
-													<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/platinum.png">
-												</c:when>
-												<c:when test="${el.memberGrade >=81 && el.memberGrade <= 110 }">
-													<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/diamond.png">
-												</c:when>
-												<c:when test="${el.memberGrade >=111 && el.memberGrade <= 140 }">
-													<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/master.png">
-												</c:when>
-												<c:when test="${el.memberGrade >=141 && el.memberGrade <= 170 }">
-													<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/challenger.png">
-												</c:when>								
-											</c:choose>
-	                                    </div>
-	                                </div>
-	                            </div>
+	                            <a href="/selectOneApplicant.do?projectNo=${projectNo}&memberNo=${memberNo}&entryNo=${el.entryNo}" class="clickRecruitTeamTag">
+		                            <div class="contentBox">
+		                                <div class="textFlexBox1">
+		                                    <div class="textContent">
+		                                        <p class="contentText">${el.ambition}</p>
+		                                    </div>
+		                                    <div class="dateType">
+		                                        <b>지원일 : </b><span><b>${el.applyDate}</b></span>
+		                                    </div>
+		                                </div>
+		                                 <div class="textFlexBox2">
+				                              <div></div>
+				                              <div class="dateType">
+				                                   <b>지원자 아이디 : </b><span><b>${el.memberId }</b></span>
+				                              </div>
+				                        </div>
+		                                <div class="bottomFlexBox">
+		                                    <div class="mSubImgBox">
+		                                    	<c:forEach items="${udLangList }" var="udl"  varStatus="i">
+					                                 <c:if test="${el.memberNo eq udl.memberNo && el.projectNo eq udl.projectNo}">
+					                                     <img class="langImg" src="${udl.langImg }">
+					                                 </c:if>
+					                             </c:forEach>
+		                                    </div>
+		                                    <div class="rankImg">
+		                                        <c:choose>
+													<c:when test="${el.memberGrade >=1 && el.memberGrade <= 20 }">
+														<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/bronze.png">
+													</c:when>
+													<c:when test="${el.memberGrade >=21 && el.memberGrade <= 40 }">
+														<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/silver.png">
+													</c:when>
+													<c:when test="${el.memberGrade >=41 && el.memberGrade <= 60 }">
+														<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/gold.png">
+													</c:when>
+													<c:when test="${el.memberGrade >=61 && el.memberGrade <= 80 }">
+														<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/platinum.png">
+													</c:when>
+													<c:when test="${el.memberGrade >=81 && el.memberGrade <= 110 }">
+														<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/diamond.png">
+													</c:when>
+													<c:when test="${el.memberGrade >=111 && el.memberGrade <= 140 }">
+														<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/master.png">
+													</c:when>
+													<c:when test="${el.memberGrade >=141 && el.memberGrade <= 170 }">
+														<img class="rankImg" src="/resources/img/recruitTeamProject/common/rank/challenger.png">
+													</c:when>								
+												</c:choose>
+		                                    </div>
+		                                </div>
+		                            </div>
+	                            </a>
 	                        </div>
 	                        <div class="btnBox">
 	                            <a href="/selectFinalTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}&viewValue=${viewValue}&pageTransValue=${availableNum }"><button type="button" class="btn btn-primary">최종선발</button></a>
