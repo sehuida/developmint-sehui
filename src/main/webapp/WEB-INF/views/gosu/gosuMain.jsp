@@ -572,14 +572,25 @@ to {
 
 					</div>
 				</c:if>
-				<hr style="margin-top: 100px;">
+				<hr style="margin-top: 80px;">
 				<h4>
 					<span style="color: rgb(78, 205, 196)">요청서</span>를 통한 <span
 						style="color: rgb(78, 205, 196)">고수</span> 매칭
 				</h4>
 				<div class="g-statusContent">
-				
-				<c:forEach items="${grpsList }" var="grpsl" varStatus="i">
+				<c:choose>
+					<c:when test="${empty grpsList }">
+						<c:if test="${sessionScope.m.memberType eq 1}">
+						<span style="margin:100px;">요청서를 작성해보세요!</span>
+						</c:if>
+						<c:if test="${sessionScope.m.memberType eq 2}">
+						<span style="margin:100px;">상단의 요청서 버튼을 눌러 견적서를 보내보세요!</span>
+						 
+						</c:if>
+						
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${grpsList }" var="grpsl" varStatus="i">
 					<a href="/gosuProject.do?rpsNo=${grpsl.requestProjectSubNo }">
 						<table class="g-sc-tbl card bg-info mb-3">
 							<tboay style="min-width:342px;max-width:342px;">
@@ -602,6 +613,9 @@ to {
 						</table>
 					</a> 
 					</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			
 				
 				</div>
 			</div>
