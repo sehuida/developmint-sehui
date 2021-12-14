@@ -263,8 +263,14 @@ public class AdminController {
 			return "common/msg";
 		}
 		
+		//회사 인증 처리 페이지로 이동
 		@RequestMapping(value="/companyEnroll.do")
-		public String companyEnroll(Model model) {
+		public String companyEnroll(Model model, int reqPage) {
+			TotalMember tm = service.companyEnroll(reqPage);
+			model.addAttribute("list",tm.getCertiList());
+			model.addAttribute("count",tm.getTotalCount());
+			model.addAttribute("pageNavi",tm.getPageNavi());
+			model.addAttribute("memlist", tm.getMemberInfoList());
 			
 			return "admin/companyEnroll";
 		}

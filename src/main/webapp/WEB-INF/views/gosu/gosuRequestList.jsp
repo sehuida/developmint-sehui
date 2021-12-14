@@ -103,11 +103,11 @@ input:focus, textarea:focus {
 										<img src="/resources/upload/member/${mrl.requestWriterImg }">
 										</c:if>
 										</th>
-										<th>${mrl.requestWriterId }</th>
+										<th><span style="color: rgb(78, 205, 196);padding:0;">${mrl.requestWriterId }</span></th>
 										<td style="text-align: right;">${mrl.requsetDate}</td>
 									</tr>
 									<tr>
-										<td colspan="2">${mrl.requestContent7}</td>
+										<td colspan="2" style="background-color:  rgba(239, 239, 239, 0.3);">${mrl.requestContent7}</td>
 									</tr>
 								</table>
 						</a></td>

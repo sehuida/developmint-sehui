@@ -77,6 +77,9 @@ public class ResumeDao {
 		return (ArrayList<Announce>)list;
 	}
 
+	public int deleteResume(int resumeNo) {
+		return sqlSession.delete("resume.deleteResume", resumeNo);
+	}
 	
 	 
 }

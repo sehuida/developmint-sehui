@@ -213,5 +213,9 @@
 	<!-- </foreach> -->
 	</select>
 	
+	<delete id="deleteResume" parameterType="_int">
+		delete from resume where resume_no = #{resumeNo}
+	</delete>
+
 	
 </mapper>

@@ -396,6 +396,42 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="gosu-review">
+					<h4>개발후기</h4>
+					<div class="review-wrap">
+						<div>
+							<div class="review-avg">
+								<span style="font-size: 30px; font-weight: bold;">xx개의 후기</span>
+							</div>
+							<hr>
+							<div class="review-one">
+								<ul>
+									<li>xxx이름</li>
+									<li>2021.12.01</li>
+								</ul>
+								<br>
+								<div style="display: flex; justify-content: center;">
+									<p>후기후기후기후기후기후기후기후기후기후기후기후기</p>
+								</div>
+							</div>
+							<div class="review-one">
+								<ul>
+									<li>xxx이름</li>
+									<li>2021.12.01</li>
+								</ul>
+								<br>
+								<div style="display: flex; justify-content: center;">
+									<p>후기후기후기후기후기후기후기후기후기후기후기후기</p>
+								</div>
+							</div>
+						</div>
+						<div style="display: flex; justify-content: center;">
+							<a class="btn btn-primary">후기 더보기</a>
+						</div>
+					</div>
+				</div>
+
 				<div class="gosu-act">
 					<h4>활동 및 자격</h4>
 					<div>

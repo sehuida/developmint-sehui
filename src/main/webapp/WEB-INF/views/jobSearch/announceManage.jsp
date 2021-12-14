@@ -234,6 +234,19 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="contain">
 		<em>구인공고 관리</em>				<!-- if 구인글 없을 때 등록된 구인글이 없습니다. -->
+		<c:if test="${empty list }">
+			<div class="grayBox">
+				<div class="announceHeader">
+					<div class="resiterAnnounce">
+						<p style="margin-bottom: 10px;">대표이력서</p>
+					</div><br><br>
+					<div class="announceTitle" style="margin-bottom: 30px;">
+						<em style="font-size:20px; color: #666;">등록된 구인공고가 없습니다.</em><br>
+						<em style="font-size:20px; color: #666;">아래에 버튼을 눌러 구인공고를 작성해주세요.</em>
+					</div>
+				</div>
+			</div>
+		</c:if>
 	<c:choose>
 		<c:when test="${empty list }">
 			
@@ -291,7 +304,7 @@
 					</li>               
 				</ul>
 			<div class="message">
-				<a href="applicationStatus.do"><button class="companyMessage">지원 신청 현황</button></a>		<!-- 일반회원이 지원신청을 했을 경우 count증가하고 이력서 열람할 수 있도록 하기 -> 서류합격? 버튼 누를 시 웹소켓으로 쪽지 보내기 -->
+				<a href="applicationStatus.do"><button class="companyMessage">지원신청 회원 목록</button></a>		<!-- 일반회원이 지원신청을 했을 경우 count증가하고 이력서 열람할 수 있도록 하기 -> 서류합격? 버튼 누를 시 웹소켓으로 쪽지 보내기 -->
 				<span class="requestCount">1</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
 			</div>
 			<div class="update">
@@ -302,8 +315,8 @@
 			<a href="announceFrm.do"><button class="resumeBtn">구인공고 작성하기</button></a>
 		</div>
 		<div class="resumeExplain">
-			<p>이력서는 최대 10개까지 등록 가능합니다.</p>
-			<p>대표이력서 설정은 1개의 이력서만 가능합니다.</p>
+			<p>구인공고를 등록해보세요.</p>
+			<p>구인공고는 하나만 작성이 가능합니다.</p>
 		</div>
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

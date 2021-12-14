@@ -265,10 +265,22 @@
     	margin: 50px 0px;
     	height: 230px;
     	border: 1px solid #dfdfdf;
+    	overflow: hidden;
     }
     .resumeTitle>a{
     	color: black;
     	text-decoration: none;
+    }
+    .deleteBtn{
+    	float: right;
+    }
+    .deleteBtn>a{
+    	color: #888;
+    	font-size: 12px;
+    	text-decoration: none;
+    	position: relative;
+    	top: -30px;
+    	margin-right: 20px;
     }
 </style>
 <script>
@@ -620,6 +632,9 @@
 									</div>
 								</li>                       
 							</ul>
+							<div class="deleteBtn">
+								<a href="/deleteResume.do?resumeNo=${rs.resumeNo }">삭제하기</a>
+							</div>
 						</div>
 					<%-- </c:if> --%>
 				</c:forEach>

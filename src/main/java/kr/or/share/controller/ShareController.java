@@ -10,4 +10,8 @@ public class ShareController {
 	public String shareList() {
 		return "share/shareList";
 	}
+	@RequestMapping(value="/shareWriteFrm.do")
+	public String shareWriteFrm() {
+		return "share/shareWriteFrm";
+	}
 }

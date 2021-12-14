@@ -73,6 +73,9 @@ public class ResumeService {
 		 return dao.selectAllAnnounce(list); 
 	 }
 	 
+	public int deleteResume(int resumeNo) {
+		return dao.deleteResume(resumeNo);
+	}
 	 
 
 	/*
