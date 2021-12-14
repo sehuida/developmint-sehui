@@ -97,7 +97,7 @@
 									<P>이메일을 기억하셔야 비회원 전용으로 찾기 시 용이합니다. </P> -->
 									<div class="form-group">
 										<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-										<small id="emailHelp" class="form-text text-muted">이메일을 기억하셔야 비회원 전용으로 찾기 시 용이합니다. </small>
+										<small id="emailHelp" class="form-text text-danger">이메일을 기억하셔야 비회원 전용으로 찾기 시 용이합니다. </small>
 									</div>
 								</c:when>
 								<c:otherwise>
@@ -129,19 +129,16 @@
 						    </c:choose>
 							<c:choose>
 								<c:when test="${empty sessionScope.m }">
-									<tr>
-										<th scope="row">비밀번호</th>
-										<td>
-											<input type="password" class="n-input" name="qna_pw" placeholder="4자리이상" required>
-											<P>주의! 비밀번호를 기억하셔야 답변확인이 가능합니다.</P>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row">비밀번호 확인</th>
-										<td>
-											<input type="password" class="n-input" name="reChk" placeholder="4자리이상" required>
-										</td>
-									</tr>
+									<div class="form-group">
+								      <label for="qna_pw" class="form-label mt-4">비밀번호</label>
+								      <input type="password" class="form-control" id="qna_pw" name="qna_pw" placeholder="패스워드를 입력" style="width: 20%">
+								      <small id="emailHelp" class="form-text text-danger">답변확인을 위해 꼭 비밀번호를 기억하세요! </small>
+								    </div>
+									<div class="form-group">
+								      <label for="rePwChk" class="form-label mt-4">비밀번호 확인</label>
+								      <input type="password" class="form-control" id="rePwChk" name="rePwChk" placeholder="패스워드를 다시 입력" style="width: 20%">
+								      <small id="emailHelp" class="form-text text-danger">답변확인을 위해 꼭 비밀번호를 기억하세요! </small>
+								    </div>
 								</c:when>
 							</c:choose>
 						</div>
