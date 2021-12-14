@@ -54,6 +54,7 @@
 	padding : 30px;
 	border: 1px solid #d9d9d9;
 	font-size: 18px;
+	width: 1200px;
 }
 .clickBtn{
 	text-align: center;
@@ -87,6 +88,7 @@
 	margin-top:30px;
 	border: 1px solid #d9d9d9;
 	padding:30px;
+	width: 1200px;
 }
 .comentView>span:first-child {
 	font-weight: bold;

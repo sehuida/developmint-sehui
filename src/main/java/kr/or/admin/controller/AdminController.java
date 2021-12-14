@@ -262,6 +262,12 @@ public class AdminController {
 			model.addAttribute("loc","/contestEnrollMember.do?reqPage=1&date="+date);
 			return "common/msg";
 		}
+		
+		@RequestMapping(value="/companyEnroll.do")
+		public String companyEnroll(Model model) {
+			
+			return "admin/companyEnroll";
+		}
 
 
 }
