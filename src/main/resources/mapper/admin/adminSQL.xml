@@ -517,6 +517,42 @@
 		CM_STATUS = 2
 	</select>
 	
+	<!-- 회사인증 회원 목록 불러오기 -->
+	<select id="certiList" parameterType="map" resultType="cvo">
+		select cc.* 
+		from(
+			select
+				rownum as rnum, c.* from(select 
+				cer_no as cerNo,
+				member_no as memberNo,
+				filepath,
+				approve as apporove
+			from CERTIFICATION 
+			where approve = 'N'
+	        order by cer_no DESC)c)cc
+	    where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 회사인증 전체 회원 수 -->
+	<select id="totalcertiMemberCount" resultType="_int">
+		select count(*) from CERTIFICATION where approve = 'N'
+	</select>
+	
+	<select id="memberInfoList" parameterType="_int" resultType="m">
+		select 
+			member_no as memberNo,
+			member_name as memberName,
+			phone,
+			member_id as memberId,
+			member_pw as memberPw,
+			email,
+			member_type as memberType,
+			enroll_date as enrollDate,
+			filepath,
+			member_grade as memberGrade
+		from member
+		where member_no = ${value}
+	</select>
 	
 </mapper>
 
