@@ -31,7 +31,7 @@ input:focus, textarea:focus {
 .talk-wrap {
 	display: flex;
 	flex-direction: column;
-	padding: 50px;
+	padding: 10px;
 	margin-top: 100px;
 	margin-bottom: 100px;
 	background-color: rgb(250, 250, 250);
@@ -142,8 +142,16 @@ input:focus, textarea:focus {
 				<a href="/gosuRequestCostList.do">견적서</a>
 			</div>
 		</c:if>
-
-		<div class="g-msg">고수에게 요구 사항을 정확하게 전달해주세요!</div>
+		
+		<div class="g-msg">
+		<c:if test="${sessionScope.m.memberType eq 1 }">
+		고수에게 요구사항을 정확하게 전달해 주세요!
+		</c:if>
+		<c:if test="${sessionScope.m.memberType eq 2 }">
+		질문자의 요구사항에 맞게 개발을 진행해 주세요!
+		</c:if>
+		
+		</div>
 
 		<div class="talk-wrap">
 		
@@ -186,19 +194,19 @@ input:focus, textarea:focus {
 									<table>
 										<tr>
 											<th style="text-align: right; width: 150px;"><c:if
-													test="${empty gtl.gosuImg }">
+													test="${empty gtl.memberImg }">
 													<img src="/resources/img/gosu/g_img_basic.png">
-												</c:if> <c:if test="${not empty gtl.writerImg }">
-													<img src="/resources/upload/member/${gtl.writerImg}">
+												</c:if> <c:if test="${not empty gtl.memberImg }">
+													<img src="/resources/upload/member/${gtl.memberImg}">
 												</c:if></th>
 											<th style="font-size: 30px;"><c:choose>
-													<c:when test="${sessionScope.m.memberId ne grpsOne.memberId}">
+													<c:when test="${sessionScope.m.memberType ne 2}">
 														<span style="color: rgb(78, 205, 196);">질문자</span>
 													</c:when>
 													<c:otherwise>
 														<span style="color: rgb(78, 205, 196);">고수</span>
 													</c:otherwise>
-												</c:choose> ${gtl.writerId }</th>
+												</c:choose> ${gtl.memberId }</th>
 											<td
 												style="text-align: right; padding-right: 50px; color: gray;">${gtl.requestProjectDate }</td>
 										</tr>
@@ -229,48 +237,120 @@ input:focus, textarea:focus {
 		<hr>
 		
 		
-		<span style="color: gray; font-size: small;">* 전송할 내용을 아래에
-			입력해주세요<br> * 첨부파일은 한 번에 하나씩만 전송 가능합니다.
-		</span> <br> <br> <br>
-		<div class="talk-sub">
+	<c:choose>
+			<c:when test="${grpsOne.requestProjectSubNum eq 3}">
+				<c:choose>
+					<c:when test="${sessionScope.m.memberType eq 2}">
 
-			<div>
-				<form>
-					<table>
-						<tr>
-							<th>첨부파일</th>
-							<td><input type="file"></td>
-						</tr>
-						<tr>
-							<td colspan="2"><textarea name="" cols="100" rows="10"></textarea></td>
-						</tr>
-						<tr style="text-align: right;">
-							<td colspan="2"><button type="submit"
-									class="btn btn-primary">전송</button></td>
-						</tr>
-					</table>
 
-				</form>
-			</div>
-		</div>
+						<c:choose>
+							<c:when test="${sessionScope.m.memberType eq 2}">
+								테스트 구문 바꾸기 후기 남긴거
+
+
+							</c:when>
+							<c:otherwise>
+							아직 작성된 후기가 없습니다!
+						</c:otherwise>
+						</c:choose>
+
+
+					</c:when>
+					<c:otherwise>
+						<div
+							style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
+							<div>
+								<h2 style="font-weight: 900; width: 100%; text-align: center;">고수님께서
+									개발을 완료하셨습니다!</h2>
+								<br> <br> <span
+									style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">후기 작성하기</span>
+								<br> <br>
+								<table>
+									<tr>
+										<td>진행 과정과 받은 작품에 대해 꼼꼼하게 후기를 남겨주세요!</td>
+									</tr>
+									<tr>
+										<td><textarea cols="70" rows="20"></textarea></td>
+									
+									</tr>
+									<tr>
+										<td style="text-align: right;"><button type="button" class="btn btn-primary"
+												style="font-weight: 900; padding: 10px; margin-left: 10px;">후기
+												작성</button></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+
+					</c:otherwise>
+				</c:choose>
+			</c:when>
+			<c:otherwise>
+				<span style="color: gray; font-size: small;">* 전송할 내용을 아래에
+					입력해주세요<br> * 첨부파일은 한 번에 하나씩만 전송 가능합니다.
+				</span>
+				<br>
+				<br>
+				<br>
+				<div class="talk-sub">
+
+					<div>
+						<table>
+							<tr>
+								<th colspan="2">첨부파일 &nbsp;&nbsp;&nbsp;&nbsp; <input
+									type="file" id="talkFile"></th>
+
+							</tr>
+							<tr>
+								<td colspan="2"><textarea cols="100" rows="10"
+										id="talkContent"></textarea></td>
+							</tr>
+							<tr style="text-align: right;">
+								<c:choose>
+									<c:when test="${sessionScope.m.memberType eq 2}">
+										<td style="text-align: center;">
+											<button type="button" id="talkStopAjax" class="btn btn-info"
+												style="width: 200px;">개발 완료</button>
+										</td>
+										<td style="text-align: center;">
+											<button type="button" id="talkBtnAjax"
+												class="btn btn-primary" style="width: 200px;">전송</button>
+										</td>
+									</c:when>
+									<c:otherwise>
+										<td colspan="2">
+											<button type="button" id="talkBtnAjax"
+												class="btn btn-primary">전송</button>
+										</td>
+									</c:otherwise>
+								</c:choose>
+
+							</tr>
+							<input type="hidden" value="${sessionScope.m.memberNo }"
+								id="writer">
+							<input type="hidden" value="${grpsOne.requestProjectSubNo}" id="requestProjectSubNo">
+						</table>
+					</div>
+				</div>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<script>
-		$("#talkBtnAjax2").click(function() {
+		$("#talkBtnAjax").click(function() {
 			var talkContent = $("#talkContent").val();
-			var writer = $("#writer").val();
-			var feedbackNo = $("#feedbackNo").val();
-
+			var writerNo = $("#writer").val();
+			var requestProjectSubNo = $("#requestProjectSubNo").val();
 			var form = new FormData();
 			var files = $("#talkFile")[0].files[0];
 			console.log(files);
 			form.append("talkFile", files);
 			form.append("talkContent", talkContent);
-			form.append("writer", writer);
-			form.append("feedbackNo", feedbackNo);
+			form.append("writerNo", writerNo);
+			form.append("requestProjectSubNo", requestProjectSubNo);
 
 			$.ajax({
 
-				url : "/talkBtnAjax.do",
+				url : "/talkBtnProjectAjax.do",
 				type : "post",
 				processData : false,
 				contentType : false,
@@ -286,14 +366,14 @@ input:focus, textarea:focus {
 				}
 			});
 		});
-		$("#talkStopAjax2").click(function() {
-			var feedbackNo = $("#feedbackNo").val();
-
+		$("#talkStopAjax").click(function() {
+			var requestProjectSubNo = $("#requestProjectSubNo").val();
+			
 			$.ajax({
 
-				url : "/talkStopAjax.do",
+				url : "/talkStopAjax2.do",
 				data : {
-					"feedbackNo" : feedbackNo
+					"requestProjectSubNo" : requestProjectSubNo
 				},
 				success : function(data) {
 					if (data > 0) {
