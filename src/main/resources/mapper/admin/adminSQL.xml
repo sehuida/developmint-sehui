@@ -517,6 +517,7 @@
 		CM_STATUS = 2
 	</select>
 	
+	
 </mapper>
 
 

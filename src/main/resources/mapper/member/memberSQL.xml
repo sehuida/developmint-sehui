@@ -164,4 +164,20 @@
   <select id="myprojectCount" parameterType="_int" resultType="_int">
   	select count(*) from project where member_no=#{memberNo}
   </select>
+  <select id="projectLikes" parameterType="map" resultType="pjtlike">
+	select * from(
+	select rownum as rnum,pp.* from
+	(select
+	    project_dib_no as projectDib,
+	    project_no as projectNo,
+	    member_no as memberNo,
+		(select  case when  <![CDATA[recruit_end_date <= to_char(sysdate,'yyyy-mm-dd')]]> then '종료'
+		    else recruit_end_date
+		    end as endDate from project pjt where pjt.project_no = pbs.project_no) as endDate,
+	    (select recruit_title from project pjt where pjt.project_no = pbs.project_no) as recruitTitle
+	from project_dibs pbs where member_no=#{memberNo} order by 1)pp) where rnum between #{start} and #{end}  	
+  </select>
+  <select id="projectLikesCnt" parameterType="_int" resultType="_int">
+  	select count(*) from project_dibs where member_no=#{memberNo} 
+  </select>
 </mapper>

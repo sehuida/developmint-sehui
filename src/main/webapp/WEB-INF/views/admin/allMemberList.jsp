@@ -66,8 +66,8 @@
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container" style="margin-top:50px;margin-bottom:100px;">
 		<div class="mainCate">
-		<a href="/adminPage.do" class="cateAtag"><i class="bi bi-chevron-left"></i></a> 
-		<span id="allMember" style="font-weight:bold">전체 회원 조회</span>
+			<a href="/adminPage.do" class="cateAtag"><i class="bi bi-chevron-left"></i></a> 
+			<span id="allMember" style="font-weight:bold">전체 회원 조회</span>
 		</div>
 		<br><br><br>
 	
