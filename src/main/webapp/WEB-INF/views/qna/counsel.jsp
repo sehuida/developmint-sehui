@@ -29,7 +29,7 @@
 				  <div class="modal-dialog" role="document" style="top: 30%">
 				    <div class="modal-content">
 				      <div class="modal-header">
-				        <h5 class="modal-title">비회원Q&A 전용</h5>
+				        <h5 class="modal-title">알림</h5>
 				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 				          <span aria-hidden="true"></span>
 				        </button>
@@ -162,17 +162,15 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script type="text/javascript">
-		
-		var m = '<%=(String)session.getAttribute("m")%>';
+		var memberNo = $("input[name=memberId]").val(); 
 		
 		 $(function(){
-			if("${empty sessionScope.m}"){
+			if(${empty sessionScope.m}){
 				$('#testModal').modal("show");
 				$(".btn_yes").click(function(){
 					location.href ="/loginFrm.do";
 				});
-				
-			}
+			};
 			
 		}); 
 		function cancel() {
@@ -180,12 +178,13 @@
 				history.back();
 			}
 		}
+		/* 비회원일경우  */
 		function qna_add1() {
 			var f1 = $('#f1');
 
 			if($('#f1 [name=category]').val() == '') {
 				alert('문의유형을 선택해 주십시오.');
-				$('#f1 [name=qa_kind]').focus();
+				$('#f1 [name=category]').focus();
 				return false;
 			}
 			if($.trim($('#f1 [name=email]').val()) == '') {
@@ -194,7 +193,7 @@
 			} else {
 				var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 				if(!filter.test($('#f1 [name=email]').val())) {
-					alert('올바른 이메일 형식으로 입력해 주십시오.n);
+					alert('올바른 이메일 형식으로 입력해 주십시오.');
 					return false;
 				}
 			}
@@ -205,21 +204,19 @@
 			}
 			if(!$.trim($('#f1 [name=qnaContent]').val())) {
 				alert('문의내용을 입력해 주십시오.');
-				$('#f1 [name=qa_msg]').focus();
+				$('#f1 [name=qnaContent]').focus();
 				return false;
 			}
 			var pwReg = /^[a-zA-Z0-9]{4,}$/;
 			if($.trim($('#f1 [name=qna_pw]').val()) == ''){
 				alert('비밀번호를 입력해주십시오.');
 				return false;
-			}else {
-				if(!pwReg.test('#f1 [name=qna_pw]')){
+			}
+			if(!pwReg.test($('#f1 [name=qna_pw]').val())){
 					alert('영대소문자/숫자로 4글자 이상 입력해주십시오.');
 					$('#f1 [name=qna_pw]').focus();
 					return false;
-				}
 			}
-
 			$("form").attr("action", "/counsel_save1.do");
 			f1.submit();
 		}
@@ -228,54 +225,28 @@
 		function qna_add2() {
 			var f1 = $('#f1');
 
-			if (f1.data('submitted') === true) {
+			if($('#f1 [name=category]').val() == '') {
+				alert('문의유형을 선택해 주십시오.');
+				$('#f1 [name=category]').focus();
 				return false;
-			} else {
-				f1.data('submitted', true);
 			}
-
-			var qa_msg =stripSpecialCharacters($('#f1 [name=qa_msg]').val());
-
-			try {
-				if($('#f1 [name=qa_kind]').val() == '') {
-					alert('문의유형을 선택해 주십시오.');
-					$('#f1 [name=qa_kind]').focus();
-					throw new Error("invalid");
-				}
-
-
-				if($.trim($('#f1 [name=user_nm]').val()) == '') {
-					alert('작성자를 입력해 주십시오.');
-					$('#f1 [name=user_nm]').focus();
-					throw new Error("invalid");
-				}
-
-				var pattern_kor = /[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-				if(pattern_kor.test($.trim($('#f1 [name=user_nm]').val()))) {
-					alert('작성자를 한글로 입력해 주십시오.');
-					$('#f1 [name=user_nm]').focus();
-					throw new Error("invalid");
-				}
-
-
-				if($.trim($('#f1 [name=subject]').val()) == '') {
-					alert('제목을 입력해 주십시오.');
-					$('#f1 [name=subject]').focus();
-					throw new Error("invalid");
-				}
-
-				if(!$.trim($('#f1 [name=qa_msg]').val())) {
-					alert('문의내용을 입력해 주십시오.');
-					$('#f1 [name=qa_msg]').focus();
-					throw new Error("invalid");
-				}
-
-				
-			} catch (e) {
-				f1.data('submitted', false);
+			if($.trim($('#f1 [name=memberId]').val()) == '') {
+				alert('작성자를 입력해 주십시오.');
+				$('#f1 [name=memberId]').focus();
+				return false;
+			}
+			if($.trim($('#f1 [name=qnaTitle]').val()) == '') {
+				alert('제목을 입력해 주십시오.');
+				$('#f1 [name=qnaTitle]').focus();
+				return false;
+			}
+			if(!$.trim($('#f1 [name=qnaContent]').val())) {
+				alert('문의내용을 입력해 주십시오.');
+				$('#f1 [name=qnaContent]').focus();
 				return false;
 			}
 
+			
 			// 파일 업로드 컨텐츠 넣기
 			var file_contents = "";
 			$.each($('#file_show li'), function(index, item) {
@@ -293,6 +264,7 @@
 			$("form").attr("action", "/counsel_save2.do");
 			f1.submit();
 		}
+		
 		function uploadImage() {
 			$("#file_message").text('').hide();
 			var ff = $('#upload_form').get(0);
