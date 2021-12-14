@@ -37,7 +37,7 @@
 				      <div class="modal-body">
 				        <p>현재 로그인이 되어있지 않습니다.</p>
 				        <p>로그인 후 1:1 Q&A 진행하시겠습니까?</p>
-				        <p>* 아니요 선택시 비회원Q&A로 진행됩니다.</p>
+				        <p class="text-danger">*'아니요'선택 시 비회원 전용 Q&A로 진행되며 비밀번호를 기억하셔야 합니다.</p>
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-primary btn_yes">예</button>
@@ -48,83 +48,102 @@
 				</div>
 			</div>
 			<!-- 모달 끝  -->
-			<form action="/counsel_save.do" method="post" enctype="multipart/form-data" id="f1" name="f1">
+			<form  method="post" enctype="multipart/form-data" id="f1" name="f1">
 				<div class="contents">
 					<!-- 제목 -->
-					<h3>1:1 Q&A</h3>
+					<c:choose>
+						<c:when test="${empty sessionScope.m }">
+							<h3>비회원 1:1 Q&A</h3>
+						</c:when>
+						<c:otherwise>
+							<h3>1:1 Q&A</h3>
+						</c:otherwise>
+					</c:choose>
 					<!-- 주의사항 -->
 					<ul>
-						<li>Q&A 내 상담내역은은 고객센터>내 상담내역에서 확인하실 수 있습니다.</li>
-						<li>프로젝트 정보 및 공모전 관련 문의는 해당 문의에 남기셔야 빠른 답변이 가능합니다.</li>
+						<li class="text-danger">Q&A 내 상담내역은은 <a href="" style="display: inline-block;">공지사항</a> > <a href="" style="display: inline-block;">상담내역</a>에서 확인하실 수 있습니다.</li>
+						<li class="text-danger">프로젝트 정보 및 공모전 관련 문의는 해당 문의에 남기셔야 빠른 답변이 가능합니다.</li>
 						<li>사기접수시 비회원으로 문의하시면 정보보호로 인해 일부만 확인가능하십니다.</li>
 						<li>취소/신청/게시물보기는 마이페이지에서 확인 하실 수 있습니다.</li>
+						<li>로그인 후 이용하실경우 첨부파일을 넣을 수가 있습니다.</li>
 					</ul>
 					<!-- 폼돌아가는구간 -->
 					<div class="section_form">
 						<div class="harf_area">
 							<header class="n-section-title">
-								<h2 class="tit">문의 작성</h2>
+								<h3 class="tit">문의 작성</h3>
 							</header>
-							<table class="n-table table-row">
-								<tbody>
+							<div class="form-group">
+						     	<label for="category" class="form-label mt-4">문의유형</label>
+							    	<select class="form-select" id="category" name="category" required>
+								      	<option value="">문의유형 선택</option>
+										<option value="7">로그인관련</option>
+										<option value="8">계정관련</option>
+										<option value="9">결제관련</option>
+										<option value="10">환불관련</option>
+										<option value="11">커뮤니티관련</option>
+										<option value="12">공모전관련</option>
+										<option value="13">구인잡관련</option>
+										<option value="14">기타 문의</option>
+										<option value="21">신고</option>
+										<option value="22">기능/작동 오류</option>
+										<option value="20">이벤트</option>
+						     		</select>
+						  	</div>
+							<c:choose>
+								<c:when test="${empty sessionScope.m }">
+									<label for="email" class="form-label mt-4" scope="row" >작성자</label>
+									<!-- <input type="email" class="n-input" name="email" placeholder="예)examEmail@gmail.com" required>
+									<P>이메일을 기억하셔야 비회원 전용으로 찾기 시 용이합니다. </P> -->
+									<div class="form-group">
+										<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+										<small id="emailHelp" class="form-text text-muted">이메일을 기억하셔야 비회원 전용으로 찾기 시 용이합니다. </small>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<label for="memberId" class="form-label mt-4" scope="row" >작성자</label>
+									<div class="form-group">
+										<input type="text" class="n-input form-control" id="memberId" name="memberId" value="${sessionScope.m.memberId }" readonly>
+										<small id="emailHelp" class="form-text text-muted">답변확인은 <a href="" style="display: inline-block;">공지사항</a> > <a href="" style="display: inline-block;">내 Q & A</a>로 확인하실수 있습니다.</small>
+									</div>
+								</c:otherwise>
+							</c:choose>
+							<div class="form-group">
+							  <label class="col-form-label mt-4" for="qnaTitle" scope="row">제목</label>
+							  <input type="text" class="form-control" value="" placeholder="제목을 입력해주세요." id="qnaTitle" name="qnaTitle" required>
+							</div>
+							<div class="form-group">
+						      <label for="qnaContent" class="form-label mt-4" scope="row">문의내용</label>
+						      <textarea class="form-control" id="qnaContent" name="qnaContent" cols="100" rows="100" placeholder="내용을 입력해주세요." required style="resize: none;"></textarea>
+						    </div>
+						    <c:choose>
+						    	<c:when test="${not empty sessionScope.m }">
+								    <div class="form-group">
+								    	<label scope="row">사진</label>
+								    	<ul class="file_show" id="file_show">
+																								</ul>
+										<button type="button" class="btn-file" onclick="$('#Filedata').click();">파일 선택</button>
+										<span id="file_message" style="display: none;color: red;font-weight: bold;"></span>
+								    </div>
+						    	</c:when>
+						    </c:choose>
+							<c:choose>
+								<c:when test="${empty sessionScope.m }">
 									<tr>
-										<th scope="row">문의유형</th>
+										<th scope="row">비밀번호</th>
 										<td>
-	                                        <div class="bg-select">
-												<select name="qa_kind">
-													<option value="">문의유형 선택</option>
-													<option value="7">로그인관련</option>
-													<option value="8">계정관련</option>
-													<option value="9">결제관련</option>
-													<option value="10">환불관련</option>
-													<option value="11">커뮤니티관련</option>
-													<option value="12">공모전관련</option>
-													<option value="13">구인잡관련</option>
-													<option value="14">기타 문의</option>
-													<option value="21">신고</option>
-													<option value="22">기능/작동 오류</option>
-													<option value="20">이벤트</option>
-												</select>
-											</div>
+											<input type="password" class="n-input" name="qna_pw" placeholder="4자리이상" required>
+											<P>주의! 비밀번호를 기억하셔야 답변확인이 가능합니다.</P>
 										</td>
 									</tr>
 									<tr>
-										<th scope="row">작성자</th>
+										<th scope="row">비밀번호 확인</th>
 										<td>
-											<c:choose>
-												<c:when test="${empty sessionScope.m }">
-													<input type="email" class="n-input" name="email" placeholder="예)examEmail@gmail.com">
-												</c:when>
-												<c:otherwise>
-													<input type="text" class="n-input" name="user_nm" value="${sessionScope.m.memberId }" >
-												</c:otherwise>
-											</c:choose>
-											
+											<input type="password" class="n-input" name="reChk" placeholder="4자리이상" required>
 										</td>
 									</tr>
-									<tr>
-										<th scope="row">제목</th>
-										<td>
-											<input type="text" class="n-input" name="subject" value="" placeholder="제목을 입력해주세요.">
-										</td>
-									</tr>
-									<tr class="n-same-row">
-										<th scope="row">문의내용</th>
-										<td>
-											<textarea name="qa_msg" cols="100" rows="100" class="n-input" placeholder="내용을 입력해주세요."></textarea>
-										</td>
-									</tr>
-									<tr class="n-same-row">
-										<th scope="row">사진</th>
-										<td class="file-upload">
-											<ul class="file_show" id="file_show">
-																						</ul>
-											<button type="button" class="btn-file" onclick="$('#Filedata').click();">파일 선택</button>
-											<span id="file_message" style="display: none;color: red;font-weight: bold;"></span>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+								</c:when>
+							</c:choose>
 						</div>
 						<!-- faq 오른쪽 -->
 						<div id="faq_list" class="harf_area"></div>
@@ -132,8 +151,17 @@
 					<!-- 폼돌아가는구간 끝  -->
 					<!-- 버튼 -->
 					<div class="n-btn-group">
-						<a href="javascript:void(0)" onClick="cancel(); return false;" class="n-btn btn-lighter">취소</a>
-						<a href="javascript:void(0)" onClick="qna_add(); return false;" class="n-btn btn-accent">작성하기</a>
+						<a href="javascript:void(0)" onClick="cancel(); return false;" class="btn btn-outline-secondary">취소</a>
+						<c:choose>
+							<c:when test="${empty sessionScope.m }">
+								<a href="javascript:void(0)" onClick="qna_add1(); return false;" class="btn btn-primary">작성하기</a>
+							</c:when>
+							<c:otherwise>
+								<a href="javascript:void(0)" onClick="qna_add2(); return false;" class="btn btn-primary">작성하기</a>
+							</c:otherwise>
+						</c:choose>
+						
+						
 					</div>
 				</div>
 			</form>
@@ -160,7 +188,7 @@
 				history.back();
 			}
 		}
-		function qna_add() {
+		function qna_add1() {
 			var f1 = $('#f1');
 
 			if (f1.data('submitted') === true) {
@@ -205,16 +233,7 @@
 					throw new Error("invalid");
 				}
 
-				// 금지어 체크
-				// var txt = $('form[name=f1] [name=subject]').val() +'|'+ $('form[name=f1] [name=qa_msg]').val();
-				if(!chkBlackKeyword($('form[name=f1] [name=subject]').val())) {
-					$('form[name=f1] [name=subject]').focus();
-					throw new Error("invalid");
-				}
-				if(!chkBlackKeyword($('form[name=f1] [name=qa_msg]').val())) {
-					$('form[name=f1] [name=qa_msg]').focus();
-					throw new Error("invalid");
-				}
+				
 			} catch (e) {
 				f1.data('submitted', false);
 				return false;
@@ -233,10 +252,116 @@
 
 			var contents = qa_msg + file_contents;
 			$('#f1 [name=qa_msg]').val(contents);
-
+			
+			$("form").attr("action", "/counsel_save1.do");
 			f1.submit();
 		}
+		function qna_add2() {
+			var f1 = $('#f1');
 
+			if (f1.data('submitted') === true) {
+				return false;
+			} else {
+				f1.data('submitted', true);
+			}
+
+			var qa_msg =stripSpecialCharacters($('#f1 [name=qa_msg]').val());
+
+			try {
+				if($('#f1 [name=qa_kind]').val() == '') {
+					alert('문의유형을 선택해 주십시오.');
+					$('#f1 [name=qa_kind]').focus();
+					throw new Error("invalid");
+				}
+
+
+				if($.trim($('#f1 [name=user_nm]').val()) == '') {
+					alert('작성자를 입력해 주십시오.');
+					$('#f1 [name=user_nm]').focus();
+					throw new Error("invalid");
+				}
+
+				var pattern_kor = /[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+				if(pattern_kor.test($.trim($('#f1 [name=user_nm]').val()))) {
+					alert('작성자를 한글로 입력해 주십시오.');
+					$('#f1 [name=user_nm]').focus();
+					throw new Error("invalid");
+				}
+
+
+				if($.trim($('#f1 [name=subject]').val()) == '') {
+					alert('제목을 입력해 주십시오.');
+					$('#f1 [name=subject]').focus();
+					throw new Error("invalid");
+				}
+
+				if(!$.trim($('#f1 [name=qa_msg]').val())) {
+					alert('문의내용을 입력해 주십시오.');
+					$('#f1 [name=qa_msg]').focus();
+					throw new Error("invalid");
+				}
+
+				
+			} catch (e) {
+				f1.data('submitted', false);
+				return false;
+			}
+
+			// 파일 업로드 컨텐츠 넣기
+			var file_contents = "";
+			$.each($('#file_show li'), function(index, item) {
+				var img_src = $(this).children('img').attr('src');
+				file_contents += '<br/><img src="'+ img_src +'"/>';
+			});
+
+			if(file_contents){
+				$('#f1 [name=image_yn]').val('Y');
+			}
+
+			var contents = qa_msg + file_contents;
+			$('#f1 [name=qa_msg]').val(contents);
+			
+			$("form").attr("action", "/counsel_save2.do");
+			f1.submit();
+		}
+		function uploadImage() {
+			$("#file_message").text('').hide();
+			var ff = $('#upload_form').get(0);
+			var formData = new FormData(ff);
+
+			$.ajax({
+				cache : false,
+				url : "/fileupload.do",
+				processData: false,
+				contentType: false,
+				type : 'POST',
+				data : formData,
+				success : function(response) {
+					try {
+						var callback = response;
+						if (matches = response.replace(/(?:\r\n|\r|\n)/g, '').match(/\<script\>(.*)\<\/script\>/)) {
+							callback = $.trim(matches[1]);
+						}
+						eval(callback);
+					} catch (e) {
+					}
+				}
+			});
+
+			ff.reset();
+		}
+
+		function SetImage(result, message, file_url) {
+			var ff = document.upload_form;
+
+			if(result) {
+				var image_tag = "<li><img src=\"" + file_url + "\" /><a class=\"del-image\" href=\"javascript:void(0);\"><i class=\"ic-14-line-close ic-white\"></i></a></li>";
+				ff.files.value += (ff.files.value != "") ? "," + file_url : file_url;
+				$("#file_show").append(image_tag);
+			} else {
+				$("#file_message").text(message).show();
+			}
+		}
 	</script>
 </body>
 </html>
