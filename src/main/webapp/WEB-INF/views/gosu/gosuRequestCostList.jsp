@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <style>
 .container * {
@@ -129,6 +130,7 @@ input:focus, textarea:focus {
 	border: none;
 	background: transparent;
 	text-align: center;
+	margin-top:20px;margin-bottom:20px;
 }
 
 .hrm-content td, .hrm-content th {
@@ -148,7 +150,7 @@ input:focus, textarea:focus {
 			<c:choose>
 				<c:when test="${empty memberRequestCostList }">
 					<span
-						style="font-size: 30px; font-weight: 900; color: gray; margin-top: 100px;">아직
+						style="font-size: 30px; font-weight: 900; color: gray; margin-top: 100px; margin-bottom: 100px;">아직
 						도착한 견적서가 없어요!</span>
 
 				</c:when>
@@ -156,37 +158,37 @@ input:focus, textarea:focus {
 					<table>
 
 
-						<c:forEach items="${memberRequestCostList }" var="mrcl"
-							varStatus="i">
-							<tr>
-								<td>
-									<table class="g-one-tbl">
-										<tr>
-											<th rowspan="3"><c:if test="${empty mrcl.gosuImg }">
-													<img src="/resources/img/gosu/g_img_basic.png">
-												</c:if> <c:if test="${not empty mrcl.gosuImg }">
-													<img src="/resources/upload/member/${mrcl.gosuImg}">
-												</c:if></th>
-											<th><span style="color: rgb(78, 205, 196);">고수</span>${mrcl.gosuId }</th>
-											<td style="text-align: right;">${mrcl.costDate }</td>
-										</tr>
-										<tr>
-											<td colspan="2" style="max-width: 1000px;">${mrcl.costContentBr }</td>
 
-										</tr>
-										<tr>
-											<th>비용 ${mrcl.cost}원</th>
-											<td style="display: flex; justify-content: right;">
-												<button type="button"
-													onclick="gosuProjectJSPAjax(${mrcl.costNo});"
-													class="btn btn-primary" style="width: 150px;">진행하기</button>
-											</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
+							<c:forEach items="${memberRequestCostList }" var="mrcl"
+								varStatus="i">
+								<tr>
+									<td>
+										<table class="g-one-tbl">
+											<tr>
+												<th rowspan="3"><c:if test="${empty mrcl.gosuImg }">
+														<img src="/resources/img/gosu/g_img_basic.png">
+													</c:if> <c:if test="${not empty mrcl.gosuImg }">
+														<img src="/resources/upload/member/${mrcl.gosuImg}">
+													</c:if></th>
+												<th><span style="color: rgb(78, 205, 196);padding:0; padding-right: 10px;">고수</span>${mrcl.gosuId }</th>
+												<td style="text-align: right;">${mrcl.costDate }</td>
+											</tr>
+											<tr>
+												<td colspan="2" style="max-width: 1000px;">${mrcl.costContentBr }</td>
+
+											</tr>
+											<tr>
+												<th>비용 ${mrcl.cost}원</th>
+												<td style="display: flex; justify-content: right;">
+													<button type="button"
+														onclick="gosuProjectJSPAjax(${mrcl.costNo});"
+														class="btn btn-primary" style="width: 150px;">진행하기</button>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
 						</c:forEach>
-
 					</table>
 
 				</c:otherwise>
@@ -210,7 +212,7 @@ input:focus, textarea:focus {
 							</tr>
 							<tr>
 								<th>내용</th>
-								<td><input type="text" id="contentSend" disabled></td>
+								<td><textarea id="contentSend" disabled style="text-align:center;  font-size: 15px; padding:10px; width: 100%; margin-top:20px;margin-bottom:20px;"></textarea></td>
 							</tr>
 							<tr>
 								<th>견적비용</th>

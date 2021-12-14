@@ -205,5 +205,9 @@ public class GosuDao {
 		return (ArrayList<GosuRequestProjectSub>)list;
 	}
 
+	public int insertGosuRequestProject(GosuRequestProject grp) {
+		return sqlSession.insert("gosu.insertGosuRequestProject",grp);
+	}
+
 
 }

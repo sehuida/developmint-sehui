@@ -365,7 +365,9 @@
 		memberId
 		from gosu_request_cost
 		where member_id
-		=#{memberId}order by
+		=#{memberId}
+		AND cost_no NOT IN(select cost_no from gosu_request_project_sub)
+		order by
 		1
 		desc )r)rr
 	</select>
@@ -418,84 +420,142 @@
 	<select id="selectGosuRequestProjectOne" resultType="grp"
 		parameterType="_int">
 		select
-		REQUEST_PROJECT_NO as requestProjectNo,
-		MEMBER_NO
+		pro.REQUEST_PROJECT_NO as requestProjectNo,
+		pro.MEMBER_NO
 		as memberNo,
-		REQUEST_PROJECT_CONTENT as requestProjectContent,
-		REQUEST_PROJECT_DATE as requestProjectDate,
-		FILEPATH,
-		FILENAME,
-		REQUEST_PROJECT_SUB_NO as requestProjectSubNo
-		from gosu_request_project
-		where REQUEST_PROJECT_SUB_NO
-		=#{rpsNo}
+		pro.REQUEST_PROJECT_CONTENT as requestProjectContent,
+		pro.REQUEST_PROJECT_DATE
+		as requestProjectDate,
+		pro.FILEPATH,
+		pro.FILENAME,
+		pro.REQUEST_PROJECT_SUB_NO as
+		requestProjectSubNo,
+		(select member_id from member where
+		member_no = pro.member_no) as memberId,
+		(select filepath from member
+		where member_no = pro.member_no) as
+		memberImg
+		from(select * from
+		gosu_request_project where
+		REQUEST_PROJECT_SUB_NO=#{rpsNo})pro
+
 	</select>
 	<select id="selectGosuRequestProjectSub" resultType="grps"
 		parameterType="_int">
-		select 
-		(select member_id from member where member_no = request.request_writer_no) AS requestWriterId,
-		(select filepath from member where member_no = request.request_writer_no) as requestWriterImg,
+		select
+		(select member_id from member where member_no =
+		request.request_writer_no) AS
+		requestWriterId,
+		(select filepath from
+		member where member_no =
+		request.request_writer_no) as
+		requestWriterImg,
 		sub.REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
-		sub.REQUEST_NO as requestNo,
+		sub.REQUEST_NO as
+		requestNo,
 		sub.COST_NO as costNo,
-		sub.REQUEST_PROJECT_SUB_NUM as requestProjectSubNum,
-		sub.REQUEST_PROJECT_SUB_DATE as requestProjectSubDate,
-		(select member_id from member where member_no = cost.gosu_no) as gosuId,
-		(select filepath from member where member_no = cost.gosu_no) as gosuImg
+		sub.REQUEST_PROJECT_SUB_NUM as
+		requestProjectSubNum,
+		sub.REQUEST_PROJECT_SUB_DATE as
+		requestProjectSubDate,
+		(select member_id
+		from member where member_no =
+		cost.gosu_no) as gosuId,
+		(select filepath
+		from member where member_no =
+		cost.gosu_no) as gosuImg
 		from
 		gosu_request_project_sub sub
-		LEFT JOIN gosu_request request
+		LEFT JOIN
+		gosu_request request
 		ON
 		sub.request_no = request.request_no
-		LEFT JOIN gosu_request_COST cost
+		LEFT JOIN
+		gosu_request_COST cost
 		ON
 		sub.cost_no = cost.cost_no
-		WHERE sub.REQUEST_PROJECT_SUB_NO = #{rpsNo}
+		WHERE
+		sub.REQUEST_PROJECT_SUB_NO = #{rpsNo}
 
 	</select>
 	<select id="selectGosuRequestProjectSubList" resultType="grps"
 		parameterType="_int">
-		select 
-		(select member_id from member where member_no = request.request_writer_no) AS requestWriterId,
-		(select filepath from member where member_no = request.request_writer_no) as requestWriterImg,
+		select
+		(select member_id from member where member_no =
+		request.request_writer_no) AS
+		requestWriterId,
+		(select filepath from
+		member where member_no =
+		request.request_writer_no) as
+		requestWriterImg,
 		sub.REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
-		sub.REQUEST_NO as requestNo,
+		sub.REQUEST_NO as
+		requestNo,
 		sub.COST_NO as costNo,
-		sub.REQUEST_PROJECT_SUB_NUM as requestProjectSubNum,
-		sub.REQUEST_PROJECT_SUB_DATE as requestProjectSubDate,
-		(select member_id from member where member_no = cost.gosu_no) as gosuId,
-		(select filepath from member where member_no = cost.gosu_no) as gosuImg
+		sub.REQUEST_PROJECT_SUB_NUM as
+		requestProjectSubNum,
+		sub.REQUEST_PROJECT_SUB_DATE as
+		requestProjectSubDate,
+		(select member_id
+		from member where member_no =
+		cost.gosu_no) as gosuId,
+		(select filepath
+		from member where member_no =
+		cost.gosu_no) as gosuImg
 		from
 		gosu_request_project_sub sub
-		LEFT JOIN gosu_request request
+		LEFT JOIN
+		gosu_request request
 		ON
 		sub.request_no = request.request_no
-		LEFT JOIN gosu_request_COST cost
+		LEFT JOIN
+		gosu_request_COST cost
 		ON
 		sub.cost_no = cost.cost_no
-		WHERE request.request_writer_no =#{memberNo}
-		
+		WHERE
+		request.request_writer_no =#{memberNo}
+
 	</select>
 	<select id="selectGosuRequestProjectSubList2" resultType="grps"
 		parameterType="_int">
-		select 
-		(select member_id from member where member_no = request.request_writer_no) AS requestWriterId,
-		(select filepath from member where member_no = request.request_writer_no) as requestWriterImg,
+		select
+		(select member_id from member where member_no =
+		request.request_writer_no) AS
+		requestWriterId,
+		(select filepath from
+		member where member_no =
+		request.request_writer_no) as
+		requestWriterImg,
 		sub.REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
-		sub.REQUEST_NO as requestNo,
+		sub.REQUEST_NO as
+		requestNo,
 		sub.COST_NO as costNo,
-		sub.REQUEST_PROJECT_SUB_NUM as requestProjectSubNum,
-		sub.REQUEST_PROJECT_SUB_DATE as requestProjectSubDate,
-		(select member_id from member where member_no = cost.gosu_no) as gosuId,
-		(select filepath from member where member_no = cost.gosu_no) as gosuImg
+		sub.REQUEST_PROJECT_SUB_NUM as
+		requestProjectSubNum,
+		sub.REQUEST_PROJECT_SUB_DATE as
+		requestProjectSubDate,
+		(select member_id
+		from member where member_no =
+		cost.gosu_no) as gosuId,
+		(select filepath
+		from member where member_no =
+		cost.gosu_no) as gosuImg
 		from
 		gosu_request_project_sub sub
-		LEFT JOIN gosu_request request
+		LEFT JOIN
+		gosu_request request
 		ON
 		sub.request_no = request.request_no
-		LEFT JOIN gosu_request_COST cost
+		LEFT JOIN
+		gosu_request_COST cost
 		ON
 		sub.cost_no = cost.cost_no
-		WHERE cost.gosu_no= #{memberNo} 
+		WHERE cost.gosu_no=
+		#{memberNo}
 	</select>
+	<insert id="insertGosuRequestProject" parameterType="grp">
+		insert into
+		gosu_request_project
+		values(GOSU_REQUEST_PROJECT_SEQ.nextval,#{memberNo},#{requestProjectContent},to_char(sysdate,'yyyy-mm-dd'),#{filepath},#{filename},#{requestProjectSubNo})
+	</insert>
 </mapper>
