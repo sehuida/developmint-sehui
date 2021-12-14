@@ -146,4 +146,22 @@
 		from project_Entry pte where member_no=#{memberNo}
 		order by 1 desc)pt) where rnum between #{start} and #{end}
   </select>
+  <select id="crewListCount" parameterType="_int" resultType="_int">
+  	select count(*) from project_entry where member_no=#{memberNo}
+  </select>
+  <select id="myproject" parameterType="map" resultType="pjtpvo">
+		select * from (
+		select rownum as rnum,myt.* from
+		(select 
+		        project_no as projectNo,
+		        recruit_title as recruitTitle,
+		        case when  <![CDATA[recruit_end_date <= to_char(sysdate,'yyyy-mm-dd')]]> then '종료'
+		        else recruit_end_date
+		        end as endDate,
+		        (select count(*) as cnt from project_entry pje where pjt.project_no = pje.project_no) as entryCount
+		from project pjt where project_no in (select project_no as projectNo from project where member_no=#{memberNo}) order by 1 desc)myt) where rnum between #{start} and #{end}  	
+  </select>
+  <select id="myprojectCount" parameterType="_int" resultType="_int">
+  	select count(*) from project where member_no=#{memberNo}
+  </select>
 </mapper>

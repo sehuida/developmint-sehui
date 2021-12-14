@@ -432,21 +432,70 @@
 	</select>
 	<select id="selectGosuRequestProjectSub" resultType="grps"
 		parameterType="_int">
+		select 
+		(select member_id from member where member_no = request.request_writer_no) AS requestWriterId,
+		(select filepath from member where member_no = request.request_writer_no) as requestWriterImg,
+		sub.REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
+		sub.REQUEST_NO as requestNo,
+		sub.COST_NO as costNo,
+		sub.REQUEST_PROJECT_SUB_NUM as requestProjectSubNum,
+		sub.REQUEST_PROJECT_SUB_DATE as requestProjectSubDate,
+		(select member_id from member where member_no = cost.gosu_no) as gosuId,
+		(select filepath from member where member_no = cost.gosu_no) as gosuImg
+		from
+		gosu_request_project_sub sub
+		LEFT JOIN gosu_request request
+		ON
+		sub.request_no = request.request_no
+		LEFT JOIN gosu_request_COST cost
+		ON
+		sub.cost_no = cost.cost_no
+		WHERE sub.REQUEST_PROJECT_SUB_NO = #{rpsNo}
 
-		select
-		a.REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
-		a.REQUEST_NO as requestNo,
-		a.COST_NO as costNo,
-		a.REQUEST_PROJECT_SUB_NUM as
-		requestProjectSubNum,
-		a.REQUEST_PROJECT_SUB_DATE as requestProjectSubDate,
-		B.member_id as memberId
-		FROM
-		gosu_request_project_sub A
-		JOIN gosu_request_cost B
-		ON A.cost_no =
-		B.cost_no
-		WHERE A.REQUEST_PROJECT_SUB_NO = #{rpsNo}
-
+	</select>
+	<select id="selectGosuRequestProjectSubList" resultType="grps"
+		parameterType="_int">
+		select 
+		(select member_id from member where member_no = request.request_writer_no) AS requestWriterId,
+		(select filepath from member where member_no = request.request_writer_no) as requestWriterImg,
+		sub.REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
+		sub.REQUEST_NO as requestNo,
+		sub.COST_NO as costNo,
+		sub.REQUEST_PROJECT_SUB_NUM as requestProjectSubNum,
+		sub.REQUEST_PROJECT_SUB_DATE as requestProjectSubDate,
+		(select member_id from member where member_no = cost.gosu_no) as gosuId,
+		(select filepath from member where member_no = cost.gosu_no) as gosuImg
+		from
+		gosu_request_project_sub sub
+		LEFT JOIN gosu_request request
+		ON
+		sub.request_no = request.request_no
+		LEFT JOIN gosu_request_COST cost
+		ON
+		sub.cost_no = cost.cost_no
+		WHERE request.request_writer_no =#{memberNo}
+		
+	</select>
+	<select id="selectGosuRequestProjectSubList2" resultType="grps"
+		parameterType="_int">
+		select 
+		(select member_id from member where member_no = request.request_writer_no) AS requestWriterId,
+		(select filepath from member where member_no = request.request_writer_no) as requestWriterImg,
+		sub.REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
+		sub.REQUEST_NO as requestNo,
+		sub.COST_NO as costNo,
+		sub.REQUEST_PROJECT_SUB_NUM as requestProjectSubNum,
+		sub.REQUEST_PROJECT_SUB_DATE as requestProjectSubDate,
+		(select member_id from member where member_no = cost.gosu_no) as gosuId,
+		(select filepath from member where member_no = cost.gosu_no) as gosuImg
+		from
+		gosu_request_project_sub sub
+		LEFT JOIN gosu_request request
+		ON
+		sub.request_no = request.request_no
+		LEFT JOIN gosu_request_COST cost
+		ON
+		sub.cost_no = cost.cost_no
+		WHERE cost.gosu_no= #{memberNo} 
 	</select>
 </mapper>
