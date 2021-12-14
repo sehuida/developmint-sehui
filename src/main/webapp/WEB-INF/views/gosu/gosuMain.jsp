@@ -253,14 +253,18 @@ to {
 
 .g-statusContent {
 	display: flex;
-	width: 900px;
+	width: 1100px;
 	margin: 0 auto;
 	flex-wrap: wrap;
 }
 
 .g-statusContent>a {
 	width: 350px;
-	margin: 50px;
+	margin-right: 100px;
+	margin-left: 100px;
+	margin-bottom: 50px;
+	margin-top: 50px;
+	
 	border-width: 2px;
 }
 
@@ -524,7 +528,7 @@ to {
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
-							<span style="font-size: 20px;">아직 신청한 내역이 없습니다!</span>
+							<span style="font-size: 20px;margin-left:100px;">아직 신청한 내역이 없습니다!</span>
 						</c:otherwise>
 					</c:choose>
 
@@ -562,7 +566,7 @@ to {
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<span style="font-size: 20px;">아직 신청받은 내역이 없습니다!</span>
+								<span style="font-size: 20px; margin-left:100px;">아직 신청받은 내역이 없습니다!</span>
 							</c:otherwise>
 						</c:choose>
 
@@ -574,28 +578,31 @@ to {
 						style="color: rgb(78, 205, 196)">고수</span> 매칭
 				</h4>
 				<div class="g-statusContent">
-					<a href="/gosuProject.do">
+				
+				<c:forEach items="${grpsList }" var="grpsl" varStatus="i">
+					<a href="/gosuProject.do?rpsNo=${grpsl.requestProjectSubNo }">
 						<table class="g-sc-tbl card bg-info mb-3">
 							<tboay style="min-width:342px;max-width:342px;">
 
 							<tr>
+								<c:if test="${sessionScope.m.memberType eq 1 }">
+	
 								<th>고수</th>
-								<td><span style="color: white;">아이디(memberId)</span></td>
+								<td><span style="color: white;">${grpsl.gosuId }</span></td>
+								</c:if>
+								<c:if test="${sessionScope.m.memberType eq 2 }">
+								
+								<th>질문자</th>
+								<td><span style="color: white;">${grpsl.requestWriterId }</span></td>
+								</c:if>
+								
 							</tr>
 
 							</tboay>
 						</table>
-					</a> <a href="/gosuProject.do">
-						<table class="g-sc-tbl card bg-info mb-3">
-							<tboay style="min-width:342px;max-width:342px;">
-							<tr>
-								<th>고수</th>
-								<td><span style="color: white;">아이디(memberId)</span></td>
-							</tr>
-
-							</tboay>
-						</table>
-					</a>
+					</a> 
+					</c:forEach>
+				
 				</div>
 			</div>
 		</div>

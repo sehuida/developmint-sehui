@@ -242,4 +242,17 @@ public class GosuService {
 		return grps;
 	}
 
+	public ArrayList<GosuRequestProjectSub> selectGosuRequestProjectSubList(int memberNo) {
+		ArrayList<GosuRequestProjectSub> list = dao.selectGosuRequestProjectSubList(memberNo);
+	
+		return list;
+	}
+
+	public ArrayList<GosuRequestProjectSub> selectGosuRequestProjectSubList2(int memberNo) {
+		ArrayList<GosuRequestProjectSub> list = dao.selectGosuRequestProjectSubList2(memberNo);
+	
+		return list;
+	}
+	
+
 }
