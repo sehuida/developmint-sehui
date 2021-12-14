@@ -54,11 +54,10 @@
 					<h3>1:1 Q&A</h3>
 					<!-- 주의사항 -->
 					<ul>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
+						<li>Q&A 내 상담내역은은 고객센터>내 상담내역에서 확인하실 수 있습니다.</li>
+						<li>프로젝트 정보 및 공모전 관련 문의는 해당 문의에 남기셔야 빠른 답변이 가능합니다.</li>
+						<li>사기접수시 비회원으로 문의하시면 정보보호로 인해 일부만 확인가능하십니다.</li>
+						<li>취소/신청/게시물보기는 마이페이지에서 확인 하실 수 있습니다.</li>
 					</ul>
 					<!-- 폼돌아가는구간 -->
 					<div class="section_form">
@@ -74,13 +73,13 @@
 	                                        <div class="bg-select">
 												<select name="qa_kind">
 													<option value="">문의유형 선택</option>
-													<option value="8">교환</option>
-													<option value="9">환불</option>
-													<option value="10">취소(출하 전 취소)</option>
-													<option value="11">배송</option>
-													<option value="20">A/S</option>
-													<option value="12">주문/결제</option>
-													<option value="15">회원 관련</option>
+													<option value="8">로그인관련</option>
+													<option value="9">계정관련</option>
+													<option value="10">결제관련</option>
+													<option value="11">환불관련</option>
+													<option value="20">커뮤니티관련</option>
+													<option value="12">공모전관련</option>
+													<option value="15">구인잡관련</option>
 													<option value="16">기타 문의</option>
 													<option value="17">신고</option>
 													<option value="19">기능/작동 오류</option>
