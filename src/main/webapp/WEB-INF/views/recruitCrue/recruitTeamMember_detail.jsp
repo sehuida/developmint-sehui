@@ -196,6 +196,7 @@
 	                			<input type="hidden" name="boardNo" value="${pt.projectNo }">
 	                			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 	                			<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+	                			<input type="hidden" name="boardType" value="3">
 	                		</c:otherwise>
 	                	</c:choose>
 	                </div>
@@ -296,6 +297,7 @@
 					                            <input type="hidden" name="commentNo" value="${cl.commentNo }">
 				                				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 				                				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+				                				<input type="hidden" name="boardType" value="3">
 					                        </div>
 					                        <div class="commentBtnBox">
 					                        	<button type="submit" class="btn btn-outline-primary">등록</button>

@@ -281,11 +281,12 @@ public class ProjectTeamService {
 		return result;
 	}
 
-	public int insertComment(String commentContent, int boardNo, String memberId) {
+	public int insertComment(String commentContent, int boardNo, String memberId, int boardType) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("commentContent", commentContent);
 		map.put("boardNo", boardNo);
 		map.put("memberId", memberId);
+		map.put("boardType", boardType);
 		int result = dao.insertComment(map);
 		return result;
 	}
@@ -303,12 +304,13 @@ public class ProjectTeamService {
 		return result;
 	}
 
-	public int reCommentInsert(String commentContent, int boardNo, String memberId, int commentNo) {
+	public int reCommentInsert(String commentContent, int boardNo, String memberId, int commentNo, int boardType) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("commentContent", commentContent);
 		map.put("boardNo", boardNo);
 		map.put("memberId", memberId);
 		map.put("commentNo", commentNo);
+		map.put("boardType", boardType);
 		int result = dao.reCommentInsert(map);
 		return result;
 	}
@@ -488,6 +490,14 @@ public class ProjectTeamService {
 		ArrayList<UseDevelopLanguage> udlList = dao.selectAllUseDevelopLangList();
 		ProjectTeamApplicantViewData ptavd = new ProjectTeamApplicantViewData(commentList, pe, udlList);
 		return ptavd;
+	}
+
+	public int searchEntryNo(int boardNo, String memberId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boardNo", boardNo);
+		map.put("memberId", memberId);
+		int entryNo = dao.searchEntryNo(map);
+		return entryNo;
 	}
 
 	

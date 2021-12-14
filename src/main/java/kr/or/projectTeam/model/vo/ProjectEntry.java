@@ -10,7 +10,7 @@ public class ProjectEntry {
 	private String ambition;
 	private String applyContent;
 	private String applyDate;
-	private String entryStatus;
+	private int entryStatus;
 	private String imgPath;
 	private int commentCount;
 	private String memberId;

@@ -221,17 +221,27 @@ public class ProjectTeamController {
 	  }
 	  
 	  @RequestMapping(value="/insertComment.do") 
-	  public String insertComment(Model model, String commentContent, int boardNo, String memberId, int memberNo) {
-		  int result = service.insertComment(commentContent, boardNo, memberId); 
+	  public String insertComment(Model model, String commentContent, int boardNo, String memberId, int memberNo, int boardType) {
+		  int result = service.insertComment(commentContent, boardNo, memberId, boardType); 
 		  if(result > 0) { 
 			  model.addAttribute("title", "댓글 등록 성공");
 			  model.addAttribute("msg", "댓글 등록 완료되었습니다.");
-			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  if(boardType == 3) {
+				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  } else {
+				  int entryNo = service.searchEntryNo(boardNo, memberId);
+				  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+boardNo+"&memberNo=$"+memberNo+"&entryNo="+entryNo);
+			  }
 			  model.addAttribute("icon", "success");
 		  } else {
 			  model.addAttribute("title", "댓글 등록 실패");
 			  model.addAttribute("msg", "댓글 등록 실패하였습니다.");
-			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  if(boardType == 3) {
+				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  } else {
+				  int entryNo = service.searchEntryNo(boardNo, memberId);
+				  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+boardNo+"&memberNo=$"+memberNo+"&entryNo="+entryNo);
+			  }
 			  model.addAttribute("icon", "warning");
 		  }
 		  return "member/swalMsg"; 
@@ -272,17 +282,27 @@ public class ProjectTeamController {
 	  }
 	  
 	  @RequestMapping(value="/reCommentInsert.do")   
-	  public String reCommentInsert(Model model, String commentContent, int boardNo, String memberId, int memberNo, int commentNo) {
-		  int result = service.reCommentInsert(commentContent, boardNo, memberId, commentNo); 
+	  public String reCommentInsert(Model model, String commentContent, int boardNo, String memberId, int memberNo, int commentNo, int boardType) {
+		  int result = service.reCommentInsert(commentContent, boardNo, memberId, commentNo, boardType); 
 		  if(result > 0) { 
 			  model.addAttribute("title", "대댓글 등록 성공");
 			  model.addAttribute("msg", "대댓글 등록 완료되었습니다.");
-			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  if(boardType == 3) {
+				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  } else {
+				  int entryNo = service.searchEntryNo(boardNo, memberId);
+				  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+boardNo+"&memberNo=$"+memberNo+"&entryNo="+entryNo);
+			  }
 			  model.addAttribute("icon", "success");
 		  } else {
 			  model.addAttribute("title", "대댓글 등록 실패");
 			  model.addAttribute("msg", "대댓글 등록 실패하였습니다.");
-			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  if(boardType == 3) {
+				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
+			  } else {
+				  int entryNo = service.searchEntryNo(boardNo, memberId);
+				  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+boardNo+"&memberNo=$"+memberNo+"&entryNo="+entryNo);
+			  }
 			  model.addAttribute("icon", "warning");
 		  }
 		  return "member/swalMsg"; 
@@ -496,6 +516,8 @@ public class ProjectTeamController {
 			model.addAttribute("pe", ptavd.getPe());
 			model.addAttribute("udlList", ptavd.getUdlList());
 			model.addAttribute("entryNo", entryNo);
+			model.addAttribute("memberNo", memberNo);
+			model.addAttribute("projectNo", projectNo);
 			return "recruitCrue/applicant_detail";
 		}
 }

@@ -423,7 +423,7 @@
   </update>
   
   <insert id="insertComment" parameterType="map">
-  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'yyyy-mm-dd hh24:mi'), #{boardNo}, 3, 1, null)
+  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'yyyy-mm-dd hh24:mi'), #{boardNo}, #{boardType}, 1, null)
   </insert>
   
   <delete id="deleteComment" parameterType="_int">
@@ -435,7 +435,7 @@
   </update>
   
   <insert id="reCommentInsert" parameterType="map">
-  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'yyyy-mm-dd hh24:mi'), #{boardNo}, 3, 2, #{commentNo})
+  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'yyyy-mm-dd hh24:mi'), #{boardNo}, #{boardType}, 2, #{commentNo})
   </insert>
   
   <delete id="deleteDibCount">
@@ -702,5 +702,11 @@
   	where board_no = #{entryNo} and board_type = 5
   </select>
   
+  <select id="searchEntryNo" parameterType="map" resultType="_int">
+  		select 
+  			entry_no
+  		from project_entry
+  		where project_no = #{boardNo} and member_no = (select member_no from member where member_id = #{memberId})
+  </select>
   
 </mapper>

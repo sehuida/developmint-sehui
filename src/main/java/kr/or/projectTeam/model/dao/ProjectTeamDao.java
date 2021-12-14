@@ -237,5 +237,9 @@ public class ProjectTeamDao {
 		return (ArrayList<ProjectTeamNoticeComment>) list;
 	}
 
+	public int searchEntryNo(Map<String, Object> map) {
+		return sqlSession.selectOne("projectTeam.searchEntryNo", map);
+	}
+
 	
 }
