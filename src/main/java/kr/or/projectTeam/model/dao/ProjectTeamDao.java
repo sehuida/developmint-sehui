@@ -149,7 +149,7 @@ public class ProjectTeamDao {
 		return (ArrayList<ProjectEntry>) list;
 	}
 
-	public ArrayList<UseDevelopLanguage> selectAllUseDevelopLangList(int projectNo) {
+	public ArrayList<UseDevelopLanguage> selectAllUseDevelopLangList() {
 		List<UseDevelopLanguage> list = sqlSession.selectList("projectTeam.selectAllUseDevelopLangList");
 		return (ArrayList<UseDevelopLanguage>) list;
 	}
@@ -231,4 +231,11 @@ public class ProjectTeamDao {
 	public ProjectEntry selectOneApplicant(int entryNo) {
 		return sqlSession.selectOne("projectTeam.selectOneApplicant", entryNo);
 	}
+
+	public ArrayList<ProjectTeamNoticeComment> selectApplyCommentList(int entryNo) {
+		List<ProjectTeamNoticeComment> list = sqlSession.selectList("projectTeam.selectApplyCommentList", entryNo);
+		return (ArrayList<ProjectTeamNoticeComment>) list;
+	}
+
+	
 }

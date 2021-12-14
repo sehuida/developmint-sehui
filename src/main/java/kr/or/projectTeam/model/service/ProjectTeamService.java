@@ -348,7 +348,7 @@ public class ProjectTeamService {
 		map.put("viewValue", viewValue);
 		map.put("projectNo", projectNo);
 		ArrayList<ProjectEntry> entryList = dao.selectAllManageEntry(map);
-		ArrayList<UseDevelopLanguage> udLangList = dao.selectAllUseDevelopLangList(projectNo);
+		ArrayList<UseDevelopLanguage> udLangList = dao.selectAllUseDevelopLangList();
 		ArrayList<DevelopLanguage> developLangList = dao.selectAllDevelopLangList();
 		int entryNo = entryList.get(0).getEntryNo();
 		
@@ -433,7 +433,7 @@ public class ProjectTeamService {
 		map.put("viewValue", viewValue);
 		map.put("projectNo", projectNo);
 		ArrayList<ProjectEntry> entryList = dao.manageFinalEntryFrm(map);
-		ArrayList<UseDevelopLanguage> udLangList = dao.selectAllUseDevelopLangList(projectNo);
+		ArrayList<UseDevelopLanguage> udLangList = dao.selectAllUseDevelopLangList();
 		ArrayList<DevelopLanguage> developLangList = dao.selectAllDevelopLangList();
 		int entryNo = entryList.get(0).getEntryNo();
 		String pageNavi= null;
@@ -484,7 +484,10 @@ public class ProjectTeamService {
 
 	public ProjectTeamApplicantViewData selectOneApplicant(int entryNo) {
 		ProjectEntry pe = dao.selectOneApplicant(entryNo);
-		return null;
+		ArrayList<ProjectTeamNoticeComment> commentList = dao.selectApplyCommentList(entryNo);
+		ArrayList<UseDevelopLanguage> udlList = dao.selectAllUseDevelopLangList();
+		ProjectTeamApplicantViewData ptavd = new ProjectTeamApplicantViewData(commentList, pe, udlList);
+		return ptavd;
 	}
 
 	

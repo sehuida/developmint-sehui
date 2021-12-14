@@ -492,7 +492,7 @@ public class ProjectTeamController {
 	  @RequestMapping(value="/selectOneApplicant.do")
 		public String selectOneApplicant(Model model, int projectNo, int memberNo, int entryNo) {
 			ProjectTeamApplicantViewData ptavd = service.selectOneApplicant(entryNo);
-			model.addAttribute("commentList", ptavd.getList());
+			model.addAttribute("commentList", ptavd.getCommentList());
 			model.addAttribute("pe", ptavd.getPe());
 			model.addAttribute("udlList", ptavd.getUdlList());
 			model.addAttribute("entryNo", entryNo);

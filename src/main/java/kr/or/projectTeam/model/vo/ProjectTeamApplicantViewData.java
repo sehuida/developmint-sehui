@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProjectTeamApplicantViewData {
-	private ArrayList<ProjectTeamNoticeComment> list;
+	private ArrayList<ProjectTeamNoticeComment> commentList;
 	private ProjectEntry pe;
 	private ArrayList<UseDevelopLanguage> udlList;
 }

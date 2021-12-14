@@ -670,29 +670,37 @@
  </update>
  
  <select id="selectOneApplicant" parameterType="_int" resultType="pe">
-  	select 
-			p.project_no as projectNo,
-			p.member_no as projectWriterMemberNo,
-			p.recruit_start_date as rStartDate,
-			p.recruit_end_date as rEndDate,
-			p.view_count as viewCount,
-			p.recruit_title as rTitle,
-			p.recruit_content as rContent,
-			p.project_name as projectName,
-			p.project_goal as projectGoal,
-			p.project_reader as projectReader,
-			p.project_status as projectStatus,
-			p.project_start_date as pStartDate,
-			p.project_end_date as pEndDate,
-			(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
-			(select count(*) from project_dibs pd where pd.project_no = #{projectNo}) as dibCount,
-            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = #{projectNo}) as commentCount,
-            (select member_id from member m where m.member_no = p.member_no) as projectWriterId,
-            (select member_grade from member m where m.member_no = p.member_no) as projectWriterGrade,
-            (select count(*) from project_dibs pd where pd.project_no = #{projectNo} and pd.member_no = #{memberNo}) as dibCountClickValue,
-            (select count(*) from project_entry where member_no = #{memberNo} and project_no=#{projectNo}) as applyValue
-	from project p 
-	where project_no = #{projectNo}
+  	select
+			pe.ENTRY_NO as entryNo,
+			pe.member_no as memberNo,
+			pe.PROJECT_NO as projectNo,
+			pe.AMBITION as ambition,
+			pe.APPLY_CONTENT as applyContent,
+			pe.APPLY_DATE as applyDate,
+			pe.ENTRY_STATUS as entryStatus,
+			(select filepath from member m where m.member_no = pe.member_no) as imgPath,
+			(select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
+			(select member_id from member m where m.member_no = pe.member_no) as memberId,
+			(select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
+			(select count(*) from project_entry pee where pee.entry_Status = 3 and pee.PROJECT_NO = pe.PROJECT_NO) as availableNum
+			from project_entry pe
+		where pe.ENTRY_NO = #{entryNo}
   </select>
+  
+  <select id="selectApplyCommentList" parameterType="_int" resultType="ptnc">
+  	select 
+  		c.comment_no as commentNo,
+  		c.member_id as memberId,
+  		c.comment_content as commentContent,
+  		c.reg_date as regDate,
+  		c.board_no as boardNo,
+  		c.board_type as boardType,
+  		c.comment_type as commentType,
+  		c.comment_ref as commentRef,
+  		(select filepath from member m where m.member_id = c.member_id) as writerImgPath
+  	from comments c
+  	where board_no = #{entryNo} and board_type = 5
+  </select>
+  
   
 </mapper>
