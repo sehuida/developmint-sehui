@@ -142,8 +142,16 @@ input:focus, textarea:focus {
 				<a href="/gosuRequestCostList.do">견적서</a>
 			</div>
 		</c:if>
-
-		<div class="g-msg">고수에게 요구 사항을 정확하게 전달해주세요!</div>
+		
+		<div class="g-msg">
+		<c:if test="${sessionScope.m.memberType eq 1 }">
+		고수에게 요구사항을 정확하게 전달해 주세요!
+		</c:if>
+		<c:if test="${sessionScope.m.memberType eq 2 }">
+		질문자의 요구사항에 맞게 개발을 진행해 주세요!
+		</c:if>
+		
+		</div>
 
 		<div class="talk-wrap">
 		
@@ -253,7 +261,7 @@ input:focus, textarea:focus {
 							style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
 							<div>
 								<h2 style="font-weight: 900; width: 100%; text-align: center;">고수님께서
-									완료한 피드백입니다!</h2>
+									개발을 완료하셨습니다!</h2>
 								<br> <br> <span
 									style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">리뷰</span>
 								<br> <br>
@@ -355,14 +363,14 @@ input:focus, textarea:focus {
 				}
 			});
 		});
-		$("#talkStopAjax2").click(function() {
-			var feedbackNo = $("#feedbackNo").val();
-
+		$("#talkStopAjax").click(function() {
+			var requestProjectSubNo = $("#requestProjectSubNo").val();
+			
 			$.ajax({
 
-				url : "/talkStopAjax.do",
+				url : "/talkStopAjax2.do",
 				data : {
-					"feedbackNo" : feedbackNo
+					"requestProjectSubNo" : requestProjectSubNo
 				},
 				success : function(data) {
 					if (data > 0) {

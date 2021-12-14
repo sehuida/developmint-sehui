@@ -558,4 +558,10 @@
 		gosu_request_project
 		values(GOSU_REQUEST_PROJECT_SEQ.nextval,#{memberNo},#{requestProjectContent},to_char(sysdate,'yyyy-mm-dd'),#{filepath},#{filename},#{requestProjectSubNo})
 	</insert>
+	
+	<update id="talkStop2" parameterType="_int">
+		update
+		gosu_request_project_sub set
+		REQUEST_PROJECT_SUB_NUM = 3 where REQUEST_PROJECT_SUB_NO = #{requestProjectSubNo}
+	</update>
 </mapper>

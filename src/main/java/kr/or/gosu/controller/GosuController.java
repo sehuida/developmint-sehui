@@ -558,4 +558,12 @@ public class GosuController {
 
 			return result;
 		}
+		
+
+		@ResponseBody
+		@RequestMapping(value = "/talkStopAjax2.do")
+		public int talkStopAjax2(int requestProjectSubNo, Model model) {
+			int result = service.talkStop2(requestProjectSubNo);
+			return result;
+		}
 }

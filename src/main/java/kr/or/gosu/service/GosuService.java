@@ -255,6 +255,12 @@ public class GosuService {
 		int result = dao.insertGosuRequestProject(grp);
 		return result;
 	}
-	
+
+	@Transactional
+	public int talkStop2(int requestProjectSubNo) {
+		int result = dao.talkStop2(requestProjectSubNo);
+		return result;
+	}
+
 
 }
