@@ -15,6 +15,7 @@ import kr.or.projectTeam.model.dao.ProjectTeamDao;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectEntry;
 import kr.or.projectTeam.model.vo.ProjectTeam;
+import kr.or.projectTeam.model.vo.ProjectTeamApplicantViewData;
 import kr.or.projectTeam.model.vo.ProjectTeamApplyPageData;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeComment;
@@ -455,9 +456,9 @@ public class ProjectTeamService {
 		map.put("startProjectList", startProjectList);
 		map.put("startProjectMemberList", startProjectMemberList);
 		int updateEntryResult = dao.updateEntryResult(map);
-		ArrayList<ProjectEntry> startProjectListFinal = dao.startProjectListFinal(map);
+		ArrayList<ProjectEntry> startProjectListFinalList = dao.startProjectListFinal(map);
 		if(updateEntryResult > 0) {
-			result = dao.insertTeamMember(startProjectListFinal);
+			result = dao.insertTeamMember(startProjectListFinalList);
 		}
 		return result;
 	}
@@ -471,7 +472,7 @@ public class ProjectTeamService {
 		int result = 0;
 		int updateResult = dao.updateFinalTeamMember(entryNo);
 		if(updateResult > 0) {
-			result = dao.insertFinalTeamMember(map);
+			result = dao.insertFinalTeamMember2(map);
 		}
 		return result;
 	}
@@ -479,6 +480,11 @@ public class ProjectTeamService {
 	public int returnTeamMember(int entryNo) {
 		int result = dao.returnTeamMember(entryNo);
 		return result;
+	}
+
+	public ProjectTeamApplicantViewData selectOneApplicant(int entryNo) {
+		ProjectEntry pe = dao.selectOneApplicant(entryNo);
+		return null;
 	}
 
 	

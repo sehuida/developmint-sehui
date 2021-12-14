@@ -31,6 +31,7 @@ import kr.or.projectTeam.model.service.ProjectTeamService;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectEntry;
 import kr.or.projectTeam.model.vo.ProjectTeam;
+import kr.or.projectTeam.model.vo.ProjectTeamApplicantViewData;
 import kr.or.projectTeam.model.vo.ProjectTeamApplyPageData;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeViewData;
@@ -439,36 +440,62 @@ public class ProjectTeamController {
 		}
 	  
 	  @RequestMapping(value="/selectFinalTeamMember.do")
-	  public String selectFinalTeamMember(Model model, int projectNo, int memberNo, int entryNo, int viewValue) {
+	  public String selectFinalTeamMember(Model model, int projectNo, int memberNo, int entryNo, int viewValue, int pageTransValue) {
 		  int result = service.insertFinalTeamMember(entryNo, projectNo, memberNo);
 			if(result > 0) { 
 				  model.addAttribute("title", "지원자 최종 선발");
 				  model.addAttribute("msg", "해당 지원자는 프로젝트 팀원으로 최종 선발되었습니다.");
-				  model.addAttribute("loc","/manageFinalEntryFrm.do?memberNo="+memberNo+"&projectNo="+projectNo+"&viewValue="+viewValue);
+				  if(pageTransValue - 1 == 0) {
+					  model.addAttribute("loc","/manageEntry.do?memberNo="+memberNo+"&projectNo="+projectNo+"&reqPage=1&viewValue=1");
+				  } else {
+					  model.addAttribute("loc","/manageFinalEntryFrm.do?memberNo="+memberNo+"&projectNo="+projectNo+"&viewValue=1");
+				  }
 				  model.addAttribute("icon", "success");
 			  } else {
 				  model.addAttribute("title", "지원자 최종 선발 실패");
 				  model.addAttribute("msg", "지원자 최종 선발 과정에 오류가 발생되었습니다.");
-				  model.addAttribute("loc","/manageFinalEntryFrm.do?memberNo="+memberNo+"&projectNo="+projectNo+"&viewValue="+viewValue);
+				  if(pageTransValue - 1 == 0) {
+					  model.addAttribute("loc","/manageEntry.do?memberNo="+memberNo+"&projectNo="+projectNo+"&reqPage=1&viewValue=1");
+				  } else {
+					  model.addAttribute("loc","/manageFinalEntryFrm.do?memberNo="+memberNo+"&projectNo="+projectNo+"&viewValue=1");
+				  }
 				  model.addAttribute("icon", "warning");
 			  }
 			  return "member/swalMsg"; 
 	  }
 	  
 	  @RequestMapping(value="/returnTeamMember.do")
-	  public String returnTeamMember(Model model, int projectNo, int memberNo, int entryNo, int viewValue) {
+	  public String returnTeamMember(Model model, int projectNo, int memberNo, int entryNo, int viewValue, int pageTransValue) {
 		  int result = service.returnTeamMember(entryNo);
 			if(result > 0) { 
 				  model.addAttribute("title", "지원 대기로 전환");
 				  model.addAttribute("msg", "해당 지원자는 지원자 관리에서 다시 확인해볼 수 있습니다.");
-				  model.addAttribute("loc","/manageFinalEntryFrm.do?memberNo="+memberNo+"&projectNo="+projectNo+"&viewValue="+viewValue);
+				  if(pageTransValue - 1 == 0) {
+					  model.addAttribute("loc","/manageEntry.do?memberNo="+memberNo+"&projectNo="+projectNo+"&reqPage=1&viewValue=1");
+				  } else {
+					  model.addAttribute("loc","/manageFinalEntryFrm.do?memberNo="+memberNo+"&projectNo="+projectNo+"&viewValue=1");
+				  }
 				  model.addAttribute("icon", "success");
 			  } else {
 				  model.addAttribute("title", "지원자 전환 실패");
 				  model.addAttribute("msg", "지원자 전환 과정에서 오류가 발생되었습니다.");
-				  model.addAttribute("loc","/manageFinalEntryFrm.do?memberNo="+memberNo+"&projectNo="+projectNo+"&viewValue="+viewValue);
+				  if(pageTransValue - 1 == 0) {
+					  model.addAttribute("loc","/manageEntry.do?memberNo="+memberNo+"&projectNo="+projectNo+"&reqPage=1&viewValue=1");
+				  } else {
+					  model.addAttribute("loc","/manageFinalEntryFrm.do?memberNo="+memberNo+"&projectNo="+projectNo+"&viewValue=1");
+				  }
 				  model.addAttribute("icon", "warning");
 			  }
 			  return "member/swalMsg"; 
 	  }
+	  
+	  @RequestMapping(value="/selectOneApplicant.do")
+		public String selectOneApplicant(Model model, int projectNo, int memberNo, int entryNo) {
+			ProjectTeamApplicantViewData ptavd = service.selectOneApplicant(entryNo);
+			model.addAttribute("commentList", ptavd.getList());
+			model.addAttribute("pe", ptavd.getPe());
+			model.addAttribute("udlList", ptavd.getUdlList());
+			model.addAttribute("entryNo", entryNo);
+			return "recruitCrue/applicant_detail";
+		}
 }

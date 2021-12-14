@@ -144,8 +144,8 @@
 	                            </div>
 	                        </div>
 	                        <div class="btnBox">
-	                            <a href="/selectFinalTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}&viewValue=${viewValue}"><button type="button" class="btn btn-primary">최종선발</button></a>
-	                        	<a href="/returnTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}&viewValue=${viewValue}"><button type="button" class="btn btn-secondary">대기인원으로 전환</button></a>
+	                            <a href="/selectFinalTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}&viewValue=${viewValue}&pageTransValue=${availableNum }"><button type="button" class="btn btn-primary">최종선발</button></a>
+	                        	<a href="/returnTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}&viewValue=${viewValue}&pageTransValue=${availableNum }"><button type="button" class="btn btn-secondary" style="margin-right: 40px;">대기인원 전환</button></a>
 	                        </div>
                     	</c:if>
                     </c:forEach>

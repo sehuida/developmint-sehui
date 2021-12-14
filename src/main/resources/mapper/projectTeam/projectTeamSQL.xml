@@ -568,47 +568,6 @@
   		update project_entry set entry_status = 2  where entry_no = #{entryNo}
   </update>
   
-  <select id="startProjectListFinal" parameterType="_int" resultType="pe">
-  	<choose>
-  		<when test="viewValue == 1">
-	  		select
-				pe.ENTRY_NO as entryNo,
-				pe.member_no as memberNo,
-				pe.PROJECT_NO as projectNo,
-				pe.AMBITION as ambition,
-				pe.APPLY_CONTENT as applyContent,
-				pe.APPLY_DATE as applyDate,
-				pe.ENTRY_STATUS as entryStatus,
-				(select filepath from member m where m.member_no = pe.member_no) as imgPath,
-				(select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
-				(select member_id from member m where m.member_no = pe.member_no) as memberId,
-				(select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
-				(select count(*) from project_entry pee where pee.entry_Status = 3 and pee.PROJECT_NO = pe.PROJECT_NO) as availableNum
-			from project_entry pe
-			where pe.project_no = #{projectNo} and pe.ENTRY_STATUS = 4
-			order by ENTRY_NO DESC
-  		</when>
-  		<otherwise>
-  			select
-				pe.ENTRY_NO as entryNo,
-				pe.member_no as memberNo,
-				pe.PROJECT_NO as projectNo,
-				pe.AMBITION as ambition,
-				pe.APPLY_CONTENT as applyContent,
-				pe.APPLY_DATE as applyDate,
-				pe.ENTRY_STATUS as entryStatus,
-				(select filepath from member m where m.member_no = pe.member_no) as imgPath,
-				(select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
-				(select member_id from member m where m.member_no = pe.member_no) as memberId,
-				(select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
-				(select count(*) from project_entry pee where pee.entry_Status = 3 and pee.PROJECT_NO = pe.PROJECT_NO) as availableNum
-			from project_entry pe
-			where pe.project_no = #{projectNo} and pe.ENTRY_STATUS = 4
-			order by memberGrade DESC, ENTRY_NO DESC
-  		</otherwise>
-  	</choose>
-  </select>
-  
   <select id="selectStartProjectList" parameterType="String" resultType="_int">
   		select project_no as projectNo from project where project_status = 2 where recruit_end_date like #{today}
   </select>
@@ -648,7 +607,7 @@
   <insert id="insertTeamMember" parameterType="List">
   		insert into project_team_member(team_member_no, project_no, member_no, member_role)
   		select tm_seq.nextval, A.* from (
-  			<foreach collection="startProjectListFinal" item="plf" separator="UNION ALL ">
+  			<foreach collection="startProjectListFinalList" item="plf" separator="UNION ALL ">
   				select 
   					#{plf.projectNo} as project_no,
   					#{plf.memberNo} as member_no,
@@ -698,7 +657,7 @@
   	</choose>
   </select>
   
- <insert id="insertFinalTeamMember" parameterType="map">
+ <insert id="insertFinalTeamMember2" parameterType="map">
  		insert into project_team_member values(tm_seq.nextval, #{projectNo}, #{memberNo}, null)
  </insert> 
  
@@ -710,5 +669,30 @@
  		update project_entry set entry_Status = 1 where ENTRY_NO = #{entryNo}
  </update>
  
+ <select id="selectOneApplicant" parameterType="_int" resultType="pe">
+  	select 
+			p.project_no as projectNo,
+			p.member_no as projectWriterMemberNo,
+			p.recruit_start_date as rStartDate,
+			p.recruit_end_date as rEndDate,
+			p.view_count as viewCount,
+			p.recruit_title as rTitle,
+			p.recruit_content as rContent,
+			p.project_name as projectName,
+			p.project_goal as projectGoal,
+			p.project_reader as projectReader,
+			p.project_status as projectStatus,
+			p.project_start_date as pStartDate,
+			p.project_end_date as pEndDate,
+			(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+			(select count(*) from project_dibs pd where pd.project_no = #{projectNo}) as dibCount,
+            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = #{projectNo}) as commentCount,
+            (select member_id from member m where m.member_no = p.member_no) as projectWriterId,
+            (select member_grade from member m where m.member_no = p.member_no) as projectWriterGrade,
+            (select count(*) from project_dibs pd where pd.project_no = #{projectNo} and pd.member_no = #{memberNo}) as dibCountClickValue,
+            (select count(*) from project_entry where member_no = #{memberNo} and project_no=#{projectNo}) as applyValue
+	from project p 
+	where project_no = #{projectNo}
+  </select>
   
 </mapper>

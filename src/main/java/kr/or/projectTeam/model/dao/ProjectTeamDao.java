@@ -212,12 +212,12 @@ public class ProjectTeamDao {
 		return (ArrayList<ProjectEntry>) startProjectFinalList;
 	}
 
-	public int insertTeamMember(ArrayList<ProjectEntry> startProjectListFinal) {
-		return sqlSession.insert("projectTeam.insertTeamMember", startProjectListFinal);
+	public int insertTeamMember(ArrayList<ProjectEntry> startProjectListFinalList) {
+		return sqlSession.insert("projectTeam.insertTeamMember", startProjectListFinalList);
 	}
 
-	public int insertFinalTeamMember(Map<String, Object> map) {
-		return sqlSession.insert("projectTeam.insertFinalTeamMember", map);
+	public int insertFinalTeamMember2(Map<String, Object> map) {
+		return sqlSession.insert("projectTeam.insertFinalTeamMember2", map);
 	}
 
 	public int returnTeamMember(int entryNo) {
@@ -226,5 +226,9 @@ public class ProjectTeamDao {
 
 	public int updateFinalTeamMember(int entryNo) {
 		return sqlSession.update("projectTeam.updateFinalTeamMember", entryNo);
+	}
+
+	public ProjectEntry selectOneApplicant(int entryNo) {
+		return sqlSession.selectOne("projectTeam.selectOneApplicant", entryNo);
 	}
 }
