@@ -529,8 +529,8 @@
   		update project_entry set entry_status = 3 where entry_no = #{entryNo} and member_no = #{memberNo}
   </update>
   
-  <select id="selectAllFinalEntry" parameterType="_int" resultType="pe">
-  		select member_no as memberNo from project_entry where entry_status = 3 and project_no = #{projectNo}
+  <select id="selectAllFinalEntry" parameterType="_int" resultType="List">
+  		select member_no from project_entry where entry_status = 3 and project_no = #{projectNo}
   </select>
   
   <update id="updateFinalRecruitTeam" parameterType="map">
@@ -538,7 +538,7 @@
   </update>
   
   <update id="updateFinalRecruitTeam2" parameterType="map" >
-  		update project_entry set entry_status = 4 where member_no in 
+  		update project_entry set entry_status = 4 where project_no = #{projectNo} and member_no in 
   		<foreach collection="finalList" item="fl" index="i" separator="," open="(" close=")">
   			#{fl.memberNo}
   		</foreach>
@@ -558,10 +558,149 @@
   			<foreach collection="finalList" item="fl" separator="UNION ALL ">
   				select 
   					#{projectNo} as project_no,
-  					#{fl} as member_no,
+  					#{fl.memberNo} as member_no,
   					null as member_role
   				from dual
   			</foreach>) A
   </insert>
+  
+  <update id="deleteTeamMember" parameterType="_int">
+  		update project_entry set entry_status = 2  where entry_no = #{entryNo}
+  </update>
+  
+  <select id="selectStartProjectList" parameterType="String" resultType="_int">
+  		select project_no as projectNo from project where project_status = 2 where recruit_end_date like #{today}
+  </select>
+  
+  <select id="startProjectList" parameterType="List" resultType="_int">
+  		select member_no from project_entry where ENTRY_STATUS = 3 and project_no in
+  		<foreach collection="startProjectList" item="stl" open="(" close=")" separator=",">
+  			#{stl}
+  		</foreach>
+  </select>
+  
+  <update id="updateEntryResult">
+  		update project_entry set ENTRY_STATUS = 4 where project_no in 
+  		<foreach collection="startProjectList" item="stl" open="(" close=")" separator=",">
+  			#{stl}
+  		</foreach>
+  		 and member_no in
+  		 <foreach collection="startProjectMemberList" item="spml" open="(" close=")" separator=",">
+  			#{spml}
+  		</foreach>  
+  </update>
+  
+  <select id="startProjectListFinal" parameterType="map">
+  		select 
+  			project_no as projectNo,
+  			member_no as memberNo
+  		from project_entry where project_no in
+  		<foreach collection="startProjectList" item="stl" open="(" close=")" separator=",">
+  			#{stl}
+  		</foreach>
+  		 and member_no in
+  		 <foreach collection="startProjectMemberList" item="spml" open="(" close=")" separator=",">
+  			#{spml}
+  		</foreach>  
+  </select>
+  
+  <insert id="insertTeamMember" parameterType="List">
+  		insert into project_team_member(team_member_no, project_no, member_no, member_role)
+  		select tm_seq.nextval, A.* from (
+  			<foreach collection="startProjectListFinalList" item="plf" separator="UNION ALL ">
+  				select 
+  					#{plf.projectNo} as project_no,
+  					#{plf.memberNo} as member_no,
+  					null as member_role
+  				from dual
+  			</foreach>) A
+  </insert>
+  
+  <select id="manageFinalEntryFrm" parameterType="map" resultType="pe">
+  	<choose>
+  		<when test="viewValue == 1">
+	  		select
+				pe.ENTRY_NO as entryNo,
+				pe.member_no as memberNo,
+				pe.PROJECT_NO as projectNo,
+				pe.AMBITION as ambition,
+				pe.APPLY_CONTENT as applyContent,
+				pe.APPLY_DATE as applyDate,
+				pe.ENTRY_STATUS as entryStatus,
+				(select filepath from member m where m.member_no = pe.member_no) as imgPath,
+				(select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
+				(select member_id from member m where m.member_no = pe.member_no) as memberId,
+				(select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
+				(select count(*) from project_entry pee where pee.entry_Status = 3 and pee.PROJECT_NO = pe.PROJECT_NO) as availableNum
+			from project_entry pe
+			where pe.project_no = #{projectNo} and pe.ENTRY_STATUS = 3
+			order by ENTRY_NO DESC
+  		</when>
+  		<otherwise>
+  			select
+				pe.ENTRY_NO as entryNo,
+				pe.member_no as memberNo,
+				pe.PROJECT_NO as projectNo,
+				pe.AMBITION as ambition,
+				pe.APPLY_CONTENT as applyContent,
+				pe.APPLY_DATE as applyDate,
+				pe.ENTRY_STATUS as entryStatus,
+				(select filepath from member m where m.member_no = pe.member_no) as imgPath,
+				(select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
+				(select member_id from member m where m.member_no = pe.member_no) as memberId,
+				(select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
+				(select count(*) from project_entry pee where pee.entry_Status = 3 and pee.PROJECT_NO = pe.PROJECT_NO) as availableNum
+			from project_entry pe
+			where pe.project_no = #{projectNo} and pe.ENTRY_STATUS = 3
+			order by memberGrade DESC, ENTRY_NO DESC
+  		</otherwise>
+  	</choose>
+  </select>
+  
+ <insert id="insertFinalTeamMember2" parameterType="map">
+ 		insert into project_team_member values(tm_seq.nextval, #{projectNo}, #{memberNo}, null)
+ </insert> 
+ 
+  <update id="updateFinalTeamMember" parameterType="_int">
+ 		update project_entry set entry_Status = 4 where ENTRY_NO = #{entryNo}
+ </update>
+ 
+ <update id="returnTeamMember" parameterType="_int">
+ 		update project_entry set entry_Status = 1 where ENTRY_NO = #{entryNo}
+ </update>
+ 
+ <select id="selectOneApplicant" parameterType="_int" resultType="pe">
+  	select
+			pe.ENTRY_NO as entryNo,
+			pe.member_no as memberNo,
+			pe.PROJECT_NO as projectNo,
+			pe.AMBITION as ambition,
+			pe.APPLY_CONTENT as applyContent,
+			pe.APPLY_DATE as applyDate,
+			pe.ENTRY_STATUS as entryStatus,
+			(select filepath from member m where m.member_no = pe.member_no) as imgPath,
+			(select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
+			(select member_id from member m where m.member_no = pe.member_no) as memberId,
+			(select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
+			(select count(*) from project_entry pee where pee.entry_Status = 3 and pee.PROJECT_NO = pe.PROJECT_NO) as availableNum
+			from project_entry pe
+		where pe.ENTRY_NO = #{entryNo}
+  </select>
+  
+  <select id="selectApplyCommentList" parameterType="_int" resultType="ptnc">
+  	select 
+  		c.comment_no as commentNo,
+  		c.member_id as memberId,
+  		c.comment_content as commentContent,
+  		c.reg_date as regDate,
+  		c.board_no as boardNo,
+  		c.board_type as boardType,
+  		c.comment_type as commentType,
+  		c.comment_ref as commentRef,
+  		(select filepath from member m where m.member_id = c.member_id) as writerImgPath
+  	from comments c
+  	where board_no = #{entryNo} and board_type = 5
+  </select>
+  
   
 </mapper>
