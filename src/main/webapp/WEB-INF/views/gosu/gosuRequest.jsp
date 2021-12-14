@@ -439,6 +439,7 @@ input[type="checkbox"]:checked {
 					</dl>
 
 				</li>
+				<%-- 
 				<li>
 					<dl>
 						<dt class="g-mint">4</dt>
@@ -452,6 +453,7 @@ input[type="checkbox"]:checked {
 					</dl>
 
 				</li>
+				--%>
 			</ul>
 		</div>
 	</div>

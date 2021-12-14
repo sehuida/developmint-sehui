@@ -174,11 +174,11 @@ input:focus, textarea:focus {
 												<td style="text-align: right;">${mrcl.costDate }</td>
 											</tr>
 											<tr>
-												<td colspan="2" style="max-width: 1000px;">${mrcl.costContentBr }</td>
+												<td colspan="2"style="max-width: 1000px;" ><span style="width:100%; background-color:  rgba(239, 239, 239, 0.3);">${mrcl.costContentBr }</span></td>
 
 											</tr>
 											<tr>
-												<th>비용 ${mrcl.cost}원</th>
+												<th>비용 <span  style="color:red;padding: 0;">${mrcl.cost}</span>원</th>
 												<td style="display: flex; justify-content: right;">
 													<button type="button"
 														onclick="gosuProjectJSPAjax(${mrcl.costNo});"
@@ -212,7 +212,7 @@ input:focus, textarea:focus {
 							</tr>
 							<tr>
 								<th>내용</th>
-								<td><textarea id="contentSend" disabled style="text-align:center;  font-size: 15px; padding:10px; width: 100%; margin-top:20px;margin-bottom:20px;"></textarea></td>
+								<td><textarea id="contentSend" disabled style="text-align:center;  font-size: 15px; padding:10px; width: 100%; margin-top:20px;margin-bottom:20px;border: none;"></textarea></td>
 							</tr>
 							<tr>
 								<th>견적비용</th>

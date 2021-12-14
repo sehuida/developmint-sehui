@@ -572,7 +572,7 @@ to {
 
 					</div>
 				</c:if>
-				<hr style="margin-top: 100px;">
+				<hr style="margin-top: 80px;">
 				<h4>
 					<span style="color: rgb(78, 205, 196)">요청서</span>를 통한 <span
 						style="color: rgb(78, 205, 196)">고수</span> 매칭

@@ -245,12 +245,12 @@ input:focus, textarea:focus {
 
 						<c:choose>
 							<c:when test="${sessionScope.m.memberType eq 2}">
-								테스트 구문 바꾸기 리뷰 있으면 리뷰 보여주게
+								테스트 구문 바꾸기 후기 남긴거
 
 
 							</c:when>
 							<c:otherwise>
-							아직 작성된 리뷰가 없습니다!
+							아직 작성된 후기가 없습니다!
 						</c:otherwise>
 						</c:choose>
 
@@ -263,16 +263,19 @@ input:focus, textarea:focus {
 								<h2 style="font-weight: 900; width: 100%; text-align: center;">고수님께서
 									개발을 완료하셨습니다!</h2>
 								<br> <br> <span
-									style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">리뷰</span>
+									style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">후기 작성하기</span>
 								<br> <br>
 								<table>
 									<tr>
-										<td colspan="2">별별별별별 &nbsp;&nbsp;&nbsp;</td>
+										<td>진행 과정과 받은 작품에 대해 꼼꼼하게 후기를 남겨주세요!</td>
 									</tr>
 									<tr>
-										<td><textarea cols="70"></textarea></td>
-										<td><button type="button" class="btn btn-primary"
-												style="font-weight: 900; padding: 10px; margin-left: 10px;">리뷰
+										<td><textarea cols="70" rows="20"></textarea></td>
+									
+									</tr>
+									<tr>
+										<td style="text-align: right;"><button type="button" class="btn btn-primary"
+												style="font-weight: 900; padding: 10px; margin-left: 10px;">후기
 												작성</button></td>
 									</tr>
 								</table>
