@@ -134,7 +134,8 @@
 		</c:if>
 		<h1>나의 현황</h1>
 		<hr>
-		<p style="margin-bottom: 100px;">신청하신 전체 내역을 확인하실 수 있습니다.</p>
+		<p style="margin-bottom: 100px; color: gray;">신청하신 전체 내역을 확인하실 수
+			있습니다.</p>
 		<div class="g-sa-wrap">
 			<h4>신청한 내역</h4>
 			<div class="g-margin">
@@ -143,7 +144,7 @@
 						<c:forEach items="${gosuTalkList }" var="gtl" varStatus="i">
 							<div>
 								<table>
-									<tr style="font-size: x-small;">
+									<tr style="font-size: small;">
 										<c:if test="${gtl.feedbackNum eq 1 }">
 											<td style="text-align: left; padding-top: 20px;"><b
 												style="color: blue;">진행 전</b></td>
@@ -203,7 +204,7 @@
 							<c:forEach items="${gosuTalkList2 }" var="gtl" varStatus="i">
 								<div>
 									<table>
-										<tr style="font-size: x-small;">
+										<tr style="font-size: small;">
 											<c:if test="${gtl.feedbackNum eq 1 }">
 												<td style="text-align: left; padding-top: 20px;"><b
 													style="color: blue;">진행 전</b></td>
@@ -275,76 +276,89 @@
 
 			<h4>요청서를 통한 고수 매칭</h4>
 			<div class="g-margin">
-				<div class="g-left">
-					<table>
-						<tr style="font-size: x-small;">
-							<td style="text-align: left; padding-top: 20px;"><b
-								style="color: red;">진행 중</b></td>
-							<td style="padding-top: 20px;">2021.XX.XX</td>
-						</tr>
-						<tr>
-							<td><b><span
-									style="color: rgb(78, 205, 196); font-size: 20px;">고수</span></b></td>
-							<td rowspan="2"><img
-								src="/resources/img/gosu/g_img_basic.png"></td>
-						</tr>
-						<tr>
-							<td style="font-size: 25px; width: 240px;"><b>강세희</b></td>
-						</tr>
-						<tr>
-							<td colspan="2"><a href="/gosuProject.do"
-								class="btn btn-info">자세히 보기</a></td>
-						</tr>
+				<c:choose>
+					<c:when test="${empty grpsList }">
+						<c:if test="${sessionScope.m.memberType eq 1}">
+							<span style="margin: 100px;">요청서를 작성해보세요!</span>
+						</c:if>
+						<c:if test="${sessionScope.m.memberType eq 2}">
+							<span style="margin: 100px;">상단의 요청서 버튼을 눌러 견적서를 보내보세요!</span>
 
-					</table>
-				</div>
+						</c:if>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${grpsList }" var="grl" varStatus="i">
+							<div class="g-left">
+								<table>
+									<tr style="font-size: small;">
 
-				<div>
-					<table>
-						<tr style="font-size: x-small;">
-							<td style="text-align: left; padding-top: 20px;"><b
-								style="color: red;">진행 중</b></td>
-							<td style="padding-top: 20px;">2021.XX.XX</td>
-						</tr>
-						<tr>
-							<td><b><span
-									style="color: rgb(78, 205, 196); font-size: 20px;">고수</span></b></td>
-							<td rowspan="2"><img
-								src="/resources/img/gosu/g_img_basic.png"></td>
-						</tr>
-						<tr>
-							<td style="font-size: 25px; width: 240px;"><b>강세희</b></td>
-						</tr>
-						<tr>
-							<td colspan="2"><a href="/gosuProject.do"
-								class="btn btn-info">자세히 보기</a></td>
-						</tr>
+										<c:if test="${grl.requestProjectSubNum eq 1 }">
+											<td style="text-align: left; padding-top: 20px;"><b
+												style="color: red;"></b></td>
+										</c:if>
+										<c:if test="${grl.requestProjectSubNum eq 3 }">
+											<td style="text-align: left; padding-top: 20px;"><b
+												style="color: gray;">진행 완료</b></td>
+										</c:if>
+										<td style="padding-top: 20px;">${grl.requestProjectSubDate }</td>
+									</tr>
+									<tr>
+										<td><c:if test="${sessionScope.m.memberType eq 1 }">
+												<b><span
+													style="color: rgb(78, 205, 196); font-size: 20px;">고수</span></b>
 
-					</table>
-				</div>
-				<div>
-					<table>
-						<tr style="font-size: x-small;">
-							<td style="text-align: left; padding-top: 20px;"><b
-								style="color: red;">진행 중</b></td>
-							<td style="padding-top: 20px;">2021.XX.XX</td>
-						</tr>
-						<tr>
-							<td><b><span
-									style="color: rgb(78, 205, 196); font-size: 20px;">고수</span></b></td>
-							<td rowspan="2"><img
-								src="/resources/img/gosu/g_img_basic.png"></td>
-						</tr>
-						<tr>
-							<td style="font-size: 25px; width: 240px;"><b>강세희</b></td>
-						</tr>
-						<tr>
-							<td colspan="2"><a href="/gosuProject.do"
-								class="btn btn-info">자세히 보기</a></td>
-						</tr>
+											</c:if> <c:if test="${sessionScope.m.memberType eq 2 }">
+												<b><span
+													style="color: rgb(78, 205, 196); font-size: 20px;">질문자</span></b>
+											</c:if></td>
+										<td rowspan="2"><c:if
+												test="${sessionScope.m.memberType eq 1 }">
+												<c:if test="${empty grl.gosuImg}">
+													<img src="/resources/img/gosu/g_img_basic.png">
+												</c:if>
+												<c:if test="${not empty grl.gosuImg}">
+													<img
+														src="/resources/upload/member/${grl.gosuImg  }">
+												</c:if>
 
-					</table>
-				</div>
+											</c:if>
+											<c:if
+												test="${sessionScope.m.memberType eq 2 }">
+												<c:if test="${empty grl.requestWriterImg}">
+													<img src="/resources/img/gosu/g_img_basic.png">
+												</c:if>
+												<c:if test="${not empty grl.requestWriterImg}">
+													<img
+														src="/resources/upload/member/${grl.requestWriterImg  }">
+												</c:if>
+
+											</c:if>
+											</td>
+									</tr>
+									<tr>
+										<td style="font-size: 25px; width: 240px;"><b>
+											<c:if
+												test="${sessionScope.m.memberType eq 2 }">
+												${grl.requestWriterId  }
+
+											</c:if>
+												<c:if
+												test="${sessionScope.m.memberType eq 1 }">
+												${grl.gosuId  }
+
+											</c:if>
+										</b></td>
+									</tr>
+									<tr>
+										<td colspan="2"><a href="/gosuProject.do?rpsNo=${grl.requestProjectSubNo }"
+											class="btn btn-info">자세히 보기</a></td>
+									</tr>
+
+								</table>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 
 			</div>
 		</div>

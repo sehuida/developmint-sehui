@@ -205,5 +205,13 @@ public class GosuDao {
 		return (ArrayList<GosuRequestProjectSub>)list;
 	}
 
+	public int insertGosuRequestProject(GosuRequestProject grp) {
+		return sqlSession.insert("gosu.insertGosuRequestProject",grp);
+	}
+
+	public int talkStop2(int requestProjectSubNo) {
+		return sqlSession.update("gosu.talkStop2",requestProjectSubNo);
+	}
+
 
 }
