@@ -238,6 +238,15 @@ public class GosuController {
 		System.out.println("getId : " + m.getMemberId());
 		ArrayList<GosuFeedback> gf = service.selectGosuFeedbackList(m.getMemberId());
 		ArrayList<GosuFeedback> gf2 = service.selectGosuFeedbackList2(m.getMemberId());
+		if(m.getMemberType() ==1) {
+			ArrayList<GosuRequestProjectSub> grpsList = service.selectGosuRequestProjectSubList(m.getMemberNo());
+			model.addAttribute("grpsList", grpsList);
+			System.out.println(grpsList);
+		}else if(m.getMemberType() ==2) {
+			ArrayList<GosuRequestProjectSub> grpsList = service.selectGosuRequestProjectSubList2(m.getMemberNo());
+			System.out.println(grpsList);
+			model.addAttribute("grpsList", grpsList);
+		}
 		model.addAttribute("gosuTalkList", gf);
 		model.addAttribute("gosuTalkList2", gf2);
 
@@ -500,4 +509,70 @@ public class GosuController {
 		
 		return "gosu/gosuProject";
 	}
+	
+
+		@ResponseBody
+		@RequestMapping(value = "/talkBtnProjectAjax.do")
+		public int talkBtnProjectAjax(MultipartHttpServletRequest req, HttpSession session, HttpServletRequest request,
+				String talkContent, int writerNo, @RequestParam(required = false, defaultValue = "0") int requestProjectSubNo,
+				Model model) {
+			System.out.println("talkContent : " + talkContent);
+			System.out.println("writerNo : " + writerNo);
+			System.out.println("requestProjectSubNo : " + requestProjectSubNo);
+			GosuRequestProject grp = new GosuRequestProject();
+			grp.setMemberNo(writerNo);
+			grp.setRequestProjectSubNo(requestProjectSubNo);
+			grp.setRequestProjectContent(talkContent);
+			MultipartFile files = req.getFile("talkFile");
+			if (files == null) {
+
+			} else {
+				String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/gosu/gosuRequestProject/");
+				String filename = files.getOriginalFilename();
+				String onlyFilename = filename.substring(0, filename.indexOf("."));
+				String extention = filename.substring(filename.indexOf("."));
+				String filepath = null;
+				int count = 0;
+				while (true) {
+					if (count == 0) {
+						filepath = onlyFilename + extention;
+					} else {
+						filepath = onlyFilename + "_" + count + extention;
+					}
+					File checkFile = new File(savePath + filepath);
+					if (!checkFile.exists()) {
+						break;
+					}
+					count++;
+				}
+
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = files.getBytes();
+					bos.write(bytes);
+					bos.close();
+					grp.setFilename(filename);
+					grp.setFilepath("/resources/upload/gosu/gosuRequestProject/" + filepath);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			int result = service.insertGosuRequestProject(grp);
+
+			return result;
+		}
+		
+
+		@ResponseBody
+		@RequestMapping(value = "/talkStopAjax2.do")
+		public int talkStopAjax2(int requestProjectSubNo, Model model) {
+			int result = service.talkStop2(requestProjectSubNo);
+			return result;
+		}
 }
