@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.company.service.CompanyService;
 import kr.or.company.vo.Company;
+import kr.or.company.vo.CompanyInfo;
 
 @Controller
 public class CompanyController {
@@ -17,7 +18,7 @@ public class CompanyController {
 	@RequestMapping(value="/companyInfo.do")
 	public String companyInfo(String companyName, Model model) {
 		//회사명으로 company정보 가져오기
-		Company company = service.selectCompany(companyName);
+		CompanyInfo company = service.selectCompany(companyName);
 		model.addAttribute("com", company);
 		System.out.println("company : "+ company);
 		return "jobSearch/companyInfo";
