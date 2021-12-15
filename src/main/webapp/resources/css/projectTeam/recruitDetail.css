@@ -2,6 +2,10 @@
 	margin-bottom: 150px;
 }
 
+.container {
+   min-width: 1200px; 
+}
+
 .return_img{
     width: 80px;
 }

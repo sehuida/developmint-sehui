@@ -230,7 +230,8 @@ public class ProjectTeamService {
 		return ptmpd;
 	}
 
-
+	
+	@Transactional
 	public int writeRecruitTeam(ProjectTeam pt, int memberNo, ArrayList<String> langList) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo);
@@ -260,7 +261,8 @@ public class ProjectTeamService {
 		return ptnvd;
 		
 	}
-
+	
+	@Transactional
 	public int updateRecruitTeam(ProjectTeam pt, int memberNo, ArrayList<String> langList, int projectNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo);
@@ -270,17 +272,20 @@ public class ProjectTeamService {
 		int result = dao.updateRecruitTeam(map);
 		return result;
 	}
-
+	
+	@Transactional
 	public int deleteOneNotice(int projectNo) {
 		int result = dao.deleteOneNotice(projectNo);
 		return result;
 	}
-
+	
+	@Transactional
 	public int updateStatus() {
 		int result = dao.updateStatus();
 		return result;
 	}
-
+	
+	@Transactional
 	public int insertComment(String commentContent, int boardNo, String memberId, int boardType) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("commentContent", commentContent);
@@ -290,12 +295,14 @@ public class ProjectTeamService {
 		int result = dao.insertComment(map);
 		return result;
 	}
-
+	
+	@Transactional
 	public int deleteComment(int commentNo) {
 		int result = dao.deleteComment(commentNo);
 		return result;
 	}
-
+	
+	@Transactional
 	public int updateComment(int commentNo, String commentContent) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("commentContent", commentContent);
@@ -303,7 +310,8 @@ public class ProjectTeamService {
 		int result = dao.updateComment(map);
 		return result;
 	}
-
+	
+	@Transactional
 	public int reCommentInsert(String commentContent, int boardNo, String memberId, int commentNo, int boardType) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("commentContent", commentContent);
@@ -314,7 +322,8 @@ public class ProjectTeamService {
 		int result = dao.reCommentInsert(map);
 		return result;
 	}
-
+	
+	@Transactional
 	public int insertDibCount(int projectNo, int memberNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("projectNo", projectNo);
@@ -322,7 +331,8 @@ public class ProjectTeamService {
 		int result = dao.insertDibCount(map);
 		return result;
 	}
-
+	
+	@Transactional
 	public int deleteDibCount(int projectNo, int memberNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("projectNo", projectNo);
@@ -331,6 +341,7 @@ public class ProjectTeamService {
 		return result;
 	}
 	
+	@Transactional
 	public int insertApplyProject(ProjectEntry pta, ArrayList<String> langList, int projectNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pta", pta);
@@ -424,7 +435,8 @@ public class ProjectTeamService {
 		}
 		return result;
 	}
-
+	
+	@Transactional
 	public int deleteTeamMember(int entryNo) {
 		int result = dao.deleteTeamMember(entryNo);
 		return result;
@@ -465,6 +477,7 @@ public class ProjectTeamService {
 		return result;
 	}
 
+	@Transactional
 	public int insertFinalTeamMember(int entryNo, int projectNo, int memberNo) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -478,7 +491,9 @@ public class ProjectTeamService {
 		}
 		return result;
 	}
-
+	
+	
+	@Transactional
 	public int returnTeamMember(int entryNo) {
 		int result = dao.returnTeamMember(entryNo);
 		return result;
@@ -500,6 +515,7 @@ public class ProjectTeamService {
 		return entryNo;
 	}
 
+	@Transactional
 	public int cancelApplyProject(int entryNo, int applicantNo, int projectNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("entryNo", entryNo);
@@ -533,6 +549,7 @@ public class ProjectTeamService {
 		return result;
 	}
 
+	@Transactional
 	public int insertComment(String commentContent, int boardNo, String memberId, int boardType, int entryNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("commentContent", commentContent);
@@ -541,6 +558,22 @@ public class ProjectTeamService {
 		map.put("boardType", boardType);
 		map.put("entryNo", entryNo);
 		int result = dao.insertApplyComment(map);
+		return result;
+	}
+
+	public int applyCheckValue(int projectNo, Integer memberNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("projectNo", projectNo);
+		int result = dao.applyCheckValue(map);
+		return result;
+	}
+
+	public int searchEntryNo2(int projectNo, Integer memberNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("projectNo", projectNo);
+		int result = dao.searchEntryNo2(map);
 		return result;
 	}
 	

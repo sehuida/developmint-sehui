@@ -134,8 +134,8 @@
                     			</c:choose>
                     		</c:when>
                     		<c:otherwise>
-                    			<button type="button" class="btn btn-primary">수정</button>
-                        		<button type="button" class="btn btn-primary">삭제</button>
+                    			<a href="/updateProjectApplyFrm.do?entryNo=${pe.entryNo }&memberNo=${memberNo}&projectNo=${pe.projectNo}"><button type="button" class="btn btn-primary">수정</button></a>
+                        		<a href="/cancelApplyProject.do?entryNo=${pe.entryNo }&memberNo=${memberNo}&projectNo=${pe.projectNo}&applicantNo=${pe.memberNo}"><button type="button" class="btn btn-primary">지원 취소</button></a>
                     		</c:otherwise>
                     	</c:choose>
                     </div>
@@ -151,6 +151,7 @@
 	                	<input type="hidden" name="boardNo" value="${pe.projectNo }">
 	                	<input type="hidden" name="memberNo" value="${memberNo }">
 	                	<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+	                	<input type="hidden" name="checkMemberNo" value="${sessionScope.m.memberNo }">
 	                	<input type="hidden" name="boardType" value="5">
 	                </div>
 	                <div class="commentBtnBox">
