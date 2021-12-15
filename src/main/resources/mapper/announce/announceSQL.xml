@@ -80,6 +80,7 @@
 			fields = #{fields},
 			school = #{school},
 			work_form = #{workForm},
+			career = #{career},
 			announce_title = #{announceTitle},
 			announce_content = #{announceContent},
 			skills = #{skills},
@@ -87,9 +88,8 @@
 			work_place = #{workPlace},
 			end_date = #{endDate},
 			veterans = #{veterans},
-			military = #{military},
-			write_date = #{writeDate},
-			career = #{career}
+			military = #{military}
+			where announce_no = #{announceNo}
 	</update>
 	
 	<delete id="deleteAnnounce" parameterType="_int">
