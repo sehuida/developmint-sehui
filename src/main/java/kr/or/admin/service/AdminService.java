@@ -38,6 +38,7 @@ import kr.or.contest.vo.ContestMember;
 import kr.or.contest.vo.ContestMemberList;
 import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.Member;
+import kr.or.notice.vo.Notice;
 
 @Service
 public class AdminService {
@@ -101,7 +102,12 @@ public class AdminService {
 		HashMap<String, Object> date = new HashMap<String, Object>();
 		date.put("dateList", dateList);
 		
-		TotalData td = new TotalData(todayTotalMember, todayJoinMember, todayOutMember, todayTotalContent, dateList, joinList, outList, gradeList, cateList, yesterDayTotalMember, yesterDayTotalBoard); 
+		//최신공지사항 5개 불러오기
+		ArrayList<Notice> noticeList = dao.noticeList();
+		
+		
+		
+		TotalData td = new TotalData(todayTotalMember, todayJoinMember, todayOutMember, todayTotalContent, dateList, joinList, outList, gradeList, cateList, yesterDayTotalMember, yesterDayTotalBoard, noticeList); 
 		return td;
 	}
 
@@ -669,6 +675,25 @@ public class AdminService {
 		
 		
 		return tm;
+	}
+	
+	@Transactional
+	public int enrollMemberCompany(int companyNo, int memberNo) {
+		int result = dao.enrollMemberCompany(memberNo);
+		int result1 = 0;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("companyNo", companyNo);
+		map.put("memberNo", memberNo);
+		if(result > 0) {
+			result1 = dao.enrollMemberCompany2(map);
+			
+		}
+		return result1;
+	}
+
+	public int noEnrollMemberCompany(int memberNo) {
+		int result = dao.noEnrollMemberCompany(memberNo);
+		return result;
 	}
 }
 

@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>회사 인증 처리</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
 .mainCate{
@@ -97,13 +98,13 @@
 						 <div class="inputBox">
 							 <form action="/enrollMemberCompany.do" class="enrollForm">
 								<span><i class="bi bi-briefcase" style="font-size: 20px; color: #898989; margin-right: 5px;"></i></span><span class="infoTitle" style="margin-top: 20px; display: inline-block;">회사 선택</span>
-								<select class="form-control selectForm" style="margin-top:7px"> 
-									<option>회사를 선택하세요.</option>
+								<select class="form-control selectForm" style="margin-top:7px" name="companyNo"> 
+									<option value="no">회사를 선택하세요.</option>
 									<c:forEach items="${companyList }" var="com">
 										<option value="${com.companyNo }">${com.companyName }</option>
 									</c:forEach>
 								</select>
-								
+								<input type="hidden" name="memberNo" value="${memlist[i.index].memberNo }">
 							</form>
 						</div>
 					</div>
@@ -132,5 +133,58 @@
 		
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
+	<script>
+		$(".enrollBtn").click(function(){
+			var index = $(".enrollBtn").index(this);
+			if($('.selectForm option:selected').eq(index).val() == 'no'){
+				alert("회사를 선택해주세요.");
+				return;
+			}
+			swal({
+	 			  title: "회사 인증",
+	 			  text: "선택한 회사로 인증하시겠습니까?",
+	 			  icon: "warning",
+	 			  buttons: true,
+	 			  dangerMode: true,
+	 			})
+	 			.then((willDelete) => {
+	 			  if (willDelete) {
+	 				 $(".enrollForm").eq(index).submit();	
+	 			  }
+	 			});
+		})
+		
+		$(".noEnrollBtn").click(function(){
+			var index = $(".noEnrollBtn").index(this);
+			var memberNo = $("[name=memberNo]").eq(index).val();
+			swal({
+	 			  title: "회사 인증 반려",
+	 			  text: "선택한 회원을 반려 처리하시겠습니까?",
+	 			  icon: "warning",
+	 			  buttons: true,
+	 			  dangerMode: true,
+	 			})
+	 			.then((willDelete) => {
+	 			  if (willDelete) {
+	 				 location.href="/noEnrollMemberCompany.do?memberNo="+memberNo;	
+	 			  }
+	 			});
+		})
+	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

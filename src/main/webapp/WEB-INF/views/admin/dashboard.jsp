@@ -86,8 +86,7 @@
 }
 .cate2Box{
 	display: flex;
-	border-bottom: 1px solid #e9e9e9;
-	padding-bottom: 70px;
+	padding-bottom: 40px;
 }
 #chartBox{
 	box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
@@ -121,7 +120,7 @@
 	justify-content: space-evenly;
 }
 .BoardList{
-	width: 400px;
+	width: 600px;
 	border : 1px solid #d9d9d9;
 	border-radius : 5px;
 	padding: 25px;
@@ -298,32 +297,24 @@
 		</div>
 		
 		<%--게시판 별 최신글 --%>	
-		<div class="cate3Box">	
+		<div class="cate3Box">
+		<p class="title" style="margin-top:50px;">관리자 관리 게시판</p>	
 			<div>
-				<div class="BoardList" style="margin-top:50px;">
+				
+				<div class="BoardList" >
 					<div>
 					<p class="title" style="background-color: #fff">공지사항</p>
-					<a href="#" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
+					<a href="/noticeList.do?reqPage=1" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
 					</div>
-					<c:forEach var="i" begin="0" end="5">
-					<a href="#" class="newBoard"><span>최신 공지사항 입니다.</span></a><span class="newBoardDate">2021-11-29</span><br>
+					<c:forEach items="${noticeList }" var="n">
+					<a href="#" class="newBoard"><span>${n.noticeTitle }</span></a><span class="newBoardDate">${n.regDate }</span><br>
 					</c:forEach>
 				</div>
 				
-				<div class="BoardList" style="margin-top:50px;">
+				<div class="BoardList" >
 					<div>
-					<p class="title" style="background-color: #fff">QnA</p>
-					<a href="#" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
-					</div>
-					<c:forEach var="i" begin="0" end="5">
-					<a href="#" class="newBoard"><span>최신 QnA 입니다.</span></a><span class="newBoardDate">2021-11-29</span><br>
-					</c:forEach>
-				</div>
-				
-				<div class="BoardList" style="margin-top:50px;">
-					<div>
-					<p class="title" style="background-color: #fff">QnA</p>
-					<a href="#" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
+					<p class="title" style="background-color: #fff">QNA</p>
+					<a href="/counselAdmin.do" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
 					</div>
 					<c:forEach var="i" begin="0" end="5">
 					<a href="#" class="newBoard"><span>최신 QnA 입니다.</span></a><span class="newBoardDate">2021-11-29</span><br>
