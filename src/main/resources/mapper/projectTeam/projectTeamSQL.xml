@@ -338,7 +338,7 @@
   <insert id="writeRecruitTeam" parameterType="map">
   	<choose>
   		<when test="insertLangValue == 1">
-	  		insert into project values(project_seq.nextval, #{memberNo}, to_char(sysdate,'yyyy-mm-dd'), #{pt.rEndDate}, 0, #{pt.rTitle}, #{pt.rContent}, #{projectName}, #{projectGoal}, (select member_id from member where member_no = #{memberNo}), 1, null, null)
+	  		insert into project values(project_seq.nextval, #{memberNo}, to_char(sysdate,'yyyy-mm-dd'), #{pt.rEndDate}, 0, #{pt.rTitle}, #{pt.rContent}, #{pt.projectName}, #{pt.projectGoal}, (select member_id from member where member_no = #{memberNo}), 1, null, null)
   		</when>
   		<when test="insertLangValue == 2">
   			insert into use_project_language(use_project_lang_no, project_no, language_no)
@@ -381,7 +381,8 @@
             (select member_id from member m where m.member_no = p.member_no) as projectWriterId,
             (select member_grade from member m where m.member_no = p.member_no) as projectWriterGrade,
             (select count(*) from project_dibs pd where pd.project_no = #{projectNo} and pd.member_no = #{memberNo}) as dibCountClickValue,
-            (select count(*) from project_entry where member_no = #{memberNo} and project_no=#{projectNo}) as applyValue
+            (select count(*) from project_entry where project_no=#{projectNo}) as applyValue,
+            (select count(*) from project_entry where project_no=#{projectNo} and member_no=#{memberNo}) as myApplyValue
 	from project p 
 	where project_no = #{projectNo}
   </select>
@@ -739,6 +740,10 @@
   					1
   				from dual
   			</foreach>) A
+  </insert>
+  
+  <insert id="insertApplyComment" parameterType="map">
+  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'yyyy-mm-dd hh24:mi'), #{entryNo}, #{boardType}, 1, null)
   </insert>
   
 </mapper>

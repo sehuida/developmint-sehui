@@ -173,7 +173,9 @@
                             <div id="right_site">
                                 <input type="checkbox" class="navi_checkbox">
                                 <span class="navi_right_font">모집중인 글만 보기</span>
-                                <a href="/recruitNotice_writeForm.do?memberNo=${m.memberNo }"><button type="button" class="btn btn-success" id="navi_button">글 쓰기</button></a>
+                                <c:if test="${sessionScope.m.memberNo ne null }">
+                                	<a href="/recruitNotice_writeForm.do?memberNo=${m.memberNo }"><button type="button" class="btn btn-success" id="navi_button">글 쓰기</button></a>
+                                </c:if>
                             </div>
                         </div>
                         <div class="rListBox">

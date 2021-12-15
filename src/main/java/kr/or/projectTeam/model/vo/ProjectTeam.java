@@ -27,4 +27,6 @@ public class ProjectTeam {
 	private int projectWriterGrade;
 	private int dibCountClickValue;
 	private int applyValue;
+	private int myApplyValue;
+	private int myEntryNo;
 }

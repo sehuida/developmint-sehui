@@ -532,5 +532,16 @@ public class ProjectTeamService {
 		}
 		return result;
 	}
+
+	public int insertComment(String commentContent, int boardNo, String memberId, int boardType, int entryNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("commentContent", commentContent);
+		map.put("projectNo", boardNo);
+		map.put("memberId", memberId);
+		map.put("boardType", boardType);
+		map.put("entryNo", entryNo);
+		int result = dao.insertApplyComment(map);
+		return result;
+	}
 	
 }
