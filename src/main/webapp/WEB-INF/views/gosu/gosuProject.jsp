@@ -270,11 +270,14 @@ input:focus, textarea:focus {
 										<td>진행 과정과 받은 작품에 대해 꼼꼼하게 후기를 남겨주세요!</td>
 									</tr>
 									<tr>
-										<td><textarea cols="70" rows="20"></textarea></td>
+										<td><textarea cols="70" rows="10" id="requestReviewContent"placeholder="내용을 입력해주세요." style="padding:20px;"></textarea></td>
+										<input type="hidden" value="${grpsOne.requestProjectSubNo} " id="grequestProjectSubNo">
+										<input type="hidden" value="${sessionScope.m.memberId} " id="requestMemberId">
+										
 									
 									</tr>
 									<tr>
-										<td style="text-align: right;"><button type="button" class="btn btn-primary"
+										<td style="text-align: right;"><button id="requestReviewAjax" type="button" class="btn btn-primary"
 												style="font-weight: 900; padding: 10px; margin-left: 10px;">후기
 												작성</button></td>
 									</tr>
@@ -374,6 +377,35 @@ input:focus, textarea:focus {
 				url : "/talkStopAjax2.do",
 				data : {
 					"requestProjectSubNo" : requestProjectSubNo
+				},
+				success : function(data) {
+					if (data > 0) {
+						location.reload();
+					} else {
+						console.log("에러");
+					}
+				}
+			});
+		});
+		$("#requestReviewAjax").click(function() {
+			var requestReviewContent = $("#requestReviewContent").val();
+			var requestProjectSubNo = $("#grequestProjectSubNo").val();
+			var requestMemberId = $("#requestMemberId").val();
+			console.log(requestReviewContent);
+			console.log(requestProjectSubNo);
+			console.log(requestMemberId);
+			if(requestReviewContent==""){
+				alert("내용을 입력해주세요!");
+				return false;
+			}
+			$.ajax({
+
+				url : "/requestReviewAjax.do",
+				data : {
+					"requestReviewContent" : requestReviewContent,
+					"requestProjectSubNo" : requestProjectSubNo,
+					"requestMemberId" : requestMemberId
+					
 				},
 				success : function(data) {
 					if (data > 0) {

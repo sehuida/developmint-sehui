@@ -242,7 +242,7 @@
                 <c:forEach items="${list }" var="a" varStatus="i">
 	                <div class="content">
 	                    <div class="status">모집중</div>
-	                    <div class="cpName"><a href="companyInfo.do">${a.companyName }</a></div>	
+	                    <div class="cpName"><a href="companyInfo.do?companyName=${a.companyName }">${a.companyName }</a></div>	
 	                    <div class="title">
 	                        <a href="jobSearchView.do?announce_no=1">${a.announceTitle }</a>	
 	                    </div>
