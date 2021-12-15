@@ -33,17 +33,31 @@ public class ShareController {
 	public String shareWriteFrm() {
 		return "share/shareWriteFrm";
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/boardSummerImage.do")
 	public String boardSummer(MultipartFile file, HttpServletRequest request) {
 		
-		String saveRoot = request.getSession().getServletContext().getRealPath("/resources/upload/share/");
-		String originalFileName = file.getOriginalFilename(); 	//오리지날 파일명
-		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
-
-		String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/share/");
+		String filename = file.getOriginalFilename();
+		String onlyFilename = filename.substring(0,filename.indexOf("."));
+		String extension = filename.substring(filename.indexOf("."));
+		String filepath = null;
+		int count=0;
+		while(true) {
+			if(count == 0 ) {
+				filepath = onlyFilename+extension;
+			}else {
+				filepath = onlyFilename+"_"+count+extension;
+			}
+			File checkFile = new File(savePath+filepath);
+			if(!checkFile.exists()) {
+				break;
+			}
+			count++;
+		}
 		try {
-			FileOutputStream fos = new FileOutputStream(new File(saveRoot + savedFileName));
+			FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
 			// 업로드 속도증가를 위한 보조스트림
 			BufferedOutputStream bos = new BufferedOutputStream(fos);
 			// 파일 업로드
@@ -57,7 +71,7 @@ public class ShareController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "/resources/upload/share/" + savedFileName;		
+		return "/resources/upload/share/" + filepath;		
 	}
 	
 	@RequestMapping(value="/insertShareBoard.do")
