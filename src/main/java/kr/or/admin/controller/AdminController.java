@@ -63,6 +63,7 @@ public class AdminController {
 			model.addAttribute("cateList",td.getCateList());
 			model.addAttribute("yesterDayTotalMember", td.getYesterDayTotalMember());
 			model.addAttribute("yesterDayTotalBoard", td.getYesterDayTotalBoard());
+			model.addAttribute("noticeList", td.getNoticeList());
 			return "admin/dashboard";
 		}
 		
@@ -275,6 +276,34 @@ public class AdminController {
 			
 			return "admin/companyEnroll";
 		}
+		
+		//회사 인증
+		@RequestMapping(value="/enrollMemberCompany.do")
+		public String enrollMemberCompany(Model model, int companyNo, int memberNo) {
+			int result = service.enrollMemberCompany(companyNo,memberNo);
+			if(result>0) {
+				model.addAttribute("msg","처리 완료 되었습니다.");
+			}else {
+				model.addAttribute("msg","처리 실패");
+			}
+			model.addAttribute("loc","/companyEnroll.do?reqPage=1");
+			return "common/msg";
+		}
+		
+		//회사 인증 반려
+		@RequestMapping(value="/noEnrollMemberCompany.do")
+		public String noEnrollMemberCompany(Model model, int memberNo) {
+			int result = service.noEnrollMemberCompany(memberNo);
+			if(result>0) {
+				model.addAttribute("msg","처리 완료 되었습니다.");
+			}else {
+				model.addAttribute("msg","처리 실패");
+			}
+			model.addAttribute("loc","/companyEnroll.do?reqPage=1");
+			return "common/msg";
+		}
+		
+		
 
 
 }

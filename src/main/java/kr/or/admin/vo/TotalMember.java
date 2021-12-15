@@ -7,6 +7,7 @@ import kr.or.comment.vo.Report;
 import kr.or.company.vo.Company;
 import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.Member;
+import kr.or.notice.vo.Notice;
 import lombok.Data;
 
 @Data
