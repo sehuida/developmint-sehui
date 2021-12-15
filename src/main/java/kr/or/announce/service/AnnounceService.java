@@ -23,6 +23,14 @@ public class AnnounceService {
 		return dao.selectAllAnnounce(memberNo);
 	}
 
+	public Announce selectOneAnnounce(int announceNo) {
+		return dao.selectOneAnnounce(announceNo);
+	}
+
+	public int updateAnnounce(Announce a) {
+		return dao.updateAnnounce(a);
+	}
+
 	/*
 	 * public ArrayList<Announce> selectAllannounce(int memberNo) { return
 	 * dao.selectAllAnnounce(memberNo); }

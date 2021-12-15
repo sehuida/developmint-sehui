@@ -51,4 +51,45 @@
 		from announcement
 	</select>
 	
+	<select id="selectOneAnnounce" parameterType="_int" resultType="a">
+		select
+			announce_no as announceNo,
+			member_no as memberNo,
+			company_name as companyName,
+			category,
+			fields,
+			school,
+			work_form as workForm,
+			announce_title as announceTitle,
+			announce_content as announceContent,
+			skills,
+			money,
+			work_place as workPlace,
+			end_date as endDate,
+			veterans,
+			military,
+			write_date as writeDate,
+			career
+		from announcement
+		where announce_no = #{announceNo}
+	</select>
+	
+	<update id="updateAnnounce" parameterType="a">
+		update announcement set 
+			category = #{category},
+			fields = #{fields},
+			school = #{school},
+			work_form = #{workForm},
+			announce_title = #{announceTitle},
+			announce_content = #{announceContent},
+			skills = #{skills},
+			money = #{money},
+			work_place = #{workPlace},
+			end_date = #{endDate},
+			veterans = #{veterans},
+			military = #{military},
+			write_date = #{writeDate},
+			career = #{career}
+	</update>
+	
 </mapper>
