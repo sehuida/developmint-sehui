@@ -31,6 +31,17 @@ public class AnnounceService {
 		return dao.updateAnnounce(a);
 	}
 
+	public int deleteAnnounce(int announceNo) {
+		int appResult = dao.deleteApplication(announceNo);
+		if(appResult > 0) {
+			System.out.println("deleteAnnounce Dao 여기 성공");
+			return dao.deleteAnnounce(announceNo);
+		} else {
+			return 0;
+		}
+		
+	}
+
 	/*
 	 * public ArrayList<Announce> selectAllannounce(int memberNo) { return
 	 * dao.selectAllAnnounce(memberNo); }

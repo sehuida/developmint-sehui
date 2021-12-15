@@ -607,6 +607,21 @@
 						</div>	
 					</div>
 					
+					<div class="grayBox">
+						<em>경력</em>
+						<br><br>
+						<div class="career">
+							<b>경력선택</b>
+						</div>
+						<div class="careerInput">
+							<select class="selectInput" id="career" name="career">	
+								<option value=1>신입</option>
+								<option value=2>경력</option>
+								<option value=3>경력무관</option>
+							</select>
+						</div>		
+					</div>
+					
 					<!-- 이전, 등록하기 버튼 -->
 					<div class="selectBtn">
 						<input type="submit" class="resumeBtn" value="등록">

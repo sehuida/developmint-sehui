@@ -360,6 +360,7 @@
 		<div class="announceData">
 			<form action="updateAnnounce.do" method="post">
 			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">		<!-- 멤버번호 가져오기 위해서 히든으로 전송 -->
+			<input type="hidden" name="announceNo" value="${a.announceNo }">
 				<div class="step1">
 					<em>기본정보</em>
 					<br><br><br>
@@ -369,7 +370,7 @@
 						<em>회사명</em>
 						<br><br>
 						<b>회사명</b>
-						<input type="text" class="textInput" id="companyTitle" name="companyName" placeholder="회사명 입력">
+						<input type="text" class="textInput" id="companyTitle" name="companyName" value="${a.companyName }">
 					</div>
 					
 		
@@ -508,7 +509,7 @@
 						<div class="announTitle">
 							<b>공고 제목</b>
 						</div>
-						<input type="text" class="textInput" id="announTitle" style="width: 810px; margin-left: 0px;" name="announceTitle" placeholder="공고 제목을 입력하세요."><br>
+						<input type="text" class="textInput" id="announTitle" style="width: 810px; margin-left: 0px;" name="announceTitle" value="${a.announceTitle }"><br>
 					</div>
 					
 					<div class="step2Box">
@@ -518,16 +519,7 @@
 							파트너가 알아야 할 유의사항(필수 사항, 전문 경험 등)도 함께 작성해 주세요.
 						</p>
 			            <div class="announContent">
-			                <textarea cols="120" rows="30" name="announceContent" class="announContentTextarea" placeholder="  
-
-  <프로젝트의 현재 상황>
-  예시) 프로젝트의 목적, 현재 준비 상황, 진행 계획 등
-
-  <상세한 업무 내용>
-  예시) 사이트의 용도, 주요 기능 List, 작업 분량, 필요한 조건 등
-
-  <참고자료 / 유의사항>
-  예시) 참고사이트, 기타 유의사항 등"></textarea>
+			                <textarea cols="120" rows="30" name="announceContent" class="announContentTextarea" value="${a.announceContent }"></textarea>
 			        	</div>  
 			    	</div>
 			    	

@@ -64,6 +64,7 @@
         <span id="page-head">글작성하기</span><i class="bi bi-pen"></i>
         <div class="page-wrap">
             <form action="/insertShareBoard.do" method="post" enctype="multipart/form-data">
+            	<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
                 <div class="form-group">
                     <div class="categorys">
                         <label for="boardType" class="form-label mt-4">상세 유형</label><img
@@ -93,10 +94,6 @@
                     <div class="summerContentTop">
                         <div>
                             <label for="boardContent" class="form-label mt-4">글 내용</label>
-                        </div>
-                        <div style="margin-top: 20px;">
-                            <span class="text-info">남은 글자 수 - </span><span class="text-muted"
-                                id="maxContentPost">3000</span>
                         </div>
                     </div>
                     <textarea class="form-control" id="boardContent" name="boardContent" rows="3"></textarea>
@@ -128,7 +125,7 @@
 			    ['table', ['table']],
 			    ['para', ['ul', 'ol', 'paragraph']],
 			    ['height', ['height']],
-			    ['insert',['picture','link','video']],
+			    ['insert',['picture','link']],
 			    ['view', ['fullscreen', 'help']]
 			  ],
 			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
@@ -136,33 +133,7 @@
 			callbacks :{
 				onImageUpload : function(files){
 					uploadImage(files[0],this);	
-				},
-				onKeydown: function (e) { 
-                    var t = e.currentTarget.innerText; 
-                    if (t.trim().length >= 3000) {
-                        //delete keys, arrow keys, copy, cut, select all
-                        if (e.keyCode != 8 && !(e.keyCode >=37 && e.keyCode <=40) && e.keyCode != 46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e.ctrlKey) && !(e.keyCode == 65 && e.ctrlKey))
-                        e.preventDefault(); 
-                    } 
-                },
-                onKeyup: function (e) {
-                    var t = e.currentTarget.innerText;
-                    $('#maxContentPost').text(3000 - t.trim().length);
-                },
-                onPaste: function (e) {
-                    var t = e.currentTarget.innerText;
-                    var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-                    e.preventDefault();
-                    var maxPaste = bufferText.length;
-                    if(t.length + bufferText.length > 3000){
-                        maxPaste = 3000 - t.length;
-                    }
-                    if(maxPaste > 0){
-                        document.execCommand('insertText', false, bufferText.substring(0, maxPaste));
-                    }
-                    $('#maxContentPost').text(3000 - t.length);
-                }
-				
+				}
 			}
 		}); // 썸머노트 입력문 종료
 		function uploadImage(file,editor){

@@ -124,6 +124,15 @@
 		color: rgb(78, 205, 196);
 		background-color: white;
 	}
+	.deleteAnnounce{
+		border: none;
+		width: 100px;
+		height: 45px;
+		border: 2px solid orange;
+		border-radius: 10px;
+		color: orange;
+		background-color: white;
+	}
 	.resumeBtn{
         background-color: rgb(78, 205, 196);
         border: none;
@@ -168,7 +177,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="contain">
 		<em>구인공고 관리</em>				<!-- if 구인글 없을 때 등록된 구인글이 없습니다. -->
-		<c:if test="${empty a }">
+		<%-- <c:if test="${empty a }">
 			<div class="grayBox">
 				<div class="announceHeader">
 					<div class="resiterAnnounce">
@@ -180,87 +189,101 @@
 					</div>
 				</div>
 			</div>
-		</c:if>
+		</c:if> --%>
 	<c:choose>
-		<c:when test="${empty list }">
-			
+		<c:when test="${empty a }">
+			<div class="grayBox">
+				<div class="announceHeader">
+					<div class="resiterAnnounce">
+						<p style="margin-bottom: 10px;">대표이력서</p>
+					</div>
+					<div class="announceTitle" style="margin-bottom: 30px; margin-left: 30px;">
+						<em style="font-size:20px; color: #666;">등록된 구인공고가 없습니다.</em><br>
+						<em style="font-size:20px; color: #666;">아래에 버튼을 눌러 구인공고를 작성해주세요.</em>
+					</div>
+				</div>
+			</div>
 		</c:when>
 		<c:otherwise>
+			<div class="grayBox">
+				<div class="resumeHeader">
+					<div class="ceoAnnounce">
+						<p>등록된 공고</p>
+					</div>
+					<div class="writeDate">
+						<span>${a.writeDate }</span>	
+					</div>
+				</div>
+					<div class="announceTitle">
+						<em>${a.announceTitle }</em>	<!-- r.resumeTitle -->
+					</div>
+					<ul class="announceInfo1">
+		            	<li class="career">
+		            		<div class="announceInfoImg">
+		            			<img src="resources/img/resume/career.PNG">
+		            		</div>
+		            		<div class="announceInfoData">
+		            			<c:if test="${a.career eq 1 }">
+		            				<span>신입</span>
+		            			</c:if>
+		            			<c:if test="${a.career eq 2 }">
+		            				<span>경력</span>
+		            			</c:if>
+		            			<c:if test="${a.career eq 3 }">
+		            				<span>경력무관</span>
+		            			</c:if>
+		            		</div>
+		            	</li>   
+		            	<li class="money">
+							<div class="announceInfoImg">
+								<img src="resources/img/resume/income.PNG">					
+							</div>
+							<div class="announceInfoData">
+								<span>${a.money } &#8361;</span>	<!-- r.resumeMoney -->
+							</div>
+						</li>  
+					</ul>
+					<ul	class="announceInfo2">  
+					<li class="workPlace">
+							<div class="announceInfoImg">
+								<img src="resources/img/resume/workPlaceGray.PNG" style="width:19px; height: 24px;">
+							</div>
+							<div class="announceInfoData">
+								<span>위치 : 서울 금천구</span>	<!-- r.resumeworkPlace -->
+							</div>
+						</li>    					           
+						<li class="workForm">
+							<div class="announceInfoImg">
+								<img src="resources/img/resume/workForm.PNG">
+							</div>
+							<div class="announceInfoData">
+								<span>직무·직업 : 
+									<c:if test="${a.category eq 1 }">
+										IT개발
+									</c:if> 
+									<c:if test="${a.category eq 2 }">
+										웹 디자인
+									</c:if> 
+									<c:if test="${a.category eq 3 }">
+										프로젝트 기획
+									</c:if> 
+								</span>	<!-- r.resumeWorkForm -->
+							</div>
+						</li>               
+					</ul>
+				<div class="message">
+					<a href="applicationStatus.do"><button class="companyMessage">지원신청 회원 목록</button></a>		<!-- 일반회원이 지원신청을 했을 경우 count증가하고 이력서 열람할 수 있도록 하기 -> 서류합격? 버튼 누를 시 웹소켓으로 쪽지 보내기 -->
+					<span class="requestCount">1</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
+				</div>
+				<div class="update">
+					<%-- <input type="hidden" value="${a.announceNo }" name="announceNo"> --%>
+					<a href="/updateAnnounceFrm.do?announceNo=${a.announceNo }"><button class="updateAnnounce">수정하기</button></a>
+					<a href="/deleteAnnounce.do?announceNo=${a.announceNo }"><button class="deleteAnnounce">삭제하기</button></a>
+				</div>
+			</div>
 			
 		</c:otherwise>
 	</c:choose>
-		<div class="grayBox">
-			<div class="resumeHeader">
-				<div class="ceoAnnounce">
-					<p>등록된 공고</p>
-				</div>
-				<div class="writeDate">
-					<span>${a.writeDate }</span>	
-				</div>
-			</div>
-				<div class="announceTitle">
-					<em>${a.announceTitle }</em>	<!-- r.resumeTitle -->
-				</div>
-				<ul class="announceInfo1">
-	            	<li class="career">
-	            		<div class="announceInfoImg">
-	            			<img src="resources/img/resume/career.PNG">
-	            		</div>
-	            		<div class="announceInfoData">
-	            			<c:if test="${a.career eq 1 }">
-	            				<span>신입</span>
-	            			</c:if>
-	            			<c:if test="${a.career eq 2 }">
-	            				<span>경력</span>
-	            			</c:if>
-	            		</div>
-	            	</li>   
-	            	<li class="money">
-						<div class="announceInfoImg">
-							<img src="resources/img/resume/income.PNG">					
-						</div>
-						<div class="announceInfoData">
-							<span>${a.money } &#8361;</span>	<!-- r.resumeMoney -->
-						</div>
-					</li>  
-				</ul>
-				<ul	class="announceInfo2">  
-				<li class="workPlace">
-						<div class="announceInfoImg">
-							<img src="resources/img/resume/workPlaceGray.PNG" style="width:19px; height: 24px;">
-						</div>
-						<div class="announceInfoData">
-							<span>위치 : 서울 금천구</span>	<!-- r.resumeworkPlace -->
-						</div>
-					</li>    					           
-					<li class="workForm">
-						<div class="announceInfoImg">
-							<img src="resources/img/resume/workForm.PNG">
-						</div>
-						<div class="announceInfoData">
-							<span>직무·직업 : 
-								<c:if test="${a.category eq 1 }">
-									IT개발
-								</c:if> 
-								<c:if test="${a.category eq 2 }">
-									웹 디자인
-								</c:if> 
-								<c:if test="${a.category eq 3 }">
-									프로젝트 기획
-								</c:if> 
-							</span>	<!-- r.resumeWorkForm -->
-						</div>
-					</li>               
-				</ul>
-			<div class="message">
-				<a href="applicationStatus.do"><button class="companyMessage">지원신청 회원 목록</button></a>		<!-- 일반회원이 지원신청을 했을 경우 count증가하고 이력서 열람할 수 있도록 하기 -> 서류합격? 버튼 누를 시 웹소켓으로 쪽지 보내기 -->
-				<span class="requestCount">1</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
-			</div>
-			<div class="update">
-				<input type="hidden" value="${a.announceNo }" name="announceNo">
-				<a href="/updateAnnounceFrm.do?announceNo=${a.announceNo }"><button class="updateAnnounce">수정하기</button></a>
-			</div>
-		</div>
 		<div class="resume">
 			<a href="announceFrm.do"><button class="resumeBtn">구인공고 작성하기</button></a>
 		</div>
