@@ -26,7 +26,7 @@
 	
 	<insert id="insertAnnounce" parameterType="a">
 		insert into announcement values(announce_seq.nextval, #{memberNo}, #{companyName}, #{category}, #{fields}, #{school}, #{workForm}
-		, #{announceTitle}, #{announceContent}, #{skills}, #{money}, #{workPlace}, #{endDate}, #{veterans}, #{military}, to_char(sysdate,'yyyy-mm-dd'))
+		, #{announceTitle}, #{announceContent}, #{skills}, #{money}, #{workPlace}, #{endDate}, #{veterans}, #{military}, to_char(sysdate,'yyyy-mm-dd'), #{career})
 	</insert>
 	
 	<select id="allAnnounce" resultType="a">
@@ -50,5 +50,54 @@
 			career
 		from announcement
 	</select>
+	
+	<select id="selectOneAnnounce" parameterType="_int" resultType="a">
+		select
+			announce_no as announceNo,
+			member_no as memberNo,
+			company_name as companyName,
+			category,
+			fields,
+			school,
+			work_form as workForm,
+			announce_title as announceTitle,
+			announce_content as announceContent,
+			skills,
+			money,
+			work_place as workPlace,
+			end_date as endDate,
+			veterans,
+			military,
+			write_date as writeDate,
+			career
+		from announcement
+		where announce_no = #{announceNo}
+	</select>
+	
+	<update id="updateAnnounce" parameterType="a">
+		update announcement set 
+			category = #{category},
+			fields = #{fields},
+			school = #{school},
+			work_form = #{workForm},
+			career = #{career},
+			announce_title = #{announceTitle},
+			announce_content = #{announceContent},
+			skills = #{skills},
+			money = #{money},
+			work_place = #{workPlace},
+			end_date = #{endDate},
+			veterans = #{veterans},
+			military = #{military}
+			where announce_no = #{announceNo}
+	</update>
+	
+	<delete id="deleteApplication" parameterType="_int">
+		delete from application where announce_no = #{announceNo}
+	</delete>
+	
+	<delete id="deleteAnnounce" parameterType="_int">
+		delete from announcement where announce_no = #{announceNo}
+	</delete>
 	
 </mapper>

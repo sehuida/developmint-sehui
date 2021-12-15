@@ -41,7 +41,8 @@
 			"filename" as filename, 
 			"filepath" as filepath, 
 			"pin"as pin, 
-			"notice_writer" as noticeWriter 
+			"notice_writer" as noticeWriter, 
+			read_count as readCount
 		from notice where "notice_no" = #{noticeNo }
 	</select>
 	<select id="noticeAroundList" parameterType="_int" resultType="n">
@@ -56,10 +57,10 @@
 	<insert id="insertNotice" parameterType="n" >
 		<choose>
 			<when test="pin == 2">
-				INSERT INTO NOTICE VALUES(NOTICE_SEQ.NEXTVAL,#{noticeTitle},#{noticeContent},to_char(sysdate,'yyyy-mm-dd'),#{filename},#{filepath},2,#{noticeWriter})
+				INSERT INTO NOTICE VALUES(NOTICE_SEQ.NEXTVAL,#{noticeTitle},#{noticeContent},to_char(sysdate,'yyyy-mm-dd'),#{filename},#{filepath},2,#{noticeWriter},0)
 			</when>
 			<otherwise>
-				INSERT INTO NOTICE VALUES(NOTICE_SEQ.NEXTVAL,#{noticeTitle},#{noticeContent},to_char(sysdate,'yyyy-mm-dd'),#{filename},#{filepath},1,#{noticeWriter})
+				INSERT INTO NOTICE VALUES(NOTICE_SEQ.NEXTVAL,#{noticeTitle},#{noticeContent},to_char(sysdate,'yyyy-mm-dd'),#{filename},#{filepath},1,#{noticeWriter},0)
 			</otherwise>
 		</choose>
 	</insert>

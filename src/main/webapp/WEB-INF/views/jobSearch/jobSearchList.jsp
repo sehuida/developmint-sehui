@@ -290,13 +290,13 @@
 	                            <br>
 	                            <span>|</span>
 	                            <c:if test="${a.category eq 1}">
-	                            <span>개발</span>	                            	
+	                            <span>IT 개발</span>	                            	
 	                            </c:if>
 	                            <c:if test="${a.category eq 2}">
-	                            <span>디자인</span>	                            	
+	                            <span>웹 디자인</span>	                            	
 	                            </c:if>
 	                            <c:if test="${a.category eq 3}">
-	                            <span>기획</span>	                            	
+	                            <span>프로젝트 기획</span>	                            	
 	                            </c:if>
 	                        </div>
 	                    </div>

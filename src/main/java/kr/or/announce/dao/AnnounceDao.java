@@ -31,4 +31,21 @@ public class AnnounceDao {
 		return sqlSession.selectOne("announce.selectAnnounce", memberNo);
 	}
 
+	public Announce selectOneAnnounce(int announceNo) {
+		return sqlSession.selectOne("announce.selectOneAnnounce", announceNo);
+	}
+
+	public int updateAnnounce(Announce a) {
+		return sqlSession.update("announce.updateAnnounce", a);
+	}
+
+	public int deleteApplication(int announceNo) {
+		return sqlSession.delete("announce.deleteApplication", announceNo);
+	}
+	
+	public int deleteAnnounce(int announceNo) {
+		return sqlSession.delete("announce.deleteAnnounce", announceNo);
+	}
+
+
 }

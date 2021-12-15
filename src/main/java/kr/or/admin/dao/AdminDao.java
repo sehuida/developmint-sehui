@@ -16,6 +16,7 @@ import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestMemberList;
 import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.Member;
+import kr.or.notice.vo.Notice;
 
 @Repository
 public class AdminDao {
@@ -228,6 +229,24 @@ public class AdminDao {
 	public ArrayList<Company> companyList() {
 		List<Company> list = sqlSession.selectList("admin.companyList");
 		return (ArrayList<Company>)list;
+	}
+
+	public int enrollMemberCompany(int memberNo) {
+		return sqlSession.update("admin.enrollMemberCompany", memberNo);
+	}
+
+	public int enrollMemberCompany2(Map<String, Object> map) {
+		return sqlSession.update("admin.enrollMemberCompany2", map);
+		
+	}
+
+	public int noEnrollMemberCompany(int memberNo) {
+		return sqlSession.update("admin.noEnrollMemberCompany", memberNo);
+	}
+
+	public ArrayList<Notice> noticeList() {
+		List<Notice> list = sqlSession.selectList("admin.noticeList");
+		return (ArrayList<Notice>)list;
 	}
 	
 
