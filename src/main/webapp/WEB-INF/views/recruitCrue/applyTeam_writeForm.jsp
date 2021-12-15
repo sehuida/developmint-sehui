@@ -23,7 +23,6 @@
 	<link rel="stylesheet" href="/resources/css/projectTeam/writePage.css">
 
 <script>
-	var result = false;
 	$(function(){
 		
 		$("input[type='checkbox']").on("click", function(){
@@ -34,15 +33,6 @@
 			}
 		});
 		 
-		 $('#maxContentPost').on('DOMSubtreeModified propertychange',function(){
-	        	if($('#maxContentPost').text() < 0){
-	            	result = false;
-	            }
-	        	if($('#maxContentPost').text() >= 0){
-	        		result = true;
-	            }
-	     });
-	
 		$(".return_img").click(function(){
 			history.back();
 		});
@@ -54,10 +44,6 @@
         	swal("체크하지 않거나 입력되지 않은 값이 있습니다.", "비어있는 입력값이 있는지 다시 한번 확인해주세요!", "warning");
         	return false;
         } 
-       if(result == false){
-    	   swal("입력값 초과", "모집설명에서 입력값이 허용치를 초과하였습니다.", "warning");
-    	   return false;
-       }
         
     }
 	
@@ -106,7 +92,6 @@
 	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/content-creator.png">
 	                            <p class="titleText">지원사유</p>
 	                        </div>
-	                        <span>입력 가능 글자 수 : </span><b id="maxContentPost" style="text-align:left"></b>
 	                        <div class="form-group">
 	                            <textarea class="form-control" id="summernote" rows="3" name="applyContent"></textarea>
 	                        </div>
@@ -147,34 +132,7 @@
 			callbacks:{
 				onImageUpload : function(files){
  					uploadImage(files[0], this);
- 				},
-				onKeydown: function (e) { 
-                     var t = e.currentTarget.innerText; 
-                     if (t.trim().length >= 1000) {
-                         //delete keys, arrow keys, copy, cut, select all
-                         if (e.keyCode != 8 && !(e.keyCode >=37 && e.keyCode <=40) && e.keyCode != 46 && !(e.keyCode == 88 && e.ctrlKey) && !(e.keyCode == 67 && e.ctrlKey) && !(e.keyCode == 65 && e.ctrlKey))
-                         e.preventDefault(); 
-                     } 
-                 },
-                 onKeyup: function (e) {
-                     var t = e.currentTarget.innerText;
-                     $('#maxContentPost').text(1000 - t.trim().length);
-                     
-                 },
-                 onPaste: function (e) {
-                     var t = e.currentTarget.innerText;
-                     var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-                     e.preventDefault();
-                     var maxPaste = bufferText.length;
-                     if(t.length + bufferText.length > 1000){
-                         maxPaste = 1000 - t.length;
-                     }
-                     if(maxPaste > 0){
-                         document.execCommand('insertText', false, bufferText.substring(0, maxPaste));
-                     }
-                     $('#maxContentPost').text(1000 - t.length);
-                 },
-                 
+ 				}
 			}
 		});
 	});
