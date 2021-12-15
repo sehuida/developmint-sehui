@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.announce.service.AnnounceService;
 import kr.or.announce.vo.Announce;
+import kr.or.resume.vo.Resume;
 
 @Controller
 public class AnnounceController {
@@ -66,5 +67,18 @@ public class AnnounceController {
 		return "common/msg";
 		
 	}
+	
+	@RequestMapping(value="/deleteAnnounce.do")
+	public String deleteAnnounce(int announceNo, Announce a, Model model) {
+		int result = service.deleteAnnounce(announceNo);
+		if(result > 0) {
+			model.addAttribute("msg","구인공고가 삭제되었습니다.");
+		} else {
+			model.addAttribute("msg","구인공고 삭제 에러");			
+		}
+		model.addAttribute("loc","/announceManage.do?memberNo="+a.getMemberNo());
+		return "common/msg";
+	}
+	
 	
 }

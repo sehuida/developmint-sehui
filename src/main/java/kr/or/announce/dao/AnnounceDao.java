@@ -39,4 +39,8 @@ public class AnnounceDao {
 		return sqlSession.update("announce.updateAnnounce", a);
 	}
 
+	public int deleteAnnounce(int announceNo) {
+		return sqlSession.delete("announce.deleteAnnounce", announceNo);
+	}
+
 }

@@ -31,6 +31,10 @@ public class AnnounceService {
 		return dao.updateAnnounce(a);
 	}
 
+	public int deleteAnnounce(int announceNo) {
+		return dao.deleteAnnounce(announceNo);
+	}
+
 	/*
 	 * public ArrayList<Announce> selectAllannounce(int memberNo) { return
 	 * dao.selectAllAnnounce(memberNo); }

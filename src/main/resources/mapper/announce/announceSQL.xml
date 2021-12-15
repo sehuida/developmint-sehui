@@ -92,4 +92,8 @@
 			career = #{career}
 	</update>
 	
+	<delete id="deleteAnnounce" parameterType="_int">
+		delete from announcement where announce_no = #{announceNo}
+	</delete>
+	
 </mapper>
