@@ -116,9 +116,33 @@ input:focus, textarea:focus {
 	display: block;
 	font-size: 13px;
 }
-#gstar{
-	width: 30px;
-	margin-bottom:30px;
+
+.star-rating {
+	display: flex;
+	flex-direction: row-reverse;
+	font-size: 1.5em;
+	justify-content: space-around;
+	padding: 0 .2em;
+	text-align: center;
+	width: 6em;
+	margin-bottom: 10px;
+}
+
+.star-rating input {
+	display: none;
+}
+
+.star-rating label {
+	color: #ccc;
+	cursor: pointer;
+}
+
+.star-rating :checked ~ label {
+	color: #f90;
+}
+
+.star-rating label:hover, .star-rating label:hover ~ label {
+	color: #fc0;
 }
 </style>
 </head>
@@ -232,48 +256,144 @@ input:focus, textarea:focus {
 			<c:when test="${gfOne.feedbackNum eq 3}">
 				<c:choose>
 					<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
-
-
 						<c:choose>
-							<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
-								테스트 구문 바꾸기 리뷰 있으면 리뷰 보여주게
+							<c:when test="${not empty greview}">
+	<div
+									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 50px;">
+									<div>
+										<span
+											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">작성된 리뷰</span>
+										<br> <br>
+										<table>
+											<tr>
+												<td style="font-weight: 900; font-size: 20px;padding-bottom:5px;">${greview.writer }</td>
+												<td style="width: 800px;">
+													
+													<div class="star-rating">
+														<c:if test="${greview.reviewNum eq 1 }">
+															<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+														</c:if>
+														<c:if test="${greview.reviewNum eq 2 }">
+															<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+														</c:if>
+														<c:if test="${greview.reviewNum eq 3 }">
+															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+														</c:if>
+														<c:if test="${greview.reviewNum eq 4 }">
+															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+														</c:if>
+														<c:if test="${greview.reviewNum eq 5 }">
+															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+														</c:if>
+													</div>
+												</td>
+												<td>${greview.reviewDate }</td>
 
+											</tr>
+											<tr>
+												<td colspan="3" style="text-align: center; border: 1px solid #78c2ad;  padding:50px;">${greview.reviewContentBr }</td>
 
+											</tr>
+										</table>
+										<div style="text-align: center;">
+											<button type="button" class="btn btn-primary"
+												style="font-weight: 900; padding: 10px; margin: 50px;"
+												onclick="history.back();">뒤로가기</button>
+										</div>
+									</div>
 							</c:when>
 							<c:otherwise>
 							아직 작성된 리뷰가 없습니다!
 						</c:otherwise>
 						</c:choose>
-
-
 					</c:when>
 					<c:otherwise>
-						<div
-							style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
-							<div>
-								<h2 style="font-weight: 900; width: 100%; text-align: center;">고수님께서
-									완료한 피드백입니다!</h2>
-								<br> <br> <span
-									style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">리뷰</span>
-								<br> <br>
-								<table>
-									<tr>
-										<td colspan="2"><img id="gstar"
-											src="/resources/img/gosu/stars_02.png"> <img id="gstar"
-											src="/resources/img/gosu/stars_01.png"> <img id="gstar"
-											src="/resources/img/gosu/stars_01.png"> <img id="gstar"
-											src="/resources/img/gosu/stars_01.png"> <img id="gstar"
-											src="/resources/img/gosu/stars_01.png"></td>
-									</tr>
-									<tr>
-										<td><textarea cols="70"></textarea></td>
-										<td><button type="button" class="btn btn-primary"
-												style="font-weight: 900; padding: 10px; margin-left: 10px;">리뷰
-												작성</button></td>
-									</tr>
-								</table>
-							</div>
-						</div>
+						<c:choose>
+							<c:when test="${not empty greview}">
+								<div
+									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 50px;">
+									<div>
+										<span
+											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">작성한 리뷰</span>
+										<br> <br>
+										<table>
+											<tr>
+												<td style="width: 800px;">
+													<div class="star-rating">
+															<c:if test="${greview.reviewNum eq 1 }">
+															<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+														</c:if>
+														<c:if test="${greview.reviewNum eq 2 }">
+															<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+														</c:if>
+														<c:if test="${greview.reviewNum eq 3 }">
+															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+														</c:if>
+														<c:if test="${greview.reviewNum eq 4 }">
+															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+														</c:if>
+														<c:if test="${greview.reviewNum eq 5 }">
+															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+														</c:if>
+													</div>
+												</td>
+												<td>${greview.reviewDate }</td>
+
+											</tr>
+											<tr>
+												<td colspan="2" style="text-align: center; border: 1px solid #78c2ad;  padding:50px;">${greview.reviewContentBr }</td>
+
+											</tr>
+										</table>
+										<div style="text-align: center;">
+											<button type="button" class="btn btn-primary"
+												style="font-weight: 900; padding: 10px; margin: 50px;"
+												onclick="history.back();">뒤로가기</button>
+										</div>
+									</div>
+							</c:when>
+							<c:otherwise>
+								<div
+									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
+									<div>
+										<h2 style="font-weight: 900; width: 100%; text-align: center;">고수님께서
+											완료한 피드백입니다!</h2>
+										<br> <br> <span
+											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">리뷰</span>
+										<br> <br>
+										<table>
+											<tr>
+												<td colspan="2">
+													<div class="star-rating">
+														<input type="radio" id="5-stars" name="rating" value="5" />
+														<label for="5-stars" class="star">&#9733;</label> <input
+															type="radio" id="4-stars" name="rating" value="4" /> <label
+															for="4-stars" class="star">&#9733;</label> <input
+															type="radio" id="3-stars" name="rating" value="3" /> <label
+															for="3-stars" class="star">&#9733;</label> <input
+															type="radio" id="2-stars" name="rating" value="2" /> <label
+															for="2-stars" class="star">&#9733;</label> <input
+															type="radio" id="1-star" name="rating" value="1" /> <label
+															for="1-star" class="star">&#9733;</label>
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td><textarea cols="70" id="reviewContent"></textarea></td>
+												<td><button type="button" id="reviewSendAjax"
+														class="btn btn-primary"
+														style="font-weight: 900; padding: 10px; margin-left: 10px;">리뷰
+														작성</button></td>
+												<input type="hidden" value=${gfOne.ggosuNo } id="gfGgosuNo">
+												<input type="hidden" value="${sessionScope.m.memberId }"
+													id="writer">
+											</tr>
+										</table>
+									</div>
+								</div>
+							</c:otherwise>
+						</c:choose>
+
 
 					</c:otherwise>
 				</c:choose>
@@ -328,6 +448,7 @@ input:focus, textarea:focus {
 			</c:otherwise>
 		</c:choose>
 
+
 	</div>
 	<script>
 		$("#talkBtnAjax").click(function() {
@@ -379,6 +500,39 @@ input:focus, textarea:focus {
 				}
 			});
 		});
+		$("#reviewSendAjax").click(function() {
+			var reviewNum = $("input[name=rating]:checked").val();
+			var writer = $("#writer").val();
+			var reviewContent = $("#reviewContent").val();
+			var ggosuNo = $("#gfGgosuNo").val();
+			console.log(reviewNum);
+			console.log(writer);
+			console.log(reviewContent);
+			console.log(ggosuNo);
+			if (reviewNum == null || reviewContent == "") {
+				alert("작성하신 리뷰를 다시 확인해주세요!");
+				return false;
+			}
+			$.ajax({
+
+				url : "/reviewSendAjax.do",
+				data : {
+					"reviewNum" : reviewNum,
+					"writer" : writer,
+					"reviewContent" : reviewContent,
+					"ggosuNo" : ggosuNo
+				},
+				success : function(data) {
+					if (data > 0) {
+						alert("리뷰 작성이 완료되었습니다!");
+
+						location.reload();
+					} else {
+						console.log("에러");
+					}
+				}
+			});
+		})
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>

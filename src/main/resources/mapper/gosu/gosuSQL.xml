@@ -366,10 +366,12 @@
 		from gosu_request_cost
 		where member_id
 		=#{memberId}
-		AND cost_no NOT IN(select cost_no from gosu_request_project_sub)
+		AND cost_no
+		NOT IN(select cost_no from gosu_request_project_sub)
 		order by
 		1
-		desc )r)rr
+		desc
+		)r)rr
 	</select>
 	<select id="selectRequestNoGosuNo" parameterType="grc"
 		resultType="grc">
@@ -423,7 +425,8 @@
 		pro.REQUEST_PROJECT_NO as requestProjectNo,
 		pro.MEMBER_NO
 		as memberNo,
-		pro.REQUEST_PROJECT_CONTENT as requestProjectContent,
+		pro.REQUEST_PROJECT_CONTENT as
+		requestProjectContent,
 		pro.REQUEST_PROJECT_DATE
 		as requestProjectDate,
 		pro.FILEPATH,
@@ -431,12 +434,15 @@
 		pro.REQUEST_PROJECT_SUB_NO as
 		requestProjectSubNo,
 		(select member_id from member where
-		member_no = pro.member_no) as memberId,
+		member_no =
+		pro.member_no) as memberId,
 		(select filepath from member
-		where member_no = pro.member_no) as
+		where member_no
+		= pro.member_no) as
 		memberImg
 		from(select * from
-		gosu_request_project where
+		gosu_request_project
+		where
 		REQUEST_PROJECT_SUB_NO=#{rpsNo})pro
 
 	</select>
@@ -558,10 +564,59 @@
 		gosu_request_project
 		values(GOSU_REQUEST_PROJECT_SEQ.nextval,#{memberNo},#{requestProjectContent},to_char(sysdate,'yyyy-mm-dd'),#{filepath},#{filename},#{requestProjectSubNo})
 	</insert>
-	
+
 	<update id="talkStop2" parameterType="_int">
 		update
 		gosu_request_project_sub set
-		REQUEST_PROJECT_SUB_NUM = 3 where REQUEST_PROJECT_SUB_NO = #{requestProjectSubNo}
+		REQUEST_PROJECT_SUB_NUM = 3 where
+		REQUEST_PROJECT_SUB_NO = #{requestProjectSubNo}
 	</update>
+	<insert id="insetReviewOne" parameterType="greview">
+		insert into
+		gosu_review
+		values(gosu_r_seq.nextval,#{ggosuNo},#{writer},#{reviewContent},#{reviewNum},to_char(sysdate,'yyyy-mm-dd'))
+	</insert>
+	<select id="selectGosuReviewOne" parameterType="greview"
+		resultType="greview">
+		select
+		REVIEW_NO as reviewNo,
+		GGOSU_NO as ggosuNo,
+		WRITER as
+		writer,
+		REVIEW_CONTENT as reviewContent,
+		REVIEW_NUM as reviewNum,
+		REVIEW_DATE as reviewDate
+		from
+		gosu_review where GGOSU_NO = #{ggosuNo}
+		and WRITER=#{writer}
+	</select>
+	<select id="selectGosuReviewList" parameterType="_int"
+		resultType="greview">
+		select
+		REVIEW_NO as reviewNo,
+		GGOSU_NO as ggosuNo,
+		WRITER as
+		writer,
+		REVIEW_CONTENT as reviewContent,
+		REVIEW_NUM as reviewNum,
+		REVIEW_DATE as reviewDate
+		from
+		gosu_review where GGOSU_NO=#{ggsouNo}
+	</select>
+	<select id="selectReviewCount" parameterType="_int"
+		resultType="_int">
+		select
+		count(*) as reviewCount
+		from
+		gosu_review where GGOSU_NO=#{ggsouNo}
+	</select>
+
+	<select id="selectReviewAvg" parameterType="_int"
+		resultType="_int">
+		SELECT ROUND(AVG(REVIEW_NUM),1) as reviewAvg
+		FROM gosu_review
+		where ggosu_no =#{ggsouNo}
+		GROUP BY GGOSU_NO
+	</select>
+
 </mapper>

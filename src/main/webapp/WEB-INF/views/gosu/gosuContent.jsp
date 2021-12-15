@@ -353,47 +353,76 @@
 				<div class="gosu-review">
 					<h4>리뷰</h4>
 					<div class="review-wrap">
+					<c:choose>
+						<c:when test="${empty greviewList }">
+							작성된 리뷰가 아직 없습니다!
+						</c:when>
+						<c:otherwise>
 						<div>
 							<div class="review-avg">
 								<table>
 									<tr>
-										<td rowspan="3" style="font-size: 40px; font-weight: bold;">4.0</td>
+										<td rowspan="3" style="font-size: 40px; font-weight: bold;">${grAVG.reviewAvg }점</td>
 									</tr>
 									<tr>
-										<td>별별별별별</td>
+										<td>
+										<c:choose>
+											<c:when test="${grAVG.reviewAvg le 1 }">
+											<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+											</c:when>
+											<c:when test="${grAVG.reviewAvg le 2 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+											</c:when>
+												<c:when test="${grAVG.reviewAvg le 3 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+											</c:when>
+												<c:when test="${grAVG.reviewAvg le 4 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+											</c:when>
+												<c:when test="${grAVG.reviewAvg ge 5 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+											</c:when>
+										</c:choose>
+										</td>
 									</tr>
 									<tr>
-										<td style="font-size: small;">xx개의 리뷰</td>
+										<td style="font-size: small;">${grAVG.reviewCount } 개의 리뷰</td>
 									</tr>
 								</table>
 							</div>
 							<hr>
-							<div class="review-one">
-								<ul>
-									<li>xxx이름</li>
-									<li>별별별별별</li>
-									<li>2021.12.01</li>
-								</ul>
-								<br>
-								<div style="display: flex; justify-content: center;">
-									<p>리뷰리뷰리뷰리뷰리뷰립류ㅣ뷰리뷰리뷰리뷰리리뷰리뷰리뷰리뷰리뷰립류ㅣ뷰리뷰리뷰리뷰리리뷰리뷰리뷰리뷰리뷰립류ㅣ뷰리뷰리뷰리뷰리리뷰리뷰리뷰리뷰리뷰립류ㅣ뷰리뷰리뷰리뷰리리뷰리뷰리뷰리뷰리뷰립류ㅣ뷰리뷰리뷰리뷰리</p>
+
+							<c:forEach items="${greviewList }" var="grl" varStatus="i">
+								<div class="review-one">
+									<ul>
+										<li>${grl.writer }</li>
+										<li><c:if test="${grl.reviewNum eq 1 }">
+												<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+											</c:if> <c:if test="${grl.reviewNum eq 2 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+											</c:if> <c:if test="${grl.reviewNum eq 3 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+											</c:if> <c:if test="${grl.reviewNum eq 4 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+											</c:if> <c:if test="${grl.reviewNum eq 5 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+											</c:if></li>
+										<li>${grl.reviewDate }</li>
+									</ul>
+									<br>
+									<div style="display: flex; justify-content: center;">
+										<p>${grl.reviewContentBr }</p>
+									</div>
 								</div>
-							</div>
-							<div class="review-one">
-								<ul>
-									<li>xxx이름</li>
-									<li>별별별별별</li>
-									<li>2021.12.01</li>
-								</ul>
-								<br>
-								<div style="display: flex; justify-content: center;">
-									<p>리뷰리뷰리뷰리뷰리뷰립류ㅣ뷰리뷰리뷰리뷰리리뷰리뷰리뷰리뷰리뷰립류ㅣ뷰리뷰리뷰리뷰리리뷰리뷰리뷰리뷰리뷰립류ㅣ뷰리뷰리뷰리뷰리리뷰리뷰리뷰리뷰리뷰립류ㅣ뷰리뷰리뷰리뷰리리뷰리뷰리뷰리뷰리뷰립류ㅣ뷰리뷰리뷰리뷰리</p>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 						<div style="display: flex; justify-content: center;">
 							<a class="btn btn-primary">리뷰 더보기</a>
 						</div>
+						</c:otherwise>
+					</c:choose>
+						
+						
 					</div>
 				</div>
 
