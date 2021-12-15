@@ -18,7 +18,7 @@
 	.companyInfoHeader{
 		width: 1000px;
 		margin: 0 auto;
-		margin-top: 80px;
+		margin-top: 50px;
 		margin-bottom: 50px; 
 		text-align: center;
 	}
@@ -63,10 +63,11 @@
 	}
 	.companyName, .companyName>p{
 		display: inline-block;
-		font-size: 10px;
+		font-size: 12px;
 		color: blue;
 		margin-left: 10px;
-		margin-bottom: 0;
+		position: relative;
+		top: -1px;
 	}
 </style>
 <body>
