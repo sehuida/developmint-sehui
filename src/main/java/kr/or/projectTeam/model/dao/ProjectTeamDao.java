@@ -265,5 +265,13 @@ public class ProjectTeamDao {
 		return sqlSession.insert("projectTeam.insertApplyComment", map);
 	}
 
+	public int applyCheckValue(Map<String, Object> map) {
+		return sqlSession.selectOne("projectTeam.applyCheckValue", map);
+	}
+
+	public int searchEntryNo2(Map<String, Object> map) {
+		return sqlSession.selectOne("projectTeam.searchEntryNo2", map);
+	}
+
 	
 }

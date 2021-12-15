@@ -5,4 +5,7 @@
    		insert into share_board values 
    		(share_seq.nextval,#{memberNo},#{boardTitle},#{boardContent},#{boardType}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'),#{filename},#{filepath},0)
    </insert>
+   <update id="plusPoints" parameterType="sv">
+   		update member set member_grade = member_grade+3 where member_no=#{memberNo}
+   </update>
 </mapper>

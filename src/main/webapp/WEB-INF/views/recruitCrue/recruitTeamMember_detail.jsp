@@ -149,6 +149,9 @@
                     				<c:when test="${memberNo == -1 || pt.projectStatus != 1 }">
                     					<button type="button" class="btn btn-primary" disabled="disabled">프로젝트 지원</button>
                     				</c:when>
+                    				<c:when test="${applyCheckValue > 0}">
+                    					<a href="/selectOneApplicant.do?projectNo=${pt.projectNo}&memberNo=${pt.projectWriterMemberNo}&entryNo=${entryNo}"><button type="button" class="btn btn-primary">작성한 지원글 확인</button></a>
+                    				</c:when>
                     				<c:otherwise>
                     					<a href="/insertApplyProjectFrm.do?memberNo=${sessionScope.m.memberNo }&projectNo=${pt.projectNo}"><button type="button" class="btn btn-primary">프로젝트 지원</button></a>
                     				</c:otherwise>

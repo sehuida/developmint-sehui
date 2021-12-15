@@ -9,6 +9,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 </head>
 <style>
+.container {
+   min-width: 1200px; 
+}
 .mainCate{
 	display:flex;
 }

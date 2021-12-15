@@ -173,11 +173,20 @@ public class ProjectTeamController {
 		if(memberNo == null) {
 			memberNo = -1;
 		}
+		int entryNo = 0;
+		int applyCheckValue = service.applyCheckValue(projectNo, memberNo);
+		if(applyCheckValue > 0) {
+			entryNo = service.searchEntryNo2(projectNo, memberNo);
+		}
 		ProjectTeamNoticeViewData ptnvd = service.selectOneNotice(projectNo, memberNo);
 		model.addAttribute("commentList", ptnvd.getList());
 		model.addAttribute("pt", ptnvd.getPt());
 		model.addAttribute("pdLangList", ptnvd.getPdLangList());
 		model.addAttribute("memberNo", memberNo);
+		model.addAttribute("applyCheckValue",applyCheckValue);
+		if(entryNo > 0) {
+			model.addAttribute("entryNo",entryNo);
+		}
 		return "recruitCrue/recruitTeamMember_detail";
 	}
 	
@@ -233,14 +242,18 @@ public class ProjectTeamController {
 	  }
 	  
 	  @RequestMapping(value="/insertComment.do") 
-	  public String insertComment(Model model, String commentContent, int boardNo, String memberId, int memberNo, int boardType) {
+	  public String insertComment(Model model, String commentContent, int boardNo, String memberId, int memberNo, int boardType, int checkMemberNo) {
 		  int entryNo = 0;
 		  int result = 0;
 		  if(boardType == 3) {
 			  result = service.insertComment(commentContent, boardNo, memberId, boardType); 
 		  }else {
-			  entryNo = service.searchEntryNo(boardNo, memberId);
-			  result = service.insertComment(commentContent, boardNo, memberId, boardType, entryNo); 
+			  if(checkMemberNo != memberNo) {
+				  entryNo = service.searchEntryNo(boardNo, memberId);
+				  result = service.insertComment(commentContent, boardNo, memberId, boardType, entryNo);
+			  } else {
+				  result = service.insertComment(commentContent, boardNo, memberId, boardType); 
+			  }
 		  }
 		  if(result > 0) { 
 			  model.addAttribute("title", "댓글 등록 성공");
@@ -248,7 +261,7 @@ public class ProjectTeamController {
 			  if(boardType == 3) {
 				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
 			  } else {
-				  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+boardNo+"&memberNo=$"+memberNo+"&entryNo="+entryNo);
+				  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+boardNo+"&memberNo="+memberNo+"&entryNo="+entryNo);
 			  }
 			  model.addAttribute("icon", "success");
 		  } else {
@@ -257,7 +270,7 @@ public class ProjectTeamController {
 			  if(boardType == 3) {
 				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
 			  } else {
-				  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+boardNo+"&memberNo=$"+memberNo+"&entryNo="+entryNo);
+				  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+boardNo+"&memberNo="+memberNo+"&entryNo="+entryNo);
 			  }
 			  model.addAttribute("icon", "warning");
 		  }
@@ -559,9 +572,7 @@ public class ProjectTeamController {
 		public String updateProjectApplyFrm(Model model, int projectNo, int memberNo, int entryNo) {
 			ProjectTeamApplicantViewData ptavd = service.selectOneApplicant(entryNo);
 			ArrayList<DevelopLanguage> dlList = service.selectAllDevelopLang();
-			model.addAttribute("memberNo", memberNo);
 			model.addAttribute("dlList", dlList);
-			model.addAttribute("projectNo", projectNo);
 			model.addAttribute("commentList", ptavd.getCommentList());
 			model.addAttribute("pe", ptavd.getPe());
 			model.addAttribute("udlList", ptavd.getUdlList());

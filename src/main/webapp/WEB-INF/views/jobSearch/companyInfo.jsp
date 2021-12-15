@@ -78,7 +78,7 @@
 				<img src="resources/img/jobSearch/Develomint_logo.png">	<!-- 나중에 업로드이미지로 바꿔주기 -->
 			</div>
 			<div class="companyTitle">
-				<p>(주)디벨로민트</p>
+				<p>${com.companyName }</p>
 			</div>
 		</div>
 		<div class="intro">
@@ -86,13 +86,14 @@
 		</div>
 		<hr>
 		<div class="announce">
-			<%-- <c:choose>						//등록된 공고가 없으면 회사정보 페이지 올 일이 없으니 안써도 될거같음
-				<c:when test="${empty a.announceNo }">
+			<c:choose>						
+				<c:when test="${empty com }">
 					<div class="emptyResume">
 						<p>등록된 채용공고가 없습니다.</p>
 					</div>
 				</c:when>
-			</c:choose> --%>
+				<c:otherwise>
+				
 			<p>채용중 공고</p>
 			<div class="announceBox">
 				<%-- <c:choose>
@@ -109,12 +110,14 @@
 					<p>모집중</p>
 				</div>
 				<div class="companyName">
-					<p>(주)디벨로민트</p>		<!-- ${a.companyname } -->
+					<p>${com.companyName }</p>		<!-- ${a.companyname } -->
 				</div>
 				<div class="announceTitle">
 					<p>2021 하반기 경영지원실  신입/경력 채용 공고</p>		<!-- ${a.companyTitle } -->
 				</div>
 			</div>
+			</c:otherwise>
+		</c:choose>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

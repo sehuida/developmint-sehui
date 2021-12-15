@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="company">
-	<select id="selectCompany" parameterType="string" resultType="com">
+	<select id="selectCompany" parameterType="string" resultType="ci">
 		select
+			announce_title as announceTitle,
+			career,
+			school,
+			work_place as workPlace,
+			work_form as workForm,
 			company_no as companyNo,
 			company_name as companyName,
 			open_date as openDate,
 			employee,
-			category,
+			c.category,
 			ceo,
 			address,
 			content,
 			business_no as businessNo
-		from company
+		from company c join announcement a using (company_name)
 		where company_name = #{companyName}
 	</select>
 </mapper>
