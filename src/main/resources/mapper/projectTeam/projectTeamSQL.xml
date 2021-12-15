@@ -709,4 +709,36 @@
   		where project_no = #{boardNo} and member_no = (select member_no from member where member_id = #{memberId})
   </select>
   
+  <delete id="cancelApplyProject" parameterType="map">
+  		delete from project_entry where entry_no = #{entryNo}
+  </delete>
+  
+  <delete id="deleteUseLang" parameterType="map">
+  		delete from use_develop_language where member_no = #{applicantNo} and project_no = #{projectNo}
+  </delete>
+  
+  <update id="updateApplyData" parameterType="map">
+	  		update project_entry set 
+		  		ambition = #{pe.ambition}, 
+		  		apply_content = #{pe.applyContent}, 
+  			where entryNo = #{pe.entryNo}
+  </update>
+  
+  <delete id="deleteApplyLangList" parameterType="map">
+  		delete from use_develop_language where project_no = #{projectNo} and #{pe.memberNo}
+  </delete>
+  
+   <insert id="insertApplyLangList" parameterType="map">
+  		insert into use_develop_language(use_lang_no, member_no, language_no, project_no, usecase)
+  			select ulang_seq.nextval, A.* from (
+  			<foreach collection="langList" item="lang" separator="UNION ALL ">
+  				select 
+					#{pe.memberNo} as member_no,
+  					(select language_no from develop_language where language_name = #{lang}) as language_no,
+  					#{projectNo} as project_no,
+  					1
+  				from dual
+  			</foreach>) A
+  </insert>
+  
 </mapper>

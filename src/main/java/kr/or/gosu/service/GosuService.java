@@ -17,6 +17,8 @@ import kr.or.gosu.vo.GosuRequestCost;
 import kr.or.gosu.vo.GosuRequestCount;
 import kr.or.gosu.vo.GosuRequestProject;
 import kr.or.gosu.vo.GosuRequestProjectSub;
+import kr.or.gosu.vo.GosuRequestReview;
+import kr.or.gosu.vo.GosuReview;
 import kr.or.gosu.vo.GosuTalk;
 
 @Service
@@ -260,6 +262,33 @@ public class GosuService {
 	public int talkStop2(int requestProjectSubNo) {
 		int result = dao.talkStop2(requestProjectSubNo);
 		return result;
+	}
+	@Transactional
+	public int insetReviewOne(GosuReview gr) {
+		int result = dao.insetReviewOne(gr);
+		return result;
+	}
+
+	public GosuReview selectGosuReviewOne(GosuReview gr) {
+		GosuReview gosuReviewOne = dao.selectGosuReviewOne(gr);	
+		return gosuReviewOne;
+	}
+
+	public ArrayList<GosuReview> selectGosuReviewList(int ggsouNo) {
+		ArrayList<GosuReview> list = dao.selectGosuReviewList(ggsouNo);
+		return list;
+	}
+
+	public GosuReview selectReviewCountAVG(int ggsouNo) {
+		GosuReview gosuReviewOne = new GosuReview();
+		gosuReviewOne.setReviewCount(dao.selectReviewCount(ggsouNo));	
+		gosuReviewOne.setReviewAvg(dao.selectReviewAvg(ggsouNo));
+		return gosuReviewOne;
+	}
+
+	public int insertRequestReviewAjax(GosuRequestReview grr) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

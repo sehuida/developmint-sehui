@@ -34,7 +34,30 @@
 	line-height: 35px;
 	margin-left: 5px;
 	font-size: 18px;
+	font-weight: bold;
 }
+
+
+.insertForm>p{
+	font-size: 20px;
+	font-weight: bold;
+	margin-right: 10px;
+	margin-top: 15px;
+}
+
+.flexBox>p{
+	font-size: 20px;
+	font-weight: bold;
+	margin-right: 10px;
+	margin-top: 10px;
+
+}
+.flexBox{
+	display:flex;
+	align-items: center;
+	margin-top: 20px;
+}
+
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -42,73 +65,32 @@
 		<div class="titleBox">
 			<a href="/contestMain.do"><i class="bi bi-chevron-left"></i></a><span>공모전 등록</span>
 		</div>
-		<form action="/insertContest.do" method="post" enctype="multipart/form-data">
-
-			<table class="table" style="width: 1000px;">
-				<tr>
-					<th class="table-active">주최사</th>
-					<td><input type="text" name="contestHost" class="form-control"></td>
-				</tr>
-				
-				<tr>
-					<th class="table-active">공모명</th>
-					<td><input type="text" name="contestTitle" class="form-control"></td>
-				</tr>
-				<tr>
-					<th class="table-active">공모마감</th>
-					<td id="dateTd">
-						<input type="date" class="form-control" id="mindate" min="" name="contestDeadline" style="width: 47%">
-					</td>
-				</tr>
-				<tr>
-					<th class="table-active">공모유형</th>
-					<td>
-						<label style="margin-right:20px;"><input type="radio" name="contestType" value="1" class="form-check-input" >기획</label> 
-						<label style="margin-right:20px;"><input type="radio" name="contestType" value="2" class="form-check-input">개발</label> 
-						<label><input type="radio" name="contestType" value="3" class="form-check-input">디자인</label>
-					</td>
-				</tr>
-				<tr>
-					<th class="table-active">참가자격</th>
-					<td>
-						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="대학생" class="form-check-input">대학생</label>
-						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="대학원생" class="form-check-input">대학원생</label> 
-						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="고등학생"class="form-check-input">고등학생</label> 
-						<label style="margin-right:20px;"><input type="checkbox" name="contestQualify" value="일반인" class="form-check-input">일반인</label> 
-						<label><input type="checkbox" name="contestQualify" value="제한없음" class="form-check-input">제한없음</label>
-						</td>
-				</tr>
-				<tr>
-					<th class="table-active">1등 시상금</th>
-					<td><input type="text" name="contestPrize" class="form-control prize" style="width: 47%" placeholder="숫자만 입력해주세요"><span id="won">만원</span></td>
-				</tr>
-				<tr>
-					<th class="table-active">담당자 이메일</th>
-					<td><input type="email" name="email" class="form-control"></td>
-				</tr>
-				<tr>
-					<th class="table-active">담당자 전화번호</th>
-					<td><input type="text" name="phone" class="form-control" placeholder="010-XXXX-XXXX"></td>
-				</tr>
-				<tr>
-					<th class="table-active">공모요강</th>
-					<td><textarea id="contestContent" name="contestContent" class="form-control" style="height: 600px;resize: none;"></textarea></td>
-				</tr>
-				<tr>
-					<th class="table-active">포스터 이미지</th>
-					<td><input type="file" class="form-control-file" name="files"></td>
-				</tr>
-				<tr>
-					<td colspan="2"><i class="bi bi-exclamation-circle-fill"></i>
-						공모전은 관리자 승인 후 등록됩니다.
-					</td>
-				</tr>
-				<tr>
-					<th colspan="2">
-						<input type="button" class="btn btn-primary submitBtn" value="등록하기">
-					</th>
-				</tr>
-			</table>
+		<form action="/insertContest.do" method="post" enctype="multipart/form-data" class="insertForm">
+			<div class="flexBox">
+				<p><i class="bi bi-award" style="color:#4ECDC4"></i> 공모유형</p>
+				<label style="margin-right:20px; font-weight: bold"><input type="radio" name="contestType" value="1" class="form-check-input" style="margin-right:5px;">기획</label> 
+				<label style="margin-right:20px; font-weight: bold"><input type="radio" name="contestType" value="2" class="form-check-input" style="margin-right:5px;">개발</label> 
+				<label  style="font-weight: bold"><input type="radio" name="contestType" value="3" class="form-check-input" style="margin-right:5px;">디자인</label>
+				<p style="margin-left: 120px;"><i class="bi bi-check-lg" style="color:#4ECDC4"></i> 참가자격</p>
+				<label style="margin-right:20px; font-weight: bold"><input type="checkbox" name="contestQualify" value="대학생" class="form-check-input" style="margin-right:5px;">대학생</label>
+				<label style="margin-right:20px; font-weight: bold"><input type="checkbox" name="contestQualify" value="대학원생" class="form-check-input" style="margin-right:5px;">대학원생</label> 
+				<label style="margin-right:20px; font-weight: bold"><input type="checkbox" name="contestQualify" value="고등학생"class="form-check-input" style="margin-right:5px;">고등학생</label> 
+				<label style="margin-right:20px; font-weight: bold"><input type="checkbox" name="contestQualify" value="일반인" class="form-check-input" style="margin-right:5px;">일반인</label> 
+				<label style="font-weight: bold"><input type="checkbox" name="contestQualify" value="제한없음" class="form-check-input" style="margin-right:5px;">제한없음</label>
+			</div>
+			<p><i class="bi bi-building" style="color:#4ECDC4"></i> 주최사</p><input type="text" name="contestHost" class="form-control" style="width:1000px;">
+			<p><i class="bi bi-calendar-week" style="color:#4ECDC4"></i> 공모마감</p><input type="date" class="form-control" id="mindate" min="" name="contestDeadline" style="width: 1000px; height: 38px;">
+			<p><i class="bi bi-trophy" style="color:#4ECDC4"></i> 1등 시상금</p><input type="text" name="contestPrize" class="form-control prize" style="width: 960px;" placeholder="숫자만 입력해주세요"><span id="won">만원</span>
+			<p><i class="bi bi-envelope" style="color:#4ECDC4"></i> 담당자 이메일</p><input type="email" name="email" class="form-control" style="width:1000px;">
+			<p><i class="bi bi-telephone" style="color:#4ECDC4"></i> 담당자 전화번호</p><input type="text" name="phone" class="form-control" placeholder="010-XXXX-XXXX" style="width:1000px;">
+			<p><i class="bi bi-chat-square-quote" style="color:#4ECDC4"></i> 공모명</p><input type="text" name="contestTitle" class="form-control" style="width:1000px;">
+			<p><i class="bi bi-pencil-square" style="color:#4ECDC4"></i> 공모요강</p>
+			<textarea id="contestContent" name="contestContent" class="form-control" style="width:1000px; height: 600px;resize: none;"></textarea>
+			<p><i class="bi bi-card-image" style="color:#4ECDC4"></i> 포스터 이미지</p>
+			<input type="file" id="formFile" name="upFile" class="form-control" style="width:1000px;">
+			<p style="font-size: 16px;">공모전은 관리자 승인 후 등록됩니다.</p>
+			<input type="button" class="btn btn-primary submitBtn" value="등록하기" style="width:1000px;">
+		
 			<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 		</form>
 	</div>
@@ -134,23 +116,6 @@
 
 	//모두 입력해야 등록가능
 	$(".submitBtn").click(function(){
-		console.log("dd");
-		if($('input[name=contestHost]').val() == ""){
-			alert("주최사를 입력해주세요.");
-			return;
-		}
-		if($('input[name=contestTitle]').val() == ""){
-			alert("공모명을 입력해주세요.");
-			return;
-		}
-		if($('input[name=contestDate]').val() == ""){
-			alert("공모 시작 날짜를 입력해주세요.");
-			return;
-		}
-		if($('input[name=contestDeadline]').val() == ""){
-			alert("공모 종료 날짜를 입력해주세요.");
-			return;
-		}
 		var radioCheck = $('input[name=contestType]').is(":checked");
 		if(!radioCheck){
 			alert("공모유형을 체크해주세요.");
@@ -161,7 +126,14 @@
 			alert("공모자격을 체크해주세요.");
 			return;
 		}
-		
+		if($('input[name=contestHost]').val() == ""){
+			alert("주최사를 입력해주세요.");
+			return;
+		}
+		if($('input[name=contestDeadline]').val() == ""){
+			alert("공모 마감 날짜를 입력해주세요.");
+			return;
+		}
 		if($('input[name=contestPrize]').val() == ""){
 			alert("시상금을 입력해주세요.");
 			return;
@@ -182,6 +154,12 @@
 			alert("담당자 전화번호를 입력해주세요.");
 			return;
 		}
+		
+		if($('input[name=contestTitle]').val() == ""){
+			alert("공모명을 입력해주세요.");
+			return;
+		}
+		
 		if($('input[name=contestContent]').val() == ""){
 			alert("공모요강을 입력해주세요.");
 			return;

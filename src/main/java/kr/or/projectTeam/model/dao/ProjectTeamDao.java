@@ -241,5 +241,25 @@ public class ProjectTeamDao {
 		return sqlSession.selectOne("projectTeam.searchEntryNo", map);
 	}
 
+	public int cancelApplyProject(Map<String, Object> map) {
+		return sqlSession.delete("projectTeam.cancelApplyProject", map);
+	}
+
+	public int deleteUseLang(Map<String, Object> map) {
+		return sqlSession.delete("projectTeam.deleteUseLang", map);
+	}
+
+	public int updateApplyData(Map<String, Object> map) {
+		return sqlSession.update("projectTeam.updateApplyData", map);
+	}
+
+	public int deleteApplyLangList(Map<String, Object> map) {
+		return sqlSession.delete("projectTeam.deleteApplyLangList", map);
+	}
+
+	public int insertApplyLangList(Map<String, Object> map) {
+		return sqlSession.insert("projectTeam.insertApplyLangList", map);
+	}
+
 	
 }

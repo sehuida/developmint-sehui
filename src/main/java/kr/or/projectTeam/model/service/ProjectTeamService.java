@@ -500,5 +500,37 @@ public class ProjectTeamService {
 		return entryNo;
 	}
 
+	public int cancelApplyProject(int entryNo, int applicantNo, int projectNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("entryNo", entryNo);
+		map.put("applicantNo", applicantNo);
+		map.put("projectNo", projectNo);
+		int result = 0;
+		int result1 = dao.cancelApplyProject(map);
+		if(result1 >0) {
+			result = dao.deleteUseLang(map);
+		}
+		return result;
+	}
+	
+	@Transactional
+	public int updateApplyForm(ProjectEntry pe, int memberNo, ArrayList<String> langList, int projectNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("projectNo", projectNo);
+		map.put("pe", pe);
+		map.put("langList", langList);
+		int result = 0;
+		int tempResult = dao.updateApplyData(map);
+		if (tempResult > 0) {
+			int tempResult2 = dao.deleteApplyLangList(map);
+			if (tempResult2 > 0) {
+				int insertLangValue = 2;
+				map.put("insertLangValue", insertLangValue);
+				result = dao.insertApplyLangList(map);
+			}
+		}
+		return result;
+	}
 	
 }

@@ -113,14 +113,27 @@ public class ProjectTeamController {
 		 /*
 			* String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
 		*/
-				
 		// 내부경로로 저장
 		String saveRoot = request.getSession().getServletContext().getRealPath("/resources/upload/projectTeam/editor/");
 		
 		String originalFileName = file.getOriginalFilename(); 	//오리지날 파일명
+		String onlyFilename = originalFileName.substring(0,originalFileName.indexOf("."));
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
 		// 파일 확장자
-		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+		String savedFileName = null;	//저장될 파일 명
+		int count=0;
+		while(true) {
+			if(count == 0 ) {
+				savedFileName = onlyFilename+extension;
+			}else {
+				savedFileName = onlyFilename+"_"+count+extension;
+			}
+			File checkFile = new File(saveRoot+savedFileName);
+			if(!checkFile.exists()) {
+				break;
+			}
+			count++;
+		}
 		try {
 			FileOutputStream fos = new FileOutputStream(new File(saveRoot + savedFileName));
 			//업로드 속도증가를 위한 보조스트림
@@ -187,7 +200,6 @@ public class ProjectTeamController {
 	  @RequestMapping(value="/updateRecruitNotice.do") 
 	  public String updateOneNotice(HttpServletRequest request, Model model, ProjectTeam pt, int memberNo, String[] chk, int projectNo) { 
 		  ArrayList<String> langList = new ArrayList<String>(Arrays.asList(chk));
-	  
 		  int result = service.updateRecruitTeam(pt, memberNo, langList, projectNo); 
 		  if(result > 0) { 
 			  model.addAttribute("title", "수정성공!");
@@ -520,4 +532,57 @@ public class ProjectTeamController {
 			model.addAttribute("projectNo", projectNo);
 			return "recruitCrue/applicant_detail";
 		}
+	  
+	  @RequestMapping(value="/cancelApplyProject.do")
+		public String cancelApplyProject(Model model, int entryNo, int memberNo, int projectNo, int applicantNo) {
+			int result = service.cancelApplyProject(entryNo, applicantNo, projectNo);
+			if(result > 0) { 
+				  model.addAttribute("title", "지원 취소");
+				  model.addAttribute("msg", "프로젝트 지원이 취소되었습니다.");
+				  model.addAttribute("loc","/recruitTeamMember_mainPage.do?reqPage=1");
+				  model.addAttribute("icon", "success");
+			  } else {
+				  model.addAttribute("title", "지원 취소 실패");
+				  model.addAttribute("msg", "시스템 문제로 인해 지원 취소과정에 오류가 발생하였습니다. ");
+				  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+projectNo+"&memberNo="+memberNo+"&entryNo="+entryNo);
+				  model.addAttribute("icon", "warning");
+			  }
+			  return "member/swalMsg"; 
+		}
+	  
+	  @RequestMapping(value="/updateProjectApplyFrm.do")
+		public String updateProjectApplyFrm(Model model, int projectNo, int memberNo, int entryNo) {
+			ProjectTeamApplicantViewData ptavd = service.selectOneApplicant(entryNo);
+			ArrayList<DevelopLanguage> dlList = service.selectAllDevelopLang();
+			model.addAttribute("memberNo", memberNo);
+			model.addAttribute("dlList", dlList);
+			model.addAttribute("projectNo", projectNo);
+			model.addAttribute("commentList", ptavd.getCommentList());
+			model.addAttribute("pe", ptavd.getPe());
+			model.addAttribute("udlList", ptavd.getUdlList());
+			model.addAttribute("entryNo", entryNo);
+			model.addAttribute("memberNo", memberNo);
+			model.addAttribute("projectNo", projectNo);
+			return "recruitCrue/applyTeamUpdateForm";
+		}
+	  
+	  @RequestMapping(value="/updateApplyForm.do") 
+	  public String updateApplyForm(HttpServletRequest request, Model model, ProjectEntry pe, int memberNo, String[] chk, int projectNo, int entryNo) { 
+		  ArrayList<String> langList = new ArrayList<String>(Arrays.asList(chk));
+	  
+		  int result = service.updateApplyForm(pe, memberNo, langList, projectNo); 
+		  if(result > 0) { 
+			  model.addAttribute("title", "수정 성공!");
+			  model.addAttribute("msg", "수정 완료되었습니다.");
+			  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+projectNo+"&memberNo="+memberNo+"&entryNo="+entryNo);
+			  model.addAttribute("icon", "success");
+		  } else {
+			  model.addAttribute("title", "수정 실패");
+			  model.addAttribute("msg", "수정 실패하였습니다.");
+			  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+projectNo+"&memberNo="+memberNo+"&entryNo="+entryNo);
+			  model.addAttribute("icon", "warning");
+		  }
+		  return "member/swalMsg"; 
+	  }
+	  
 }
