@@ -19,6 +19,7 @@
 		font-size: 30px;
 		font-family: NotoBold;
 		margin-right: 25px;
+		margin-left: 200px;
 	}
 	.page-wrap{
 		width: 900px;
@@ -62,7 +63,7 @@
     <div class="container">
         <span id="page-head">글작성하기</span><i class="bi bi-pen"></i>
         <div class="page-wrap">
-            <form action="/insertShareBoard.do" method="post">
+            <form action="/insertShareBoard.do" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="categorys">
                         <label for="boardType" class="form-label mt-4">상세 유형</label><img
