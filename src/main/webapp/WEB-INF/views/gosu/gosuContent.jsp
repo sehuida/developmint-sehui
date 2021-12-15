@@ -358,7 +358,9 @@
 							작성된 리뷰가 아직 없습니다!
 						</c:when>
 						<c:otherwise>
-						<div>
+						<c:choose>
+							<c:if test="${empty grAVG }">
+							<div>
 							<div class="review-avg">
 								<table>
 									<tr>
@@ -390,6 +392,12 @@
 									</tr>
 								</table>
 							</div>
+							
+							</c:if>
+							
+							
+						</c:choose>
+						
 							<hr>
 
 							<c:forEach items="${greviewList }" var="grl" varStatus="i">

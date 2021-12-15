@@ -254,7 +254,7 @@
 			고수 소개글은 하나만 작성이 가능하며, 수정 삭제가 불가능합니다!<br> 신중하게 작성해주시길 바랍니다.
 		</div>
 
-		<form action="/gosuWrite.do" method="post"
+		<form action="/gosuWrite.do" method="post" id="g-btn-submit"
 			enctype="multipart/form-data">
 			<div style="text-align: right; margin-top: 50px;">
 				<input type="hidden" name="gsouNo"
@@ -374,6 +374,33 @@
 		</form>
 	</div>
 	<script>
+	$('#g-btn-submit').submit(function() {
+		var photoFilepath = $("input[name=photoFilepath]").val();
+		var gprojectFilepath = $("input[name=gprojectFilepath]").val();
+		var gprojectTitle =$("input[name=gprojectTitle]").val();
+		var gprojectContent =$("input[name=gprojectContent]").val();
+		var gosuCost = $("input[name=gosuCost]").val();
+		var gosuAct = $("input[name=gosuAct]").val();
+		var gosuExplain = $("input[name=gosuExplain]").val();
+		var gosuTitle =$("input[name=gosuTitle]").val();
+		var gosuSelf =  $("input[name=gosuSelf]").val();
+		
+		
+		if (photoFilepath==null || 
+				gprojectFilepath == null ||
+				gprojectTitle ==""||
+				gprojectContent ==""||
+				gosuCost ==""||
+				gosuAct ==""||
+				gosuTitle ==""||
+				gosuExplain == "" ||
+				gosuSelf ==""
+		) {
+			alert("입력하신 내용을 다시 확인해주세요!");
+			
+			return false;
+		}
+	});
 		$("#gProject").click(function() {
 			var gprojectTitle = $("#gprojectTitle");
 			var gprojectContent = $("#gprojectContent");

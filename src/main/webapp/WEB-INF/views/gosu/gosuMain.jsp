@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!DOCTYPE html>
 <html>
@@ -264,7 +265,6 @@ to {
 	margin-left: 100px;
 	margin-bottom: 50px;
 	margin-top: 50px;
-	
 	border-width: 2px;
 }
 
@@ -375,7 +375,7 @@ to {
 		<c:set var="i" value="0" />
 		<c:set var="j" value="2" />
 		<c:forEach items="${gList }" var="g">
-			<c:if test="${i%j == 0 }">
+			<c:if test="${i%j eq 0 }">
 				<div class="gosu-wrap">
 			</c:if>
 			<div class="gosu">
@@ -421,16 +421,16 @@ to {
 					</table>
 				</button>
 			</div>
-			<c:if test="${i%j == j-1 }">
+			<c:if test="${i%j eq j-1 }">
 	</div>
 	</c:if>
 	<c:set var="i" value="${i+1 }" />
 	</c:forEach>
-
-
-
-
-
+	<c:if test="${fn:length(gList) % 2!=0}">
+		<c:if test="${fn:length(gList) == i}">
+			</div>
+		</c:if>
+	</c:if>
 	<div style="text-align: center">
 		<span class="dot" onclick="currentSlide(1); "></span> <span
 			class="dot" onclick="currentSlide(2); "></span> <span class="dot"
@@ -441,9 +441,6 @@ to {
 			<h3 style="margin-left: 0;">
 				새로운 <span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다!
 			</h3>
-
-
-
 			<div class="g-act">
 				활동 고수&nbsp;&nbsp;<span> ${gosuCount }</span>명
 			</div>
@@ -528,7 +525,8 @@ to {
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
-							<span style="font-size: 20px;margin-left:100px;">아직 신청한 내역이 없습니다!</span>
+							<span style="font-size: 20px; margin-left: 100px;">아직 신청한
+								내역이 없습니다!</span>
 						</c:otherwise>
 					</c:choose>
 
@@ -566,7 +564,8 @@ to {
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<span style="font-size: 20px; margin-left:100px;">아직 신청받은 내역이 없습니다!</span>
+								<span style="font-size: 20px; margin-left: 100px;">아직
+									신청받은 내역이 없습니다!</span>
 							</c:otherwise>
 						</c:choose>
 
@@ -578,45 +577,45 @@ to {
 						style="color: rgb(78, 205, 196)">고수</span> 매칭
 				</h4>
 				<div class="g-statusContent">
-				<c:choose>
-					<c:when test="${empty grpsList }">
-						<c:if test="${sessionScope.m.memberType eq 1}">
-						<span style="margin:100px;">요청서를 작성해보세요!</span>
-						</c:if>
-						<c:if test="${sessionScope.m.memberType eq 2}">
-						<span style="margin:100px;">상단의 요청서 버튼을 눌러 견적서를 보내보세요!</span>
-						 
-						</c:if>
-						
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${grpsList }" var="grpsl" varStatus="i">
-					<a href="/gosuProject.do?rpsNo=${grpsl.requestProjectSubNo }">
-						<table class="g-sc-tbl card bg-info mb-3">
-							<tboay style="min-width:342px;max-width:342px;">
+					<c:choose>
+						<c:when test="${empty grpsList }">
+							<c:if test="${sessionScope.m.memberType eq 1}">
+								<span style="margin: 100px;">요청서를 작성해보세요!</span>
+							</c:if>
+							<c:if test="${sessionScope.m.memberType eq 2}">
+								<span style="margin: 100px;">상단의 요청서 버튼을 눌러 견적서를 보내보세요!</span>
 
-							<tr>
-								<c:if test="${sessionScope.m.memberType eq 1 }">
-	
-								<th>고수</th>
-								<td><span style="color: white;">${grpsl.gosuId }</span></td>
-								</c:if>
-								<c:if test="${sessionScope.m.memberType eq 2 }">
-								
-								<th>질문자</th>
-								<td><span style="color: white;">${grpsl.requestWriterId }</span></td>
-								</c:if>
-								
-							</tr>
+							</c:if>
 
-							</tboay>
-						</table>
-					</a> 
-					</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			
-				
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${grpsList }" var="grpsl" varStatus="i">
+								<a href="/gosuProject.do?rpsNo=${grpsl.requestProjectSubNo }">
+									<table class="g-sc-tbl card bg-info mb-3">
+										<tboay style="min-width:342px;max-width:342px;">
+
+										<tr>
+											<c:if test="${sessionScope.m.memberType eq 1 }">
+
+												<th>고수</th>
+												<td><span style="color: white;">${grpsl.gosuId }</span></td>
+											</c:if>
+											<c:if test="${sessionScope.m.memberType eq 2 }">
+
+												<th>질문자</th>
+												<td><span style="color: white;">${grpsl.requestWriterId }</span></td>
+											</c:if>
+
+										</tr>
+
+										</tboay>
+									</table>
+								</a>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+
+
 				</div>
 			</div>
 		</div>

@@ -96,8 +96,11 @@ public class GosuController {
 		Gosu gosu = service.selectGosuOne(gNo);
 		ArrayList<GosuProject> gprList = service.selectGosuProject(gNo);
 		ArrayList<GosuPhoto> gptList = service.selectGosuPhoto(gNo);
+		
 		ArrayList<GosuReview> grList = service.selectGosuReviewList(gosu.getGgsouNo());
+	
 		GosuReview grAVG = service.selectReviewCountAVG(gosu.getGgsouNo());
+	
 		model.addAttribute("gosu", gosu);
 		model.addAttribute("gprojectList", gprList);
 		model.addAttribute("gphotoList", gptList);

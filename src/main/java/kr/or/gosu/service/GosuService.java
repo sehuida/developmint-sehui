@@ -281,6 +281,7 @@ public class GosuService {
 
 	public GosuReview selectReviewCountAVG(int ggsouNo) {
 		GosuReview gosuReviewOne = new GosuReview();
+		
 		gosuReviewOne.setReviewCount(dao.selectReviewCount(ggsouNo));	
 		gosuReviewOne.setReviewAvg(dao.selectReviewAvg(ggsouNo));
 		return gosuReviewOne;
