@@ -120,11 +120,15 @@
 						    	<c:when test="${not empty sessionScope.m }">
 								    <div class="form-group">
 								    	<label scope="row">사진</label>
-								    	<ul class="file_show" id="file_show">
+								    	<ul class="file_show" id="file_show" >
 																								</ul>
 										<button type="button" class="btn-file" onclick="$('#Filedata').click();">파일 선택</button>
 										<span id="file_message" style="display: none;color: red;font-weight: bold;"></span>
 								    </div>
+								    <!-- <div class="form-group">
+								      <label for="formFile" class="form-label mt-4"> 첨부파일</label>
+								      <input class="form-control" type="file" name="files" multiple>
+								    </div> -->
 						    	</c:when>
 						    </c:choose>
 							<c:choose>
@@ -155,8 +159,10 @@
 					</div>
 				</div>
 			</form>
-			<form action="">
-				<input type="file" id="Filedata" class="input_file" onchange="uploadImage();" style="display: none !important;" />
+			<form action="upload_form.do" id="upload_form" name="upload_form" method="post" enctype="multipart/form-data">
+				<!-- <input type="file" id="Filedata" class="input_file" onchange="uploadImage();" style="display: none !important;" /> -->
+				<input type="file" id="Filedata" class="input_file" onchange="loadImg(this);" style="display: none !important;" />
+				<input type="hidden" name="memberId" value="${sessionScope.m.memberNo }">
 			</form>
 		</div>
 	</div>
@@ -249,7 +255,7 @@
 				return false;
 			}
 
-			
+			/* 
 			 // 파일 업로드 컨텐츠 넣기
 			var file_contents = "";
 			$.each($('#file_show li'), function(index, item) {
@@ -258,7 +264,7 @@
 			});
 
 			var contents = qa_msg + file_contents;
-			$('#f1 [name=qnaContent]').val(contents); 
+			$('#f1 [name=qnaContent]').val(contents);  */
 			
 			$("form").attr("action", "/counsel_save2.do");
 			f1.submit();
@@ -272,36 +278,44 @@
 			$.ajax({
 				cache : false,
 				url : "/fileupload.do",
+				enctype : 'multipart/form-data',
 				processData: false,
 				contentType: false,
 				type : 'POST',
 				data : formData,
-				success : function(response) {
-					try {
-						var callback = response;
-						if (matches = response.replace(/(?:\r\n|\r|\n)/g, '').match(/\<script\>(.*)\<\/script\>/)) {
-							callback = $.trim(matches[1]);
-						}
-						eval(callback);
-					} catch (e) {
-					}
+				success : function(file_url) {
+					var image_tag = "<li><img  src=\"" + file_url +  "\" /><a class=\"del-image\" href=\"javascript:void(0);\"><i class=\"bi bi-x-circle-fill\"></i></a></li>";
+					$("#file_show").append(image_tag);
 				}
 			});
 
 			ff.reset();
+		} 
+		
+		function loadImg(obj){
+			var files=obj.files;
+			if(files.length!=0){
+				var reader=new FileReader();
+				reader.readAsDataURL(files[0]);
+				reader.onload=function(e){
+					/* $("#img-view").attr("src",e.target.result); */
+					var image_tag = "<li><img src=\"" + e.target.result + "\" /><a class=\"del-image\" href=\"javascript:void(0);\"><i class=\"bi bi-x-circle-fill\"></i></a></li>";
+					$("#file_show").append(image_tag);
+				}
+			}else{
+				$("#img-view").attr("src","");
+			}
 		}
-
-		function SetImage(result, message, file_url) {
+		/* function SetImage(result, message, file_url) {
 			var ff = document.upload_form;
 
 			if(result) {
-				var image_tag = "<li><img src=\"" + file_url + "\" /><a class=\"del-image\" href=\"javascript:void(0);\"><i class=\"ic-14-line-close ic-white\"></i></a></li>";
-				ff.files.value += (ff.files.value != "") ? "," + file_url : file_url;
+				var image_tag = "<li><img src=\"" + file_url + "\" /><a class=\"del-image\" href=\"javascript:void(0);\"><i class=\"bi bi-x-circle-fill ic-white\"></i></a></li>";
 				$("#file_show").append(image_tag);
 			} else {
 				$("#file_message").text(message).show();
 			}
-		}
+		} */
 	</script>
 </body>
 </html>

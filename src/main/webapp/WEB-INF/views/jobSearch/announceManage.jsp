@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -239,7 +240,7 @@
 								<img src="resources/img/resume/income.PNG">					
 							</div>
 							<div class="announceInfoData">
-								<span>${a.money } &#8361;</span>	<!-- r.resumeMoney -->
+								<span><fmt:formatNumber value="${a.money}" pattern="#,###"/> &#8361;</span>	<!-- r.resumeMoney -->
 							</div>
 						</li>  
 					</ul>
