@@ -8,7 +8,7 @@
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <meta charset="UTF-8">
-<title>RecruitCrue WriteForm</title>
+<title>Apply Update Form</title>
 </head>
 
 <body>
@@ -33,6 +33,7 @@
 			}
 		});
 		
+	
 		$(".return_img").click(function(){
 			history.back();
 		});
@@ -40,12 +41,10 @@
 	});
 	
 	function checkValue(){
-        if(($(".btn-check:checked").length == 0) || ($("#datePicker").val() == "") || ($("#inputLarge").val() == "") || ($("input[name=projectTitle]").val() == "") || ($("input[name=projectGoal]").val() == "") || ($("input[name=rContent]").val() == "")) {
+        if(($(".btn-check:checked").length == 0) || ($("#inputLarge").val() == "") || ($("input[name=applyContent]").val() == "")) {
         	swal("체크하지 않거나 입력되지 않은 값이 있습니다.", "비어있는 입력값이 있는지 다시 한번 확인해주세요!", "warning");
         	return false;
         } 
-        
-        
     }
 	
 </script>
@@ -56,10 +55,10 @@
                 <img class="return_img" src="/resources/img/recruitTeamProject/writePage/left.png">
             </div>
             <div class="main_content">
-	            <form action="/writeRecruitTeam.do" method="post" enctype="multipart/form-data" onsubmit="return checkValue();">
+	            <form action="/updateApplyForm.do?memberNo=${memberNo }&projectNo=${pe.projectNo}&entry=${pe.entryNo}" method="post" enctype="multipart/form-data" onsubmit="return checkValue();">
 		            <div class="writeBox">
 	                    <div class="form-group">
-	                        <input class="form-control form-control-lg" type="text" placeholder="모집공고 제목을 입력해주세요." id="inputLarge" name="rTitle" maxlength="30">
+	                        <input class="form-control form-control-lg" type="text" id="inputLarge" name="rTitle" maxlength="30" value="${pe.ambition}">
 	                    </div>
 	                    <div class="writeLine">
 	                        <div class="titleFlexBox">
@@ -90,56 +89,18 @@
 	                    <div class="line"></div>
 	                    <div class="writeLine">
 	                        <div class="titleFlexBox">
-	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/pending.png">
-	                            <p class="titleText">모집마감일(모집일부터 최대 14일)</p>
-	                        </div>
-	                        <input type="text" id="datePicker" class="form-control" placeholder="마감일을 선택해주세요" name="rEndDate">
-	                       <!--  <ul class="nav nav-pills">
-	                            <li class="nav-item dropdown">
-	                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">날짜를 선택하세요</a>
-	                                <div class="dropdown-menu">
-	                                    <a class="dropdown-item">2021년 12월 23일</a>
-	                                    <a class="dropdown-item">2021년 12월 24일</a>
-	                                    <a class="dropdown-item">2021년 12월 25일</a>
-	                                    <a class="dropdown-item">2021년 12월 26일</a>
-	                                </div>
-	                            </li>
-	                        </ul> -->
-	                    </div>
-	                    <div class="line"></div>
-	                    <div class="writeLine">
-	                        <div class="titleFlexBox">
-	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/title.png">
-	                            <p class="titleText">프로젝트명</p>
-	                        </div>
-	                        <div class="form-group">
-	                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault" name="projectName" maxlength="40">
-	                        </div>
-	                    </div>
-	                    <div class="line"></div>
-	                    <div class="writeLine">
-	                        <div class="titleFlexBox">
-	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/goal.png">
-	                            <p class="titleText">프로젝트 목표(ex. 웹 페이지 정복)</p>
-	                        </div>
-	                        <div class="form-group">
-	                            <input type="text" class="form-control" placeholder="내용을 입력해주세요" id="inputDefault" name="projectGoal" maxlength="60">
-	                        </div>
-	                    </div>
-	                    <div class="line"></div>
-	                    <div class="writeLine">
-	                        <div class="titleFlexBox">
 	                            <img class="iconImg" src="/resources/img/recruitTeamProject/writePage/content-creator.png">
-	                            <p class="titleText">모집설명</p>
+	                            <p class="titleText">지원사유</p>
 	                        </div>
 	                        <div class="form-group">
-	                            <textarea class="form-control" id="summernote" rows="3" name="rContent"></textarea>
+	                            <textarea class="form-control" id="summernote" rows="3" name="rContent" value="${pe.applyContent }"></textarea>
 	                        </div>
 	                    </div>
 	                    <div class="finalLine"></div>
 	                    <div class="submitBtnBox">
 	                    	<input type="hidden" name="memberNo" value="${memberNo }">
-	                        <button type="submit" class="btn btn-primary btn-lg" onclick="return checkValue();">제출</button>
+	                    	<input type="hidden" name="projectNo" value="${projectNo }">
+	                        <button type="submit" class="btn btn-primary btn-lg" onclick="return checkValue();">수정</button>
 	                    </div>
 	                </div>
 		        </form>

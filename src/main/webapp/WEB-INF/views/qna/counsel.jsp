@@ -171,7 +171,10 @@
 					location.href ="/loginFrm.do";
 				});
 			};
-			
+			// 등록 이미지 삭제
+			$('body').on('click', '.del-image', function() {
+				$(this).parents('li').remove();
+			});
 		}); 
 		function cancel() {
 			if(confirm('취소하시겠습니까?')){
@@ -247,19 +250,15 @@
 			}
 
 			
-			// 파일 업로드 컨텐츠 넣기
+			 // 파일 업로드 컨텐츠 넣기
 			var file_contents = "";
 			$.each($('#file_show li'), function(index, item) {
 				var img_src = $(this).children('img').attr('src');
 				file_contents += '<br/><img src="'+ img_src +'"/>';
 			});
 
-			if(file_contents){
-				$('#f1 [name=image_yn]').val('Y');
-			}
-
 			var contents = qa_msg + file_contents;
-			$('#f1 [name=qa_msg]').val(contents);
+			$('#f1 [name=qnaContent]').val(contents); 
 			
 			$("form").attr("action", "/counsel_save2.do");
 			f1.submit();

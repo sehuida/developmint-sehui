@@ -134,8 +134,8 @@
                     			</c:choose>
                     		</c:when>
                     		<c:otherwise>
-                    			<button type="button" class="btn btn-primary">수정</button>
-                        		<button type="button" class="btn btn-primary">삭제</button>
+                    			<a href="updateProjectApplyFrm.do?entryNo=${pe.entryNo }&memberNo=${memberNo }&projectNo=${pe.projectNo}"><button type="button" class="btn btn-primary">수정</button></a>
+                        		<a href="cancelApplyProject.do?entryNo=${pe.entryNo }&applicantNo=${pe.memberNo}&memberNo=${memberNo }&projectNo=${pt.projectNo}"> <button type="button" class="btn btn-primary">지원취소</button></a>
                     		</c:otherwise>
                     	</c:choose>
                     </div>

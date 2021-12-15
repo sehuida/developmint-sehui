@@ -42,5 +42,11 @@
 		<typeAlias type="kr.or.member.model.vo.ProjectLikes" alias="pjtlike"/>
 		<typeAlias type="kr.or.company.vo.Company" alias="com"/>
 		<typeAlias type="kr.or.share.model.vo.Share" alias="sv"/>
-	</typeAliases>	
+		<typeAlias type="kr.or.gosu.vo.GosuReview" alias="greview"/>
+	</typeAliases>
+	
+	<!-- LONG타입 데이터를 불러오기 위한 type handler 입니다. -->
+    <typeHandlers>
+        <typeHandler handler="kr.or.common.CLOBHandler" javaType="String" jdbcType="LONGVARCHAR"/>
+    </typeHandlers>	
 </configuration>
