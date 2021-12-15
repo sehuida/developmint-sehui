@@ -34,6 +34,7 @@ import kr.or.gosu.vo.GosuRequestCost;
 import kr.or.gosu.vo.GosuRequestCount;
 import kr.or.gosu.vo.GosuRequestProject;
 import kr.or.gosu.vo.GosuRequestProjectSub;
+import kr.or.gosu.vo.GosuReview;
 import kr.or.gosu.vo.GosuTalk;
 import kr.or.member.model.vo.Member;
 
@@ -64,10 +65,10 @@ public class GosuController {
 			System.out.println("getId : " + m.getMemberId());
 			ArrayList<GosuFeedback> gf = service.selectGosuFeedbackList(m.getMemberId());
 			ArrayList<GosuFeedback> gf2 = service.selectGosuFeedbackList2(m.getMemberId());
-			if(m.getMemberType() ==1) {
+			if (m.getMemberType() == 1) {
 				ArrayList<GosuRequestProjectSub> grpsList = service.selectGosuRequestProjectSubList(m.getMemberNo());
 				model.addAttribute("grpsList", grpsList);
-			}else if(m.getMemberType() ==2) {
+			} else if (m.getMemberType() == 2) {
 				ArrayList<GosuRequestProjectSub> grpsList = service.selectGosuRequestProjectSubList2(m.getMemberNo());
 				model.addAttribute("grpsList", grpsList);
 			}
@@ -94,9 +95,13 @@ public class GosuController {
 		Gosu gosu = service.selectGosuOne(gNo);
 		ArrayList<GosuProject> gprList = service.selectGosuProject(gNo);
 		ArrayList<GosuPhoto> gptList = service.selectGosuPhoto(gNo);
+		ArrayList<GosuReview> grList = service.selectGosuReviewList(gosu.getGgsouNo());
+		GosuReview grAVG = service.selectReviewCountAVG(gosu.getGgsouNo());
 		model.addAttribute("gosu", gosu);
 		model.addAttribute("gprojectList", gprList);
 		model.addAttribute("gphotoList", gptList);
+		model.addAttribute("greviewList",grList);
+		model.addAttribute("grAVG",grAVG);
 		return "gosu/gosuContent";
 	}
 
@@ -231,18 +236,18 @@ public class GosuController {
 		g.setGprojectFilepath("/resources/upload/gosuProject/" + filepath);
 		Gson gson = new Gson();
 		return gson.toJson(g);
-	}//dd
+	}// dd
 
 	@RequestMapping(value = "/gosuSituation.do")
 	public String gosuSituation(@SessionAttribute Member m, Model model) {
 		System.out.println("getId : " + m.getMemberId());
 		ArrayList<GosuFeedback> gf = service.selectGosuFeedbackList(m.getMemberId());
 		ArrayList<GosuFeedback> gf2 = service.selectGosuFeedbackList2(m.getMemberId());
-		if(m.getMemberType() ==1) {
+		if (m.getMemberType() == 1) {
 			ArrayList<GosuRequestProjectSub> grpsList = service.selectGosuRequestProjectSubList(m.getMemberNo());
 			model.addAttribute("grpsList", grpsList);
 			System.out.println(grpsList);
-		}else if(m.getMemberType() ==2) {
+		} else if (m.getMemberType() == 2) {
 			ArrayList<GosuRequestProjectSub> grpsList = service.selectGosuRequestProjectSubList2(m.getMemberNo());
 			System.out.println(grpsList);
 			model.addAttribute("grpsList", grpsList);
@@ -285,9 +290,25 @@ public class GosuController {
 	public String gosuTalk(int fbNo, Model model) {
 		GosuFeedback gf = service.selectFeedbackOne(fbNo);
 		ArrayList<GosuTalk> gtList = service.selectGosuTalk(fbNo);
+		GosuReview gr = new GosuReview();
+		gr.setGgosuNo(gf.getGgosuNo());
+		gr.setWriter(gf.getMemberId());
+		GosuReview greview = service.selectGosuReviewOne(gr);
 		model.addAttribute("gfOne", gf);
 		model.addAttribute("gtList", gtList);
+		model.addAttribute("greview", greview);
 		return "gosu/gosuTalk";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/reviewSendAjax.do")
+	public int reviewSendAjax(int reviewNum,int ggosuNo,String writer,String reviewContent, Model model) {
+		GosuReview gr = new GosuReview();
+		gr.setGgosuNo(ggosuNo);
+		gr.setReviewContent(reviewContent);
+		gr.setReviewNum(reviewNum);
+		gr.setWriter(writer);
+		int result = service.insetReviewOne(gr);
+		return result;
 	}
 
 	@ResponseBody
@@ -488,11 +509,10 @@ public class GosuController {
 		return gpc;
 	}
 
-
 	@ResponseBody
 	@RequestMapping(value = "/gosuRequestProjectSubAjax.do")
-	public int gosuRequestProjectSubAjax(int requestNo,int costNo,Model model) {
-		
+	public int gosuRequestProjectSubAjax(int requestNo, int costNo, Model model) {
+
 		GosuRequestProjectSub grps = new GosuRequestProjectSub();
 		grps.setCostNo(costNo);
 		grps.setRequestNo(requestNo);
@@ -501,78 +521,77 @@ public class GosuController {
 	}
 
 	@RequestMapping(value = "/gosuProject.do")
-	public String gosuProject(int rpsNo,Model model ) {
+	public String gosuProject(int rpsNo, Model model) {
 		GosuRequestProjectSub grps = service.selectGosuRequestProjectSub(rpsNo);
 		ArrayList<GosuRequestProject> grp = service.selectGosuRequestProjectOne(rpsNo);
-		model.addAttribute("grplist" ,grp);
-		model.addAttribute("grpsOne" ,grps);
-		
+		model.addAttribute("grplist", grp);
+		model.addAttribute("grpsOne", grps);
+
 		return "gosu/gosuProject";
 	}
-	
 
-		@ResponseBody
-		@RequestMapping(value = "/talkBtnProjectAjax.do")
-		public int talkBtnProjectAjax(MultipartHttpServletRequest req, HttpSession session, HttpServletRequest request,
-				String talkContent, int writerNo, @RequestParam(required = false, defaultValue = "0") int requestProjectSubNo,
-				Model model) {
-			System.out.println("talkContent : " + talkContent);
-			System.out.println("writerNo : " + writerNo);
-			System.out.println("requestProjectSubNo : " + requestProjectSubNo);
-			GosuRequestProject grp = new GosuRequestProject();
-			grp.setMemberNo(writerNo);
-			grp.setRequestProjectSubNo(requestProjectSubNo);
-			grp.setRequestProjectContent(talkContent);
-			MultipartFile files = req.getFile("talkFile");
-			if (files == null) {
+	@ResponseBody
+	@RequestMapping(value = "/talkBtnProjectAjax.do")
+	public int talkBtnProjectAjax(MultipartHttpServletRequest req, HttpSession session, HttpServletRequest request,
+			String talkContent, int writerNo,
+			@RequestParam(required = false, defaultValue = "0") int requestProjectSubNo, Model model) {
+		System.out.println("talkContent : " + talkContent);
+		System.out.println("writerNo : " + writerNo);
+		System.out.println("requestProjectSubNo : " + requestProjectSubNo);
+		GosuRequestProject grp = new GosuRequestProject();
+		grp.setMemberNo(writerNo);
+		grp.setRequestProjectSubNo(requestProjectSubNo);
+		grp.setRequestProjectContent(talkContent);
+		MultipartFile files = req.getFile("talkFile");
+		if (files == null) {
 
-			} else {
-				String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/gosu/gosuRequestProject/");
-				String filename = files.getOriginalFilename();
-				String onlyFilename = filename.substring(0, filename.indexOf("."));
-				String extention = filename.substring(filename.indexOf("."));
-				String filepath = null;
-				int count = 0;
-				while (true) {
-					if (count == 0) {
-						filepath = onlyFilename + extention;
-					} else {
-						filepath = onlyFilename + "_" + count + extention;
-					}
-					File checkFile = new File(savePath + filepath);
-					if (!checkFile.exists()) {
-						break;
-					}
-					count++;
+		} else {
+			String savePath = request.getSession().getServletContext()
+					.getRealPath("/resources/upload/gosu/gosuRequestProject/");
+			String filename = files.getOriginalFilename();
+			String onlyFilename = filename.substring(0, filename.indexOf("."));
+			String extention = filename.substring(filename.indexOf("."));
+			String filepath = null;
+			int count = 0;
+			while (true) {
+				if (count == 0) {
+					filepath = onlyFilename + extention;
+				} else {
+					filepath = onlyFilename + "_" + count + extention;
 				}
-
-				try {
-					FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
-					BufferedOutputStream bos = new BufferedOutputStream(fos);
-					byte[] bytes = files.getBytes();
-					bos.write(bytes);
-					bos.close();
-					grp.setFilename(filename);
-					grp.setFilepath("/resources/upload/gosu/gosuRequestProject/" + filepath);
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				File checkFile = new File(savePath + filepath);
+				if (!checkFile.exists()) {
+					break;
 				}
+				count++;
 			}
 
-			int result = service.insertGosuRequestProject(grp);
-
-			return result;
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = files.getBytes();
+				bos.write(bytes);
+				bos.close();
+				grp.setFilename(filename);
+				grp.setFilepath("/resources/upload/gosu/gosuRequestProject/" + filepath);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
 
-		@ResponseBody
-		@RequestMapping(value = "/talkStopAjax2.do")
-		public int talkStopAjax2(int requestProjectSubNo, Model model) {
-			int result = service.talkStop2(requestProjectSubNo);
-			return result;
-		}
+		int result = service.insertGosuRequestProject(grp);
+
+		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/talkStopAjax2.do")
+	public int talkStopAjax2(int requestProjectSubNo, Model model) {
+		int result = service.talkStop2(requestProjectSubNo);
+		return result;
+	}
 }

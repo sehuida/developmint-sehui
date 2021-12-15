@@ -298,7 +298,7 @@
 		
 		<%--게시판 별 최신글 --%>	
 		<div class="cate3Box">
-		<p class="title" style="margin-top:50px;">관리자 관리 게시판</p>	
+		<p class="title" style="margin-top:50px;">관리자 게시판</p>	
 			<div>
 				
 				<div class="BoardList" >
@@ -307,7 +307,7 @@
 					<a href="/noticeList.do?reqPage=1" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
 					</div>
 					<c:forEach items="${noticeList }" var="n">
-					<a href="#" class="newBoard"><span>${n.noticeTitle }</span></a><span class="newBoardDate">${n.regDate }</span><br>
+						<a href="/noticeView.do?noticeNo=${n.noticeNo }" class="newBoard"><span>${n.noticeTitle }</span></a><span class="newBoardDate">${n.regDate }</span><br>
 					</c:forEach>
 				</div>
 				

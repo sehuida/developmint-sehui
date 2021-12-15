@@ -14,6 +14,7 @@ import kr.or.gosu.vo.GosuRequestCost;
 import kr.or.gosu.vo.GosuRequestCount;
 import kr.or.gosu.vo.GosuRequestProject;
 import kr.or.gosu.vo.GosuRequestProjectSub;
+import kr.or.gosu.vo.GosuReview;
 import kr.or.gosu.vo.GosuTalk;
 
 import java.util.ArrayList;
@@ -211,6 +212,28 @@ public class GosuDao {
 
 	public int talkStop2(int requestProjectSubNo) {
 		return sqlSession.update("gosu.talkStop2",requestProjectSubNo);
+	}
+
+	public int insetReviewOne(GosuReview greview) {
+		return sqlSession.insert("gosu.insetReviewOne",greview);
+	}
+
+	public GosuReview selectGosuReviewOne(GosuReview gr) {
+		return sqlSession.selectOne("gosu.selectGosuReviewOne",gr);
+	}
+
+	public ArrayList<GosuReview> selectGosuReviewList(int ggsouNo) {
+		List<GosuReview> list = sqlSession.selectList("gosu.selectGosuReviewList",ggsouNo);
+		return (ArrayList<GosuReview>)list;
+	}
+
+
+	public int selectReviewCount(int ggsouNo) {
+		return sqlSession.selectOne("gosu.selectReviewCount",ggsouNo);
+	}
+
+	public int selectReviewAvg(int ggsouNo) {
+		return sqlSession.selectOne("gosu.selectReviewAvg",ggsouNo);
 	}
 
 
