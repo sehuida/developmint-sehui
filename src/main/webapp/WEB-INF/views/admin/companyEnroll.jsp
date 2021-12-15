@@ -9,6 +9,9 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
+.container {
+   min-width: 1200px; 
+}
 .mainCate{
 	display:flex;
 }

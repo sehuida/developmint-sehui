@@ -10,6 +10,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 </head>
 <style>
+.container {
+   min-width: 1200px; 
+}
 .mainCate{
 	display:flex;
 }
