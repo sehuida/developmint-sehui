@@ -66,6 +66,7 @@ public class AnnounceController {
 	
 	@RequestMapping(value="/deleteAnnounce.do")
 	public String deleteAnnounce(Announce a, Model model) {
+		System.out.println("deleteAnnounce a : "+a);
 		int result = service.deleteAnnounce(a.getAnnounceNo());
 		if(result > 0) {
 			model.addAttribute("msg","구인공고가 삭제되었습니다.");

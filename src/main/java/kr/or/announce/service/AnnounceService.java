@@ -32,7 +32,14 @@ public class AnnounceService {
 	}
 
 	public int deleteAnnounce(int announceNo) {
-		return dao.deleteAnnounce(announceNo);
+		int appResult = dao.deleteApplication(announceNo);
+		if(appResult > 0) {
+			System.out.println("deleteAnnounce Dao 여기 성공");
+			return dao.deleteAnnounce(announceNo);
+		} else {
+			return 0;
+		}
+		
 	}
 
 	/*

@@ -92,6 +92,10 @@
 			where announce_no = #{announceNo}
 	</update>
 	
+	<delete id="deleteApplication" parameterType="_int">
+		delete from application where announce_no = #{announceNo}
+	</delete>
+	
 	<delete id="deleteAnnounce" parameterType="_int">
 		delete from announcement where announce_no = #{announceNo}
 	</delete>
