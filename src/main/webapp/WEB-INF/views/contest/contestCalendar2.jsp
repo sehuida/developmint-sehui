@@ -8,6 +8,9 @@
 <link href='/resources/fullcalendar-5.10.1/lib/main.css' rel='stylesheet' />
 </head>
 <style>
+.container {
+   min-width: 1200px; 
+}
 	.titleBox{
 		font-size: 30px;
 		font-weight: bold;

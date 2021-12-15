@@ -8,6 +8,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 </head>
 <style>
+.container {
+   min-width: 1200px; 
+}
 .titleBox{
 		font-size: 30px;
 		font-weight: bold;
@@ -87,7 +90,7 @@
 			<p><i class="bi bi-pencil-square" style="color:#4ECDC4"></i> 공모요강</p>
 			<textarea id="contestContent" name="contestContent" class="form-control" style="width:1000px; height: 600px;resize: none;"></textarea>
 			<p><i class="bi bi-card-image" style="color:#4ECDC4"></i> 포스터 이미지</p>
-			<input type="file" id="formFile" name="upFile" class="form-control" style="width:1000px;">
+			<input type="file" id="formFile" name="files" class="form-control" style="width:1000px;">
 			<p style="font-size: 16px;">공모전은 관리자 승인 후 등록됩니다.</p>
 			<input type="button" class="btn btn-primary submitBtn" value="등록하기" style="width:1000px;">
 		
