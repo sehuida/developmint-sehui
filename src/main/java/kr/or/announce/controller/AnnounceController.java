@@ -44,4 +44,38 @@ public class AnnounceController {
 		return "jobSearch/applicationStatus";
 	}
 	
+	@RequestMapping(value="/updateAnnounceFrm.do")
+	public String updateAnnounceFrm(int announceNo, Model model) {
+		Announce announce = service.selectOneAnnounce(announceNo);
+		model.addAttribute("a", announce);
+		return "jobSearch/updateAnnounceFrm";
+	}
+	
+	@RequestMapping(value="/updateAnnounce.do")
+	public String updateAnnounce(Model model, Announce a) {
+		int result = service.updateAnnounce(a);
+		if(result > 0) {
+			model.addAttribute("msg","구인공고 수정완료");
+		} else {
+			model.addAttribute("msg","구인공고 수정실패");
+		}
+		model.addAttribute("loc", "/announceManage.do?memberNo="+a.getMemberNo());
+		return "common/msg";
+		
+	}
+	
+	@RequestMapping(value="/deleteAnnounce.do")
+	public String deleteAnnounce(Announce a, Model model) {
+		System.out.println("deleteAnnounce a : "+a);
+		int result = service.deleteAnnounce(a.getAnnounceNo());
+		if(result > 0) {
+			model.addAttribute("msg","구인공고가 삭제되었습니다.");
+		} else {
+			model.addAttribute("msg","구인공고 삭제 에러");			
+		}
+		model.addAttribute("loc","/announceManage.do?memberNo="+a.getMemberNo());
+		return "common/msg";
+	}
+	
+	
 }
