@@ -26,7 +26,7 @@
 	
 	<insert id="insertAnnounce" parameterType="a">
 		insert into announcement values(announce_seq.nextval, #{memberNo}, #{companyName}, #{category}, #{fields}, #{school}, #{workForm}
-		, #{announceTitle}, #{announceContent}, #{skills}, #{money}, #{workPlace}, #{endDate}, #{veterans}, #{military}, to_char(sysdate,'yyyy-mm-dd'))
+		, #{announceTitle}, #{announceContent}, #{skills}, #{money}, #{workPlace}, #{endDate}, #{veterans}, #{military}, to_char(sysdate,'yyyy-mm-dd'), #{career})
 	</insert>
 	
 	<select id="allAnnounce" resultType="a">
