@@ -93,7 +93,7 @@
 	                            <p class="titleText">지원사유</p>
 	                        </div>
 	                        <div class="form-group">
-	                            <textarea class="form-control" id="summernote" rows="3" name="rContent" value="${pe.applyContent }"></textarea>
+	                            <textarea class="form-control" id="summernote" rows="3" name="rContent" >${pe.applyContent }</textarea>
 	                        </div>
 	                    </div>
 	                    <div class="finalLine"></div>

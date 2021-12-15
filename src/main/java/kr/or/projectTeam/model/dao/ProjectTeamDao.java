@@ -261,5 +261,9 @@ public class ProjectTeamDao {
 		return sqlSession.insert("projectTeam.insertApplyLangList", map);
 	}
 
+	public int insertApplyComment(Map<String, Object> map) {
+		return sqlSession.insert("projectTeam.insertApplyComment", map);
+	}
+
 	
 }
