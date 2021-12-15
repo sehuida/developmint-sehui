@@ -34,6 +34,7 @@ import kr.or.gosu.vo.GosuRequestCost;
 import kr.or.gosu.vo.GosuRequestCount;
 import kr.or.gosu.vo.GosuRequestProject;
 import kr.or.gosu.vo.GosuRequestProjectSub;
+import kr.or.gosu.vo.GosuRequestReview;
 import kr.or.gosu.vo.GosuReview;
 import kr.or.gosu.vo.GosuTalk;
 import kr.or.member.model.vo.Member;
@@ -100,8 +101,8 @@ public class GosuController {
 		model.addAttribute("gosu", gosu);
 		model.addAttribute("gprojectList", gprList);
 		model.addAttribute("gphotoList", gptList);
-		model.addAttribute("greviewList",grList);
-		model.addAttribute("grAVG",grAVG);
+		model.addAttribute("greviewList", grList);
+		model.addAttribute("grAVG", grAVG);
 		return "gosu/gosuContent";
 	}
 
@@ -299,9 +300,10 @@ public class GosuController {
 		model.addAttribute("greview", greview);
 		return "gosu/gosuTalk";
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/reviewSendAjax.do")
-	public int reviewSendAjax(int reviewNum,int ggosuNo,String writer,String reviewContent, Model model) {
+	public int reviewSendAjax(int reviewNum, int ggosuNo, String writer, String reviewContent, Model model) {
 		GosuReview gr = new GosuReview();
 		gr.setGgosuNo(ggosuNo);
 		gr.setReviewContent(reviewContent);
@@ -592,6 +594,17 @@ public class GosuController {
 	@RequestMapping(value = "/talkStopAjax2.do")
 	public int talkStopAjax2(int requestProjectSubNo, Model model) {
 		int result = service.talkStop2(requestProjectSubNo);
+		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/requestReviewAjax.do")
+	public int requestReviewAjax(int requestProjectSubNo,String requestMemberId,String requestReviewContent, Model model) {
+		GosuRequestReview grr = new GosuRequestReview();
+		grr.setRequestProjectSubNo(requestProjectSubNo);
+		grr.setMemberId(requestMemberId);
+		grr.setRequestReviewContent(requestReviewContent);
+		int result = service.insertRequestReviewAjax(grr);
 		return result;
 	}
 }

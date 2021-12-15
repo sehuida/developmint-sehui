@@ -17,6 +17,7 @@ import kr.or.gosu.vo.GosuRequestCost;
 import kr.or.gosu.vo.GosuRequestCount;
 import kr.or.gosu.vo.GosuRequestProject;
 import kr.or.gosu.vo.GosuRequestProjectSub;
+import kr.or.gosu.vo.GosuRequestReview;
 import kr.or.gosu.vo.GosuReview;
 import kr.or.gosu.vo.GosuTalk;
 
@@ -283,6 +284,11 @@ public class GosuService {
 		gosuReviewOne.setReviewCount(dao.selectReviewCount(ggsouNo));	
 		gosuReviewOne.setReviewAvg(dao.selectReviewAvg(ggsouNo));
 		return gosuReviewOne;
+	}
+
+	public int insertRequestReviewAjax(GosuRequestReview grr) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 
