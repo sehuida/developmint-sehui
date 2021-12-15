@@ -60,8 +60,10 @@ public class NoticeController {
 	public String noticeView(int noticeNo, Model model) {
 		//상세보기를위해 1개 글만 가지로 오기
 		Notice n = service.selectOneNotice(noticeNo);
+		System.out.println(noticeNo);
 		//rnum구하기
 		Rnum rn = service.selectRnum(noticeNo);
+		System.out.println(rn.getRnum());
 		//rnum으로 5개글만뽑아오기
 		ArrayList<Rnum> rlist = service.selectRnumList(rn.getRnum());
 		model.addAttribute("n", n);
@@ -178,7 +180,7 @@ public class NoticeController {
 	@ResponseBody
 	@RequestMapping(value = "/uploadImage.do")
 	public String uploadImage(MultipartFile file, HttpServletRequest req) {
-
+		/*
 		String contextRoot = new HttpServletRequestWrapper(req).getRealPath("/");
 		String fileRoot = contextRoot + "resources/upload/notice/";
 		String originalFileName = file.getOriginalFilename(); // 오리지날 파일명
@@ -200,9 +202,45 @@ public class NoticeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*-----------------------------------------------------------------*/
+		
 		System.out.println(fileRoot + savedFileName);
 		return "/resources/upload/notice/" + savedFileName;
+		*/
+		
+		String savePath = req.getSession().getServletContext().getRealPath("/resources/upload/notice/");
+		String filename = file.getOriginalFilename();
+		String onlyFilename = filename.substring(0,filename.indexOf("."));
+		String extension = filename.substring(filename.indexOf("."));
+		String filepath = null;
+		int count=0;
+		while(true) {
+			if(count == 0 ) {
+				filepath = onlyFilename+extension;
+			}else {
+				filepath = onlyFilename+"_"+count+extension;
+			}
+			File checkFile = new File(savePath+filepath);
+			if(!checkFile.exists()) {
+				break;
+			}
+			count++;
+		}
+		try {
+			FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
+			// 업로드 속도증가를 위한 보조스트림
+			BufferedOutputStream bos = new BufferedOutputStream(fos);
+			// 파일 업로드
+			byte[] bytes = file.getBytes();
+			bos.write(bytes);
+			bos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "/resources/upload/notice/" + filepath;
 	}
 
 	@RequestMapping(value = "/deleteNoticeNo.do")

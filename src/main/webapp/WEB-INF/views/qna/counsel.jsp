@@ -247,7 +247,7 @@
 			}
 
 			
-			// 파일 업로드 컨텐츠 넣기
+			 // 파일 업로드 컨텐츠 넣기
 			var file_contents = "";
 			$.each($('#file_show li'), function(index, item) {
 				var img_src = $(this).children('img').attr('src');
@@ -259,7 +259,7 @@
 			}
 
 			var contents = qa_msg + file_contents;
-			$('#f1 [name=qa_msg]').val(contents);
+			$('#f1 [name=qa_msg]').val(contents); 
 			
 			$("form").attr("action", "/counsel_save2.do");
 			f1.submit();
