@@ -12,7 +12,7 @@ public class CompanyService {
 	@Autowired
 	private CompanyDao dao;
 
-	public Company selectCompany(int companyNo) {
-		return dao.selectCompany(companyNo);
+	public Company selectCompany(String companyName) {
+		return dao.selectCompany(companyName);
 	}
 }

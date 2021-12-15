@@ -25,10 +25,10 @@ public class JobSearchController {
 		return "jobSearch/jobSearchList";
 	}
 	
-	@RequestMapping(value="/companyInfo.do")
-	public String companyInfo() {
-		return "jobSearch/companyInfo";
-	}
+	/*	CompanyController에서 사용
+	 * @RequestMapping(value="/companyInfo.do") public String companyInfo() { return
+	 * "jobSearch/companyInfo"; }
+	 */
 	
 	
 	

@@ -12,7 +12,7 @@ public class CompanyDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public Company selectCompany(int companyNo) {
-		return sqlSession.selectOne("company.selectCompany", companyNo);
+	public Company selectCompany(String companyName) {
+		return sqlSession.selectOne("company.selectCompany", companyName);
 	}
 }
