@@ -14,4 +14,8 @@ public class ShareDao {
 	public int insertBoard(Share s) {
 		return sqlSession.insert("share.insertShare",s);
 	}
+
+	public int plusPoints(Share s) {
+		return sqlSession.update("share.plusPoints",s);
+	}
 }

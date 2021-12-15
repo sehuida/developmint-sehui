@@ -127,7 +127,7 @@ public class ShareController {
 
 		int result = service.insertShareBoard(s);
 
-		if (result > 0) {
+		if (result > 1) {
 			model.addAttribute("title", "등록성공");
 			model.addAttribute("msg", "글 작성이 완료 되셨습니다.");
 			model.addAttribute("loc", "/shareList.do");
