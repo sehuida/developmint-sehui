@@ -8,6 +8,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 </head>
 <style>
+.container {
+   min-width: 1200px; 
+}
 .mainCate{
 	display:flex;
 }

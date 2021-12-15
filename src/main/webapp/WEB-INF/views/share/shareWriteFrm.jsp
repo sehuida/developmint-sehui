@@ -56,6 +56,9 @@
 	#submitBtn{
 		width: 150px;
 	}
+	.container {
+  		 min-width: 1200px; 
+	}
 </style>
 </head>
 <body>

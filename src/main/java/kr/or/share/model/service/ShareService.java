@@ -14,6 +14,9 @@ public class ShareService {
 	
 	@Transactional
 	public int insertShareBoard(Share s) {
-		return dao.insertBoard(s);
+		int result = 0;
+		result += dao.insertBoard(s);
+		result += dao.plusPoints(s);
+		return result;
 	}
 }
