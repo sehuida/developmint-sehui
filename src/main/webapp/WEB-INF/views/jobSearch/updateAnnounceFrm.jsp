@@ -6,7 +6,7 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-<title>이력서 작성하기</title>
+<title>develomint</title>
 <style>
 	.contain{
 		width: 1200px;
@@ -142,7 +142,7 @@
 	.backBtn:hover{
 		background-color: red;
 	}
-	.resumeBtn{
+	.announceBtn{
 		background-color: rgb(78, 205, 196);
 		color: white;
 		width: 150px;
@@ -155,7 +155,7 @@
 		float: right;
 		margin-right: 100px;
 	}
-	.resumeBtn:hover{
+	.announceBtn:hover{
 		background-color: rgb(0, 174, 255);
 	}
 	
@@ -358,7 +358,7 @@
 			</ul>
 		</div>
 		<div class="announceData">
-			<form action="insertAnnounce.do" method="post">
+			<form action="updateAnnounce.do" method="post">
 			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">		<!-- 멤버번호 가져오기 위해서 히든으로 전송 -->
 				<div class="step1">
 					<em>기본정보</em>
@@ -474,6 +474,23 @@
 							</select>
 						</div>		
 					</div>
+					
+					
+					<div class="grayBox">
+						<em>경력</em>
+						<br><br>
+						<div class="career">
+							<b>경력선택</b>
+						</div>
+						<div class="careerInput">
+							<select class="selectInput" id="career" name="career">	
+								<option value=1>신입</option>
+								<option value=2>경력</option>
+								<option value=3>경력무관</option>
+							</select>
+						</div>		
+					</div>
+					
 					<div class="selectBtn">
 						<input type="button" onclick="window.scrollTo(0,0);" class="nextBtn1" value="다음">
 					</div>
@@ -609,7 +626,7 @@
 					
 					<!-- 이전, 등록하기 버튼 -->
 					<div class="selectBtn">
-						<input type="submit" class="resumeBtn" value="등록">
+						<input type="submit" class="announceBtn" value="등록">
 						<input type="button" onclick="window.scrollTo(0,0);" class="backBtn2" value="< 이전">
 					</div>
 				</div>

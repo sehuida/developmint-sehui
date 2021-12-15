@@ -115,13 +115,22 @@
 		overflow: hidden;
 		float: right;	
 	}
-	.updateResume{
+	.updateAnnounce{
 		border: none;
 		width: 100px;
 		height: 45px;
 		border: 2px solid rgb(78, 205, 196);
 		border-radius: 10px;
 		color: rgb(78, 205, 196);
+		background-color: white;
+	}
+	.deleteAnnounce{
+		border: none;
+		width: 100px;
+		height: 45px;
+		border: 2px solid orange;
+		border-radius: 10px;
+		color: orange;
 		background-color: white;
 	}
 	.resumeBtn{
@@ -257,7 +266,9 @@
 				<span class="requestCount">1</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
 			</div>
 			<div class="update">
-				<a href="updateResume.do?resumeNo=${r.resumeNo }"><button class="updateResume">수정하기</button></a>
+				<input type="hidden" value="${a.announceNo }" name="announceNo">
+				<a href="/updateAnnounceFrm.do?announceNo=${a.announceNo }"><button class="updateAnnounce">수정하기</button></a>
+				<a href="/deleteAnnounce.do?announceNo=${a.announceNo }"><button class="deleteAnnounce">삭제하기</button></a>
 			</div>
 		</div>
 		<div class="resume">
