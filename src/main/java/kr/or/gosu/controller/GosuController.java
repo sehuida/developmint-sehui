@@ -1,12 +1,16 @@
 package kr.or.gosu.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Reader;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -49,8 +53,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -739,22 +745,48 @@ public class GosuController {
 		model.addAttribute("loc", "/gosuNoticeList.do");
 		return "member/swalMsg";
 	}
+
 	@RequestMapping(value = "/gosuList2.do")
-	public String gosuList2(int reqPage,String keyword, String type, Model model) {
-		GosuListPageData glpd = service.selectGosuList2(reqPage,keyword,type);
+	public String gosuList2(int reqPage, String keyword, String type, Model model) {
+		GosuListPageData glpd = service.selectGosuList2(reqPage, keyword, type);
 		model.addAttribute("gList", glpd.getList());
 		model.addAttribute("pageNavi", glpd.getPageNavi());
 		model.addAttribute("start", glpd.getStart());
 		return "gosu/gosuList";
 	}
-		@RequestMapping(value = "/gosuNoticeList2.do")
-	public String gosuNoticeList2(int reqPage,String keyword, String type, Model model) {
-			GosuNoticeListPageData glpd = service.selectGosuNoticeList2(reqPage,keyword,type);
-			model.addAttribute("gNoticeList", glpd.getList());
-			model.addAttribute("pageNavi", glpd.getPageNavi());
-			model.addAttribute("start", glpd.getStart());
 
-			return "gosu/gosuNoticeList";
+	@RequestMapping(value = "/gosuNoticeList2.do")
+	public String gosuNoticeList2(int reqPage, String keyword, String type, Model model) {
+		GosuNoticeListPageData glpd = service.selectGosuNoticeList2(reqPage, keyword, type);
+		model.addAttribute("gNoticeList", glpd.getList());
+		model.addAttribute("pageNavi", glpd.getPageNavi());
+		model.addAttribute("start", glpd.getStart());
+
+		return "gosu/gosuNoticeList";
 	}
 
-}
+	@RequestMapping(value = "/fileDownload.do")
+	public void fileDownload(String filePath, String fileName, HttpServletRequest req, HttpServletResponse response)
+			throws Exception {
+		try {
+			String path = req.getSession().getServletContext().getRealPath(filePath); // 경로에 접근할 때 역슬래시('\') 사용
+			System.out.println(path);
+			File file = new File(path);
+			response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로
+																								// 쓰이는지를 알려주는 헤더
+			System.out.println("filename = "+file.getName());
+			FileInputStream fileInputStream = new FileInputStream(path); // 파일 읽어오기
+			OutputStream out = response.getOutputStream();
+
+			int read = 0;
+			byte[] buffer = new byte[1024];
+			while ((read = fileInputStream.read(buffer)) != -1) { // 1024바이트씩 계속 읽으면서 outputStream에 저장, -1이 나오면 더이상 읽을
+																	// 파일이 없음
+				out.write(buffer, 0, read);
+			}
+
+		} catch (Exception e) {
+			throw new Exception("download error");
+		}
+
+}}

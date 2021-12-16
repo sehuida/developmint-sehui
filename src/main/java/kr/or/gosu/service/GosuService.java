@@ -383,7 +383,7 @@ public class GosuService {
 
 
 	public GosuNoticeListPageData selectGosuNoticeList(int reqPage) {
-		int numPerPage = 12;
+		int numPerPage = 18;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -611,7 +611,7 @@ public class GosuService {
 
 
 	public GosuNoticeListPageData selectGosuNoticeList2(int reqPage, String keyword, String type) {
-		int numPerPage = 12;
+		int numPerPage = 18;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 		Map<String, Object> map = new HashMap<String, Object>();

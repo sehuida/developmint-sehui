@@ -201,7 +201,8 @@ input:focus, textarea:focus {
 											<c:if test="${not empty gtl.filename }">
 												<th colspan="2"
 													style="text-align: left; padding-left: 50px;">첨부파일
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>${gtl.filename }</a>
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/fileDownload.do?fileName=${gtl.filename }&filePath=${gtl.filepath }"id="download">${gtl.filename }</a>
+													
 												</th>
 
 											</c:if>
@@ -240,7 +241,8 @@ input:focus, textarea:focus {
 										<tr>
 											<c:if test="${not empty gtl.filename }">
 												<th style="text-align: right;">첨부파일</th>
-												<td colspan="2"><a>${gtl.filename }</a></td>
+												<td colspan="2"><a href="/fileDownload.do?fileName=${gtl.filename }&filePath=${gtl.filepath }"id="download">${gtl.filename }</a></td>
+											
 											</c:if>
 										</tr>
 										<tr>
@@ -464,6 +466,7 @@ input:focus, textarea:focus {
 	</div>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
+
 		$("#talkBtnAjax").click(function() {
 			var talkContent = $("#talkContent").val();
 			var writer = $("#writer").val();
