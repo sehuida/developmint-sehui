@@ -19,6 +19,7 @@ import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.member.model.vo.Member;
+import kr.or.notice.vo.Notice;
 import kr.or.qna.service.QnaService;
 
 @Controller
@@ -107,4 +108,11 @@ public class QnaController {
 		}
 		return "/resources/upload/qna/" + filepath;
 	}
+	
+	@RequestMapping(value="/counsel_save1.do")
+	public String insertCounsel() {
+		
+		return "qna/counsel";
+	}
+	
 }

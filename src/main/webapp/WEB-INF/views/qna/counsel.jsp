@@ -12,7 +12,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<div class="container" style="margin-bottom: 50px;max-width: 1591px">
+	<div class="container" style="margin-bottom: 50px;max-width: 1591px;min-width: 1591px;">
 		<div class="area">
 			<div class="nav-sub" style="margin-top: 30px;"><a href="/" class="text-hover">홈</a><span> > </span><a href="/noticehome.do" class="text-hover">고객센터</a><span> > </span><span>공지사항</span></div>
 			<div class="title"><h2 style="color: #78c2ad;">CS Center</h2></div>
@@ -81,10 +81,13 @@
 										<option value="8">계정관련</option>
 										<option value="9">결제관련</option>
 										<option value="10">환불관련</option>
-										<option value="11">커뮤니티관련</option>
-										<option value="12">공모전관련</option>
-										<option value="13">구인잡관련</option>
-										<option value="14">기타 문의</option>
+										<option value="11">공모전관련</option>
+										<option value="12">구인잡관련</option>
+										<option value="13">커뮤니티관련(사는 얘기)</option>
+				                        <option value="14">커뮤니티관련(Tech Q&A)</option>
+				                        <option value="15">커뮤니티관련(Tips & 강좌)</option>
+				                        <option value="16">IT NEWS & 정보</option>
+										<option value="40">기타 문의</option>
 										<option value="21">신고</option>
 										<option value="22">기능/작동 오류</option>
 										<option value="20">이벤트</option>
@@ -118,12 +121,14 @@
 						    </div>
 						    <c:choose>
 						    	<c:when test="${not empty sessionScope.m }">
-								    <div class="form-group">
-								    	<label scope="row">사진</label>
-								    	<ul class="file_show" id="file_show" >
-																								</ul>
-										<button type="button" class="btn-file" onclick="$('#Filedata').click();">파일 선택</button>
-										<span id="file_message" style="display: none;color: red;font-weight: bold;"></span>
+								    <div class="form-group" >
+								    	<label scope="row" style="display: block;">사진</label>
+								    	<div class="div-flex">
+									    	<ul class="file_show div-flex" id="file_show" style="list-style-type: none;padding: 0;display: inline-block;">
+																									</ul>
+											<button type="button" class="btn-file" onclick="$('#Filedata').click();">파일 선택</button>
+											<span id="file_message" style="display: none;color: red;font-weight: bold;"></span>
+								    	</div>
 								    </div>
 								    <!-- <div class="form-group">
 								      <label for="formFile" class="form-label mt-4"> 첨부파일</label>
@@ -161,7 +166,7 @@
 			</form>
 			<form action="upload_form.do" id="upload_form" name="upload_form" method="post" enctype="multipart/form-data">
 				<!-- <input type="file" id="Filedata" class="input_file" onchange="uploadImage();" style="display: none !important;" /> -->
-				<input type="file" id="Filedata" class="input_file" onchange="loadImg(this);" style="display: none !important;" />
+				<input type="file" name="Filedata" id="Filedata" class="input_file" onchange="loadImg(this);" style="display: none !important;" multiple>
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberNo }">
 			</form>
 		</div>
@@ -216,18 +221,22 @@
 				$('#f1 [name=qnaContent]').focus();
 				return false;
 			}
-			var pwReg = /^[a-zA-Z0-9]{4,}$/;
+			//var pwReg = /^[a-zA-Z0-9]+{4,}$/;
+			var pwReg = /^[a-z][a-zA-Z0-9]{3,}$/;
 			if($.trim($('#f1 [name=qna_pw]').val()) == ''){
 				alert('비밀번호를 입력해주십시오.');
 				return false;
 			}
 			if(!pwReg.test($('#f1 [name=qna_pw]').val())){
-					alert('영대소문자/숫자로 4글자 이상 입력해주십시오.');
+					alert('총 4글자 이상, 첫글자는 소문자로 입력해주십시오.');
 					$('#f1 [name=qna_pw]').focus();
 					return false;
 			}
-			$("form").attr("action", "/counsel_save1.do");
-			f1.submit();
+			
+			if(confirm("작성하시겠습니까?")){
+				$("form").attr("action", "/counsel_save1.do");
+				f1.submit();
+			}
 		}
 		
 		/* 회원일경우 */
@@ -266,8 +275,11 @@
 			var contents = qa_msg + file_contents;
 			$('#f1 [name=qnaContent]').val(contents);  */
 			
-			$("form").attr("action", "/counsel_save2.do");
-			f1.submit();
+			if(confirm("작성하시겠습니까?")){
+				$("form").attr("action", "/counsel_save2.do");
+				f1.submit();
+			}
+			
 		}
 		
 		function uploadImage() {
@@ -299,7 +311,7 @@
 				reader.readAsDataURL(files[0]);
 				reader.onload=function(e){
 					/* $("#img-view").attr("src",e.target.result); */
-					var image_tag = "<li><img src=\"" + e.target.result + "\" /><a class=\"del-image\" href=\"javascript:void(0);\"><i class=\"bi bi-x-circle-fill\"></i></a></li>";
+					var image_tag = "<li><img style=\"width: 65px;height: 65px;\" src=\"" + e.target.result + "\" /><a class=\"del-image\" href=\"javascript:void(0);\"><i class=\"bi bi-x-circle-fill\"></i></a></li>";
 					$("#file_show").append(image_tag);
 				}
 			}else{
