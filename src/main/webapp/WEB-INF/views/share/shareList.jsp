@@ -24,17 +24,16 @@
 		align-items: center;
 		margin-top: 50px;
 	}
+	.page-sorting a{
+		margin-right: 10px;
+	}
 	#searcher{
 		width: 30%;
 	}
 	.pageCategory{
 		display: flex;
-		margin-top: 50px;
 		justify-content: space-between;
-		height: 50px;
-	}
-	.pageCategory a{
-		align-items: center;
+		margin-top: 50px;
 	}
 </style>
 </head>
@@ -42,24 +41,21 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="container">
 			<div class="page-top">
-				<div>
-					<span style="font-size: 25px; font-family: NotoBold;">개발지식 공유 게시판</span><img class="cateImg" src="/resources/img/shareBoard/board.png">				
-				</div>
-				<div class="pageCategory" id="pageCategory">
-					<div class="btn-group" role="group" aria-label="Basic example">
-					  <a type="button" class="btn btn-secondary details">사는 얘기</a>
-					  <a type="button" class="btn btn-secondary details">Tech Q&A</a>
-					  <a type="button" class="btn btn-secondary details">Tips & 강좌</a>
-					  <a type="button" class="btn btn-secondary details">IT NEWS & 정보</a>
+				<div class="pageCategory">
+					<div>
+						<span style="font-size: 25px; font-family: NotoBold;">개발지식 공유 게시판</span><img class="cateImg" src="/resources/img/shareBoard/board.png">									
 					</div>
-					<a href="/shareWriteFrm.do" class="btn btn-primary writeBtn">글쓰기</a>				
-				</div><!-- 세부카테고리 종료 -->				
+					<div>
+ 				    	<a href="/shareWriteFrm.do" class="btn btn-info writeBtn">글쓰기</a>				
+					</div>
+				</div>
+				<!-- 페이지 카테고리 종료 -->
 				<div class="page-sorting">
 					<div>
-						<span>최신순</span>
-						<span>추천순</span>
-						<span>조회순</span>
-						<span>댓글순</span>					
+						<a href="#" class="btn btn-outline-dark">최신순</a>
+						<a href="#" class="btn btn-outline-dark">추천순</a>
+						<a href="#" class="btn btn-outline-dark">조회순</a>
+						<a href="#" class="btn btn-outline-dark">댓글순</a>				
 					</div>
 		            <!-- 게시글 검색창 , 작성자 or 글 제목 -->
 				    <div class="input-group mb-3 " id="searcher">
@@ -71,6 +67,10 @@
 				      <button class="btn btn-primary" type="button" id="searchBtn">검색하기</button>
 				    </div>
 				</div>
+				<!-- 페이지 소팅div 끝 -->
+			</div>
+			<div class="page-table">
+				
 			</div>
 		</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
