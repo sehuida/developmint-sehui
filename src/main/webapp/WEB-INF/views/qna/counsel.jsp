@@ -174,6 +174,8 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script type="text/javascript">
 		var memberNo = $("input[name=memberId]").val(); 
+		var category = '';
+		var old_faq_idx = "";
 		
 		 $(function(){
 			if(${empty sessionScope.m}){
@@ -182,11 +184,56 @@
 					location.href ="/loginFrm.do";
 				});
 			};
+			
+			// 초기출력
+			viewFAQList(qa_kind);
+			$('#f1 [name=category]').on('change', function() {
+
+				if ($(this).val() == '22') {
+					$('textarea[name=qnaContent]').text('정확한 답변을 드리기 위해, 아래 상세 내용들이 필요합니다.
+		필요 시 추가적인 정보나 확인 요청을 드릴 수 있습니다.
+		문제 상황에 대한 상세한 설명과 명확한 사진 및 영상은 검토에 큰 도움이 됩니다.
+
+		  1. 오류 발생 일시:
+		  2. 접속한 환경(모바일, PC 등):
+		  3. PC 환경이었다면 브라우저 종류(익스플로러, 크롬 등):
+		  4. 모바일 환경이었다면 OS 버전(안드로이드 11, iOS 14 등):
+		  5. 상세한 오류 발생 내용:');
+				} else {
+					$('textarea[name=qnaContent]').text('');
+				}
+
+		        viewFAQList($(this).val());
+			});
+			
 			// 등록 이미지 삭제
 			$('body').on('click', '.del-image', function() {
 				$(this).parents('li').remove();
 			});
 		}); 
+		
+		function viewFAQList(idx) {
+			$('#f1 [name=category]').val(idx);
+			idx = idx == '' ? 7 : idx;
+			if(old_faq_idx !== idx) {
+				request_service(idx);
+			}
+			old_faq_idx = idx;
+
+		}
+		
+		function request_service(idx) {
+			var target_url = "/faq.do?category="+idx;
+
+			$.ajax({
+				type: "GET",
+				url: target_url,
+				success: function(msg) {
+					$("#faq_list").html(msg);
+				}
+			});
+		}
+		
 		function cancel() {
 			if(confirm('취소하시겠습니까?')){
 				history.back();
