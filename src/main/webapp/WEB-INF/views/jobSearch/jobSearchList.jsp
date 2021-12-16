@@ -185,10 +185,7 @@
     #pageNavi{
     	display: flex;
     	justify-content: center;
-    	margin: 20px 0px;
-    }
-    .page-link{
-    	padding: 6px 12px;
+    	margin: 30px 0px;
     }
 </style>
 <body>
@@ -203,7 +200,7 @@
                 <c:choose>
                 	<c:when test="${not empty sessionScope.m }">
                 		<c:if test="${sessionScope.m.memberType eq 1 }">		<!-- 일반회원일 경우 -> 이력서 작성하기 띄우기 -->
-			                <a href="resumeManage.do?memberNo=${sessionScope.m.memberNo }"><button class="resume">이력서 작성하기</button></a>                		
+			                <a href="resumeManage.do?memberNo=${sessionScope.m.memberNo }&reqPage=1"><button class="resume">이력서 작성하기</button></a>                		
                 		</c:if>
                 		<c:if test="${sessionScope.m.memberType eq 3 }">		<!-- 기업회원일 경우 -> 구인글 작성하기 띄우기 -->
 			                <a href="announceManage.do?memberNo=${sessionScope.m.memberNo }"><button class="resume">구인글 작성하기</button></a>                		
@@ -504,7 +501,7 @@
                     </div>
                 </div>
                 <br>
-                <div id="pageNavi">${pageNavi }</div>
+                <div id="pageNavi" style="padding: 0px;">${pageNavi }</div>
             </div>
         </div>
     </div>

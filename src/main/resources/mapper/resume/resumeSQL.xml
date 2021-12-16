@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="resume">
-	<select id="selectAllResume" parameterType="_int" resultType="r">
+	<select id="selectAllResume" parameterType="map" resultType="r">
+		select * from
+		(select rownum as rnum , r.*
+		from (
 		select
 			resume_no as resumeNo,
 			member_no as memberNo,
@@ -32,8 +35,14 @@
 			work_place as workPlace,
 			write_date as writeDate,
 			ceo_resume as ceoResume
-		from resume
-		where member_no = #{memberNo}
+		from resume where member_no = #{memberNo}
+		order by 1 desc )r)rr 
+		where rnum between #{start} and
+		#{end}
+	</select>
+	
+	<select id="selectResumeTotalCount" parameterType="_int" resultType="_int">
+		select count(*) from resume where member_no = #{memberNo}
 	</select>
 	
 	<select	id="selectOneResume" parameterType="_int" resultType="r">

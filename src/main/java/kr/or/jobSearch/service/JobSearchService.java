@@ -60,7 +60,7 @@ public class JobSearchService {
 			// 다음 버튼
 			if(pageNo <= totalPage) {
 				pageNavi += "<li class='page-item'>";
-				pageNavi += "<a class = 'page-link' href='/gosuRequestList.do?reqPage="+pageNo+"'>";
+				pageNavi += "<a class = 'page-link' href='/jobSearchList.do?reqPage="+pageNo+"'>";
 				pageNavi += "&gt;</a></li>";
 			}
 			pageNavi += "</ul>";
