@@ -187,4 +187,14 @@ public class QnaController {
 		return "common/msg";
 	}
 	
+	@RequestMapping(value="/myCounsel.do")
+	public String myCounsel() {
+		return "qna/counselUser";
+	}
+	
+	@RequestMapping(value="/adminCounsel.do")
+	public String adminCounsel() {
+		return "qna/counselAdmin";
+	}
+	
 }

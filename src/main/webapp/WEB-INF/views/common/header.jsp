@@ -55,10 +55,10 @@
     	<c:choose>
 			<c:when test="${empty sessionScope.m }">
 				<li class="nav-item">
-					<a type="button" class="btn btn-secondary btn-lg" href="/loginFrm.do">Login</a>
+					<a type="button" class="btn btn-secondary btn-lg" href="/loginFrm.do" style="font-size: medium;font-weight: bold;">로그인</a>
 		        </li>
 				<li class="nav-item">
-					<a type="button" class="btn btn-link btn-lg" href="/joinFrm.do">Join</a>
+					<a type="button" class="btn btn-link btn-lg join-link-text" href="/joinFrm.do" style="font-size: medium;font-weight: bold;">회원가입</a>
 		        </li>
 			</c:when>
 			<c:otherwise>
@@ -67,9 +67,9 @@
 						<li class="nav-item dropdown float-end me-5">
 				          <a class="nav-link dropdown-toggle active margin-right" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="padding: 0;"><i class="bi bi-person-circle" style="font-size: 2.5rem;"></i> ${sessionScope.m.memberId } 님</a>
 				          <div class="dropdown-menu">
-				            <a class="dropdown-item" href="/adminPage.do">ADMIN MYPAGE</a>
+				            <a class="dropdown-item" href="/adminPage.do">관리자 페이지</a>
 				            <div class="dropdown-divider"></div>
-				            <a class="dropdown-item" href="/logout.do">LOGOUT</a>
+				            <a class="dropdown-item" href="/logout.do">로그아웃</a>
 				          </div>
 				        </li>
 					</c:when>
@@ -90,16 +90,16 @@
 						          </a>
 						          <div class="dropdown-menu">
 						          	<c:if test="${sessionScope.m.memberType eq 1 }">
-							            <a class="dropdown-item" href="/mypage.do">MYPAGE</a>
+							            <a class="dropdown-item" href="/mypage.do">마이페이지</a>
 						          	</c:if>
 						          	<c:if test="${sessionScope.m.memberType eq 2}">
-									    <a class="dropdown-item" href="/mypageGosu.do">MYPAGE</a>	
+									    <a class="dropdown-item" href="/mypageGosu.do">마이페이지</a>	
 									</c:if>
 						          	<c:if test="${sessionScope.m.memberType eq 3}">
-									    <a class="dropdown-item" href="/mypageCom.do">MYPAGE</a>	
+									    <a class="dropdown-item" href="/mypageCom.do">마이페이지</a>	
 									</c:if>
 						            <div class="dropdown-divider"></div>
-						            <a class="dropdown-item" href="/logout.do">LOGOUT</a>
+						            <a class="dropdown-item" href="/logout.do">로그아웃</a>
 						          </div>
 						        </li>
 							</c:when>
