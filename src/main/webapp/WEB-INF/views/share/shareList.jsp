@@ -83,11 +83,11 @@
 					</div>
 		            <!-- 게시글 검색창 , 작성자 or 글 제목 -->
 				    <div class="input-group mb-3 " id="searcher">
-				      <select class="form-select" id="searchCategory">
+				      <select class="form-select" id="searchCategory" name="searchCategory">
 				        <option value="1">제목</option>
 				        <option value="2">작성자</option>
 				      </select>
-				      <input type="text" class="form-control" placeholder="검색할 내용" aria-label="Recipient's username" aria-describedby="searchBtn" style="width:150px;">
+				      <input type="text" class="form-control" placeholder="검색할 내용" aria-label="Recipient's username" aria-describedby="searchBtn" name="searchContent" id="searchContent" style="width:150px;">
 				      <button class="btn btn-primary" type="button" id="searchBtn">검색하기</button>
 				    </div>
 				</div>
@@ -102,7 +102,7 @@
 						<tr>
 							<td style="padding-left: 30px;">
 								<div>
-									<span class="text-muted"># ${sv.boardNo }</span><span class="badge bg-info cateBadge">${sv.boardType }</span>
+									<span class="text-muted"># ${sv.boardNo }</span><span class="badge bg-info cateBadge">${sv.type }</span>
 								</div>
 								<a href="/shareBoardView?boardNo=${sv.boardNo }">${sv.boardTitle }</a>
 							</td>
@@ -151,7 +151,6 @@
 	 //카테고리 색
 	 $(function(){
 		 var type = '${type}';
-		 console.log(type);
 		 
 		 if(type == 1){
 			 $(".sorting").eq(0).removeClass("btn-outline-dark");
@@ -166,6 +165,13 @@
 			 $(".sorting").eq(3).removeClass("btn-outline-dark");
 			 $(".sorting").eq(3).addClass("btn-dark");
 		 }
+	 });
+	 //검색
+	 $("#searchBtn").click(function(){
+		var searchVal = $("#searchContent").val();
+		var category = $("#searchCategory").val();
+		location.href="/shareList.do?reqPage=1&type=1&search="+searchVal+"&category="+category;
+
 	 });
 	</script>	
 </body>
