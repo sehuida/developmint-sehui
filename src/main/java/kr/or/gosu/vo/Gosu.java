@@ -21,6 +21,10 @@ public class Gosu {
 	private String gosuImg;
 	private int reviewAvg;
 	
+	//검색필터
+	private String type;
+	private String keyword;
+	
 	public String getGosuExplainBr(){
 		return gosuExplain.replaceAll("\r\n", "<br>");
 	}

@@ -739,5 +739,22 @@ public class GosuController {
 		model.addAttribute("loc", "/gosuNoticeList.do");
 		return "member/swalMsg";
 	}
+	@RequestMapping(value = "/gosuList2.do")
+	public String gosuList2(int reqPage,String keyword, String type, Model model) {
+		GosuListPageData glpd = service.selectGosuList2(reqPage,keyword,type);
+		model.addAttribute("gList", glpd.getList());
+		model.addAttribute("pageNavi", glpd.getPageNavi());
+		model.addAttribute("start", glpd.getStart());
+		return "gosu/gosuList";
+	}
+		@RequestMapping(value = "/gosuNoticeList2.do")
+	public String gosuNoticeList2(int reqPage,String keyword, String type, Model model) {
+			GosuNoticeListPageData glpd = service.selectGosuNoticeList2(reqPage,keyword,type);
+			model.addAttribute("gNoticeList", glpd.getList());
+			model.addAttribute("pageNavi", glpd.getPageNavi());
+			model.addAttribute("start", glpd.getStart());
+
+			return "gosu/gosuNoticeList";
+	}
 
 }

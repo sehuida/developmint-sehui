@@ -294,6 +294,24 @@ public class GosuDao {
 		return sqlSession.selectOne("gosu.selectRequestCostCount",memberId);
 	}
 
+	public ArrayList<Gosu> selectGosuListKeyword(Map<String, Object> map) {
+		List<Gosu> list = sqlSession.selectList("gosu.selectGosuListKeyword",map);
+		return (ArrayList<Gosu>)list;
+	}
+
+	public int selectGosuListTotalCountKeyword(Map<String, Object> map) {
+		return sqlSession.selectOne("gosu.selectGosuListTotalCountKeyword",map);
+	}
+
+	public ArrayList<GosuNotice> selectGosuNoticeListKeyword(Map<String, Object> map) {
+		List<GosuNotice> list = sqlSession.selectList("gosu.selectGosuNoticeListKeyword",map);
+		return (ArrayList<GosuNotice>)list;
+	}
+
+	public int selectGosuNoticeListTotalCountKeyword(Map<String, Object> map) {
+		return sqlSession.selectOne("gosu.selectGosuNoticeListTotalCountKeyword",map);
+	}
+
 
 
 }
