@@ -11,4 +11,8 @@ public class GosuNotice {
 	private String gnoticePhoto;
 	private String gnoticeDate;
 	private String writeImg;
+
+	public String getGnoticeContentBr(){
+		return gnoticeContent.replaceAll("\r\n", "<br>");
+	}
 }

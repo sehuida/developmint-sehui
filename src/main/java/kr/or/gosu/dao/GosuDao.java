@@ -246,5 +246,33 @@ public class GosuDao {
 		return sqlSession.selectOne("gosu.GosuRequestReview",grr2);
 	}
 
+	public int gosuNoticeUpdate(GosuNotice gNotice) {
+		return sqlSession.update("gosu.gosuNoticeUpdate",gNotice);
+	}
+
+	public int noticeContentdelete(int gnn) {
+		return sqlSession.delete("gosu.noticeContentdelete",gnn);
+	}
+
+	public ArrayList<GosuRequestReview> selectGosuRequestReviewList(int ggsouNo) {
+		List<GosuRequestReview> list = sqlSession.selectList("gosu.selectGosuRequestReviewList",ggsouNo);
+		return (ArrayList<GosuRequestReview>)list;
+	}
+
+	public int selectGrrCount(int ggsouNo) {
+		return sqlSession.selectOne("gosu.selectGrrCount",ggsouNo);
+	}
+
+	public ArrayList<GosuReview> selectMemberReviewList(String memberId) {
+		List<GosuReview> list = sqlSession.selectList("gosu.selectMemberReviewList",memberId);
+		return (ArrayList<GosuReview>)list;
+	}
+
+	public ArrayList<GosuRequestReview> selectMemberRequestReviewList(String memberId) {
+		List<GosuRequestReview> list = sqlSession.selectList("gosu.selectMemberRequestReviewList",memberId);
+		return (ArrayList<GosuRequestReview>)list;
+	}
+
+
 
 }

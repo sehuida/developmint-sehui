@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>공모전 상세보기</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
 .container {
@@ -57,7 +58,7 @@
 	padding : 30px;
 	border: 1px solid #d9d9d9;
 	font-size: 18px;
-	width: 1200px;
+	
 }
 .clickBtn{
 	text-align: center;
@@ -83,7 +84,7 @@
 	margin-right: 20px;
 }
 .textBox>textarea{
-	width: 1000px;
+	width: 1020px;
 	height: 100px;
 	resize: none;
 }
@@ -91,7 +92,6 @@
 	margin-top:30px;
 	border: 1px solid #d9d9d9;
 	padding:30px;
-	width: 1200px;
 }
 .comentView>span:first-child {
 	font-weight: bold;
@@ -172,7 +172,7 @@
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
-	<div class="container" style="margin-bottom: 100px; margin-left: 400px;">
+	<div class="container" style="margin-bottom: 100px">
 		<p id="mainTitel"><a href="#" onClick="history.back()"><i class="bi bi-chevron-left"></i></a>공모전 상세보기</p>
 		<div class="contestTitle" style="margin-top:55px;">
 			<p>${c.contestTitle }</p>
@@ -232,7 +232,7 @@
 										<input type="text" class="form-control" name="cmGit">
 									</div>
 									<div style="text-align: right; ">
-										<button type="submit" class="btn btn-primary" style="width: 100px;">신청</button>
+										<button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">신청</button>
 										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
 									</div>
 									<input type="hidden" name="contestNo" value="${list.contest.contestNo }">
@@ -264,10 +264,10 @@
 						<p>${sessionScope.m.memberId }</p>
 					</div>
 					<div class="textBox" >
-						<textarea class="form-control" name="commentContent"></textarea>
+						<textarea class="form-control textareaBox" name="commentContent"></textarea>
 					</div>
 					<div>
-						<input type="submit" value="등록" class="btn btn-outline-primary" style="height: 100px; width: 100px; font-weight: bold">
+						<input type="submit" value="등록" class="btn btn-outline-primary commentBtn" style="height: 100px; width: 100px; font-weight: bold">
 					</div>
 				</div>
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
@@ -299,7 +299,7 @@
 									<c:if test="${cl.memberId eq sessionScope.m.memberId }">
 									<%--댓글 수정  --%>
 										<a href="#" data-bs-toggle="modal" data-bs-target="#updateComment${i.index }">수정</a>
-							
+											
 											<%--댓글 수정  Modal --%>
 											<div class="modal fade" id="updateComment${i.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 											  <div class="modal-dialog  modal-dialog-centered">
@@ -385,7 +385,7 @@
 							<%--대댓글 작성 창 --%>
 							<form action="/insertContestComment.do" method="post">
 								<div class="recomentBox">
-									<textarea class="form-control reText" name="commentContent"></textarea>
+									<textarea class="form-control reText textareaBox" name="commentContent"></textarea>
 									<c:choose>
 										<c:when test="${not empty sessionScope.m }">
 											<input type="submit" value="등록" class="btn btn-outline-primary" style="height: 100px; width: 80px; font-weight: bold; margin-left:10px; margin-right: 10px">
@@ -410,6 +410,7 @@
 								<c:if test="${rl.commentType eq 2 && cl.commentNo eq rl.commentRef}">
 									<div class="reComentView">
 									<i class="bi bi-arrow-return-right" style="margin-left:20px;"></i>
+										
 										<span>${rl.memberId }</span>
 										<span>
 										${rl.commentContent }
@@ -428,7 +429,7 @@
 												    <div class="modal-content">
 												      <div class="modal-body">
 												      	<form action="/updateContestComment.do" method="post">
-												      	<textarea class="form-control reText" name="commentContent">${rl.commentContent }</textarea>
+												      	<textarea class="form-control reText textareaBox" name="commentContent">${rl.commentContent }</textarea>
 												      	<input type="hidden" value="${rl.commentNo }" name="commentNo">
 												      	<input type="hidden" value="${rl.boardNo }" name="boardNo">
 												      	<div style="text-align: right; ">
@@ -516,6 +517,22 @@
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	
 	<script>
+	
+		//글자수 제한
+   		 $('.textareaBox').keydown(function(){
+   			 var length = $(".textareaBox").val().length;
+  			console.log(length);
+  			 if($(this).val().length > 64) {
+  				swal({
+  	 			  title: "글자수 초과",
+  	 			  text: "초과 입력 할 수 없습니다. 초과된 내용은 자동으로 삭제됩니다.",
+  	 			  icon: "warning",
+  	 			  buttons: true,
+  	 			})
+                 $(this).val($(this).val().substring(0, 64));
+  			 }
+   		 })
+	
 		//대댓글 창 토글
 		$(".reComentBtn").click(function(){
 			var index = $(".reComentBtn").index(this);
@@ -567,6 +584,15 @@
 			alert("로그인 후 작성이 가능합니다.");
 			location.href="/loginFrm.do";
 		})
+		
+		//깃주소 입력 안하면 신청 안됨
+		$(".contesteEnrollBtn").click(function(){
+			if($('input[name=cmGit]').val() == ""){
+				alert("깃주소를 입력해주세요.");
+				return false;
+			}
+		})
+		
 		
 
 	</script>

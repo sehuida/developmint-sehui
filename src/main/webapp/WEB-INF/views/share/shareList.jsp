@@ -24,17 +24,40 @@
 		align-items: center;
 		margin-top: 50px;
 	}
+	.page-sorting a{
+		margin-right: 10px;
+	}
 	#searcher{
 		width: 30%;
 	}
 	.pageCategory{
 		display: flex;
-		margin-top: 50px;
 		justify-content: space-between;
-		height: 50px;
+		margin-top: 50px;
 	}
-	.pageCategory a{
-		align-items: center;
+	.cateBadge{
+		margin-left: 10px;
+	}
+	.tbcol{
+		width: 100px;
+	}
+	#pageNavi{
+		display: flex;
+		justify-content: center;
+		margin-top: 50px;
+	}
+	.page-table{
+		margin-top: 50px;
+		margin-bottom: 50px;
+	}
+	.page-table a{
+		text-decoration: none;
+		font-weight: bold;
+		font-size: 17px;
+		color: #343a40;
+	}
+	.page-table table{
+		vertical-align: middle;
 	}
 </style>
 </head>
@@ -42,24 +65,21 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="container">
 			<div class="page-top">
-				<div>
-					<span style="font-size: 25px; font-family: NotoBold;">개발지식 공유 게시판</span><img class="cateImg" src="/resources/img/shareBoard/board.png">				
-				</div>
-				<div class="pageCategory" id="pageCategory">
-					<div class="btn-group" role="group" aria-label="Basic example">
-					  <a type="button" class="btn btn-secondary details">사는 얘기</a>
-					  <a type="button" class="btn btn-secondary details">Tech Q&A</a>
-					  <a type="button" class="btn btn-secondary details">Tips & 강좌</a>
-					  <a type="button" class="btn btn-secondary details">IT NEWS & 정보</a>
+				<div class="pageCategory">
+					<div>
+						<span style="font-size: 25px; font-family: NotoBold;">개발지식 공유 게시판</span><img class="cateImg" src="/resources/img/shareBoard/board.png">									
 					</div>
-					<a href="/shareWriteFrm.do" class="btn btn-primary writeBtn">글쓰기</a>				
-				</div><!-- 세부카테고리 종료 -->				
+					<div>
+ 				    	<a href="/shareWriteFrm.do" class="btn btn-info writeBtn">글쓰기</a>				
+					</div>
+				</div>
+				<!-- 페이지 카테고리 종료 -->
 				<div class="page-sorting">
 					<div>
-						<span>최신순</span>
-						<span>추천순</span>
-						<span>조회순</span>
-						<span>댓글순</span>					
+						<a href="/shareList.do?reqPage=1&type=1" class="btn btn-outline-dark sorting">최신순</a>
+						<a href="/shareList.do?reqPage=1&type=2" class="btn btn-outline-dark sorting">추천순</a>
+						<a href="/shareList.do?reqPage=1&type=3" class="btn btn-outline-dark sorting">조회순</a>
+						<a href="/shareList.do?reqPage=1&type=4" class="btn btn-outline-dark sorting">댓글순</a>				
 					</div>
 		            <!-- 게시글 검색창 , 작성자 or 글 제목 -->
 				    <div class="input-group mb-3 " id="searcher">
@@ -71,8 +91,82 @@
 				      <button class="btn btn-primary" type="button" id="searchBtn">검색하기</button>
 				    </div>
 				</div>
+				<!-- 페이지 소팅div 끝 -->
+			</div>
+			<div class="page-table">
+				<table class="table table-hover">
+					<tr class="table-primary">
+						<th style="padding-left: 30px;">제목</th><th class="tbcol">댓글</th><th class="tbcol">좋아요</th><th class="tbcol">조회수</th><th style="width: 250px; padding-left: 50px;">작성자</th><th style="width: 200px; padding-left: 50px;">작성시간</th>
+					</tr>
+					<c:forEach items="${list }" var="sv" varStatus="i">
+						<tr>
+							<td style="padding-left: 30px;">
+								<div>
+									<span class="text-muted"># ${sv.boardNo }</span><span class="badge bg-info cateBadge">${sv.boardType }</span>
+								</div>
+								<a href="/shareBoardView?boardNo=${sv.boardNo }">${sv.boardTitle }</a>
+							</td>
+							<td><i class="bi bi-chat" style="color: #4ecdc4"></i>${sv.comments }</td>
+							<td><i class="bi bi-suit-heart-fill" style="color: #4ecdc4"></i>${sv.likes }</td>
+							<td><i class="bi bi-eyeglasses" style="color: #4ecdc4"></i>${sv.readCount }</td>
+							<td>
+								<img src="/resources/upload/member/${sv.profiles }" style="width: 30px; height: 30px; border-radius: 30px;">
+								<span>${sv.memberId }</span>
+								<c:choose>
+									<c:when test="${sv.memberGrade >=1 && sv.memberGrade <= 20 }">
+										<span><img src="/resources/img/member/rank/bronze.png" style="width: 35px; height:35px;"></span>
+									</c:when>
+									<c:when test="${sv.memberGrade >=21 && sv.memberGrade <= 40 }">
+										<span><img src="/resources/img/member/rank/silver.png" style="width: 35px; height:35px;"></span>
+									</c:when>
+									<c:when test="${sv.memberGrade >=41 && sv.memberGrade <= 60 }">
+										<span><img src="/resources/img/member/rank/gold.png" style="width: 35px; height:35px;"></span>
+									</c:when>
+									<c:when test="${sv.memberGrade >=61 && sv.memberGrade <= 80 }">
+										<span><img src="/resources/img/member/rank/platinum.png" style="width: 35px; height:35px;"></span>
+									</c:when>
+									<c:when test="${sv.memberGrade >=81 && sv.memberGrade <= 110 }">
+										<span><img src="/resources/img/member/rank/diamond.png" style="width: 35px; height:35px;"></span>
+									</c:when>
+									<c:when test="${sv.memberGrade >=111 && sv.memberGrade <= 140 }">
+										<span><img src="/resources/img/member/rank/master.png" style="width: 35px; height:35px;"></span>
+									</c:when>
+									<c:when test="${sv.memberGrade >=141 && sv.memberGrade <= 170 }">
+										<span><img src="/resources/img/member/rank/challenger.png" style="width: 35px; height:35px;"></span>
+									</c:when>								
+								</c:choose>								
+							</td>
+							<td>${sv.regDate }</td>
+						</tr>
+					</c:forEach>
+				</table><!-- 출력 테이블 종료 -->
+				<div id="pageNavi">
+					${pageNavi }
+				</div>
 			</div>
 		</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script type="text/javascript">
+		
+	 //카테고리 색
+	 $(function(){
+		 var type = '${type}';
+		 console.log(type);
+		 
+		 if(type == 1){
+			 $(".sorting").eq(0).removeClass("btn-outline-dark");
+			 $(".sorting").eq(0).addClass("btn-dark");
+		 }else if(type == 2){
+			 $(".sorting").eq(1).removeClass("btn-outline-dark");
+			 $(".sorting").eq(1).addClass("btn-dark");
+		 }else if(type == 3){
+			 $(".sorting").eq(2).removeClass("btn-outline-dark");
+			 $(".sorting").eq(2).addClass("btn-dark");
+		 }else if(type == 4){
+			 $(".sorting").eq(3).removeClass("btn-outline-dark");
+			 $(".sorting").eq(3).addClass("btn-dark");
+		 }
+	 });
+	</script>	
 </body>
 </html>

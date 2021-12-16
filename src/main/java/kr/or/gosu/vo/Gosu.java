@@ -19,6 +19,7 @@ public class Gosu {
 	private String gosuDate;
 	private String gosuId;
 	private String gosuImg;
+	private int reviewAvg;
 	
 	public String getGosuExplainBr(){
 		return gosuExplain.replaceAll("\r\n", "<br>");

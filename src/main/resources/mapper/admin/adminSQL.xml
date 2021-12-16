@@ -275,11 +275,11 @@
 		select count(*) from member where enroll_date BETWEEN '2021-11-29' and #{ydate}
 	</select>
 	
-	<!-- Today 총 게시물 -->
+	<!-- 어제 총 게시물 -->
 	<select id="yesterDayTotalBoard" parameterType="string" resultType="_int">
 		select sum(A+B+C+D+E) from
 		(SELECT
-		(SELECT COUNT(*) FROM SHARE_BOARD where REG_DATE like #{sToday}||'%')A, 
+		(SELECT COUNT(*) FROM SHARE_BOARD where REG_DATE like #{ydate}||'%')A, 
 		(SELECT COUNT(*) FROM PROJECT where recruit_start_date = #{ydate})B, 
 		(SELECT COUNT(*) FROM CONTEST where CONTEST_DATE = #{ydate})C, 
 		(SELECT COUNT(*) FROM GOSU_NOTICE where gnotice_date = #{ydate})D,

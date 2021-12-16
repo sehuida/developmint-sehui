@@ -431,37 +431,38 @@
 
 				<div class="gosu-review">
 					<h4>개발후기</h4>
-					<div class="review-wrap">
+					<c:choose>
+						<c:when test="${empty grrList }">
+							작성된 후기가 아직 없습니다!
+						</c:when>
+						<c:otherwise>
+						<div class="review-wrap">
 						<div>
 							<div class="review-avg">
-								<span style="font-size: 30px; font-weight: bold;">xx개의 후기</span>
+								<span style="font-size: 30px; font-weight: bold;">${grrCount}개의 후기</span>
 							</div>
 							<hr>
+							<c:forEach items="${grrList }" var="grl" varStatus="i">
 							<div class="review-one">
 								<ul>
-									<li>xxx이름</li>
-									<li>2021.12.01</li>
+									<li style="font-weight: 900;">${grl.memberId }</li>
+									<li style="color:gray;">${grl.requestReviewDate }</li>
 								</ul>
 								<br>
 								<div style="display: flex; justify-content: center;">
-									<p>후기후기후기후기후기후기후기후기후기후기후기후기</p>
+									<p>${grl.requestReviewContentBr }</p>
 								</div>
 							</div>
-							<div class="review-one">
-								<ul>
-									<li>xxx이름</li>
-									<li>2021.12.01</li>
-								</ul>
-								<br>
-								<div style="display: flex; justify-content: center;">
-									<p>후기후기후기후기후기후기후기후기후기후기후기후기</p>
-								</div>
-							</div>
+							</c:forEach>
+							
 						</div>
 						<div style="display: flex; justify-content: center;">
 							<a class="btn btn-primary">후기 더보기</a>
 						</div>
 					</div>
+						</c:otherwise>
+					</c:choose>
+					
 				</div>
 
 				<div class="gosu-act">

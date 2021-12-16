@@ -42,6 +42,10 @@
 	justify-content: center;
 	margin-bottom: 70px;
 }
+.gosu>button{
+
+	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
+	}
 
 .gosu table {
 	width: 100%;
@@ -245,7 +249,25 @@
 							<tr>
 								<td style="text-align: center; font-weight: bold;"><span
 									style="color: rgb(78, 205, 196);">고수</span> ${g.gosuId }</td>
-								<td>4.0</td>
+								<td>
+								<c:if test="${not empty g.reviewAvg }">
+							<c:if test="${g.reviewAvg eq 0 }"><span style="color:gray; font-size: small;">아직 등록된 리뷰가 없습니다.</span></c:if>
+							
+											<c:if test="${g.reviewAvg ne 0 }"><span>${g.reviewAvg } 점 &nbsp;&nbsp;</span></c:if>
+								<c:if test="${g.reviewAvg eq 1 }">
+												<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+											</c:if> <c:if test="${g.reviewAvg eq 2 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+											</c:if> <c:if test="${g.reviewAvg eq 3 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+											</c:if> <c:if test="${g.reviewAvg eq 4 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+											</c:if> <c:if test="${g.reviewAvg eq 5 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+											</c:if>
+											
+							</c:if>
+								</td>
 							</tr>
 						</table>
 					</button>

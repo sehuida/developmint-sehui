@@ -102,37 +102,41 @@ input:focus, textarea:focus {
 			</div>
 		</c:if>
 		<h4>
-			&gt; &nbsp;<span style="color: rgb(78, 205, 196);">고수</span>의 게시판
-			작성하기
+			&gt; &nbsp;<span style="color: rgb(78, 205, 196);">고수</span>의 게시판 수정하기
 		</h4>
-		<form action="/gosuNoticeWrite.do" method="post" id="g-btn-submit"
+		<form action="/gosuNoticeUpdate.do" method="post" id="g-btn-submit"
 			enctype="multipart/form-data">
 			<input type="hidden" name="writeId"
 				value="${sessionScope.m.memberId }">
+			<input type="hidden" name="gnoticeNo"
+				value="${gNotice.gnoticeNo }">
 			<div class="g-content g-center">
 				<div>
 					<table>
 						<tr>
 							<th>첨부파일 <span style="color: red;">* </span></th>
-							<td><input type="file" name="files" style="width: 100%;"></td>
+							<td id="g-td1"><img style="width: 800px;" src="${gNotice.gnoticePhoto}"><button type="button" id="g-photo-del" class="btn btn-primary" style="margin-bottom: 50%;">X
+								
+							</button><span id="photo-empty"><input type="hidden" name="gnoticePhoto" value="${gNotice.gnoticePhoto}"></span></td>
+							<td id="g-td2" style="display: none;"><input type="file" name="files" style="width: 100%;"></td>
 						</tr>
 						<tr>
 							<th>제목 <span style="color: red;">* </span></th>
-							<td><input type="text" name="gnoticeTitle"
+							<td><input type="text" name="gnoticeTitle" value="${gNotice.gnoticeTitle}"
 								style="width: 100%;"></td>
 						</tr>
 						<tr>
 							<th>내용 <span style="color: red;"> * </span></th>
 							<td><textarea cols="100" rows="30" name="gnoticeContent"
-									placeholder="* 고수님만의 노하우를 작성해주세요!"></textarea></td>
+									>${gNotice.gnoticeContent}</textarea></td>
 						</tr>
 
 					</table>
 				</div>
 			</div>
 			<div class="g-center">
-				<a href="/gosuNoticeList.do" class="btn btn-info"
-					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">취소</a>
+				<a class="btn btn-info"
+					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;" onclick="history.back();">취소</a>
 				<button type="submit" class="btn btn-primary"
 					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">확인</button>
 			</div>
@@ -140,33 +144,44 @@ input:focus, textarea:focus {
 	</div>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
-		$('#g-btn-submit').submit(function() {
-			var gnoticeContent = $("input[name=gnoticeContent]").val();
-			var gnoticeTitle = $("textarea[name=gnoticeTitle]").val();
-			var files = $("input[name=files]").val();
-			console.log("gnoticeContent : " + gnoticeContent);
-			console.log("gnoticeTitle : " + gnoticeTitle);
-			console.log("files : " + files);
-			if (gnoticeContent == "" || gnoticeTitle == "") {
-				swal({
-			        title: '등록실패',
-			        text: "입력하신 내용을 다시 확인해주세요!",
-			        icon: 'error'
-			      });
-				return false;
-			}
-			if (files == "") {
-				swal({
-			        title: '등록실패',
-			        text: "1개의 사진을 첨부하셔야 합니다.",
-			        icon: 'error'
-			      });
-				return false;
-			}
 
-		});
+	$("#g-photo-del").click(function(){
+		$("#g-td1").css("display","none");
+		$("#photo-empty").empty();
+		$("#g-td2").css("display","flex");
+		
+		
+	});
+	
+	$('#g-btn-submit').submit(function() {
+		var gnoticeContent = $("input[name=gnoticeContent]").val();
+		var gnoticeTitle = $("input[name=gnoticeTitle]").val();
+		var files =$("input[name=files]").val();
+		var gnoticePhoto =$("input[name=gnoticePhoto]").val();
+		console.log("gnoticeContent : "+gnoticeContent);
+		console.log("gnoticeTitle : "+gnoticeTitle);
+		console.log("files : "+files);
+		console.log("gnoticePhoto : "+gnoticePhoto);
+		if (gnoticeContent=="" || gnoticeTitle =="" ) {
+			swal({
+		        title: '수정실패',
+		        text: "입력하신 내용을 다시 확인해주세요!",
+		        icon: 'error'
+		      });
+			return false;
+		}
+		if (files=="" && gnoticePhoto ==null ) {
+			swal({
+		        title: '수정실패',
+		        text: "1개의 사진을 첨부하셔야 합니다.",
+		        icon: 'error'
+		      });
+		
+			return false;
+		}
+		
+	});
 	</script>
-
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>

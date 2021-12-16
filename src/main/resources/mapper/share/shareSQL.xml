@@ -8,4 +8,43 @@
    <update id="plusPoints" parameterType="sv">
    		update member set member_grade = member_grade+3 where member_no=#{memberNo}
    </update>
+   <select id="shareList" parameterType="map" resultType="sv">
+		select shb.* from
+		(select rownum as rnum,sb.* from
+		(select 
+		    member_no as memberNo,
+		    board_no as boardNo,
+		    board_title as boardtitle,
+		    board_content as boardContent,
+		    board_type as boardType,
+		    reg_date as regDate,
+		    filename,
+		    s.filepath,
+		    read_count as readCount,
+		    member_id as memberId,
+		    m.filepath as profiles,
+		    member_grade as memberGrade,
+		    (select count(*) from likes lk where s.board_no=lk.board_no) as likes,
+		    (select count(*) from comments c where c.board_no=s.board_no and c.board_type=2) as comments
+		from share_board s left join member m using (member_no) 
+		order by 
+		 <choose> 
+		 	<when test="type == 1">
+		 		board_no
+		 	</when>
+		 	<when test="type == 2">
+		 		likes
+		 	</when>
+		 	<when test="type == 3">
+		 		read_count
+		 	</when>
+		 	<when test="type == 4">
+		 		comments
+		 	</when>	 	
+		 </choose>		
+		 desc)sb)shb where rnum between #{start} and #{end}  	
+   </select>
+   <select id="shareCount" resultType="_int">
+   		select count(*) from share_board		
+   </select>
 </mapper>
