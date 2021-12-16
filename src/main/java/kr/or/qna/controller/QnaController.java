@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.member.model.vo.Member;
 import kr.or.notice.vo.Notice;
 import kr.or.qna.service.QnaService;
+import kr.or.qna.vo.nonQna;
 
 @Controller
 public class QnaController {
@@ -109,9 +110,10 @@ public class QnaController {
 		return "/resources/upload/qna/" + filepath;
 	}
 	
+	//비회원일경우
 	@RequestMapping(value="/counsel_save1.do")
-	public String insertCounsel() {
-		
+	public String insertCounsel(nonQna nq, HttpServletRequest request, Model model) {
+		//int result = service.insertCounselNonQna(nq);
 		return "qna/counsel";
 	}
 	

@@ -39,7 +39,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/shareList.do" >개발지식공유</a>
+          <a class="nav-link " href="/shareList.do?reqPage=1&type=1" >개발지식공유</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="/jobSearchList.do">구인구직</a>
