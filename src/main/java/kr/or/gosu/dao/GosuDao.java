@@ -142,10 +142,6 @@ public class GosuDao {
 		return sqlSession.insert("gosu.insertGosuRequest",gr);
 	}
 
-	public ArrayList<GosuRequest> selectMemberRequestList() {
-		List<GosuRequest> list = sqlSession.selectList("gosu.selectMemberRequestList");
-		return (ArrayList<GosuRequest>)list;
-	}
 
 	public GosuRequest selectGosuRequestContent(int mrn) {
 		return sqlSession.selectOne("gosu.selectGosuRequestContent",mrn);
@@ -153,11 +149,6 @@ public class GosuDao {
 
 	public int gosuRequestCostInsert(GosuRequestCost grc) {
 		return sqlSession.insert("gosu.gosuRequestCostInsert",grc);
-	}
-
-	public ArrayList<GosuRequestCost> selectGosuRequestCostList(String memberId) {
-		List<GosuRequestCost> list = sqlSession.selectList("gosu.selectGosuRequestCostList",memberId);
-		return (ArrayList<GosuRequestCost>)list;
 	}
 
 	public GosuRequestCost selectRequestNoGosuNo(GosuRequestCost grc) {
@@ -288,6 +279,21 @@ public class GosuDao {
 	public int selectGosuNoticeListTotalCount() {
 		return sqlSession.selectOne("gosu.selectGosuNoticeListTotalCount");
 	}
+
+	public ArrayList<GosuRequest> selectMemberRequestList(Map<String, Object> map) {
+		List<GosuRequest> list = sqlSession.selectList("gosu.selectMemberRequestList",map);
+		return (ArrayList<GosuRequest>)list;
+	}
+
+	public ArrayList<GosuRequestCost> selectGosuRequestCostList(Map<String, Object> map) {
+		List<GosuRequestCost> list = sqlSession.selectList("gosu.selectGosuRequestCostList",map);
+		return (ArrayList<GosuRequestCost>)list;
+	}
+
+	public int selectRequestCostCount(String memberId) {
+		return sqlSession.selectOne("gosu.selectRequestCostCount",memberId);
+	}
+
 
 
 }
