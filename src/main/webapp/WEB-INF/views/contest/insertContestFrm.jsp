@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>공모 등록 페이지</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
 .container {
@@ -100,6 +101,24 @@
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	
 <script>
+	
+	//글자수 제한
+	$('#contestContent').keydown(function(){
+		 var length = $("#contestContent").val().length;
+		console.log(length);
+
+		 if($(this).val().length > 1000) {
+			swal({
+			  title: "글자수 초과",
+			  text: "초과 입력 할 수 없습니다. 초과된 내용은 자동으로 삭제됩니다.",
+			  icon: "warning",
+			  buttons: true,
+			})
+        $(this).val($(this).val().substring(0, 1000));
+			
+		 }
+
+	 })
 
 	//접수기간 데드라인 선택은 오늘날짜부터 선택 가능
 	$(function(){
