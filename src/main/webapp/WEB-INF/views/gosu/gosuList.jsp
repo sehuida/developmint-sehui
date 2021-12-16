@@ -42,6 +42,10 @@
 	justify-content: center;
 	margin-bottom: 70px;
 }
+.gosu>button{
+
+	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
+	}
 
 .gosu table {
 	width: 100%;

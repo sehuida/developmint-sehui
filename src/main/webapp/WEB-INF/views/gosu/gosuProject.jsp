@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,6 +57,7 @@ input:focus, textarea:focus {
 	align-self: flex-start;
 	background-color: white;
 	border-radius: 100px;
+	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
 }
 
 .talk-one table img {
@@ -245,13 +248,39 @@ input:focus, textarea:focus {
 
 						<c:choose>
 							<c:when test="${not empty grrOne}">
-								테스트 구문 바꾸기 후기 남긴거
-
-
+								<div
+									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
+									<div>
+										<span
+											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">후기</span>
+										<br> <br>
+										<table>
+											<tr>
+												<td
+													style="text-align: right; color: gray; font-size: small;">${grrOne.requestReviewDate }</td>
+											</tr>
+											<tr>
+												<td><p
+														style="width: 800px; text-align: center; padding: 20px; border: 1px solid gray; margin: 20px; box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;">${grrOne.requestReviewContentBr }</p></td>
+											</tr>
+											<tr>
+												<td style="text-align: right;"><button
+														id="requestReviewAjax" type="button"
+														class="btn btn-primary"
+														style="font-weight: 900; padding: 10px; margin-left: 10px;"
+														onclick="history.back();">뒤로가기</button></td>
+											</tr>
+										</table>
+									</div>
+								</div>
 							</c:when>
 							<c:otherwise>
-							아직 작성된 후기가 없습니다!
-						</c:otherwise>
+								<div
+									style="display: flex; justify-content: center; margin-top: 200px; margin-bottom: 200px;">
+									<span style="font-size: 30px; font-weight: 900; color: gray;">아직
+										작성된 후기가 없습니다!</span>
+								</div>
+							</c:otherwise>
 						</c:choose>
 					</c:when>
 					<c:otherwise>
@@ -259,20 +288,25 @@ input:focus, textarea:focus {
 							<c:when test="${not empty grrOne}">
 								<div
 									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
-									<div><span
-											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">작성한 후기</span> <br> <br>
+									<div>
+										<span
+											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">작성한
+											후기</span> <br> <br>
 										<table>
 											<tr>
-												<td>${grrOne.requestReviewDate }</td>
+												<td
+													style="text-align: right; color: gray; font-size: small;">${grrOne.requestReviewDate }</td>
 											</tr>
 											<tr>
-												<td>${grrOne.requestReviewContentBr }</td>
+												<td><p
+														style="width: 800px; text-align: center; padding: 20px; border: 1px solid gray; margin: 20px; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">${grrOne.requestReviewContentBr }</p></td>
 											</tr>
 											<tr>
 												<td style="text-align: right;"><button
 														id="requestReviewAjax" type="button"
 														class="btn btn-primary"
-														style="font-weight: 900; padding: 10px; margin-left: 10px;"onclick="history.back();">뒤로가기</button></td>
+														style="font-weight: 900; padding: 10px; margin-left: 10px;"
+														onclick="history.back();">뒤로가기</button></td>
 											</tr>
 										</table>
 									</div>
@@ -295,9 +329,9 @@ input:focus, textarea:focus {
 												<td><textarea cols="70" rows="10"
 														id="requestReviewContent" placeholder="내용을 입력해주세요."
 														style="padding: 20px;"></textarea></td>
-												<input type="hidden" value="${grpsOne.requestProjectSubNo} "
+												<input type="hidden" value="${grpsOne.requestProjectSubNo}"
 													id="grequestProjectSubNo">
-												<input type="hidden" value="${sessionScope.m.memberId} "
+												<input type="hidden" value="${sessionScope.m.memberId}"
 													id="requestMemberId">
 
 
@@ -343,8 +377,10 @@ input:focus, textarea:focus {
 								<c:choose>
 									<c:when test="${sessionScope.m.memberType eq 2}">
 										<td style="text-align: center;">
+										<c:if test="${fn:length(grplist) >= 10}">
 											<button type="button" id="talkStopAjax" class="btn btn-info"
 												style="width: 200px;">개발 완료</button>
+												</c:if>
 										</td>
 										<td style="text-align: center;">
 											<button type="button" id="talkBtnAjax"
@@ -360,7 +396,7 @@ input:focus, textarea:focus {
 								</c:choose>
 
 							</tr>
-							<input type="hidden" value="${sessionScope.m.memberNo }"
+							<input type="hidden" value="${sessionScope.m.memberNo}"
 								id="writer">
 							<input type="hidden" value="${grpsOne.requestProjectSubNo}"
 								id="requestProjectSubNo">
@@ -370,6 +406,7 @@ input:focus, textarea:focus {
 			</c:otherwise>
 		</c:choose>
 	</div>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
 		$("#talkBtnAjax").click(function() {
 			var talkContent = $("#talkContent").val();
@@ -382,7 +419,14 @@ input:focus, textarea:focus {
 			form.append("talkContent", talkContent);
 			form.append("writerNo", writerNo);
 			form.append("requestProjectSubNo", requestProjectSubNo);
-
+			if (talkContent == "") {
+				swal({
+			      title: '실패',
+			        text: "내용을 입력해주세요!",
+			        icon: 'error'
+			      });
+				return false;
+			}
 			$.ajax({
 
 				url : "/talkBtnProjectAjax.do",
@@ -427,7 +471,11 @@ input:focus, textarea:focus {
 			console.log(requestProjectSubNo);
 			console.log(requestMemberId);
 			if (requestReviewContent == "") {
-				alert("내용을 입력해주세요!");
+				swal({
+			      title: '실패',
+			        text: "내용을 입력해주세요!",
+			        icon: 'error'
+			      });
 				return false;
 			}
 			$.ajax({
@@ -441,7 +489,11 @@ input:focus, textarea:focus {
 				},
 				success : function(data) {
 					if (data > 0) {
-						alert("후기 작성 완료");
+						swal({
+					      title: '성공',
+					        text: "후기 작성 완료",
+					        icon: 'success'
+					      });
 						location.reload();
 					} else {
 						console.log("에러");

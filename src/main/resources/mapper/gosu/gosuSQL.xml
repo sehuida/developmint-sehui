@@ -620,7 +620,7 @@
 		where ggosu_no =#{ggsouNo}
 		GROUP BY GGOSU_NO
 	</select>
-	
+
 	<insert id="insertRequestReviewAjax" parameterType="grreview">
 		insert into
 		gosu_request_review
@@ -631,13 +631,72 @@
 		SELECT
 		REQUEST_REVIEW_NO as requestReviewNo,
 		REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
-		REQUEST_MEMBER_ID as memberId,
+		REQUEST_MEMBER_ID as
+		memberId,
 		REQUEST_REVIEW_CONTENT as
 		requestReviewContent,
 		REQUEST_REVIEW_DATE as requestReviewDate
 		FROM
 		gosu_request_review
-		where REQUEST_PROJECT_SUB_NO =#{requestProjectSubNo} and
-		REQUEST_MEMBER_ID =#{memberId}
+		where
+		REQUEST_PROJECT_SUB_NO =#{requestProjectSubNo} and
+		REQUEST_MEMBER_ID
+		=#{memberId}
+	</select>
+	<update id="gosuNoticeUpdate" parameterType="gn">
+		update
+		gosu_notice
+		set
+		GNOTICE_TITLE = #{gnoticeTitle},
+		GNOTICE_CONTENT =
+		#{gnoticeContent},
+		GNOTICE_PHOTO = #{gnoticePhoto}
+		where
+		GNOTICE_NO =
+		#{gnoticeNo}
+	</update>
+	<delete id="noticeContentdelete" parameterType="_int">
+		delete from
+		gosu_notice where gnotice_no = #{gnn}
+	</delete>
+
+	<select id="selectGosuRequestReviewList" parameterType="_int"
+		resultType="grreview">
+
+		select
+
+		grr.REQUEST_REVIEW_NO as requestReviewNo,
+		grr.REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
+		grr.REQUEST_MEMBER_ID as
+		memberId,
+		grr.REQUEST_REVIEW_CONTENT as
+		requestReviewContent,
+		grr.REQUEST_REVIEW_DATE as requestReviewDate
+
+		from gosu_request_review grr
+		LEFT JOIN gosu_Request_project_sub sub
+		ON
+		grr.REQUEST_PROJECT_SUB_NO = sub.REQUEST_PROJECT_SUB_NO
+		LEFT JOIN
+		gosu_request_COST cost
+		ON sub.cost_no = cost.cost_no
+		LEFT JOIN gosu gosu
+		ON cost.gosu_no = gosu.gosu_no
+		where ggosu_no = #{ggsouNo}
+	</select>
+		<select id="selectGrrCount" parameterType="_int"
+		resultType="_int">
+		select
+		count(*) 
+		from gosu_request_review grr
+		LEFT JOIN gosu_Request_project_sub sub
+		ON
+		grr.REQUEST_PROJECT_SUB_NO = sub.REQUEST_PROJECT_SUB_NO
+		LEFT JOIN
+		gosu_request_COST cost
+		ON sub.cost_no = cost.cost_no
+		LEFT JOIN gosu gosu
+		ON cost.gosu_no = gosu.gosu_no
+		where ggosu_no = #{ggsouNo}
 	</select>
 </mapper>

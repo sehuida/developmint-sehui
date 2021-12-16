@@ -195,6 +195,7 @@ input:focus, textarea:focus {
 			</div>
 		</div>
 	</div>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
 		$("#hrm-close").click(function() {
 			$(".hrm-wrap").css("display", "none");
@@ -221,12 +222,22 @@ input:focus, textarea:focus {
 				success : function(data) {
 					console.log(data);
 					if (data > 0) {
-						alert("견적서를 보냈습니다!");
-						location.href = "/gosuMain.do";
+						swal({
+					        title: '성공',
+					        text: "견적서를 보냈습니다!",
+					        icon: 'success'
+					      }).then(function(){
+					    	 window.location = "/gosuMain.do"; 
+					      });
+						
 					} else {
-
-						alert("견적서를 보내지 못했습니다. 관리자에게 문의해주세요");
-						location.href = "/";
+						swal({
+					        title: '실패',
+					        text: "견적서를 보내지 못했습니다. 관리자에게 문의해주세요",
+					        icon: 'error'
+					      }).then(function(){
+					    	 window.location = "/"; 
+					      });
 					}
 
 				}

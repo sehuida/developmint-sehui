@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,6 +57,8 @@ input:focus, textarea:focus {
 	padding-top: 40px;
 	margin-bottom: 100px;
 	background-color: white;
+	border-radius: 30px;
+	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
 }
 
 .talk-one table img {
@@ -144,6 +147,7 @@ input:focus, textarea:focus {
 .star-rating label:hover, .star-rating label:hover ~ label {
 	color: #fc0;
 }
+
 </style>
 </head>
 <body>
@@ -170,6 +174,8 @@ input:focus, textarea:focus {
 			</c:choose>
 
 		</h3>
+		
+		
 		<div class="g-feedback">
 
 			<h3>Q. &nbsp;${gfOne.feedbackTitle }</h3>
@@ -258,17 +264,18 @@ input:focus, textarea:focus {
 					<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
 						<c:choose>
 							<c:when test="${not empty greview}">
-	<div
+								<div
 									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 50px;">
 									<div>
 										<span
-											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">작성된 리뷰</span>
-										<br> <br>
+											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">작성된
+											리뷰</span> <br> <br>
 										<table>
 											<tr>
-												<td style="font-weight: 900; font-size: 20px;padding-bottom:5px;">${greview.writer }</td>
+												<td
+													style="font-weight: 900; font-size: 20px; padding-bottom: 5px;">${greview.writer }</td>
 												<td style="width: 800px;">
-													
+
 													<div class="star-rating">
 														<c:if test="${greview.reviewNum eq 1 }">
 															<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
@@ -291,7 +298,8 @@ input:focus, textarea:focus {
 
 											</tr>
 											<tr>
-												<td colspan="3" style="text-align: center; border: 1px solid #78c2ad;  padding:50px;">${greview.reviewContentBr }</td>
+												<td colspan="3"
+													style="text-align: center; border: 1px solid #78c2ad; padding: 50px;">${greview.reviewContentBr }</td>
 
 											</tr>
 										</table>
@@ -303,7 +311,11 @@ input:focus, textarea:focus {
 									</div>
 							</c:when>
 							<c:otherwise>
-							아직 작성된 리뷰가 없습니다!
+							<div
+									style="display: flex; justify-content: center; margin-top: 200px; margin-bottom: 200px;">
+									<span style="font-size: 30px; font-weight: 900; color: gray;">아직
+										작성된 리뷰가 없습니다!</span>
+								</div>
 						</c:otherwise>
 						</c:choose>
 					</c:when>
@@ -314,13 +326,13 @@ input:focus, textarea:focus {
 									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 50px;">
 									<div>
 										<span
-											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">작성한 리뷰</span>
-										<br> <br>
+											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">작성한
+											리뷰</span> <br> <br>
 										<table>
 											<tr>
 												<td style="width: 800px;">
 													<div class="star-rating">
-															<c:if test="${greview.reviewNum eq 1 }">
+														<c:if test="${greview.reviewNum eq 1 }">
 															<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
 														</c:if>
 														<c:if test="${greview.reviewNum eq 2 }">
@@ -341,7 +353,8 @@ input:focus, textarea:focus {
 
 											</tr>
 											<tr>
-												<td colspan="2" style="text-align: center; border: 1px solid #78c2ad;  padding:50px;">${greview.reviewContentBr }</td>
+												<td colspan="2"
+													style="text-align: center; border: 1px solid #78c2ad; padding: 50px; box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;">${greview.reviewContentBr }</td>
 
 											</tr>
 										</table>
@@ -399,57 +412,57 @@ input:focus, textarea:focus {
 				</c:choose>
 			</c:when>
 			<c:otherwise>
-				<span style="color: gray; font-size: small;">* 전송할 내용을 아래에
-					입력해주세요<br> * 첨부파일은 한 번에 하나씩만 전송 가능합니다.
-				</span>
-				<br>
-				<br>
-				<br>
-				<div class="talk-sub">
+					<span style="color: gray; font-size: small;">* 전송할 내용을 아래에
+						입력해주세요<br> * 첨부파일은 한 번에 하나씩만 전송 가능합니다.
+					</span> <br> <br> <br>
+					<div class="talk-sub">
 
-					<div>
-						<table>
-							<tr>
-								<th colspan="2">첨부파일 &nbsp;&nbsp;&nbsp;&nbsp; <input
-									type="file" id="talkFile"></th>
+						<div>
+							<table>
+								<tr>
+									<th colspan="2">첨부파일 &nbsp;&nbsp;&nbsp;&nbsp; <input
+										type="file" id="talkFile"></th>
 
-							</tr>
-							<tr>
-								<td colspan="2"><textarea cols="100" rows="10"
-										id="talkContent"></textarea></td>
-							</tr>
-							<tr style="text-align: right;">
-								<c:choose>
-									<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
-										<td style="text-align: center;">
-											<button type="button" id="talkStopAjax" class="btn btn-info"
-												style="width: 200px;">피드백 마치기</button>
-										</td>
-										<td style="text-align: center;">
-											<button type="button" id="talkBtnAjax"
-												class="btn btn-primary" style="width: 200px;">전송</button>
-										</td>
-									</c:when>
-									<c:otherwise>
-										<td colspan="2">
-											<button type="button" id="talkBtnAjax"
-												class="btn btn-primary">전송</button>
-										</td>
-									</c:otherwise>
-								</c:choose>
+								</tr>
+								<tr>
+									<td colspan="2"><textarea cols="100" rows="10"
+											id="talkContent"></textarea></td>
+								</tr>
+								<tr style="text-align: right;">
+									<c:choose>
+										<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
+											<c:if test="${fn:length(gtList) >= 10}">
+											<td style="text-align: center;">
+												<button type="button" id="talkStopAjax" class="btn btn-info"
+													style="width: 200px;">피드백 마치기</button>
+											</td>
+											</c:if>
+											<td style="text-align: center;">
+												<button type="button" id="talkBtnAjax"
+													class="btn btn-primary" style="width: 200px;">전송</button>
+											</td>
+										</c:when>
+										<c:otherwise>
+											<td colspan="2">
+												<button type="button" id="talkBtnAjax"
+													class="btn btn-primary">전송</button>
+											</td>
+										</c:otherwise>
+									</c:choose>
 
-							</tr>
-							<input type="hidden" value="${sessionScope.m.memberId }"
-								id="writer">
-							<input type="hidden" value="${gfOne.feedbackNo}" id="feedbackNo">
-						</table>
+								</tr>
+								<input type="hidden" value="${sessionScope.m.memberId }"
+									id="writer">
+								<input type="hidden" value="${gfOne.feedbackNo}" id="feedbackNo">
+							</table>
+						</div>
 					</div>
-				</div>
 			</c:otherwise>
 		</c:choose>
 
 
 	</div>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
 		$("#talkBtnAjax").click(function() {
 			var talkContent = $("#talkContent").val();
@@ -463,7 +476,14 @@ input:focus, textarea:focus {
 			form.append("talkContent", talkContent);
 			form.append("writer", writer);
 			form.append("feedbackNo", feedbackNo);
-
+			if (talkContent == "") {
+				swal({
+			      title: '실패',
+			        text: "내용을 입력해주세요!",
+			        icon: 'error'
+			      });
+				return false;
+			}
 			$.ajax({
 
 				url : "/talkBtnAjax.do",
@@ -510,7 +530,11 @@ input:focus, textarea:focus {
 			console.log(reviewContent);
 			console.log(ggosuNo);
 			if (reviewNum == null || reviewContent == "") {
-				alert("작성하신 리뷰를 다시 확인해주세요!");
+				swal({
+				      title: '실패',
+				        text: "작성하신 리뷰를 다시 확인해주세요!",
+				        icon: 'error'
+				      });
 				return false;
 			}
 			$.ajax({
@@ -524,8 +548,11 @@ input:focus, textarea:focus {
 				},
 				success : function(data) {
 					if (data > 0) {
-						alert("리뷰 작성이 완료되었습니다!");
-
+						swal({
+					        title: '성공',
+					        text: "리뷰 작성이 완료되었습니다!",
+					        icon: 'success'
+					      });
 						location.reload();
 					} else {
 						console.log("에러");
