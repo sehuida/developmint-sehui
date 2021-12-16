@@ -137,7 +137,7 @@ input:focus, textarea:focus {
 								</c:if>
 
 
-								<td style="width: 750px;"><a href="/gosuContent.do?gNo=${gosu.ggsouNo}" class="gtitle">${gosu.gosuTitle }</a></td>
+								<td style="width: 750px;"><a href="/gosuContent.do?gNo=${gosu.ggsouNo}" class="gtitle" style="font-weight: 900; font-size: 20px;">${gosu.gosuTitle }</a></td>
 							</tr>
 							<tr>
 								<td><hr></td>
@@ -193,7 +193,16 @@ input:focus, textarea:focus {
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
 	$("#gRequestCostBtn").click(function(){
-
+		var gosuFeedbackContent = $("#gosuFeedbackContent").val();
+		var gosuFeedbackTitle = $("#gosuFeedbackTitle").val();
+		if(gosuFeedbackContent == "" || gosuFeedbackTitle == ""){
+			swal({
+		        title: '실패',
+		        text: '제목과 내용을 올바르게 입력해주세요.',
+		        icon: 'error'
+		      })
+			return false;
+		}
 		var IMP = window.IMP;
 		  IMP.init('imp37172515');
 		  var cost = $("#gfCost").val();

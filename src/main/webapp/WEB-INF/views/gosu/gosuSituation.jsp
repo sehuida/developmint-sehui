@@ -22,7 +22,7 @@
 
 .container {
 	min-width: 1200px;
-	margin-bottom: 100px;
+	margin-bottom: 200px;
 	margin-top: 100px;
 }
 
@@ -117,7 +117,6 @@
 	display: flex;
 	margin: 0 auto;
 	width: 1080px;
-	background-color: #f4f5f6; 
 }
 </style>
 </head>
@@ -145,7 +144,16 @@
 				<c:choose>
 					<c:when test="${not empty gosuTalkList }">
 						<c:forEach items="${gosuTalkList }" var="gtl" varStatus="i">
-							<div>
+							<c:choose>
+									<c:when test="${gtl.feedbackNum eq 3  }">
+
+										<div style="background-color: #e5e5e5;">
+									</c:when>
+									<c:otherwise>
+
+										<div>
+									</c:otherwise>
+								</c:choose>
 								<table>
 									<tr style="font-size: small;">
 										<c:if test="${gtl.feedbackNum eq 1 }">
@@ -206,213 +214,247 @@
 					<c:choose>
 						<c:when test="${not empty gosuTalkList2 }">
 							<c:forEach items="${gosuTalkList2 }" var="gtl" varStatus="i">
-								<div>
-									<table>
-										<tr style="font-size: small;">
-											<c:if test="${gtl.feedbackNum eq 1 }">
-												<td style="text-align: left; padding-top: 20px;"><b
-													style="color: blue;">진행 전</b></td>
-											</c:if>
-											<c:if test="${gtl.feedbackNum eq 2 }">
-												<td style="text-align: left; padding-top: 20px;"><b
-													style="color: red;">진행 중</b></td>
-											</c:if>
-											<c:if test="${gtl.feedbackNum eq 3 }">
-												<td style="text-align: left; padding-top: 20px;"><b
-													style="color: gray;">진행 완료</b></td>
-											</c:if>
+								<c:choose>
+									<c:when test="${gtl.feedbackNum eq 3  }">
 
-											<td style="padding-top: 20px;">${gtl.feedbackDate }</td>
-										</tr>
-										<tr>
-											<td><b>${gtl.feedbackTitle }</b></td>
-											<td rowspan="2" style="padding-right: 0;"><c:if
-													test="${empty gtl.memberImg }">
-													<img src="/resources/img/gosu/g_img_basic.png">
-													<br>
-													<span
-														style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.memberId }</span>
-												</c:if> <c:if test="${not empty gtl.memberImg  }">
-													<img src="/resources/upload/member/${gtl.memberImg  }">
-													<br>
-													<span
-														style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.memberId }</span>
-												</c:if></td>
-										</tr>
-										<tr>
-											<td><span style="height: 50px; width: 230px;">${gtl.feedbackContent }</span></td>
-										</tr>
-										<tr>
-											<td colspan="2"><a
-												href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
-												class="btn btn-secondary" style="font-weight: 900;">자세히 보기</a></td>
-										</tr>
+										<div style="background-color: #e5e5e5;">
+									</c:when>
+									<c:otherwise>
 
-									</table>
-								</div>
-							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							<span
-								style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">아직
-								신청받은 내역이 없습니다!</span>
-						</c:otherwise>
-					</c:choose>
+										<div>
+									</c:otherwise>
+								</c:choose>
 
+								<table>
+									<tr style="font-size: small;">
+										<c:if test="${gtl.feedbackNum eq 1 }">
+											<td style="text-align: left; padding-top: 20px;"><b
+												style="color: blue;">진행 전</b></td>
+										</c:if>
+										<c:if test="${gtl.feedbackNum eq 2 }">
+											<td style="text-align: left; padding-top: 20px;"><b
+												style="color: red;">진행 중</b></td>
+										</c:if>
+										<c:if test="${gtl.feedbackNum eq 3 }">
+											<td style="text-align: left; padding-top: 20px;"><b
+												style="color: gray;">진행 완료</b></td>
+										</c:if>
+
+										<td style="padding-top: 20px;">${gtl.feedbackDate }</td>
+									</tr>
+									<tr>
+										<td><b>${gtl.feedbackTitle }</b></td>
+										<td rowspan="2" style="padding-right: 0;"><c:if
+												test="${empty gtl.memberImg }">
+												<img src="/resources/img/gosu/g_img_basic.png">
+												<br>
+												<span
+													style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.memberId }</span>
+											</c:if> <c:if test="${not empty gtl.memberImg  }">
+												<img src="/resources/upload/member/${gtl.memberImg  }">
+												<br>
+												<span
+													style="font-size: small; font-weight: 900; color: rgb(160, 160, 160);">${gtl.memberId }</span>
+											</c:if></td>
+									</tr>
+									<tr>
+										<td><span style="height: 50px; width: 230px;">${gtl.feedbackContent }</span></td>
+									</tr>
+									<tr>
+										<td colspan="2"><a
+											href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
+											class="btn btn-secondary" style="font-weight: 900;">자세히
+												보기</a></td>
+									</tr>
+
+								</table>
 				</div>
-			</c:if>
-			<h4>작성한 리뷰</h4>
+				</c:forEach>
+				</c:when>
+				<c:otherwise>
+
+					<span
+						style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">아직
+						신청받은 내역이 없습니다!</span>
+				</c:otherwise>
+				</c:choose>
+		</div>
+		</c:if>
+		<h4>작성한 리뷰</h4>
+
+		<c:choose>
+			<c:when test="${not empty grList }">
+				<c:forEach items="${grList }" var="grl" varStatus="i">
+					<div style="display: flex; justify-content: center;">
+						<div class="review-one" style="width: 80%;">
+							<ul>
+								<li><b><span style="color: rgb(78, 205, 196);">
+											고수 </span>${grl.gosuId }</b></li>
+								<li><c:if test="${grl.reviewNum eq 1 }">
+										<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+									</c:if> <c:if test="${grl.reviewNum eq 2 }">
+										<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+									</c:if> <c:if test="${grl.reviewNum eq 3 }">
+										<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+									</c:if> <c:if test="${grl.reviewNum eq 4 }">
+										<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+									</c:if> <c:if test="${grl.reviewNum eq 5 }">
+										<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+									</c:if></li>
+								<li style="color: gray">${grl.reviewDate }</li>
+							</ul>
+							<br>
+							<div style="display: flex; justify-content: center;">
+								<p>${grl.reviewContentBr }</p>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<div class="g-margin">
+					<span
+						style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">아직
+						작성하신 리뷰가 없습니다!!</span>
+				</div>
+			</c:otherwise>
+		</c:choose>
+
+		<c:if test="${sessionScope.m.memberType eq 1 }">
+			<h4>작성한 후기</h4>
+
 			<c:choose>
-				<c:when test="${not empty grList }">
-					<c:forEach items="${grList }" var="grl" varStatus="i">
-						<div>
+				<c:when test="${not empty grrList }">
+					<c:forEach items="${grrList }" var="grl" varStatus="i">
+
+						<div style="display: flex; justify-content: center;">
 							<div class="review-one" style="width: 80%;">
 								<ul>
 									<li><b><span style="color: rgb(78, 205, 196);">
 												고수 </span>${grl.gosuId }</b></li>
-									<li><c:if test="${grl.reviewNum eq 1 }">
-											<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
-										</c:if> <c:if test="${grl.reviewNum eq 2 }">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
-										</c:if> <c:if test="${grl.reviewNum eq 3 }">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-										</c:if> <c:if test="${grl.reviewNum eq 4 }">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-										</c:if> <c:if test="${grl.reviewNum eq 5 }">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-										</c:if></li>
-									<li style="color: gray">${grl.reviewDate }</li>
+									<li style="color: gray">${grl.requestReviewDate }</li>
 								</ul>
 								<br>
 								<div style="display: flex; justify-content: center;">
-									<p>${grl.reviewContentBr }</p>
+									<p>${grl.requestReviewContentBr }</p>
 								</div>
 							</div>
 						</div>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
-					<div class="review-one" style="margin-bottom: 100px;">아직 작성하신
-						리뷰가 없습니다!</div>
+					<div class="g-margin">
+						<span
+							style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">아직
+							작성하신 후기가 없습니다!</span>
+					</div>
 				</c:otherwise>
 			</c:choose>
 
-			<c:if test="${sessionScope.m.memberType eq 1 }">
-				<h4>작성한 후기</h4>
-				<c:choose>
-					<c:when test="${not empty grrList }">
-						<c:forEach items="${grrList }" var="grl" varStatus="i">
-							<div>
-								<div class="review-one" style="width: 80%;">
-									<ul>
-										<li><b><span style="color: rgb(78, 205, 196);">
-										고수 </span>${grl.gosuId }</b></li>
-										<li style="color: gray">${grl.requestReviewDate }</li>
-									</ul>
-									<br>
-									<div style="display: flex; justify-content: center;">
-										<p>${grl.requestReviewContentBr }</p>
-									</div>
-								</div>
-							</div>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						<div class="review-one" style="margin-bottom: 100px;">아직
-							작성하신 후기가 없습니다!</div>
-					</c:otherwise>
-				</c:choose>
 
-			</c:if>
-			<h4>요청서를 통한 고수 매칭</h4>
-			<div >
-				<c:choose>
-					<c:when test="${empty grpsList }">
+		</c:if>
+		<h4>요청서를 통한 고수 매칭</h4>
+		<div class="g-margin">
+			<c:choose>
+				<c:when test="${empty grpsList }">
+					<c:choose>
+						<c:when test="${sessionScope.m.memberType eq 1}">
+							<span
+								style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">요청서를
+								작성해보세요!!</span>
+						</c:when>
+						<c:when test="${sessionScope.m.memberType eq 2}">
+							<span
+								style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">상단의
+								요청서 버튼을 눌러 견적서를 보내보세요!</span>
+						</c:when>
+						<c:otherwise>
+							<span
+								style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">일반회원과
+								고수회원이 이용할 수 있습니다.</span>
+
+						</c:otherwise>
+					</c:choose>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${grpsList }" var="grl" varStatus="i">
 						<c:choose>
-							<c:when test="${sessionScope.m.memberType eq 1}">
-								<span style="margin: 100px; margin-left: 0; padding:20px;">요청서를 작성해보세요!</span>
-							</c:when>
-							<c:when test="${sessionScope.m.memberType eq 2}">
-								<span style="margin: 100px; margin-left: 0; padding:20px;">상단의 요청서 버튼을
-									눌러 견적서를 보내보세요!</span>
+							<c:when test="${grl.requestProjectSubNum eq 3 }">
+
+								<div class="g-left" style="background-color: #e5e5e5;">
 							</c:when>
 							<c:otherwise>
 
-								<span style="margin: 100px; margin-left: 0; color: gray;padding:20px;">일반회원과
-									고수회원이 이용할 수 있습니다.</span>
+								<div class="g-left">
 							</c:otherwise>
 						</c:choose>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${grpsList }" var="grl" varStatus="i">
-							<div class="g-left">
-								<table>
-									<tr style="font-size: small;">
 
-										<c:if test="${grl.requestProjectSubNum eq 1 }">
-											<td style="text-align: left; padding-top: 20px;"><b
-												style="color: red;"></b></td>
+						<table>
+							<tr style="font-size: small;">
+
+								<c:if test="${grl.requestProjectSubNum eq 1 }">
+									<td style="text-align: left; padding-top: 20px;"><b
+										style="color: red;"></b></td>
+								</c:if>
+								<c:if test="${grl.requestProjectSubNum eq 3 }">
+									<td style="text-align: left; padding-top: 20px;"><b
+										style="color: gray;">진행 완료</b></td>
+								</c:if>
+								<td style="padding-top: 20px;">${grl.requestProjectSubDate }</td>
+							</tr>
+							<tr>
+								<td><c:if test="${sessionScope.m.memberType eq 1 }">
+										<b><span
+											style="color: rgb(78, 205, 196); font-size: 20px;">고수</span></b>
+
+									</c:if> <c:if test="${sessionScope.m.memberType eq 2 }">
+										<b><span
+											style="color: rgb(78, 205, 196); font-size: 20px;">질문자</span></b>
+									</c:if></td>
+								<td rowspan="2"><c:if
+										test="${sessionScope.m.memberType eq 1 }">
+										<c:if test="${empty grl.gosuImg}">
+											<img src="/resources/img/gosu/g_img_basic.png">
 										</c:if>
-										<c:if test="${grl.requestProjectSubNum eq 3 }">
-											<td style="text-align: left; padding-top: 20px;"><b
-												style="color: gray;">진행 완료</b></td>
+										<c:if test="${not empty grl.gosuImg}">
+											<img src="/resources/upload/member/${grl.gosuImg  }">
 										</c:if>
-										<td style="padding-top: 20px;">${grl.requestProjectSubDate }</td>
-									</tr>
-									<tr>
-										<td><c:if test="${sessionScope.m.memberType eq 1 }">
-												<b><span
-													style="color: rgb(78, 205, 196); font-size: 20px;">고수</span></b>
 
-											</c:if> <c:if test="${sessionScope.m.memberType eq 2 }">
-												<b><span
-													style="color: rgb(78, 205, 196); font-size: 20px;">질문자</span></b>
-											</c:if></td>
-										<td rowspan="2"><c:if
-												test="${sessionScope.m.memberType eq 1 }">
-												<c:if test="${empty grl.gosuImg}">
-													<img src="/resources/img/gosu/g_img_basic.png">
-												</c:if>
-												<c:if test="${not empty grl.gosuImg}">
-													<img src="/resources/upload/member/${grl.gosuImg  }">
-												</c:if>
+									</c:if> <c:if test="${sessionScope.m.memberType eq 2 }">
+										<c:if test="${empty grl.requestWriterImg}">
+											<img src="/resources/img/gosu/g_img_basic.png">
+										</c:if>
+										<c:if test="${not empty grl.requestWriterImg}">
+											<img src="/resources/upload/member/${grl.requestWriterImg  }">
+										</c:if>
 
-											</c:if> <c:if test="${sessionScope.m.memberType eq 2 }">
-												<c:if test="${empty grl.requestWriterImg}">
-													<img src="/resources/img/gosu/g_img_basic.png">
-												</c:if>
-												<c:if test="${not empty grl.requestWriterImg}">
-													<img
-														src="/resources/upload/member/${grl.requestWriterImg  }">
-												</c:if>
-
-											</c:if></td>
-									</tr>
-									<tr>
-										<td style="font-size: 25px; width: 240px;"><b> <c:if
-													test="${sessionScope.m.memberType eq 2 }">
+									</c:if></td>
+							</tr>
+							<tr>
+								<td style="font-size: 25px; width: 240px;"><b> <c:if
+											test="${sessionScope.m.memberType eq 2 }">
 												${grl.requestWriterId  }
 
 											</c:if> <c:if test="${sessionScope.m.memberType eq 1 }">
 												${grl.gosuId  }
 
 											</c:if>
-										</b></td>
-									</tr>
-									<tr>
-										<td colspan="2"><a
-											href="/gosuProject.do?rpsNo=${grl.requestProjectSubNo }"
-											class="btn btn-info" style="font-weight: 900;">자세히 보기</a></td>
-									</tr>
+								</b></td>
+							</tr>
+							<tr>
+								<td colspan="2"><a
+									href="/gosuProject.do?rpsNo=${grl.requestProjectSubNo }"
+									class="btn btn-info" style="font-weight: 900;">자세히 보기</a></td>
+							</tr>
 
-								</table>
-							</div>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-
-			</div>
+						</table>
 		</div>
+		</c:forEach>
+		</c:otherwise>
+		</c:choose>
+
+	</div>
+	</div>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
