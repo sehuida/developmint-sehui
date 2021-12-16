@@ -32,6 +32,7 @@ public class ShareController {
 		model.addAttribute("list",sbp.getList());
 		model.addAttribute("start",sbp.getStart());
 		model.addAttribute("pageNavi",sbp.getPageNavi());
+		model.addAttribute("type",type);
 		return "share/shareList";
 	}
 	@RequestMapping(value="/shareWriteFrm.do")
