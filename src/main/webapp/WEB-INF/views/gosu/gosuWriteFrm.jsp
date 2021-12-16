@@ -309,8 +309,12 @@
 					</div>
 
 					<div class="gosu-photos">
-						<h4>사진 <span style="color: red;">* </span> <span style="color:gray;font-size: small;">한 가지 이상의 사진을 추가해 주세요.</span></h4>
-						
+						<h4>
+							사진 <span style="color: red;">* </span> <span
+								style="color: gray; font-size: small;">한 가지 이상의 사진을 추가해
+								주세요.</span>
+						</h4>
+
 						<div style="overflow: hidden;">
 							<input type="file" name="photoFilepath" multiple>
 						</div>
@@ -329,8 +333,12 @@
 						</div>
 					</div>
 					<div class="gosu-project">
-						<h4>프로젝트 <span style="color: red;">* </span><span style="color:gray;font-size: small;">한 가지 이상의 프로젝트를 추가해 주세요.</span> </h4>
-						
+						<h4>
+							프로젝트 <span style="color: red;">* </span><span
+								style="color: gray; font-size: small;">한 가지 이상의 프로젝트를 추가해
+								주세요.</span>
+						</h4>
+
 						<div class="g-photo-wrap"></div>
 						<div style="display: flex; justify-content: center;">
 							<a id="gProject" class="btn btn-primary"
@@ -341,7 +349,7 @@
 
 						<h4>
 							피드백 비용 <span style="color: red; margin-right: 100px;">* </span> <span><input
-								type="text" name="gosuCost" style="width: 400px;">
+								type="text" name="gosuCost" style="width: 400px;" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');">
 								&nbsp; &nbsp;원</span>
 						</h4>
 
@@ -375,34 +383,37 @@
 			</div>
 		</form>
 	</div>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
-	$('#g-btn-submit').submit(function() {
-		var photoFilepath = $("input[name=photoFilepath]").val();
-		var gprojectFilepath = $("input[name=gprojectFilepath]").val();
-		var gprojectTitle =$("input[name=gprojectTitle]").val();
-		var gprojectContent =$("input[name=gprojectContent]").val();
-		var gosuCost = $("input[name=gosuCost]").val();
-		var gosuAct = $("input[name=gosuAct]").val();
-		var gosuExplain = $("input[name=gosuExplain]").val();
-		var gosuTitle =$("input[name=gosuTitle]").val();
-		var gosuSelf =  $("input[name=gosuSelf]").val();
-		
-		
-		if (photoFilepath==null || 
-				gprojectFilepath == null ||
-				gprojectTitle ==""||
-				gprojectContent ==""||
-				gosuCost ==""||
-				gosuAct ==""||
-				gosuTitle ==""||
-				gosuExplain == "" ||
-				gosuSelf ==""
-		) {
-			alert("입력하신 내용을 다시 확인해주세요!");
-			
-			return false;
-		}
-	});
+		$('#g-btn-submit').submit(
+				function() {
+					var photoFilepath = $("input[name=photoFilepath]").val();
+					var gprojectFilepath = $("input[name=gprojectFilepath]")
+							.val();
+					var gprojectTitle = $("input[name=gprojectTitle]").val();
+					var gprojectContent = $("input[name=gprojectContent]")
+							.val();
+					var gosuCost = $("input[name=gosuCost]").val();
+					var gosuAct = $("input[name=gosuAct]").val();
+					var gosuExplain = $("input[name=gosuExplain]").val();
+					var gosuTitle = $("input[name=gosuTitle]").val();
+					var gosuSelf = $("input[name=gosuSelf]").val();
+
+					if (photoFilepath == null || gprojectFilepath == null
+							|| gprojectTitle == "" || gprojectContent == ""
+							|| gosuCost == "" || gosuAct == ""
+							|| gosuTitle == "" || gosuExplain == ""
+							|| gosuSelf == "") {
+						
+						swal({
+					        title: '실패',
+					        text: "입력하신 내용을 다시 확인해주세요!",
+					        icon: 'error'
+					      });
+
+						return false;
+					}
+				});
 		$("#gProject").click(function() {
 			var gprojectTitle = $("#gprojectTitle");
 			var gprojectContent = $("#gprojectContent");

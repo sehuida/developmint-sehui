@@ -66,6 +66,7 @@ ul#gallery>a>li dt {
 	height: 150px;
 	margin: 5px;
 	overflow: hidden;
+	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
 }
 
 ul#gallery>a>li dt::after {
@@ -89,6 +90,7 @@ ul#gallery>a>li dt img {
 	width: 100%;
 	height: 100%;
 	transition: 0.6s ease-in-out;
+	
 }
 
 ul#gallery>a>li:hover img {

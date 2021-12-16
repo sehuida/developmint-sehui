@@ -61,6 +61,10 @@
 	width: 100%;
 }
 
+.gosu>button {
+	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
+}
+
 .gosu img {
 	text-align: center;
 	width: 200px;
@@ -114,6 +118,7 @@
 .gosu-one img {
 	width: 225px;
 	height: 225px;
+	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
 }
 
 .gosu button:hover {
@@ -151,6 +156,7 @@ ul#gallery>a>li {
 	height: 300px;
 	margin: 40px;
 	overflow: hidden;
+	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
 }
 
 ul#gallery>a>li::after {
@@ -162,12 +168,9 @@ ul#gallery>a>li::after {
 	width: 87%;
 	height: 87%;
 	padding-top: 80px;
-	border: 2px solid #fff;
 	transform: translate(-50%, -50%);
 	text-align: center;
-	content: '';
 	font-size: 35px;
-	color: #fff;
 	opacity: 0;
 	transition: 0.8s;
 }
@@ -289,6 +292,10 @@ to {
 	text-align: left;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.g-sc-tbl {
+	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
 }
 
 .gosu-write-wrap {
@@ -416,7 +423,26 @@ to {
 						<tr>
 							<td style="text-align: center; font-weight: bold;"><span
 								style="color: rgb(78, 205, 196);">고수</span> ${g.gosuId }</td>
-							<td>4.0</td>
+							<td>
+							<c:if test="${not empty g.reviewAvg }">
+							<c:if test="${g.reviewAvg eq 0 }"><span style="color:gray; font-size: small;">아직 등록된 리뷰가 없습니다.</span></c:if>
+							
+											<c:if test="${g.reviewAvg ne 0 }"><span>${g.reviewAvg } 점 &nbsp;&nbsp;</span></c:if>
+								<c:if test="${g.reviewAvg eq 1 }">
+												<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+											</c:if> <c:if test="${g.reviewAvg eq 2 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+											</c:if> <c:if test="${g.reviewAvg eq 3 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+											</c:if> <c:if test="${g.reviewAvg eq 4 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+											</c:if> <c:if test="${g.reviewAvg eq 5 }">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+											</c:if>
+											
+							</c:if>
+							
+							</td>
 						</tr>
 					</table>
 				</button>
@@ -525,8 +551,7 @@ to {
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
-							<span style="font-size: 20px; margin-left: 100px;">아직 신청한
-								내역이 없습니다!</span>
+							<span style="margin: 100px;">아직 신청한 내역이 없습니다!</span>
 						</c:otherwise>
 					</c:choose>
 
@@ -564,8 +589,7 @@ to {
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<span style="font-size: 20px; margin-left: 100px;">아직
-									신청받은 내역이 없습니다!</span>
+								<span style="margin: 100px;">아직 신청받은 내역이 없습니다!</span>
 							</c:otherwise>
 						</c:choose>
 
@@ -579,14 +603,19 @@ to {
 				<div class="g-statusContent">
 					<c:choose>
 						<c:when test="${empty grpsList }">
-							<c:if test="${sessionScope.m.memberType eq 1}">
-								<span style="margin: 100px;">요청서를 작성해보세요!</span>
-							</c:if>
-							<c:if test="${sessionScope.m.memberType eq 2}">
-								<span style="margin: 100px;">상단의 요청서 버튼을 눌러 견적서를 보내보세요!</span>
+							<c:choose>
+								<c:when test="${sessionScope.m.memberType eq 1}">
+									<span style="margin: 100px;">요청서를 작성해보세요!</span>
+								</c:when>
+								<c:when test="${sessionScope.m.memberType eq 2}">
+									<span style="margin: 100px;">상단의 요청서 버튼을 눌러 견적서를 보내보세요!</span>
+								</c:when>
+								<c:otherwise>
 
-							</c:if>
-
+									<span style="margin: 100px; color: gray;">일반회원과 고수회원이
+										이용할 수 있습니다.</span>
+								</c:otherwise>
+							</c:choose>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${grpsList }" var="grpsl" varStatus="i">

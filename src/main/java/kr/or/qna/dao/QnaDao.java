@@ -4,10 +4,31 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
+import kr.or.qna.vo.Qna;
+import kr.or.qna.vo.nonQna;
+
 @Repository
 public class QnaDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlsession;
+
+	//--------------------비회원전용
+	public int insertCountNonQna(nonQna nq) {
+		return sqlsession.insert("qna.insertCounselNonQna",nq);
+	}
+
+
+	public int insertCounselQna(Qna q) {
+		return sqlsession.insert("qna.insertCountQna",q);
+	}
+
+
+	public int insertFile(ProjectTeamFileVO ptfv) {
+		return sqlsession.insert("qna.insertFile",ptfv);
+	}
+
+	
 	
 }

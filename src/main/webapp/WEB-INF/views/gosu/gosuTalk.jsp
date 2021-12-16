@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -310,7 +311,11 @@ input:focus, textarea:focus {
 									</div>
 							</c:when>
 							<c:otherwise>
-							아직 작성된 리뷰가 없습니다!
+							<div
+									style="display: flex; justify-content: center; margin-top: 200px; margin-bottom: 200px;">
+									<span style="font-size: 30px; font-weight: 900; color: gray;">아직
+										작성된 리뷰가 없습니다!</span>
+								</div>
 						</c:otherwise>
 						</c:choose>
 					</c:when>
@@ -426,10 +431,12 @@ input:focus, textarea:focus {
 								<tr style="text-align: right;">
 									<c:choose>
 										<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
+											<c:if test="${fn:length(gtList) >= 10}">
 											<td style="text-align: center;">
 												<button type="button" id="talkStopAjax" class="btn btn-info"
 													style="width: 200px;">피드백 마치기</button>
 											</td>
+											</c:if>
 											<td style="text-align: center;">
 												<button type="button" id="talkBtnAjax"
 													class="btn btn-primary" style="width: 200px;">전송</button>
@@ -455,6 +462,7 @@ input:focus, textarea:focus {
 
 
 	</div>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
 		$("#talkBtnAjax").click(function() {
 			var talkContent = $("#talkContent").val();
@@ -468,7 +476,14 @@ input:focus, textarea:focus {
 			form.append("talkContent", talkContent);
 			form.append("writer", writer);
 			form.append("feedbackNo", feedbackNo);
-
+			if (talkContent == "") {
+				swal({
+			      title: '실패',
+			        text: "내용을 입력해주세요!",
+			        icon: 'error'
+			      });
+				return false;
+			}
 			$.ajax({
 
 				url : "/talkBtnAjax.do",
@@ -515,7 +530,11 @@ input:focus, textarea:focus {
 			console.log(reviewContent);
 			console.log(ggosuNo);
 			if (reviewNum == null || reviewContent == "") {
-				alert("작성하신 리뷰를 다시 확인해주세요!");
+				swal({
+				      title: '실패',
+				        text: "작성하신 리뷰를 다시 확인해주세요!",
+				        icon: 'error'
+				      });
 				return false;
 			}
 			$.ajax({
@@ -529,8 +548,11 @@ input:focus, textarea:focus {
 				},
 				success : function(data) {
 					if (data > 0) {
-						alert("리뷰 작성이 완료되었습니다!");
-
+						swal({
+					        title: '성공',
+					        text: "리뷰 작성이 완료되었습니다!",
+					        icon: 'success'
+					      });
 						location.reload();
 					} else {
 						console.log("에러");

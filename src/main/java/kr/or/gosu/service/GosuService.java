@@ -56,6 +56,12 @@ public class GosuService {
 
 			g.setGosuId(dao.selectGosuId(gosuNo));
 			g.setGosuImg(dao.selectGosuImg(gosuNo));
+
+			ArrayList<GosuReview> list2 = dao.selectGosuReviewList(g.getGgsouNo());
+			if(!list2.isEmpty()) {
+				g.setReviewAvg(dao.selectReviewAvg(g.getGgsouNo()));
+				
+			}
 		}
 		return list;
 	}
@@ -64,6 +70,10 @@ public class GosuService {
 		Gosu gosu = dao.selectGosuOne(ggosuNo);
 		gosu.setGosuId(dao.selectGosuId(gosu.getGsouNo()));
 		gosu.setGosuImg(dao.selectGosuImg(gosu.getGsouNo()));
+		ArrayList<GosuReview> list2 = dao.selectGosuReviewList(gosu.getGgsouNo());
+		if(!list2.isEmpty()) {
+			gosu.setReviewAvg(dao.selectReviewAvg(gosu.getGgsouNo()));
+		}
 		return gosu;
 	}
 
@@ -295,6 +305,36 @@ public class GosuService {
 	public GosuRequestReview selectGosuRequestReviewOne(GosuRequestReview grr2) {
 		GosuRequestReview gosuReviewOne = dao.GosuRequestReview(grr2);	
 		return gosuReviewOne;
+	}
+	@Transactional
+	public int gosuNoticeUpdate(GosuNotice gNotice) {
+		int result = dao.gosuNoticeUpdate(gNotice);
+		return result;
+	}
+	@Transactional
+	public int noticeContentdelete(int gnn) {
+		int result = dao.noticeContentdelete(gnn);
+		return result;
+	}
+
+	public ArrayList<GosuRequestReview> selectGosuRequestReviewList(int ggsouNo) {
+		ArrayList<GosuRequestReview> list = dao.selectGosuRequestReviewList(ggsouNo);
+		return list;
+	}
+
+	public int selectGrrCount(int ggsouNo) {
+		int selectGrrCount = dao.selectGrrCount(ggsouNo);
+		return selectGrrCount;
+	}
+
+	public ArrayList<GosuReview> selectMemberReviewList(String memberId) {
+		ArrayList<GosuReview> list = dao.selectMemberReviewList(memberId);
+		return list;
+	}
+
+	public ArrayList<GosuRequestReview> selectMemberRequestReviewList(String memberId) {
+		ArrayList<GosuRequestReview> list = dao.selectMemberRequestReviewList(memberId);
+		return list;
 	}
 
 

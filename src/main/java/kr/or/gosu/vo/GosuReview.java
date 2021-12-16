@@ -12,7 +12,7 @@ public class GosuReview {
 	private String reviewDate;
 	private int reviewCount;
 	private int reviewAvg;
-	
+	private String gosuId;
 
 	public String getReviewContentBr(){
 		return reviewContent.replaceAll(",", "<br>");

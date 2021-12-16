@@ -140,7 +140,7 @@
 								<c:when test="${empty sessionScope.m }">
 									<div class="form-group">
 								      <label for="qna_pw" class="form-label mt-4">비밀번호</label>
-								      <input type="password" class="form-control" id="qna_pw" name="qna_pw" placeholder="패스워드를 입력" style="width: 20%">
+								      <input type="password" class="form-control" id="qnaPw" name="qnaPw" placeholder="패스워드를 입력" style="width: 20%">
 								      <small id="emailHelp" class="form-text text-danger">답변확인을 위해 꼭 비밀번호를 기억하세요! </small>
 								    </div>
 								</c:when>
@@ -163,12 +163,12 @@
 						</c:choose>
 					</div>
 				</div>
-			</form>
-			<form action="upload_form.do" id="upload_form" name="upload_form" method="post" enctype="multipart/form-data">
-				<!-- <input type="file" id="Filedata" class="input_file" onchange="uploadImage();" style="display: none !important;" /> -->
 				<input type="file" name="Filedata" id="Filedata" class="input_file" onchange="loadImg(this);" style="display: none !important;" multiple>
-				<input type="hidden" name="memberId" value="${sessionScope.m.memberNo }">
 			</form>
+			<%-- <form action="upload_form.do" id="upload_form" name="upload_form" method="post" enctype="multipart/form-data">
+				<!-- <input type="file" id="Filedata" class="input_file" onchange="uploadImage();" style="display: none !important;" /> -->
+				<input type="hidden" name="memberId" value="${sessionScope.m.memberNo }">
+			</form> --%>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
@@ -223,11 +223,11 @@
 			}
 			//var pwReg = /^[a-zA-Z0-9]+{4,}$/;
 			var pwReg = /^[a-z][a-zA-Z0-9]{3,}$/;
-			if($.trim($('#f1 [name=qna_pw]').val()) == ''){
+			if($.trim($('#f1 [name=qnaPw]').val()) == ''){
 				alert('비밀번호를 입력해주십시오.');
 				return false;
 			}
-			if(!pwReg.test($('#f1 [name=qna_pw]').val())){
+			if(!pwReg.test($('#f1 [name=qnaPw]').val())){
 					alert('총 4글자 이상, 첫글자는 소문자로 입력해주십시오.');
 					$('#f1 [name=qna_pw]').focus();
 					return false;

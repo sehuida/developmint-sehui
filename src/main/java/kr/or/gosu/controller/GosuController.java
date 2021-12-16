@@ -96,19 +96,24 @@ public class GosuController {
 		Gosu gosu = service.selectGosuOne(gNo);
 		ArrayList<GosuProject> gprList = service.selectGosuProject(gNo);
 		ArrayList<GosuPhoto> gptList = service.selectGosuPhoto(gNo);
-		
 		ArrayList<GosuReview> grList = service.selectGosuReviewList(gosu.getGgsouNo());
-		if(!grList.isEmpty()) {
+		if (!grList.isEmpty()) {
 
 			GosuReview grAVG = service.selectReviewCountAVG(gosu.getGgsouNo());
 			model.addAttribute("grAVG", grAVG);
-			
+
 		}
-	
+		ArrayList<GosuRequestReview> grrList = service.selectGosuRequestReviewList(gosu.getGgsouNo());
+		if (!grrList.isEmpty()) {
+			int grrCount = service.selectGrrCount(gosu.getGgsouNo());
+			model.addAttribute("grrCount", grrCount);
+
+		}
 		model.addAttribute("gosu", gosu);
 		model.addAttribute("gprojectList", gprList);
 		model.addAttribute("gphotoList", gptList);
 		model.addAttribute("greviewList", grList);
+		model.addAttribute("grrList", grrList);
 		return "gosu/gosuContent";
 	}
 
@@ -171,12 +176,17 @@ public class GosuController {
 		}
 		int result = service.insertGosu(g, photoList, projectList);
 		if (result == -1 || result != projectList.size()) {
-			model.addAttribute("msg", "등록 실패");
+			model.addAttribute("title", "등록 실패");
+			model.addAttribute("msg", "입력 정보를 확인해주세요.");
+			model.addAttribute("icon", "error");
 		} else {
-			model.addAttribute("msg", "등록 성공");
+			model.addAttribute("title", "등록 성공");
+			model.addAttribute("msg", "");
+			model.addAttribute("icon", "success");
 		}
+		
 		model.addAttribute("loc", "/");
-		return "common/msg";
+		return "member/swalMsg";
 	}
 
 	@ResponseBody
@@ -243,7 +253,7 @@ public class GosuController {
 		g.setGprojectFilepath("/resources/upload/gosuProject/" + filepath);
 		Gson gson = new Gson();
 		return gson.toJson(g);
-	}// dd
+	}
 
 	@RequestMapping(value = "/gosuSituation.do")
 	public String gosuSituation(@SessionAttribute Member m, Model model) {
@@ -259,9 +269,12 @@ public class GosuController {
 			System.out.println(grpsList);
 			model.addAttribute("grpsList", grpsList);
 		}
+		ArrayList<GosuReview> grList = service.selectMemberReviewList(m.getMemberId());
+		ArrayList<GosuRequestReview> grrList = service.selectMemberRequestReviewList(m.getMemberId()); 
 		model.addAttribute("gosuTalkList", gf);
 		model.addAttribute("gosuTalkList2", gf2);
-
+		model.addAttribute("grList", grList);
+		model.addAttribute("grrList", grrList);
 		return "gosu/gosuSituation";
 	}
 
@@ -428,12 +441,17 @@ public class GosuController {
 		int result = service.insertGosuNotice(gNotice);
 
 		if (result == -1) {
-			model.addAttribute("msg", "등록 실패");
+			model.addAttribute("title", "등록 실패");
+			model.addAttribute("msg", "입력하신 내용을 확인해주세요.");
+			model.addAttribute("icon", "error");
 		} else {
-			model.addAttribute("msg", "등록 성공");
+			model.addAttribute("title", "등록 성공");
+			model.addAttribute("msg", "");
+			model.addAttribute("icon", "success");
 		}
 		model.addAttribute("loc", "/gosuNoticeList.do");
-		return "common/msg";
+		
+		return "member/swalMsg";
 	}
 
 	@RequestMapping(value = "/gosuNoticeContent.do")
@@ -606,17 +624,99 @@ public class GosuController {
 		int result = service.talkStop2(requestProjectSubNo);
 		return result;
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/requestReviewAjax.do")
-	public int requestReviewAjax(int requestProjectSubNo,String requestMemberId,String requestReviewContent, Model model) {
+	public int requestReviewAjax(int requestProjectSubNo, String requestMemberId, String requestReviewContent,
+			Model model) {
 		GosuRequestReview grr = new GosuRequestReview();
-		System.out.println("requestProjectSubNo : "+requestProjectSubNo);
-		System.out.println("requestMemberId : "+requestMemberId);
-		System.out.println("requestReviewContent : "+requestReviewContent);
+		System.out.println("requestProjectSubNo : " + requestProjectSubNo);
+		System.out.println("requestMemberId : " + requestMemberId);
+		System.out.println("requestReviewContent : " + requestReviewContent);
 		grr.setRequestProjectSubNo(requestProjectSubNo);
 		grr.setMemberId(requestMemberId);
 		grr.setRequestReviewContent(requestReviewContent);
 		int result = service.insertRequestReviewAjax(grr);
 		return result;
 	}
+
+	@RequestMapping(value = "/noticeContentUpdateFrm.do")
+	public String noticeContentUpdateFrm(int gnn, Model model) {
+
+		GosuNotice gNotice = service.selectGosuNoticeOne(gnn);
+		model.addAttribute("gNotice",gNotice);
+		return "gosu/gosuNoticeUpdateFrm";
+	}
+		@RequestMapping(value = "/gosuNoticeUpdate.do")
+		public String gosuNoticeUpdate(MultipartFile files, HttpServletRequest request, GosuNotice gNotice, Model model) {
+			if (files.isEmpty()) {
+			} else {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/gosu/gosuNotice/");
+			String filename = files.getOriginalFilename();
+			String onlyFilename = filename.substring(0, filename.indexOf("."));
+			String extention = filename.substring(filename.indexOf("."));
+			String filepath = null;
+			int count = 0;
+			while (true) {
+				if (count == 0) {
+					filepath = onlyFilename + extention;
+				} else {
+					filepath = onlyFilename + "_" + count + extention;
+				}
+				File checkFile = new File(savePath + filepath);
+				if (!checkFile.exists()) {
+					break;
+				}
+				count++;
+			}
+
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = files.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			gNotice.setGnoticePhoto("/resources/upload/gosu/gosuNotice/" + filepath);
+			}
+			int result = service.gosuNoticeUpdate(gNotice);
+
+			if (result == -1) {
+
+				model.addAttribute("title", "등록 실패");
+				model.addAttribute("icon", "error");
+				model.addAttribute("msg", "입력 정보를 확인해주세요.");
+			} else {
+				model.addAttribute("title", "등록 성공");
+				model.addAttribute("msg", "");
+				model.addAttribute("icon", "success");
+			}
+			model.addAttribute("loc", "/gosuNoticeContent.do?gnn="+gNotice.getGnoticeNo());
+			return "member/swalMsg";
+		}
+	@RequestMapping(value = "/noticeContentdelete.do")
+		public String noticeContentdelete(int gnn, Model model) {
+		int result = service.noticeContentdelete(gnn);
+
+		if (result == -1) {
+			model.addAttribute("title", "삭제 실패");
+			model.addAttribute("icon", "error");
+			model.addAttribute("msg", "입력 정보를 확인해주세요.");
+		} else {
+			model.addAttribute("title", "삭제 성공");
+
+			model.addAttribute("msg", "");
+			model.addAttribute("icon", "success");
+		}
+		model.addAttribute("loc", "/gosuNoticeList.do");
+		return "member/swalMsg";
+		}
+
 }

@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.share.model.service.ShareService;
 import kr.or.share.model.vo.Share;
+import kr.or.share.model.vo.ShareBoardPage;
 
 @Controller
 public class ShareController {
@@ -26,7 +27,13 @@ public class ShareController {
 	private ShareService service;
 	
 	@RequestMapping(value="/shareList.do")
-	public String shareList() {
+	public String shareList(Model model,int reqPage,int type) {
+		//검색이 들어왔을때
+		ShareBoardPage sbp = service.shareBoardList(reqPage,type);
+		model.addAttribute("list",sbp.getList());
+		model.addAttribute("start",sbp.getStart());
+		model.addAttribute("pageNavi",sbp.getPageNavi());
+		model.addAttribute("type",type);
 		return "share/shareList";
 	}
 	@RequestMapping(value="/shareWriteFrm.do")
@@ -130,12 +137,12 @@ public class ShareController {
 		if (result > 1) {
 			model.addAttribute("title", "등록성공");
 			model.addAttribute("msg", "글 작성이 완료 되셨습니다.");
-			model.addAttribute("loc", "/shareList.do");
+			model.addAttribute("loc", "/shareList.do?reqPage=1&type=1");
 			model.addAttribute("icon", "success");
 		} else {
 			model.addAttribute("title", "변경실패");
 			model.addAttribute("msg", "글 작성에 실패하셨습니다.");
-			model.addAttribute("loc", "/shareList.do");
+			model.addAttribute("loc", "/shareList.do?reqPage=1&type=1");
 			model.addAttribute("icon", "warning");
 		}
 		return "member/swalMsg";

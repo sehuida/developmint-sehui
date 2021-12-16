@@ -1,5 +1,9 @@
 package kr.or.share.model.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,5 +21,24 @@ public class ShareDao {
 
 	public int plusPoints(Share s) {
 		return sqlSession.update("share.plusPoints",s);
+	}
+
+	public ArrayList<Share> shareBoardList(HashMap<String, Object> map) {
+		List<Share> list = sqlSession.selectList("share.shareList",map); 
+		return (ArrayList<Share>)list;
+	}
+
+	public int shareTotalCount() {
+		return sqlSession.selectOne("share.shareCount");
+	}
+
+	public ArrayList<Share> searchId(HashMap<String, Object> map) {
+		List<Share> list = sqlSession.selectList("share.searchId",map); 
+		return (ArrayList<Share>)list;
+	}
+
+	public ArrayList<Share> searchTitle(HashMap<String, Object> map) {
+		List<Share> list = sqlSession.selectList("share.searchTitle",map); 
+		return (ArrayList<Share>)list;
 	}
 }
