@@ -1,6 +1,7 @@
 package kr.or.jobSearch.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,6 +20,19 @@ public class JobSearchDao {
 		List list = sqlSession.selectList("announce.allAnnounce");
 		return (ArrayList<Announce>)list;
 	}
+
+	public ArrayList<Announce> selectMemberRequestList(HashMap<String, Object> map) {
+		List<Announce> list = sqlSession.selectList("announce.selectMemberRequestList", map);
+		return (ArrayList<Announce>)list;
+	}
+
+	public int selectTotalCount() {
+		return sqlSession.selectOne("announce.announceTotalCount");
+	}
+	
+	
+	
+	
 	
 	
 }

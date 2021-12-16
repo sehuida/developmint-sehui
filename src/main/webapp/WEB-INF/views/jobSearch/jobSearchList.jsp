@@ -182,6 +182,14 @@
     	top: -4px;
     	cursor: pointer;
     }
+    #pageNavi{
+    	display: flex;
+    	justify-content: center;
+    	margin: 20px 0px;
+    }
+    .page-link{
+    	padding: 6px 12px;
+    }
 </style>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -496,7 +504,7 @@
                     </div>
                 </div>
                 <br>
-                <p class="imsi" style="margin-top: 30px; margin-bottom: 60px; text-align: center">페이징 처리 하기</p>
+                <div id="pageNavi">${pageNavi }</div>
             </div>
         </div>
     </div>
