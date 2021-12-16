@@ -69,9 +69,11 @@
 					<div>
 						<span style="font-size: 25px; font-family: NotoBold;">개발지식 공유 게시판</span><img class="cateImg" src="/resources/img/shareBoard/board.png">									
 					</div>
-					<div>
- 				    	<a href="/shareWriteFrm.do" class="btn btn-info writeBtn">글쓰기</a>				
-					</div>
+					<c:if test="${not empty sessionScope.m }">
+						<div>
+	 				    	<a href="/shareWriteFrm.do" class="btn btn-info writeBtn">글쓰기</a>				
+						</div>					
+					</c:if>
 				</div>
 				<!-- 페이지 카테고리 종료 -->
 				<div class="page-sorting">
@@ -169,8 +171,10 @@
 	 //검색
 	 $("#searchBtn").click(function(){
 		var searchVal = $("#searchContent").val();
-		var category = $("#searchCategory").val();
-		location.href="/shareList.do?reqPage=1&type=1&search="+searchVal+"&category="+category;
+		var cateVal = $("#searchCategory").val();
+		var category = Number(cateVal);
+
+		location.href="/shareSearch.do?reqPage=1&type=1&search="+searchVal+"&category="+category;
 
 	 });
 	</script>	

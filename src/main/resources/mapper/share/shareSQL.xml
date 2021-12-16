@@ -47,7 +47,7 @@
    <select id="shareCount" resultType="_int">
    		select count(*) from share_board		
    </select>
-   <select id="searchId" parameterType="map" resultType="sv">
+   <select id="searchBoard" parameterType="map" resultType="sv">
 		select shb.* from
 		(select rownum as rnum,sb.* from
 		(select 
@@ -65,28 +65,16 @@
 		    member_grade as memberGrade,
 		    (select count(*) from likes lk where s.board_no=lk.board_no) as likes,
 		    (select count(*) from comments c where c.board_no=s.board_no and c.board_type=2) as comments
-		from share_board s left join member m using (member_no) where m.member_id like '%#{search}%'
-		order by 1 desc)sb)shb where rnum between #{start} and #{end}      
-   </select>
-   <select id="searchTitle" parameterType="map" resultType="sv">
-		select shb.* from
-		(select rownum as rnum,sb.* from
-		(select 
-		    member_no as memberNo,
-		    board_no as boardNo,
-		    board_title as boardtitle,
-		    board_content as boardContent,
-		    board_type as boardType,
-		    reg_date as regDate,
-		    filename,
-		    s.filepath,
-		    read_count as readCount,
-		    member_id as memberId,
-		    m.filepath as profiles,
-		    member_grade as memberGrade,
-		    (select count(*) from likes lk where s.board_no=lk.board_no) as likes,
-		    (select count(*) from comments c where c.board_no=s.board_no and c.board_type=2) as comments
-		from share_board s left join member m using (member_no) where s.board_title like '%#{search}%'
+		from share_board s left join member m using (member_no)
+		<trim prefix="where">
+			<if test="category == 1">
+				  s.board_title like '%'||#{search}||'%'		
+			</if>
+			<if test="category == 2">
+				   m.member_id like '%'||#{search}||'%'
+			</if>
+		</trim>
+
 		order by 1 desc)sb)shb where rnum between #{start} and #{end}      
    </select>
 </mapper>
