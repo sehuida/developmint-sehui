@@ -608,15 +608,36 @@
 		select
 		count(*) as reviewCount
 		from
-		gosu_review where GGOSU_NO=#{ggsouNo}
+		gosu_review where
+		GGOSU_NO=#{ggsouNo}
 	</select>
 
 	<select id="selectReviewAvg" parameterType="_int"
 		resultType="_int">
 		SELECT ROUND(AVG(REVIEW_NUM),1) as reviewAvg
-		FROM gosu_review
+		FROM
+		gosu_review
 		where ggosu_no =#{ggsouNo}
 		GROUP BY GGOSU_NO
 	</select>
-
+	
+	<insert id="insertRequestReviewAjax" parameterType="grreview">
+		insert into
+		gosu_request_review
+		values(G_REQUEST_REVIEW_SEQ.nextval,#{requestProjectSubNo},#{memberId},#{requestReviewContent},to_char(sysdate,'yyyy-mm-dd'))
+	</insert>
+	<select id="GosuRequestReview" parameterType="grreview"
+		resultType="grreview">
+		SELECT
+		REQUEST_REVIEW_NO as requestReviewNo,
+		REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
+		REQUEST_MEMBER_ID as memberId,
+		REQUEST_REVIEW_CONTENT as
+		requestReviewContent,
+		REQUEST_REVIEW_DATE as requestReviewDate
+		FROM
+		gosu_request_review
+		where REQUEST_PROJECT_SUB_NO =#{requestProjectSubNo} and
+		REQUEST_MEMBER_ID =#{memberId}
+	</select>
 </mapper>

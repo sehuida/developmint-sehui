@@ -286,10 +286,15 @@ public class GosuService {
 		gosuReviewOne.setReviewAvg(dao.selectReviewAvg(ggsouNo));
 		return gosuReviewOne;
 	}
-
+	@Transactional
 	public int insertRequestReviewAjax(GosuRequestReview grr) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = dao.insertRequestReviewAjax(grr);
+		return result;
+	}
+
+	public GosuRequestReview selectGosuRequestReviewOne(GosuRequestReview grr2) {
+		GosuRequestReview gosuReviewOne = dao.GosuRequestReview(grr2);	
+		return gosuReviewOne;
 	}
 
 

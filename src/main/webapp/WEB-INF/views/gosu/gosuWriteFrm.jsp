@@ -251,7 +251,7 @@
 			&gt; &nbsp;<span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다!
 		</h4>
 		<div style="color: red;">
-			고수 소개글은 하나만 작성이 가능하며, 수정 삭제가 불가능합니다!<br> 신중하게 작성해주시길 바랍니다.
+			고수 소개 글은 하나만 작성이 가능하며, 수정 삭제가 불가능합니다!<br> 신중하게 작성해 주시길 바랍니다.
 		</div>
 
 		<form action="/gosuWrite.do" method="post" id="g-btn-submit"
@@ -309,7 +309,8 @@
 					</div>
 
 					<div class="gosu-photos">
-						<h4>사진</h4>
+						<h4>사진 <span style="color: red;">* </span> <span style="color:gray;font-size: small;">한 가지 이상의 사진을 추가해 주세요.</span></h4>
+						
 						<div style="overflow: hidden;">
 							<input type="file" name="photoFilepath" multiple>
 						</div>
@@ -328,7 +329,8 @@
 						</div>
 					</div>
 					<div class="gosu-project">
-						<h4>프로젝트</h4>
+						<h4>프로젝트 <span style="color: red;">* </span><span style="color:gray;font-size: small;">한 가지 이상의 프로젝트를 추가해 주세요.</span> </h4>
+						
 						<div class="g-photo-wrap"></div>
 						<div style="display: flex; justify-content: center;">
 							<a id="gProject" class="btn btn-primary"
@@ -409,12 +411,15 @@
 			gprojectContent.val("");
 			gprojectFilepath.val("");
 			$("#gimage_container").empty();
+			$('body').css("overflow", "hidden");
+			$('.hrm-wrap').css("overflow", "scroll");
 			$(".hrm-wrap").css("display", "flex");
 
 		});
 		$("#hrm-close").click(function() {
 
 			$(".hrm-wrap").css("display", "none");
+			$('body').css("overflow", "scroll");
 
 		});
 

@@ -439,21 +439,19 @@ input[type="checkbox"]:checked {
 					</dl>
 
 				</li>
-				<%-- 
 				<li>
 					<dl>
 						<dt class="g-mint">4</dt>
 						<dt>
 							<img src="/resources/img/gosu/gosuSend4.png">
 						</dt>
-						<dt>리뷰쓰기</dt>
+						<dt>후기쓰기</dt>
 						<dd>
-							거래가 잘 마무리 되었다면<br>서비스에 대한 리뷰를<br>남겨주세요.
+							거래가 잘 마무리 되었다면<br>개발에 대한 후기를<br>남겨주세요.
 						</dd>
 					</dl>
 
 				</li>
-				--%>
 			</ul>
 		</div>
 	</div>

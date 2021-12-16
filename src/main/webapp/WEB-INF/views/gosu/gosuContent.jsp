@@ -358,8 +358,7 @@
 							작성된 리뷰가 아직 없습니다!
 						</c:when>
 						<c:otherwise>
-						<c:choose>
-							<c:if test="${empty grAVG }">
+					
 							<div>
 							<div class="review-avg">
 								<table>
@@ -392,11 +391,7 @@
 									</tr>
 								</table>
 							</div>
-							
-							</c:if>
-							
-							
-						</c:choose>
+					
 						
 							<hr>
 
@@ -582,7 +577,7 @@
 			      $('.bigPictureWrapper').hide();
 			    }, 1000);
 			  });
-		})
+		});
 		$("#hrm-close").click(function() {
 
 			$(".hrm-wrap").css("display", "none");

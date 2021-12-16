@@ -142,109 +142,109 @@ input:focus, textarea:focus {
 				<a href="/gosuRequestCostList.do">견적서</a>
 			</div>
 		</c:if>
-		
+
 		<div class="g-msg">
-		<c:if test="${sessionScope.m.memberType eq 1 }">
+			<c:if test="${sessionScope.m.memberType eq 1 }">
 		고수에게 요구사항을 정확하게 전달해 주세요!
 		</c:if>
-		<c:if test="${sessionScope.m.memberType eq 2 }">
+			<c:if test="${sessionScope.m.memberType eq 2 }">
 		질문자의 요구사항에 맞게 개발을 진행해 주세요!
 		</c:if>
-		
+
 		</div>
 
 		<div class="talk-wrap">
-		
+
 			<c:choose>
-			<c:when test="${empty grplist }">
-				<div class="talk-sub">
-					<h2 style="font-weight: 900; color: #cacaca; margin: 150px;">대화를
-						시작해보세요!</h2>
-				</div>
-			</c:when>
-			<c:otherwise>
-				<div class="talk-wrap">
-					<c:forEach items="${grplist }" var="gtl" varStatus="i">
-						<c:choose>
-							<c:when test="${gtl.memberNo eq sessionScope.m.memberNo }">
-								<div class="talk-one talk-me">
-									<table>
-										<tr>
+				<c:when test="${empty grplist }">
+					<div class="talk-sub">
+						<h2 style="font-weight: 900; color: #cacaca; margin: 150px;">대화를
+							시작해보세요!</h2>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="talk-wrap">
+						<c:forEach items="${grplist }" var="gtl" varStatus="i">
+							<c:choose>
+								<c:when test="${gtl.memberNo eq sessionScope.m.memberNo }">
+									<div class="talk-one talk-me">
+										<table>
+											<tr>
 
-											<c:if test="${not empty gtl.filename }">
-												<th colspan="2"
-													style="text-align: left; padding-left: 50px;">첨부파일
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>${gtl.filename }</a>
-												</th>
+												<c:if test="${not empty gtl.filename }">
+													<th colspan="2"
+														style="text-align: left; padding-left: 50px;">첨부파일
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>${gtl.filename }</a>
+													</th>
 
-											</c:if>
-											<td
-												style="text-align: right; padding-right: 50px; color: gray;">${gtl.requestProjectDate }</td>
-										</tr>
+												</c:if>
+												<td
+													style="text-align: right; padding-right: 50px; color: gray;">${gtl.requestProjectDate }</td>
+											</tr>
 
-										<tr>
-											<td colspan="3" style="text-align: center; padding: 40px;"><p
-													style="border: 1px solid gray; padding: 30px;">${gtl.requestProjectContentBr }</p></td>
-										</tr>
-									</table>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<div class="talk-one">
-									<table>
-										<tr>
-											<th style="text-align: right; width: 150px;"><c:if
-													test="${empty gtl.memberImg }">
-													<img src="/resources/img/gosu/g_img_basic.png">
-												</c:if> <c:if test="${not empty gtl.memberImg }">
-													<img src="/resources/upload/member/${gtl.memberImg}">
-												</c:if></th>
-											<th style="font-size: 30px;"><c:choose>
-													<c:when test="${sessionScope.m.memberType ne 2}">
-														<span style="color: rgb(78, 205, 196);">질문자</span>
-													</c:when>
-													<c:otherwise>
-														<span style="color: rgb(78, 205, 196);">고수</span>
-													</c:otherwise>
-												</c:choose> ${gtl.memberId }</th>
-											<td
-												style="text-align: right; padding-right: 50px; color: gray;">${gtl.requestProjectDate }</td>
-										</tr>
-										<tr>
-											<c:if test="${not empty gtl.filename }">
-												<th style="text-align: right;">첨부파일</th>
-												<td colspan="2"><a>${gtl.filename }</a></td>
-											</c:if>
-										</tr>
-										<tr>
-											<td colspan="3" style="text-align: center; padding: 40px;"><p
-													style="border: 1px solid gray; padding: 30px;">${gtl.requestProjectContentBr }</p></td>
-										</tr>
-									</table>
-								</div>
-							</c:otherwise>
-						</c:choose>
+											<tr>
+												<td colspan="3" style="text-align: center; padding: 40px;"><p
+														style="border: 1px solid gray; padding: 30px;">${gtl.requestProjectContentBr }</p></td>
+											</tr>
+										</table>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="talk-one">
+										<table>
+											<tr>
+												<th style="text-align: right; width: 150px;"><c:if
+														test="${empty gtl.memberImg }">
+														<img src="/resources/img/gosu/g_img_basic.png">
+													</c:if> <c:if test="${not empty gtl.memberImg }">
+														<img src="/resources/upload/member/${gtl.memberImg}">
+													</c:if></th>
+												<th style="font-size: 30px;"><c:choose>
+														<c:when test="${sessionScope.m.memberType ne 2}">
+															<span style="color: rgb(78, 205, 196);">질문자</span>
+														</c:when>
+														<c:otherwise>
+															<span style="color: rgb(78, 205, 196);">고수</span>
+														</c:otherwise>
+													</c:choose> ${gtl.memberId }</th>
+												<td
+													style="text-align: right; padding-right: 50px; color: gray;">${gtl.requestProjectDate }</td>
+											</tr>
+											<tr>
+												<c:if test="${not empty gtl.filename }">
+													<th style="text-align: right;">첨부파일</th>
+													<td colspan="2"><a>${gtl.filename }</a></td>
+												</c:if>
+											</tr>
+											<tr>
+												<td colspan="3" style="text-align: center; padding: 40px;"><p
+														style="border: 1px solid gray; padding: 30px;">${gtl.requestProjectContentBr }</p></td>
+											</tr>
+										</table>
+									</div>
+								</c:otherwise>
+							</c:choose>
 
-					</c:forEach>
+						</c:forEach>
 
-				</div>
-			</c:otherwise>
-		</c:choose>
-		
-		
-			
+					</div>
+				</c:otherwise>
+			</c:choose>
+
+
+
 		</div>
 		<hr>
-		
-		
-	<c:choose>
+
+
+		<c:choose>
 			<c:when test="${grpsOne.requestProjectSubNum eq 3}">
 				<c:choose>
 					<c:when test="${sessionScope.m.memberType eq 2}">
 
 
 						<c:choose>
-							<c:when test="${sessionScope.m.memberType eq 2}">
+							<c:when test="${not empty grrOne}">
 								테스트 구문 바꾸기 후기 남긴거
 
 
@@ -253,37 +253,68 @@ input:focus, textarea:focus {
 							아직 작성된 후기가 없습니다!
 						</c:otherwise>
 						</c:choose>
-
-
 					</c:when>
 					<c:otherwise>
-						<div
-							style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
-							<div>
-								<h2 style="font-weight: 900; width: 100%; text-align: center;">고수님께서
-									개발을 완료하셨습니다!</h2>
-								<br> <br> <span
-									style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">후기 작성하기</span>
-								<br> <br>
-								<table>
-									<tr>
-										<td>진행 과정과 받은 작품에 대해 꼼꼼하게 후기를 남겨주세요!</td>
-									</tr>
-									<tr>
-										<td><textarea cols="70" rows="10" id="requestReviewContent"placeholder="내용을 입력해주세요." style="padding:20px;"></textarea></td>
-										<input type="hidden" value="${grpsOne.requestProjectSubNo} " id="grequestProjectSubNo">
-										<input type="hidden" value="${sessionScope.m.memberId} " id="requestMemberId">
-										
-									
-									</tr>
-									<tr>
-										<td style="text-align: right;"><button id="requestReviewAjax" type="button" class="btn btn-primary"
-												style="font-weight: 900; padding: 10px; margin-left: 10px;">후기
-												작성</button></td>
-									</tr>
-								</table>
-							</div>
-						</div>
+						<c:choose>
+							<c:when test="${not empty grrOne}">
+								<div
+									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
+									<div><span
+											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">작성한 후기</span> <br> <br>
+										<table>
+											<tr>
+												<td>${grrOne.requestReviewDate }</td>
+											</tr>
+											<tr>
+												<td>${grrOne.requestReviewContentBr }</td>
+											</tr>
+											<tr>
+												<td style="text-align: right;"><button
+														id="requestReviewAjax" type="button"
+														class="btn btn-primary"
+														style="font-weight: 900; padding: 10px; margin-left: 10px;"onclick="history.back();">뒤로가기</button></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div
+									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
+									<div>
+										<h2 style="font-weight: 900; width: 100%; text-align: center;">고수님께서
+											개발을 완료하셨습니다!</h2>
+										<br> <br> <span
+											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">후기
+											작성하기</span> <br> <br>
+										<table>
+											<tr>
+												<td>진행 과정과 받은 작품에 대해 꼼꼼하게 후기를 남겨주세요!</td>
+											</tr>
+											<tr>
+												<td><textarea cols="70" rows="10"
+														id="requestReviewContent" placeholder="내용을 입력해주세요."
+														style="padding: 20px;"></textarea></td>
+												<input type="hidden" value="${grpsOne.requestProjectSubNo} "
+													id="grequestProjectSubNo">
+												<input type="hidden" value="${sessionScope.m.memberId} "
+													id="requestMemberId">
+
+
+											</tr>
+											<tr>
+												<td style="text-align: right;"><button
+														id="requestReviewAjax" type="button"
+														class="btn btn-primary"
+														style="font-weight: 900; padding: 10px; margin-left: 10px;">후기
+														작성</button></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+
+							</c:otherwise>
+						</c:choose>
 
 					</c:otherwise>
 				</c:choose>
@@ -331,7 +362,8 @@ input:focus, textarea:focus {
 							</tr>
 							<input type="hidden" value="${sessionScope.m.memberNo }"
 								id="writer">
-							<input type="hidden" value="${grpsOne.requestProjectSubNo}" id="requestProjectSubNo">
+							<input type="hidden" value="${grpsOne.requestProjectSubNo}"
+								id="requestProjectSubNo">
 						</table>
 					</div>
 				</div>
@@ -371,7 +403,7 @@ input:focus, textarea:focus {
 		});
 		$("#talkStopAjax").click(function() {
 			var requestProjectSubNo = $("#requestProjectSubNo").val();
-			
+
 			$.ajax({
 
 				url : "/talkStopAjax2.do",
@@ -394,7 +426,7 @@ input:focus, textarea:focus {
 			console.log(requestReviewContent);
 			console.log(requestProjectSubNo);
 			console.log(requestMemberId);
-			if(requestReviewContent==""){
+			if (requestReviewContent == "") {
 				alert("내용을 입력해주세요!");
 				return false;
 			}
@@ -405,10 +437,11 @@ input:focus, textarea:focus {
 					"requestReviewContent" : requestReviewContent,
 					"requestProjectSubNo" : requestProjectSubNo,
 					"requestMemberId" : requestMemberId
-					
+
 				},
 				success : function(data) {
 					if (data > 0) {
+						alert("후기 작성 완료");
 						location.reload();
 					} else {
 						console.log("에러");

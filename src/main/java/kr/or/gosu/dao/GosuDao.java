@@ -14,6 +14,7 @@ import kr.or.gosu.vo.GosuRequestCost;
 import kr.or.gosu.vo.GosuRequestCount;
 import kr.or.gosu.vo.GosuRequestProject;
 import kr.or.gosu.vo.GosuRequestProjectSub;
+import kr.or.gosu.vo.GosuRequestReview;
 import kr.or.gosu.vo.GosuReview;
 import kr.or.gosu.vo.GosuTalk;
 
@@ -234,6 +235,14 @@ public class GosuDao {
 
 	public int selectReviewAvg(int ggsouNo) {
 		return sqlSession.selectOne("gosu.selectReviewAvg",ggsouNo);
+	}
+
+	public int insertRequestReviewAjax(GosuRequestReview grr) {
+		return sqlSession.insert("gosu.insertRequestReviewAjax",grr);
+	}
+
+	public GosuRequestReview GosuRequestReview(GosuRequestReview grr2) {
+		return sqlSession.selectOne("gosu.GosuRequestReview",grr2);
 	}
 
 

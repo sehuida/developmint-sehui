@@ -98,14 +98,17 @@ public class GosuController {
 		ArrayList<GosuPhoto> gptList = service.selectGosuPhoto(gNo);
 		
 		ArrayList<GosuReview> grList = service.selectGosuReviewList(gosu.getGgsouNo());
-	
-		GosuReview grAVG = service.selectReviewCountAVG(gosu.getGgsouNo());
+		if(!grList.isEmpty()) {
+
+			GosuReview grAVG = service.selectReviewCountAVG(gosu.getGgsouNo());
+			model.addAttribute("grAVG", grAVG);
+			
+		}
 	
 		model.addAttribute("gosu", gosu);
 		model.addAttribute("gprojectList", gprList);
 		model.addAttribute("gphotoList", gptList);
 		model.addAttribute("greviewList", grList);
-		model.addAttribute("grAVG", grAVG);
 		return "gosu/gosuContent";
 	}
 
@@ -529,9 +532,13 @@ public class GosuController {
 	public String gosuProject(int rpsNo, Model model) {
 		GosuRequestProjectSub grps = service.selectGosuRequestProjectSub(rpsNo);
 		ArrayList<GosuRequestProject> grp = service.selectGosuRequestProjectOne(rpsNo);
+		GosuRequestReview grr2 = new GosuRequestReview();
+		grr2.setMemberId(grps.getRequestWriterId());
+		grr2.setRequestProjectSubNo(grps.getRequestProjectSubNo());
+		GosuRequestReview grr = service.selectGosuRequestReviewOne(grr2);
 		model.addAttribute("grplist", grp);
 		model.addAttribute("grpsOne", grps);
-
+		model.addAttribute("grrOne", grr);
 		return "gosu/gosuProject";
 	}
 
@@ -599,11 +606,13 @@ public class GosuController {
 		int result = service.talkStop2(requestProjectSubNo);
 		return result;
 	}
-
 	@ResponseBody
 	@RequestMapping(value = "/requestReviewAjax.do")
 	public int requestReviewAjax(int requestProjectSubNo,String requestMemberId,String requestReviewContent, Model model) {
 		GosuRequestReview grr = new GosuRequestReview();
+		System.out.println("requestProjectSubNo : "+requestProjectSubNo);
+		System.out.println("requestMemberId : "+requestMemberId);
+		System.out.println("requestReviewContent : "+requestReviewContent);
 		grr.setRequestProjectSubNo(requestProjectSubNo);
 		grr.setMemberId(requestMemberId);
 		grr.setRequestReviewContent(requestReviewContent);
