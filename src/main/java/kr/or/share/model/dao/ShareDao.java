@@ -31,4 +31,14 @@ public class ShareDao {
 	public int shareTotalCount() {
 		return sqlSession.selectOne("share.shareCount");
 	}
+
+	public ArrayList<Share> searchId(HashMap<String, Object> map) {
+		List<Share> list = sqlSession.selectList("share.searchId",map); 
+		return (ArrayList<Share>)list;
+	}
+
+	public ArrayList<Share> searchTitle(HashMap<String, Object> map) {
+		List<Share> list = sqlSession.selectList("share.searchTitle",map); 
+		return (ArrayList<Share>)list;
+	}
 }

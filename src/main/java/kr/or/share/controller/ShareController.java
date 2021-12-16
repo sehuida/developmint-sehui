@@ -28,6 +28,7 @@ public class ShareController {
 	
 	@RequestMapping(value="/shareList.do")
 	public String shareList(Model model,int reqPage,int type) {
+		//검색이 들어왔을때
 		ShareBoardPage sbp = service.shareBoardList(reqPage,type);
 		model.addAttribute("list",sbp.getList());
 		model.addAttribute("start",sbp.getStart());
@@ -136,12 +137,12 @@ public class ShareController {
 		if (result > 1) {
 			model.addAttribute("title", "등록성공");
 			model.addAttribute("msg", "글 작성이 완료 되셨습니다.");
-			model.addAttribute("loc", "/shareList.do");
+			model.addAttribute("loc", "/shareList.do?reqPage=1&type=1");
 			model.addAttribute("icon", "success");
 		} else {
 			model.addAttribute("title", "변경실패");
 			model.addAttribute("msg", "글 작성에 실패하셨습니다.");
-			model.addAttribute("loc", "/shareList.do");
+			model.addAttribute("loc", "/shareList.do?reqPage=1&type=1");
 			model.addAttribute("icon", "warning");
 		}
 		return "member/swalMsg";
