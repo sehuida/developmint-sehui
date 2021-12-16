@@ -172,8 +172,11 @@
 			alert("담당자 이메일을 입력해주세요.");
 			return;
 		}
-		if($('input[name=phone]').val() == ""){
-			alert("담당자 전화번호를 입력해주세요.");
+		
+		//전화번호 유효성 검사
+		var phoneCheck = /^010-([0-9]{4})-([0-9]{4})$/;
+		if(!phoneCheck.test($('input[name=phone]').val())){
+			alert("전화번호를 올바르게 입력해주세요.");
 			return;
 		}
 		

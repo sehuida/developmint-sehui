@@ -92,6 +92,7 @@
 	margin-top:30px;
 	border: 1px solid #d9d9d9;
 	padding:30px;
+	padding-bottom: 20px;
 }
 .comentView>span:first-child {
 	font-weight: bold;
