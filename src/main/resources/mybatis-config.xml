@@ -45,6 +45,7 @@
 		<typeAlias type="kr.or.gosu.vo.GosuReview" alias="greview"/>
 		<typeAlias type="kr.or.company.vo.CompanyInfo" alias="ci"/>
 		<typeAlias type="kr.or.gosu.vo.GosuRequestReview" alias="grreview"/>
+		<typeAlias type="kr.or.qna.vo.nonQna" alias="nq"/>
 	</typeAliases>
 	
 	<!-- LONG타입 데이터를 불러오기 위한 type handler 입니다. -->
