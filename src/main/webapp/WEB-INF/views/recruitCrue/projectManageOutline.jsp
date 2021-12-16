@@ -5,12 +5,10 @@
 <html>
 <head>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
-
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <meta charset="UTF-8">
 <title>Project Outline</title>
-</head>
-<body>
+
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<link rel="stylesheet" href="/resources/css/projectTeam/projectManageDefault.css">
@@ -42,38 +40,39 @@
     }
 	
 </script>
-	
+</head>
+<body>
 	<div class="container" id="projectContainer">
-		<div class="main">
+        <div class="main">
             <div class="main-left-box">
                 <h2>프로젝트 명</h2>
                 <ul>
                     <li class="flexLi" style="border-bottom: 3px dashed #90d1b4;">
-                        <a href="#" class="subNaviAtag"><img src="img/recruitTeamProject/recruitPage/powerOn.png" class="subNaviImg"><span>프로젝트 개요</span></a>
+                        <a href="#" class="subNaviAtag" ><img src="img/recruitTeamProject/recruitPage/powerOn.png" class="subNaviImg"><span style="cursor: pointer;">프로젝트 개요</span></a>
                     </li>
                     <li class="flexLi">
-                        <a href="#" class="subNaviAtag"><img src="img/recruitTeamProject/추후사용/calendar.png" class="subNaviImg"><span>캘린더</span></a>
+                        <a href="#" class="subNaviAtag"><img src="img/recruitTeamProject/추후사용/calendar.png" class="subNaviImg"><span style="cursor: pointer;">캘린더</span></a>
                     </li>
                     <li class="flexLi">
-                        <a href="#" class="subNaviAtag"><img src="img/recruitTeamProject/추후사용/makefg (8).png" class="subNaviImg"><span>과업 관리</span></a>
+                        <a href="#" class="subNaviAtag"><img src="img/recruitTeamProject/추후사용/makefg (8).png" class="subNaviImg"><span style="cursor: pointer;">과업 관리</span></a>
                     </li>
                     <li class="flexLi">
-                        <a href="#" class="subNaviAtag"><img src="img/recruitTeamProject/추후사용/board.png" class="subNaviImg"><span>보드</span></a>
+                        <a href="#" class="subNaviAtag"><img src="img/recruitTeamProject/추후사용/board.png" class="subNaviImg"><span style="cursor: pointer;">보드</span></a>
                     </li>
                     <c:foreach 바로가기>
                     <li class="flexLi">
-                        <a href="#" class="subNaviAtag"><span>바로가기</span></a>
+                        <a href="#" class="subNaviAtag"><span style="cursor: pointer;">바로가기</span></a>
                     </li>
                     </c:foreach>
                     <li class="flexLi">
-                        <a data-bs-toggle="modal" href="#shortcutModal" class="subNaviAtag"><img src="img/recruitTeamProject/추후사용/shortcuts.png" class="subNaviImg"><span>바로가기 추가</span></a>
+                        <a data-bs-toggle="modal" href="#shortcutModal" class="subNaviAtag"><img src="img/recruitTeamProject/추후사용/shortcuts.png" class="subNaviImg"><span style="cursor: pointer;">바로가기 추가</span></a>
                     </li>
                 </ul>
             </div>
             <div class="main_wrap">
                 <div class="titleFlexBox">
                     <p class="titleText">프로젝트 개요</p>
-                    <button type="button" class="btn btn-primary" id="closeProjectBtn">프로젝트 종료</button>
+                    <a data-bs-toggle="modal" href="#projectEnd"><button type="button" class="btn btn-primary" id="closeProjectBtn">프로젝트 종료</button></a>
                 </div>
                 <div class="titleLine"></div>
                 <div class="projectInfoFlexBox">
@@ -256,106 +255,228 @@
         <div class="modal-dialog  modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
-                    <form action="/insertContestMember.do" method="post">
-                        <p style="font-size: 25px; font-weight: bold">공모전 신청</p>
-                        <p style="font-size: 22px;">${list.contest.contestTitle }</p>
-                        <div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;">
-                            <p><span style="font-weight: bold">신청자 ID</span> : ${sessionScope.m.memberId }</p>
-                            <p><span style="font-weight: bold">신청자 이름</span> : ${sessionScope.m.memberName }</p>
-                            <p><span style="font-weight: bold">신청자 전화번호</span> : ${sessionScope.m.phone }</p>
-                            <p><span style="font-weight: bold">신청자 E-mail</span> : ${sessionScope.m.email }</p>
-                            <p><span style="font-weight: bold">신청자 Git 주소</span> : </p>
-                            <input type="text" class="form-control" name="cmGit">
+                    <form action="/addShortcut.do" method="post">
+                        <p style="font-size: 25px; font-weight: bold; color: #90d1b4; margin-bottom: 10px;">바로가기 추가</p>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">웹 주소</label>
+                            <input type="text" class="form-control" placeholder="웹 주소를 넣어주세요" id="inputDefault" name="shortcutAddr" >
+                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">바로가기 이름</label>
+                            <input type="text" class="form-control" placeholder="바로가기 이름을 입력해주세요" id="inputDefault" name="shortcutName">
                         </div>
-                        <div style="text-align: right; ">
-                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">신청</button>
+                        <div style="text-align: right; padding-top: 10px;">
+                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">추가</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
                         </div>
-                        <input type="hidden" name="contestNo" value="${list.contest.contestNo }">
-                        <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-                        <input type="hidden" name="cmStatus" value="1">
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="projectEnd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p style="font-size: 35px; font-weight: bold; color: rgb(78, 205, 196); margin-bottom: 10px; text-align: center;">프로젝트 종료</p>
+                    <div class="card-body">
+                        <h4 class="card-title" style="text-align: center; margin-bottom: 30px; color: #90d1b4; font-weight: 900;">프로젝트 종료 관련 안내 및 주의사항</h4>
+                        <p class="card-text" style="text-align: left; margin-bottom: 20px; font-weight: 900;">
+                            1. 프로젝트를 프로젝트를 종료하면 지금까지 작업한 정보는 저장되며 추후에도 마이페이지에서 확인이 가능합니다.
+                            <br>
+                            <br>
+                            2. 종료 이후 수정이나 삭제는 불가능하오니 이 점 <br> 주의해주시기 바랍니다.
+                        </p>
+                        <p class="card-text" style="text-align: center; margin-bottom: 30px; margin-top: 30px; font-weight: 900; color: #FF5677;">
+                            종료버튼을 누르고 모든 팀원들에 대해 후기를 작성해야  <br> 최종적으로 프로젝트가 종료되니 명심해주세요!
+                        </p>
+                    </div>
+                    <div style="text-align: center; padding-top: 10px;">
+                        <a data-bs-toggle="modal" href="#writeReview"><button type="button" class="btn btn-primary contesteEnrollBtn" style="width: 100px; margin-right: 15px;">종료</button></a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="writeReview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="/endProject.do" method="post"></form>
+                        <p style="font-size: 35px; font-weight: bold; color: rgb(78, 205, 196); margin-bottom: 10px; text-align: left;">팀원에게 후기를 남겨주세요</p>
+                        <p style="font-weight: 900;"> &#10004; 후기는 익명으로 등록됩니다.</p>
+                        <div style="border-bottom: 1px solid #90d1b4; margin-bottom: 60px;"></div>
+
+                        <div style="display: flex; margin-left: 50px; margin-top: 50px;">
+                            <div style="display: flex; flex-direction: column; margin-right: 30px; margin-top: 10px;">
+                                <img src="img/recruitTeamProject/common/user.png" style="width: 100px; height: 100px; margin-left: 10px;">
+                                <p style="font-size: 26px; font-weight: 900;">memberId</p>
+                            </div>
+                            <div style="display: flex; flex-direction: column;">
+                                <div style="display: flex;">
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/bigHappy.png" style="width: 40px; height: 40px; display: block; margin: 0px auto;">
+                                        <label for="r5" style="text-align: center;">매우좋았어요</label>
+                                        <input type="radio" id="r5" name="reviewRadio" value="5" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/happy.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r4">좋았어요</label>
+                                        <input type="radio" id="r4" name="reviewRadio" value="4" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/common.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r3">친절해요</label>
+                                        <input type="radio" id="r3" name="reviewRadio" value="3" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/bad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r2">나빠요</label>
+                                        <input type="radio" id="r2" name="reviewRadio" value="2" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/superBad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r1">매우나빠요</label>
+                                        <input type="radio" id="r1" name="reviewRadio" value="1" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group" style="margin-top: 20px;">
+                                    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; margin-left: 50px; margin-top: 50px;">
+                            <div style="display: flex; flex-direction: column; margin-right: 30px; margin-top: 10px;">
+                                <img src="img/recruitTeamProject/common/user.png" style="width: 100px; height: 100px; margin-left: 10px;">
+                                <p style="font-size: 26px; font-weight: 900;">memberId</p>
+                            </div>
+                            <div style="display: flex; flex-direction: column;">
+                                <div style="display: flex;">
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/bigHappy.png" style="width: 40px; height: 40px; display: block; margin: 0px auto;">
+                                        <label for="r5" style="text-align: center;">매우좋았어요</label>
+                                        <input type="radio" id="r5" name="reviewRadio" value="5" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/happy.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r4">좋았어요</label>
+                                        <input type="radio" id="r4" name="reviewRadio" value="4" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/common.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r3">친절해요</label>
+                                        <input type="radio" id="r3" name="reviewRadio" value="3" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/bad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r2">나빠요</label>
+                                        <input type="radio" id="r2" name="reviewRadio" value="2" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/superBad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r1">매우나빠요</label>
+                                        <input type="radio" id="r1" name="reviewRadio" value="1" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group" style="margin-top: 20px;">
+                                    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; margin-left: 50px; margin-top: 50px;">
+                            <div style="display: flex; flex-direction: column; margin-right: 30px; margin-top: 10px;">
+                                <img src="img/recruitTeamProject/common/user.png" style="width: 100px; height: 100px; margin-left: 10px;">
+                                <p style="font-size: 26px; font-weight: 900;">memberId</p>
+                            </div>
+                            <div style="display: flex; flex-direction: column;">
+                                <div style="display: flex;">
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/bigHappy.png" style="width: 40px; height: 40px; display: block; margin: 0px auto;">
+                                        <label for="r5" style="text-align: center;">매우좋았어요</label>
+                                        <input type="radio" id="r5" name="reviewRadio" value="5" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/happy.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r4">좋았어요</label>
+                                        <input type="radio" id="r4" name="reviewRadio" value="4" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/common.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r3">친절해요</label>
+                                        <input type="radio" id="r3" name="reviewRadio" value="3" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/bad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r2">나빠요</label>
+                                        <input type="radio" id="r2" name="reviewRadio" value="2" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/superBad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r1">매우나빠요</label>
+                                        <input type="radio" id="r1" name="reviewRadio" value="1" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group" style="margin-top: 20px;">
+                                    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; margin-left: 50px; margin-top: 50px;">
+                            <div style="display: flex; flex-direction: column; margin-right: 30px; margin-top: 10px;">
+                                <img src="img/recruitTeamProject/common/user.png" style="width: 100px; height: 100px; margin-left: 10px;">
+                                <p style="font-size: 26px; font-weight: 900;">memberId</p>
+                            </div>
+                            <div style="display: flex; flex-direction: column;">
+                                <div style="display: flex;">
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/bigHappy.png" style="width: 40px; height: 40px; display: block; margin: 0px auto;">
+                                        <label for="r5" style="text-align: center;">매우좋았어요</label>
+                                        <input type="radio" id="r5" name="reviewRadio" value="5" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/happy.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r4">좋았어요</label>
+                                        <input type="radio" id="r4" name="reviewRadio" value="4" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/common.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r3">친절해요</label>
+                                        <input type="radio" id="r3" name="reviewRadio" value="3" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/bad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r2">나빠요</label>
+                                        <input type="radio" id="r2" name="reviewRadio" value="2" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    <div class="modalReviewSub1">
+                                        <img src="img/recruitTeamProject/review/superBad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+                                        <label for="r1">매우나빠요</label>
+                                        <input type="radio" id="r1" name="reviewRadio" value="1" style="display: block; margin: 0px auto;">
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group" style="margin-top: 20px;">
+                                    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="border-bottom: 1px solid #90d1b4; margin-bottom: 10px; margin-top: 40px;"></div>
+                        <div style="text-align: center; padding-top: 10px; margin-top: 40px; margin-bottom: 40px;">
+                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 150px; margin-right: 15px;">후기작성 완료</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-	<script>
-	$(function(){
-		 
-		$("#summernote").summernote({
-			height : 700,
-			lang : "ko-KR",
-			focus: false,
-			placeholder: '프로젝트 공고내용을 자세히 작성해주세요..!',
-			toolbar:[ 
-						['fontname', ['fontname']],
-						['fontsize', ['fontsize']], 
-						['style', ['bold', 'italic', 'underline','strikethrough', 'clear']], 
-						['color', ['forecolor','color']], 
-						['table', ['table']], 
-						['para', ['ul', 'ol', 'paragraph']], 
-						['height', ['height']], 
-						['insert',['picture','link']], 
-						['view', ['fullscreen', 'codeview', 'help']] 
-					], 
-			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'], 
-			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-			callbacks:{
-				onImageUpload : function(files){
- 					uploadImage(files[0], this);
- 				}
-			}
-		});
-	});
-	
-	function uploadImage(file, editor){
-		data = new FormData();
-		data.append("file",file);
-		var fileData = $("input[name=files]").val();
-		$.ajax({
-			url : "/rUploadImage.do",
-			type :"post",		//file전송을 위해 ajax를 할떄는 type을 post로 해줘야한다
-			data : data,
-			enctype : 'multipart/form-data',
-			processData : false,
-			contentType : false,
-			success : function(data){
-				$(editor).summernote("insertImage",data);
-				
-			}
-		});
-	}
-	
-	$(function() {	
-		$('#datePicker').datepicker({
-		    format: "yyyy-mm-dd",	//데이터 포맷 형식(yyyy : 년 mm : 월 dd : 일 )
-		    startDate: '0d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
-		    endDate: '+14d',	//달력에서 선택 할 수 있는 가장 느린 날짜. 이후로 선택 불가 ( d : 일 m : 달 y : 년 w : 주)
-		    autoclose : true,	//사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
-		    calendarWeeks : false, //캘린더 옆에 몇 주차인지 보여주는 옵션 기본값 false 보여주려면 true
-		    clearBtn : false, //날짜 선택한 값 초기화 해주는 버튼 보여주는 옵션 기본값 false 보여주려면 true
-		    /* datesDisabled : ['2019-06-24','2019-06-26'],//선택 불가능한 일 설정 하는 배열 위에 있는 format 과 형식이 같아야함. */
-		    /* daysOfWeekDisabled : [0,6],	//선택 불가능한 요일 설정 0 : 일요일 ~ 6 : 토요일
-		    daysOfWeekHighlighted : [3], //강조 되어야 하는 요일 설정 */
-		    disableTouchKeyboard : false,	//모바일에서 플러그인 작동 여부 기본값 false 가 작동 true가 작동 안함.
-		    immediateUpdates: false,	//사용자가 보는 화면으로 바로바로 날짜를 변경할지 여부 기본값 :false 
-		    multidate : false, //여러 날짜 선택할 수 있게 하는 옵션 기본값 :false 
-		    multidateSeparator :",", //여러 날짜를 선택했을 때 사이에 나타나는 글짜 2019-05-01,2019-06-01
-		    templates : {
-		        leftArrow: '&laquo;',
-		        rightArrow: '&raquo;'
-		    }, //다음달 이전달로 넘어가는 화살표 모양 커스텀 마이징 
-		    showWeekDays : true ,// 위에 요일 보여주는 옵션 기본값 : true
-		    title: "마감일 선택",	//캘린더 상단에 보여주는 타이틀
-		    todayHighlight : true ,	//오늘 날짜에 하이라이팅 기능 기본값 :false 
-		    toggleActive : true,	//이미 선택된 날짜 선택하면 기본값 : false인경우 그대로 유지 true인 경우 날짜 삭제
-		    weekStart : 0 ,//달력 시작 요일 선택하는 것 기본값은 0인 일요일 
-		    language : "ko"	//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
-		    
-		});//datepicker end
-	});//ready end
-	</script>
 	
 </body>
 </html>
