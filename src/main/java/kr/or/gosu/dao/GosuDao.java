@@ -20,6 +20,7 @@ import kr.or.gosu.vo.GosuTalk;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 @Repository
@@ -76,23 +77,10 @@ public class GosuDao {
 		return sqlSession.selectOne("gosu.selectGosuNoticeOne",gnoticeNo);
 	}
 
-	public ArrayList<GosuNotice> selectGosuNoticeList() {
-		List<GosuNotice> list = sqlSession.selectList("gosu.selectGosuNoticeList");
-		return (ArrayList<GosuNotice>)list;
-	}
+	
 
 	public String selectGosuImg(String writeId) {
 		return sqlSession.selectOne("gosu.getGosuImg2",writeId);
-	}
-
-	public ArrayList<GosuNotice> selectGosuNoticeList2() {
-		List<GosuNotice> list = sqlSession.selectList("gosu.selectGosuNoticeList2");
-		return (ArrayList<GosuNotice>)list;
-	}
-
-	public ArrayList<Gosu> selectNewGosuList() {
-		List<Gosu> list = sqlSession.selectList("gosu.selectNewGosuList");
-		return (ArrayList<Gosu>)list;
 	}
 
 	public int selectGosuCount() {
@@ -273,6 +261,33 @@ public class GosuDao {
 		return (ArrayList<GosuRequestReview>)list;
 	}
 
+	public int selectGosuListTotalCount() {
+		return sqlSession.selectOne("gosu.selectGosuListTotalCount");
+	}
+
+	public ArrayList<Gosu> selectGosuList(Map<String, Object> map) {
+		List<Gosu> list = sqlSession.selectList("gosu.selectGosuListMap",map);
+		return (ArrayList<Gosu>)list;
+	}
+
+	public ArrayList<GosuNotice> selectGosuNoticeList(Map<String, Object> map) {
+		List<GosuNotice> list = sqlSession.selectList("gosu.selectGosuNoticeList",map);
+		return (ArrayList<GosuNotice>)list;
+	}
+
+	public ArrayList<GosuNotice> selectGosuNoticeList2() {
+		List<GosuNotice> list = sqlSession.selectList("gosu.selectGosuNoticeList2");
+		return (ArrayList<GosuNotice>)list;
+	}
+
+	public ArrayList<Gosu> selectNewGosuList() {
+		List<Gosu> list = sqlSession.selectList("gosu.selectNewGosuList");
+		return (ArrayList<Gosu>)list;
+	}
+
+	public int selectGosuNoticeListTotalCount() {
+		return sqlSession.selectOne("gosu.selectGosuNoticeListTotalCount");
+	}
 
 
 }

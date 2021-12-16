@@ -26,7 +26,9 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import kr.or.gosu.service.GosuService;
 import kr.or.gosu.vo.Gosu;
 import kr.or.gosu.vo.GosuFeedback;
+import kr.or.gosu.vo.GosuListPageData;
 import kr.or.gosu.vo.GosuNotice;
+import kr.or.gosu.vo.GosuNoticeListPageData;
 import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
 import kr.or.gosu.vo.GosuRequest;
@@ -85,9 +87,11 @@ public class GosuController {
 	}
 
 	@RequestMapping(value = "/gosuList.do")
-	public String gosuList(Model model) {
-		ArrayList<Gosu> g = service.selectGosuList();
-		model.addAttribute("gList", g);
+	public String gosuList(int reqPage, Model model) {
+		GosuListPageData glpd = service.selectGosuList(reqPage);
+		model.addAttribute("gList", glpd.getList());
+		model.addAttribute("pageNavi", glpd.getPageNavi());
+		model.addAttribute("start", glpd.getStart());
 		return "gosu/gosuList";
 	}
 
@@ -390,9 +394,12 @@ public class GosuController {
 	}
 
 	@RequestMapping(value = "/gosuNoticeList.do")
-	public String gosuNoticeLsit(Model model) {
-		ArrayList<GosuNotice> g = service.selectGosuNoticeList();
-		model.addAttribute("gNoticeList", g);
+	public String gosuNoticeLsit(int reqPage,Model model) {
+		GosuNoticeListPageData glpd = service.selectGosuNoticeList(reqPage);
+		model.addAttribute("gNoticeList", glpd.getList());
+		model.addAttribute("pageNavi", glpd.getPageNavi());
+		model.addAttribute("start", glpd.getStart());
+		
 		return "gosu/gosuNoticeList";
 	}
 

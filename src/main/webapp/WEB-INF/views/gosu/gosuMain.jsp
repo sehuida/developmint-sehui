@@ -377,7 +377,7 @@ to {
 			</div>
 		</c:if>
 		<div class="g-plus">
-			<a href="/gosuList.do" style="color: rgb(78, 205, 196);">더보기</a>
+			<a href="/gosuList.do?reqPage=1" style="color: rgb(78, 205, 196);">더보기</a>
 		</div>
 		<c:set var="i" value="0" />
 		<c:set var="j" value="2" />
@@ -497,7 +497,7 @@ to {
 			<span style="color: rgb(78, 205, 196);">고수</span>의 게시판
 		</h3>
 		<div class="g-plus">
-			<a href="/gosuNoticeList.do" style="color: rgb(78, 205, 196);">더보기</a>
+			<a href="/gosuNoticeList.do?reqPage=1" style="color: rgb(78, 205, 196);">더보기</a>
 		</div>
 		<div class="g-gall">
 			<ul id="gallery">

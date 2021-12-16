@@ -105,22 +105,7 @@
 		from
 		gosu_notice where gnotice_no = #{gnoticeNo}
 	</select>
-	<select id="selectGosuNoticeList" resultType="gn">
 
-		select * from
-		(select rownum as rnum , r.*
-		from (
-		select
-		gnotice_no as gnoticeNo,
-		member_id as writeId,
-		gnotice_title as gnoticeTitle,
-		gnotice_content as
-		gnoticeContent,
-		gnotice_photo as gnoticePhoto,
-		gnotice_date as
-		gnoticeDate
-		from gosu_notice order by 1 desc )r)rr
-	</select>
 	<select id="getGosuImg2" parameterType="string"
 		resultType="string">
 		select
@@ -733,11 +718,11 @@
 
 
 	</select>
-	<select id="selectMemberRequestReviewList" parameterType="string"
-		resultType="grreview">
+	<select id="selectMemberRequestReviewList"
+		parameterType="string" resultType="grreview">
 
 		select
-		
+
 		grr.REQUEST_REVIEW_NO as
 		requestReviewNo,
 		grr.REQUEST_PROJECT_SUB_NO as
@@ -748,16 +733,65 @@
 		requestReviewContent,
 		grr.REQUEST_REVIEW_DATE as
 		requestReviewDate,
-		(select member_id from member where member_no = cost.gosu_no) as gosuId
+		(select member_id from member where member_no = cost.gosu_no) as
+		gosuId
 		from gosu_request_review grr
-		LEFT JOIN gosu_Request_project_sub sub
+		LEFT JOIN gosu_Request_project_sub
+		sub
 		ON grr.REQUEST_PROJECT_SUB_NO = sub.REQUEST_PROJECT_SUB_NO
-		LEFT JOIN gosu_request_COST cost
+		LEFT JOIN
+		gosu_request_COST cost
 		ON sub.cost_no = cost.cost_no
 		LEFT JOIN gosu gosu
 		ON cost.gosu_no = gosu.gosu_no
 		WHERE
 		REQUEST_MEMBER_ID =
 		#{memberId}
+	</select>
+	<select id="selectGosuListTotalCount" resultType="_int">
+		select
+		count(*)
+		from gosu
+	</select>
+
+	<select id="selectGosuListMap" parameterType="map"
+		resultType="g">
+		select * from(
+		select rownum as rnum,cc.* from
+		(
+		select
+		ggosu_no as ggsouNo,
+		gosu_no as gsouNo,
+		gosu_title as gosuTitle,
+		gosu_self as gosuSelf,
+		gosu_explain as
+		gosuExplain,
+		gosu_act as gosuAct,
+		gosu_cost as gosuCost,
+		gosu_date as
+		gosuDate
+		from gosu
+		order by 1 desc)cc) where rnum between #{start} and #{end}
+	</select>
+	<select id="selectGosuNoticeList" parameterType="map" resultType="gn">
+
+		select * from
+		(select rownum as rnum , r.*
+		from (
+		select
+		gnotice_no as gnoticeNo,
+		member_id as writeId,
+		gnotice_title as gnoticeTitle,
+		gnotice_content as
+		gnoticeContent,
+		gnotice_photo as gnoticePhoto,
+		gnotice_date as
+		gnoticeDate
+		from gosu_notice order by 1 desc )r)rr where rnum between #{start} and #{end}
+	</select>
+	<select id="selectGosuNoticeListTotalCount" resultType="_int">
+		select
+		count(*)
+		from gosu_notice
 	</select>
 </mapper>

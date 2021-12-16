@@ -225,7 +225,7 @@ ul#gallery>a>li dd {
 			</div>
 
 		</div>
-		<div id="pageNavi"></div>
+		<div id = "pageNavi">${pageNavi }</div>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
