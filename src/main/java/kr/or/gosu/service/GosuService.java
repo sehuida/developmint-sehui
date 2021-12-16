@@ -56,6 +56,12 @@ public class GosuService {
 
 			g.setGosuId(dao.selectGosuId(gosuNo));
 			g.setGosuImg(dao.selectGosuImg(gosuNo));
+
+			ArrayList<GosuReview> list2 = dao.selectGosuReviewList(g.getGgsouNo());
+			if(!list2.isEmpty()) {
+				g.setReviewAvg(dao.selectReviewAvg(g.getGgsouNo()));
+				
+			}
 		}
 		return list;
 	}
@@ -64,6 +70,10 @@ public class GosuService {
 		Gosu gosu = dao.selectGosuOne(ggosuNo);
 		gosu.setGosuId(dao.selectGosuId(gosu.getGsouNo()));
 		gosu.setGosuImg(dao.selectGosuImg(gosu.getGsouNo()));
+		ArrayList<GosuReview> list2 = dao.selectGosuReviewList(gosu.getGgsouNo());
+		if(!list2.isEmpty()) {
+			gosu.setReviewAvg(dao.selectReviewAvg(gosu.getGgsouNo()));
+		}
 		return gosu;
 	}
 
