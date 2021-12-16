@@ -269,9 +269,12 @@ public class GosuController {
 			System.out.println(grpsList);
 			model.addAttribute("grpsList", grpsList);
 		}
+		ArrayList<GosuReview> grList = service.selectMemberReviewList(m.getMemberId());
+		ArrayList<GosuRequestReview> grrList = service.selectMemberRequestReviewList(m.getMemberId()); 
 		model.addAttribute("gosuTalkList", gf);
 		model.addAttribute("gosuTalkList2", gf2);
-
+		model.addAttribute("grList", grList);
+		model.addAttribute("grrList", grrList);
 		return "gosu/gosuSituation";
 	}
 

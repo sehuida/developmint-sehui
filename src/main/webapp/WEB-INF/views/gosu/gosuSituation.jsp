@@ -29,8 +29,8 @@
 .g-sa-wrap h4 {
 	font-weight: 900;
 	color: rgb(78, 205, 196);
-	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-top: 100px;
+	margin-bottom: 100px;
 	font-size: 40px;
 }
 
@@ -58,6 +58,7 @@
 	padding-right: 20px;
 	margin: 70px;
 	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
+	background-color: white;
 }
 
 .container>div>div {
@@ -116,6 +117,7 @@
 	display: flex;
 	margin: 0 auto;
 	width: 1080px;
+	background-color: #f4f5f6; 
 }
 </style>
 </head>
@@ -180,9 +182,10 @@
 										<td><span style="height: 50px; width: 230px;">${gtl.feedbackContent }</span></td>
 									</tr>
 									<tr>
-										<td colspan="2"><a style="margin-top: 0;font-weight: 900;"
+										<td colspan="2"><a
+											style="margin-top: 0; font-weight: 900;"
 											href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
-											class="btn btn-primary" >자세히 보기</a></td>
+											class="btn btn-primary">자세히 보기</a></td>
 									</tr>
 
 								</table>
@@ -242,7 +245,7 @@
 										<tr>
 											<td colspan="2"><a
 												href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
-												class="btn btn-primary" style="font-weight: 900;">자세히 보기</a></td>
+												class="btn btn-secondary" style="font-weight: 900;">자세히 보기</a></td>
 										</tr>
 
 									</table>
@@ -258,34 +261,87 @@
 
 				</div>
 			</c:if>
-
 			<h4>작성한 리뷰</h4>
-			<div style="margin-bottom: 100px;">
-				<div class="review-one" style="width: 80%;">
-					<ul>
-						<li><b><span style="color: rgb(78, 205, 196);"> 고수
-							</span>XXX</b></li>
-						<li>별별별별별</li>
-						<li style="color: gray">2021.12.01</li>
-					</ul>
-					<br>
-					<div style="display: flex; justify-content: center;">
-						<p>리뷰리뷰리뷰리리뷰리뷰리뷰리리뷰리뷰리뷰리리뷰리뷰리뷰리리뷰리뷰리뷰리리뷰리뷰리뷰리리뷰리뷰리뷰리리뷰리뷰리뷰리뷰리뷰립류ㅣ뷰리뷰리뷰리뷰리리뷰리뷰리뷰리뷰리뷰립류ㅣ뷰리뷰리뷰리뷰리리뷰리뷰리뷰리뷰리뷰립류ㅣ뷰리뷰리뷰리뷰리리뷰리뷰리뷰리뷰리뷰립류ㅣ뷰리뷰리뷰리뷰리리뷰리뷰리뷰리뷰리뷰립류ㅣ뷰리뷰리뷰리뷰리</p>
-					</div>
-				</div>
-			</div>
+			<c:choose>
+				<c:when test="${not empty grList }">
+					<c:forEach items="${grList }" var="grl" varStatus="i">
+						<div>
+							<div class="review-one" style="width: 80%;">
+								<ul>
+									<li><b><span style="color: rgb(78, 205, 196);">
+												고수 </span>${grl.gosuId }</b></li>
+									<li><c:if test="${grl.reviewNum eq 1 }">
+											<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+										</c:if> <c:if test="${grl.reviewNum eq 2 }">
+											<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+										</c:if> <c:if test="${grl.reviewNum eq 3 }">
+											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+										</c:if> <c:if test="${grl.reviewNum eq 4 }">
+											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+										</c:if> <c:if test="${grl.reviewNum eq 5 }">
+											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+										</c:if></li>
+									<li style="color: gray">${grl.reviewDate }</li>
+								</ul>
+								<br>
+								<div style="display: flex; justify-content: center;">
+									<p>${grl.reviewContentBr }</p>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<div class="review-one" style="margin-bottom: 100px;">아직 작성하신
+						리뷰가 없습니다!</div>
+				</c:otherwise>
+			</c:choose>
 
+			<c:if test="${sessionScope.m.memberType eq 1 }">
+				<h4>작성한 후기</h4>
+				<c:choose>
+					<c:when test="${not empty grrList }">
+						<c:forEach items="${grrList }" var="grl" varStatus="i">
+							<div>
+								<div class="review-one" style="width: 80%;">
+									<ul>
+										<li><b><span style="color: rgb(78, 205, 196);">
+										고수 </span>${grl.gosuId }</b></li>
+										<li style="color: gray">${grl.requestReviewDate }</li>
+									</ul>
+									<br>
+									<div style="display: flex; justify-content: center;">
+										<p>${grl.requestReviewContentBr }</p>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<div class="review-one" style="margin-bottom: 100px;">아직
+							작성하신 후기가 없습니다!</div>
+					</c:otherwise>
+				</c:choose>
+
+			</c:if>
 			<h4>요청서를 통한 고수 매칭</h4>
-			<div class="g-margin">
+			<div >
 				<c:choose>
 					<c:when test="${empty grpsList }">
-						<c:if test="${sessionScope.m.memberType eq 1}">
-							<span style="margin: 100px;">요청서를 작성해보세요!</span>
-						</c:if>
-						<c:if test="${sessionScope.m.memberType eq 2}">
-							<span style="margin: 100px;">상단의 요청서 버튼을 눌러 견적서를 보내보세요!</span>
+						<c:choose>
+							<c:when test="${sessionScope.m.memberType eq 1}">
+								<span style="margin: 100px; margin-left: 0; padding:20px;">요청서를 작성해보세요!</span>
+							</c:when>
+							<c:when test="${sessionScope.m.memberType eq 2}">
+								<span style="margin: 100px; margin-left: 0; padding:20px;">상단의 요청서 버튼을
+									눌러 견적서를 보내보세요!</span>
+							</c:when>
+							<c:otherwise>
 
-						</c:if>
+								<span style="margin: 100px; margin-left: 0; color: gray;padding:20px;">일반회원과
+									고수회원이 이용할 수 있습니다.</span>
+							</c:otherwise>
+						</c:choose>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${grpsList }" var="grl" varStatus="i">

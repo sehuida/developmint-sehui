@@ -673,7 +673,8 @@
 		requestReviewContent,
 		grr.REQUEST_REVIEW_DATE as requestReviewDate
 
-		from gosu_request_review grr
+		from
+		gosu_request_review grr
 		LEFT JOIN gosu_Request_project_sub sub
 		ON
 		grr.REQUEST_PROJECT_SUB_NO = sub.REQUEST_PROJECT_SUB_NO
@@ -684,19 +685,79 @@
 		ON cost.gosu_no = gosu.gosu_no
 		where ggosu_no = #{ggsouNo}
 	</select>
-		<select id="selectGrrCount" parameterType="_int"
+	<select id="selectGrrCount" parameterType="_int"
 		resultType="_int">
 		select
-		count(*) 
+		count(*)
 		from gosu_request_review grr
-		LEFT JOIN gosu_Request_project_sub sub
+		LEFT JOIN
+		gosu_Request_project_sub sub
 		ON
-		grr.REQUEST_PROJECT_SUB_NO = sub.REQUEST_PROJECT_SUB_NO
+		grr.REQUEST_PROJECT_SUB_NO =
+		sub.REQUEST_PROJECT_SUB_NO
 		LEFT JOIN
 		gosu_request_COST cost
+		ON
+		sub.cost_no = cost.cost_no
+		LEFT JOIN gosu gosu
+		ON cost.gosu_no =
+		gosu.gosu_no
+		where ggosu_no = #{ggsouNo}
+	</select>
+
+
+	<select id="selectMemberReviewList" parameterType="string"
+		resultType="greview">
+		select
+		gr.REVIEW_NO as reviewNo,
+		gr.GGOSU_NO as ggosuNo,
+		gr.WRITER
+		as
+		writer,
+		gr.REVIEW_CONTENT as reviewContent,
+		gr.REVIEW_NUM as
+		reviewNum,
+		gr.REVIEW_DATE as reviewDate,
+		m.member_id as gosuId
+		from
+		gosu_review gr
+		LEFT JOIN gosu g
+		ON
+		gr.ggosu_no = g.ggosu_no
+		LEFT JOIN
+		member m
+		ON
+		g.gosu_no = m.member_no
+		WHERE
+		writer = #{memberId}
+
+
+	</select>
+	<select id="selectMemberRequestReviewList" parameterType="string"
+		resultType="grreview">
+
+		select
+		
+		grr.REQUEST_REVIEW_NO as
+		requestReviewNo,
+		grr.REQUEST_PROJECT_SUB_NO as
+		requestProjectSubNo,
+		grr.REQUEST_MEMBER_ID as
+		memberId,
+		grr.REQUEST_REVIEW_CONTENT as
+		requestReviewContent,
+		grr.REQUEST_REVIEW_DATE as
+		requestReviewDate,
+		(select member_id from member where member_no = cost.gosu_no) as gosuId
+		from gosu_request_review grr
+		LEFT JOIN gosu_Request_project_sub sub
+		ON grr.REQUEST_PROJECT_SUB_NO = sub.REQUEST_PROJECT_SUB_NO
+		LEFT JOIN gosu_request_COST cost
 		ON sub.cost_no = cost.cost_no
 		LEFT JOIN gosu gosu
 		ON cost.gosu_no = gosu.gosu_no
-		where ggosu_no = #{ggsouNo}
+		WHERE
+		REQUEST_MEMBER_ID =
+		#{memberId}
 	</select>
 </mapper>

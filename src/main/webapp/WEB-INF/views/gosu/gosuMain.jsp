@@ -587,14 +587,17 @@ to {
 				<div class="g-statusContent">
 					<c:choose>
 						<c:when test="${empty grpsList }">
-							<c:if test="${sessionScope.m.memberType eq 1}">
+							<c:choose>
+								<c:when test="${sessionScope.m.memberType eq 1}">
 								<span style="margin: 100px;">요청서를 작성해보세요!</span>
-							</c:if>
-							<c:if test="${sessionScope.m.memberType eq 2}">
-								<span style="margin: 100px;">상단의 요청서 버튼을 눌러 견적서를 보내보세요!</span>
-
-							</c:if>
-
+								</c:when>
+								<c:when test="${sessionScope.m.memberType eq 2}">
+								<span style="margin: 100px;">상단의 요청서 버튼을 눌러 견적서를 보내보세요!</span></c:when>
+								<c:otherwise>
+								
+									<span style="margin: 100px; color: gray;">일반회원과 고수회원이 이용할 수 있습니다.</span>
+								</c:otherwise>
+							</c:choose>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${grpsList }" var="grpsl" varStatus="i">
