@@ -19,7 +19,7 @@ public class Share {
 	private int likes;
 	private int comments;
 	
-	public String getBoardType() {
+	public String getType() {
 		if(boardType == 1) {
 			return "사는얘기";
 		}else if(boardType == 2) {
