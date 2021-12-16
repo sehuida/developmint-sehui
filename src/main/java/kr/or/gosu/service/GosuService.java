@@ -18,7 +18,9 @@ import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
 import kr.or.gosu.vo.GosuRequest;
 import kr.or.gosu.vo.GosuRequestCost;
+import kr.or.gosu.vo.GosuRequestCostListPageData;
 import kr.or.gosu.vo.GosuRequestCount;
+import kr.or.gosu.vo.GosuRequestListPageData;
 import kr.or.gosu.vo.GosuRequestProject;
 import kr.or.gosu.vo.GosuRequestProjectSub;
 import kr.or.gosu.vo.GosuRequestReview;
@@ -175,14 +177,6 @@ public class GosuService {
 		return result;
 	}
 
-	public ArrayList<GosuRequest> selectMemberRequestList() {
-		ArrayList<GosuRequest> list = dao.selectMemberRequestList();
-		for (GosuRequest g : list) {
-			g.setRequestWriterImg(dao.selectGosuImg(g.getRequestWriterNo()));
-			g.setRequestWriterId(dao.selectGosuId(g.getRequestWriterNo()));
-		}
-		return list;
-	}
 
 	public GosuRequest selectGosuRequestContent(int mrn) {
 		GosuRequest gosuRequest = dao.selectGosuRequestContent(mrn);	
@@ -196,14 +190,7 @@ public class GosuService {
 		return result;
 	}
 
-	public ArrayList<GosuRequestCost> selectGosuRequestCostList(String memberId) {
-		ArrayList<GosuRequestCost> list = dao.selectGosuRequestCostList(memberId);
-		for (GosuRequestCost g : list) {
-			g.setGosuImg(dao.selectGosuImg(g.getGosuNo()));
-			g.setGosuId(dao.selectGosuId(g.getGosuNo()));
-		}
-		return list;
-	}
+
 
 	public GosuRequestCost selectRequestNoGosuNo(GosuRequestCost grc) {
 		GosuRequestCost requestNoGosuNo = dao.selectRequestNoGosuNo(grc);	
@@ -446,6 +433,120 @@ public class GosuService {
 		return glpd;
 	}
 
+
+	public GosuRequestListPageData selectMemberRequestList(int reqPage) {
+		int numPerPage = 5;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		ArrayList<GosuRequest> list = dao.selectMemberRequestList(map);
+		for (GosuRequest g : list) {
+			g.setRequestWriterImg(dao.selectGosuImg(g.getRequestWriterNo()));
+			g.setRequestWriterId(dao.selectGosuId(g.getRequestWriterNo()));
+		}
+		int totalCount = dao.selectRequestCount();
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		} else {
+			totalPage = totalCount / numPerPage + 1;
+		}
+		
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
+		String pageNavi = "<ul class='pagination pagination-lg'>";
+		if(pageNo != 1) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/gosuRequestList.do?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "&lt;</a></li>";
+		}// 페이지 숫자
+		for(int i=0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='page-item active'>";
+				pageNavi += "<a class = 'page-link' href='/gosuRequestList.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			} else {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/gosuRequestList.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음 버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/gosuRequestList.do?reqPage="+pageNo+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		GosuRequestListPageData glpd = new GosuRequestListPageData(list, pageNavi, start);
+		return glpd;
+	}
+
+
+	public GosuRequestCostListPageData selectGosuRequestCostList(int reqPage, String memberId) {
+		int numPerPage = 5;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("memberId",memberId);
+		ArrayList<GosuRequestCost> list = dao.selectGosuRequestCostList(map);
+		for (GosuRequestCost g : list) {
+			g.setGosuImg(dao.selectGosuImg(g.getGosuNo()));
+			g.setGosuId(dao.selectGosuId(g.getGosuNo()));
+		}
+		int totalCount = dao.selectRequestCostCount(memberId);
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		} else {
+			totalPage = totalCount / numPerPage + 1;
+		}
+		
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
+		String pageNavi = "<ul class='pagination pagination-lg'>";
+		if(pageNo != 1) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/gosuRequestCostList.do?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "&lt;</a></li>";
+		}// 페이지 숫자
+		for(int i=0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='page-item active'>";
+				pageNavi += "<a class = 'page-link' href='/gosuRequestCostList.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			} else {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/gosuRequestCostList.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음 버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/gosuRequestCostList.do?reqPage="+pageNo+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		GosuRequestCostListPageData glpd = new GosuRequestCostListPageData(list, pageNavi, start);
+		return glpd;
+	}
+
+
+
+	
 
 
 
