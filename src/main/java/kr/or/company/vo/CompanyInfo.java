@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CompanyInfo {
-	private String companyTitle;
+	private String announceTitle;
 	private int career;
 	private int school;
 	private String workPlace;

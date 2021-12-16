@@ -65,6 +65,7 @@
 	#pageNavi{
 		margin-top: 50px;
 	}
+	
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>

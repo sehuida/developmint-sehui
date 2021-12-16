@@ -249,7 +249,7 @@ public class NoticeController {
 		if (result > 0) {
 			model.addAttribute("msg", "삭제가 완료되었습니다.");
 		} else {
-			model.addAttribute("msg", "삭제실패~ 에러발생~~고객센터문의바람~~");
+			model.addAttribute("msg", "삭제실패~ 에러발생~~개발자 문의바람~~");
 		}
 		model.addAttribute("loc", "/noticeList.do?reqPage=1");
 		return "common/msg";
@@ -328,7 +328,7 @@ public class NoticeController {
 		if (result > 0) {
 			model.addAttribute("msg", "수정이 완료되었습니다.");
 		} else {
-			model.addAttribute("msg", "삭제실패~ 에러발생~~고객센터 문의바람~~");
+			model.addAttribute("msg", "삭제실패~ 에러발생~~개발자 문의바람~~");
 		}
 		return "common/msg";
 	}
