@@ -113,8 +113,14 @@ public class QnaController {
 	//비회원일경우
 	@RequestMapping(value="/counsel_save1.do")
 	public String insertCounsel(nonQna nq, HttpServletRequest request, Model model) {
-		//int result = service.insertCounselNonQna(nq);
-		return "qna/counsel";
+		int result = service.insertCounselNonQna(nq);
+		if(result>0) {
+			model.addAttribute("msg","1:1 Q&A 신청 완료");	
+		}else {
+			model.addAttribute("msg","1:1 Q&A 신청 실패");
+		}
+		model.addAttribute("loc","/n_counsel.do");
+		return "common/msg";
 	}
 	
 }
