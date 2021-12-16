@@ -242,6 +242,7 @@ public class GosuDao {
 	}
 
 	public GosuRequestReview GosuRequestReview(GosuRequestReview grr2) {
+		
 		return sqlSession.selectOne("gosu.GosuRequestReview",grr2);
 	}
 

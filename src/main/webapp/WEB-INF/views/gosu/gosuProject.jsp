@@ -55,6 +55,7 @@ input:focus, textarea:focus {
 	align-self: flex-start;
 	background-color: white;
 	border-radius: 100px;
+	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
 }
 
 .talk-one table img {
@@ -245,13 +246,39 @@ input:focus, textarea:focus {
 
 						<c:choose>
 							<c:when test="${not empty grrOne}">
-								테스트 구문 바꾸기 후기 남긴거
-
-
+								<div
+									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
+									<div>
+										<span
+											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">후기</span>
+										<br> <br>
+										<table>
+											<tr>
+												<td
+													style="text-align: right; color: gray; font-size: small;">${grrOne.requestReviewDate }</td>
+											</tr>
+											<tr>
+												<td><p
+														style="width: 800px; text-align: center; padding: 20px; border: 1px solid gray; margin: 20px; box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;">${grrOne.requestReviewContentBr }</p></td>
+											</tr>
+											<tr>
+												<td style="text-align: right;"><button
+														id="requestReviewAjax" type="button"
+														class="btn btn-primary"
+														style="font-weight: 900; padding: 10px; margin-left: 10px;"
+														onclick="history.back();">뒤로가기</button></td>
+											</tr>
+										</table>
+									</div>
+								</div>
 							</c:when>
 							<c:otherwise>
-							아직 작성된 후기가 없습니다!
-						</c:otherwise>
+								<div
+									style="display: flex; justify-content: center; margin-top: 200px; margin-bottom: 200px;">
+									<span style="font-size: 30px; font-weight: 900; color: gray;">아직
+										작성된 후기가 없습니다!</span>
+								</div>
+							</c:otherwise>
 						</c:choose>
 					</c:when>
 					<c:otherwise>
@@ -259,20 +286,25 @@ input:focus, textarea:focus {
 							<c:when test="${not empty grrOne}">
 								<div
 									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
-									<div><span
-											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">작성한 후기</span> <br> <br>
+									<div>
+										<span
+											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">작성한
+											후기</span> <br> <br>
 										<table>
 											<tr>
-												<td>${grrOne.requestReviewDate }</td>
+												<td
+													style="text-align: right; color: gray; font-size: small;">${grrOne.requestReviewDate }</td>
 											</tr>
 											<tr>
-												<td>${grrOne.requestReviewContentBr }</td>
+												<td><p
+														style="width: 800px; text-align: center; padding: 20px; border: 1px solid gray; margin: 20px;">${grrOne.requestReviewContentBr }</p></td>
 											</tr>
 											<tr>
 												<td style="text-align: right;"><button
 														id="requestReviewAjax" type="button"
 														class="btn btn-primary"
-														style="font-weight: 900; padding: 10px; margin-left: 10px;"onclick="history.back();">뒤로가기</button></td>
+														style="font-weight: 900; padding: 10px; margin-left: 10px;"
+														onclick="history.back();">뒤로가기</button></td>
 											</tr>
 										</table>
 									</div>
@@ -295,9 +327,9 @@ input:focus, textarea:focus {
 												<td><textarea cols="70" rows="10"
 														id="requestReviewContent" placeholder="내용을 입력해주세요."
 														style="padding: 20px;"></textarea></td>
-												<input type="hidden" value="${grpsOne.requestProjectSubNo} "
+												<input type="hidden" value="${grpsOne.requestProjectSubNo}"
 													id="grequestProjectSubNo">
-												<input type="hidden" value="${sessionScope.m.memberId} "
+												<input type="hidden" value="${sessionScope.m.memberId}"
 													id="requestMemberId">
 
 
@@ -360,7 +392,7 @@ input:focus, textarea:focus {
 								</c:choose>
 
 							</tr>
-							<input type="hidden" value="${sessionScope.m.memberNo }"
+							<input type="hidden" value="${sessionScope.m.memberNo}"
 								id="writer">
 							<input type="hidden" value="${grpsOne.requestProjectSubNo}"
 								id="requestProjectSubNo">
