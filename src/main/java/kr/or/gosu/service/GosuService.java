@@ -317,5 +317,15 @@ public class GosuService {
 		return selectGrrCount;
 	}
 
+	public ArrayList<GosuReview> selectMemberReviewList(String memberId) {
+		ArrayList<GosuReview> list = dao.selectMemberReviewList(memberId);
+		return list;
+	}
+
+	public ArrayList<GosuRequestReview> selectMemberRequestReviewList(String memberId) {
+		ArrayList<GosuRequestReview> list = dao.selectMemberRequestReviewList(memberId);
+		return list;
+	}
+
 
 }

@@ -60,8 +60,8 @@
 .gosu table {
 	width: 100%;
 }
-.gosu>button{
 
+.gosu>button {
 	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
 }
 
@@ -118,7 +118,6 @@
 .gosu-one img {
 	width: 225px;
 	height: 225px;
-	
 	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
 }
 
@@ -157,7 +156,6 @@ ul#gallery>a>li {
 	height: 300px;
 	margin: 40px;
 	overflow: hidden;
-	
 	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
 }
 
@@ -295,10 +293,11 @@ to {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-.g-sc-tbl{
-	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
 
+.g-sc-tbl {
+	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
 }
+
 .gosu-write-wrap {
 	position: fixed;
 	z-index: 1000;
@@ -533,8 +532,7 @@ to {
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
-							<span style="font-size: 20px; margin-left: 100px;">아직 신청한
-								내역이 없습니다!</span>
+							<span style="margin: 100px;">아직 신청한 내역이 없습니다!</span>
 						</c:otherwise>
 					</c:choose>
 
@@ -572,8 +570,7 @@ to {
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<span style="font-size: 20px; margin-left: 100px;">아직
-									신청받은 내역이 없습니다!</span>
+								<span style="margin: 100px;">아직 신청받은 내역이 없습니다!</span>
 							</c:otherwise>
 						</c:choose>
 
@@ -587,14 +584,19 @@ to {
 				<div class="g-statusContent">
 					<c:choose>
 						<c:when test="${empty grpsList }">
-							<c:if test="${sessionScope.m.memberType eq 1}">
-								<span style="margin: 100px;">요청서를 작성해보세요!</span>
-							</c:if>
-							<c:if test="${sessionScope.m.memberType eq 2}">
-								<span style="margin: 100px;">상단의 요청서 버튼을 눌러 견적서를 보내보세요!</span>
+							<c:choose>
+								<c:when test="${sessionScope.m.memberType eq 1}">
+									<span style="margin: 100px;">요청서를 작성해보세요!</span>
+								</c:when>
+								<c:when test="${sessionScope.m.memberType eq 2}">
+									<span style="margin: 100px;">상단의 요청서 버튼을 눌러 견적서를 보내보세요!</span>
+								</c:when>
+								<c:otherwise>
 
-							</c:if>
-
+									<span style="margin: 100px; color: gray;">일반회원과 고수회원이
+										이용할 수 있습니다.</span>
+								</c:otherwise>
+							</c:choose>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${grpsList }" var="grpsl" varStatus="i">

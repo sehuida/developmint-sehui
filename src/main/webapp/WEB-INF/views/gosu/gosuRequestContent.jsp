@@ -180,7 +180,7 @@ input:focus, textarea:focus {
 					</div>
 					<br> <span>견적비용</span>
 					<div class="g-style">
-						<input type="text" id="costSend" placeholder="숫자만 입력하세요.">&nbsp;&nbsp;
+						<input type="text" name="cost" id="costSend" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');" placeholder="숫자만 입력하세요.">&nbsp;&nbsp;
 						원 <input type="hidden" value="${grOne.requestNo }"
 							id="requestNoSend"> <input type="hidden"
 							value="${sessionScope.m.memberNo }" id="gosuNoSend">
@@ -203,13 +203,22 @@ input:focus, textarea:focus {
 		$("#costSendModal").click(function() {
 			$(".hrm-wrap").css("display", "flex");
 		});
-
 		$("#costSendAjax").click(function() {
 			var requestNo = $("#requestNoSend").val();
 			var gosuNo = $("#gosuNoSend").val();
 			var cost = $("#costSend").val();
 			var content = $("#contentSend").val();
 			var memberId = $("#memberIdSend").val();
+			
+			if(cost == "" || content == ""){
+				swal({
+			        title: '실패',
+			        text: '입력하신 내용이 올바르지 않습니다.',
+			        icon: 'error'
+			      })
+				return false;
+				
+			}
 			$.ajax({
 				url : "/gosuRequestCostInsert.do",
 				data : {

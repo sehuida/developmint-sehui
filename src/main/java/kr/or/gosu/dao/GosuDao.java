@@ -263,6 +263,16 @@ public class GosuDao {
 		return sqlSession.selectOne("gosu.selectGrrCount",ggsouNo);
 	}
 
+	public ArrayList<GosuReview> selectMemberReviewList(String memberId) {
+		List<GosuReview> list = sqlSession.selectList("gosu.selectMemberReviewList",memberId);
+		return (ArrayList<GosuReview>)list;
+	}
+
+	public ArrayList<GosuRequestReview> selectMemberRequestReviewList(String memberId) {
+		List<GosuRequestReview> list = sqlSession.selectList("gosu.selectMemberRequestReviewList",memberId);
+		return (ArrayList<GosuRequestReview>)list;
+	}
+
 
 
 }

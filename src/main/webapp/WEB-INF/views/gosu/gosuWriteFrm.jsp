@@ -349,7 +349,7 @@
 
 						<h4>
 							피드백 비용 <span style="color: red; margin-right: 100px;">* </span> <span><input
-								type="text" name="gosuCost" style="width: 400px;">
+								type="text" name="gosuCost" style="width: 400px;" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');">
 								&nbsp; &nbsp;원</span>
 						</h4>
 
