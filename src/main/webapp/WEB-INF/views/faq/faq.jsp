@@ -22,7 +22,7 @@
 					<li><a href="/faq.do" class="text-hover">자주묻는질문<br><span class="last-span">자주묻는질문</span></a></li>
 				</ul>
 			</div>
-			<!-- faq 리스트 페이징없이 쫙 뽑기 (버튼클릭시 자동 조회수 update 넣기, 컬럼도 추가해야됨) 조회수에 맞춰 고객센터에서 faq 리스트 뽑아줄때 어떻게 뽑아줄지 결정됨-->
+			<!-- faq 리스트 페이징없이 쫙 뽑기? -->
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

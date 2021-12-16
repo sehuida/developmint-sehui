@@ -44,7 +44,7 @@ public class QnaController {
 	
 	@RequestMapping(value="/faq.do")
 	public String tofaq() {
-		return "faq/faqList";
+		return "faq/faq";
 	}
 	
 	@ResponseBody
