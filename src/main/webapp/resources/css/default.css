@@ -45,3 +45,9 @@ textarea{
 .bi-person-circle::before {
 	margin-right: 10px;	
 }
+.join-link-text{
+	text-decoration: none !important;
+}
+.join-link-text:hover {
+	text-decoration: underline !important;
+}

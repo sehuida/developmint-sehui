@@ -143,12 +143,12 @@
 	<div class="container">
 		<c:if test="${sessionScope.m.memberType eq 2}">
 			<div class="gosu-mail">
-				<a href="/gosuRequestList.do">요청서</a>
+				<a href="/gosuRequestList.do?reqPage=1">요청서</a>
 			</div>
 		</c:if>
 		<c:if test="${sessionScope.m.memberType eq 1}">
 			<div class="gosu-mail">
-				<a href="/gosuRequestCostList.do">견적서</a>
+				<a href="/gosuRequestCostList.do?reqPage=1">견적서</a>
 			</div>
 		</c:if>
 		<h4>
@@ -197,9 +197,11 @@
 
 		<div class="g-center">
 			<c:if test="${sessionScope.m.memberId ne gNotice.writeId}">
+			<c:if test="${not empty sessionScope.m }">
 				<a id="feedbackListAjax" class="btn btn-info"
 					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">피드백
 					신청하기</a>
+					</c:if>
 				<a class="btn btn-primary"
 					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
 					onclick="history.back();">뒤로가기</a>

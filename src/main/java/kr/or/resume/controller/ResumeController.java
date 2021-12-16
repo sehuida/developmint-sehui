@@ -12,6 +12,7 @@ import kr.or.announce.vo.Announce;
 import kr.or.member.model.vo.Member;
 import kr.or.resume.service.ResumeService;
 import kr.or.resume.vo.Resume;
+import kr.or.resume.vo.ResumePageData;
 
 @Controller
 public class ResumeController {
@@ -26,13 +27,15 @@ public class ResumeController {
 	 }
 	 
 	@RequestMapping(value="/resumeManage.do")
-	public String resumeManage(Model model, int memberNo) {
-		ArrayList<Resume> list = service.selectAllResume(memberNo);
-		if(!list.isEmpty()) {
+	public String resumeManage(Model model, int memberNo, int reqPage) {
+		ResumePageData rpd = service.selectAllResume(memberNo, reqPage);
+		if(!rpd.getList().isEmpty()) {
 			int count = service.selectResumeCount(memberNo);			
 			model.addAttribute("count", count);
 		}
-		model.addAttribute("list", list);
+		model.addAttribute("list", rpd.getList());
+		model.addAttribute("pageNavi", rpd.getPageNavi());
+		model.addAttribute("start", rpd.getStart());
 		return "resume/resumeManage";
 	}
 	

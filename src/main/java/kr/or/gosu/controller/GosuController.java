@@ -1,12 +1,16 @@
 package kr.or.gosu.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Reader;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -33,7 +37,9 @@ import kr.or.gosu.vo.GosuPhoto;
 import kr.or.gosu.vo.GosuProject;
 import kr.or.gosu.vo.GosuRequest;
 import kr.or.gosu.vo.GosuRequestCost;
+import kr.or.gosu.vo.GosuRequestCostListPageData;
 import kr.or.gosu.vo.GosuRequestCount;
+import kr.or.gosu.vo.GosuRequestListPageData;
 import kr.or.gosu.vo.GosuRequestProject;
 import kr.or.gosu.vo.GosuRequestProjectSub;
 import kr.or.gosu.vo.GosuRequestReview;
@@ -47,8 +53,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -188,7 +196,7 @@ public class GosuController {
 			model.addAttribute("msg", "");
 			model.addAttribute("icon", "success");
 		}
-		
+
 		model.addAttribute("loc", "/");
 		return "member/swalMsg";
 	}
@@ -274,7 +282,7 @@ public class GosuController {
 			model.addAttribute("grpsList", grpsList);
 		}
 		ArrayList<GosuReview> grList = service.selectMemberReviewList(m.getMemberId());
-		ArrayList<GosuRequestReview> grrList = service.selectMemberRequestReviewList(m.getMemberId()); 
+		ArrayList<GosuRequestReview> grrList = service.selectMemberRequestReviewList(m.getMemberId());
 		model.addAttribute("gosuTalkList", gf);
 		model.addAttribute("gosuTalkList2", gf2);
 		model.addAttribute("grList", grList);
@@ -394,12 +402,12 @@ public class GosuController {
 	}
 
 	@RequestMapping(value = "/gosuNoticeList.do")
-	public String gosuNoticeLsit(int reqPage,Model model) {
+	public String gosuNoticeLsit(int reqPage, Model model) {
 		GosuNoticeListPageData glpd = service.selectGosuNoticeList(reqPage);
 		model.addAttribute("gNoticeList", glpd.getList());
 		model.addAttribute("pageNavi", glpd.getPageNavi());
 		model.addAttribute("start", glpd.getStart());
-		
+
 		return "gosu/gosuNoticeList";
 	}
 
@@ -457,7 +465,7 @@ public class GosuController {
 			model.addAttribute("icon", "success");
 		}
 		model.addAttribute("loc", "/gosuNoticeList.do");
-		
+
 		return "member/swalMsg";
 	}
 
@@ -482,22 +490,29 @@ public class GosuController {
 	@RequestMapping(value = "/gosuRequestdo.do")
 	public String gosuRequestDo(GosuRequest gr, Model model, @SessionAttribute(required = false) Member m) {
 		int result = service.insertGosuRequest(gr);
+
 		if (result > 0) {
-			System.out.println("성공");
-			ArrayList<GosuRequestCost> memberRequestCostList = service.selectGosuRequestCostList(m.getMemberId());
-			model.addAttribute("memberRequestCostList", memberRequestCostList);
+			model.addAttribute("title", "성공");
+			model.addAttribute("msg", "");
+			model.addAttribute("icon", "success");
 
 		} else {
-			System.out.println("실패");
 
+			model.addAttribute("title", "실패");
+			model.addAttribute("icon", "error");
+			model.addAttribute("msg", "관리자에게 문의해주세요");
 		}
-		return "gosu/gosuRequestCostList";
+		model.addAttribute("loc", "/gosuRequestCostList.do?reqPage=1");
+		return "member/swalMsg";
+
 	}
 
 	@RequestMapping(value = "/gosuRequestList.do")
-	public String gosuRequestList(Model model) {
-		ArrayList<GosuRequest> memberRequestList = service.selectMemberRequestList();
-		model.addAttribute("memberRequestList", memberRequestList);
+	public String gosuRequestList(int reqPage, Model model) {
+		GosuRequestListPageData glpd = service.selectMemberRequestList(reqPage);
+		model.addAttribute("memberRequestList", glpd.getList());
+		model.addAttribute("pageNavi", glpd.getPageNavi());
+		model.addAttribute("start", glpd.getStart());
 		return "gosu/gosuRequestList";
 	}
 
@@ -529,9 +544,11 @@ public class GosuController {
 	}
 
 	@RequestMapping(value = "/gosuRequestCostList.do")
-	public String gosuRequestCostList(@SessionAttribute(required = false) Member m, Model model) {
-		ArrayList<GosuRequestCost> memberRequestCostList = service.selectGosuRequestCostList(m.getMemberId());
-		model.addAttribute("memberRequestCostList", memberRequestCostList);
+	public String gosuRequestCostList(int reqPage, @SessionAttribute(required = false) Member m, Model model) {
+		GosuRequestCostListPageData glpd = service.selectGosuRequestCostList(reqPage, m.getMemberId());
+		model.addAttribute("memberRequestCostList", glpd.getList());
+		model.addAttribute("pageNavi", glpd.getPageNavi());
+		model.addAttribute("start", glpd.getStart());
 		return "gosu/gosuRequestCostList";
 	}
 
@@ -651,14 +668,16 @@ public class GosuController {
 	public String noticeContentUpdateFrm(int gnn, Model model) {
 
 		GosuNotice gNotice = service.selectGosuNoticeOne(gnn);
-		model.addAttribute("gNotice",gNotice);
+		model.addAttribute("gNotice", gNotice);
 		return "gosu/gosuNoticeUpdateFrm";
 	}
-		@RequestMapping(value = "/gosuNoticeUpdate.do")
-		public String gosuNoticeUpdate(MultipartFile files, HttpServletRequest request, GosuNotice gNotice, Model model) {
-			if (files.isEmpty()) {
-			} else {
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/gosu/gosuNotice/");
+
+	@RequestMapping(value = "/gosuNoticeUpdate.do")
+	public String gosuNoticeUpdate(MultipartFile files, HttpServletRequest request, GosuNotice gNotice, Model model) {
+		if (files.isEmpty()) {
+		} else {
+			String savePath = request.getSession().getServletContext()
+					.getRealPath("/resources/upload/gosu/gosuNotice/");
 			String filename = files.getOriginalFilename();
 			String onlyFilename = filename.substring(0, filename.indexOf("."));
 			String extention = filename.substring(filename.indexOf("."));
@@ -692,24 +711,25 @@ public class GosuController {
 			}
 
 			gNotice.setGnoticePhoto("/resources/upload/gosu/gosuNotice/" + filepath);
-			}
-			int result = service.gosuNoticeUpdate(gNotice);
-
-			if (result == -1) {
-
-				model.addAttribute("title", "등록 실패");
-				model.addAttribute("icon", "error");
-				model.addAttribute("msg", "입력 정보를 확인해주세요.");
-			} else {
-				model.addAttribute("title", "등록 성공");
-				model.addAttribute("msg", "");
-				model.addAttribute("icon", "success");
-			}
-			model.addAttribute("loc", "/gosuNoticeContent.do?gnn="+gNotice.getGnoticeNo());
-			return "member/swalMsg";
 		}
+		int result = service.gosuNoticeUpdate(gNotice);
+
+		if (result == -1) {
+
+			model.addAttribute("title", "등록 실패");
+			model.addAttribute("icon", "error");
+			model.addAttribute("msg", "입력 정보를 확인해주세요.");
+		} else {
+			model.addAttribute("title", "등록 성공");
+			model.addAttribute("msg", "");
+			model.addAttribute("icon", "success");
+		}
+		model.addAttribute("loc", "/gosuNoticeContent.do?gnn=" + gNotice.getGnoticeNo());
+		return "member/swalMsg";
+	}
+
 	@RequestMapping(value = "/noticeContentdelete.do")
-		public String noticeContentdelete(int gnn, Model model) {
+	public String noticeContentdelete(int gnn, Model model) {
 		int result = service.noticeContentdelete(gnn);
 
 		if (result == -1) {
@@ -724,6 +744,49 @@ public class GosuController {
 		}
 		model.addAttribute("loc", "/gosuNoticeList.do");
 		return "member/swalMsg";
+	}
+
+	@RequestMapping(value = "/gosuList2.do")
+	public String gosuList2(int reqPage, String keyword, String type, Model model) {
+		GosuListPageData glpd = service.selectGosuList2(reqPage, keyword, type);
+		model.addAttribute("gList", glpd.getList());
+		model.addAttribute("pageNavi", glpd.getPageNavi());
+		model.addAttribute("start", glpd.getStart());
+		return "gosu/gosuList";
+	}
+
+	@RequestMapping(value = "/gosuNoticeList2.do")
+	public String gosuNoticeList2(int reqPage, String keyword, String type, Model model) {
+		GosuNoticeListPageData glpd = service.selectGosuNoticeList2(reqPage, keyword, type);
+		model.addAttribute("gNoticeList", glpd.getList());
+		model.addAttribute("pageNavi", glpd.getPageNavi());
+		model.addAttribute("start", glpd.getStart());
+
+		return "gosu/gosuNoticeList";
+	}
+
+	@RequestMapping(value = "/fileDownload.do")
+	public void fileDownload(String filePath, String fileName, HttpServletRequest req, HttpServletResponse response)
+			throws Exception {
+		try {
+			String path = req.getSession().getServletContext().getRealPath(filePath); // 경로에 접근할 때 역슬래시('\') 사용
+			System.out.println(path);
+			File file = new File(path);
+			response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로
+																								// 쓰이는지를 알려주는 헤더
+			System.out.println("filename = "+file.getName());
+			FileInputStream fileInputStream = new FileInputStream(path); // 파일 읽어오기
+			OutputStream out = response.getOutputStream();
+
+			int read = 0;
+			byte[] buffer = new byte[1024];
+			while ((read = fileInputStream.read(buffer)) != -1) { // 1024바이트씩 계속 읽으면서 outputStream에 저장, -1이 나오면 더이상 읽을
+																	// 파일이 없음
+				out.write(buffer, 0, read);
+			}
+
+		} catch (Exception e) {
+			throw new Exception("download error");
 		}
 
-}
+}}

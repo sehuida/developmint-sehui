@@ -44,7 +44,7 @@ public class QnaController {
 	
 	@RequestMapping(value="/faq.do")
 	public String tofaq() {
-		return "faq/faqList";
+		return "faq/faq";
 	}
 	
 	@ResponseBody
@@ -185,6 +185,16 @@ public class QnaController {
 		}
 		model.addAttribute("loc","/");
 		return "common/msg";
+	}
+	
+	@RequestMapping(value="/myCounsel.do")
+	public String myCounsel() {
+		return "qna/counselUser";
+	}
+	
+	@RequestMapping(value="/adminCounsel.do")
+	public String adminCounsel() {
+		return "qna/counselAdmin";
 	}
 	
 }

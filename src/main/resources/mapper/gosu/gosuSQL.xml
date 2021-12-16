@@ -283,25 +283,7 @@
 		values(GOSU_REQUEST_SEQ.nextval,#{requestWriterNo},#{requestContent1},#{requestContent2},#{requestContent3},#{requestContent4},#{requestContent5},#{requestContent6},#{requestContent7},to_char(sysdate,'yyyy-mm-dd'))
 
 	</insert>
-	<select id="selectMemberRequestList" resultType="gr">
-		select * from
-		(select rownum as rnum , r.*
-		from (
-		select
-		REQUEST_NO as
-		requestNo,
-		REQUEST_WRITER_NO as requestWriterNo,
-		REQUEST_CONTENT7
-		as
-		requestContent7,
-		REQUEST_DATE as requsetDate
-		from gosu_request order by
-		1
-		desc )r)rr
 
-
-
-	</select>
 	<select id="selectGosuRequestContent" parameterType="_int"
 		resultType="gr">
 
@@ -332,32 +314,7 @@
 		gosu_request_cost
 		values(GOSU_REQUEST_COST_SEQ.nextval,#{gosuNo},#{requestNo},#{costContent},#{cost},to_char(sysdate,'yyyy-mm-dd'),#{memberId})
 	</insert>
-	<select id="selectGosuRequestCostList" resultType="grc"
-		parameterType="string">
-		select * from
-		(select rownum as rnum , r.*
-		from (
-		select
-		COST_NO as costNo,
-		GOSU_NO as gosuNo,
-		REQUEST_NO
-		as
-		requestNo,
-		COST_CONTENT as costContent,
-		cost,
-		COST_DATE as costDate,
-		MEMBER_ID as
-		memberId
-		from gosu_request_cost
-		where member_id
-		=#{memberId}
-		AND cost_no
-		NOT IN(select cost_no from gosu_request_project_sub)
-		order by
-		1
-		desc
-		)r)rr
-	</select>
+
 	<select id="selectRequestNoGosuNo" parameterType="grc"
 		resultType="grc">
 		select
@@ -771,9 +728,11 @@
 		gosu_date as
 		gosuDate
 		from gosu
-		order by 1 desc)cc) where rnum between #{start} and #{end}
+		order by 1 desc)cc)
+		where rnum between #{start} and #{end}
 	</select>
-	<select id="selectGosuNoticeList" parameterType="map" resultType="gn">
+	<select id="selectGosuNoticeList" parameterType="map"
+		resultType="gn">
 
 		select * from
 		(select rownum as rnum , r.*
@@ -781,17 +740,178 @@
 		select
 		gnotice_no as gnoticeNo,
 		member_id as writeId,
-		gnotice_title as gnoticeTitle,
+		gnotice_title as
+		gnoticeTitle,
 		gnotice_content as
 		gnoticeContent,
-		gnotice_photo as gnoticePhoto,
+		gnotice_photo as
+		gnoticePhoto,
 		gnotice_date as
 		gnoticeDate
-		from gosu_notice order by 1 desc )r)rr where rnum between #{start} and #{end}
+		from gosu_notice order by 1
+		desc )r)rr where rnum between #{start} and #{end}
 	</select>
 	<select id="selectGosuNoticeListTotalCount" resultType="_int">
 		select
 		count(*)
 		from gosu_notice
 	</select>
+
+	<select id="selectMemberRequestList" parameterType="map"
+		resultType="gr">
+		select * from
+		(select rownum as rnum , r.*
+		from (
+		select
+		REQUEST_NO as
+		requestNo,
+		REQUEST_WRITER_NO as requestWriterNo,
+		REQUEST_CONTENT7
+		as
+		requestContent7,
+		REQUEST_DATE as requsetDate
+		from
+		gosu_request order by
+		1
+		desc )r)rr where rnum between #{start} and
+		#{end}
+	</select>
+	<select id="selectGosuRequestCostList" resultType="grc"
+		parameterType="map">
+		select * from
+		(select rownum as rnum , r.*
+		from (
+		select
+		COST_NO as costNo,
+		GOSU_NO as gosuNo,
+		REQUEST_NO
+		as
+		requestNo,
+		COST_CONTENT as costContent,
+		cost,
+		COST_DATE as costDate,
+		MEMBER_ID as
+		memberId
+		from gosu_request_cost
+		where member_id
+		=#{memberId}
+		AND cost_no
+		NOT IN(select cost_no from gosu_request_project_sub)
+		order by
+		1
+		desc
+		)r)rr where rnum between #{start} and
+		#{end}
+	</select>
+	<select id="selectRequestCostCount" parameterType="string"
+		resultType="_int">
+		select
+		count(*)
+		from gosu_request_cost where member_id
+		=#{memberId}
+	</select>
+	
+	
+	<select id="selectGosuListKeyword" parameterType="map"
+		resultType="g">
+		select * from(
+		select rownum as rnum,cc.* from
+		(
+		select
+		ggosu_no as ggsouNo,
+		gosu_no as gsouNo,
+		gosu_title as gosuTitle,
+		gosu_self as gosuSelf,
+		gosu_explain as
+		gosuExplain,
+		gosu_act as gosuAct,
+		gosu_cost as gosuCost,
+		gosu_date as
+		gosuDate
+		from gosu
+		<trim prefix="WHERE" prefixOverrides="AND">
+		
+		<choose>
+			<when test="type != null and type.equals('title')">
+			AND gosu_title LIKE '%'||#{keyword}||'%' 
+			</when>
+			<when test="type != null and type.equals('content')">
+			AND gosu_explain LIKE '%'||#{keyword}||'%' 
+			</when>
+		</choose>
+		</trim>
+		order by 1 desc)cc)
+		where
+		rnum between #{start} and #{end}
+	</select>
+	
+		<select id="selectGosuListTotalCountKeyword" parameterType="map" resultType="_int">
+		select
+		count(*)
+		from gosu 
+		<trim prefix="WHERE" prefixOverrides="AND">
+		<choose>
+			<when test="type != null and type.equals('title')">
+			AND gosu_title LIKE '%'||#{keyword}||'%' 
+			</when>
+			<when test="type != null and type.equals('content')">
+			AND gosu_explain LIKE '%'||#{keyword}||'%' 
+			</when>
+		</choose>
+		</trim>
+	</select>
+	
+	
+	
+	<select id="selectGosuNoticeListKeyword" parameterType="map"
+		resultType="gn">
+		
+		select * from
+		(select rownum as rnum , r.*
+		from (
+		select
+		gnotice_no as gnoticeNo,
+		member_id as writeId,
+		gnotice_title as
+		gnoticeTitle,
+		gnotice_content as
+		gnoticeContent,
+		gnotice_photo as
+		gnoticePhoto,
+		gnotice_date as
+		gnoticeDate
+		from
+		gosu_notice
+			<trim prefix="WHERE" prefixOverrides="AND">
+		
+		<choose>
+			<when test="type != null and type.equals('title')">
+			AND gnotice_title LIKE '%'||#{keyword}||'%' 
+			</when>
+			<when test="type != null and type.equals('content')">
+			AND gnotice_content LIKE '%'||#{keyword}||'%' 
+			</when>
+		</choose>
+		</trim>
+		order by 1
+		desc )r)rr where rnum between #{start} and #{end}
+		
+	</select>
+	
+		<select id="selectGosuNoticeListTotalCountKeyword" parameterType="map" resultType="_int">
+		select
+		count(*)
+		from gosu_notice
+		<trim prefix="WHERE" prefixOverrides="AND">
+		<choose>
+			<when test="type != null and type.equals('title')">
+			AND gnotice_title LIKE '%'||#{keyword}||'%' 
+			</when>
+			<when test="type != null and type.equals('content')">
+			AND gnotice_content LIKE '%'||#{keyword}||'%' 
+			</when>
+		</choose>
+		</trim>
+	</select>
+	
 </mapper>

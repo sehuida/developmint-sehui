@@ -17,6 +17,7 @@
 
 .container {
 	min-width: 1200px;
+	margin-bottom: 100px;
 }
 
 input:focus, textarea:focus {
@@ -61,6 +62,7 @@ input:focus, textarea:focus {
 	width: 90%;
 	border: 1px solid rgb(211, 211, 211);
 	margin-bottom: 50px;
+	box-shadow: rgba(0, 0, 0, 0.4) 3PX 3PX 3PX 3PX;
 }
 
 .g-one-tbl:hover {
@@ -237,7 +239,7 @@ input:focus, textarea:focus {
 		</div>
 
 
-		<div id="pageNavi"></div>
+		 <div id = "pageNavi">${pageNavi }</div>
 	</div>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>

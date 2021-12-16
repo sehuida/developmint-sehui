@@ -11,18 +11,23 @@ import org.springframework.stereotype.Repository;
 import kr.or.announce.vo.Announce;
 import kr.or.member.model.vo.Member;
 import kr.or.resume.vo.Resume;
+import kr.or.resume.vo.ResumePageData;
 
 @Repository
 public class ResumeDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-
-	public ArrayList<Resume> selectAllResume(int memberNo) {
-		List list = sqlSession.selectList("resume.selectAllResume", memberNo);
+	
+	public ArrayList<Resume> selectAllResumeList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("resume.selectAllResume", map);
 		return (ArrayList<Resume>)list;
 	}
 
+	public int selectResumeTotalCount(int memberNo) {
+		return sqlSession.selectOne("resume.selectResumeTotalCount", memberNo);
+	}
+	
 	public Resume selectOneResume(int resumeNo) {
 		return sqlSession.selectOne("resume.selectOneresume", resumeNo);
 	}
@@ -80,6 +85,10 @@ public class ResumeDao {
 	public int deleteResume(int resumeNo) {
 		return sqlSession.delete("resume.deleteResume", resumeNo);
 	}
+
+	
+
+	
 	
 	 
 }
