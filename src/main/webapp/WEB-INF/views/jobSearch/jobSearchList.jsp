@@ -249,7 +249,7 @@
 	                    <div class="status">모집중</div>
 	                    <div class="cpName"><a href="companyInfo.do?companyName=${a.companyName }">${a.companyName }</a></div>	
 	                    <div class="title">
-	                        <a href="jobSearchView.do?announce_no=1">${a.announceTitle }</a>	
+	                        <a href="announceView.do?announceNo=${a.announceNo}">${a.announceTitle }</a>	
 	                    </div>
 	                    <div class="info">
 	                        <div class="humanInfo">
