@@ -296,6 +296,26 @@ public class GosuService {
 		GosuRequestReview gosuReviewOne = dao.GosuRequestReview(grr2);	
 		return gosuReviewOne;
 	}
+	@Transactional
+	public int gosuNoticeUpdate(GosuNotice gNotice) {
+		int result = dao.gosuNoticeUpdate(gNotice);
+		return result;
+	}
+	@Transactional
+	public int noticeContentdelete(int gnn) {
+		int result = dao.noticeContentdelete(gnn);
+		return result;
+	}
+
+	public ArrayList<GosuRequestReview> selectGosuRequestReviewList(int ggsouNo) {
+		ArrayList<GosuRequestReview> list = dao.selectGosuRequestReviewList(ggsouNo);
+		return list;
+	}
+
+	public int selectGrrCount(int ggsouNo) {
+		int selectGrrCount = dao.selectGrrCount(ggsouNo);
+		return selectGrrCount;
+	}
 
 
 }

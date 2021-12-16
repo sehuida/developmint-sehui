@@ -57,6 +57,7 @@
 	padding-left: 20px;
 	padding-right: 20px;
 	margin: 70px;
+	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
 }
 
 .container>div>div {
@@ -66,7 +67,7 @@
 
 .container>div>div>div table img {
 	border-radius: 50%;
-	border: 1px solid beige;
+	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
 	height: 80px;
 	width: 80px;
 }
@@ -179,9 +180,9 @@
 										<td><span style="height: 50px; width: 230px;">${gtl.feedbackContent }</span></td>
 									</tr>
 									<tr>
-										<td colspan="2"><a style="margin-top: 0;"
+										<td colspan="2"><a style="margin-top: 0;font-weight: 900;"
 											href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
-											class="btn btn-primary">자세히 보기</a></td>
+											class="btn btn-primary" >자세히 보기</a></td>
 									</tr>
 
 								</table>
@@ -241,7 +242,7 @@
 										<tr>
 											<td colspan="2"><a
 												href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
-												class="btn btn-primary">자세히 보기</a></td>
+												class="btn btn-primary" style="font-weight: 900;">자세히 보기</a></td>
 										</tr>
 
 									</table>
@@ -317,13 +318,10 @@
 													<img src="/resources/img/gosu/g_img_basic.png">
 												</c:if>
 												<c:if test="${not empty grl.gosuImg}">
-													<img
-														src="/resources/upload/member/${grl.gosuImg  }">
+													<img src="/resources/upload/member/${grl.gosuImg  }">
 												</c:if>
 
-											</c:if>
-											<c:if
-												test="${sessionScope.m.memberType eq 2 }">
+											</c:if> <c:if test="${sessionScope.m.memberType eq 2 }">
 												<c:if test="${empty grl.requestWriterImg}">
 													<img src="/resources/img/gosu/g_img_basic.png">
 												</c:if>
@@ -332,26 +330,23 @@
 														src="/resources/upload/member/${grl.requestWriterImg  }">
 												</c:if>
 
-											</c:if>
-											</td>
+											</c:if></td>
 									</tr>
 									<tr>
-										<td style="font-size: 25px; width: 240px;"><b>
-											<c:if
-												test="${sessionScope.m.memberType eq 2 }">
+										<td style="font-size: 25px; width: 240px;"><b> <c:if
+													test="${sessionScope.m.memberType eq 2 }">
 												${grl.requestWriterId  }
 
-											</c:if>
-												<c:if
-												test="${sessionScope.m.memberType eq 1 }">
+											</c:if> <c:if test="${sessionScope.m.memberType eq 1 }">
 												${grl.gosuId  }
 
 											</c:if>
 										</b></td>
 									</tr>
 									<tr>
-										<td colspan="2"><a href="/gosuProject.do?rpsNo=${grl.requestProjectSubNo }"
-											class="btn btn-info">자세히 보기</a></td>
+										<td colspan="2"><a
+											href="/gosuProject.do?rpsNo=${grl.requestProjectSubNo }"
+											class="btn btn-info" style="font-weight: 900;">자세히 보기</a></td>
 									</tr>
 
 								</table>

@@ -9,7 +9,6 @@ public class GosuRequestReview {
 	private String memberId;
 	private String requestReviewContent;
 	private String requestReviewDate;
-	private int ggosuNo;
 	
 
 	public String getRequestReviewContentBr(){

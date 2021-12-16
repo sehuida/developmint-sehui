@@ -239,6 +239,7 @@ input:focus, textarea:focus {
 
 		<div id="pageNavi"></div>
 	</div>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
 		$("#hrm-close").click(function() {
 			$(".hrm-wrap").css("display", "none");
@@ -287,6 +288,8 @@ input:focus, textarea:focus {
 			        var msg = '결제가 완료되었습니다.';
 						var costNo = $("#costNo").val();
 						var requestNo = $("#requestNo").val();
+						var title ='성공';
+				        var icon = 'success';
 			   		 $.ajax({
 						url : "/gosuRequestProjectSubAjax.do"
 						, type : "post"
@@ -303,8 +306,15 @@ input:focus, textarea:focus {
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
+			        var title ='실패';
+			        var icon = 'error';
 			    }
-			    alert(msg);
+			    
+				swal({
+			        title: title,
+			        text: msg,
+			        icon: icon
+			      });
 			    
 			
 		})

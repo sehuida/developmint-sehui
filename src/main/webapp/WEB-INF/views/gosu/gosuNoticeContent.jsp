@@ -189,7 +189,7 @@
 						</table>
 					</dt>
 					<dd>
-						<p>${gNotice.gnoticeContent}</p>
+						<p>${gNotice.gnoticeContentBr}</p>
 					</dd>
 				</dl>
 			</div>
@@ -200,10 +200,17 @@
 				<a id="feedbackListAjax" class="btn btn-info"
 					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">피드백
 					신청하기</a>
+				<a class="btn btn-primary"
+					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
+					onclick="history.back();">뒤로가기</a>
 			</c:if>
-			<a class="btn btn-primary"
-				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
-				onclick="history.back();">뒤로가기</a>
+			<c:if test="${sessionScope.m.memberId eq gNotice.writeId}">
+				<a href="/noticeContentUpdateFrm.do?gnn=${gNotice.gnoticeNo }" class="btn btn-info"
+					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">수정하기</a>
+				<a href="/noticeContentdelete.do?gnn=${gNotice.gnoticeNo }" class="btn btn-primary"
+					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">삭제하기</a>
+			</c:if>
+
 		</div>
 		<div class="hrm-wrap" style="display: none; margin: 0;">
 			<div id="hrm-modal">
@@ -212,8 +219,8 @@
 					<div class="g-style">
 
 						<c:if test="${not empty gosuWriteList}">
-								<a class="btn btn-success" style="font-size: 30px;"
-									href="/gosuContent.do?gNo=${gosuWriteList.ggsouNo}">${gosuWriteList.gosuTitle }</a>
+							<a class="btn btn-success" style="font-size: 30px;"
+								href="/gosuContent.do?gNo=${gosuWriteList.ggsouNo}">${gosuWriteList.gosuTitle }</a>
 						</c:if>
 						<c:if test="${empty gosuWriteList}">
 							<span style="font-size: 30px;">아직 고수님께서 소개글을 등록하지 않았네요!</span>

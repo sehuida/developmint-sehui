@@ -190,7 +190,7 @@ input:focus, textarea:focus {
 		
 	<input type="hidden" value="${sessionScope.m.memberId }" id="mId">
 	</div>
-	
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
 	$("#gRequestCostBtn").click(function(){
 
@@ -210,6 +210,8 @@ input:focus, textarea:focus {
 		}, function(rsp) {
 		    if ( rsp.success ) {
 		        var msg = '결제가 완료되었습니다.';
+		        var icon = 'success';
+		        var title ='피드백을 시작하세요!';
 		        var ggsouNo = $("#ggsouNo").val();
 		        var gosuFeedbackTitle =$("#gosuFeedbackTitle").val();
 		        var gosuFeedbackContent = $("#gosuFeedbackContent").val();
@@ -225,8 +227,14 @@ input:focus, textarea:focus {
 		    } else {
 		        var msg = '결제에 실패하였습니다.';
 		        msg += '에러내용 : ' + rsp.error_msg;
+		        var icon = 'error';
+		        var title ='관리자에게 문의해주세요';
 		    }
-		    alert(msg);
+		    swal({
+		       title: title,
+		        text: msg,
+		      icon: icon
+		      });
 		    
 		
 	})
