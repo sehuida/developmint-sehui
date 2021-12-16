@@ -89,14 +89,10 @@ public class ShareService {
 		map.put("end",end);
 		map.put("type", type);
 		map.put("search", search);
+		map.put("category",category);
 		
-		ArrayList<Share> list = null;
+		ArrayList<Share> list = dao.searchBoard(map);
 		
-		if(category == 1) {
-			list = dao.searchId(map);			
-		}else {
-			list = dao.searchTitle(map);	
-		}
 		
 		int totalCount = dao.shareTotalCount();
 		int totalPage = 0;
@@ -138,4 +134,5 @@ public class ShareService {
 		ShareBoardPage sbp = new ShareBoardPage(list, start, pageNavi);
 		return sbp;
 	}
+
 }

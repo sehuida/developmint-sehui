@@ -100,4 +100,39 @@
 		delete from announcement where announce_no = #{announceNo}
 	</delete>
 	
+	<select id="selectMemberRequestList" parameterType="map" resultType="a">
+		select * from
+		(select rownum as rnum , r.*
+		from (
+		select
+			announce_no as announceNo,
+			member_no as memberNo,
+			company_name as companyName,
+			category,
+			fields,
+			school,
+			work_form as workForm,
+			announce_title as announceTitle,
+			announce_content as announceContent,
+			skills,
+			money,
+			work_place as workPlace,
+			end_date as endDate,
+			veterans,
+			military,
+			write_date as writeDate,
+			career
+		from announcement
+		order by 1 desc )r)rr 
+		where rnum between #{start} and
+		#{end}
+		
+	</select>
+	<select id="announceTotalCount" resultType="_int">
+		select count(*) from announcement
+	</select>
+	
+	
+	
+	
 </mapper>

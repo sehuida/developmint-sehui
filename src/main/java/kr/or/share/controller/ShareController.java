@@ -28,7 +28,6 @@ public class ShareController {
 	
 	@RequestMapping(value="/shareList.do")
 	public String shareList(Model model,int reqPage,int type) {
-		//검색이 들어왔을때
 		ShareBoardPage sbp = service.shareBoardList(reqPage,type);
 		model.addAttribute("list",sbp.getList());
 		model.addAttribute("start",sbp.getStart());
@@ -36,6 +35,17 @@ public class ShareController {
 		model.addAttribute("type",type);
 		return "share/shareList";
 	}
+	@RequestMapping(value="/shareSearch.do")
+	public String shareSearch(Model model,int reqPage,int type,String search,int category) {
+		ShareBoardPage sbp = service.shareBoardList(reqPage,type,category,search);
+		model.addAttribute("list",sbp.getList());
+		model.addAttribute("start",sbp.getStart());
+		model.addAttribute("pageNavi",sbp.getPageNavi());
+		model.addAttribute("type",type);
+		return "share/shareList";		
+	}
+	
+	
 	@RequestMapping(value="/shareWriteFrm.do")
 	public String shareWriteFrm() {
 		return "share/shareWriteFrm";
