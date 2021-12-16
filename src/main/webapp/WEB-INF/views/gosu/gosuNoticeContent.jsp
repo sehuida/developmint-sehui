@@ -197,9 +197,11 @@
 
 		<div class="g-center">
 			<c:if test="${sessionScope.m.memberId ne gNotice.writeId}">
+			<c:if test="${not empty sessionScope.m }">
 				<a id="feedbackListAjax" class="btn btn-info"
 					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">피드백
 					신청하기</a>
+					</c:if>
 				<a class="btn btn-primary"
 					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
 					onclick="history.back();">뒤로가기</a>

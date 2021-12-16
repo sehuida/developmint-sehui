@@ -11,7 +11,11 @@ public class GosuNotice {
 	private String gnoticePhoto;
 	private String gnoticeDate;
 	private String writeImg;
-
+	
+	//검색필터
+	private String type;
+	private String keyword;
+	
 	public String getGnoticeContentBr(){
 		return gnoticeContent.replaceAll("\r\n", "<br>");
 	}
