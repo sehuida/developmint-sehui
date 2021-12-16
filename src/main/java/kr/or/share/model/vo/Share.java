@@ -14,12 +14,12 @@ public class Share {
 	private String filepath;
 	private int readCount;
 	private String memberId;
-	private String profile;
+	private String profiles;
 	private int memberGrade;
 	private int likes;
 	private int comments;
 	
-	public String getType() {
+	public String getBoardType() {
 		if(boardType == 1) {
 			return "사는얘기";
 		}else if(boardType == 2) {
