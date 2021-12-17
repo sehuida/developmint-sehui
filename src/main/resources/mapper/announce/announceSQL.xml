@@ -56,7 +56,7 @@
 			announce_no as announceNo,
 			member_no as memberNo,
 			company_name as companyName,
-			category,
+			a.category,
 			fields,
 			school,
 			work_form as workForm,
@@ -69,8 +69,10 @@
 			veterans,
 			military,
 			write_date as writeDate,
-			career
-		from announcement
+			career,
+			filepath
+		from announcement a
+		join company c using(company_name)
 		where announce_no = #{announceNo}
 	</select>
 	
@@ -100,7 +102,7 @@
 		delete from announcement where announce_no = #{announceNo}
 	</delete>
 	
-	<select id="selectMemberRequestList" parameterType="map" resultType="a">
+	<select id="selectJobSearchList" parameterType="map" resultType="a">
 		select * from
 		(select rownum as rnum , r.*
 		from (

@@ -24,7 +24,7 @@ public class JobSearchService {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("start", start);
 			map.put("end", end);
-			ArrayList<Announce> list = dao.selectMemberRequestList(map);
+			ArrayList<Announce> list = dao.selectJobSearchList(map);
 			
 			int totalCount = dao.selectTotalCount();
 			int totalPage = 0;

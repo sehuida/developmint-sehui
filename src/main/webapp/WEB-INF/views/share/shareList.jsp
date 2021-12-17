@@ -106,7 +106,7 @@
 								<div>
 									<span class="text-muted"># ${sv.boardNo }</span><span class="badge bg-info cateBadge">${sv.type }</span>
 								</div>
-								<a href="/shareBoardView?boardNo=${sv.boardNo }">${sv.boardTitle }</a>
+								<a href="/shareBoardView.do?boardNo=${sv.boardNo }">${sv.boardTitle }</a>
 							</td>
 							<td><i class="bi bi-chat" style="color: #4ecdc4"></i>${sv.comments }</td>
 							<td><i class="bi bi-suit-heart-fill" style="color: #4ecdc4"></i>${sv.likes }</td>

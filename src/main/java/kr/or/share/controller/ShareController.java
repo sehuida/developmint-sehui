@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.share.model.service.ShareService;
 import kr.or.share.model.vo.Share;
 import kr.or.share.model.vo.ShareBoardPage;
+import kr.or.share.model.vo.ShareViewData;
 
 @Controller
 public class ShareController {
@@ -44,7 +45,13 @@ public class ShareController {
 		model.addAttribute("type",type);
 		return "share/shareList";		
 	}
-	
+	@RequestMapping(value="/shareBoardView.do")
+	public String shareBoardView(Model model,int boardNo) {
+		ShareViewData svd = service.shareBoardView(boardNo);
+		model.addAttribute("sv",svd.getS());
+		model.addAttribute("list", svd.getList());
+		return "share/shareView";
+	}
 	
 	@RequestMapping(value="/shareWriteFrm.do")
 	public String shareWriteFrm() {
