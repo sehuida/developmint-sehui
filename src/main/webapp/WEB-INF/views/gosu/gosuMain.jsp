@@ -577,8 +577,8 @@ to {
 												</th>
 											</tr>
 											<tr class="card-header">
-												<th style="color: #78c2ad;">질문자</th>
-												<td style="width: 197px;">${gtl.memberId }</td>
+												<th style="color: #78c2ad;width: 150px;">질문자</th>
+												<td style="width: 177px;">${gtl.memberId }</td>
 											</tr>
 											<tr>
 												<th>내용</th>
@@ -631,8 +631,8 @@ to {
 											</c:if>
 											<c:if test="${sessionScope.m.memberType eq 2 }">
 
-												<th style="color: #78c2ad;">질문자</th>
-												<td style="width: 197px;"><span >${grpsl.requestWriterId }</span></td>
+												<th style="color: #78c2ad; width: 150px;">질문자</th>
+												<td style="width: 177px;"><span >${grpsl.requestWriterId }</span></td>
 											</c:if>
 
 										</tr>
