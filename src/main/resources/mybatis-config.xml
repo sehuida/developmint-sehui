@@ -48,6 +48,7 @@
 		<typeAlias type="kr.or.qna.vo.nonQna" alias="nq"/>
 		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTeamFileVO" alias="pfv"/>
 		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTeamMember" alias="pfm"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTask" alias="ptk"/>
 	</typeAliases>
 	
 	<!-- LONG타입 데이터를 불러오기 위한 type handler 입니다. -->

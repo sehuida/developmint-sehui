@@ -603,8 +603,8 @@ public class ProjectTeamController {
 	  
 	  @RequestMapping(value="/enterMyProject.do") 
 	  public String enterMyProject(Model model, int projectNo, int memberNo ) {
-		  	
-			return "recruitCrue/applyTeamUpdateForm";
+		  
+			return "recruitCrue/projectManageOutline";
 	  }
 	  
 	  
