@@ -91,5 +91,9 @@ public class ContestDao {
 	public int enrollCount(int contestNo) {
 		return sqlSession.selectOne("contest.enrollCount",contestNo);
 	}
+
+	public int deleteContest(int contestNo) {
+		return sqlSession.delete("contest.deleteContest",contestNo);
+	}
 	
 }

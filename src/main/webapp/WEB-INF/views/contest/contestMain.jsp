@@ -15,6 +15,7 @@
 <style>
 .container {
    min-width: 1200px; 
+   
 }
 
 .titleBox{
@@ -85,18 +86,19 @@ overflow: hidden;
 	color: #595959;
 }
 .contestImgBox{
-	
+	perspective: 300px;
 	width: 280px;
 	height: 400px;
 	overflow: hidden;
 	margin-right: 30px;   
+	
 }
 .contestImgBox img{
    height:100%;
    width: 100%;
    border-radius: 5px;
    box-shadow: 0px 1px 1px -2px rgb(0 0 0 / 20%), 0px 0px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
- 
+ 	
 }
   .contestImgBox .item {
 	  width: 280px;

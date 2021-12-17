@@ -50,4 +50,8 @@ public class ShareDao {
 	public int updateReadCount(int boardNo) {
 		return sqlSession.update("share.updateCount",boardNo);
 	}
+
+	public int insertCommentShare(Comment c) {
+		return sqlSession.insert("share.insertComment",c);
+	}
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.or.comment.vo.Comment;
 import kr.or.gosu.vo.Gosu;
 import kr.or.gosu.vo.GosuFeedback;
 import kr.or.gosu.vo.GosuNotice;
@@ -310,6 +311,27 @@ public class GosuDao {
 
 	public int selectGosuNoticeListTotalCountKeyword(Map<String, Object> map) {
 		return sqlSession.selectOne("gosu.selectGosuNoticeListTotalCountKeyword",map);
+	}
+
+	public int insertGosuNoticeComment(Comment cmt) {
+		return sqlSession.insert("gosu.insertGosuNoticeComment",cmt);
+	}
+
+	public ArrayList<Comment> selectGosuNoticeCommentList(int gnn) {
+		List<Comment> list = sqlSession.selectList("gosu.selectGosuNoticeCommentList",gnn);
+		return (ArrayList<Comment>)list;
+	}
+
+	public int insertGosuNoticeCommentRe(Comment cmt) {
+		return sqlSession.insert("gosu.insertGosuNoticeCommentRe",cmt);
+	}
+
+	public int gNoticeCommentUpdateAjax(Comment cmt) {
+		return sqlSession.insert("gosu.gNoticeCommentUpdateAjax",cmt);
+	}
+
+	public int gNoticeCommentDeleteAjax(int commentNo) {
+		return sqlSession.delete("gosu.gNoticeCommentDeleteAjax",commentNo);
 	}
 
 
