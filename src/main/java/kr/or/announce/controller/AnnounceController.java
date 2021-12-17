@@ -77,5 +77,12 @@ public class AnnounceController {
 		return "common/msg";
 	}
 	
+	@RequestMapping(value="/announceView.do")
+	public String announceView(int announceNo, Model model) {
+		Announce announce = service.selectOneAnnounce(announceNo);
+		model.addAttribute("a", announce);
+		return "jobSearch/announceView";
+	}
+	
 	
 }

@@ -383,7 +383,7 @@ public class GosuService {
 
 
 	public GosuNoticeListPageData selectGosuNoticeList(int reqPage) {
-		int numPerPage = 12;
+		int numPerPage = 18;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -541,6 +541,125 @@ public class GosuService {
 		}
 		pageNavi += "</ul>";
 		GosuRequestCostListPageData glpd = new GosuRequestCostListPageData(list, pageNavi, start);
+		return glpd;
+	}
+
+
+	public GosuListPageData selectGosuList2(int reqPage, String keyword, String type) {
+		int numPerPage = 5;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("keyword",keyword);
+		map.put("type",type);
+		ArrayList<Gosu> list = dao.selectGosuListKeyword(map);
+		for (Gosu g : list) {
+			int gosuNo = g.getGsouNo();
+
+			g.setGosuId(dao.selectGosuId(gosuNo));
+			g.setGosuImg(dao.selectGosuImg(gosuNo));
+
+			ArrayList<GosuReview> list2 = dao.selectGosuReviewList(g.getGgsouNo());
+			if(!list2.isEmpty()) {
+				g.setReviewAvg(dao.selectReviewAvg(g.getGgsouNo()));
+				
+			}
+		}
+		int totalCount = dao.selectGosuListTotalCountKeyword(map);
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		} else {
+			totalPage = totalCount / numPerPage + 1;
+		}
+		
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
+		String pageNavi = "<ul class='pagination pagination-lg'>";
+		if(pageNo != 1) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/gosuList.do?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "&lt;</a></li>";
+		}// 페이지 숫자
+		for(int i=0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='page-item active'>";
+				pageNavi += "<a class = 'page-link' href='/gosuList.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			} else {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/gosuList.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음 버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/gosuList.do?reqPage="+pageNo+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		GosuListPageData glpd = new GosuListPageData(list, pageNavi, start);
+		return glpd;
+	}
+
+
+	public GosuNoticeListPageData selectGosuNoticeList2(int reqPage, String keyword, String type) {
+		int numPerPage = 18;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("keyword",keyword);
+		map.put("type",type);
+		ArrayList<GosuNotice> list = dao.selectGosuNoticeListKeyword(map);
+		
+		int totalCount = dao.selectGosuNoticeListTotalCountKeyword(map);
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		} else {
+			totalPage = totalCount / numPerPage + 1;
+		}
+		
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
+		String pageNavi = "<ul class='pagination pagination-lg'>";
+		if(pageNo != 1) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/gosuNoticeList.do?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "&lt;</a></li>";
+		}// 페이지 숫자
+		for(int i=0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='page-item active'>";
+				pageNavi += "<a class = 'page-link' href='/gosuNoticeList.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			} else {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/gosuNoticeList.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음 버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/gosuNoticeList.do?reqPage="+pageNo+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		GosuNoticeListPageData glpd = new GosuNoticeListPageData(list, pageNavi, start);
 		return glpd;
 	}
 

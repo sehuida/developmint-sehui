@@ -282,6 +282,11 @@
     	top: -30px;
     	margin-right: 20px;
     }
+    #pageNavi{
+    	display: flex;
+    	justify-content: center;
+    	margin: 30px 0px;
+    }
 </style>
 <script>
 	$(function(){
@@ -390,7 +395,7 @@
 		<c:forEach items="${list }" var="r" varStatus="i">
 			<c:choose>
 				<c:when test="${r.ceoResume eq 0 }">
-					
+				
 				</c:when>
 				<c:otherwise>
 					
@@ -513,7 +518,7 @@
 			총 0건
 			</c:when>
 			<c:otherwise>
-			총 <p class="count" style="margin: 0; display: inline;">${count }</p>건		
+			총 <p class="count" style="margin: 0; display: inline; color: rgb(78, 205, 196)">${count }</p>건		
 			</c:otherwise>
 		</c:choose>
 		</div>
@@ -643,6 +648,7 @@
 			</c:otherwise>
 		</c:choose>
 		</div>
+		<div id="pageNavi">${pageNavi }</div>
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

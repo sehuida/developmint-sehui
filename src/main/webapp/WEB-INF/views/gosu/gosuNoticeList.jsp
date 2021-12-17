@@ -90,7 +90,6 @@ ul#gallery>a>li dt img {
 	width: 100%;
 	height: 100%;
 	transition: 0.6s ease-in-out;
-	
 }
 
 ul#gallery>a>li:hover img {
@@ -183,11 +182,15 @@ ul#gallery>a>li dd {
 		</h3>
 		<div class="gosu-search">
 
-			<input type="text" value="" placeholder="내용을 입력해주세요"> <select>
-				<option value="" selected disabled hidden>검색</option>
-				<option value="">제목</option>
-				<option value="">내용</option>
+			<input type="text" id="search-content" placeholder="내용을 입력해주세요">
+			<select name="type">
+				<option value="" selected disabled hidden>선택</option>
+				<option value="title">제목</option>
+				<option value="content">내용</option>
 			</select>
+			<button type="button" class="btn btn-primary"
+				style="padding: 15px; margin-left: 5px; margin-bottom: 5px; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;"
+				onclick="getSearchList();">검색</button>
 
 		</div>
 		<c:if test="${sessionScope.m.memberType eq 2}">
@@ -225,8 +228,21 @@ ul#gallery>a>li dd {
 			</div>
 
 		</div>
-		<div id = "pageNavi">${pageNavi }</div>
+		<div id="pageNavi">${pageNavi }</div>
 	</div>
+
+	<script>
+		function getSearchList() {
+
+			var searchContent = $("input[id=search-content]").val();
+			var type = $("select[name=type]").val();
+			console.log(searchContent);
+			console.log(type);
+			
+			location.href = "/gosuNoticeList2.do?reqPage=1&keyword=" + searchContent
+					+ "&type=" + type;
+		}
+	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>
