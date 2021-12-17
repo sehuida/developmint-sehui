@@ -170,13 +170,28 @@
 	font-size: 12px;
 	color:red;
 }
+.contestDelBox{
+	display: flex;
+	justify-content: space-between;
+	align-items: center; 
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container" style="margin-bottom: 100px">
 		<p id="mainTitel"><a href="#" onClick="history.back()"><i class="bi bi-chevron-left"></i></a>공모전 상세보기</p>
-		<div class="contestTitle" style="margin-top:55px;">
-			<p>${c.contestTitle }</p>
+		<div class="contestDelBox">
+			<div class="contestTitle" style="margin-top:55px;">
+				<p>${list.contest.contestTitle }</p>
+			</div>
+			<c:if test="${sessionScope.m.memberId ==  list.contest.memberId}">
+				<div>
+					<form action="/deleteContest.do" class="delForm">
+						<button type="button" class="btn btn btn-info btn-sm delBtn">공모전 삭제하기</button>
+						<input type="hidden" name="contestNo" value="${list.contest.contestNo }">
+					</form>
+				</div>
+			</c:if>
 		</div>
 		<%--공모 이미지+정보 --%>
 		<div class="contestInfoBox">
@@ -212,44 +227,49 @@
 				<%--로그인 됐으면 신청가능 / 로그인 안됐으면 로그인페이지로 이동 --%>
 				<c:choose>
 				<c:when test="${not empty sessionScope.m }">
-				<%--공모 신청 버튼 --%>
-				<div class="clickBtn">
-					<button class="btn btn-primary btn-lg btn-block loginClick" style="margin-top:20px; width: 300px; " data-bs-toggle="modal" data-bs-target="#contestMember">공모 신청</button>
-				</div>
-				<%--공모 신청  Modal --%>
-				<div class="modal fade" id="contestMember" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog  modal-dialog-centered">
-						<div class="modal-content">
-							<div class="modal-body">
-								<form action="/insertContestMember.do" method="post">
-									<p style="font-size: 25px; font-weight: bold">공모전 신청</p>
-									<p style="font-size: 22px;">${list.contest.contestTitle }</p>
-									<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;">
-										<p><span style="font-weight: bold">신청자 ID</span> : ${sessionScope.m.memberId }</p>
-										<p><span style="font-weight: bold">신청자 이름</span> : ${sessionScope.m.memberName }</p>
-										<p><span style="font-weight: bold">신청자 전화번호</span> : ${sessionScope.m.phone }</p>
-										<p><span style="font-weight: bold">신청자 E-mail</span> : ${sessionScope.m.email }</p>
-										<p><span style="font-weight: bold">신청자 Git 주소</span> : </p>
-										<input type="text" class="form-control" name="cmGit">
-									</div>
-									<div style="text-align: right; ">
-										<button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">신청</button>
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
-									</div>
-									<input type="hidden" name="contestNo" value="${list.contest.contestNo }">
-									<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-									<input type="hidden" name="cmStatus" value="1">
-								</form>
+					<c:if test="${list.contest.contestDeadline > today }">
+					<%--공모 신청 버튼 --%>
+					<div class="clickBtn">
+						<button class="btn btn-primary btn-lg btn-block loginClick" style="margin-top:20px; width: 300px; " data-bs-toggle="modal" data-bs-target="#contestMember">공모 신청</button>
+					</div>
+					<%--공모 신청  Modal --%>
+					<div class="modal fade" id="contestMember" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog  modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-body">
+									<form action="/insertContestMember.do" method="post">
+										<p style="font-size: 25px; font-weight: bold">공모전 신청</p>
+										<p style="font-size: 22px;">${list.contest.contestTitle }</p>
+										<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;">
+											<p><span style="font-weight: bold">신청자 ID</span> : ${sessionScope.m.memberId }</p>
+											<p><span style="font-weight: bold">신청자 이름</span> : ${sessionScope.m.memberName }</p>
+											<p><span style="font-weight: bold">신청자 전화번호</span> : ${sessionScope.m.phone }</p>
+											<p><span style="font-weight: bold">신청자 E-mail</span> : ${sessionScope.m.email }</p>
+											<p><span style="font-weight: bold">신청자 Git 주소</span> : </p>
+											<input type="text" class="form-control" name="cmGit">
+										</div>
+										<div style="text-align: right; ">
+											<button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">신청</button>
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
+										</div>
+										<input type="hidden" name="contestNo" value="${list.contest.contestNo }">
+										<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+										<input type="hidden" name="cmStatus" value="1">
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+					</c:if>
 				</c:when>
 				<c:otherwise>
-					<div class="clickBtn">
-					<a href="/loginFrm.do" class="btn btn-primary btn-lg btn-block" style="margin-top:20px; width: 300px; ">공모 신청</a>
-				</div>
+					<c:if test="${list.contest.contestDeadline > today }">
+						<div class="clickBtn">
+							<a href="/loginFrm.do" class="btn btn-primary btn-lg btn-block" style="margin-top:20px; width: 300px; ">공모 신청</a>
+						</div>
+					</c:if>
 				</c:otherwise>
+					
 				</c:choose>
 			</div>
 		</div>
@@ -594,7 +614,20 @@
 			}
 		})
 		
-		
+		$(".delBtn").click(function(){
+			swal({
+	 			  title: "공모전 삭제",
+	 			  text: "공모전을 삭제하시면 지원자들의 정보가 삭제됩니다. 그래도 삭제하시겠습니까?",
+	 			  icon: "warning",
+	 			  buttons: true,
+	 			  dangerMode: true,
+	 			})
+	 			.then((willDelete) => {
+	 			  if (willDelete) {
+	 			   $(".delForm").submit();	
+	 			  }
+	 			});
+		});
 
 	</script>
 </body>

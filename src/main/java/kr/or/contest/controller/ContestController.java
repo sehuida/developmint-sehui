@@ -119,6 +119,8 @@ public class ContestController {
 		ContestList list = service.contestView(contestNo);
 		model.addAttribute("list",list);
 		model.addAttribute("enrollCount",list.getEnrollCount());
+		LocalDate today = LocalDate.now();
+		model.addAttribute("today",today);
 		return "contest/contestView";
 	}
 	
@@ -215,6 +217,19 @@ public class ContestController {
 		ArrayList<Contest> list = service.searchContest(contestDeadline);
 		return new Gson().toJson(list);
 	}
+	
+	//공모신청
+		@RequestMapping(value="/deleteContest.do")
+		public String deleteContest(int contestNo, Model model) {
+			int result = service.deleteContest(contestNo);
+			if(result>0) {
+				model.addAttribute("msg","공모전 삭제 완료");	
+			}else {
+				model.addAttribute("msg","공모전 삭제 실패");
+			}
+			model.addAttribute("loc","/contestMain.do");
+			return "common/msg";
+		}
 	
 }
 

@@ -15,6 +15,7 @@
 <style>
 .container {
    min-width: 1200px; 
+   
 }
 
 .titleBox{
@@ -85,17 +86,19 @@ overflow: hidden;
 	color: #595959;
 }
 .contestImgBox{
-	
+	perspective: 300px;
 	width: 280px;
 	height: 400px;
 	overflow: hidden;
 	margin-right: 30px;   
+	
 }
 .contestImgBox img{
    height:100%;
    width: 100%;
    border-radius: 5px;
- 
+   box-shadow: 0px 1px 1px -2px rgb(0 0 0 / 20%), 0px 0px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+ 	
 }
   .contestImgBox .item {
 	  width: 280px;
@@ -136,11 +139,11 @@ overflow: hidden;
 		font-weight: bold;
 		text-decoration: none;
 		color: #fff;
-		padding: 10px;
-		font-size: 25px;
-		border: 3px solid #fff;
+		padding: 7px;
+		font-size: 23px;
+		border: 2px solid #fff;
 		border-radius : 7px;;
-		margin-left: 65px;
+		margin-left: 70px;
 	}
 	.contestBack2>a:hover{
 		text-decoration: underline;
@@ -195,7 +198,7 @@ overflow: hidden;
 			<%--공모전 이미지 --%>
 			<div class="contestImgBox">
 				<div class="front item">
-						<img src="/resources/img/contest/${nc.contestImg }">
+					<img src="/resources/img/contest/${nc.contestImg }">
 				</div>
 				<div class="back item">
 					<div class="contestBack" style="background-image: url(/resources/img/contest/${nc.contestImg }) ">

@@ -135,6 +135,10 @@ public class ContestService {
 	public ArrayList<Contest> searchContest(String contestDeadline) {
 		return dao.searchContest(contestDeadline);
 	}
+
+	public int deleteContest(int contestNo) {
+		return dao.deleteContest(contestNo);
+	}
 }
 
 

@@ -92,7 +92,8 @@
 			<textarea id="contestContent" name="contestContent" class="form-control" style="width:1000px; height: 600px;resize: none;"></textarea>
 			<p><i class="bi bi-card-image" style="color:#4ECDC4"></i> 포스터 이미지</p>
 			<input type="file" id="formFile" name="files" class="form-control" style="width:1000px;">
-			<p style="font-size: 16px;">공모전은 관리자 승인 후 등록됩니다.</p>
+			<p style="font-size: 16px; margin-bottom: 0px;">공모전은 관리자 승인 후 등록됩니다.</p>
+			<p style="font-size: 16px; margin-top: 0px; color:#CE0000">(승인이 완료되면 삭제만 가능하니 한 번 더 확인해 주시길 바랍니다.)</p>
 			<input type="button" class="btn btn-primary submitBtn" value="등록하기" style="width:1000px;">
 		
 			<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">

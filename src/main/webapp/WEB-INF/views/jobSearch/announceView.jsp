@@ -12,6 +12,7 @@
 		padding-left: 200px;
 		padding-bottom: 50px;
 		overflow: hidden;
+		margin-top: 100px;
 	}
 	.announceTitle{
 		margin-bottom: 0px;
@@ -43,7 +44,6 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		회사상세뷰
 		<div class="header">
 			<div class="announceTitle">
 				<p>${a.announceTitle }</p>

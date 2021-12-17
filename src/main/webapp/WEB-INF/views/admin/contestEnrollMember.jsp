@@ -277,7 +277,7 @@
 						}
 						var checkConfirm = confirm("선택 회원을 반려하시겠습니까?");
 						if(checkConfirm){
-							location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=3&contestNo="+contestNo+"&date=${date}email=";
+							location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=3&contestNo="+contestNo+"&date=${date}";
 						}
 						
 						

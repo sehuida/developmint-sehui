@@ -77,4 +77,37 @@
 
 		order by 1 desc)sb)shb where rnum between #{start} and #{end}      
    </select>
+   <select id="shareBoardView" parameterType="_int" resultType="sv">
+		select 
+				    member_no as memberNo,
+				    board_no as boardNo,
+				    board_title as boardtitle,
+				    board_content as boardContent,
+				    board_type as boardType,
+				    reg_date as regDate,
+				    filename,
+				    s.filepath,
+				    read_count as readCount,
+				    member_id as memberId,
+				    m.filepath as profiles,
+				    member_grade as memberGrade,
+				    (select count(*) from likes lk where s.board_no=lk.board_no) as likes,
+				    (select count(*) from comments c where c.board_no=s.board_no and c.board_type=2) as comments
+				from share_board s left join member m using (member_no) where s.board_no=#{boardNo}   
+   </select>
+   <select id="shareComments" parameterType="_int" resultType="cm">
+		select
+		    comment_no as commentNo,
+		    member_id as memberId,
+		    comment_content as commentContent,
+		    reg_date as regDate,
+		    board_no as boradNO,
+		    board_type as boardType,
+		    comment_type as commentType,
+		    comment_ref as commentRef
+		from comments where board_type = 2 and board_no=#{boardNo}   		
+   </select>
+   <update id="updateCount" parameterType="_int">
+		update share_board set read_count = read_count+1 where board_no=#{boardNo}
+   </update>
 </mapper>
