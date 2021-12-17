@@ -330,9 +330,7 @@
 					<div>
 						<p>${gosu.gosuExplainBr }</p>
 					</div>
-					<div class="g-plus">
-						<a href="">더보기</a>
-					</div>
+				
 				</div>
 
 				<div class="gosu-photos">
@@ -345,9 +343,7 @@
 							</c:forEach>
 						</ul>
 					</div>
-					<div class="g-plus">
-						<a href="">더보기</a>
-					</div>
+					
 				</div>
 
 				<div class="gosu-review">
@@ -419,9 +415,7 @@
 								</div>
 							</c:forEach>
 						</div>
-						<div style="display: flex; justify-content: center;">
-							<a class="btn btn-primary">리뷰 더보기</a>
-						</div>
+						
 						</c:otherwise>
 					</c:choose>
 						
@@ -456,9 +450,7 @@
 							</c:forEach>
 							
 						</div>
-						<div style="display: flex; justify-content: center;">
-							<a class="btn btn-primary">후기 더보기</a>
-						</div>
+					
 					</div>
 						</c:otherwise>
 					</c:choose>
@@ -493,9 +485,7 @@
 							</div>
 						</c:forEach>
 					</div>
-					<div style="display: flex; justify-content: center;">
-						<a class="btn btn-primary">더보기</a>
-					</div>
+					
 				</div>
 				<div class="gosu-feedback">
 

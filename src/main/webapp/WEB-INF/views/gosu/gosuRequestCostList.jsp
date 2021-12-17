@@ -157,6 +157,7 @@ input:focus, textarea:focus {
 
 				</c:when>
 				<c:otherwise>
+				
 					<table>
 
 

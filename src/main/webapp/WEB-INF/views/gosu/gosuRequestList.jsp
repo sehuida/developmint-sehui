@@ -33,7 +33,7 @@ input:focus, textarea:focus {
 .requestList {
 	display: flex;
 	justify-content: center;
-	margin-top: 100px;
+	
 	margin-bottom: 50px;
 }
 
@@ -62,7 +62,6 @@ input:focus, textarea:focus {
 .g-one-tbl {
 	width: 90%;
 	border: 1px solid rgb(211, 211, 211);
-
 	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
 }
 
@@ -90,27 +89,31 @@ input:focus, textarea:focus {
 		<h3>
 			<span style="color: rgb(78, 205, 196);">디벨로민트</span>에서 연결된 요청리스트
 		</h3>
-		
+		<div style="display: flex;justify-content: center;margin-top: 100px;">
+			<div style="padding: 20px;width: 1150px;">
+				<span style="font-weight: 900;"><a href="/gosuRequestList.do?reqPage=1" class="card-link" >전체보기</a><a class="card-link">보낸 요청서</a><a  class="card-link">보내지 않은 요청서</a></span>
+			</div>
+		</div>
 		<div class="requestList">
+
 			<table>
 				<c:forEach items="${memberRequestList }" var="mrl" varStatus="i">
 					<tr>
 						<td><a href="/gosuRequestContent.do?mrn=${mrl.requestNo }">
 								<table class="g-one-tbl">
 									<tr>
-										<th rowspan="2">
-										<c:if test="${empty mrl.requestWriterImg }">
-										<img src="/resources/img/gosu/g_img_basic.png">
-										</c:if>
-										<c:if test="${not empty mrl.requestWriterImg }">
-										<img src="/resources/upload/member/${mrl.requestWriterImg }">
-										</c:if>
-										</th>
-										<th><span style="color: rgb(78, 205, 196);padding:0;">${mrl.requestWriterId }</span></th>
+										<th rowspan="2"><c:if
+												test="${empty mrl.requestWriterImg }">
+												<img src="/resources/img/gosu/g_img_basic.png">
+											</c:if> <c:if test="${not empty mrl.requestWriterImg }">
+												<img src="/resources/upload/member/${mrl.requestWriterImg }">
+											</c:if></th>
+										<th><span style="color: rgb(78, 205, 196); padding: 0;">${mrl.requestWriterId }</span></th>
 										<td style="text-align: right;">${mrl.requsetDate}</td>
 									</tr>
 									<tr>
-										<td colspan="2" style="background-color:  rgba(239, 239, 239, 0.3);">${mrl.requestContent7}</td>
+										<td colspan="2"
+											style="background-color: rgba(239, 239, 239, 0.3);">${mrl.requestContent7}</td>
 									</tr>
 								</table>
 						</a></td>
@@ -122,7 +125,7 @@ input:focus, textarea:focus {
 
 		</div>
 
-		 <div id = "pageNavi">${pageNavi }</div>
+		<div id="pageNavi" style="margin-bottom: 100px;">${pageNavi }</div>
 
 		<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
