@@ -200,15 +200,18 @@
 			<div>
 				<c:choose>
 					<c:when test="${empty commentList }">
-				
-				</div>	
-				<div style="padding: 20px;text-align: center; ">
-					<h2 style="color:gray; font-size: 20px;font-weight: 900;line-height: 200px;">작성된 댓글이 없습니다.</h2>
-				</div>
-					
-					</c:when>
-					<c:otherwise>
-					<c:forEach items="${commentList }" var="cl" varStatus="i">
+			</div>
+			<div style="padding: 20px; text-align: center;">
+				<img src="/resources/img/member/user.png"
+					style="border-radius: 50%; width: 70px;margin-top:70px;">
+				<h2
+					style="color: gray; font-size: 20px; font-weight: 900; line-height: 100px;">작성된
+					댓글이 없습니다.</h2>
+			</div>
+
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${commentList }" var="cl" varStatus="i">
 					<c:choose>
 						<c:when test="${cl.commentType eq 1}">
 							<table style="margin: 30px;">
@@ -273,13 +276,13 @@
 							<c:forEach items="${commentList }" var="clre" varStatus="i">
 								<c:if
 									test="${(clre.commentType eq 2) && (clre.commentRef eq cl.commentNo)}">
-									<table style="margin: 30px; ">
+									<table style="margin: 30px;">
 										<tr>
 											<td rowspan="3"
 												style="width: 200px; text-align: right; padding: 10px;">
-												<img
-										src="/resources/img/gosu/g-dada.png" style="width: 20px;">
-												</td>
+												<img src="/resources/img/gosu/g-dada.png"
+												style="width: 20px;">
+											</td>
 										</tr>
 										<tr style="text-align: center;">
 											<td style="width: 200px; text-align: left;"><c:if
@@ -321,16 +324,17 @@
 
 					</c:choose>
 				</c:forEach>
-					</c:otherwise>
-				</c:choose>
-				
+			</c:otherwise>
+			</c:choose>
 
 
-			</div>
+
 		</div>
-		<c:if test="${not empty sessionScope.m }">
-		<div style="display: flex;justify-content: center;">
-			<div class="card bg-light mb-3" style="padding: 20px; width: 1200px;min-width: 1200px;">
+	</div>
+	<c:if test="${not empty sessionScope.m }">
+		<div style="display: flex; justify-content: center;">
+			<div class="card bg-light mb-3"
+				style="padding: 20px; width: 1200px; min-width: 1200px;">
 				<table>
 					<tr style="text-align: center;">
 						<td style="width: 200px;"><c:if
@@ -362,51 +366,51 @@
 				</table>
 
 			</div>
-			</div>
+		</div>
+	</c:if>
+	<div class="g-center">
+		<c:if test="${sessionScope.m.memberId ne gNotice.writeId}">
+			<c:if test="${not empty sessionScope.m }">
+				<a id="feedbackListAjax" class="btn btn-info"
+					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">피드백
+					신청하기</a>
+			</c:if>
+			<a class="btn btn-primary"
+				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
+				onclick="history.back();">뒤로가기</a>
 		</c:if>
-		<div class="g-center">
-			<c:if test="${sessionScope.m.memberId ne gNotice.writeId}">
-				<c:if test="${not empty sessionScope.m }">
-					<a id="feedbackListAjax" class="btn btn-info"
-						style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">피드백
-						신청하기</a>
-				</c:if>
-				<a class="btn btn-primary"
-					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
-					onclick="history.back();">뒤로가기</a>
-			</c:if>
-			<c:if test="${sessionScope.m.memberId eq gNotice.writeId}">
-				<a href="/noticeContentUpdateFrm.do?gnn=${gNotice.gnoticeNo }"
-					class="btn btn-info"
-					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
-					id="commentUpdate">수정하기</a>
-				<a href="/noticeContentdelete.do?gnn=${gNotice.gnoticeNo }"
-					class="btn btn-primary"
-					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
-					id="commentDelete">삭제하기</a>
-			</c:if>
+		<c:if test="${sessionScope.m.memberId eq gNotice.writeId}">
+			<a href="/noticeContentUpdateFrm.do?gnn=${gNotice.gnoticeNo }"
+				class="btn btn-info"
+				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
+				id="commentUpdate">수정하기</a>
+			<a href="/noticeContentdelete.do?gnn=${gNotice.gnoticeNo }"
+				class="btn btn-primary"
+				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
+				id="commentDelete">삭제하기</a>
+		</c:if>
 
-		</div>
-		<div class="hrm-wrap" style="display: none; margin: 0;">
-			<div id="hrm-modal">
-				<div class="hrm-content">
-					<br>
-					<div class="g-style">
+	</div>
+	<div class="hrm-wrap" style="display: none; margin: 0;">
+		<div id="hrm-modal">
+			<div class="hrm-content">
+				<br>
+				<div class="g-style">
 
-						<c:if test="${not empty gosuWriteList}">
-							<a class="btn btn-success" style="font-size: 30px;"
-								href="/gosuContent.do?gNo=${gosuWriteList.ggsouNo}">${gosuWriteList.gosuTitle }</a>
-						</c:if>
-						<c:if test="${empty gosuWriteList}">
-							<span style="font-size: 30px;">아직 고수님께서 소개글을 등록하지 않았네요!</span>
-						</c:if>
-					</div>
-				</div>
-				<div class="hrm-btn-wrap">
-					<a id="hrm-close" class="btn btn-outline-success">확인</a>
+					<c:if test="${not empty gosuWriteList}">
+						<a class="btn btn-success" style="font-size: 30px;"
+							href="/gosuContent.do?gNo=${gosuWriteList.ggsouNo}">${gosuWriteList.gosuTitle }</a>
+					</c:if>
+					<c:if test="${empty gosuWriteList}">
+						<span style="font-size: 30px;">아직 고수님께서 소개글을 등록하지 않았네요!</span>
+					</c:if>
 				</div>
 			</div>
+			<div class="hrm-btn-wrap">
+				<a id="hrm-close" class="btn btn-outline-success">확인</a>
+			</div>
 		</div>
+	</div>
 
 	</div>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -454,11 +458,11 @@
 		$(".commentDelete").click(function() {
 			var commentNo = $(this).prev().prev().val();
 			console.log(commentNo);
-			
+
 			$.ajax({
 				url : "/gNoticeCommentDeleteAjax.do",
 				data : {
-					"commentNo":commentNo
+					"commentNo" : commentNo
 				},
 				success : function(data) {
 					if (data > 0) {
@@ -477,7 +481,7 @@
 					location.reload();
 				}
 			});
-			
+
 		});
 
 		$(".g-commentRe").click(function() {

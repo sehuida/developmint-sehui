@@ -62,8 +62,8 @@ input:focus, textarea:focus {
 .g-one-tbl {
 	width: 90%;
 	border: 1px solid rgb(211, 211, 211);
-	
-	box-shadow: rgba(0, 0, 0, 0.4) 3PX 3PX 3PX 3PX;
+
+	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
 }
 
 .g-one-tbl:hover {
