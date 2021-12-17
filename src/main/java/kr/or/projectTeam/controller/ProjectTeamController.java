@@ -601,4 +601,11 @@ public class ProjectTeamController {
 		  return "member/swalMsg"; 
 	  }
 	  
+	  @RequestMapping(value="/enterMyProject.do") 
+	  public String enterMyProject(Model model, int projectNo, int memberNo ) {
+		  	
+			return "recruitCrue/applyTeamUpdateForm";
+	  }
+	  
+	  
 }
