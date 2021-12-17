@@ -19,8 +19,9 @@
 		margin-top: 50px;
 	}
 	.pageWrap{
-		border: 2px solid #4ecdc4;
 		padding: 40px;
+   		border-radius: 10px;
+   		box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	}
 	.viewHead,.viewMember{
 		padding-top: 30px;
@@ -60,6 +61,9 @@
 	.likeBtn{
 		text-align: center;
 	}
+	.commentWrap{
+		display: flex;
+	}
 </style>
 </head>
 <body>
@@ -68,7 +72,7 @@
 		<div class="pageCategory">
 			<span style="font-size: 25px; font-family: NotoBold;">${sv.type }</span><img class="cateImg" src="/resources/img/shareBoard/search.png">				
 		</div>
-		<div class="pageWrap" style="marigin-top: 30px;">
+		<div class="pageWrap" style="margin-top: 50px;">
 			<div class="viewHead">
 				<div>
 					<span style="font-weight: Bold; margin-right: 15px; font-size: 22px;">${sv.boardTitle }</span><span class="badge bg-info cateBadge">${sv.type }</span>				
@@ -122,6 +126,10 @@
 			</div>
 			<div class="likeBtn">
 			  <button type="button" class="btn btn-primary"><i class="bi bi-hand-thumbs-up-fill"></i>좋아요</button>
+			  <c:if test="${sessionScope.m.memberId eq sv.memberId}">
+			  	<a href="#" class="btn btn-info">수정</a>
+			  	<a href="#" class="btn btn-info">삭제</a>
+			  </c:if>
 			</div>
 		</div><!-- 작성글 출력문 종료 -->
 		<!-- 회원만 댓글 달 수 있게 제약조건 -->
@@ -141,11 +149,22 @@
 		<div class="comments">
 			<c:forEach items="${list }" var="sc" varStatus="i">
 				<c:if test="${sc.commentType eq 1 }">
+					<!-- 댓글중 타입 1인것들 전체 출력하기 -->
 					<div class="commentWrap">
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
+						<div>
+							<i class="bi bi-person-circle" style="color:#4ecdc4; font-size: 4rem;"></i>	
+						</div>
+						<div>
+							<div>${sv.memberId }</div>
+							<div>${sv.regDate }</div>
+						</div>
+						<div>
+							<p>${sc.commentContent }</p>
+					   		<textarea rows="2" name="commentContent" style="display: none;">${sc.commentContent }</textarea>
+						</div>
+						<div>
+							
+						</div>
 					</div>
 				</c:if>
 			</c:forEach>
