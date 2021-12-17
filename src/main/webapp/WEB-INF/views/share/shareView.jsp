@@ -41,9 +41,11 @@
 		margin-right: 20px;
 	}
 	.comments{
-		border: 1px solid #aeaeae;
-		width: 800px;
-		margin: 0 auto;
+		border: 2px solid #4ecdc4;
+		border-radius: 10px;
+		width: 1100px;
+		margin: 50px auto;
+		padding: 20px;
 	}
 	.inputCommentBox{
 		width: 800px;
@@ -63,6 +65,27 @@
 	}
 	.commentWrap{
 		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		/*border: 1px solid #aeaeae; */
+	}
+	.recommentWrap{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-left: 60px;
+	}
+	.commentContent{
+		width: 400px;
+	}
+	.commentData{
+		margin-left: -50px;
+	}
+	.commentData>*{
+		margin-bottom: 5px;
+	}
+	.recommentForm{
+		display: none;
 	}
 </style>
 </head>
@@ -127,18 +150,20 @@
 			<div class="likeBtn">
 			  <button type="button" class="btn btn-primary"><i class="bi bi-hand-thumbs-up-fill"></i>좋아요</button>
 			  <c:if test="${sessionScope.m.memberId eq sv.memberId}">
+			  	<!-- 수정 삭제 구현해야함-->
 			  	<a href="#" class="btn btn-info">수정</a>
-			  	<a href="#" class="btn btn-info">삭제</a>
+			  	<a href="/deleteBoard.do?boardNo=${sv.boardNo }" class="btn btn-info">삭제</a>
 			  </c:if>
 			</div>
 		</div><!-- 작성글 출력문 종료 -->
 		<!-- 회원만 댓글 달 수 있게 제약조건 -->
 		<c:if test="${not empty sessionScope.m }">
-		<form action="/insertCommentShare.do" method="post">
+		<form action="/shareInsertComment.do" method="post">
 			<div class="inputCommentBox">
 				<i class="bi bi-person-circle" style="color:#4ecdc4; font-size: 4rem;"></i>
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-				<input type="hidden" name="boardNo" value="${n.noticeNo }">
+				<input type="hidden" name="boardNo" value="${sv.boardNo }">
+				<input type="hidden" name="commentType" value="1">
 				<textarea name="commentContent" class="form-control" rows="3"></textarea>
 				<div style="width:150px;">
 					<button type="submit" class="btn btn-primary btn-lg btn-block">등록</button>					
@@ -154,22 +179,76 @@
 						<div>
 							<i class="bi bi-person-circle" style="color:#4ecdc4; font-size: 4rem;"></i>	
 						</div>
-						<div>
-							<div>${sv.memberId }</div>
-							<div>${sv.regDate }</div>
+						<div class="commentData">
+							<div><span class="text-info">${sc.memberId }</span></div>
+							<div>
+								<span>${sc.regDate }</span>
+								<!-- 로그인 시에만 대댓글 달 수 있음 -->
+								<c:if test="${not empty sessionScope.m }">
+								<a href="javascript:void(0)" class="recShow btn btn-secondary btn-sm">답글달기</a>
+								</c:if>
+							</div>
 						</div>
-						<div>
+						<div class="commentContent">
 							<p>${sc.commentContent }</p>
 					   		<textarea rows="2" name="commentContent" style="display: none;">${sc.commentContent }</textarea>
 						</div>
 						<div>
-							
+							<c:if test="${not empty sessionScope.m }">
+								<button class="btn btn-danger"><i class="bi bi-cone"></i>신고하기</button>						  														
+							</c:if>					  							
+							<c:if test="${sessionScope.m.memberId eq sc.memberId }">
+							  	<button class="btn btn-info">수정</button>		
+							  	<button class="btn btn-info">삭제</button>
+							</c:if>
 						</div>
 					</div>
+					<c:if test="${not empty sessionScope.m }">
+						<form action="/insertComment.do" class="recommentForm">						
+							<input type="hidden" name="commentType" value="2">
+							<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+							<input type="hidden" name="boardNo" value="${s.boardNo }">
+							<input type="hidden" name="commentRef" value="${sc.commentNo }">
+							<textarea name="commentContent" class="form-control" style="width: 70%; margin: 0 auto;"></textarea>
+							<button type="submit" class="btn btn-outline-primary">등록</button>
+							<button type="reset" class="btn btn-outline-danger recCancel">취소</button>
+						</form>							
+					</c:if>
+					<!-- 로그인이 되어있는 경우 대댓글 작성용 form태그 미리 생성 -->		
 				</c:if>
-			</c:forEach>
-		</div>
+				<c:forEach items="${list }" var="scc" varStatus="i">
+					<c:if test="${scc.commentType eq 2 && sc.commentNo eq scc.commentRef}">
+						<div class="recommentWrap">
+							<div>
+								<i class="bi bi-arrow-return-right" style="font-size: 3rem; color: #4ecdc4; "></i>
+							</div>
+							<div class="commentData">
+								<div><span class="text-info">${scc.memberId }</span></div>
+								<div>${scc.regDate }</div>
+							</div>
+							<div class="commentContent">
+								<p>${scc.commentContent }</p>
+						   		<textarea rows="2" name="commentContent" style="display: none;">${scc.commentContent }</textarea>
+							</div>
+							<div>	
+								<c:if test="${not empty sessionScope.m }">
+									<button class="btn btn-danger"><i class="bi bi-cone"></i>신고하기</button>						  														
+								</c:if>
+								<c:if test="${sessionScope.m.memberId eq scc.memberId }">
+								  	<button class="btn btn-info">수정</button>		
+								  	<button class="btn btn-info">삭제</button>
+								</c:if>
+							</div>
+						</div>						
+					</c:if>
+				</c:forEach><!-- 대댓글 반복문 끝 -->
+			</c:forEach><!-- 전체댓글 반복문 끝 -->
+		</div><!-- 전체 댓글 출력 -->
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<script>
+//수정,삭제 onclick 이벤트로 보내주기 swalMsg 이용!
+
+</script>
 </body>
 </html>

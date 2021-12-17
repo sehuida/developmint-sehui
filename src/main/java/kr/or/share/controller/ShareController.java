@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.comment.vo.Comment;
 import kr.or.share.model.service.ShareService;
 import kr.or.share.model.vo.Share;
 import kr.or.share.model.vo.ShareBoardPage;
@@ -160,6 +161,23 @@ public class ShareController {
 			model.addAttribute("title", "변경실패");
 			model.addAttribute("msg", "글 작성에 실패하셨습니다.");
 			model.addAttribute("loc", "/shareList.do?reqPage=1&type=1");
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";
+	}
+	
+	@RequestMapping(value="/shareInsertComment.do")
+	public String insertCommentShare(Comment c,Model model) {
+		int result = service.insertCommentShare(c);
+		if(result>0) {
+			model.addAttribute("title", "등록성공");
+			model.addAttribute("msg", "댓글 작성이 완료 되셨습니다.");
+			model.addAttribute("loc", "/shareBoardView.do?boardNo="+c.getBoardNo());
+			model.addAttribute("icon", "success");			
+		}else {
+			model.addAttribute("title", "등록실패");
+			model.addAttribute("msg", "댓글 작성에 실패하셨습니다.");
+			model.addAttribute("loc", "/shareBoardView.do?boardNo="+c.getBoardNo());
 			model.addAttribute("icon", "warning");
 		}
 		return "member/swalMsg";

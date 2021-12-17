@@ -144,5 +144,10 @@ public class ShareService {
 		ShareViewData svd = new ShareViewData(list, s);
 		return svd;
 	}
+	
+	@Transactional
+	public int insertCommentShare(Comment c) {
+		return dao.insertCommentShare(c);
+	}
 
 }
