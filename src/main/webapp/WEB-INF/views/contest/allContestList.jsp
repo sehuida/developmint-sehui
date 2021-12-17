@@ -45,22 +45,77 @@
 		margin: 0;
 	}
 	.contestImgBox{
-		box-shadow: 0px 1px 5px -2px rgb(0 0 0 / 20%), 0px 0px 4px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+	
+	width: 280px;
+	height: 400px;
+	overflow: hidden;
+	margin-right: 30px;   
+}
+.contestImgBox img{
+   height:100%;
+   width: 100%;
+   border-radius: 5px;
+	box-shadow: 0px 1px 1px -2px rgb(0 0 0 / 20%), 0px 0px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+}
+  .contestImgBox .item {
+	  width: 280px;
+	  height: 400px;
+      backface-visibility: hidden;
+      transition: 1s;
+      
+    }
+    .contestImgBox .item.front {
+      position: absolute;
+      transform: rotateY(0deg);
+    }
+
+    .contestImgBox:hover .item.front {
+      transform: rotateY(180deg);
+    }
+    .contestImgBox .item.back {
+      transform: rotateY(-180deg);
+    }
+    .contestImgBox:hover .item.back {
+      transform: rotateY(0deg);
+    }
+    .contestBack{
+    	width: 280px;
+	  	height: 400px;
+	  	background-size : contain;
+	  	border-radius: 5px;
+    }
+	.contestBack2{
 		width: 280px;
-		height: 400px;
-		overflow: hidden;
-		margin-right: 30px;   
+	  	height: 400px;
+	  	background-size : contain;
+		border-radius: 5px;
+		background: rgba(0, 0, 0, 0.7);
+		padding-top: 75px;
 	}
-	.contestImgBox img{
-	   height:100%;
-	   width: 100%;
-	   object-fit:cover;   
-	   transform:scale(1.0);        
-	   transition: transform .5s; 
+	.contestBack2>a{
+		font-weight: bold;
+		text-decoration: none;
+		color: #fff;
+		padding: 7px;
+		font-size: 23px;
+		border: 2px solid #fff;
+		border-radius : 7px;;
+		margin-left: 70px;
 	}
-	.contestImgBox img:hover{ 
-	   transform:scale(1.1);
-	   transition: transform .5s;
+	.contestBack2>a:hover{
+		text-decoration: underline;
+		color: #fff;
+		
+	}
+	.contestBack2>p{
+		color:#fff;
+		font-size: 20px;
+		text-align: center;
+
+	}
+	.contestBack2>p>span{
+		font-weight: bold
+		
 	}
 	#pageNavi{
 		margin-top: 50px;
@@ -108,8 +163,32 @@
 			<div>
 				<%--공모전 이미지 --%>
 				<div class="contestImgBox">
-					<a href="/contestView.do?contestNo=${nc.contestNo }"><img src="/resources/img/contest/${nc.contestImg }"></a>
+				<div class="front item">
+					<img src="/resources/img/contest/${nc.contestImg }">
 				</div>
+				<div class="back item">
+					<div class="contestBack" style="background-image: url(/resources/img/contest/${nc.contestImg }) ">
+						<div class="contestBack2" >
+							<c:choose>
+								<c:when test="${nc.contestType == 1}">
+									<p><i class="bi bi-award" style="margin-right: 5px;"></i><span>공모유형</span> : 기획</p>
+								</c:when>
+								<c:when test="${nc.contestType == 2}">
+									<p><i class="bi bi-award" style="margin-right: 5px;"></i><span>공모유형</span> : 개발</p>
+								</c:when>
+								<c:otherwise>
+									<p><i class="bi bi-award" style="margin-right: 5px;"></i><span>공모유형</span> : 디자인</p>
+								</c:otherwise>
+							</c:choose>
+							<p><i class="bi bi-trophy" style="margin-right: 5px;"></i><span>1등 시상금</span> : ${nc.contestPrize } 만원</p>
+							<p style="margin-bottom: 80px;"><i class="bi bi-eye" style="margin-right: 5px;"></i><span>조회수</span> : ${nc.contestCount } 회</p>
+							<a href="/contestView.do?contestNo=${nc.contestNo }">
+								상세보기 <i class="bi bi-hand-index"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
 				<%--공모전 제목(제목이 16글자가 넘어가면 뒤에는 ...으로 표시 --%>
 				<c:choose>
 					<c:when test="${fn:length(nc.contestTitle) > 16}">
