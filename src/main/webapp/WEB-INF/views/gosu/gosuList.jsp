@@ -45,7 +45,7 @@
 }
 
 .gosu>button {
-	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
+	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
 }
 
 .gosu table {
