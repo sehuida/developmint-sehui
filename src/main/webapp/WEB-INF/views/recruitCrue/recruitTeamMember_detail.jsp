@@ -111,7 +111,7 @@
 	                    		</c:when>
 	                    		<c:otherwise>
 	                    			<button type="button" class="btn btn-primary" disabled="disabled">모집 마감</button>
-	                    			<a href="enterMyProject.do?projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}"><button type="button" class="btn btn-primary">내프로젝트()</button></a>
+	                    			<a href="enterMyProject.do?projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}"><button type="button" class="btn btn-primary">내프로젝트(임시)</button></a>
 	                    		</c:otherwise>
 	                    	</c:choose>
 	                    </c:if>
