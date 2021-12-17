@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import kr.or.comment.vo.Comment;
 import kr.or.gosu.service.GosuService;
 import kr.or.gosu.vo.Gosu;
 import kr.or.gosu.vo.GosuFeedback;
@@ -473,8 +474,10 @@ public class GosuController {
 	public String gosuNoticeContent(int gnn, Model model) {
 		GosuNotice gNotice = service.selectGosuNoticeOne(gnn);
 		Gosu gosuWriteList = service.selectgosuWriteList(gNotice.getWriteId());
+		ArrayList<Comment> commentList = service.selectGosuNoticeCommentList(gnn);
 		model.addAttribute("gNotice", gNotice);
 		model.addAttribute("gosuWriteList", gosuWriteList);
+		model.addAttribute("commentList", commentList);
 
 		return "gosu/gosuNoticeContent";
 	}
@@ -774,7 +777,7 @@ public class GosuController {
 			File file = new File(path);
 			response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로
 																								// 쓰이는지를 알려주는 헤더
-			System.out.println("filename = "+file.getName());
+			System.out.println("filename = " + file.getName());
 			FileInputStream fileInputStream = new FileInputStream(path); // 파일 읽어오기
 			OutputStream out = response.getOutputStream();
 
@@ -788,5 +791,39 @@ public class GosuController {
 		} catch (Exception e) {
 			throw new Exception("download error");
 		}
+	}
 
-}}
+	@ResponseBody
+	@RequestMapping(value = "/gNoticeCommentAjax.do")
+	public int gNoticeCommentAjax(int boardNo, int boardType, int commentType, String memberId, String commentContent) {
+		Comment cmt = new Comment();
+		cmt.setBoardNo(boardNo);
+		cmt.setBoardType(boardType);
+		cmt.setCommentType(commentType);
+		cmt.setMemberId(memberId);
+		cmt.setCommentContent(commentContent);
+		int result = service.insertGosuNoticeComment(cmt);
+		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/gNoticeCommentReAjax.do")
+	public int gNoticeCommentReAjax(Comment cmt) {
+		int result = service.insertGosuNoticeCommentRe(cmt);
+		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/gNoticeCommentUpdateAjax.do")
+	public int gNoticeCommentUpdateAjax(Comment cmt) {
+		int result = service.gNoticeCommentUpdateAjax(cmt);
+		return result;
+	
+	}
+	@ResponseBody
+	@RequestMapping(value = "/gNoticeCommentDeleteAjax.do")
+	public int gNoticeCommentDeleteAjax(int commentNo) {
+		int result = service.gNoticeCommentDeleteAjax(commentNo);
+		return result;
+	}
+}
