@@ -12,4 +12,7 @@ public class Comment {
 	private int boardType;
 	private int commentType;
 	private int commentRef;
+	//세희가 필요해서 추가함~~! 메리크리스마스
+	private String memberImg;
+	
 }
