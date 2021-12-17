@@ -21,8 +21,8 @@ public class JobSearchDao {
 		return (ArrayList<Announce>)list;
 	}
 
-	public ArrayList<Announce> selectMemberRequestList(HashMap<String, Object> map) {
-		List<Announce> list = sqlSession.selectList("announce.selectMemberRequestList", map);
+	public ArrayList<Announce> selectJobSearchList(HashMap<String, Object> map) {
+		List<Announce> list = sqlSession.selectList("announce.selectJobSearchList", map);
 		return (ArrayList<Announce>)list;
 	}
 
