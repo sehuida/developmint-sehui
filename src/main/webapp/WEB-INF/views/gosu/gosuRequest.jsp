@@ -445,7 +445,7 @@ input[type="checkbox"]:checked {
 						<dt>
 							<img src="/resources/img/gosu/gosuSend4.png">
 						</dt>
-						<dt>후기쓰기</dt>
+						<dt>후기 쓰기</dt>
 						<dd>
 							거래가 잘 마무리 되었다면<br>개발에 대한 후기를<br>남겨주세요.
 						</dd>

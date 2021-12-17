@@ -57,7 +57,7 @@ input:focus, textarea:focus {
 	align-self: flex-start;
 	background-color: white;
 	border-radius: 100px;
-	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
+	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
 }
 
 .talk-one table img {
@@ -75,8 +75,7 @@ input:focus, textarea:focus {
 
 .talk-me {
 	border-radius: 100px;
-	background-color: rgb(245, 245, 245);
-	border: 1px solid gray;
+	background-color: rgb(183, 223, 205);
 	align-self: flex-end !important;
 }
 
