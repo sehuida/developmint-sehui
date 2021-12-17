@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.comment.vo.Comment;
 import kr.or.share.model.vo.Share;
 
 @Repository
@@ -35,5 +36,18 @@ public class ShareDao {
 	public ArrayList<Share> searchBoard(HashMap<String, Object> map) {
 		List<Share> list = sqlSession.selectList("share.searchBoard",map); 
 		return (ArrayList<Share>)list;
+	}
+
+	public Share selectBoardView(int boardNo) {
+		return sqlSession.selectOne("share.shareBoardView",boardNo);
+	}
+
+	public ArrayList<Comment> selectBoardComment(int boardNo) {
+		List<Comment> list = sqlSession.selectList("share.shareComments",boardNo);
+		return (ArrayList<Comment>)list;
+	}
+
+	public int updateReadCount(int boardNo) {
+		return sqlSession.update("share.updateCount",boardNo);
 	}
 }
