@@ -20,25 +20,31 @@
 		values(gosu_gpr.nextval,#{ggsouNo},#{gprojectTitle},#{gprojectContent},#{gprojectFilepath})
 	</insert>
 	<select id="gosuList" resultType="g">
-		select 
+		select
 		ggosu_no as ggsouNo,
 		gosu_no as gsouNo,
 		gosu_title as gosuTitle,
-		gosu_self as gosuSelf,
+		gosu_self as
+		gosuSelf,
 		gosu_explain as
 		gosuExplain,
 		gosu_act as gosuAct,
-		gosu_cost as gosuCost,
+		gosu_cost as
+		gosuCost,
 		gosu_date as
 		gosuDate ,
 		gosu_id as gosuId
-		
+
 		from (select rownum as
-		rnum , r.*,(select member_id from member where member_no = r.gosu_no) as gosu_id from (
+		rnum ,
+		r.*,(select member_id from member where
+		member_no = r.gosu_no) as
+		gosu_id from (
 		select
 		*
 		from gosu
-		order by 1 desc )r)rr
+		order by 1
+		desc )r)rr
 	</select>
 	<select id="getGosuId" parameterType="_int" resultType="string">
 		select
@@ -814,67 +820,72 @@
 		from gosu_request_cost where member_id
 		=#{memberId}
 	</select>
-	
-	
+
+
 	<select id="selectGosuListKeyword" parameterType="map"
 		resultType="g">
 		select * from(
 		select rownum as rnum,cc.* from
 		(
 		select
-		ggosu_no as ggsouNo,
+		ggosu_no as
+		ggsouNo,
 		gosu_no as gsouNo,
 		gosu_title as gosuTitle,
-		gosu_self as gosuSelf,
+		gosu_self as
+		gosuSelf,
 		gosu_explain as
 		gosuExplain,
 		gosu_act as gosuAct,
-		gosu_cost as gosuCost,
+		gosu_cost as
+		gosuCost,
 		gosu_date as
 		gosuDate
 		from gosu
 		<trim prefix="WHERE" prefixOverrides="AND">
-		
-		<choose>
-			<when test="type != null and type.equals('title')">
-			AND gosu_title LIKE '%'||#{keyword}||'%' 
-			</when>
-			<when test="type != null and type.equals('content')">
-			AND gosu_explain LIKE '%'||#{keyword}||'%' 
-			</when>
-		</choose>
+
+			<choose>
+				<when test="type != null and type.equals('title')">
+					AND gosu_title LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="type != null and type.equals('content')">
+					AND gosu_explain LIKE '%'||#{keyword}||'%'
+				</when>
+			</choose>
 		</trim>
 		order by 1 desc)cc)
 		where
 		rnum between #{start} and #{end}
 	</select>
-	
-		<select id="selectGosuListTotalCountKeyword" parameterType="map" resultType="_int">
+
+	<select id="selectGosuListTotalCountKeyword" parameterType="map"
+		resultType="_int">
 		select
 		count(*)
-		from gosu 
+		from gosu
 		<trim prefix="WHERE" prefixOverrides="AND">
-		<choose>
-			<when test="type != null and type.equals('title')">
-			AND gosu_title LIKE '%'||#{keyword}||'%' 
-			</when>
-			<when test="type != null and type.equals('content')">
-			AND gosu_explain LIKE '%'||#{keyword}||'%' 
-			</when>
-		</choose>
+			<choose>
+				<when test="type != null and type.equals('title')">
+					AND gosu_title LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="type != null and type.equals('content')">
+					AND gosu_explain LIKE '%'||#{keyword}||'%'
+				</when>
+			</choose>
 		</trim>
 	</select>
-	
-	
-	
+
+
+
 	<select id="selectGosuNoticeListKeyword" parameterType="map"
 		resultType="gn">
-		
+
 		select * from
 		(select rownum as rnum , r.*
 		from (
 		select
-		gnotice_no as gnoticeNo,
+		gnotice_no as
+		gnoticeNo,
 		member_id as writeId,
 		gnotice_title as
 		gnoticeTitle,
@@ -886,36 +897,76 @@
 		gnoticeDate
 		from
 		gosu_notice
-			<trim prefix="WHERE" prefixOverrides="AND">
-		
-		<choose>
-			<when test="type != null and type.equals('title')">
-			AND gnotice_title LIKE '%'||#{keyword}||'%' 
-			</when>
-			<when test="type != null and type.equals('content')">
-			AND gnotice_content LIKE '%'||#{keyword}||'%' 
-			</when>
-		</choose>
+		<trim prefix="WHERE" prefixOverrides="AND">
+
+			<choose>
+				<when test="type != null and type.equals('title')">
+					AND gnotice_title LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="type != null and type.equals('content')">
+					AND gnotice_content LIKE '%'||#{keyword}||'%'
+				</when>
+			</choose>
 		</trim>
 		order by 1
 		desc )r)rr where rnum between #{start} and #{end}
-		
+
 	</select>
-	
-		<select id="selectGosuNoticeListTotalCountKeyword" parameterType="map" resultType="_int">
+
+	<select id="selectGosuNoticeListTotalCountKeyword"
+		parameterType="map" resultType="_int">
 		select
 		count(*)
 		from gosu_notice
 		<trim prefix="WHERE" prefixOverrides="AND">
-		<choose>
-			<when test="type != null and type.equals('title')">
-			AND gnotice_title LIKE '%'||#{keyword}||'%' 
-			</when>
-			<when test="type != null and type.equals('content')">
-			AND gnotice_content LIKE '%'||#{keyword}||'%' 
-			</when>
-		</choose>
+			<choose>
+				<when test="type != null and type.equals('title')">
+					AND gnotice_title LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="type != null and type.equals('content')">
+					AND gnotice_content LIKE '%'||#{keyword}||'%'
+				</when>
+			</choose>
 		</trim>
 	</select>
+
+	<insert id="insertGosuNoticeComment" parameterType="cm">
+		insert into
+		comments
+		values(COMMENTS_SEQ.nextval,#{memberId},#{commentContent},to_char(sysdate,'yyyy-mm-dd'),#{boardNo},#{boardType},#{commentType},null)
+	</insert>
+	<select id="selectGosuNoticeCommentList" parameterType="_int"
+		resultType="cm">
+		select
+		COMMENT_NO as commentNo,
+		MEMBER_ID as memberId,
+		COMMENT_CONTENT as commentContent,
+		REG_DATE as regDate,
+		BOARD_NO as boardNo,
+		BOARD_TYPE as boardType,
+		COMMENT_TYPE as commentType,
+		COMMENT_REF as commentRef,
+		filepath as memberImg
+		from (select rownum as rnum , r.*,(select filepath from member where
+		member_id = r.MEMBER_ID) as
+		filepath from
+		(select
+		*
+		from comments where board_type=6 and board_no =#{gnn} order by 1 desc )r)rr
+	</select>
+	<insert id="insertGosuNoticeCommentRe" parameterType="cm">
+		insert into
+		comments
+		values(COMMENTS_SEQ.nextval,#{memberId},#{commentContent},to_char(sysdate,'yyyy-mm-dd'),#{boardNo},#{boardType},#{commentType},${commentRef})
+	</insert>
+	<update id="gNoticeCommentUpdateAjax" parameterType="cm">
+		update
+		comments set
+		COMMENT_CONTENT = #{commentContent} where COMMENT_NO = #{commentNo}
+	</update>
 	
+	<delete id="gNoticeCommentDeleteAjax" parameterType="_int">
+		delete from
+		comments where COMMENT_NO = #{commentNo}
+	</delete>
 </mapper>

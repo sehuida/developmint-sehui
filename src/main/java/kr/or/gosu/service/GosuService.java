@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.comment.vo.Comment;
 import kr.or.gosu.dao.GosuDao;
 import kr.or.gosu.vo.Gosu;
 import kr.or.gosu.vo.GosuFeedback;
@@ -663,9 +664,37 @@ public class GosuService {
 		return glpd;
 	}
 
+	@Transactional
+	public int insertGosuNoticeComment(Comment cmt) {
+		int result = dao.insertGosuNoticeComment(cmt);
+		return result;
+	}
 
 
-	
+	public ArrayList<Comment> selectGosuNoticeCommentList(int gnn) {
+		ArrayList<Comment> list = dao.selectGosuNoticeCommentList(gnn);
+		return list;
+	}
+
+	@Transactional
+	public int insertGosuNoticeCommentRe(Comment cmt) {
+		int result = dao.insertGosuNoticeCommentRe(cmt);
+		return result;
+	}
+
+	@Transactional
+	public int gNoticeCommentUpdateAjax(Comment cmt) {
+		int result = dao.gNoticeCommentUpdateAjax(cmt);
+		return result;
+	}
+
+
+	@Transactional
+	public int gNoticeCommentDeleteAjax(int commentNo) {
+		int result = dao.gNoticeCommentDeleteAjax(commentNo);
+		return result;
+	}
+
 
 
 
