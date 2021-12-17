@@ -22,7 +22,40 @@
 					<li><a href="/faq.do" class="text-hover">자주묻는질문<br><span class="last-span">자주묻는질문</span></a></li>
 				</ul>
 			</div>
-			<!-- faq 리스트 페이징없이 쫙 뽑기? -->
+			<div class="right_contents section_contents">
+				<h3 class="title_cs font-mss">FAQ <span>자주 묻는 질문</span></h3>
+				<!-- 탭버튼 -->
+				<ul class="mypage_type">
+	                <li><a href="/faq.do?category=12">주문 결제</a></li>
+					<li><a href="/faq.do?category=11">배송 안내</a></li>
+					<li><a href="/faq.do?category=10">주문취소</a></li>
+					<li><a href="/faq.do?category=8">교환</a></li>
+					<li><a href="/faq.do?category=9">환불</a></li>
+					<li><a href="/faq.do?category=13">상품 관련</a></li>
+					<li><a href="/faq.do?category=14">포인트 · 적립금</a></li>
+					<li><a href="/faq.do?category=17">이벤트</a></li>
+					<li><a href="/faq.do?category=15">회원 관련</a></li>
+					<li><a href="/faq.do?category=21">무탠픽업</a></li>
+					<li><a href="/faq.do?category=16">기타</a></li>
+	            </ul>
+				<!-- //탭버튼 -->
+				<!-- 콘텐츠 -->
+				<table class="table_basic">
+				   <colgroup>
+					   <col width="8%">
+					   <col width="">
+				   </colgroup>
+				   <thead>
+					   <tr>
+						   <th scope="col">번호</th>
+						   <th scope="col">내용</th>
+					   </tr>
+				   </thead>
+				   <tbody>
+				   		<!-- 출력 -->
+				   </tbody>
+			  	</table>
+			</div>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
