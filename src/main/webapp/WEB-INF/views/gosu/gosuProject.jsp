@@ -33,7 +33,7 @@ input:focus, textarea:focus {
 .talk-wrap {
 	display: flex;
 	flex-direction: column;
-	padding: 10px;
+	padding: 30px;
 	margin-top: 50px;
 	margin-bottom: 50px;
 	background-color: rgb(250, 250, 250);
@@ -50,7 +50,7 @@ input:focus, textarea:focus {
 }
 
 .talk-one {
-	width: 80%;
+	width: 50%;
 	margin-bottom: 100px;
 	align-self: flex-start;
 }

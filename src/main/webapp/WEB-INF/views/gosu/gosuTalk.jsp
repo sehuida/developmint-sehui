@@ -49,7 +49,7 @@ input:focus, textarea:focus {
 }
 
 .talk-one {
-	width: 80%;
+	width: 50%;
 	margin-bottom: 100px;
 	align-self: flex-start;
 }

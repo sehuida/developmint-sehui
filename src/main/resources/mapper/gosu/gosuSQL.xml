@@ -952,7 +952,7 @@
 		filepath from
 		(select
 		*
-		from comments where board_type=6 and board_no =#{gnn} order by 1 desc )r)rr
+		from comments where board_type=6 and board_no =#{gnn} order by 1  )r)rr
 	</select>
 	<insert id="insertGosuNoticeCommentRe" parameterType="cm">
 		insert into
