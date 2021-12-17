@@ -57,7 +57,7 @@
 	padding-left: 20px;
 	padding-right: 20px;
 	margin: 70px;
-	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
+	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
 	background-color: white;
 }
 
@@ -151,7 +151,7 @@
 								</c:when>
 								<c:otherwise>
 
-									<div>
+									<div >
 								</c:otherwise>
 							</c:choose>
 							<table>
@@ -169,7 +169,7 @@
 											style="color: gray;">진행 완료</b></td>
 									</c:if>
 
-									<td>${gtl.feedbackDate }</td>
+									<td style="padding-right: 0;">${gtl.feedbackDate }</td>
 								</tr>
 								<tr>
 									<td><b>${gtl.feedbackTitle }</b></td>
@@ -187,7 +187,7 @@
 										</c:if></td>
 								</tr>
 								<tr>
-									<td><span style="height: 50px; width: 230px;">${gtl.feedbackContent }</span></td>
+									<td><span style="height: 50px; width: 245px;">${gtl.feedbackContent }</span></td>
 								</tr>
 								<tr>
 									<td colspan="2"><a
@@ -240,7 +240,7 @@
 											style="color: gray;">진행 완료</b></td>
 									</c:if>
 
-									<td style="padding-top: 20px;">${gtl.feedbackDate }</td>
+									<td style="padding-top: 20px;padding-right: 0;">${gtl.feedbackDate }</td>
 								</tr>
 								<tr>
 									<td><b>${gtl.feedbackTitle }</b></td>
@@ -258,7 +258,7 @@
 										</c:if></td>
 								</tr>
 								<tr>
-									<td><span style="height: 50px; width: 230px;">${gtl.feedbackContent }</span></td>
+									<td><span style="height: 50px; width: 245px;">${gtl.feedbackContent }</span></td>
 								</tr>
 								<tr>
 									<td colspan="2"><a
@@ -286,7 +286,7 @@
 	<c:choose>
 		<c:when test="${not empty grList }">
 			<c:forEach items="${grList }" var="grl" varStatus="i">
-				<div style="display: flex; justify-content: center;">
+				<div style="display: flex; justify-content: center;" >
 					<div class="review-one" style="width: 80%;">
 						<ul>
 							<li><b><span style="color: rgb(78, 205, 196);">
@@ -395,7 +395,7 @@
 
 							<c:if test="${grl.requestProjectSubNum eq 1 }">
 								<td style="text-align: left; padding-top: 20px;"><b
-									style="color: red;"></b></td>
+									style="color: red;">개발 진행</b></td>
 							</c:if>
 							<c:if test="${grl.requestProjectSubNum eq 3 }">
 								<td style="text-align: left; padding-top: 20px;"><b
@@ -430,7 +430,7 @@
 								</c:if></td>
 						</tr>
 						<tr>
-							<td style="font-size: 25px; width: 240px;"><b> <c:if
+							<td style="font-size: 25px; width: 255px;"><b> <c:if
 										test="${sessionScope.m.memberType eq 2 }">
 												${grl.requestWriterId  }
 

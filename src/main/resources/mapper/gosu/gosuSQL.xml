@@ -20,9 +20,7 @@
 		values(gosu_gpr.nextval,#{ggsouNo},#{gprojectTitle},#{gprojectContent},#{gprojectFilepath})
 	</insert>
 	<select id="gosuList" resultType="g">
-		select * from (select rownum as
-		rnum , r.* from (
-		select
+		select 
 		ggosu_no as ggsouNo,
 		gosu_no as gsouNo,
 		gosu_title as gosuTitle,
@@ -32,7 +30,13 @@
 		gosu_act as gosuAct,
 		gosu_cost as gosuCost,
 		gosu_date as
-		gosuDate
+		gosuDate ,
+		gosu_id as gosuId
+		
+		from (select rownum as
+		rnum , r.*,(select member_id from member where member_no = r.gosu_no) as gosu_id from (
+		select
+		*
 		from gosu
 		order by 1 desc )r)rr
 	</select>

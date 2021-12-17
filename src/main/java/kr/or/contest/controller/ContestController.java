@@ -119,6 +119,8 @@ public class ContestController {
 		ContestList list = service.contestView(contestNo);
 		model.addAttribute("list",list);
 		model.addAttribute("enrollCount",list.getEnrollCount());
+		LocalDate today = LocalDate.now();
+		model.addAttribute("today",today);
 		return "contest/contestView";
 	}
 	

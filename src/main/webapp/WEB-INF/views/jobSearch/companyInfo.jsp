@@ -21,19 +21,25 @@
 		margin-top: 50px;
 		margin-bottom: 50px; 
 		text-align: center;
+		display: flex;
+		justify-content: center;
 	}
 	.companyImg{
-		display: inline-block;		
+		display: inline-block;	
+		line-height: 32px;	
 	}
 	.companyImg>img{
-		width: 130px;
-		height: 30px;
+		width: 120px;
+		height: 36px;
 	}
 	.companyTitle{
 		display: inline-block;
 		margin-left: 15px;
 		font-size: 24px;
 		font-weight: 900;
+	}
+	.companyTitle>p{
+		margin-bottom: 0px;
 	}
 	.intro{
 		margin-left: 20px;
@@ -129,7 +135,7 @@
 	<div class="contain">
 		<div class="companyInfoHeader">
 			<div class="companyImg">				<!-- 공고 1개만 가능하면 걍 두고 여러개 가능하면 forEach로 여러개 해줘야댐 -->
-				<img src="resources/img/jobSearch/Develomint_logo.png">	<!-- 나중에 업로드이미지로 바꿔주기 -->
+				${com.filepath }
 			</div>
 			<div class="companyTitle">
 				<p>${com.companyName }</p>
@@ -163,6 +169,7 @@
 				<div class="status">
 					<p>모집중</p>
 				</div>
+				
 				<div class="companyName">
 					<p>${com.companyName }</p>
 				</div>
@@ -172,7 +179,7 @@
 				<ul class="resumeInfo1">
 					           	<li class="career">
 					            	<div class="resumeInfoImg">
-					            		<img src="resources/img/resume/career.PNG">
+					            		<img src="resources/img/resume/career.PNG" style="height: 22px; margin-left: 2px;">
 					            	</div>
 					            	<div class="resumeInfoData">
 					            	<em style="font-size: 16px; font-weight: normal;">경력 : </em>
@@ -235,7 +242,7 @@
 							<ul class="resumeInfo2">
 								<li class="workPlace">
 									<div class="resumeInfoImg">
-										<img src="resources/img/resume/money.PNG" style="width:16px; height: 23px; margin-left: 2px;">					
+										<img src="resources/img/resume/school.PNG" style="width:18px; height: 23px; margin-left: 2px;">					
 									</div>
 									<div class="resumeInfoData">
 										<em style="font-size: 16px; font-weight: normal;">학력 : </em>			
@@ -254,7 +261,6 @@
 						            	<c:if test="${com.school eq 5 }">		
 						            		<span>학력무관</span>
 						            	</c:if>
-						            	이미지 바꾸기
 									</div>
 									
 								</li>       					           

@@ -176,7 +176,7 @@ input:focus, textarea:focus {
 												<td style="text-align: right;">${mrcl.costDate }</td>
 											</tr>
 											<tr>
-												<td colspan="2"style="max-width: 1000px;" ><span style="width:100%; background-color:  rgba(239, 239, 239, 0.3);">${mrcl.costContentBr }</span></td>
+												<td colspan="2"style="max-width: 1000px;" ><span style="width:100%; color:  gray;">${mrcl.costContentBr }</span></td>
 
 											</tr>
 											<tr>
