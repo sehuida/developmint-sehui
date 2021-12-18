@@ -531,6 +531,14 @@ public class GosuController {
 		model.addAttribute("grcOne", grc2);
 		return "gosu/gosuRequestContent";
 	}
+	@RequestMapping(value = "/gosuRequestListGosuNo.do")
+	public String gosuRequestListGosuNo(int reqPage,int gosuNo,String type, Model model) {
+		GosuRequestListPageData glpd = service.selectMemberRequestListGosuNoIN(reqPage,gosuNo,type);
+		model.addAttribute("memberRequestList", glpd.getList());
+		model.addAttribute("pageNavi", glpd.getPageNavi());
+		model.addAttribute("start", glpd.getStart());
+		return "gosu/gosuRequestList";
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/gosuRequestCostInsert.do")
