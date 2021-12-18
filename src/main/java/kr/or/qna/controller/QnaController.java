@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.ResultMap;
+import org.omg.PortableInterceptor.NON_EXISTENT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -192,8 +193,21 @@ public class QnaController {
 		return "qna/counselUser";
 	}
 	
+	/*
+	 * @RequestMapping(value="/adminCounsel.do") public String adminCounsel(Model
+	 * model) { ArrayList<Qna> adlist = service.counselList();
+	 * model.addAttribute("adlist",adlist); return "qna/counselAdmin"; }
+	 */
+	
 	@RequestMapping(value="/adminCounsel.do")
-	public String adminCounsel() {
+	public String adminCounsel(int type, Model model) {
+		if(type==1) {
+			ArrayList<Qna> adlist = service.counselList();
+			model.addAttribute("adlist",adlist);
+		}else if(type==2){
+			ArrayList<nonQna> adlist = service.non_counselList();
+			model.addAttribute("adlist",adlist);
+		}
 		return "qna/counselAdmin";
 	}
 	

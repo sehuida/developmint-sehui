@@ -52,3 +52,21 @@
 .div-flex{
 	display: flex;
 }
+.searchBox{
+	background: #78c2ad;
+    border-radius: 5px;
+    width: 25%;
+    padding: 10px;
+}
+.searchBox-frm{
+	display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+.searchBox-1{
+	margin-right: 20px;
+}
+.searchBox-2{
+	margin-right: 20px;
+}

@@ -83,10 +83,7 @@
 										<option value="10">환불관련</option>
 										<option value="11">공모전관련</option>
 										<option value="12">구인잡관련</option>
-										<option value="13">커뮤니티관련(사는 얘기)</option>
-				                        <option value="14">커뮤니티관련(Tech Q&A)</option>
-				                        <option value="15">커뮤니티관련(Tips & 강좌)</option>
-				                        <option value="16">IT NEWS & 정보</option>
+										<option value="13">커뮤니티관련</option>
 										<option value="40">기타 문의</option>
 										<option value="21">신고</option>
 										<option value="22">기능/작동 오류</option>

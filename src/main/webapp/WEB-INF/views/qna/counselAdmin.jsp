@@ -24,10 +24,75 @@
 				</ul>
 			</div>
 			<div class="contents">
-				<ol class="breadcrumb" style="width: 20%;">
-				  <li class="breadcrumb-item active" ><a href="#">회원</a></li>
-				  <li class="breadcrumb-item" ><a href="#">비회원</a></li>
-				</ol>
+				<div class="selectBox">
+					<ol class="breadcrumb" style="width: 25%;">
+					  <li class="breadcrumb-item active" ><a href="#">회원</a></li>
+					  <li class="breadcrumb-item" ><a href="#">비회원</a></li>
+					</ol>
+				</div>
+				<div class="searchBox">
+					<form action="searhBox.do" class="searchBox-frm">
+						<div class="form-group searchBox-1">
+					     	<label for="category" class="form-label mt-4">문의유형</label>
+					    	<select class="form-select" id="category" name="category" >
+						      	<option value="">문의유형 선택</option>
+								<option value="7">로그인관련</option>
+								<option value="8">계정관련</option>
+								<option value="9">결제관련</option>
+								<option value="10">환불관련</option>
+								<option value="11">공모전관련</option>
+								<option value="12">구인잡관련</option>
+								<option value="13">커뮤니티관련</option>
+								<option value="40">기타 문의</option>
+								<option value="21">신고</option>
+								<option value="22">기능/작동 오류</option>
+								<option value="20">이벤트</option>
+				     		</select>
+					  	</div>
+					  	<div class="form-group searchBox-2">
+					     	<label for="category" class="form-label mt-4">답변상태</label>
+					    	<select class="form-select" id="qnaAnswer" name="qnaAnswer" >
+						      	<option value="">전체</option>
+						      	<option value="1">미답변</option>
+								<option value="2">답변</option>
+				     		</select>
+					  	</div>
+					  	<button class="btn btn-outline-dark">검색</button>
+					</form>
+				</div>
+				<div class="contents">
+					<table class="n-table table-col">
+					<colgroup>
+						<col style="width:12.6%">
+						<col style="width:*">
+						<col style="width:12.6%">
+						<col style="width:12.6%">
+					</colgroup>
+					<thead>
+					<tr>
+						<th scope="col">문의 유형</th>
+						<th scope="col">내용</th>
+						<th scope="col">작성일</th>
+						<th scope="col">처리 상태</th>
+					</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list }" var="q" varStatus="i">
+							<tr>
+								<td >${q.type }</td>
+								<td><a href="javascript:void(0);">${q.qnaTitle }</a></td>
+								<td>${q.regDate }</td>
+								<td>
+									<span>${q.state }</span>
+									<div>
+										<button type="button" class="btn btn-outline-dark">답변하기</button>
+									</div>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				</div>
 			</div>
 		</div>
 	</div>

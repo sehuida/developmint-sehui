@@ -1,5 +1,8 @@
 package kr.or.qna.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,6 +30,12 @@ public class QnaDao {
 
 	public int insertFile(ProjectTeamFileVO ptfv) {
 		return sqlsession.insert("qna.insertFile",ptfv);
+	}
+
+
+	public ArrayList<Qna> counselList() {
+		List<Qna> list = sqlsession.selectList("qna.counselList");
+		return (ArrayList<Qna>)list;
 	}
 
 	

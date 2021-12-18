@@ -44,4 +44,14 @@ public class QnaService {
 		return result;
 	}
 
+
+	public ArrayList<Qna> counselList() {
+		return dao.counselList();
+	}
+
+	public ArrayList<nonQna> non_counselList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
