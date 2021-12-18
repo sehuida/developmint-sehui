@@ -15,4 +15,17 @@
 	<insert id="insertFile" parameterType="pfv">
 		insert into attachment values(atm_seq.nextval,#{memberNo}, 6,#{boardNo}, #{fileName}, #{filePath})
 	</insert>
+	<select id="counselList">
+		select "qna_no"as qnaNo,
+		    "member_id"as memberId,
+		    "category"as category,
+		    "qna_title"as qnaTitle,
+		    "qna_content"as qnaContent,
+		    "reg_date"as regDate,
+		    "filename"as filename,
+		    "filepath"as filepath,
+		    "qna_answer" as qnsAnswer,
+		    "answer_date"as answerDate
+		from qna order by 1 desc;
+	</select>
 </mapper>
