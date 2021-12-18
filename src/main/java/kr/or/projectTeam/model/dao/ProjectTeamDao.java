@@ -17,6 +17,7 @@ import kr.or.projectTeam.model.vo.ProjectTask;
 import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.projectTeam.model.vo.ProjectTeamMember;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeComment;
+import kr.or.projectTeam.model.vo.Shortcuts;
 import kr.or.projectTeam.model.vo.UseDevelopLanguage;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
 
@@ -290,6 +291,15 @@ public class ProjectTeamDao {
 
 	public ProjectTask toDoTask(int projectNo) {
 		return sqlSession.selectOne("projectTeam.toDoTask", projectNo);
+	}
+
+	public int addShortcut(Map<String, Object> map) {
+		return sqlSession.insert("projectTeam.addShortcut", map);
+	}
+
+	public ArrayList<Shortcuts> shortcutList(int projectNo) {
+		List<Shortcuts> list = sqlSession.selectList("projectTeam.shortcutList", projectNo);
+		return (ArrayList<Shortcuts>) list;
 	}
 
 	
