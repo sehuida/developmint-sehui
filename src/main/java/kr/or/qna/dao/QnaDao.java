@@ -38,6 +38,12 @@ public class QnaDao {
 		return (ArrayList<Qna>)list;
 	}
 
+
+	public ArrayList<nonQna> counselList2() {
+		List<nonQna> list = sqlsession.selectList("qna.counselList2");
+		return (ArrayList<nonQna>)list;
+	}
+
 	
 	
 }

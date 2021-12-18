@@ -200,9 +200,16 @@ public class QnaController {
 	 */
 	
 	@RequestMapping(value="/adminCounsel.do")
-	public String adminCounsel(Model model) {
-		ArrayList<Qna> adlist = service.counselList();
-		model.addAttribute("adlist",adlist);
+	public String adminCounsel(Model model, int type) {
+		if(type==1) {
+			ArrayList<Qna> adlist = service.counselList();
+			model.addAttribute("type",type);
+			model.addAttribute("adlist",adlist);
+		}else if(type==2) {
+			ArrayList<nonQna> adlist = service.counselList2();
+			model.addAttribute("type",type);
+			model.addAttribute("adlist",adlist);
+		}
 		return "qna/counselAdmin";
 	}
 	

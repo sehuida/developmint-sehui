@@ -49,9 +49,10 @@ public class QnaService {
 		return dao.counselList();
 	}
 
-	public ArrayList<nonQna> non_counselList() {
+
+	public ArrayList<nonQna> counselList2() {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.counselList2();
 	}
 
 }

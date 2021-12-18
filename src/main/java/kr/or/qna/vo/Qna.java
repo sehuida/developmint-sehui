@@ -43,11 +43,21 @@ public class Qna {
 	}
 	
 	public String getState() {
-		if(qnaAnswer == "") {
+		/*
+		if(qnaAnswer == null) {
 			return "답변 대기";
-		}else if(qnaAnswer != "") {
+		}else {
 			return "답변 완료";
 		}
-		return null;
+		*/
+		if (qnaAnswer != null && qnaAnswer.length() != 0) {
+			return "답변 완료";
+		} else {
+			return "답변 대기";
+		}
+	}
+	
+	public String getQnaContentBr() {
+		return qnaContent.replaceAll("\r\n", "<br>");
 	}
 }
