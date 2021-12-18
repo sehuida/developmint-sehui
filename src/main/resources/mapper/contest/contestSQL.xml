@@ -277,9 +277,15 @@
 		  ]]>
   	</select>
   	
+  	<!-- 공모전 신청 회원 수 -->
   	<select id="enrollCount" parameterType="_int" resultType="_int">
   		select count(*) from contest_member where contest_no = #{contestNo}
   	</select>
+  	
+  	<!-- 공모전 삭제 -->
+  	<delete id="deleteContest" parameterType="_int">
+  		delete from contest where contest_no = #{contestNo}
+  	</delete>
 </mapper>
 
 

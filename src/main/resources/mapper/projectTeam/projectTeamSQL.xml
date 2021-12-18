@@ -754,4 +754,83 @@
   		select entry_no from project_entry where member_no = #{memberNo} and project_no = #{projectNo}
   </select>
   
+  <select id="projectInfo" parameterType="map" resultType="pt">
+  	select
+				p.project_no as projectNo,
+				p.member_no as projectWriterMemberNo,
+				p.recruit_start_date as rStartDate,
+				p.recruit_end_date as rEndDate,
+				p.view_count as viewCount,
+				p.recruit_title as rTitle,
+				p.recruit_content as rContent,
+				p.project_name as projectName,
+				p.project_goal as projectGoal,
+				p.project_reader as projectReader,
+				p.project_status as projectStatus,
+				p.project_start_date as pStartDate,
+				p.project_end_date as pEndDate,
+				(select filepath from member m where m.member_id = p.project_reader) as writerImgPath
+			from project p 
+			where project_no = #{projectNo}
+  </select>
+  
+  <select id="memberInfoList" parameterType="map" resultType="pfm">
+  		select 
+  			team_member_no as teamMemberNo,
+  			project_no as projectNo,
+  			member_no as memberNo,
+  			member_role as memberRole
+  		from project_team_member
+  		where project_no = #{projectNo}
+  </select>
+
+<select id="ProjectTask" parameterType="_int" resultType="ptk">
+		select * from (
+			select rownum, ta.* from (
+				select
+					t.task_no as taskNo,
+					t.project_no as projectNo,
+					t.team_member_no as teamMemberNo,
+					t.task_sort as taskSort,
+					t.task_title as taskTitle,
+					t.task_content as taskContent,
+					t.priority as priority,
+					t.connect_issue as connectIssue,
+					t.reference_link as referLink,
+					t.reference_link_name as linkName,
+					t.start_date as startDate,
+					t.complete_date as completeDate,
+					t.end_date as endDate,
+					t.process_sort as processSort
+				from task t 
+				where t.project_no = #{projectNo} and t.process_sort = 3
+				order by t.end_date desc) ta)
+			where rownum = 1
+</select>
+
+
+<select id="toDoTask" parameterType="_int" resultType="ptk">
+		select * from (
+			select rownum, ta.* from (
+				select
+					t.task_no as taskNo,
+					t.project_no as projectNo,
+					t.team_member_no as teamMemberNo,
+					t.task_sort as taskSort,
+					t.task_title as taskTitle,
+					t.task_content as taskContent,
+					t.priority as priority,
+					t.connect_issue as connectIssue,
+					t.reference_link as referLink,
+					t.reference_link_name as linkName,
+					t.start_date as startDate,
+					t.complete_date as completeDate,
+					t.end_date as endDate,
+					t.process_sort as processSort
+				from task t 
+				where t.project_no = #{projectNo} and t.process_sort = 1
+				order by t.start_date) ta)
+			where rownum = 1
+</select>
+  
 </mapper>

@@ -48,7 +48,7 @@
                 <h2>프로젝트 명</h2>
                 <ul>
                     <li class="flexLi" style="border-bottom: 3px dashed #90d1b4;">
-                        <a href="#" class="subNaviAtag" ><img src="img/recruitTeamProject/recruitPage/powerOn.png" class="subNaviImg"><span style="cursor: pointer;">프로젝트 개요</span></a>
+                        <a href="enterMyProject.do?projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" class="subNaviAtag" ><img src="/resources/img/recruitTeamProject/recruitPage/powerOn.png" class="subNaviImg"><span style="cursor: pointer;">프로젝트 개요</span></a>
                     </li>
                     <li class="flexLi">
                         <a href="#" class="subNaviAtag"><img src="img/recruitTeamProject/추후사용/calendar.png" class="subNaviImg"><span style="cursor: pointer;">캘린더</span></a>
@@ -59,11 +59,9 @@
                     <li class="flexLi">
                         <a href="#" class="subNaviAtag"><img src="img/recruitTeamProject/추후사용/board.png" class="subNaviImg"><span style="cursor: pointer;">보드</span></a>
                     </li>
-                    <c:foreach 바로가기>
                     <li class="flexLi">
                         <a href="#" class="subNaviAtag"><span style="cursor: pointer;">바로가기</span></a>
                     </li>
-                    </c:foreach>
                     <li class="flexLi">
                         <a data-bs-toggle="modal" href="#shortcutModal" class="subNaviAtag"><img src="img/recruitTeamProject/추후사용/shortcuts.png" class="subNaviImg"><span style="cursor: pointer;">바로가기 추가</span></a>
                     </li>
@@ -80,11 +78,11 @@
                         <form action="#" method="post">
                             <div class="form-group">
                                 <label class="col-form-label col-form-label-lg mt-4" for="inputLarge" >프로젝트 이름</label>
-                                <input class="form-control form-control-lg" type="text" placeholder="프로젝트명" id="inputLarge">
+                                <input class="form-control form-control-lg" type="text" placeholder="${pt.projectName}" id="inputLarge">
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label col-form-label-lg mt-4" for="inputLarge" >프로젝트 목표</label>
-                                <input class="form-control form-control-lg" type="text" placeholder="프로젝트명" id="inputLarge">
+                                <input class="form-control form-control-lg" type="text" placeholder="${pt.projectGoal}" id="inputLarge">
                             </div>
                             <div class="projectLanguageBox">
                                 <div class="projectLanguageFlexBox">

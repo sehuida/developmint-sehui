@@ -30,10 +30,12 @@ import kr.or.member.model.vo.Member;
 import kr.or.projectTeam.model.service.ProjectTeamService;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectEntry;
+import kr.or.projectTeam.model.vo.ProjectTask;
 import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.projectTeam.model.vo.ProjectTeamApplicantViewData;
 import kr.or.projectTeam.model.vo.ProjectTeamApplyPageData;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
+import kr.or.projectTeam.model.vo.ProjectTeamMember;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeViewData;
 import kr.or.projectTeam.model.vo.projectTeamMainPageData;
 
@@ -600,5 +602,19 @@ public class ProjectTeamController {
 		  }
 		  return "member/swalMsg"; 
 	  }
+	  
+	  @RequestMapping(value="/enterMyProject.do") 
+	  public String enterMyProject(Model model, int projectNo, int memberNo ) {
+		  	ProjectTeam pt = service.projectInfo(projectNo, memberNo);
+		  	ArrayList<ProjectTeamMember> memberList = service.memberInfoList(projectNo, memberNo);
+		  	ProjectTask recentTask = service.recentTask(projectNo);
+		  	ProjectTask toDoTask = service.toDoTask(projectNo);
+		  	model.addAttribute("pt", pt);
+			model.addAttribute("memberList", memberList);
+			model.addAttribute("recentTask", recentTask);
+			model.addAttribute("toDoTask", toDoTask);
+			return "recruitCrue/projectManageOutline";
+	  }
+	  
 	  
 }

@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.comment.vo.Comment;
 import kr.or.member.model.vo.GosuNoticePage;
 import kr.or.share.model.dao.ShareDao;
 import kr.or.share.model.vo.Share;
 import kr.or.share.model.vo.ShareBoardPage;
+import kr.or.share.model.vo.ShareViewData;
 
 @Service
 public class ShareService {
@@ -133,6 +135,28 @@ public class ShareService {
 		
 		ShareBoardPage sbp = new ShareBoardPage(list, start, pageNavi);
 		return sbp;
+	}
+
+	public ShareViewData shareBoardView(int boardNo) {
+		int result = dao.updateReadCount(boardNo);
+		Share s = dao.selectBoardView(boardNo);
+		ArrayList<Comment> list = dao.selectBoardComment(boardNo);
+		ShareViewData svd = new ShareViewData(list, s);
+		return svd;
+	}
+	
+	@Transactional
+	public int insertCommentShare(Comment c) {
+		return dao.insertCommentShare(c);
+	}
+	
+	@Transactional
+	public int deleteBoard(int boardNo) {
+		return dao.deleteBoard(boardNo);
+	}
+
+	public Share selectOneBoard(int boardNo) {
+		return dao.selectBoardView(boardNo);
 	}
 
 }

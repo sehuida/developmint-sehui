@@ -14,10 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.projectTeam.model.dao.ProjectTeamDao;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectEntry;
+import kr.or.projectTeam.model.vo.ProjectTask;
 import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.projectTeam.model.vo.ProjectTeamApplicantViewData;
 import kr.or.projectTeam.model.vo.ProjectTeamApplyPageData;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
+import kr.or.projectTeam.model.vo.ProjectTeamMember;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeComment;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeViewData;
 import kr.or.projectTeam.model.vo.UseDevelopLanguage;
@@ -575,6 +577,32 @@ public class ProjectTeamService {
 		map.put("projectNo", projectNo);
 		int result = dao.searchEntryNo2(map);
 		return result;
+	}
+
+	public ProjectTeam projectInfo(int projectNo, int memberNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("projectNo", projectNo);
+		ProjectTeam pt = dao.projectInfo(map);
+		return pt;
+	}
+
+	public ArrayList<ProjectTeamMember> memberInfoList(int projectNo, int memberNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("projectNo", projectNo);
+		ArrayList<ProjectTeamMember> list = dao.memberInfoList(map);
+		return list;
+	}
+
+	public ProjectTask recentTask(int projectNo) {
+		ProjectTask ptk = dao.recentTask(projectNo);
+		return ptk;
+	}
+
+	public ProjectTask toDoTask(int projectNo) {
+		ProjectTask ptk = dao.toDoTask(projectNo);
+		return ptk;
 	}
 	
 }

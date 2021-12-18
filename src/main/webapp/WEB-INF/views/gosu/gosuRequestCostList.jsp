@@ -62,7 +62,7 @@ input:focus, textarea:focus {
 	width: 90%;
 	border: 1px solid rgb(211, 211, 211);
 	margin-bottom: 50px;
-	box-shadow: rgba(0, 0, 0, 0.4) 3PX 3PX 3PX 3PX;
+	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
 }
 
 .g-one-tbl:hover {
@@ -157,6 +157,7 @@ input:focus, textarea:focus {
 
 				</c:when>
 				<c:otherwise>
+				
 					<table>
 
 
@@ -176,7 +177,7 @@ input:focus, textarea:focus {
 												<td style="text-align: right;">${mrcl.costDate }</td>
 											</tr>
 											<tr>
-												<td colspan="2"style="max-width: 1000px;" ><span style="width:100%; background-color:  rgba(239, 239, 239, 0.3);">${mrcl.costContentBr }</span></td>
+												<td colspan="2"style="max-width: 1000px;" ><span style="width:100%; color:  gray;">${mrcl.costContentBr }</span></td>
 
 											</tr>
 											<tr>

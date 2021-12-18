@@ -57,7 +57,7 @@
 	padding-left: 20px;
 	padding-right: 20px;
 	margin: 70px;
-	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
+	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
 	background-color: white;
 }
 
@@ -147,7 +147,7 @@
 							<c:choose>
 								<c:when test="${gtl.feedbackNum eq 3  }">
 
-									<div style="background-color: #e5e5e5;">
+									<div style="background-color: #f6f6f6;">
 								</c:when>
 								<c:otherwise>
 
@@ -169,7 +169,7 @@
 											style="color: gray;">진행 완료</b></td>
 									</c:if>
 
-									<td>${gtl.feedbackDate }</td>
+									<td style="padding-right: 0;">${gtl.feedbackDate }</td>
 								</tr>
 								<tr>
 									<td><b>${gtl.feedbackTitle }</b></td>
@@ -187,13 +187,23 @@
 										</c:if></td>
 								</tr>
 								<tr>
-									<td><span style="height: 50px; width: 230px;">${gtl.feedbackContent }</span></td>
+									<td><span style="height: 50px; width: 245px;">${gtl.feedbackContent }</span></td>
 								</tr>
 								<tr>
-									<td colspan="2"><a
-										style="margin-top: 0; font-weight: 900; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;"
-										href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
-										class="btn btn-primary">자세히 보기</a></td>
+									<td colspan="2"><c:choose>
+											<c:when test="${gtl.feedbackNum eq 3 }">
+												<a
+													style="margin-top: 0; font-weight: 900; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;"
+													href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
+													class="btn btn-outline-primary">자세히 보기</a>
+											</c:when>
+											<c:otherwise>
+												<a
+													style="margin-top: 0; font-weight: 900; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;"
+													href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
+													class="btn btn-primary">자세히 보기</a>
+											</c:otherwise>
+										</c:choose></td>
 								</tr>
 
 							</table>
@@ -217,7 +227,7 @@
 							<c:choose>
 								<c:when test="${gtl.feedbackNum eq 3  }">
 
-									<div style="background-color: #e5e5e5;">
+									<div style="background-color: #f6f6f6;">
 								</c:when>
 								<c:otherwise>
 
@@ -240,7 +250,7 @@
 											style="color: gray;">진행 완료</b></td>
 									</c:if>
 
-									<td style="padding-top: 20px;">${gtl.feedbackDate }</td>
+									<td style="padding-top: 20px; padding-right: 0;">${gtl.feedbackDate }</td>
 								</tr>
 								<tr>
 									<td><b>${gtl.feedbackTitle }</b></td>
@@ -258,14 +268,23 @@
 										</c:if></td>
 								</tr>
 								<tr>
-									<td><span style="height: 50px; width: 230px;">${gtl.feedbackContent }</span></td>
+									<td><span style="height: 50px; width: 245px;">${gtl.feedbackContent }</span></td>
 								</tr>
 								<tr>
-									<td colspan="2"><a
-										href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
-										class="btn btn-secondary"
-										style="font-weight: 900; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">자세히
-											보기</a></td>
+									<td colspan="2"><c:choose>
+											<c:when test="${gtl.feedbackNum eq 3 }">
+												<a href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
+													class="btn btn-outline-secondary"
+													style="font-weight: 900; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">자세히
+													보기</a>
+											</c:when>
+											<c:otherwise>
+												<a href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
+													class="btn btn-secondary"
+													style="font-weight: 900; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">자세히
+													보기</a>
+											</c:otherwise>
+										</c:choose></td>
 								</tr>
 
 							</table>
@@ -382,7 +401,7 @@
 					<c:choose>
 						<c:when test="${grl.requestProjectSubNum eq 3 }">
 
-							<div class="g-left" style="background-color: #e5e5e5;">
+							<div class="g-left" style="background-color: #f6f6f6;">
 						</c:when>
 						<c:otherwise>
 
@@ -395,7 +414,7 @@
 
 							<c:if test="${grl.requestProjectSubNum eq 1 }">
 								<td style="text-align: left; padding-top: 20px;"><b
-									style="color: red;"></b></td>
+									style="color: red;">개발 진행</b></td>
 							</c:if>
 							<c:if test="${grl.requestProjectSubNum eq 3 }">
 								<td style="text-align: left; padding-top: 20px;"><b
@@ -430,7 +449,7 @@
 								</c:if></td>
 						</tr>
 						<tr>
-							<td style="font-size: 25px; width: 240px;"><b> <c:if
+							<td style="font-size: 25px; width: 255px;"><b> <c:if
 										test="${sessionScope.m.memberType eq 2 }">
 												${grl.requestWriterId  }
 
@@ -441,11 +460,20 @@
 							</b></td>
 						</tr>
 						<tr>
-							<td colspan="2"><a
-								href="/gosuProject.do?rpsNo=${grl.requestProjectSubNo }"
-								class="btn btn-info"
-								style="font-weight: 900; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">자세히
-									보기</a></td>
+							<td colspan="2"><c:choose>
+									<c:when test="${grl.requestProjectSubNum eq 3 }">
+										<a href="/gosuProject.do?rpsNo=${grl.requestProjectSubNo }"
+											class="btn btn-outline-info"
+											style="font-weight: 900; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">자세히
+											보기</a>
+									</c:when>
+									<c:otherwise>
+										<a href="/gosuProject.do?rpsNo=${grl.requestProjectSubNo }"
+											class="btn btn-info"
+											style="font-weight: 900; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">자세히
+											보기</a>
+									</c:otherwise>
+								</c:choose></td>
 						</tr>
 
 					</table>

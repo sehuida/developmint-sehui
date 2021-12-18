@@ -62,7 +62,7 @@
 }
 
 .gosu>button {
-	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
+	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
 }
 
 .gosu img {
@@ -118,7 +118,7 @@
 .gosu-one img {
 	width: 225px;
 	height: 225px;
-	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
+	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
 }
 
 .gosu button:hover {
@@ -156,7 +156,7 @@ ul#gallery>a>li {
 	height: 300px;
 	margin: 40px;
 	overflow: hidden;
-	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
+	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
 }
 
 ul#gallery>a>li::after {
@@ -295,7 +295,7 @@ to {
 }
 
 .g-sc-tbl {
-	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
+	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
 }
 
 .gosu-write-wrap {
@@ -422,7 +422,7 @@ to {
 						</tr>
 						<tr>
 							<td style="text-align: center; font-weight: bold;"><span
-								style="color: rgb(78, 205, 196);">고수</span> ${g.gosuId }</td>
+								style="color: rgb(78, 205, 196);">고수</span>&nbsp;&nbsp;${g.gosuId }</td>
 							<td>
 							<c:if test="${not empty g.reviewAvg }">
 							<c:if test="${g.reviewAvg eq 0 }"><span style="color:gray; font-size: small;">아직 등록된 리뷰가 없습니다.</span></c:if>
@@ -526,9 +526,9 @@ to {
 						<c:when test="${not empty gosuTalkList }">
 							<c:forEach items="${gosuTalkList }" var="gtl" varStatus="i">
 								<a href="/gosuTalk.do?fbNo=${gtl.feedbackNo }">
-									<table class="g-sc-tbl card text-white bg-primary mb-3">
-										<tr>
-											<th colspan="2" style="text-align: right; padding-right: 0;">
+									<table class="g-sc-tbl card bg-light mb-3">
+										<tr >
+											<th colspan="2" style="text-align: right; padding-right: 0;" >
 												<c:if test="${gtl.feedbackNum eq 1 }">
 													<span style="color: blue; padding-right: 0;">진행 전</span>
 												</c:if> <c:if test="${gtl.feedbackNum eq 2 }">
@@ -538,11 +538,11 @@ to {
 												</c:if>
 											</th>
 										</tr>
-										<tr>
-											<th>고수</th>
-											<td style="width: 180px;">${gtl.gosuId }</td>
+										<tr  class="card-header">
+											<th style="color: #78c2ad;">고수</th>
+											<td style="width: 197px;">${gtl.gosuId }</td>
 										</tr>
-										<tr>
+										<tr >
 											<th>내용</th>
 											<td>${gtl.feedbackTitle }</td>
 										</tr>
@@ -576,9 +576,9 @@ to {
 													</c:if>
 												</th>
 											</tr>
-											<tr>
-												<th>질문자</th>
-												<td style="width: 180px;">${gtl.memberId }</td>
+											<tr class="card-header">
+												<th style="color: #78c2ad;width: 150px;">질문자</th>
+												<td style="width: 177px;">${gtl.memberId }</td>
 											</tr>
 											<tr>
 												<th>내용</th>
@@ -620,19 +620,19 @@ to {
 						<c:otherwise>
 							<c:forEach items="${grpsList }" var="grpsl" varStatus="i">
 								<a href="/gosuProject.do?rpsNo=${grpsl.requestProjectSubNo }">
-									<table class="g-sc-tbl card bg-info mb-3">
+									<table class="g-sc-tbl card bg-light mb-3">
 										<tboay style="min-width:342px;max-width:342px;">
 
-										<tr>
+										<tr class="card-header">
 											<c:if test="${sessionScope.m.memberType eq 1 }">
 
-												<th>고수</th>
-												<td><span style="color: white;">${grpsl.gosuId }</span></td>
+												<th style="color: #78c2ad;">고수</th>
+												<td style="width: 197px;"><span >${grpsl.gosuId }</span></td>
 											</c:if>
 											<c:if test="${sessionScope.m.memberType eq 2 }">
 
-												<th>질문자</th>
-												<td><span style="color: white;">${grpsl.requestWriterId }</span></td>
+												<th style="color: #78c2ad; width: 150px;">질문자</th>
+												<td style="width: 177px;"><span >${grpsl.requestWriterId }</span></td>
 											</c:if>
 
 										</tr>

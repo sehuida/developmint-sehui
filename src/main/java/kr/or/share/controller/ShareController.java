@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.comment.vo.Comment;
 import kr.or.share.model.service.ShareService;
 import kr.or.share.model.vo.Share;
 import kr.or.share.model.vo.ShareBoardPage;
+import kr.or.share.model.vo.ShareViewData;
 
 @Controller
 public class ShareController {
@@ -44,7 +46,13 @@ public class ShareController {
 		model.addAttribute("type",type);
 		return "share/shareList";		
 	}
-	
+	@RequestMapping(value="/shareBoardView.do")
+	public String shareBoardView(Model model,int boardNo) {
+		ShareViewData svd = service.shareBoardView(boardNo);
+		model.addAttribute("sv",svd.getS());
+		model.addAttribute("list", svd.getList());
+		return "share/shareView";
+	}
 	
 	@RequestMapping(value="/shareWriteFrm.do")
 	public String shareWriteFrm() {
@@ -156,5 +164,44 @@ public class ShareController {
 			model.addAttribute("icon", "warning");
 		}
 		return "member/swalMsg";
+	}
+	
+	@RequestMapping(value="/shareInsertComment.do")
+	public String insertCommentShare(Comment c,Model model) {
+		int result = service.insertCommentShare(c);
+		if(result>0) {
+			model.addAttribute("title", "등록성공");
+			model.addAttribute("msg", "댓글 작성이 완료 되셨습니다.");
+			model.addAttribute("loc", "/shareBoardView.do?boardNo="+c.getBoardNo());
+			model.addAttribute("icon", "success");			
+		}else {
+			model.addAttribute("title", "등록실패");
+			model.addAttribute("msg", "댓글 작성에 실패하셨습니다.");
+			model.addAttribute("loc", "/shareBoardView.do?boardNo="+c.getBoardNo());
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";
+	}
+	@RequestMapping(value="/deleteBoard.do")
+	public String deleteBoard(int boardNo,Model model) {
+		int result = service.deleteBoard(boardNo);
+		if(result>0) {
+			model.addAttribute("title", "삭제성공");
+			model.addAttribute("msg", "게시물이 삭제되었습니다.");
+			model.addAttribute("loc", "/shareList.do?reqPage=1&type=1");
+			model.addAttribute("icon", "success");			
+		}else {
+			model.addAttribute("title", "등록실패");
+			model.addAttribute("msg", "댓글 작성에 실패하셨습니다.");
+			model.addAttribute("loc", "/shareList.do?reqPage=1&type=1");
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";
+	}
+	@RequestMapping(value="/updateBoardFrm.do")
+	public String updateBoardFrm(int boardNo,Model model) {
+		Share s = service.selectOneBoard(boardNo);
+		model.addAttribute(s);
+		return "share/updateBoard";
 	}
 }

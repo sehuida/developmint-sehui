@@ -13,7 +13,9 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectEntry;
+import kr.or.projectTeam.model.vo.ProjectTask;
 import kr.or.projectTeam.model.vo.ProjectTeam;
+import kr.or.projectTeam.model.vo.ProjectTeamMember;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeComment;
 import kr.or.projectTeam.model.vo.UseDevelopLanguage;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
@@ -271,6 +273,23 @@ public class ProjectTeamDao {
 
 	public int searchEntryNo2(Map<String, Object> map) {
 		return sqlSession.selectOne("projectTeam.searchEntryNo2", map);
+	}
+
+	public ProjectTeam projectInfo(Map<String, Object> map) {
+		return sqlSession.selectOne("projectTeam.projectInfo", map);
+	}
+
+	public ArrayList<ProjectTeamMember> memberInfoList(Map<String, Object> map) {
+		List<ProjectTeamMember> list = sqlSession.selectList("projectTeam.memberInfoList", map);
+		return (ArrayList<ProjectTeamMember>) list;
+	}
+
+	public ProjectTask recentTask(int projectNo) {
+		return sqlSession.selectOne("projectTeam.ProjectTask", projectNo);
+	}
+
+	public ProjectTask toDoTask(int projectNo) {
+		return sqlSession.selectOne("projectTeam.toDoTask", projectNo);
 	}
 
 	

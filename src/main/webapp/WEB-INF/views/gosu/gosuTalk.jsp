@@ -30,15 +30,12 @@ input:focus, textarea:focus {
 }
 
 .talk-wrap {
-	padding-top: 100px;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin-top: 100px;
-	margin-bottom: 100px;
-	background-color: #f4f5f6;
-	display: flex;
+	padding: 30px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	background-color: rgb(250, 250, 250);
 }
 
 .g-feedback h3 {
@@ -52,13 +49,9 @@ input:focus, textarea:focus {
 }
 
 .talk-one {
-	border: 1px solid gray;
-	width: 80%;
-	padding-top: 40px;
+	width: 50%;
 	margin-bottom: 100px;
-	background-color: white;
-	border-radius: 30px;
-	box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;
+	align-self: flex-start;
 }
 
 .talk-one table img {
@@ -66,21 +59,23 @@ input:focus, textarea:focus {
 	width: 60px;
 }
 
+.talk-one p {
+	background-color: white;
+	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
+}
+
 .talk-one table {
 	width: 100%;
 }
 
-.talk-one table td, .talk-one table th {
-	padding: 20px;
-}
-
 .talk-me {
-	background-color: rgb(144, 209, 180);
-	border: 1px solid gray;
+	align-self: flex-end !important;
 }
 
 .talk-me p {
-	background-color: white;
+	background-color: rgb(183, 223, 205);
+	padding: 30px;
+	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
 }
 
 .talk-sub {
@@ -120,6 +115,16 @@ input:focus, textarea:focus {
 	font-size: 13px;
 }
 
+.container>.g-msg {
+	margin: 50px;
+	display: flex;
+	justify-content: center;
+	color: rgb(153, 153, 153);
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+}
+
 .star-rating {
 	display: flex;
 	flex-direction: row-reverse;
@@ -147,7 +152,6 @@ input:focus, textarea:focus {
 .star-rating label:hover, .star-rating label:hover ~ label {
 	color: #fc0;
 }
-
 </style>
 </head>
 <body>
@@ -174,8 +178,8 @@ input:focus, textarea:focus {
 			</c:choose>
 
 		</h3>
-		
-		
+
+
 		<div class="g-feedback">
 
 			<h3>Q. &nbsp;${gfOne.feedbackTitle }</h3>
@@ -185,8 +189,12 @@ input:focus, textarea:focus {
 		<c:choose>
 			<c:when test="${gfOne.feedbackNum eq 1}">
 				<div class="talk-sub">
-					<h2 style="font-weight: 900; color: #cacaca; margin: 150px;">대화를
-						시작해보세요!</h2>
+					<div style="text-align: center;">
+						<img src="/resources/img/member/user.png"
+							style="border-radius: 50%; width: 70px; margin-bottom: 30px;">
+						<h2 style="font-weight: 900; color: #cacaca;">대화를 시작해보세요!</h2>
+					</div>
+
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -199,19 +207,19 @@ input:focus, textarea:focus {
 										<tr>
 
 											<c:if test="${not empty gtl.filename }">
-												<th colspan="2"
-													style="text-align: left; padding-left: 50px;">첨부파일
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/fileDownload.do?fileName=${gtl.filename }&filePath=${gtl.filepath }"id="download">${gtl.filename }</a>
-													
+												<th colspan="2" style="text-align: left;">첨부파일
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+													href="/fileDownload.do?fileName=${gtl.filename }&filePath=${gtl.filepath }"
+													id="download">${gtl.filename }</a>
+
 												</th>
 
 											</c:if>
-											<td
-												style="text-align: right; padding-right: 50px; color: gray;">${gtl.talkDate }</td>
+											<td style="text-align: right; color: gray;">${gtl.talkDate }</td>
 										</tr>
 
 										<tr>
-											<td colspan="3" style="text-align: center; padding: 40px;"><p
+											<td colspan="3" style="text-align: center;"><p
 													style="border: 1px solid gray; padding: 30px;">${gtl.talkContentBr }</p></td>
 										</tr>
 									</table>
@@ -221,13 +229,13 @@ input:focus, textarea:focus {
 								<div class="talk-one">
 									<table>
 										<tr>
-											<th style="text-align: right; width: 150px;"><c:if
+											<th colspan="2"
+												style="text-align: left; width: 150px; font-size: 30px;"><c:if
 													test="${empty gtl.gosuImg }">
 													<img src="/resources/img/gosu/g_img_basic.png">
 												</c:if> <c:if test="${not empty gtl.gosuImg }">
 													<img src="/resources/upload/member/${gtl.gosuImg }">
-												</c:if></th>
-											<th style="font-size: 30px;"><c:choose>
+												</c:if> <c:choose>
 													<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
 														<span style="color: rgb(78, 205, 196);">질문자</span>
 													</c:when>
@@ -235,18 +243,18 @@ input:focus, textarea:focus {
 														<span style="color: rgb(78, 205, 196);">고수</span>
 													</c:otherwise>
 												</c:choose> ${gtl.writer }</th>
-											<td
-												style="text-align: right; padding-right: 50px; color: gray;">${gtl.talkDate }</td>
+											<td style="text-align: right; color: gray;">${gtl.talkDate }</td>
 										</tr>
-										<tr>
+										<tr style="text-align: right;">
 											<c:if test="${not empty gtl.filename }">
-												<th style="text-align: right;">첨부파일</th>
-												<td colspan="2"><a href="/fileDownload.do?fileName=${gtl.filename }&filePath=${gtl.filepath }"id="download">${gtl.filename }</a></td>
-											
+												<th colspan="3">첨부파일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+													href="/fileDownload.do?fileName=${gtl.filename }&filePath=${gtl.filepath }"
+													id="download">${gtl.filename }</a></th>
+
 											</c:if>
 										</tr>
 										<tr>
-											<td colspan="3" style="text-align: center; padding: 40px;"><p
+											<td colspan="3" style="text-align: center;"><p
 													style="border: 1px solid gray; padding: 30px;">${gtl.talkContentBr }</p></td>
 										</tr>
 									</table>
@@ -313,12 +321,12 @@ input:focus, textarea:focus {
 									</div>
 							</c:when>
 							<c:otherwise>
-							<div
+								<div
 									style="display: flex; justify-content: center; margin-top: 200px; margin-bottom: 200px;">
 									<span style="font-size: 30px; font-weight: 900; color: gray;">아직
 										작성된 리뷰가 없습니다!</span>
 								</div>
-						</c:otherwise>
+							</c:otherwise>
 						</c:choose>
 					</c:when>
 					<c:otherwise>
@@ -356,7 +364,7 @@ input:focus, textarea:focus {
 											</tr>
 											<tr>
 												<td colspan="2"
-													style="text-align: center; border: 1px solid #78c2ad; padding: 50px; box-shadow: rgba(0, 0, 0, 0.4) 5PX 5PX 5PX 5PX;">${greview.reviewContentBr }</td>
+													style="text-align: center; border: 1px solid #78c2ad; padding: 50px; box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2pX;">${greview.reviewContentBr }</td>
 
 											</tr>
 										</table>
@@ -414,51 +422,54 @@ input:focus, textarea:focus {
 				</c:choose>
 			</c:when>
 			<c:otherwise>
-					<span style="color: gray; font-size: small;">* 전송할 내용을 아래에
-						입력해주세요<br> * 첨부파일은 한 번에 하나씩만 전송 가능합니다.
-					</span> <br> <br> <br>
-					<div class="talk-sub">
+				<span style="color: gray; font-size: small;">* 전송할 내용을 아래에
+					입력해주세요<br> * 첨부파일은 한 번에 하나씩만 전송 가능합니다.
+				</span>
+				<br>
+				<br>
+				<br>
+				<div class="talk-sub">
 
-						<div>
-							<table>
-								<tr>
-									<th colspan="2">첨부파일 &nbsp;&nbsp;&nbsp;&nbsp; <input
-										type="file" id="talkFile"></th>
+					<div>
+						<table>
+							<tr>
+								<th colspan="2">첨부파일 &nbsp;&nbsp;&nbsp;&nbsp; <input
+									type="file" id="talkFile"></th>
 
-								</tr>
-								<tr>
-									<td colspan="2"><textarea cols="100" rows="10"
-											id="talkContent"></textarea></td>
-								</tr>
-								<tr style="text-align: right;">
-									<c:choose>
-										<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
-											<c:if test="${fn:length(gtList) >= 10}">
+							</tr>
+							<tr>
+								<td colspan="2"><textarea cols="100" rows="10"
+										id="talkContent"></textarea></td>
+							</tr>
+							<tr style="text-align: right;">
+								<c:choose>
+									<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
+										<c:if test="${fn:length(gtList) >= 10}">
 											<td style="text-align: center;">
 												<button type="button" id="talkStopAjax" class="btn btn-info"
 													style="width: 200px;">피드백 마치기</button>
 											</td>
-											</c:if>
-											<td style="text-align: center;">
-												<button type="button" id="talkBtnAjax"
-													class="btn btn-primary" style="width: 200px;">전송</button>
-											</td>
-										</c:when>
-										<c:otherwise>
-											<td colspan="2">
-												<button type="button" id="talkBtnAjax"
-													class="btn btn-primary">전송</button>
-											</td>
-										</c:otherwise>
-									</c:choose>
+										</c:if>
+										<td style="text-align: center;">
+											<button type="button" id="talkBtnAjax"
+												class="btn btn-primary" style="width: 200px;">전송</button>
+										</td>
+									</c:when>
+									<c:otherwise>
+										<td colspan="2">
+											<button type="button" id="talkBtnAjax"
+												class="btn btn-primary">전송</button>
+										</td>
+									</c:otherwise>
+								</c:choose>
 
-								</tr>
-								<input type="hidden" value="${sessionScope.m.memberId }"
-									id="writer">
-								<input type="hidden" value="${gfOne.feedbackNo}" id="feedbackNo">
-							</table>
-						</div>
+							</tr>
+							<input type="hidden" value="${sessionScope.m.memberId }"
+								id="writer">
+							<input type="hidden" value="${gfOne.feedbackNo}" id="feedbackNo">
+						</table>
 					</div>
+				</div>
 			</c:otherwise>
 		</c:choose>
 
@@ -466,7 +477,6 @@ input:focus, textarea:focus {
 	</div>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
-
 		$("#talkBtnAjax").click(function() {
 			var talkContent = $("#talkContent").val();
 			var writer = $("#writer").val();
@@ -481,10 +491,10 @@ input:focus, textarea:focus {
 			form.append("feedbackNo", feedbackNo);
 			if (talkContent == "") {
 				swal({
-			      title: '실패',
-			        text: "내용을 입력해주세요!",
-			        icon: 'error'
-			      });
+					title : '실패',
+					text : "내용을 입력해주세요!",
+					icon : 'error'
+				});
 				return false;
 			}
 			$.ajax({
@@ -534,10 +544,10 @@ input:focus, textarea:focus {
 			console.log(ggosuNo);
 			if (reviewNum == null || reviewContent == "") {
 				swal({
-				      title: '실패',
-				        text: "작성하신 리뷰를 다시 확인해주세요!",
-				        icon: 'error'
-				      });
+					title : '실패',
+					text : "작성하신 리뷰를 다시 확인해주세요!",
+					icon : 'error'
+				});
 				return false;
 			}
 			$.ajax({
@@ -552,10 +562,10 @@ input:focus, textarea:focus {
 				success : function(data) {
 					if (data > 0) {
 						swal({
-					        title: '성공',
-					        text: "리뷰 작성이 완료되었습니다!",
-					        icon: 'success'
-					      });
+							title : '성공',
+							text : "리뷰 작성이 완료되었습니다!",
+							icon : 'success'
+						});
 						location.reload();
 					} else {
 						console.log("에러");

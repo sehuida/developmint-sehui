@@ -16,7 +16,8 @@
 			ceo,
 			address,
 			content,
-			business_no as businessNo
+			business_no as businessNo,
+			filepath
 		from company c join announcement a using (company_name)
 		where company_name = #{companyName}
 	</select>
