@@ -182,4 +182,26 @@ public class ShareController {
 		}
 		return "member/swalMsg";
 	}
+	@RequestMapping(value="/deleteBoard.do")
+	public String deleteBoard(int boardNo,Model model) {
+		int result = service.deleteBoard(boardNo);
+		if(result>0) {
+			model.addAttribute("title", "삭제성공");
+			model.addAttribute("msg", "게시물이 삭제되었습니다.");
+			model.addAttribute("loc", "/shareList.do?reqPage=1&type=1");
+			model.addAttribute("icon", "success");			
+		}else {
+			model.addAttribute("title", "등록실패");
+			model.addAttribute("msg", "댓글 작성에 실패하셨습니다.");
+			model.addAttribute("loc", "/shareList.do?reqPage=1&type=1");
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";
+	}
+	@RequestMapping(value="/updateBoardFrm.do")
+	public String updateBoardFrm(int boardNo,Model model) {
+		Share s = service.selectOneBoard(boardNo);
+		model.addAttribute(s);
+		return "share/updateBoard";
+	}
 }

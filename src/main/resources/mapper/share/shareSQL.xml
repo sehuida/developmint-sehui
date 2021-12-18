@@ -113,4 +113,7 @@
    <insert id="insertComment" parameterType="cm">
    		insert into comments values(comments_seq.nextval,#{memberId},#{commentContent},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{boardNo},2,#{commentType},'')
    </insert>
+   <delete id="deleteBoard" parameterType="_int">
+   		delete from share_board where board_no=#{boardNo}
+   </delete>
 </mapper>

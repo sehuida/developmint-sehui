@@ -149,5 +149,14 @@ public class ShareService {
 	public int insertCommentShare(Comment c) {
 		return dao.insertCommentShare(c);
 	}
+	
+	@Transactional
+	public int deleteBoard(int boardNo) {
+		return dao.deleteBoard(boardNo);
+	}
+
+	public Share selectOneBoard(int boardNo) {
+		return dao.selectBoardView(boardNo);
+	}
 
 }

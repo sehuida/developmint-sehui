@@ -54,4 +54,8 @@ public class ShareDao {
 	public int insertCommentShare(Comment c) {
 		return sqlSession.insert("share.insertComment",c);
 	}
+
+	public int deleteBoard(int boardNo) {
+		return sqlSession.delete("share.deleteBoard",boardNo);
+	}
 }

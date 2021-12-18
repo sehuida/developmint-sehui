@@ -151,8 +151,8 @@
 			  <button type="button" class="btn btn-primary"><i class="bi bi-hand-thumbs-up-fill"></i>좋아요</button>
 			  <c:if test="${sessionScope.m.memberId eq sv.memberId}">
 			  	<!-- 수정 삭제 구현해야함-->
-			  	<a href="#" class="btn btn-info">수정</a>
-			  	<a href="/deleteBoard.do?boardNo=${sv.boardNo }" class="btn btn-info">삭제</a>
+			  	<a href="/updateBoardFrm.do?boardNo=${sv.boardNo }" class="btn btn-info">수정</a>
+			  	<button type="button" class="btn btn-info deleteBoard">삭제</button>
 			  </c:if>
 			</div>
 		</div><!-- 작성글 출력문 종료 -->
@@ -248,7 +248,19 @@
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script>
 //수정,삭제 onclick 이벤트로 보내주기 swalMsg 이용!
-
+	//게시글 삭제 버튼 클릭
+	$(".deleteBoard").click(function(){
+		swal({
+		    title: "글을 삭제하시겠습니까?",
+		    icon: "warning",
+		    buttons: ["돌아가기", "삭제하기"],
+		    dangerMode: true
+		}).then((willDelete) => {
+		    if (willDelete) {
+		    	location.href="/deleteBoard.do?boardNo="+'${sv.boardNo}';
+		    }
+		});
+	});
 </script>
 </body>
 </html>
