@@ -57,7 +57,7 @@ public class Qna {
 		}
 	}
 	
-	public String getQnaContentBr() {
-		return qnaContent.replaceAll("\r\n", "<br>");
+	public String getQnaAnswerBr() {
+		return qnaAnswer.replaceAll("\r\n", "<br>");
 	}
 }

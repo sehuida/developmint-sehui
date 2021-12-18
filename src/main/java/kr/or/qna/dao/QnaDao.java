@@ -1,6 +1,7 @@
 package kr.or.qna.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -42,6 +43,12 @@ public class QnaDao {
 	public ArrayList<nonQna> counselList2() {
 		List<nonQna> list = sqlsession.selectList("qna.counselList2");
 		return (ArrayList<nonQna>)list;
+	}
+
+
+	public int updateCounsel(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlsession.update("qna.updateCounsel",map);
 	}
 
 	

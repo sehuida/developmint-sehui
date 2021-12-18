@@ -1,6 +1,7 @@
 package kr.or.qna.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,5 +55,26 @@ public class QnaService {
 		// TODO Auto-generated method stub
 		return dao.counselList2();
 	}
+
+
+	public int updateCounsel(String qnaAnswer, int type, int num) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("qnaAnswer", qnaAnswer);
+		map.put("type", type);
+		map.put("num", num);
+		
+		int result = dao.updateCounsel(map);
+		/*
+		int result=0;
+		if(type==1) {
+			result = dao.updateCounsel1(qnaAnswer);
+		}else if(type==2){
+			result = dao.updateCounsel2(qnaAnswer);
+		}
+		*/
+		return result;
+	}
+
+
 
 }

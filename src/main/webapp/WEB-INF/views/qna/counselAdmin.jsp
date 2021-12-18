@@ -122,8 +122,9 @@
 									<div>
 										<c:choose>
 											<c:when test="${not empty q.qnaAnswer}">
-												<button type="button" class="btn btn-primary" onclick="answerView();">답변보기</button>
-												<div class="modal" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<%-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewModal${i.index }">내역보기</button> --%>
+												<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal${i.index }">내역보기</a>
+												<div class="modal" id="viewModal${i.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 												  <div class="modal-dialog" role="document" style="top: 30%">
 												    <div class="modal-content">
 												      <div class="modal-header">
@@ -134,10 +135,10 @@
 												      </div>
 												      <div class="modal-body">
 														<p style="font-size: 25px; font-weight: bold">보낸 답변보기</p>
-														<p style="font-size: 22px;">${q.type } > ${q.qnaTitle }</p>
-														<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;">
+														<p style="font-size: 22px;">${q.type }>${q.qnaTitle }</p>
+														<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;border-radius: 5px;">
 															<p><span style="font-weight: bold">답변 제목</span> : re)${q.qnaTitle }</p>
-															<p><span style="font-weight: bold">내용</span> : ${q.qnaAnswer }</p>
+															<p><span style="font-weight: bold">내용</span> : ${q.qnaAnswerBr }</p>
 															<p><span style="font-weight: bold">답변 날짜</span> : ${q.answerDate}</p>
 														</div>
 												      </div>
@@ -149,8 +150,9 @@
 												</div>
 											</c:when>
 											<c:otherwise>
-												<button type="button" class="btn btn-secondary" onclick="answerWrite();">답변하기</button>
-												<div class="modal" id="writeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<%-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#writeModal${i.index }" data-whatever="${adlist }">답변하기</button> --%>
+												<a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#writeModal${i.index }">답변하기</a>
+												<div class="modal" id="writeModal${i.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 												  <div class="modal-dialog" role="document" >
 												    <div class="modal-content">
 												      <div class="modal-header">
@@ -163,16 +165,32 @@
 											      		<div class="modal-body">
 															<p style="font-size: 25px; font-weight: bold">답변보내기</p>
 															<p style="font-size: 22px;">${q.type } > ${q.qnaTitle }</p>
-															<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;">
+															<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;border-radius: 5px;">
 																<p><span style="font-weight: bold">답변</span> : re)${q.qnaTitle }</p>
 																<div class="form-group">
 															      <label for="qnaAnswer" class="form-label mt-4" style="font-weight: bold">내용</label>
 															      <textarea class="form-control" id="qnaAnswer" name="qnaAnswer" cols="20" rows="20" placeholder="내용을 입력해주세요." required style="resize: none;" ></textarea>
 															    </div>
 															</div>
+															<c:choose>
+																<c:when test="${type eq 1}">
+																	글번호 : <input type="text" value="${q.qnaNo}" name="num">
+																</c:when>
+																<c:otherwise>
+																	글번호 : <input type="text" value="${q.nonQnaNo}" name="num">
+																</c:otherwise>
+															</c:choose>
+															<c:choose>
+																<c:when test="${type eq 1}">
+																	<input type="hidden" value="1" name="type">회원
+																</c:when>
+																<c:otherwise>
+																	<input type="hidden" value="2" name="type">비회원
+																</c:otherwise>
+															</c:choose>
 												      	</div>
 													      <div class="modal-footer">
-													        <button type="button" class="btn btn-primary btn_yes">작성하기</button>
+													        <button type="submit" class="btn btn-primary btn_yes">작성하기</button>
 													        <button type="button" class="btn btn-secondary btn_no" data-bs-dismiss="modal">취소하기</button>
 													      </div>
 														</form>
@@ -185,6 +203,77 @@
 								</td>
 							</tr>
 						</c:forEach>
+						<!-- 모달 -->
+						<%-- <div class="modal" id="viewModal${i.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document" style="top: 30%">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title">AnswerView</h5>
+						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true"></span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+								<p style="font-size: 25px; font-weight: bold">보낸 답변보기</p>
+								<p style="font-size: 22px;">타입>타이틀</p>
+								<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;border-radius: 5px;">
+									<p><span style="font-weight: bold">답변 제목</span> : re)타이틀</p>
+									<p><span style="font-weight: bold">내용</span> : ${q.qnaAnswerBr }</p>
+									<p><span style="font-weight: bold">답변 날짜</span> : ${q.answerDate}</p>
+								</div>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary btn_no" data-bs-dismiss="modal">닫기</button>
+						      </div>
+						    </div>
+						  </div>
+						</div> --%>
+						<%-- <div class="modal" id="writeModal${i.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document" >
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title">AnswerWrite</h5>
+						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true"></span>
+						        </button>
+						      </div>
+						    	<form action="/updateCounsel.do" method="post">
+					      		<div class="modal-body">
+									<p style="font-size: 25px; font-weight: bold">답변보내기</p>
+									<p style="font-size: 22px;">${q.type } > ${q.qnaTitle }</p>
+									<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;border-radius: 5px;">
+										<p><span style="font-weight: bold">답변</span> : re)${q.qnaTitle }</p>
+										<div class="form-group">
+									      <label for="qnaAnswer" class="form-label mt-4" style="font-weight: bold">내용</label>
+									      <textarea class="form-control" id="qnaAnswer" name="qnaAnswer" cols="20" rows="20" placeholder="내용을 입력해주세요." required style="resize: none;" ></textarea>
+									    </div>
+									</div>
+									<c:choose>
+										<c:when test="${type eq 1}">
+											<input type="text" value="${q.qnaNo}" name="qnaNo">
+										</c:when>
+										<c:otherwise>
+											<input type="text" value="${q.nonQnaNo}" name="nonQnaNo">
+										</c:otherwise>
+									</c:choose>
+									<c:choose>
+										<c:when test="${type eq 1}">
+											<input type="text" value="1" name="type">
+										</c:when>
+										<c:otherwise>
+											<input type="text" value="2" name="type">
+										</c:otherwise>
+									</c:choose>
+						      	</div>
+							      <div class="modal-footer">
+							        <button type="submit" class="btn btn-primary btn_yes">작성하기</button>
+							        <button type="button" class="btn btn-secondary btn_no" data-bs-dismiss="modal">취소하기</button>
+							      </div>
+								</form>
+						    </div>
+						  </div>
+						</div> --%>
+						<!-- 모달 -->
 					</tbody>
 				</table>
 				</div>
@@ -193,12 +282,6 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script type="text/javascript">
-		function answerView(){
-			$('#viewModal').modal("show");
-		}
-		function answerWrite(){
-			$('#writeModal').modal("show");
-		}
 		
 	</script>
 </body>

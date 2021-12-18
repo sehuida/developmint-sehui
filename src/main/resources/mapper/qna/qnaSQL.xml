@@ -41,4 +41,14 @@
 		    "answer_date" as answerDate
 		from non_member_qna order by 1 desc
 	</select>
+	<update id="updateCounsel" parameterType="map">
+		<choose>
+			<when test="type==1">
+				update qna set "qna_answer"=#{qnaAnswer}, "answer_date"=to_char(sysdate,'YYYY-MM-DD HH24:MI') where "qna_no"=#{num}
+			</when>
+			<otherwise>
+				update non_member_qna set "qna_answer"=#{qnaAnswer}, "answer_date"=to_char(sysdate,'YYYY-MM-DD HH24:MI') where "non_qna_no"=#{num}
+			</otherwise>
+		</choose>
+	</update>
 </mapper>

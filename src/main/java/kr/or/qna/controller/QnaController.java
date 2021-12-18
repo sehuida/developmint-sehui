@@ -213,4 +213,21 @@ public class QnaController {
 		return "qna/counselAdmin";
 	}
 	
+	@RequestMapping(value="/updateCounsel.do")
+	public String updateCounsel(int num, int type, String qnaAnswer, Model model) {
+		int result = service.updateCounsel(qnaAnswer, type, num);
+		if(result>0) {
+			model.addAttribute("title", "답변성공!");
+			model.addAttribute("msg", "답변상태가 변경되었습니다.");
+			model.addAttribute("loc", "/adminCounsel.do?type="+type);
+			model.addAttribute("icon", "success");
+		}else {
+			model.addAttribute("title", "답변실패");
+			model.addAttribute("msg", "답변보내기에 실패하셨습니다.");
+			model.addAttribute("loc", "adminCounsel.do?type="+type);
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";
+	}
+	
 }
