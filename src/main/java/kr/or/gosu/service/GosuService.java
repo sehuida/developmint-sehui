@@ -754,6 +754,12 @@ public class GosuService {
 	}
 
 
+	public GosuRequest gosuMemberRequestAjax(GosuRequestCost grc) {
+		GosuRequest gosuRequest = dao.gosuMemberRequestAjax(grc);	
+		return gosuRequest;
+	}
+
+
 
 
 }

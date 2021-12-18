@@ -531,9 +531,10 @@ public class GosuController {
 		model.addAttribute("grcOne", grc2);
 		return "gosu/gosuRequestContent";
 	}
+
 	@RequestMapping(value = "/gosuRequestListGosuNo.do")
-	public String gosuRequestListGosuNo(int reqPage,int gosuNo,String type, Model model) {
-		GosuRequestListPageData glpd = service.selectMemberRequestListGosuNoIN(reqPage,gosuNo,type);
+	public String gosuRequestListGosuNo(int reqPage, int gosuNo, String type, Model model) {
+		GosuRequestListPageData glpd = service.selectMemberRequestListGosuNoIN(reqPage, gosuNo, type);
 		model.addAttribute("memberRequestList", glpd.getList());
 		model.addAttribute("pageNavi", glpd.getPageNavi());
 		model.addAttribute("start", glpd.getStart());
@@ -826,12 +827,25 @@ public class GosuController {
 	public int gNoticeCommentUpdateAjax(Comment cmt) {
 		int result = service.gNoticeCommentUpdateAjax(cmt);
 		return result;
-	
+
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/gNoticeCommentDeleteAjax.do")
 	public int gNoticeCommentDeleteAjax(int commentNo) {
 		int result = service.gNoticeCommentDeleteAjax(commentNo);
 		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/gosuMemberRequestAjax.do")
+	public GosuRequest gosuMemberRequestAjax(int costNo, @SessionAttribute(required = false) Member m) {
+		System.out.println("costNo : "+costNo);
+		System.out.println("mId : "+m.getMemberId());
+		GosuRequestCost grc = new GosuRequestCost();
+		grc.setCostNo(costNo);
+		grc.setMemberId(m.getMemberId());
+		GosuRequest grcOne = service.gosuMemberRequestAjax(grc);
+		return grcOne;
 	}
 }

@@ -124,7 +124,7 @@ input:focus, textarea:focus {
 }
 
 .hrm-content span {
-	font-size: 30px;
+	font-size: 20px;
 	font-weight: 900;
 }
 
@@ -132,13 +132,91 @@ input:focus, textarea:focus {
 	border: none;
 	background: transparent;
 	text-align: center;
-	margin-top:20px;margin-bottom:20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
-.hrm-content td, .hrm-content th {
-	font-size: 30px;
+.hrm-content td {
+	font-size: 20px;
 	font-weight: 900;
-	width: 400px;
+	width: 600px;
+}
+
+.hrm-content th {
+	font-size: 20px;
+	font-weight: 900;
+	width: 200px;
+}
+
+.req-wrap {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10000;
+}
+
+#req-modal {
+	background-color: white;
+	width: 800px;
+	padding: 30px;
+}
+
+.req-btn-wrap {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.req-btn-wrap a {
+	margin: 20px;
+	padding: 10px;
+	width: 100px;
+}
+
+.req-content span {
+	font-size: 20px;
+	font-weight: 900;
+}
+
+.req-content input {
+	border: none;
+	background: transparent;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.req-content td {
+	font-size: 20px;
+	font-weight: 900;
+	width: 600px;
+}
+
+.req-content th {
+	font-size: 20px;
+	font-weight: 900;
+	width: 200px;
+}
+.g-req-box{
+	border :3px solid  #6cc3d5;
+}
+.g-req-box ul{
+	list-style-type: none;
+}
+.g-req-box li{
+	padding: 10px;
+	margin:10px;
+}
+.g-req-box h6{
+	font-weight: 900;
+	color : #6cc3d5;
 }
 </style>
 <body>
@@ -157,40 +235,47 @@ input:focus, textarea:focus {
 
 				</c:when>
 				<c:otherwise>
-				
+
 					<table>
 
 
 
-							<c:forEach items="${memberRequestCostList }" var="mrcl"
-								varStatus="i">
-								<tr>
-									<td>
-										<table class="g-one-tbl">
-											<tr>
-												<th rowspan="3"><c:if test="${empty mrcl.gosuImg }">
-														<img src="/resources/img/gosu/g_img_basic.png">
-													</c:if> <c:if test="${not empty mrcl.gosuImg }">
-														<img src="/resources/upload/member/${mrcl.gosuImg}">
-													</c:if></th>
-												<th><span style="color: rgb(78, 205, 196);padding:0; padding-right: 10px;">고수</span>${mrcl.gosuId }</th>
-												<td style="text-align: right;">${mrcl.costDate }</td>
-											</tr>
-											<tr>
-												<td colspan="2"style="max-width: 1000px;" ><span style="width:100%; color:  gray;">${mrcl.costContentBr }</span></td>
+						<c:forEach items="${memberRequestCostList }" var="mrcl"
+							varStatus="i">
+							<tr>
+								<td>
+									<table class="g-one-tbl">
+										<tr>
+											<th rowspan="3"><c:if test="${empty mrcl.gosuImg }">
+													<img src="/resources/img/gosu/g_img_basic.png">
+												</c:if> <c:if test="${not empty mrcl.gosuImg }">
+													<img src="/resources/upload/member/${mrcl.gosuImg}">
+												</c:if></th>
+											<th><span
+												style="color: rgb(78, 205, 196); padding: 0; padding-right: 10px;">고수</span>${mrcl.gosuId }</th>
+											<td style="text-align: right;">${mrcl.costDate }</td>
+										</tr>
+										<tr>
+											<td colspan="2" style="max-width: 1000px;"><span
+												style="width: 100%; color: gray;">${mrcl.costContentBr }</span></td>
 
-											</tr>
-											<tr>
-												<th>비용 <span  style="color:red;padding: 0;">${mrcl.cost}</span>원</th>
-												<td style="display: flex; justify-content: right;">
-													<button type="button"
-														onclick="gosuProjectJSPAjax(${mrcl.costNo});"
-														class="btn btn-primary" style="width: 150px;">진행하기</button>
-												</td>
-											</tr>
-										</table>
-									</td>
-								</tr>
+										</tr>
+										<tr>
+											<th>비용 <span style="color: red; padding: 0;">${mrcl.cost}</span>원
+											</th>
+											<td style="display: flex; justify-content: right;">
+												<button type="button"
+													onclick="gosuRequestAjax(${mrcl.costNo});"
+													class="btn btn-info"
+													style="width: 150px; margin-right: 15px;">보낸 요청서</button>
+												<button type="button"
+													onclick="gosuProjectJSPAjax(${mrcl.costNo});"
+													class="btn btn-primary" style="width: 150px;">진행하기</button>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
 						</c:forEach>
 					</table>
 
@@ -200,7 +285,8 @@ input:focus, textarea:focus {
 		<div class="hrm-wrap" style="display: none; margin: 0;">
 			<div id="hrm-modal">
 				<div class="hrm-content">
-					<br>&nbsp;&nbsp;&nbsp;&nbsp; <span>결제하시겠습니까?</span> <br>
+					<br>&nbsp;&nbsp;&nbsp;&nbsp; <span
+						style="color: #56cc9d; font-size: 30px;">결제하시겠습니까?</span> <br>
 					<br> <br>
 					<div class="g-style">
 						<table>
@@ -215,11 +301,13 @@ input:focus, textarea:focus {
 							</tr>
 							<tr>
 								<th>내용</th>
-								<td><textarea id="contentSend" disabled style="text-align:center;  font-size: 15px; padding:10px; width: 100%; margin-top:20px;margin-bottom:20px;border: none;"></textarea></td>
+								<td><textarea id="contentSend" disabled
+										style="text-align: center; font-size: 15px; padding: 10px; width: 100%; border: none;"></textarea></td>
 							</tr>
 							<tr>
 								<th>견적비용</th>
-								<td><input type="text" id="costSend" disabled></td>
+								<td><input type="text" id="costSend"
+									style="color: red; font-weight: 900; font-size: 25px;" disabled>원</td>
 								<input type="hidden" id="requestNo">
 								<input type="hidden" id="costNo">
 								<input type="hidden" id="ggmemberId">
@@ -238,12 +326,55 @@ input:focus, textarea:focus {
 				</div>
 			</div>
 		</div>
+		<div class="req-wrap" style="display: none; margin: 0;">
+			<div id="req-modal">
+				<div class="req-content">
 
+					<div class="g-style g-req-box"></div>
 
-		 <div id = "pageNavi">${pageNavi }</div>
+				</div>
+				<div class="req-btn-wrap">
+					<a id="req-close" class="btn btn-outline-info">확인</a>
+				</div>
+			</div>
+		</div>
+
+		<div id="pageNavi">${pageNavi }</div>
 	</div>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
+		function gosuRequestAjax(costNo){
+			console.log("costNo : "+costNo);
+			$.ajax({
+				url : "/gosuMemberRequestAjax.do",
+				data : {
+					"costNo" : costNo
+				},
+				success : function(data) {
+					console.log(data);
+					$(".g-req-box").empty();
+					var html="";
+					html+="<ul style='padding: 0;'>";
+					html+="<li><h6>어떤 플랫폼을 원하시나요?</h6>"+data.requestContent1Br+"<br></li><li>";
+					html+="<h6>어떤 종류의 개발을 원하시나요?</h6>"+data.requestContent2Br+"<br></li><li>";
+					html+="<h6>원하는 숙련도의 개발자가 있으신가요?</h6>"+data.requestContent3Br+"<br></li><li>";
+					html+="<h6>기획은 어느 정도 되어있나요?</h6>"+data.requestContent4Br+"<br></li><li>";
+					html+="<h6>개발 내용과 참고 사항에 대해 상세히 알려주세요.</h6>"+data.requestContent7+"<br>";
+					html+="</li><li><h6>언제까지 작업이 완료되어야 하나요?</h6>"+data.requestContent5Br+"<br></li><li>";
+					html+="<h6>어떻게 진행하기 원하시나요?</h6>"+data.requestContent6Br+"<br></li></ul>";
+					$(".g-req-box").append(html);
+					$('body').css("overflow", "hidden");
+					$('.req-wrap').css("overflow", "scroll");
+					$(".req-wrap").css("display", "flex");
+					
+				}
+	
+		});
+		};
+		$("#req-close").click(function() {
+			$(".req-wrap").css("display", "none");
+			$('body').css("overflow", "scroll");
+		});
 		$("#hrm-close").click(function() {
 			$(".hrm-wrap").css("display", "none");
 		});

@@ -810,15 +810,15 @@
 		order by
 		1
 		desc
-		)r)rr where rnum between #{start} and
-		#{end}
+		)r)rr where rnum between #{start} and #{end}
 	</select>
 	<select id="selectRequestCostCount" parameterType="string"
 		resultType="_int">
 		select
 		count(*)
 		from gosu_request_cost where member_id
-		=#{memberId}
+		=#{memberId} AND cost_no
+		NOT IN(select cost_no from gosu_request_project_sub)
 	</select>
 
 
@@ -1025,7 +1025,7 @@
 				as
 				requestContent7,
 				REQUEST_DATE as
-				requsetDate 
+				requsetDate
 				from
 				(select rownum as
 				rnum , r.*
@@ -1055,7 +1055,8 @@
 				) and
 				cost.gosu_no =
 				#{gosuNo})order by 1
-				desc)r)rr where rnum
+				desc)r)rr
+				where rnum
 				between
 				#{start} and #{end}
 
@@ -1123,4 +1124,29 @@
 
 
 	</select>
+	<select id="gosuMemberRequestAjax" parameterType="grc" resultType="gr">
+		select 
+		req.REQUEST_NO as requestNo,
+		req.REQUEST_WRITER_NO as
+		requestWriterNo,
+		req.REQUEST_CONTENT1 as requestContent1,
+		req.REQUEST_CONTENT2
+		as
+		requestContent2,
+		req.REQUEST_CONTENT3 as requestContent3,
+		req.REQUEST_CONTENT4
+		as requestContent4,
+		req.REQUEST_CONTENT5 as
+		requestContent5,
+		req.REQUEST_CONTENT6 as requestContent6,
+		req.REQUEST_CONTENT7
+		as
+		requestContent7,
+		req.REQUEST_DATE as requsetDate
+		from gosu_request req
+		JOIN gosu_request_cost cost
+		ON req.request_no = cost.request_no
+		where cost.cost_no = #{costNo} and cost.member_id = #{memberId}
+	</select>
+
 </mapper>
