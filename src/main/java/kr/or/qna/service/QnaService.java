@@ -57,6 +57,7 @@ public class QnaService {
 	}
 
 
+	@Transactional
 	public int updateCounsel(String qnaAnswer, int type, int num) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("qnaAnswer", qnaAnswer);
