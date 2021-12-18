@@ -51,4 +51,17 @@
 			</otherwise>
 		</choose>
 	</update>
+	<select id="myCounselOne" parameterType="string" resultType="q">
+		select ROWNUM as rnum, q.* from(select 
+		    "qna_no" as qnaNo,
+		    "category"as category,
+		    "qna_title"as qnaTitle,
+		    "qna_content"as qnaContent,
+		    "reg_date"as regDate,
+		    "filename"as filename,
+		    "filepath"as filepath,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date"as answerDate
+		from qna where "member_id"=#{memberId} order by 1 desc)q
+	</select>
 </mapper>

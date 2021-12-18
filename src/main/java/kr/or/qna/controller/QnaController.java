@@ -119,12 +119,18 @@ public class QnaController {
 	public String insertCounsel(nonQna nq, HttpServletRequest request, Model model) {
 		int result = service.insertCounselNonQna(nq);
 		if(result>0) {
-			model.addAttribute("msg","1:1 Q&A 신청 완료");	
+			model.addAttribute("title", "1:1 Q&A 신청 성공!");
+			model.addAttribute("msg", "답변은 비회원 전용 리스트를 확인하시면 됩니다.");
+			model.addAttribute("loc", "/n_counsel.do");
+			model.addAttribute("icon", "success");	
 		}else {
-			model.addAttribute("msg","1:1 Q&A 신청 실패");
+			model.addAttribute("title", "1:1 Q&A 신청 실패");
+			model.addAttribute("msg", "답변보내기에 실패하셨습니다.");
+			model.addAttribute("loc", "/n_counsel.do");
+			model.addAttribute("icon", "warning");
 		}
-		model.addAttribute("loc","/n_counsel.do");
-		return "common/msg";
+		//model.addAttribute("loc","/n_counsel.do");
+		return "member/swalMsg";
 	}
 	
 	@RequestMapping(value="/counsel_save2.do")
@@ -180,16 +186,24 @@ public class QnaController {
 		}
 		int result = service.insertCounselQna(m,q, list);
 		if(result == -1||result != list.size()) {
-			model.addAttribute("msg","등록실패");
+			model.addAttribute("title", "1:1 Q&A 신청 성공!");
+			model.addAttribute("msg", "상담내역에 등록되었습니다. 확인해주세요.");
+			model.addAttribute("loc", "/n_counsel.do");
+			model.addAttribute("icon", "success");
 		}else {
-			model.addAttribute("msg","등록성공");
+			model.addAttribute("title", "1:1 Q&A 신청 실패");
+			model.addAttribute("msg", "상담 보내기에 실패하셨습니다. 관리자에 문의해주세요");
+			model.addAttribute("loc", "/n_counsel.do");
+			model.addAttribute("icon", "warning");
 		}
-		model.addAttribute("loc","/");
-		return "common/msg";
+		//model.addAttribute("loc","/");
+		return "member/swalMsg";
 	}
 	
 	@RequestMapping(value="/myCounsel.do")
-	public String myCounsel() {
+	public String myCounsel(@SessionAttribute Member m, Model model) {
+		ArrayList<Qna> list = service.myCounselOne(m.getMemberId());
+		model.addAttribute("list",list);
 		return "qna/counselUser";
 	}
 	

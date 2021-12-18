@@ -76,6 +76,11 @@ public class QnaService {
 		return result;
 	}
 
+	public ArrayList<Qna> myCounselOne(String memberId) {
+		// TODO Auto-generated method stub
+		return dao.myCounselOne(memberId);
+	}
+
 
 
 }

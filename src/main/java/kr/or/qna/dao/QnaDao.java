@@ -51,6 +51,12 @@ public class QnaDao {
 		return sqlsession.update("qna.updateCounsel",map);
 	}
 
+
+	public ArrayList<Qna> myCounselOne(String memberId) {
+		List<Qna> list = sqlsession.selectList("qna.myCounselOne",memberId);
+		return (ArrayList<Qna>)list;
+	}
+
 	
 	
 }

@@ -60,7 +60,7 @@
 				     		</select>
 					  	</div>
 					  	<div class="form-group searchBox-2">
-					     	<label for="category" class="form-label mt-1 text-white">답변상태</label>
+					     	<label for="qnaAnswer" class="form-label mt-1 text-white">답변상태</label>
 					    	<select class="form-select" id="qnaAnswer" name="qnaAnswer" >
 						      	<option value="">전체</option>
 						      	<option value="1">미답변</option>
