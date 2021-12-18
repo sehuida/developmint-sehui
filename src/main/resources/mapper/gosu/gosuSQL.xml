@@ -942,17 +942,21 @@
 		MEMBER_ID as memberId,
 		COMMENT_CONTENT as commentContent,
 		REG_DATE as regDate,
-		BOARD_NO as boardNo,
+		BOARD_NO as
+		boardNo,
 		BOARD_TYPE as boardType,
 		COMMENT_TYPE as commentType,
 		COMMENT_REF as commentRef,
 		filepath as memberImg
-		from (select rownum as rnum , r.*,(select filepath from member where
-		member_id = r.MEMBER_ID) as
+		from (select rownum as
+		rnum , r.*,(select filepath from member where
+		member_id = r.MEMBER_ID)
+		as
 		filepath from
 		(select
 		*
-		from comments where board_type=6 and board_no =#{gnn} order by 1  )r)rr
+		from comments where board_type=6 and board_no
+		=#{gnn} order by 1 )r)rr
 	</select>
 	<insert id="insertGosuNoticeCommentRe" parameterType="cm">
 		insert into
@@ -962,11 +966,161 @@
 	<update id="gNoticeCommentUpdateAjax" parameterType="cm">
 		update
 		comments set
-		COMMENT_CONTENT = #{commentContent} where COMMENT_NO = #{commentNo}
+		COMMENT_CONTENT = #{commentContent} where COMMENT_NO =
+		#{commentNo}
 	</update>
-	
+
 	<delete id="gNoticeCommentDeleteAjax" parameterType="_int">
 		delete from
 		comments where COMMENT_NO = #{commentNo}
 	</delete>
+	<select id="selectMemberRequestListGosuNoIN" parameterType="map"
+		resultType="gr">
+		<choose>
+			<when test="type != null and type.equals('in')">
+				select
+				*
+				from
+				(select rownum as rnum , r.*
+				from (
+				select
+				req.REQUEST_NO as
+				requestNo,
+				req.REQUEST_WRITER_NO as
+				requestWriterNo,
+				req.REQUEST_CONTENT7
+				as
+				requestContent7,
+				req.REQUEST_DATE as
+				requsetDate
+				from
+				gosu_request req
+				left JOIN
+				gosu_request_cost cost
+				ON
+				req.request_no =
+				cost.request_no
+				where
+				cost.request_no IN
+				(
+				select
+				request_no from
+				gosu_request_cost
+				where gosu_no = #{gosuNo}
+				) and
+				cost.gosu_no =
+				#{gosuNo} order by 1
+				desc)r)rr where rnum
+				between
+				#{start} and #{end}
+
+			</when>
+			<when test="type != null and type.equals('notin')">
+				select
+				REQUEST_NO as
+				requestNo,
+				REQUEST_WRITER_NO as
+				requestWriterNo,
+				REQUEST_CONTENT7
+				as
+				requestContent7,
+				REQUEST_DATE as
+				requsetDate 
+				from
+				(select rownum as
+				rnum , r.*
+				from (
+				select * from
+				gosu_request where
+				request_no
+				NOT IN (
+				select req.request_no
+				from
+				gosu_request req
+				left
+				JOIN
+				gosu_request_cost
+				cost
+				ON
+				req.request_no =
+				cost.request_no
+				where
+				cost.request_no IN
+				(
+				select
+				request_no from
+				gosu_request_cost
+				where
+				gosu_no = #{gosuNo}
+				) and
+				cost.gosu_no =
+				#{gosuNo})order by 1
+				desc)r)rr where rnum
+				between
+				#{start} and #{end}
+
+			</when>
+		</choose>
+
+	</select>
+	<select id="selectRequestCountGosuNoIN" parameterType="map"
+		resultType="_int">
+		<choose>
+			<when test="type != null and type.equals('in')">
+				select
+				count(*)
+				from
+				(
+				select *
+				from
+				gosu_request req
+				left
+				JOIN
+				gosu_request_cost cost
+				ON
+				req.request_no =
+				cost.request_no
+				where
+				cost.request_no IN
+				(
+				select
+				request_no from gosu_request_cost
+				where
+				gosu_no = #{gosuNo}
+				) and
+				cost.gosu_no = #{gosuNo} )
+
+			</when>
+			<when test="type != null and type.equals('notin')">
+				select
+				count(*)
+				from
+				(
+				select * from gosu_request where
+				request_no
+				NOT IN (
+				select req.request_no
+				from
+				gosu_request req
+				left
+				JOIN
+				gosu_request_cost
+				cost
+				ON
+				req.request_no =
+				cost.request_no
+				where
+				cost.request_no IN
+				(
+				select
+				request_no from gosu_request_cost
+				where
+				gosu_no = #{gosuNo}
+				) and
+				cost.gosu_no = #{gosuNo}))
+			</when>
+		</choose>
+
+
+	</select>
 </mapper>

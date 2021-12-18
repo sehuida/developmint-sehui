@@ -17,7 +17,7 @@
 
 .container {
 	min-width: 1200px;
-	margin-bottom:100px;
+	margin-bottom: 100px;
 }
 
 .container>h3 {
@@ -157,7 +157,6 @@
 	display: flex;
 	justify-content: center;
 }
-
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -179,15 +178,15 @@
 			고수에게 피드백을 신청해보세요!<br> 당신의 작품을 평가해줍니다. 마음껏 질문하세요!
 		</div>
 		<div class="gosu-search">
-				<input type="text" id="search-content" placeholder="내용을 입력해주세요"> 
-				<select name="type">
-					<option value="" selected disabled hidden>선택</option>
-					<option value="title">제목</option>
-					<option value="content">내용</option>
-				</select>
-				<button type="button" class="btn btn-primary"
-					style="padding: 15px; margin-left:5px; margin-bottom: 5px; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;"
-					onclick="getSearchList();">검색</button>
+			<input type="text" id="search-content" placeholder="내용을 입력해주세요">
+			<select name="type">
+				<option value="" selected disabled hidden>선택</option>
+				<option value="title">제목</option>
+				<option value="content">내용</option>
+			</select>
+			<button type="button" class="btn btn-primary"
+				style="padding: 15px; margin-left: 5px; margin-bottom: 5px; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;"
+				onclick="getSearchList();">검색</button>
 		</div>
 		<c:if test="${sessionScope.m.memberType eq 2}">
 
@@ -219,101 +218,108 @@
 		</c:if>
 
 		<div class="gosu-wrap">
-		<c:choose>
-			<c:when test="${empty gList }">
-			<div class="talk-sub">
-					<h2 style="font-weight: 900; color: #cacaca; margin: 150px;">게시글을 찾을 수 없습니다.</h2>
-				</div>
-			
-			</c:when>
-			<c:otherwise>
-			<c:forEach items="${gList }" var="g" varStatus="i">
-				<div class="gosu">
-					<button type="button" class="card border-primary mb-3"
-						style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-						<table>
-							<tr>
-								<c:if test="${empty g.gosuImg }">
-									<td rowspan="4" class="gosu_img"
-										style="padding: 40px; text-align: center;"><img
-										src="/resources/img/gosu/g_img_basic.png"
-										style="border-radius: 50%; width: 200px; height: 200px;"></td>
-								</c:if>
-								<c:if test="${not empty g.gosuImg }">
-									<td rowspan="4" style="padding: 40px; text-align: center;"><img
-										src="/resources/upload/member/${g.gosuImg }"
-										style="border-radius: 50%; width: 200px; height: 200px;"></td>
-								</c:if>
+			<c:choose>
+				<c:when test="${empty gList }">
 
 
-								<td style="width: 750px;"><a
-									href="/gosuContent.do?gNo=${g.ggsouNo}" class="gtitle">${g.gosuTitle }</a></td>
-							</tr>
-							<tr>
-								<td><hr></td>
-							</tr>
-							<tr>
+					<div class="talk-sub" style="margin-bottom: 100px;">
+						<div style="text-align: center;">
+							<img src="/resources/img/member/user.png"
+								style="border-radius: 50%; width: 70px; margin-top: 70px;">
+							<h2 style="font-weight: 900; color: #cacaca; margin: 30px; ">게시글을
+								찾을 수 없습니다.</h2>
+						</div>
+					</div >
 
-								<td>
-									<li><b>한줄소개</b> : ${g.gosuSelf }</li>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<li><b>비용</b> : ${g.gosuCost }</li>
-								</td>
-							</tr>
-							<tr>
-								<td style="text-align: center; font-weight: bold;"><span
-									style="color: rgb(78, 205, 196);">고수</span> ${g.gosuId }</td>
-								<td><c:if test="${not empty g.reviewAvg }">
-										<c:if test="${g.reviewAvg eq 0 }">
-											<span style="color: gray; font-size: small;">아직 등록된
-												리뷰가 없습니다.</span>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${gList }" var="g" varStatus="i">
+						<div class="gosu">
+							<button type="button" class="card border-primary mb-3"
+								style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+								<table>
+									<tr>
+										<c:if test="${empty g.gosuImg }">
+											<td rowspan="4" class="gosu_img"
+												style="padding: 40px; text-align: center;"><img
+												src="/resources/img/gosu/g_img_basic.png"
+												style="border-radius: 50%; width: 200px; height: 200px;"></td>
 										</c:if>
-
-										<c:if test="${g.reviewAvg ne 0 }">
-											<span>${g.reviewAvg } 점 &nbsp;&nbsp;</span>
-										</c:if>
-										<c:if test="${g.reviewAvg eq 1 }">
-											<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
-										</c:if>
-										<c:if test="${g.reviewAvg eq 2 }">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
-										</c:if>
-										<c:if test="${g.reviewAvg eq 3 }">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-										</c:if>
-										<c:if test="${g.reviewAvg eq 4 }">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-										</c:if>
-										<c:if test="${g.reviewAvg eq 5 }">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+										<c:if test="${not empty g.gosuImg }">
+											<td rowspan="4" style="padding: 40px; text-align: center;"><img
+												src="/resources/upload/member/${g.gosuImg }"
+												style="border-radius: 50%; width: 200px; height: 200px;"></td>
 										</c:if>
 
-									</c:if></td>
-							</tr>
-						</table>
-					</button>
-				</div>
-			</c:forEach>
-			</c:otherwise>
-		</c:choose>
-			
+
+										<td style="width: 750px;"><a
+											href="/gosuContent.do?gNo=${g.ggsouNo}" class="gtitle">${g.gosuTitle }</a></td>
+									</tr>
+									<tr>
+										<td><hr></td>
+									</tr>
+									<tr>
+
+										<td>
+											<li><b>한줄소개</b> : ${g.gosuSelf }</li>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<li><b>비용</b> : ${g.gosuCost }</li>
+										</td>
+									</tr>
+									<tr>
+										<td style="text-align: center; font-weight: bold;"><span
+											style="color: rgb(78, 205, 196);">고수</span> ${g.gosuId }</td>
+										<td><c:if test="${not empty g.reviewAvg }">
+												<c:if test="${g.reviewAvg eq 0 }">
+													<span style="color: gray; font-size: small;">아직 등록된
+														리뷰가 없습니다.</span>
+												</c:if>
+
+												<c:if test="${g.reviewAvg ne 0 }">
+													<span>${g.reviewAvg } 점 &nbsp;&nbsp;</span>
+												</c:if>
+												<c:if test="${g.reviewAvg eq 1 }">
+													<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+												</c:if>
+												<c:if test="${g.reviewAvg eq 2 }">
+													<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+												</c:if>
+												<c:if test="${g.reviewAvg eq 3 }">
+													<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+												</c:if>
+												<c:if test="${g.reviewAvg eq 4 }">
+													<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+												</c:if>
+												<c:if test="${g.reviewAvg eq 5 }">
+													<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+												</c:if>
+
+											</c:if></td>
+									</tr>
+								</table>
+							</button>
+						</div>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+
 
 		</div>
 		<div id="pageNavi">${pageNavi }</div>
 	</div>
 	<script>
-	
 		function getSearchList() {
 
 			var searchContent = $("input[id=search-content]").val();
 			var type = $("select[name=type]").val();
 			console.log(searchContent);
 			console.log(type);
-			
-			location.href = "/gosuList2.do?reqPage=1&keyword="+searchContent + "&type=" + type;
+
+			location.href = "/gosuList2.do?reqPage=1&keyword=" + searchContent
+					+ "&type=" + type;
 		}
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
