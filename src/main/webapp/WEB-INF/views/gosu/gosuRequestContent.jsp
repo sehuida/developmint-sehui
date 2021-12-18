@@ -158,6 +158,7 @@ input:focus, textarea:focus {
 			<c:if test="${not empty grcOne }">
 				<span style="color : red;">이미 견적서를 보낸 요청서입니다.</span>
 			</c:if>
+		
 		</div>
 		<div class="g-center">
 			<a class="btn btn-info"
