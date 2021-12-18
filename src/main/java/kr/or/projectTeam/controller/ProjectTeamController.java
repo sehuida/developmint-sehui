@@ -37,6 +37,8 @@ import kr.or.projectTeam.model.vo.ProjectTeamApplyPageData;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.projectTeam.model.vo.ProjectTeamMember;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeViewData;
+import kr.or.projectTeam.model.vo.Shortcuts;
+import kr.or.projectTeam.model.vo.projectDevLanguage;
 import kr.or.projectTeam.model.vo.projectTeamMainPageData;
 
 @Controller
@@ -609,11 +611,34 @@ public class ProjectTeamController {
 		  	ArrayList<ProjectTeamMember> memberList = service.memberInfoList(projectNo, memberNo);
 		  	ProjectTask recentTask = service.recentTask(projectNo);
 		  	ProjectTask toDoTask = service.toDoTask(projectNo);
+		  	ArrayList<projectDevLanguage> pdLangList = service.selectAllprojectLangList();
+		  	ArrayList<DevelopLanguage> dlList = service.selectAllDevelopLang();
+		  	ArrayList<Shortcuts> scList = service.shortcutList(projectNo);
 		  	model.addAttribute("pt", pt);
 			model.addAttribute("memberList", memberList);
 			model.addAttribute("recentTask", recentTask);
 			model.addAttribute("toDoTask", toDoTask);
+			model.addAttribute("pdLangList", pdLangList);
+			model.addAttribute("dlList", dlList);
+			model.addAttribute("scList", scList);
 			return "recruitCrue/projectManageOutline";
+	  }
+	  
+	  @RequestMapping(value="//addShortcut.do")
+	  public String addShortcut(Model model, String shortcutAddr, String shortcutName, Integer projectNo, int memberNo ) {
+		  int result = service.addShortcut(shortcutAddr, shortcutName, projectNo); 
+		  if(result > 0) { 
+			  model.addAttribute("title", "바로가기 추가 성공!");
+			  model.addAttribute("msg", "등록하신 링크로 바로가기가 추가되었습니다.");
+			  model.addAttribute("loc","enterMyProject.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("icon", "success");
+		  } else {
+			  model.addAttribute("title", "바로가기 추가 실패");
+			  model.addAttribute("msg", "시스템 오류로 추가가 실패하였습니다.");
+			  model.addAttribute("loc","enterMyProject.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("icon", "warning");
+		  }
+		  return "member/swalMsg"; 
 	  }
 	  
 	  

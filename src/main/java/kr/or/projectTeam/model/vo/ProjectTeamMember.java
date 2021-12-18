@@ -8,4 +8,7 @@ public class ProjectTeamMember {
 	private int projectNo;
 	private int memberNo;
 	private String memberRole;
+	private String memberId;
+	private String memberImg;
+	private int memberGrade;
 }
