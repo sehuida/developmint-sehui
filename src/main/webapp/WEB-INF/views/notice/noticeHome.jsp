@@ -25,27 +25,27 @@
 			<div class="cs_menu">
 				<ul>
 					<li><span class="">Tel. 2163-8560</span><br><span class="last-span">평일 9:00~18:00(점심 12:00~13:00)</span></li>
-					<li><a href="/app/cs/counsel"><span class="font-mss">1:1 Q&A</span>1:1문의하기</a></li>
-					<li><a href="/app/mypage/counsel"><span class="font-mss">My Question</span>내 질문</a></li>
-					<li><a href="/app/cs/faq"><span class="font-mss">FAQ</span>자주 묻는 질문</a></li>
-					<li><a href="/app/cs/notice_list"><span class="font-mss">Notice</span>공지사항</a></li>
+					<li><a href="/n_counsel.do"><span class="font-mss">1:1 Q&A</span>1:1문의하기</a></li>
+					<li><a href="/myCounsel.do"><span class="font-mss">My Question</span>내 질문</a></li>
+					<li><a href="/faq.do"><span class="font-mss">FAQ</span>자주 묻는 질문</a></li>
+					<li><a href="/noticeList.do?reqPage=1"><span class="font-mss">Notice</span>공지사항</a></li>
 				</ul>
 			</div>
 			<div class="right_contents section_contents">
 				<h3 class="title_cs font-mss">FAQ <span>자주 묻는 질문</span></h3>
 				<!-- 탭버튼 -->
 				<ul class="mypage_type">
-	                <li><a href="/app/cs/faq/12">주문 결제</a></li>
-					<li><a href="/app/cs/faq/11">배송 안내</a></li>
-					<li><a href="/app/cs/faq/10">주문취소</a></li>
-					<li><a href="/app/cs/faq/8">교환</a></li>
-					<li><a href="/app/cs/faq/9">환불</a></li>
-					<li><a href="/app/cs/faq/13">상품 관련</a></li>
-					<li><a href="/app/cs/faq/14">포인트 · 적립금</a></li>
-					<li><a href="/app/cs/faq/17">이벤트</a></li>
-					<li><a href="/app/cs/faq/15">회원 관련</a></li>
-					<li><a href="/app/cs/faq/21">무탠픽업</a></li>
-					<li><a href="/app/cs/faq/16">기타</a></li>
+	                <li><a href="/faq.do?category=12">주문 결제</a></li>
+					<li><a href="/faq.do?category=11">배송 안내</a></li>
+					<li><a href="/faq.do?category=10">주문취소</a></li>
+					<li><a href="/faq.do?category=8">교환</a></li>
+					<li><a href="/faq.do?category=9">환불</a></li>
+					<li><a href="/faq.do?category=13">상품 관련</a></li>
+					<li><a href="/faq.do?category=14">포인트 · 적립금</a></li>
+					<li><a href="/faq.do?category=17">이벤트</a></li>
+					<li><a href="/faq.do?category=15">회원 관련</a></li>
+					<li><a href="/faq.do?category=21">무탠픽업</a></li>
+					<li><a href="/faq.do?category=16">기타</a></li>
 	            </ul>
 				<!-- //탭버튼 -->
 				<!-- 콘텐츠 -->

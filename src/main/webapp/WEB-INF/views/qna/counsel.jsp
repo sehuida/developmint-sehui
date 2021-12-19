@@ -83,10 +83,7 @@
 										<option value="10">환불관련</option>
 										<option value="11">공모전관련</option>
 										<option value="12">구인잡관련</option>
-										<option value="13">커뮤니티관련(사는 얘기)</option>
-				                        <option value="14">커뮤니티관련(Tech Q&A)</option>
-				                        <option value="15">커뮤니티관련(Tips & 강좌)</option>
-				                        <option value="16">IT NEWS & 정보</option>
+										<option value="13">커뮤니티관련</option>
 										<option value="40">기타 문의</option>
 										<option value="21">신고</option>
 										<option value="22">기능/작동 오류</option>
@@ -186,19 +183,12 @@
 			};
 			
 			// 초기출력
-			viewFAQList(qa_kind);
+			viewFAQList(category);
 			$('#f1 [name=category]').on('change', function() {
 
 				if ($(this).val() == '22') {
-					$('textarea[name=qnaContent]').text('정확한 답변을 드리기 위해, 아래 상세 내용들이 필요합니다.
-		필요 시 추가적인 정보나 확인 요청을 드릴 수 있습니다.
-		문제 상황에 대한 상세한 설명과 명확한 사진 및 영상은 검토에 큰 도움이 됩니다.
-
-		  1. 오류 발생 일시:
-		  2. 접속한 환경(모바일, PC 등):
-		  3. PC 환경이었다면 브라우저 종류(익스플로러, 크롬 등):
-		  4. 모바일 환경이었다면 OS 버전(안드로이드 11, iOS 14 등):
-		  5. 상세한 오류 발생 내용:');
+					$('textarea[name=qnaContent]').text('');
+					
 				} else {
 					$('textarea[name=qnaContent]').text('');
 				}
@@ -222,8 +212,8 @@
 
 		}
 		
-		function request_service(idx) {
-			var target_url = "/faq.do?category="+idx;
+		 function request_service(idx) {
+			var target_url = "/faqlist.do?category="+idx;
 
 			$.ajax({
 				type: "GET",
@@ -232,7 +222,7 @@
 					$("#faq_list").html(msg);
 				}
 			});
-		}
+		} 
 		
 		function cancel() {
 			if(confirm('취소하시겠습니까?')){

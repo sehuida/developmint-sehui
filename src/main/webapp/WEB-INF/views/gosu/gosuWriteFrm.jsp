@@ -4,7 +4,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 
 <%
 	ArrayList<GosuProject> gProjectList = new ArrayList<GosuProject>();
@@ -39,7 +38,7 @@
 	font-weight: bold;
 }
 
-.gosu-content-wrap>div>h4 ,.container>h4{
+.gosu-content-wrap>div>h4, .container>h4 {
 	font-weight: bold;
 	color: black;
 	margin-top: 200px;
@@ -48,7 +47,7 @@
 
 .gosu-content-wrap {
 	width: 1200px;
-	padding:50px;
+	padding: 50px;
 	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
 }
 
@@ -149,8 +148,8 @@
 
 .gosu input {
 	width: 700px;
-	margin-top:30px;
-	margin-bottom:30px;
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
 .gosu-mail {
@@ -244,6 +243,35 @@
 	align-items: center;
 	margin-top: 20px;
 }
+
+#gProject:hover {
+	cursor: pointer;
+	border: 1px solid rgb(46, 108, 164);
+	color: rgb(46, 108, 164);
+}
+
+.jb-a:hover .jb-c {
+	display: block;
+}
+#gProject {
+	border: 1px solid gray;
+	width: 200px;
+	height: 200px;
+	text-align: center;
+	position: relative;
+}
+
+#gProject>img {
+	width: 30px;
+	margin-top: 75px;
+}
+
+.jb-c {
+	position: absolute;
+	top: 0px;
+	left: 84px;
+	display: none;
+}
 </style>
 <body>
 
@@ -262,7 +290,7 @@
 		<h4>
 			&gt; &nbsp;<span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다!
 		</h4>
-		<div style="color: red;margin-bottom: 100px;">
+		<div style="color: red; margin-bottom: 100px;">
 			고수 소개 글은 하나만 작성이 가능하며, 수정 삭제가 불가능합니다!<br> 신중하게 작성해 주시길 바랍니다.
 		</div>
 
@@ -278,7 +306,7 @@
 						<table>
 							<tr>
 								<c:if test="${empty sessionScope.m.filepath }">
-									<th rowspan="6" style="padding: 40px;padding-right: 70px;"><img
+									<th rowspan="6" style="padding: 40px; padding-right: 70px;"><img
 										src="/resources/img/gosu/g_img_basic.png"
 										style="width: 250px;"></th>
 								</c:if>
@@ -316,8 +344,7 @@
 
 						<div>
 							<p>
-							<textarea name="gosuExplain" id="gosuExplain"
-								></textarea>
+								<textarea name="gosuExplain" id="gosuExplain"></textarea>
 							</p>
 
 						</div>
@@ -344,7 +371,7 @@
 						</h4>
 						<div>
 							<p>
-								<textarea name="gosuAct" id="gosuAct" ></textarea>
+								<textarea name="gosuAct" id="gosuAct"></textarea>
 							</p>
 						</div>
 					</div>
@@ -355,11 +382,15 @@
 								주세요.</span>
 						</h4>
 
-						<div class="g-photo-wrap"></div>
-						<div style="display: flex; justify-content: center;">
-							<a id="gProject" class="btn btn-primary"
-								style="padding: 10px; width: 100px;">추가하기</a>
+						<div class="g-photo-wrap">
+
+							<div id="gProject" class="jb-a">
+								<img class="jb-b" src="/resources/img/gosu/projectPlus.png">
+								<img class="jb-c" src="/resources/img/gosu/projectPlusBlue.png">
+								<br>추가하기
+							</div>
 						</div>
+
 					</div>
 					<div class="gosu-feedback">
 
@@ -370,6 +401,10 @@
 								&nbsp; &nbsp;원</span>
 						</h4>
 
+					</div>
+					<div style="display: flex; justify-content: center;">
+						<button type="submit" class="btn btn-primary"
+							style="width: 200px; margin: 100px; padding: 10px;">작성하기</button>
 					</div>
 				</div>
 				<div class="hrm-wrap" style="display: none;">
@@ -393,16 +428,14 @@
 						</div>
 					</div>
 				</div>
+
 			</div>
-			<div style="display: flex; justify-content: center;">
-				<button type="submit" class="btn btn-primary"
-					style="width: 200px; margin: 100px; padding: 10px;">작성하기</button>
-			</div>
+
 		</form>
 	</div>
 
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	
+
 	<script src="/resources/summernote/summernote-lite.js"></script>
 	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 	<script>
@@ -413,7 +446,6 @@
 					maxHeight : 500,
 					lang : "ko-KR",
 					toolbar : [
-							// [groupName, [list of button]]
 							[ 'fontname', [ 'fontname' ] ],
 							[ 'fontsize', [ 'fontsize' ] ],
 							[
@@ -444,7 +476,6 @@
 					maxHeight : 500,
 					lang : "ko-KR",
 					toolbar : [
-							// [groupName, [list of button]]
 							[ 'fontname', [ 'fontname' ] ],
 							[ 'fontsize', [ 'fontsize' ] ],
 							[
@@ -467,23 +498,23 @@
 							uploadImage(files[0], this);
 						}
 					}
-				}); 
-				
-				function uploadImage(file,editor){
-					data = new FormData();
-					data.append("file",file);
-					$.ajax({
-						url : "/gosuSummerImage.do",
-						type :"post",		//file전송을 위해 ajax를 할떄는 type을 post로 해줘야한다
-						data : data,
-						enctype : 'multipart/form-data',
-						processData : false,
-						contentType : false,
-						success : function(data){					
-							$(editor).summernote("insertImage",data);
-						}
-					});
-				 }
+				});
+
+		function uploadImage(file, editor) {
+			data = new FormData();
+			data.append("file", file);
+			$.ajax({
+				url : "/gosuSummerImage.do",
+				type : "post",
+				data : data,
+				enctype : 'multipart/form-data',
+				processData : false,
+				contentType : false,
+				success : function(data) {
+					$(editor).summernote("insertImage", data);
+				}
+			});
+		}
 		$('#g-btn-submit').submit(
 				function() {
 					var photoFilepath = $("input[name=photoFilepath]").val();
@@ -526,13 +557,6 @@
 			$(".hrm-wrap").css("display", "flex");
 
 		});
-		$("#hrm-close").click(function() {
-
-			$('body').css("overflow", "scroll");
-			$(".hrm-wrap").css("display", "none");
-
-		});
-
 		$(function() {
 
 			var gprojectFilepath = $("#gprojectFilepath");
@@ -549,20 +573,20 @@
 								var reader = new FileReader();
 								reader.onload = (function(aImg) {
 									return function(e) {
-
 										aImg.src = e.target.result;
 										var html = "";
 										var div = $(".g-photo-wrap");
+										console.log("div : " + div);
 										html += "<div class='g-photo-one'><dl>";
 										html += "<dt id='gimg'><img></dt>";
 										html += "<dd><b class='g-b' style='font-size: 19px;'></b></dd>";
 										html += "<dd><p class='g-p'></p></dd>";
 										html += "</dl></div>";
-										div.append(html);
-
-										$(".g-photo-one").last().find(
+										div.prepend(html);
+										$(".g-photo-one").first().find(
 												"#gimg>img").attr("src",
 												e.target.result);
+
 									}
 								})(image)
 
@@ -575,6 +599,17 @@
 							});
 
 		});
+		$("#hrm-close").click(function() {
+
+			var gprojectFilepath = $("#gprojectFilepath");
+			if (gprojectFilepath.val() != "") {
+
+				$(".g-photo-one").first().remove();
+			}
+			$('body').css("overflow", "scroll");
+			$(".hrm-wrap").css("display", "none");
+
+		});
 		function gProjectArr() {
 			var gprojectTitle = $("#gprojectTitle").val();
 			console.log(gprojectTitle);
@@ -582,6 +617,17 @@
 			console.log(gprojectContent);
 
 			var gprojectFilepath = $("#gprojectFilepath");
+			if (gprojectTitle == "" || gprojectContent == ""
+					|| gprojectFilepath.val() == "") {
+				swal({
+					title : '실패',
+					text : "입력하신 내용을 다시 확인해주세요!",
+					icon : 'error'
+				});
+				return false;
+
+			}
+			;
 
 			var form = new FormData();
 			var files = $("#gprojectFilepath")[0].files[0];
@@ -602,26 +648,26 @@
 							console.log(data.gprojectTitle);
 							console.log(data.gprojectContent);
 							$(".g-photo-one")
-									.last()
+									.first()
 									.append(
 											"<input type='hidden' name='gprojectFilepath' value='"+data.gprojectFilepath+"'>");
 							$(".g-photo-one")
-									.last()
+									.first()
 									.append(
 											"<input type='hidden' name='gprojectTitle' value='"+data.gprojectTitle+"'>");
 							$(".g-photo-one")
-									.last()
+									.first()
 									.append(
 											"<input type='hidden' name='gprojectContent' value='"+data.gprojectContent+"'>");
 
 						}
 					});
 
-			var gb = $(".g-photo-one").last().find(".g-b");
+			var gb = $(".g-photo-one").first().find(".g-b");
 			console.log(gb);
 			gb.append(gprojectTitle);
 
-			var gp = $(".g-photo-one").last().find(".g-p");
+			var gp = $(".g-photo-one").first().find(".g-p");
 			console.log(gp);
 			gp.append(gprojectContent);
 

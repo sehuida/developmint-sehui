@@ -4,7 +4,6 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
