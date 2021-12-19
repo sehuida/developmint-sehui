@@ -49,21 +49,25 @@
 	}
 	.applicationBtn{
 		display: inline-block;
-		width: 100px;
-		text-align: center;
-		padding: 15px 0px;
 		float: right;
+		margin-right: 50px;
+	}
+	.applicationBtn>button{
 		background-color: rgb(78, 205, 196);
 		color: white;
 		font-weight: bold;
 		border-radius: 5px;
-		margin-right: 50px;
-		cursor: pointer;
+		width: 100px;
+		text-align: center;
+		padding: 15px 0px;
+		border: none;
+		outline: none;
 	}
 	.info{
 		width: 1000px;
 		margin: 0 auto;
-		margin-top: 30px;
+		border: 1px solid #d9d9d9;
+		padding: 50px;
 	}
 	.infoContent{
 		margin-top: 10px;
@@ -96,6 +100,7 @@
 		overflow: hidden;
 		border: 1px solid #888;
 		padding: 20px 10px;
+		margin:0 auto;
 	}
 	.infoLogo{
 		width: 260px;
@@ -136,7 +141,13 @@
 		text-decoration: none;
 		color: #222222;
 	}
-	
+	.announcement{
+		margin-left: 60px;
+		font-size: 20px;
+		font-weight: bold;
+		margin-top: 50px;
+		margin-bottom: 10px;
+	}
 </style>
 <script>
 	
@@ -152,13 +163,109 @@
 				<p>${a.announceTitle }</p>
 			</div>
 			<div class="applicationBtn">
-				<a>지원하기</a>
+				<!-- 모달버튼// 사용법 자세히모름 수현누나 물어보기 -->
+				<button data-bs-toggle="modal" data-bs-target="#contestMember">지원하기</button>
+				<!-- modal내용 등록 -->
+				<div class="modal fade" id="contestMember" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog  modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-body">
+									<form action="#" method="post">
+										<p style="font-size: 15px; color: #444444; margin-bottom:5px;">${a.companyName } 입사지원</p>
+										<p style="font-size: 22px; font-weight: bold; text-overflow:ellipsis; margin-bottom: 0px;">${a.announceTitle }</p>
+										<p style="font-size: 12px; color: #999999;">
+											<c:if test="${a.career eq 1 }">
+												신입
+											</c:if> 
+											<c:if test="${a.career eq 2 }">
+												경력
+											</c:if> 
+											<c:if test="${a.career eq 3 }">
+												신입/경력
+											</c:if> 
+											| 
+											<c:if test="${a.school eq 1 }">
+												초졸이상
+											</c:if>
+											<c:if test="${a.school eq 2 }">
+												중졸이상
+											</c:if>
+											<c:if test="${a.school eq 3 }">
+												고졸이상
+											</c:if>
+											<c:if test="${a.school eq 4 }">
+												대졸이상
+											</c:if>
+											<c:if test="${a.school eq 5 }">
+												학력무관
+											</c:if>
+											|
+											<c:if test="${a.workPlace eq 1 }">
+												서울
+											</c:if>
+											<c:if test="${a.workPlace eq 2 }">		
+						            			경기
+							            	</c:if>
+											<c:if test="${a.workPlace eq 3 }">		
+							            		인천
+							            	</c:if>
+											<c:if test="${a.workPlace eq 4 }">		
+												강원
+							            	</c:if>
+											<c:if test="${a.workPlace eq 5 }">		
+							            		충남
+							            	</c:if>
+											<c:if test="${a.workPlace eq 6 }">		
+							            		충북
+							            	</c:if>
+											<c:if test="${a.workPlace eq 7 }">		
+												경북
+							            	</c:if>
+											<c:if test="${a.workPlace eq 8 }">		
+												부산
+							            	</c:if>
+											<c:if test="${a.workPlace eq 9 }">		
+												경남
+							            	</c:if>
+											<c:if test="${a.workPlace eq 10 }">		
+							            		전북
+							            	</c:if>
+											<c:if test="${a.workPlace eq 11 }">		
+							            		전남
+							            	</c:if>
+											<c:if test="${a.workPlace eq 12 }">		
+							            		제주
+							            	</c:if>	
+										</p>
+										<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;">
+											<p><span style="font-weight: bold">신청자 ID</span> : ${sessionScope.m.memberId }</p>
+											<p><span style="font-weight: bold">신청자 이름</span> : ${sessionScope.m.memberName }</p>
+											<p><span style="font-weight: bold">신청자 전화번호</span> : ${sessionScope.m.phone }</p>
+											<p><span style="font-weight: bold">신청자 E-mail</span> : ${sessionScope.m.email }</p>
+											<p><span style="font-weight: bold">신청자 Git 주소</span> : </p>
+											<input type="text" class="form-control" name="cmGit">
+										</div>
+										<p class="desc" style="font-size:12px; color: #999999;"> 제출서류는 90일까지 지원기업에게 제공됩니다.<br>제출에 동의할 경우에만 [입사지원] 버튼을 클릭해 주세요.<br> 동의하지 않을 경우 입사지원이 불가능합니다.</p>
+										<p class="desc" style="font-size:12px; color: #999999;"> 만료(응시 시작일로부터 3년)된 인 ∙ 적성검사 포함 시 입사지원이 불가능하며, 입사지원 후 제출된 인 ∙ 적성검사는 만료 여부와 관계없이 입사지원서 열람 기준 내 인사담당자가 확인할 수 있습니다.</p>
+										<div style="text-align: right; ">
+											<button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">신청</button>
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
+										</div>
+										<input type="hidden" name="announceNo" value="${a.announceNo }">
+										<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+										<input type="hidden" name="cmStatus" value="1">
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
 			</div>
 			<div class="companyName">
 				<small>${a.companyName }</small>
 			</div>
 		</div>
 		<hr>
+		<div class="announcement">모집요강</div>
 		<div class="info">
 			<div class="infoDiv">
 				<em>요약</em>
