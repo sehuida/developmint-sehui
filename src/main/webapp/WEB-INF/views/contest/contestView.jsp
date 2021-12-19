@@ -358,39 +358,39 @@
 								<div class="iddate">
 									<p>${cl.memberId }</p>
 									<p>${cl.regDate }</p>
-										<%--로그인했을 때만 보여주기 --%>
-								<c:if test="${not empty sessionScope.m }">
-									<%--내가 쓴 댓글일 경우만 보여주기 --%>
-									<c:if test="${cl.memberId eq sessionScope.m.memberId }">
-									<%--댓글 수정  --%>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#updateComment${i.index }">수정</a>
+									<%--로그인했을 때만 보여주기 --%>
+									<c:if test="${not empty sessionScope.m }">
+										<%--내가 쓴 댓글일 경우만 보여주기 --%>
+										<c:if test="${cl.memberId eq sessionScope.m.memberId }">
+										<%--댓글 수정  --%>
+											<a href="#" data-bs-toggle="modal" data-bs-target="#updateComment${i.index }">수정</a>
+												
+												<%--댓글 수정  Modal --%>
+												<div class="modal fade" id="updateComment${i.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												  <div class="modal-dialog  modal-dialog-centered">
+												    <div class="modal-content">
+												      <div class="modal-body">
+												      	<form action="/updateContestComment.do" method="post">
+												      	<textarea class="form-control reText" name="commentContent">${cl.commentContent }</textarea>
+												      	<input type="hidden" value="${cl.commentNo }" name="commentNo">
+												      	<input type="hidden" value="${cl.boardNo }" name="boardNo">
+												      	<div style="text-align: right; ">
+												      	<button type="submit" class="btn btn-primary">수정</button>
+												        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+												        </div>
+												        </form>
+												      </div>
+												    </div>
+												  </div>
+												</div>
 											
-											<%--댓글 수정  Modal --%>
-											<div class="modal fade" id="updateComment${i.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-											  <div class="modal-dialog  modal-dialog-centered">
-											    <div class="modal-content">
-											      <div class="modal-body">
-											      	<form action="/updateContestComment.do" method="post">
-											      	<textarea class="form-control reText" name="commentContent">${cl.commentContent }</textarea>
-											      	<input type="hidden" value="${cl.commentNo }" name="commentNo">
-											      	<input type="hidden" value="${cl.boardNo }" name="boardNo">
-											      	<div style="text-align: right; ">
-											      	<button type="submit" class="btn btn-primary">수정</button>
-											        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-											        </div>
-											        </form>
-											      </div>
-											    </div>
-											  </div>
-											</div>
-										
-										<%--댓글 삭제 --%>
-										<form action="/deleteContestComment.do" method="post" class="delForm" style="display: inline;">
-											<a href="javascript:void(0);" class="delComment">삭제</a>
-											<input type="hidden" value="${cl.commentNo }" name="commentNo">
-											<input type="hidden" value="${cl.boardNo }" name="boardNo">
-										</form>
-									</c:if>
+											<%--댓글 삭제 --%>
+											<form action="/deleteContestComment.do" method="post" class="delForm" style="display: inline;">
+												<a href="javascript:void(0);" class="delComment">삭제</a>
+												<input type="hidden" value="${cl.commentNo }" name="commentNo">
+												<input type="hidden" value="${cl.boardNo }" name="boardNo">
+											</form>
+										</c:if>
 									</c:if>
 								</div>
 								<span>
@@ -398,7 +398,8 @@
 									<a href="javascript:void(0)" class="reComentBtn"><i class="bi bi-chat-dots-fill" style="font-size: 20px"></i></a>
 								</span>
 								
-							<c:if test="${not empty sessionScope.m }">
+								<%--로그인했을 때만 보여주기 --%>
+								<c:if test="${not empty sessionScope.m }">
 									<%--댓글 신고 --%>
 									<a href="#" data-bs-toggle="modal" data-bs-target="#reportComment${i.index }"><i class="bi bi-exclamation-circle-fill" style="font-size: 20px;color:#f3969a;"></i></a>
 									
@@ -446,8 +447,7 @@
 									      </div>
 										  </div>
 									  </div>
-									</div>
-									
+									</div>	
 								</c:if>
 							</div>
 							
@@ -497,38 +497,38 @@
 											<p>${rl.memberId }</p>
 											<p>${rl.regDate }</p>
 											<%--로그인했을 때만 보여주기 --%>
-										<c:if test="${not empty sessionScope.m }">
-											<%--내가 쓴 댓글일 경우만 보여주기 --%>
-											<c:if test="${rl.memberId eq sessionScope.m.memberId }">
-											<%--댓글 수정  --%>
-												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#updateReComment${j.index }" class="updateBtn">수정</a>
-												
-												<%--댓글 수정  Modal --%>
-												<div class="modal fade" id="updateReComment${j.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-												  <div class="modal-dialog  modal-dialog-centered">
-												    <div class="modal-content">
-												      <div class="modal-body">
-												      	<form action="/updateContestComment.do" method="post">
-												      	<textarea class="form-control reText textareaBox" name="commentContent">${rl.commentContent }</textarea>
-												      	<input type="hidden" value="${rl.commentNo }" name="commentNo">
-												      	<input type="hidden" value="${rl.boardNo }" name="boardNo">
-												      	<div style="text-align: right; ">
-												      	<button type="submit" class="btn btn-primary">수정</button>
-												        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-												        </div>
-												        </form>
-												      </div>
-												    </div>
-												  </div>
-												</div>
-												
-												<%--댓글 삭제 --%>
-												<form action="/deleteContestComment.do" method="post" class="delForm" style="display: inline;">
-													<a href="javascript:void(0);" class="delComment">삭제</a>
-													<input type="hidden" value="${rl.commentNo }" name="commentNo">
-												    <input type="hidden" value="${rl.boardNo }" name="boardNo">
-												</form>
-											</c:if>
+											<c:if test="${not empty sessionScope.m }">
+												<%--내가 쓴 댓글일 경우만 보여주기 --%>
+												<c:if test="${rl.memberId eq sessionScope.m.memberId }">
+												<%--댓글 수정  --%>
+													<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#updateReComment${j.index }" class="updateBtn">수정</a>
+													
+													<%--댓글 수정  Modal --%>
+													<div class="modal fade" id="updateReComment${j.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													  <div class="modal-dialog  modal-dialog-centered">
+													    <div class="modal-content">
+													      <div class="modal-body">
+													      	<form action="/updateContestComment.do" method="post">
+													      	<textarea class="form-control reText textareaBox" name="commentContent">${rl.commentContent }</textarea>
+													      	<input type="hidden" value="${rl.commentNo }" name="commentNo">
+													      	<input type="hidden" value="${rl.boardNo }" name="boardNo">
+													      	<div style="text-align: right; ">
+													      	<button type="submit" class="btn btn-primary">수정</button>
+													        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+													        </div>
+													        </form>
+													      </div>
+													    </div>
+													  </div>
+													</div>
+													
+													<%--댓글 삭제 --%>
+													<form action="/deleteContestComment.do" method="post" class="delForm" style="display: inline;">
+														<a href="javascript:void(0);" class="delComment">삭제</a>
+														<input type="hidden" value="${rl.commentNo }" name="commentNo">
+													    <input type="hidden" value="${rl.boardNo }" name="boardNo">
+													</form>
+												</c:if>
 											</c:if>
 										</div>
 										<span>

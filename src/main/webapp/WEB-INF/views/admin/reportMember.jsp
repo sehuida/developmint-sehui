@@ -285,6 +285,8 @@
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	 <script>
+	 
+	 	//ajax로 회원의 신고 횟수 가져오기
 	 	$(".selectBox").click(function(){
 	 		var index = $(".selectBox").index(this);
 	 		$(".selectBox").css("border","1px solid #d9d9d9");
@@ -307,8 +309,11 @@
 				}
 	 		})
 	 	});
+	 	
+	 	//페이지 들어올 때 제일 상단 신고내역 클릭
 	 	$(".selectBox").eq(0).trigger("click");
 	 	 
+	 	//신고 반려 클릭 시
 	 	$(".canselReport").click(function(){
 	 		var index = $(".canselReport").index(this);
 	 		swal({
@@ -325,9 +330,11 @@
 	 			});
 	 	})
 	 	
+	 	//신고 처리 클릭 시
 	 	$(".reportBtn").click(function(){
 	 		var index = $(".reportBtn").index(this);
 	 		var rpCount = $(".rpCount").eq(index).html();
+	 		//신고 횟수가 4번일 때
 	 		if(rpCount == 4){
 	 			swal({
 		 			  title: "신고처리(로그인차단)",
@@ -341,6 +348,7 @@
 		 				 $(".reportBtnForm").eq(index).submit();	
 		 			  }
 		 			});
+	 		//신고 횟수가 5번 이상일 때
 	 		}else if(rpCount >= 5){
 	 			swal({
 		 			  title: "차단회원 신고처리",
@@ -369,7 +377,8 @@
 		 			});
 	 		}
 	 	})
-	 	 
+	 	
+	 	//허위신고
 	 	$(".falseBtn").click(function(){
 	 		var index = $(".falseBtn").index(this);
 	 		swal({
