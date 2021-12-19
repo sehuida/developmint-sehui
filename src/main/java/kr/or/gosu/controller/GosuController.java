@@ -99,6 +99,7 @@ public class GosuController {
 	public String gosuList(int reqPage, Model model) {
 		GosuListPageData glpd = service.selectGosuList(reqPage);
 		model.addAttribute("gList", glpd.getList());
+		model.addAttribute("gList2", glpd.getList2());
 		model.addAttribute("pageNavi", glpd.getPageNavi());
 		model.addAttribute("start", glpd.getStart());
 		return "gosu/gosuList";
@@ -128,6 +129,46 @@ public class GosuController {
 		model.addAttribute("greviewList", grList);
 		model.addAttribute("grrList", grrList);
 		return "gosu/gosuContent";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/gosuSummerImage.do")
+	public String boardSummer(MultipartFile file, HttpServletRequest request) {
+
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/gosu/gosuSn/");
+		String filename = file.getOriginalFilename();
+		String onlyFilename = filename.substring(0, filename.indexOf("."));
+		String extension = filename.substring(filename.indexOf("."));
+		String filepath = null;
+		int count = 0;
+		while (true) {
+			if (count == 0) {
+				filepath = onlyFilename + extension;
+			} else {
+				filepath = onlyFilename + "_" + count + extension;
+			}
+			File checkFile = new File(savePath + filepath);
+			if (!checkFile.exists()) {
+				break;
+			}
+			count++;
+		}
+		try {
+			FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
+			// 업로드 속도증가를 위한 보조스트림
+			BufferedOutputStream bos = new BufferedOutputStream(fos);
+			// 파일 업로드
+			byte[] bytes = file.getBytes();
+			bos.write(bytes);
+			bos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "/resources/upload/gosu/gosuSn/" + filepath;
 	}
 
 	@RequestMapping(value = "/gosuWriteFrm.do")
@@ -762,6 +803,7 @@ public class GosuController {
 	public String gosuList2(int reqPage, String keyword, String type, Model model) {
 		GosuListPageData glpd = service.selectGosuList2(reqPage, keyword, type);
 		model.addAttribute("gList", glpd.getList());
+		model.addAttribute("gList2", glpd.getList2());
 		model.addAttribute("pageNavi", glpd.getPageNavi());
 		model.addAttribute("start", glpd.getStart());
 		return "gosu/gosuList";
@@ -840,8 +882,8 @@ public class GosuController {
 	@ResponseBody
 	@RequestMapping(value = "/gosuMemberRequestAjax.do")
 	public GosuRequest gosuMemberRequestAjax(int costNo, @SessionAttribute(required = false) Member m) {
-		System.out.println("costNo : "+costNo);
-		System.out.println("mId : "+m.getMemberId());
+		System.out.println("costNo : " + costNo);
+		System.out.println("mId : " + m.getMemberId());
 		GosuRequestCost grc = new GosuRequestCost();
 		grc.setCostNo(costNo);
 		grc.setMemberId(m.getMemberId());

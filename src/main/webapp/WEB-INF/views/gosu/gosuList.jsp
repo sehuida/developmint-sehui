@@ -190,8 +190,8 @@
 		</div>
 		<c:if test="${sessionScope.m.memberType eq 2}">
 
-			<c:forEach items="${gList }" var="g" varStatus="i">
-				<c:if test="${g.gosuId eq sessionScope.m.memberId  }">
+			<c:forEach items="${gList2 }" var="g" varStatus="i">
+				<c:if test="${g.gsouNo eq sessionScope.m.memberNo  }">
 					<%
 						itest++;
 					%>

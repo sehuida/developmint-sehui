@@ -721,6 +721,20 @@
 		from gosu
 	</select>
 
+	<select id="selectGosuListAll" resultType="g">
+		select
+		ggosu_no as ggsouNo,
+		gosu_no as gsouNo,
+		gosu_title as gosuTitle,
+		gosu_self as gosuSelf,
+		gosu_explain as
+		gosuExplain,
+		gosu_act as gosuAct,
+		gosu_cost as gosuCost,
+		gosu_date as
+		gosuDate
+		from gosu
+	</select>
 	<select id="selectGosuListMap" parameterType="map"
 		resultType="g">
 		select * from(
@@ -818,7 +832,8 @@
 		count(*)
 		from gosu_request_cost where member_id
 		=#{memberId} AND cost_no
-		NOT IN(select cost_no from gosu_request_project_sub)
+		NOT IN(select cost_no from
+		gosu_request_project_sub)
 	</select>
 
 
@@ -1124,8 +1139,9 @@
 
 
 	</select>
-	<select id="gosuMemberRequestAjax" parameterType="grc" resultType="gr">
-		select 
+	<select id="gosuMemberRequestAjax" parameterType="grc"
+		resultType="gr">
+		select
 		req.REQUEST_NO as requestNo,
 		req.REQUEST_WRITER_NO as
 		requestWriterNo,
@@ -1145,8 +1161,10 @@
 		req.REQUEST_DATE as requsetDate
 		from gosu_request req
 		JOIN gosu_request_cost cost
-		ON req.request_no = cost.request_no
-		where cost.cost_no = #{costNo} and cost.member_id = #{memberId}
+		ON req.request_no =
+		cost.request_no
+		where cost.cost_no = #{costNo} and cost.member_id =
+		#{memberId}
 	</select>
 
 </mapper>
