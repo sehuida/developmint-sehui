@@ -40,7 +40,7 @@ public class AnnounceController {
 	}
 	
 	@RequestMapping(value="/applicationStatus.do")
-	public String applicationStatus() {
+	public String applicationStatus(Model model) {
 		
 		return "jobSearch/applicationStatus";
 	}

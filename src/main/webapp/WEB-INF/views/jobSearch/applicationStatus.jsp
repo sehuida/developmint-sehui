@@ -10,7 +10,14 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
-		지원 신청 현황 작성하는 곳
+		<div class="container" style="margin-top:50px;margin-bottom:100px;">
+			<div class="mainCate">
+				<span style="font-weight:bold">지원내역</span>
+			</div>
+			<br><br>
+			<p id="unprocessed">입사 지원 수 : <span>1</span> 건</p>
+			
+		</div>
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
