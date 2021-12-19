@@ -51,6 +51,7 @@
 		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTask" alias="ptk"/>
 		<typeAlias type="kr.or.projectTeam.model.vo.Shortcuts" alias="sc"/>
 		<typeAlias type="kr.or.announce.vo.AnnounceView" alias="av"/>
+		<typeAlias type="kr.or.projectTeam.model.vo.ProjectReview" alias="pr"/>
 	</typeAliases>
 	
 	<!-- LONG타입 데이터를 불러오기 위한 type handler 입니다. -->
