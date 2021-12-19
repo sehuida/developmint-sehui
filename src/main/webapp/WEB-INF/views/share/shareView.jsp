@@ -207,7 +207,52 @@
 						</div>
 						<div>
 							<c:if test="${not empty sessionScope.m }">
-								<button class="btn btn-danger"><i class="bi bi-cone"></i>신고하기</button>						  														
+								<a href="#" data-bs-toggle="modal" data-bs-target="#reportComment${i.index }" class="btn btn-danger"><i class="bi bi-cone"></i>신고하기</a>
+									<!-- 댓글신고 modal -->
+									<div class="modal fade" id="reportComment${i.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									  <div class="modal-dialog  modal-dialog-centered">
+									    <div class="modal-content">
+									      <div class="modal-body">
+									      	<form action="/reportShare.do" method="post" class="reportBox">
+										      	<p class="Modaltitle">신고 하기</p>
+										      	<div style="border-bottom:1px solid #d9d9d9; padding:5px; margin-bottom: 10px; padding-bottom: 10px;">
+										      		<p>신고는 반대 의견을 표시하는 기능이 아닙니다.</p>
+										      		<p>글 작성자의 의견에 반대하는 경우 신고대신 [댓글] 기능을 사용해 주세요.</p>
+										      	</div>
+										      	<div style="padding:5px; margin-bottom: 10px;">
+											      	<p><span>댓글 작성자</span> : ${sc.memberId }</p>
+											      	<p><span>댓글</span> : ${sc.commentContent }</p>
+										      	</div>
+										      	<div style="margin-bottom: 20px; padding:5px;">
+										      		<p style="margin-bottom: 10px;"><span>신고사유</span></p>
+											      	<label style="margin-right: 70px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="1">영리목적/홍보성</label>
+											      	<label style="margin-right: 20px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="2">음란성/선정성</label>
+											      	<label><input type="radio" class="form-check-input radioChk" name="reportReason" value="3">불법정보</label><br>					      	
+											      	<label style="margin-right: 8px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="4">같은 내용 반복 게시(도배)</label>
+											      	<label style="margin-right: 20px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="5">욕설/인성공격</label>
+											      	<label><input type="radio" class="form-check-input radioChk" name="reportReason" value="6">개인정보누출</label><br>
+											      	<label><input type="radio" class="form-check-input radioChk etcBtn" name="reportReason" value="7">기타</label><br>
+										      		<textarea class="form-control etc" style="resize: none;" name="reportEtc" ></textarea>
+										      	</div>
+										      	<div style="margin-bottom: 20px; background-color: #F7F7F7; padding:10px;">
+										      		<p>◈ 이용규칙에 위배되는 댓글을  5회 이상 작성한 회원은 사이트 제한 조치가 취해집니다.</p>
+										      		<p>◈ 허위신고일 경우, 신고자의 서비스 활동이 제한될 수 있으니 유의하시어 신중하게 신고해 주세요.</p>
+										      	</div>
+										      	<div style="text-align: right;">
+										      		<button type="button" class="btn btn-secondary reportBtn" style="width: 100px;">신고</button>
+										        	<button type="button" class="btn btn-primary" style="width: 100px;" data-bs-dismiss="modal">취소</button>
+												</div>
+												<input type="hidden" name="reporterId" value="${sessionScope.m.memberId }">
+												<input type="hidden" name="commentNo" value="${sc.commentNo }">
+												<input type="hidden" name="reportStatus" value="1">
+												<input type="hidden" name="commentContent" value="${sc.commentContent }">
+												<input type="hidden" name="boardNo" value="${sv.boardNo }">
+												<input type="hidden" name="commentId" value="${sc.memberId }">
+									        </form>
+									      </div>
+										  </div>
+									  </div>
+									</div>					  														
 							</c:if>					  							
 							<c:if test="${sessionScope.m.memberId eq sc.memberId }">
 								<a class="btn btn-info" href="javascript:void(0)" onclick="modifyComment(this,'${sc.commentNo }','${sv.boardNo }')">수정</a>
@@ -230,7 +275,7 @@
 					</c:if>
 				<!-- 로그인이 되어있는 경우 대댓글 작성용 form태그 미리 생성 -->		
 				</c:if>
-				<c:forEach items="${list }" var="scc" varStatus="i">
+				<c:forEach items="${list }" var="scc" varStatus="j">
 					<c:if test="${scc.commentType eq 2 && sc.commentNo eq scc.commentRef}">
 						<div class="recommentWrap">
 							<div>
@@ -246,7 +291,52 @@
 							</div>
 							<div>	
 								<c:if test="${not empty sessionScope.m }">
-									<button class="btn btn-danger"><i class="bi bi-cone"></i>신고하기</button>						  														
+									<a href="#" data-bs-toggle="modal" data-bs-target="#reportComment${j.index }" class="btn btn-danger"><i class="bi bi-cone"></i>신고하기</a>
+										<!-- 댓글신고 modal -->
+										<div class="modal fade" id="reportComment${j.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										  <div class="modal-dialog  modal-dialog-centered">
+										    <div class="modal-content">
+										      <div class="modal-body">
+										      	<form action="/reportShare.do" method="post" class="reportBox">
+											      	<p class="Modaltitle">신고 하기</p>
+											      	<div style="border-bottom:1px solid #d9d9d9; padding:5px; margin-bottom: 10px; padding-bottom: 10px;">
+											      		<p>신고는 반대 의견을 표시하는 기능이 아닙니다.</p>
+											      		<p>글 작성자의 의견에 반대하는 경우 신고대신 [댓글] 기능을 사용해 주세요.</p>
+											      	</div>
+											      	<div style="padding:5px; margin-bottom: 10px;">
+												      	<p><span>댓글 작성자</span> : ${scc.memberId }</p>
+												      	<p><span>댓글</span> : ${scc.commentContent }</p>
+											      	</div>
+											      	<div style="margin-bottom: 20px; padding:5px;">
+											      		<p style="margin-bottom: 10px;"><span>신고사유</span></p>
+												      	<label style="margin-right: 70px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="1">영리목적/홍보성</label>
+												      	<label style="margin-right: 20px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="2">음란성/선정성</label>
+												      	<label><input type="radio" class="form-check-input radioChk" name="reportReason" value="3">불법정보</label><br>					      	
+												      	<label style="margin-right: 8px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="4">같은 내용 반복 게시(도배)</label>
+												      	<label style="margin-right: 20px;"><input type="radio" class="form-check-input radioChk" name="reportReason" value="5">욕설/인성공격</label>
+												      	<label><input type="radio" class="form-check-input radioChk" name="reportReason" value="6">개인정보누출</label><br>
+												      	<label><input type="radio" class="form-check-input radioChk etcBtn" name="reportReason" value="7">기타</label><br>
+											      		<textarea class="form-control etc" style="resize: none;" name="reportEtc" ></textarea>
+											      	</div>
+											      	<div style="margin-bottom: 20px; background-color: #F7F7F7; padding:10px;">
+											      		<p>◈ 이용규칙에 위배되는 댓글을  5회 이상 작성한 회원은 사이트 제한 조치가 취해집니다.</p>
+											      		<p>◈ 허위신고일 경우, 신고자의 서비스 활동이 제한될 수 있으니 유의하시어 신중하게 신고해 주세요.</p>
+											      	</div>
+											      	<div style="text-align: right;">
+											      		<button type="button" class="btn btn-secondary reportBtn" style="width: 100px;">신고</button>
+											        	<button type="button" class="btn btn-primary" style="width: 100px;" data-bs-dismiss="modal">취소</button>
+													</div>
+													<input type="hidden" name="reporterId" value="${sessionScope.m.memberId }">
+													<input type="hidden" name="commentNo" value="${scc.commentNo }">
+													<input type="hidden" name="reportStatus" value="1">
+													<input type="hidden" name="commentContent" value="${scc.commentContent }">
+													<input type="hidden" name="boardNo" value="${sv.boardNo }">
+													<input type="hidden" name="commentId" value="${scc.memberId }">
+										        </form>
+										      </div>
+											  </div>
+										  </div>
+										</div>						  														
 								</c:if>
 								<c:if test="${sessionScope.m.memberId eq scc.memberId }">
 									<a class="btn btn-info" href="javascript:void(0)" onclick="modifyComment(this,'${scc.commentNo }','${sv.boardNo }')">수정</a>
@@ -343,6 +433,29 @@
 		    }
 		});
 	}
+	//신고버튼 누르면 confirm창 띄우고 ok하면 submit
+	$(".reportBtn").click(function(){
+		var radioCheck = $('input[name=reportReason]').is(":checked");
+		if(!radioCheck){
+			swal({
+				title: "신고 사유를 체크해주세요",
+				icon : "warning"
+			});
+			return;
+		}
+		swal({
+		    title: "허위 신고일 경우 신고자가 불이익을 받을 수 있습니다.",
+		    icon: "warning",
+		    buttons: ["돌아가기", "신고하기"],
+		    dangerMode: true
+		}).then((willDelete) => {
+		    if (willDelete) {
+		    	var index = $(".reportBtn").index(this);
+		    	$(".reportBox").eq(index).submit();
+		    }
+		});
+
+	});
 </script>
 </body>
 </html>

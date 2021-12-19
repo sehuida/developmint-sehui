@@ -133,4 +133,7 @@
    <update id="updateComment" parameterType="cm">
    		update comments set comment_content=#{commentContent} where comment_no=#{commentNo}
    </update>
+   <insert id="shareReport" parameterType="rp">
+   		insert into report values(report_seq.nextval, #{reporterId}, #{reportReason}, #{reportEtc}, #{commentNo}, #{commentId}, to_char(sysdate,'yyyy-mm-dd'), #{reportStatus}, #{commentContent},null )
+   </insert>
 </mapper>

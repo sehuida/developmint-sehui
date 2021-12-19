@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.comment.vo.Comment;
+import kr.or.comment.vo.Report;
 import kr.or.notice.vo.Notice;
 import kr.or.share.model.service.ShareService;
 import kr.or.share.model.vo.Share;
@@ -368,5 +369,20 @@ public class ShareController {
 			model.addAttribute("icon", "warning");
 		}
 		return "member/swalMsg";		
+	}
+	//댓글신고
+	@RequestMapping(value="/reportShare.do")
+	public String reportShare(Report rp,Model model, int boardNo) {
+		int result = service.shareReport(rp);
+		if(result>0) {
+			model.addAttribute("title", "신고 완료");
+			model.addAttribute("loc", "/shareBoardView.do?boardNo="+boardNo);
+			model.addAttribute("icon", "success");				
+		}else {
+			model.addAttribute("title", "신고 실패");
+			model.addAttribute("loc", "/shareBoardView.do?boardNo="+boardNo);
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";
 	}
 }
