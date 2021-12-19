@@ -12,9 +12,6 @@
 .container {
    min-width: 1200px; 
 }
-.mainCate{
-	
-}
 #allMember{
 	font-size: 25px;
 	line-height: 46px;
@@ -32,14 +29,9 @@
 	border-radius: 3px;
 	margin-bottom: 40px;
 	text-align: center;
-	background-color: #fafafa;
 	padding : 20px;
-	box-shadow: 1px 2px 10px 0 rgb(0 0 0 / 10%);
+	box-shadow: 1px 2px 10px 0 rgb(0 0 0 / 15%);
 	transform: perspective(1px) translateZ(0);
-}
-.memberBox:hover{
-	background-color: #fff;
-	transition: background-color .6s 0s;
 }
 .memberBox {
   transition: color 0.25s;
@@ -60,13 +52,13 @@
   transform-origin: center;
 }
 .memberBox::before {
-  border-top: 3px solid #4ECDC4;
-  border-bottom: 3px solid #4ECDC4;
+  border-top: 2px solid #4ECDC4;
+  border-bottom: 2px solid #4ECDC4;
   transform: scale3d(0, 1, 1);
 }
 .memberBox::after {
-  border-left: 3px solid #4ECDC4;
-  border-right: 3px solid #4ECDC4;
+  border-left: 2px solid #4ECDC4;
+  border-right: 2px solid #4ECDC4;
   transform: scale3d(1, 0, 1);
 }
 .memberBox:hover::before, .memberBox:hover::after {
@@ -105,7 +97,17 @@
 .certiBtn{
 	margin-bottom : 20px;
 }
-
+.noList{
+	width: 1200px;
+	border: 1px solid #d9d9d9;
+	height: 400px;
+	text-align: center;
+	padding-top: 130px;
+}
+.noList>p{
+	font-size: 25px;
+	font-weight: bold;
+}
 
 </style>
 <body>
@@ -117,59 +119,68 @@
 		</div>
 		<br><br><br>
 		
-		<div class="certiBox">
-			<c:forEach items="${list }" var="c" varStatus="i">
-				<div class="memberBox">
-					<div class="imgBox">
-						<c:choose>
-							<c:when test="${not empty memlist[i.index].filepath }">
-								<img src="/resources/upload/member/${memlist[i.index].filepath }">
-							</c:when>
-							<c:otherwise>
-								<img src="/resources/img/member/user.png">
-							</c:otherwise>
-						</c:choose>
-						<p> ${memlist[i.index].memberId }<p>
-					</div>
-					<div class="infoBox">
-						<div class="certiBtn"><button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#certiModal${i.index }">인증 사진 확인</button></div>
-						 <span class="infoTitle"><i class="bi bi-person-fill" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>회원이름 : </span><span>${memlist[i.index].memberName }</span><br>
-						 <span class="infoTitle"><i class="bi bi-envelope" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>이메일 : </span><span>${memlist[i.index].email }</span><br>
-						 
-						 <div class="inputBox">
-							 <form action="/enrollMemberCompany.do" class="enrollForm">
-								<span><i class="bi bi-briefcase" style="font-size: 20px; color: #898989; margin-right: 5px;"></i></span><span class="infoTitle" style="margin-top: 20px; margin-ridisplay: inline-block; margin-right: 5px;">회사 선택 : </span>
-								<select class="form-control selectForm" style="margin-top:7px; width: 200px; display: inline-block;" name="companyNo" > 
-									<option value="no">회사를 선택하세요.</option>
-									<c:forEach items="${companyList }" var="com">
-										<option value="${com.companyNo }">${com.companyName }</option>
-									</c:forEach>
-								</select>
-								<input type="hidden" name="memberNo" value="${memlist[i.index].memberNo }">
-							</form>
+		<c:choose>
+			<c:when test="${not empty list }">
+				<div class="certiBox">
+					<c:forEach items="${list }" var="c" varStatus="i">
+						<div class="memberBox">
+							<div class="imgBox">
+								<c:choose>
+									<c:when test="${not empty memlist[i.index].filepath }">
+										<img src="/resources/upload/member/${memlist[i.index].filepath }">
+									</c:when>
+									<c:otherwise>
+										<img src="/resources/img/member/user.png">
+									</c:otherwise>
+								</c:choose>
+								<p> ${memlist[i.index].memberId }<p>
+							</div>
+							<div class="infoBox">
+								<div class="certiBtn"><button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#certiModal${i.index }">인증 사진 확인</button></div>
+								 <span class="infoTitle"><i class="bi bi-person-fill" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>회원이름 : </span><span>${memlist[i.index].memberName }</span><br>
+								 <span class="infoTitle"><i class="bi bi-envelope" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>이메일 : </span><span>${memlist[i.index].email }</span><br>
+								 
+								 <div class="inputBox">
+									 <form action="/enrollMemberCompany.do" class="enrollForm">
+										<span><i class="bi bi-briefcase" style="font-size: 20px; color: #898989; margin-right: 5px;"></i></span><span class="infoTitle" style="margin-top: 20px; margin-ridisplay: inline-block; margin-right: 5px;">회사 선택 : </span>
+										<select class="form-control selectForm" style="margin-top:7px; width: 200px; display: inline-block;" name="companyNo" > 
+											<option value="no">회사를 선택하세요.</option>
+											<c:forEach items="${companyList }" var="com">
+												<option value="${com.companyNo }">${com.companyName }</option>
+											</c:forEach>
+										</select>
+										<input type="hidden" name="memberNo" value="${memlist[i.index].memberNo }">
+									</form>
+								</div>
+							</div>
+							<div>
+								<button class="btn btn-primary enrollBtn" style="margin-top: 20px; margin-right: 5px;">인증</button><button class="btn btn-secondary noEnrollBtn"  style="margin-top: 20px; margin-left: 5px;">반려</button>
+							</div>
 						</div>
-					</div>
-					<div>
-						<button class="btn btn-primary enrollBtn" style="margin-top: 20px; margin-right: 5px;">인증</button><button class="btn btn-secondary noEnrollBtn"  style="margin-top: 20px; margin-left: 5px;">반려</button>
-					</div>
+					</c:forEach>
 				</div>
-			</c:forEach>
-		</div>
-		<div id="pageNavi" style="text-align: center; margin-top:50px;"  >${pageNavi }</div>
-		
-		<!-- 내용보기 Modal -->
-		<c:forEach items="${list }" var="c" varStatus="i">
-		<div class="modal fade" id="certiModal${i.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content" style="border-radius: 0.3rem;">
-		      <div class="modal-body">
-		      	<img src="/resources/upload/certification/${c.filepath }" width="470">
-		      </div>
-		    </div>
-		  </div>
-		</div>
-		</c:forEach>
-		
+				<div id="pageNavi" style="text-align: center; margin-top:50px;"  >${pageNavi }</div>
+				
+				<!-- 내용보기 Modal -->
+				<c:forEach items="${list }" var="c" varStatus="i">
+				<div class="modal fade" id="certiModal${i.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content" style="border-radius: 0.3rem;">
+				      <div class="modal-body">
+				      	<img src="/resources/upload/certification/${c.filepath }" width="470">
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<div class="noList">
+					<p><i class="bi bi-chat-square-dots" style="color: #4ECDC4; font-size: 35px;"></i></p>
+					<p>회사 인증을 요청한 회원이 없습니다.</p>
+				</div>
+			</c:otherwise>
+		</c:choose>
 		
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>

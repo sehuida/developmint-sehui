@@ -21,7 +21,7 @@
 	margin-top: 50px;
 }
 .bi{
-	color:#4ECDC4;
+	
 	font-size: 30px;
 }
 .contestTitle{
@@ -251,7 +251,7 @@
 		<%---------------------------------------------------------------------------- --%>
 		<%--공모 요강 --%>
 		<div class="contestContentBox">
-			<p><i class="bi bi-check2"></i> 공모요강</p>
+			<p><i class="bi bi-check2" style="color:#4ECDC4;"></i> 공모요강</p>
 			<div id="conBox">
 				<p>${list.contest.contestContentBr }</p>
 				<%--로그인 됐으면 신청가능 / 로그인 안됐으면 로그인페이지로 이동 --%>
@@ -481,7 +481,7 @@
 							<c:forEach items="${list.commentList }" var="rl" varStatus="j">
 								<c:if test="${rl.commentType eq 2 && cl.commentNo eq rl.commentRef}">
 									<div class="reComentView">
-									<i class="bi bi-arrow-return-right" style="margin-left:50px;"></i>
+									<i class="bi bi-arrow-return-right" style="margin-left:50px; color:#4ECDC4;"></i>
 										
 										<div class="recommentImgBox">
 											<c:choose>
@@ -593,7 +593,7 @@
 			<%--댓글이 없는경우 --%>
 			<c:otherwise>
 				<div style="text-align: center">
-					<p><i class="bi bi-chat-square-dots" style="font-size: 35px; display:inline-block;"></i></p>
+					<p><i class="bi bi-chat-square-dots" style="font-size: 35px; display:inline-block; color:#4ECDC4;"></i></p>
 					<p style="font-weight: bold">등록된 댓글이 없습니다. 댓글을 남겨보세요!</p>
 				</div>
 			</c:otherwise>
