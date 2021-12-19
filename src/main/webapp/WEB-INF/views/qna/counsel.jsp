@@ -77,7 +77,7 @@
 					</ul>
 					<!-- 폼돌아가는구간 -->
 					<div class="section_form">
-						<div class="harf_area">
+						<div class="harf_area" style="padding-right: 20px !important;">
 							<header class="n-section-title">
 								<i class="bi bi-info-circle" style="font-size: 2em;padding-right: 10px;"></i><span style="font-size: 20px;">문의 작성</span>
 							</header>
@@ -93,8 +93,8 @@
 										<option value="12">구인잡관련</option>
 										<option value="13">커뮤니티관련</option>
 										<option value="40">기타 문의</option>
-										<option value="21">신고</option>
-										<option value="22">기능/작동 오류</option>
+										<option value="22">신고</option>
+										<option value="21">기능/작동 오류</option>
 										<option value="20">이벤트</option>
 						     		</select>
 						  	</div>
@@ -122,7 +122,7 @@
 							</div>
 							<div class="form-group">
 						      <label for="qnaContent" class="form-label mt-4" scope="row">문의내용</label>
-						      <textarea class="form-control" id="qnaContent" name="qnaContent" cols="100" rows="100" placeholder="내용을 입력해주세요." required style="resize: none;"></textarea>
+						      <textarea class="form-control" id="qnaContent" name="qnaContent" cols="100" rows="20" placeholder="내용을 입력해주세요." required style="resize: none;"></textarea>
 						    </div>
 						    <c:choose>
 						    	<c:when test="${not empty sessionScope.m }">
@@ -152,12 +152,12 @@
 							</c:choose>
 						</div>
 						<!-- faq 오른쪽 -->
-						<div id="faq_list" class="harf_area"></div>
+						<div id="faq_list" class="harf_area" style="padding-left: 20px !important;" ></div>
 					</div>
 					<!-- 폼돌아가는구간 끝  -->
 					<!-- 버튼 -->
 					<div class="n-btn-group">
-						<a href="javascript:void(0)" onClick="cancel(); return false;" class="btn btn-outline-secondary">취소</a>
+						<a href="javascript:void(0)" onClick="cancel(); return false;" class="btn btn-outline-secondary" style="margin: 0 10px;">취소</a>
 						<c:choose>
 							<c:when test="${empty sessionScope.m }">
 								<a href="javascript:void(0)" onClick="qna_add1(); return false;" class="btn btn-primary">작성하기</a>

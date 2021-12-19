@@ -147,6 +147,6 @@
 		</choose>
 	</select>
 	<select id="selectFaqList" parameterType="_int" resultType="f">
-		select faq_no as faqNo, faq_q as faqQ, faq_a as faqA, category from faq where category = #{category} order by 1;
+		select faq_no as faqNo, faq_q as faqQ, faq_a as faqA, category from faq where category = #{category} order by 1
 	</select>
 </mapper>

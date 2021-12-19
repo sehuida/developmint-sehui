@@ -262,6 +262,8 @@ public class QnaController {
 	@RequestMapping(value="/faqlist.do")
 	public String faqlistBox(int category, Model model) {
 		ArrayList<Faq> list = service.selectFaqlist(category);
+		model.addAttribute("category",category);
+		model.addAttribute("list",list);
 		return "qna/faqlist";
 	}
 }

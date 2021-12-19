@@ -114,3 +114,11 @@ overflow: auto;
     -ms-box-sizing: border-box;
     -o-box-sizing: border-box;
 }
+
+.n-btn-group{
+	display: flex;
+    justify-content: center;
+}
+.btn-h:hover{
+	text-decoration: underline;
+}
