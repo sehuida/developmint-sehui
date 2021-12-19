@@ -17,7 +17,9 @@
 			address,
 			content,
 			business_no as businessNo,
-			filepath
+			filepath,
+			write_date as writeDate,
+			announce_no as announceNo
 		from company c join announcement a using (company_name)
 		where company_name = #{companyName}
 	</select>

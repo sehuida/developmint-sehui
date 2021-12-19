@@ -21,7 +21,7 @@
 	margin-top: 50px;
 }
 .bi{
-	color:#4ECDC4;
+	
 	font-size: 30px;
 }
 .contestTitle{
@@ -68,6 +68,7 @@
 	border: 1px solid #d9d9d9;
 	padding:20px;
 	display: flex;
+	align-items: center;
 }
 .userInfoBox{
 	width: 80px;
@@ -94,39 +95,63 @@
 	padding:30px;
 	padding-bottom: 20px;
 }
-.comentView>span:first-child {
-	font-weight: bold;
+
+.commentImgBox{
 	display:inline-block;
 	width: 100px;
+	text-align: center;
 }
-.comentView>span:nth-child(2) {
+.iddate{
 	display:inline-block;
-	width: 900px;
+	width: 100px;
+	text-align: center;
+	
 }
-.comentView>span:nth-child(3) {
-	margin-right: 15px;
+.comentView{
+	height: 73px;
+	display: flex;
+	align-items: center;
 }
-.comentView>a{
+.iddate>p{
+	margin : 0;
+}
+.iddate>p:first-child{
+	font-weight: bold;
+}
+.iddate>p:nth-of-type(2){
+	font-size: 14px;
+}
+.comentView>span:nth-of-type(1) {
+	display:inline-block;
+	width: 940px;
+	margin-right: 50px;
+	margin-left: 10px;
+}
+
+.iddate>a{
 	text-decoration: none;
 	color : black;
+	font-size: 14px;
 }
-.comentView>form>a{
+.iddate>form>a{
 	text-decoration: none;
 	color : black;
+	font-size: 14px;
 }
-.reComentView>span:first-of-type {
+.recommentImgBox {
 	font-weight: bold;
 	display:inline-block;
 	width: 100px;
 	margin-left: 20px;
+	text-align: center;
 }
-.reComentView>span:nth-of-type(2) {
+.reComentView>span:nth-of-type(1) {
 	display:inline-block;
-	width: 827px;
+	width: 830px;
+	margin-right: 60px;
+	margin-left: 10px;
 }
-.reComentView>span:nth-of-type(3) {
-	margin-right: 15px;
-}
+
 .reComentView>a{
 	text-decoration: none;
 	color : black;
@@ -134,6 +159,11 @@
 .reComentView>form>a{
 	text-decoration: none;
 	color : black;
+}
+.reComentView{
+	height: 73px;
+	display: flex;
+	align-items: center;
 }
 .recomentBox{
 	display: flex;
@@ -221,7 +251,7 @@
 		<%---------------------------------------------------------------------------- --%>
 		<%--공모 요강 --%>
 		<div class="contestContentBox">
-			<p><i class="bi bi-check2"></i> 공모요강</p>
+			<p><i class="bi bi-check2" style="color:#4ECDC4;"></i> 공모요강</p>
 			<div id="conBox">
 				<p>${list.contest.contestContentBr }</p>
 				<%--로그인 됐으면 신청가능 / 로그인 안됐으면 로그인페이지로 이동 --%>
@@ -281,7 +311,14 @@
 			<form action="/insertContestComment.do" method="post">
 				<div class="commentBox">
 					<div class="userInfoBox">
-						<img src="/resources/img/userTestImg.png" width="80px;" height="75px;">
+						<c:choose>
+							<c:when test="${sessionScope.m.filepath eq null }">
+								<img src="/resources/img/member/user.png" style="width: 60px; height:60px; margin-left:10px;">				
+							</c:when>
+							<c:otherwise>
+								<img src="/resources/upload/member/${sessionScope.m.filepath }" style="width: 60px; height:60px; margin-left:10px;">
+							</c:otherwise>
+						</c:choose>
 						<p>${sessionScope.m.memberId }</p>
 					</div>
 					<div class="textBox" >
@@ -308,46 +345,61 @@
 					<div style="margin-bottom: 20px;">
 						<c:if test="${cl.commentType eq 1 }">
 							<div class="comentView">
-								<span>${cl.memberId }</span>
+								<div class="commentImgBox">
+									<c:choose>
+										<c:when test="${cl.memberImg eq null }">
+											<img src="/resources/img/member/user.png" style="width: 60px; height:60px;">				
+										</c:when>
+										<c:otherwise>
+											<img src="/resources/upload/member/${cl.memberImg }" style="width: 60px; height:60px; border-radius: 50%">
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<div class="iddate">
+									<p>${cl.memberId }</p>
+									<p>${cl.regDate }</p>
+									<%--로그인했을 때만 보여주기 --%>
+									<c:if test="${not empty sessionScope.m }">
+										<%--내가 쓴 댓글일 경우만 보여주기 --%>
+										<c:if test="${cl.memberId eq sessionScope.m.memberId }">
+										<%--댓글 수정  --%>
+											<a href="#" data-bs-toggle="modal" data-bs-target="#updateComment${i.index }">수정</a>
+												
+												<%--댓글 수정  Modal --%>
+												<div class="modal fade" id="updateComment${i.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												  <div class="modal-dialog  modal-dialog-centered">
+												    <div class="modal-content">
+												      <div class="modal-body">
+												      	<form action="/updateContestComment.do" method="post">
+												      	<textarea class="form-control reText" name="commentContent">${cl.commentContent }</textarea>
+												      	<input type="hidden" value="${cl.commentNo }" name="commentNo">
+												      	<input type="hidden" value="${cl.boardNo }" name="boardNo">
+												      	<div style="text-align: right; ">
+												      	<button type="submit" class="btn btn-primary">수정</button>
+												        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+												        </div>
+												        </form>
+												      </div>
+												    </div>
+												  </div>
+												</div>
+											
+											<%--댓글 삭제 --%>
+											<form action="/deleteContestComment.do" method="post" class="delForm" style="display: inline;">
+												<a href="javascript:void(0);" class="delComment">삭제</a>
+												<input type="hidden" value="${cl.commentNo }" name="commentNo">
+												<input type="hidden" value="${cl.boardNo }" name="boardNo">
+											</form>
+										</c:if>
+									</c:if>
+								</div>
 								<span>
-								${cl.commentContent }
-								<a href="javascript:void(0)" class="reComentBtn"><i class="bi bi-chat-dots-fill" style="font-size: 20px"></i></a>
+									${cl.commentContent }
+									<a href="javascript:void(0)" class="reComentBtn"><i class="bi bi-chat-dots-fill" style="font-size: 20px"></i></a>
 								</span>
-								<span>${cl.regDate }</span>
+								
 								<%--로그인했을 때만 보여주기 --%>
 								<c:if test="${not empty sessionScope.m }">
-									<%--내가 쓴 댓글일 경우만 보여주기 --%>
-									<c:if test="${cl.memberId eq sessionScope.m.memberId }">
-									<%--댓글 수정  --%>
-										<a href="#" data-bs-toggle="modal" data-bs-target="#updateComment${i.index }">수정</a>
-											
-											<%--댓글 수정  Modal --%>
-											<div class="modal fade" id="updateComment${i.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-											  <div class="modal-dialog  modal-dialog-centered">
-											    <div class="modal-content">
-											      <div class="modal-body">
-											      	<form action="/updateContestComment.do" method="post">
-											      	<textarea class="form-control reText" name="commentContent">${cl.commentContent }</textarea>
-											      	<input type="hidden" value="${cl.commentNo }" name="commentNo">
-											      	<input type="hidden" value="${cl.boardNo }" name="boardNo">
-											      	<div style="text-align: right; ">
-											      	<button type="submit" class="btn btn-primary">수정</button>
-											        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-											        </div>
-											        </form>
-											      </div>
-											    </div>
-											  </div>
-											</div>
-										
-										<%--댓글 삭제 --%>
-										<form action="/deleteContestComment.do" method="post" class="delForm" style="display: inline;">
-											<a href="javascript:void(0);" class="delComment">삭제</a>
-											<input type="hidden" value="${cl.commentNo }" name="commentNo">
-											<input type="hidden" value="${cl.boardNo }" name="boardNo">
-										</form>
-									</c:if>
-									
 									<%--댓글 신고 --%>
 									<a href="#" data-bs-toggle="modal" data-bs-target="#reportComment${i.index }"><i class="bi bi-exclamation-circle-fill" style="font-size: 20px;color:#f3969a;"></i></a>
 									
@@ -395,8 +447,7 @@
 									      </div>
 										  </div>
 									  </div>
-									</div>
-									
+									</div>	
 								</c:if>
 							</div>
 							
@@ -430,46 +481,60 @@
 							<c:forEach items="${list.commentList }" var="rl" varStatus="j">
 								<c:if test="${rl.commentType eq 2 && cl.commentNo eq rl.commentRef}">
 									<div class="reComentView">
-									<i class="bi bi-arrow-return-right" style="margin-left:20px;"></i>
+									<i class="bi bi-arrow-return-right" style="margin-left:50px; color:#4ECDC4;"></i>
 										
-										<span>${rl.memberId }</span>
+										<div class="recommentImgBox">
+											<c:choose>
+												<c:when test="${rl.memberImg eq null }">
+													<img src="/resources/img/member/user.png" style="width: 60px; height:60px;">				
+												</c:when>
+												<c:otherwise>
+													<img src="/resources/upload/member/${rl.memberImg }" style="width: 60px; height:60px; border-radius: 50%">
+												</c:otherwise>
+											</c:choose>
+										</div>
+										<div class="iddate">
+											<p>${rl.memberId }</p>
+											<p>${rl.regDate }</p>
+											<%--로그인했을 때만 보여주기 --%>
+											<c:if test="${not empty sessionScope.m }">
+												<%--내가 쓴 댓글일 경우만 보여주기 --%>
+												<c:if test="${rl.memberId eq sessionScope.m.memberId }">
+												<%--댓글 수정  --%>
+													<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#updateReComment${j.index }" class="updateBtn">수정</a>
+													
+													<%--댓글 수정  Modal --%>
+													<div class="modal fade" id="updateReComment${j.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+													  <div class="modal-dialog  modal-dialog-centered">
+													    <div class="modal-content">
+													      <div class="modal-body">
+													      	<form action="/updateContestComment.do" method="post">
+													      	<textarea class="form-control reText textareaBox" name="commentContent">${rl.commentContent }</textarea>
+													      	<input type="hidden" value="${rl.commentNo }" name="commentNo">
+													      	<input type="hidden" value="${rl.boardNo }" name="boardNo">
+													      	<div style="text-align: right; ">
+													      	<button type="submit" class="btn btn-primary">수정</button>
+													        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+													        </div>
+													        </form>
+													      </div>
+													    </div>
+													  </div>
+													</div>
+													
+													<%--댓글 삭제 --%>
+													<form action="/deleteContestComment.do" method="post" class="delForm" style="display: inline;">
+														<a href="javascript:void(0);" class="delComment">삭제</a>
+														<input type="hidden" value="${rl.commentNo }" name="commentNo">
+													    <input type="hidden" value="${rl.boardNo }" name="boardNo">
+													</form>
+												</c:if>
+											</c:if>
+										</div>
 										<span>
 										${rl.commentContent }
 										</span>
-										<span>${rl.regDate }</span>
-										<%--로그인했을 때만 보여주기 --%>
 										<c:if test="${not empty sessionScope.m }">
-											<%--내가 쓴 댓글일 경우만 보여주기 --%>
-											<c:if test="${rl.memberId eq sessionScope.m.memberId }">
-											<%--댓글 수정  --%>
-												<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#updateReComment${j.index }" class="updateBtn">수정</a>
-												
-												<%--댓글 수정  Modal --%>
-												<div class="modal fade" id="updateReComment${j.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-												  <div class="modal-dialog  modal-dialog-centered">
-												    <div class="modal-content">
-												      <div class="modal-body">
-												      	<form action="/updateContestComment.do" method="post">
-												      	<textarea class="form-control reText textareaBox" name="commentContent">${rl.commentContent }</textarea>
-												      	<input type="hidden" value="${rl.commentNo }" name="commentNo">
-												      	<input type="hidden" value="${rl.boardNo }" name="boardNo">
-												      	<div style="text-align: right; ">
-												      	<button type="submit" class="btn btn-primary">수정</button>
-												        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-												        </div>
-												        </form>
-												      </div>
-												    </div>
-												  </div>
-												</div>
-												
-												<%--댓글 삭제 --%>
-												<form action="/deleteContestComment.do" method="post" class="delForm" style="display: inline;">
-													<a href="javascript:void(0);" class="delComment">삭제</a>
-													<input type="hidden" value="${rl.commentNo }" name="commentNo">
-												    <input type="hidden" value="${rl.boardNo }" name="boardNo">
-												</form>
-											</c:if>
 										<a href="#" data-bs-toggle="modal" data-bs-target="#reportComment${j.index }"><i class="bi bi-exclamation-circle-fill" style="font-size: 20px;color:#f3969a;"></i></a>
 										
 										<%--댓글 신고  Modal --%>
@@ -528,7 +593,7 @@
 			<%--댓글이 없는경우 --%>
 			<c:otherwise>
 				<div style="text-align: center">
-					<p><i class="bi bi-chat-square-dots" style="font-size: 35px; display:inline-block;"></i></p>
+					<p><i class="bi bi-chat-square-dots" style="font-size: 35px; display:inline-block; color:#4ECDC4;"></i></p>
 					<p style="font-weight: bold">등록된 댓글이 없습니다. 댓글을 남겨보세요!</p>
 				</div>
 			</c:otherwise>
@@ -614,6 +679,7 @@
 			}
 		})
 		
+		//공모전 삭제
 		$(".delBtn").click(function(){
 			swal({
 	 			  title: "공모전 삭제",

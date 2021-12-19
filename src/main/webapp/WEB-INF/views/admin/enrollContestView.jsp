@@ -137,6 +137,9 @@
 			<div class="contestContent">
 				<span>${c.contestContentBr }</span> 
 			</div>
+			<div style="text-align: center; margin-top: 10px; font-size: 18px; font-weight: bold; color:#EA0000">
+				<p>※ 공모 승인시 공모전 게시판에 등록됩니다.</p>
+			</div>
 			<div class="btnBox">
 				<form action="/contestOK.do" id="contestOKFrm">
 					<button type="button" class="btn btn-primary btn-lg conOK">공모 승인</button>

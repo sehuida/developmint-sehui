@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.announce.service.AnnounceService;
 import kr.or.announce.vo.Announce;
+import kr.or.announce.vo.AnnounceView;
 
 @Controller
 public class AnnounceController {
@@ -79,7 +80,8 @@ public class AnnounceController {
 	
 	@RequestMapping(value="/announceView.do")
 	public String announceView(int announceNo, Model model) {
-		Announce announce = service.selectOneAnnounce(announceNo);
+		AnnounceView announce = service.selectAnnounceView(announceNo);
+		System.out.println("view : "+announce);
 		model.addAttribute("a", announce);
 		return "jobSearch/announceView";
 	}

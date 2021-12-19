@@ -12,9 +12,11 @@
 <style>
 .container * {
 	text-decoration: none;
-	color: black;
 }
 
+.note-modal-footer{
+	height: 60px !important;
+}
 .container {
 	min-width: 1200px;
 }
