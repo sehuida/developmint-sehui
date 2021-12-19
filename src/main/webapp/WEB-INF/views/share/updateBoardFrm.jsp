@@ -74,7 +74,7 @@
                         <label for="boardType" class="form-label mt-4">상세 유형</label><img
                             src="/resources/img/shareBoard/options-lines.png" class="cateImg">
                     </div>
-                    <select class="form-select" id="boardType" name="boardType">
+                    <select class="form-select" id="boardType" name="boardType" disabled="disabled">
                         <option value="1">사는 얘기</option>
                         <option value="2">Tech Q&A</option>
                         <option value="3">Tips & 강좌</option>
@@ -99,12 +99,12 @@
                         		<i class="bi bi-file-earmark delFile" style="color: #4ecdc4;"></i>
                         		<span class="delFile">${s.filename }</span>
                         		<button type="button" id="delBtn" class="btn btn-primary btn-sm delFile">삭제</button>
-		                        <input class="form-control" type="file" id="filepath" style="display:none; ">
+		                        <input class="form-control" type="file" id="filepath" name="files" style="display:none; ">
 								<input type="hidden" name="oldFilename" value="${s.filename }">
 								<input type="hidden" name="oldFilepath" value="${s.filepath }">                        	
                         	</c:when>
                         	<c:otherwise>
-                        		<input class="form-control" type="file" id="filepath">
+                        		<input class="form-control" type="file" id="filepath" name="files">
                         	</c:otherwise>
                         </c:choose>
                     </div>
@@ -117,7 +117,7 @@
                 </div>
             </form>
             <div class="submitDiv">
-	            <button class="btn btn-outline-primary" id="submitBtn">글작성</button>            
+	            <button class="btn btn-outline-primary" id="submitBtn">수정하기</button>            
             </div>
         </div>
     </div>

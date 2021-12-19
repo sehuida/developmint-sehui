@@ -1,14 +1,19 @@
 package kr.or.share.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.UUID;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.comment.vo.Comment;
+import kr.or.notice.vo.Notice;
 import kr.or.share.model.service.ShareService;
 import kr.or.share.model.vo.Share;
 import kr.or.share.model.vo.ShareBoardPage;
@@ -249,11 +255,10 @@ public class ShareController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			
 			// 중복처리된 파일 이름 넣어주기
 			s.setFilepath(filepath);
 			s.setFilename(filename);
-			
 			// status의 상태에 따라 처리
 			if (status == 2) {
 				File delFile = new File(savePath + "/" + oldFilepath);
@@ -267,16 +272,52 @@ public class ShareController {
 		int result = service.updateShareBoard(s);
 
 		if (result > 0) {
-			model.addAttribute("title", "등록성공");
-			model.addAttribute("msg", "글 작성이 완료 되셨습니다.");
+			model.addAttribute("title", "수정성공");
+			model.addAttribute("msg", "글 수정이 완료 되셨습니다.");
 			model.addAttribute("loc", "/shareList.do?reqPage=1&type=1");
 			model.addAttribute("icon", "success");
 		} else {
 			model.addAttribute("title", "변경실패");
-			model.addAttribute("msg", "글 작성에 실패하셨습니다.");
+			model.addAttribute("msg", "글 수정이 실패하셨습니다.");
 			model.addAttribute("loc", "/shareList.do?reqPage=1&type=1");
 			model.addAttribute("icon", "warning");
 		}
 		return "member/swalMsg";
+	}
+	@ResponseBody
+	@RequestMapping(value="/sharefileDown.do")
+	public void filedownload(int boardNo,HttpServletRequest req, Model model, HttpServletResponse rep) throws IOException{
+		Share s = service.selectOneBoard(boardNo);
+		String savePath = req.getSession().getServletContext().getRealPath("/resources/upload/share/");
+		//파일경로 
+		String file = savePath+s.getFilepath();
+		
+		FileInputStream fis = new FileInputStream(file);
+		BufferedInputStream bis = new BufferedInputStream(fis);
+		
+		ServletOutputStream sos = rep.getOutputStream();
+		BufferedOutputStream bos = new BufferedOutputStream(sos);
+			
+		String resFilename = "";
+		boolean bool = req.getHeader("user-agent").indexOf("MSIE") != -1 || req.getHeader("user-agent").indexOf("Trident") != -1;
+		if(bool) {
+			resFilename = URLEncoder.encode(s.getFilename(), "utf-8");
+			resFilename = resFilename.replaceAll("////", "%20"); // 파일명에 "//" 가 있으면 %20으로 바꾸는 구문
+		}else {
+			resFilename = new String(s.getFilename().getBytes("utf-8"),"ISO-8859-1");
+		}
+		rep.setContentType("application/octet-stream");
+		rep.setHeader("Content-Disposition", "attachment;filename="+resFilename);
+		
+		while(true) {
+			int read = bis.read();
+			if(read != -1) {
+				bos.write(read);
+			}else {
+				break;
+			}
+		}
+		bis.close();
+		bos.close();		
 	}
 }

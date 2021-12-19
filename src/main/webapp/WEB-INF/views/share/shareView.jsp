@@ -155,6 +155,11 @@
 			  	<button type="button" class="btn btn-info deleteBoard">삭제</button>
 			  </c:if>
 			</div>
+			<c:if test="${not empty sv.filename }">
+				<div>
+					첨부파일 : <a href="/sharefileDown.do?boardNo=${sv.boardNo }">${sv.filename }</a>			
+				</div>
+			</c:if>
 		</div><!-- 작성글 출력문 종료 -->
 		<!-- 회원만 댓글 달 수 있게 제약조건 -->
 		<c:if test="${not empty sessionScope.m }">
@@ -171,8 +176,8 @@
 			</div>
 		</form>			
 		</c:if>
-		<div class="comments">
 			<c:forEach items="${list }" var="sc" varStatus="i">
+		<div class="comments">
 				<c:if test="${sc.commentType eq 1 }">
 					<!-- 댓글중 타입 1인것들 전체 출력하기 -->
 					<div class="commentWrap">
@@ -242,8 +247,8 @@
 						</div>						
 					</c:if>
 				</c:forEach><!-- 대댓글 반복문 끝 -->
+				</div><!-- 전체 댓글 출력 -->
 			</c:forEach><!-- 전체댓글 반복문 끝 -->
-		</div><!-- 전체 댓글 출력 -->
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script>

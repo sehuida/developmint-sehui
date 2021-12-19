@@ -92,7 +92,7 @@
                             <label for="filepath" class="form-label mt-4">첨부 파일</label><img
                                 src="/resources/img/shareBoard/upload.png" class="cateImg">
                         </div>
-                        <input class="form-control" type="file" id="filepath">
+                        <input class="form-control" type="file" id="filepath" name="files">
                     </div>
                     <div class="summerContentTop">
                         <div>
@@ -180,6 +180,36 @@
 			}
 		});
 	  });
+	$("#filepath").change(function(){
+		
+		var fileVal = $(this).val();
+		var pathPoint = fileVal.lastIndexOf('.');
+		var filePoint = fileVal.substring(pathPoint+1, this.length);
+		var fileType = filePoint.toLowerCase();
+		var fileSize = 10 * 1024 * 1024; //10메가
+		if(fileType == 'jpg' || fileType == 'png' || fileType == 'jpeg' || fileType == 'gif'){
+		var uploadFileSize = this.files[0].size;
+			if(uploadFileSize > fileSize){
+				swal({
+			        title: '사진 용량이 큽니다',
+			        text: '사진 20mb미만 파일만 업로드 가능합니다.',
+			        icon: 'warning'
+			      })
+				$("#formFile").val("");
+				return;
+			}
+		}else if(fileVal == ""){
+			$("#formFile").val("");
+			return;
+		}else{
+			swal({
+		        title: '확장자를 확인해주세요!',
+		        text: '첨부파일은 이미지 파일만 가능합니다.',
+		        icon: 'warning'
+		      })
+			$("#filepath").val("");
+			return;
+		}
 	</script>	
 </body>
 </html>
