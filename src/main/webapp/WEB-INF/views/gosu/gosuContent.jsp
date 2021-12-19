@@ -96,6 +96,11 @@
 	background-color: transparent;
 }
 
+
+#gProject {
+	padding: 0;
+}
+
 .g-photo-one * {
 	width: 200px;
 }
@@ -327,10 +332,10 @@
 				</div>
 				<div>
 					<h4>상세설명</h4>
-					<div>
+					<div style="overflow: auto;">
 						<p>${gosu.gosuExplainBr }</p>
 					</div>
-				
+
 				</div>
 
 				<div class="gosu-photos">
@@ -343,83 +348,82 @@
 							</c:forEach>
 						</ul>
 					</div>
-					
+
 				</div>
 
 				<div class="gosu-review">
 					<h4>리뷰</h4>
 					<div class="review-wrap">
-					<c:choose>
-						<c:when test="${empty greviewList }">
+						<c:choose>
+							<c:when test="${empty greviewList }">
 							작성된 리뷰가 아직 없습니다!
 						</c:when>
-						<c:otherwise>
-					
-							<div>
-							<div class="review-avg">
-								<table>
-									<tr>
-										<td rowspan="3" style="font-size: 40px; font-weight: bold;">${grAVG.reviewAvg }점</td>
-									</tr>
-									<tr>
-										<td>
-										<c:choose>
-											<c:when test="${grAVG.reviewAvg le 1 }">
-											<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
-											</c:when>
-											<c:when test="${grAVG.reviewAvg le 2 }">
-												<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
-											</c:when>
-												<c:when test="${grAVG.reviewAvg le 3 }">
-												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-											</c:when>
-												<c:when test="${grAVG.reviewAvg le 4 }">
-												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-											</c:when>
-												<c:when test="${grAVG.reviewAvg ge 5 }">
-												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-											</c:when>
-										</c:choose>
-										</td>
-									</tr>
-									<tr>
-										<td style="font-size: small;">${grAVG.reviewCount } 개의 리뷰</td>
-									</tr>
-								</table>
-							</div>
-					
-						
-							<hr>
+							<c:otherwise>
 
-							<c:forEach items="${greviewList }" var="grl" varStatus="i">
-								<div class="review-one">
-									<ul>
-										<li>${grl.writer }</li>
-										<li><c:if test="${grl.reviewNum eq 1 }">
-												<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
-											</c:if> <c:if test="${grl.reviewNum eq 2 }">
-												<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
-											</c:if> <c:if test="${grl.reviewNum eq 3 }">
-												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-											</c:if> <c:if test="${grl.reviewNum eq 4 }">
-												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-											</c:if> <c:if test="${grl.reviewNum eq 5 }">
-												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-											</c:if></li>
-										<li>${grl.reviewDate }</li>
-									</ul>
-									<br>
-									<div style="display: flex; justify-content: center;">
-										<p>${grl.reviewContentBr }</p>
+								<div>
+									<div class="review-avg">
+										<table>
+											<tr>
+												<td rowspan="3" style="font-size: 40px; font-weight: bold;">${grAVG.reviewAvg }점</td>
+											</tr>
+											<tr>
+												<td><c:choose>
+														<c:when test="${grAVG.reviewAvg le 1 }">
+															<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+														</c:when>
+														<c:when test="${grAVG.reviewAvg le 2 }">
+															<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+														</c:when>
+														<c:when test="${grAVG.reviewAvg le 3 }">
+															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+														</c:when>
+														<c:when test="${grAVG.reviewAvg le 4 }">
+															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+														</c:when>
+														<c:when test="${grAVG.reviewAvg ge 5 }">
+															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+														</c:when>
+													</c:choose></td>
+											</tr>
+											<tr>
+												<td style="font-size: small;">${grAVG.reviewCount }개의
+													리뷰</td>
+											</tr>
+										</table>
 									</div>
+
+
+									<hr>
+
+									<c:forEach items="${greviewList }" var="grl" varStatus="i">
+										<div class="review-one">
+											<ul>
+												<li>${grl.writer }</li>
+												<li><c:if test="${grl.reviewNum eq 1 }">
+														<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+													</c:if> <c:if test="${grl.reviewNum eq 2 }">
+														<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+													</c:if> <c:if test="${grl.reviewNum eq 3 }">
+														<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+													</c:if> <c:if test="${grl.reviewNum eq 4 }">
+														<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+													</c:if> <c:if test="${grl.reviewNum eq 5 }">
+														<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+													</c:if></li>
+												<li>${grl.reviewDate }</li>
+											</ul>
+											<br>
+											<div style="display: flex; justify-content: center;">
+												<p>${grl.reviewContentBr }</p>
+											</div>
+										</div>
+									</c:forEach>
 								</div>
-							</c:forEach>
-						</div>
-						
-						</c:otherwise>
-					</c:choose>
-						
-						
+
+							</c:otherwise>
+						</c:choose>
+
+
 					</div>
 				</div>
 
@@ -430,36 +434,37 @@
 							작성된 후기가 아직 없습니다!
 						</c:when>
 						<c:otherwise>
-						<div class="review-wrap">
-						<div>
-							<div class="review-avg">
-								<span style="font-size: 30px; font-weight: bold;">${grrCount}개의 후기</span>
-							</div>
-							<hr>
-							<c:forEach items="${grrList }" var="grl" varStatus="i">
-							<div class="review-one">
-								<ul>
-									<li style="font-weight: 900;">${grl.memberId }</li>
-									<li style="color:gray;">${grl.requestReviewDate }</li>
-								</ul>
-								<br>
-								<div style="display: flex; justify-content: center;">
-									<p>${grl.requestReviewContentBr }</p>
+							<div class="review-wrap">
+								<div>
+									<div class="review-avg">
+										<span style="font-size: 30px; font-weight: bold;">${grrCount}개의
+											후기</span>
+									</div>
+									<hr>
+									<c:forEach items="${grrList }" var="grl" varStatus="i">
+										<div class="review-one">
+											<ul>
+												<li style="font-weight: 900;">${grl.memberId }</li>
+												<li style="color: gray;">${grl.requestReviewDate }</li>
+											</ul>
+											<br>
+											<div style="display: flex; justify-content: center;">
+												<p>${grl.requestReviewContentBr }</p>
+											</div>
+										</div>
+									</c:forEach>
+
 								</div>
+
 							</div>
-							</c:forEach>
-							
-						</div>
-					
-					</div>
 						</c:otherwise>
 					</c:choose>
-					
+
 				</div>
 
 				<div class="gosu-act">
 					<h4>활동 및 자격</h4>
-					<div>
+					<div style="overflow: auto;">
 						<p>${gosu.gosuActBr }</p>
 					</div>
 				</div>
@@ -470,7 +475,7 @@
 							<div class="g-photo-one">
 								<button type="button" id="gProject"
 									onclick="pAjax(${gpr.gprojectNo});">
-									<dl>
+									<dl style="margin: 0;">
 										<dt>
 											<img src="${gpr.gprojectFilepath }">
 										</dt>
@@ -478,14 +483,14 @@
 											<b class="g-b" style="font-size: 19px;">${gpr.gprojectContent }</b>
 										</dd>
 										<dd>
-											<p class="g-p">${gpr.gprojectTitle }</p>
+											<p class="g-p" style="margin: 0;">${gpr.gprojectTitle }</p>
 										</dd>
 									</dl>
 								</button>
 							</div>
 						</c:forEach>
 					</div>
-					
+
 				</div>
 				<div class="gosu-feedback">
 
