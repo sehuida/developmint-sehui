@@ -68,7 +68,6 @@
 					</colgroup> --%>
 					<thead>
 					<tr>
-						<th style="width: 10%">문의번호</th>
 						<th style="width: 15%">문의 유형</th>
 						<th style="text-align: center;">내용</th>
 						<th style="width: 10%">작성일</th>
@@ -78,7 +77,6 @@
 					<tbody>
 						<c:forEach items="${list }" var="q" varStatus="i">
 							<tr>
-								<td>${i.count}</td>
 								<td >${q.type }</td>
 								<td ><a href="javascript:void(0);">${q.qnaTitle }</a></td>
 								<td>${q.regDate }</td>
