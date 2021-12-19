@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>기업소개</title>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b0b0a9f222f0ab356e278f15c5fdc64"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b0b0a9f222f0ab356e278f15c5fdc64"></script>
 </head>
 <style>
 .contain {
@@ -88,12 +88,19 @@
 	position: relative;
 	top: -1px;
 }
-
 em {
 	font-style: normal;
 	font-weight: 900;
 	font-size: 20px;
 	margin-bottom: 15px;
+}
+b {
+	font-style: normal;
+	font-weight: 900;
+	font-size: 20px;
+	margin-bottom: 15px;
+	margin: 30px 0px;
+	display: block;
 }
 
 .resumeInfo1 {
@@ -164,9 +171,37 @@ em {
 	text-align: center;
 	padding: 3px 5px;
 }
+.info{
+	overflow: hidden;
+	float: left;
+	list-style: none;
+}
+.info>li{
+	height: 50px;
+}
+.info1{
+	color: #888888;
+}
+.info2{
+	margin-left: 30px;
+	color: #222222;
+}
 </style>
 <body>
+<script>
+
+	/* 카카오맵 API */
+	var container = $("#map"); //지도를 담을 영역의 DOM 레퍼런스
+	var options = { //지도를 생성할 때 필요한 기본 옵션
+		center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+		level: 3 //지도의 레벨(확대, 축소 정도)
+	};
+	
+	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+</script>
+
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<div id="map" style="width:500px;height:400px;"></div>
 	<div class="contain">
 		<div class="companyInfoHeader">
 			<div class="companyImg">
@@ -309,8 +344,7 @@ em {
 								</div>
 								<div class="resumeInfoData">
 									<!-- r.resumeWorkForm -->
-									<em style="font-size: 16px; font-weight: normal;">희망 근무형태
-										: </em>
+									<em style="font-size: 16px; font-weight: normal;">희망 근무형태 : </em>
 									<c:if test="${com.workForm eq 1 }">
 										<!-- 1 -> 정규직 -->
 										<span>정규직</span>
@@ -335,6 +369,26 @@ em {
 							</li>
 						</ul>
 					</div>
+					<b>기업개요</b>
+					<!-- 사진같은거 넣을지말지 고민좀 -->
+					<ul class="info info1">
+						<li>업종</li>
+						<li>대표자명</li>
+						<li>홈페이지</li>
+						<li>기업주소</li>
+						<li>사업내용</li>
+					</ul>
+					<ul class="info info2">
+						<li>${com.category }</li>
+						<li>${com.ceo }</li>
+						<li><a href="#" style="text-decoration: none; color: #222222;">http://www.homepage.co.kr</a></li>
+						<li>
+							${com.address }
+
+							<div id="map" style="width:500px;height:400px;"></div>
+						</li>
+						<li>업종</li>
+					</ul>
 				</c:otherwise>
 			</c:choose>
 		</div>
