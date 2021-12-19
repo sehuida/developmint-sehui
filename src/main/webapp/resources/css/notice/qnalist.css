@@ -97,3 +97,20 @@ overflow: auto;
   width: 0;
   height: 0;
 }
+
+.n-section-title{
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#faq_list{
+	width: 50%;
+}
+.harf_area{
+	display: table-cell;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+}

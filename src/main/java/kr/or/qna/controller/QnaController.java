@@ -258,4 +258,8 @@ public class QnaController {
 		return "qna/counselAdmin";
 	}
 	
+	@RequestMapping(value="/faqlist.do")
+	public String faqlistBox(int category, Model model) {
+		return "qna/faqlist";
+	}
 }
