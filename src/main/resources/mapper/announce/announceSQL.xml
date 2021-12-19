@@ -75,6 +75,37 @@
 		join company c using(company_name)
 		where announce_no = #{announceNo}
 	</select>
+
+
+	<select id="selectAnnounceView" parameterType="_int" resultType="av">
+		select
+			announce_no as announceNo,
+			member_no as memberNo,
+			company_name as companyName,
+			a.category,
+			fields,
+			school,
+			work_form as workForm,
+			announce_title as announceTitle,
+			announce_content as announceContent,
+			skills,
+			money,
+			work_place as workPlace,
+			end_date as endDate,
+			veterans,
+			military,
+			write_date as writeDate,
+			career,
+			c.open_date as openDate,
+			c.employee,
+			c.ceo,
+			c.address,
+			c.content,
+			filepath
+		from announcement a
+		join company c using(company_name)
+		where announce_no = #{announceNo}
+	</select>
 	
 	<update id="updateAnnounce" parameterType="a">
 		update announcement set 

@@ -361,166 +361,58 @@
                         <p style="font-size: 35px; font-weight: bold; color: rgb(78, 205, 196); margin-bottom: 10px; text-align: left;">팀원에게 후기를 남겨주세요</p>
                         <p style="font-weight: 900;"> &#10004; 후기는 익명으로 등록됩니다.</p>
                         <div style="border-bottom: 1px solid #90d1b4; margin-bottom: 60px;"></div>
-
-                        <div style="display: flex; margin-left: 50px; margin-top: 50px;">
-                            <div style="display: flex; flex-direction: column; margin-right: 30px; margin-top: 10px;">
-                                <img src="img/recruitTeamProject/common/user.png" style="width: 100px; height: 100px; margin-left: 10px;">
-                                <p style="font-size: 26px; font-weight: 900;">memberId</p>
-                            </div>
-                            <div style="display: flex; flex-direction: column;">
-                                <div style="display: flex;">
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/bigHappy.png" style="width: 40px; height: 40px; display: block; margin: 0px auto;">
-                                        <label for="r5" style="text-align: center;">매우좋았어요</label>
-                                        <input type="radio" id="r5" name="reviewRadio" value="5" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/happy.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r4">좋았어요</label>
-                                        <input type="radio" id="r4" name="reviewRadio" value="4" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/common.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r3">친절해요</label>
-                                        <input type="radio" id="r3" name="reviewRadio" value="3" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/bad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r2">나빠요</label>
-                                        <input type="radio" id="r2" name="reviewRadio" value="2" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/superBad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r1">매우나빠요</label>
-                                        <input type="radio" id="r1" name="reviewRadio" value="1" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    
-                                </div>
-                                <div class="form-group" style="margin-top: 20px;">
-                                    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="display: flex; margin-left: 50px; margin-top: 50px;">
-                            <div style="display: flex; flex-direction: column; margin-right: 30px; margin-top: 10px;">
-                                <img src="img/recruitTeamProject/common/user.png" style="width: 100px; height: 100px; margin-left: 10px;">
-                                <p style="font-size: 26px; font-weight: 900;">memberId</p>
-                            </div>
-                            <div style="display: flex; flex-direction: column;">
-                                <div style="display: flex;">
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/bigHappy.png" style="width: 40px; height: 40px; display: block; margin: 0px auto;">
-                                        <label for="r5" style="text-align: center;">매우좋았어요</label>
-                                        <input type="radio" id="r5" name="reviewRadio" value="5" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/happy.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r4">좋았어요</label>
-                                        <input type="radio" id="r4" name="reviewRadio" value="4" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/common.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r3">친절해요</label>
-                                        <input type="radio" id="r3" name="reviewRadio" value="3" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/bad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r2">나빠요</label>
-                                        <input type="radio" id="r2" name="reviewRadio" value="2" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/superBad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r1">매우나빠요</label>
-                                        <input type="radio" id="r1" name="reviewRadio" value="1" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    
-                                </div>
-                                <div class="form-group" style="margin-top: 20px;">
-                                    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="display: flex; margin-left: 50px; margin-top: 50px;">
-                            <div style="display: flex; flex-direction: column; margin-right: 30px; margin-top: 10px;">
-                                <img src="img/recruitTeamProject/common/user.png" style="width: 100px; height: 100px; margin-left: 10px;">
-                                <p style="font-size: 26px; font-weight: 900;">memberId</p>
-                            </div>
-                            <div style="display: flex; flex-direction: column;">
-                                <div style="display: flex;">
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/bigHappy.png" style="width: 40px; height: 40px; display: block; margin: 0px auto;">
-                                        <label for="r5" style="text-align: center;">매우좋았어요</label>
-                                        <input type="radio" id="r5" name="reviewRadio" value="5" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/happy.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r4">좋았어요</label>
-                                        <input type="radio" id="r4" name="reviewRadio" value="4" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/common.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r3">친절해요</label>
-                                        <input type="radio" id="r3" name="reviewRadio" value="3" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/bad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r2">나빠요</label>
-                                        <input type="radio" id="r2" name="reviewRadio" value="2" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/superBad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r1">매우나빠요</label>
-                                        <input type="radio" id="r1" name="reviewRadio" value="1" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    
-                                </div>
-                                <div class="form-group" style="margin-top: 20px;">
-                                    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="display: flex; margin-left: 50px; margin-top: 50px;">
-                            <div style="display: flex; flex-direction: column; margin-right: 30px; margin-top: 10px;">
-                                <img src="img/recruitTeamProject/common/user.png" style="width: 100px; height: 100px; margin-left: 10px;">
-                                <p style="font-size: 26px; font-weight: 900;">memberId</p>
-                            </div>
-                            <div style="display: flex; flex-direction: column;">
-                                <div style="display: flex;">
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/bigHappy.png" style="width: 40px; height: 40px; display: block; margin: 0px auto;">
-                                        <label for="r5" style="text-align: center;">매우좋았어요</label>
-                                        <input type="radio" id="r5" name="reviewRadio" value="5" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/happy.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r4">좋았어요</label>
-                                        <input type="radio" id="r4" name="reviewRadio" value="4" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/common.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r3">친절해요</label>
-                                        <input type="radio" id="r3" name="reviewRadio" value="3" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/bad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r2">나빠요</label>
-                                        <input type="radio" id="r2" name="reviewRadio" value="2" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    <div class="modalReviewSub1">
-                                        <img src="img/recruitTeamProject/review/superBad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-                                        <label for="r1">매우나빠요</label>
-                                        <input type="radio" id="r1" name="reviewRadio" value="1" style="display: block; margin: 0px auto;">
-                                    </div>
-                                    
-                                </div>
-                                <div class="form-group" style="margin-top: 20px;">
-                                    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        
+						<c:forEach items="${memberList}" var="ml" varStatus="i">
+							<div style="display: flex; margin-left: 50px; margin-top: 50px;">
+	                            <div style="display: flex; flex-direction: column; margin-right: 30px; margin-top: 10px;">
+	                            <c:choose>
+	                            	<c:when test="${ml.memberImg eq null}">
+	                            		<img src="/resources/img/recruitTeamProject/common/user.png" style="width: 100px; height: 100px; margin-left: 10px;">
+	                            	</c:when>
+	                            	<c:otherwise>
+	                            		<img src="/resources/upload/member/${ml.memberImg}" style="width: 100px; height: 100px; margin-left: 10px;">
+	                            	</c:otherwise>
+	                            </c:choose>
+	                                <p style="font-size: 26px; font-weight: 900;">${ml.memberId}</p>
+	                            </div>
+	                            <div style="display: flex; flex-direction: column;">
+	                                <div style="display: flex;">
+	                                    <div class="modalReviewSub1">
+	                                        <img src="/resources/img/recruitTeamProject/review/bigHappy.png" style="width: 40px; height: 40px; display: block; margin: 0px auto;">
+	                                        <label for="r5" style="text-align: center;">매우좋았어요</label>
+	                                        <input type="radio" id="r5" name="reviewPoint" value="5" style="display: block; margin: 0px auto;">
+	                                    </div>
+	                                    <div class="modalReviewSub1">
+	                                        <img src="/resources/img/recruitTeamProject/review/happy.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+	                                        <label for="r4">좋았어요</label>
+	                                        <input type="radio" id="r4" name="reviewPoint" value="4" style="display: block; margin: 0px auto;">
+	                                    </div>
+	                                    <div class="modalReviewSub1">
+	                                        <img src="/resources/img/recruitTeamProject/review/common.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+	                                        <label for="r3">친절해요</label>
+	                                        <input type="radio" id="r3" name="reviewPoint" value="3" style="display: block; margin: 0px auto;">
+	                                    </div>
+	                                    <div class="modalReviewSub1">
+	                                        <img src="/resources/img/recruitTeamProject/review/bad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+	                                        <label for="r2">나빠요</label>
+	                                        <input type="radio" id="r2" name="reviewPoint" value="2" style="display: block; margin: 0px auto;">
+	                                    </div>
+	                                    <div class="modalReviewSub1">
+	                                        <img src="/resources/img/recruitTeamProject/review/superBad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+	                                        <label for="r1">매우나빠요</label>
+	                                        <input type="radio" id="r1" name="reviewPoint" value="1" style="display: block; margin: 0px auto;">
+	                                    </div>
+	                                    
+	                                </div>
+	                                <div class="form-group" style="margin-top: 20px;">
+	                                    <textarea class="form-control" id="exampleTextarea" rows="3" maxlength="250" name="reviewContent"></textarea>
+	                                </div>
+	                            </div>
+	                        </div>
+						</c:forEach>
                         <div style="border-bottom: 1px solid #90d1b4; margin-bottom: 10px; margin-top: 40px;"></div>
                         <div style="text-align: center; padding-top: 10px; margin-top: 40px; margin-bottom: 40px;">
+                        	<input type="hidden" name="projectNo" value="${ml.projectNo}">
+                        	<input type="hidden" name="teamMemberNo" value="${ml.teamMemberNo}">
                             <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 150px; margin-right: 15px;">후기작성 완료</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
                         </div>

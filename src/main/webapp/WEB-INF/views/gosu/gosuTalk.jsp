@@ -11,7 +11,6 @@
 <style>
 .container * {
 	text-decoration: none;
-	color: black;
 }
 
 .container {
@@ -159,6 +158,9 @@ input:focus, textarea:focus {
 	justify-content: space-between;
 	align-items: center;
 	margin-top: 20px;
+}
+.note-modal-footer{
+	height: 60px !important;
 }
 </style>
 </head>

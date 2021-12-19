@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.announce.vo.Announce;
+import kr.or.announce.vo.AnnounceView;
 import kr.or.resume.vo.Resume;
 
 @Repository
@@ -33,6 +34,10 @@ public class AnnounceDao {
 
 	public Announce selectOneAnnounce(int announceNo) {
 		return sqlSession.selectOne("announce.selectOneAnnounce", announceNo);
+	}
+	
+	public AnnounceView selectAnnounceView(int announceNo) {
+		return sqlSession.selectOne("announce.selectAnnounceView", announceNo);
 	}
 
 	public int updateAnnounce(Announce a) {
