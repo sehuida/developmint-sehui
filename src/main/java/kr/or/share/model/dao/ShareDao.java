@@ -58,4 +58,8 @@ public class ShareDao {
 	public int deleteBoard(int boardNo) {
 		return sqlSession.delete("share.deleteBoard",boardNo);
 	}
+
+	public int updateBoard(Share s) {
+		return sqlSession.update("share.updateBoard",s);
+	}
 }

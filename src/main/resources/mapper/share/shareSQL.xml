@@ -116,4 +116,12 @@
    <delete id="deleteBoard" parameterType="_int">
    		delete from share_board where board_no=#{boardNo}
    </delete>
+   <update id="updateBoard" parameterType="sv">
+ 		update share_board set
+ 			board_title = #{boardTitle},
+ 			board_content = #{boardContent},
+ 			filename = #{filename},
+ 			filepath = #{filepath}
+ 		where board_no=#{boardNo}
+   </update>
 </mapper>
