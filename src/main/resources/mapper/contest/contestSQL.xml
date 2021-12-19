@@ -143,8 +143,10 @@
   			board_no as boardNo,
   			board_type as boardType,
   			comment_type as commentType,
-  			comment_ref as commentRef
+  			comment_ref as commentRef,
+  			filepath as memberImg
   		from comments
+  		join member using(member_id)
   		where board_no = #{contestNo} and board_type = 1
   		order by comment_no
   	</select>
