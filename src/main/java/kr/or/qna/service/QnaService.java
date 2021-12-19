@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.member.model.vo.Member;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.qna.dao.QnaDao;
+import kr.or.qna.vo.Faq;
 import kr.or.qna.vo.Qna;
 import kr.or.qna.vo.nonQna;
 
@@ -93,6 +94,11 @@ public class QnaService {
 		map.put("category", category);
 		map.put("state", state);
 		return dao.searchBox2(map);
+	}
+
+	public ArrayList<Faq> selectFaqlist(int category) {
+		// TODO Auto-generated method stub
+		return dao.selectFaqlist(category);
 	}
 
 	

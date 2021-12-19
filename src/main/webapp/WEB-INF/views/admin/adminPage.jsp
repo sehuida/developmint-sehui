@@ -44,10 +44,17 @@
 	padding-bottom: 10px;
 	padding-top: 10px;
 }
-#cate>span{
+#cate>a>span{
 	line-height: 43px;
 	margin-left : 20px;
 	font-size : 17px;
+}
+#cate>a{
+	text-decoration: none;
+	color: black;
+}
+#cate:hover>a{
+	color : #4ECDC4
 }
 
 .cateAtag{
@@ -76,49 +83,57 @@
 			<!-- 관리자페이지 카테고리 -->
 			<p class="title">전체현황</p>
 			<div id="cate">
-				<i class="bi bi-clipboard-data" style="color:#4ECDC4;"></i><span>대시보드</span>
+				<i class="bi bi-clipboard-data" style="color:#4ECDC4;"></i>
+				<a href="/dashboard.do"><span>대시보드</span></a>
 				<a href="/dashboard.do" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			
 			<p class="title">회원관리</p>
 			<div id="cate">
-				<i class="bi bi-list-ul" style="color:#4ECDC4;"></i><span>전체 회원 조회</span>
+				<i class="bi bi-list-ul" style="color:#4ECDC4;"></i>
+				<a href="/allMemberList.do?reqPage=1&type=0&list=1"><span>전체 회원 조회</span></a>
 				<a href="/allMemberList.do?reqPage=1&type=0&list=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			<div id="cate">
-				<i class="bi bi-exclamation-circle" style="color:#4ECDC4;"></i><span>신고 회원 처리</span>
+				<i class="bi bi-exclamation-circle" style="color:#4ECDC4;"></i>
+				<a href="/reportMember.do?reqPage=1"><span>신고 회원 처리</span></a>
 				<a href="/reportMember.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			<div id="cate">
-				<i class="bi bi-person-dash-fill" style="color:#4ECDC4;"></i><span>차단 회원 관리</span>
+				<i class="bi bi-person-dash-fill" style="color:#4ECDC4;"></i>
+				<a href="/blockedMember.do?reqPage=1"><span>차단 회원 관리</span></a>
 				<a href="/blockedMember.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			<div id="cate">
-				<i class="bi bi-briefcase" style="color:#4ECDC4;"></i><span>회사 인증 처리</span>
+				<i class="bi bi-briefcase" style="color:#4ECDC4;"></i>
+				<a href="/companyEnroll.do?reqPage=1"><span>회사 인증 처리</span></a>
 				<a href="/companyEnroll.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			
 			
-			
 			<p class="title">공모전</p>
 			<div id="cate">
-				<i class="bi bi-trophy" style="color:#4ECDC4;"></i><span>공모전 등록 내역</span>
+				<i class="bi bi-trophy" style="color:#4ECDC4;"></i>
+				<a href="/contestEnrollList.do?reqPage=1"><span>공모전 등록 내역</span></a>
 				<a href="/contestEnrollList.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			<div id="cate">
-				<i class="bi bi-people-fill" style="color:#4ECDC4;"></i><span>공모전 신청 회원 보기</span>
+				<i class="bi bi-people-fill" style="color:#4ECDC4;"></i>
+				<a href="/contestEnrollMember.do?reqPage=1&date=${today }"><span>공모전 신청 회원 보기</span></a>
 				<a href="/contestEnrollMember.do?reqPage=1&date=${today }" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			
 			<%-- 민주가 만든 공지사항, qna로 이동 --%>
 			<p class="title">게시판 관리</p>
 			<div id="cate">
-				<i class="bi bi-megaphone" style="color:#4ECDC4;"></i><span>공지사항</span>
+				<i class="bi bi-megaphone" style="color:#4ECDC4;"></i>
+				<a href="/noticeList.do?reqPage=1"><span>공지사항</span></a>
 				<a href="/noticeList.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			<div id="cate">
-				<i class="bi bi-chat-dots" style="color:#4ECDC4;"></i><span>QnA</span>
-				<a href="/tocounsel.do" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
+				<i class="bi bi-chat-dots" style="color:#4ECDC4;"></i>
+				<a href="/adminCounsel.do?type=1"><span>QnA</span></a>
+				<a href="/adminCounsel.do?type=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 		</div>
 	</div>

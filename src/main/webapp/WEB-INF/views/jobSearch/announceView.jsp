@@ -52,7 +52,7 @@
 		float: right;
 		margin-right: 50px;
 	}
-	.applicationBtn>button{
+	.applicationBtn>button, .loginBtn{
 		background-color: rgb(78, 205, 196);
 		color: white;
 		font-weight: bold;
@@ -163,8 +163,15 @@
 				<p>${a.announceTitle }</p>
 			</div>
 			<div class="applicationBtn">
+				<c:choose>
+					<c:when test="${empty sessionScope.m }">
+						<a href="/loginFrm.do"><button class="loginBtn">지원하기</button></a>
+					</c:when>
+					<c:otherwise>
+						<button data-bs-toggle="modal" data-bs-target="#contestMember">지원하기</button>
+					</c:otherwise>
+				</c:choose>
 				<!-- 모달버튼// 사용법 자세히모름 수현누나 물어보기 -->
-				<button data-bs-toggle="modal" data-bs-target="#contestMember">지원하기</button>
 				<!-- modal내용 등록 -->
 				<div class="modal fade" id="contestMember" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog  modal-dialog-centered">

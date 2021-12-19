@@ -60,18 +60,26 @@
 						</c:otherwise>
 					</c:choose>
 					<!-- 주의사항 -->
-					<ul>
-						<li class="text-danger">Q&A 내 상담내역은은 <a href="" style="display: inline-block;">공지사항</a> > <a href="" style="display: inline-block;">상담내역</a>에서 확인하실 수 있습니다.</li>
-						<li class="text-danger">프로젝트 정보 및 공모전 관련 문의는 해당 문의에 남기셔야 빠른 답변이 가능합니다.</li>
-						<li>사기접수시 비회원으로 문의하시면 정보보호로 인해 일부만 확인가능하십니다.</li>
-						<li>취소/신청/게시물보기는 마이페이지에서 확인 하실 수 있습니다.</li>
-						<li>로그인 후 이용하실경우 첨부파일을 넣을 수가 있습니다.</li>
+					<ul style="padding: 0">
+						<li class="text-danger"><i class="bi bi-arrow-right-short"></i>Q&A 내 상담내역은은 <a href="/noticehome.do" style="display: inline-block;font-weight: bold;" class="text-danger">공지사항</a> > 
+						<c:choose>
+							<c:when test="${empty sessionScope.m }">
+							<a href="" style="display: inline-block;font-weight: bold;" class="text-danger">상담내역</a>
+							</c:when>
+							<c:otherwise>
+								<a href="" style="display: inline-block;font-weight: bold;" class="text-danger">상담내역</a>
+							</c:otherwise>
+						</c:choose>에서 확인하실 수 있습니다.</li>
+						<li class="text-danger"><i class="bi bi-arrow-right-short"></i>프로젝트 정보 및 공모전 관련 문의는 해당 문의에 남기셔야 빠른 답변이 가능합니다.</li>
+						<li><i class="bi bi-arrow-right-short"></i>사기접수시 비회원으로 문의하시면 정보보호로 인해 일부만 확인가능하십니다.</li>
+						<li><i class="bi bi-arrow-right-short"></i>취소/신청/게시물보기는 마이페이지에서 확인 하실 수 있습니다.</li>
+						<li><i class="bi bi-arrow-right-short"></i>로그인 후 이용하실경우 첨부파일을 넣을 수가 있습니다.</li>
 					</ul>
 					<!-- 폼돌아가는구간 -->
 					<div class="section_form">
 						<div class="harf_area">
 							<header class="n-section-title">
-								<h3 class="tit">문의 작성</h3>
+								<i class="bi bi-info-circle" style="font-size: 2em;padding-right: 10px;"></i><span style="font-size: 20px;">문의 작성</span>
 							</header>
 							<div class="form-group">
 						     	<label for="category" class="form-label mt-4">문의유형</label>
@@ -187,7 +195,7 @@
 			$('#f1 [name=category]').on('change', function() {
 
 				if ($(this).val() == '22') {
-					$('textarea[name=qnaContent]').text('');
+					$('textarea[name=qnaContent]').text('정확한 답변을 드리기 위해, 아래 상세 내용들이 필요합니다. 1. 오류 발생 일시:2. 접속한 환경(모바일, PC 등):3. PC 환경이었다면 브라우저 종류(익스플로러, 크롬 등):4. 모바일 환경이었다면 OS 버전(안드로이드 11, iOS 14 등):5. 상세한 오류 발생 내용:');
 					
 				} else {
 					$('textarea[name=qnaContent]').text('');
