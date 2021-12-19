@@ -81,25 +81,51 @@
             <div class="main_wrap">
                 <div class="titleFlexBox">
                     <p class="titleText">프로젝트 개요</p>
-                    <a data-bs-toggle="modal" href="#projectEnd"><button type="button" class="btn btn-primary" id="closeProjectBtn">프로젝트 종료</button></a>
+                    <c:choose>
+                    	<c:when test="${sessionScope.m.memberId eq pt.projectReader && projectStatus ne 3}">
+                    		<a data-bs-toggle="modal" href="#projectEnd"><button type="button" class="btn btn-primary" id="closeProjectBtn">프로젝트 종료</button></a>
+                    	</c:when>
+                    	<c:when test="${sessionScope.m.memberId ne pt.projectReader && projectStatus eq 3 && pt.writeReviewCheck eq 0}">
+                    		<a data-bs-toggle="modal" href="#writeReview"><button type="button" class="btn btn-primary" id="closeProjectBtn">후기 작성</button></a>
+                    	</c:when>
+                    	<c:when test="${sessionScope.m.memberId ne pt.projectReader && projectStatus eq 3 && pt.writeReviewCheck ne 0}">
+                    		<button type="button" class="btn btn-primary" id="closeProjectBtn" disabled="disabled">프로젝트 종료</button>
+                    	</c:when>
+                    </c:choose>
                 </div>
                 <div class="titleLine"></div>
                 <div class="projectInfoFlexBox">
                     <div class="projectInfoLine1">
-                        <form action="#" method="post">
+                        <form action="/updateProjectOutline.do" method="post">
                             <div class="form-group">
                                 <label class="col-form-label col-form-label-lg mt-4" for="inputLarge" >프로젝트 이름</label>
-                                <input class="form-control form-control-lg" type="text" placeholder="${pt.projectName}" id="inputLarge">
+                                <c:choose>
+                                	<c:when test="${sessionScope.m.memberId eq pt.projectReader}">
+                                		<input class="form-control form-control-lg" type="text" placeholder="${pt.projectName}" id="inputLarge" name="projectName">
+                                	</c:when>
+                                	<c:otherwise>
+                                		<input class="form-control form-control-lg" type="text" placeholder="${pt.projectName}" id="inputLarge" readonly="readonly">
+                                	</c:otherwise>
+                                </c:choose>
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label col-form-label-lg mt-4" for="inputLarge" >프로젝트 목표</label>
-                                <input class="form-control form-control-lg" type="text" placeholder="${pt.projectGoal}" id="inputLarge">
+                                <c:choose>
+                                	<c:when test="${sessionScope.m.memberId eq pt.projectReader}">
+                                		<input class="form-control form-control-lg" type="text" placeholder="${pt.projectGoal}" id="inputLarge" name="projectGoal">
+                                	</c:when>
+                                	<c:otherwise>
+                                		<input class="form-control form-control-lg" type="text" placeholder="${pt.projectGoal}" id="inputLarge" readonly="readonly">
+                                	</c:otherwise>
+                                </c:choose>
                             </div>
                             <div class="projectLanguageBox">
                                 <div class="projectLanguageFlexBox">
                                     <p class="infoLineText1">사용 언어</p>
-                                    <button type="button" class="btn btn-primary btn-sm" id="updateLabel1">수정</button>
-                                    <button type="button" class="btn btn-primary btn-sm" id="updateLabel2">취소</button>
+                                    <c:if test="${sessionScope.m.memberId eq pt.projectReader}">
+                                    	<button type="button" class="btn btn-primary btn-sm" id="updateLabel1">수정</button>
+                                    	<button type="button" class="btn btn-primary btn-sm" id="updateLabel2">취소</button>
+                                    </c:if>
                                 </div>
                                 <div class="languageBox">
                                 	<c:forEach items="${pdLangList}" var="li" varStatus="i">
@@ -132,8 +158,10 @@
                             <div class="projectLeader">
                                 <div class="projectLanguageFlexBox">
                                     <p class="infoLineText1">프로젝트 리더</p>
-                                    <button type="button" class="btn btn-primary btn-sm" id="updateLeaderLabel1">수정</button>
-                                    <button type="button" class="btn btn-primary btn-sm" id="updateLeaderLabel2">취소</button>
+                                    <c:if test="${sessionScope.m.memberId eq pt.projectReader}">
+                                    	<button type="button" class="btn btn-primary btn-sm" id="updateLeaderLabel1">수정</button>
+                                    	<button type="button" class="btn btn-primary btn-sm" id="updateLeaderLabel2">취소</button>
+                                    </c:if>
                                 </div>
                                 <div class="leaderInfoBox">
                                 	<c:choose>
@@ -172,7 +200,7 @@
                                 <div id="selectLeaderBox">
                                     <div class="form-group">
                                         <label for="exampleSelect1" class="form-label mt-4">프로젝트 리더 선택</label>
-                                        <select class="form-select" id="exampleSelect1" style="width: 400px;">
+                                        <select class="form-select" id="exampleSelect1" style="width: 400px;" name="projectReader">
                                             <option><p>${pt.projectReader}</p></option>
                                             <c:forEach items="${memberList }" var="ml">
                                             	<c:if test="${ml.memberId ne pt.projectReader}">
@@ -223,7 +251,14 @@
 	                                            </div>
 	                                            <div class="rollBox">
 	                                                <div class="form-group">
-	                                                    <input class="form-control form-control-sm" type="text" id="inputSmall" name="crueRoll" value="${ml[i].memberRole }">
+	                                                	<c:choose>
+	                                                		<c:when test="${ml[i].memberId eq sessionScope.m.memberId}">
+	                                                			<input class="form-control form-control-sm" type="text" id="inputSmall" name="crueRoll" value="${ml[i].memberRole }">
+	                                                		</c:when>
+	                                                		<c:otherwise>
+	                                                			<input class="form-control form-control-sm" type="text" id="inputSmall" value="${ml[i].memberRole }" readonly="readonly">
+	                                                		</c:otherwise>
+	                                                	</c:choose>
 	                                                </div>
 	                                            </div>
 	                                        </div> 
@@ -264,7 +299,14 @@
 	                                            </div>
 	                                            <div class="rollBox">
 	                                                <div class="form-group">
-	                                                    <input class="form-control form-control-sm" type="text" id="inputSmall" name="crueRoll" value="${ml[i+1].memberRole }">
+	                                                	<c:choose>
+	                                                		<c:when test="${ml[i+1].memberId eq sessionScope.m.memberId}">
+	                                                			<input class="form-control form-control-sm" type="text" id="inputSmall" name="crueRoll" value="${ml[i+1].memberRole }">
+	                                                		</c:when>
+	                                                		<c:otherwise>
+	                                                			<input class="form-control form-control-sm" type="text" id="inputSmall" value="${ml[i+1].memberRole }" readonly="readonly">
+	                                                		</c:otherwise>
+	                                                	</c:choose>
 	                                                </div>
 	                                            </div>
 	                                        </div> 
@@ -293,6 +335,8 @@
                             </div>
                             <div class="areaLine"></div>
                             <div class="submitBtnArea">
+                            	<input type="hidden" name="sessionMemberNo" value="${sessionScope.m.memberId}">
+                            	<input type="hidden" name="projectNo" value="${pt.projectNo}">
                                 <button type="submit" class="btn btn-primary">수정</button>
                             </div>
                         </form>
@@ -362,6 +406,9 @@
                         <p style="font-weight: 900;"> &#10004; 후기는 익명으로 등록됩니다.</p>
                         <div style="border-bottom: 1px solid #90d1b4; margin-bottom: 60px;"></div>
 						<c:forEach items="${memberList}" var="ml" varStatus="i">
+							<c:if test="${ml.teamMemberNo}">
+							
+							</c:if>
 							<div style="display: flex; margin-left: 50px; margin-top: 50px;">
 	                            <div style="display: flex; flex-direction: column; margin-right: 30px; margin-top: 10px;">
 	                            <c:choose>
@@ -407,12 +454,16 @@
 	                                    <textarea class="form-control" id="exampleTextarea" rows="3" maxlength="250" name="reviewContent"></textarea>
 	                                </div>
 	                            </div>
+	                            <input type="hidden" name="projectNo" value="${ml.projectNo}">
+	                            <input type="hidden" name="teamMemberNo" value="${ml.teamMemberNo}">
 	                        </div>
 						</c:forEach>
                         <div style="border-bottom: 1px solid #90d1b4; margin-bottom: 10px; margin-top: 40px;"></div>
                         <div style="text-align: center; padding-top: 10px; margin-top: 40px; margin-bottom: 40px;">
-                        	<input type="hidden" name="projectNo" value="${ml.projectNo}">
-                        	<input type="hidden" name="teamMemberNo" value="${ml.teamMemberNo}">
+                        	<input type="hidden" name="backMemberNo" value="${sessionScope.m.memberNo}">
+                        	<input type="hidden" name="backProjectNo" value="${pt.projectNo}">
+                        	<input type="hidden" name="sessionMemberId" value="${sessionScope.m.memberId}">
+                        	<input type="hidden" name="projectReader" value="${pt.projectReader}">
                             <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 150px; margin-right: 15px;">후기작성 완료</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
                         </div>

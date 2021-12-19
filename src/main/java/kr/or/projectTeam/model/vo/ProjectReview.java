@@ -9,5 +9,6 @@ public class ProjectReview {
 	private int projectNo;
 	private int reviewPoint;
 	private String reviewContent;
+	private int reviewWriter;
 	private String enrollDate;
 }

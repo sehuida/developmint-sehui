@@ -306,5 +306,17 @@ public class ProjectTeamDao {
 		return sqlSession.delete("projectTeam.deleteShortcut", shortcutNo);
 	}
 
+	public int insertReview(Map<String, Object> map) {
+		return sqlSession.insert("projectTeam.insertReview", map);
+	}
+
+	public int reviewMemberPointUpdate(Map<String, Object> map) {
+		return sqlSession.update("projectTeam.reviewMemberPointUpdate", map);
+	}
+
+	public int endProject(Map<String, Object> map) {
+		return sqlSession.update("projectTeam.endProject", map);
+	}
+
 	
 }
