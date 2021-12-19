@@ -158,5 +158,9 @@ public class ShareService {
 	public Share selectOneBoard(int boardNo) {
 		return dao.selectBoardView(boardNo);
 	}
+	@Transactional
+	public int updateShareBoard(Share s) {
+		return dao.updateBoard(s);
+	}
 
 }
