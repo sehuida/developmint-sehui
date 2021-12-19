@@ -188,7 +188,6 @@ b {
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<div id="map" style="width:500px;height:400px;"></div>
 	<div class="contain">
 		<div class="companyInfoHeader">
 			<div class="companyImg">
@@ -362,19 +361,18 @@ b {
 						<li>업종</li>
 						<li>대표자명</li>
 						<li>홈페이지</li>
-						<li>기업주소</li>
 						<li>사업내용</li>
+						<li>기업주소</li>
 					</ul>
 					<ul class="info info2">
 						<li>${com.category }</li>
 						<li>${com.ceo }</li>
 						<li><a href="#" style="text-decoration: none; color: #222222;">http://www.homepage.co.kr</a></li>
+						<li>내용내용</li>
 						<li>
 							${com.address }
-
-							<div id="map" style="width:500px;height:400px;"></div>
 						</li>
-						<li>업종</li>
+						<div id="map" style="width:500px;height:400px;"></div>
 					</ul>
 				</c:otherwise>
 			</c:choose>
