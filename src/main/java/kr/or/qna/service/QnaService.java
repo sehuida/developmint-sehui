@@ -81,6 +81,22 @@ public class QnaService {
 		return dao.myCounselOne(memberId);
 	}
 
+	public ArrayList<Qna> searchBox1(int category, int state) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("category", category);
+		map.put("state", state);
+		return dao.searchBox1(map);
+	}
+
+	public ArrayList<nonQna> searchBox2(int category, int state) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("category", category);
+		map.put("state", state);
+		return dao.searchBox2(map);
+	}
+
+	
+
 
 
 }

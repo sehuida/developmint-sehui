@@ -57,6 +57,19 @@ public class QnaDao {
 		return (ArrayList<Qna>)list;
 	}
 
+
+	public ArrayList<Qna> searchBox1(HashMap<String, Object> map) {
+		List<Qna> list = sqlsession.selectList("qna.searchBox1",map);
+		return (ArrayList<Qna>)list;
+	}
+
+
+	public ArrayList<nonQna> searchBox2(HashMap<String, Object> map) {
+		List<nonQna> list = sqlsession.selectList("qna.searchBox2",map);
+		return (ArrayList<nonQna>)list;
+	}
+
+
 	
 	
 }

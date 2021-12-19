@@ -41,11 +41,11 @@
 				<button type="button" class="btn btn-primary">비회원</button> -->
 				</div>
 				<div class="searchBox">
-					<form action="searhBox.do" class="searchBox-frm">
+					<form action="/searhBox.do" class="searchBox-frm">
 						<div class="form-group searchBox-1">
 					     	<label for="category" class="form-label mt-1 text-white">문의유형</label>
 					    	<select class="form-select" id="category" name="category" >
-						      	<option value="">문의유형 선택</option>
+						      	<option value="0">문의유형 선택</option>
 								<option value="7">로그인관련</option>
 								<option value="8">계정관련</option>
 								<option value="9">결제관련</option>
@@ -61,13 +61,14 @@
 					  	</div>
 					  	<div class="form-group searchBox-2">
 					     	<label for="qnaAnswer" class="form-label mt-1 text-white">답변상태</label>
-					    	<select class="form-select" id="qnaAnswer" name="qnaAnswer" >
-						      	<option value="">전체</option>
+					    	<select class="form-select" id="state" name="state" >
+						      	<option value="0">전체</option>
 						      	<option value="1">미답변</option>
 								<option value="2">답변</option>
 				     		</select>
 					  	</div>
-					  	<button class="btn btn-secondary">검색</button>
+					  	<input type="hidden" value="${type }" name="type" id="type">
+					  	<button type="submit" class="btn btn-secondary">검색</button>
 					</form>
 				</div>
 				<div class="contents t2">

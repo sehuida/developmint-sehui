@@ -37,7 +37,7 @@
 		    "qna_title"as qnaTitle,
 		    "qna_content" as qnaContent,
 		    "reg_date"as regDate,
-		    "qna_answer" as qnaAnwer,
+		    "qna_answer" as qnaAnswer,
 		    "answer_date" as answerDate
 		from non_member_qna order by 1 desc
 	</select>
@@ -63,5 +63,87 @@
 		    "qna_answer" as qnaAnswer,
 		    "answer_date"as answerDate
 		from qna where "member_id"=#{memberId} order by 1 desc)q
+	</select>
+	<select id="searchBox1" parameterType="map" resultType="q">
+		select q.* from(select "qna_no"as qnaNo,
+		    "member_id"as memberId,
+		    "category"as category,
+		    "qna_title"as qnaTitle,
+		    "qna_content"as qnaContent,
+		    "reg_date"as regDate,
+		    "filename"as filename,
+		    "filepath"as filepath,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date"as answerDate
+		from qna order by 1 desc)q 
+		<choose>
+			<when test="category==0">
+				<trim prefix="where">
+					<if test="state==0">
+						
+					</if>
+					<if test="state == 1">
+						qnaAnswer is null		
+					</if>
+					<if test="state == 2">
+						qnaAnswer is not null
+					</if>
+				</trim>
+			</when>
+			<otherwise>
+				<trim prefix="where">
+					<if test="state==0">
+						category=#{category}
+					</if>
+					<if test="state == 1">
+						category=#{category} and qnaAnswer is null		
+					</if>
+					<if test="state == 2">
+						category=#{category} and qnaAnswer is not null
+					</if>
+				</trim>
+			</otherwise>
+		</choose>
+	</select>
+	<select id="searchBox2" parameterType="map" resultType="nq">
+		select nq.* from(select 
+		    "non_qna_no"as nonQnaNo,
+		    "category" as category,
+		    "email" as email,
+		    "qna_pw"as qnaPw,
+		    "qna_title"as qnaTitle,
+		    "qna_content" as qnaContent,
+		    "reg_date"as regDate,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date" as answerDate
+		from non_member_qna order by 1 desc)nq
+		<choose>
+			<when test="category==0">
+				<trim prefix="where">
+					<if test="state==0">
+						
+					</if>
+					<if test="state == 1">
+						qnaAnswer is null		
+					</if>
+					<if test="state == 2">
+						qnaAnswer is not null
+					</if>
+				</trim>
+			</when>
+			<otherwise>
+				<trim prefix="where">
+					<if test="state==0">
+						category=#{category}
+					</if>
+					<if test="state == 1">
+						category=#{category} and qnaAnswer is null		
+					</if>
+					<if test="state == 2">
+						category=#{category} and qnaAnswer is not null
+					</if>
+				</trim>
+			</otherwise>
+		</choose>
 	</select>
 </mapper>

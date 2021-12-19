@@ -244,4 +244,18 @@ public class QnaController {
 		return "member/swalMsg";
 	}
 	
+	@RequestMapping(value="/searhBox.do")
+	public String searchBox(Model model, int type, int category, int state) {
+		if(type==1) {
+			ArrayList<Qna> list = service.searchBox1(category,state);
+			model.addAttribute("type",type);
+			model.addAttribute("adlist",list);
+		}else if(type==2) {
+			ArrayList<nonQna> list = service.searchBox2(category,state);
+			model.addAttribute("type",type);
+			model.addAttribute("adlist",list);
+		}
+		return "qna/counselAdmin";
+	}
+	
 }
