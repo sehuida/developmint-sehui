@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.ResultMap;
+import org.omg.PortableInterceptor.NON_EXISTENT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -118,12 +119,18 @@ public class QnaController {
 	public String insertCounsel(nonQna nq, HttpServletRequest request, Model model) {
 		int result = service.insertCounselNonQna(nq);
 		if(result>0) {
-			model.addAttribute("msg","1:1 Q&A 신청 완료");	
+			model.addAttribute("title", "1:1 Q&A 신청 성공!");
+			model.addAttribute("msg", "답변은 비회원 전용 리스트를 확인하시면 됩니다.");
+			model.addAttribute("loc", "/n_counsel.do");
+			model.addAttribute("icon", "success");	
 		}else {
-			model.addAttribute("msg","1:1 Q&A 신청 실패");
+			model.addAttribute("title", "1:1 Q&A 신청 실패");
+			model.addAttribute("msg", "답변보내기에 실패하셨습니다.");
+			model.addAttribute("loc", "/n_counsel.do");
+			model.addAttribute("icon", "warning");
 		}
-		model.addAttribute("loc","/n_counsel.do");
-		return "common/msg";
+		//model.addAttribute("loc","/n_counsel.do");
+		return "member/swalMsg";
 	}
 	
 	@RequestMapping(value="/counsel_save2.do")
@@ -179,21 +186,75 @@ public class QnaController {
 		}
 		int result = service.insertCounselQna(m,q, list);
 		if(result == -1||result != list.size()) {
-			model.addAttribute("msg","등록실패");
+			model.addAttribute("title", "1:1 Q&A 신청 성공!");
+			model.addAttribute("msg", "상담내역에 등록되었습니다. 확인해주세요.");
+			model.addAttribute("loc", "/n_counsel.do");
+			model.addAttribute("icon", "success");
 		}else {
-			model.addAttribute("msg","등록성공");
+			model.addAttribute("title", "1:1 Q&A 신청 실패");
+			model.addAttribute("msg", "상담 보내기에 실패하셨습니다. 관리자에 문의해주세요");
+			model.addAttribute("loc", "/n_counsel.do");
+			model.addAttribute("icon", "warning");
 		}
-		model.addAttribute("loc","/");
-		return "common/msg";
+		//model.addAttribute("loc","/");
+		return "member/swalMsg";
 	}
 	
 	@RequestMapping(value="/myCounsel.do")
-	public String myCounsel() {
+	public String myCounsel(@SessionAttribute Member m, Model model) {
+		ArrayList<Qna> list = service.myCounselOne(m.getMemberId());
+		model.addAttribute("list",list);
 		return "qna/counselUser";
 	}
 	
+	/*
+	 * @RequestMapping(value="/adminCounsel.do") public String adminCounsel(Model
+	 * model) { ArrayList<Qna> adlist = service.counselList();
+	 * model.addAttribute("adlist",adlist); return "qna/counselAdmin"; }
+	 */
+	
 	@RequestMapping(value="/adminCounsel.do")
-	public String adminCounsel() {
+	public String adminCounsel(Model model, int type) {
+		if(type==1) {
+			ArrayList<Qna> adlist = service.counselList();
+			model.addAttribute("type",type);
+			model.addAttribute("adlist",adlist);
+		}else if(type==2) {
+			ArrayList<nonQna> adlist = service.counselList2();
+			model.addAttribute("type",type);
+			model.addAttribute("adlist",adlist);
+		}
+		return "qna/counselAdmin";
+	}
+	
+	@RequestMapping(value="/updateCounsel.do")
+	public String updateCounsel(int num, int type, String qnaAnswer, Model model) {
+		int result = service.updateCounsel(qnaAnswer, type, num);
+		if(result>0) {
+			model.addAttribute("title", "답변성공!");
+			model.addAttribute("msg", "답변상태가 변경되었습니다.");
+			model.addAttribute("loc", "/adminCounsel.do?type="+type);
+			model.addAttribute("icon", "success");
+		}else {
+			model.addAttribute("title", "답변실패");
+			model.addAttribute("msg", "답변보내기에 실패하셨습니다.");
+			model.addAttribute("loc", "adminCounsel.do?type="+type);
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";
+	}
+	
+	@RequestMapping(value="/searhBox.do")
+	public String searchBox(Model model, int type, int category, int state) {
+		if(type==1) {
+			ArrayList<Qna> list = service.searchBox1(category,state);
+			model.addAttribute("type",type);
+			model.addAttribute("adlist",list);
+		}else if(type==2) {
+			ArrayList<nonQna> list = service.searchBox2(category,state);
+			model.addAttribute("type",type);
+			model.addAttribute("adlist",list);
+		}
 		return "qna/counselAdmin";
 	}
 	

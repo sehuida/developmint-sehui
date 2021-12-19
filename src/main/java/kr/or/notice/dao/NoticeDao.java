@@ -65,4 +65,9 @@ public class NoticeDao {
 		return (ArrayList<Rnum>)rlist;
 	}
 
+	public int noticeCountUp(int noticeNo) {
+		// TODO Auto-generated method stub
+		return sqlsession.update("notice.noticeCountUp", noticeNo);
+	}
+
 }

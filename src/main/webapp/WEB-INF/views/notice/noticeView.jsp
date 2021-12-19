@@ -33,7 +33,7 @@
 					<!-- 불러온 글제목 -->
 					<h4 style="font-weight: bold;border-bottom: 1px solid #ddd;">${n.noticeTitle }</h4>
 					<!-- 작성일, 읽은 수(테이블 컬럼 추가 해야함) -->
-					<span>${n.regDate } / View : ${readCount } /</span>
+					<span>${n.regDate } / View : ${n.readCount } </span>
 					<p>
 						<!-- 첨부파일테이블로 넣어서 사용 -->
 						<c:if test="${not empty n.filename }">
