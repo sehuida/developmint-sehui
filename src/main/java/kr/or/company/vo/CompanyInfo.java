@@ -19,5 +19,7 @@ public class CompanyInfo {
 	private String content;
 	private int businessNo;
 	private String filepath;
+	private String writeDate;
+	private int announceNo;
 
 }
