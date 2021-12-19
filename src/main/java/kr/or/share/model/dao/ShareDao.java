@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.comment.vo.Comment;
+import kr.or.comment.vo.Report;
 import kr.or.share.model.vo.Share;
 
 @Repository
@@ -73,5 +74,9 @@ public class ShareDao {
 
 	public int updateComment(Comment c) {
 		return sqlSession.update("share.updateComment",c);
+	}
+
+	public int shareReport(Report rp) {
+		return sqlSession.insert("share.shareReport",rp);
 	}
 }
