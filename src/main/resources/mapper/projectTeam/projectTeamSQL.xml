@@ -896,8 +896,8 @@
 		</foreach>
   	</update>
   	
-  	<update id="returnTeamMember" parameterType="_int">
+  	<update id="endProject" parameterType="_int">
  		update project set project_status = 3 where project_no = #{backProjectNo}
- </update>
+ 	</update>
   	
 </mapper>
