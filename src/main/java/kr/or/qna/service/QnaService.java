@@ -1,6 +1,7 @@
 package kr.or.qna.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,59 @@ public class QnaService {
 		}
 		return result;
 	}
+
+
+	public ArrayList<Qna> counselList() {
+		return dao.counselList();
+	}
+
+
+	public ArrayList<nonQna> counselList2() {
+		// TODO Auto-generated method stub
+		return dao.counselList2();
+	}
+
+
+	@Transactional
+	public int updateCounsel(String qnaAnswer, int type, int num) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("qnaAnswer", qnaAnswer);
+		map.put("type", type);
+		map.put("num", num);
+		
+		int result = dao.updateCounsel(map);
+		/*
+		int result=0;
+		if(type==1) {
+			result = dao.updateCounsel1(qnaAnswer);
+		}else if(type==2){
+			result = dao.updateCounsel2(qnaAnswer);
+		}
+		*/
+		return result;
+	}
+
+	public ArrayList<Qna> myCounselOne(String memberId) {
+		// TODO Auto-generated method stub
+		return dao.myCounselOne(memberId);
+	}
+
+	public ArrayList<Qna> searchBox1(int category, int state) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("category", category);
+		map.put("state", state);
+		return dao.searchBox1(map);
+	}
+
+	public ArrayList<nonQna> searchBox2(int category, int state) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("category", category);
+		map.put("state", state);
+		return dao.searchBox2(map);
+	}
+
+	
+
+
 
 }

@@ -15,4 +15,135 @@
 	<insert id="insertFile" parameterType="pfv">
 		insert into attachment values(atm_seq.nextval,#{memberNo}, 6,#{boardNo}, #{fileName}, #{filePath})
 	</insert>
+	<select id="counselList" parameterType="q" resultType="q">
+		select "qna_no"as qnaNo,
+		    "member_id"as memberId,
+		    "category"as category,
+		    "qna_title"as qnaTitle,
+		    "qna_content"as qnaContent,
+		    "reg_date"as regDate,
+		    "filename"as filename,
+		    "filepath"as filepath,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date"as answerDate
+		from qna order by 1 desc
+	</select>
+	<select id="counselList2" parameterType="nq" resultType="nq">
+		select 
+		    "non_qna_no"as nonQnaNo,
+		    "category" as category,
+		    "email" as email,
+		    "qna_pw"as qnaPw,
+		    "qna_title"as qnaTitle,
+		    "qna_content" as qnaContent,
+		    "reg_date"as regDate,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date" as answerDate
+		from non_member_qna order by 1 desc
+	</select>
+	<update id="updateCounsel" parameterType="map">
+		<choose>
+			<when test="type==1">
+				update qna set "qna_answer"=#{qnaAnswer}, "answer_date"=to_char(sysdate,'YYYY-MM-DD HH24:MI') where "qna_no"=#{num}
+			</when>
+			<otherwise>
+				update non_member_qna set "qna_answer"=#{qnaAnswer}, "answer_date"=to_char(sysdate,'YYYY-MM-DD HH24:MI') where "non_qna_no"=#{num}
+			</otherwise>
+		</choose>
+	</update>
+	<select id="myCounselOne" parameterType="string" resultType="q">
+		select ROWNUM as rnum, q.* from(select 
+		    "qna_no" as qnaNo,
+		    "category"as category,
+		    "qna_title"as qnaTitle,
+		    "qna_content"as qnaContent,
+		    "reg_date"as regDate,
+		    "filename"as filename,
+		    "filepath"as filepath,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date"as answerDate
+		from qna where "member_id"=#{memberId} order by 1 desc)q
+	</select>
+	<select id="searchBox1" parameterType="map" resultType="q">
+		select q.* from(select "qna_no"as qnaNo,
+		    "member_id"as memberId,
+		    "category"as category,
+		    "qna_title"as qnaTitle,
+		    "qna_content"as qnaContent,
+		    "reg_date"as regDate,
+		    "filename"as filename,
+		    "filepath"as filepath,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date"as answerDate
+		from qna order by 1 desc)q 
+		<choose>
+			<when test="category==0">
+				<trim prefix="where">
+					<if test="state==0">
+						
+					</if>
+					<if test="state == 1">
+						qnaAnswer is null		
+					</if>
+					<if test="state == 2">
+						qnaAnswer is not null
+					</if>
+				</trim>
+			</when>
+			<otherwise>
+				<trim prefix="where">
+					<if test="state==0">
+						category=#{category}
+					</if>
+					<if test="state == 1">
+						category=#{category} and qnaAnswer is null		
+					</if>
+					<if test="state == 2">
+						category=#{category} and qnaAnswer is not null
+					</if>
+				</trim>
+			</otherwise>
+		</choose>
+	</select>
+	<select id="searchBox2" parameterType="map" resultType="nq">
+		select nq.* from(select 
+		    "non_qna_no"as nonQnaNo,
+		    "category" as category,
+		    "email" as email,
+		    "qna_pw"as qnaPw,
+		    "qna_title"as qnaTitle,
+		    "qna_content" as qnaContent,
+		    "reg_date"as regDate,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date" as answerDate
+		from non_member_qna order by 1 desc)nq
+		<choose>
+			<when test="category==0">
+				<trim prefix="where">
+					<if test="state==0">
+						
+					</if>
+					<if test="state == 1">
+						qnaAnswer is null		
+					</if>
+					<if test="state == 2">
+						qnaAnswer is not null
+					</if>
+				</trim>
+			</when>
+			<otherwise>
+				<trim prefix="where">
+					<if test="state==0">
+						category=#{category}
+					</if>
+					<if test="state == 1">
+						category=#{category} and qnaAnswer is null		
+					</if>
+					<if test="state == 2">
+						category=#{category} and qnaAnswer is not null
+					</if>
+				</trim>
+			</otherwise>
+		</choose>
+	</select>
 </mapper>

@@ -71,6 +71,7 @@ public class NoticeService {
 	}
 
 	public Notice selectOneNotice(int noticeNo) {
+		int result = dao.noticeCountUp(noticeNo);
 		Notice n = dao.selectOneNotice(noticeNo);
 		return n;
 	}

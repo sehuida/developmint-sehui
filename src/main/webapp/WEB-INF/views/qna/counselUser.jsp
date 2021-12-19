@@ -9,6 +9,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <link rel="stylesheet" href="/resources/css/notice/noticeList.css">
 <link rel="stylesheet" href="/resources/css/notice/qnalist.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -27,69 +30,82 @@
 				<header class="n-section-title">
 					<h1 class="tit">1:1문의</h1>
 				</header>
-				
-					<form name="searchForm" id="searchForm"  method="get" action="/counsel">
-				<input type="hidden" name="period" value=""/>
-				<input type="hidden" name="page" value="1"/>
+				<form name="searchForm" id="searchForm"  method="get" action="/counsel">
 				<div class="n-table-filter">
-					<div class="n-radio-tab">
-						<input type="radio" id="radioTabGuide0" name="radioTabGuide" onClick="setPeriod(this,'1week');" >
-						<label for="radioTabGuide0">1주일</label>
-
-						<input type="radio" id="radioTabGuide1" name="radioTabGuide" onClick="setPeriod(this,'1month');" >
-						<label for="radioTabGuide1">1개월</label>
-
-						<input type="radio" id="radioTabGuide2" name="radioTabGuide" onClick="setPeriod(this,'3month');" >
-						<label for="radioTabGuide2">3개월</label>
-
-						<input type="radio" id="radioTabGuide3" name="radioTabGuide" onClick="setPeriod(this,'');" checked>
-						<label for="radioTabGuide3">전체 시기</label>
+					<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+					  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked=""  onClick="setPeriod(this,'1week');">
+					  <label class="btn btn-outline-primary" for="btnradio1">1주일</label>
+					  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked="" onClick="setPeriod(this,'1month');">
+					  <label class="btn btn-outline-primary" for="btnradio2">1개월</label>
+					  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" checked="" onClick="setPeriod(this,'3month');">
+					  <label class="btn btn-outline-primary" for="btnradio3">3개월</label>
+					  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" checked="" onClick="setPeriod(this,'');">
+					  <label class="btn btn-outline-primary" for="btnradio3">전체 시기</label>
 					</div>
-
-                    <div class="n-datepicker sb">
-                        <input type="text" class="n-input" name="dt_fr" value="" placeholder="-" onblur="checkDateFormat(this);">
+					<div class="form-group n-datepicker sb">
+                        <input type="text" class="n-input form-control" name="dt_fr" value="" placeholder="-" onblur="checkDateFormat(this);">
                     </div>
                     <div class="n-datepicker">
-                        <input type="text" class="n-input" name="dt_to" value="" placeholder="-" onblur="checkDateFormat(this);">
+                        <input type="text" class="n-input form-control" name="dt_to" value="" placeholder="-" onblur="checkDateFormat(this);">
                     </div>
-
-					<div class="n-select">
-						<select name="state">
-							<option value="">전체 보기</option>
-							<option value="1" >답변 대기</option>
-							<option value="10" >접수</option>
-							<option value="20" >업체 문의 중</option>
-							<option value="30" >물품 도착 확인</option>
-							<option value="40" >교환 상품 발송</option>
-							<option value="50" >답변 완료</option>
-						</select>
-					</div>
-					<button type="button" class="n-btn btn-sm btn-accent" onclick="search();">조회</button>
+					<div class="form-group searchBox-2">
+				     	<label for="qnaAnswer" class="form-label mt-1 text-white">답변상태</label>
+				    	<select class="form-select" id="qnaAnswer" name="qnaAnswer" >
+					      	<option value="">전체</option>
+					      	<option value="1">미답변</option>
+							<option value="2">답변</option>
+			     		</select>
+				  	</div>
+				  	<button class="btn btn-secondary">조회</button>
 				</div>
 				</form>
-			
-				<table class="n-table table-col">
-					<colgroup>
+				<table class="table">
+					<%-- <colgroup>
 						<col style="width:12.6%">
 						<col style="width:*">
 						<col style="width:12.6%">
 						<col style="width:12.6%">
-					</colgroup>
+					</colgroup> --%>
 					<thead>
 					<tr>
-						<th scope="col">문의 유형</th>
-						<th scope="col">내용</th>
-						<th scope="col">작성일</th>
-						<th scope="col">처리 상태</th>
+						<th style="width: 10%">문의번호</th>
+						<th style="width: 15%">문의 유형</th>
+						<th style="text-align: center;">내용</th>
+						<th style="width: 10%">작성일</th>
+						<th style="width: 8%;">처리 상태</th>
 					</tr>
 					</thead>
 					<tbody>
-						
+						<c:forEach items="${list }" var="q" varStatus="i">
+							<tr>
+								<td>${i.count}</td>
+								<td >${q.type }</td>
+								<td ><a href="javascript:void(0);">${q.qnaTitle }</a></td>
+								<td>${q.regDate }</td>
+								<td>
+									<span>${q.state }</span>
+									<div>
+										<c:choose>
+											<c:when test="${not empty q.qnaAnswer}">
+												<%-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewModal${i.index }">내역보기</button> --%>
+												<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal${i.index }">내역보기</a>
+												
+											</c:when>
+											<c:otherwise>
+												<%-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#writeModal${i.index }" data-whatever="${adlist }">답변하기</button> --%>
+												<a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#writeModal${i.index }">답변하기</a>
+												
+											</c:otherwise>
+										</c:choose>
+									</div>
+								</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 				<div class="n-paging"></div>
 				<div class="n-btn-group">
-					<a href="/counsel" class="n-btn btn-accent">1:1 문의하기</a>
+					<a href="/n_counsel.do" class="btn btn-dark">1:1 문의하기</a>
 				</div>
 			</div>
 		</div>
