@@ -306,7 +306,7 @@
 		<c:when test="${not empty grList }">
 			<c:forEach items="${grList }" var="grl" varStatus="i">
 				<div style="display: flex; justify-content: center;">
-					<div class="review-one" style="width: 80%;">
+					<div class="review-one" style="width: 80%; margin: 20px;">
 						<ul>
 							<li><b><span style="color: rgb(78, 205, 196);">
 										고수 </span>${grl.gosuId }</b></li>
@@ -348,7 +348,7 @@
 				<c:forEach items="${grrList }" var="grl" varStatus="i">
 
 					<div style="display: flex; justify-content: center;">
-						<div class="review-one" style="width: 80%;">
+						<div class="review-one" style="width: 80%; margin: 20px;">
 							<ul>
 								<li><b><span style="color: rgb(78, 205, 196);">
 											고수 </span>${grl.gosuId }</b></li>

@@ -168,20 +168,20 @@
 	font-weight: 900;
 	text-align: center;
 	margin: 30px;
-	line-height:70px;
-	font-size: 40px;
+	line-height:60px;
+	font-size: 35px;
 	color: rgb(70, 147, 127);
 }
 
 .community-content h4 {
 	font-weight: 900;
-	font-size:30px;
+	font-size:25px;
 	margin-top:10px;
 	margin-bottom:20px;
 }
 
 .community-content h4>img{
-	width: 30px;
+	width: 25px;
 	margin-right: 10px;
 }
 .community-btn-wrap a {
@@ -212,7 +212,7 @@
 
 #community-guide:hover {
 	cursor: pointer;
-	color: #6cc3d5;
+	color: rgb(70, 147, 127);
 }
 </style>
 <body>

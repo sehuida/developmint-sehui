@@ -250,6 +250,9 @@
 	color: rgb(46, 108, 164);
 }
 
+.note-modal-footer{
+	height: 60px !important;
+}
 .jb-a:hover .jb-c {
 	display: block;
 }
