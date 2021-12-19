@@ -62,4 +62,16 @@ public class ShareDao {
 	public int updateBoard(Share s) {
 		return sqlSession.update("share.updateBoard",s);
 	}
+
+	public int insertRecomment(Comment c) {
+		return sqlSession.insert("share.insertRecomment",c);
+	}
+
+	public int deleteComment(Comment c) {
+		return sqlSession.delete("share.deleteComment",c);
+	}
+
+	public int updateComment(Comment c) {
+		return sqlSession.update("share.updateComment",c);
+	}
 }
