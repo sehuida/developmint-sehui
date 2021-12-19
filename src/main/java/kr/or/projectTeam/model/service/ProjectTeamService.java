@@ -625,5 +625,11 @@ public class ProjectTeamService {
 		ArrayList<Shortcuts> shortcutList = dao.shortcutList(projectNo);
 		return shortcutList;
 	}
+
+	@Transactional
+	public int deleteShortcut(int shortcutNo) {
+		int result = dao.deleteShortcut(shortcutNo);
+		return result;
+	}
 	
 }

@@ -849,5 +849,9 @@
 			from Shortcuts
 			where project_no = #{projectNo} 
 	</select>
+	
+	<delete id="deleteShortcut" parameterType="_int">
+			delete from Shortcuts where shortcut_no = #{shortcutNo}
+	</delete>
   
 </mapper>

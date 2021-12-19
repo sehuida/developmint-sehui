@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,16 +55,22 @@ input:focus, textarea:focus {
 	width: 50%;
 	margin-bottom: 100px;
 	align-self: flex-start;
+	padding: 20px;
 }
 
-.talk-one table img {
-	border-radius: 50%;
-	width: 60px;
-}
-
-.talk-one p {
+.talk-one tr:last-child td:last-child {
+	padding: 20px;
 	background-color: white;
 	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
+}
+
+.talk-me tr:last-child td:last-child {
+	background-color: rgb(183, 223, 205);
+}
+
+.talk-one table th img {
+	border-radius: 50%;
+	width: 60px;
 }
 
 .talk-one table {
@@ -70,12 +79,6 @@ input:focus, textarea:focus {
 
 .talk-me {
 	align-self: flex-end !important;
-}
-
-.talk-me p {
-	background-color: rgb(183, 223, 205);
-	padding: 30px;
-	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
 }
 
 .talk-sub {
@@ -152,6 +155,13 @@ input:focus, textarea:focus {
 .star-rating label:hover, .star-rating label:hover ~ label {
 	color: #fc0;
 }
+
+.summerContentTop {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+}
 </style>
 </head>
 <body>
@@ -219,8 +229,7 @@ input:focus, textarea:focus {
 										</tr>
 
 										<tr>
-											<td colspan="3" style="text-align: center;"><p
-													style="border: 1px solid gray; padding: 30px;">${gtl.talkContentBr }</p></td>
+											<td colspan="3">${gtl.talkContentBr }</td>
 										</tr>
 									</table>
 								</div>
@@ -254,8 +263,7 @@ input:focus, textarea:focus {
 											</c:if>
 										</tr>
 										<tr>
-											<td colspan="3" style="text-align: center;"><p
-													style="border: 1px solid gray; padding: 30px;">${gtl.talkContentBr }</p></td>
+											<td colspan="3">${gtl.talkContentBr }</td>
 										</tr>
 									</table>
 								</div>
@@ -475,8 +483,59 @@ input:focus, textarea:focus {
 
 
 	</div>
+
+	<script src="/resources/summernote/summernote-lite.js"></script>
+	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
+		$("#talkContent").summernote(
+				{
+					height : 500,
+					minHeight : 500,
+					maxHeight : 500,
+					lang : "ko-KR",
+					toolbar : [
+							// [groupName, [list of button]]
+							[ 'fontname', [ 'fontname' ] ],
+							[ 'fontsize', [ 'fontsize' ] ],
+							[
+									'style',
+									[ 'bold', 'italic', 'underline',
+											'strikethrough', 'clear' ] ],
+							[ 'color', [ 'forecolor', 'color' ] ],
+							[ 'table', [ 'table' ] ],
+							[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+							[ 'height', [ 'height' ] ],
+							[ 'insert', [ 'picture', 'link' ] ],
+							[ 'view', [ 'fullscreen', 'help' ] ] ],
+					fontNames : [ 'Arial', 'Arial Black', 'Comic Sans MS',
+							'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체',
+							'바탕체' ],
+					fontSizes : [ '8', '9', '10', '11', '12', '14', '16', '18',
+							'20', '22', '24', '28', '30', '36', '50', '72' ],
+					callbacks : {
+						onImageUpload : function(files) {
+							uploadImage(files[0], this);
+						}
+					}
+				});
+
+		function uploadImage(file, editor) {
+			data = new FormData();
+			data.append("file", file);
+			$.ajax({
+				url : "/gosuSummerImage.do",
+				type : "post", //file전송을 위해 ajax를 할떄는 type을 post로 해줘야한다
+				data : data,
+				enctype : 'multipart/form-data',
+				processData : false,
+				contentType : false,
+				success : function(data) {
+					$(editor).summernote("insertImage", data);
+				}
+			});
+		}
+
 		$("#talkBtnAjax").click(function() {
 			var talkContent = $("#talkContent").val();
 			var writer = $("#writer").val();

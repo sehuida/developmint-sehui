@@ -371,7 +371,9 @@ public class GosuService {
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
-		GosuListPageData glpd = new GosuListPageData(list, pageNavi, start);
+
+		ArrayList<Gosu> list2 = dao.selectGosuListAll();
+		GosuListPageData glpd = new GosuListPageData(list, pageNavi, start,list2);
 		return glpd;
 	}
 
@@ -606,7 +608,8 @@ public class GosuService {
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
-		GosuListPageData glpd = new GosuListPageData(list, pageNavi, start);
+		ArrayList<Gosu> list2 = dao.selectGosuListAll();
+		GosuListPageData glpd = new GosuListPageData(list, pageNavi, start,list2);
 		return glpd;
 	}
 
@@ -751,6 +754,12 @@ public class GosuService {
 		pageNavi += "</ul>";
 		GosuRequestListPageData glpd = new GosuRequestListPageData(list, pageNavi, start);
 		return glpd;
+	}
+
+
+	public GosuRequest gosuMemberRequestAjax(GosuRequestCost grc) {
+		GosuRequest gosuRequest = dao.gosuMemberRequestAjax(grc);	
+		return gosuRequest;
 	}
 
 

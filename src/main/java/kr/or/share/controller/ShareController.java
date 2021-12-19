@@ -201,7 +201,82 @@ public class ShareController {
 	@RequestMapping(value="/updateBoardFrm.do")
 	public String updateBoardFrm(int boardNo,Model model) {
 		Share s = service.selectOneBoard(boardNo);
-		model.addAttribute(s);
-		return "share/updateBoard";
+		model.addAttribute("s",s);
+		return "share/updateBoardFrm";
+	}
+	@RequestMapping(value="/updateShareBoard.do")
+	public String updateBoard(int status, String oldFilename, String oldFilepath,
+		Share s,HttpServletRequest request, MultipartFile files, Model model) {
+		if (!files.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/share/");
+			// 사용자가 올린 파일명
+			String filename = files.getOriginalFilename();
+			// 올린 파일명에서 확장자 앞까지 자르기
+			String onlyFilename = filename.substring(0, filename.indexOf("."));
+			// 올린 파일명에서 확장자 부분 자르기
+			String extention = filename.substring(filename.indexOf("."));
+
+			// 실제 업로드할 파일명
+			String filepath = null;
+			// 중복 파일 뒤에 붙여줄 숫자
+			int count = 0;
+			// 중복된 파일이 없을 때까지 반복(파일명 중복시 숫자 붙이는 코드)
+			while (true) {
+				if (count == 0) {
+					filepath = onlyFilename + extention;
+				} else {
+					filepath = onlyFilename + "_" + count + extention;
+				}
+				// 파일 경로안에 중복된 파일이 있는지 체크
+				File checkFile = new File(savePath + filepath);
+				if (!checkFile.exists()) {
+					break;
+				}
+				count++;
+			}
+
+			// 중복처리가 끝나면 파일 업로드
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = files.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			// 중복처리된 파일 이름 넣어주기
+			s.setFilepath(filepath);
+			s.setFilename(filename);
+			
+			// status의 상태에 따라 처리
+			if (status == 2) {
+				File delFile = new File(savePath + "/" + oldFilepath);
+				delFile.delete();
+			} else if (oldFilename != null) {
+				s.setFilename(oldFilename);
+				s.setFilepath(oldFilepath);
+			}
+		}
+
+		int result = service.updateShareBoard(s);
+
+		if (result > 0) {
+			model.addAttribute("title", "등록성공");
+			model.addAttribute("msg", "글 작성이 완료 되셨습니다.");
+			model.addAttribute("loc", "/shareList.do?reqPage=1&type=1");
+			model.addAttribute("icon", "success");
+		} else {
+			model.addAttribute("title", "변경실패");
+			model.addAttribute("msg", "글 작성에 실패하셨습니다.");
+			model.addAttribute("loc", "/shareList.do?reqPage=1&type=1");
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";
 	}
 }

@@ -3,6 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+
 <%
 	ArrayList<GosuProject> gProjectList = new ArrayList<GosuProject>();
 %>
@@ -15,7 +18,6 @@
 <style>
 .container * {
 	text-decoration: none;
-	color: black;
 }
 
 .container {
@@ -37,16 +39,17 @@
 	font-weight: bold;
 }
 
-.container h4 {
+.gosu-content-wrap>div>h4 ,.container>h4{
 	font-weight: bold;
 	color: black;
-	margin-top: 40px;
-	margin-bottom: 40px;
+	margin-top: 200px;
 	margin-bottom: 50px;
 }
 
 .gosu-content-wrap {
-	width: 900px;
+	width: 1200px;
+	padding:50px;
+	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
 }
 
 .gosu {
@@ -125,7 +128,7 @@
 .g-photo-one .g-b {
 	height: 30px;
 	overflow: hidden;
-	display: block;;
+	display: block;
 	text-overflow: ellipsis;
 	text-align: center;
 }
@@ -144,8 +147,10 @@
 	flex-wrap: wrap;
 }
 
-.container input {
-	width: 800px;
+.gosu input {
+	width: 700px;
+	margin-top:30px;
+	margin-bottom:30px;
 }
 
 .gosu-mail {
@@ -178,7 +183,6 @@
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.5);
-	display: flex;
 	align-items: center;
 	justify-content: center;
 	z-index: 10000;
@@ -233,8 +237,16 @@
 #gimage_container img {
 	width: 300px;
 }
+
+.summerContentTop {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+}
 </style>
 <body>
+
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
 		<c:if test="${sessionScope.m.memberType eq 2}">
@@ -250,7 +262,7 @@
 		<h4>
 			&gt; &nbsp;<span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다!
 		</h4>
-		<div style="color: red;">
+		<div style="color: red;margin-bottom: 100px;">
 			고수 소개 글은 하나만 작성이 가능하며, 수정 삭제가 불가능합니다!<br> 신중하게 작성해 주시길 바랍니다.
 		</div>
 
@@ -266,7 +278,7 @@
 						<table>
 							<tr>
 								<c:if test="${empty sessionScope.m.filepath }">
-									<th rowspan="6" style="padding: 40px; padding-right: 100px;"><img
+									<th rowspan="6" style="padding: 40px;padding-right: 70px;"><img
 										src="/resources/img/gosu/g_img_basic.png"
 										style="width: 250px;"></th>
 								</c:if>
@@ -300,10 +312,14 @@
 						<h4>
 							상세설명 <span style="color: red;">* </span>
 						</h4>
+
+
 						<div>
 							<p>
-								<textarea name="gosuExplain"></textarea>
+							<textarea name="gosuExplain" id="gosuExplain"
+								></textarea>
 							</p>
+
 						</div>
 
 					</div>
@@ -328,7 +344,7 @@
 						</h4>
 						<div>
 							<p>
-								<textarea name="gosuAct"></textarea>
+								<textarea name="gosuAct" id="gosuAct" ></textarea>
 							</p>
 						</div>
 					</div>
@@ -349,7 +365,8 @@
 
 						<h4>
 							피드백 비용 <span style="color: red; margin-right: 100px;">* </span> <span><input
-								type="text" name="gosuCost" style="width: 400px;" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');">
+								type="text" name="gosuCost" style="width: 400px;"
+								onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');">
 								&nbsp; &nbsp;원</span>
 						</h4>
 
@@ -383,8 +400,90 @@
 			</div>
 		</form>
 	</div>
+
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
+	<script src="/resources/summernote/summernote-lite.js"></script>
+	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 	<script>
+		$("#gosuExplain").summernote(
+				{
+					height : 500,
+					minHeight : 500,
+					maxHeight : 500,
+					lang : "ko-KR",
+					toolbar : [
+							// [groupName, [list of button]]
+							[ 'fontname', [ 'fontname' ] ],
+							[ 'fontsize', [ 'fontsize' ] ],
+							[
+									'style',
+									[ 'bold', 'italic', 'underline',
+											'strikethrough', 'clear' ] ],
+							[ 'color', [ 'forecolor', 'color' ] ],
+							[ 'table', [ 'table' ] ],
+							[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+							[ 'height', [ 'height' ] ],
+							[ 'insert', [ 'picture', 'link' ] ],
+							[ 'view', [ 'fullscreen', 'help' ] ] ],
+					fontNames : [ 'Arial', 'Arial Black', 'Comic Sans MS',
+							'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체',
+							'바탕체' ],
+					fontSizes : [ '8', '9', '10', '11', '12', '14', '16', '18',
+							'20', '22', '24', '28', '30', '36', '50', '72' ],
+					callbacks : {
+						onImageUpload : function(files) {
+							uploadImage(files[0], this);
+						}
+					}
+				});
+		$("#gosuAct").summernote(
+				{
+					height : 500,
+					minHeight : 500,
+					maxHeight : 500,
+					lang : "ko-KR",
+					toolbar : [
+							// [groupName, [list of button]]
+							[ 'fontname', [ 'fontname' ] ],
+							[ 'fontsize', [ 'fontsize' ] ],
+							[
+									'style',
+									[ 'bold', 'italic', 'underline',
+											'strikethrough', 'clear' ] ],
+							[ 'color', [ 'forecolor', 'color' ] ],
+							[ 'table', [ 'table' ] ],
+							[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+							[ 'height', [ 'height' ] ],
+							[ 'insert', [ 'picture', 'link' ] ],
+							[ 'view', [ 'fullscreen', 'help' ] ] ],
+					fontNames : [ 'Arial', 'Arial Black', 'Comic Sans MS',
+							'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체',
+							'바탕체' ],
+					fontSizes : [ '8', '9', '10', '11', '12', '14', '16', '18',
+							'20', '22', '24', '28', '30', '36', '50', '72' ],
+					callbacks : {
+						onImageUpload : function(files) {
+							uploadImage(files[0], this);
+						}
+					}
+				}); 
+				
+				function uploadImage(file,editor){
+					data = new FormData();
+					data.append("file",file);
+					$.ajax({
+						url : "/gosuSummerImage.do",
+						type :"post",		//file전송을 위해 ajax를 할떄는 type을 post로 해줘야한다
+						data : data,
+						enctype : 'multipart/form-data',
+						processData : false,
+						contentType : false,
+						success : function(data){					
+							$(editor).summernote("insertImage",data);
+						}
+					});
+				 }
 		$('#g-btn-submit').submit(
 				function() {
 					var photoFilepath = $("input[name=photoFilepath]").val();
@@ -401,15 +500,15 @@
 
 					if (photoFilepath == null || gprojectFilepath == null
 							|| gprojectTitle == "" || gprojectContent == ""
-							|| gosuCost == "" || gosuAct == ""
-							|| gosuTitle == "" || gosuExplain == ""
+							|| gosuCost == "" || gosuAct.lenght == 0
+							|| gosuTitle == "" || gosuExplain.lenght == 0
 							|| gosuSelf == "") {
-						
+
 						swal({
-					        title: '실패',
-					        text: "입력하신 내용을 다시 확인해주세요!",
-					        icon: 'error'
-					      });
+							title : '실패',
+							text : "입력하신 내용을 다시 확인해주세요!",
+							icon : 'error'
+						});
 
 						return false;
 					}
@@ -429,8 +528,8 @@
 		});
 		$("#hrm-close").click(function() {
 
-			$(".hrm-wrap").css("display", "none");
 			$('body').css("overflow", "scroll");
+			$(".hrm-wrap").css("display", "none");
 
 		});
 
@@ -525,6 +624,8 @@
 			var gp = $(".g-photo-one").last().find(".g-p");
 			console.log(gp);
 			gp.append(gprojectContent);
+
+			$('body').css("overflow", "scroll");
 			$(".hrm-wrap").css("display", "none");
 
 		}

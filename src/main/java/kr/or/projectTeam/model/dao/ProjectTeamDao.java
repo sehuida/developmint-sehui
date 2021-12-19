@@ -302,5 +302,9 @@ public class ProjectTeamDao {
 		return (ArrayList<Shortcuts>) list;
 	}
 
+	public int deleteShortcut(int shortcutNo) {
+		return sqlSession.delete("projectTeam.deleteShortcut", shortcutNo);
+	}
+
 	
 }

@@ -343,6 +343,15 @@ public class GosuDao {
 		return sqlSession.selectOne("gosu.selectRequestCountGosuNoIN",map);
 	}
 
+	public GosuRequest gosuMemberRequestAjax(GosuRequestCost grc) {
+		return sqlSession.selectOne("gosu.gosuMemberRequestAjax",grc);
+	}
+
+	public ArrayList<Gosu> selectGosuListAll() {
+		List<Gosu> list = sqlSession.selectList("gosu.selectGosuListAll");
+		return (ArrayList<Gosu>)list;
+	}
+
 
 
 }
