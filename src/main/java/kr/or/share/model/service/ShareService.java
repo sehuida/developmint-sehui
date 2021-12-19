@@ -162,5 +162,18 @@ public class ShareService {
 	public int updateShareBoard(Share s) {
 		return dao.updateBoard(s);
 	}
+	
+	@Transactional
+	public int insertRecomment(Comment c) {
+		return dao.insertRecomment(c);
+	}
+	@Transactional
+	public int deleteComment(Comment c) {
+		return dao.deleteComment(c);
+	}
+	@Transactional
+	public int updateComment(Comment c) {
+		return dao.updateComment(c);
+	}
 
 }

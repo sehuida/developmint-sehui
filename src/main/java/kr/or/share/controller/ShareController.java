@@ -188,6 +188,23 @@ public class ShareController {
 		}
 		return "member/swalMsg";
 	}
+	
+	@RequestMapping(value="/insertReComment.do")
+	public String insertRecomment(Comment c,Model model) {
+		int result = service.insertRecomment(c);
+		if(result>0) {
+			model.addAttribute("title", "등록성공");
+			model.addAttribute("msg", "댓글 작성이 완료 되셨습니다.");
+			model.addAttribute("loc", "/shareBoardView.do?boardNo="+c.getBoardNo());
+			model.addAttribute("icon", "success");			
+		}else {
+			model.addAttribute("title", "등록실패");
+			model.addAttribute("msg", "댓글 작성에 실패하셨습니다.");
+			model.addAttribute("loc", "/shareBoardView.do?boardNo="+c.getBoardNo());
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";
+	}
 	@RequestMapping(value="/deleteBoard.do")
 	public String deleteBoard(int boardNo,Model model) {
 		int result = service.deleteBoard(boardNo);
@@ -319,5 +336,37 @@ public class ShareController {
 		}
 		bis.close();
 		bos.close();		
+	}
+	@RequestMapping(value="/deleteShareComment.do")
+	public String deleteComment(Comment c,Model model) {
+		int result = service.deleteComment(c);
+		if(result>0) {
+			model.addAttribute("title", "삭제성공");
+			model.addAttribute("msg", "댓글 삭제가 완료 되셨습니다.");
+			model.addAttribute("loc", "/shareBoardView.do?boardNo="+c.getBoardNo());
+			model.addAttribute("icon", "success");			
+		}else {
+			model.addAttribute("title", "삭제실패");
+			model.addAttribute("msg", "댓글 삭제에 실패하셨습니다.");
+			model.addAttribute("loc", "/shareBoardView.do?boardNo="+c.getBoardNo());
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";
+	}
+	@RequestMapping(value="/updateShareComment.do")
+	public String updateShareComment(Comment c,Model model) {
+		int result = service.updateComment(c);
+		if(result>0) {
+			model.addAttribute("title", "수정성공");
+			model.addAttribute("msg", "댓글 수정이 완료 되셨습니다.");
+			model.addAttribute("loc", "/shareBoardView.do?boardNo="+c.getBoardNo());
+			model.addAttribute("icon", "success");			
+		}else {
+			model.addAttribute("title", "수정실패");
+			model.addAttribute("msg", "댓글 수정이 실패하셨습니다.");
+			model.addAttribute("loc", "/shareBoardView.do?boardNo="+c.getBoardNo());
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";		
 	}
 }

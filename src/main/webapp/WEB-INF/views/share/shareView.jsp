@@ -41,11 +41,18 @@
 		margin-right: 20px;
 	}
 	.comments{
+		margin-top:50px;
+		margin-bottom: 50px;
+	}
+	.commentWrap,.recommentWrap{
 		border: 2px solid #4ecdc4;
 		border-radius: 10px;
 		width: 1100px;
-		margin: 50px auto;
+		margin: 20px auto;
 		padding: 20px;
+	}
+	.recommentWrap{
+		margin-top: 0;
 	}
 	.inputCommentBox{
 		width: 800px;
@@ -176,8 +183,8 @@
 			</div>
 		</form>			
 		</c:if>
+			<div class="comments">
 			<c:forEach items="${list }" var="sc" varStatus="i">
-		<div class="comments">
 				<c:if test="${sc.commentType eq 1 }">
 					<!-- 댓글중 타입 1인것들 전체 출력하기 -->
 					<div class="commentWrap">
@@ -196,30 +203,32 @@
 						</div>
 						<div class="commentContent">
 							<p>${sc.commentContent }</p>
-					   		<textarea rows="2" name="commentContent" style="display: none;">${sc.commentContent }</textarea>
+					   		<textarea rows="2" name="commentContent" style="display: none; width: 100%">${sc.commentContent }</textarea>
 						</div>
 						<div>
 							<c:if test="${not empty sessionScope.m }">
 								<button class="btn btn-danger"><i class="bi bi-cone"></i>신고하기</button>						  														
 							</c:if>					  							
 							<c:if test="${sessionScope.m.memberId eq sc.memberId }">
-							  	<button class="btn btn-info">수정</button>		
-							  	<button class="btn btn-info">삭제</button>
+								<a class="btn btn-info" href="javascript:void(0)" onclick="modifyComment(this,'${sc.commentNo }','${sv.boardNo }')">수정</a>
+								<a class="btn btn-info" href="javascript:void(0)" onclick="deleteComment(this,'${sc.commentNo }','${sv.boardNo }')">삭제</a>	
 							</c:if>
 						</div>
 					</div>
 					<c:if test="${not empty sessionScope.m }">
-						<form action="/insertComment.do" class="recommentForm">						
-							<input type="hidden" name="commentType" value="2">
-							<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-							<input type="hidden" name="boardNo" value="${s.boardNo }">
-							<input type="hidden" name="commentRef" value="${sc.commentNo }">
-							<textarea name="commentContent" class="form-control" style="width: 70%; margin: 0 auto;"></textarea>
-							<button type="submit" class="btn btn-outline-primary">등록</button>
-							<button type="reset" class="btn btn-outline-danger recCancel">취소</button>
-						</form>							
+						<div class="commentWrap recommentForm">
+							<form action="/insertReComment.do" method="post" style="width: 100%; display: flex">						
+								<input type="hidden" name="commentType" value="2">
+								<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+								<input type="hidden" name="boardNo" value="${sv.boardNo }">
+								<input type="hidden" name="commentRef" value="${sc.commentNo }">
+								<textarea name="commentContent" class="form-control" style="width: 70%; margin: 0 auto;"></textarea>
+								<button type="submit" class="btn btn-outline-primary">등록</button>
+								<button type="reset" class="btn btn-outline-danger recCancel">취소</button>
+							</form>						
+						</div>
 					</c:if>
-					<!-- 로그인이 되어있는 경우 대댓글 작성용 form태그 미리 생성 -->		
+				<!-- 로그인이 되어있는 경우 대댓글 작성용 form태그 미리 생성 -->		
 				</c:if>
 				<c:forEach items="${list }" var="scc" varStatus="i">
 					<c:if test="${scc.commentType eq 2 && sc.commentNo eq scc.commentRef}">
@@ -233,26 +242,26 @@
 							</div>
 							<div class="commentContent">
 								<p>${scc.commentContent }</p>
-						   		<textarea rows="2" name="commentContent" style="display: none;">${scc.commentContent }</textarea>
+						   		<textarea rows="2" name="commentContent" style="display: none; width: 100%">${scc.commentContent }</textarea>
 							</div>
 							<div>	
 								<c:if test="${not empty sessionScope.m }">
 									<button class="btn btn-danger"><i class="bi bi-cone"></i>신고하기</button>						  														
 								</c:if>
 								<c:if test="${sessionScope.m.memberId eq scc.memberId }">
-								  	<button class="btn btn-info">수정</button>		
-								  	<button class="btn btn-info">삭제</button>
+									<a class="btn btn-info" href="javascript:void(0)" onclick="modifyComment(this,'${scc.commentNo }','${sv.boardNo }')">수정</a>
+									<a class="btn btn-info" href="javascript:void(0)" onclick="deleteComment(this,'${scc.commentNo }','${sv.boardNo }')">삭제</a>							  	
 								</c:if>
 							</div>
 						</div>						
 					</c:if>
 				</c:forEach><!-- 대댓글 반복문 끝 -->
-				</div><!-- 전체 댓글 출력 -->
-			</c:forEach><!-- 전체댓글 반복문 끝 -->
+		</c:forEach><!-- 전체댓글 반복문 끝 -->
+		</div><!-- 전체 댓글 출력 -->
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script>
-//수정,삭제 onclick 이벤트로 보내주기 swalMsg 이용!
+	//삭제 onclick 이벤트로 보내주기 swalMsg 이용!
 	//게시글 삭제 버튼 클릭
 	$(".deleteBoard").click(function(){
 		swal({
@@ -266,6 +275,74 @@
 		    }
 		});
 	});
+	//답글달기  취소
+	$(".recShow").click(function(){
+		//몇번째 답글달기 버튼을 클릭했는지
+		var idx = $(".recShow").index(this);
+		$(this).hide();
+		$(".recommentForm").eq(idx).css("display","flex");
+	});
+	
+	$(".recCancel").click(function(){
+		var idx = $(".recCancel").index(this);
+		$(".recommentForm").eq(idx).css("display","none");
+		$(".recShow").eq(idx).show();
+	});
+	//댓글 수정 삭제구문
+	function modifyComment(obj,commentNo,boardNo){
+		//textarea를 화면에 표현
+		$(obj).parent().prev().children(":last").show();
+		//기존 본문 내용을 숨김
+		$(obj).parent().prev().children(":first").hide();
+		//수정 -> 수정완료
+		$(obj).html('수정완료');
+		$(obj).attr("onclick","modifyComplete(this,'"+commentNo+"','"+boardNo+"');");
+		//삭제 -> 취소
+		$(obj).next().html('취소');
+		$(obj).next().attr("onclick","modifyCancel(this,'"+commentNo+"','"+boardNo+"');");
+		//답글달기버튼 숨기기
+		$(obj).next().next().hide();
+	}
+	
+	function modifyCancel(obj,commentNo,boardNo){
+		//textarea 숨김 (this) 가 지금은 취소버튼임 위치 잘 생각하기!
+		$(obj).parent().prev().children(":last").hide();
+		//기존 본문내용을 화면에 다시 표현
+		$(obj).parent().prev().children(":first").show();
+		//수정완료 -> 수정
+		$(obj).prev().html("수정");
+		$(obj).prev().attr("onclick","modifyComment(this,'"+commentNo+"','"+boardNo+"');");
+		//취소 -> 삭제
+		$(obj).html("삭제");
+		$(obj).attr("onclick","deleteComment(this,'"+commentNo+"','"+boardNo+"');");
+		//답글달기버튼 화면에 표현
+		$(obj).next().show();
+	}
+	function modifyComplete(obj,commentNo,boardNo){
+		//새로운 form태그를 생성
+		var form = $("<form action='/updateShareComment.do' method='post'></form>");
+		//form안에 수정댓글번호 설정
+		form.append($("<input type='text' name='commentNo' value='"+commentNo+"'>"));
+		//form안에 공지사항번호 설정
+		form.append($("<input type='text' name='boardNo' value='"+boardNo+"'>"));
+		//수정한 댓글 내용을 설정
+		form.append($(obj).parent().prev().children(":last"));
+		//전송할form태그를 현재 페이지에 추거
+		$("body").append(form);
+		form.submit();
+	}
+	function deleteComment(obj,commentNo,boardNo){
+		swal({
+		    title: "댓글을 삭제하시겠습니까?",
+		    icon: "warning",
+		    buttons: ["돌아가기", "삭제하기"],
+		    dangerMode: true
+		}).then((willDelete) => {
+		    if (willDelete) {
+		    	location.href="/deleteShareComment.do?commentNo="+commentNo+"&boardNo="+boardNo;
+		    }
+		});
+	}
 </script>
 </body>
 </html>
