@@ -130,8 +130,6 @@
 	width: 100px;
 }
 
-
-
 .community-wrap {
 	display: none;
 	position: fixed;
@@ -147,26 +145,47 @@
 }
 
 #community-modal {
-	background-color: #f4f4f4;
+	background-color: rgb(235, 242, 235);
 	width: 800px;
 }
 
 .community-btn-wrap {
+	
 	width: 100%;
 	display: flex;
 	justify-content: center;
 }
-.community-content>h2{
+
+.community-btn-wrap2 {
+	background-color: rgb(70, 147, 127);
+	width: 100%;
+	height:50px;
+	line-height:50px;
+	text-align: right;
+}
+
+.community-content>h2 {
 	font-weight: 900;
 	text-align: center;
-	margin:50px;
+	margin: 30px;
+	line-height:70px;
+	font-size: 40px;
+	color: rgb(70, 147, 127);
 }
-.community-content h4{
-	font-weight: 900;
 
+.community-content h4 {
+	font-weight: 900;
+	font-size:30px;
+	margin-top:10px;
+	margin-bottom:20px;
+}
+
+.community-content h4>img{
+	width: 30px;
+	margin-right: 10px;
 }
 .community-btn-wrap a {
-	margin: 30px;
+	margin: 20px;
 	padding: 10px;
 	width: 100px;
 }
@@ -179,12 +198,21 @@
 	justify-content: center;
 }
 
-#community-guide{
-	color:blue;
+.c-style {
+	padding: 30px;
+	border-radius:30px;
+	border: 3px solid rgb(70, 147, 127); 
+	background-color: white;
+	margin:20px;
 }
+
+#community-guide {
+	color: blue;
+}
+
 #community-guide:hover {
 	cursor: pointer;
-	color:#6cc3d5;
+	color: #6cc3d5;
 }
 </style>
 <body>
@@ -471,24 +499,37 @@
 		<div id="community-modal">
 			<div class="community-content">
 				<br>
-				
-				<h2 style="color:#6cc3d5;">커뮤니티 가이드</h2>
-				<div class="g-style" style="padding: 30px;background-color:#e2eef0; ">
-					<div>
-					</div>
+
+				<h2>
+					디벨로민트를 이용하는 <br>
+					<span style="color: black;">회원을 위한 </span> 커뮤니티 가이드
+				</h2>
+				<div class="g-style c-style">
+
 					<div style="text-align: left;">
-					<h4 >스팸 및 현혹 행위</h4> 
-디벨로민트 커뮤니티는 신뢰를 바탕으로 구축된 커뮤니티입니다. 다른 사용자를 상대로 사기, 현혹, 스팸, 사취하려는 의도가 있는 댓글은 디벨로민트에서 허용되지 않습니다.<br><br>
-					<h4 >잘못된 정보</h4> 
-오해의 소지가 있거나 사기성 정보로 큰 피해를 입힐 심각한 위험이 있는 특정 유형의 게시글 혹은 댓글은 디벨로민트에서 허용되지 않습니다. 여기에는 유해한 치료제나 치료법을 홍보하는 게시글 혹은 댓글, 기술적으로 조작된 특정 유형의 게시글, 민주적 절차를 방해하는 댓글 등 실제적인 위험을 초래할 수 있는 특정 유형의 잘못된 정보가 포함됩니다.<br><br>
-					<hr>
-다음 규칙을 반드시 준수해 주시기 바랍니다. 디벨로민트 플랫폼 안팎에서 회원의 행위가 디벨로민트 사용자, 커뮤니티, 직원이나 생태계에 해를 끼치는 경우 디벨로민트는 회원 행위의 과실이 얼마나 심각한지, 유해한 행위에 패턴이 존재하는지 여부를 포함하나 이에 국한되지 않는 다양한 요소를 고려하여 대처할 수 있습니다. 디벨로민트는 회원의 권한 정지부터 계정 해지에 이르기까지 다양한 조치를 취합니다.
-					
+						<h4><img src="/resources/img/gosu/cum_chk.png">스팸 및 현혹 행위</h4>
+						디벨로민트 커뮤니티는 신뢰를 바탕으로 구축된 커뮤니티입니다. 다른 사용자를 상대로 사기, 현혹, 스팸, 사취하려는
+						의도가 있는 댓글은 디벨로민트에서 허용되지 않습니다.<br>
+						<br>
+						<h4><img src="/resources/img/gosu/cum_chk.png">잘못된 정보</h4>
+						오해의 소지가 있거나 사기성 정보로 큰 피해를 입힐 심각한 위험이 있는 특정 유형의 게시글 혹은 댓글은 디벨로민트에서
+						허용되지 않습니다. 여기에는 유해한 치료제나 치료법을 홍보하는 게시글 혹은 댓글, 기술적으로 조작된 특정 유형의
+						게시글, 민주적 절차를 방해하는 댓글 등 실제적인 위험을 초래할 수 있는 특정 유형의 잘못된 정보가 포함됩니다.<br>
+						<br>
+						<hr>
+						다음 규칙을 반드시 준수해 주시기 바랍니다. 디벨로민트 플랫폼 안팎에서 회원의 행위가 디벨로민트 사용자, 커뮤니티,
+						직원이나 생태계에 해를 끼치는 경우 디벨로민트는 회원 행위의 과실이 얼마나 심각한지, 유해한 행위에 패턴이 존재하는지
+						여부를 포함하나 이에 국한되지 않는 다양한 요소를 고려하여 대처할 수 있습니다. 디벨로민트는 회원의 권한 정지부터 계정
+						해지에 이르기까지 다양한 조치를 취합니다.
+
 					</div>
 				</div>
 			</div>
 			<div class="community-btn-wrap">
-				<a id="community-close" class="btn btn-outline-info">확인</a>
+				<a id="community-close" class="btn btn-outline-success" >확인</a>
+			</div>
+			<div class="community-btn-wrap2">
+				<span style="color:white; margin: 20px;">2021.12.19</span>
 			</div>
 		</div>
 	</div>
@@ -670,14 +711,13 @@
 		$("#community-guide").click(function() {
 
 			$(".community-wrap").css("display", "flex");
-			
+
 		});
 		$("#community-close").click(function() {
 
 			$(".community-wrap").css("display", "none");
 
 		});
-
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
