@@ -30,6 +30,7 @@ import kr.or.member.model.vo.Member;
 import kr.or.projectTeam.model.service.ProjectTeamService;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectEntry;
+import kr.or.projectTeam.model.vo.ProjectReview;
 import kr.or.projectTeam.model.vo.ProjectTask;
 import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.projectTeam.model.vo.ProjectTeamApplicantViewData;
@@ -377,13 +378,21 @@ public class ProjectTeamController {
 	  }
 	  
 	  @RequestMapping(value="/insertApplyProjectFrm.do")
-		public String insertApplyProjectFrm(int memberNo, Model model, int projectNo) {
+		public String insertApplyProjectFrm(int memberNo, Model model, int projectNo, int writeReviewCheck) {
 			ArrayList<DevelopLanguage> dlList = service.selectAllDevelopLang();
 			if(memberNo > 0) {
-				model.addAttribute("memberNo", memberNo);
-				model.addAttribute("dlList", dlList);
-				model.addAttribute("projectNo", projectNo);
-				return "recruitCrue/applyTeam_writeForm";
+				if(writeReviewCheck > 0) {
+					model.addAttribute("title", "후기 미작성 회원 지원불가");
+					model.addAttribute("msg", "이전 완료한 프로젝트 후기를 작성해야 지원이 가능합니다.");
+					model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+					model.addAttribute("icon", "warning");
+					return "member/swalMsg";
+				} else {
+					model.addAttribute("memberNo", memberNo);
+					model.addAttribute("dlList", dlList);
+					model.addAttribute("projectNo", projectNo);
+					return "recruitCrue/applyTeam_writeForm";
+				}
 			} else {
 				model.addAttribute("title", "비회원 서비스 이용 불가");
 				model.addAttribute("msg", "로그인 후 이용이 가능합니다.");
@@ -653,6 +662,60 @@ public class ProjectTeamController {
 			  model.addAttribute("title", "바로가기 삭제 실패");
 			  model.addAttribute("msg", "시스템 오류로 삭제 실패하였습니다.");
 			  model.addAttribute("loc","enterMyProject.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			  model.addAttribute("icon", "warning");
+		  }
+		  return "member/swalMsg"; 
+	  }
+	  
+	  @RequestMapping(value="/endProject.do")
+	  public String endProject(Model model, ProjectReview[] pr, int backMemberNo, int backProjectNo, String sessionMemberId, String projectReader) {
+		  int result = 0;
+		  ArrayList<ProjectReview> endList = new ArrayList<ProjectReview>(Arrays.asList(pr));
+		  if(sessionMemberId.equals(projectReader)) {
+			  result = service.endProject(endList, backProjectNo, backMemberNo);
+			  if(result > 0) { 
+				  model.addAttribute("title", "프로젝트 종료");
+				  model.addAttribute("msg", "그 동안 진심으로 고생많으셨습니다..!");
+				  model.addAttribute("loc","enterMyProject.do?projectNo="+backProjectNo+"&memberNo="+backMemberNo);
+				  model.addAttribute("icon", "success");
+			  } else {
+				  model.addAttribute("title", "프로젝트 종료 실패");
+				  model.addAttribute("msg", "시스템 오류로 종료 실패하였습니다.");
+				  model.addAttribute("loc","enterMyProject.do?projectNo="+backProjectNo+"&memberNo="+backMemberNo);
+				  model.addAttribute("icon", "warning");
+			  }
+			  return "member/swalMsg"; 
+		  } else {
+			  result = service.insertReview(endList, backProjectNo, backMemberNo);
+			  if(result > 0) { 
+				  model.addAttribute("title", "리뷰 등록 성공!");
+				  model.addAttribute("msg", "그 동안 진심으로 고생많으셨습니다..!");
+				  model.addAttribute("loc","enterMyProject.do?projectNo="+backProjectNo+"&memberNo="+backMemberNo);
+				  model.addAttribute("icon", "success");
+			  } else {
+				  model.addAttribute("title", "리뷰 등록 실패");
+				  model.addAttribute("msg", "시스템 오류로 종료 실패하였습니다.");
+				  model.addAttribute("loc","enterMyProject.do?projectNo="+backProjectNo+"&memberNo="+backMemberNo);
+				  model.addAttribute("icon", "warning");
+			  }
+			  return "member/swalMsg"; 
+		  }
+		   
+	  }
+	  
+	  @RequestMapping(value="/updateProjectOutline.do")
+	  public String updateProjectOutline(Model model, String[] chk, ProjectTeam pt, String crueRoll, int sessionMemberNo, int projectNo) {
+		  ArrayList<String> langList = new ArrayList<String>(Arrays.asList(chk));
+		  int result = service.updateProjectOutline(langList, pt, crueRoll, sessionMemberNo, projectNo); 
+		  if(result > 0) { 
+			  model.addAttribute("title", "프로젝트 수정 성공!");
+			  model.addAttribute("msg", "변경하신 프로젝트 내용이 반영되었습니다.");
+			  model.addAttribute("loc","enterMyProject.do?projectNo="+projectNo+"&memberNo="+sessionMemberNo);
+			  model.addAttribute("icon", "success");
+		  } else {
+			  model.addAttribute("title", "프로젝트 수정 실패");
+			  model.addAttribute("msg", "시스템 오류로 수정 실패하였습니다.");
+			  model.addAttribute("loc","enterMyProject.do?projectNo="+projectNo+"&memberNo="+sessionMemberNo);
 			  model.addAttribute("icon", "warning");
 		  }
 		  return "member/swalMsg"; 
