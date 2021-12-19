@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
+import kr.or.qna.vo.Faq;
 import kr.or.qna.vo.Qna;
 import kr.or.qna.vo.nonQna;
 
@@ -67,6 +68,12 @@ public class QnaDao {
 	public ArrayList<nonQna> searchBox2(HashMap<String, Object> map) {
 		List<nonQna> list = sqlsession.selectList("qna.searchBox2",map);
 		return (ArrayList<nonQna>)list;
+	}
+
+
+	public ArrayList<Faq> selectFaqlist(int category) {
+		List<Faq> list = sqlsession.selectList("qna.selectFaqList",category);
+		return (ArrayList<Faq>)list;
 	}
 
 
