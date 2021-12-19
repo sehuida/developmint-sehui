@@ -436,7 +436,7 @@
 							uploadImage(files[0], this);
 						}
 					}
-				}); // 썸머노트 입력문 종료
+				});
 		$("#gosuAct").summernote(
 				{
 					height : 500,
@@ -467,7 +467,7 @@
 							uploadImage(files[0], this);
 						}
 					}
-				}); // 썸머노트 입력문 종료
+				}); 
 				
 				function uploadImage(file,editor){
 					data = new FormData();
