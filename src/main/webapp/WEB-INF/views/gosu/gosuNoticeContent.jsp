@@ -130,12 +130,61 @@
 	width: 100px;
 }
 
+
+
+.community-wrap {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10000;
+}
+
+#community-modal {
+	background-color: #f4f4f4;
+	width: 800px;
+}
+
+.community-btn-wrap {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.community-content>h2{
+	font-weight: 900;
+	text-align: center;
+	margin:50px;
+}
+.community-content h4{
+	font-weight: 900;
+
+}
+.community-btn-wrap a {
+	margin: 30px;
+	padding: 10px;
+	width: 100px;
+}
+
 .g-style {
 	text-align: center;
 	margin: 10px;
 	padding: 30px;
 	display: flex;
 	justify-content: center;
+}
+
+#community-guide{
+	color:blue;
+}
+#community-guide:hover {
+	cursor: pointer;
+	color:#6cc3d5;
 }
 </style>
 <body>
@@ -196,14 +245,20 @@
 		</div>
 
 		<hr>
+		<div style="margin-bottom: 50px;">
+			<span style="font-weight: 900;">댓글을 작성할 때는 타인을 존중하고 <a
+				id="community-guide">커뮤니티 가이드</a>를 준수해야 합니다.
+			</span>
+		</div>
 		<div style="display: flex; justify-content: center;">
+
 			<div>
 				<c:choose>
 					<c:when test="${empty commentList }">
 			</div>
 			<div style="padding: 20px; text-align: center;">
 				<img src="/resources/img/member/user.png"
-					style="border-radius: 50%; width: 70px;margin-top:70px;">
+					style="border-radius: 50%; width: 70px; margin-top: 70px;">
 				<h2
 					style="color: gray; font-size: 20px; font-weight: 900; line-height: 100px;">작성된
 					댓글이 없습니다.</h2>
@@ -219,7 +274,7 @@
 									<td style="font-size: small; color: gray;" colspan="3">${cl.regDate }</td>
 								</tr>
 								<tr style="text-align: center;">
-									<td style="width: 200px;"><c:if
+									<td style="width: 100px;"><c:if
 											test="${not empty cl.memberImg  }">
 											<img src="/resources/upload/member/${cl.memberImg }"
 												style="border-radius: 50%; width: 70px;">
@@ -255,7 +310,7 @@
 								style="margin: 30px; display: none;">
 								<tr>
 									<td rowspan="3"
-										style="width: 200px; text-align: right; padding: 10px;"><img
+										style="width: 100px; text-align: right; padding: 10px;"><img
 										src="/resources/img/gosu/g-dada2.png" style="width: 50px;"></td>
 								</tr>
 
@@ -279,7 +334,7 @@
 									<table style="margin: 30px;">
 										<tr>
 											<td rowspan="3"
-												style="width: 200px; text-align: right; padding: 10px;">
+												style="width: 100px; text-align: right; padding: 10px;">
 												<img src="/resources/img/gosu/g-dada.png"
 												style="width: 20px;">
 											</td>
@@ -332,7 +387,7 @@
 		</div>
 	</div>
 	<c:if test="${not empty sessionScope.m }">
-		<div style="display: flex; justify-content: center;">
+		<div style="display: flex; justify-content: center; margin-top: 80px;">
 			<div class="card bg-light mb-3"
 				style="padding: 20px; width: 1200px; min-width: 1200px;">
 				<table>
@@ -348,7 +403,7 @@
 							</c:if></td>
 
 						<td rowspan="2" style="padding-right: 40px;"><textarea
-								rows="5" style="width: 100%;" placeholder="댓글을 입력해주세요."
+								rows="5" style="width: 100%;" placeholder="  댓글을 입력해주세요."
 								id="commentContent"></textarea></td>
 						<input type="hidden" value="${sessionScope.m.memberId }"
 							id="g-memberId">
@@ -408,6 +463,32 @@
 			</div>
 			<div class="hrm-btn-wrap">
 				<a id="hrm-close" class="btn btn-outline-success">확인</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="community-wrap" style="display: none; margin: 0;">
+		<div id="community-modal">
+			<div class="community-content">
+				<br>
+				
+				<h2 style="color:#6cc3d5;">커뮤니티 가이드</h2>
+				<div class="g-style" style="padding: 30px;background-color:#e2eef0; ">
+					<div>
+					</div>
+					<div style="text-align: left;">
+					<h4 >스팸 및 현혹 행위</h4> 
+디벨로민트 커뮤니티는 신뢰를 바탕으로 구축된 커뮤니티입니다. 다른 사용자를 상대로 사기, 현혹, 스팸, 사취하려는 의도가 있는 댓글은 디벨로민트에서 허용되지 않습니다.<br><br>
+					<h4 >잘못된 정보</h4> 
+오해의 소지가 있거나 사기성 정보로 큰 피해를 입힐 심각한 위험이 있는 특정 유형의 게시글 혹은 댓글은 디벨로민트에서 허용되지 않습니다. 여기에는 유해한 치료제나 치료법을 홍보하는 게시글 혹은 댓글, 기술적으로 조작된 특정 유형의 게시글, 민주적 절차를 방해하는 댓글 등 실제적인 위험을 초래할 수 있는 특정 유형의 잘못된 정보가 포함됩니다.<br><br>
+					<hr>
+다음 규칙을 반드시 준수해 주시기 바랍니다. 디벨로민트 플랫폼 안팎에서 회원의 행위가 디벨로민트 사용자, 커뮤니티, 직원이나 생태계에 해를 끼치는 경우 디벨로민트는 회원 행위의 과실이 얼마나 심각한지, 유해한 행위에 패턴이 존재하는지 여부를 포함하나 이에 국한되지 않는 다양한 요소를 고려하여 대처할 수 있습니다. 디벨로민트는 회원의 권한 정지부터 계정 해지에 이르기까지 다양한 조치를 취합니다.
+					
+					</div>
+				</div>
+			</div>
+			<div class="community-btn-wrap">
+				<a id="community-close" class="btn btn-outline-info">확인</a>
 			</div>
 		</div>
 	</div>
@@ -586,6 +667,17 @@
 			$(".hrm-wrap").css("display", "none");
 
 		});
+		$("#community-guide").click(function() {
+
+			$(".community-wrap").css("display", "flex");
+			
+		});
+		$("#community-close").click(function() {
+
+			$(".community-wrap").css("display", "none");
+
+		});
+
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>

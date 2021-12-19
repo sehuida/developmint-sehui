@@ -371,7 +371,9 @@ public class GosuService {
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
-		GosuListPageData glpd = new GosuListPageData(list, pageNavi, start);
+
+		ArrayList<Gosu> list2 = dao.selectGosuListAll();
+		GosuListPageData glpd = new GosuListPageData(list, pageNavi, start,list2);
 		return glpd;
 	}
 
@@ -606,7 +608,8 @@ public class GosuService {
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
-		GosuListPageData glpd = new GosuListPageData(list, pageNavi, start);
+		ArrayList<Gosu> list2 = dao.selectGosuListAll();
+		GosuListPageData glpd = new GosuListPageData(list, pageNavi, start,list2);
 		return glpd;
 	}
 
@@ -693,6 +696,70 @@ public class GosuService {
 	public int gNoticeCommentDeleteAjax(int commentNo) {
 		int result = dao.gNoticeCommentDeleteAjax(commentNo);
 		return result;
+	}
+
+
+	public GosuRequestListPageData selectMemberRequestListGosuNoIN(int reqPage, int gosuNo,String type) {
+		int numPerPage = 5;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("gosuNo",gosuNo);
+		System.out.println("type : "+type);
+		map.put("type",type);
+		ArrayList<GosuRequest> list = dao.selectMemberRequestListGosuNoIN(map);
+		for (GosuRequest g : list) {
+			g.setRequestWriterImg(dao.selectGosuImg(g.getRequestWriterNo()));
+			g.setRequestWriterId(dao.selectGosuId(g.getRequestWriterNo()));
+		}
+		int totalCount = dao.selectRequestCountGosuNoIN(map);
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		} else {
+			totalPage = totalCount / numPerPage + 1;
+		}
+		
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
+		String pageNavi = "<ul class='pagination pagination-lg'>";
+		if(pageNo != 1) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/gosuRequestListGosuNo.do?reqPage="+(pageNo-1)+"&gosuNo="+gosuNo+"&type="+type+"'>";
+			pageNavi += "&lt;</a></li>";
+		}// 페이지 숫자
+		for(int i=0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='page-item active'>";
+				pageNavi += "<a class = 'page-link' href='/gosuRequestListGosuNo.do?reqPage="+pageNo+"&gosuNo="+gosuNo+"&type="+type+"'>";
+				pageNavi += pageNo + "</a></li>";
+			} else {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/gosuRequestListGosuNo.do?reqPage="+pageNo+"&gosuNo="+gosuNo+"&type="+type+"'>";
+				pageNavi += pageNo + "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음 버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/gosuRequestListGosuNo.do?reqPage="+pageNo+"&gosuNo="+gosuNo+"&type="+type+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		GosuRequestListPageData glpd = new GosuRequestListPageData(list, pageNavi, start);
+		return glpd;
+	}
+
+
+	public GosuRequest gosuMemberRequestAjax(GosuRequestCost grc) {
+		GosuRequest gosuRequest = dao.gosuMemberRequestAjax(grc);	
+		return gosuRequest;
 	}
 
 

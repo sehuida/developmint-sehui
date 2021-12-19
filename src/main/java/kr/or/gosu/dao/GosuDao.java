@@ -334,6 +334,24 @@ public class GosuDao {
 		return sqlSession.delete("gosu.gNoticeCommentDeleteAjax",commentNo);
 	}
 
+	public ArrayList<GosuRequest> selectMemberRequestListGosuNoIN(Map<String, Object> map) {
+		List<GosuRequest> list = sqlSession.selectList("gosu.selectMemberRequestListGosuNoIN",map);
+		return (ArrayList<GosuRequest>)list;
+	}
+
+	public int selectRequestCountGosuNoIN(Map<String, Object> map) {
+		return sqlSession.selectOne("gosu.selectRequestCountGosuNoIN",map);
+	}
+
+	public GosuRequest gosuMemberRequestAjax(GosuRequestCost grc) {
+		return sqlSession.selectOne("gosu.gosuMemberRequestAjax",grc);
+	}
+
+	public ArrayList<Gosu> selectGosuListAll() {
+		List<Gosu> list = sqlSession.selectList("gosu.selectGosuListAll");
+		return (ArrayList<Gosu>)list;
+	}
+
 
 
 }

@@ -22,6 +22,7 @@ import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.projectTeam.model.vo.ProjectTeamMember;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeComment;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeViewData;
+import kr.or.projectTeam.model.vo.Shortcuts;
 import kr.or.projectTeam.model.vo.UseDevelopLanguage;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
 import kr.or.projectTeam.model.vo.projectTeamMainPageData;
@@ -603,6 +604,32 @@ public class ProjectTeamService {
 	public ProjectTask toDoTask(int projectNo) {
 		ProjectTask ptk = dao.toDoTask(projectNo);
 		return ptk;
+	}
+
+	public ArrayList<projectDevLanguage> selectAllprojectLangList() {
+		ArrayList<projectDevLanguage> pdLangList = dao.selectAllprojectLangList();
+		return pdLangList;
+	}
+	
+	@Transactional
+	public int addShortcut(String shortcutAddr, String shortcutName, int projectNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("shortcutAddr", shortcutAddr);
+		map.put("shortcutName", shortcutName);
+		map.put("projectNo", projectNo);
+		int result = dao.addShortcut(map);
+		return result;
+	}
+
+	public ArrayList<Shortcuts> shortcutList(int projectNo) {
+		ArrayList<Shortcuts> shortcutList = dao.shortcutList(projectNo);
+		return shortcutList;
+	}
+
+	@Transactional
+	public int deleteShortcut(int shortcutNo) {
+		int result = dao.deleteShortcut(shortcutNo);
+		return result;
 	}
 	
 }

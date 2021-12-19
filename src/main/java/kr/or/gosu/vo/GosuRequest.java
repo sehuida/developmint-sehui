@@ -18,7 +18,7 @@ public class GosuRequest {
 	private String requsetDate;
 	private String requestWriterImg;
 	private String requestWriterId;
-	
+	private String type;
 
 	public String getRequestContent1Br(){
 		return requestContent1.replaceAll(",", "<br>");

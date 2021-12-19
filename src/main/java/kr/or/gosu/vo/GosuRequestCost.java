@@ -13,6 +13,7 @@ public class GosuRequestCost {
 	private String memberId;
 	private String gosuImg;
 	private String gosuId;
+	private String type;
 	
 	public String getCostContentBr(){
 		return costContent.replaceAll("\r\n", "<br>");

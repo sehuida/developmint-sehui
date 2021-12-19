@@ -13,4 +13,5 @@ public class GosuListPageData {
 	private ArrayList<Gosu> list;
 	private String pageNavi;
 	private int start;
+	private ArrayList<Gosu> list2;
 }

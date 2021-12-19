@@ -570,17 +570,17 @@
   </update>
   
   <select id="selectStartProjectList" parameterType="String" resultType="_int">
-  		select project_no as projectNo from project where project_status = 2 where recruit_end_date like #{today}
+  		select project_no as projectNo from project where project_status = 2 and recruit_end_date like #{today}
   </select>
   
-  <select id="startProjectList" parameterType="List" resultType="_int">
+  <select id="startProjectMemberList" parameterType="List" resultType="_int">
   		select member_no from project_entry where ENTRY_STATUS = 3 and project_no in
   		<foreach collection="startProjectList" item="stl" open="(" close=")" separator=",">
   			#{stl}
   		</foreach>
   </select>
   
-  <update id="updateEntryResult">
+  <update id="updateEntryResult" parameterType="map">
   		update project_entry set ENTRY_STATUS = 4 where project_no in 
   		<foreach collection="startProjectList" item="stl" open="(" close=")" separator=",">
   			#{stl}
@@ -776,61 +776,82 @@
   
   <select id="memberInfoList" parameterType="map" resultType="pfm">
   		select 
-  			team_member_no as teamMemberNo,
-  			project_no as projectNo,
-  			member_no as memberNo,
-  			member_role as memberRole
-  		from project_team_member
+  			ptm.team_member_no as teamMemberNo,
+  			ptm.project_no as projectNo,
+  			ptm.member_no as memberNo,
+  			ptm.member_role as memberRole,
+  			(select member_id from member m where m.member_no = ptm.member_no) as memberId,
+  			(select filepath from member m where m.member_no = ptm.member_no) as memberImg,
+  			(select member_grade from member m where m.member_no = ptm.member_no ) as memberGrade
+  		from project_team_member ptm
   		where project_no = #{projectNo}
   </select>
 
-<select id="ProjectTask" parameterType="_int" resultType="ptk">
-		select * from (
-			select rownum, ta.* from (
-				select
-					t.task_no as taskNo,
-					t.project_no as projectNo,
-					t.team_member_no as teamMemberNo,
-					t.task_sort as taskSort,
-					t.task_title as taskTitle,
-					t.task_content as taskContent,
-					t.priority as priority,
-					t.connect_issue as connectIssue,
-					t.reference_link as referLink,
-					t.reference_link_name as linkName,
-					t.start_date as startDate,
-					t.complete_date as completeDate,
-					t.end_date as endDate,
-					t.process_sort as processSort
-				from task t 
-				where t.project_no = #{projectNo} and t.process_sort = 3
-				order by t.end_date desc) ta)
-			where rownum = 1
-</select>
+	<select id="ProjectTask" parameterType="_int" resultType="ptk">
+			select * from (
+				select rownum, ta.* from (
+					select
+						t.task_no as taskNo,
+						t.project_no as projectNo,
+						t.team_member_no as teamMemberNo,
+						t.task_sort as taskSort,
+						t.task_title as taskTitle,
+						t.task_content as taskContent,
+						t.priority as priority,
+						t.connect_issue as connectIssue,
+						t.reference_link as referLink,
+						t.reference_link_name as linkName,
+						t.start_date as startDate,
+						t.complete_date as completeDate,
+						t.end_date as endDate,
+						t.process_sort as processSort
+					from task t 
+					where t.project_no = #{projectNo} and t.process_sort = 3
+					order by t.end_date desc) ta)
+				where rownum = 1
+	</select>
 
 
-<select id="toDoTask" parameterType="_int" resultType="ptk">
-		select * from (
-			select rownum, ta.* from (
-				select
-					t.task_no as taskNo,
-					t.project_no as projectNo,
-					t.team_member_no as teamMemberNo,
-					t.task_sort as taskSort,
-					t.task_title as taskTitle,
-					t.task_content as taskContent,
-					t.priority as priority,
-					t.connect_issue as connectIssue,
-					t.reference_link as referLink,
-					t.reference_link_name as linkName,
-					t.start_date as startDate,
-					t.complete_date as completeDate,
-					t.end_date as endDate,
-					t.process_sort as processSort
-				from task t 
-				where t.project_no = #{projectNo} and t.process_sort = 1
-				order by t.start_date) ta)
-			where rownum = 1
-</select>
+	<select id="toDoTask" parameterType="_int" resultType="ptk">
+			select * from (
+				select rownum, ta.* from (
+					select
+						t.task_no as taskNo,
+						t.project_no as projectNo,
+						t.team_member_no as teamMemberNo,
+						t.task_sort as taskSort,
+						t.task_title as taskTitle,
+						t.task_content as taskContent,
+						t.priority as priority,
+						t.connect_issue as connectIssue,
+						t.reference_link as referLink,
+						t.reference_link_name as linkName,
+						t.start_date as startDate,
+						t.complete_date as completeDate,
+						t.end_date as endDate,
+						t.process_sort as processSort
+					from task t 
+					where t.project_no = #{projectNo} and t.process_sort = 1
+					order by t.start_date) ta)
+				where rownum = 1
+	</select>
+	
+	<insert id="addShortcut" parameterType="map">
+	  		insert into Shortcuts values(shortcut_seq.nextval, #{projectNo}, #{shortcutAddr}, #{shortcutName})
+	</insert>
+	
+	<select id="shortcutList" parameterType="_int" resultType="sc">
+			select 
+				shortcut_no as shortcutNo,
+				project_no as projectNo,
+				s_link_addr as linkAddr,
+				s_link_name as linkName
+			from Shortcuts
+			where project_no = #{projectNo} 
+	</select>
+	
+	<delete id="deleteShortcut" parameterType="_int">
+			delete from Shortcuts where shortcut_no = #{shortcutNo}
+	</delete>
   
 </mapper>
