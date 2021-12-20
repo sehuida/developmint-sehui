@@ -178,4 +178,46 @@
 		    file_path as filePath
 		from attachment where BOARD_TYPE=6 and BOARD_NO = #{qnaNo}
 	</select>
+	
+	<select id="userSearchBox" parameterType="map" resultType="q">
+		select q.* from(select "qna_no"as qnaNo,
+		    "member_id"as memberId,
+		    "category"as category,
+		    "qna_title"as qnaTitle,
+		    "qna_content"as qnaContent,
+		    "reg_date"as regDate,
+		    "filename"as filename,
+		    "filepath"as filepath,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date"as answerDate
+		from qna order by 1 desc)q
+		<choose>
+			<when test="category==0">
+				<trim prefix="where">
+					<if test="state==0">
+						memberId=#{memberId }
+					</if>
+					<if test="state == 1">
+						qnaAnswer is null and memberId=#{memberId }		
+					</if>
+					<if test="state == 2">
+						qnaAnswer is not null and memberId=#{memberId }
+					</if>
+				</trim>
+			</when>
+			<otherwise>
+				<trim prefix="where">
+					<if test="state==0">
+						category=#{category}
+					</if>
+					<if test="state == 1">
+						category=#{category} and qnaAnswer is null	and memberId=#{memberId }	
+					</if>
+					<if test="state == 2">
+						category=#{category} and qnaAnswer is not null and memberId=#{memberId }
+					</if>
+				</trim>
+			</otherwise>
+		</choose>
+	</select>
 </mapper>

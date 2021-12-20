@@ -274,5 +274,16 @@ public class QnaController {
 		return filelist;
 	}
 	
+	@RequestMapping(value="/nonMember_CounselList.do")
+	public String  nonMemberCounselList() {
+		
+		return "qna/nonMemberCounsel";
+	}
 	
+	@RequestMapping(value="/searhBoxUser.do")
+	public String UserSearchBox(Model model, int category, int state, String memberId) {
+		ArrayList<Qna> list = service.userSearchbox(category, state, memberId);
+		model.addAttribute("list",list);
+		return "qna/counselUser";
+	}
 }

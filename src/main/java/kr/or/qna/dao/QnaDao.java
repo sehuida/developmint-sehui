@@ -83,6 +83,12 @@ public class QnaDao {
 	}
 
 
+	public ArrayList<Qna> userSearchBox(HashMap<String, Object> map) {
+		List<Qna> list = sqlsession.selectList("qna.userSearchBox",map);
+		return (ArrayList<Qna>) list;
+	}
+
+
 	
 	
 }
