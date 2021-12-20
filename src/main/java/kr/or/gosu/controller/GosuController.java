@@ -79,10 +79,14 @@ public class GosuController {
 			ArrayList<GosuFeedback> gf2 = service.selectGosuFeedbackList2(m.getMemberId());
 			if (m.getMemberType() == 1) {
 				ArrayList<GosuRequestProjectSub> grpsList = service.selectGosuRequestProjectSubList(m.getMemberNo());
+				int costCount = service.selectGosuRequestCostListCount(m.getMemberId());
 				model.addAttribute("grpsList", grpsList);
+				model.addAttribute("costCount",costCount);
 			} else if (m.getMemberType() == 2) {
 				ArrayList<GosuRequestProjectSub> grpsList = service.selectGosuRequestProjectSubList2(m.getMemberNo());
+				int requestCount = service.selectGosuRequestListCount(m.getMemberNo());
 				model.addAttribute("grpsList", grpsList);
+				model.addAttribute("requestCount",requestCount);
 			}
 			model.addAttribute("gosuTalkList", gf);
 			model.addAttribute("gosuTalkList2", gf2);
