@@ -95,11 +95,6 @@ public class QnaDao {
 	}
 
 
-	public ArrayList<NonQna> selectNonQnaList() {
-		// TODO Auto-generated method stub
-		List<NonQna> list = sqlsession.selectList("qna.selectNonQnalist");
-		return (ArrayList<NonQna>) list;
-	}
 
 
 	

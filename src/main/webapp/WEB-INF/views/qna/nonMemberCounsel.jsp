@@ -63,33 +63,33 @@
 					</colgroup> --%>
 					<thead>
 					<tr>
-						<th style="width: 10%">문의번호</th>
-						<th style="width: 15%">문의 유형</th>
-						<th style="width: 8%;">처리 상태</th>
+						<th style="width: 8%">문의번호</th>
+						<th style="width: 10%">문의 유형</th>
 						<th style="text-align: center;">제목</th>
-						<th style="width: 10%">작성일</th>
-						<th style="width: 10%">이메일</th>
+						<th style="width: 10%">문의 작성일</th>
+						<th style="width: 18%">이메일</th>
+						<th style="width: 10%;">처리 상태</th>
 						<th style="width: 10%">버튼</th>
 					</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="nq" items="${list }" varStatus="i">
+						<c:forEach items="${adlist }" var="nq"  varStatus="i">
 							<tr>
 								<td>${nq.nonQnaNo }</td>
 								<td>${nq.type }</td>
-								<td>${nq.state }</td>
 								<td>${nq.qnaTitle }</td>
 								<td>${nq.regDate }</td>
 								<td>
-									<%-- <c:set var="subTitle" value="${fn:substring(nq.email,0,16)}"/>
-									<p class="newTitle">${subTitle }...</p>
-								    <!-- 아이디의 앞 4자리까지 보여 주고 --> --%>
-								  	${fn:substring(nq.email,0,4)}
+								    <!-- 아이디의 앞 4자리까지 보여 주고 -->
+								  	<p style="display: inline-block;">${fn:substring(nq.email,0,4)}</p>
 								   	<!-- 5자리부터 id의 길이만큼 *를 찍어줌 -->
-								   	<c:forEach begin="5" end="${fn:length(nq.email)}" step="1">
-								   		*
-								   	</c:forEach>
+								   	<p style="display: inline-block;">
+								   		<c:forEach begin="4" end="${fn:length(nq.email)}" step="1">
+									   		*
+									   	</c:forEach>
+								   	</p>
 								</td>
+								<td><a href="" class="btn btn-success disabled">${nq.state }</a></td>
 								<td><a href="javascript:void(0);" class="btn btn-secondary" id="pwChk">비밀번호 입력</a></td>
 							</tr>
 						</c:forEach>

@@ -120,10 +120,6 @@ public class QnaService {
 		return dao.deleteMyQna(qnaNo);
 	}
 
-	public ArrayList<NonQna> selectNonQnaList() {
-		// TODO Auto-generated method stub
-		return dao.selectNonQnaList();
-	}
 
 	
 

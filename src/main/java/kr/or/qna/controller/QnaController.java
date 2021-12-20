@@ -276,8 +276,8 @@ public class QnaController {
 	
 	@RequestMapping(value="/nonMember_CounselList.do")
 	public String  nonMemberCounselList(Model model) {
-		ArrayList<NonQna> list = service.selectNonQnaList();
-		model.addAttribute("list",list);
+		ArrayList<NonQna> adlist = service.counselList2();
+		model.addAttribute("adlist",adlist);
 		return "qna/nonMemberCounsel";
 	}
 	
