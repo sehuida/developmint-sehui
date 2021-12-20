@@ -466,7 +466,7 @@
 											<input type="button" value="등록" class="btn btn-outline-primary noMember" style="height: 100px; width: 80px; font-weight: bold; margin-left:10px; margin-right: 10px">
 										</c:otherwise>
 									</c:choose>
-									<input type="button" value="취소" class="btn btn-outline-secondary cancelBtn" style="height: 100px; width: 80px; font-weight: bold">
+									<input type="reset" value="취소" class="btn btn-outline-secondary cancelBtn" style="height: 100px; width: 80px; font-weight: bold">
 									<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 									<input type="hidden" name="boardNo" value="${list.contest.contestNo }">
 									<input type="hidden" name="boardType" value="1">

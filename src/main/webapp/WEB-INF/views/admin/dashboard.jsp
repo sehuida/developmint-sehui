@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,7 +124,7 @@
 	justify-content: space-evenly;
 }
 .BoardList{
-	width: 600px;
+	width: 400px;
 	border : 1px solid #d9d9d9;
 	border-radius : 5px;
 	padding: 25px;
@@ -310,19 +311,57 @@
 					<a href="/noticeList.do?reqPage=1" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
 					</div>
 					<c:forEach items="${noticeList }" var="n">
-						<a href="/noticeView.do?noticeNo=${n.noticeNo }" class="newBoard"><span>${n.noticeTitle }</span></a><span class="newBoardDate">${n.regDate }</span><br>
+						<c:choose>
+							<c:when test="${fn:length(n.noticeTitle) > 16}">
+								<c:set var="subTitle" value="${fn:substring(n.noticeTitle,0,16)}"/>
+								<a href="/noticeView.do?noticeNo=${n.noticeNo }" class="newBoard"><span>${subTitle }...</span></a>
+							</c:when>
+							<c:otherwise>
+								<span class="newTitle">${n.noticeTitle }</span>
+							</c:otherwise>
+						</c:choose>
+						<span class="newBoardDate">${n.regDate }</span><br>
 					</c:forEach>
 				</div>
 				
 				<div class="BoardList" >
 					<div>
-					<p class="title" style="background-color: #fff">QNA</p>
-					<a href="/counselAdmin.do" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
+					<p class="title" style="background-color: #fff">회원 QNA</p>
+					<a href="/adminCounsel.do?type=1" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
 					</div>
-					<c:forEach var="i" begin="0" end="5">
-					<a href="#" class="newBoard"><span>최신 QnA 입니다.</span></a><span class="newBoardDate">2021-11-29</span><br>
+					<c:forEach items="${qnaList }" var="q">
+						<c:choose>
+							<c:when test="${fn:length(q.qnaTitle) > 16}">
+								<c:set var="subTitle" value="${fn:substring(q.qnaTitle,0,16)}"/>
+								<a href="#" class="newBoard"><span>${subTitle }...</span></a>
+							</c:when>
+							<c:otherwise>
+								<span class="newTitle">${q.qnaTitle }</span>
+							</c:otherwise>
+						</c:choose>
+						<span class="newBoardDate">${q.regDate }</span><br>
 					</c:forEach>
 				</div>
+				
+				<div class="BoardList" >
+					<div>
+					<p class="title" style="background-color: #fff;">비회원 QNA</p>
+					<a href="/adminCounsel.do?type=2" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
+					</div>
+					<c:forEach items="${nonQnaList }" var="nq">
+						<c:choose>
+							<c:when test="${fn:length(nq.qnaTitle) > 16}">
+								<c:set var="subTitle" value="${fn:substring(nq.qnaTitle,0,16)}"/>
+								<a href="#" class="newBoard"><span>${subTitle }...</span></a>
+							</c:when>
+							<c:otherwise>
+								<span class="newTitle">${nq.qnaTitle }</span>
+							</c:otherwise>
+						</c:choose>
+						<span class="newBoardDate">${nq.regDate }</span><br>
+					</c:forEach>
+				</div>
+				
 			</div>
 		</div>
 	</div> 

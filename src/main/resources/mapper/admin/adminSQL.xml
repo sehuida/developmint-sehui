@@ -576,20 +576,39 @@
 	
 	<!-- 공지사항 5개 불러오기 -->
 	<select id="noticeList" resultType="n">
-		 SELECT NN.* FROM 
+	SELECT NN.* FROM 
 		(SELECT ROWNUM AS RNUM, N.* FROM
 			(SELECT 
 				"notice_no" as noticeNo, 
 				"notice_title" as noticeTitle, 
-				"reg_date" as regDate,
-				"filename" as filename, 
-				"filepath" as filepath, 
-				"pin"as pin, 
-				"notice_writer" as noticeWriter
+				"reg_date" as regDate
 			FROM notice  ORDER BY "notice_no" DESC)N)NN 
 		WHERE RNUM BETWEEN 1 and 5
 	</select>
 	
+	<!-- QnA 5개 불러오기 -->
+	<select id="qnaList" resultType="q">
+	 SELECT QQ.* FROM 
+		(SELECT ROWNUM AS RNUM, Q.* FROM
+			(SELECT 
+				"qna_no" as qnaNo, 
+				"qna_title" as qnaTitle, 
+				"reg_date" as regDate
+			FROM qna  ORDER BY "qna_no" DESC)Q)QQ
+		WHERE RNUM BETWEEN 1 and 5
+	</select>
+	
+	<!-- nonQnA 5개 불러오기 -->
+	<select id="nonQnaList" resultType="nq">
+	SELECT NQQ.* FROM 
+		(SELECT ROWNUM AS RNUM, NQ.* FROM
+			(SELECT 
+				"non_qna_no" as qnaNo, 
+				"qna_title" as qnaTitle, 
+				"reg_date" as regDate
+			FROM non_member_qna  ORDER BY "non_qna_no" DESC)NQ)NQQ
+		WHERE RNUM BETWEEN 1 and 5
+	</select>
 </mapper>
 
 
