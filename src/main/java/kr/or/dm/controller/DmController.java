@@ -37,4 +37,28 @@ public class DmController {
 			return "0";
 		}
 	}
+	@ResponseBody
+	@RequestMapping(value="/updateDm.do")
+	public String updateDm(int dmNo) {
+		int result = service.updateDm(dmNo);
+		if(result>0) {
+			return "1";
+		}else {
+			return "0";
+		}
+	}
+	@RequestMapping(value="/deleteMsg.do")
+	public String deleteMsg(int dmNo,Model model) {
+		int result = service.deleteMsg(dmNo);
+		if(result>0) {
+			model.addAttribute("title", "삭제성공");
+			model.addAttribute("loc", "/dmList.do");
+			model.addAttribute("icon", "success");			
+		}else {
+			model.addAttribute("title", "삭제실패");
+			model.addAttribute("loc", "/dmList.do");
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";
+	}
 }

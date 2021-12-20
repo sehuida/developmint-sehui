@@ -28,4 +28,12 @@ public class DmService {
 	public int dmCount(String memberId) {
 		return dao.dmCount(memberId);
 	}
+	@Transactional
+	public int updateDm(int dmNo) {
+		return dao.updateDm(dmNo);
+	}
+	@Transactional
+	public int deleteMsg(int dmNo) {
+		return dao.deleteMsg(dmNo);
+	}
 }

@@ -7,10 +7,17 @@
 <meta charset="UTF-8">
 <title>Develomints</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 	.dmWrap{
 		width: 1000px;
 		margin: 0 auto;
+	}
+	table td,tr{
+		text-align: center;
+	}
+	table th{
+		width: 150px;
 	}
 </style>
 </head>
@@ -21,35 +28,75 @@
 		<div class="dmWrap">
 			<p class="text-muted">받은 쪽지함</p>
 			<table class="table table-hover">
-				<tr class="table-active">
-					<th>번호</th><th>보낸사람</th><th>내용</th><th>날짜</th><th>읽음여부(Y,N)</th>
+				<tr class="table-primary">
+					<th>번호</th><th>보낸사람</th><th style="width: 500px; text-align: left;">내용</th><th>날짜</th><th>읽음여부</th><th>삭제하기</th>
 				</tr>
-				<c:forEach items="${list }" var="dm">
+				<c:forEach items="${list }" var="dm" varStatus="i">
 					<c:if test="${dm.receiver eq sessionScope.m.memberId}">
 						<tr>
 							<td>${dm.dmNo }</td>
 							<td>${dm.sender }</td>
-							<td>${dm.dmContent }</td>
+							<td style="text-align: left"><a href="#" data-bs-toggle="modal" data-bs-target="#reportComment${i.index }" class="reply">${dm.dmContent }</a></td>
 							<td>${dm.dmTime }</td>
-							<td>${dm.readStatus }</td>
+							<c:choose>
+								<c:when test="${dm.readStatus == 'Y' }">
+									<td class="text-info">읽음</td>								
+								</c:when>
+								<c:otherwise>
+									<td class="text-danger">읽지않음</td>
+								</c:otherwise>							
+							</c:choose>
+							<td>
+								<a href="javascript:void(0)" class="btn btn-danger delmsg" onclick="deleteMsg(this,'${dm.dmNo}')">삭제</a>
+							</td>
 						</tr>
-					</c:if>
+					<!-- 답장하기 modal -->
+					<div class="modal fade" id="reportComment${i.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog  modal-dialog-centered">
+					    <div class="modal-content">
+					      <div class="modal-body">
+						      	<p class="Modaltitle">답장하기</p>
+						      	<div style="padding:5px; margin-bottom: 10px;">
+							      	<p><span>발신자</span> : ${dm.sender }</p>
+							      	<textarea rows="3" style="width:100%" class="form-control dmContent"></textarea>
+						      	</div>
+						      	<div style="text-align: right;">
+						      		<button type="button" class="btn btn-secondary send" style="width: 100px;">답장</button>
+						        	<button type="button" class="btn btn-primary " id="cancel" style="width: 100px;" data-bs-dismiss="modal">취소</button>					        	
+								</div>
+								<input type="hidden" id="receiver" value="${dm.sender }">
+								<input type="hidden" id="sender" value="${sessionScope.m.memberId }">
+					      </div>
+						  </div>
+					  </div>
+					</div><!-- 답장하기 modal 종료 -->
+					</c:if>				
 				</c:forEach>
 			</table>
 			<hr>
 			<p class="text-muted">보낸 쪽지함</p>
 			<table class="table table-hover">
-				<tr class="table-active">
-					<th>번호</th><th>받는사람</th><th>내용</th><th>날짜</th><th>읽음여부(Y,N)</th>
+				<tr class="table-primary">
+					<th>번호</th><th>받는사람</th><th style="width: 500px; text-align: left;">내용</th><th>날짜</th><th>읽음여부</th><th>삭제하기</th>
 				</tr>
 				<c:forEach items="${list }" var="dm">
 					<c:if test="${dm.sender eq sessionScope.m.memberId}">
 						<tr>
 							<td>${dm.dmNo }</td>
 							<td>${dm.receiver }</td>
-							<td>${dm.dmContent }</td>
+							<td style="text-align: left">${dm.dmContent }</td>
 							<td>${dm.dmTime }</td>
-							<td>${dm.readStatus }</td>
+							<c:choose>
+								<c:when test="${dm.readStatus == 'Y' }">
+									<td class="text-info">읽음</td>								
+								</c:when>
+								<c:otherwise>
+									<td class="text-danger">읽지않음</td>
+								</c:otherwise>							
+							</c:choose>
+							<td>
+								<a href="javascript:void(0)" class="btn btn-danger delmsg" onclick="deleteMsg(this,'${dm.dmNo}')">삭제</a>
+							</td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -58,26 +105,65 @@
 	</div>	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
-		$("#send").click(function () {
-			
+		$(".send").click(function () {
+			//선택자를 가져오고 그중에 this가 몇번쨰인지 확인하는거!
+			//$(this).index(); 아님!!!
+			var index = $(".send").index(this);
 			var receiver = $("#receiver").val();
-			var dmContent = $("#dmContent").val();
+			var dmContent = $(".dmContent").eq(index).val();
 			var sender = $("#sender").val();
-			
 			$.ajax({
 				url : "/sendDm.do",
 				data : {receiver:receiver,dmContent:dmContent,sender:sender},
 				success : function(data) {
 					if(data == 1){
 						dmCount(receiver);
-						console.log("성공");
+						swal({
+							  title: "답장 완료",
+							  icon: "success",
+							  button: "닫기",
+							}).then(function(){
+								location.reload();							
+							});;
 					}else{
 						console.log("실패");
 					}
-					location.reload();
 				}
 			});
-		})
+		});
+		//상세보기 누르면 읽음으로 표시하고,count 업데이트
+		$(".reply").click(function(){
+			//누른버튼 기준으로 발신자 check
+			var receiver = '${sessionScope.m.memberId}';
+			var dmNo = $(this).parent().prev().prev().html();
+			$.ajax({
+				url : "/updateDm.do",
+				data : {dmNo:dmNo},
+				success : function(data){
+					if(data == 1){
+						dmCount(receiver);
+					}else{
+						
+					}
+				}
+			});
+		});
+		$("#cancel").click(function(){
+			location.reload();
+		});
+		//메시지 삭제하기
+		function deleteMsg(obj,dmNo){
+			swal({
+			    title: "쪽지를 삭제하시겠습니까?",
+			    icon: "warning",
+			    buttons: ["돌아가기", "삭제하기"],
+			    dangerMode: true
+			}).then((willDelete) => {
+			    if (willDelete) {
+			    	location.href="/deleteMsg.do?dmNo="+dmNo;
+			    }
+			});
+		}
 	</script>
 </body>
 </html>
