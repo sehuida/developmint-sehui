@@ -891,4 +891,10 @@ public class GosuController {
 		GosuRequest grcOne = service.gosuMemberRequestAjax(grc);
 		return grcOne;
 	}
+
+	@RequestMapping(value = "/develomintIntro.do")
+	public String develomintIntro() {
+		return "gosu/develomintIntro";
+	}
+
 }
