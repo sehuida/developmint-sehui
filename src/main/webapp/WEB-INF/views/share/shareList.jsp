@@ -106,6 +106,7 @@
 								<div>
 									<span class="text-muted"># ${sv.boardNo }</span><span class="badge bg-info cateBadge">${sv.type }</span>
 								</div>
+								<!-- 로그인으로 if문 돌리고 처리-->
 								<a href="/shareBoardView.do?boardNo=${sv.boardNo }">${sv.boardTitle }</a>
 							</td>
 							<td><i class="bi bi-chat" style="color: #4ecdc4"></i>${sv.comments }</td>
