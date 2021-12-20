@@ -165,7 +165,24 @@
 		select count(*) from announcement
 	</select>
 	
-	
+	<select id="selectApplyAnnounce" parameterType="_int" resultType="al">
+		select * from
+		(select rownum as rnum , r.*
+		from (
+        select
+            app_no as appNo,
+            status,
+            announce_no as announceNo,
+            a.member_no as memberNo,
+            resume_title as resumeTitle,
+            apply_date as applyDate
+        from application a
+        join resume re using(resume_no)
+        order by 1 desc )r)rr
+        where rnum between 1 and 5 and (status = 1 or status = 2) and announceNo = #{announceNo}
+		
+		
+	</select>
 	
 	
 </mapper>

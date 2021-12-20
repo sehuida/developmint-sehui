@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.announce.dao.AnnounceDao;
 import kr.or.announce.vo.Announce;
+import kr.or.announce.vo.AnnounceList;
 import kr.or.announce.vo.AnnounceView;
 
 @Service
@@ -45,6 +46,10 @@ public class AnnounceService {
 			return 0;
 		}
 		
+	}
+
+	public ArrayList<AnnounceList> selectApplyAnnounce(int announceNo) {
+		return dao.selectApplyAnnounce(announceNo);
 	}
 
 	/*

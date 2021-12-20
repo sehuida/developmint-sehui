@@ -357,6 +357,7 @@
 				reader.onload=function(e){
 					/* $("#img-view").attr("src",e.target.result); */
 					var image_tag = "<li><img style=\"width: 65px;height: 65px;\" src=\"" + e.target.result + "\" /><a class=\"del-image\" href=\"javascript:void(0);\"><i class=\"bi bi-x-circle-fill\"></i></a></li>";
+					files.value += (files.value != "") ? "," + e.target.result : e.target.result;
 					$("#file_show").append(image_tag);
 				}
 			}else{
@@ -373,6 +374,7 @@
 				$("#file_message").text(message).show();
 			}
 		} */
+		
 	</script>
 </body>
 </html>
