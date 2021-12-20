@@ -89,6 +89,12 @@ public class QnaDao {
 	}
 
 
+	public int deleteMyQna(int qnaNo) {
+		// TODO Auto-generated method stub
+		return sqlsession.delete("qna.deleteMyQna",qnaNo);
+	}
+
+
 	
 	
 }

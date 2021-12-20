@@ -169,6 +169,7 @@
 		select faq_no as faqNo, faq_q as faqQ, faq_a as faqA, category from faq where category = #{category} order by 1
 	</select>
 	
+	<!-- 유저전용 file list -->
 	<select id="selectOnefileList" parameterType="_int" resultType="pfv">
 		select file_no as fileNo, 
 		    member_no as memberNo, 
@@ -179,6 +180,7 @@
 		from attachment where BOARD_TYPE=6 and BOARD_NO = #{qnaNo}
 	</select>
 	
+	<!-- 유저 전용 검색 -->
 	<select id="userSearchBox" parameterType="map" resultType="q">
 		select q.* from(select "qna_no"as qnaNo,
 		    "member_id"as memberId,
@@ -220,4 +222,9 @@
 			</otherwise>
 		</choose>
 	</select>
+	
+	<!-- 유지전용 질문 삭제  -->
+	<delete id="deleteMyQna" parameterType="_int" >
+		delete from qna where "qna_no" = #{qnaNo}
+	</delete>
 </mapper>

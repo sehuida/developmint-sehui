@@ -115,6 +115,11 @@ public class QnaService {
 		return dao.userSearchBox(map);
 	}
 
+	public int deleteQna(int qnaNo) {
+		// TODO Auto-generated method stub
+		return dao.deleteMyQna(qnaNo);
+	}
+
 	
 
 

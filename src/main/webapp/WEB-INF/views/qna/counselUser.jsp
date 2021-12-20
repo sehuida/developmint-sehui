@@ -125,10 +125,34 @@
 											<c:when test="${not empty q.qnaAnswer}">
 												<%-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewModal${i.index }">내역보기</button> --%>
 												<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal${i.index }">내역보기</a>
+												<div class="modal" id="viewModal${i.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												  <div class="modal-dialog" role="document" style="top: 20%;min-width: 1000px;">
+												    <div class="modal-content">
+												      <div class="modal-header">
+												        <h5 class="modal-title">AnswerView</h5>
+												        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+												          <span aria-hidden="true"></span>
+												        </button>
+												      </div>
+												      <div class="modal-body" >
+														<p style="font-size: 25px; font-weight: bold">보낸 답변보기</p>
+														<p style="font-size: 22px;">${q.type }>${q.qnaTitle }</p>
+														<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;border-radius: 5px;">
+															<p><span style="font-weight: bold">답변 제목</span> : re)${q.qnaTitle }</p>
+															<p><span style="font-weight: bold">내용</span> : ${q.qnaAnswerBr }</p>
+															<p><span style="font-weight: bold">답변 날짜</span> : ${q.answerDate}</p>
+														</div>
+												      </div>
+												      <div class="modal-footer">
+												        <button type="button" class="btn btn-secondary btn_no" data-bs-dismiss="modal">닫기</button>
+												      </div>
+												    </div>
+												  </div>
+												</div>
 											</c:when>
 											<c:otherwise>
 												<%-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#writeModal${i.index }" data-whatever="${adlist }">답변하기</button> --%>
-												<a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#writeModal${i.index }">수정하기</a>
+												<a href="#" class="btn btn-secondary" onclick="deleteMyQna(this,'${q.qnaNo}');">삭제하기</a>
 											</c:otherwise>
 										</c:choose>
 									</div>
@@ -149,6 +173,12 @@
 		function cancel() {
 			if(confirm('공지사항으로 돌아가시겠습니까?')){
 				location.href="/noticehome.do";
+			}
+		}
+		function deleteMyQna(obj,qnaNo){
+			console.log(qnaNo);
+			if(confirm("게시글을 삭제하시겠습니까?")){
+				location.href="/deleteMyQna.do?qnaNo="+qnaNo;
 			}
 		}
 	</script>
