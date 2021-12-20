@@ -225,6 +225,11 @@
 					</div>
 				</div>
 			</div>
+			<div style="display: none">
+				<input type="hidden" class="receiver" value="${r.commentId }">
+				<input type="hidden" class="sender" value="관리자">
+				<input type="hidden" class="dmContent" value="[경고] 회원님은 현재 4회 신고 처리되었습니다. 5회 누적 시 사이트 이용이 제한됩니다.">
+			</div>
 			</c:forEach>
 		</div>	
 		<p class="title" style="margin-top: 50px;">최근 처리 내역</p>
@@ -282,6 +287,7 @@
 					</table>
 				</div>
 			</div>
+			
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 	 <script>
@@ -360,6 +366,34 @@
 		 			.then((willDelete) => {
 		 			  if (willDelete) {
 		 			   $(".reportBtnForm").eq(index).submit();	
+		 			  }
+		 			});
+	 		}else if(rpCount == 3){
+	 			swal({
+		 			  title: "신고처리",
+		 			  text: "해당 회원을 신고처리 하시겠습니까? 신고 처리 후 메시지를 전송합니다.",
+		 			  icon: "warning",
+		 			  buttons: true,
+		 			  dangerMode: true,
+		 			})
+		 			.then((willDelete) => {
+		 			  if (willDelete) {
+		 			   $(".reportBtnForm").eq(index).submit();
+						
+		 			  	var receiver = $(".receiver").eq(index).val();
+		 				var dmContent = $(".dmContent").eq(index).val();
+		 				var sender = $(".sender").eq(index).val();
+		 				
+		 				$.ajax({
+		 					url : "/sendDm.do",
+		 					data : {receiver:receiver,dmContent:dmContent,sender:sender},
+		 					success : function(data) {
+		 						if(data == 1){
+		 							dmCount(receiver);
+		 						}
+		 					}
+		 				});
+		 				
 		 			  }
 		 			});
 	 		}else{
