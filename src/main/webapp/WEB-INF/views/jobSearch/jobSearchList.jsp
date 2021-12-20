@@ -199,7 +199,7 @@
                 <p>애플리케이션 개발, 웹 개발, 일반 소프트웨어 개발, 웹 디자인, 커머스, 쇼핑몰 등</p>
                 <c:choose>
                 	<c:when test="${not empty sessionScope.m }">
-                		<c:if test="${sessionScope.m.memberType eq 1 }">		<!-- 일반회원일 경우 -> 이력서 작성하기 띄우기 -->
+                		<c:if test="${sessionScope.m.memberType eq 1 or sessionScope.m.memberType eq 2 }">		<!-- 일반회원일 경우 -> 이력서 작성하기 띄우기 -->
 			                <a href="resumeManage.do?memberNo=${sessionScope.m.memberNo }&reqPage=1"><button class="resume">이력서 작성하기</button></a>                		
                 		</c:if>
                 		<c:if test="${sessionScope.m.memberType eq 3 }">		<!-- 기업회원일 경우 -> 구인글 작성하기 띄우기 -->

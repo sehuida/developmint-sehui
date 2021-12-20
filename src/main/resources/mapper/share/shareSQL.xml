@@ -124,4 +124,16 @@
  			filepath = #{filepath}
  		where board_no=#{boardNo}
    </update>
+   <insert id="insertRecomment" parameterType="cm">
+   		insert into comments values(comments_seq.nextval,#{memberId},#{commentContent},to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#{boardNo},2,#{commentType},#{commentRef})
+   </insert>
+   <delete id="deleteComment" parameterType="cm">
+   		delete from comments where comment_no = #{commentNo}
+   </delete>
+   <update id="updateComment" parameterType="cm">
+   		update comments set comment_content=#{commentContent} where comment_no=#{commentNo}
+   </update>
+   <insert id="shareReport" parameterType="rp">
+   		insert into report values(report_seq.nextval, #{reporterId}, #{reportReason}, #{reportEtc}, #{commentNo}, #{commentId}, to_char(sysdate,'yyyy-mm-dd'), #{reportStatus}, #{commentContent},null )
+   </insert>
 </mapper>

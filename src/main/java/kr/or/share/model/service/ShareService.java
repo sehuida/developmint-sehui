@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.comment.vo.Comment;
+import kr.or.comment.vo.Report;
 import kr.or.member.model.vo.GosuNoticePage;
 import kr.or.share.model.dao.ShareDao;
 import kr.or.share.model.vo.Share;
@@ -161,6 +162,23 @@ public class ShareService {
 	@Transactional
 	public int updateShareBoard(Share s) {
 		return dao.updateBoard(s);
+	}
+	
+	@Transactional
+	public int insertRecomment(Comment c) {
+		return dao.insertRecomment(c);
+	}
+	@Transactional
+	public int deleteComment(Comment c) {
+		return dao.deleteComment(c);
+	}
+	@Transactional
+	public int updateComment(Comment c) {
+		return dao.updateComment(c);
+	}
+	@Transactional
+	public int shareReport(Report rp) {
+		return dao.shareReport(rp);
 	}
 
 }

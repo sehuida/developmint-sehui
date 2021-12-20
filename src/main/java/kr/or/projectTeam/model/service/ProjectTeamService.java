@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.projectTeam.model.dao.ProjectTeamDao;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectEntry;
+import kr.or.projectTeam.model.vo.ProjectReview;
 import kr.or.projectTeam.model.vo.ProjectTask;
 import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.projectTeam.model.vo.ProjectTeamApplicantViewData;
@@ -629,6 +630,71 @@ public class ProjectTeamService {
 	@Transactional
 	public int deleteShortcut(int shortcutNo) {
 		int result = dao.deleteShortcut(shortcutNo);
+		return result;
+	}
+	
+	@Transactional
+	public int endProject(ArrayList<ProjectReview> endList, int backProjectNo, int backMemberNo) {
+		int result = 0;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("endList", endList);
+		map.put("backProjectNo", backProjectNo);
+		map.put("backMemberNo", backMemberNo);
+		int reviewResult = dao.insertReview(map);
+		if(reviewResult > 0) {
+			int memberPointResult = dao.reviewMemberPointUpdate(map);
+			if(memberPointResult > 0) {
+				result = dao.endProject(map);
+			}
+		}
+		
+		return result;
+	}
+	
+	@Transactional
+	public int insertReview(ArrayList<ProjectReview> endList, int backProjectNo, int backMemberNo) {
+		int result = 0;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("endList", endList);
+		map.put("backProjectNo", backProjectNo);
+		map.put("backMemberNo", backMemberNo);
+		int reviewResult = dao.insertReview(map);
+		if(reviewResult > 0) {
+			result = dao.reviewMemberPointUpdate(map);
+		}
+		return result;
+	}
+	
+	@Transactional
+	public int updateProjectOutline(ArrayList<String> langList, ProjectTeam pt, String crueRoll, int sessionMemberNo,
+			int projectNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("langList", langList);
+		map.put("pt", pt);
+		map.put("crueRoll", crueRoll);
+		map.put("sessionMemberNo", sessionMemberNo);
+		map.put("projectNo", projectNo);
+		
+		int result1 = 1;
+		int result2 = 1;
+		int result3 = 1;
+		
+		int result = 0;
+		
+		if(langList.size() != 0) {
+			//result1 = dao.updateProjectLangList(map);
+		}
+		if(pt != null) {
+			//result2 = dao.projectUpdate(map);
+		}
+		if(crueRoll != null && crueRoll != "") {
+			//result3 = dao.crueRollUpdate(map);
+		}
+		
+		if(result1 > 0 && result2 > 0 && result3 > 0) {
+			result = 1;
+		}
+		
 		return result;
 	}
 	

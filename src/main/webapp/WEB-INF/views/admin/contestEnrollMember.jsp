@@ -216,10 +216,12 @@
 						tbl += '<td>'+data[i].cmGit+'</td>';
 						tbl += '</tr>';
 					}
+					var p2 = '<p style="font-size: 16px; font-weight: bold; color: #F23737;">승인 시 주최자 메일로 회원리스트가 전송됩니다.</p>'
 					var btn = '<button class="btn btn-primary allEnroll">전체 회원 승인</button>';
 					btn += '<button class="btn btn-primary checkEnroll">선택 회원 승인</button>';
 					btn += '<button class="btn btn-secondary noEnroll">선택 회원 반려</button>';
 					$(".contestMemberView").eq(index).append(tbl);
+					$(".contestMemberView").eq(index).append(p2);
 					$(".contestMemberView").eq(index).append(btn);
 	
 					

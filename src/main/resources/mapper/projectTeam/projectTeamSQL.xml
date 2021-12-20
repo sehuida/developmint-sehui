@@ -382,7 +382,10 @@
             (select member_grade from member m where m.member_no = p.member_no) as projectWriterGrade,
             (select count(*) from project_dibs pd where pd.project_no = #{projectNo} and pd.member_no = #{memberNo}) as dibCountClickValue,
             (select count(*) from project_entry where project_no=#{projectNo}) as applyValue,
-            (select count(*) from project_entry where project_no=#{projectNo} and member_no=#{memberNo}) as myApplyValue
+            (select count(*) from project_entry where project_no=#{projectNo} and member_no=#{memberNo}) as myApplyValue,
+            (select count(*) from project_review where project_no in
+            	((select pp.project_no from project pp where pp.project_status = 3 and pp.project_no in ((select pm.project_no from project_team_member pm where pm.member_no=#{memberNo})))) 
+            and review_writer = 'null') as writeReviewCheck
 	from project p 
 	where project_no = #{projectNo}
   </select>
@@ -755,7 +758,7 @@
   </select>
   
   <select id="projectInfo" parameterType="map" resultType="pt">
-  	select
+  		select
 				p.project_no as projectNo,
 				p.member_no as projectWriterMemberNo,
 				p.recruit_start_date as rStartDate,
@@ -769,7 +772,8 @@
 				p.project_status as projectStatus,
 				p.project_start_date as pStartDate,
 				p.project_end_date as pEndDate,
-				(select filepath from member m where m.member_id = p.project_reader) as writerImgPath
+				(select filepath from member m where m.member_id = p.project_reader) as writerImgPath,
+				(select count(*) from project_review where project_no = #{projectNo} and review_writer = #{memberNo}) as writeReviewCheck;
 			from project p 
 			where project_no = #{projectNo}
   </select>
@@ -853,5 +857,47 @@
 	<delete id="deleteShortcut" parameterType="_int">
 			delete from Shortcuts where shortcut_no = #{shortcutNo}
 	</delete>
-  
+	
+	<insert id="insertReview" parameterType="map">
+	  		insert into project_review(review_no, team_member_no, project_no, review_point, review_content, review_writer, enroll_date)
+  			select review_seq.nextval, A.* from (
+  			<foreach collection="endList" item="list" separator="UNION ALL ">
+  				select 
+					#{list.teamMemberNo} as team_member_no,
+  					#{backProjectNo} as project_no,
+  					#{list.reviewPoint} as review_point,
+  					#{list.reviewContent} as review_content,
+  					#{backMemberNo} as review_writer,
+  					to_char(sysdate, 'yyyy-mm-dd') as enroll_date
+  				from dual
+  			</foreach>) A
+	</insert>
+  	
+  	<update id="reviewMemberPointUpdate" parameterType="map">
+  		<foreach collection="endList" item="el">
+			update member m set m.member_grade = 
+			<choose>
+				<when test="el.reviewPoint == 1">
+					m.member_grade where member_no=#{el.teamMemberNo}
+				</when>
+				<when test="el.reviewPoint == 2">
+					m.member_grade where member_no=#{el.teamMemberNo}
+				</when>
+				<when test="el.reviewPoint == 3">
+					m.member_grade+1 where member_no=#{el.teamMemberNo}
+				</when>
+				<when test="el.reviewPoint == 4">
+					m.member_grade+2 where member_no=#{el.teamMemberNo}
+				</when>
+				<when test="el.reviewPoint == 5">
+					m.member_grade+3 where member_no=#{el.teamMemberNo}
+				</when>
+			</choose>
+		</foreach>
+  	</update>
+  	
+  	<update id="endProject" parameterType="_int">
+ 		update project set project_status = 3 where project_no = #{backProjectNo}
+ 	</update>
+  	
 </mapper>

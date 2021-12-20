@@ -24,6 +24,7 @@ import kr.or.member.model.vo.Member;
 import kr.or.notice.vo.Notice;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.qna.service.QnaService;
+import kr.or.qna.vo.Faq;
 import kr.or.qna.vo.Qna;
 import kr.or.qna.vo.nonQna;
 
@@ -258,4 +259,11 @@ public class QnaController {
 		return "qna/counselAdmin";
 	}
 	
+	@RequestMapping(value="/faqlist.do")
+	public String faqlistBox(int category, Model model) {
+		ArrayList<Faq> list = service.selectFaqlist(category);
+		model.addAttribute("category",category);
+		model.addAttribute("list",list);
+		return "qna/faqlist";
+	}
 }

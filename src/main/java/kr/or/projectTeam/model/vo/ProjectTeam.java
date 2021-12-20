@@ -29,4 +29,5 @@ public class ProjectTeam {
 	private int applyValue;
 	private int myApplyValue;
 	private int myEntryNo;
+	private int writeReviewCheck;
 }

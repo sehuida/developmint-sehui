@@ -273,7 +273,7 @@
 						</li>               
 					</ul>
 				<div class="message">
-					<a href="applicationStatus.do"><button class="companyMessage">지원신청 회원 목록</button></a>		<!-- 일반회원이 지원신청을 했을 경우 count증가하고 이력서 열람할 수 있도록 하기 -> 서류합격? 버튼 누를 시 웹소켓으로 쪽지 보내기 -->
+					<a href="applicationStatus.do?reqPage=1"><button class="companyMessage">지원신청 회원 목록</button></a>		<!-- 일반회원이 지원신청을 했을 경우 count증가하고 이력서 열람할 수 있도록 하기 -> 서류합격? 버튼 누를 시 웹소켓으로 쪽지 보내기 -->
 					<span class="requestCount">1</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
 				</div>
 				<div class="update">
