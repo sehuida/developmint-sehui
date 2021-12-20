@@ -64,6 +64,8 @@ public class AdminController {
 			model.addAttribute("yesterDayTotalMember", td.getYesterDayTotalMember());
 			model.addAttribute("yesterDayTotalBoard", td.getYesterDayTotalBoard());
 			model.addAttribute("noticeList", td.getNoticeList());
+			model.addAttribute("qnaList", td.getQnaList());
+			model.addAttribute("nonQnaList", td.getNonQnaList());
 			return "admin/dashboard";
 		}
 		

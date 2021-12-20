@@ -33,37 +33,21 @@
 	box-shadow: 1px 2px 10px 0 rgb(0 0 0 / 15%);
 	transform: perspective(1px) translateZ(0);
 }
-.memberBox {
-  transition: color 0.25s;
+.memberBox::before{
+	content: "";
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 100%;
+    top: 0;
+    background: #4ECDC4;
+    height: 4px;
+    transition-property: right;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
 }
-.memberBox::before, .memberBox::after {
-  box-sizing: inherit;
-  z-index: -1;
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border: 2px solid transparent;
-  border-radius : 3px;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  transform-origin: center;
-}
-.memberBox::before {
-  border-top: 2px solid #4ECDC4;
-  border-bottom: 2px solid #4ECDC4;
-  transform: scale3d(0, 1, 1);
-}
-.memberBox::after {
-  border-left: 2px solid #4ECDC4;
-  border-right: 2px solid #4ECDC4;
-  transform: scale3d(1, 0, 1);
-}
-.memberBox:hover::before, .memberBox:hover::after {
-  transform: scale3d(1, 1, 1);
-  transition: transform 0.5s;
+.memberBox:hover:before{
+	right: 0;
 }
 
 .imgBox{

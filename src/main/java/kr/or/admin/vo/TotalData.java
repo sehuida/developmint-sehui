@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kr.or.notice.vo.Notice;
+import kr.or.qna.vo.Qna;
+import kr.or.qna.vo.nonQna;
 import lombok.Data;
 
 @Data
@@ -20,10 +22,12 @@ public class TotalData {
 	private int yesterDayTotalMember;
 	private int yesterDayTotalBoard;
 	private ArrayList<Notice> noticeList;
+	private ArrayList<Qna> qnaList;
+	private ArrayList<nonQna> nonQnaList;
 	
 	public TotalData(int todayTotalMember, int todayJoinMember, int todayOutMember, int todayTotalContent,
 			List<String> dateList, List<Integer> joinList, List<Integer> outList, List<Integer> gradeList,
-			List<Integer> cateList, int yesterDayTotalMember, int yesterDayTotalBoard, ArrayList<Notice> noticeList) {
+			List<Integer> cateList, int yesterDayTotalMember, int yesterDayTotalBoard, ArrayList<Notice> noticeList, ArrayList<Qna> qnaList, ArrayList<nonQna> nonQnaList) {
 		super();
 		this.todayTotalMember = todayTotalMember;
 		this.todayJoinMember = todayJoinMember;
@@ -37,6 +41,8 @@ public class TotalData {
 		this.yesterDayTotalMember = yesterDayTotalMember;
 		this.yesterDayTotalBoard = yesterDayTotalBoard;
 		this.noticeList = noticeList;
+		this.qnaList = qnaList;
+		this.nonQnaList = nonQnaList;
 	}
 	
 	
