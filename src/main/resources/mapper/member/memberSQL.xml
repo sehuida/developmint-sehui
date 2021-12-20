@@ -180,4 +180,26 @@
   <select id="projectLikesCnt" parameterType="_int" resultType="_int">
   	select count(*) from project_dibs where member_no=#{memberNo} 
   </select>
+  <select id="myBoard" parameterType="map" resultType="sv">
+	select shb.*,(select count(*) from comments c where c.board_no=shb.boardNo and c.board_type=2) as comments from
+	(select rownum as rnum,sb.* from
+	(select 
+	    member_no as memberNo,
+	    board_no as boardNo,
+	    board_title as boardtitle,
+	    board_content as boardContent,
+	    board_type as boardType,
+	    reg_date as regDate,
+	    filename,
+	    s.filepath,
+	    read_count as readCount,
+	    member_id as memberId,
+	    m.filepath as profiles,
+	    member_grade as memberGrade,
+	    (select count(*) from likes lk where s.board_no=lk.board_no) as likes
+	from share_board s left join member m using (member_no) where member_no=#{memberNo} order by 1 desc)sb)shb where rnum between #{start} and #{end}	
+  </select>
+  <select id="boardCount" parameterType="_int" resultType="_int">
+  	select count(*) from share_board where member_no=#{memberNo}
+  </select>
 </mapper>
