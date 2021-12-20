@@ -514,11 +514,11 @@
 							</div>
 							<br> <b>제목</b><br>
 							<div class="g-style">
-								<p id="gprojectTitle" style="width: 500px;"></p>
+								<p id="gprojectTitle" style="width: 500px;font-size: 25px;font-weight:900; color:#56cc9d;"></p>
 							</div>
 							<br> <b>내용</b><br>
 							<div class="g-style">
-								<p id="gprojectContent" style="width: 500px;"></p>
+								<p id="gprojectContent" style="width: 500px; text-align: left;"></p>
 							</div>
 
 							<br>
@@ -586,6 +586,8 @@
 					, type : "post"
 					, data : {"pNo":pNo}
 					, success : function(data) {
+						$("#gprojectTitle").empty();
+						$("#gprojectContent").empty();
 						console.log(data);
 						$("#gprojectTitle").append(data.gprojectContent);
 						$("#gprojectContent").append(data.gprojectTitleBr);

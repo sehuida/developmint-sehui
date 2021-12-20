@@ -213,6 +213,7 @@ input:focus, textarea:focus {
 
 }
 .g-req-box ul {
+	
 }
 
 .g-req-box li {
@@ -414,6 +415,12 @@ input:focus, textarea:focus {
 			var gfTitle = $("#ggcostContent").val();
 			var mId = $("#ggmemberId").val();
 			 var cost = $("#costSend").val();
+			 console.log("글자 길이 : "+gfTitle.length);
+			 if(gfTitle.length >= 10){
+				    gfTitle = gfTitle.substr(0,10)+"...";
+			};
+			console.log("글자 길이 : "+gfTitle.length);
+
 			var IMP = window.IMP;
 			  IMP.init('imp37172515');
 			  console.log(cost);
@@ -429,8 +436,7 @@ input:focus, textarea:focus {
 			        var msg = '결제가 완료되었습니다.';
 						var costNo = $("#costNo").val();
 						var requestNo = $("#requestNo").val();
-						var title ='성공';
-				        var icon = 'success';
+						
 			   		 $.ajax({
 						url : "/gosuRequestProjectSubAjax.do"
 						, type : "post"
@@ -440,25 +446,27 @@ input:focus, textarea:focus {
 							"costNo" : costNo,
 							}
 						, success : function(data) {
-							console.log(data);
-							location.href="/gosuProject.do?rpsNo="+data;
+							console.log(data); 
+							swal({
+					            title: '성공',
+					            text: '개발을 진행하세요',
+					            icon: 'success'
+					          });
+							location.href="/gosuMain.do"
 						}
 				 });
 			    } else {
-			        var msg = '결제에 실패하였습니다.';
-			        msg += '에러내용 : ' + rsp.error_msg;
-			        var title ='실패';
-			        var icon = 'error';
+			       
+			        swal({
+			            title: '실패',
+			            text: '에러 : '+rsp.error_msg,
+			            icon: 'error'
+			          });
 			    }
 			    
-				swal({
-			        title: title,
-			        text: msg,
-			        icon: icon
-			      });
-			    
 			
-		})
+			
+		});
 		});
 		
 		

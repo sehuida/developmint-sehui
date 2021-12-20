@@ -323,7 +323,7 @@ input:focus, textarea:focus {
 											</tr>
 											<tr>
 												<td colspan="3"
-													style="text-align: center; border: 1px solid #78c2ad; padding: 50px;">${greview.reviewContentBr }</td>
+													style="width: 800px;text-align: center; border: 1px solid #78c2ad; padding: 50px;">${greview.reviewContentBr }</td>
 
 											</tr>
 										</table>

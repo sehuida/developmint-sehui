@@ -223,7 +223,8 @@ public class GosuService {
 	}
 
 	public GosuRequestProjectSub selectGosuRequestProjectSub(int rpsNo) {
-		GosuRequestProjectSub grps = dao.selectGosuRequestProjectSub(rpsNo);	
+		GosuRequestProjectSub grps = dao.selectGosuRequestProjectSub(rpsNo);
+		
 		return grps;
 	}
 
@@ -395,7 +396,7 @@ public class GosuService {
 
 
 	public GosuNoticeListPageData selectGosuNoticeList(int reqPage) {
-		int numPerPage = 18;
+		int numPerPage = 12;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 		Map<String, Object> map = new HashMap<String, Object>();

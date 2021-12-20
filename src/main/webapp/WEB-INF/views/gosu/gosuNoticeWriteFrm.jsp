@@ -67,6 +67,16 @@ input:focus, textarea:focus {
 }
 
 
+.summerContentTop {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.note-modal-footer{
+	height: 60px !important;
+}
 .gosu-mail {
 	display: flex;
 	justify-content: right;

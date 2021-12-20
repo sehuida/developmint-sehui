@@ -631,9 +631,10 @@ public class GosuController {
 		grr2.setMemberId(grps.getRequestWriterId());
 		grr2.setRequestProjectSubNo(grps.getRequestProjectSubNo());
 		GosuRequestReview grr = service.selectGosuRequestReviewOne(grr2);
+		model.addAttribute("grrOne", grr);
+
 		model.addAttribute("grplist", grp);
 		model.addAttribute("grpsOne", grps);
-		model.addAttribute("grrOne", grr);
 		return "gosu/gosuProject";
 	}
 
