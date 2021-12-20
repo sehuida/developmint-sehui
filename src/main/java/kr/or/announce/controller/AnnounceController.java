@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.or.announce.service.AnnounceService;
 import kr.or.announce.vo.Announce;
 import kr.or.announce.vo.AnnounceList;
+import kr.or.announce.vo.AnnounceListPageData;
 import kr.or.announce.vo.AnnounceView;
 
 @Controller
@@ -42,9 +43,14 @@ public class AnnounceController {
 	
 	@RequestMapping(value="/applicationStatus.do")
 	public String applicationStatus(Model model, int announceNo, int reqPage) {
-		ArrayList<AnnounceList> list = service.selectApplyAnnounce(announceNo);
-		System.out.println("status : "+list);
-		model.addAttribute("list", list);
+		AnnounceListPageData apd = service.selectApplyAnnounce(announceNo, reqPage);
+		System.out.println("status : "+apd);
+		System.out.println("list : "+apd.getList());
+		/* String memberName = service.selectMemberName(apd.getList()); */
+		model.addAttribute("list", apd.getList());
+		model.addAttribute("pageNavi", apd.getPageNavi());
+		model.addAttribute("start", apd.getStart());
+		model.addAttribute("count", apd.getCount());
 		return "jobSearch/applicationStatus";
 	}
 	

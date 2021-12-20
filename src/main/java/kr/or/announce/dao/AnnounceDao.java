@@ -1,6 +1,7 @@
 package kr.or.announce.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -53,10 +54,15 @@ public class AnnounceDao {
 		return sqlSession.delete("announce.deleteAnnounce", announceNo);
 	}
 
-	public ArrayList<AnnounceList> selectApplyAnnounce(int announceNo) {
-			List list = sqlSession.selectList("announce.selectApplyAnnounce", announceNo);
+	public ArrayList<AnnounceList> selectApplyAnnounce(HashMap<String, Object> map) {
+			List list = sqlSession.selectList("announce.selectApplyAnnounce", map);
 		return (ArrayList<AnnounceList>)list;
 	}
+
+	public int selectApplyAnnounceCount(int announceNo) {
+		return sqlSession.selectOne("announce.selectApplyAnnounceCount", announceNo);
+	}
+
 
 
 }

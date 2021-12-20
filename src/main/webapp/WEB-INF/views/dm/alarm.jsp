@@ -15,6 +15,7 @@
  	function dmStart() {
 		var data = {type:"conn",memberId:memberId};
 		ws.send(JSON.stringify(data));
+		//매개변수로 준 아이디한테 그때 db에서 읽지않은 쪽지를 카운팅해서 화면에 띄워주는거
 		dmCount(memberId);
 	}
  	function dmMsg(param) {

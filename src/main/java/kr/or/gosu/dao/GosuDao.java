@@ -213,7 +213,7 @@ public class GosuDao {
 		return sqlSession.selectOne("gosu.selectReviewCount",ggsouNo);
 	}
 
-	public int selectReviewAvg(int ggsouNo) {
+	public Double selectReviewAvg(int ggsouNo) {
 		return sqlSession.selectOne("gosu.selectReviewAvg",ggsouNo);
 	}
 

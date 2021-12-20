@@ -26,4 +26,12 @@ public class DmDao {
 	public int dmCount(String memberId) {
 		return sqlSession.selectOne("direct.dmCount",memberId);
 	}
+
+	public int updateDm(int dmNo) {
+		return sqlSession.update("direct.updateDm",dmNo);
+	}
+
+	public int deleteMsg(int dmNo) {
+		return sqlSession.delete("direct.deleteMsg",dmNo);
+	}
 }
