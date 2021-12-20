@@ -77,6 +77,12 @@ public class QnaDao {
 	}
 
 
+	public ArrayList<ProjectTeamFileVO> selectOnefileList(int qnaNo) {
+		List<ProjectTeamFileVO> list = sqlsession.selectList("qna.selectOnefileList",qnaNo);
+		return (ArrayList<ProjectTeamFileVO>) list;
+	}
+
+
 	
 	
 }

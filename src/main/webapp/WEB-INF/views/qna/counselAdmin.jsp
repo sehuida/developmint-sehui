@@ -108,7 +108,38 @@
 									</c:otherwise>
 								</c:choose>
 								<td >${q.type }</td>
-								<td ><a href="javascript:void(0);">${q.qnaTitle }</a></td>
+								<td >
+									<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#qna_Modal${i.index }" onclick="clickList('${q.qnaNo}','${i.index }');" class="clickA">${q.qnaTitle }</a>
+									<div class="modal" id="qna_Modal${i.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									  <div class="modal-dialog " role="document" style="top: 30%;min-width: 1000px;">
+									    <div class="modal-content " >
+									      <div class="modal-header">
+									        <h5 class="modal-title">문의 확인하기</h5>
+									        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+									          <span aria-hidden="true"></span>
+									        </button>
+									      </div>
+									      <div class="modal-body">
+											<p style="font-size: 25px; font-weight: bold" id="qnaCheck">${q.type } : ${q.qnaTitle }</p>
+											<%-- <p style="font-size: 15px;">파일명 : <a href="/fileDown.do?noticeNo=${n.noticeNo }">${n.filename }</a></p> --%>
+											<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;border-radius: 5px;">
+												<p class="qnaContent">${q.qnaContent }</p>
+											</div>
+											<div>
+												<p class="qnafile">
+													<%-- <c:forEach items="${b.list }" var="f">
+														<a href="/boardFileDownload?fileNo=${f.fileNo }">${f.filename }</a><br>
+													</c:forEach> --%>
+												</p>
+											</div>
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-secondary btn_no" data-bs-dismiss="modal">닫기</button>
+									      </div>
+									    </div>
+									  </div>
+									</div>
+								</td>
 								<c:choose>
 									<c:when test="${type eq 1}">
 										<td >${q.memberId }</td>
@@ -126,7 +157,7 @@
 												<%-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewModal${i.index }">내역보기</button> --%>
 												<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal${i.index }">내역보기</a>
 												<div class="modal" id="viewModal${i.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-												  <div class="modal-dialog" role="document" style="top: 30%">
+												  <div class="modal-dialog" role="document" style="top: 20%;min-width: 1000px;">
 												    <div class="modal-content">
 												      <div class="modal-header">
 												        <h5 class="modal-title">AnswerView</h5>
@@ -134,7 +165,7 @@
 												          <span aria-hidden="true"></span>
 												        </button>
 												      </div>
-												      <div class="modal-body">
+												      <div class="modal-body" >
 														<p style="font-size: 25px; font-weight: bold">보낸 답변보기</p>
 														<p style="font-size: 22px;">${q.type }>${q.qnaTitle }</p>
 														<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;border-radius: 5px;">
@@ -154,7 +185,7 @@
 												<%-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#writeModal${i.index }" data-whatever="${adlist }">답변하기</button> --%>
 												<a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#writeModal${i.index }">답변하기</a>
 												<div class="modal" id="writeModal${i.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-												  <div class="modal-dialog" role="document" >
+												  <div class="modal-dialog" role="document" style="min-width: 1000px;">
 												    <div class="modal-content">
 												      <div class="modal-header">
 												        <h5 class="modal-title">AnswerWrite</h5>
@@ -283,7 +314,26 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script type="text/javascript">
-		
+		function clickList(num, index){
+			$(".qnafile").empty();
+			console.log(num);
+			console.log(index);
+			//var index = index;
+			$.ajax({
+				url : "/selectOnefileList.do",
+				type : 'post',
+				data : {qnaNo : num},
+				success : function(data){
+					var aTag = '<p style="font-weight: bold;">첨부파일 조회<small id="emailHelp" class="form-text text-danger">(용량이 많을수록, 시간이 소요됩니다. )</small></span><p>';
+					if(data.length != 0){
+						for(var i =0;i<data.length;i++){
+							aTag += '<a href="/boardFileDownload?fileNo='+data[i].fileNo+'">'+data[i].fileName+'</a><br>';
+						}
+						$(".qnafile").eq(index).append(aTag);
+					};
+				}
+			}); 
+		}
 	</script>
 </body>
 </html>

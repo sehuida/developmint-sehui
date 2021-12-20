@@ -187,15 +187,15 @@ public class QnaController {
 		}
 		int result = service.insertCounselQna(m,q, list);
 		if(result == -1||result != list.size()) {
-			model.addAttribute("title", "1:1 Q&A 신청 성공!");
-			model.addAttribute("msg", "상담내역에 등록되었습니다. 확인해주세요.");
-			model.addAttribute("loc", "/n_counsel.do");
-			model.addAttribute("icon", "success");
-		}else {
 			model.addAttribute("title", "1:1 Q&A 신청 실패");
 			model.addAttribute("msg", "상담 보내기에 실패하셨습니다. 관리자에 문의해주세요");
 			model.addAttribute("loc", "/n_counsel.do");
 			model.addAttribute("icon", "warning");
+		}else {
+			model.addAttribute("title", "1:1 Q&A 신청 성공!");
+			model.addAttribute("msg", "상담내역에 등록되었습니다. 확인해주세요.");
+			model.addAttribute("loc", "/n_counsel.do");
+			model.addAttribute("icon", "success");
 		}
 		//model.addAttribute("loc","/");
 		return "member/swalMsg";
@@ -266,4 +266,13 @@ public class QnaController {
 		model.addAttribute("list",list);
 		return "qna/faqlist";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/selectOnefileList.do")
+	public ArrayList<ProjectTeamFileVO> selectOnefileList(int qnaNo){
+		ArrayList<ProjectTeamFileVO> filelist = service.selectOnefileList(qnaNo); 
+		return filelist;
+	}
+	
+	
 }
