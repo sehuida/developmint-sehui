@@ -100,7 +100,7 @@ public class AnnounceService {
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
-		AnnounceListPageData apd = new AnnounceListPageData(list, pageNavi, start);
+		AnnounceListPageData apd = new AnnounceListPageData(list, pageNavi, start, totalCount);
 		return apd;
 		
 	}

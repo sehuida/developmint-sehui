@@ -14,7 +14,7 @@
 				<span style="font-weight:bold">지원내역</span>
 			</div>
 			<br><br>
-			<p id="unprocessed">입사 지원 수 : <span>1</span> 건</p>
+			<p id="unprocessed">입사 지원 수 : <span>${count }</span> 건</p>
 			
 			<div id="pageNavi">${pageNavi }</div>
 		</div>

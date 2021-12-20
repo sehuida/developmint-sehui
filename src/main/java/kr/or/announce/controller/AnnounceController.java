@@ -48,6 +48,7 @@ public class AnnounceController {
 		model.addAttribute("list", apd.getList());
 		model.addAttribute("pageNavi", apd.getPageNavi());
 		model.addAttribute("start", apd.getStart());
+		model.addAttribute("count", apd.getCount());
 		return "jobSearch/applicationStatus";
 	}
 	

@@ -12,4 +12,5 @@ public class AnnounceListPageData {
 	private ArrayList<AnnounceList> list;
 	private String pageNavi;
 	private int start;
+	private int count;
 }
