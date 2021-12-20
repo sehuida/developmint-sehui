@@ -172,7 +172,7 @@
 									<td style="padding-right: 0;">${gtl.feedbackDate }</td>
 								</tr>
 								<tr>
-									<td><b>${gtl.feedbackTitle }</b></td>
+									<td><b>${gtl.feedbackTitlePlus2 }</b></td>
 									<td rowspan="2" style="padding-right: 0;"><c:if
 											test="${empty gtl.gosuImg }">
 											<img src="/resources/img/gosu/g_img_basic.png">
@@ -253,7 +253,7 @@
 									<td style="padding-top: 20px; padding-right: 0;">${gtl.feedbackDate }</td>
 								</tr>
 								<tr>
-									<td><b>${gtl.feedbackTitle }</b></td>
+									<td><b>${gtl.feedbackTitlePlus2 }</b></td>
 									<td rowspan="2" style="padding-right: 0;"><c:if
 											test="${empty gtl.memberImg }">
 											<img src="/resources/img/gosu/g_img_basic.png">
