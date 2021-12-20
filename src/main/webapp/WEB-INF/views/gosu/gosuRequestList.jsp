@@ -59,13 +59,14 @@ input:focus, textarea:focus {
 }
 
 .g-one-tbl {
-	width: 90%;
-	border: 1px solid rgb(211, 211, 211);
+	width: 70%;
+	border: 3px solid #78c2ad;
 	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
+   
 }
 
 .g-one-tbl:hover {
-	border: 1px solid black;
+	border: 3px solid rgb(235, 242, 235);
 }
 
 .g-one-tbl th {
@@ -122,23 +123,25 @@ input:focus, textarea:focus {
 					<table>
 						<c:forEach items="${memberRequestList }" var="mrl" varStatus="i">
 							<tr>
-								<td><a href="/gosuRequestContent.do?mrn=${mrl.requestNo }">
+								<td><a href="/gosuRequestContent.do?mrn=${mrl.requestNo }" style="padding-top: 40px;">
 										<table class="g-one-tbl">
 											<tr>
-												<th rowspan="2"><c:if
+												<th rowspan="2" style="padding-bottom: 0;padding-top: 0;"><c:if
 														test="${empty mrl.requestWriterImg }">
 														<img src="/resources/img/gosu/g_img_basic.png">
 													</c:if> <c:if test="${not empty mrl.requestWriterImg }">
 														<img
 															src="/resources/upload/member/${mrl.requestWriterImg }">
 													</c:if></th>
-												<th><span style="color: rgb(78, 205, 196); padding: 0;">${mrl.requestWriterId }</span></th>
-												<td style="text-align: right;">${mrl.requsetDate}</td>
+												<th style="height:18px;padding-bottom: 0;"><span style="color: rgb(78, 205, 196); padding: 0;font-size: 20px;">${mrl.requestWriterId }</span></th>
+												<td style="text-align: right;padding-bottom: 0;">${mrl.requsetDate}</td>
 											</tr>
 											<tr>
-												<td colspan="2"
-													style="background-color: rgba(239, 239, 239, 0.3);">${mrl.requestContent7}</td>
+												<td colspan="2" style="padding-top: 0;">
+													
+													<p style=" border: 3px solid rgb(223, 245, 235);border-radius: 30px;margin: 0;">${mrl.requestContent7Plus}</p></td>
 											</tr>
+										
 										</table>
 								</a></td>
 							</tr>

@@ -63,6 +63,9 @@
 }
 
 
+.note-editable{
+	width: 918px;
+}
 .g-content tr th, .g-content tr td {
 	padding: 40px;
 }

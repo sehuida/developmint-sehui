@@ -13,6 +13,9 @@
 	text-decoration: none;
 }
 
+.note-editable{
+	width: 918px;
+}
 .note-modal-footer{
 	height: 60px !important;
 }

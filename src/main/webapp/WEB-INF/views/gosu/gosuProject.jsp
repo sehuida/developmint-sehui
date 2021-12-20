@@ -13,7 +13,9 @@
 .container * {
 	text-decoration: none;
 }
-
+.note-editable{
+	width: 918px;
+}
 .note-modal-footer{
 	height: 60px !important;
 }
@@ -58,6 +60,8 @@ input:focus, textarea:focus {
 	align-self: flex-start;
 	padding: 20px;
 	overflow: auto;
+}
+.talk-one img{
 }
 .talk-one p *{
 	background-color:transparent !important;
