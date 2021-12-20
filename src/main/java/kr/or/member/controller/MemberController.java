@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import kr.or.gosu.vo.GosuNotice;
 import kr.or.member.model.service.MailSender;
 import kr.or.member.model.service.MemberService;
+import kr.or.member.model.vo.BoardPage;
 import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.ContestPage;
 import kr.or.member.model.vo.CrewListPage;
@@ -382,5 +383,13 @@ public class MemberController {
 			model.addAttribute("type", type);
 		}
 		return "member/crewList";
+	}
+	@RequestMapping("/myBoardPage.do")
+	public String myBoardPage(Member m,Model model,int reqPage) {
+		BoardPage bpg = service.myboardPage(m,reqPage);
+		model.addAttribute("list",bpg.getList());
+		model.addAttribute("pageNavi",bpg.getPageNavi());
+		model.addAttribute("start",bpg.getStart());
+		return "member/myBoardPage";
 	}
 }
