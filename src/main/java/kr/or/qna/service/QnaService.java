@@ -101,6 +101,11 @@ public class QnaService {
 		return dao.selectFaqlist(category);
 	}
 
+	public ArrayList<ProjectTeamFileVO> selectOnefileList(int qnaNo) {
+		// TODO Auto-generated method stub
+		return dao.selectOnefileList(qnaNo);
+	}
+
 	
 
 

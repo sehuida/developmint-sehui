@@ -18,5 +18,12 @@ public class GosuRequestCost {
 	public String getCostContentBr(){
 		return costContent.replaceAll("\r\n", "<br>");
 	}
+	public String getCostContentPlus(){
+		if(costContent.length() >= 60){
+			 return costContent.substring(0,60)+"...";
+		};
+		return costContent;
+	}
 	
+
 }

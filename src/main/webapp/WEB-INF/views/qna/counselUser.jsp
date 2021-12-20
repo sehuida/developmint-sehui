@@ -91,8 +91,7 @@
 											</c:when>
 											<c:otherwise>
 												<%-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#writeModal${i.index }" data-whatever="${adlist }">답변하기</button> --%>
-												<a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#writeModal${i.index }">답변하기</a>
-												
+												<a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#writeModal${i.index }">수정하기</a>
 											</c:otherwise>
 										</c:choose>
 									</div>
