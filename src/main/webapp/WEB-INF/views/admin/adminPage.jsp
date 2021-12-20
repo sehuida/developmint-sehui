@@ -126,6 +126,11 @@
 			<%-- 민주가 만든 공지사항, qna로 이동 --%>
 			<p class="title">게시판 관리</p>
 			<div id="cate">
+				<i class="bi bi-layout-text-sidebar-reverse" style="color:#4ECDC4;"></i>
+				<a href="/allBoardList.do?reqPage=1&type=1"><span>전체 게시판 조회</span></a>
+				<a href="/allBoardList.do?reqPage=1&type=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
+			</div>
+			<div id="cate">
 				<i class="bi bi-megaphone" style="color:#4ECDC4;"></i>
 				<a href="/noticeList.do?reqPage=1"><span>공지사항</span></a>
 				<a href="/noticeList.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>

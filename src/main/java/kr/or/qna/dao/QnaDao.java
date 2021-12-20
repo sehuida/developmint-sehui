@@ -83,6 +83,18 @@ public class QnaDao {
 	}
 
 
+	public ArrayList<Qna> userSearchBox(HashMap<String, Object> map) {
+		List<Qna> list = sqlsession.selectList("qna.userSearchBox",map);
+		return (ArrayList<Qna>) list;
+	}
+
+
+	public int deleteMyQna(int qnaNo) {
+		// TODO Auto-generated method stub
+		return sqlsession.delete("qna.deleteMyQna",qnaNo);
+	}
+
+
 	
 	
 }

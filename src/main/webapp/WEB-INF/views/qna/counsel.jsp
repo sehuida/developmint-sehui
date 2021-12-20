@@ -64,10 +64,10 @@
 						<li class="text-danger"><i class="bi bi-arrow-right-short"></i>Q&A 내 상담내역은은 <a href="/noticehome.do" style="display: inline-block;font-weight: bold;" class="text-danger">공지사항</a> > 
 						<c:choose>
 							<c:when test="${empty sessionScope.m }">
-							<a href="" style="display: inline-block;font-weight: bold;" class="text-danger">상담내역</a>
+							<a href="/nonMember_CounselList.do" style="display: inline-block;font-weight: bold;" class="text-danger">상담내역</a>
 							</c:when>
 							<c:otherwise>
-								<a href="" style="display: inline-block;font-weight: bold;" class="text-danger">상담내역</a>
+								<a href="/myCounsel.do" style="display: inline-block;font-weight: bold;" class="text-danger">상담내역</a>
 							</c:otherwise>
 						</c:choose>에서 확인하실 수 있습니다.</li>
 						<li class="text-danger"><i class="bi bi-arrow-right-short"></i>프로젝트 정보 및 공모전 관련 문의는 해당 문의에 남기셔야 빠른 답변이 가능합니다.</li>
@@ -156,7 +156,7 @@
 					</div>
 					<!-- 폼돌아가는구간 끝  -->
 					<!-- 버튼 -->
-					<div class="n-btn-group">
+					<div class="n-btn-group" style="margin: 10px;">
 						<a href="javascript:void(0)" onClick="cancel(); return false;" class="btn btn-outline-secondary" style="margin: 0 10px;">취소</a>
 						<c:choose>
 							<c:when test="${empty sessionScope.m }">

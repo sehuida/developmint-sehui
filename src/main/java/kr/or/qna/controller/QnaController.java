@@ -274,5 +274,33 @@ public class QnaController {
 		return filelist;
 	}
 	
+	@RequestMapping(value="/nonMember_CounselList.do")
+	public String  nonMemberCounselList() {
+		
+		return "qna/nonMemberCounsel";
+	}
 	
+	@RequestMapping(value="/searhBoxUser.do")
+	public String UserSearchBox(Model model, int category, int state, String memberId) {
+		ArrayList<Qna> list = service.userSearchbox(category, state, memberId);
+		model.addAttribute("list",list);
+		return "qna/counselUser";
+	}
+	
+	@RequestMapping(value="/deleteMyQna.do")
+	public String deleteQna(int qnaNo, Model model) {
+		int result = service.deleteQna(qnaNo);
+		if(result>0) {
+			model.addAttribute("title", "삭제성공!");
+			model.addAttribute("msg", "내 질문보기 페이지가 상태 변경되었습니다.");
+			model.addAttribute("loc", "/myCounsel.do");
+			model.addAttribute("icon", "success");
+		}else {
+			model.addAttribute("title", "삭제실패");
+			model.addAttribute("msg", "개발자에게 연락하세요.");
+			model.addAttribute("loc", "/myCounsel.do");
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";
+	}
 }
