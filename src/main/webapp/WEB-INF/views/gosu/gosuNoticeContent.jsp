@@ -59,7 +59,6 @@
 }
 
 .gosu p {
-	text-align: center;
 	margin-top: 80px;
 }
 
@@ -214,6 +213,14 @@
 	cursor: pointer;
 	color: rgb(70, 147, 127);
 }
+
+.summerContentTop {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+}
+
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -266,7 +273,7 @@
 						</table>
 					</dt>
 					<dd>
-						<p>${gNotice.gnoticeContentBr}</p>
+						<p style="overflow: auto;">${gNotice.gnoticeContentBr}</p>
 					</dd>
 				</dl>
 			</div>
@@ -537,6 +544,7 @@
 	</div>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
+
 		$(".commentUpdate").click(
 				function() {
 					var tabs = $(".commentUpdate");
