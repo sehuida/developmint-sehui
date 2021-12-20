@@ -40,7 +40,7 @@ import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.Member;
 import kr.or.notice.vo.Notice;
 import kr.or.qna.vo.Qna;
-import kr.or.qna.vo.nonQna;
+import kr.or.qna.vo.NonQna;
 
 @Service
 public class AdminService {
@@ -107,7 +107,7 @@ public class AdminService {
 		//최신공지사항 5개 불러오기
 		ArrayList<Notice> noticeList = dao.noticeList();
 		ArrayList<Qna> qnaList = dao.qnaList();
-		ArrayList<nonQna> nonQnaList = dao.nonQnaList();
+		ArrayList<NonQna> nonQnaList = dao.nonQnaList();
 		
 		
 		

@@ -5,30 +5,8 @@
   var phoneChk = false;
   var emailChk = false;
   var emailCodeChk = false;
-  
-  
-  $("#joinBtn").click(function(){
-	 var required = $(".required:checked").length;
-	 if(idChk==true&&pwChk==true&&pwreChk==true&&nameChk==true&&phoneChk==true&&emailChk==true&&emailCodeChk==true&&required==2){
-		 swal({
-			   title: "가입성공!",
-			   text: "Devlomints에 가입하신걸 환영합니다.",
-			   icon: "success", //"info,success,warning,error" 중 택1
-			   button: "둘러보기",
-			})
-		 .then((value) => {
-		 	$("form").submit();			 
-		 });
-	 }else{
-		 swal({
-			   title: "가입실패",
-			   text: "입력값을  다시 확인해주세요.",
-			   icon: "warning", //"info,success,warning,error" 중 택1
-			   button: "돌아가기",
-			})
-		 return false;
-	 }
-  });
+  var captcha = 1;
+ 
   //$(".required:checked").length;
   
   //아이디 중복체크

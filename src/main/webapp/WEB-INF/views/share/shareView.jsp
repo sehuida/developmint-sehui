@@ -154,7 +154,7 @@
 					  <div class="modal-dialog  modal-dialog-centered">
 					    <div class="modal-content">
 					      <div class="modal-body">
-						      	<p class="Modaltitle">답장하기</p>
+						      	<p class="Modaltitle">쪽지보내기</p>
 						      	<div style="padding:5px; margin-bottom: 10px;">
 							      	<p><span>수신자</span> : ${sv.memberId }</p>
 							      	<textarea rows="3" style="width:100%" class="form-control" id="dmContent"></textarea>

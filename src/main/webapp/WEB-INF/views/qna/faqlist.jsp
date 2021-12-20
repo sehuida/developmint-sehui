@@ -33,6 +33,12 @@
 					<c:when test="${category eq 13}">
 						커뮤니티관련
 					</c:when>
+					<c:when test="${category eq 14}">
+						고수관련
+					</c:when>
+					<c:when test="${category eq 15}">
+						팀프로젝트관련
+					</c:when>
 					<c:when test="${category eq 40}">
 						기타
 					</c:when>

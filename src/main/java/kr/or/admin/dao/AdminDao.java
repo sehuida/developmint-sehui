@@ -18,7 +18,7 @@ import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.Member;
 import kr.or.notice.vo.Notice;
 import kr.or.qna.vo.Qna;
-import kr.or.qna.vo.nonQna;
+import kr.or.qna.vo.NonQna;
 
 @Repository
 public class AdminDao {
@@ -256,9 +256,9 @@ public class AdminDao {
 		return (ArrayList<Qna>)list;
 	}
 
-	public ArrayList<nonQna> nonQnaList() {
-		List<nonQna> list = sqlSession.selectList("admin.nonQnaList");
-		return (ArrayList<nonQna>)list;
+	public ArrayList<NonQna> nonQnaList() {
+		List<NonQna> list = sqlSession.selectList("admin.nonQnaList");
+		return (ArrayList<NonQna>)list;
 	}
 	
 

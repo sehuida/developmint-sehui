@@ -11,8 +11,8 @@ import kr.or.member.model.vo.Member;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.qna.dao.QnaDao;
 import kr.or.qna.vo.Faq;
+import kr.or.qna.vo.NonQna;
 import kr.or.qna.vo.Qna;
-import kr.or.qna.vo.nonQna;
 
 @Service
 public class QnaService {
@@ -20,7 +20,7 @@ public class QnaService {
 	@Autowired
 	private QnaDao dao;
 
-	public int insertCounselNonQna(nonQna nq) {
+	public int insertCounselNonQna(NonQna nq) {
 		int result = dao.insertCountNonQna(nq);
 		return result;
 	}
@@ -52,7 +52,7 @@ public class QnaService {
 	}
 
 
-	public ArrayList<nonQna> counselList2() {
+	public ArrayList<NonQna> counselList2() {
 		// TODO Auto-generated method stub
 		return dao.counselList2();
 	}
@@ -89,7 +89,7 @@ public class QnaService {
 		return dao.searchBox1(map);
 	}
 
-	public ArrayList<nonQna> searchBox2(int category, int state) {
+	public ArrayList<NonQna> searchBox2(int category, int state) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("category", category);
 		map.put("state", state);
@@ -118,6 +118,11 @@ public class QnaService {
 	public int deleteQna(int qnaNo) {
 		// TODO Auto-generated method stub
 		return dao.deleteMyQna(qnaNo);
+	}
+
+	public ArrayList<NonQna> selectNonQnaList() {
+		// TODO Auto-generated method stub
+		return dao.selectNonQnaList();
 	}
 
 	

@@ -14,7 +14,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container" style="margin-bottom: 50px;max-width: 1591px;min-width: 1591px;">
 		<div class="area">
-			<div class="nav-sub" style="margin-top: 30px;"><a href="/" class="text-hover">홈</a><span> > </span><a href="/noticehome.do" class="text-hover">고객센터</a><span> > </span><span>공지사항</span></div>
+			<div class="nav-sub" style="margin-top: 30px;"><a href="/" class="text-hover">홈</a><span> > </span>고객센터<!-- <a href="/noticehome.do" class="text-hover">고객센터</a> --><span> > </span><span>공지사항</span></div>
 			<div class="title"><h2 style="color: #78c2ad;">CS Center</h2></div>
 			<div class="center_tap">
 				<ul style="margin-bottom: 0;">
@@ -92,6 +92,8 @@
 										<option value="11">공모전관련</option>
 										<option value="12">구인잡관련</option>
 										<option value="13">커뮤니티관련</option>
+										<option value="14">고수관련</option>
+										<option value="15">팀프로젝트 관련</option>
 										<option value="40">기타 문의</option>
 										<option value="22">신고</option>
 										<option value="21">기능/작동 오류</option>

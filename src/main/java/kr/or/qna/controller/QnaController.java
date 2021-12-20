@@ -25,8 +25,8 @@ import kr.or.notice.vo.Notice;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.qna.service.QnaService;
 import kr.or.qna.vo.Faq;
+import kr.or.qna.vo.NonQna;
 import kr.or.qna.vo.Qna;
-import kr.or.qna.vo.nonQna;
 
 @Controller
 public class QnaController {
@@ -117,7 +117,7 @@ public class QnaController {
 	
 	//비회원일경우
 	@RequestMapping(value="/counsel_save1.do")
-	public String insertCounsel(nonQna nq, HttpServletRequest request, Model model) {
+	public String insertCounsel(NonQna nq, HttpServletRequest request, Model model) {
 		int result = service.insertCounselNonQna(nq);
 		if(result>0) {
 			model.addAttribute("title", "1:1 Q&A 신청 성공!");
@@ -221,7 +221,7 @@ public class QnaController {
 			model.addAttribute("type",type);
 			model.addAttribute("adlist",adlist);
 		}else if(type==2) {
-			ArrayList<nonQna> adlist = service.counselList2();
+			ArrayList<NonQna> adlist = service.counselList2();
 			model.addAttribute("type",type);
 			model.addAttribute("adlist",adlist);
 		}
@@ -252,7 +252,7 @@ public class QnaController {
 			model.addAttribute("type",type);
 			model.addAttribute("adlist",list);
 		}else if(type==2) {
-			ArrayList<nonQna> list = service.searchBox2(category,state);
+			ArrayList<NonQna> list = service.searchBox2(category,state);
 			model.addAttribute("type",type);
 			model.addAttribute("adlist",list);
 		}
@@ -275,8 +275,9 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value="/nonMember_CounselList.do")
-	public String  nonMemberCounselList() {
-		
+	public String  nonMemberCounselList(Model model) {
+		ArrayList<NonQna> list = service.selectNonQnaList();
+		model.addAttribute("list",list);
 		return "qna/nonMemberCounsel";
 	}
 	
@@ -303,4 +304,5 @@ public class QnaController {
 		}
 		return "member/swalMsg";
 	}
+	
 }
