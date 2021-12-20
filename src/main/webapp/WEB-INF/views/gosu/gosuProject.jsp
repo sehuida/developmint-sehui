@@ -54,9 +54,13 @@ input:focus, textarea:focus {
 
 .talk-one {
 	width: 50%;
-	margin-bottom: 100px;
+	margin-bottom: 50px;
 	align-self: flex-start;
 	padding: 20px;
+	overflow: auto;
+}
+.talk-one p *{
+	background-color:transparent !important;
 }
 
 .talk-one tr:last-child td:last-child {
@@ -309,7 +313,7 @@ input:focus, textarea:focus {
 											</tr>
 											<tr>
 												<td><p
-														style="width: 800px; text-align: center; padding: 20px; border: 1px solid gray; margin: 20px; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">${grrOne.requestReviewContentBr }</p></td>
+														style="width: 800px; padding: 20px; border: 1px solid gray; margin: 20px; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">${grrOne.requestReviewContentBr }</p></td>
 											</tr>
 											<tr>
 												<td style="text-align: right;"><button

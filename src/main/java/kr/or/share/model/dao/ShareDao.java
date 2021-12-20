@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.comment.vo.Comment;
 import kr.or.comment.vo.Report;
+import kr.or.share.model.vo.Like;
 import kr.or.share.model.vo.Share;
 
 @Repository
@@ -78,5 +79,17 @@ public class ShareDao {
 
 	public int shareReport(Report rp) {
 		return sqlSession.insert("share.shareReport",rp);
+	}
+
+	public Like shareLike(Like lk) {
+		return sqlSession.selectOne("share.shareCheck",lk);
+	}
+
+	public int addLike(Like lk) {
+		return sqlSession.insert("share.addLike",lk);
+	}
+
+	public int removeLike(Like lk) {
+		return sqlSession.delete("share.deleteLike",lk);
 	}
 }

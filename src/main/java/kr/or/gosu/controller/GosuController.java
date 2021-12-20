@@ -506,7 +506,7 @@ public class GosuController {
 			model.addAttribute("msg", "");
 			model.addAttribute("icon", "success");
 		}
-		model.addAttribute("loc", "/gosuNoticeList.do");
+		model.addAttribute("loc", "/gosuNoticeList.do?reqPage=1");
 
 		return "member/swalMsg";
 	}
@@ -631,9 +631,10 @@ public class GosuController {
 		grr2.setMemberId(grps.getRequestWriterId());
 		grr2.setRequestProjectSubNo(grps.getRequestProjectSubNo());
 		GosuRequestReview grr = service.selectGosuRequestReviewOne(grr2);
+		model.addAttribute("grrOne", grr);
+
 		model.addAttribute("grplist", grp);
 		model.addAttribute("grpsOne", grps);
-		model.addAttribute("grrOne", grr);
 		return "gosu/gosuProject";
 	}
 
@@ -795,7 +796,7 @@ public class GosuController {
 			model.addAttribute("msg", "");
 			model.addAttribute("icon", "success");
 		}
-		model.addAttribute("loc", "/gosuNoticeList.do");
+		model.addAttribute("loc", "/gosuNoticeList.do?reqPage=1");
 		return "member/swalMsg";
 	}
 

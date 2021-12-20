@@ -170,8 +170,6 @@ ul#gallery>a>li::after {
 	padding-top: 80px;
 	transform: translate(-50%, -50%);
 	text-align: center;
-	font-size: 35px;
-	opacity: 0;
 	transition: 0.8s;
 }
 
@@ -183,12 +181,8 @@ ul#gallery>a>li>img {
 
 ul#gallery>a>li:hover img {
 	transform: scale(1.18);
-	opacity: 0.65;
 }
 
-ul#gallery>a>li:hover::after {
-	opacity: 1;
-}
 
 .dot {
 	cursor: pointer;
@@ -503,7 +497,7 @@ to {
 			<ul id="gallery">
 				<c:forEach items="${gNoticeList }" var="gnl" varStatus="i">
 
-					<a href="/gosuNoticeContent.do?gnn=${gnl.gnoticeNo }"><li><img
+					<a href="/gosuNoticeContent.do?gnn=${gnl.gnoticeNo }"><li style="border-radius: 10px;" ><img 
 							src="${gnl.gnoticePhoto }"></li></a>
 				</c:forEach>
 

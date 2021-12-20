@@ -15,6 +15,7 @@ import kr.or.contest.vo.ContestMember;
 import kr.or.gosu.vo.GosuNotice;
 import kr.or.member.controller.RandomPassword;
 import kr.or.member.model.dao.MemberDao;
+import kr.or.member.model.vo.BoardPage;
 import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.ContestPage;
 import kr.or.member.model.vo.CrewListPage;
@@ -27,6 +28,7 @@ import kr.or.member.model.vo.ProjectLikes;
 import kr.or.member.model.vo.ProjectLikesPage;
 import kr.or.member.model.vo.ProjectPageVO;
 import kr.or.projectTeam.model.vo.ProjectTeam;
+import kr.or.share.model.vo.Share;
 
 @Service
 public class MemberService {
@@ -395,6 +397,59 @@ public class MemberService {
 				
 				ProjectLikesPage plp = new ProjectLikesPage(list, pageNavi, start);
 				return plp;
+	}
+
+	public BoardPage myboardPage(Member m , int reqPage) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int numPerPage = 5;
+		int end = reqPage*numPerPage;
+		int start = end - numPerPage + 1;
+		
+		map.put("memberNo", m.getMemberNo());
+		map.put("start",start);
+		map.put("end",end);
+		ArrayList<Share> list = dao.myboardPageList(map);
+		
+		int totalCount = dao.boardCount(m.getMemberNo());
+		int totalPage = 0;
+		if(totalCount%numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage+1;
+		}
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		
+		String pageNavi = "<ul class='pagination pagination-lg'>";
+				
+				if(pageNo != 1) {
+					pageNavi += "<li class=\"page-item\">";
+					pageNavi += "<a class=\"page-link\" href='/myBoardPage.do?reqPage="+(pageNo-1)+"&memberNo="+(m.getMemberNo())+"'>&laquo;</a></li>";
+				}
+				
+				for(int i=0;i<pageNaviSize;i++){
+					if(pageNo == reqPage) {
+						pageNavi += "<li class=\"page-item active\">";
+						pageNavi += "<a class='page-link' href='/myBoardPage.do?reqPage="+pageNo+"&memberNo="+(m.getMemberNo())+"'>"+pageNo+"</a></li>";
+					} else {
+						pageNavi += "<li class='page-item'>";
+						pageNavi += "<a class='page-link' href='/myBoardPage.do?reqPage="+pageNo+"&memberNo="+(m.getMemberNo())+"'>";
+						pageNavi += pageNo+"</a></li>";
+					}
+					pageNo++;
+					if(pageNo>totalPage) {
+						break;
+					}
+				}
+				if(pageNo <= totalPage) {
+					pageNavi += "<li class='page-item'>";
+					pageNavi += "<a class='page-link' href='/myBoardPage.do?reqPage="+pageNo+"&memberNo="+(m.getMemberNo())+"'>";
+					pageNavi += "&raquo;</a></li>";
+				}
+				pageNavi += "</ul>";
+				
+				BoardPage bpg = new BoardPage(list, pageNavi, start);
+				return bpg;
 	}
 	
 }

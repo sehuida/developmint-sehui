@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.comment.vo.Comment;
 import kr.or.comment.vo.Report;
 import kr.or.member.model.vo.GosuNoticePage;
+import kr.or.member.model.vo.Member;
 import kr.or.share.model.dao.ShareDao;
+import kr.or.share.model.vo.Like;
 import kr.or.share.model.vo.Share;
 import kr.or.share.model.vo.ShareBoardPage;
 import kr.or.share.model.vo.ShareViewData;
@@ -179,6 +181,32 @@ public class ShareService {
 	@Transactional
 	public int shareReport(Report rp) {
 		return dao.shareReport(rp);
+	}
+	
+	@Transactional
+	public int shareLike(Like lk) {
+		Like likeChk = dao.shareLike(lk);
+		int result = 0;
+		if(likeChk == null) {
+			//좋아요 안눌렀을때
+			result = dao.addLike(lk);
+			result += 1;
+			//좋아요 눌리면 return값 2
+		}else {
+			//좋아요 이미 눌렀을때
+			result = dao.removeLike(lk);
+			//좋아요 지워지면 return 값 1
+		}
+		return result;
+	}
+
+	public int isLike(Like lk) {
+		Like likeChk = dao.shareLike(lk);
+		if(likeChk == null) {
+			return 0;
+		}else {
+			return 1;
+		}
 	}
 
 }

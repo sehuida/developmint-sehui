@@ -723,14 +723,17 @@
 
 	<select id="selectGosuListAll" resultType="g">
 		select
-		ggosu_no as ggsouNo,
+		ggosu_no as
+		ggsouNo,
 		gosu_no as gsouNo,
 		gosu_title as gosuTitle,
-		gosu_self as gosuSelf,
+		gosu_self as
+		gosuSelf,
 		gosu_explain as
 		gosuExplain,
 		gosu_act as gosuAct,
-		gosu_cost as gosuCost,
+		gosu_cost as
+		gosuCost,
 		gosu_date as
 		gosuDate
 		from gosu
@@ -1149,21 +1152,25 @@
 		req.REQUEST_CONTENT2
 		as
 		requestContent2,
-		req.REQUEST_CONTENT3 as requestContent3,
+		req.REQUEST_CONTENT3 as
+		requestContent3,
 		req.REQUEST_CONTENT4
 		as requestContent4,
 		req.REQUEST_CONTENT5 as
 		requestContent5,
-		req.REQUEST_CONTENT6 as requestContent6,
+		req.REQUEST_CONTENT6 as
+		requestContent6,
 		req.REQUEST_CONTENT7
 		as
 		requestContent7,
 		req.REQUEST_DATE as requsetDate
 		from gosu_request req
-		JOIN gosu_request_cost cost
+		JOIN
+		gosu_request_cost cost
 		ON req.request_no =
 		cost.request_no
-		where cost.cost_no = #{costNo} and cost.member_id =
+		where
+		cost.cost_no = #{costNo} and cost.member_id =
 		#{memberId}
 	</select>
 

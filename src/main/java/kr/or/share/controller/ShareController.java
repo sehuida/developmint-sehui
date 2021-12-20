@@ -26,6 +26,7 @@ import kr.or.comment.vo.Comment;
 import kr.or.comment.vo.Report;
 import kr.or.notice.vo.Notice;
 import kr.or.share.model.service.ShareService;
+import kr.or.share.model.vo.Like;
 import kr.or.share.model.vo.Share;
 import kr.or.share.model.vo.ShareBoardPage;
 import kr.or.share.model.vo.ShareViewData;
@@ -384,5 +385,17 @@ public class ShareController {
 			model.addAttribute("icon", "warning");
 		}
 		return "member/swalMsg";
+	}
+	@ResponseBody
+	@RequestMapping(value="/shareLike.do")
+	public int shareLike(Like lk) {
+		int result = service.shareLike(lk);
+		return result;
+	}
+	@ResponseBody
+	@RequestMapping(value="/isLike.do")
+	public int isLike(Like lk) {
+		int result = service.isLike(lk);
+		return result;
 	}
 }

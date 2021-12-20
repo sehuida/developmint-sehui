@@ -244,15 +244,15 @@
 	margin-top: 20px;
 }
 
+.note-modal-footer{
+	height: 60px !important;
+}
 #gProject:hover {
 	cursor: pointer;
 	border: 1px solid rgb(46, 108, 164);
 	color: rgb(46, 108, 164);
 }
 
-.note-modal-footer{
-	height: 60px !important;
-}
 .jb-a:hover .jb-c {
 	display: block;
 }

@@ -20,6 +20,7 @@ import kr.or.member.model.vo.MyContest;
 import kr.or.member.model.vo.ProjectLikes;
 import kr.or.member.model.vo.ProjectPageVO;
 import kr.or.projectTeam.model.vo.ProjectTeam;
+import kr.or.share.model.vo.Share;
 
 @Repository
 public class MemberDao {
@@ -137,6 +138,15 @@ public class MemberDao {
 
 	public int projectLikeCount(int memberNo) {
 		return sqlSession.selectOne("member.projectLikesCnt",memberNo);
+	}
+
+	public ArrayList<Share> myboardPageList(HashMap<String, Object> map) {
+		List<Share> list = sqlSession.selectList("member.myBoard",map);
+		return (ArrayList<Share>)list;
+	}
+
+	public int boardCount(int memberNo) {
+		return sqlSession.selectOne("member.boardCount",memberNo);
 	}
 
 }

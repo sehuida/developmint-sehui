@@ -56,15 +56,15 @@ ul#gallery {
 	list-style: none;
 	padding: 0;
 	margin: 0 auto;
-	width: 1140px;
+	width: 1050px;
 }
 
 ul#gallery>a>li dt {
 	position: relative;
-	background-color: #000;
-	width: 180px;
-	height: 150px;
-	margin: 5px;
+	width: 330px;
+	height: 300px;
+	border-radius:10px;
+	margin: 10px;
 	overflow: hidden;
 	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
 }
@@ -81,8 +81,7 @@ ul#gallery>a>li dt::after {
 	transform: translate(-50%, -50%);
 	text-align: center;
 	font-size: 35px;
-	color: #fff;
-	opacity: 0;
+
 	transition: 0.8s;
 }
 
@@ -94,17 +93,15 @@ ul#gallery>a>li dt img {
 
 ul#gallery>a>li:hover img {
 	transform: scale(1.18);
-	opacity: 0.65;
+
 }
 
-ul#gallery>a>li:hover::after {
-	opacity: 1;
-}
 
 ul#gallery>a>li dd {
 	padding: 5px;
 	height: 30px;
-	width: 190px;
+	text-align:center;
+	width: 330px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
@@ -219,7 +216,7 @@ ul#gallery>a>li dd {
 									<dd>
 										<b>${gnl.gnoticeTitle }</b>
 									</dd>
-									<dd>${gnl.gnoticeContent }</dd>
+								
 								</dl>
 						</li>
 						</a>
