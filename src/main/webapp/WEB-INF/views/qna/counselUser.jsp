@@ -13,11 +13,16 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
+<style>
+	.tit:hover {
+	cursor: pointer;
+}
+</style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container" style="margin-bottom: 50px;max-width: 1591px">
 		<div class="area">
-			<div class="nav-sub" style="margin-top: 30px;"><a href="/" class="text-hover">홈</a><span> > </span><a href="/noticehome.do" class="text-hover">고객센터</a><span> > </span><span>공지사항</span></div>
+			<div class="nav-sub" style="margin-top: 30px;"><a href="/" class="text-hover">홈</a><span> > </span><a href="/noticehome.do" class="text-hover">고객센터</a><span> > </span><span>공지사항</span><span> > </span><span>내 질문보기</span></div>
 			<div class="title"><h2 style="color: #78c2ad;">CS Center</h2></div>
 			<div class="center_tap">
 				<ul style="margin-bottom: 0;">
@@ -28,37 +33,39 @@
 			</div>
 			<div class="contents">
 				<header class="n-section-title">
-					<h1 class="tit">1:1문의</h1>
+					<span class="tit" style="font-size: 2em;margin: 0 0 30px 0;" onclick="cancel(); return false;"><i class="bi bi-arrow-up-right-square" ></i> 내 질문 보기</span>
 				</header>
-				<form name="searchForm" id="searchForm"  method="get" action="/counsel">
-				<div class="n-table-filter">
-					<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked=""  onClick="setPeriod(this,'1week');">
-					  <label class="btn btn-outline-primary" for="btnradio1">1주일</label>
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" checked="" onClick="setPeriod(this,'1month');">
-					  <label class="btn btn-outline-primary" for="btnradio2">1개월</label>
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" checked="" onClick="setPeriod(this,'3month');">
-					  <label class="btn btn-outline-primary" for="btnradio3">3개월</label>
-					  <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" checked="" onClick="setPeriod(this,'');">
-					  <label class="btn btn-outline-primary" for="btnradio3">전체 시기</label>
-					</div>
-					<div class="form-group n-datepicker sb">
-                        <input type="text" class="n-input form-control" name="dt_fr" value="" placeholder="-" onblur="checkDateFormat(this);">
-                    </div>
-                    <div class="n-datepicker">
-                        <input type="text" class="n-input form-control" name="dt_to" value="" placeholder="-" onblur="checkDateFormat(this);">
-                    </div>
-					<div class="form-group searchBox-2">
-				     	<label for="qnaAnswer" class="form-label mt-1 text-white">답변상태</label>
-				    	<select class="form-select" id="qnaAnswer" name="qnaAnswer" >
-					      	<option value="">전체</option>
-					      	<option value="1">미답변</option>
-							<option value="2">답변</option>
-			     		</select>
-				  	</div>
-				  	<button class="btn btn-secondary">조회</button>
+				<div class="searchBox">
+					<form action="/searhBoxUser.do" class="searchBox-frm">
+						<div class="form-group searchBox-1">
+					     	<label for="category" class="form-label mt-1 text-white">문의유형</label>
+					    	<select class="form-select" id="category" name="category" >
+						      	<option value="0">문의유형 선택</option>
+								<option value="7">로그인관련</option>
+								<option value="8">계정관련</option>
+								<option value="9">결제관련</option>
+								<option value="10">환불관련</option>
+								<option value="11">공모전관련</option>
+								<option value="12">구인잡관련</option>
+								<option value="13">커뮤니티관련</option>
+								<option value="40">기타 문의</option>
+								<option value="21">신고</option>
+								<option value="22">기능/작동 오류</option>
+								<option value="20">이벤트</option>
+				     		</select>
+					  	</div>
+					  	<div class="form-group searchBox-2">
+					     	<label for="qnaAnswer" class="form-label mt-1 text-white">답변상태</label>
+					    	<select class="form-select" id="state" name="state" >
+						      	<option value="0">전체</option>
+						      	<option value="1">미답변</option>
+								<option value="2">답변</option>
+				     		</select>
+					  	</div>
+					  	<input type="hidden" value="${sessionScope.m.memberId }" name="memberId" id="memberId">
+					  	<button type="submit" class="btn btn-secondary">검색</button>
+					</form>
 				</div>
-				</form>
 				<table class="table">
 					<%-- <colgroup>
 						<col style="width:12.6%">
@@ -78,7 +85,38 @@
 						<c:forEach items="${list }" var="q" varStatus="i">
 							<tr>
 								<td >${q.type }</td>
-								<td ><a href="javascript:void(0);">${q.qnaTitle }</a></td>
+								<td >
+									<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#qna_Modal${i.index }">${q.qnaTitle }</a>
+									<div class="modal" id="qna_Modal${i.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									  <div class="modal-dialog " role="document" style="top: 30%;min-width: 1000px;">
+									    <div class="modal-content " >
+									      <div class="modal-header">
+									        <h5 class="modal-title">내 문의</h5>
+									        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+									          <span aria-hidden="true"></span>
+									        </button>
+									      </div>
+									      <div class="modal-body">
+											<p style="font-size: 25px; font-weight: bold" id="qnaCheck">${q.type } : ${q.qnaTitle }</p>
+											<%-- <p style="font-size: 15px;">파일명 : <a href="/fileDown.do?noticeNo=${n.noticeNo }">${n.filename }</a></p> --%>
+											<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;border-radius: 5px;">
+												<p class="qnaContent">${q.qnaContent }</p>
+											</div>
+											<div>
+												<p class="qnafile">
+													<%-- <c:forEach items="${b.list }" var="f">
+														<a href="/boardFileDownload?fileNo=${f.fileNo }">${f.filename }</a><br>
+													</c:forEach> --%>
+												</p>
+											</div>
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-secondary btn_no" data-bs-dismiss="modal">닫기</button>
+									      </div>
+									    </div>
+									  </div>
+									</div>
+								</td>
 								<td>${q.regDate }</td>
 								<td>
 									<span>${q.state }</span>
@@ -87,7 +125,6 @@
 											<c:when test="${not empty q.qnaAnswer}">
 												<%-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#viewModal${i.index }">내역보기</button> --%>
 												<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#viewModal${i.index }">내역보기</a>
-												
 											</c:when>
 											<c:otherwise>
 												<%-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#writeModal${i.index }" data-whatever="${adlist }">답변하기</button> --%>
@@ -108,5 +145,12 @@
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script type="text/javascript">
+		function cancel() {
+			if(confirm('공지사항으로 돌아가시겠습니까?')){
+				location.href="/noticehome.do";
+			}
+		}
+	</script>
 </body>
 </html>

@@ -106,6 +106,15 @@ public class QnaService {
 		return dao.selectOnefileList(qnaNo);
 	}
 
+
+	public ArrayList<Qna> userSearchbox(int category, int state, String memberId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("category", category);
+		map.put("state", state);
+		map.put("memberId", memberId);
+		return dao.userSearchBox(map);
+	}
+
 	
 
 
