@@ -67,7 +67,7 @@
 						<th style="width: 10%">문의 유형</th>
 						<th style="text-align: center;">제목</th>
 						<th style="width: 10%">문의 작성일</th>
-						<th style="width: 18%">이메일</th>
+						<th style="width: 18%;">이메일</th>
 						<th style="width: 10%;">처리 상태</th>
 						<th style="width: 10%">버튼</th>
 					</tr>
@@ -77,20 +77,38 @@
 							<tr>
 								<td>${nq.nonQnaNo }</td>
 								<td>${nq.type }</td>
-								<td>${nq.qnaTitle }</td>
+								<td>${nq.qnaTitle }
+									<c:choose>
+										<c:when test="${fn:length(nq.qnaTitle) > 16}">
+											<c:set var="subTitle" value="${fn:substring(nq.qnaTitle,0,16)}"/>
+											<p style="padding: 0;margin: 0;">${subTitle }...</p>
+										</c:when>
+										<c:otherwise>
+											<p style="padding: 0;margin: 0;">${nc.contestTitle }</p>
+										</c:otherwise>
+									</c:choose>
+								</td>
 								<td>${nq.regDate }</td>
 								<td>
-								    <!-- 아이디의 앞 4자리까지 보여 주고 -->
-								  	<p style="display: inline-block;">${fn:substring(nq.email,0,4)}</p>
-								   	<!-- 5자리부터 id의 길이만큼 *를 찍어줌 -->
-								   	<p style="display: inline-block;">
-								   		<c:forEach begin="4" end="${fn:length(nq.email)}" step="1">
-									   		*
-									   	</c:forEach>
-								   	</p>
+								    <!-- 아이디의 앞 3자리까지 보여 주고 -->
+								  	<p style="display: inline-block;margin: 0;">
+								  		<c:set var="startTitle" value="${fn:substringBefore(nq.email, '@')}"/>
+								  		<c:set var="endTitle" value="${fn:substringAfter(nq.email, '@')}"/>
+								  		${fn:substring(startTitle,0,fn:length(startTitle)-4)}⁎⁎⁎⁎@${fn:substring(endTitle,0,fn:length(endTitle)-6)}⁎⁎⁎⁎⁎⁎
+								  	</p>
+								   	<!--  @뒤에 3자리 뒤부터 *를 찍어줌 -->
 								</td>
-								<td><a href="" class="btn btn-success disabled">${nq.state }</a></td>
-								<td><a href="javascript:void(0);" class="btn btn-secondary" id="pwChk">비밀번호 입력</a></td>
+								<td>
+									<c:choose>
+										<c:when test="${empty nq.qnaAnswer }">
+											<a href="" class="btn btn-success disabled">${nq.state }</a>
+										</c:when>
+										<c:otherwise>
+											<a href="" class="btn btn-secondary disabled">${nq.state }</a>
+										</c:otherwise>
+									</c:choose>
+								</td>
+								<td><a href="javascript:void(0);" class="btn btn-outline-dark" id="pwChk" onclick="pwChkList('${nq.nonQnaNo}','${i.index }');">비밀번호 입력</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -100,7 +118,9 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script type="text/javascript">
-		
+		function pwChkList(no, index){
+			
+		}
 	</script>
 </body>
 </html>
