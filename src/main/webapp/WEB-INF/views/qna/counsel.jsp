@@ -92,6 +92,8 @@
 										<option value="11">공모전관련</option>
 										<option value="12">구인잡관련</option>
 										<option value="13">커뮤니티관련</option>
+										<option value="14">고수관련</option>
+										<option value="15">팀프로젝트 관련</option>
 										<option value="40">기타 문의</option>
 										<option value="22">신고</option>
 										<option value="21">기능/작동 오류</option>

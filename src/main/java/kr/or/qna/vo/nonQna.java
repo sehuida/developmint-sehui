@@ -29,11 +29,15 @@ public class nonQna {
 			return "구인잡관련";
 		}else if(category == 13) {
 			return "커뮤니티관련";
+		}else if(category == 14) {
+			return "고수관련";
+		}else if(category == 15) {
+			return "팀프로젝트관련";
 		}else if(category == 40) {
 			return "기타문의";
-		}else if(category == 21) {
-			return "신고";
 		}else if(category == 22) {
+			return "신고";
+		}else if(category == 21) {
 			return "기능/작동 오류";
 		}else if(category == 20) {
 			return "이벤트";

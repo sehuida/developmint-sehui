@@ -1,0 +1,24 @@
+@charset "UTF-8";
+.contents{
+	clear: both;
+    position: relative;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+ul, li{
+	padding: 0;
+	margin: 0;
+}
+.title_cs{
+	font-size: 18px;
+    display: inline-block;
+}
+.center_tap3 ul li{
+	display: table-cell;
+    width: 33.3%;
+    margin: -1px 0 0 0;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    box-sizing: border-box;
+    padding: 20px;
+}
