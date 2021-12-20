@@ -70,7 +70,7 @@
 	<context:component-scan base-package="kr.or.announce" />
 	<context:component-scan base-package="kr.or.company" />
 	<context:component-scan base-package="kr.or.how" />
-	
+	<context:component-scan base-package="kr.or.dm"/>
 	
 	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -88,17 +88,17 @@
 	<!-- 예약작업 어노테이션방식 사용 선언 -->
 	<task:annotation-driven/>
 	
+	<beans:bean id="alarm" class="kr.or.common.Alarm"/>
+	<websocket:handlers>
+		<websocket:mapping handler="alarm" path="/alarm.do"/>
+	</websocket:handlers>
 	<!-- 웹소켓 전체채팅 객체 생성 
 	<beans:bean id="allMemberChat" class="kr.or.member.model.service.AllMemberChat"/>
 	 웹소켓 설정 
 	 웹소켓 쪽지 객체 생성
-	<beans:bean id="alarm" class="kr.or.common.Alarm"/>
 	-->
 	<!--  
-	<websocket:handlers>
 		<websocket:mapping handler="allMemberChat" path="/chat.do"/>
-		<websocket:mapping handler="alarm" path="/alarm.do"/>
-	</websocket:handlers>
 	-->
 	<!--  
 	<beans:bean id="log" class="kr.or.common.LogTest1"/>

@@ -148,7 +148,27 @@
 					</c:choose>			
 				</div>
 				<div>
-					<a href=#>쪽지 보내기</a><img style="width: 35px; height: 35px;" src="/resources/img/shareBoard/paper-plane.png">						
+					<a href="#" data-bs-toggle="modal" data-bs-target="#reportComment" class="reply">쪽지보내기</a><img style="width: 35px; height: 35px;" src="/resources/img/shareBoard/paper-plane.png">
+					<!-- 쪽지보내기 modal -->
+					<div class="modal fade" id="reportComment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog  modal-dialog-centered">
+					    <div class="modal-content">
+					      <div class="modal-body">
+						      	<p class="Modaltitle">답장하기</p>
+						      	<div style="padding:5px; margin-bottom: 10px;">
+							      	<p><span>수신자</span> : ${sv.memberId }</p>
+							      	<textarea rows="3" style="width:100%" class="form-control" id="dmContent"></textarea>
+						      	</div>
+						      	<div style="text-align: right;">
+						      		<button type="button" class="btn btn-secondary" id="send" style="width: 100px;">전송</button>
+						        	<button type="button" class="btn btn-primary " id="cancel" style="width: 100px;" data-bs-dismiss="modal">취소</button>					        	
+								</div>
+								<input type="hidden" id="receiver" value="${sv.memberId }">
+								<input type="hidden" id="sender" value="${sessionScope.m.memberId }">
+					      </div>
+						  </div>
+					  </div>
+					</div><!-- 쪽지 modal 끝 -->						
 				</div>
 			</div>
 			<div class="viewContent">
@@ -501,6 +521,31 @@
 				}
 			});			
 		}
+	});
+	$("#send").click(function () {
+		
+		var receiver = $("#receiver").val();
+		var dmContent = $("#dmContent").val();
+		var sender = $("#sender").val();
+		
+		$.ajax({
+			url : "/sendDm.do",
+			data : {receiver:receiver,dmContent:dmContent,sender:sender},
+			success : function(data) {
+				if(data == 1){
+					dmCount(receiver);
+					swal({
+						  title: "전송완료",
+						  icon: "success",
+						  button: "닫기",
+						}).then(function(){
+							location.reload();							
+						});
+				}else{
+					console.log("실패");
+				}
+			}
+		});
 	});
 </script>
 </body>

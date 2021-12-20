@@ -11,7 +11,7 @@ public class GosuReview {
 	private int reviewNum;
 	private String reviewDate;
 	private int reviewCount;
-	private int reviewAvg;
+	private Double reviewAvg;
 	private String gosuId;
 
 	public String getReviewContentBr(){

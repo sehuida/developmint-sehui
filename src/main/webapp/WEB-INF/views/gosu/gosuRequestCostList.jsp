@@ -55,7 +55,8 @@ input:focus, textarea:focus {
 
 .g-one-tbl img {
 	border-radius: 50%;
-	width: 150px;
+	width: 150px;height: 150px;
+	padding: 0;
 }
 
 .g-one-tbl {
@@ -237,9 +238,15 @@ input:focus, textarea:focus {
 		<div class="requestList">
 			<c:choose>
 				<c:when test="${empty memberRequestCostList }">
-					<span
-						style="font-size: 30px; font-weight: 900; color: gray; margin-top: 100px; margin-bottom: 100px;">아직
-						도착한 견적서가 없어요!</span>
+
+					<div style="padding: 20px; text-align: center;">
+						<img src="/resources/img/member/user.png"
+							style="border-radius: 50%; width: 120px; margin-top: 70px;">
+						<h2
+							style="color: gray; font-size: 30px; font-weight: 900; line-height: 100px;margin-bottom: 100px;">아직
+						도착한 견적서가 없어요!</h2>
+					</div>
+				
 
 				</c:when>
 				<c:otherwise>
@@ -254,7 +261,7 @@ input:focus, textarea:focus {
 								<td>
 									<table class="g-one-tbl">
 										<tr>
-											<th rowspan="3"><c:if test="${empty mrcl.gosuImg }">
+											<th rowspan="3" style="padding-right: 0;text-align: right;"><c:if test="${empty mrcl.gosuImg }">
 													<img src="/resources/img/gosu/g_img_basic.png">
 												</c:if> <c:if test="${not empty mrcl.gosuImg }">
 													<img src="/resources/upload/member/${mrcl.gosuImg}">
@@ -265,7 +272,7 @@ input:focus, textarea:focus {
 										</tr>
 										<tr>
 											<td colspan="2" style="max-width: 1000px;"><span
-												style="width: 100%; color: gray;">${mrcl.costContentBr }</span></td>
+												style="width: 100%; color: gray;">${mrcl.costContentPlus }</span></td>
 
 										</tr>
 										<tr>

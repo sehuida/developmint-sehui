@@ -96,7 +96,6 @@
 	background-color: transparent;
 }
 
-
 #gProject {
 	padding: 0;
 }
@@ -310,7 +309,7 @@
 							<c:if test="${not empty gosu.gosuImg }">
 								<th rowspan="6" style="padding: 40px; padding-right: 100px;"><img
 									src="/resources/upload/member/${gosu.gosuImg }"
-									style="width: 250px;"></th>
+									style="width: 250px; height: 250px;"></th>
 							</c:if>
 						</tr>
 						<tr>
@@ -368,21 +367,24 @@
 											</tr>
 											<tr>
 												<td><c:choose>
-														<c:when test="${grAVG.reviewAvg le 1 }">
-															<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
-														</c:when>
-														<c:when test="${grAVG.reviewAvg le 2 }">
-															<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
-														</c:when>
-														<c:when test="${grAVG.reviewAvg le 3 }">
-															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-														</c:when>
-														<c:when test="${grAVG.reviewAvg le 4 }">
-															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-														</c:when>
-														<c:when test="${grAVG.reviewAvg ge 5 }">
+														<c:when test="${grAVG.reviewAvg eq 5}">
 															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
 														</c:when>
+														<c:when test="${grAVG.reviewAvg eq 4}">
+															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+														</c:when>
+
+														<c:when test="${grAVG.reviewAvg eq 3}">
+															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+														</c:when>
+														<c:when test="${grAVG.reviewAvg eq 2}">
+															<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+														</c:when>
+														<c:when test="${grAVG.reviewAvg eq 1}">
+															<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+														</c:when>
+
+
 													</c:choose></td>
 											</tr>
 											<tr>
@@ -514,7 +516,8 @@
 							</div>
 							<br> <b>제목</b><br>
 							<div class="g-style">
-								<p id="gprojectTitle" style="width: 500px;font-size: 25px;font-weight:900; color:#56cc9d;"></p>
+								<p id="gprojectTitle"
+									style="width: 500px; font-size: 25px; font-weight: 900; color: #56cc9d;"></p>
 							</div>
 							<br> <b>내용</b><br>
 							<div class="g-style">

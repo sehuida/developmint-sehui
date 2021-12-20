@@ -19,4 +19,11 @@ public class GosuFeedback {
 	public String getFeedbackContentBr(){
 		return feedbackContent.replaceAll("\r\n", "<br>");
 	}
+	public String getfeedbackTitlePlus(){
+		 if(feedbackTitle.length() >= 4){
+			 return feedbackTitle.substring(0,4)+"..";
+		};
+		return feedbackTitle;
+	}	
+
 }
