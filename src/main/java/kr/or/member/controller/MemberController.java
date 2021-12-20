@@ -232,6 +232,7 @@ public class MemberController {
 		model.addAttribute("loc", "/");
 		return "common/msg";
 	}
+	
 	@ResponseBody
 	@RequestMapping("/uploadProfile.do")
 	public String uploadProfile(MultipartFile files,String memberId,HttpServletRequest request,Model model,HttpSession session) {
