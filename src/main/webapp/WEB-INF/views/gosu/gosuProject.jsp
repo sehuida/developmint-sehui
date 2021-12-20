@@ -80,6 +80,7 @@ input:focus, textarea:focus {
 .talk-one table th img {
 	border-radius: 50%;
 	width: 60px;
+	height: 60px;
 }
 
 
@@ -222,10 +223,10 @@ input:focus, textarea:focus {
 														<img src="/resources/upload/member/${gtl.memberImg}">
 													</c:if> <c:choose>
 														<c:when test="${sessionScope.m.memberType ne 2}">
-															<span style="color: rgb(78, 205, 196);">질문자</span>
+															<span style="color: rgb(78, 205, 196);">고수</span>
 														</c:when>
 														<c:otherwise>
-															<span style="color: rgb(78, 205, 196);">고수</span>
+															<span style="color: rgb(78, 205, 196);">질문자</span>
 														</c:otherwise>
 													</c:choose> ${gtl.memberId }</th>
 												<td style="text-align: right; color: gray;">${gtl.requestProjectDate }</td>

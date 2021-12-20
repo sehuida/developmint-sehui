@@ -15,6 +15,10 @@
 	text-decoration: none;
 }
 
+.note-editable{
+	max-width: 918px;
+	min-width: 918px;
+}
 .container {
 	min-width: 1200px;
 }
@@ -74,6 +78,7 @@ input:focus, textarea:focus {
 .talk-one table th img {
 	border-radius: 50%;
 	width: 60px;
+	height: 60px;
 }
 
 .talk-one table {

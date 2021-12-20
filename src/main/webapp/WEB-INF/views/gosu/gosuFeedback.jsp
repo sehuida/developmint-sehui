@@ -152,44 +152,47 @@ input:focus, textarea:focus {
 					<tr>
 
 						<td>
-							<li><b>한줄소개</b> : ${gosu.gosuSelf }</li> <input type="hidden"
-							value="${gosu.gosuTitle }" id="gfTitle"> <input
+							<li><b>한줄소개</b>&nbsp;&nbsp;${gosu.gosuSelf }</li> <input
+							type="hidden" value="${gosu.gosuTitle }" id="gfTitle"> <input
 							type="hidden" value="${gosu.ggsouNo }" id="ggsouNo">
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<li><b>비용</b> : ${gosu.gosuCost }</li> <input type="hidden"
+							<li><b>비용</b>&nbsp;&nbsp;<b style="color: red;">
+									${gosu.gosuCost }</b>&nbsp;원</li> <input type="hidden"
 							value="${gosu.gosuCost }" id="gfCost">
 						</td>
 					</tr>
 					<tr>
 						<td style="text-align: center; font-weight: bold;"><span
 							style="color: rgb(78, 205, 196);">고수</span> ${gosu.gosuId }</td>
-						<td><c:if test="${not empty gosu.reviewAvg }">
-								<c:if test="${gosu.reviewAvg eq 0 }">
-									<span style="color: gray; font-size: small;">아직 등록된 리뷰가
-										없습니다.</span>
-								</c:if>
+						<td><c:if test="${empty gosu.reviewAvg }">
+								<span style="color: gray; font-size: small;">아직 등록된 리뷰가
+									없습니다.</span>
 
-								<c:if test="${gosu.reviewAvg ne 0 }">
-									<span>${gosu.reviewAvg } 점 &nbsp;&nbsp;</span>
-								</c:if>
-								<c:if test="${gosu.reviewAvg eq 1 }">
-									<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
-								</c:if>
-								<c:if test="${gosu.reviewAvg eq 2 }">
-									<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
-								</c:if>
-								<c:if test="${gosu.reviewAvg eq 3 }">
-									<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-								</c:if>
-								<c:if test="${gosu.reviewAvg eq 4 }">
-									<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-								</c:if>
-								<c:if test="${gosu.reviewAvg eq 5 }">
-									<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-								</c:if>
+							</c:if> <c:if test="${not empty gosu.reviewAvg }">
+								<span>${gosu.reviewAvg } 점 &nbsp;&nbsp;</span>
+								<c:choose>
+									<c:when test="${gosu.reviewAvg eq 5}">
+										<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+									</c:when>
+									<c:when test="${gosu.reviewAvg >= 4}">
+										<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+									</c:when>
+
+									<c:when test="${gosu.reviewAvg >= 3}">
+										<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+									</c:when>
+									<c:when test="${gosu.reviewAvg >= 2}">
+										<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+									</c:when>
+									<c:when test="${gosu.reviewAvg>= 1}">
+										<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+									</c:when>
+
+
+								</c:choose>
 
 							</c:if></td>
 					</tr>
