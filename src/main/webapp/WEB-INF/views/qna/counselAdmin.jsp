@@ -109,36 +109,72 @@
 								</c:choose>
 								<td >${q.type }</td>
 								<td >
-									<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#qna_Modal${i.index }" onclick="clickList('${q.qnaNo}','${i.index }');" class="clickA">${q.qnaTitle }</a>
-									<div class="modal" id="qna_Modal${i.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-									  <div class="modal-dialog " role="document" style="top: 30%;min-width: 1000px;">
-									    <div class="modal-content " >
-									      <div class="modal-header">
-									        <h5 class="modal-title">문의 확인하기</h5>
-									        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-									          <span aria-hidden="true"></span>
-									        </button>
-									      </div>
-									      <div class="modal-body">
-											<p style="font-size: 25px; font-weight: bold" id="qnaCheck">${q.type } : ${q.qnaTitle }</p>
-											<%-- <p style="font-size: 15px;">파일명 : <a href="/fileDown.do?noticeNo=${n.noticeNo }">${n.filename }</a></p> --%>
-											<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;border-radius: 5px;">
-												<p class="qnaContent">${q.qnaContent }</p>
+									<c:choose>
+										<c:when test="${type eq 1}">
+											<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#qna_Modal${i.index }" onclick="clickList('${q.qnaNo}','${i.index }');" class="clickA">${q.qnaTitle }</a>
+											<div class="modal" id="qna_Modal${i.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											  <div class="modal-dialog " role="document" style="top: 30%;min-width: 1000px;">
+											    <div class="modal-content " >
+											      <div class="modal-header">
+											        <h5 class="modal-title">문의 확인하기</h5>
+											        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+											          <span aria-hidden="true"></span>
+											        </button>
+											      </div>
+											      <div class="modal-body">
+													<p style="font-size: 25px; font-weight: bold" id="qnaCheck">${q.type } : ${q.qnaTitle }</p>
+													<%-- <p style="font-size: 15px;">파일명 : <a href="/fileDown.do?noticeNo=${n.noticeNo }">${n.filename }</a></p> --%>
+													<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;border-radius: 5px;">
+														<p class="qnaContent">${q.qnaContent }</p>
+													</div>
+													<div>
+														<p class="qnafile">
+															<%-- <c:forEach items="${b.list }" var="f">
+																<a href="/boardFileDownload?fileNo=${f.fileNo }">${f.filename }</a><br>
+															</c:forEach> --%>
+														</p>
+													</div>
+											      </div>
+											      <div class="modal-footer">
+											        <button type="button" class="btn btn-secondary btn_no" data-bs-dismiss="modal">닫기</button>
+											      </div>
+											    </div>
+											  </div>
 											</div>
-											<div>
-												<p class="qnafile">
-													<%-- <c:forEach items="${b.list }" var="f">
-														<a href="/boardFileDownload?fileNo=${f.fileNo }">${f.filename }</a><br>
-													</c:forEach> --%>
-												</p>
+										</c:when>
+										<c:otherwise>
+											<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#qna_Modal${i.index }" <%-- onclick="clickList('${q.qnaNo}','${i.index }');" --%> class="clickA">${q.qnaTitle }</a>
+											<div class="modal" id="qna_Modal${i.index }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											  <div class="modal-dialog " role="document" style="top: 30%;min-width: 1000px;">
+											    <div class="modal-content " >
+											      <div class="modal-header">
+											        <h5 class="modal-title">문의 확인하기</h5>
+											        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+											          <span aria-hidden="true"></span>
+											        </button>
+											      </div>
+											      <div class="modal-body">
+													<p style="font-size: 25px; font-weight: bold" id="qnaCheck">${q.type } : ${q.qnaTitle }</p>
+													<%-- <p style="font-size: 15px;">파일명 : <a href="/fileDown.do?noticeNo=${n.noticeNo }">${n.filename }</a></p> --%>
+													<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;border-radius: 5px;">
+														<p class="qnaContent">${q.qnaContent }</p>
+													</div>
+													<div>
+														<p class="qnafile">
+															<%-- <c:forEach items="${b.list }" var="f">
+																<a href="/boardFileDownload?fileNo=${f.fileNo }">${f.filename }</a><br>
+															</c:forEach> --%>
+														</p>
+													</div>
+											      </div>
+											      <div class="modal-footer">
+											        <button type="button" class="btn btn-secondary btn_no" data-bs-dismiss="modal">닫기</button>
+											      </div>
+											    </div>
+											  </div>
 											</div>
-									      </div>
-									      <div class="modal-footer">
-									        <button type="button" class="btn btn-secondary btn_no" data-bs-dismiss="modal">닫기</button>
-									      </div>
-									    </div>
-									  </div>
-									</div>
+										</c:otherwise>
+									</c:choose>
 								</td>
 								<c:choose>
 									<c:when test="${type eq 1}">
