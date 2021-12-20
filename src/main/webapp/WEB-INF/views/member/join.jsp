@@ -8,6 +8,7 @@
 <title>JoinFrm</title>
 <link rel="stylesheet" href="/resources/css/member/join.css">
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
 <body>
   <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -99,6 +100,7 @@
             </button>
           </div>
         </fieldset>
+        <div class="g-recaptcha" data-sitekey=6LdUebcdAAAAAJsK4CE4Ih7C_d3zdDX_IOXzfeo1 style="width: 100%; margin-top: 30px; margin-left: 70px;"></div>
         <button type="button" class="btn btn-primary" id="joinBtn">회원가입</button>
       </form>
     </div><!--joinwrap끝나는지점-->
@@ -194,5 +196,55 @@
   </div><!--container끝나는 지점-->
   <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
  <script type="text/javascript" src="/resources/js/member/join.js"></script>
+ <script type="text/javascript">
+ $("#joinBtn").click(function(){
+	 var required = $(".required:checked").length;
+	 if(idChk==true&&pwChk==true&&pwreChk==true&&nameChk==true&&phoneChk==true&&emailChk==true&&emailCodeChk==true&&required==2){
+		//리캡차 체크
+		$.ajax({
+            url: '/VerifyRecaptcha.do',
+            type: 'post',
+            data: {
+                recaptcha: $("#g-recaptcha-response").val()
+            },
+            success: function(data) {
+                switch (data) {
+                    case 0:
+                        console.log("자동 가입 방지 봇 통과");
+                        captcha = 0;
+                		break;
+                    case 1:
+	               		 swal({
+	          			   title: "자동가입 방지봇을 체크해주세요!",
+	          			   icon: "warning", //"info,success,warning,error" 중 택1
+	          			   button: "돌아가기",
+	          			});
+                        break;
+                    default:
+                        alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : " + Number(data) + "]");
+                   		break;
+                }
+            }
+        });
+		 swal({
+			   title: "가입성공!",
+			   text: "Devlomints에 가입하신걸 환영합니다.",
+			   icon: "success", //"info,success,warning,error" 중 택1
+			   button: "둘러보기",
+			})
+		 .then((value) => {
+		 	$("form").submit();			 
+		 });
+	 }else{
+		 swal({
+			   title: "가입실패",
+			   text: "입력값을  다시 확인해주세요.",
+			   icon: "warning", //"info,success,warning,error" 중 택1
+			   button: "돌아가기",
+			})
+		 return false;
+	 }
+  });
+ </script>
 </body>
 </html>

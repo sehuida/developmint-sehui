@@ -352,6 +352,14 @@ public class GosuDao {
 		return (ArrayList<Gosu>)list;
 	}
 
+	public int selectGosuRequestCostListCount(String memberId) {
+		return sqlSession.selectOne("gosu.selectGosuRequestCostListCount",memberId);
+	}
+
+	public int selectGosuRequestListCount(int memberNo) {
+		return sqlSession.selectOne("gosu.selectGosuRequestListCount",memberNo);
+	}
+
 
 
 }

@@ -343,12 +343,20 @@ to {
 	<div class="container">
 		<c:if test="${sessionScope.m.memberType eq 2}">
 			<div class="gosu-mail">
-				<a href="/gosuRequestList.do?reqPage=1">요청서</a>
+				<a href="/gosuRequestList.do?reqPage=1">
+				<c:if test="${ requestCount ne 0 }">
+				<span>${ requestCount}</span>
+				</c:if>
+				요청서</a>
 			</div>
 		</c:if>
 		<c:if test="${sessionScope.m.memberType eq 1}">
 			<div class="gosu-mail">
-				<a href="/gosuRequestCostList.do?reqPage=1">견적서</a>
+				<a href="/gosuRequestCostList.do?reqPage=1">
+				<c:if test="${ costCount ne 0 }">
+				<span>${ costCount}</span>
+				</c:if>
+				견적서</a>
 			</div>
 		</c:if>
 		<h1>

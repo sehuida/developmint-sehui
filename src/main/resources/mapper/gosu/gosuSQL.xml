@@ -1174,4 +1174,44 @@
 		#{memberId}
 	</select>
 
+	<select id="selectGosuRequestCostListCount"
+		parameterType="string" resultType="_int">
+		select
+		count(*)
+		from
+		gosu_request_cost
+		cost
+		LEFT JOIN
+		GOSU_REQUEST_PROJECT_SUB sub
+		ON cost.cost_no = sub.cost_no
+		where request_project_sub_no is null and member_id=#{memberId}
+	</select>
+	<select id="selectGosuRequestListCount" parameterType="_int"
+		resultType="_int">
+		select count(*) from
+		gosu_request where
+		request_no
+		NOT IN (
+		select req.request_no
+		from
+		gosu_request req
+		left
+		JOIN
+		gosu_request_cost
+		cost
+		ON
+		req.request_no =
+		cost.request_no
+		where
+		cost.request_no IN
+		(
+		select
+		request_no from
+		gosu_request_cost
+		where
+		gosu_no = #{memberId}
+		) and
+		cost.gosu_no = #{memberId})
+
+	</select>
 </mapper>
