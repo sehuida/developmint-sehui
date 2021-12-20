@@ -19,4 +19,10 @@
   	<select id="dmCount" parameterType="string" resultType="_int">
   		select count(*) from post where receiver = #{memberId} and read_status='N' 
   	</select>
+  	<update id="updateDm" parameterType="_int">
+  		update post set read_status='Y' where dm_no=#{dmNo}
+  	</update>
+  	<delete id="deleteMsg" parameterType="_int">
+  		delete from post where dm_no=#{dmNo}
+  	</delete>
 </mapper>
