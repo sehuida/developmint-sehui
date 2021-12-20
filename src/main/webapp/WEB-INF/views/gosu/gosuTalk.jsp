@@ -3,12 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
 .container * {
 	text-decoration: none;
 }
@@ -48,11 +50,15 @@ input:focus, textarea:focus {
 	padding: 20px;
 }
 
+.talk-one p *{
+	background-color:transparent !important;
+}
 .talk-one {
 	width: 50%;
-	margin-bottom: 100px;
+	margin-bottom: 50px;
 	align-self: flex-start;
 	padding: 20px;
+	overflow: auto;
 }
 
 .talk-one tr:last-child td:last-child {
@@ -190,11 +196,11 @@ input:focus, textarea:focus {
 		</h3>
 
 
-		<div class="g-feedback">
+		<div class="g-feedback" style="margin-bottom:100px;">
 
 			<h3>Q. &nbsp;${gfOne.feedbackTitle }</h3>
-			<span>${gfOne.feedbackContentBr }</span>
-		</div>
+			<span >${gfOne.feedbackContentBr }</span>
+		</div >
 
 		<c:choose>
 			<c:when test="${gfOne.feedbackNum eq 1}">
@@ -367,12 +373,12 @@ input:focus, textarea:focus {
 														</c:if>
 													</div>
 												</td>
-												<td>${greview.reviewDate }</td>
+												<td >${greview.reviewDate }</td>
 
 											</tr>
 											<tr>
 												<td colspan="2"
-													style="text-align: center; border: 1px solid #78c2ad; padding: 50px; box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2pX;">${greview.reviewContentBr }</td>
+													style="width: 800px; border: 1px solid #78c2ad; padding: 50px; box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2pX;">${greview.reviewContentBr }</td>
 
 											</tr>
 										</table>

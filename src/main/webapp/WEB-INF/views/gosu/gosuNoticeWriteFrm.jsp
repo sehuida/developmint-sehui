@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,12 +11,14 @@
 <style>
 .container * {
 	text-decoration: none;
-	color: black;
 }
 
+.note-modal-footer{
+	height: 60px !important;
+}
 .container {
-	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-top: 100px;
+	margin-bottom: 100px;
 	min-width: 1200px;
 }
 
@@ -42,8 +45,7 @@
 .g-content {
 	display: flex;
 	justify-content: center;
-	margin-top: 100px;
-	margin-bottom: 100px;
+
 }
 
 .g-content input, .g-content textarea {
@@ -53,7 +55,9 @@
 .g-content tr th, .g-content tr td {
 	padding: 40px;
 }
-
+.g-content tr th{
+	width: 200px;
+}
 input:focus, textarea:focus {
 	outline: none;
 }
@@ -62,9 +66,6 @@ input:focus, textarea:focus {
 	font-size: 25px;
 }
 
-.g-content>div {
-	
-}
 
 .gosu-mail {
 	display: flex;
@@ -86,6 +87,11 @@ input:focus, textarea:focus {
 	margin-left: 50px;
 	display: block;
 	font-size: 13px;
+}
+#g-btn-submit{
+	min-width :1200px;
+	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
+	
 }
 </style>
 <body>
@@ -123,7 +129,7 @@ input:focus, textarea:focus {
 						</tr>
 						<tr>
 							<th>내용 <span style="color: red;"> * </span></th>
-							<td><textarea cols="100" rows="30" name="gnoticeContent"
+							<td><textarea cols="100" rows="30" name="gnoticeContent" id="gnoticeContent"
 									placeholder="* 고수님만의 노하우를 작성해주세요!"></textarea></td>
 						</tr>
 
@@ -132,14 +138,63 @@ input:focus, textarea:focus {
 			</div>
 			<div class="g-center">
 				<a href="/gosuNoticeList.do" class="btn btn-info"
-					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">취소</a>
+					style="width: 200px; margin: 50px; padding: 10px; font-weight: bold;">취소</a>
 				<button type="submit" class="btn btn-primary"
-					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">확인</button>
+					style="width: 200px; margin: 50px; padding: 10px; font-weight: bold;">확인</button>
 			</div>
 		</form>
 	</div>
+	
+	<script src="/resources/summernote/summernote-lite.js"></script>
+	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
+	$("#gnoticeContent").summernote(
+			{
+				height : 500,
+				minHeight : 500,
+				maxHeight : 500,
+				lang : "ko-KR",
+				toolbar : [
+						[ 'fontname', [ 'fontname' ] ],
+						[ 'fontsize', [ 'fontsize' ] ],
+						[
+								'style',
+								[ 'bold', 'italic', 'underline',
+										'strikethrough', 'clear' ] ],
+						[ 'color', [ 'forecolor', 'color' ] ],
+						[ 'table', [ 'table' ] ],
+						[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+						[ 'height', [ 'height' ] ],
+						[ 'insert', [ 'picture', 'link' ] ],
+						[ 'view', [ 'fullscreen', 'help' ] ] ],
+				fontNames : [ 'Arial', 'Arial Black', 'Comic Sans MS',
+						'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체',
+						'바탕체' ],
+				fontSizes : [ '8', '9', '10', '11', '12', '14', '16', '18',
+						'20', '22', '24', '28', '30', '36', '50', '72' ],
+				callbacks : {
+					onImageUpload : function(files) {
+						uploadImage(files[0], this);
+					}
+				}
+			});
+
+	function uploadImage(file, editor) {
+		data = new FormData();
+		data.append("file", file);
+		$.ajax({
+			url : "/gosuSummerImage.do",
+			type : "post",
+			data : data,
+			enctype : 'multipart/form-data',
+			processData : false,
+			contentType : false,
+			success : function(data) {
+				$(editor).summernote("insertImage", data);
+			}
+		});
+	}
 		$('#g-btn-submit').submit(function() {
 			var gnoticeContent = $("input[name=gnoticeContent]").val();
 			var gnoticeTitle = $("textarea[name=gnoticeTitle]").val();

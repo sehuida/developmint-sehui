@@ -381,6 +381,15 @@ public class GosuService {
 	public ArrayList<Gosu> selectGosuList() {
 
 		ArrayList<Gosu> list = dao.selectGosuList();
+		for (Gosu g : list) {
+			g.setGosuImg(dao.selectGosuImg(g.getGsouNo()));
+
+			ArrayList<GosuReview> list2 = dao.selectGosuReviewList(g.getGgsouNo());
+			if(!list2.isEmpty()) {
+				g.setReviewAvg(dao.selectReviewAvg(g.getGgsouNo()));
+				
+			}
+		}
 		return list;
 	}
 

@@ -506,7 +506,7 @@ public class GosuController {
 			model.addAttribute("msg", "");
 			model.addAttribute("icon", "success");
 		}
-		model.addAttribute("loc", "/gosuNoticeList.do");
+		model.addAttribute("loc", "/gosuNoticeList.do?reqPage=1");
 
 		return "member/swalMsg";
 	}
@@ -795,7 +795,7 @@ public class GosuController {
 			model.addAttribute("msg", "");
 			model.addAttribute("icon", "success");
 		}
-		model.addAttribute("loc", "/gosuNoticeList.do");
+		model.addAttribute("loc", "/gosuNoticeList.do?reqPage=1");
 		return "member/swalMsg";
 	}
 
