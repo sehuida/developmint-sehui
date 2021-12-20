@@ -273,11 +273,10 @@
 						</li>               
 					</ul>
 				<div class="message">
-					<a href="applicationStatus.do?reqPage=1"><button class="companyMessage">지원신청 회원 목록</button></a>		<!-- 일반회원이 지원신청을 했을 경우 count증가하고 이력서 열람할 수 있도록 하기 -> 서류합격? 버튼 누를 시 웹소켓으로 쪽지 보내기 -->
+					<a href="applicationStatus.do?announceNo=${a.announceNo }&reqPage=1"><button class="companyMessage">지원신청 회원 목록</button></a>		<!-- 일반회원이 지원신청을 했을 경우 count증가하고 이력서 열람할 수 있도록 하기 -> 서류합격? 버튼 누를 시 웹소켓으로 쪽지 보내기 -->
 					<span class="requestCount">1</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
 				</div>
 				<div class="update">
-					<%-- <input type="hidden" value="${a.announceNo }" name="announceNo"> --%>
 					<a href="/updateAnnounceFrm.do?announceNo=${a.announceNo }"><button class="updateAnnounce">수정하기</button></a>
 					<a href="/deleteAnnounce.do?announceNo=${a.announceNo }"><button class="deleteAnnounce">삭제하기</button></a>
 				</div>
@@ -293,6 +292,7 @@
 			<p>구인공고는 하나만 작성이 가능합니다.</p>
 		</div>
 	</div>
+	<%-- <input type="hidden" value="${a.announceNo }" name="announceNo"> --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

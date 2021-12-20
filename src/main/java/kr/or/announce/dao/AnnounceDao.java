@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.announce.vo.Announce;
+import kr.or.announce.vo.AnnounceList;
 import kr.or.announce.vo.AnnounceView;
 import kr.or.resume.vo.Resume;
 
@@ -50,6 +51,11 @@ public class AnnounceDao {
 	
 	public int deleteAnnounce(int announceNo) {
 		return sqlSession.delete("announce.deleteAnnounce", announceNo);
+	}
+
+	public ArrayList<AnnounceList> selectApplyAnnounce(int announceNo) {
+			List list = sqlSession.selectList("announce.selectApplyAnnounce", announceNo);
+		return (ArrayList<AnnounceList>)list;
 	}
 
 
