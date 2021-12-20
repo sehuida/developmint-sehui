@@ -5,7 +5,7 @@ import java.util.List;
 
 import kr.or.notice.vo.Notice;
 import kr.or.qna.vo.Qna;
-import kr.or.qna.vo.nonQna;
+import kr.or.qna.vo.NonQna;
 import lombok.Data;
 
 @Data
@@ -23,11 +23,11 @@ public class TotalData {
 	private int yesterDayTotalBoard;
 	private ArrayList<Notice> noticeList;
 	private ArrayList<Qna> qnaList;
-	private ArrayList<nonQna> nonQnaList;
+	private ArrayList<NonQna> nonQnaList;
 	
 	public TotalData(int todayTotalMember, int todayJoinMember, int todayOutMember, int todayTotalContent,
 			List<String> dateList, List<Integer> joinList, List<Integer> outList, List<Integer> gradeList,
-			List<Integer> cateList, int yesterDayTotalMember, int yesterDayTotalBoard, ArrayList<Notice> noticeList, ArrayList<Qna> qnaList, ArrayList<nonQna> nonQnaList) {
+			List<Integer> cateList, int yesterDayTotalMember, int yesterDayTotalBoard, ArrayList<Notice> noticeList, ArrayList<Qna> qnaList, ArrayList<NonQna> nonQnaList) {
 		super();
 		this.todayTotalMember = todayTotalMember;
 		this.todayJoinMember = todayJoinMember;

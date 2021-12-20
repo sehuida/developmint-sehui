@@ -45,7 +45,7 @@
 		<typeAlias type="kr.or.gosu.vo.GosuReview" alias="greview"/>
 		<typeAlias type="kr.or.company.vo.CompanyInfo" alias="ci"/>
 		<typeAlias type="kr.or.gosu.vo.GosuRequestReview" alias="grreview"/>
-		<typeAlias type="kr.or.qna.vo.nonQna" alias="nq"/>
+		<typeAlias type="kr.or.qna.vo.NonQna" alias="nq"/>
 		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTeamFileVO" alias="pfv"/>
 		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTeamMember" alias="pfm"/>
 		<typeAlias type="kr.or.projectTeam.model.vo.ProjectTask" alias="ptk"/>

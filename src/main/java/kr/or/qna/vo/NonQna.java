@@ -3,7 +3,7 @@ package kr.or.qna.vo;
 import lombok.Data;
 
 @Data
-public class nonQna {
+public class NonQna {
 	private int nonQnaNo;
 	private int category;
 	private String email;
