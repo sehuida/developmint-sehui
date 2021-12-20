@@ -94,6 +94,7 @@
 			</div>
 
 		</div>
+		<br><br><br><br>
 		<div style="margin-bottom: 100px; margin-top: 100px;">
 			<h1 style="font-size: 50px;">
 				더 특별한 일상을 만드는 것,<br> 그것이 디벨로민트를 시작하는 이유입니다.

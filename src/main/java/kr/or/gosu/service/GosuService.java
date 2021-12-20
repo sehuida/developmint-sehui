@@ -773,6 +773,18 @@ public class GosuService {
 	}
 
 
+	public int selectGosuRequestCostListCount(String memberId) {
+		int costCount= dao.selectGosuRequestCostListCount(memberId);
+		return costCount;
+	}
+
+
+	public int selectGosuRequestListCount(int memberNo) {
+		int costCount= dao.selectGosuRequestListCount(memberNo);
+		return costCount;
+	}
+
+
 
 
 }
