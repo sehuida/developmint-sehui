@@ -237,9 +237,15 @@ input:focus, textarea:focus {
 		<div class="requestList">
 			<c:choose>
 				<c:when test="${empty memberRequestCostList }">
-					<span
-						style="font-size: 30px; font-weight: 900; color: gray; margin-top: 100px; margin-bottom: 100px;">아직
-						도착한 견적서가 없어요!</span>
+
+					<div style="padding: 20px; text-align: center;">
+						<img src="/resources/img/member/user.png"
+							style="border-radius: 50%; width: 120px; margin-top: 70px;">
+						<h2
+							style="color: gray; font-size: 30px; font-weight: 900; line-height: 100px;margin-bottom: 100px;">아직
+						도착한 견적서가 없어요!</h2>
+					</div>
+				
 
 				</c:when>
 				<c:otherwise>

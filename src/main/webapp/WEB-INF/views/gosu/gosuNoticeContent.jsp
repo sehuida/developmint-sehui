@@ -55,6 +55,7 @@
 .gosu td>img {
 	border-radius: 50%;
 	width: 50px;
+	height: 50px;
 	margin-right: 30px;
 }
 
@@ -333,10 +334,10 @@
 									<td style="width: 100px;"><c:if
 											test="${not empty cl.memberImg  }">
 											<img src="/resources/upload/member/${cl.memberImg }"
-												style="border-radius: 50%; width: 70px;">
+												style="border-radius: 50%; width: 70px;height: 70px; ">
 										</c:if> <c:if test="${empty cl.memberImg  }">
 											<img src="/resources/img/member/user.png"
-												style="border-radius: 50%; width: 70px;">
+												style="border-radius: 50%; width: 70px;height: 70px; ">
 										</c:if></td>
 									<td rowspan="2" style="text-align: left"><input
 										id="updateContent"
@@ -455,7 +456,7 @@
 									style="border-radius: 50%; width: 70px;">
 							</c:if> <c:if test="${not empty sessionScope.m.filepath }">
 								<img src="/resources/upload/member/${sessionScope.m.filepath }"
-									style="border-radius: 50%; width: 70px;">
+									style="border-radius: 50%; width: 70px; height: 70px; ">
 							</c:if></td>
 
 						<td rowspan="2" style="padding-right: 40px;"><textarea
