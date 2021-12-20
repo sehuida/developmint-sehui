@@ -565,7 +565,7 @@
 	</select>
 
 	<select id="selectReviewAvg" parameterType="_int"
-		resultType="_int">
+		resultType="double">
 		SELECT ROUND(AVG(REVIEW_NUM),1) as reviewAvg
 		FROM
 		gosu_review

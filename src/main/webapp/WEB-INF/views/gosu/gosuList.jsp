@@ -226,10 +226,10 @@
 						<div style="text-align: center;">
 							<img src="/resources/img/member/user.png"
 								style="border-radius: 50%; width: 70px; margin-top: 70px;">
-							<h2 style="font-weight: 900; color: #cacaca; margin: 30px; ">게시글을
+							<h2 style="font-weight: 900; color: #cacaca; margin: 30px;">게시글을
 								찾을 수 없습니다.</h2>
 						</div>
-					</div >
+					</div>
 
 				</c:when>
 				<c:otherwise>
@@ -261,41 +261,44 @@
 									<tr>
 
 										<td>
-											<li><b>한줄소개</b> : ${g.gosuSelf }</li>
+											<li><b>한줄소개</b>&nbsp;&nbsp;${g.gosuSelf }</li>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<li><b>비용</b> : ${g.gosuCost }</li>
+											<li><b>비용</b>&nbsp;&nbsp;<b style="color: red;"> ${g.gosuCost }</b>&nbsp;원</li>
 										</td>
 									</tr>
 									<tr>
 										<td style="text-align: center; font-weight: bold;"><span
 											style="color: rgb(78, 205, 196);">고수</span> ${g.gosuId }</td>
-										<td><c:if test="${not empty g.reviewAvg }">
-												<c:if test="${g.reviewAvg eq 0 }">
-													<span style="color: gray; font-size: small;">아직 등록된
-														리뷰가 없습니다.</span>
-												</c:if>
+										<td><c:if test="${empty g.reviewAvg }">
+												<span style="color: gray; font-size: small;">아직 등록된
+													리뷰가 없습니다.</span>
+											</c:if> <c:if test="${not empty g.reviewAvg }">
+												<span>${g.reviewAvg } 점 &nbsp;&nbsp;</span>
 
-												<c:if test="${g.reviewAvg ne 0 }">
-													<span>${g.reviewAvg } 점 &nbsp;&nbsp;</span>
-												</c:if>
-												<c:if test="${g.reviewAvg eq 1 }">
-													<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
-												</c:if>
-												<c:if test="${g.reviewAvg eq 2 }">
-													<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
-												</c:if>
-												<c:if test="${g.reviewAvg eq 3 }">
-													<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-												</c:if>
-												<c:if test="${g.reviewAvg eq 4 }">
-													<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-												</c:if>
-												<c:if test="${g.reviewAvg eq 5 }">
-													<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-												</c:if>
+												<c:choose>
+													<c:when test="${g.reviewAvg eq 5}">
+														<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+													</c:when>
+													<c:when test="${g.reviewAvg >= 4}">
+														<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+													</c:when>
+
+													<c:when test="${g.reviewAvg >= 3}">
+														<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+													</c:when>
+													<c:when test="${g.reviewAvg >= 2}">
+														<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+													</c:when>
+													<c:when test="${g.reviewAvg>= 1}">
+														<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+													</c:when>
+
+
+												</c:choose>
+
 
 											</c:if></td>
 									</tr>
