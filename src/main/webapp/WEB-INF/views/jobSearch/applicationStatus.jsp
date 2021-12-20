@@ -15,7 +15,9 @@
 			</div>
 			<br><br>
 			<p id="unprocessed">입사 지원 수 : <span>${count }</span> 건</p>
-			
+			<div class="">
+				<%-- ${list.resumeTitle } --%>
+			</div>
 			<div id="pageNavi">${pageNavi }</div>
 		</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
