@@ -78,9 +78,7 @@
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
 		<div class="back-img">
-			<h2>
-				비즈니스와 일상에 기술을 더하여<br> 더 편리하고 즐거운 세상을 만들어갑니다.
-			</h2>
+			
 		</div>
 		<h1>
 			<span style="color: rgb(78, 205, 196); margin: 50px;">Develomint</span>
@@ -96,7 +94,7 @@
 		</div>
 		<br><br><br><br>
 		<div style="margin-bottom: 100px; margin-top: 100px;">
-			<h1 style="font-size: 50px;">
+			<h1 style="font-size: 50px;line-height: 90px;">
 				더 특별한 일상을 만드는 것,<br> 그것이 디벨로민트를 시작하는 이유입니다.
 			</h1>
 		</div>
@@ -135,9 +133,9 @@
 			</div>
 		</div>
 		<div style="margin-bottom: 100px; margin-top: 100px;">
-			<h1 style="font-size: 50px; line-height: 75px;">
-				The way we work Why not?<br> <br> 당연한 것들에 대한 도전<br> <br>
-				If Develomint Enterprise, ()<br> <br> <span
+			<h1 style="font-size: 50px; line-height: 90px;">
+				<b>The way we work Why not?</b><br> <br> 당연한 것들에 대한 도전<br> <br>
+				<b>If Develomint Enterprise, (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</b><br> <br> <span
 					style="color: rgb(78, 205, 196); font-weight: 900;">디벨로민트
 					생각에 대한 기대,</span> <br>더 특별한 일상을 만드는 것,<br>그것이 디벨로민트를 시작하는 이유입니다.
 			</h1>
@@ -158,7 +156,13 @@
 				<h3 style="text-align: center; width: 100%; color: gray;">디벨로민트에
 					가입해보세요</h3>
 				<div class="line"></div>
-				<a href="/joinFrm.do" class="btn btn-success" style="margin: 100px;width: 200px;font-size: 20px;font-weight: 900;">회원가입</a>
+				<c:if test="${empty sessionScope.m }">
+					<a href="/joinFrm.do" class="btn btn-success" style="margin: 100px;width: 200px;font-size: 20px;font-weight: 900;">회원가입</a>
+				</c:if>
+				<c:if test="${not empty sessionScope.m }">
+					<a href="/logout.do" class="btn btn-success" style="margin: 100px;width: 200px;font-size: 20px;font-weight: 900;">로그아웃</a>
+			
+				</c:if>
 			</div> 
 
 		</div>
