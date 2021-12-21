@@ -95,6 +95,12 @@ public class QnaDao {
 	}
 
 
+	public NonQna enterThePw(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("qna.enterThePw",map);
+	}
+
+
 
 
 	

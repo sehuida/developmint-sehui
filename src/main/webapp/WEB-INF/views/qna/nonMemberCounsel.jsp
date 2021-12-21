@@ -10,6 +10,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <link rel="stylesheet" href="/resources/css/notice/noticeList.css">
 <link rel="stylesheet" href="/resources/css/notice/qnalist.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -107,7 +108,13 @@
 										</c:otherwise>
 									</c:choose>
 								</td>
-								<td><a href="javascript:void(0);" class="btn btn-outline-dark" id="pwChk" onclick="pwChkList('${nq.nonQnaNo}','${i.index }');">비밀번호 입력</a></td>
+								<td>
+									<form action="/searchPw.do" method="post" class="searchPw" id="searchPw" >
+										<a href="javascript:void(0);" class="btn btn-outline-dark pwChk" id="pwChk" onclick="pwChkList('${nq.nonQnaNo}','${i.index }');return false;">비밀번호 입력</a>
+										<input value="${nq.nonQnaNo}" type="hidden" name="nonQnaNo"> 
+										<input type="hidden" name="qnaPw" id="qnaPw">
+									</form>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -117,9 +124,83 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script type="text/javascript">
-		function pwChkList(no, index){
+			var SwalColors = {
+			  blue: "rgba(43, 165, 137, 0.45)"
+			};
+
+			function SwalOverlayColor(color){
+			  setTimeout(function(){
+			    $(".swal-overlay").css({"background-color":SwalColors[color]});
+			  },200);
+			}
+	
+			/* $(".pwChk").click(function (){
+			var index = $(".reportBtn").index(this);
+			SwalOverlayColor("blue");
+			swal({
+					text : '비밀번호를 입력해주세요.',
+				 	content: {
+				    element: "input",
+				    attributes: {
+				      placeholder: "Type your password",
+				      type: "password",
+				    },
+				  },
+				  button : {
+					 	text: "Search!",
+					 	value : true,
+				    	closeModal: false,
+				  },
+				  //closeOnClickOutside : false,
+				})
+				.then(pw => {
+				  if (!pw) throw null;
+				  var memebrPw = ${pw}
+				  $("#qnaPw").val(memberPw);
+				  console.log(memebrPw);
+				  //$(".searchPw").eq(index).submit();
+				  return location.href="/searchPw?"
+				})
+				.catch(err => {
+				  if (err) {
+				    swal("Oh noes!", "The AJAX request failed!", "error");
+				  } else {
+				    swal.stopLoading();
+				    swal.close();
+				  }
+				});
+			}); */
 			
-		}
+			function pwChkList(no, index){
+				SwalOverlayColor("blue");
+				swal({
+						text : '비밀번호를 입력해주세요.',
+						closeOnClickOutside : false,
+					 	content: {
+					    element: "input",
+					    attributes: {
+					      placeholder: "Type your password",
+					      type: "password",
+					    },
+					  },
+					  button : {
+						  text: "Search!",
+						  value : true,
+						  closeModal: false,
+					  }
+					})
+					.then(function(qnaPw) {
+						if (!qnaPw) {
+							swal("Oh noes!", "비밀번호를 입력해주세요!", "error");
+							return false;
+						}
+						$("#qnaPw").eq(index).val(qnaPw);
+						//console.log(qnaPw);
+						//console.log($("#qnaPw").eq(index).val());
+						$("#qnaPw").val(qnaPw);
+						$(".searchPw").eq(index).submit();
+					});
+			}
 	</script>
 </body>
 </html>

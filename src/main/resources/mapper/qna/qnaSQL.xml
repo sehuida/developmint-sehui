@@ -228,4 +228,18 @@
 		delete from qna where "qna_no" = #{qnaNo}
 	</delete>
 	
+	<!-- 비밀번호입력 -->
+	<select id="enterThePw" parameterType="map" resultType="nq">
+		select 
+		    "non_qna_no"as nonQnaNo,
+		    "category" as category,
+		    "email" as email,
+		    "qna_pw"as qnaPw,
+		    "qna_title"as qnaTitle,
+		    "qna_content" as qnaContent,
+		    "reg_date"as regDate,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date" as answerDate
+		from non_member_qna where "non_qna_no"=#{nonQnaNo} and "qna_pw" = #{qnaPw} order by 1 desc
+	</select>
 </mapper>
