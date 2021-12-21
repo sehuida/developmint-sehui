@@ -6,6 +6,8 @@
 <head>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <link rel="stylesheet" href="/resources/css/member/login.css">
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <meta charset="UTF-8">
 <title>Login</title>
 </head>
@@ -32,6 +34,10 @@
                 <div class="loginBt">
                     <a class="btn btn-info" href="/joinFrm.do">회원가입</a>   
                 </div>
+                <div class="loginBt">
+			        <a id="kakao-login-btn">
+			        </a>
+                </div>
                 <div>
                     <a href="/findId.do">아이디찾기/비밀번호찾기</a>
                 </div>
@@ -39,5 +45,45 @@
         </form>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script type="text/javascript">
+		//카카오톡 로그인 버튼
+		$(function(){
+			Kakao.init('1672daed0bcbc8c8ebbff80ce544272f');
+			console.log(Kakao.isInitialized());
+			 Kakao.Auth.createLoginButton({
+			   container: '#kakao-login-btn',
+			   success: function(authObj) {
+			     Kakao.API.request({
+			       url: '/v2/user/me',
+			       success: function(res) {
+			             console.log(res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
+			           		$.ajax({
+			           			url : "/kakao.do",
+			           			data : {memberId : res.id , memberPw : res.id},
+			           			type : "post",
+			           			success : function(data){
+			           				if(data == 1){
+			           				 	window.location = "/main.do";
+			           				}else{
+			           					swal({
+			           				        title: "카카오로 가입된 계정이 없습니다.",
+			           				        text: "회원가입을 먼저 진행해 주세요!",
+			           				        icon: "warning",
+			           				        button: "회원가입"
+			           				      }).then(function(){
+			           				    	 window.location = "/kakaoJoinFrm.do?memberId="+res.id+"&memberPw="+res.id; 
+			           				      });
+			           				}
+			           			}
+			           		});
+			           }
+			         })
+			       },
+			       fail: function(error) {
+			         alert(JSON.stringify(error));
+			       }
+			     });						
+		});
+	</script>
 </body>
 </html>

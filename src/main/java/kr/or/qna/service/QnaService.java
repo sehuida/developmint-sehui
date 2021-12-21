@@ -120,6 +120,13 @@ public class QnaService {
 		return dao.deleteMyQna(qnaNo);
 	}
 
+	public NonQna searchPw(int nonQnaNo, String qnaPw) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("nonQnaNo", nonQnaNo);
+		map.put("qnaPw", qnaPw);
+		return dao.enterThePw(map);
+	}
+
 
 	
 

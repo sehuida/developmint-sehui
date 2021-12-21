@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 
 import kr.or.gosu.vo.GosuNotice;
-import kr.or.member.model.service.KakaoService;
 import kr.or.member.model.service.MailSender;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.BoardPage;
@@ -71,7 +70,14 @@ public class MemberController {
 	@RequestMapping(value="/login.do")
 	public String loginFrm(Member member,HttpSession session,Model model) {
 		Member m = service.selectOneMember(member);
+		
 		if(m != null) {
+			if(m.getMemberType() == 4){
+				model.addAttribute("title", "차단된 회원입니다.");
+				model.addAttribute("loc", "/main.do");
+				model.addAttribute("icon", "error");
+				return "member/swalMsg";				
+			}
 			session.setAttribute("m", m);
 			return "common/main";
 		}else {
@@ -81,6 +87,23 @@ public class MemberController {
 			model.addAttribute("icon", "error");
 			return "member/swalMsg";
 		}
+	}
+	@ResponseBody
+	@RequestMapping(value="/kakao.do")
+	public String kakao(Member member,HttpSession session,Model model) {
+		Member m = service.selectOneMember(member);
+		if(m != null) {
+			session.setAttribute("m", m);
+			return "1";
+		}else {
+			return "0";
+		}
+	}
+	@RequestMapping(value="/kakaoJoinFrm.do")
+	public String kakaJoinFrm(Member m,Model model) {
+		model.addAttribute("memberId",m.getMemberId());
+		model.addAttribute("memberPw",m.getMemberPw());
+		return "member/kakaoJoin";
 	}
 	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) {
@@ -411,11 +434,5 @@ public class MemberController {
 		model.addAttribute("start",bpg.getStart());
 		return "member/myBoardPage";
 	}
-	@RequestMapping(value="/kakaoAuth.do")
-	public String kakaoAuth(@RequestParam(value = "code", required = false) String code) throws Exception{
-        System.out.println("#########" + code);
-        String access_Token = KakaoService.getAccessToken(code);
-        System.out.println("###access_Token#### : " + access_Token);
-        return "common/main";
-	}
+
 }
