@@ -37,7 +37,14 @@
             $("#updateLeaderLabel2").css("display","none");
         });
         
-    }
+        $(".radioChk").click(function(){
+        	if($(this).is(":checked")){
+        		var radioValue = $(this).val();
+        		$(this).parent().parent().next().val(radioValue);
+        	}
+        });
+        
+    });
 	
 </script>
 </head>
@@ -51,7 +58,7 @@
                         <a href="/enterMyProject.do?projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" class="subNaviAtag" ><img src="/resources/img/recruitTeamProject/recruitPage/powerOn.png" class="subNaviImg"><span style="cursor: pointer; font-weight: 900">프로젝트 개요</span></a>
                     </li>
                     <li class="flexLi">
-                        <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/calendar.png" class="subNaviImg"><span style="cursor: pointer;">캘린더</span></a>
+                        <a href="/coding.do" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/calendar.png" class="subNaviImg"><span style="cursor: pointer;">캘린더</span></a>
                     </li>
                     <li class="flexLi">
                         <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg"><span style="cursor: pointer;">과업 관리</span></a>
@@ -202,7 +209,7 @@
                                         <label for="exampleSelect1" class="form-label mt-4">프로젝트 리더 선택</label>
                                         <select class="form-select" id="exampleSelect1" style="width: 400px;" name="projectReader">
                                             <option><p>${pt.projectReader}</p></option>
-                                            <c:forEach items="${memberList }" var="ml">
+                                            <c:forEach items="${memberList}" var="ml">
                                             	<c:if test="${ml.memberId ne pt.projectReader}">
 	                                            	<option><p>${ml.memberId}</p></option>
                                             	</c:if>
@@ -212,39 +219,39 @@
                                 </div>
                                 <div class="crueBox">
                                     <p class="infoLineText1">프로젝트 크루 및 역할</p>
-                                    <c:forEach items="${memberList}" var="ml" varStatus="i">
                                     	<div class="crueTwoFlexBox">
+		                                    <c:forEach items="${memberList}" var="ml" begin="0" end="1">
 	                                        <div class="crueAllInfoBox">
 	                                            <div class="crueProfile"> 
 	                                            	<c:choose>
-				                                		<c:when test="${ml[i].memberImg eq null}">
+				                                		<c:when test="${ml.memberImg eq null}">
 				                                			<img src="/resources/img/recruitTeamProject/common/user.png" class="crueImg">
 				                                		</c:when>
 				                                		<c:otherwise>
-				                                			<img src="/resources/upload/member/${ml[i].memberImg}" class="crueImg">
+				                                			<img src="/resources/upload/member/${ml.memberImg}" class="crueImg">
 				                                		</c:otherwise>
 				                                	</c:choose>
-	                                                <p class="crueIdText">${ml[i].memberId}</p>
+	                                                <p class="crueIdText">${ml.memberId}</p>
 	                                                <c:choose>
-														<c:when test="${ml[i].memberGrade >=1 && ml[i].memberGrade <= 20 }">
+														<c:when test="${ml.memberGrade >=1 && ml.memberGrade <= 20 }">
 															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/bronze.png">
 														</c:when>
-														<c:when test="${ml[i].memberGrade >=21 && ml[i].memberGrade <= 40 }">
+														<c:when test="${ml.memberGrade >=21 && ml.memberGrade <= 40 }">
 															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/silver.png">
 														</c:when>
-														<c:when test="${ml[i].memberGrade >=41 && ml[i].memberGrade <= 60 }">
+														<c:when test="${ml.memberGrade >=41 && ml.memberGrade <= 60 }">
 															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/gold.png">
 														</c:when>
-														<c:when test="${ml[i].memberGrade >=61 && ml[i].memberGrade <= 80 }">
+														<c:when test="${ml.memberGrade >=61 && ml.memberGrade <= 80 }">
 															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/platinum.png">
 														</c:when>
-														<c:when test="${ml[i].memberGrade >=81 && ml[i].memberGrade <= 110 }">
+														<c:when test="${ml.memberGrade >=81 && ml.memberGrade <= 110 }">
 															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/diamond.png">
 														</c:when>
-														<c:when test="${ml[i].memberGrade >=111 && ml[i].memberGrade <= 140 }">
+														<c:when test="${ml.memberGrade >=111 && ml.memberGrade <= 140 }">
 															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/master.png">
 														</c:when>
-														<c:when test="${ml[i].memberGrade >=141 && ml[i].memberGrade <= 170 }">
+														<c:when test="${ml.memberGrade >=141 && ml.memberGrade <= 170 }">
 															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/challenger.png">
 														</c:when>								
 													</c:choose>
@@ -252,66 +259,122 @@
 	                                            <div class="rollBox">
 	                                                <div class="form-group">
 	                                                	<c:choose>
-	                                                		<c:when test="${ml[i].memberId eq sessionScope.m.memberId}">
-	                                                			<input class="form-control form-control-sm" type="text" id="inputSmall" name="crueRoll" value="${ml[i].memberRole }">
+	                                                		<c:when test="${ml.memberId eq sessionScope.m.memberId}">
+	                                                			<input class="form-control form-control-sm" type="text" id="inputSmall" name="crueRoll" value="${ml.memberRole }">
 	                                                		</c:when>
 	                                                		<c:otherwise>
-	                                                			<input class="form-control form-control-sm" type="text" id="inputSmall" value="${ml[i].memberRole }" readonly="readonly">
+	                                                			<input class="form-control form-control-sm" type="text" id="inputSmall" value="${ml.memberRole }" readonly="readonly">
 	                                                		</c:otherwise>
 	                                                	</c:choose>
 	                                                </div>
 	                                            </div>
-	                                        </div> 
-	                                        <div class="crueAllInfoBox">
-	                                            <div class="crueProfile"> 
-	                                            	<c:choose>
-				                                		<c:when test="${ml[i+1].memberImg eq null}">
-				                                			<img src="/resources/img/recruitTeamProject/common/user.png" class="crueImg">
-				                                		</c:when>
-				                                		<c:otherwise>
-				                                			<img src="/resources/upload/member/${ml[i+1].memberImg}" class="crueImg">
-				                                		</c:otherwise>
-				                                	</c:choose>
-	                                                <p class="crueIdText">${ml[i+1].memberId}</p>
-	                                                <c:choose>
-														<c:when test="${ml[i+1].memberGrade >=1 && ml[i+1].memberGrade <= 20 }">
-															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/bronze.png">
-														</c:when>
-														<c:when test="${ml[i+1].memberGrade >=21 && ml[i+1].memberGrade <= 40 }">
-															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/silver.png">
-														</c:when>
-														<c:when test="${ml[i+1].memberGrade >=41 && ml[i+1].memberGrade <= 60 }">
-															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/gold.png">
-														</c:when>
-														<c:when test="${ml[i+1].memberGrade >=61 && ml[i+1].memberGrade <= 80 }">
-															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/platinum.png">
-														</c:when>
-														<c:when test="${ml[i+1].memberGrade >=81 && ml[i+1].memberGrade <= 110 }">
-															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/diamond.png">
-														</c:when>
-														<c:when test="${ml[i+1].memberGrade >=111 && ml[i+1].memberGrade <= 140 }">
-															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/master.png">
-														</c:when>
-														<c:when test="${ml[i+1].memberGrade >=141 && ml[i+1].memberGrade <= 170 }">
-															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/challenger.png">
-														</c:when>								
-													</c:choose>
-	                                            </div>
-	                                            <div class="rollBox">
-	                                                <div class="form-group">
-	                                                	<c:choose>
-	                                                		<c:when test="${ml[i+1].memberId eq sessionScope.m.memberId}">
-	                                                			<input class="form-control form-control-sm" type="text" id="inputSmall" name="crueRoll" value="${ml[i+1].memberRole }">
-	                                                		</c:when>
-	                                                		<c:otherwise>
-	                                                			<input class="form-control form-control-sm" type="text" id="inputSmall" value="${ml[i+1].memberRole }" readonly="readonly">
-	                                                		</c:otherwise>
-	                                                	</c:choose>
-	                                                </div>
-	                                            </div>
-	                                        </div> 
+	                                        </div>
+                                   			</c:forEach>
 	                                     </div>
-                                    </c:forEach>
+	                                     <div class="crueTwoFlexBox">
+		                                    <c:forEach items="${memberList}" var="ml" begin="2" end="3">
+	                                        <div class="crueAllInfoBox">
+	                                            <div class="crueProfile"> 
+	                                            	<c:choose>
+				                                		<c:when test="${ml.memberImg eq null}">
+				                                			<img src="/resources/img/recruitTeamProject/common/user.png" class="crueImg">
+				                                		</c:when>
+				                                		<c:otherwise>
+				                                			<img src="/resources/upload/member/${ml.memberImg}" class="crueImg">
+				                                		</c:otherwise>
+				                                	</c:choose>
+	                                                <p class="crueIdText">${ml.memberId}</p>
+	                                                <c:choose>
+														<c:when test="${ml.memberGrade >=1 && ml.memberGrade <= 20 }">
+															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/bronze.png">
+														</c:when>
+														<c:when test="${ml.memberGrade >=21 && ml.memberGrade <= 40 }">
+															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/silver.png">
+														</c:when>
+														<c:when test="${ml.memberGrade >=41 && ml.memberGrade <= 60 }">
+															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/gold.png">
+														</c:when>
+														<c:when test="${ml.memberGrade >=61 && ml.memberGrade <= 80 }">
+															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/platinum.png">
+														</c:when>
+														<c:when test="${ml.memberGrade >=81 && ml.memberGrade <= 110 }">
+															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/diamond.png">
+														</c:when>
+														<c:when test="${ml.memberGrade >=111 && ml.memberGrade <= 140 }">
+															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/master.png">
+														</c:when>
+														<c:when test="${ml.memberGrade >=141 && ml.memberGrade <= 170 }">
+															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/challenger.png">
+														</c:when>								
+													</c:choose>
+	                                            </div>
+	                                            <div class="rollBox">
+	                                                <div class="form-group">
+	                                                	<c:choose>
+	                                                		<c:when test="${ml.memberId eq sessionScope.m.memberId}">
+	                                                			<input class="form-control form-control-sm" type="text" id="inputSmall" name="crueRoll" value="${ml.memberRole }">
+	                                                		</c:when>
+	                                                		<c:otherwise>
+	                                                			<input class="form-control form-control-sm" type="text" id="inputSmall" value="${ml.memberRole }" readonly="readonly">
+	                                                		</c:otherwise>
+	                                                	</c:choose>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+                                   			</c:forEach>
+	                                     </div>
+	                                     <div class="crueTwoFlexBox">
+		                                    <c:forEach items="${memberList}" var="ml" begin="4" end="5">
+	                                        <div class="crueAllInfoBox">
+	                                            <div class="crueProfile"> 
+	                                            	<c:choose>
+				                                		<c:when test="${ml.memberImg eq null}">
+				                                			<img src="/resources/img/recruitTeamProject/common/user.png" class="crueImg">
+				                                		</c:when>
+				                                		<c:otherwise>
+				                                			<img src="/resources/upload/member/${ml.memberImg}" class="crueImg">
+				                                		</c:otherwise>
+				                                	</c:choose>
+	                                                <p class="crueIdText">${ml.memberId}</p>
+	                                                <c:choose>
+														<c:when test="${ml.memberGrade >=1 && ml.memberGrade <= 20 }">
+															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/bronze.png">
+														</c:when>
+														<c:when test="${ml.memberGrade >=21 && ml.memberGrade <= 40 }">
+															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/silver.png">
+														</c:when>
+														<c:when test="${ml.memberGrade >=41 && ml.memberGrade <= 60 }">
+															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/gold.png">
+														</c:when>
+														<c:when test="${ml.memberGrade >=61 && ml.memberGrade <= 80 }">
+															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/platinum.png">
+														</c:when>
+														<c:when test="${ml.memberGrade >=81 && ml.memberGrade <= 110 }">
+															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/diamond.png">
+														</c:when>
+														<c:when test="${ml.memberGrade >=111 && ml.memberGrade <= 140 }">
+															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/master.png">
+														</c:when>
+														<c:when test="${ml.memberGrade >=141 && ml.memberGrade <= 170 }">
+															<img class="crueGradeImg" src="/resources/img/recruitTeamProject/common/rank/challenger.png">
+														</c:when>								
+													</c:choose>
+	                                            </div>
+	                                            <div class="rollBox">
+	                                                <div class="form-group">
+	                                                	<c:choose>
+	                                                		<c:when test="${ml.memberId eq sessionScope.m.memberId}">
+	                                                			<input class="form-control form-control-sm" type="text" id="inputSmall" name="crueRoll" value="${ml.memberRole }">
+	                                                		</c:when>
+	                                                		<c:otherwise>
+	                                                			<input class="form-control form-control-sm" type="text" id="inputSmall" value="${ml.memberRole }" readonly="readonly">
+	                                                		</c:otherwise>
+	                                                	</c:choose>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+                                   			</c:forEach>
+	                                     </div>
                                 <div class="taskMainFlexBox">
                                     <div class="taskInfoBox">
                                         <p class="infoLineText2">최근에 완료된 일</p>
@@ -401,62 +464,63 @@
         <div class="modal-dialog  modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
-                    <form action="/endProject.do" method="post"></form>
+                    <form action="/endProject.do" method="post">
                         <p style="font-size: 35px; font-weight: bold; color: rgb(78, 205, 196); margin-bottom: 10px; text-align: left;">팀원에게 후기를 남겨주세요</p>
                         <p style="font-weight: 900;"> &#10004; 후기는 익명으로 등록됩니다.</p>
                         <div style="border-bottom: 1px solid #90d1b4; margin-bottom: 60px;"></div>
 						<c:forEach items="${memberList}" var="ml" varStatus="i">
-							<c:if test="${ml.teamMemberNo}">
-							
+							<c:if test="${ml.memberNo ne sessionScope.m.memberNo}">
+								<div style="display: flex; margin-left: 50px; margin-top: 50px;">
+		                            <div style="display: flex; flex-direction: column; margin-right: 30px; margin-top: 10px;">
+		                            <c:choose>
+		                            	<c:when test="${ml.memberImg eq null}">
+		                            		<img src="/resources/img/recruitTeamProject/common/user.png" style="width: 100px; height: 100px; margin-left: 10px;">
+		                            	</c:when>
+		                            	<c:otherwise>
+		                            		<img src="/resources/upload/member/${ml.memberImg}" style="width: 100px; height: 100px; margin-left: 10px;">
+		                            	</c:otherwise>
+		                            </c:choose>
+		                                <p style="font-size: 26px; font-weight: 900;">${ml.memberId}</p>
+		                            </div>
+		                            <div style="display: flex; flex-direction: column;">
+		                                <div style="display: flex;">
+		                                    <div class="modalReviewSub1">
+		                                        <img src="/resources/img/recruitTeamProject/review/bigHappy.png" style="width: 40px; height: 40px; display: block; margin: 0px auto;">
+		                                        <label for="r5" style="text-align: center;">매우좋았어요</label>
+		                                        <input type="radio" id="r5" name="rePoint${i.index}" class="radioChk" value="5" style="display: block; margin: 0px auto;">
+		                                    </div>
+		                                    <div class="modalReviewSub1">
+		                                        <img src="/resources/img/recruitTeamProject/review/happy.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+		                                        <label for="r4">좋았어요</label>
+		                                        <input type="radio" id="r4" name="rePoint${i.index}" value="4" class="radioChk" style="display: block; margin: 0px auto;">
+		                                    </div>
+		                                    <div class="modalReviewSub1">
+		                                        <img src="/resources/img/recruitTeamProject/review/common.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+		                                        <label for="r3">친절해요</label>
+		                                        <input type="radio" id="r3" name="rePoint${i.index}" value="3" class="radioChk" style="display: block; margin: 0px auto;">
+		                                    </div>
+		                                    <div class="modalReviewSub1">
+		                                        <img src="/resources/img/recruitTeamProject/review/bad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+		                                        <label for="r2">나빠요</label>
+		                                        <input type="radio" id="r2" name="rePoint${i.index}" value="2" class="radioChk" style="display: block; margin: 0px auto;">
+		                                    </div>
+		                                    <div class="modalReviewSub1">
+		                                        <img src="/resources/img/recruitTeamProject/review/superBad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
+		                                        <label for="r1">매우나빠요</label>
+		                                        <input type="radio" id="r1" name="rePoint${i.index}" value="1" class="radioChk" style="display: block; margin: 0px auto;">
+		                                        
+		                                    </div>
+		                                </div>
+		                                <input type="hidden" name="reviewPoint">
+		                                <div class="form-group" style="margin-top: 20px;">
+		                                    <textarea class="form-control" id="exampleTextarea" rows="3" maxlength="250" name="reviewContent"></textarea>
+		                                </div>
+		                            </div>
+		                            <input type="hidden" name="projectNo" value="${ml.projectNo}">
+		                            <input type="hidden" name="teamMemberNo" value="${ml.teamMemberNo}">
+		                            
+		                        </div>
 							</c:if>
-							<div style="display: flex; margin-left: 50px; margin-top: 50px;">
-	                            <div style="display: flex; flex-direction: column; margin-right: 30px; margin-top: 10px;">
-	                            <c:choose>
-	                            	<c:when test="${ml.memberImg eq null}">
-	                            		<img src="/resources/img/recruitTeamProject/common/user.png" style="width: 100px; height: 100px; margin-left: 10px;">
-	                            	</c:when>
-	                            	<c:otherwise>
-	                            		<img src="/resources/upload/member/${ml.memberImg}" style="width: 100px; height: 100px; margin-left: 10px;">
-	                            	</c:otherwise>
-	                            </c:choose>
-	                                <p style="font-size: 26px; font-weight: 900;">${ml.memberId}</p>
-	                            </div>
-	                            <div style="display: flex; flex-direction: column;">
-	                                <div style="display: flex;">
-	                                    <div class="modalReviewSub1">
-	                                        <img src="/resources/img/recruitTeamProject/review/bigHappy.png" style="width: 40px; height: 40px; display: block; margin: 0px auto;">
-	                                        <label for="r5" style="text-align: center;">매우좋았어요</label>
-	                                        <input type="radio" id="r5" name="reviewPoint" value="5" style="display: block; margin: 0px auto;">
-	                                    </div>
-	                                    <div class="modalReviewSub1">
-	                                        <img src="/resources/img/recruitTeamProject/review/happy.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-	                                        <label for="r4">좋았어요</label>
-	                                        <input type="radio" id="r4" name="reviewPoint" value="4" style="display: block; margin: 0px auto;">
-	                                    </div>
-	                                    <div class="modalReviewSub1">
-	                                        <img src="/resources/img/recruitTeamProject/review/common.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-	                                        <label for="r3">친절해요</label>
-	                                        <input type="radio" id="r3" name="reviewPoint" value="3" style="display: block; margin: 0px auto;">
-	                                    </div>
-	                                    <div class="modalReviewSub1">
-	                                        <img src="/resources/img/recruitTeamProject/review/bad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-	                                        <label for="r2">나빠요</label>
-	                                        <input type="radio" id="r2" name="reviewPoint" value="2" style="display: block; margin: 0px auto;">
-	                                    </div>
-	                                    <div class="modalReviewSub1">
-	                                        <img src="/resources/img/recruitTeamProject/review/superBad.png" style="width: 40px; height: 40px; block; margin: 0px auto;">
-	                                        <label for="r1">매우나빠요</label>
-	                                        <input type="radio" id="r1" name="reviewPoint" value="1" style="display: block; margin: 0px auto;">
-	                                    </div>
-	                                    
-	                                </div>
-	                                <div class="form-group" style="margin-top: 20px;">
-	                                    <textarea class="form-control" id="exampleTextarea" rows="3" maxlength="250" name="reviewContent"></textarea>
-	                                </div>
-	                            </div>
-	                            <input type="hidden" name="projectNo" value="${ml.projectNo}">
-	                            <input type="hidden" name="teamMemberNo" value="${ml.teamMemberNo}">
-	                        </div>
 						</c:forEach>
                         <div style="border-bottom: 1px solid #90d1b4; margin-bottom: 10px; margin-top: 40px;"></div>
                         <div style="text-align: center; padding-top: 10px; margin-top: 40px; margin-bottom: 40px;">

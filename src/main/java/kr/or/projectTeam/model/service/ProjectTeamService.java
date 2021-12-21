@@ -464,19 +464,21 @@ public class ProjectTeamService {
 	public int projectStartProcess() {
 		
 		int result = 0;
+		int updateEntryResult = 0;
 		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date nowDate = new Date();
 		String today = sdFormat.format(nowDate);
 		ArrayList<Integer> startProjectList = dao.selectStartProjectList(today);
-		ArrayList<Integer> startProjectMemberList = dao.startProjectMemberList(startProjectList);
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("startProjectList", startProjectList);
-		map.put("startProjectMemberList", startProjectMemberList);
-		int updateEntryResult = dao.updateEntryResult(map);
-		ArrayList<ProjectEntry> startProjectListFinalList = dao.startProjectListFinal(map);
-		if(updateEntryResult > 0) {
-			result = dao.insertTeamMember(startProjectListFinalList);
+		ArrayList<Integer> startProjectMemberList = dao.startProjectMemberList(map);
+		if(startProjectMemberList.size() != 0) {
+			map.put("startProjectMemberList", startProjectMemberList);
+			updateEntryResult = dao.updateEntryResult(map);
+			ArrayList<ProjectEntry> startProjectListFinalList = dao.startProjectListFinal(map);
+			if(updateEntryResult > 0) {
+				result = dao.insertTeamMember(startProjectListFinalList);
+			}
 		}
 		return result;
 	}
@@ -634,10 +636,10 @@ public class ProjectTeamService {
 	}
 	
 	@Transactional
-	public int endProject(ArrayList<ProjectReview> endList, int backProjectNo, int backMemberNo) {
+	public int endProject(ArrayList<ProjectReview> reviewlist, int backProjectNo, int backMemberNo) {
 		int result = 0;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("endList", endList);
+		map.put("reviewlist", reviewlist);
 		map.put("backProjectNo", backProjectNo);
 		map.put("backMemberNo", backMemberNo);
 		int reviewResult = dao.insertReview(map);
@@ -652,10 +654,10 @@ public class ProjectTeamService {
 	}
 	
 	@Transactional
-	public int insertReview(ArrayList<ProjectReview> endList, int backProjectNo, int backMemberNo) {
+	public int insertReview(ArrayList<ProjectReview> reviewlist, int backProjectNo, int backMemberNo) {
 		int result = 0;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("endList", endList);
+		map.put("reviewlist", reviewlist);
 		map.put("backProjectNo", backProjectNo);
 		map.put("backMemberNo", backMemberNo);
 		int reviewResult = dao.insertReview(map);

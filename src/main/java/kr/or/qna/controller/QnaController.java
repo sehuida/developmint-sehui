@@ -305,4 +305,19 @@ public class QnaController {
 		return "member/swalMsg";
 	}
 	
+	@RequestMapping(value="/searchPw.do")
+	public String searchPw(Model model, int nonQnaNo, String qnaPw) {
+		NonQna nq = service.searchPw(nonQnaNo,qnaPw);
+		if(nq != null) {
+			model.addAttribute("nq",nq);
+			return "qna/nonMember_field";
+		}else {
+			model.addAttribute("title", "비밀번호 입력 실패");
+			model.addAttribute("msg", "입력 정보를 다시 확인해주세요.");
+			model.addAttribute("loc", "/nonMember_CounselList.do");
+			model.addAttribute("icon", "error");
+			return "member/swalMsg";
+		}
+	}
+	
 }

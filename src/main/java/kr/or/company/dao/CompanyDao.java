@@ -17,8 +17,8 @@ public class CompanyDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public CompanyInfo selectCompany(String companyName) {
-		return sqlSession.selectOne("company.selectCompany", companyName);
+	public CompanyInfo selectCompany(int companyNo) {
+		return sqlSession.selectOne("company.selectCompany", companyNo);
 	}
 	
 	public int insertCompanyComment(Comment cm) {
@@ -31,14 +31,18 @@ public class CompanyDao {
 	}
 
 	public int updateCompanyComment(Comment cm) {
-		return sqlSession.update("contest.updateCompanyComment",cm);
+		return sqlSession.update("company.updateCompanyComment",cm);
 	}
 
 	public int deleteCompanyComment(Comment cm) {
-		return sqlSession.delete("contest.deleteCompanyComment",cm);
+		return sqlSession.delete("company.deleteCompanyComment",cm);
 	}
 
 	public int selectCompanyNo(String companyName) {
 		return sqlSession.selectOne("company.selectCompanyNo", companyName);
+	}
+
+	public String selectCompanyName(int companyNo) {
+		return sqlSession.selectOne("company.selectCompanyName", companyNo);
 	}
 }
