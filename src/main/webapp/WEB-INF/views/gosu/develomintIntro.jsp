@@ -23,7 +23,6 @@
 
 .container {
 	min-width: 1200px;
-	
 }
 
 .line {
@@ -96,16 +95,44 @@ html, body {
 	height: 100%;
 }
 
+.down-wrap {
+	position: fixed;
+	z-index: 1000;
+	margin-top: 180px;
+	margin-left: 1400px;
+}
+
+.down-img {
+	text-align: center;
+	justify-content: right;
+}
+
+.down-img>img {
+	width: 30px;
+	animation: motion 0.3s linear 0s infinite alternate;
+	margin-top: 0;
+}
+
+@keyframes motion 
+{ 0% {margin-top: 0px;}
+100%{margin-top:10px;}}
 </style>
 <body>
 	<div class="container" style="margin-top: 0;">
+
 		<div class="g-box">
 			<%@include file="/WEB-INF/views/common/header.jsp"%>
+
 			<div class="back-img" style="margin: 0;"></div>
 			<h1 style="text-align: center; margin-top: 150px;">
 				<span
 					style="color: rgb(78, 205, 196); font-size: 80px; font-weight: 900;">Develomint</span>
 			</h1>
+			<div class="down-wrap">
+				<div class="down-img">
+					<img src="/resources/img/gosu/downdown.png">
+				</div>
+			</div>
 		</div>
 		<div class="g-center g-box">
 			<div style="margin-top: 400px;">
@@ -116,6 +143,7 @@ html, body {
 			</div>
 
 		</div>
+
 		<div class="g-box">
 			<br> <br> <br> <br> <br> <br>
 			<h1 style="font-size: 50px; line-height: 90px; margin-top: 200px;">
@@ -167,17 +195,17 @@ html, body {
 				<h3
 					style="text-align: center; width: 100%; color: gray; font-weight: 900;">오픈소스를
 					요리하다, Olive Platform</h3>
-				<br><br> <img style="width: 100%;"
+				<br> <br> <img style="width: 100%;"
 					src="/resources/img/gosu/olive.png">
 			</div>
 		</div>
 		<div class="g-center g-box">
 			<div style="text-align: center; margin-top: 300px;">
-		
-				<h3
-					style="text-align: center; width: 100%; color: gray; ">디벨로민트에
+
+				<h3 style="text-align: center; width: 100%; color: gray;">디벨로민트에
 					가입해보세요</h3>
-				<div class="line" style="width: 15rem;"></div><br><br><br><br><br><br>
+				<div class="line" style="width: 15rem;"></div>
+				<br> <br> <br> <br> <br> <br>
 				<c:if test="${empty sessionScope.m }">
 					<a href="/joinFrm.do" class="btn btn-success"
 						style="width: 200px; font-size: 20px; font-weight: 900;">회원가입</a>
@@ -194,6 +222,7 @@ html, body {
 	</div>
 	<script>
 		$(".g-box").each(function() {
+
 			// 개별적으로 Wheel 이벤트 적용 mousewheel(IE/chrome/opera) DOMMouseScroll(FF)
 			$(this).on("mousewheel DOMMouseScroll", function(e) {
 				e.preventDefault();
@@ -213,8 +242,17 @@ html, body {
 				var moveTop = null;
 				// 마우스휠을 위에서 아래로
 				if (delta < 0) {
+					console.log("next : "+$(this).next());
 					if ($(this).next() != undefined) {
+
+						$(".down-img>img").css("display","flex");
 						moveTop = $(this).next().offset().top;
+						console.log(moveTop);
+					}
+					if ($(this).next()== Object) {
+						$(".down-img>img").css("display","none");
+						moveTop = 0;
+						console.log(moveTop);
 					}
 					// 마우스휠을 아래에서 위로
 				} else {
@@ -222,14 +260,20 @@ html, body {
 						moveTop = $(this).prev().offset().top;
 					}
 				}
+				if (moveTop == null) {
+				}
+
 				// 화면 이동 0.8초(800)
 				$("html,body").stop().animate({
 					scrollTop : moveTop + 'px'
+
 				}, {
 					duration : 300,
 					complete : function() {
+						console.log("여기여기");
 					}
 				});
+
 			});
 		});
 	</script>
