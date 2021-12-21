@@ -320,4 +320,11 @@ public class QnaController {
 		}
 	}
 	
+	@RequestMapping(value="/nonSearhBox.do")
+	public String nonSearchBox(int category, String keyword, Model model) {
+		ArrayList<NonQna> adlist = service.nonSearchList(category, keyword);
+		model.addAttribute("adlist",adlist);
+		return "qna/nonMemberCounsel";
+	}
+	
 }

@@ -101,6 +101,13 @@ public class QnaDao {
 	}
 
 
+	public ArrayList<NonQna> nonSearchList(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<NonQna> list = sqlsession.selectList("qna.nonSearchList",map);
+		return (ArrayList<NonQna>) list;
+	}
+
+
 
 
 	

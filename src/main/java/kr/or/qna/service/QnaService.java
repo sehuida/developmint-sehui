@@ -127,6 +127,14 @@ public class QnaService {
 		return dao.enterThePw(map);
 	}
 
+	public ArrayList<NonQna> nonSearchList(int category, String keyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("category", category);
+		map.put("keyword", keyword);
+		// TODO Auto-generated method stub
+		return dao.nonSearchList(map);
+	}
+
 
 	
 

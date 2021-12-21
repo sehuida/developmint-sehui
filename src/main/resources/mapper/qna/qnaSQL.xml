@@ -242,4 +242,41 @@
 		    "answer_date" as answerDate
 		from non_member_qna where "non_qna_no"=#{nonQnaNo} and "qna_pw" = #{qnaPw} order by 1 desc
 	</select>
+	
+	<!-- 비회원 서치 -->
+	<select id="nonSearchList" parameterType="map" resultType="nq">
+		select 
+		    "non_qna_no"as nonQnaNo,
+		    "category" as category,
+		    "email" as email,
+		    "qna_pw"as qnaPw,
+		    "qna_title"as qnaTitle,
+		    "qna_content" as qnaContent,
+		    "reg_date"as regDate,
+		    "qna_answer" as qnaAnswer,
+		    "answer_date" as answerDate
+		from non_member_qna 
+		<choose>
+			<when test="category==0">
+				<trim prefix="where">
+					<if test="keyword == null">
+					
+					</if>
+					<if test="keyword != null">
+						"email" like  '%'||#{keyword}||'%'
+					</if>
+				</trim>
+			</when>
+			<otherwise>
+				<trim prefix="where">
+					<if test="keyword == null">
+						"category"=#{category}
+					</if>
+					<if test="keyword != null">
+						"category"=#{category} and "email" like '%'||#{keyword}||'%'
+					</if>
+				</trim>
+			</otherwise>
+		</choose>
+	</select>
 </mapper>
