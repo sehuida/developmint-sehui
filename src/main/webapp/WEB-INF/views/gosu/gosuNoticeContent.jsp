@@ -444,7 +444,7 @@
 		</div>
 	</div>
 	<c:if test="${not empty sessionScope.m }">
-		<div style="display: flex; justify-content: center; margin-top: 80px;">
+		<div style="display: flex; justify-content: center; margin-top: 80px;margin-bottom: 200px;">
 			<div class="card bg-light mb-3"
 				style="padding: 20px; width: 1200px; min-width: 1200px;">
 				<table>
