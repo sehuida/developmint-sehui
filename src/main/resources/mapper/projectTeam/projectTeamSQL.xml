@@ -923,6 +923,26 @@
   				member_role = #{crueRoll}
   		where project_no = #{projectNo} and member_no = #{sessionMemberNo}
   </update>
- 	
-  	
+ 
+ <select id="projectTaskList" parameterType="_int" resultType="ptk">
+ 		select
+ 			task_no as taskNo,
+ 			project_no as projectNo,
+ 			team_member_no as teamMemberNo,
+ 			task_sort as taskSort,
+ 			task_title as taskTitle,
+ 			task_content as taskContent,
+ 			priority as priority,
+ 			connect_issue as connectIssue,
+ 			reference_link as referLink,
+ 			reference_link_name as linkName,
+ 			start_date as startDate,
+ 			complete_date as completeDate,
+ 			end_date as endDate,
+ 			process_sort as processSort
+ 		from task 
+ 		where project_no = #{projectNo}
+ 		order by task_no desc
+ </select>
+ 
 </mapper>

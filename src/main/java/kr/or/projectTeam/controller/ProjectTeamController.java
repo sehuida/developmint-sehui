@@ -39,6 +39,7 @@ import kr.or.projectTeam.model.vo.ProjectTeamApplicantViewData;
 import kr.or.projectTeam.model.vo.ProjectTeamApplyPageData;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.projectTeam.model.vo.ProjectTeamMember;
+import kr.or.projectTeam.model.vo.ProjectTeamNoticeComment;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeViewData;
 import kr.or.projectTeam.model.vo.Shortcuts;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
@@ -759,5 +760,12 @@ public class ProjectTeamController {
 		  return "member/swalMsg"; 
 	  }
 	  
+	  @RequestMapping(value="/enterProjectTask.do")
+		public String enterProjectTask(Model model, int projectNo) {
+			 ArrayList<ProjectTask> ptk = service.projectTaskList(projectNo);
+			 model.addAttribute("ptk", ptk);
+			 model.addAttribute("projectNo", projectNo);
+			return "recruitCrue/projectManageTask";
+		}
 	  
 }

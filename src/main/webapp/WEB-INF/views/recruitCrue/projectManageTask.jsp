@@ -28,6 +28,40 @@
 <body>
 	<div class="container" id="projectContainer">
         <div class="main">
+        <div class="main-left-box">
+                <h2>${pt.projectName}</h2>
+                <ul>
+                    <li class="flexLi" style="border-bottom: 3px dashed #90d1b4;">
+                        <a href="/enterMyProject.do?projectNo=${projectNo}&memberNo=${sessionScope.m.memberNo}" class="subNaviAtag" ><img src="/resources/img/recruitTeamProject/recruitPage/powerOn.png" class="subNaviImg"><span style="cursor: pointer;">프로젝트 개요</span></a>
+                    </li>
+                    <li class="flexLi">
+                        <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/calendar.png" class="subNaviImg"><span style="cursor: pointer;">캘린더</span></a>
+                    </li>
+                    <li class="flexLi">
+                        <a href="/enterProjectTask.do?projectNo=${projectNo}" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg"><span style="cursor: pointer; font-weight: 900">과업 관리</span></a>
+                    </li>
+                    <li class="flexLi">
+                        <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/board.png" class="subNaviImg"><span style="cursor: pointer;">보드</span></a>
+                    </li>
+                    <c:forEach items="${scList}" var="sl">
+                    	<li class="flexLi">
+                    		<c:choose>
+                    			<c:when test="${sl.linkName ne null}">
+				                    <a href="${sl.linkAddr}" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg"><span style="cursor: pointer;">${sl.linkName}</span></a>
+				                    <a href="/deleteShortcut.do?shortcutNo=${sl.shortcutNo}&projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" style="position: relative; top: 10px; text-decoration: none; margin-left: 30px;">X</a>
+                    			</c:when>
+                    			<c:otherwise>
+	                    			<a href="${sl.linkAddr}" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg"><span style="cursor: pointer;">${sl.linkAddr}</span></a>
+	                    			<a href="/deleteShortcut.do?shortcutNo=${sl.shortcutNo}&projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" style="position: relative; top: 8px; text-decoration: none; margin-left: 30px;">X</a>
+                    			</c:otherwise>
+                    		</c:choose>
+	                    </li>
+                    </c:forEach>
+                    <li class="flexLi">
+                        <a data-bs-toggle="modal" href="#shortcutModal" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/shortcuts.png" class="subNaviImg"><span style="cursor: pointer;">바로가기 추가</span></a>
+                    </li>
+                </ul>
+            </div>
             <div class="main_wrap">
                 <div class="titleFlexBox">
                     <p class="titleText">과업 관리</p>
@@ -49,8 +83,8 @@
                                     <span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
                                     <span class="badge rounded-pill bg-primary" id="ongoingLabel">진행 중</span>
                                     <span class="badge rounded-pill bg-primary" id="todoLabel">해야 할 일</span>
-                                    <img src="img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
-                                    <a href="#" class="hoverImg"><img src="img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+                                    <img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+                                    <a href="#" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
                                 </div>
                             </div>
                         </a>
@@ -70,7 +104,8 @@
                             <div class="rightTaskSite">
                                 <span class="badge rounded-pill bg-primary" id="lowLabel">low</span>
                                 <span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
-                                <img src="img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+                                <img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+                                <a href="#" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
                             </div>
                         </div>
                         <div>
@@ -89,7 +124,8 @@
                             <div class="rightTaskSite">
                                 <span class="badge rounded-pill bg-primary" id="lowLabel">low</span>
                                 <span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
-                                <img src="img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+                                <img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+                                <a href="#" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
                             </div>
                         </div>
                         <div>
@@ -108,7 +144,8 @@
                             <div class="rightTaskSite">
                                 <span class="badge rounded-pill bg-primary" id="lowLabel">low</span>
                                 <span class="badge rounded-pill bg-primary" id="holdLabel">보류</span>
-                                <img src="img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+                                <img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+                                <a href="#" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
                             </div>
                         </div>
                         <div>
@@ -171,7 +208,7 @@
                                         <p class="taskInfoText">담당자</p>
                                     </div>
                                     <div style="display: flex;">
-                                        <img src="img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 10px; margin-right: 15px;">
+                                        <img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 10px; margin-right: 15px;">
                                         <p class="taskInfoText">MemberId</p>
                                     </div>
                                 </div>
@@ -203,10 +240,11 @@
                             </div>
                         </div>
                         <div style="text-align: left; padding-top: 5px; margin-left: 20px;">
-                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">저장</button>
+                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px; margin-right: 10px">저장</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
                         </div>
                     </form>
+                    <div class="titleLine" style="width: 100%; margin-top: 20px;"></div>
                     <div class="bottomLinkBox" style="margin-top: 45px;">
                         <p class="modalBottomTitle">참고 이슈(최대 3개)</p>
                         <div class="issueForm">
@@ -223,8 +261,8 @@
                                         <span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
                                         <span class="badge rounded-pill bg-primary" id="ongoingLabel">진행 중</span>
                                         <span class="badge rounded-pill bg-primary" id="todoLabel">해야 할 일</span>
-                                        <img src="img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
-                                        <a href="#" class="hoverImg"><img src="img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+                                        <img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+                                        <a href="#" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
                                     </div>
                                 </div>
                                 <a data-bs-toggle="modal" href="#linkIssue" style="text-decoration: none;"><p>+ 이슈 등록하기</p></a>
@@ -240,14 +278,12 @@
                                     <p class="taskTitle" style="margin-left: 35px;">www.naver.com</p>
                                 </div>
                                 <div class="rightTaskSite">
-                                    <a href="#" class="hoverImg"><img src="img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+                                    <a href="#" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
                                 </div>
                             </div>
                             <a data-bs-toggle="modal" href="#refLink" style="text-decoration: none;"><p>+ 링크 등록하기</p></a>
                         </div>
                     </div>
-                    <div class="titleLine" style="width: 100%;"></div>
-                    
                 </div>
             </div>
         </div>

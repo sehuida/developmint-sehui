@@ -706,5 +706,12 @@ public class ProjectTeamService {
 		
 		return result;
 	}
+
+	public ArrayList<ProjectTask> projectTaskList(int projectNo) {
+		ArrayList<ProjectTask> list = dao.projectTaskList(projectNo);
+		return list;
+	}
+
+	
 	
 }

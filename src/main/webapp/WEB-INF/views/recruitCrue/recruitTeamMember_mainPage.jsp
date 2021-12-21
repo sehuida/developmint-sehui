@@ -180,53 +180,107 @@
                         </div>
                         <div class="rListBox">
                         <c:forEach items="${list }" var="pt" varStatus="mi">
-	                        	<div class="contentFlexBox">
-	                                <div class="imgBox">
-	                                	<c:choose>
-	                                		<c:when test="${pt.writerImgPath eq null}">
-	                                			<img class="myInfoImg" src="/resources/img/member/user.png">
-	                                		</c:when>
-	                                		<c:otherwise>
-	                                			<img class="myInfoImg" src="/resources/upload/member/${pt.writerImgPath }">
-	                                		</c:otherwise>
-	                                	</c:choose> 
-	                                </div>
-                        			<a href="/selectOneNotice.do?projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" class="clickRecruitTeamTag">
-		                                <div class="contentBox">
-		                                    <div class="textFlexBox1">
-		                                        <div class="textContent">
-		                                            <p class="contentText">${pt.RTitle }</p>
-		                                        </div>
-		                                        <div class="dateType">
-		                                            <b>작성일 : </b><span><b>${pt.RStartDate }</b></span>
-		                                        </div>
-		                                    </div>
-		                                    <div class="textFlexBox2">
-		                                        <div></div>
-		                                        <div class="dateType">
-		                                            <b>마감일 : </b><span><b>${pt.REndDate }</b></span>
-		                                        </div>
-		                                    </div>
-		                                    <div class="bottomFlexBox">
-		                                        <div class="subImgBox">
-			                                        <c:forEach items="${pdLangList }" var="lI"  varStatus="i">
-			                                        	<c:if test="${pt.projectNo eq lI.projectNo }">
-			                                        		<img class="langImg" src="${lI.langImg }">
-			                                           	</c:if>
-			                                        </c:forEach>
-		                                        </div>
-		                                        <div class="countBox">
-		                                            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/bubble-chat.png">
-		                                            <span class="countText">${pt.commentCount }</span>
-		                                            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
-		                                            <span class="countText">${pt.viewCount }</span>
-		                                            <img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png" style="position: relative; top: 3px;">
-		                                            <span class="countText">${pt.dibCount }</span>
-		                                        </div>
-		                                    </div>
+                        	<c:choose>
+                        		<c:when test="${pt.projectStatus eq 1 }">
+                        			<div class="contentFlexBox">
+		                                <div class="imgBox">
+		                                	<c:choose>
+		                                		<c:when test="${pt.writerImgPath eq null}">
+		                                			<img class="myInfoImg" src="/resources/img/member/user.png">
+		                                		</c:when>
+		                                		<c:otherwise>
+		                                			<img class="myInfoImg" src="/resources/upload/member/${pt.writerImgPath }">
+		                                		</c:otherwise>
+		                                	</c:choose> 
 		                                </div>
-                            		</a>
-	                            </div>
+	                        			<a href="/selectOneNotice.do?projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" class="clickRecruitTeamTag">
+			                                <div class="contentBox">
+			                                    <div class="textFlexBox1">
+			                                        <div class="textContent">
+			                                            <p class="contentText">${pt.RTitle }</p>
+			                                        </div>
+			                                        <div class="dateType">
+			                                            <b>작성일 : </b><span><b>${pt.RStartDate }</b></span>
+			                                        </div>
+			                                    </div>
+			                                    <div class="textFlexBox2">
+			                                        <div></div>
+			                                        <div class="dateType">
+			                                            <b>마감일 : </b><span><b>${pt.REndDate }</b></span>
+			                                        </div>
+			                                    </div>
+			                                    <div class="bottomFlexBox">
+			                                        <div class="subImgBox">
+				                                        <c:forEach items="${pdLangList }" var="lI"  varStatus="i">
+				                                        	<c:if test="${pt.projectNo eq lI.projectNo }">
+				                                        		<img class="langImg" src="${lI.langImg }">
+				                                           	</c:if>
+				                                        </c:forEach>
+			                                        </div>
+			                                        <div class="countBox">
+			                                            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/bubble-chat.png">
+			                                            <span class="countText">${pt.commentCount }</span>
+			                                            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
+			                                            <span class="countText">${pt.viewCount }</span>
+			                                            <img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png" style="position: relative; top: 3px;">
+			                                            <span class="countText">${pt.dibCount }</span>
+			                                        </div>
+			                                    </div>
+			                                </div>
+	                            		</a>
+		                            </div>
+                        		</c:when>
+                        		<c:otherwise>
+                        			<div class="contentFlexBox">
+		                                <div class="imgBox">
+		                                	<c:choose>
+		                                		<c:when test="${pt.writerImgPath eq null}">
+		                                			<img class="myInfoImg" src="/resources/img/member/user.png">
+		                                		</c:when>
+		                                		<c:otherwise>
+		                                			<img class="myInfoImg" src="/resources/upload/member/${pt.writerImgPath }">
+		                                		</c:otherwise>
+		                                	</c:choose> 
+		                                </div>
+	                        			<a href="/selectOneNotice.do?projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" class="clickRecruitTeamTag">
+			                                <div class="contentBox" style="background-color: #F2FFE9;">
+			                                    <div class="textFlexBox1">
+			                                        <div class="textContent">
+			                                            <p class="contentText" style="text-align: center;">모집마감</p>
+			                                        </div>
+			                                        <div class="dateType">
+			                                            <b>작성일 : </b><span><b>${pt.RStartDate }</b></span>
+			                                        </div>
+			                                    </div>
+			                                    <div class="textFlexBox2">
+			                                        <div></div>
+			                                        <div class="dateType">
+			                                            <b>마감일 : </b><span><b>${pt.REndDate }</b></span>
+			                                        </div>
+			                                    </div>
+			                                    <div class="bottomFlexBox">
+			                                        <div class="subImgBox">
+				                                        <c:forEach items="${pdLangList }" var="lI"  varStatus="i">
+				                                        	<c:if test="${pt.projectNo eq lI.projectNo }">
+				                                        		<img class="langImg" src="${lI.langImg }">
+				                                           	</c:if>
+				                                        </c:forEach>
+			                                        </div>
+			                                        <div class="countBox">
+			                                            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/bubble-chat.png">
+			                                            <span class="countText">${pt.commentCount }</span>
+			                                            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
+			                                            <span class="countText">${pt.viewCount }</span>
+			                                            <img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png" style="position: relative; top: 3px;">
+			                                            <span class="countText">${pt.dibCount }</span>
+			                                        </div>
+			                                    </div>
+			                                </div>
+	                            		</a>
+		                            </div>
+                        		</c:otherwise>
+                        	</c:choose>
+	                        	
                         </c:forEach>
                         <div id = "pageNavi">${pageNavi }</div>
                     </div>

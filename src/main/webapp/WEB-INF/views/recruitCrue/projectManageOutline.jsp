@@ -61,7 +61,7 @@
                         <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/calendar.png" class="subNaviImg"><span style="cursor: pointer;">캘린더</span></a>
                     </li>
                     <li class="flexLi">
-                        <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg"><span style="cursor: pointer;">과업 관리</span></a>
+                        <a href="/enterProjectTask.do?projectNo=${pt.projectNo}" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg"><span style="cursor: pointer;">과업 관리</span></a>
                     </li>
                     <li class="flexLi">
                         <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/board.png" class="subNaviImg"><span style="cursor: pointer;">보드</span></a>

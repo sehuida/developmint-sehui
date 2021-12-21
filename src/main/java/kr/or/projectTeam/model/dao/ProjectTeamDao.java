@@ -334,6 +334,11 @@ public class ProjectTeamDao {
 	public int crueRollUpdate(Map<String, Object> map) {
 		return sqlSession.update("projectTeam.crueRollUpdate", map);
 	}
+
+	public ArrayList<ProjectTask> projectTaskList(int projectNo) {
+		List<ProjectTask> list = sqlSession.selectList("projectTeam.projectTaskList", projectNo);
+		return (ArrayList<ProjectTask>) list;
+	}
 	
 	
 
