@@ -78,6 +78,7 @@
 	left: 0;
 	bottom: 0;
 	width: 100%;
+	background-color: white;
 }
 
 html, body {
@@ -101,7 +102,9 @@ html, body {
 	margin-top: 180px;
 	margin-left: 1400px;
 }
-
+.container-fluid{
+	margin-left: 0 !important;
+}
 .down-img {
 	text-align: center;
 	justify-content: right;

@@ -900,5 +900,8 @@ public class GosuController {
 	public String develomintIntro() {
 		return "gosu/develomintIntro";
 	}
-
+		@RequestMapping(value = "/gosuIntro.do")
+	public String gosuIntro() {
+		return "gosu/gosuIntro";
+	}
 }
