@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.announce.vo.Announce;
+import kr.or.announce.vo.ApplicationCompany;
 import kr.or.member.model.vo.Member;
 import kr.or.resume.vo.Resume;
 import kr.or.resume.vo.ResumePageData;
@@ -78,14 +79,14 @@ public class ResumeDao {
 		return (ArrayList<Announce>)list;
 	}
 	
-	public ArrayList<Announce> selectAllAnnounce(int memberNo) {
+	public ArrayList<ApplicationCompany> selectAllAnnounce(int memberNo) {
 		/*
 		 * HashMap<String, Object> map = new HashMap<String, Object>();
 		 * map.put("memberNo", memberNo); map.put("announceNo", announceNo);
 		 */
 		 
 		List list = sqlSession.selectList("resume.selectAllAnnounce", memberNo);
-		return (ArrayList<Announce>)list;
+		return (ArrayList<ApplicationCompany>)list;
 	}
 
 	public int deleteResume(int resumeNo) {

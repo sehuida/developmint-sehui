@@ -212,13 +212,13 @@
 		where member_no = #{memberNo}
 	</select>
 	
-	<select id="selectAllAnnounce" parameterType="_int" resultType="a">
+	<select id="selectAllAnnounce" parameterType="_int" resultType="ac">
 	<!-- <foreach collection="list" item="list" open="(" close=")" separator=","> -->
 	select 
 	    company_name as companyName,
 	    announce_title as announceTitle,
 	    category,
-	    write_date as writeDate
+	    apply_date as applyDate
 	    from announcement
     join application a using(announce_no)
     where a.member_no = #{memberNo}

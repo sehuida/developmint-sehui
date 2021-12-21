@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.announce.vo.Announce;
 import kr.or.announce.vo.AnnouncePageData;
+import kr.or.announce.vo.ApplicationCompany;
 import kr.or.member.model.vo.Member;
 import kr.or.resume.dao.ResumeDao;
 import kr.or.resume.vo.Resume;
@@ -117,9 +118,8 @@ public class ResumeService {
 	}
 
 	/* 지원한 회사 리스트 가져오기 */
-	 public ArrayList<Announce> selectAllAnnounce(int memberNo) {
-		 ArrayList<Announce> list = dao.selectAllAnnounce(memberNo);
-		 System.out.println(list);
+	 public ArrayList<ApplicationCompany> selectAllAnnounce(int memberNo) {
+		 ArrayList<ApplicationCompany> list = dao.selectAllAnnounce(memberNo);
 		 return list; 
 	 }
 	 

@@ -57,6 +57,7 @@
 		<typeAlias type="kr.or.dm.model.vo.DirectMessage" alias="dm"/>
 		<typeAlias type="kr.or.announce.vo.AnnounceList" alias="al"/>
 		<typeAlias type="kr.or.company.vo.CompanyInfoComment" alias="cic"/>
+		<typeAlias type="kr.or.announce.vo.ApplicationCompany" alias="ac"/>
 	</typeAliases>
 	
 	<!-- LONG타입 데이터를 불러오기 위한 type handler 입니다. -->
