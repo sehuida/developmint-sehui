@@ -66,8 +66,8 @@
 				<h4 style="font-family: NotoBold; margin-bottom: 20px;">커뮤니티</h4>
 				<div>
 					<img src="/resources/img/member/notes.png">
-					<a class="pageLists" href="/myBoardPage.do?repPage=1&memberNo=${sessionScope.m.memberNo }">게시판 작성글보기</a>
-					<a href="/myBoardPage.do?repPage=1&memberNo=${sessionScope.m.memberNo }"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
+					<a class="pageLists" href="/myBoardPage.do?reqPage=1&memberNo=${sessionScope.m.memberNo }">게시판 작성글보기</a>
+					<a href="/myBoardPage.do?reqPage=1&memberNo=${sessionScope.m.memberNo }"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
 				</div>
 				<div>
 					<img src="/resources/img/member/multiple-users-silhouette.png">

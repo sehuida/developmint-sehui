@@ -55,5 +55,25 @@
 			</div>
 		</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var memberType = $("#memberType").val();
+			
+			if($("#notting").val() == 0){
+				swal({
+			        title: '신청내역이 없습니다',
+			        text: '',
+			        icon: 'warning',
+			        button : '돌아가기'
+			      }).then(function(){
+			    	  if(memberType==2){
+			    	  	window.location = "/mypageGosu.do";			    		  
+			    	  }else{
+			    		  window.location = "/mypage.do";	  
+			    	  }
+                  });					
+			}
+		});
+	</script>
 </body>
 </html>
