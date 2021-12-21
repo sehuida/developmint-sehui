@@ -90,21 +90,20 @@
 								</td>
 								<td>${nq.regDate }</td>
 								<td>
-								    <!-- 아이디의 앞 3자리까지 보여 주고 -->
+								    <!-- 아이디의 앞 3자리까지 보여 주고  @뒤에 3자리 뒤부터 *를 찍어줌-->
 								  	<p style="display: inline-block;margin: 0;">
 								  		<c:set var="startTitle" value="${fn:substringBefore(nq.email, '@')}"/>
 								  		<c:set var="endTitle" value="${fn:substringAfter(nq.email, '@')}"/>
 								  		${fn:substring(startTitle,0,fn:length(startTitle)-4)}⁎⁎⁎⁎@${fn:substring(endTitle,0,fn:length(endTitle)-6)}⁎⁎⁎⁎⁎⁎
 								  	</p>
-								   	<!--  @뒤에 3자리 뒤부터 *를 찍어줌 -->
 								</td>
 								<td>
 									<c:choose>
 										<c:when test="${empty nq.qnaAnswer }">
-											<a href="" class="btn btn-success disabled">${nq.state }</a>
+											<a href="#" class="btn btn-success disabled">${nq.state }</a>
 										</c:when>
 										<c:otherwise>
-											<a href="" class="btn btn-secondary disabled">${nq.state }</a>
+											<a href="#" class="btn btn-secondary disabled">${nq.state }</a>
 										</c:otherwise>
 									</c:choose>
 								</td>
