@@ -14,4 +14,5 @@ public class ProjectReview {
 	private String reviewContent;
 	private int reviewWriter;
 	private String enrollDate;
+	private int memberNo;
 }
