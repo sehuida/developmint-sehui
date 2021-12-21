@@ -40,8 +40,8 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="/updateResumeFrm.do")
-	public String updateResume(Resume resume, Model model) {
-		Resume r = service.selectCeoResume(resume.getCeoResume());
+	public String updateResume(Resume resume, int memberNo, Model model) {
+		Resume r = service.selectCeoResume(resume.getCeoResume(), memberNo);
 		model.addAttribute("r", r);
 		return "resume/updateResumeFrm";
 	}
@@ -52,7 +52,7 @@ public class ResumeController {
 		int result = service.updateCeoResume(r);
 		if(result > 0) {
 			model.addAttribute("msg","이력서 수정완료");
-			model.addAttribute("loc", "/resumeManage.do?memberNo="+memberNo);
+			model.addAttribute("loc", "/resumeManage.do?memberNo="+memberNo+"&reqPage=1");
 		} else {
 			model.addAttribute("msg","이력서 수정실패");
 		}
@@ -71,7 +71,7 @@ public class ResumeController {
 			model.addAttribute("msg", "입력 정보를 확인해주세요.");
 			model.addAttribute("icon", "error");
 		}
-		model.addAttribute("loc","/resumeManage.do?memberNo="+memberNo);
+		model.addAttribute("loc","/resumeManage.do?memberNo="+memberNo+"&reqPage=1");
 		return "member/swalMsg";
 	}
 	
@@ -86,7 +86,7 @@ public class ResumeController {
 	@RequestMapping(value="/ceoResumeView.do")
 	public String ceoResumeView(Resume r, Model model) {
 		int ceoResume = r.getCeoResume();
-		Resume resume = service.selectCeoResume(ceoResume);
+		Resume resume = service.selectCeoResume(ceoResume, r.getMemberNo());
 		Member m = service.selectOneMember(resume.getMemberNo());
 		System.out.println("resumeView 확인 r : " + resume);
 		model.addAttribute("r", resume);
@@ -111,14 +111,14 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="/deleteResume.do")
-	public String deleteResume(int resumeNo, Resume r, Model model) {
+	public String deleteResume(int resumeNo, Resume r, Model model, int memberNo) {
 		int result = service.deleteResume(resumeNo);
 		if(result > 0) {
 			model.addAttribute("msg","이력서가 삭제되었습니다.");
 		} else {
 			model.addAttribute("msg","이력서 삭제 에러");			
 		}
-		model.addAttribute("loc","/resumeManage.do?memberNo="+r.getMemberNo());
+		model.addAttribute("loc","/resumeManage.do?memberNo="+memberNo+"&reqPage=1");
 		return "common/msg";
 	}
 	

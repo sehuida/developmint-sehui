@@ -53,8 +53,11 @@ public class ResumeDao {
 		return sqlSession.update("resume.updateCeoResume", resumeNo); 
 	}
 
-	public Resume selectCeoResume(int ceoResume) {
-		return sqlSession.selectOne("resume.selectCeoResume", ceoResume);
+	public Resume selectCeoResume(int ceoResume, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		 map.put("memberNo", memberNo); 
+		 map.put("announceNo", ceoResume);
+		return sqlSession.selectOne("resume.selectCeoResume", map);
 	}
 
 	public int updateCeoResume(Resume r) {
@@ -75,15 +78,22 @@ public class ResumeDao {
 		return (ArrayList<Announce>)list;
 	}
 	
-	public ArrayList<Announce> selectAllAnnounce(ArrayList<Announce> announceNo) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("list", announceNo);
-		List list = sqlSession.selectList("resume.selectAllAnnounce", map);
+	public ArrayList<Announce> selectAllAnnounce(int memberNo) {
+		/*
+		 * HashMap<String, Object> map = new HashMap<String, Object>();
+		 * map.put("memberNo", memberNo); map.put("announceNo", announceNo);
+		 */
+		 
+		List list = sqlSession.selectList("resume.selectAllAnnounce", memberNo);
 		return (ArrayList<Announce>)list;
 	}
 
 	public int deleteResume(int resumeNo) {
 		return sqlSession.delete("resume.deleteResume", resumeNo);
+	}
+
+	public int deleteApplycation(int resumeNo) {
+		return sqlSession.delete("resume.deleteApplycation", resumeNo);
 	}
 
 	

@@ -250,8 +250,9 @@
     } */
 	.noResume{
 		width: 800px;
+		height: 200px;
 		margin: 0 auto;
-		margin-top: 40px;
+		margin-top: 100px;
 		text-align: center;
 	}
     .wd{
@@ -497,7 +498,7 @@
 						<div class="update">
 							
 							<a href="ceoResumeView.do?ceoResume=${r.ceoResume }"><button class="ceoResumeView">이력서 보기</button></a>
-							<a href="updateResumeFrm.do?ceoResume=${r.ceoResume }"><button class="updateResume">수정하기</button></a>
+							<a href="updateResumeFrm.do?memberNo=${sessionScope.m.memberNo}&ceoResume=${r.ceoResume }"><button class="updateResume">수정하기</button></a>
 						</div>
 					</div>
 				</c:otherwise>
@@ -648,7 +649,9 @@
 			</c:otherwise>
 		</c:choose>
 		</div>
-		<div id="pageNavi">${pageNavi }</div>
+		<c:if test="${not empty rs }">
+			<div id="pageNavi">${pageNavi }</div>
+		</c:if>
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

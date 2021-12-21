@@ -90,7 +90,7 @@ public class ResumeService {
 		 if(reset > 0) {
 			 int ceoResume = dao.updateCeoResume(resumeNo);
 			 if(ceoResume > 0) {
-				 Resume resume = dao.selectCeoResume(ceoResume);
+				 Resume resume = dao.selectCeoResume(ceoResume, memberNo);
 				 return resume; 
 			 } else {
 				 return null;
@@ -100,8 +100,8 @@ public class ResumeService {
 		 }
 	 }
 
-	public Resume selectCeoResume(int ceoResume) {
-		return dao.selectCeoResume(ceoResume);
+	public Resume selectCeoResume(int ceoResume, int memberNo) {
+		return dao.selectCeoResume(ceoResume, memberNo);
 	}
 
 	public int updateCeoResume(Resume r) {
@@ -118,13 +118,19 @@ public class ResumeService {
 
 	/* 지원한 회사 리스트 가져오기 */
 	 public ArrayList<Announce> selectAllAnnounce(int memberNo) {
-		 ArrayList<Announce> list = dao.selectAnnounceNo(memberNo);
+		 ArrayList<Announce> list = dao.selectAllAnnounce(memberNo);
 		 System.out.println(list);
-		 return dao.selectAllAnnounce(list); 
+		 return list; 
 	 }
 	 
 	public int deleteResume(int resumeNo) {
-		return dao.deleteResume(resumeNo);
+		int deleteApplication = dao.deleteApplycation(resumeNo);
+		if(deleteApplication > 0) {
+			int deleteResume = dao.deleteResume(resumeNo);
+			return deleteResume;
+		} else {
+			return 0;
+		}
 	}
 
 	

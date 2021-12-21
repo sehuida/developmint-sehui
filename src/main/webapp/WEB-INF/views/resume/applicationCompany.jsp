@@ -126,7 +126,7 @@
 			        <hr>
             	</div>
             	
-            	<div class="listStatus">
+            	<!-- <div class="listStatus">
                 	<div class="info">
 			            <div class="date left">2021.12.12 22:13</div>
 			            <div class="summary left">
@@ -148,7 +148,7 @@
 			            </div>
         			</div>
 			        <hr>
-            	</div>
+            	</div> -->
     		</form>
     	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
