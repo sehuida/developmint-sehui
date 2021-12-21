@@ -70,7 +70,14 @@ public class MemberController {
 	@RequestMapping(value="/login.do")
 	public String loginFrm(Member member,HttpSession session,Model model) {
 		Member m = service.selectOneMember(member);
+		
 		if(m != null) {
+			if(m.getMemberType() == 4){
+				model.addAttribute("title", "차단된 회원입니다.");
+				model.addAttribute("loc", "/main.do");
+				model.addAttribute("icon", "error");
+				return "member/swalMsg";				
+			}
 			session.setAttribute("m", m);
 			return "common/main";
 		}else {
