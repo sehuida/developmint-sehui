@@ -452,4 +452,8 @@ public class MemberService {
 				return bpg;
 	}
 	
+	public int announceNo(String comNo) {
+		return dao.announceNo(Integer.parseInt(comNo));
+	}
+	
 }
