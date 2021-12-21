@@ -52,16 +52,16 @@
 	<div class="container" id="projectContainer">
         <div class="main">
             <div class="main-left-box">
-                <h2>프로젝트 명</h2>
+                <h2>${pt.projectName}</h2>
                 <ul>
                     <li class="flexLi" style="border-bottom: 3px dashed #90d1b4;">
                         <a href="/enterMyProject.do?projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" class="subNaviAtag" ><img src="/resources/img/recruitTeamProject/recruitPage/powerOn.png" class="subNaviImg"><span style="cursor: pointer; font-weight: 900">프로젝트 개요</span></a>
                     </li>
                     <li class="flexLi">
-                        <a href="/coding.do" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/calendar.png" class="subNaviImg"><span style="cursor: pointer;">캘린더</span></a>
+                        <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/calendar.png" class="subNaviImg"><span style="cursor: pointer;">캘린더</span></a>
                     </li>
                     <li class="flexLi">
-                        <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg"><span style="cursor: pointer;">과업 관리</span></a>
+                        <a href="/enterProjectTask.do?projectNo=${pt.projectNo}" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg"><span style="cursor: pointer;">과업 관리</span></a>
                     </li>
                     <li class="flexLi">
                         <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/board.png" class="subNaviImg"><span style="cursor: pointer;">보드</span></a>
@@ -89,13 +89,13 @@
                 <div class="titleFlexBox">
                     <p class="titleText">프로젝트 개요</p>
                     <c:choose>
-                    	<c:when test="${sessionScope.m.memberId eq pt.projectReader && projectStatus ne 3}">
+                    	<c:when test="${sessionScope.m.memberId eq pt.projectReader && pt.projectStatus ne 3}">
                     		<a data-bs-toggle="modal" href="#projectEnd"><button type="button" class="btn btn-primary" id="closeProjectBtn">프로젝트 종료</button></a>
                     	</c:when>
-                    	<c:when test="${sessionScope.m.memberId ne pt.projectReader && projectStatus eq 3 && pt.writeReviewCheck eq 0}">
+                    	<c:when test="${sessionScope.m.memberId ne pt.projectReader && pt.projectStatus eq 3 && pt.writeReviewCheck eq 0}">
                     		<a data-bs-toggle="modal" href="#writeReview"><button type="button" class="btn btn-primary" id="closeProjectBtn">후기 작성</button></a>
                     	</c:when>
-                    	<c:when test="${sessionScope.m.memberId ne pt.projectReader && projectStatus eq 3 && pt.writeReviewCheck ne 0}">
+                    	<c:when test="${pt.projectStatus eq 3 && pt.writeReviewCheck ne 0}">
                     		<button type="button" class="btn btn-primary" id="closeProjectBtn" disabled="disabled">프로젝트 종료</button>
                     	</c:when>
                     </c:choose>
@@ -129,7 +129,7 @@
                             <div class="projectLanguageBox">
                                 <div class="projectLanguageFlexBox">
                                     <p class="infoLineText1">사용 언어</p>
-                                    <c:if test="${sessionScope.m.memberId eq pt.projectReader}">
+                                    <c:if test="${sessionScope.m.memberId eq pt.projectReader && pt.projectStatus ne 3}">
                                     	<button type="button" class="btn btn-primary btn-sm" id="updateLabel1">수정</button>
                                     	<button type="button" class="btn btn-primary btn-sm" id="updateLabel2">취소</button>
                                     </c:if>
@@ -165,7 +165,7 @@
                             <div class="projectLeader">
                                 <div class="projectLanguageFlexBox">
                                     <p class="infoLineText1">프로젝트 리더</p>
-                                    <c:if test="${sessionScope.m.memberId eq pt.projectReader}">
+                                    <c:if test="${sessionScope.m.memberId eq pt.projectReader && pt.projectStatus ne 3}">
                                     	<button type="button" class="btn btn-primary btn-sm" id="updateLeaderLabel1">수정</button>
                                     	<button type="button" class="btn btn-primary btn-sm" id="updateLeaderLabel2">취소</button>
                                     </c:if>
@@ -259,7 +259,7 @@
 	                                            <div class="rollBox">
 	                                                <div class="form-group">
 	                                                	<c:choose>
-	                                                		<c:when test="${ml.memberId eq sessionScope.m.memberId}">
+	                                                		<c:when test="${ml.memberId eq sessionScope.m.memberId && pt.projectStatus ne 3}">
 	                                                			<input class="form-control form-control-sm" type="text" id="inputSmall" name="crueRoll" value="${ml.memberRole }">
 	                                                		</c:when>
 	                                                		<c:otherwise>
@@ -398,9 +398,16 @@
                             </div>
                             <div class="areaLine"></div>
                             <div class="submitBtnArea">
-                            	<input type="hidden" name="sessionMemberNo" value="${sessionScope.m.memberId}">
+                            	<input type="hidden" name="sessionMemberNo" value="${sessionScope.m.memberNo}">
                             	<input type="hidden" name="projectNo" value="${pt.projectNo}">
-                                <button type="submit" class="btn btn-primary">수정</button>
+                            	<c:choose>
+                            		<c:when test="${pt.projectStatus eq 3}">
+		                                <button type="submit" class="btn btn-primary" disabled="disabled">수정</button>
+                            		</c:when>
+                            		<c:otherwise>
+                            			<button type="submit" class="btn btn-primary">수정</button>
+                            		</c:otherwise>
+                            	</c:choose>
                             </div>
                         </form>
                     </div>
@@ -518,6 +525,7 @@
 		                            </div>
 		                            <input type="hidden" name="projectNo" value="${ml.projectNo}">
 		                            <input type="hidden" name="teamMemberNo" value="${ml.teamMemberNo}">
+		                            <input type="hidden" name="memberNo" value="${ml.memberNo}">
 		                            
 		                        </div>
 							</c:if>

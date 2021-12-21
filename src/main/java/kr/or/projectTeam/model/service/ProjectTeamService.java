@@ -643,13 +643,15 @@ public class ProjectTeamService {
 		map.put("backProjectNo", backProjectNo);
 		map.put("backMemberNo", backMemberNo);
 		int reviewResult = dao.insertReview(map);
+		int memberPointResult = 0;
 		if(reviewResult > 0) {
-			int memberPointResult = dao.reviewMemberPointUpdate(map);
+			for(int i = 0; i < reviewlist.size(); i++) {
+				memberPointResult = dao.reviewMemberPointUpdate(reviewlist.get(i));
+			}
 			if(memberPointResult > 0) {
 				result = dao.endProject(map);
 			}
 		}
-		
 		return result;
 	}
 	
@@ -661,8 +663,11 @@ public class ProjectTeamService {
 		map.put("backProjectNo", backProjectNo);
 		map.put("backMemberNo", backMemberNo);
 		int reviewResult = dao.insertReview(map);
+		int memberPointResult = 0;
 		if(reviewResult > 0) {
-			result = dao.reviewMemberPointUpdate(map);
+			for(int i = 0; i < reviewlist.size(); i++) {
+				result = dao.reviewMemberPointUpdate(reviewlist.get(i));
+			}
 		}
 		return result;
 	}
@@ -680,17 +685,19 @@ public class ProjectTeamService {
 		int result1 = 1;
 		int result2 = 1;
 		int result3 = 1;
-		
 		int result = 0;
 		
 		if(langList.size() != 0) {
-			//result1 = dao.updateProjectLangList(map);
+			int tempResult = dao.updateProjectLangList1(map);
+			if (tempResult > 0) {
+				result1 = dao.updateProjectLangList2(map);
+			}
 		}
 		if(pt != null) {
-			//result2 = dao.projectUpdate(map);
+			result2 = dao.projectUpdate(map);
 		}
 		if(crueRoll != null && crueRoll != "") {
-			//result3 = dao.crueRollUpdate(map);
+			result3 = dao.crueRollUpdate(map);
 		}
 		
 		if(result1 > 0 && result2 > 0 && result3 > 0) {
@@ -699,5 +706,12 @@ public class ProjectTeamService {
 		
 		return result;
 	}
+
+	public ArrayList<ProjectTask> projectTaskList(int projectNo) {
+		ArrayList<ProjectTask> list = dao.projectTaskList(projectNo);
+		return list;
+	}
+
+	
 	
 }

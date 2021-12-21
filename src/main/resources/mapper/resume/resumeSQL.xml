@@ -95,7 +95,7 @@
 		update resume set ceo_resume = 1 where resume_no = #{resumeNo}
 	</update>
 	
-	<select id="selectCeoResume" parameterType="_int" resultType="r">
+	<select id="selectCeoResume" parameterType="map" resultType="r">
 		select
 			resume_no as resumeNo,
 			member_no as memberNo,
@@ -128,6 +128,7 @@
 			ceo_resume as ceoResume
 		from resume
 		where ceo_resume = #{ceoResume}
+		and member_no = #{memberNo}
 	</select>
 	
 	<update id="updateResume" parameterType="r">
@@ -211,20 +212,29 @@
 		where member_no = #{memberNo}
 	</select>
 	
-	<select id="selectAllAnnounce" parameterType="map" resultType="a">
+	<select id="selectAllAnnounce" parameterType="_int" resultType="ac">
 	<!-- <foreach collection="list" item="list" open="(" close=")" separator=","> -->
-		select
-			company_name as companyName,
-			announce_title as announceTitle,
-			write_date as writeDate
-		from announcement
-		where announce_no = #{announceNo}
+	select 
+	    company_name as companyName,
+	    announce_title as announceTitle,
+	    category,
+	    apply_date as applyDate
+	    from announcement
+    join application a using(announce_no)
+    where a.member_no = #{memberNo}
 	<!-- </foreach> -->
 	</select>
+	
+	<delete id="deleteApplycation" parameterType="_int">
+		delete from application where resume_no = #{resumeNo}
+	</delete>
 	
 	<delete id="deleteResume" parameterType="_int">
 		delete from resume where resume_no = #{resumeNo}
 	</delete>
 
+	<select id="applicationCount" parameterType="_int" resultType="_int">
+		select count(*) from application where member_no = #{memberNo}
+	</select>
 	
 </mapper>

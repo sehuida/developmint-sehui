@@ -297,6 +297,10 @@ public class AdminDao {
 	public int allBoardCount() {
 		return sqlSession.selectOne("admin.allBoardCount");
 	}
+
+	public int postSeleteDelete(Map<String, Object> map) {
+		return sqlSession.delete("admin.postSeleteDelete",map);
+	}
 	
 
 

@@ -386,7 +386,7 @@
             (select count(*) from project_entry where project_no=#{projectNo} and member_no=#{memberNo}) as myApplyValue,
             (select count(*) from project_review where project_no in
             	((select pp.project_no from project pp where pp.project_status = 3 and pp.project_no in ((select pm.project_no from project_team_member pm where pm.member_no=#{memberNo})))) 
-            and review_writer = 'null') as writeReviewCheck
+            and review_writer = null) as writeReviewCheck
 	from project p 
 	where project_no = #{projectNo}
   </select>
@@ -863,7 +863,7 @@
 	<insert id="insertReview" parameterType="map">
 	  		insert into project_review(review_no, team_member_no, project_no, review_point, review_content, review_writer, enroll_date)
   			select review_seq.nextval, A.* from (
-  			<foreach collection="reviewlist" item="list" separator="UNION ALL">
+  			<foreach collection="reviewlist" item="list" separator="UNION ALL ">
 		  			select 
 						#{list.teamMemberNo} as team_member_no,
 		  				#{backProjectNo} as project_no,
@@ -875,32 +875,74 @@
 		  	</foreach>) A
 	</insert>
   	
-  	<update id="reviewMemberPointUpdate" parameterType="map">
-  		<foreach collection="reviewlist" item="list">
-  			update member m set m.member_grade = 
+  	<update id="reviewMemberPointUpdate" parameterType="pr">
 	  			<choose>
-					<when test="list.reviewPoint == 1">
-						m.member_grade-2 where member_no=#{list.teamMemberNo}
+					<when test="reviewPoint == 1">
+						update member set member_grade = member_grade-2 where member_no=#{memberNo}
 					</when>
-					<when test="list.reviewPoint == 2">
-						m.member_grade-1 where member_no=#{list.teamMemberNo}
+					<when test="reviewPoint == 2">
+						update member set member_grade = member_grade-1 where member_no=#{memberNo}
 					</when>
-					<when test="list.reviewPoint == 3">
-						m.member_grade+1 where member_no=#{list.teamMemberNo}
+					<when test="reviewPoint == 3">
+						update member set member_grade =.member_grade+1 where member_no=#{memberNo}
 					</when>
-					<when test="list.reviewPoint == 4">
-						m.member_grade+2 where member_no=#{list.teamMemberNo}
+					<when test="reviewPoint == 4">
+						update member set member_grade = member_grade+2 where member_no=#{memberNo}
 					</when>
-					<when test="list.reviewPoint == 5">
-						m.member_grade+3 where member_no=#{list.teamMemberNo}
+					<when test="reviewPoint == 5">
+						update member set member_grade = member_grade+3 where member_no=#{memberNo}
 					</when>
 				</choose>
-				;
-  		</foreach>
   	</update>
   	
   	<update id="endProject" parameterType="_int">
  		update project set project_status = 3 where project_no = #{backProjectNo}
  	</update>
-  	
+ 	
+ 	<insert id="insertProjectLangList" parameterType="map">
+  		insert into use_project_language(use_project_lang_no, project_no, language_no)
+  		select up_lang_seq.nextval, A.* from (
+  			<foreach collection="langList" item="lang" separator="UNION ALL ">
+  				select 
+  					#{projectNo} as project_no,
+  					(select language_no from develop_language where language_name = #{lang}) as language_no
+  				from dual
+  			</foreach>) A
+  </insert>
+  
+  <update id="projectUpdate" parameterType="map">
+  		update project set 
+  				project_name = #{pt.projectName},
+  				project_goal = #{pt.projectGoal},
+  				project_reader = #{pt.projectReader}
+  		where project_no = #{projectNo}
+  </update>
+  
+  <update id="crueRollUpdate" parameterType="map">
+  		update project_team_member set 
+  				member_role = #{crueRoll}
+  		where project_no = #{projectNo} and member_no = #{sessionMemberNo}
+  </update>
+ 
+ <select id="projectTaskList" parameterType="_int" resultType="ptk">
+ 		select
+ 			task_no as taskNo,
+ 			project_no as projectNo,
+ 			team_member_no as teamMemberNo,
+ 			task_sort as taskSort,
+ 			task_title as taskTitle,
+ 			task_content as taskContent,
+ 			priority as priority,
+ 			connect_issue as connectIssue,
+ 			reference_link as referLink,
+ 			reference_link_name as linkName,
+ 			start_date as startDate,
+ 			complete_date as completeDate,
+ 			end_date as endDate,
+ 			process_sort as processSort
+ 		from task 
+ 		where project_no = #{projectNo}
+ 		order by task_no desc
+ </select>
+ 
 </mapper>

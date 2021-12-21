@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectEntry;
+import kr.or.projectTeam.model.vo.ProjectReview;
 import kr.or.projectTeam.model.vo.ProjectTask;
 import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.projectTeam.model.vo.ProjectTeamMember;
@@ -310,12 +311,33 @@ public class ProjectTeamDao {
 		return sqlSession.insert("projectTeam.insertReview", map);
 	}
 
-	public int reviewMemberPointUpdate(Map<String, Object> map) {
-		return sqlSession.update("projectTeam.reviewMemberPointUpdate", map);
+	public int reviewMemberPointUpdate(ProjectReview pr) {
+		return sqlSession.update("projectTeam.reviewMemberPointUpdate", pr);
 	}
 
 	public int endProject(Map<String, Object> map) {
 		return sqlSession.update("projectTeam.endProject", map);
+	}
+
+	public int updateProjectLangList1(Map<String, Object> map) {
+		return sqlSession.delete("projectTeam.deleteLangList", map);
+	}
+
+	public int updateProjectLangList2(Map<String, Object> map) {
+		return sqlSession.insert("projectTeam.insertProjectLangList", map);
+	}
+
+	public int projectUpdate(Map<String, Object> map) {
+		return sqlSession.update("projectTeam.projectUpdate", map);
+	}
+
+	public int crueRollUpdate(Map<String, Object> map) {
+		return sqlSession.update("projectTeam.crueRollUpdate", map);
+	}
+
+	public ArrayList<ProjectTask> projectTaskList(int projectNo) {
+		List<ProjectTask> list = sqlSession.selectList("projectTeam.projectTaskList", projectNo);
+		return (ArrayList<ProjectTask>) list;
 	}
 	
 	

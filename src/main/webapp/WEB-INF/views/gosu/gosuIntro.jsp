@@ -98,7 +98,6 @@ html, body {
 	height: 100%;
 	position: relative;
 	padding:150px;
-	padding-top: 250px;
 }
 
 .down-wrap {
@@ -152,7 +151,7 @@ html, body {
 				</div>
 			</div>
 		</div>
-		<div class="g-center g-box" style="padding-top:450px;">
+		<div class="g-center g-box" style="padding-top:400px;">
 			<div class="line"></div>
 			<div  style="" >
 				<h1 style="text-align: center;font-size: 50px; font-weight: 900;color: rgb(78, 205, 196);">요청서
@@ -225,7 +224,7 @@ html, body {
 			</div>
 
 		</div>
-		<div class="g-center g-box" style="padding-top:450px;">
+		<div class="g-center g-box" style="padding-top:400px;">
 			<div class="line"></div>
 			<div  style="" >
 				<h1 style="text-align: center;font-size: 50px; font-weight: 900;color: rgb(78, 205, 196);">피드백

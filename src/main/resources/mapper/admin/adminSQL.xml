@@ -612,7 +612,7 @@
 	
 	<!-- 프로젝트 팀 모집 글 목록 -->
 	<select id="projectList" parameterType="map" resultType="pt">
-		select rownum, p.* from(select 
+		select pp.* from(select rownum as rnum, p.* from(select 
 		    project_no as projectNo,
 		    member_no as projectWriterMemberNo,
 		    recruit_start_date as rStartDate,
@@ -621,13 +621,13 @@
 		    member_id as projectWriterId
 		from PROJECT
 		left join member using(member_no)
-		order by project_no desc)p
-		where rownum BETWEEN #{start} and #{end}
+		order by project_no desc)p)pp
+		where rnum BETWEEN #{start} and #{end}
 	</select>
 	
 	<!-- 지식공유게시판 글 목록 -->
 	<select id="shareList" parameterType="map" resultType="sv">
-		select rownum, s.* 
+		select ss.* from(select rownum as rnum, s.* 
 		from(select 
 		    board_no as boardNo,
 		    member_no as memberNo,
@@ -637,13 +637,13 @@
 		    member_id as memberId
 		from SHARE_BOARD
 		left join member using(member_no)
-		order by board_no desc)s
-		where rownum BETWEEN #{start} and #{end}
+		order by board_no desc)s)ss
+		where rnum BETWEEN #{start} and #{end}
 	</select>
 	
 	<!-- 구인 글 목록 -->
 	<select id="announceList" parameterType="map" resultType="a">
-		select rownum, a.* from(select 
+		select aa.* from(select rownum as rnum, a.* from(select 
 		    announce_no as announceNo,
 		    member_no as memberNo,
 		    company_name as companyName,
@@ -652,25 +652,25 @@
 		    member_id as school
 		from ANNOUNCEMENT
 		left join member using(member_no)
-		order by announce_no desc)a
-		where rownum BETWEEN #{start} and #{end}
+		order by announce_no desc)a)aa
+		where rnum BETWEEN #{start} and #{end}
 	</select>
 	
 	<!-- 고수게시판 글 목록 -->
 	<select id="gosuList" parameterType="map" resultType="gn">
-		select rownum, g.* from(select 
+		select gg.* from(select rownum as rnum, g.* from(select 
 		    gnotice_no as gnoticeNo,
-		    GOSU_NOTICE.MEMBER_ID as writeId,
+		    MEMBER_ID as writeId,
 		    gnotice_title as gnoticeTitle,
 		    gnotice_date as gnoticeDate
 		from gosu_notice
-        order by gnoticeNo desc)g
-        where rownum BETWEEN #{start} and #{end}
+        order by gnoticeNo desc)g)gg
+        where rnum BETWEEN #{start} and #{end}
 	</select>
 	
 	<!-- 공모전 글 목록 -->
 	<select id="contesetList2" parameterType="map" resultType="c">
-		select rownum, c.* from(select 
+		select cc.* from(select rownum as rnum, c.* from(select 
 		    contest_no as contestNo,
 		    contest_host as contestHost,
 		    contest.member_id as memberId,
@@ -678,10 +678,11 @@
 		    contest_title as contestTitle
 		from contest
 		where contest_status = 2
-		order by contest_no desc)c 
-		where rownum BETWEEN #{start} and #{end}
+		order by contest_no desc)c)cc
+		where rnum BETWEEN #{start} and #{end}
 	</select>
 	
+	<!-- 선택 게시판 총 게시물 수  -->
 	<select id="totalBoardCount" parameterType="_int" resultType="_int">
 		select count(*) 
 		from 
@@ -705,6 +706,7 @@
 		</choose>
 	</select>
 	
+	<!-- 전체 게시판 총 게시물 수 -->
 	<select id="allBoardCount" resultType="_int">
 		select sum(A+B+C+D+E) from
 		(SELECT
@@ -716,6 +718,28 @@
 		FROM DUAL)
 	
 	</select>
+	
+	<!-- 선택한 게시물 삭제 -->
+	<delete id="postSeleteDelete" parameterType="map">
+		delete from 
+		<choose>
+			<when test="type == 1">
+				PROJECT where project_no = #{boardNo}
+			</when>
+			<when test="type == 2">
+				SHARE_BOARD where board_no = #{boardNo}
+			</when>
+			<when test="type == 3">
+				ANNOUNCEMENT where announce_no = #{boardNo}
+			</when>
+			<when test="type == 4">
+				GOSU_NOTICE where gnotice_no = #{boardNo}
+			</when>
+			<when test="type == 5">
+				CONTEST where contest_no = #{boardNo}
+			</when>
+		</choose>
+	</delete>
 	
 </mapper>
 

@@ -39,6 +39,7 @@ import kr.or.projectTeam.model.vo.ProjectTeamApplicantViewData;
 import kr.or.projectTeam.model.vo.ProjectTeamApplyPageData;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.projectTeam.model.vo.ProjectTeamMember;
+import kr.or.projectTeam.model.vo.ProjectTeamNoticeComment;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeViewData;
 import kr.or.projectTeam.model.vo.Shortcuts;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
@@ -57,8 +58,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ProjectTeamController {
 	@Autowired
 	private ProjectTeamService service;
-	
-	private Logger logger = LoggerFactory.getLogger(ProjectTeamController.class);
 	
 	@RequestMapping(value="/recruitTeamMember_mainPage.do")
 	public String recruitTeamMember(Model model, int reqPage) {
@@ -183,7 +182,7 @@ public class ProjectTeamController {
 	}
 	
 	@RequestMapping(value="/selectOneNotice.do")
-	public String selectOneNotice(Model model, int projectNo, Integer memberNo) {
+	public String selectOneNotice(Model model, Integer projectNo, Integer memberNo) {
 		int result1 = service.updateStatus();
 		if(result1 > 0) {
 			int result2 = service.projectStartProcess();
@@ -681,7 +680,8 @@ public class ProjectTeamController {
 	  }
 	  
 	  @RequestMapping(value="/endProject.do")
-	  public String endProject(Model model, Integer[] teamMemberNo, Integer[] reviewPoint, String[] reviewContent, int backMemberNo, int backProjectNo, String sessionMemberId, String projectReader) {
+	  public String endProject(Model model, Integer[] memberNo, Integer[] teamMemberNo, Integer[] reviewPoint, String[] reviewContent, int backMemberNo, int backProjectNo, String sessionMemberId, String projectReader) {
+		  
 		  for(int i = 0; i < teamMemberNo.length; i++) {
 			  System.out.println("팀넘버 :"+teamMemberNo[i]);
 		  }
@@ -690,6 +690,9 @@ public class ProjectTeamController {
 		  }
 		  for(int i = 0; i < reviewContent.length; i++) {
 			  System.out.println("리뷰글 :"+reviewContent[i]);
+		  }
+		  for(int i = 0; i < memberNo.length; i++) {
+			  System.out.println("멤버번호 :"+memberNo[i]);
 		  }
 		  
 		  int result = 0;
@@ -701,6 +704,7 @@ public class ProjectTeamController {
 			  pr.setReviewPoint(reviewPoint[i]);
 			  pr.setTeamMemberNo(teamMemberNo[i]);
 			  pr.setReviewWriter(backMemberNo);
+			  pr.setMemberNo(memberNo[i]);
 			  reviewlist.add(pr);
 		  }
 		  if(sessionMemberId.equals(projectReader)) {
@@ -737,7 +741,10 @@ public class ProjectTeamController {
 	
 	  @RequestMapping(value="/updateProjectOutline.do")
 	  public String updateProjectOutline(Model model, String[] chk, ProjectTeam pt, String crueRoll, int sessionMemberNo, int projectNo) {
-		  ArrayList<String> langList = new ArrayList<String>(Arrays.asList(chk));
+		  ArrayList<String> langList = new ArrayList<String>();
+		  if(chk != null) {
+			  langList = new ArrayList<String>(Arrays.asList(chk));
+		  }
 		  int result = service.updateProjectOutline(langList, pt, crueRoll, sessionMemberNo, projectNo); 
 		  if(result > 0) { 
 			  model.addAttribute("title", "프로젝트 수정 성공!");
@@ -753,5 +760,12 @@ public class ProjectTeamController {
 		  return "member/swalMsg"; 
 	  }
 	  
+	  @RequestMapping(value="/enterProjectTask.do")
+		public String enterProjectTask(Model model, int projectNo) {
+			 ArrayList<ProjectTask> ptk = service.projectTaskList(projectNo);
+			 model.addAttribute("ptk", ptk);
+			 model.addAttribute("projectNo", projectNo);
+			return "recruitCrue/projectManageTask";
+		}
 	  
 }

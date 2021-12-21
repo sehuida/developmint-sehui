@@ -789,6 +789,14 @@ public class AdminService {
 		
 		return tb;
 	}
+
+	public int postSeleteDelete(int type, int boardNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("boardNo", boardNo);
+		int result = dao.postSeleteDelete(map);
+		return result;
+	}
 }
 
 
