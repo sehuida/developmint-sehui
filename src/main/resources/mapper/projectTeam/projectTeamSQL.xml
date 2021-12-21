@@ -382,6 +382,7 @@
             (select member_grade from member m where m.member_no = p.member_no) as projectWriterGrade,
             (select count(*) from project_dibs pd where pd.project_no = #{projectNo} and pd.member_no = #{memberNo}) as dibCountClickValue,
             (select count(*) from project_entry where project_no=#{projectNo}) as applyValue,
+            (select count(*) from project_entry where project_no=#{projectNo} and entry_status in (3,4)) as finalApplyValue,
             (select count(*) from project_entry where project_no=#{projectNo} and member_no=#{memberNo}) as myApplyValue,
             (select count(*) from project_review where project_no in
             	((select pp.project_no from project pp where pp.project_status = 3 and pp.project_no in ((select pm.project_no from project_team_member pm where pm.member_no=#{memberNo})))) 
@@ -533,7 +534,7 @@
   		update project_entry set entry_status = 3 where entry_no = #{entryNo} and member_no = #{memberNo}
   </update>
   
-  <select id="selectAllFinalEntry" parameterType="_int" resultType="List">
+  <select id="selectAllFinalEntry" parameterType="_int" resultType="_int">
   		select member_no from project_entry where entry_status = 3 and project_no = #{projectNo}
   </select>
   
@@ -544,7 +545,7 @@
   <update id="updateFinalRecruitTeam2" parameterType="map" >
   		update project_entry set entry_status = 4 where project_no = #{projectNo} and member_no in 
   		<foreach collection="finalList" item="fl" index="i" separator="," open="(" close=")">
-  			#{fl.memberNo}
+  			#{fl}
   		</foreach>
   </update>
   
@@ -562,7 +563,7 @@
   			<foreach collection="finalList" item="fl" separator="UNION ALL ">
   				select 
   					#{projectNo} as project_no,
-  					#{fl.memberNo} as member_no,
+  					#{fl} as member_no,
   					null as member_role
   				from dual
   			</foreach>) A
@@ -576,7 +577,7 @@
   		select project_no as projectNo from project where project_status = 2 and recruit_end_date like #{today}
   </select>
   
-  <select id="startProjectMemberList" parameterType="List" resultType="_int">
+  <select id="startProjectMemberList" parameterType="map" resultType="_int">
   		select member_no from project_entry where ENTRY_STATUS = 3 and project_no in
   		<foreach collection="startProjectList" item="stl" open="(" close=")" separator=",">
   			#{stl}
@@ -592,6 +593,7 @@
   		 <foreach collection="startProjectMemberList" item="spml" open="(" close=")" separator=",">
   			#{spml}
   		</foreach>  
+  		
   </update>
   
   <select id="startProjectListFinal" parameterType="map">
@@ -773,7 +775,7 @@
 				p.project_start_date as pStartDate,
 				p.project_end_date as pEndDate,
 				(select filepath from member m where m.member_id = p.project_reader) as writerImgPath,
-				(select count(*) from project_review where project_no = #{projectNo} and review_writer = #{memberNo}) as writeReviewCheck;
+				(select count(*) from project_review where project_no = #{projectNo} and review_writer = #{memberNo}) as writeReviewCheck
 			from project p 
 			where project_no = #{projectNo}
   </select>
@@ -861,39 +863,40 @@
 	<insert id="insertReview" parameterType="map">
 	  		insert into project_review(review_no, team_member_no, project_no, review_point, review_content, review_writer, enroll_date)
   			select review_seq.nextval, A.* from (
-  			<foreach collection="endList" item="list" separator="UNION ALL ">
-  				select 
-					#{list.teamMemberNo} as team_member_no,
-  					#{backProjectNo} as project_no,
-  					#{list.reviewPoint} as review_point,
-  					#{list.reviewContent} as review_content,
-  					#{backMemberNo} as review_writer,
-  					to_char(sysdate, 'yyyy-mm-dd') as enroll_date
-  				from dual
-  			</foreach>) A
+  			<foreach collection="reviewlist" item="list" separator="UNION ALL">
+		  			select 
+						#{list.teamMemberNo} as team_member_no,
+		  				#{backProjectNo} as project_no,
+		  				#{list.reviewPoint} as review_point,
+		  				#{list.reviewContent} as review_content,
+		  				#{backMemberNo} as review_writer,
+		  				to_char(sysdate, 'yyyy-mm-dd') as enroll_date
+		  			from dual
+		  	</foreach>) A
 	</insert>
   	
   	<update id="reviewMemberPointUpdate" parameterType="map">
-  		<foreach collection="endList" item="el">
-			update member m set m.member_grade = 
-			<choose>
-				<when test="el.reviewPoint == 1">
-					m.member_grade where member_no=#{el.teamMemberNo}
-				</when>
-				<when test="el.reviewPoint == 2">
-					m.member_grade where member_no=#{el.teamMemberNo}
-				</when>
-				<when test="el.reviewPoint == 3">
-					m.member_grade+1 where member_no=#{el.teamMemberNo}
-				</when>
-				<when test="el.reviewPoint == 4">
-					m.member_grade+2 where member_no=#{el.teamMemberNo}
-				</when>
-				<when test="el.reviewPoint == 5">
-					m.member_grade+3 where member_no=#{el.teamMemberNo}
-				</when>
-			</choose>
-		</foreach>
+  		<foreach collection="reviewlist" item="list">
+  			update member m set m.member_grade = 
+	  			<choose>
+					<when test="list.reviewPoint == 1">
+						m.member_grade-2 where member_no=#{list.teamMemberNo}
+					</when>
+					<when test="list.reviewPoint == 2">
+						m.member_grade-1 where member_no=#{list.teamMemberNo}
+					</when>
+					<when test="list.reviewPoint == 3">
+						m.member_grade+1 where member_no=#{list.teamMemberNo}
+					</when>
+					<when test="list.reviewPoint == 4">
+						m.member_grade+2 where member_no=#{list.teamMemberNo}
+					</when>
+					<when test="list.reviewPoint == 5">
+						m.member_grade+3 where member_no=#{list.teamMemberNo}
+					</when>
+				</choose>
+				;
+  		</foreach>
   	</update>
   	
   	<update id="endProject" parameterType="_int">

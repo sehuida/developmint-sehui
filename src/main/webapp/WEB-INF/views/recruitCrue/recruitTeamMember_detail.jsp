@@ -106,8 +106,15 @@
                     <div class="deadBtnBox">
 	                    <c:if test="${sessionScope.m.memberNo eq pt.projectWriterMemberNo}">
 	                    	<c:choose>
-	                    		<c:when test="${pt.projectStatus == 1 }">
-			                    	<a href="closeRecruitTeam.do?projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}"><button type="button" class="btn btn-primary">모집 마감</button></a>
+	                    		<c:when test="${pt.projectStatus == 1}">
+	                    			<c:choose>
+	                    				<c:when test="${pt.finalApplyValue != 0 }">
+	                    					<a href="closeRecruitTeam.do?projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}"><button type="button" class="btn btn-primary">모집 마감</button></a>
+	                    				</c:when>
+	                    				<c:otherwise>
+	                    					<button type="button" class="btn btn-primary" disabled="disabled">모집 마감</button>
+	                    				</c:otherwise>
+	                    			</c:choose>
 	                    		</c:when>
 	                    		<c:otherwise>
 	                    			<button type="button" class="btn btn-primary" disabled="disabled">모집 마감</button>

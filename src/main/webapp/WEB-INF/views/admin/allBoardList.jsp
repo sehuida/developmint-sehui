@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,11 +64,16 @@
 	box-shadow: 1px 2px 10px 0 rgb(0 0 0 / 15%);
 	width: 900px;
 	height: 600px;
+	padding: 20px;
 }
 .box1{
 	box-shadow: 1px 2px 10px 0 rgb(0 0 0 / 15%);
 	width: 320px;
 	height: 160px;
+}
+.aTag{
+	text-decoration: none;
+	color: #888888;
 }
 	
 </style>
@@ -118,14 +124,57 @@
 				</div>
 			</div>
 			<div class="flexBox">
-				<p class="title" style="margin-top:20px; width: 900px;">최신 게시물</p>	
+				<p class="title" style="margin-top:20px; width: 900px;">전체 게시물</p>	
 				<div class="boardTable">
-					
+					<c:choose>
+						<c:when test="${type == 1 }">
+							<table class="table">
+								<tr>
+									<th>No.</th>
+									<th>제목</th>
+									<th>회원ID</th>
+									<th>진행상태</th>
+									<th>작성일</th>
+									<th>게시물삭제</th>
+								</tr>
+								<c:forEach items="${projectList }" var="p" varStatus="i">
+									<tr>
+										<td>${start + i.index}</td>
+										<td><a href="/selectOneNotice.do?projectNo=${p.projectNo }&memberNo=${sessionScope.m.memberNo}" class="aTag">dd</a></td>
+									</tr>
+								</c:forEach>
+							</table>
+						</c:when>
+						
+						<c:when test="${type == 2 }">
+							<table class="table">
+								<tr>
+									<th>No.</th>
+									<th>제목</th>
+									<th>회원ID</th>
+									<th>조회수</th>
+									<th>작성일</th>
+									<th>게시물삭제</th>
+								</tr>
+								<c:forEach items="${shareList }" var="s" varStatus="i">
+									<tr>
+									<td>${start + i.index}</td>
+									<td><a href="/shareBoardView.do?boardNo=${s.boardNo }" class="aTag">${s.boardTitle }</a></td>
+									<td>${s.memberId }</td>
+									<td>${s.readCount }</td>
+									<c:set var="subTitle" value="${fn:substring(s.regDate,0,10)}"/>
+									<td>${subTitle }</td>
+									<td><button class="btn btn btn-info btn-sm delBtn">삭제하기</button></td>
+									<tr>
+								</c:forEach>
+							</table>
+							<div id="pageNavi" style="text-align: center; margin-top:50px;"  >${pageNavi }</div>
+						</c:when>
+						
+					</c:choose>
 				</div>
 			</div>
 		</div>
-		
-		
 		
 		
 		
@@ -145,11 +194,11 @@
 		        {
 		          label: boardType,
 		          backgroundColor: "#f3969a",
-		          data: [15]
+		          data: [${totalCount}]
 		        }, {
 		          label: "전체게시물",
 		          backgroundColor: "#4ECDC4",
-		          data: [60]
+		          data: [${allBoardCount}]
 		        }
 		      ]
 		    },
