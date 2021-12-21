@@ -200,8 +200,8 @@ public class ProjectTeamDao {
 		return (ArrayList<Integer>) startProjectList;
 	}
 
-	public ArrayList<Integer> startProjectMemberList(ArrayList<Integer> startProjectList) {
-		List<Integer> startProjectMemberList = sqlSession.selectList("projectTeam.startProjectMemberList", startProjectList);
+	public ArrayList<Integer> startProjectMemberList(Map<String, Object> map) {
+		List<Integer> startProjectMemberList = sqlSession.selectList("projectTeam.startProjectMemberList", map);
 		return (ArrayList<Integer>) startProjectMemberList;
 	}
 
@@ -317,6 +317,8 @@ public class ProjectTeamDao {
 	public int endProject(Map<String, Object> map) {
 		return sqlSession.update("projectTeam.endProject", map);
 	}
+	
+	
 
 	
 }

@@ -122,3 +122,9 @@ overflow: auto;
 .btn-h:hover{
 	text-decoration: underline;
 }
+.qna-contents{
+	clear: both;
+    position: relative;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}

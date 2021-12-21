@@ -40,10 +40,6 @@
             $(".rBox_Leftnavi_left").css("opacity", "0.5");
         }
         
-        $(".return_img").click(function(){
-			history.back();
-		});
-        
     });
 </script>
 <body>

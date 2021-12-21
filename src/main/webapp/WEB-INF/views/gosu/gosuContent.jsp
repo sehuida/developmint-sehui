@@ -322,7 +322,7 @@
 							<td><hr></td>
 						</tr>
 						<tr>
-							<td>한줄소개</td>
+							<td>한 줄 소개</td>
 						</tr>
 						<tr>
 							<td style="font-size: 25px;">${gosu.gosuSelf }</td>
@@ -366,7 +366,8 @@
 												<td rowspan="3" style="font-size: 40px; font-weight: bold;">${grAVG.reviewAvg }점</td>
 											</tr>
 											<tr>
-												<td><c:choose>
+												<td>
+												<c:choose>
 														<c:when test="${grAVG.reviewAvg eq 5}">
 															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
 														</c:when>
@@ -401,7 +402,10 @@
 										<div class="review-one">
 											<ul>
 												<li>${grl.writer }</li>
-												<li><c:if test="${grl.reviewNum eq 1 }">
+												<li>
+													
+													<span style="float: left;font-size: small;margin-right: 5px;">${grl.reviewNum} 점</span>
+												<c:if test="${grl.reviewNum eq 1 }">
 														<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
 													</c:if> <c:if test="${grl.reviewNum eq 2 }">
 														<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
@@ -473,7 +477,7 @@
 				<div class="gosu-project">
 					<h4>프로젝트</h4>
 					<div class="g-photo-wrap">
-						<c:forEach items="${gprojectList }" var="gpr" varStatus="i">
+					<c:forEach items="${gprojectList }" var="gpr" varStatus="i">
 							<div class="g-photo-one">
 								<button type="button" id="gProject"
 									onclick="pAjax(${gpr.gprojectNo});">

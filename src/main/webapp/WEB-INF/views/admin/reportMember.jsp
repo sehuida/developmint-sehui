@@ -227,7 +227,7 @@
 			</div>
 			<div style="display: none">
 				<input type="hidden" class="receiver" value="${r.commentId }">
-				<input type="hidden" class="sender" value="관리자">
+				<input type="hidden" class="sender" value="admin">
 				<input type="hidden" class="dmContent" value="[경고] 회원님은 현재 4회 신고 처리되었습니다. 5회 누적 시 사이트 이용이 제한됩니다.">
 			</div>
 			</c:forEach>

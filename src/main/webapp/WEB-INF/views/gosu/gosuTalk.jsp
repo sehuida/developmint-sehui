@@ -304,7 +304,8 @@ input:focus, textarea:focus {
 												<td
 													style="font-weight: 900; font-size: 20px; padding-bottom: 5px;">${greview.writer }</td>
 												<td style="width: 800px;">
-
+													
+													<span style="float: left;font-weight: 900;font-size: 25px;margin-left: 30px;">${greview.reviewNum} 점</span>
 													<div class="star-rating">
 														<c:if test="${greview.reviewNum eq 1 }">
 															<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
@@ -360,7 +361,9 @@ input:focus, textarea:focus {
 										<table>
 											<tr>
 												<td style="width: 800px;">
+													<span style="float: left;font-weight: 900;font-size: 25px;margin-left: 30px;">${greview.reviewNum} 점</span>
 													<div class="star-rating">
+														
 														<c:if test="${greview.reviewNum eq 1 }">
 															<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
 														</c:if>

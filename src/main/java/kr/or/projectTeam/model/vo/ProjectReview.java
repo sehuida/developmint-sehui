@@ -1,5 +1,8 @@
 package kr.or.projectTeam.model.vo;
 
+import java.util.ArrayList;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data

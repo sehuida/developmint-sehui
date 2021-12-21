@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.admin.service.AdminService;
+import kr.or.admin.vo.TotalBoard;
 import kr.or.admin.vo.TotalData;
 import kr.or.admin.vo.TotalMember;
 import kr.or.comment.vo.Report;
@@ -309,8 +310,32 @@ public class AdminController {
 		@RequestMapping(value="/allBoardList.do")
 		public String allBoardList(int reqPage, int type, Model model) {
 			model.addAttribute("type",type);
+			TotalBoard tb = service.totalBoard(reqPage,type);
+			model.addAttribute("gosuList", tb.getGosuList());
+			model.addAttribute("projectList",tb.getProjectList());
+			model.addAttribute("shareList",tb.getShareList());
+			model.addAttribute("announceList",tb.getAnnounceList());
+			model.addAttribute("contestList",tb.getContesetList());
+			model.addAttribute("start", tb.getStart());
+			model.addAttribute("pageNavi",tb.getPageNavi());
+			model.addAttribute("totalCount", tb.getTotalCount());
+			model.addAttribute("allBoardCount", tb.getAllBoardCount());
 			return "admin/allBoardList";
 		}
+		
+		//선택한 게시물 삭제
+		@RequestMapping(value="/postSeleteDelete.do")
+		public String postSeleteDelete(Model model, int type, int boardNo) {
+			int result = service.postSeleteDelete(type, boardNo);
+			if(result>0) {
+				model.addAttribute("msg","삭제 완료 되었습니다.");
+			}else {
+				model.addAttribute("msg","삭제 실패");
+			}
+			model.addAttribute("loc","/allBoardList.do?reqPage=1&type="+type);
+			return "common/msg";
+		}
+		
 		
 		
 
