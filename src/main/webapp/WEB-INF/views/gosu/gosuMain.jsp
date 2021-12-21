@@ -194,7 +194,7 @@ ul#gallery>a>li:hover img {
 	transition: background-color 0.6s ease;
 }
 
-.active, .dot:hover {
+.container .active,.container .dot:hover {
 	background-color: rgb(78, 205, 196);
 }
 
@@ -216,8 +216,7 @@ ul#gallery>a>li:hover img {
 
 @
 -webkit-keyframes fade {
-	from {opacity: .4
-}
+	from {opacity: .4}
 
 to {
 	opacity: 1
