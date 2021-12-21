@@ -25,18 +25,36 @@
 			</div>
 			<div class="contents" style="padding: 20px;">
 				<div class="title" style="border-bottom: none;padding: 0;">
-					<h2 style="display: inline-block;">Counsel Answer</h2>
+					<h2 style="display: inline-block;">Counsel Save</h2>
 				</div>
-				<div class="notice-contents" style="padding: 20px 0 0 0;border-bottom: none;">
+				<div class="qna-contents" style="padding: 20px 0 0 0;border-bottom: none;">
 					<!-- 불러온 글제목 -->
 					<h4 style="font-weight: bold;border-bottom: 1px solid #ddd;">${nq.type } > ${nq.qnaTitle } </h4>
 					<!-- 작성일, 읽은 수(테이블 컬럼 추가 해야함) -->
-					<span>작성일 : ${nq.regDate } </span>
+					<span>문의 작성일 : ${nq.regDate } </span>
 					<div class="contents-box">
 						<!-- 이미지 있으면 이미지 출력, 내용잇으면 내용 출력 -->
-						${nq.noticeContent }
+						${nq.qnaContent }
 					</div>
-				<a href="/noticeList.do?reqPage=1" class="btn btn-outline-primary">목록보기</a>
+				</div>
+			</div>
+			<div class="contents" style="padding: 20px;text-align: right;border-top: 5px solid #ddd;">
+				<div class="title" style="border-bottom: none;padding: 0;">
+					<h2 style="display: inline-block;">Counsel Answer</h2>
+				</div>
+				<div class="qna-contents answer" style="padding: 20px 0 0 0;border-bottom: none;">
+					<!-- 불러온 글제목 -->
+					<h4 style="font-weight: bold;border-bottom: 1px solid #ddd;">${nq.qnaTitle}(답변) > ${nq.type }</h4>
+					<!-- 작성일, 읽은 수(테이블 컬럼 추가 해야함) -->
+					<span>답변일 : ${nq.regDate } </span>
+					<div class="contents-box">
+						<!-- 이미지 있으면 이미지 출력, 내용잇으면 내용 출력 -->
+						${nq.qnaAnswer }
+					</div>
+					<div class="qna_comment text-danger" style="margin: 30px 0 30px 0;">
+						<small>※ 대부분의 질문은 FAQ 통해 답변을 얻으실 가능성이 높습니다. <a href="/faq.do">바로가기</a></small>
+					</div>
+					<a href="/nonMember_CounselList.do" class="btn btn-outline-primary">목록보기</a>
 				</div>
 			</div>
 		</div>
