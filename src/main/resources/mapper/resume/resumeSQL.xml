@@ -233,6 +233,8 @@
 		delete from resume where resume_no = #{resumeNo}
 	</delete>
 
-
+	<select id="applicationCount" parameterType="_int" resultType="_int">
+		select count(*) from application where member_no = #{memberNo}
+	</select>
 	
 </mapper>

@@ -97,6 +97,10 @@ public class ResumeDao {
 		return sqlSession.delete("resume.deleteApplycation", resumeNo);
 	}
 
+	public int applicationCount(int memberNo) {
+		return sqlSession.selectOne("resume.applicationCount", memberNo);
+	}
+
 	
 
 	

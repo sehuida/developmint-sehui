@@ -80,7 +80,7 @@
 		<div class="container">
 			<em>입사지원 현황</em>
 			<ul class="tabWrap">
-        		<li class="select"><a href="#" class="tab">전체<span class="badge">2</span></a></li>
+        		<li class="select"><a href="#" class="tab">전체<span class="badge">${count }</span></a></li>
     		</ul>
     		
     		<div class="status">

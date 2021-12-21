@@ -98,7 +98,10 @@ public class ResumeController {
 	@RequestMapping(value="/applicationCompany.do")
 	public String applicationCompany(int memberNo, Model model) {
 		ArrayList<ApplicationCompany> list = service.selectAllAnnounce(memberNo);
+		int count = service.applicationCount(memberNo);
+		model.addAttribute("count", count);
 		model.addAttribute("list", list);
+		System.out.println("count : "+ count);
 		System.out.println("list : "+ list);
 		return "resume/applicationCompany";
 	}

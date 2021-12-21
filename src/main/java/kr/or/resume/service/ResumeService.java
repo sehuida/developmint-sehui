@@ -133,6 +133,10 @@ public class ResumeService {
 		}
 	}
 
+	public int applicationCount(int memberNo) {
+		return dao.applicationCount(memberNo);
+	}
+
 	
 	 
 
