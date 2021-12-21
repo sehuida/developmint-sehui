@@ -10,14 +10,18 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.announce.vo.Announce;
 import kr.or.comment.vo.Report;
 import kr.or.company.vo.Company;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestMemberList;
+import kr.or.gosu.vo.GosuNotice;
 import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.Member;
 import kr.or.notice.vo.Notice;
+import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.qna.vo.Qna;
+import kr.or.share.model.vo.Share;
 import kr.or.qna.vo.NonQna;
 
 @Repository
@@ -259,6 +263,43 @@ public class AdminDao {
 	public ArrayList<NonQna> nonQnaList() {
 		List<NonQna> list = sqlSession.selectList("admin.nonQnaList");
 		return (ArrayList<NonQna>)list;
+	}
+
+	public ArrayList<Share> shareList(Map<String, Object> map) {
+		List<Share> list = sqlSession.selectList("admin.shareList",map);
+		return (ArrayList<Share>)list;
+	}
+
+	public ArrayList<ProjectTeam> projectList(Map<String, Object> map) {
+		List<ProjectTeam> list = sqlSession.selectList("admin.projectList",map);
+		return (ArrayList<ProjectTeam>)list;
+	}
+
+	public ArrayList<Announce> announceList(Map<String, Object> map) {
+		List<Announce> list = sqlSession.selectList("admin.announceList",map);
+		return (ArrayList<Announce>)list;
+	}
+
+	public ArrayList<GosuNotice> gosuList(Map<String, Object> map) {
+		List<GosuNotice> list = sqlSession.selectList("admin.gosuList",map);
+		return (ArrayList<GosuNotice>)list;
+	}
+
+	public ArrayList<Contest> contesetList(Map<String, Object> map) {
+		List<Contest> list = sqlSession.selectList("admin.contesetList2",map);
+		return (ArrayList<Contest>)list;
+	}
+
+	public int totalBoardCount(int type) {
+		return sqlSession.selectOne("admin.totalBoardCount", type);
+	}
+
+	public int allBoardCount() {
+		return sqlSession.selectOne("admin.allBoardCount");
+	}
+
+	public int postSeleteDelete(Map<String, Object> map) {
+		return sqlSession.delete("admin.postSeleteDelete",map);
 	}
 	
 

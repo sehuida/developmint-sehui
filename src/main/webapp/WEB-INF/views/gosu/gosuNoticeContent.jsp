@@ -113,7 +113,6 @@
 }
 
 #hrm-modal {
-	background-color: white;
 	width: 800px;
 }
 
@@ -285,6 +284,11 @@
 						style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">피드백
 						신청하기</a>
 				</c:if>
+				<c:if test="${empty sessionScope.m }">
+					<a id="feedbackListAjax" class="btn btn-info"
+						style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">고수 보러가기</a>
+				</c:if>
+				
 				<a class="btn btn-primary"
 					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
 					onclick="history.back();">뒤로가기</a>
@@ -497,7 +501,7 @@
 				</div>
 			</div>
 			<div class="hrm-btn-wrap">
-				<a id="hrm-close" class="btn btn-outline-success">확인</a>
+				<a id="hrm-close" class="btn btn-outline-success">취소</a>
 			</div>
 		</div>
 	</div>

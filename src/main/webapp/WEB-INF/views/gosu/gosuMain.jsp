@@ -194,7 +194,7 @@ ul#gallery>a>li:hover img {
 	transition: background-color 0.6s ease;
 }
 
-.active, .dot:hover {
+.container .active,.container .dot:hover {
 	background-color: rgb(78, 205, 196);
 }
 
@@ -216,8 +216,7 @@ ul#gallery>a>li:hover img {
 
 @
 -webkit-keyframes fade {
-	from {opacity: .4
-}
+	from {opacity: .4}
 
 to {
 	opacity: 1
@@ -337,10 +336,41 @@ to {
 	display: block;
 	font-size: 13px;
 }
+.gosuIntro{
+	height: 100px;
+	position: fixed;
+	left: 0;
+	margin-left: 40px;
+	z-index: 1000;
+	
+}
+.gosuIntro div a{
+	color:#78c2ad;
+	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
+	padding: 5px;
+}
+.gosuIntro div a:hover{
+	color:#367463;
+}
+.gosuIntro div{
+font-weight: 900;
+animation: motion 0.3s linear 0s infinite alternate;
+	height: 50px;
+	font-size: small;
+	
+
+}
+
+@keyframes motion 
+{ 0% {margin-top: 0px;}
+100%{margin-top:5px;}}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
+		<div class="gosuIntro">
+			<div><a href="/gosuIntro.do" >고수의 페이지가 어떤 곳인지 궁금하다면?</a></div>
+		</div>
 		<c:if test="${sessionScope.m.memberType eq 2}">
 			<div class="gosu-mail">
 				<a href="/gosuRequestList.do?reqPage=1">

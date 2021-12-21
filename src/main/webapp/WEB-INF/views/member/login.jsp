@@ -10,6 +10,11 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <meta charset="UTF-8">
 <title>Login</title>
+<style>
+	.kakaoBtn img{
+		height: 60px;
+	}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -34,7 +39,7 @@
                 <div class="loginBt">
                     <a class="btn btn-info" href="/joinFrm.do">회원가입</a>   
                 </div>
-                <div class="loginBt">
+                <div class="loginBt kakaoBtn">
 			        <a id="kakao-login-btn">
 			        </a>
                 </div>
