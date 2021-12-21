@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -42,10 +44,21 @@ import kr.or.projectTeam.model.vo.Shortcuts;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
 import kr.or.projectTeam.model.vo.projectTeamMainPageData;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
+
 @Controller
 public class ProjectTeamController {
 	@Autowired
 	private ProjectTeamService service;
+	
+	private Logger logger = LoggerFactory.getLogger(ProjectTeamController.class);
 	
 	@RequestMapping(value="/recruitTeamMember_mainPage.do")
 	public String recruitTeamMember(Model model, int reqPage) {
@@ -668,11 +681,30 @@ public class ProjectTeamController {
 	  }
 	  
 	  @RequestMapping(value="/endProject.do")
-	  public String endProject(Model model, ProjectReview[] pr, int backMemberNo, int backProjectNo, String sessionMemberId, String projectReader) {
+	  public String endProject(Model model, Integer[] teamMemberNo, Integer[] reviewPoint, String[] reviewContent, int backMemberNo, int backProjectNo, String sessionMemberId, String projectReader) {
+		  for(int i = 0; i < teamMemberNo.length; i++) {
+			  System.out.println("팀넘버 :"+teamMemberNo[i]);
+		  }
+		  for(int i = 0; i < reviewPoint.length; i++) {
+			  System.out.println("점수 :"+reviewPoint[i]);
+		  }
+		  for(int i = 0; i < reviewContent.length; i++) {
+			  System.out.println("리뷰글 :"+reviewContent[i]);
+		  }
+		  
 		  int result = 0;
-		  ArrayList<ProjectReview> endList = new ArrayList<ProjectReview>(Arrays.asList(pr));
+		  ArrayList<ProjectReview> reviewlist = new ArrayList<ProjectReview>();
+		  for(int i=0;i<teamMemberNo.length;i++) {
+			  ProjectReview pr = new ProjectReview();
+			  pr.setProjectNo(backProjectNo);
+			  pr.setReviewContent(reviewContent[i]);
+			  pr.setReviewPoint(reviewPoint[i]);
+			  pr.setTeamMemberNo(teamMemberNo[i]);
+			  pr.setReviewWriter(backMemberNo);
+			  reviewlist.add(pr);
+		  }
 		  if(sessionMemberId.equals(projectReader)) {
-			  result = service.endProject(endList, backProjectNo, backMemberNo);
+			  result = service.endProject(reviewlist, backProjectNo, backMemberNo);
 			  if(result > 0) { 
 				  model.addAttribute("title", "프로젝트 종료");
 				  model.addAttribute("msg", "그 동안 진심으로 고생많으셨습니다..!");
@@ -686,7 +718,7 @@ public class ProjectTeamController {
 			  }
 			  return "member/swalMsg"; 
 		  } else {
-			  result = service.insertReview(endList, backProjectNo, backMemberNo);
+			  result = service.insertReview(reviewlist, backProjectNo, backMemberNo);
 			  if(result > 0) { 
 				  model.addAttribute("title", "리뷰 등록 성공!");
 				  model.addAttribute("msg", "그 동안 진심으로 고생많으셨습니다..!");
@@ -702,7 +734,7 @@ public class ProjectTeamController {
 		  }
 		   
 	  }
-	  
+	
 	  @RequestMapping(value="/updateProjectOutline.do")
 	  public String updateProjectOutline(Model model, String[] chk, ProjectTeam pt, String crueRoll, int sessionMemberNo, int projectNo) {
 		  ArrayList<String> langList = new ArrayList<String>(Arrays.asList(chk));
