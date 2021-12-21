@@ -323,6 +323,19 @@ public class AdminController {
 			return "admin/allBoardList";
 		}
 		
+		//선택한 게시물 삭제
+		@RequestMapping(value="/postSeleteDelete.do")
+		public String postSeleteDelete(Model model, int type, int boardNo) {
+			int result = service.postSeleteDelete(type, boardNo);
+			if(result>0) {
+				model.addAttribute("msg","삭제 완료 되었습니다.");
+			}else {
+				model.addAttribute("msg","삭제 실패");
+			}
+			model.addAttribute("loc","/allBoardList.do?reqPage=1&type="+type);
+			return "common/msg";
+		}
+		
 		
 		
 

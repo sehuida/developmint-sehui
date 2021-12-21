@@ -160,7 +160,7 @@
 											</c:when>
 										</c:choose>
 										<td>${p.RStartDate }</td>
-										<td><button class="btn btn btn-info btn-sm delBtn">삭제하기</button></td>
+										<td><button class="btn btn btn-info btn-sm delBtn" value="${p.projectNo }">삭제하기</button></td>
 									</tr>
 								</c:forEach>
 							</table>
@@ -186,7 +186,7 @@
 									<td>${s.readCount }</td>
 									<c:set var="subTitle" value="${fn:substring(s.regDate,0,10)}"/>
 									<td>${subTitle }</td>
-									<td><button class="btn btn btn-info btn-sm delBtn">삭제하기</button></td>
+									<td><button class="btn btn btn-info btn-sm delBtn" value="${s.boardNo }">삭제하기</button></td>
 									<tr>
 								</c:forEach>
 							</table>
@@ -211,7 +211,7 @@
 									<td>${a.school }</td>
 									<td>${a.companyName }</td>
 									<td>${a.writeDate }</td>
-									<td><button class="btn btn btn-info btn-sm delBtn">삭제하기</button></td>
+									<td><button class="btn btn btn-info btn-sm delBtn" value="${a.announceNo }">삭제하기</button></td>
 									<tr>
 								</c:forEach>
 							</table>
@@ -234,7 +234,7 @@
 									<td><a href="/gosuNoticeContent.do?gnn=${g.gnoticeNo }" class="aTag">${g.gnoticeTitle }</a></td>
 									<td>${g.writeId }</td>
 									<td>${g.gnoticeDate }</td>
-									<td><button class="btn btn btn-info btn-sm delBtn">삭제하기</button></td>
+									<td><button class="btn btn btn-info btn-sm delBtn" value="${g.gnoticeNo }">삭제하기</button></td>
 									<tr>
 								</c:forEach>
 							</table>
@@ -259,7 +259,7 @@
 									<td>${c.memberId }</td>
 									<td>${c.contestHost }</td>
 									<td>${c.contestDate }</td>
-									<td><button class="btn btn btn-info btn-sm delBtn">삭제하기</button></td>
+									<td><button class="btn btn btn-info btn-sm delBtn" value="${c.contestNo }">삭제하기</button></td>
 									<tr>
 								</c:forEach>
 							</table>
@@ -322,7 +322,20 @@
 			$(".listTag").eq(4).css("color","#4ECDC4");
 			$(".cate_1").eq(4).css("border-bottom","3px solid #4ECDC4");
 		}
-	})
+	});
+	
+	$(".delBtn").click(function(){
+		var index = $(".delBtn").index(this);
+		var boardNo = $(".delBtn").eq(index).val();
+		
+		var checkConfirm = confirm("여기서 삭제하면 회원에게 통보없이 게시물이 삭제됩니다. 삭제하시겠습니까?");
+		if(checkConfirm){
+			location.href="/postSeleteDelete.do?type="+${type}+"&boardNo="+boardNo;
+		}
+	});
+	
+	
+	
 </script>
 </body>
 </html>

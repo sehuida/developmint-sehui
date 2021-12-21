@@ -682,6 +682,7 @@
 		where rnum BETWEEN #{start} and #{end}
 	</select>
 	
+	<!-- 선택 게시판 총 게시물 수  -->
 	<select id="totalBoardCount" parameterType="_int" resultType="_int">
 		select count(*) 
 		from 
@@ -705,6 +706,7 @@
 		</choose>
 	</select>
 	
+	<!-- 전체 게시판 총 게시물 수 -->
 	<select id="allBoardCount" resultType="_int">
 		select sum(A+B+C+D+E) from
 		(SELECT
@@ -716,6 +718,28 @@
 		FROM DUAL)
 	
 	</select>
+	
+	<!-- 선택한 게시물 삭제 -->
+	<delete id="postSeleteDelete" parameterType="map">
+		delete from 
+		<choose>
+			<when test="type == 1">
+				PROJECT where project_no = #{boardNo}
+			</when>
+			<when test="type == 2">
+				SHARE_BOARD where board_no = #{boardNo}
+			</when>
+			<when test="type == 3">
+				ANNOUNCEMENT where announce_no = #{boardNo}
+			</when>
+			<when test="type == 4">
+				GOSU_NOTICE where gnotice_no = #{boardNo}
+			</when>
+			<when test="type == 5">
+				CONTEST where contest_no = #{boardNo}
+			</when>
+		</choose>
+	</delete>
 	
 </mapper>
 
