@@ -223,7 +223,8 @@ public class GosuService {
 	}
 
 	public GosuRequestProjectSub selectGosuRequestProjectSub(int rpsNo) {
-		GosuRequestProjectSub grps = dao.selectGosuRequestProjectSub(rpsNo);	
+		GosuRequestProjectSub grps = dao.selectGosuRequestProjectSub(rpsNo);
+		
 		return grps;
 	}
 
@@ -381,12 +382,21 @@ public class GosuService {
 	public ArrayList<Gosu> selectGosuList() {
 
 		ArrayList<Gosu> list = dao.selectGosuList();
+		for (Gosu g : list) {
+			g.setGosuImg(dao.selectGosuImg(g.getGsouNo()));
+
+			ArrayList<GosuReview> list2 = dao.selectGosuReviewList(g.getGgsouNo());
+			if(!list2.isEmpty()) {
+				g.setReviewAvg(dao.selectReviewAvg(g.getGgsouNo()));
+				
+			}
+		}
 		return list;
 	}
 
 
 	public GosuNoticeListPageData selectGosuNoticeList(int reqPage) {
-		int numPerPage = 18;
+		int numPerPage = 12;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -760,6 +770,18 @@ public class GosuService {
 	public GosuRequest gosuMemberRequestAjax(GosuRequestCost grc) {
 		GosuRequest gosuRequest = dao.gosuMemberRequestAjax(grc);	
 		return gosuRequest;
+	}
+
+
+	public int selectGosuRequestCostListCount(String memberId) {
+		int costCount= dao.selectGosuRequestCostListCount(memberId);
+		return costCount;
+	}
+
+
+	public int selectGosuRequestListCount(int memberNo) {
+		int costCount= dao.selectGosuRequestListCount(memberNo);
+		return costCount;
 	}
 
 

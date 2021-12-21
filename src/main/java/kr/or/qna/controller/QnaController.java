@@ -25,8 +25,8 @@ import kr.or.notice.vo.Notice;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.qna.service.QnaService;
 import kr.or.qna.vo.Faq;
+import kr.or.qna.vo.NonQna;
 import kr.or.qna.vo.Qna;
-import kr.or.qna.vo.nonQna;
 
 @Controller
 public class QnaController {
@@ -117,7 +117,7 @@ public class QnaController {
 	
 	//비회원일경우
 	@RequestMapping(value="/counsel_save1.do")
-	public String insertCounsel(nonQna nq, HttpServletRequest request, Model model) {
+	public String insertCounsel(NonQna nq, HttpServletRequest request, Model model) {
 		int result = service.insertCounselNonQna(nq);
 		if(result>0) {
 			model.addAttribute("title", "1:1 Q&A 신청 성공!");
@@ -187,15 +187,15 @@ public class QnaController {
 		}
 		int result = service.insertCounselQna(m,q, list);
 		if(result == -1||result != list.size()) {
-			model.addAttribute("title", "1:1 Q&A 신청 성공!");
-			model.addAttribute("msg", "상담내역에 등록되었습니다. 확인해주세요.");
-			model.addAttribute("loc", "/n_counsel.do");
-			model.addAttribute("icon", "success");
-		}else {
 			model.addAttribute("title", "1:1 Q&A 신청 실패");
 			model.addAttribute("msg", "상담 보내기에 실패하셨습니다. 관리자에 문의해주세요");
 			model.addAttribute("loc", "/n_counsel.do");
 			model.addAttribute("icon", "warning");
+		}else {
+			model.addAttribute("title", "1:1 Q&A 신청 성공!");
+			model.addAttribute("msg", "상담내역에 등록되었습니다. 확인해주세요.");
+			model.addAttribute("loc", "/n_counsel.do");
+			model.addAttribute("icon", "success");
 		}
 		//model.addAttribute("loc","/");
 		return "member/swalMsg";
@@ -221,7 +221,7 @@ public class QnaController {
 			model.addAttribute("type",type);
 			model.addAttribute("adlist",adlist);
 		}else if(type==2) {
-			ArrayList<nonQna> adlist = service.counselList2();
+			ArrayList<NonQna> adlist = service.counselList2();
 			model.addAttribute("type",type);
 			model.addAttribute("adlist",adlist);
 		}
@@ -252,7 +252,7 @@ public class QnaController {
 			model.addAttribute("type",type);
 			model.addAttribute("adlist",list);
 		}else if(type==2) {
-			ArrayList<nonQna> list = service.searchBox2(category,state);
+			ArrayList<NonQna> list = service.searchBox2(category,state);
 			model.addAttribute("type",type);
 			model.addAttribute("adlist",list);
 		}
@@ -266,4 +266,43 @@ public class QnaController {
 		model.addAttribute("list",list);
 		return "qna/faqlist";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/selectOnefileList.do")
+	public ArrayList<ProjectTeamFileVO> selectOnefileList(int qnaNo){
+		ArrayList<ProjectTeamFileVO> filelist = service.selectOnefileList(qnaNo); 
+		return filelist;
+	}
+	
+	@RequestMapping(value="/nonMember_CounselList.do")
+	public String  nonMemberCounselList(Model model) {
+		ArrayList<NonQna> adlist = service.counselList2();
+		model.addAttribute("adlist",adlist);
+		return "qna/nonMemberCounsel";
+	}
+	
+	@RequestMapping(value="/searhBoxUser.do")
+	public String UserSearchBox(Model model, int category, int state, String memberId) {
+		ArrayList<Qna> list = service.userSearchbox(category, state, memberId);
+		model.addAttribute("list",list);
+		return "qna/counselUser";
+	}
+	
+	@RequestMapping(value="/deleteMyQna.do")
+	public String deleteQna(int qnaNo, Model model) {
+		int result = service.deleteQna(qnaNo);
+		if(result>0) {
+			model.addAttribute("title", "삭제성공!");
+			model.addAttribute("msg", "내 질문보기 페이지가 상태 변경되었습니다.");
+			model.addAttribute("loc", "/myCounsel.do");
+			model.addAttribute("icon", "success");
+		}else {
+			model.addAttribute("title", "삭제실패");
+			model.addAttribute("msg", "개발자에게 연락하세요.");
+			model.addAttribute("loc", "/myCounsel.do");
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";
+	}
+	
 }

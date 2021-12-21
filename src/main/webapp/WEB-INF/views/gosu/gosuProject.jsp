@@ -13,7 +13,9 @@
 .container * {
 	text-decoration: none;
 }
-
+.note-editable{
+	width: 918px;
+}
 .note-modal-footer{
 	height: 60px !important;
 }
@@ -54,9 +56,15 @@ input:focus, textarea:focus {
 
 .talk-one {
 	width: 50%;
-	margin-bottom: 100px;
+	margin-bottom: 50px;
 	align-self: flex-start;
 	padding: 20px;
+	overflow: auto;
+}
+.talk-one img{
+}
+.talk-one p *{
+	background-color:transparent !important;
 }
 
 .talk-one tr:last-child td:last-child {
@@ -72,6 +80,7 @@ input:focus, textarea:focus {
 .talk-one table th img {
 	border-radius: 50%;
 	width: 60px;
+	height: 60px;
 }
 
 
@@ -214,10 +223,10 @@ input:focus, textarea:focus {
 														<img src="/resources/upload/member/${gtl.memberImg}">
 													</c:if> <c:choose>
 														<c:when test="${sessionScope.m.memberType ne 2}">
-															<span style="color: rgb(78, 205, 196);">질문자</span>
+															<span style="color: rgb(78, 205, 196);">고수</span>
 														</c:when>
 														<c:otherwise>
-															<span style="color: rgb(78, 205, 196);">고수</span>
+															<span style="color: rgb(78, 205, 196);">질문자</span>
 														</c:otherwise>
 													</c:choose> ${gtl.memberId }</th>
 												<td style="text-align: right; color: gray;">${gtl.requestProjectDate }</td>
@@ -309,7 +318,7 @@ input:focus, textarea:focus {
 											</tr>
 											<tr>
 												<td><p
-														style="width: 800px; text-align: center; padding: 20px; border: 1px solid gray; margin: 20px; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">${grrOne.requestReviewContentBr }</p></td>
+														style="width: 800px; padding: 20px; border: 1px solid gray; margin: 20px; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">${grrOne.requestReviewContentBr }</p></td>
 											</tr>
 											<tr>
 												<td style="text-align: right;"><button

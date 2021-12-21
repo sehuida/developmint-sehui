@@ -64,6 +64,8 @@ public class AdminController {
 			model.addAttribute("yesterDayTotalMember", td.getYesterDayTotalMember());
 			model.addAttribute("yesterDayTotalBoard", td.getYesterDayTotalBoard());
 			model.addAttribute("noticeList", td.getNoticeList());
+			model.addAttribute("qnaList", td.getQnaList());
+			model.addAttribute("nonQnaList", td.getNonQnaList());
 			return "admin/dashboard";
 		}
 		
@@ -301,6 +303,13 @@ public class AdminController {
 			}
 			model.addAttribute("loc","/companyEnroll.do?reqPage=1");
 			return "common/msg";
+		}
+		
+		//전체게시판조회 페이지로 이동
+		@RequestMapping(value="/allBoardList.do")
+		public String allBoardList(int reqPage, int type, Model model) {
+			model.addAttribute("type",type);
+			return "admin/allBoardList";
 		}
 		
 		

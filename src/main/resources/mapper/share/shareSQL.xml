@@ -136,4 +136,17 @@
    <insert id="shareReport" parameterType="rp">
    		insert into report values(report_seq.nextval, #{reporterId}, #{reportReason}, #{reportEtc}, #{commentNo}, #{commentId}, to_char(sysdate,'yyyy-mm-dd'), #{reportStatus}, #{commentContent},null )
    </insert>
+   <select id="shareCheck" parameterType="lk" resultType="lk">
+   		select
+   			like_no as likeNo,
+   			board_no as boardNo,
+   			member_no as memberNo
+   		from likes where member_no=#{memberNo} and board_no=#{boardNo}
+   </select>
+   <insert id="addLike" parameterType="lk">
+   		insert into likes values(likes_seq.nextval,#{boardNo},#{memberNo})
+   </insert>
+   <delete id="deleteLike" parameterType="lk">
+   		delete from likes where board_no=#{boardNo} and member_no=#{memberNo}
+   </delete>
 </mapper>

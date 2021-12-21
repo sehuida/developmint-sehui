@@ -76,6 +76,7 @@
 					<c:otherwise>
 						<c:choose>
 							<c:when test="${not empty sessionScope.m }">
+					      	<jsp:include page="/WEB-INF/views/dm/alarm.jsp"/>
 								<li class="nav-item dropdown float-end me-5">
 						          <a class="nav-link dropdown-toggle active margin-right" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 						          	<c:choose>

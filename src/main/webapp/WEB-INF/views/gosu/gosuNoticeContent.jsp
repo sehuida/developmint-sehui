@@ -36,7 +36,7 @@
 }
 
 .g-img img {
-	width: 952px;
+	max-width: 952px;
 }
 
 .g-img {
@@ -55,11 +55,11 @@
 .gosu td>img {
 	border-radius: 50%;
 	width: 50px;
+	height: 50px;
 	margin-right: 30px;
 }
 
 .gosu p {
-	text-align: center;
 	margin-top: 80px;
 }
 
@@ -150,7 +150,6 @@
 }
 
 .community-btn-wrap {
-	
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -159,8 +158,8 @@
 .community-btn-wrap2 {
 	background-color: rgb(70, 147, 127);
 	width: 100%;
-	height:50px;
-	line-height:50px;
+	height: 50px;
+	line-height: 50px;
 	text-align: right;
 }
 
@@ -168,22 +167,23 @@
 	font-weight: 900;
 	text-align: center;
 	margin: 30px;
-	line-height:60px;
+	line-height: 60px;
 	font-size: 35px;
 	color: rgb(70, 147, 127);
 }
 
 .community-content h4 {
 	font-weight: 900;
-	font-size:25px;
-	margin-top:10px;
-	margin-bottom:20px;
+	font-size: 25px;
+	margin-top: 10px;
+	margin-bottom: 20px;
 }
 
-.community-content h4>img{
+.community-content h4>img {
 	width: 25px;
 	margin-right: 10px;
 }
+
 .community-btn-wrap a {
 	margin: 20px;
 	padding: 10px;
@@ -200,10 +200,10 @@
 
 .c-style {
 	padding: 30px;
-	border-radius:30px;
-	border: 3px solid rgb(70, 147, 127); 
+	border-radius: 30px;
+	border: 3px solid rgb(70, 147, 127);
 	background-color: white;
-	margin:20px;
+	margin: 20px;
 }
 
 #community-guide {
@@ -213,6 +213,13 @@
 #community-guide:hover {
 	cursor: pointer;
 	color: rgb(70, 147, 127);
+}
+
+.summerContentTop {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
 }
 </style>
 <body>
@@ -266,12 +273,34 @@
 						</table>
 					</dt>
 					<dd>
-						<p>${gNotice.gnoticeContentBr}</p>
+						<p style="overflow: auto;">${gNotice.gnoticeContentBr}</p>
 					</dd>
 				</dl>
 			</div>
 		</div>
+		<div class="g-center">
+			<c:if test="${sessionScope.m.memberId ne gNotice.writeId}">
+				<c:if test="${not empty sessionScope.m }">
+					<a id="feedbackListAjax" class="btn btn-info"
+						style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">피드백
+						신청하기</a>
+				</c:if>
+				<a class="btn btn-primary"
+					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
+					onclick="history.back();">뒤로가기</a>
+			</c:if>
+			<c:if test="${sessionScope.m.memberId eq gNotice.writeId}">
+				<a href="/noticeContentUpdateFrm.do?gnn=${gNotice.gnoticeNo }"
+					class="btn btn-info"
+					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
+					id="commentUpdate">수정하기</a>
+				<a href="/noticeContentdelete.do?gnn=${gNotice.gnoticeNo }"
+					class="btn btn-primary"
+					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
+					id="commentDelete">삭제하기</a>
+			</c:if>
 
+		</div>
 		<hr>
 		<div style="margin-bottom: 50px;">
 			<span style="font-weight: 900;">댓글을 작성할 때는 타인을 존중하고 <a
@@ -305,10 +334,10 @@
 									<td style="width: 100px;"><c:if
 											test="${not empty cl.memberImg  }">
 											<img src="/resources/upload/member/${cl.memberImg }"
-												style="border-radius: 50%; width: 70px;">
+												style="border-radius: 50%; width: 70px;height: 70px; ">
 										</c:if> <c:if test="${empty cl.memberImg  }">
 											<img src="/resources/img/member/user.png"
-												style="border-radius: 50%; width: 70px;">
+												style="border-radius: 50%; width: 70px;height: 70px; ">
 										</c:if></td>
 									<td rowspan="2" style="text-align: left"><input
 										id="updateContent"
@@ -415,7 +444,7 @@
 		</div>
 	</div>
 	<c:if test="${not empty sessionScope.m }">
-		<div style="display: flex; justify-content: center; margin-top: 80px;">
+		<div style="display: flex; justify-content: center; margin-top: 80px;margin-bottom: 200px;">
 			<div class="card bg-light mb-3"
 				style="padding: 20px; width: 1200px; min-width: 1200px;">
 				<table>
@@ -427,7 +456,7 @@
 									style="border-radius: 50%; width: 70px;">
 							</c:if> <c:if test="${not empty sessionScope.m.filepath }">
 								<img src="/resources/upload/member/${sessionScope.m.filepath }"
-									style="border-radius: 50%; width: 70px;">
+									style="border-radius: 50%; width: 70px; height: 70px; ">
 							</c:if></td>
 
 						<td rowspan="2" style="padding-right: 40px;"><textarea
@@ -451,29 +480,7 @@
 			</div>
 		</div>
 	</c:if>
-	<div class="g-center">
-		<c:if test="${sessionScope.m.memberId ne gNotice.writeId}">
-			<c:if test="${not empty sessionScope.m }">
-				<a id="feedbackListAjax" class="btn btn-info"
-					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">피드백
-					신청하기</a>
-			</c:if>
-			<a class="btn btn-primary"
-				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
-				onclick="history.back();">뒤로가기</a>
-		</c:if>
-		<c:if test="${sessionScope.m.memberId eq gNotice.writeId}">
-			<a href="/noticeContentUpdateFrm.do?gnn=${gNotice.gnoticeNo }"
-				class="btn btn-info"
-				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
-				id="commentUpdate">수정하기</a>
-			<a href="/noticeContentdelete.do?gnn=${gNotice.gnoticeNo }"
-				class="btn btn-primary"
-				style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
-				id="commentDelete">삭제하기</a>
-		</c:if>
 
-	</div>
 	<div class="hrm-wrap" style="display: none; margin: 0;">
 		<div id="hrm-modal">
 			<div class="hrm-content">
@@ -501,17 +508,20 @@
 				<br>
 
 				<h2>
-					디벨로민트를 이용하는 <br>
-					<span style="color: black;">회원을 위한 </span> 커뮤니티 가이드
+					디벨로민트를 이용하는 <br> <span style="color: black;">회원을 위한 </span>
+					커뮤니티 가이드
 				</h2>
 				<div class="g-style c-style">
 
 					<div style="text-align: left;">
-						<h4><img src="/resources/img/gosu/cum_chk.png">스팸 및 현혹 행위</h4>
+						<h4>
+							<img src="/resources/img/gosu/cum_chk.png">스팸 및 현혹 행위
+						</h4>
 						디벨로민트 커뮤니티는 신뢰를 바탕으로 구축된 커뮤니티입니다. 다른 사용자를 상대로 사기, 현혹, 스팸, 사취하려는
-						의도가 있는 댓글은 디벨로민트에서 허용되지 않습니다.<br>
-						<br>
-						<h4><img src="/resources/img/gosu/cum_chk.png">잘못된 정보</h4>
+						의도가 있는 댓글은 디벨로민트에서 허용되지 않습니다.<br> <br>
+						<h4>
+							<img src="/resources/img/gosu/cum_chk.png">잘못된 정보
+						</h4>
 						오해의 소지가 있거나 사기성 정보로 큰 피해를 입힐 심각한 위험이 있는 특정 유형의 게시글 혹은 댓글은 디벨로민트에서
 						허용되지 않습니다. 여기에는 유해한 치료제나 치료법을 홍보하는 게시글 혹은 댓글, 기술적으로 조작된 특정 유형의
 						게시글, 민주적 절차를 방해하는 댓글 등 실제적인 위험을 초래할 수 있는 특정 유형의 잘못된 정보가 포함됩니다.<br>
@@ -526,10 +536,10 @@
 				</div>
 			</div>
 			<div class="community-btn-wrap">
-				<a id="community-close" class="btn btn-outline-success" >확인</a>
+				<a id="community-close" class="btn btn-outline-success">확인</a>
 			</div>
 			<div class="community-btn-wrap2">
-				<span style="color:white; margin: 20px;">2021.12.19</span>
+				<span style="color: white; margin: 20px;">2021.12.19</span>
 			</div>
 		</div>
 	</div>

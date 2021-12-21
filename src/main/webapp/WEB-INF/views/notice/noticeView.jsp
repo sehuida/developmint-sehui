@@ -17,7 +17,7 @@
 			<div class="title"><h2 style="color: #78c2ad;">CS Center</h2></div>
 			<div class="center_tap">
 				<ul>
-					<li><span class="">Tel. 2163-8560</span><br><span class="last-span">평일 9:00~18:00(점심 12:00~13:00)</span></li>
+					<li><span class="">Tel. 2163-8560</span><br><span class="last-span">평일 9:20~18:30(점심 12:20~13:30)</span></li>
 					<li><a href="/n_counsel.do" class="text-hover">1:1 Q&A<br><span class="last-span">질문 전 FAQ(자주 묻는 질문)을 먼저 확인해 주세요.</span></a></li>
 					<li><a href="/faq.do" class="text-hover">자주묻는질문<br><span class="last-span">자주묻는질문</span></a></li>
 				</ul>

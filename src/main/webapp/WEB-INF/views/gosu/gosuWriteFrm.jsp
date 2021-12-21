@@ -237,6 +237,9 @@
 	width: 300px;
 }
 
+.note-editable{
+	width: 918px;
+}
 .summerContentTop {
 	display: flex;
 	justify-content: space-between;
@@ -244,15 +247,15 @@
 	margin-top: 20px;
 }
 
+.note-modal-footer{
+	height: 60px !important;
+}
 #gProject:hover {
 	cursor: pointer;
 	border: 1px solid rgb(46, 108, 164);
 	color: rgb(46, 108, 164);
 }
 
-.note-modal-footer{
-	height: 60px !important;
-}
 .jb-a:hover .jb-c {
 	display: block;
 }
@@ -316,7 +319,7 @@
 								<c:if test="${not empty sessionScope.m.filepath }">
 									<th rowspan="6" style="padding: 40px; padding-right: 100px;"><img
 										src="/resources/upload/member/${sessionScope.m.filepath }"
-										style="width: 250px;"></th>
+										style="width: 250px;height: 250px;"></th>
 								</c:if>
 							</tr>
 							<tr>

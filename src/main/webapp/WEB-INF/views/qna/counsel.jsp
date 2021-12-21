@@ -14,7 +14,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container" style="margin-bottom: 50px;max-width: 1591px;min-width: 1591px;">
 		<div class="area">
-			<div class="nav-sub" style="margin-top: 30px;"><a href="/" class="text-hover">홈</a><span> > </span><a href="/noticehome.do" class="text-hover">고객센터</a><span> > </span><span>공지사항</span></div>
+			<div class="nav-sub" style="margin-top: 30px;"><a href="/" class="text-hover">홈</a><span> > </span>고객센터<!-- <a href="/noticehome.do" class="text-hover">고객센터</a> --><span> > </span><span>공지사항</span></div>
 			<div class="title"><h2 style="color: #78c2ad;">CS Center</h2></div>
 			<div class="center_tap">
 				<ul style="margin-bottom: 0;">
@@ -64,10 +64,10 @@
 						<li class="text-danger"><i class="bi bi-arrow-right-short"></i>Q&A 내 상담내역은은 <a href="/noticehome.do" style="display: inline-block;font-weight: bold;" class="text-danger">공지사항</a> > 
 						<c:choose>
 							<c:when test="${empty sessionScope.m }">
-							<a href="" style="display: inline-block;font-weight: bold;" class="text-danger">상담내역</a>
+							<a href="/nonMember_CounselList.do" style="display: inline-block;font-weight: bold;" class="text-danger">상담내역</a>
 							</c:when>
 							<c:otherwise>
-								<a href="" style="display: inline-block;font-weight: bold;" class="text-danger">상담내역</a>
+								<a href="/myCounsel.do" style="display: inline-block;font-weight: bold;" class="text-danger">상담내역</a>
 							</c:otherwise>
 						</c:choose>에서 확인하실 수 있습니다.</li>
 						<li class="text-danger"><i class="bi bi-arrow-right-short"></i>프로젝트 정보 및 공모전 관련 문의는 해당 문의에 남기셔야 빠른 답변이 가능합니다.</li>
@@ -92,6 +92,8 @@
 										<option value="11">공모전관련</option>
 										<option value="12">구인잡관련</option>
 										<option value="13">커뮤니티관련</option>
+										<option value="14">고수관련</option>
+										<option value="15">팀프로젝트 관련</option>
 										<option value="40">기타 문의</option>
 										<option value="22">신고</option>
 										<option value="21">기능/작동 오류</option>
@@ -156,7 +158,7 @@
 					</div>
 					<!-- 폼돌아가는구간 끝  -->
 					<!-- 버튼 -->
-					<div class="n-btn-group">
+					<div class="n-btn-group" style="margin: 10px;">
 						<a href="javascript:void(0)" onClick="cancel(); return false;" class="btn btn-outline-secondary" style="margin: 0 10px;">취소</a>
 						<c:choose>
 							<c:when test="${empty sessionScope.m }">
@@ -357,6 +359,7 @@
 				reader.onload=function(e){
 					/* $("#img-view").attr("src",e.target.result); */
 					var image_tag = "<li><img style=\"width: 65px;height: 65px;\" src=\"" + e.target.result + "\" /><a class=\"del-image\" href=\"javascript:void(0);\"><i class=\"bi bi-x-circle-fill\"></i></a></li>";
+					files.value += (files.value != "") ? "," + e.target.result : e.target.result;
 					$("#file_show").append(image_tag);
 				}
 			}else{
@@ -373,6 +376,7 @@
 				$("#file_message").text(message).show();
 			}
 		} */
+		
 	</script>
 </body>
 </html>

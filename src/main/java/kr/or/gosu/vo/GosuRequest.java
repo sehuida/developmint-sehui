@@ -43,6 +43,11 @@ public class GosuRequest {
 	public String getRequestContent6Br(){
 		return requestContent6.replaceAll(",", "<br>");
 	}
-	
+	public String getRequestContent7Plus(){
+		 if(requestContent7.length() >= 20){
+			 return requestContent7.substring(0,20)+"...";
+		};
+		return requestContent7;
+	}	
 
 }

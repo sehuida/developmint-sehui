@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.projectTeam.model.vo.ProjectTeamFileVO;
 import kr.or.qna.vo.Faq;
 import kr.or.qna.vo.Qna;
-import kr.or.qna.vo.nonQna;
+import kr.or.qna.vo.NonQna;
 
 @Repository
 public class QnaDao {
@@ -20,7 +20,7 @@ public class QnaDao {
 	private SqlSessionTemplate sqlsession;
 
 	//--------------------비회원전용
-	public int insertCountNonQna(nonQna nq) {
+	public int insertCountNonQna(NonQna nq) {
 		return sqlsession.insert("qna.insertCounselNonQna",nq);
 	}
 
@@ -41,9 +41,9 @@ public class QnaDao {
 	}
 
 
-	public ArrayList<nonQna> counselList2() {
-		List<nonQna> list = sqlsession.selectList("qna.counselList2");
-		return (ArrayList<nonQna>)list;
+	public ArrayList<NonQna> counselList2() {
+		List<NonQna> list = sqlsession.selectList("qna.counselList2");
+		return (ArrayList<NonQna>)list;
 	}
 
 
@@ -65,9 +65,9 @@ public class QnaDao {
 	}
 
 
-	public ArrayList<nonQna> searchBox2(HashMap<String, Object> map) {
-		List<nonQna> list = sqlsession.selectList("qna.searchBox2",map);
-		return (ArrayList<nonQna>)list;
+	public ArrayList<NonQna> searchBox2(HashMap<String, Object> map) {
+		List<NonQna> list = sqlsession.selectList("qna.searchBox2",map);
+		return (ArrayList<NonQna>)list;
 	}
 
 
@@ -75,6 +75,26 @@ public class QnaDao {
 		List<Faq> list = sqlsession.selectList("qna.selectFaqList",category);
 		return (ArrayList<Faq>)list;
 	}
+
+
+	public ArrayList<ProjectTeamFileVO> selectOnefileList(int qnaNo) {
+		List<ProjectTeamFileVO> list = sqlsession.selectList("qna.selectOnefileList",qnaNo);
+		return (ArrayList<ProjectTeamFileVO>) list;
+	}
+
+
+	public ArrayList<Qna> userSearchBox(HashMap<String, Object> map) {
+		List<Qna> list = sqlsession.selectList("qna.userSearchBox",map);
+		return (ArrayList<Qna>) list;
+	}
+
+
+	public int deleteMyQna(int qnaNo) {
+		// TODO Auto-generated method stub
+		return sqlsession.delete("qna.deleteMyQna",qnaNo);
+	}
+
+
 
 
 	

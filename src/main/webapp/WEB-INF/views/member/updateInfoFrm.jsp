@@ -94,8 +94,7 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
 		//사진 업로드시 확장자 제한 
-		$("#filepath").change(function(){
-			
+		$("#formFile").change(function(){
 			var fileVal = $(this).val();
 			var pathPoint = fileVal.lastIndexOf('.');
 			var filePoint = fileVal.substring(pathPoint+1, this.length);
@@ -106,7 +105,7 @@
 				if(uploadFileSize > fileSize){
 					swal({
 				        title: '사진 용량이 큽니다',
-				        text: '사진 20mb미만 파일만 업로드 가능합니다.',
+				        text: '프로필은 사진 20mb미만 파일만 업로드 가능합니다.',
 				        icon: 'warning'
 				      })
 					$("#filepath").val("");

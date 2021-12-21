@@ -109,7 +109,7 @@
 				</div>
 				<div>
 					<i class="bi bi-chat" style="color: #4ecdc4; font-size: 1.3rem;">${sv.comments }</i>
-					<i class="bi bi-suit-heart-fill" style="color: #4ecdc4; font-size: 1.3rem;">${sv.likes }</i>
+					<i class="bi bi-suit-heart likeIcon" style="color: #4ecdc4; font-size: 1.3rem;">${sv.likes }</i>
 					<i class="bi bi-eyeglasses" style="color: #4ecdc4; font-size: 1.3rem;">${sv.readCount }</i>
 					<span class="text-muted">${sv.regDate }</span>					
 				</div>
@@ -148,14 +148,36 @@
 					</c:choose>			
 				</div>
 				<div>
-					<a href=#>쪽지 보내기</a><img style="width: 35px; height: 35px;" src="/resources/img/shareBoard/paper-plane.png">						
+					<a href="#" data-bs-toggle="modal" data-bs-target="#reportComment" class="reply">쪽지보내기</a><img style="width: 35px; height: 35px;" src="/resources/img/shareBoard/paper-plane.png">
+					<!-- 쪽지보내기 modal -->
+					<div class="modal fade" id="reportComment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog  modal-dialog-centered">
+					    <div class="modal-content">
+					      <div class="modal-body">
+						      	<p class="Modaltitle">쪽지보내기</p>
+						      	<div style="padding:5px; margin-bottom: 10px;">
+							      	<p><span>수신자</span> : ${sv.memberId }</p>
+							      	<textarea rows="3" style="width:100%" class="form-control" id="dmContent"></textarea>
+						      	</div>
+						      	<div style="text-align: right;">
+						      		<button type="button" class="btn btn-secondary" id="send" style="width: 100px;">전송</button>
+						        	<button type="button" class="btn btn-primary " id="cancel" style="width: 100px;" data-bs-dismiss="modal">취소</button>					        	
+								</div>
+								<input type="hidden" id="receiver" value="${sv.memberId }">
+								<input type="hidden" id="sender" value="${sessionScope.m.memberId }">
+					      </div>
+						  </div>
+					  </div>
+					</div><!-- 쪽지 modal 끝 -->						
 				</div>
 			</div>
 			<div class="viewContent">
 				${sv.boardContent }
 			</div>
 			<div class="likeBtn">
-			  <button type="button" class="btn btn-primary"><i class="bi bi-hand-thumbs-up-fill"></i>좋아요</button>
+			  <c:if test="${not empty sessionScope.m }">
+				  <button type="button" class="btn btn-primary likesBtn"><i class="bi bi-hand-thumbs-up-fill"></i>좋아요</button>			  
+			  </c:if>
 			  <c:if test="${sessionScope.m.memberId eq sv.memberId}">
 			  	<!-- 수정 삭제 구현해야함-->
 			  	<a href="/updateBoardFrm.do?boardNo=${sv.boardNo }" class="btn btn-info">수정</a>
@@ -173,7 +195,7 @@
 		<form action="/shareInsertComment.do" method="post">
 			<div class="inputCommentBox">
 				<i class="bi bi-person-circle" style="color:#4ecdc4; font-size: 4rem;"></i>
-				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+				<input type="hidden" name="memberId" id="memberId"value="${sessionScope.m.memberId }">
 				<input type="hidden" name="boardNo" value="${sv.boardNo }">
 				<input type="hidden" name="commentType" value="1">
 				<textarea name="commentContent" class="form-control" rows="3"></textarea>
@@ -455,6 +477,75 @@
 		    }
 		});
 
+	});
+	$(".likesBtn").click(function(){
+		var memberNo = '${sessionScope.m.memberNo}';
+		var boardNo = '${sv.boardNo }';
+		var likeVal = Number($(".likeIcon").html());
+		$.ajax({
+			type: "POST",
+			url : "/shareLike.do",
+			data : {memberNo:memberNo , boardNo:boardNo},
+			success : function(data){
+				if(data==2){
+					//하트 채운하트
+					$(".likeIcon").removeClass("bi-suit-heart");
+					$(".likeIcon").addClass("bi-suit-heart-fill");
+					$(".likeIcon").html(likeVal+1);
+				}else if(data==1){
+					//하트 텅빈하트
+					$(".likeIcon").removeClass("bi-suit-heart-fill");
+					$(".likeIcon").addClass("bi-suit-heart");
+					$(".likeIcon").html(likeVal-1);
+				}
+			}
+		});
+	});
+	
+	$(function(){
+		var memberNo = '${sessionScope.m.memberNo}';
+		var boardNo = '${sv.boardNo }';
+		if(memberNo != ''){
+			$.ajax({
+				type: "POST",
+				url : "/isLike.do",
+				data : {memberNo:memberNo , boardNo:boardNo},
+				success : function(data){
+					if(data ==1 ){
+						$(".likeIcon").removeClass("bi-suit-heart");
+						$(".likeIcon").addClass("bi-suit-heart-fill");					
+					}else{
+						$(".likeIcon").removeClass("bi-suit-heart-fill");
+						$(".likeIcon").addClass("bi-suit-heart");					
+					}
+				}
+			});			
+		}
+	});
+	$("#send").click(function () {
+		
+		var receiver = $("#receiver").val();
+		var dmContent = $("#dmContent").val();
+		var sender = $("#sender").val();
+		
+		$.ajax({
+			url : "/sendDm.do",
+			data : {receiver:receiver,dmContent:dmContent,sender:sender},
+			success : function(data) {
+				if(data == 1){
+					dmCount(receiver);
+					swal({
+						  title: "전송완료",
+						  icon: "success",
+						  button: "닫기",
+						}).then(function(){
+							location.reload();							
+						});
+				}else{
+					console.log("실패");
+				}
+			}
+		});
 	});
 </script>
 </body>

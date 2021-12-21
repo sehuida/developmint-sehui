@@ -15,8 +15,24 @@ public class GosuFeedback {
 	private String gosuImg;
 	private String memberImg;
 
-	
-	public String getFeedbackContentBr(){
+	public String getFeedbackContentBr() {
 		return feedbackContent.replaceAll("\r\n", "<br>");
 	}
+
+	public String getfeedbackTitlePlus() {
+		if (feedbackTitle.length() >= 4) {
+			return feedbackTitle.substring(0, 4) + "..";
+		}
+		;
+		return feedbackTitle;
+	}
+
+	public String getfeedbackTitlePlus2() {
+		if (feedbackTitle.length() >= 15) {
+			return feedbackTitle.substring(0, 15) + "..";
+		}
+		;
+		return feedbackTitle;
+	}
+
 }

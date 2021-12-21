@@ -565,7 +565,7 @@
 	</select>
 
 	<select id="selectReviewAvg" parameterType="_int"
-		resultType="_int">
+		resultType="double">
 		SELECT ROUND(AVG(REVIEW_NUM),1) as reviewAvg
 		FROM
 		gosu_review
@@ -723,14 +723,17 @@
 
 	<select id="selectGosuListAll" resultType="g">
 		select
-		ggosu_no as ggsouNo,
+		ggosu_no as
+		ggsouNo,
 		gosu_no as gsouNo,
 		gosu_title as gosuTitle,
-		gosu_self as gosuSelf,
+		gosu_self as
+		gosuSelf,
 		gosu_explain as
 		gosuExplain,
 		gosu_act as gosuAct,
-		gosu_cost as gosuCost,
+		gosu_cost as
+		gosuCost,
 		gosu_date as
 		gosuDate
 		from gosu
@@ -1149,22 +1152,66 @@
 		req.REQUEST_CONTENT2
 		as
 		requestContent2,
-		req.REQUEST_CONTENT3 as requestContent3,
+		req.REQUEST_CONTENT3 as
+		requestContent3,
 		req.REQUEST_CONTENT4
 		as requestContent4,
 		req.REQUEST_CONTENT5 as
 		requestContent5,
-		req.REQUEST_CONTENT6 as requestContent6,
+		req.REQUEST_CONTENT6 as
+		requestContent6,
 		req.REQUEST_CONTENT7
 		as
 		requestContent7,
 		req.REQUEST_DATE as requsetDate
 		from gosu_request req
-		JOIN gosu_request_cost cost
+		JOIN
+		gosu_request_cost cost
 		ON req.request_no =
 		cost.request_no
-		where cost.cost_no = #{costNo} and cost.member_id =
+		where
+		cost.cost_no = #{costNo} and cost.member_id =
 		#{memberId}
 	</select>
 
+	<select id="selectGosuRequestCostListCount"
+		parameterType="string" resultType="_int">
+		select
+		count(*)
+		from
+		gosu_request_cost
+		cost
+		LEFT JOIN
+		GOSU_REQUEST_PROJECT_SUB sub
+		ON cost.cost_no = sub.cost_no
+		where request_project_sub_no is null and member_id=#{memberId}
+	</select>
+	<select id="selectGosuRequestListCount" parameterType="_int"
+		resultType="_int">
+		select count(*) from
+		gosu_request where
+		request_no
+		NOT IN (
+		select req.request_no
+		from
+		gosu_request req
+		left
+		JOIN
+		gosu_request_cost
+		cost
+		ON
+		req.request_no =
+		cost.request_no
+		where
+		cost.request_no IN
+		(
+		select
+		request_no from
+		gosu_request_cost
+		where
+		gosu_no = #{memberId}
+		) and
+		cost.gosu_no = #{memberId})
+
+	</select>
 </mapper>

@@ -1,6 +1,6 @@
 package kr.or.member.controller;
 
-import java.io.BufferedOutputStream;
+import java.io.BufferedOutputStream; 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +24,7 @@ import com.google.gson.Gson;
 import kr.or.gosu.vo.GosuNotice;
 import kr.or.member.model.service.MailSender;
 import kr.or.member.model.service.MemberService;
+import kr.or.member.model.vo.BoardPage;
 import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.ContestPage;
 import kr.or.member.model.vo.CrewListPage;
@@ -38,6 +41,21 @@ public class MemberController {
 	@RequestMapping(value="/loginFrm.do")
 	public String login() {
 		return "member/login";
+	}
+	@ResponseBody
+	@RequestMapping(value = "/VerifyRecaptcha.do", method = RequestMethod.POST)
+	public int VerifyRecaptcha(HttpServletRequest request) {
+		// 시크릿 키를 캡챠를 받아올수 있는 Class에 보내서 그곳에서 값을 출력한다
+	    VerifyRecaptcha.setSecretKey("6LdUebcdAAAAAK7gy_dGL6PcVT1cNtkz3lullZB-");
+	    String gRecaptchaResponse = request.getParameter("recaptcha");
+	    try {
+	       if(VerifyRecaptcha.verify(gRecaptchaResponse))
+	          return 0; // 성공
+	       else return 1; // 실패
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return -1; //에러
+	    }
 	}
 	@RequestMapping(value="/join.do")
 	public String join(Member member,HttpSession session) {
@@ -62,6 +80,23 @@ public class MemberController {
 			model.addAttribute("icon", "error");
 			return "member/swalMsg";
 		}
+	}
+	@ResponseBody
+	@RequestMapping(value="/kakao.do")
+	public String kakao(Member member,HttpSession session,Model model) {
+		Member m = service.selectOneMember(member);
+		if(m != null) {
+			session.setAttribute("m", m);
+			return "1";
+		}else {
+			return "0";
+		}
+	}
+	@RequestMapping(value="/kakaoJoinFrm.do")
+	public String kakaJoinFrm(Member m,Model model) {
+		model.addAttribute("memberId",m.getMemberId());
+		model.addAttribute("memberPw",m.getMemberPw());
+		return "member/kakaoJoin";
 	}
 	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) {
@@ -231,6 +266,7 @@ public class MemberController {
 		model.addAttribute("loc", "/");
 		return "common/msg";
 	}
+	
 	@ResponseBody
 	@RequestMapping("/uploadProfile.do")
 	public String uploadProfile(MultipartFile files,String memberId,HttpServletRequest request,Model model,HttpSession session) {
@@ -383,4 +419,13 @@ public class MemberController {
 		}
 		return "member/crewList";
 	}
+	@RequestMapping("/myBoardPage.do")
+	public String myBoardPage(Member m,Model model,int reqPage) {
+		BoardPage bpg = service.myboardPage(m,reqPage);
+		model.addAttribute("list",bpg.getList());
+		model.addAttribute("pageNavi",bpg.getPageNavi());
+		model.addAttribute("start",bpg.getStart());
+		return "member/myBoardPage";
+	}
+
 }

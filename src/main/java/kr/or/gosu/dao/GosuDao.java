@@ -213,7 +213,7 @@ public class GosuDao {
 		return sqlSession.selectOne("gosu.selectReviewCount",ggsouNo);
 	}
 
-	public int selectReviewAvg(int ggsouNo) {
+	public Double selectReviewAvg(int ggsouNo) {
 		return sqlSession.selectOne("gosu.selectReviewAvg",ggsouNo);
 	}
 
@@ -350,6 +350,14 @@ public class GosuDao {
 	public ArrayList<Gosu> selectGosuListAll() {
 		List<Gosu> list = sqlSession.selectList("gosu.selectGosuListAll");
 		return (ArrayList<Gosu>)list;
+	}
+
+	public int selectGosuRequestCostListCount(String memberId) {
+		return sqlSession.selectOne("gosu.selectGosuRequestCostListCount",memberId);
+	}
+
+	public int selectGosuRequestListCount(int memberNo) {
+		return sqlSession.selectOne("gosu.selectGosuRequestListCount",memberNo);
 	}
 
 
