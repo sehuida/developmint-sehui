@@ -63,6 +63,15 @@ public class AnnounceDao {
 		return sqlSession.selectOne("announce.selectApplyAnnounceCount", announceNo);
 	}
 
+	public Resume selectCeoResume(int memberNo) {
+		return sqlSession.selectOne("announce.selectCeoResume", memberNo);
+	}
+
+	/*
+	 * public int selectResumeNo(int announceNo) { return
+	 * sqlSession.selectOne("announce.selectResumeNo", announceNo); }
+	 */
+
 
 
 }

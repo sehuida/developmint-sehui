@@ -189,5 +189,21 @@
 		select count(*) from application where announce_no = #{announceNo}
 	</select>
 	
+	<select id="selectCeoResume" parameterType="_int" resultType="r">
+		select
+			resume_no as resumeNo,
+			member_no as memberNo,
+			resume_title as resumeTitle,
+			write_date as writeDate
+		from resume
+		where member_no = #{memberNo}
+		and ceo_resume = 1
+	</select>
+	
+	<!-- <select id="selectResumeNo" parameterType="_int" resultType="_int">
+		select
+			resume_no as resumeNo
+		from application where announce_no = #{announceNo}
+	</select> -->
 	
 </mapper>

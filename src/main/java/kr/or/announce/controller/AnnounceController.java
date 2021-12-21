@@ -12,6 +12,7 @@ import kr.or.announce.vo.Announce;
 import kr.or.announce.vo.AnnounceList;
 import kr.or.announce.vo.AnnounceListPageData;
 import kr.or.announce.vo.AnnounceView;
+import kr.or.resume.vo.Resume;
 
 @Controller
 public class AnnounceController {
@@ -88,10 +89,14 @@ public class AnnounceController {
 	}
 	
 	@RequestMapping(value="/announceView.do")
-	public String announceView(int announceNo, Model model) {
+	public String announceView(int announceNo, int memberNo, Model model) {
 		AnnounceView announce = service.selectAnnounceView(announceNo);
+		/* int resumeNo = service.selectResumeNo(announceNo); */
+		Resume r = service.selectCeoResume(memberNo);
 		System.out.println("view : "+announce);
+		System.out.println("r : "+r);
 		model.addAttribute("a", announce);
+		model.addAttribute("r", r);
 		return "jobSearch/announceView";
 	}
 	

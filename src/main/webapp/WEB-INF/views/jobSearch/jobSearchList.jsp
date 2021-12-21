@@ -242,14 +242,15 @@
                     <option>디자인</option>
                     <option>기획</option>
                 </select>
-                <input type="text" placeholder="검색 //나중에 돋보기 이미지로 변경" class="search"><img id="searchImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
+                <input type="text" placeholder="검색 " class="search"><img id="searchImg" src="/resources/img/jobSearch/dot.PNG">
                 
                 <c:forEach items="${list }" var="a" varStatus="i">
+                <%-- <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }"> 이거로는 왜 값 안넘어감? 후..... --%>
 	                <div class="content">
 	                    <div class="status">모집중</div>
 	                    <div class="cpName"><a href="companyInfo.do?companyNo=${a.companyNo }">${a.companyName }</a></div>	
 	                    <div class="title">
-	                        <a href="announceView.do?announceNo=${a.announceNo}">${a.announceTitle }</a>	
+	                        <a href="announceView.do?announceNo=${a.announceNo}&memberNo=${sessionScope.m.memberNo }">${a.announceTitle }</a>	
 	                    </div>
 	                    <div class="info">
 	                        <div class="humanInfo">
@@ -359,6 +360,6 @@
             </div>
         </div>
     </div>
-        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
