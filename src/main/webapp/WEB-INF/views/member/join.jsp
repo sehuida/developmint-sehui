@@ -102,6 +102,9 @@
         </fieldset>
         <div class="g-recaptcha" data-sitekey=6LdUebcdAAAAAJsK4CE4Ih7C_d3zdDX_IOXzfeo1 style="width: 100%; margin-top: 30px; margin-left: 70px;"></div>
         <button type="button" class="btn btn-primary" id="joinBtn">회원가입</button>
+        <a href="https://kauth.kakao.com/oauth/authorize?client_id=c9e59a1091af51d905aa841964c7dec7&redirect_uri=http://localhost/kakaoAuth.do&response_type=code">
+        	<img src="/resources/img/member/kakao_login_medium_narrow.png">
+        </a>
       </form>
     </div><!--joinwrap끝나는지점-->
 
