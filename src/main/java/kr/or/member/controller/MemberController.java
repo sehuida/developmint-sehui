@@ -15,12 +15,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
 import kr.or.gosu.vo.GosuNotice;
+import kr.or.member.model.service.KakaoService;
 import kr.or.member.model.service.MailSender;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.BoardPage;
@@ -408,5 +410,12 @@ public class MemberController {
 		model.addAttribute("pageNavi",bpg.getPageNavi());
 		model.addAttribute("start",bpg.getStart());
 		return "member/myBoardPage";
+	}
+	@RequestMapping(value="/kakaoAuth.do")
+	public String kakaoAuth(@RequestParam(value = "code", required = false) String code) throws Exception{
+        System.out.println("#########" + code);
+        String access_Token = KakaoService.getAccessToken(code);
+        System.out.println("###access_Token#### : " + access_Token);
+        return "common/main";
 	}
 }
