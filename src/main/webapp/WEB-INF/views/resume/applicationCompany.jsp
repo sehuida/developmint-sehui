@@ -132,7 +132,20 @@
 						                <div class="action">
 						                	<span class="dateEnd"></span>
 						                </div>
-						                <button type="button" class="history">지원내역</button>
+				      					<div class="accordion" id="accordionExample">
+										 	<div class="accordion-item">
+										    	<h2 class="accordion-header" id="heading0">
+										      		<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse0" aria-expanded="true" aria-controls="collapse${i.index }">
+										       			<span>지원내역</span>
+										      		</button>
+										    		</h2>
+										    		<div id="collapse${i.index }" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+										      		<div class="accordion-body">
+										        		<strong>테스트답변용21</strong>
+										      		</div>
+										    	</div>
+										  	</div>
+										</div>
 						            </div>
 			        			</div>
 						        <hr>
