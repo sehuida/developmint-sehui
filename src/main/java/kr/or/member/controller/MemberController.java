@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
@@ -365,7 +366,9 @@ public class MemberController {
 		}
 	}
 	@RequestMapping(value="/mypageCom.do")
-	public String mypageCom() {
+	public String mypageCom(@SessionAttribute Member m,Model model) {
+		int announceNo = service.announceNo(m.getComNo());
+		model.addAttribute("announceNo",announceNo);
 		return "member/mypageCom";
 	}
 	@RequestMapping(value="/mypageGosu.do")

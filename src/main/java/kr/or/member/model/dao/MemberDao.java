@@ -149,4 +149,8 @@ public class MemberDao {
 		return sqlSession.selectOne("member.boardCount",memberNo);
 	}
 
+	public int announceNo(int comNo) {
+		return sqlSession.selectOne("member.announceNo",comNo);
+	}
+
 }
