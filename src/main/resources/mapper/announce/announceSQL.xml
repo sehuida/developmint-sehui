@@ -81,6 +81,7 @@
 		select
 			announce_no as announceNo,
 			member_no as memberNo,
+			company_no as companyNo,
 			company_name as companyName,
 			a.category,
 			fields,
@@ -140,8 +141,9 @@
 		select
 			announce_no as announceNo,
 			member_no as memberNo,
+			company_no as companyNo,
 			company_name as companyName,
-			category,
+			a.category,
 			fields,
 			school,
 			work_form as workForm,
@@ -155,7 +157,8 @@
 			military,
 			write_date as writeDate,
 			career
-		from announcement
+		from announcement a
+		join company c using(company_name)
 		order by 1 desc )r)rr 
 		where rnum between #{start} and
 		#{end}
