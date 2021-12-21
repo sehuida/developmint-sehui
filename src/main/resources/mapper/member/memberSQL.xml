@@ -11,7 +11,8 @@
   		email,
   		member_type as memberType,
   		filepath,
-  		member_grade as memberGrade
+  		member_grade as memberGrade,
+  		com_no as comNo
   	from member where member_id=#{memberId} and member_pw=#{memberPw}
   </select>
   <select id="checkPhone" parameterType="string" resultType="m">
@@ -201,5 +202,8 @@
   </select>
   <select id="boardCount" parameterType="_int" resultType="_int">
   	select count(*) from share_board where member_no=#{memberNo}
+  </select>
+  <select id="announceNo" parameterType="_int" resultType="_int">
+  	select announce_no as announceNo from announcement where company_name=(select company_name from company where company_no=#{comNo})
   </select>
 </mapper>
