@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.admin.service.AdminService;
+import kr.or.admin.vo.TotalBoard;
 import kr.or.admin.vo.TotalData;
 import kr.or.admin.vo.TotalMember;
 import kr.or.comment.vo.Report;
@@ -309,8 +310,19 @@ public class AdminController {
 		@RequestMapping(value="/allBoardList.do")
 		public String allBoardList(int reqPage, int type, Model model) {
 			model.addAttribute("type",type);
+			TotalBoard tb = service.totalBoard(reqPage,type);
+			model.addAttribute("gosuList", tb.getGosuList());
+			model.addAttribute("projectList",tb.getProjectList());
+			model.addAttribute("shareList",tb.getShareList());
+			model.addAttribute("announceList",tb.getAnnounceList());
+			model.addAttribute("contestList",tb.getContesetList());
+			model.addAttribute("start", tb.getStart());
+			model.addAttribute("pageNavi",tb.getPageNavi());
+			model.addAttribute("totalCount", tb.getTotalCount());
+			model.addAttribute("allBoardCount", tb.getAllBoardCount());
 			return "admin/allBoardList";
 		}
+		
 		
 		
 

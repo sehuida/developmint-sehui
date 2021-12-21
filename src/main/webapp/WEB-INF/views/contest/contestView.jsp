@@ -214,6 +214,8 @@
 			<div class="contestTitle" style="margin-top:55px;">
 				<p>${list.contest.contestTitle }</p>
 			</div>
+			
+			<%--자기가 올린 공모전일 경우 삭제 가능 --%>
 			<c:if test="${sessionScope.m.memberId ==  list.contest.memberId}">
 				<div>
 					<form action="/deleteContest.do" class="delForm">

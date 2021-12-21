@@ -113,8 +113,8 @@
 				<h4 style="font-family: NotoBold; margin-bottom: 20px;">커뮤니티</h4>
 				<div>
 					<img src="/resources/img/member/notes.png">
-					<a class="pageLists" href="/applicationStatus.do">구인신청 내역 확인</a>
-					<a href="/applicationStatus.do"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
+					<a class="pageLists" href="/applicationStatus.do?announceNo=${announceNo }&reqPage=1">구인신청 내역 확인</a>
+					<a href="/applicationStatus.do?announceNo=${announceNo }&reqPage=1"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
 				</div>
 				<div>
 					<img src="/resources/img/member/multiple-users-silhouette.png">

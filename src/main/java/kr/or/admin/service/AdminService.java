@@ -28,18 +28,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.admin.dao.AdminDao;
+import kr.or.admin.vo.TotalBoard;
 import kr.or.admin.vo.TotalData;
 import kr.or.admin.vo.TotalMember;
+import kr.or.announce.vo.Announce;
 import kr.or.comment.vo.Report;
 import kr.or.company.vo.Company;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestList;
 import kr.or.contest.vo.ContestMember;
 import kr.or.contest.vo.ContestMemberList;
+import kr.or.gosu.vo.GosuNotice;
 import kr.or.member.model.vo.CertiVO;
 import kr.or.member.model.vo.Member;
 import kr.or.notice.vo.Notice;
+import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.qna.vo.Qna;
+import kr.or.share.model.vo.Share;
 import kr.or.qna.vo.NonQna;
 
 @Service
@@ -698,6 +703,91 @@ public class AdminService {
 	public int noEnrollMemberCompany(int memberNo) {
 		int result = dao.noEnrollMemberCompany(memberNo);
 		return result;
+	}
+
+	public TotalBoard totalBoard(int reqPage, int type) {
+		
+		TotalBoard tb = new TotalBoard();
+		
+		//한페이지에 보여줄 게시물
+		int numPerPage = 10;
+		int end = reqPage*numPerPage;
+		int start = end-numPerPage+1;
+		
+		//한페이지에서 보여줄 게시물 목록 조회
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		
+		if(type == 1) {
+			ArrayList<ProjectTeam> projectList = dao.projectList(map);
+			tb.setProjectList(projectList);
+		}else if(type == 2) {
+			ArrayList<Share> shareList = dao.shareList(map);
+			tb.setShareList(shareList);
+		}else if(type == 3) {
+			ArrayList<Announce> announceList = dao.announceList(map);
+			tb.setAnnounceList(announceList);
+		}else if(type == 4) {
+			ArrayList<GosuNotice> gosuList = dao.gosuList(map);
+			tb.setGosuList(gosuList);
+		}else if(type == 5) {
+			ArrayList<Contest> contesetList = dao.contesetList(map);
+			tb.setContesetList(contesetList);
+		}
+		
+		//페이지 네비게이션 제작
+		int totalCount = dao.totalBoardCount(type);
+		
+		//전체 페이지 수 계산
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage+1;
+		}
+		int pageNaviSize = 5;
+		
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		
+		String pageNavi = "<ul class='pagination' style='justify-content: center;'>";
+		if(pageNo != 1) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/allBoardList.do?reqPage="+(pageNo-1)+"&type="+type+"'>";
+			pageNavi += "&lt;</a></li>";
+		}// 페이지 숫자
+		for(int i=0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='page-item active'>";
+				pageNavi += "<a class = 'page-link' style='background-color : #4ECDC4; border-color : #4ECDC4;' href='/allBoardList.do?reqPage="+pageNo+"&type="+type+"'>";
+				pageNavi += pageNo + "</a></li>";
+			} else {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/allBoardList.do?reqPage="+pageNo+"&type="+type+"'>";
+				pageNavi += pageNo + "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음 버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' style='background-color : #fff; border-color : #4ECDC4; color : #4ECDC4;' href='/allBoardList.do?reqPage="+pageNo+"&type="+type+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";	
+		
+		tb.setStart(start);
+		tb.setTotalCount(totalCount);
+		tb.setPageNavi(pageNavi);
+		
+		int allBoardCount = dao.allBoardCount();
+		tb.setAllBoardCount(allBoardCount);
+		
+		
+		return tb;
 	}
 }
 
