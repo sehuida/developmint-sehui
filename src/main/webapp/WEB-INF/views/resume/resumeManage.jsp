@@ -396,7 +396,7 @@
 		<c:forEach items="${list }" var="r" varStatus="i">
 			<c:choose>
 				<c:when test="${r.ceoResume eq 0 }">
-				
+					
 				</c:when>
 				<c:otherwise>
 					
@@ -410,7 +410,7 @@
 							</div>
 						</div>
 							<div class="resumeTitle" style="margin-bottom: 30px;">
-								<a href="ceoResumeView.do?ceoResume=${r.ceoResume }"><em>${r.resumeTitle }</em></a>	<!-- r.resumeTitle -->
+								<a href="/resumeView.do?resumeNo=${r.resumeNo }"><em>${r.resumeTitle }</em></a>	<!-- r.resumeTitle -->
 							</div>
 							<ul class="resumeInfo1">
 				            	<li class="career">
@@ -497,7 +497,7 @@
 						</div>
 						<div class="update">
 							
-							<a href="ceoResumeView.do?ceoResume=${r.ceoResume }"><button class="ceoResumeView">이력서 보기</button></a>
+							<a href="/resumeView.do?resumeNo=${r.resumeNo }"><button class="ceoResumeView">이력서 보기</button></a>
 							<a href="updateResumeFrm.do?memberNo=${sessionScope.m.memberNo}&ceoResume=${r.ceoResume }"><button class="updateResume">수정하기</button></a>
 						</div>
 					</div>
