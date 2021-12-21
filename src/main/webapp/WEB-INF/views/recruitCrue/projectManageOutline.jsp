@@ -52,7 +52,7 @@
 	<div class="container" id="projectContainer">
         <div class="main">
             <div class="main-left-box">
-                <h2>프로젝트 명</h2>
+                <h2>${pt.projectName}</h2>
                 <ul>
                     <li class="flexLi" style="border-bottom: 3px dashed #90d1b4;">
                         <a href="/enterMyProject.do?projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" class="subNaviAtag" ><img src="/resources/img/recruitTeamProject/recruitPage/powerOn.png" class="subNaviImg"><span style="cursor: pointer; font-weight: 900">프로젝트 개요</span></a>

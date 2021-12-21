@@ -44,6 +44,7 @@
     -ms-transform:scale(1.2);   
     -o-transform:scale(1.2);
     transform:scale(1.2);
+    transition: all 0.3s ease-in-out;
 }
 
 #languageBox_label{
