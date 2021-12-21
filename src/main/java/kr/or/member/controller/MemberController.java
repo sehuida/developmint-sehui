@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -69,7 +70,14 @@ public class MemberController {
 	@RequestMapping(value="/login.do")
 	public String loginFrm(Member member,HttpSession session,Model model) {
 		Member m = service.selectOneMember(member);
+		
 		if(m != null) {
+			if(m.getMemberType() == 4){
+				model.addAttribute("title", "차단된 회원입니다.");
+				model.addAttribute("loc", "/main.do");
+				model.addAttribute("icon", "error");
+				return "member/swalMsg";				
+			}
 			session.setAttribute("m", m);
 			return "common/main";
 		}else {
@@ -79,6 +87,23 @@ public class MemberController {
 			model.addAttribute("icon", "error");
 			return "member/swalMsg";
 		}
+	}
+	@ResponseBody
+	@RequestMapping(value="/kakao.do")
+	public String kakao(Member member,HttpSession session,Model model) {
+		Member m = service.selectOneMember(member);
+		if(m != null) {
+			session.setAttribute("m", m);
+			return "1";
+		}else {
+			return "0";
+		}
+	}
+	@RequestMapping(value="/kakaoJoinFrm.do")
+	public String kakaJoinFrm(Member m,Model model) {
+		model.addAttribute("memberId",m.getMemberId());
+		model.addAttribute("memberPw",m.getMemberPw());
+		return "member/kakaoJoin";
 	}
 	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) {
@@ -409,4 +434,5 @@ public class MemberController {
 		model.addAttribute("start",bpg.getStart());
 		return "member/myBoardPage";
 	}
+
 }

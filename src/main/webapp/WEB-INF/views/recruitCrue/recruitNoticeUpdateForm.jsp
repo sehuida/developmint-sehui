@@ -47,7 +47,7 @@
     }
 	
 </script>
-	
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="projectContainer">
 		<div class="main">
             <div class="returnPage">
