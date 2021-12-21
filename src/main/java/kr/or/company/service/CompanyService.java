@@ -19,13 +19,13 @@ public class CompanyService {
 	@Autowired
 	private CompanyDao dao;
 
-	public /*CompanyInfoComment*/ CompanyInfo selectCompany(String companyName, int companyNo) {
-		ArrayList<Comment> commentList = dao.commentList(companyNo);
-		CompanyInfo companyInfo = dao.selectCompany(companyName);
-		/*
-		 * CompanyInfoComment list = new CompanyInfoComment(companyInfo, commentList);
-		 */
+	public CompanyInfo selectCompany(int companyNo) {
+		CompanyInfo companyInfo = dao.selectCompany(companyNo);
 		return companyInfo;
+	}
+	
+	public ArrayList<Comment> selectCompanyCommentList(int companyNo) {
+		return dao.commentList(companyNo);
 	}
 	
 	@Transactional
@@ -46,4 +46,10 @@ public class CompanyService {
 	public int selectCompanyNo(String companyName) {
 		return dao.selectCompanyNo(companyName);
 	}
+
+	public String selectCompanyName(int companyNo) {
+		return dao.selectCompanyName(companyNo);
+	}
+
+	
 }

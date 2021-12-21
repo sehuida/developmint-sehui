@@ -21,6 +21,7 @@ public class JobSearchController {
 	@RequestMapping(value="/jobSearchList.do")
 	public String jobSearchList(Model model, int reqPage) {
 		AnnouncePageData apd = service.selectAllAnnounce(reqPage);
+		System.out.println(apd.getList());
 		model.addAttribute("list",apd.getList());
 		model.addAttribute("pageNavi",apd.getPageNavi());
 		model.addAttribute("start",apd.getStart());
