@@ -6,6 +6,7 @@ import lombok.Data;
 public class AnnounceView {
 	private int announceNo;
 	private int memberNo;
+	private int companyNo;
 	private String companyName;
 	private String category;
 	private String fields;

@@ -419,8 +419,8 @@ b {
 		<div class=comentListBox>
 			<c:choose>
 			<%--댓글이 있는경우 --%>
-			<c:when test="${not empty list.commentList }">
-				<c:forEach items="${list.commentList }" var="cl" varStatus="i">
+			<c:when test="${not empty cl }">
+				<c:forEach items="${cl }" var="cl" varStatus="i">
 					<div style="margin-bottom: 20px;">
 						<c:if test="${cl.commentType eq 1 }">
 							<div class="comentView">
@@ -496,7 +496,7 @@ b {
 									<input type="reset" value="취소" class="btn btn-outline-secondary cancelBtn" style="height: 100px; width: 80px; font-weight: bold">
 									<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 									<input type="hidden" name="boardNo" value="${com.companyNo }">
-									<input type="hidden" name="boardType" value="1">
+									<input type="hidden" name="boardType" value="4">
 									<input type="hidden" name="commentType" value="2">
 									<input type="hidden" name="commentRef" value="${cl.commentNo }">
 								</div>

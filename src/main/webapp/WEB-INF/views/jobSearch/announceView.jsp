@@ -407,8 +407,8 @@
 						</div>
 						<div class="infoData">
 								<div class="title">
-									<a href="/companyInfo.do?companyName=${a.companyName }">${a.companyName }</a>
-									<a href="/companyInfo.do?companyName=${a.companyName }" class="aa" style="margin-left: 5px;"><strong style="font-size: 12px; color: #666666;">기업정보 ></strong></a>
+									<a href="/companyInfo.do?companyNo=${a.companyNo }">${a.companyName }</a>
+									<a href="/companyInfo.do?companyNo=${a.companyNo }" class="aa" style="margin-left: 5px;"><strong style="font-size: 12px; color: #666666;">기업정보 ></strong></a>
 								</div>
 							<div class="left">
 								<div class="text">
