@@ -19,24 +19,8 @@
           <div id="join-l">
             <img src="/resources/img/logo/Develomint_logo.png" id="joinlogo">
           </div>
-          <div class="form-group">
-            <label class="col-form-label mt-4" for="memberId">아이디</label>
-            <div class="idwrap">
-              <input type="text" class="form-control" placeholder="아이디 입력(5~12자)" name="memberId" id="memberId">
-              <button type="button" class="btn btn-primary" id="memberIdChk">중복체크</button>
-            </div>
-            <span class="expResult"></span>
-          </div>
-          <div class="form-group">
-            <label for="memberPw" class="form-label mt-4">비밀번호</label>
-            <input type="password" class="form-control" name="memberPw" id="memberPw" placeholder="비밀번호(숫자,영문 최소8자)">
-            <span class="expResult"></span>
-          </div>
-          <div class="form-group">
-            <label for="memberPwRe" class="form-label mt-4">비밀번호 확인</label>
-            <input type="password" class="form-control " name="memberPwRe" id="memberPwRe" placeholder="비밀번호(숫자,영문 최소8자)">
-            <span class="expResult"></span>
-          </div>
+          <input type="hidden" name="memberId" value="${memberId }">
+          <input type="hidden" name="memberPw" value="${memberPw }">
           <div class="form-group">
             <label class="col-form-label mt-4" for="memberName">이름</label>
             <input type="text" class="form-control" placeholder="이름입력" id="memberName" name="memberName">
@@ -195,11 +179,207 @@
     </div><!--개인정보 취급방침 modal 끝나는 지점-->
   </div><!--container끝나는 지점-->
   <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
- <script type="text/javascript" src="/resources/js/member/join.js"></script>
+ <script type="text/javascript">
+ var nameChk = false;
+ var phoneChk = false;
+ var emailChk = false;
+ var emailCodeChk = false;
+ var captcha = 1;
+
+ $(function(){
+     $("#checkAll").click(function(){
+         //전체 체크박스 클릭
+         if($("#checkAll").prop("checked")){
+           $(".agreement").prop("checked",true);
+         }else{
+           $(".agreement").prop("checked",false);
+         }
+     });
+     //전체 체크박스 선택중 체크박스 하나를 풀엇을경우 "전체" 체크해제
+     $(".agreement").click(function(){
+       if($(".agreement:checked").length == 3){
+         $("#checkAll").prop("checked",true);
+       }else{
+         $("#checkAll").prop("checked",false);
+       }
+     });
+     //정규표현식을 이용해서 형식에 맞게 check해줌
+
+     //이름
+     $("#memberName").on("keyup", function(){
+           var nameReg = /^[가-힣]{2,6}$/;
+           var nameVal = $("#memberName").val();
+
+           if(nameReg.test(nameVal)){
+             $(".expResult").eq(0).html("");
+             $(".expResult").eq(0).removeClass("text-danger");
+             $("#memberName").removeClass("is-invalid");
+             $(".expResult").eq(0).addClass("text-success");
+             $("#memberName").addClass("is-valid");
+             nameChk = true;
+           }else{
+             $(".expResult").eq(0).html("이름은 한글 2~6글자로 입력해주세요");
+             $(".expResult").eq(0).removeClass("text-success");
+             $("#memberName").removeClass("is-valid");
+             $(".expResult").eq(0).addClass("text-danger");
+             $("#memberName").addClass("is-invalid");
+             nameChk = false;
+           }
+         });
+     //전화번호 중복체크
+     $("#phone").on("keyup", function(){
+       var phoneReg = /^010-([0-9]{4})-([0-9]{4})$/;
+       var phoneVal = $("#phone").val();
+
+       if(phoneReg.test(phoneVal)){
+         $.ajax({
+             url : "/phoneCheck.do",
+             data : {phone : phoneVal},
+             type : "post",
+             success : function(data){
+               if(data == 0){
+                 $(".expResult").eq(1).html("이미 사용중인 전화번호 입니다.");
+                 $(".expResult").eq(1).removeClass("text-success");
+                 $("#phone").removeClass("is-valid");
+                 $(".expResult").eq(1).addClass("text-danger");
+                 $("#phone").addClass("is-invalid");
+                 phoneChk = false;
+                 return;
+               }else{
+                 $(".expResult").eq(1).html("");
+                 $(".expResult").eq(1).removeClass("text-danger");
+                 $("#phone").removeClass("is-invalid");
+                 $(".expResult").eq(1).addClass("text-success");
+                 $("#phone").addClass("is-valid");
+                 phoneChk = true;
+                 return;
+               }
+             }
+           });
+       }else{
+         $(".expResult").eq(1).html("양식에 맞게 입력해주세요(ex.010-1234-1234)");
+         $(".expResult").eq(1).removeClass("text-success");
+         $("#phone").removeClass("is-valid");
+         $(".expResult").eq(1).addClass("text-danger");
+         $("#phone").addClass("is-invalid");
+         phoneChk = false;
+       }
+     });
+     var mailCode;
+     //이메일 중복체크, 인증메일 발송
+     $("#emailChk").on("click",function(){
+   	 var emailReg = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/;
+   	 var emailVal = $("#email").val();
+   	 
+   	 if(emailReg.test(emailVal)){
+            $.ajax({
+                url : "/emailCheck.do",
+                data : {email : emailVal},
+                type : "post",
+                success : function(data){
+                  if(data == 0){
+                    $(".expResult").eq(2).html("이미 사용중인 이메일 입니다.");
+                    $(".expResult").eq(2).removeClass("text-success");
+                    $("#email").removeClass("is-valid");
+                    $(".expResult").eq(2).addClass("text-danger");
+                    $("#email").addClass("is-invalid");
+                    emailChk = false;
+                    return;
+                  }else{
+                    $(".expResult").eq(2).html("");
+                    $(".expResult").eq(2).removeClass("text-danger");
+                    $("#email").removeClass("is-invalid");
+                    $(".expResult").eq(2).addClass("text-success");
+                    $("#email").addClass("is-valid");
+                    emailChk = true;
+                    sendMail();
+                  }
+                }
+              });
+         
+   	 }else{
+            $(".expResult").eq(2).html("양식에 맞게 입력해주세요(ex.abcd@naver.com)");
+            $(".expResult").eq(2).removeClass("text-success");
+            $("#email").removeClass("is-valid");
+            $(".expResult").eq(2).addClass("text-danger");
+            $("#email").addClass("is-invalid");
+            emailChk = false;	 
+   	 }
+     });
+ });
+ 	
+	  function sendMail(){
+		  var email = $("#email").val();
+		  
+		  $.ajax({
+			 url : "/sendMail.do",
+			 type : "post",
+			 data : {email:email},
+			 success : function(data){
+				 mailCode = data;
+				 $(".auth").slideDown();
+				 authTime();
+			 }
+		  });
+	  }
+
+	//이메일 인증시 시간 설정
+	  var intervalId;
+	  function authTime(){
+	  	$("#timeZone").html("<span id='min'>5</span> : <span id='sec'>00</span>");
+	  	intervalId = window.setInterval(function(){
+	  		timeCount();
+	  	}, 1000); //밀리세컨드 단위 
+	  }
+	//이메일 인증 시간 카운트
+	  function timeCount(){
+	  	var min = Number($("#min").html());
+	  	var sec = $("#sec").html();
+	  	if(sec == "00"){
+	  		if(min==0){
+	  			mailCode = null;
+	  			clearInterval(intervalId);
+	  			$("#authMsg").html("인증시간 만료");
+	  			$("#authMsg").css("color", "red");
+	  		}else{
+	  			$("#min").html(--min);			
+	  			$("#sec").html(59);			
+	  		}
+	  	}else{
+	  		var newSec = Number(sec);
+	  		newSec--;
+	  		if(newSec<10){ //한자리수일때
+	  			$("#sec").html("0"+newSec);
+	  		}else{
+	  			$("#sec").html(newSec);
+	  		}
+	  	}
+	  }
+	  //이메일 인증 시간
+	  $(".authBtn").click(function(){
+	  	if(mailCode == null){
+	  		$("#authMsg").html("인증시간 만료");
+	  		$("#authMsg").css("color", "red");
+	  		emailCodeChk = false;
+	  	}else{
+	  		if($("#authCode").val() == mailCode){
+	  			emailCodeChk = true;
+	  			$("#authMsg").html("인증성공");
+	  			$("#authMsg").css("color", "blue");
+	  			clearInterval(intervalId);
+	  			$("#timeZone").empty();
+	  		}else{
+	  			$("#authMsg").html("인증코드 확인");
+	  			$("#authMsg").css("color", "red");
+	  			emailCodeChk = false;
+	  		}
+	  	}
+	  }); 
+ </script>
  <script type="text/javascript">
  $("#joinBtn").click(function(){
 	 var required = $(".required:checked").length;
-	 if(idChk==true&&pwChk==true&&pwreChk==true&&nameChk==true&&phoneChk==true&&emailChk==true&&emailCodeChk==true&&required==2){
+	 if(nameChk==true&&phoneChk==true&&emailChk==true&&emailCodeChk==true&&required==2){
 		//리캡차 체크
 		$.ajax({
             url: '/VerifyRecaptcha.do',
