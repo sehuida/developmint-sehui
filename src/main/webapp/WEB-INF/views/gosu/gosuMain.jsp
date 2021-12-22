@@ -103,6 +103,9 @@
 	font-size: 30px;
 	font-weight: 900;
 }
+.gtitle:hover {
+	color: #78c2ad;
+}
 
 .gosu-person>h3, .gosu-notice>h3, .gosu-status>h3 {
 	font-size: 30px;
@@ -525,7 +528,16 @@ animation: motion 0.3s linear 0s infinite alternate;
 								style="border-radius: 50%;">
 						</c:if>
 
-						<div style="margin-top: 20px;">${ngl.gosuId }</div>
+						<div style="margin-top: 20px;">
+						<c:choose>
+							<c:when test="${ngl.ggsouNo eq 0}">
+								<a href="" class="gtitle underhover" style="color: black;" >${ngl.gosuId }</a>
+							</c:when>
+							<c:otherwise>
+								<a  href="/gosuContent.do?gNo=${ngl.ggsouNo}" class="gtitle">${ngl.gosuId }</a>						
+							</c:otherwise>
+						</c:choose>
+						</div>
 					</div>
 
 				</c:forEach>
@@ -700,7 +712,15 @@ animation: motion 0.3s linear 0s infinite alternate;
 		</div>
 	</c:if>
 	</div>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
+	 $(".underhover").click(function(){
+		 swal({
+				title : '',
+				text : "고수님께서 소개글을 작성하지 않았습니다!",
+				icon : ''
+			});
+	 });
 		var slideIndex2 = 1;
 		showSlides2(slideIndex2);
 

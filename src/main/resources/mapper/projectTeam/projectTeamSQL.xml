@@ -688,7 +688,8 @@
 			(select count(*) from comments where BOARD_TYPE = 5 and BOARD_NO = pe.project_no) as commentCount,
 			(select member_id from member m where m.member_no = pe.member_no) as memberId,
 			(select member_grade from member m where m.member_no = pe.member_no) as memberGrade,
-			(select count(*) from project_entry pee where pee.entry_Status = 3 and pee.PROJECT_NO = pe.PROJECT_NO) as availableNum
+			(select count(*) from project_entry pee where pee.entry_Status = 3 and pee.PROJECT_NO = pe.PROJECT_NO) as availableNum,
+			(select project_status from project p where p.project_no = pe.project_no)
 			from project_entry pe
 		where pe.ENTRY_NO = #{entryNo}
   </select>

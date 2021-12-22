@@ -296,18 +296,32 @@ public class ProjectTeamController {
 	  }
 	  
 	  @RequestMapping(value="/deleteComment.do") 
-	  public String deleteComment(Model model, int commentNo, int projectNo, int memberNo) {
+	  public String deleteComment(Model model, int commentNo, int projectNo, int memberNo, int boardCheckKey) {
 		  int result = service.deleteComment(commentNo); 
-		  if(result > 0) { 
-			  model.addAttribute("title", "댓글 삭제 성공");
-			  model.addAttribute("msg", "댓글 삭제 완료되었습니다.");
-			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
-			  model.addAttribute("icon", "success");
+		  if(boardCheckKey == 1) {
+			  if(result > 0) { 
+				  model.addAttribute("title", "댓글 삭제 성공");
+				  model.addAttribute("msg", "댓글 삭제 완료되었습니다.");
+				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+				  model.addAttribute("icon", "success");
+			  } else {
+				  model.addAttribute("title", "댓글 삭제 실패");
+				  model.addAttribute("msg", "댓글 삭제 실패하였습니다.");
+				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+				  model.addAttribute("icon", "warning");
+			  }
 		  } else {
-			  model.addAttribute("title", "댓글 삭제 실패");
-			  model.addAttribute("msg", "댓글 삭제 실패하였습니다.");
-			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
-			  model.addAttribute("icon", "warning");
+			  if(result > 0) { 
+				  model.addAttribute("title", "댓글 삭제 성공");
+				  model.addAttribute("msg", "댓글 삭제 완료되었습니다.");
+				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+				  model.addAttribute("icon", "success");
+			  } else {
+				  model.addAttribute("title", "댓글 삭제 실패");
+				  model.addAttribute("msg", "댓글 삭제 실패하였습니다.");
+				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+				  model.addAttribute("icon", "warning");
+			  }
 		  }
 		  return "member/swalMsg"; 
 	  }

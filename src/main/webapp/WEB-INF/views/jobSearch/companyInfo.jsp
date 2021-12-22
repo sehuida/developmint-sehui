@@ -382,7 +382,7 @@ b {
 		
 		<br><br>
 		<hr>
-		<p>회사에 대한 댓글을 남겨주세요!</p>
+		<p>회사에 대한 댓글을 남겨주세요!</p> 
 		<%--댓글 입력 창(로그인했을 때 띄우기) --%>
 		<c:if test="${not empty sessionScope.m.memberId }">
 			<form action="/insertCompanyComment.do" method="post">

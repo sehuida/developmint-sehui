@@ -146,6 +146,10 @@ input:focus, textarea:focus {
 	align-items: center;
 	margin-top: 20px;
 }
+
+#underhover:hover{
+	text-decoration: underline;
+}
 </style>
 </head>
 <body>
@@ -224,11 +228,22 @@ input:focus, textarea:focus {
 													</c:if> <c:choose>
 														<c:when test="${sessionScope.m.memberType ne 2}">
 															<span style="color: rgb(78, 205, 196);">고수</span>
+															<c:choose>
+																<c:when test="${gtl.ggosuNo eq 0}">
+																		<a id="underhover" class="underhover" style="color: black;" >${gtl.memberId }</a>
+																</c:when>
+																<c:otherwise>
+																	<a id="underhover" style="color: black;" href="/gosuContent.do?gNo=${gtl.ggosuNo}">${gtl.memberId }</a>
+													
+																</c:otherwise>
+															</c:choose>
+															
 														</c:when>
 														<c:otherwise>
 															<span style="color: rgb(78, 205, 196);">질문자</span>
+															${gtl.memberId }
 														</c:otherwise>
-													</c:choose> ${gtl.memberId }</th>
+													</c:choose> </th>
 												<td style="text-align: right; color: gray;">${gtl.requestProjectDate }</td>
 											</tr>
 											<tr>
@@ -475,7 +490,15 @@ input:focus, textarea:focus {
 				$(editor).summernote("insertImage",data);
 			}
 		});
-	 }
+	 };
+	 $(".underhover").click(function(){
+		 swal({
+				title : '',
+				text : "고수님께서 소개글을 작성하지 않았습니다!",
+				icon : ''
+			});
+	 });
+	
 		$("#talkBtnAjax").click(function() {
 			var talkContent = $("#talkContent").val();
 			var writerNo = $("#writer").val();
