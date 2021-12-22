@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="/resources/css/default.css">
+<link rel="stylesheet" href="/resources/css/main/main.css">
 </head>
 <style>
 	* Make the image fully responsive */
@@ -34,24 +35,24 @@
 				<img src="/resources/img/main/2.png" alt="Los Angeles" class="d-block"
 					style="width:100%;max-height: 80vh;">
 				<div class="carousel-caption">
-					<h3>Los Angeles</h3>
-					<p>We had such a great time in LA!</p>
+					<h4 class="text-black" style="font-weight: bold;">프로젝트에 지원하여 팀원으로 함께하세요!</h4>
+					<p><a href="/recruitTeamMember_mainPage.do?reqPage=1" class="btn btn-my">팀원모집</a></p>
 				</div>
 			</div>
 			<div class="carousel-item">
 				<img src="/resources/img/main/1.png" alt="Chicago" class="d-block h-50"
 					style="width: 100%;max-height: 80vh;">
 				<div class="carousel-caption">
-					<h3>Chicago</h3>
-					<p>Thank you, Chicago!</p>
+					<h4 class="text-white" style="font-weight: bold;">고수와 함께 개발을 해보세요!</h4>
+					<p><a href="/gosuMain.do" class="btn btn-my2">'고수'의 노하우</a></p>
 				</div>
 			</div>
 			<div class="carousel-item">
 				<img src="/resources/img/main/3.png" alt="New York" class="d-block h-50" 
 				style="width: 100%;max-height: 80vh;">
 				<div class="carousel-caption">
-					<h3>New York</h3>
-					<p>We love the Big Apple!</p>
+					<h4 class="text-white" style="font-weight: bold;">지원하고, 구해보세요!</h4>
+					<p><a href="jobSearchList.do?reqPage=1" class="btn btn-my3">구인구직</a></p>
 				</div>
 			</div>
 		</div>
