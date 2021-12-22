@@ -137,12 +137,15 @@
 	<select id="selectNewGosuList" resultType="g">
 		select * from (select
 		rownum as rnum , r.* from (select
-		member_no as gosuNo,
-		member_id as
-		gosuId,
-		filepath as gosuImg
-		from member where
-		member_type=2 order by 1
+		m.member_no as gosuNo,
+		m.member_id as gosuId,
+		m.filepath as gosuImg,
+		g.ggosu_no as ggsouNo
+        from member m
+        LEFT JOIN gosu g
+        ON m.member_no = g.gosu_no
+        where
+		m.member_type=2 order by 1
 		desc )r)rr where rnum between 1
 		and 4
 	</select>
@@ -391,7 +394,11 @@
 		(select filepath from member
 		where member_no
 		= pro.member_no) as
-		memberImg
+		memberImg,
+        (select ggosu_no from gosu
+		where gosu_no
+		= pro.member_no) as
+		ggosuNo
 		from(select * from
 		gosu_request_project
 		where
