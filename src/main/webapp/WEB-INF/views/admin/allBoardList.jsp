@@ -121,7 +121,7 @@
 				
 				<p class="title" style="margin-top:50px; width: 320px;">둘중에 하나 넣기</p>	
 				<div class="box1">
-					게시판 내 5일치 차트 or<br> 글 제일 많이 쓴 회원 정보
+					<canvas id="line-chart" style="margin-top:15px;"></canvas>
 				</div>
 			</div>
 			<div class="flexBox">
@@ -304,6 +304,19 @@
 		    }
 		});
 		
+		new Chart(document.getElementById("line-chart"), {
+			  type: 'line',
+			  data: {
+			    labels: ${weekList},
+			    datasets: [{ 
+			        data: ${countList5},
+			        label: boardType,
+			        borderColor: "#3e95cd",
+			        fill: false
+			      }
+			    ]
+			  }
+			});
 		
 		//카테고리 색
 		if(type == 1){
@@ -328,7 +341,7 @@
 		var index = $(".delBtn").index(this);
 		var boardNo = $(".delBtn").eq(index).val();
 		
-		var checkConfirm = confirm("여기서 삭제하면 회원에게 통보없이 게시물이 삭제됩니다. 삭제하시겠습니까?");
+		var checkConfirm = confirm("이곳에서 삭제하면 회원에게 통보없이 게시물이 삭제됩니다. 삭제하시겠습니까?");
 		if(checkConfirm){
 			location.href="/postSeleteDelete.do?type="+${type}+"&boardNo="+boardNo;
 		}
