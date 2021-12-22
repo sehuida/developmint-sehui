@@ -260,20 +260,20 @@
 			<when test="category==0">
 				<trim prefix="where">
 					<if test="keyword == null">
-					
+					 	order by 1 desc
 					</if>
 					<if test="keyword != null">
-						"email" like  '%'||#{keyword}||'%'
+						"email" like  '%'||#{keyword}||'%' order by 1 desc
 					</if>
 				</trim>
 			</when>
 			<otherwise>
 				<trim prefix="where">
 					<if test="keyword == null">
-						"category"=#{category}
+						"category"=#{category} order by 1 desc
 					</if>
 					<if test="keyword != null">
-						"category"=#{category} and "email" like '%'||#{keyword}||'%'
+						"category"=#{category} and "email" like '%'||#{keyword}||'%' order by 1 desc
 					</if>
 				</trim>
 			</otherwise>

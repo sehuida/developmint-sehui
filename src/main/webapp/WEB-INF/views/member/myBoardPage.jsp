@@ -61,7 +61,7 @@
 			
 			if($("#notting").val() == 0){
 				swal({
-			        title: '신청내역이 없습니다',
+			        title: '작성내역이 없습니다',
 			        text: '',
 			        icon: 'warning',
 			        button : '돌아가기'

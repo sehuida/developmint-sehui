@@ -80,7 +80,7 @@ public class ResumeController {
 	@ResponseBody
 	public Resume ceoResume(int resumeNo, int memberNo) {
 		Resume resume = service.resetCeoResume(resumeNo, memberNo);
-		
+		System.out.println(resume);
 		return resume;
 	}
 	
@@ -99,6 +99,8 @@ public class ResumeController {
 	public String applicationCompany(int memberNo, Model model) {
 		ArrayList<ApplicationCompany> list = service.selectAllAnnounce(memberNo);
 		int count = service.applicationCount(memberNo);
+		/* 이력서 내용 가져와야 할ㄹ 것 같은데 */
+		/* ArrayList<Resume> resumeList = service.select */
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		System.out.println("count : "+ count);
