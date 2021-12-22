@@ -244,16 +244,18 @@
 							            		제주
 							            	</c:if>	
 										</p>
-										<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;">
-											<p><span style="font-weight: bold">대표이력서</span> : ${r.resumeTitle }</p>
-											<p><span style="font-weight: bold">이름</span> : ${sessionScope.m.memberName }</p>
-											<p><span style="font-weight: bold">여기</span> : 어떻게 꾸밀까</p>
-											<p><span style="font-weight: bold">작성일</span> : ${r.writeDate }</p>
+										<div class="selectResume" style="width: 466px; background-color: #f8f9fa; height: 60px; line-height: 60px; padding: 0px 30px; overflow: hidden; border-radius: 10px; position: relative; top: 20px; border: 1px solid #ebebeb;">
+											<span style="font-size: 14px; color: #444;">선택된 이력서</span>
+											<a href="/resumeManage.do?memberNo=${sessionScope.m.memberNo }&reqPage=1"><button data-v-6259d225="" fragment="103966058a9" type="button" class="btn" style="color: #444; float:right; font-size: 14px; width: 120px; height:40px; margin-top: 10px; background-color: white; border-radius: 10px;">이력서 변경 <svg data-v-6259d225="" viewBox="0 0 16 16" class="ic" style="height: 14px; margin-top: -3px;"><path d="M6 13.657L11.657 8 6 2.343" stroke="#444" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></a>
+										</div>
+										<div style="border: 1px solid #d9d9d9; padding: 20px; padding-left: 25px; margin-bottom: 20px; border-top: none; border-radius: 10px; border: 1px solid #eaf0fa; padding-top: 35px; box-shadow: 0 2px 14px 0 rgb(0 0 0 / 10%);">
+											<span style="font-size: 12px; color: #999999;">${r.writeDate }</span>
+											<p><a href="/resumeView.do?resumeNo=${r.resumeNo }" target="_blank" style="font-weight: bold; text-decoration: none; color: black; text-overflow: ellipsis;">${r.resumeTitle }</a></p>
 										</div>
 										<p class="desc" style="font-size:12px; color: #999999;"> 제출서류는 90일까지 지원기업에게 제공됩니다.<br>제출에 동의할 경우에만 [입사지원] 버튼을 클릭해 주세요.<br> 동의하지 않을 경우 입사지원이 불가능합니다.</p>
 										<p class="desc" style="font-size:12px; color: #999999;"> 만료(응시 시작일로부터 3년)된 인 ∙ 적성검사 포함 시 입사지원이 불가능하며, 입사지원 후 제출된 인 ∙ 적성검사는 만료 여부와 관계없이 입사지원서 열람 기준 내 인사담당자가 확인할 수 있습니다.</p>
 										<div style="text-align: right; ">
-											<button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">신청</button>
+											<button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">지원하기</button>
 											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
 										</div>
 										<input type="hidden" name="announceNo" value="${a.announceNo }">
