@@ -291,16 +291,6 @@
 </style>
 <script>
 	$(function(){
-		if($(".ceoResume").val() == 1) {
-			/* $(this).siblings */$(".input__on-off").prop('checked',true);
-			/* ceoResume == 1 인게 보여야함
-				switch${i.count }
-			
-			for(int i = 0; i<5; i++) {
-					
-			}
-			*/
-		}
 		
 		
 		
@@ -548,8 +538,15 @@
 								<div class="ceoResumeChk">
 									<input type="hidden" class="ceoResume" id="ceoResume" value="${rs.ceoResume }" name="ceoResume">
 									<input type="hidden" name="memberNo" class="memberNo" value="${sessionScope.m.memberNo }">
-									<input type="hidden" value="${rs.resumeNo }" class="resumeNo" name="resumeNo">			<!-- aaaaaaaaaaaaaaaaaaaaaaaaa -->
-									<input type="radio" id="switch${i.count }" name="switch1" class="input__on-off">	<!--  ondblclick="this.checked=false" 더블클릭시 체크해제 (아직 안댐) -->
+									<input type="hidden" value="${rs.resumeNo }" class="resumeNo" name="resumeNo">
+									<c:choose>
+										<c:when test="${rs.ceoResume eq 1 }">
+											<input type="radio" id="switch${i.count }" name="switch1" class="input__on-off" checked="">
+										</c:when>
+										<c:otherwise>
+											<input type="radio" id="switch${i.count }" name="switch1" class="input__on-off">
+										</c:otherwise>
+									</c:choose>
 									<label for="switch${i.count }" class="label__on-off"> 
 										<span class="marble"></span> 
 										<span class="on">on</span> 
@@ -649,7 +646,7 @@
 			</c:otherwise>
 		</c:choose>
 		</div>
-		<c:if test="${not empty rs }">
+		<c:if test="${not empty list }">
 			<div id="pageNavi">${pageNavi }</div>
 		</c:if>
 	</div>
