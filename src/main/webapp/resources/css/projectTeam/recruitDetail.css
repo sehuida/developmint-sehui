@@ -119,9 +119,21 @@
 }
 
 .commmentInfoFlexBox{
-    margin-top: 80px;
-    display: flex;
+	display: flex;
+    margin-top: 20px;
+    margin-left: 40px;
 }
+
+.profileImgBox{
+	display: flex;
+}
+
+.reProfileImg{
+	width: 60px;
+	height: 60px;
+	display: flex;
+}
+
 .commentDate{
     font-weight: 600;
     margin-left: 20px;
@@ -132,13 +144,20 @@
     margin-left: 50px;
 }
 
+.reCommentContent{
+	width: 1000px;
+    margin-top: 10px;
+    margin-left: 80px;
+}
+
 .nestedCommentFlexBox{
     display: flex;
     height: 140px;
 }
 .nestedCommnetImg{
     width: 60px;
-    margin-right: 20px;
+    height: 60px;
+    margin-right: 15px;
 }
 
 .nestedCommentBox{
@@ -146,6 +165,14 @@
 
 .updateText{
     text-decoration: none;
+}
+
+.insertReText{
+	text-decoration: none;
+}
+
+.deleteText{
+	text-decoration: none;
 }
 
 .bottomContentFlexBox_iconBox{

@@ -16,5 +16,6 @@ public class ProjectEntry {
 	private String memberId;
 	private int memberGrade;
 	private int availableNum;
+	private int projectStatus;
 	
 }

@@ -16,6 +16,7 @@
 		var entryStatus = $("#entryStatus").val();
 		var memberNo = $("#memberNo").val();
 		var projectNo = $("#projectNo").val();
+		
 		$(".return_img").click(function(){
 			if(entryStatus != 1){
 				location.href="/manageEntry.do?memberNo="+memberNo+"&projectNo="+projectNo+"&reqPage=1&viewValue=1";
@@ -24,30 +25,27 @@
 			}
 		});
 		
-		$(".updateText").click(function(){
-			$(this).parent().next(".updateTextBox").css()
-			$(".updateTextBox").css("display", "block");
+		$("a[name=updateComment]").click(function(){
+			$(this).parent().next(".updateTextBox").show();
 		});
 		
-		$("#cancelBtn1").click(function(){
-			$("#updateTextBox").css("display", "none");
+		$("button[name=cancelBtn1]").click(function(){
+			$(this).parent().parent().parent().parent(".updateTextBox").hide();
 		});
 		
-		$("#insertReComment").click(function(){
-			/* $("#reCommentTextBox").css("display", "block"); */
-			$("#reCommentTextBox").show();
+		$(".insertReText").click(function(){
+			$(this).parent().next().next(".reCommentTextBox").show();
 		});
 		
-		$("#cancelBtn2").click(function(){
-			/* $("#reCommentTextBox").css("display", "none"); */
-			$("#reCommentTextBox").hide();
+		$("button[name=cancelBtn2]").click(function(){
+			$(this).parent().parent().parent().parent(".reCommentTextBox").hide();
 		});
 		
-		$("#updateReComment").click(function(){
-			$("#updateReCommentTextBox").show();
+		$("a[name=updateReComment]").click(function(){
+			$(this).parent().next(".updateReCommentTextBox").show();
 		});
-		$("#cancelBtn3").click(function(){
-			$("#updateReCommentTextBox").hide();
+		$("button[name=cancelBtn3]").click(function(){
+			$(this).parent().parent().parent(".updateReCommentTextBox").hide();
 		});
 		
 	});
@@ -157,8 +155,8 @@
 	                	<input type="hidden" name="boardType" value="5">
 	                </div>
 	                <div class="commentBtnBox">
-	                	<button type="submit" class="btn btn-outline-primary">등록</button>
-	                	<button type="reset" class="btn btn-outline-primary">초기화</button>
+               			<button type="submit" class="btn btn-outline-primary">등록</button>
+               			<button type="reset" class="btn btn-outline-primary">초기화</button>
 	                </div>
                 </form>
             </div>
@@ -176,8 +174,7 @@
 		                    		</c:otherwise>
 		                    	</c:choose>
 		                    </div>
-		                    <p class="memberIdText">${cl.memberId }</p>
-		                    <p class="commentDate">${cl.regDate }</p>
+		                    <p class="memberIdText">${cl.memberId } <span style="margin-left: 10px;">${cl.regDate }</span></p>
 		                </div>
 		                <div class="commentContent">
 		                    <div class="list-group">
@@ -188,32 +185,32 @@
 		                    <div class="updateFunction">
 		                    	<c:choose>
 		                    		<c:when test="${sessionScope.m.memberId == cl.memberId }">
-		                    			<a href="javascript:void(0);" class="updateText" id="updateComment">수정</a>
-		                        		<a href="/deleteComment.do?commentNo=${cl.commentNo }&projectNo=${pe.projectNo }&memberNo=${memberNo}" class="updateText" id="deleteBtn1" >삭제</a>
+		                    			<a href="javascript:void(0);" class="updateText" name="updateComment">수정</a>
+		                        		<a href="/deleteComment.do?commentNo=${cl.commentNo }&projectNo=${pe.projectNo }&memberNo=${memberNo}&boardCheckKey=2" class="deleteText" id="deleteBtn1" >삭제</a>
 		                    		</c:when>
 		                    		<c:when test="${sessionScope.m.memberId != cl.memberId }">
-		                    			<a href="javascript:void(0);" class="updateText" id="insertReComment" >대댓글 달기</a>
+		                    			<a href="javascript:void(0);" class="insertReText" id="insertReComment" >대댓글 달기</a>
 		                    		</c:when>
 		                    	</c:choose>
 		                    </div>
 		                    <div class="updateTextBox" id="updateTextBox">
 		                    	<form action="updateComment.do" method="post">
-					                  <div class="form-group">
-					                      	<textarea class="form-control" id="exampleTextarea" rows="3" value="${cl.commentContent }" name="commentContent" maxlength="49"></textarea>
-					                      	<input type="hidden" name="commentNo" value="${cl.commentNo }">
-					                      	<input type="hidden" name="projectNo" value="${pe.projectNo }">
+					                  <div class="form-group" style="overflow: hidden;">
+					                      <textarea class="form-control" id="exampleTextarea" rows="3" value="${cl.commentContent }" name="commentContent" maxlength="49"></textarea>
+					                      <input type="hidden" name="commentNo" value="${cl.commentNo }">
+					                      <input type="hidden" name="projectNo" value="${pe.projectNo }">
 				                			<input type="hidden" name="memberNo" value="${memberNo}">
-					                  </div>
-					                  <div class="commentBtnBox">
-					                        <button type="submit" class="btn btn-outline-primary">수정</button>
-					                        <button type="reset" class="btn btn-outline-primary">초기화</button>
-					                        <button type="button" class="btn btn-outline-primary" id="cancelBtn1">취소</button>
+						                  <div class="commentBtnBox">
+						                        <button type="submit" class="btn btn-outline-primary">수정</button>
+						                        <button type="reset" class="btn btn-outline-primary">초기화</button>
+						                        <button type="button" class="btn btn-outline-primary" name="cancelBtn1">취소</button>
+						                  </div>
 					                  </div>
 		                        </form>
 		                    </div>
 		                    <div class="reCommentTextBox" id="reCommentTextBox">
 		                    	<form action="reCommentInsert.do" method="post">
-					                <div class="form-group">
+					                <div class="form-group" style="overflow: hidden;">
 					                    <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="댓글을 입력하세요." name="commentContent" maxlength="49"></textarea>
 					                    <input type="hidden" name="boardNo" value="${pe.projectNo }">
 					                    <input type="hidden" name="commentNo" value="${cl.commentNo }">
@@ -224,7 +221,7 @@
 					                <div class="commentBtnBox">
 					                      <button type="submit" class="btn btn-outline-primary">등록</button>
 					                      <button type="reset" class="btn btn-outline-primary">초기화</button>
-					                      <button type="button" class="btn btn-outline-primary" id="cancelBtn2">취소</button>
+					                      <button type="button" class="btn btn-outline-primary" name="cancelBtn2">취소</button>
 					                </div>
 		                        </form>
 		                    </div>
@@ -233,25 +230,22 @@
 	                <c:forEach items="${commentList }" var="cll">
 	                	<c:if test="${cll.commentType == 2 && cl.commentNo == cll.commentRef}">
 	                		<div class="nestedCommentFlexBox">
-			                    <div class="nestedCommnetImgBox">
-			                        <img src="/resources/img/recruitTeamProject/common/left-arrow.png" class="nestedCommnetImg">
-			                    </div>
 			                    <div class="nestedCommentBox">
+			                        <img src="/resources/img/recruitTeamProject/common/left-arrow.png" class="nestedCommnetImg">
 			                        <div class="commmentInfoFlexBox">
 			                            <div class="profileImgBox">
 					                    	<c:choose>
 					                    		<c:when test="${cll.writerImgPath eq null}">
-					                    			<img class="profileImg" src="/resources/img/recruitTeamProject/common/user.png">
+					                    			<img class="reProfileImg" src="/resources/img/recruitTeamProject/common/user.png">
 					                    		</c:when>
 					                    		<c:otherwise>
-					                    			<img class="profileImg" src="/resources/upload/member/${cll.writerImgPath }">
+					                    			<img class="reProfileImg" src="/resources/upload/member/${cll.writerImgPath }">
 					                    		</c:otherwise>
 					                    	</c:choose>
+				                            <p class="memberIdText">${cll.memberId } <span class="commentDate">${cll.regDate }</span></p>
 					                    </div>
-			                            <p class="memberIdText">${cll.memberId }</p>
-			                            <p class="commentDate">${cll.regDate }</p>
 			                        </div>
-			                        <div class="commentContent">
+			                        <div class="reCommentContent">
 			                            <div class="list-group">
 			                                <a href="javascript:void(0);" class="list-group-item list-group-item-action flex-column align-items-start">
 			                                    <p class="mb-1">${cll.commentContent }</p>
@@ -261,7 +255,7 @@
 					                    	<c:choose>
 					                    		<c:when test="${sessionScope.m.memberId == cll.memberId }">
 					                    			<a href="javascript:void(0);" class="updateText" id="updateReComment">수정</a>
-					                        		<a href="/deleteComment.do?commentNo=${cll.commentNo }&projectNo=${pe.projectNo }&memberNo=${memberNo}" id="deleteReComment"><p class="updateText">삭제</p></a> 
+					                        		<a href="/deleteComment.do?commentNo=${cll.commentNo }&projectNo=${pe.projectNo }&memberNo=${memberNo}&boardCheckKey=2" id="deleteReComment"><p class="deleteText">삭제</p></a> 
 					                    		</c:when>
 					                    	</c:choose>
 					                    </div>
@@ -276,7 +270,7 @@
 						                          <div class="commentBtnBox">
 						                              <button type="submit" class="btn btn-outline-primary">수정</button>
 								                      <button type="reset" class="btn btn-outline-primary">초기화</button>
-								                      <button type="button" class="btn btn-outline-primary" id="cancelBtn3">취소</button>
+								                      <button type="button" class="btn btn-outline-primary" name="cancelBtn3">취소</button>
 						                          </div>
 			                                </form>
 			                            </div>
