@@ -68,12 +68,13 @@
 		</button>
 	</div>
 	</header>
+	<!-- Carousel 끝 -->
 	<div class="container">
 		<div class="container-fluid mt-3">
-			<h3>Carousel Example</h3>
-			<p>The following example shows how to create a basic carousel with
-				indicators and controls.</p>
+			<h3>Recruitment of Project teams</h3>
+			<p>We are recruiting team members to proceed with the project. Please select your preferred language.</p>
 		</div>
+		<hr>
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</div>
