@@ -13,7 +13,7 @@ public class GosuRequestProject {
 	private int requestProjectSubNo;
 	private String memberImg;
 	private String memberId;
-	
+	private int ggosuNo;
 	
 	
 	
