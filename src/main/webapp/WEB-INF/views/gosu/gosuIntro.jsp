@@ -77,14 +77,6 @@
 	margin-left: 0 !important;
 }
 
-.footer {
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	background-color: white;
-}
-
 
 html, body {
 	margin: 0;
@@ -98,12 +90,13 @@ html, body {
 	height: 100%;
 	position: relative;
 	padding:150px;
+	padding-top: 250px;
 }
 
 .down-wrap {
 	position: fixed;
 	z-index: 1000;
-	margin-top: 180px;
+		margin-top: 20%;
 	margin-left: 1400px;
 }
 
@@ -122,7 +115,7 @@ html, body {
 	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
 	margin:50px;
 	border-radius: 30px;
-	margin-top: 0;
+
 }
 @keyframes motion 
 { 0% {margin-top: 0px;}
@@ -360,6 +353,5 @@ html, body {
 			});
 		});
 	</script>
-	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>
