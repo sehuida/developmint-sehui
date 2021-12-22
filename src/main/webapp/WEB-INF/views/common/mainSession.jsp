@@ -281,7 +281,26 @@
 				
 				<div class="BoardList" >
 					<div>
-					<p class="title" style="background-color: #fff">비회원 QNA</p>
+					<p class="title" style="background-color: #fff;">비회원 QNA</p>
+					<a href="/shareList.do?reqPage=1&type=2" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
+					</div>
+					<c:forEach items="${nonQnaList }" var="nq">
+						<c:choose>
+							<c:when test="${fn:length(nq.qnaTitle) > 16}">
+								<c:set var="subTitle" value="${fn:substring(nq.qnaTitle,0,16)}"/>
+								<a href="#" class="newBoard"><span>${subTitle }...</span></a>
+							</c:when>
+							<c:otherwise>
+								<span class="newTitle-2">${nq.qnaTitle }</span>
+							</c:otherwise>
+						</c:choose>
+						<span class="newBoardDate">${nq.regDate }</span><br>
+					</c:forEach>
+				</div>
+				
+				<div class="BoardList" >
+					<div>
+					<p class="title" style="background-color: #fff">개발지식공유</p>
 					<a href="/adminCounsel.do?type=2" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
 					</div>
 					<c:forEach items="${qnaList }" var="q">
@@ -295,25 +314,6 @@
 							</c:otherwise>
 						</c:choose>
 						<span class="newBoardDate">${q.regDate }</span><br>
-					</c:forEach>
-				</div>
-				
-				<div class="BoardList" >
-					<div>
-					<p class="title" style="background-color: #fff;">개발지식공유</p>
-					<a href="/shareList.do?reqPage=1&type=2" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
-					</div>
-					<c:forEach items="${nonQnaList }" var="nq">
-						<c:choose>
-							<c:when test="${fn:length(nq.qnaTitle) > 16}">
-								<c:set var="subTitle" value="${fn:substring(nq.qnaTitle,0,16)}"/>
-								<a href="#" class="newBoard"><span>${subTitle }...</span></a>
-							</c:when>
-							<c:otherwise>
-								<span class="newTitle">${nq.qnaTitle }</span>
-							</c:otherwise>
-						</c:choose>
-						<span class="newBoardDate">${nq.regDate }</span><br>
 					</c:forEach>
 				</div>
 				
