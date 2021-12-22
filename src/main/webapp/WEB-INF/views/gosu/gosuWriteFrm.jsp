@@ -417,9 +417,10 @@
 					<div id="hrm-modal">
 						<h3 style="color: white;">프로젝트 추가하기</h3>
 						<div class="hrm-content">
-							<b>메인사진</b> <input type="file" class="gprojectFilepath"
-								id="gprojectFilepath" accept="image/*"><br>
-							<div id="gimage_container"></div>
+							<b style="color:#78c2ad;">메인사진</b> <input type="file" class="gprojectFilepath"
+								id="gprojectFilepath" accept="image/*"style="margin-bottom: 25px;" ><br>
+							<div id="gimage_container" style='margin-bottom:25px;'></div>
+
 							<b>제목</b><input type="text" class="gprojectTitle"
 								id="gprojectTitle" placeholder="내용을 입력해주세요."><br> <b
 								style="float: left;">내용</b>
@@ -505,7 +506,7 @@
 						}
 					}
 				});
-
+		
 		function uploadImage(file, editor) {
 			data = new FormData();
 			data.append("file", file);
@@ -584,7 +585,7 @@
 										var div = $(".g-photo-wrap");
 										console.log("div : " + div);
 										html += "<div class='g-photo-one'><dl>";
-										html += "<dt id='gimg'><img></dt>";
+										html += "<dt id='gimg' ><img></dt>";
 										html += "<dd><b class='g-b' style='font-size: 19px;'></b></dd>";
 										html += "<dd><p class='g-p'></p></dd>";
 										html += "</dl></div>";
@@ -616,6 +617,11 @@
 			$(".hrm-wrap").css("display", "none");
 
 		});
+
+		
+		
+	
+		
 		function gProjectArr() {
 			var gprojectTitle = $("#gprojectTitle").val();
 			console.log(gprojectTitle);
@@ -649,10 +655,7 @@
 						processData : false,
 						contentType : false,
 						success : function(data) {
-							console.log(data);
-							console.log(data.gprojectFilepath);
-							console.log(data.gprojectTitle);
-							console.log(data.gprojectContent);
+							$(".g-photo-one").first().append("<div style='text-align:center;'><button  class='delPJ' type='button'style='width:80px; border-radius:20px; background-color:#66a593; color:white;' >삭제</button></div>");
 							$(".g-photo-one")
 									.first()
 									.append(
@@ -665,6 +668,12 @@
 									.first()
 									.append(
 											"<input type='hidden' name='gprojectContent' value='"+data.gprojectContent+"'>");
+							
+							$(".delPJ").click(function() {
+								$(this).parent().parent().remove();
+						
+
+							});
 
 						}
 					});

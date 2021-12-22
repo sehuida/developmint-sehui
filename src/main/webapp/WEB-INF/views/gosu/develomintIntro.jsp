@@ -73,14 +73,6 @@
 	width: 50%;
 }
 
-.footer {
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	background-color: white;
-}
-
 html, body {
 	margin: 0;
 	padding: 0;
@@ -92,14 +84,12 @@ html, body {
 	width: 100%;
 	height: 100%;
 	position: relative;
-	height: 100%;
-	height: 100%;
 }
 
 .down-wrap {
 	position: fixed;
 	z-index: 1000;
-	margin-top: 180px;
+	margin-top: 20%;
 	margin-left: 1400px;
 }
 .container-fluid{
@@ -113,7 +103,7 @@ html, body {
 .down-img>img {
 	width: 30px;
 	animation: motion 0.3s linear 0s infinite alternate;
-	margin-top: 0;
+	
 }
 
 @keyframes motion 
@@ -126,11 +116,16 @@ html, body {
 		<div class="g-box">
 			<%@include file="/WEB-INF/views/common/header.jsp"%>
 
-			<div class="back-img" style="margin: 0;"></div>
 			<h1 style="text-align: center; margin-top: 150px;"><br>
 				<span
 					style="color: rgb(78, 205, 196); font-size: 80px; font-weight: 900;">Develomint</span>
 			</h1>
+			<div style="margin-top: 150px;">
+				<h3
+					style="text-align: center; width: 100%;  font-size: 40px;">당신만의
+					커뮤니티</h3>
+				<div class="line" style="width: 15rem;"></div>
+			</div>
 			<div class="down-wrap">
 				<div class="down-img">
 					<img src="/resources/img/gosu/downdown.png">
@@ -140,16 +135,6 @@ html, body {
 				</div>
 			</div>
 		</div>
-		<div class="g-center g-box">
-			<div style="margin-top: 400px;">
-				<h3
-					style="text-align: center; width: 100%;  font-size: 60px;">당신만의
-					커뮤니티</h3>
-				<div class="line"></div>
-			</div>
-
-		</div>
-
 		<div class="g-box">
 			<br> <br> <br> <br> <br> <br>
 			<h1 style="font-size: 50px; line-height: 90px; margin-top: 200px;">
@@ -195,22 +180,13 @@ html, body {
 			</h1>
 		</div>
 
-		<div class="g-center g-box">
-			<div style="margin-top: 50px;">
-				<br>
-				<h3
-					style="text-align: center; width: 100%; color: gray;">오픈소스를
-					요리하다, Olive Platform</h3>
-				<br> <br> <img style="width: 100%;"
-					src="/resources/img/gosu/olive.png">
-			</div>
-		</div>
+		
 		<div class="g-center g-box">
 			<div style="text-align: center; margin-top: 300px;">
 
 				<h3 style="text-align: center; width: 100%; color: black;font-size: xx-large;">디벨로민트에
 					가입해보세요</h3>
-				<div class="line" style="width: 15rem;"></div>
+				<div class="line" style="width: 12rem;"></div>
 				<br> <br> <br> <br> <br> <br>
 				<c:if test="${empty sessionScope.m }">
 					<a href="/joinFrm.do" class="btn btn-success"
@@ -289,6 +265,5 @@ html, body {
 			});
 		});
 	</script>
-	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>
