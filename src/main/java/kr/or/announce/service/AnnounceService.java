@@ -105,6 +105,15 @@ public class AnnounceService {
 		
 	}
 
+	public Resume selectCeoResume(int memberNo) {
+		return dao.selectCeoResume(memberNo);
+	}
+
+	/*
+	 * public int selectResumeNo(int announceNo) { return
+	 * dao.selectResumeNo(announceNo); }
+	 */
+
 	/*
 	 * public ArrayList<Announce> selectAllannounce(int memberNo) { return
 	 * dao.selectAllAnnounce(memberNo); }

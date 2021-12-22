@@ -242,14 +242,15 @@
                     <option>디자인</option>
                     <option>기획</option>
                 </select>
-                <input type="text" placeholder="검색 //나중에 돋보기 이미지로 변경" class="search"><img id="searchImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
+                <input type="text" placeholder="검색 " class="search"><img id="searchImg" src="/resources/img/jobSearch/dot.PNG">
                 
                 <c:forEach items="${list }" var="a" varStatus="i">
+                <%-- <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }"> 이거로는 왜 값 안넘어감? 후..... --%>
 	                <div class="content">
 	                    <div class="status">모집중</div>
 	                    <div class="cpName"><a href="companyInfo.do?companyNo=${a.companyNo }">${a.companyName }</a></div>	
 	                    <div class="title">
-	                        <a href="announceView.do?announceNo=${a.announceNo}">${a.announceTitle }</a>	
+	                        <a href="announceView.do?announceNo=${a.announceNo}&memberNo=${sessionScope.m.memberNo }">${a.announceTitle }</a>	
 	                    </div>
 	                    <div class="info">
 	                        <div class="humanInfo">
@@ -354,157 +355,11 @@
 	                    </div>
 	                </div>
                 </c:forEach>
-                
-                <div class="content">
-                    <div class="status">모집중</div>
-                    <div class="cpName"><a href="companyInfo.do?companyNo=1">케이씨환경서비스(주)</a></div>
-                    <div class="title">
-                        <a href="jobSearchView.do?announce_no=1">2021 하반기 경영지원실 신입/경력 채용 공고</a>
-                    </div>
-                    <div class="info">
-                        <div class="humanInfo">
-                            <span>경력</span> <span>신입·경력</span><br>
-                            <span>학력</span> <span>대졸(4년제) 이상</span>
-                        </div>
-                        <div class="workInfo">
-                            <span>|</span><span>개발</span><br>
-                            <span>|</span><span>애플리케이션</span>
-                        </div>
-                    </div>
-                    <div class="mainFooter">
-                        <div class="tech">
-                            <span>Java</span> <span>Android</span>
-                        </div>
-                        <div class="subInfo">
-                            <span>서울특별시 강남구</span> <span>등록일자 2021.11.23.</span>
-                        </div>
-                        <div class="situation">
-                            <div class="date">마감 <span>7</span>일 전</div>
-                            <div class="apply">총 <span>2</span>명 지원</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="content">
-                    <div class="status">모집중</div>
-                    <div class="cpName"><a href="companyInfo.do?companyNo=1">케이씨환경서비스(주)</a></div>
-                    <div class="title">
-                        <a href="jobSearchView.do?announce_no=1">2021 하반기 경영지원실 신입/경력 채용 공고</a>
-                    </div>
-                    <div class="info">
-                        <div class="humanInfo">
-                            <span>경력</span> <span>신입·경력</span><br>
-                            <span>학력</span> <span>대졸(4년제) 이상</span>
-                        </div>
-                        <div class="workInfo">
-                            <span>|</span><span>개발</span><br>
-                            <span>|</span><span>애플리케이션</span>
-                        </div>
-                    </div>
-                    <div class="mainFooter">
-                        <div class="tech">
-                            <span>Java</span> <span>Android</span>
-                        </div>
-                        <div class="subInfo">
-                            <span>서울특별시 강남구</span> <span>등록일자 2021.11.23.</span>
-                        </div>
-                        <div class="situation">
-                            <div class="date">마감 <span>7</span>일 전</div>
-                            <div class="apply">총 <span>2</span>명 지원</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="content">
-                    <div class="status">모집중</div>
-                    <div class="cpName"><a href="companyInfo.do?companyNo=1">케이씨환경서비스(주)</a></div>
-                    <div class="title">
-                        <a href="jobSearchView.do?announce_no=1">2021 하반기 경영지원실 신입/경력 채용 공고</a>
-                    </div>
-                    <div class="info">
-                        <div class="humanInfo">
-                            <span>경력</span> <span>신입·경력</span><br>
-                            <span>학력</span> <span>대졸(4년제) 이상</span>
-                        </div>
-                        <div class="workInfo">
-                            <span>|</span><span>개발</span><br>
-                            <span>|</span><span>애플리케이션</span>
-                        </div>
-                    </div>
-                    <div class="mainFooter">
-                        <div class="tech">
-                            <span>Java</span> <span>Android</span>
-                        </div>
-                        <div class="subInfo">
-                            <span>서울특별시 강남구</span> <span>등록일자 2021.11.23.</span>
-                        </div>
-                        <div class="situation">
-                            <div class="date">마감 <span>7</span>일 전</div>
-                            <div class="apply">총 <span>2</span>명 지원</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="content">
-                    <div class="status">모집중</div>
-                    <div class="cpName"><a href="companyInfo.do?companyNo=1">케이씨환경서비스(주)</a></div>
-                    <div class="title">
-                        <a href="jobSearchView.do?announce_no=1">2021 하반기 경영지원실 신입/경력 채용 공고</a>
-                    </div>
-                    <div class="info">
-                        <div class="humanInfo">
-                            <span>경력</span> <span>신입·경력</span><br>
-                            <span>학력</span> <span>대졸(4년제) 이상</span>
-                        </div>
-                        <div class="workInfo">
-                            <span>|</span><span>개발</span><br>
-                            <span>|</span><span>애플리케이션</span>
-                        </div>
-                    </div>
-                    <div class="mainFooter">
-                        <div class="tech">
-                            <span>Java</span> <span>Android</span>
-                        </div>
-                        <div class="subInfo">
-                            <span>서울특별시 강남구</span> <span>등록일자 2021.11.23.</span>
-                        </div>
-                        <div class="situation">
-                            <div class="date">마감 <span>7</span>일 전</div>
-                            <div class="apply">총 <span>2</span>명 지원</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="content">
-                    <div class="status">모집중</div>
-                    <div class="cpName"><a href="companyInfo.do?companyNo=1">케이씨환경서비스(주)</a></div>	<!-- 회사번호 -->
-                    <div class="title">
-                        <a href="jobSearchView.do?announce_no=1">2021 하반기 경영지원실 신입/경력 채용 공고</a>	<!-- 공고번호 -->
-                    </div>
-                    <div class="info">
-                        <div class="humanInfo">
-                            <span>경력</span> <span>신입·경력</span><br>
-                            <span>학력</span> <span>대졸(4년제) 이상</span>
-                        </div>
-                        <div class="workInfo">
-                            <span>|</span><span>개발</span><br>
-                            <span>|</span><span>애플리케이션</span>
-                        </div>
-                    </div>
-                    <div class="mainFooter">
-                        <div class="tech">
-                            <span>Java</span> <span>Android</span>
-                        </div>
-                        <div class="subInfo">
-                            <span>서울특별시 강남구</span> <span>등록일자 2021.11.23.</span>
-                        </div>
-                        <div class="situation">
-                            <div class="date">마감 <span>7</span>일 전</div>
-                            <div class="apply">총 <span>2</span>명 지원</div>
-                        </div>
-                    </div>
-                </div>
                 <br>
                 <div id="pageNavi" style="padding: 0px;">${pageNavi }</div>
             </div>
         </div>
     </div>
-        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
