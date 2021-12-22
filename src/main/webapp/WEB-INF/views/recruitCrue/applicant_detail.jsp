@@ -24,9 +24,11 @@
 			}
 		});
 		
-		$("#updateComment").click(function(){
-			$("#updateTextBox").css("display", "block");
+		$(".updateText").click(function(){
+			$(this).parent().next(".updateTextBox").css()
+			$(".updateTextBox").css("display", "block");
 		});
+		
 		$("#cancelBtn1").click(function(){
 			$("#updateTextBox").css("display", "none");
 		});

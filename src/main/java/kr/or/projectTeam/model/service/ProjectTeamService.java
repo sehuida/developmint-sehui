@@ -16,6 +16,7 @@ import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectEntry;
 import kr.or.projectTeam.model.vo.ProjectReview;
 import kr.or.projectTeam.model.vo.ProjectTask;
+import kr.or.projectTeam.model.vo.ProjectTaskViewData;
 import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.projectTeam.model.vo.ProjectTeamApplicantViewData;
 import kr.or.projectTeam.model.vo.ProjectTeamApplyPageData;
@@ -710,6 +711,60 @@ public class ProjectTeamService {
 	public ArrayList<ProjectTask> projectTaskList(int projectNo) {
 		ArrayList<ProjectTask> list = dao.projectTaskList(projectNo);
 		return list;
+	}
+
+	public ProjectTaskViewData enterProjectTaskM(int projectNo, int reqPage ) {
+		int numPerPage = 10;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("projectNo", projectNo);
+		ArrayList<ProjectTask> tasklist = dao.selectAllTaskMList(projectNo);
+		ArrayList<ProjectTeamMember> ptmList = dao.selectTeamMember(projectNo);
+		
+		int totalCount = dao.selectTaskMTotalCount(projectNo);
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		} else {
+			totalPage = totalCount / numPerPage + 1;
+		}
+		
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
+		String pageNavi = "<ul class='pagination'>";
+		if(pageNo != 1) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage="+(pageNo-1)+"'>";
+			pageNavi += "&lt;</a></li>";
+		}// 페이지 숫자
+		for(int i=0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='page-item active'>";
+				pageNavi += "<a class = 'page-link' href='/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			} else {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음 버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage="+pageNo+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		
+		ProjectTaskViewData ptvd = new ProjectTaskViewData(tasklist, pageNavi, start, ptmList);
+		return ptvd;
 	}
 
 	

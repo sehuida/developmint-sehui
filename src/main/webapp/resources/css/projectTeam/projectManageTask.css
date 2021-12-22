@@ -90,7 +90,6 @@
     justify-content: space-between;
     margin-top: 20px;
     font-weight: 900;
-    
 }
 
 
@@ -126,11 +125,74 @@
     transition: all 0.3s ease-in-out;
 }
 
+.rBox_navi{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 800px;
+    margin-bottom: 40px;
+}
 
+#left_site{
+    display: flex;
+    cursor: pointer;
+}
 
+.rBox_Leftnavi_right{
+    opacity: 0.5;
+}
 
+.rBox_Leftnavi_middle{
+	opacity: 0.5;
+}
 
+.navi_checkbox{
+    position: relative;
+    top: 8px;
+    width: 30px;
+    height: 30px;
+}
 
+#navi_button{
+    position: relative;
+    bottom: 3px;
+    margin-left: 20px;
+}
+
+.navi_right_font{
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.navi_left_font{
+    position: relative;
+    top: 8px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #90d1b4;
+    margin-right: 15px;
+}
+
+#pageNavi{
+	display:flex;
+	font-size : 20px;
+	margin-top : 30px;
+	/* margin: 0 auto; */
+	justify-content: center;
+}
+
+.rBox_navi_icon{
+	width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.navi_right_font{
+	margin-right: 30px;
+	margin-left: 10px;
+	color: #90d1b4;
+}
 
 
 

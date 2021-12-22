@@ -339,6 +339,20 @@ public class ProjectTeamDao {
 		List<ProjectTask> list = sqlSession.selectList("projectTeam.projectTaskList", projectNo);
 		return (ArrayList<ProjectTask>) list;
 	}
+
+	public ArrayList<ProjectTask> selectAllTaskMList(int projectNo) {
+		List<ProjectTask> list = sqlSession.selectList("projectTeam.selectAllTaskMList", projectNo);
+		return (ArrayList<ProjectTask>) list;
+	}
+
+	public int selectTaskMTotalCount(int projectNo) {
+		return sqlSession.selectOne("projectTeam.selectTaskMTotalCount", projectNo);
+	}
+
+	public ArrayList<ProjectTeamMember> selectTeamMember(int projectNo) {
+		List<ProjectTeamMember> list = sqlSession.selectList("projectTeam.selectTeamMember", projectNo);
+		return (ArrayList<ProjectTeamMember>) list;
+	}
 	
 	
 
