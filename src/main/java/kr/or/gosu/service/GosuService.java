@@ -68,6 +68,7 @@ public class GosuService {
 		ArrayList<GosuReview> list2 = dao.selectGosuReviewList(gosu.getGgsouNo());
 		if(!list2.isEmpty()) {
 			gosu.setReviewAvg(dao.selectReviewAvg(gosu.getGgsouNo()));
+			gosu.setReviewCount(dao.selectReviewCount(gosu.getGgsouNo()));
 		}
 		return gosu;
 	}
@@ -331,7 +332,7 @@ public class GosuService {
 			ArrayList<GosuReview> list2 = dao.selectGosuReviewList(g.getGgsouNo());
 			if(!list2.isEmpty()) {
 				g.setReviewAvg(dao.selectReviewAvg(g.getGgsouNo()));
-				
+				g.setReviewCount(dao.selectReviewCount(g.getGgsouNo()));
 			}
 		}
 		int totalCount = dao.selectGosuListTotalCount();
@@ -388,6 +389,7 @@ public class GosuService {
 			ArrayList<GosuReview> list2 = dao.selectGosuReviewList(g.getGgsouNo());
 			if(!list2.isEmpty()) {
 				g.setReviewAvg(dao.selectReviewAvg(g.getGgsouNo()));
+				g.setReviewCount(dao.selectReviewCount(g.getGgsouNo()));
 				
 			}
 		}

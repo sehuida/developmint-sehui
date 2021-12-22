@@ -193,6 +193,7 @@ input:focus, textarea:focus {
 
 
 								</c:choose>
+									(${gosu.reviewCount }) 
 
 							</c:if></td>
 					</tr>

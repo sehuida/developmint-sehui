@@ -298,6 +298,7 @@
 
 
 												</c:choose>
+													(${g.reviewCount }) 
 
 
 											</c:if></td>

@@ -20,6 +20,7 @@ public class Gosu {
 	private String gosuId;
 	private String gosuImg;
 	private Double reviewAvg;
+	private int reviewCount;
 	
 	//검색필터
 	private String type;

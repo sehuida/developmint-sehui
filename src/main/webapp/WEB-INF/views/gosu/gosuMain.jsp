@@ -479,6 +479,8 @@ animation: motion 0.3s linear 0s infinite alternate;
 
 
 									</c:choose>
+									
+									(${g.reviewCount }) 
 
 
 								</c:if></td>
