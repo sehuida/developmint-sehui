@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +11,10 @@
 <link rel="stylesheet" href="/resources/css/default.css">
 <link rel="stylesheet" href="/resources/css/main/main.css">
 <link rel="stylesheet" href="/resources/css/projectTeam/recruitMember.css">
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 </head>
 <style>
 	* Make the image fully responsive */
@@ -96,19 +102,60 @@
 			<p>상금이 걸린 공모전에 참가해보세요! 당신의 재능을 첨부하면 됩니다.</p>
 		</div>
 	</div>
-	<div class="container">
-		<!-- 인기순 프로젝트 리스트 출력 -->
-		<!-- 인기순 프로젝트 리스트 출력  끝 -->
-		
-		<!-- 개발지식 공유 리스트 1-5까지 리스트 출력 -->
-		<!-- 개발지식 공유 리스트 1-5까지 리스트 출력  끝-->
-		
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
-		
-		<!-- 구인구직 5가지 출력 -->
+	<div class="container" style="margin-top: 0;;margin-bottom: 20px;">
+		<!-- 구인구직 4가지 출력 -->
+		<div  style="margin-top: 100px;">
+			<span class="subEngTitel">HOT</span> <span class="subTitel">인기 공모전</span>
+		</div>
+		<%-- 인기 공모전 리스트 --%>
+		<div class="newContestBox">
+			<c:forEach var="hc" items="${conlist.hotContest }">
+			<div>
+				<%--공모전 이미지 --%>
+				<div class="contestImgBox">
+					<div class="front item">
+							<img src="/resources/img/contest/${hc.contestImg }">
+					</div>
+					<div class="back item">
+						<div class="contestBack" style="background-image: url(/resources/img/contest/${hc.contestImg }) ">
+							<div class="contestBack2" >
+								<c:choose>
+									<c:when test="${hc.contestType == 1}">
+										<p><i class="bi bi-award" style="margin-right: 5px;"></i><span>공모유형</span> : 기획</p>
+									</c:when>
+									<c:when test="${hc.contestType == 2}">
+										<p><i class="bi bi-award" style="margin-right: 5px;"></i><span>공모유형</span> : 개발</p>
+									</c:when>
+									<c:otherwise>
+										<p><i class="bi bi-award" style="margin-right: 5px;"></i><span>공모유형</span> : 디자인</p>
+									</c:otherwise>
+								</c:choose>
+								<p><i class="bi bi-trophy" style="margin-right: 5px;"></i><span>1등 시상금</span> : ${hc.contestPrize } 만원</p>
+								<p style="margin-bottom: 80px;"><i class="bi bi-eye" style="margin-right: 5px;"></i><span>조회수</span> : ${hc.contestCount } 회</p>
+								<a href="/contestView.do?contestNo=${hc.contestNo }">
+									상세보기 <i class="bi bi-hand-index"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<%--공모전 제목(제목이 16글자가 넘어가면 뒤에는 ...으로 표시 --%>
+				<c:choose>
+					<c:when test="${fn:length(hc.contestTitle) > 16}">
+						<c:set var="subTitle" value="${fn:substring(hc.contestTitle,0,16)}"/>
+						<p class="newTitle">${subTitle }...</p>
+					</c:when>
+					<c:otherwise>
+						<p class="newTitle">${hc.contestTitle }</p>
+					</c:otherwise>
+				</c:choose>
+				
+				<p class="newcontent">주최 : ${hc.contestHost }</p>
+				<p class="newcontent">기간 : ${hc.contestDate } ~ ${hc.contestDeadline }</p>
+			</div>
+			</c:forEach>
+		</div>	
 		<!-- 구인구직 끝-->
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</div>
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
@@ -117,18 +164,71 @@
 		</div>
 	</div>
 	<div class="container">
-		<!-- 인기순 프로젝트 리스트 출력 -->
-		<!-- 인기순 프로젝트 리스트 출력  끝 -->
-		
-		<!-- 개발지식 공유 리스트 1-5까지 리스트 출력 -->
-		<!-- 개발지식 공유 리스트 1-5까지 리스트 출력  끝-->
-		
 		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
+		<c:forEach items="${gosuList }" var="g" begin="0" end="4">
+		<div class="gosu">
+			<button type="button" class="card border-primary mb-3"
+				style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+				<table>
+					<tr>
+						<c:if test="${empty g.gosuImg }">
+							<td rowspan="4" class="gosu_img"
+								style="padding: 40px; text-align: center;"><img
+								src="/resources/img/gosu/g_img_basic.png"
+								style="border-radius: 50%; width: 200px; height: 200px;"></td>
+						</c:if>
+						<c:if test="${not empty g.gosuImg }">
+							<td rowspan="4" style="padding: 40px; text-align: center;"><img
+								src="/resources/upload/member/${g.gosuImg }"
+								style="border-radius: 50%; width: 200px; height: 200px;"></td>
+						</c:if>
+
+
+						<td style="width: 600px;"><a href="/gosuContent.do?gNo=${g.ggsouNo}" class="gtitle">${g.gosuTitle }</a></td>
+					</tr>
+					<tr>
+						<td><hr></td>
+					</tr>
+					<tr>
+						<td><li><b>한줄소개</b>&nbsp;&nbsp;${g.gosuSelf }</li></td>
+					</tr>
+					<tr>
+						<td><li><b>비용</b>&nbsp;&nbsp;<b style="color: red;">${g.gosuCost }</b>&nbsp;원</li></td>
+					</tr>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">
+						<span style="color: rgb(78, 205, 196);">고수</span>&nbsp;&nbsp;${g.gosuId }</td>
+						<td><c:if test="${empty g.reviewAvg  }">
+								<span style="color: gray; font-size: small;">아직 등록된 리뷰가 없습니다.</span>
+							</c:if>
+							<c:if test="${not empty g.reviewAvg }">
+								<span>${g.reviewAvg } 점 &nbsp;&nbsp;</span>
+									<c:choose>
+										<c:when test="${g.reviewAvg eq 5}">
+											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+										</c:when>
+										<c:when test="${g.reviewAvg >= 4}">
+											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+										</c:when>
+										<c:when test="${g.reviewAvg >= 3}">
+											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+										</c:when>
+										<c:when test="${g.reviewAvg >= 2}">
+											<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+										</c:when>
+										<c:when test="${g.reviewAvg >= 1}">
+											<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+										</c:when>
+									</c:choose>
+									(${g.reviewCount }) 
+							</c:if>
+						</td>
+					</tr>
+				</table>
+			</button>
+		</div>
+		</c:forEach>
 		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
-		
-		<!-- 구인구직 5가지 출력 -->
-		<!-- 구인구직 끝-->
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</div>
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
@@ -152,23 +252,73 @@
 	</div>
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
-			<h3 class="text-primary" ><a href="/shareList.do?reqPage=1&type=1" class="de-non">개발지식공유 커뮤니티</a></h3>
-			<p>개발자들의 개발지식 공유 커뮤니티 입니다. 당신의 개발지식을 공유하세요!!</p>
+			<h3 class="text-primary" ><a href="/shareList.do?reqPage=1&type=1" class="de-non">게시판</a></h3>
+			<p>각 게시판에 들어가서 게시물들을 확인하고 찾아보고 작성해 보세요!!!</p>
 		</div>
 	</div>
-	<div class="container">
-		<!-- 인기순 프로젝트 리스트 출력 -->
-		<!-- 인기순 프로젝트 리스트 출력  끝 -->
-		
-		<!-- 개발지식 공유 리스트 1-5까지 리스트 출력 -->
-		<!-- 개발지식 공유 리스트 1-5까지 리스트 출력  끝-->
-		
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
-		
-		<!-- 구인구직 5가지 출력 -->
-		<!-- 구인구직 끝-->
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<div class="container" style="margin-bottom: 50px;">
+		<div class="cate3Box">
+			<div>
+				
+				<div class="BoardList" >
+					<div>
+					<p class="title" style="background-color: #fff">공지사항</p>
+					<a href="/noticeList.do?reqPage=1" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
+					</div>
+					<c:forEach items="${noticeList }" var="n">
+						<c:choose>
+							<c:when test="${fn:length(n.noticeTitle) > 16}">
+								<c:set var="subTitle" value="${fn:substring(n.noticeTitle,0,16)}"/>
+								<a href="/noticeView.do?noticeNo=${n.noticeNo }" class="newBoard"><span>${subTitle }...</span></a>
+							</c:when>
+							<c:otherwise>
+								<span class="newTitle">${n.noticeTitle }</span>
+							</c:otherwise>
+						</c:choose>
+						<span class="newBoardDate">${n.regDate }</span><br>
+					</c:forEach>
+				</div>
+				
+				<div class="BoardList" >
+					<div>
+					<p class="title" style="background-color: #fff">비회원 QNA</p>
+					<a href="/adminCounsel.do?type=2" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
+					</div>
+					<c:forEach items="${qnaList }" var="q">
+						<c:choose>
+							<c:when test="${fn:length(q.qnaTitle) > 16}">
+								<c:set var="subTitle" value="${fn:substring(q.qnaTitle,0,16)}"/>
+								<a href="#" class="newBoard"><span>${subTitle }...</span></a>
+							</c:when>
+							<c:otherwise>
+								<span class="newTitle">${q.qnaTitle }</span>
+							</c:otherwise>
+						</c:choose>
+						<span class="newBoardDate">${q.regDate }</span><br>
+					</c:forEach>
+				</div>
+				
+				<div class="BoardList" >
+					<div>
+					<p class="title" style="background-color: #fff;">개발지식공유</p>
+					<a href="/shareList.do?reqPage=1&type=2" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
+					</div>
+					<c:forEach items="${nonQnaList }" var="nq">
+						<c:choose>
+							<c:when test="${fn:length(nq.qnaTitle) > 16}">
+								<c:set var="subTitle" value="${fn:substring(nq.qnaTitle,0,16)}"/>
+								<a href="#" class="newBoard"><span>${subTitle }...</span></a>
+							</c:when>
+							<c:otherwise>
+								<span class="newTitle">${nq.qnaTitle }</span>
+							</c:otherwise>
+						</c:choose>
+						<span class="newBoardDate">${nq.regDate }</span><br>
+					</c:forEach>
+				</div>
+				
+			</div>
+		</div>
 	</div>
 </body>
 </html>

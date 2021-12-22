@@ -86,3 +86,174 @@
 .de-non{
 	text-decoration: none;
 }
+
+.titleBox{
+overflow: hidden;
+}
+.mainTitel{
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 30px;
+	float: left;
+}
+.subTitel{
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 30px;
+	margin-top:50px;
+}
+.subEngTitel{
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 30px;
+	color:#4ECDC4;
+	margin-top:50px;
+}
+.titleBox>a{
+	float: right;
+	width: 150px;
+	height: 50px;
+	background-color: #4ECDC4;
+	font-size: 19px;
+	font-weight: bold;
+	line-height: 40px;
+	margin-right: 30px;
+}
+.newContestBox{
+	margin-top:30px;
+	margin-left: 55px;
+	overflow: hidden;
+	
+	
+}
+.newContestBox>div{
+	float: left;
+	margin-bottom: 30px;
+	
+}
+.newTitle{
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 8px;
+}
+.newcontent{
+	margin: 0;
+	    
+
+}
+.contestCate{
+	text-align: right;
+	margin-bottom: 20px;
+}
+.contestCate>a{
+	text-decoration: none;
+	margin-right: 20px;
+	font-size: 20px;
+	color: #595959;
+}
+.contestImgBox{
+	perspective: 300px;
+	width: 280px;
+	height: 400px;
+	overflow: hidden;
+	margin-right: 30px;   
+	
+}
+.contestImgBox img{
+   height:100%;
+   width: 100%;
+   border-radius: 5px;
+   box-shadow: 0px 1px 1px -2px rgb(0 0 0 / 20%), 0px 0px 1px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+ 	
+}
+  .contestImgBox .item {
+	  width: 280px;
+	  height: 400px;
+      backface-visibility: hidden;
+      transition: 1s;
+      
+    }
+    .contestImgBox .item.front {
+      position: absolute;
+      transform: rotateY(0deg);
+    }
+
+    .contestImgBox:hover .item.front {
+      transform: rotateY(180deg);
+    }
+    .contestImgBox .item.back {
+      transform: rotateY(-180deg);
+    }
+    .contestImgBox:hover .item.back {
+      transform: rotateY(0deg);
+    }
+    .contestBack{
+    	width: 280px;
+	  	height: 400px;
+	  	background-size : contain;
+	  	border-radius: 5px;
+    }
+	.contestBack2{
+		width: 280px;
+	  	height: 400px;
+	  	background-size : contain;
+		border-radius: 5px;
+		background: rgba(0, 0, 0, 0.7);
+		padding-top: 75px;
+	}
+	.contestBack2>a{
+		font-weight: bold;
+		text-decoration: none;
+		color: #fff;
+		padding: 7px;
+		font-size: 23px;
+		border: 2px solid #fff;
+		border-radius : 7px;;
+		margin-left: 70px;
+	}
+	.contestBack2>a:hover{
+		text-decoration: underline;
+		color: #fff;
+		
+	}
+	.contestBack2>p{
+		color:#fff;
+		font-size: 20px;
+		text-align: center;
+
+	}
+	.contestBack2>p>span{
+		font-weight: bold
+		
+	}
+   
+.cate3Box>div{
+	display: flex;
+	justify-content: space-evenly;
+}
+.BoardList{
+	width: 400px;
+	border : 1px solid #d9d9d9;
+	border-radius : 5px;
+	padding: 25px;
+
+}
+.BoardList>div{
+	display: flex;
+}
+.moreTag{
+	margin-left: auto;
+	color : black;
+	text-decoration: none;
+}
+.newBoard{
+	color : #565656;
+	text-decoration: none;
+}
+.newBoardDate{
+	color : #565656;
+	float:right;
+}
