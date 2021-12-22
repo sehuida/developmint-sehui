@@ -87,7 +87,7 @@
 											<img src="/resources/upload/member/${sessionScope.m.filepath }" style="width: 40px;height: 40px;border-radius: 30px;margin-right: 10px;">
 										</c:otherwise>
 									</c:choose>
-							      	 ${sessionScope.m.memberId } 님
+							      	 ${sessionScope.m.memberName } 님
 						          </a>
 						          <div class="dropdown-menu">
 						          	<c:if test="${sessionScope.m.memberType eq 1 }">
