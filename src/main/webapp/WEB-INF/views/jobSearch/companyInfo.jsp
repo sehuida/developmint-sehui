@@ -523,7 +523,7 @@ b {
 										<div class="iddate">
 											<p>${rl.memberId }</p>
 											<p>${rl.regDate }</p>
-											로그인했을 때만 보여주기
+											<!-- 로그인했을 때만 보여주기 -->
 											<c:if test="${not empty sessionScope.m }">
 												내가 쓴 댓글일 경우만 보여주기
 												<c:if test="${rl.memberId eq sessionScope.m.memberId }">
