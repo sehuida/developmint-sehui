@@ -290,16 +290,6 @@
     }
 </style>
 <script>
-		/* if($(".ceoResume").val() == 1) {
-			$(this).siblings.(".input__on-off").prop('checked',true);
-			 ceoResume == 1 인게 보여야함
-				switch${i.count }
-			
-			for(int i = 0; i<5; i++) {
-					
-			}
-			
-		} */
 	$(function(){
 		
 		

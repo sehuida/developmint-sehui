@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="resume">
 	<select id="selectAllResume" parameterType="map" resultType="r">
-		select * from
+		<!-- select * from
 		(select rownum as rnum , r.*
-		from (
-		select
+		from ( -->
+		select * from (select
 			resume_no as resumeNo,
 			member_no as memberNo,
 			resume_title as resumeTitle,
@@ -35,10 +35,43 @@
 			work_place as workPlace,
 			write_date as writeDate,
 			ceo_resume as ceoResume
-		from resume where member_no = #{memberNo}
-		order by 1 desc )r)rr 
+		from resume where member_no = #{memberNo} and ceo_resume = 1
+        union all
+        select * from (
+        select
+			resume_no as resumeNo,
+			member_no as memberNo,
+			resume_title as resumeTitle,
+			aducation,
+			school_name as schoolName,
+			school_local as schoolLocal,
+			school_start as schoolStart,
+			school_end as schoolEnd,
+			major,
+			career,
+			activity,
+			activity_place as activityPlace,
+			activity_start as activityStart,
+			activity_end as activityEnd,
+			activity_content as activityContent,
+			certi_name as certiName,
+			certi_issue as certiIssue,
+			certi_pass as certiPass,
+			certi_date as certiDate,
+			my_tech as myTech,
+			veterans,
+			military,
+			selfintro_name as selfintroName,
+			selfintro_content as selfintroContent,
+			work_form as workForm,
+			money,
+			work_place as workPlace,
+			write_date as writeDate,
+			ceo_resume as ceoResume
+		from resume where member_no = #{memberNo} and ceo_resume = 0 order by 1 desc))<!-- )r)rr 
 		where rnum between #{start} and
-		#{end}
+		#{end} -->
+        
 	</select>
 	
 	<select id="selectResumeTotalCount" parameterType="_int" resultType="_int">
