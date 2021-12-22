@@ -342,7 +342,6 @@ public class GosuController {
 		model.addAttribute("gosu", gosu);
 		return "gosu/gosuFeedback";
 	}
-
 	@ResponseBody
 	@RequestMapping(value = "/gosuFeedbackInsert.do")
 	public int gosuFeedbackInsert(int ggsouNo, String gosuFeedbackTitle, String gosuFeedbackContent, String memberId,

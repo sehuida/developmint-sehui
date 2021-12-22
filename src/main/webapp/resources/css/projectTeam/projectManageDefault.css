@@ -70,6 +70,54 @@
     display: flex;
     margin-bottom: 20px;
 }
+
+.flexCLi{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.flexCLi>div:hover span {
+    color: #609b8a;
+}
+
+.flexSuperSubBox{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.flexSuperSubBox span{
+    position: relative;
+    top: 8px;
+    font-size: 18px;
+    color: #90d1b4;
+}
+
+.s-sub-menu{
+    display: none;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+/* .s-sub-menu-show{
+    margin-left: 10px;
+    margin-bottom: 10px;
+} */
+
+.s-sub-menu li a{
+    text-decoration: none;
+}
+.s-sub-menu li:hover span{
+    color: #90d1b4;
+    font-weight: 900;
+}
+.s-sub-menu span{
+    color: rgb(78, 205, 196);
+}
+
+
+
+
+
 .subNaviAtag{
     text-decoration: none;
     margin-bottom: 5px;

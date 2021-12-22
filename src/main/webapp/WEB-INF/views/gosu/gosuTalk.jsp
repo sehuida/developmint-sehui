@@ -173,6 +173,9 @@ input:focus, textarea:focus {
 .note-modal-footer{
 	height: 60px !important;
 }
+#underhover:hover{
+	text-decoration: underline;
+}
 </style>
 </head>
 <body>
@@ -258,11 +261,15 @@ input:focus, textarea:focus {
 												</c:if> <c:choose>
 													<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
 														<span style="color: rgb(78, 205, 196);">질문자</span>
+														${gtl.writer }
 													</c:when>
 													<c:otherwise>
 														<span style="color: rgb(78, 205, 196);">고수</span>
+														<a id="underhover" style="color: black;" href="/gosuContent.do?gNo=${gfOne.ggosuNo}">${gtl.writer }</a>
 													</c:otherwise>
-												</c:choose> ${gtl.writer }</th>
+												</c:choose>
+												
+												</th>
 											<td style="text-align: right; color: gray;">${gtl.talkDate }</td>
 										</tr>
 										<tr style="text-align: right;">
