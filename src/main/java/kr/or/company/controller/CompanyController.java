@@ -26,9 +26,9 @@ public class CompanyController {
 		/* CompanyInfoComment */CompanyInfo company = service.selectCompany(companyNo);
 		ArrayList<Comment> commentList = service.selectCompanyCommentList(companyNo);
 		model.addAttribute("com", company);
-		model.addAttribute("cl", commentList);
+		model.addAttribute("commentList", commentList);
 		System.out.println("company : "+ company);
-		System.out.println("cl : "+ commentList);
+		System.out.println("commentList : "+ commentList);
 		return "jobSearch/companyInfo";
 	}
 	

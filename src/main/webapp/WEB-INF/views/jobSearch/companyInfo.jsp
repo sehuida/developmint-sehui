@@ -419,8 +419,8 @@ b {
 		<div class=comentListBox>
 			<c:choose>
 			<%--댓글이 있는경우 --%>
-			<c:when test="${not empty cl }">
-				<c:forEach items="${cl }" var="cl" varStatus="i">
+			<c:when test="${not empty commentList }">
+				<c:forEach items="${commentList }" var="cl" varStatus="i">
 					<div style="margin-bottom: 20px;">
 						<c:if test="${cl.commentType eq 1 }">
 							<div class="comentView">
@@ -505,7 +505,7 @@ b {
 							
 		<%---------------------------------------------------------------------------- --%>
 							<%--대댓글 리스트 --%>
-							<%-- <c:forEach items="${cl }" var="rl" varStatus="j">
+							<c:forEach items="${commentList }" var="rl" varStatus="j">
 								<c:if test="${rl.commentType eq 2 && cl.commentNo eq rl.commentRef}">
 									<div class="reComentView">
 									<i class="bi bi-arrow-return-right" style="margin-left:50px; color:#4ECDC4;"></i>
@@ -564,7 +564,7 @@ b {
 										
 									</div>
 								</c:if>
-							</c:forEach> --%>
+							</c:forEach>
 						</div>
 				</c:forEach>	
 			</c:when>
