@@ -114,14 +114,21 @@
 	display:flex;
 	align-items: center;
 	color:#4ECDC4;
+	animation: motion 0.3s linear 0s infinite alternate;
 }
 
+@keyframes motion 
+{ 0% {margin-top: 0px;}
+100%{margin-top:5px;}}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="container" style="margin-top:50px;margin-bottom:100px;">
 		<!-- 관리자 신고가이드 -->
-		<div class="reportGuide" data-bs-toggle="modal" data-bs-target="#guideModal"><i class="bi bi-info-circle" style="font-size: 23px; margin-right: 5px;"></i><p style="margin:0">신고 가이드</p></div>
+		<div class="reportGuide" data-bs-toggle="modal" data-bs-target="#guideModal">
+			<i class="bi bi-info-circle" style="font-size: 23px; margin-right: 5px;"></i>
+			<p style="margin:0">신고 가이드</p>
+		</div>
 		
 		<!-- 신고가이드 Modal -->
 		<div class="modal fade" id="guideModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
