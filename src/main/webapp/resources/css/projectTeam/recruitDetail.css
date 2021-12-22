@@ -81,6 +81,7 @@
     display: flex;
     justify-content: space-between;
 }
+
 .deadBtnBox{
     position: relative;
     right: 80px;
@@ -99,8 +100,6 @@
     margin-right: 15px;
 }
 .countText{
-    position: relative;
-    top: 5px;
     font-size: 16px;
     font-weight: 900;
     margin-right: 10px;
@@ -108,13 +107,13 @@
 
 .commentWriteBox{
     margin-top: 100px;
+    overflow: hidden;
 }
 .commentTitleText{
     font-size: 36px;
     font-weight: 900;
 }
 .commentBtnBox{
-	z-index : 100;
     margin-top: 15px;
     float: right;
 }
@@ -122,12 +121,9 @@
 .commmentInfoFlexBox{
     margin-top: 80px;
     display: flex;
-    z-index : 100;
 }
 .commentDate{
     font-weight: 600;
-    position: relative;
-    top: 25px;
     margin-left: 20px;
 }
 .commentContent{
@@ -138,18 +134,16 @@
 
 .nestedCommentFlexBox{
     display: flex;
-    z-index: 5;
     height: 140px;
 }
 .nestedCommnetImg{
     width: 60px;
     margin-right: 20px;
 }
+
 .nestedCommentBox{
-    position: relative;
-    bottom: 80px;
-    z-index: 15;
 }
+
 .updateText{
     text-decoration: none;
 }
@@ -175,17 +169,14 @@
 .updateFunction{
 	display : flex;
 	margin-bottom : 10px;
-	z-index: 101;
 }
 .updateText{
 	color : #90d1b4;
 	margin-left : 10px;
 	margin-right : 10px;
 	text-decoration: none;
-	z-index: 100;
 }
 .nestedCommentBox{
-	z-index: 10;
 }
 #deleteReComment{
 	text-decoration: none;

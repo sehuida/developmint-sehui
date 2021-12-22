@@ -199,7 +199,7 @@ b {
 				${com.filepath }
 			</div>
 			<div class="companyTitle">
-				<p>${com.companyName }</p>
+				<p id="companyName">${com.companyName }</p>
 			</div>
 		</div>
 		<div class="intro">
@@ -237,7 +237,7 @@ b {
 								style="color: #999999; font-style: normal; margin-left: 15px; font-size: 12px;">${com.writeDate }</i>
 						</div>
 						<div class="announceTitle">
-							<a href="/announceView.do?announceNo=${com.announceNo }">${com.announceTitle }</a>
+							<a href="/announceView.do?announceNo=${com.announceNo }&memberNo=${sessionScope.m.memberNo }">${com.announceTitle }</a>
 						</div>
 
 						<ul class="resumeInfo1">
@@ -373,10 +373,8 @@ b {
 						<li>${com.ceo }</li>
 						<li><a href="#" style="text-decoration: none; color: #222222;">http://www.homepage.co.kr</a></li>
 						<li>내용내용</li>
-						<li style="height: 400px;">
-							${com.address }<br>
+						<li id="address">${com.address }</li>
 						<div id="map" style="width:500px;height:400px; margin-top: 30px;"></div>
-						</li>
 					</ul>
 				</c:otherwise>
 			</c:choose>
@@ -419,8 +417,8 @@ b {
 		<div class=comentListBox>
 			<c:choose>
 			<%--댓글이 있는경우 --%>
-			<c:when test="${not empty cl }">
-				<c:forEach items="${cl }" var="cl" varStatus="i">
+			<c:when test="${not empty commentList }">
+				<c:forEach items="${commentList }" var="cl" varStatus="i">
 					<div style="margin-bottom: 20px;">
 						<c:if test="${cl.commentType eq 1 }">
 							<div class="comentView">
@@ -505,7 +503,7 @@ b {
 							
 		<%---------------------------------------------------------------------------- --%>
 							<%--대댓글 리스트 --%>
-							<%-- <c:forEach items="${cl }" var="rl" varStatus="j">
+							<c:forEach items="${commentList }" var="rl" varStatus="j">
 								<c:if test="${rl.commentType eq 2 && cl.commentNo eq rl.commentRef}">
 									<div class="reComentView">
 									<i class="bi bi-arrow-return-right" style="margin-left:50px; color:#4ECDC4;"></i>
@@ -523,14 +521,14 @@ b {
 										<div class="iddate">
 											<p>${rl.memberId }</p>
 											<p>${rl.regDate }</p>
-											로그인했을 때만 보여주기
+											<!-- 로그인했을 때만 보여주기 -->
 											<c:if test="${not empty sessionScope.m }">
-												내가 쓴 댓글일 경우만 보여주기
+												<!-- 내가 쓴 댓글일 경우만 보여주기 -->
 												<c:if test="${rl.memberId eq sessionScope.m.memberId }">
-												댓글 수정 
+												<!-- 댓글 수정  -->
 													<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#updateReComment${j.index }" class="updateBtn">수정</a>
 													
-													댓글 수정  Modal
+													<!-- 댓글 수정  Modal -->
 													<div class="modal fade" id="updateReComment${j.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 													  <div class="modal-dialog  modal-dialog-centered">
 													    <div class="modal-content">
@@ -549,7 +547,7 @@ b {
 													  </div>
 													</div>
 													
-													댓글 삭제
+													<!-- 댓글 삭제 -->
 													<form action="/deleteCompanyComment.do" method="post" class="delForm" style="display: inline;">
 														<a href="javascript:void(0);" class="delComment">삭제</a>
 														<input type="hidden" value="${rl.commentNo }" name="commentNo">
@@ -564,7 +562,7 @@ b {
 										
 									</div>
 								</c:if>
-							</c:forEach> --%>
+							</c:forEach>
 						</div>
 				</c:forEach>	
 			</c:when>
@@ -728,7 +726,42 @@ b {
 		level: 3 //지도의 레벨(확대, 축소 정도)
 	};
 	
+	// 지도를 생성합니다    
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	// 기업의 주소 가져오기
+	var address = $("#address").html();
+	// 기업이름 가져오기
+	var companyName = $("#companyName").html();
+
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch(address, function(result, status) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+companyName+'</div>'
+	        });
+	        infowindow.open(map, marker);
+
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	});    
+	
 </script>
 </body>
 </html>
