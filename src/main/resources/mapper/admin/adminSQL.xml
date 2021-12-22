@@ -741,6 +741,29 @@
 		</choose>
 	</delete>
 	
+	<select id="countList5" parameterType="map" resultType="_int">
+		select count(*) 
+		from 
+		<choose>
+			<when test="type == 1">
+				PROJECT where recruit_start_date = #{date}
+			</when>
+			<when test="type == 2">
+				SHARE_BOARD where REG_DATE like #{date}||'%'
+			</when>
+			<when test="type == 3">
+				ANNOUNCEMENT where write_date = #{date}
+			</when>
+			<when test="type == 4">
+				gosu_notice where gnotice_date = #{date}
+			</when>
+			<when test="type == 5">
+				contest
+				where contest_status = 2 and CONTEST_DATE = #{date}
+			</when>
+		</choose>
+	</select>
+	
 </mapper>
 
 
