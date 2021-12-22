@@ -39,7 +39,7 @@
 		<!-- The slideshow/carousel -->
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="/resources/img/main/2.png" alt="Los Angeles" class="d-block"
+				<img src="/resources/img/main/4.png" alt="Los Angeles" class="d-block"
 					style="width:100%;max-height: 80vh;">
 				<div class="carousel-caption">
 					<h4 class="text-black" style="font-weight: bold;">프로젝트에 지원하여 팀원으로 함께하세요!</h4>
