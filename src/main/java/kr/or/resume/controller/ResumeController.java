@@ -80,7 +80,7 @@ public class ResumeController {
 	@ResponseBody
 	public Resume ceoResume(int resumeNo, int memberNo) {
 		Resume resume = service.resetCeoResume(resumeNo, memberNo);
-		
+		System.out.println(resume);
 		return resume;
 	}
 	

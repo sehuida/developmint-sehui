@@ -786,6 +786,58 @@ public class AdminService {
 		int allBoardCount = dao.allBoardCount();
 		tb.setAllBoardCount(allBoardCount);
 		
+		List<Integer> countList5 = new ArrayList<Integer>();
+		List<String> weekList = new ArrayList<String>();
+		
+		//날짜별로 List에 넣기
+		for(int i=4;i>=0;i--) {
+			//오늘날짜 불러오기
+		  	Calendar cal = Calendar.getInstance();
+		    cal.setTime(new Date());
+		    //String으로 포맷
+		    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		    //오늘날짜에서 i만큼 빼주기
+		   	cal.add(Calendar.DATE, -i);
+		   	String date =  df.format(cal.getTime());
+		   	//해당날짜 게시물 수 구하기
+		   	Map<String, Object> map2 = new HashMap<String, Object>();
+			map2.put("date", date);
+			map2.put("type", type);
+		    int bCount = dao.countList5(map2);
+		    countList5.add(bCount);
+		    //요일 구하기
+		    int week = cal.get(Calendar.DAY_OF_WEEK);
+		    String day = "";
+		    switch (week) { 
+	        case 1:
+	            day = "SUN";
+	            break;
+	        case 2:
+	            day = "MON";
+	            break;
+	        case 3:
+	            day = "TUE";
+	            break;
+	        case 4:
+	            day = "WED";
+	            break;
+	        case 5:
+	            day = "THU";
+	            break;
+	        case 6:
+	            day = "FRI";
+	            break;
+	        case 7:
+	            day = "SAT";
+	            break;
+	        }
+		    String stDay =  "\""+day+"\"";
+		    weekList.add(stDay);
+		}
+		tb.setCountList5(countList5);
+		tb.setWeekList(weekList);
+		
+		
 		
 		return tb;
 	}

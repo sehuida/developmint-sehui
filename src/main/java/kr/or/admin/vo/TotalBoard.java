@@ -1,6 +1,7 @@
 package kr.or.admin.vo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import kr.or.announce.vo.Announce;
 import kr.or.contest.vo.Contest;
@@ -21,4 +22,6 @@ public class TotalBoard {
 	private ArrayList<Contest> contesetList;
 	private int allBoardCount;
 	private String  bestMember;
+	private List<Integer> countList5;
+	private List<String> weekList;
 }

@@ -57,7 +57,7 @@ public class ResumeDao {
 	public Resume selectCeoResume(int ceoResume, int memberNo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		 map.put("memberNo", memberNo); 
-		 map.put("announceNo", ceoResume);
+		 map.put("ceoResume", ceoResume);
 		return sqlSession.selectOne("resume.selectCeoResume", map);
 	}
 

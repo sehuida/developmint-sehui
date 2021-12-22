@@ -320,6 +320,8 @@ public class AdminController {
 			model.addAttribute("pageNavi",tb.getPageNavi());
 			model.addAttribute("totalCount", tb.getTotalCount());
 			model.addAttribute("allBoardCount", tb.getAllBoardCount());
+			model.addAttribute("countList5", tb.getCountList5());
+			model.addAttribute("weekList", tb.getWeekList());
 			return "admin/allBoardList";
 		}
 		

@@ -505,7 +505,7 @@ b {
 							
 		<%---------------------------------------------------------------------------- --%>
 							<%--대댓글 리스트 --%>
-							<c:forEach items="${list.commentList }" var="rl" varStatus="j">
+							<%-- <c:forEach items="${cl }" var="rl" varStatus="j">
 								<c:if test="${rl.commentType eq 2 && cl.commentNo eq rl.commentRef}">
 									<div class="reComentView">
 									<i class="bi bi-arrow-return-right" style="margin-left:50px; color:#4ECDC4;"></i>
@@ -523,14 +523,14 @@ b {
 										<div class="iddate">
 											<p>${rl.memberId }</p>
 											<p>${rl.regDate }</p>
-											<%--로그인했을 때만 보여주기 --%>
+											로그인했을 때만 보여주기
 											<c:if test="${not empty sessionScope.m }">
-												<%--내가 쓴 댓글일 경우만 보여주기 --%>
+												내가 쓴 댓글일 경우만 보여주기
 												<c:if test="${rl.memberId eq sessionScope.m.memberId }">
-												<%--댓글 수정  --%>
+												댓글 수정 
 													<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#updateReComment${j.index }" class="updateBtn">수정</a>
 													
-													<%--댓글 수정  Modal --%>
+													댓글 수정  Modal
 													<div class="modal fade" id="updateReComment${j.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 													  <div class="modal-dialog  modal-dialog-centered">
 													    <div class="modal-content">
@@ -549,7 +549,7 @@ b {
 													  </div>
 													</div>
 													
-													<%--댓글 삭제 --%>
+													댓글 삭제
 													<form action="/deleteCompanyComment.do" method="post" class="delForm" style="display: inline;">
 														<a href="javascript:void(0);" class="delComment">삭제</a>
 														<input type="hidden" value="${rl.commentNo }" name="commentNo">
@@ -564,7 +564,7 @@ b {
 										
 									</div>
 								</c:if>
-							</c:forEach>
+							</c:forEach> --%>
 						</div>
 				</c:forEach>	
 			</c:when>
@@ -699,6 +699,28 @@ b {
 
 	</style>
 <script>
+	$(".reComentBtn").click(function(){
+		var index = $(".reComentBtn").index(this);
+		$(".recomentBox").eq(index).toggle();
+	});
+	$(".reComentBtn").trigger('click');
+	
+	//대댓글창 취소 클릭시 닫히기
+	$(".cancelBtn").click(function(){
+		var index = $(".cancelBtn").index(this);
+		$(".recomentBox").eq(index).css("display","none");
+	});
+	
+	//댓글삭제 confirm창 띄우고 ok하면 submit
+	$(".delComment").click(function(){
+		var result = confirm('댓글을 삭제하시겠습니까?');
+		var index = $(".delComment").index(this);
+		if(result){
+			$(".delForm").eq(index).submit();
+		}
+	});
+
+
 	/* 카카오맵 API */
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션

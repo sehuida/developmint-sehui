@@ -46,7 +46,7 @@
 					<!-- 불러온 글제목 -->
 					<h4 style="font-weight: bold;border-bottom: 1px solid #ddd;">${nq.qnaTitle}(답변) > ${nq.type }</h4>
 					<!-- 작성일, 읽은 수(테이블 컬럼 추가 해야함) -->
-					<span>답변일 : ${nq.regDate } </span>
+					<span>답변일 : ${nq.answerDate } </span>
 					<div class="contents-box">
 						<!-- 이미지 있으면 이미지 출력, 내용잇으면 내용 출력 -->
 						${nq.qnaAnswer }
