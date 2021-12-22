@@ -21,7 +21,7 @@ public class ResumeService {
 	private ResumeDao dao;
 
 	public ResumePageData selectAllResume(int memberNo, int reqPage) {
-		int numPerPage = 5;
+		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 		HashMap<String, Object> map = new HashMap<String, Object>();

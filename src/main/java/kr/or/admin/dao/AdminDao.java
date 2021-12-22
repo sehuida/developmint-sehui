@@ -301,6 +301,10 @@ public class AdminDao {
 	public int postSeleteDelete(Map<String, Object> map) {
 		return sqlSession.delete("admin.postSeleteDelete",map);
 	}
+
+	public int countList5(Map<String, Object> map2) {
+		return sqlSession.selectOne("admin.countList5", map2);
+	}
 	
 
 

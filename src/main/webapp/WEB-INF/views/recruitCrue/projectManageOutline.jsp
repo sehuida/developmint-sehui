@@ -44,6 +44,10 @@
         	}
         });
         
+        $(".flexCLi").click(function(){
+            $(".s-sub-menu").slideToggle("slow")
+        });
+        
     });
 	
 </script>
@@ -60,8 +64,16 @@
                     <li class="flexLi">
                         <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/calendar.png" class="subNaviImg"><span style="cursor: pointer;">캘린더</span></a>
                     </li>
-                    <li class="flexLi">
-                        <a href="/enterProjectTask.do?projectNo=${pt.projectNo}" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg"><span style="cursor: pointer;">과업 관리</span></a>
+                    <li class="flexCLi" style="cursor: pointer;">
+	                    <div class="flexSuperSubBox">
+	                          <img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg"><span>과업 관리</span>
+	                    </div>
+	                    <ul class="s-sub-menu">
+                            <li><a href="/enterProjectTaskM.do?projectNo=${pt.projectNo}&reqPage=1"><span style="cursor: pointer;">Meeting</span></a></li>
+                            <li><a href="#"><span>Task</span></a></li>
+                            <li><a href="#"><span>Bug</span></a></li>
+                            <li><a href="#"><span>Hold</span></a></li>
+                        </ul>
                     </li>
                     <li class="flexLi">
                         <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/board.png" class="subNaviImg"><span style="cursor: pointer;">보드</span></a>

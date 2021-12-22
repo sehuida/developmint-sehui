@@ -11,4 +11,5 @@ public class ProjectTeamMember {
 	private String memberId;
 	private String memberImg;
 	private int memberGrade;
+	private String projectName;
 }

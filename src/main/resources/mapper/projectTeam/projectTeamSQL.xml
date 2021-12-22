@@ -945,4 +945,43 @@
  		order by task_no desc
  </select>
  
+ <select id="selectAllTaskMList" parameterType="_int" resultType="ptk">
+ 		select
+ 			task_no as taskNo,
+ 			project_no as projectNo,
+ 			team_member_no as teamMemberNo,
+ 			task_sort as taskSort,
+ 			task_title as taskTitle,
+ 			task_content as taskContent,
+ 			priority as priority,
+ 			connect_issue as connectIssue,
+ 			reference_link as referLink,
+ 			reference_link_name as linkName,
+ 			start_date as startDate,
+ 			complete_date as completeDate,
+ 			end_date as endDate,
+ 			process_sort as processSort
+ 		from task 
+ 		where project_no = #{projectNo} and task_no like '%M%'
+ 		order by task_no desc
+ </select>
+ 
+ <select id="selectTaskMTotalCount" parameterType="_int" resultType="_int">
+ 		select count(*) from task where project_no = #{projectNo} and task_no like '%M%'
+ </select>
+ 
+ <select id="selectTeamMember" parameterType="_int" resultType="pfm">
+ 		select 
+  			ptm.team_member_no as teamMemberNo,
+  			ptm.project_no as projectNo,
+  			ptm.member_no as memberNo,
+  			ptm.member_role as memberRole,
+  			(select member_id from member m where m.member_no = ptm.member_no) as memberId,
+  			(select filepath from member m where m.member_no = ptm.member_no) as memberImg,
+  			(select member_grade from member m where m.member_no = ptm.member_no ) as memberGrade,
+  			(select project_name from project where project_no = #{projectNo}) as projectName
+  		from project_team_member ptm
+  		where project_no = #{projectNo}
+ </select>
+ 
 </mapper>

@@ -34,6 +34,7 @@ import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectEntry;
 import kr.or.projectTeam.model.vo.ProjectReview;
 import kr.or.projectTeam.model.vo.ProjectTask;
+import kr.or.projectTeam.model.vo.ProjectTaskViewData;
 import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.projectTeam.model.vo.ProjectTeamApplicantViewData;
 import kr.or.projectTeam.model.vo.ProjectTeamApplyPageData;
@@ -766,6 +767,20 @@ public class ProjectTeamController {
 			 model.addAttribute("ptk", ptk);
 			 model.addAttribute("projectNo", projectNo);
 			return "recruitCrue/projectManageTask";
+		}
+	  
+	  @RequestMapping(value="/enterProjectTaskM.do")
+		public String enterProjectTaskM(Model model, int projectNo, int reqPage) {
+		  	ProjectTaskViewData ptvd = service.enterProjectTaskM(projectNo, reqPage);
+		  	ArrayList<Shortcuts> scList = service.shortcutList(projectNo);
+		  	model.addAttribute("ptk", ptvd.getTasklist());
+			model.addAttribute("projectNo", projectNo);
+			model.addAttribute("pageNavi", ptvd.getPageNavi());
+			model.addAttribute("start", ptvd.getStart());
+			model.addAttribute("ptm", ptvd.getPtmList());
+			model.addAttribute("ptmGet0", ptvd.getPtmList().get(0));
+			model.addAttribute("scList", scList);
+			return "recruitCrue/projectManageTaskM";
 		}
 	  
 }

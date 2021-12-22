@@ -128,52 +128,27 @@
 			                        <div class="status left">
 			                    		<em class="appStatus">지원완료</em>
 			                        </div>
-						            <div class="btns left">
-						                <div class="action">
-						                	<span class="dateEnd"></span>
-						                </div>
-				      					<div class="accordion" id="accordionExample">
-										 	<div class="accordion-item">
-										    	<h2 class="accordion-header" id="heading0">
-										      		<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse0" aria-expanded="true" aria-controls="collapse${i.index }">
+						            <div class="btn" style="width: 180px;">
+				      					<div class="accordion" id="accordionExample" style="width: 180px; justify-content: center;">
+										 	<div class="accord" style="width: 180px;">
+										    	<h2 class="accordion-header" style="width: 180px;">
+										      		<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${i.index }" aria-expanded="true" aria-controls="collapse${i.index }">
 										       			<span>지원내역</span>
 										      		</button>
-										    		</h2>
-										    		<div id="collapse${i.index }" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
-										      		<div class="accordion-body">
-										        		<strong>테스트답변용21</strong>
-										      		</div>
-										    	</div>
+										    	</h2>
 										  	</div>
 										</div>
 						            </div>
 			        			</div>
+												<!-- 토글나오는애 -->
+										    	<div id="collapse${i.index }" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample" 
+										    	style="background-color: rgb(250, 250, 250);">
+											      	<div class="accordion-body">
+											        	<strong>이력서 정보 넣기</strong>
+											      	</div>
+										    	</div>
 						        <hr>
 			            	</div>
-            	
-			            	<!-- <div class="listStatus">
-			                	<div class="info">
-						            <div class="date left">2021.12.12 22:13</div>
-						            <div class="summary left">
-						                <strong class="corp">
-			                            	<a href="#">㈜한국비즈넷</a>
-			                            </strong>
-			                			<div class="recruit">
-			                            	<a href="#"><span class="">소프트웨어 개발자</span></a>
-			                			</div>
-			            			</div>
-			                            <div class="status left">
-			                    			<em class="appStatus">지원완료</em>
-			                            </div>
-						            <div class="btns left">
-						                <div class="action">
-						                	<span class="dateEnd"></span>
-						                </div>
-						                <button type="button" class="history">지원내역</button>
-						            </div>
-			        			</div>
-						        <hr>
-			            	</div> -->
     					</form>
         			</c:forEach>
         		</c:otherwise>
