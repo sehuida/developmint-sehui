@@ -150,30 +150,6 @@
 			        			</div>
 						        <hr>
 			            	</div>
-            	
-			            	<!-- <div class="listStatus">
-			                	<div class="info">
-						            <div class="date left">2021.12.12 22:13</div>
-						            <div class="summary left">
-						                <strong class="corp">
-			                            	<a href="#">㈜한국비즈넷</a>
-			                            </strong>
-			                			<div class="recruit">
-			                            	<a href="#"><span class="">소프트웨어 개발자</span></a>
-			                			</div>
-			            			</div>
-			                            <div class="status left">
-			                    			<em class="appStatus">지원완료</em>
-			                            </div>
-						            <div class="btns left">
-						                <div class="action">
-						                	<span class="dateEnd"></span>
-						                </div>
-						                <button type="button" class="history">지원내역</button>
-						            </div>
-			        			</div>
-						        <hr>
-			            	</div> -->
     					</form>
         			</c:forEach>
         		</c:otherwise>
