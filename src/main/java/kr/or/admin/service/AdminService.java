@@ -799,7 +799,7 @@ public class AdminService {
 		    //오늘날짜에서 i만큼 빼주기
 		   	cal.add(Calendar.DATE, -i);
 		   	String date =  df.format(cal.getTime());
-		   	//해당날짜 가입 회원 구하고 리스트에 넣기
+		   	//해당날짜 게시물 수 구하기
 		   	Map<String, Object> map2 = new HashMap<String, Object>();
 			map2.put("date", date);
 			map2.put("type", type);

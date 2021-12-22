@@ -114,12 +114,12 @@
 		
 		<div class="chartTableBox">
 			<div class="flexBox">
-				<p class="title" style="margin-top:20px; width: 320px;">게시물 수</p>	
+				<p class="title" style="margin-top:20px; width: 320px;">총 게시물 수</p>	
 				<div class="chartBox">
 					<canvas id="bar-chart-grouped" width="100%" height="100%"></canvas>
 				</div>
 				
-				<p class="title" style="margin-top:50px; width: 320px;">둘중에 하나 넣기</p>	
+				<p class="title" style="margin-top:50px; width: 320px;">최근 5일 게시물 수</p>	
 				<div class="box1">
 					<canvas id="line-chart" style="margin-top:15px;"></canvas>
 				</div>
