@@ -394,7 +394,21 @@
 			<div class="infoDiv">
 				<em>채용절차</em>	
 				<div class="infoContent">
-					<p>온라인 이력서 접수 -> 서류 검토 -> 면접 일정 조율 -> 합/불 결과 통보</p>
+					<img src="/resources/img/company/saram.png">
+				</div>
+			</div>
+			
+			<div class="infoDiv">
+				<em>접수기간 및 방법</em>	
+				<div class="application">
+					<p>AnnounceView에 마감날짜 추가해서 가져와야할듯 겁나기찬네</p>
+				</div>
+			</div>
+			
+			<div class="infoDiv">
+				<em>유의사항</em>	
+				<div class="ue">
+					<p>ㆍ입사지원 서류에 허위사실이 발견될 경우, 채용확정 이후라도 채용이 취소될 수 있습니다. css는 나중에 할게요</p>
 				</div>
 			</div>
 			
@@ -434,6 +448,7 @@
 					</div>
 				</div>
 			</div>
+			
 		</div>
 	</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
