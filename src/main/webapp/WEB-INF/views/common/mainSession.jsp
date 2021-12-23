@@ -24,7 +24,7 @@
   }
 </style>
 <body>
-	<header>
+	<header style="min-width: 1800px;">
 	<!-- Carousel -->
 	<div id="demo" class="carousel slide" data-bs-ride="carousel">
 
@@ -83,7 +83,7 @@
 			<p>프로젝트 팀장은 당신을 찾고있습니다! 필요한 언어를 선택하여 팀원으로 참가하세요.</p>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" style="min-width: 1800px;">
 		<!-- 인기순 프로젝트 리스트 출력 -->
 		
 		<!-- 인기순 프로젝트 리스트 출력  끝 -->
@@ -95,7 +95,7 @@
 			<p>상금이 걸린 공모전에 참가해보세요! 당신의 재능을 첨부하면 됩니다.</p>
 		</div>
 	</div>
-	<div class="container" style="margin-top: 0;;margin-bottom: 20px;">
+	<div class="container" style="margin-top: 0;;margin-bottom: 20px;style="min-width: 1800px;"">
 		<div  style="margin-top: 100px;">
 			<span class="subEngTitel">HOT</span> <span class="subTitel">인기 공모전</span><a href="/allContestList.do?reqPage=1&type=0" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
 		</div>
@@ -104,7 +104,7 @@
 			<c:forEach var="hc" items="${conlist.hotContest }">
 			<div>
 				<%--공모전 이미지 --%>
-				<div class="contestImgBox">
+				<div class="contestImgBox" >
 					<div class="front item">
 							<img src="/resources/img/contest/${hc.contestImg }">
 					</div>
@@ -133,8 +133,8 @@
 				</div>
 				<%--공모전 제목(제목이 16글자가 넘어가면 뒤에는 ...으로 표시 --%>
 				<c:choose>
-					<c:when test="${fn:length(hc.contestTitle) > 16}">
-						<c:set var="subTitle" value="${fn:substring(hc.contestTitle,0,16)}"/>
+					<c:when test="${fn:length(hc.contestTitle) > 15}">
+						<c:set var="subTitle" value="${fn:substring(hc.contestTitle,0,15)}"/>
 						<p class="newTitle">${subTitle }...</p>
 					</c:when>
 					<c:otherwise>
@@ -156,7 +156,7 @@
 			<p>개발 고수와 매칭하여 고수의 노하우를 물어보세요!</p>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" style="min-width: 1800px;">
 		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
 		<c:forEach items="${gosuList }" var="g" begin="0" end="4">
 		<div class="gosu">
@@ -228,7 +228,7 @@
 			<p>인재를 구하고, 세상을 지배하세요!</p>
 		</div>
 	</div>
-	<div class="container" style="margin-bottom: 60px;">
+	<div class="container" style="margin-bottom: 60px;min-width: 1800px;">
 		<a href="/jobSearchList.do?reqPage=1" style="padding-left: 20px;text-decoration: none;font-weight: bold;float: right;margin-right: 10em;">더보기</a>
 	    <c:forEach items="${joblist }" var="a" varStatus="i" begin="0" end="2">
 	     <div class="content" style="margin: 30px auto auto auto;">
@@ -352,7 +352,7 @@
 			<p>각 게시판에 들어가서 게시물들을 확인하고 찾아보고 작성해 보세요!!!</p>
 		</div>
 	</div>
-	<div class="container" style="margin-bottom: 50px;">
+	<div class="container" style="margin-bottom: 50px;min-width: 1800px;">
 	<!-- 게시판 3가지 출력 -->
 		<div class="cate3Box">
 			<div>
