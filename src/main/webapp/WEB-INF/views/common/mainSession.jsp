@@ -86,16 +86,6 @@
 	<div class="container">
 		<!-- 인기순 프로젝트 리스트 출력 -->
 		<!-- 인기순 프로젝트 리스트 출력  끝 -->
-		
-		<!-- 개발지식 공유 리스트 1-5까지 리스트 출력 -->
-		<!-- 개발지식 공유 리스트 1-5까지 리스트 출력  끝-->
-		
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
-		
-		<!-- 구인구직 5가지 출력 -->
-		<!-- 구인구직 끝-->
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</div>
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
@@ -236,9 +226,116 @@
 		</div>
 	</div>
 	<div class="container">
-		<!-- 인기순 프로젝트 리스트 출력 -->
-		<!-- 인기순 프로젝트 리스트 출력  끝 -->
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<c:forEach items="${joblist }" var="a" varStatus="i">
+		<div class="content">
+		    <div class="status">모집중</div>
+		    <div class="cpName"><a href="companyInfo.do?companyNo=${a.companyNo }">${a.companyName }</a></div>	
+		    <div class="title-job">
+		        <a href="announceView.do?announceNo=${a.announceNo}&memberNo=${sessionScope.m.memberNo }">${a.announceTitle }</a>	
+		    </div>
+		    <div class="info">
+		        <div class="humanInfo">
+		            <span>경력</span> 
+		            <c:if test="${a.career eq 1}">
+		            	<span>신입</span>
+		            </c:if>
+		            <c:if test="${a.career eq 2}">
+		            	<span>경력</span>
+		            </c:if>
+		            <br>
+		            <span>학력</span> 
+		            <c:if test="${a.school eq 1}">
+		             <span>초등학교 졸업</span>
+		            </c:if>
+		            <c:if test="${a.school eq 2}">
+		             <span>중학교 졸업</span>
+		            </c:if>
+		            <c:if test="${a.school eq 3}">
+		             <span>고등학교 졸업</span>
+		            </c:if>
+		            <c:if test="${a.school eq 4}">
+		             <span>대학교 졸업 이상</span>
+		            </c:if>
+		        </div>
+		        <div class="workInfo">
+		            <span>|</span>
+		            <c:if test="${a.workForm eq 1}">
+		            	<span>정규직</span>
+		            </c:if>
+		            <c:if test="${a.workForm eq 2}">
+		            	<span>계약직</span>
+		            </c:if>
+		            <c:if test="${a.workForm eq 3}">
+		            	<span>아르바이트</span>
+		            </c:if>
+		            <c:if test="${a.workForm eq 4}">
+		            	<span>인턴</span>
+		            </c:if>
+		            <c:if test="${a.workForm eq 5}">
+		            	<span>프리랜서</span>
+		            </c:if>
+		            <br>
+		            <span>|</span>
+		            <c:if test="${a.category eq 1}">
+		            <span>IT 개발</span>	                            	
+		            </c:if>
+		            <c:if test="${a.category eq 2}">
+		            <span>웹 디자인</span>	                            	
+		            </c:if>
+		            <c:if test="${a.category eq 3}">
+		            <span>프로젝트 기획</span>	                            	
+		            </c:if>
+		        </div>
+		    </div>
+		    <div class="mainFooter">
+		        <div class="tech">
+		            <span>${a.skills }</span>
+		        </div>
+		        <div class="subInfo">
+		            <span><c:if test="${a.workPlace eq 1 }">
+		            	서울
+		            </c:if>
+		            <c:if test="${a.workPlace eq 2 }">
+		            	경기
+		            </c:if>
+		            <c:if test="${a.workPlace eq 3 }">
+		            	인천
+		            </c:if>
+		            <c:if test="${a.workPlace eq 4 }">
+		            	강원
+		            </c:if>
+		            <c:if test="${a.workPlace eq 5 }">
+		            	충남
+		            </c:if>
+		            <c:if test="${a.workPlace eq 6 }">
+		            	충북
+		            </c:if>
+		            <c:if test="${a.workPlace eq 7 }">
+		            	경북
+		            </c:if>
+		            <c:if test="${a.workPlace eq 8 }">
+		            	부산
+		            </c:if>
+		            <c:if test="${a.workPlace eq 9 }">
+		            	경남
+		            </c:if>
+		            <c:if test="${a.workPlace eq 10 }">
+		            	전북
+		            </c:if>
+		            <c:if test="${a.workPlace eq 11 }">
+		            	전남
+		            </c:if>
+		            <c:if test="${a.workPlace eq 12 }">
+		            	제주
+		            </c:if></span> <span style="margin-left: 20px;">등록일자 ${a.writeDate }</span>
+		        </div>
+		        <div class="situation">
+		            <div class="date">마감 <span>7</span>일 전</div>		<!-- 7 -> 마감일-현재일 이거 어캐하지 -->
+		            <div class="apply">총 <span>2</span>명 지원</div>		<!-- 2 -> 지원한 이력서 갯수 count  흠  -->
+		        </div>
+		    </div>
+		</div>
+		</c:forEach>
 	</div>
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">

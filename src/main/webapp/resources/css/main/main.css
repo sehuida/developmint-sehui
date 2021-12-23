@@ -257,3 +257,178 @@ overflow: hidden;
 	color : #565656;
 	float:right;
 }
+
+/*구인구직*/
+.contain{
+    width: 1200px;
+    margin: 0 auto;
+}
+.jobSearchListHeader{
+    overflow: hidden;
+    margin-left: 100px;
+}
+.headerText1{
+    margin-top: 150px;
+    margin-right: 100px;
+    font-weight: 900;
+    font-size: 20px;
+    float: left;
+}
+.headerText1>h1{
+    margin: 5px 0px;
+    color: black;
+    font-weight: 900;
+}
+.headerText1>p{
+	margin-top: 20px;
+    width: 300px;
+    color: gray;
+    font-size: 13px;
+}
+.resume{
+    background-color: rgb(78, 205, 196);
+    border: none;
+    font-size: 15px;
+    font-weight: 900;
+    width: 200px;
+    height: 50px;
+    color: white;
+    cursor: pointer;
+}
+.resume>a{
+    text-decoration: none;
+}
+.headerImg{
+    float: left;
+}
+.mainHeader{
+    width: 1000px;
+    margin: 0 auto;
+}
+.mainHeader>p{
+    font-size: 18px;
+    margin-left: 10px;
+    margin-bottom: 50px;
+    color: rgb(65, 65, 65);
+}
+.mainCenter{
+    width: 1000px;
+    margin: 0 auto;
+}
+.mainCenter>select{
+    width: 310px;
+    height: 50px;
+    padding-left: 15px;
+    margin-right: 20px;
+    outline: none;
+}
+.mainCenter>input{
+    width: 330px;
+    height: 50px;
+    padding-left: 15px;
+    outline: none;
+}
+.content{
+    margin-top: 50px;
+    width: 995px;
+    border: 1px solid gray;
+    padding: 30px;
+    padding-bottom: 0;
+    overflow: hidden;
+    padding-left: 50px;
+    box-sizing: border-box;
+}
+.status{
+    float: left;
+    width: 70px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    background-color: rgb(78, 205, 196);
+}
+.cpName{
+    float: left;
+    margin-left: 20px;
+    padding-top: 3px;
+    font-size: 13px;
+ }
+.cpName>a{
+    color: blue;
+    text-decoration: none;
+}
+.title{
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+.title>a{
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 900;
+    color: black;
+}
+.info{
+    overflow: hidden;
+}
+.humanInfo{
+    float: left;
+}
+.humanInfo>span{
+    margin-right: 20px;
+    color: gray;
+}
+.workInfo{
+    float: left;
+}
+.workInfo>span{
+    margin-left: 20px;
+    color: gray;
+}
+.mainFooter{
+    overflow: hidden;
+    margin-top: 30px;
+}
+.tech{
+    float: left;
+    height: 50px;
+}
+.tech span{
+    background-color: rgb(226, 226, 226);
+    color: gray;
+    padding: 10px;
+    width: 50px;
+    height: 30px;
+    border-radius: 10px;
+}
+.subInfo{
+    float: left;
+    margin-left: 30px;
+    color: rgb(100, 100, 100);
+}
+.subInfo>span{
+	font-size: 13px;
+}
+.situation{
+    float: right;
+    color: gray;
+    padding-bottom: 30px;
+    padding-right: 20px;
+    font-size: 14px;
+}
+.date>span{
+    color: rgb(78, 205, 196);
+}
+.apply>span{
+    color: rgb(78, 205, 196);
+}
+.search{
+	position: absolute;
+}
+#searchImg{
+	width: 20px;
+	height: 20px;
+	position: relative;
+	left: 290px;
+	top: -4px;
+	cursor: pointer;
+}

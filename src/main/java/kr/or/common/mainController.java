@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.admin.service.AdminService;
 import kr.or.admin.vo.TotalData;
+import kr.or.announce.vo.AnnouncePageData;
 import kr.or.contest.service.ContestService;
 import kr.or.contest.vo.ContestList;
 import kr.or.gosu.service.GosuService;
 import kr.or.gosu.vo.Gosu;
+import kr.or.jobSearch.service.JobSearchService;
 import kr.or.projectTeam.model.service.ProjectTeamService;
 import kr.or.qna.service.QnaService;
 import kr.or.qna.vo.NonQna;
@@ -42,6 +44,9 @@ public class mainController {
 	@Autowired
 	private ShareService shService;
 	
+	@Autowired
+	private JobSearchService jobService;
+	
 	@RequestMapping(value="/main.do")
 	public String main(Model model) {
 		//고수에서 불러오기
@@ -60,12 +65,15 @@ public class mainController {
 		int type = 1;
 		ShareBoardPage sbp = shService.shareBoardList(reqPage,type);
 		//팀프로젝트에서 불러오기
+		//구인구직 가지고오기
+		AnnouncePageData apd = jobService.selectAllAnnounce(reqPage);
 		
 		model.addAttribute("gosuList",g);
 		model.addAttribute("conlist",list);
 		model.addAttribute("noticeList", td.getNoticeList());
 		model.addAttribute("adlist",adlist);
 		model.addAttribute("shlist",sbp.getList());
+		model.addAttribute("joblist",apd.getList());
 		return "common/main";
 	}
 	
