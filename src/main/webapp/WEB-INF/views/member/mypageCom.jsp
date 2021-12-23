@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Develomints</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 	.page-wrap{
 		width: 700px;
@@ -113,8 +114,16 @@
 				<h4 style="font-family: NotoBold; margin-bottom: 20px;">커뮤니티</h4>
 				<div>
 					<img src="/resources/img/member/notes.png">
-					<a class="pageLists" href="/applicationStatus.do?announceNo=${announceNo }&reqPage=1">구인신청 내역 확인</a>
-					<a href="/applicationStatus.do?announceNo=${announceNo }&reqPage=1"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
+					<c:choose>
+						<c:when test="${announceNo eq 0 }">
+							<a class="pageLists" href="javascript:noList();">구인신청 내역 확인</a>
+							<a href="javascript:noList()"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>						
+						</c:when>
+						<c:otherwise>
+							<a class="pageLists" href="/applicationStatus.do?announceNo=${announceNo }&reqPage=1">구인신청 내역 확인</a>
+							<a href="/applicationStatus.do?announceNo=${announceNo }&reqPage=1"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>						
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div>
 					<img src="/resources/img/member/multiple-users-silhouette.png">
@@ -137,6 +146,12 @@
 		var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
   		return new bootstrap.Popover(popoverTriggerEl)
 		})
+		function noList(){
+			swal({
+		        title: '구인공고글이 없습니다',
+		        icon: 'warning'
+		      });
+		}
 	</script>
 </body>
 </html>

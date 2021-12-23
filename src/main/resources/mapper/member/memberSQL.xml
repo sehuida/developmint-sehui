@@ -97,8 +97,8 @@
   <update id="addCompnay" parameterType="m">
  	update member set com_no=#{comNo}, member_type=3 where member_id = #{memberId}
   </update>
-  <select id="checkCompany" parameterType="m" resultType="_int">
-  	select company_no from company where business_no=#{comNo}
+  <select id="checkCompany" parameterType="m" resultType="com">
+  	select company_no as companyNo from company where business_no=#{comNo}
   </select>
   <update id="delProfile" parameterType="m">
   	update member set filepath = '' where member_id = #{memberId}
@@ -204,6 +204,21 @@
   	select count(*) from share_board where member_no=#{memberNo}
   </select>
   <select id="announceNo" parameterType="_int" resultType="_int">
-  	select announce_no as announceNo from announcement where company_name=(select company_name from company where company_no=#{comNo})
+  	<!-- nvl 을 이용해서 널일때처리방식 정해주고, 레프트조인으로 null이라도 나오게 밀어넣는것 -->
+  	select nvl(announce_no,0) from company left join announcement using(company_name) where company_no=#{comNo}
+  </select>
+  <select id="existCompany" parameterType="m" resultType="m">
+  	select
+   		member_no as memberNo,
+  		member_name as memberName,
+  		phone,
+  		member_id as memberId,
+  		member_pw as memberPw,
+  		email,
+  		member_type as memberType,
+  		filepath,
+  		member_grade as memberGrade,
+  		com_no as comNo
+  from member where member_type= 3 and com_no=#{comNo}
   </select>
 </mapper>

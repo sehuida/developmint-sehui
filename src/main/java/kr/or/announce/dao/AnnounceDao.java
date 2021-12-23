@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.announce.vo.Announce;
 import kr.or.announce.vo.AnnounceList;
 import kr.or.announce.vo.AnnounceView;
+import kr.or.announce.vo.Application;
 import kr.or.resume.vo.Resume;
 
 @Repository
@@ -65,6 +66,10 @@ public class AnnounceDao {
 
 	public Resume selectCeoResume(int memberNo) {
 		return sqlSession.selectOne("announce.selectCeoResume", memberNo);
+	}
+
+	public int insertApplication(Application app) {
+		return sqlSession.insert("announce.insertApplication", app);
 	}
 
 	/*

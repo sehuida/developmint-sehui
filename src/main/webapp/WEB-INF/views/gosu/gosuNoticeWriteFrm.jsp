@@ -56,10 +56,10 @@
 }
 
 .g-content tr th, .g-content tr td {
-	padding: 40px;
+	padding: 20px;
 }
 .g-content tr th{
-	width: 200px;
+	width: 165px;
 }
 input:focus, textarea:focus {
 	outline: none;
@@ -132,28 +132,37 @@ input:focus, textarea:focus {
 				<div>
 					<table>
 						<tr>
-							<th>첨부파일 <span style="color: red;">* </span></th>
-							<td><input type="file" name="files" style="width: 100%;"></td>
+							<th   style="padding-top: 100px;padding-bottom: 100px;">첨부파일 <span style="color: red;">* </span></th>
+							<td  style="padding-top: 100px;padding-bottom: 100px;"><input type="file" name="files" style="width: 100%;"></td>
+						</tr>
+					
+						<tr>
+						<th colspan="2" >제목 <span style="color: red;margin-right: 30px;">* </span><span style="font-size: small;color:gray;">고수님만의 노하우를 어필할 수 있는 제목으로 작성해주세요!</span></th>
+							
 						</tr>
 						<tr>
-							<th>제목 <span style="color: red;">* </span></th>
-							<td><input type="text" name="gnoticeTitle"
-								style="width: 100%;"></td>
+							<td colspan="2" style="padding-bottom: 100px;"><input type="text" name="gnoticeTitle"
+								style="width: 100%;"placeholder="제목 입력"></td>
+							
 						</tr>
 						<tr>
-							<th>내용 <span style="color: red;"> * </span></th>
-							<td><textarea cols="100" rows="30" name="gnoticeContent" id="gnoticeContent"
-									placeholder="* 고수님만의 노하우를 작성해주세요!"></textarea></td>
+							<td colspan="2" style="font-size: small;color:gray;">* 고수님의 노하우를 자세하게 작성해주세요!</td>
 						</tr>
-
+						
+						<tr>
+							<td colspan="2"><textarea cols="100" rows="30" name="gnoticeContent" id="gnoticeContent"
+									></textarea></td>
+							
+						</tr>
+						
 					</table>
 				</div>
 			</div>
-			<div class="g-center">
+			<div class="g-center" >
 				<a href="/gosuNoticeList.do" class="btn btn-info"
-					style="width: 200px; margin: 50px; padding: 10px; font-weight: bold;">취소</a>
+					style="width: 200px; margin: 70px; padding: 10px; font-weight: bold;">취소</a>
 				<button type="submit" class="btn btn-primary"
-					style="width: 200px; margin: 50px; padding: 10px; font-weight: bold;">확인</button>
+					style="width: 200px;margin: 70px; padding: 10px; font-weight: bold;">확인</button>
 			</div>
 		</form>
 	</div>

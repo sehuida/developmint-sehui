@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.company.vo.Company;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestList;
 import kr.or.contest.vo.ContestMember;
@@ -116,10 +117,16 @@ public class MemberService {
 
 	@Transactional
 	public int addCompany(Member m) {
-		int result = dao.checkCompany(m);
-		if(result>0) {
-			m.setComNo(Integer.toString(result));
-			return dao.addCompany(m);			
+		Company com = dao.checkCompany(m);
+		if(com != null) {
+			m.setComNo(Integer.toString(com.getCompanyNo()));
+			Member member = dao.existCompany(m);
+			if(member == null) {
+				return dao.addCompany(m);							
+			}else {
+				
+				return 2;
+			}
 		}else {
 			return 0;
 		}
