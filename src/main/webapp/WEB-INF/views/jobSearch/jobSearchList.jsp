@@ -245,12 +245,18 @@
                 <input type="text" placeholder="검색 " class="search"><img id="searchImg" src="/resources/img/jobSearch/dot.PNG">
                 
                 <c:forEach items="${list }" var="a" varStatus="i">
-                <%-- <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }"> 이거로는 왜 값 안넘어감? 후..... --%>
+                
+                
 	                <div class="content">
 	                    <div class="status">모집중</div>
 	                    <div class="cpName"><a href="companyInfo.do?companyNo=${a.companyNo }">${a.companyName }</a></div>	
 	                    <div class="title">
-	                        <a href="announceView.do?announceNo=${a.announceNo}&memberNo=${sessionScope.m.memberNo }">${a.announceTitle }</a>	
+	                    <c:if test="${not empty sessionScope.m }">
+	                        <a href="/announceView.do?announceNo=${a.announceNo}&memberNo=${sessionScope.m.memberNo }<%-- &memberNo=${sessionScope.m.memberNo } --%>">${a.announceTitle }</a>	
+	                    </c:if>
+	                    <c:if test="${empty sessionScope.m }">
+	                        <a href="/announceView.do?announceNo=${a.announceNo}&memberNo=0<%-- &memberNo=${sessionScope.m.memberNo } --%>">${a.announceTitle }</a>	
+	                    </c:if>
 	                    </div>
 	                    <div class="info">
 	                        <div class="humanInfo">

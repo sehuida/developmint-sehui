@@ -18,4 +18,5 @@ public class ProjectTask {
 	private String completeDate;
 	private String endDate;
 	private int processSort;
+	private int memberNo;
 }

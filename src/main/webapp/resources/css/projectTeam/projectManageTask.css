@@ -139,13 +139,6 @@
     cursor: pointer;
 }
 
-.rBox_Leftnavi_right{
-    opacity: 0.5;
-}
-
-.rBox_Leftnavi_middle{
-	opacity: 0.5;
-}
 
 .navi_checkbox{
     position: relative;
@@ -153,6 +146,18 @@
     width: 30px;
     height: 30px;
 }
+
+.rBox_Leftnavi_left{
+	opacity: 0.5;
+}
+.rBox_Leftnavi_middle{
+	opacity: 0.5;
+}
+
+.rBox_Leftnavi_right{
+	opacity: 0.5;
+}
+
 
 #navi_button{
     position: relative;

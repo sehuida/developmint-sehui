@@ -766,6 +766,30 @@ public class ProjectTeamService {
 		ProjectTaskViewData ptvd = new ProjectTaskViewData(tasklist, pageNavi, start, ptmList);
 		return ptvd;
 	}
+	
+	@Transactional
+	public int addIssue(int projectNo, int memberNo, int taskType, String issueTitle, String taskStartDate) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("projectNo", projectNo);
+		map.put("memberNo", memberNo);
+		map.put("taskType", taskType);
+		map.put("issueTitle", issueTitle);
+		map.put("taskStartDate", taskStartDate);
+		int result = dao.addIssue(map);
+		return result;
+	}
+	
+	@Transactional
+	public int addIssueToday(int projectNo, int memberNo, int taskType, String issueTitle, String taskStartDate) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("projectNo", projectNo);
+		map.put("memberNo", memberNo);
+		map.put("taskType", taskType);
+		map.put("issueTitle", issueTitle);
+		map.put("taskStartDate", taskStartDate);
+		int result = dao.addIssueToday(map);
+		return result;
+	}
 
 	
 	
