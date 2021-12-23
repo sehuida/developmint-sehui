@@ -30,10 +30,12 @@ public class ResumeController {
 	@RequestMapping(value="/resumeManage.do")
 	public String resumeManage(Model model, int memberNo, int reqPage) {
 		ResumePageData rpd = service.selectAllResume(memberNo, reqPage);
+		int appCount = service.applicationCount(memberNo);
 		if(!rpd.getList().isEmpty()) {
 			int count = service.selectResumeCount(memberNo);			
 			model.addAttribute("count", count);
 		}
+		model.addAttribute("appCount", appCount);
 		model.addAttribute("list", rpd.getList());
 		model.addAttribute("pageNavi", rpd.getPageNavi());
 		model.addAttribute("start", rpd.getStart());
