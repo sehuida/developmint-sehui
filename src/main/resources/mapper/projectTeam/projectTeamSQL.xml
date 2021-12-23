@@ -1015,5 +1015,31 @@
  		</when>
  	</choose>
   </insert>
+  
+  <select id="selectMainProjectList" resultType="pt">
+ 		select * from (
+			  			select rownum as rnum, a.* from
+				            (select
+								p.project_no as projectNo,
+								p.member_no as projectWriterMemberNo,
+								p.recruit_start_date as rStartDate,
+								p.recruit_end_date as rEndDate,
+								p.view_count as viewCount,
+								p.recruit_title as rTitle,
+								p.recruit_content as rContent,
+								p.project_name as projectName,
+								p.project_goal as projectGoal,
+								p.project_reader as projectReader,
+								p.project_status as projectStatus,
+								p.project_start_date as pStartDate,
+								p.project_end_date as pEndDate,
+								(select filepath from member m where m.member_no = p.member_no) as writerImgPath,
+								(select count(*) from project_dibs pd where pd.project_no = p.project_no) as dibCount,
+					            (select count(*) from comments where BOARD_TYPE = 3 and BOARD_NO = p.project_no) as commentCount
+							from project p
+							where p.project_status = 1 
+			       			order by project_No DESC) a)
+						where rnum between 1 and 8
+ </select>
  
 </mapper>

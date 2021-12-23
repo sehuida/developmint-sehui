@@ -362,6 +362,13 @@ public class ProjectTeamDao {
 		return sqlSession.insert("projectTeam.addIssueToday", map);
 	}
 	
+	public ArrayList<ProjectTeam> selectMainProjectList() {
+		List<ProjectTeam> list = sqlSession.selectList("projectTeam.selectMainProjectList");
+		return (ArrayList<ProjectTeam>) list;
+	}
+	
+	
+	
 	
 
 	
