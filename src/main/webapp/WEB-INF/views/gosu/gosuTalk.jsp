@@ -10,15 +10,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-
 .container * {
 	text-decoration: none;
 }
 
-.note-editable{
+.note-editable {
 	max-width: 918px;
 	min-width: 918px;
 }
+
 .container {
 	min-width: 1200px;
 }
@@ -54,9 +54,10 @@ input:focus, textarea:focus {
 	padding: 20px;
 }
 
-.talk-one p *{
-	background-color:transparent !important;
+.talk-one p * {
+	background-color: transparent !important;
 }
+
 .talk-one {
 	width: 50%;
 	margin-bottom: 50px;
@@ -170,11 +171,17 @@ input:focus, textarea:focus {
 	align-items: center;
 	margin-top: 20px;
 }
-.note-modal-footer{
+
+.note-modal-footer {
 	height: 60px !important;
 }
-#underhover:hover{
+
+#underhover:hover {
 	text-decoration: underline;
+}
+
+.widthwidth {
+	width: 100%;
 }
 </style>
 </head>
@@ -204,11 +211,11 @@ input:focus, textarea:focus {
 		</h3>
 
 
-		<div class="g-feedback" style="margin-bottom:100px;">
+		<div class="g-feedback" style="margin-bottom: 100px;">
 
 			<h3>Q. &nbsp;${gfOne.feedbackTitle }</h3>
-			<span >${gfOne.feedbackContentBr }</span>
-		</div >
+			<span>${gfOne.feedbackContentBr }</span>
+		</div>
 
 		<c:choose>
 			<c:when test="${gfOne.feedbackNum eq 1}">
@@ -222,6 +229,12 @@ input:focus, textarea:focus {
 				</div>
 			</c:when>
 			<c:otherwise>
+				<div>
+					<div style="text-align: right;">
+						<button type="button" id="widthBtn" class="btn btn-primary"
+							style="width: 100px; font-weight: 900;">전체보기</button>
+					</div>
+				</div>
 				<div class="talk-wrap">
 					<c:forEach items="${gtList }" var="gtl" varStatus="i">
 						<c:choose>
@@ -255,9 +268,11 @@ input:focus, textarea:focus {
 											<th colspan="2"
 												style="text-align: left; width: 150px; font-size: 30px;"><c:if
 													test="${empty gtl.gosuImg }">
-													<img src="/resources/img/gosu/g_img_basic.png" style="margin-bottom: 5px;">
+													<img src="/resources/img/gosu/g_img_basic.png"
+														style="margin-bottom: 5px;">
 												</c:if> <c:if test="${not empty gtl.gosuImg }">
-													<img src="/resources/upload/member/${gtl.gosuImg }" style="margin-bottom: 5px;">
+													<img src="/resources/upload/member/${gtl.gosuImg }"
+														style="margin-bottom: 5px;">
 												</c:if> <c:choose>
 													<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
 														<span style="color: rgb(78, 205, 196);">질문자</span>
@@ -265,11 +280,10 @@ input:focus, textarea:focus {
 													</c:when>
 													<c:otherwise>
 														<span style="color: rgb(78, 205, 196);">고수</span>
-														<a id="underhover" style="color: black;" href="/gosuContent.do?gNo=${gfOne.ggosuNo}">${gtl.writer }</a>
+														<a id="underhover" style="color: black;"
+															href="/gosuContent.do?gNo=${gfOne.ggosuNo}">${gtl.writer }</a>
 													</c:otherwise>
-												</c:choose>
-												
-												</th>
+												</c:choose></th>
 											<td style="text-align: right; color: gray;">${gtl.talkDate }</td>
 										</tr>
 										<tr style="text-align: right;">
@@ -310,9 +324,9 @@ input:focus, textarea:focus {
 											<tr>
 												<td
 													style="font-weight: 900; font-size: 20px; padding-bottom: 5px;">${greview.writer }</td>
-												<td style="width: 800px;">
-													
-													<span style="float: left;font-weight: 900;font-size: 25px;margin-left: 30px;">${greview.reviewNum} 점</span>
+												<td style="width: 800px;"><span
+													style="float: left; font-weight: 900; font-size: 25px; margin-left: 30px;">${greview.reviewNum}
+														점</span>
 													<div class="star-rating">
 														<c:if test="${greview.reviewNum eq 1 }">
 															<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
@@ -329,14 +343,13 @@ input:focus, textarea:focus {
 														<c:if test="${greview.reviewNum eq 5 }">
 															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
 														</c:if>
-													</div>
-												</td>
+													</div></td>
 												<td>${greview.reviewDate }</td>
 
 											</tr>
 											<tr>
 												<td colspan="3"
-													style="width: 800px;text-align: center; border: 1px solid #78c2ad; padding: 50px;">${greview.reviewContentBr }</td>
+													style="width: 800px; text-align: center; border: 1px solid #78c2ad; padding: 50px;">${greview.reviewContentBr }</td>
 
 											</tr>
 										</table>
@@ -367,10 +380,11 @@ input:focus, textarea:focus {
 											리뷰</span> <br> <br>
 										<table>
 											<tr>
-												<td style="width: 800px;">
-													<span style="float: left;font-weight: 900;font-size: 25px;margin-left: 30px;">${greview.reviewNum} 점</span>
+												<td style="width: 800px;"><span
+													style="float: left; font-weight: 900; font-size: 25px; margin-left: 30px;">${greview.reviewNum}
+														점</span>
 													<div class="star-rating">
-														
+
 														<c:if test="${greview.reviewNum eq 1 }">
 															<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
 														</c:if>
@@ -386,9 +400,8 @@ input:focus, textarea:focus {
 														<c:if test="${greview.reviewNum eq 5 }">
 															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
 														</c:if>
-													</div>
-												</td>
-												<td >${greview.reviewDate }</td>
+													</div></td>
+												<td>${greview.reviewDate }</td>
 
 											</tr>
 											<tr>
@@ -509,6 +522,14 @@ input:focus, textarea:focus {
 	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
+		$("#widthBtn").click(function() {
+			$(".talk-one").toggleClass("widthwidth");
+		});
+		$(".talk-one").click(function() {
+			var idx = $(".talk-one").index(this);
+			$(".talk-one").eq(idx).toggleClass("widthwidth");
+		});
+
 		$("#talkContent").summernote(
 				{
 					height : 500,

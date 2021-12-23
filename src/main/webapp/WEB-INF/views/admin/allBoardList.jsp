@@ -181,7 +181,19 @@
 								<c:forEach items="${shareList }" var="s" varStatus="i">
 									<tr>
 									<td>${start + i.index}</td>
-									<td><a href="/shareBoardView.do?boardNo=${s.boardNo }" class="aTag">${s.boardTitle }</a></td>
+									<td>
+										<a href="/shareBoardView.do?boardNo=${s.boardNo }" class="aTag">
+											<c:choose>
+												<c:when test="${fn:length(s.boardTitle) > 25}">
+													<c:set var="subTitle" value="${fn:substring(s.boardTitle,0,25)}"/>
+													${subTitle }...
+												</c:when>
+												<c:otherwise>
+													${s.boardTitle }
+												</c:otherwise>
+											</c:choose>
+										</a>
+									</td>
 									<td>${s.memberId }</td>
 									<td>${s.readCount }</td>
 									<c:set var="subTitle" value="${fn:substring(s.regDate,0,10)}"/>
@@ -207,7 +219,19 @@
 								<c:forEach items="${announceList }" var="a" varStatus="i">
 									<tr>
 									<td>${start + i.index}</td>
-									<td><a href="announceView.do?announceNo=${a.announceNo}" class="aTag">${a.announceTitle }</a></td>
+									<td>
+										<a href="announceView.do?announceNo=${a.announceNo}" class="aTag">
+											<c:choose>
+												<c:when test="${fn:length(a.announceTitle) > 30}">
+													<c:set var="subTitle" value="${fn:substring(a.announceTitle,0,30)}"/>
+													${subTitle }...
+												</c:when>
+												<c:otherwise>
+													${a.announceTitle }
+												</c:otherwise>
+											</c:choose>	
+										</a>
+									</td>
 									<td>${a.school }</td>
 									<td>${a.companyName }</td>
 									<td>${a.writeDate }</td>
@@ -231,7 +255,19 @@
 								<c:forEach items="${gosuList }" var="g" varStatus="i">
 									<tr>
 									<td>${start + i.index}</td>
-									<td><a href="/gosuNoticeContent.do?gnn=${g.gnoticeNo }" class="aTag">${g.gnoticeTitle }</a></td>
+									<td>
+										<a href="/gosuNoticeContent.do?gnn=${g.gnoticeNo }" class="aTag">
+											<c:choose>
+												<c:when test="${fn:length(g.gnoticeTitle) > 35}">
+													<c:set var="subTitle" value="${fn:substring(g.gnoticeTitle,0,35)}"/>
+													${subTitle }...
+												</c:when>
+												<c:otherwise>
+													${g.gnoticeTitle }
+												</c:otherwise>
+											</c:choose>	
+										</a>
+									</td>
 									<td>${g.writeId }</td>
 									<td>${g.gnoticeDate }</td>
 									<td><button class="btn btn btn-info btn-sm delBtn" value="${g.gnoticeNo }">삭제하기</button></td>
@@ -255,7 +291,19 @@
 								<c:forEach items="${contestList }" var="c" varStatus="i">
 									<tr>
 									<td>${start + i.index}</td>
-									<td><a href="/contestView.do?contestNo=${c.contestNo }" class="aTag">${c.contestTitle }</a></td>
+									<td>
+										<a href="/contestView.do?contestNo=${c.contestNo }" class="aTag">
+											<c:choose>
+												<c:when test="${fn:length(c.contestTitle) > 25}">
+													<c:set var="subTitle" value="${fn:substring(c.contestTitle,0,25)}"/>
+													${subTitle }...
+												</c:when>
+												<c:otherwise>
+													${c.contestTitle }
+												</c:otherwise>
+											</c:choose>	
+										</a>
+									</td>
 									<td>${c.memberId }</td>
 									<td>${c.contestHost }</td>
 									<td>${c.contestDate }</td>

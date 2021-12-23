@@ -211,7 +211,14 @@
 					<!-- 댓글중 타입 1인것들 전체 출력하기 -->
 					<div class="commentWrap">
 						<div>
-							<i class="bi bi-person-circle" style="color:#4ecdc4; font-size: 4rem;"></i>	
+							<c:choose>
+								<c:when test="${not empty sc.memberImg }">
+									<img src="/resources/upload/member/${sc.memberImg }" style="width: 50px; height: 50px; border-radius: 30px;">
+								</c:when>
+								<c:otherwise>
+									<i class="bi bi-person-circle" style="color:#4ecdc4; font-size: 4rem;"></i>								
+								</c:otherwise>
+							</c:choose>
 						</div>
 						<div class="commentData">
 							<div><span class="text-info">${sc.memberId }</span></div>
