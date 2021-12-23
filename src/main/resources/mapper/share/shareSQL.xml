@@ -104,8 +104,9 @@
 		    board_no as boradNO,
 		    board_type as boardType,
 		    comment_type as commentType,
-		    comment_ref as commentRef
-		from comments where board_type = 2 and board_no=#{boardNo}   		
+		    comment_ref as commentRef,
+            (select filepath from member m where c.member_id =m.member_id) as memberImg
+		from comments c where c.board_type = 2 and c.board_no=#{boardNo}    		
    </select>
    <update id="updateCount" parameterType="_int">
 		update share_board set read_count = read_count+1 where board_no=#{boardNo}

@@ -226,8 +226,8 @@ overflow: hidden;
 
 			<%--공모전 제목(제목이 16글자가 넘어가면 뒤에는 ...으로 표시 --%>
 			<c:choose>
-				<c:when test="${fn:length(nc.contestTitle) > 16}">
-					<c:set var="subTitle" value="${fn:substring(nc.contestTitle,0,16)}"/>
+				<c:when test="${fn:length(nc.contestTitle) > 15}">
+					<c:set var="subTitle" value="${fn:substring(nc.contestTitle,0,15)}"/>
 					<p class="newTitle">${subTitle }...</p>
 				</c:when>
 				<c:otherwise>
@@ -278,8 +278,8 @@ overflow: hidden;
 			</div>
 			<%--공모전 제목(제목이 16글자가 넘어가면 뒤에는 ...으로 표시 --%>
 			<c:choose>
-				<c:when test="${fn:length(hc.contestTitle) > 16}">
-					<c:set var="subTitle" value="${fn:substring(hc.contestTitle,0,16)}"/>
+				<c:when test="${fn:length(hc.contestTitle) > 15}">
+					<c:set var="subTitle" value="${fn:substring(hc.contestTitle,0,15)}"/>
 					<p class="newTitle">${subTitle }...</p>
 				</c:when>
 				<c:otherwise>

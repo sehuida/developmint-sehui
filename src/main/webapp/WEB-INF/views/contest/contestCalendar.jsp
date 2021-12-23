@@ -90,9 +90,9 @@
 					atag.append("<img src='/resources/img/contest/"+data[i].contestImg+"'>");
 					imgbox.append(atag);
 					div.append(imgbox);
-					if(data[i].contestTitle.length > 16){
+					if(data[i].contestTitle.length > 15){
 						var string = data[i].contestTitle;
-						var substring = string.substring(0,16);
+						var substring = string.substring(0,15);
 						div.append("<p class='contestTitle'>"+substring+"...</p>");
 					}else{
 						div.append("<p class='contestTitle'>"+data[i].contestTitle+"</p>");

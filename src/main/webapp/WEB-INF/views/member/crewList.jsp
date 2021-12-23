@@ -11,6 +11,11 @@
 <link rel="stylesheet" href="/resources/css/member/viewPages.css">
 <link rel="stylesheet" href="/resources/css/member/crewList.css">
 </head>
+<style>
+	.crewtable *{
+		vertical-align: middle;
+	}
+</style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
@@ -33,13 +38,13 @@
 					<ol class="breadcrumb projectSelect">
 						<c:choose>
 							<c:when test="${type eq 0}">
-								 <li class="breadcrumb-item actives">신청한 내역</li>
+								 <li class="breadcrumb-item actives">신청한 프로젝트</li>
 								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=1">내 프로젝트</a></li>
 								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=2">찜한내역</a></li>							
 							</c:when>
 							<c:when test="${type eq 1 }">
 								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=0">신청한 내역</a></li>
-								 <li class="breadcrumb-item actives">내 프로젝트</li>
+								 <li class="breadcrumb-item actives">개설한 프로젝트</li>
 								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=2">찜한내역</a></li>							
 							</c:when>
 							<c:when test="${type eq 2 }">
@@ -52,9 +57,9 @@
 				</div>
 				<c:choose>
 					<c:when test="${type eq 0 }">
-						<table class="table table-hover">
+						<table class="table table-hover crewtable">
 							<tr class="table-primary">
-								<th>번호</th><th>프로젝트명</th><th>모집시작일</th><th>지원결과</th>
+								<th>번호</th><th>프로젝트명</th><th>모집시작일</th><th>지원결과</th><th>프로젝트 관리</th>
 							</tr>
 							<c:forEach items="${list }" var="crew" varStatus="i">
 								<tr>
@@ -77,6 +82,16 @@
 											<td class="text-success">최종선발</td>
 										</c:when>																													
 									</c:choose>
+									<td>
+										<c:choose>
+											<c:when test="${crew.entryStatus eq 4 and crew.projectStatus ne 1 }">
+												<a class="btn btn-success" href="/enterMyProject.do?projectNo=${crew.projectNo }&memberNo=${sessionScope.m.memberNo}">관리</a>
+											</c:when>
+											<c:otherwise>
+												<span class="text-info">모집진행중</span>
+											</c:otherwise>										
+										</c:choose>
+									</td>
 								</tr>
 							</c:forEach>
 						</table>			
@@ -84,7 +99,7 @@
 					<c:when test="${type eq 1 }">
 						<table class="table table-hover">
 							<tr class="table-primary">
-								<th>번호</th><th>프로젝트명</th><th>모집 마감일</th><th>지원자수</th>
+								<th>번호</th><th>프로젝트명</th><th>모집 마감일</th><th>지원자수</th><th>프로젝트 관리</th>
 							</tr>
 							<c:forEach items="${list }" var="crew" varStatus="i">
 								<tr>
@@ -101,6 +116,16 @@
 										</c:otherwise>
 									</c:choose>
 									<td>${crew.entryCount }</td>
+									<td>
+										<c:choose>
+											<c:when test="${crew.projectStatus ne 1 }">
+												<a class="btn btn-success" href="/enterMyProject.do?projectNo=${crew.projectNo }&memberNo=${sessionScope.m.memberNo}">관리</a>
+											</c:when>
+											<c:otherwise>
+												<span class="text-info">모집진행중</span>
+											</c:otherwise>										
+										</c:choose>
+									</td>
 								</tr>
 							</c:forEach>
 						</table>						
