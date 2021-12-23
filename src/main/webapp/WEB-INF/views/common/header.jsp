@@ -64,8 +64,11 @@
 			<c:otherwise>
 				<c:choose>
 					<c:when test="${not empty sessionScope.m && sessionScope.m.memberType eq 9 }">
+						<jsp:include page="/WEB-INF/views/dm/alarm.jsp"/>
 						<li class="nav-item dropdown float-end me-5">
-				          <a class="nav-link dropdown-toggle active margin-right" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="padding: 0;"><i class="bi bi-person-circle" style="font-size: 2.5rem;"></i> ${sessionScope.m.memberId } 님</a>
+				          <a class="nav-link dropdown-toggle active margin-right" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="padding: 0;">
+				          <img src="/resources/upload/member/${sessionScope.m.filepath }" style="width: 40px;height: 40px;border-radius: 30px;margin-right: 10px;"></i> 
+				          ${sessionScope.m.memberId } 님</a>
 				          <div class="dropdown-menu">
 				            <a class="dropdown-item" href="/adminPage.do">관리자 페이지</a>
 				            <div class="dropdown-divider"></div>
