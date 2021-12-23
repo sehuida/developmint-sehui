@@ -56,18 +56,23 @@
 	    }
 		
 		$("#taskStartDate").change(function(){
-            var birthReg = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
-            var birthValue = $("#taskStartDate").val();
-            if(birthReg.test(birthValue)){
+            var startReg = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
+            var startValue = $("#taskStartDate").val();
+            if(startReg.test(startValue)){
                 $("#dateChk").text("정상입니다.");
                 $("#dateChk").css("color", "blue");
                 result = true;
             }else {
-                $("#dateChk").text("일자는 하이픈("-") 포함 10자리로 기입해주시기 바랍니다.(YYYY-MM-DD)");
+                $("#dateChk").text("일자는 하이픈(-) 포함 10자리로 기입해주시기 바랍니다.(YYYY-MM-DD)");
                 $("#dateChk").css("color", "red");
                 result = false;
             }
         });
+		
+		$(".addClick").click(function(){
+			$("input[name=issueTitle]").val('');
+			$("#taskStartDate").val('');
+		});
 		
     });
 	
@@ -180,9 +185,9 @@
 	                                		</c:when>
 	                                	</c:choose>
 	                                	<c:forEach items="ptm" var="ptm">
-		                                	<c:if test="${ptm.memberImg eq ptk.memberNo}">
+		                                	<c:if test="${ptm.memberNo eq ptk.memberNo}">
 		                                		<c:choose>
-			                                		<c:when test="${ptm.memberImg eq null}">
+			                                		<c:when test="${ptm.memberNo eq null}">
 			                                			<img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
 			                                		</c:when>
 			                                		<c:otherwise>
@@ -197,7 +202,7 @@
 	                        </a>
                         </c:forEach>
                         <div>
-                            <a data-bs-toggle="modal" href="#addMIssue" style="text-decoration: none;"><p class="addIssue" style="margin-left: 35px;">+ 이슈 만들기</p></a>
+                            <a data-bs-toggle="modal" href="#addMIssue" style="text-decoration: none;" class="addClick"><p class="addIssue" style="margin-left: 35px;">+ 이슈 만들기</p></a>
                         </div>
                         <div id = "pageNavi">${pageNavi }</div>
                     </div>
@@ -220,7 +225,7 @@
                             <input type="text" class="form-control" placeholder="바로가기 이름을 입력해주세요" id="inputDefault" name="shortcutName">
                         </div>
                         <div style="text-align: right; padding-top: 10px;">
-                        	<input type="hidden" name="projectNo" value="${pt.projectNo}">
+                        	<input type="hidden" name="projectNo" value="${projectNo}">
                         	<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
                             <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">추가</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
@@ -395,7 +400,7 @@
                             <input type="text" class="form-control" placeholder="제목을 입력해주세요" id="inputDefault" name="issueTitle"  maxlength="30" required="required">
                             <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">과업 시작 일자</label>
                             <input type="text" class="form-control" placeholder="시작일을 입력해주세요(YYYY-MM-DD)" id="taskStartDate" name="taskStartDate" maxlength="10" required="required">
-                            <span id="dateChk"></span>
+                            <span id="dateChk" style="font-size: 15px;"></span>
                         </div>
                         <div style="text-align: right; padding-top: 10px;">
                         	<input type="hidden" name="taskType" value=1> 
