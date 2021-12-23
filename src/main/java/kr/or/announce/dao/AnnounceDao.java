@@ -72,6 +72,10 @@ public class AnnounceDao {
 		return sqlSession.insert("announce.insertApplication", app);
 	}
 
+	public int selectAnnounceCount(int announceNo) {
+		return sqlSession.selectOne("announce.selectAnnounceCount", announceNo);
+	}
+
 	/*
 	 * public int selectResumeNo(int announceNo) { return
 	 * sqlSession.selectOne("announce.selectResumeNo", announceNo); }

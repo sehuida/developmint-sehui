@@ -210,4 +210,8 @@
 		insert into application values(app_seq.nextval, #{announceNo}, #{resumeNo}, #{memberNo}, #{status}, to_char(sysdate,'yyyy-mm-dd'))
 	</insert>
 	
+	<select id="selectAnnounceCount" parameterType="_int" resultType="_int">
+		select count(*) from application where announce_no = #{announceNo}
+	</select>
+	
 </mapper>
