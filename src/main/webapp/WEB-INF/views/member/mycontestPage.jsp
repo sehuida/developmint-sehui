@@ -30,7 +30,7 @@
 				</div>
 				<c:choose>
 					<c:when test="${empty list }">
-						<p class="notting">작성글이 없습니다 ! </p>
+						<p class="notting">신청내역이 없습니다 ! </p>
 						<input type="hidden" id="notting" value="0">
 						<input type="hidden" id="memberType" value="${sessionScope.m.memberType }">
 					</c:when>
