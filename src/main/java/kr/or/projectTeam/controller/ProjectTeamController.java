@@ -6,8 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -59,6 +62,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ProjectTeamController {
 	@Autowired
 	private ProjectTeamService service;
+	
+	DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+	Date nowDate = new Date();
+	String today = sdFormat.format(nowDate);
 	
 	@RequestMapping(value="/recruitTeamMember_mainPage.do")
 	public String recruitTeamMember(Model model, int reqPage) {
@@ -727,12 +734,12 @@ public class ProjectTeamController {
 			  if(result > 0) { 
 				  model.addAttribute("title", "프로젝트 종료");
 				  model.addAttribute("msg", "그 동안 진심으로 고생많으셨습니다..!");
-				  model.addAttribute("loc","enterMyProject.do?projectNo="+backProjectNo+"&memberNo="+backMemberNo);
+				  model.addAttribute("loc","/enterMyProject.do?projectNo="+backProjectNo+"&memberNo="+backMemberNo);
 				  model.addAttribute("icon", "success");
 			  } else {
 				  model.addAttribute("title", "프로젝트 종료 실패");
 				  model.addAttribute("msg", "시스템 오류로 종료 실패하였습니다.");
-				  model.addAttribute("loc","enterMyProject.do?projectNo="+backProjectNo+"&memberNo="+backMemberNo);
+				  model.addAttribute("loc","/enterMyProject.do?projectNo="+backProjectNo+"&memberNo="+backMemberNo);
 				  model.addAttribute("icon", "warning");
 			  }
 			  return "member/swalMsg"; 
@@ -741,12 +748,12 @@ public class ProjectTeamController {
 			  if(result > 0) { 
 				  model.addAttribute("title", "리뷰 등록 성공!");
 				  model.addAttribute("msg", "그 동안 진심으로 고생많으셨습니다..!");
-				  model.addAttribute("loc","enterMyProject.do?projectNo="+backProjectNo+"&memberNo="+backMemberNo);
+				  model.addAttribute("loc","/enterMyProject.do?projectNo="+backProjectNo+"&memberNo="+backMemberNo);
 				  model.addAttribute("icon", "success");
 			  } else {
 				  model.addAttribute("title", "리뷰 등록 실패");
 				  model.addAttribute("msg", "시스템 오류로 종료 실패하였습니다.");
-				  model.addAttribute("loc","enterMyProject.do?projectNo="+backProjectNo+"&memberNo="+backMemberNo);
+				  model.addAttribute("loc","/enterMyProject.do?projectNo="+backProjectNo+"&memberNo="+backMemberNo);
 				  model.addAttribute("icon", "warning");
 			  }
 			  return "member/swalMsg"; 
@@ -764,12 +771,12 @@ public class ProjectTeamController {
 		  if(result > 0) { 
 			  model.addAttribute("title", "프로젝트 수정 성공!");
 			  model.addAttribute("msg", "변경하신 프로젝트 내용이 반영되었습니다.");
-			  model.addAttribute("loc","enterMyProject.do?projectNo="+projectNo+"&memberNo="+sessionMemberNo);
+			  model.addAttribute("loc","/enterMyProject.do?projectNo="+projectNo+"&memberNo="+sessionMemberNo);
 			  model.addAttribute("icon", "success");
 		  } else {
 			  model.addAttribute("title", "프로젝트 수정 실패");
 			  model.addAttribute("msg", "시스템 오류로 수정 실패하였습니다.");
-			  model.addAttribute("loc","enterMyProject.do?projectNo="+projectNo+"&memberNo="+sessionMemberNo);
+			  model.addAttribute("loc","/enterMyProject.do?projectNo="+projectNo+"&memberNo="+sessionMemberNo);
 			  model.addAttribute("icon", "warning");
 		  }
 		  return "member/swalMsg"; 
@@ -797,4 +804,93 @@ public class ProjectTeamController {
 			return "recruitCrue/projectManageTaskM";
 		}
 	  
+	  @RequestMapping(value="/addIssue.do")
+	  public String addIssue(Model model, int projectNo, int memberNo, int taskType, String issueTitle, String taskStartDate) {
+		   int compare = today.compareTo(taskStartDate);
+		   if(compare > 0) {
+			   	model.addAttribute("title", "이슈 등록 실패");
+				model.addAttribute("msg", "시작일은 오늘날짜 이전으로 설정할 수 없습니다. ");
+				model.addAttribute("loc","/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage=1");
+				model.addAttribute("icon", "warning");
+		   } else if (compare == 0) {
+			   int result = service.addIssueToday(projectNo, memberNo, taskType, issueTitle, taskStartDate); 
+				  if(taskType == 1) {
+					  if(result > 0) { 
+						  model.addAttribute("title", "이슈 등록 성공!");
+						  model.addAttribute("msg", "이슈가 등록 되었습니다.");
+						  model.addAttribute("loc","/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage=1");
+						  model.addAttribute("icon", "success");
+					  } else {
+						  model.addAttribute("title", "이슈 등록 실패");
+						  model.addAttribute("msg", "시스템 오류로 등록 실패하였습니다.");
+						  model.addAttribute("loc","/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage=1");
+						  model.addAttribute("icon", "warning");
+					  }
+				 } else if(taskType == 2) {
+					 if(result > 0) { 
+						  model.addAttribute("title", "이슈 등록 성공!");
+						  model.addAttribute("msg", "이슈가 등록 되었습니다.");
+						  model.addAttribute("loc","/enterProjectTaskT.do?projectNo="+projectNo+"&reqPage=1");
+						  model.addAttribute("icon", "success");
+					  } else {
+						  model.addAttribute("title", "이슈 등록 실패");
+						  model.addAttribute("msg", "시스템 오류로 등록 실패하였습니다.");
+						  model.addAttribute("loc","/enterProjectTaskT.do?projectNo="+projectNo+"&reqPage=1");
+						  model.addAttribute("icon", "warning");
+					  }
+				 } else if(taskType == 3) {
+					 if(result > 0) { 
+						  model.addAttribute("title", "이슈 등록 성공!");
+						  model.addAttribute("msg", "이슈가 등록 되었습니다.");
+						  model.addAttribute("loc","/enterProjectTaskB.do?projectNo="+projectNo+"&reqPage=1");
+						  model.addAttribute("icon", "success");
+					  } else {
+						  model.addAttribute("title", "이슈 등록 실패");
+						  model.addAttribute("msg", "시스템 오류로 등록 실패하였습니다.");
+						  model.addAttribute("loc","/enterProjectTaskB.do?projectNo="+projectNo+"&reqPage=1");
+						  model.addAttribute("icon", "warning");
+					  }
+				 }
+		   } else {
+			   int result = service.addIssue(projectNo, memberNo, taskType, issueTitle, taskStartDate); 
+				  if(taskType == 1) {
+					  if(result > 0) { 
+						  model.addAttribute("title", "이슈 등록 성공!");
+						  model.addAttribute("msg", "이슈가 등록 되었습니다.");
+						  model.addAttribute("loc","/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage=1");
+						  model.addAttribute("icon", "success");
+					  } else {
+						  model.addAttribute("title", "이슈 등록 실패");
+						  model.addAttribute("msg", "시스템 오류로 등록 실패하였습니다.");
+						  model.addAttribute("loc","/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage=1");
+						  model.addAttribute("icon", "warning");
+					  }
+				  } else if(taskType == 2) {
+						 if(result > 0) { 
+							  model.addAttribute("title", "이슈 등록 성공!");
+							  model.addAttribute("msg", "이슈가 등록 되었습니다.");
+							  model.addAttribute("loc","/enterProjectTaskT.do?projectNo="+projectNo+"&reqPage=1");
+							  model.addAttribute("icon", "success");
+						  } else {
+							  model.addAttribute("title", "이슈 등록 실패");
+							  model.addAttribute("msg", "시스템 오류로 등록 실패하였습니다.");
+							  model.addAttribute("loc","/enterProjectTaskT.do?projectNo="+projectNo+"&reqPage=1");
+							  model.addAttribute("icon", "warning");
+						  }
+					 } else if(taskType == 3) {
+						 if(result > 0) { 
+							  model.addAttribute("title", "이슈 등록 성공!");
+							  model.addAttribute("msg", "이슈가 등록 되었습니다.");
+							  model.addAttribute("loc","/enterProjectTaskB.do?projectNo="+projectNo+"&reqPage=1");
+							  model.addAttribute("icon", "success");
+						  } else {
+							  model.addAttribute("title", "이슈 등록 실패");
+							  model.addAttribute("msg", "시스템 오류로 등록 실패하였습니다.");
+							  model.addAttribute("loc","/enterProjectTaskB.do?projectNo="+projectNo+"&reqPage=1");
+							  model.addAttribute("icon", "warning");
+						  }
+					 }
+		   }
+		   return "member/swalMsg"; 
+		 }
 }

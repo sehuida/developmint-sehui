@@ -353,6 +353,14 @@ public class ProjectTeamDao {
 		List<ProjectTeamMember> list = sqlSession.selectList("projectTeam.selectTeamMember", projectNo);
 		return (ArrayList<ProjectTeamMember>) list;
 	}
+
+	public int addIssue(Map<String, Object> map) {
+		return sqlSession.insert("projectTeam.addIssue", map);
+	}
+
+	public int addIssueToday(Map<String, Object> map) {
+		return sqlSession.insert("projectTeam.addIssueToday", map);
+	}
 	
 	
 
