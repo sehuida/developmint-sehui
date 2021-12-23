@@ -22,6 +22,9 @@
 	display: flex;
     align-items: center;
 	}
+	.container-fluid{
+	
+	}
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -31,7 +34,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarColor01">
+    <div class="collapse navbar-collapse" id="navbarColor01" style="min-width: 800px;">
       <ul class="navbar-nav me-auto" style="font-size: 18px;margin-left: 20px;font-weight: bold;">
         <li class="nav-item">
           <a class="nav-link " href="/recruitTeamMember_mainPage.do?reqPage=1">팀원모집
