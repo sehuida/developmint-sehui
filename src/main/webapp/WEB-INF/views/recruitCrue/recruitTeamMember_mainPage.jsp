@@ -104,13 +104,13 @@
 			}
 		 });
 		
-		/* $(".navi_checkbox").change(function(){
+		$(".navi_checkbox").change(function(){
 			if($(".navi_checkbox").is(":checked")){
 				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=1&checkValue=2";
 			} else {
 				location.href="/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue=1&checkValue=1";
 			}
-		}); */
+		});
 	    
 	    if(checkValue == 1){
 	    	$(".navi_checkbox").prop("checked", false);
