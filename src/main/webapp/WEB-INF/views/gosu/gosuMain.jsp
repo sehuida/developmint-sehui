@@ -103,10 +103,12 @@
 	font-size: 30px;
 	font-weight: 900;
 }
-.gtitle:hover {
+.gtitle:hover, .underhover:hover ,.underhover2:hover {
 	color: #78c2ad;
 }
-
+.underhover:hover{
+	cursor: pointer;
+}
 .gosu-person>h3, .gosu-notice>h3, .gosu-status>h3 {
 	font-size: 30px;
 	font-weight: 900;
@@ -531,10 +533,10 @@ animation: motion 0.3s linear 0s infinite alternate;
 						<div style="margin-top: 20px;">
 						<c:choose>
 							<c:when test="${ngl.ggsouNo eq 0}">
-								<a href="" class="gtitle underhover" style="color: black;" >${ngl.gosuId }</a>
+								<a class="gtitle underhover" style="font-size:15px;" >${ngl.gosuId }</a>
 							</c:when>
 							<c:otherwise>
-								<a  href="/gosuContent.do?gNo=${ngl.ggsouNo}" class="gtitle">${ngl.gosuId }</a>						
+								<a  href="/gosuContent.do?gNo=${ngl.ggsouNo}" class="gtitle underhover2"  style="font-size:15px;">${ngl.gosuId }</a>						
 							</c:otherwise>
 						</c:choose>
 						</div>

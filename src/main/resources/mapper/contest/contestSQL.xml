@@ -288,6 +288,11 @@
   	<delete id="deleteContest" parameterType="_int">
   		delete from contest where contest_no = #{contestNo}
   	</delete>
+  	
+  	<!-- 공모전 지원 중복 체크 -->
+  	<select id="duplicationCheckCon" parameterType="map" resultType="_int"> 
+  		select count(*) from contest_member where contest_no = #{contestNo} and member_id = #{memberId}
+  	</select>
 </mapper>
 
 
