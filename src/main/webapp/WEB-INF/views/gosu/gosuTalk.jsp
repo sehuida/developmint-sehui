@@ -255,9 +255,9 @@ input:focus, textarea:focus {
 											<th colspan="2"
 												style="text-align: left; width: 150px; font-size: 30px;"><c:if
 													test="${empty gtl.gosuImg }">
-													<img src="/resources/img/gosu/g_img_basic.png">
+													<img src="/resources/img/gosu/g_img_basic.png" style="margin-bottom: 5px;">
 												</c:if> <c:if test="${not empty gtl.gosuImg }">
-													<img src="/resources/upload/member/${gtl.gosuImg }">
+													<img src="/resources/upload/member/${gtl.gosuImg }" style="margin-bottom: 5px;">
 												</c:if> <c:choose>
 													<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
 														<span style="color: rgb(78, 205, 196);">질문자</span>
