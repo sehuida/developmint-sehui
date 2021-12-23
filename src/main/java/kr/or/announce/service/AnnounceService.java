@@ -11,6 +11,7 @@ import kr.or.announce.vo.Announce;
 import kr.or.announce.vo.AnnounceList;
 import kr.or.announce.vo.AnnounceListPageData;
 import kr.or.announce.vo.AnnounceView;
+import kr.or.announce.vo.Application;
 import kr.or.resume.vo.Resume;
 import kr.or.resume.vo.ResumePageData;
 
@@ -107,6 +108,10 @@ public class AnnounceService {
 
 	public Resume selectCeoResume(int memberNo) {
 		return dao.selectCeoResume(memberNo);
+	}
+
+	public int insertApplication(Application app) {
+		return dao.insertApplication(app);
 	}
 
 	/*

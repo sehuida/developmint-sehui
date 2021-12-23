@@ -312,7 +312,7 @@
 						<table>
 							<tr>
 								<c:if test="${empty sessionScope.m.filepath }">
-									<th rowspan="6" style="padding: 40px; padding-right: 70px;"><img
+									<th rowspan="8" style="padding: 40px; padding-right: 70px;"><img
 										src="/resources/img/gosu/g_img_basic.png"
 										style="width: 250px;"></th>
 								</c:if>
@@ -327,18 +327,24 @@
 										style="color: red;">* </span></span></td>
 							</tr>
 							<tr>
-								<td style="font-size: 25px;"><input type="text"
+								<td style="font-size: 25px;"><input type="text" placeholder="제목 입력"
 									name="gosuTitle"></td>
+							</tr>
+							<tr>
+								<td style="font-size: small;padding-bottom: 20px;color:gray;">* 고수님을 어필할 수 있는 제목으로 작성해주세요!</td>
 							</tr>
 							<tr>
 								<td><hr></td>
 							</tr>
 							<tr>
-								<td>한줄소개 <span style="color: red;">* </span></td>
+								<td>한 줄 소개 <span style="color: red;">* </span></td>
 							</tr>
 							<tr>
-								<td style="font-size: 25px;"><input type="text"
+								<td style="font-size: 25px;"><input type="text" placeholder="한 줄 소개 입력"
 									name="gosuSelf"></td>
+							</tr>
+							<tr>
+								<td style="font-size: small;padding-bottom: 20px;color:gray;">* 고수님을 한 줄로 소개한다면?</td>
 							</tr>
 						</table>
 					</div>
@@ -354,6 +360,9 @@
 								></textarea>
 							</p>
 
+						</div>
+						<div>
+							<span style="font-size: small;padding-bottom: 20px;color:gray;">* 상세설명에는 고수님의 능력이나 활동 경력등을 자세하게 작성하시는 게 좋아요!</span>
 						</div>
 
 					</div>
@@ -381,6 +390,10 @@
 								<textarea name="gosuAct" id="gosuAct"></textarea>
 							</p>
 						</div>
+						<div>
+							<span style="font-size: small;padding-bottom: 20px;color:gray;">* 활동 및 자격에는 여태 진행했는 프로젝트나 취득한 자격증 등을 자세하게 적어주세요. 또 아래 프로젝트를 통해 증명해 주세요!</span>
+						</div>
+						
 					</div>
 					<div class="gosu-project">
 						<h4>
@@ -402,11 +415,14 @@
 					<div class="gosu-feedback">
 
 						<h4>
-							피드백 비용 <span style="color: red; margin-right: 100px;">* </span> <span><input
-								type="text" name="gosuCost" style="width: 400px;"
+							피드백 비용 <span style="color: red; margin-right: 100px;">* </span> <input
+								type="text" name="gosuCost" style="width: 400px;" placeholder="비용 입력"
 								onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');">
-								&nbsp; &nbsp;원</span>
+								<span>&nbsp; &nbsp;원</span>
 						</h4>
+						<div>
+							<span style="font-size: small;padding-bottom: 20px;color:gray;">* 너무 높은 가격은 피해주세요! 주로 1000월~50000원 사이가 적당합니다!</span>
+						</div>
 
 					</div>
 					<div style="display: flex; justify-content: center;">
@@ -418,15 +434,15 @@
 					<div id="hrm-modal">
 						<h3 style="color: white;">프로젝트 추가하기</h3>
 						<div class="hrm-content">
-							<b style="color:#78c2ad;">메인사진</b> <input type="file" class="gprojectFilepath"
+							<b style="color:#78c2ad;" >메인사진</b> <input type="file" class="gprojectFilepath"
 								id="gprojectFilepath" accept="image/*"style="margin-bottom: 25px;" ><br>
 							<div id="gimage_container" style='margin-bottom:25px;'></div>
 
 							<b>제목</b><input type="text" class="gprojectTitle"
-								id="gprojectTitle" placeholder="내용을 입력해주세요."><br> <b
+								id="gprojectTitle" placeholder="프로젝트 제목 입력"><br> <b
 								style="float: left;">내용</b>
 							<textarea cols="80" class="gprojectContent" id="gprojectContent"
-								placeholder="내용을 입력해주세요."></textarea>
+								placeholder="프로젝트 내용 입력"></textarea>
 							<br>
 						</div>
 						<div class="hrm-btn-wrap">

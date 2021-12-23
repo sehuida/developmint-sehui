@@ -24,7 +24,7 @@
 	em{
 		font-style: normal;
 		font-weight: bold;
-		font-size: 18px;
+		font-size: 22px;
 	}
 	.logo{
 		display: inline-block;
@@ -70,7 +70,7 @@
 		padding: 50px;
 	}
 	.infoContent{
-		margin-top: 10px;
+		margin-top: 20px;
 	}
 	.infoUl{
 		list-style: none;
@@ -85,7 +85,7 @@
 		width: 120px;
 	}
 	.infoDiv{
-		margin-bottom: 50px;
+		margin-bottom: 80px;
 	}
 	.img>img{
 		width: 18px;
@@ -169,103 +169,104 @@
 					</c:when>
 					<c:otherwise>
 						<button data-bs-toggle="modal" data-bs-target="#contestMember">지원하기</button>
-					</c:otherwise>
-				</c:choose>
-				<!-- 모달버튼// 사용법 자세히모름 수현누나 물어보기 -->
-				<!-- modal내용 등록 -->
-				<div class="modal fade" id="contestMember" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog  modal-dialog-centered">
-							<div class="modal-content">
-								<div class="modal-body">
-									<form action="#" method="post">
-										<p style="font-size: 15px; color: #444444; margin-bottom:5px;">${a.companyName } 입사지원</p>
-										<p style="font-size: 22px; font-weight: bold; text-overflow:ellipsis; margin-bottom: 0px;">${a.announceTitle }</p>
-										<p style="font-size: 12px; color: #999999;">
-											<c:if test="${a.career eq 1 }">
-												신입
-											</c:if> 
-											<c:if test="${a.career eq 2 }">
-												경력
-											</c:if> 
-											<c:if test="${a.career eq 3 }">
-												신입/경력
-											</c:if> 
-											| 
-											<c:if test="${a.school eq 1 }">
-												초졸이상
-											</c:if>
-											<c:if test="${a.school eq 2 }">
-												중졸이상
-											</c:if>
-											<c:if test="${a.school eq 3 }">
-												고졸이상
-											</c:if>
-											<c:if test="${a.school eq 4 }">
-												대졸이상
-											</c:if>
-											<c:if test="${a.school eq 5 }">
-												학력무관
-											</c:if>
-											|
-											<c:if test="${a.workPlace eq 1 }">
-												서울
-											</c:if>
-											<c:if test="${a.workPlace eq 2 }">		
-						            			경기
-							            	</c:if>
-											<c:if test="${a.workPlace eq 3 }">		
-							            		인천
-							            	</c:if>
-											<c:if test="${a.workPlace eq 4 }">		
-												강원
-							            	</c:if>
-											<c:if test="${a.workPlace eq 5 }">		
-							            		충남
-							            	</c:if>
-											<c:if test="${a.workPlace eq 6 }">		
-							            		충북
-							            	</c:if>
-											<c:if test="${a.workPlace eq 7 }">		
-												경북
-							            	</c:if>
-											<c:if test="${a.workPlace eq 8 }">		
-												부산
-							            	</c:if>
-											<c:if test="${a.workPlace eq 9 }">		
-												경남
-							            	</c:if>
-											<c:if test="${a.workPlace eq 10 }">		
-							            		전북
-							            	</c:if>
-											<c:if test="${a.workPlace eq 11 }">		
-							            		전남
-							            	</c:if>
-											<c:if test="${a.workPlace eq 12 }">		
-							            		제주
-							            	</c:if>	
-										</p>
-										<div class="selectResume" style="width: 466px; background-color: #f8f9fa; height: 60px; line-height: 60px; padding: 0px 30px; overflow: hidden; border-radius: 10px; position: relative; top: 20px; border: 1px solid #ebebeb;">
-											<span style="font-size: 14px; color: #444;">선택된 이력서</span>
-											<a href="/resumeManage.do?memberNo=${sessionScope.m.memberNo }&reqPage=1"><button data-v-6259d225="" fragment="103966058a9" type="button" class="btn" style="color: #444; float:right; font-size: 14px; width: 120px; height:40px; margin-top: 10px; background-color: white; border-radius: 10px;">이력서 변경 <svg data-v-6259d225="" viewBox="0 0 16 16" class="ic" style="height: 14px; margin-top: -3px;"><path d="M6 13.657L11.657 8 6 2.343" stroke="#444" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></a>
+						<!-- 모달버튼// 사용법 자세히모름 수현누나 물어보기 -->
+						<!-- modal내용 등록 -->
+						<div class="modal fade" id="contestMember" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog  modal-dialog-centered">
+									<div class="modal-content">
+										<div class="modal-body">
+											<form action="/insertApplication.do" method="post">
+												<p style="font-size: 15px; color: #444444; margin-bottom:5px;">${a.companyName } 입사지원</p>
+												<p style="font-size: 22px; font-weight: bold; text-overflow:ellipsis; margin-bottom: 0px;">${a.announceTitle }</p>
+												<p style="font-size: 12px; color: #999999;">
+													<c:if test="${a.career eq 1 }">
+														신입
+													</c:if> 
+													<c:if test="${a.career eq 2 }">
+														경력
+													</c:if> 
+													<c:if test="${a.career eq 3 }">
+														신입/경력
+													</c:if> 
+													| 
+													<c:if test="${a.school eq 1 }">
+														초졸이상
+													</c:if>
+													<c:if test="${a.school eq 2 }">
+														중졸이상
+													</c:if>
+													<c:if test="${a.school eq 3 }">
+														고졸이상
+													</c:if>
+													<c:if test="${a.school eq 4 }">
+														대졸이상
+													</c:if>
+													<c:if test="${a.school eq 5 }">
+														학력무관
+													</c:if>
+													|
+													<c:if test="${a.workPlace eq 1 }">
+														서울
+													</c:if>
+													<c:if test="${a.workPlace eq 2 }">		
+								            			경기
+									            	</c:if>
+													<c:if test="${a.workPlace eq 3 }">		
+									            		인천
+									            	</c:if>
+													<c:if test="${a.workPlace eq 4 }">		
+														강원
+									            	</c:if>
+													<c:if test="${a.workPlace eq 5 }">		
+									            		충남
+									            	</c:if>
+													<c:if test="${a.workPlace eq 6 }">		
+									            		충북
+									            	</c:if>
+													<c:if test="${a.workPlace eq 7 }">		
+														경북
+									            	</c:if>
+													<c:if test="${a.workPlace eq 8 }">		
+														부산
+									            	</c:if>
+													<c:if test="${a.workPlace eq 9 }">		
+														경남
+									            	</c:if>
+													<c:if test="${a.workPlace eq 10 }">		
+									            		전북
+									            	</c:if>
+													<c:if test="${a.workPlace eq 11 }">		
+									            		전남
+									            	</c:if>
+													<c:if test="${a.workPlace eq 12 }">		
+									            		제주
+									            	</c:if>	
+												</p>
+												<div class="selectResume" style="width: 466px; background-color: #f8f9fa; height: 60px; line-height: 60px; padding: 0px 30px; overflow: hidden; border-radius: 10px; position: relative; top: 20px; border: 1px solid #ebebeb;">
+													<span style="font-size: 14px; color: #444;">선택된 이력서</span>
+													<a href="/resumeManage.do?memberNo=${sessionScope.m.memberNo }&reqPage=1"><button data-v-6259d225="" fragment="103966058a9" type="button" class="btn" style="color: #444; float:right; font-size: 14px; width: 120px; height:40px; margin-top: 10px; background-color: white; border-radius: 10px;">이력서 변경 <svg data-v-6259d225="" viewBox="0 0 16 16" class="ic" style="height: 14px; margin-top: -3px;"><path d="M6 13.657L11.657 8 6 2.343" stroke="#444" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></a>
+												</div>
+												<div style="border: 1px solid #d9d9d9; padding: 20px; padding-left: 25px; margin-bottom: 20px; border-top: none; border-radius: 10px; border: 1px solid #eaf0fa; padding-top: 35px; box-shadow: 0 2px 14px 0 rgb(0 0 0 / 10%);">
+													<span style="font-size: 12px; color: #999999;">${r.writeDate }</span>
+													<p><a href="/resumeView.do?resumeNo=${r.resumeNo }" target="_blank" style="font-weight: bold; text-decoration: none; color: black; text-overflow: ellipsis;">${r.resumeTitle }</a></p>
+												</div>
+												<p class="desc" style="font-size:12px; color: #999999;"> 제출서류는 90일까지 지원기업에게 제공됩니다.<br>제출에 동의할 경우에만 [입사지원] 버튼을 클릭해 주세요.<br> 동의하지 않을 경우 입사지원이 불가능합니다.</p>
+												<p class="desc" style="font-size:12px; color: #999999;"> 만료(응시 시작일로부터 3년)된 인 ∙ 적성검사 포함 시 입사지원이 불가능하며, 입사지원 후 제출된 인 ∙ 적성검사는 만료 여부와 관계없이 입사지원서 열람 기준 내 인사담당자가 확인할 수 있습니다.</p>
+												<div style="text-align: right; ">
+													<button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">지원하기</button>
+													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
+												</div>
+												<input type="hidden" name="announceNo" value="${a.announceNo }">
+												<input type="hidden" name="resumeNo" value="${r.resumeNo }">
+												<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+												<input type="hidden" name="status" value="1">
+											</form>
 										</div>
-										<div style="border: 1px solid #d9d9d9; padding: 20px; padding-left: 25px; margin-bottom: 20px; border-top: none; border-radius: 10px; border: 1px solid #eaf0fa; padding-top: 35px; box-shadow: 0 2px 14px 0 rgb(0 0 0 / 10%);">
-											<span style="font-size: 12px; color: #999999;">${r.writeDate }</span>
-											<p><a href="/resumeView.do?resumeNo=${r.resumeNo }" target="_blank" style="font-weight: bold; text-decoration: none; color: black; text-overflow: ellipsis;">${r.resumeTitle }</a></p>
-										</div>
-										<p class="desc" style="font-size:12px; color: #999999;"> 제출서류는 90일까지 지원기업에게 제공됩니다.<br>제출에 동의할 경우에만 [입사지원] 버튼을 클릭해 주세요.<br> 동의하지 않을 경우 입사지원이 불가능합니다.</p>
-										<p class="desc" style="font-size:12px; color: #999999;"> 만료(응시 시작일로부터 3년)된 인 ∙ 적성검사 포함 시 입사지원이 불가능하며, 입사지원 후 제출된 인 ∙ 적성검사는 만료 여부와 관계없이 입사지원서 열람 기준 내 인사담당자가 확인할 수 있습니다.</p>
-										<div style="text-align: right; ">
-											<button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">지원하기</button>
-											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
-										</div>
-										<input type="hidden" name="announceNo" value="${a.announceNo }">
-										<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
-										<input type="hidden" name="cmStatus" value="1">
-									</form>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="companyName">
 				<small>${a.companyName }</small>
@@ -275,7 +276,7 @@
 		<div class="announcement">모집요강</div>
 		<div class="info">
 			<div class="infoDiv">
-				<em>요약</em>
+				<em><span style="color: rgb(78, 205, 196); font-size: 18px;">●</span> 요약</em>
 				<ul class="infoUl">
 					<li>
 						<span class="announceInfo">
@@ -362,7 +363,7 @@
 			</div>
 			
 			<div class="infoDiv">
-				<em>기업소개</em>	
+				<em><span style="color: rgb(78, 205, 196); font-size: 18px;">●</span> 기업소개</em>	
 				<div class="infoContent">
 					<p>${a.content }</p>
 				</div>
@@ -370,14 +371,14 @@
 			</div>
 			
 			<div class="infoDiv">
-				<em>주요업무</em>	
+				<em><span style="color: rgb(78, 205, 196); font-size: 18px;">●</span> 주요업무</em>	
 				<div class="infoContent">
 					<p>${a.announceContent }</p>
 				</div>
 			</div>
 			
 			<div class="infoDiv">
-				<em>우대사항</em>	
+				<em><span style="color: rgb(78, 205, 196); font-size: 18px;">●</span> 우대사항</em>	
 				<div class="infoContent">
 					<c:if test="${a.veterans eq 2 }">
 						<p>보훈대상 우대</p>
@@ -392,28 +393,67 @@
 			</div>
 			
 			<div class="infoDiv">
-				<em>채용절차</em>	
+				<em><span style="color: rgb(78, 205, 196); font-size: 18px;">●</span> 채용절차</em>		
 				<div class="infoContent">
-					<img src="/resources/img/company/saram.png">
+					<!-- <img src="/resources/img/company/saram.png"> -->
+					<style>
+						.reNum{
+							list-style: none;
+							overflow: hidden;
+							text-align: center;
+							margin-left: 20px; 
+						}
+						.reNum>li{
+							float: left;
+							text-align: center;
+						}
+						.r{
+							padding: 0px 15px;
+						}
+						.reNum>li>p{
+							margin-top: 10px;
+							color: #3698c1;
+							width: 136px;
+						}
+					</style>
+					<ul class="reNum">
+                            <li>
+                                <img src="/resources/img/company/re_num01.png" alt=""> <img src="/resources/img/company/right.PNG" class="r">
+                                <p>서류전형</p>
+                            </li>
+                            <li>
+                                <img src="/resources/img/company/re_num02.png" alt=""> <img src="/resources/img/company/right.PNG" class="r">
+                                <p>1차 실무면접</p>
+                            </li>
+                            <li>
+                                <img src="/resources/img/company/re_num03.png" alt=""> <img src="/resources/img/company/right.PNG" class="r">
+                                <p>2차 임원면접</p>
+                            </li>
+                            <li>
+                                <img src="/resources/img/company/re_num04.png" alt="">
+                                <p>최종합격</p>
+                            </li>
+                        </ul>
+					
 				</div>
 			</div>
 			
 			<div class="infoDiv">
-				<em>접수기간 및 방법</em>	
-				<div class="application">
-					<p>AnnounceView에 마감날짜 추가해서 가져와야할듯 겁나기찬네</p>
+				<em><span style="color: rgb(78, 205, 196); font-size: 18px;">●</span> 접수기간 및 방법</em>	
+				<div class="infoContent">
+					<p><p>AnnounceView에 마감날짜 추가해서 가져와야할듯 겁나기찬네</p></p>
 				</div>
 			</div>
 			
 			<div class="infoDiv">
-				<em>유의사항</em>	
-				<div class="ue">
+				<em><span style="color: rgb(78, 205, 196); font-size: 18px;">●</span> 유의사항</em>	
+				<div class="infoContent">
 					<p>ㆍ입사지원 서류에 허위사실이 발견될 경우, 채용확정 이후라도 채용이 취소될 수 있습니다. css는 나중에 할게요</p>
 				</div>
 			</div>
 			
 			<div class="infoDiv">
-				<em>기업정보</em>	
+				<em><span style="color: rgb(78, 205, 196); font-size: 18px;">●</span> 기업정보</em>	
 				<div class="infoContent">
 					<div class="comInfo">
 						<div class="infoLogo">

@@ -75,6 +75,7 @@
 	</div>
 	</header>
 	<!-- Carousel 끝 -->
+	<!-- main세션 -->
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
 			<h3><a href="/recruitTeamMember_mainPage.do?reqPage=1" class="de-non">팀 프로젝트 모집</a></h3>
@@ -84,18 +85,10 @@
 	</div>
 	<div class="container">
 		<!-- 인기순 프로젝트 리스트 출력 -->
+		
 		<!-- 인기순 프로젝트 리스트 출력  끝 -->
-		
-		<!-- 개발지식 공유 리스트 1-5까지 리스트 출력 -->
-		<!-- 개발지식 공유 리스트 1-5까지 리스트 출력  끝-->
-		
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
-		
-		<!-- 구인구직 5가지 출력 -->
-		<!-- 구인구직 끝-->
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</div>
+	<!-- 공모전 -->
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
 			<h3 class="text-primary"><a href="/contestMain.do" class="de-non">공모전</a></h3>
@@ -103,9 +96,8 @@
 		</div>
 	</div>
 	<div class="container" style="margin-top: 0;;margin-bottom: 20px;">
-		<!-- 구인구직 4가지 출력 -->
 		<div  style="margin-top: 100px;">
-			<span class="subEngTitel">HOT</span> <span class="subTitel">인기 공모전</span>
+			<span class="subEngTitel">HOT</span> <span class="subTitel">인기 공모전</span><a href="/allContestList.do?reqPage=1&type=0" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
 		</div>
 		<%-- 인기 공모전 리스트 --%>
 		<div class="newContestBox">
@@ -155,8 +147,9 @@
 			</div>
 			</c:forEach>
 		</div>	
-		<!-- 구인구직 끝-->
 	</div>
+	<!-- 공모전 -->
+	<!-- 고수의 노하우 -->
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
 			<h3 class="text-primary"><a href="/gosuMain.do" class="de-non">'고수'의 노하우</a></h3>
@@ -168,7 +161,7 @@
 		<c:forEach items="${gosuList }" var="g" begin="0" end="4">
 		<div class="gosu">
 			<button type="button" class="card border-primary mb-3"
-				style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+				style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;margin: auto;">
 				<table>
 					<tr>
 						<c:if test="${empty g.gosuImg }">
@@ -182,8 +175,6 @@
 								src="/resources/upload/member/${g.gosuImg }"
 								style="border-radius: 50%; width: 200px; height: 200px;"></td>
 						</c:if>
-
-
 						<td style="width: 600px;"><a href="/gosuContent.do?gNo=${g.ggsouNo}" class="gtitle">${g.gosuTitle }</a></td>
 					</tr>
 					<tr>
@@ -228,27 +219,132 @@
 			</button>
 		</div>
 		</c:forEach>
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
 	</div>
+	<!-- 고수 소개 얼굴만 최신 등록 5명 출력 끝 -->
+	<!-- 구인구직 -->
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
 			<h3 class="text-primary"><a href="/jobSearchList.do?reqPage=1" class="de-non">구인구직</a></h3>
 			<p>인재를 구하고, 세상을 지배하세요!</p>
 		</div>
 	</div>
-	<div class="container">
-		<!-- 인기순 프로젝트 리스트 출력 -->
-		<!-- 인기순 프로젝트 리스트 출력  끝 -->
-		
-		<!-- 개발지식 공유 리스트 1-5까지 리스트 출력 -->
-		<!-- 개발지식 공유 리스트 1-5까지 리스트 출력  끝-->
-		
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
-		
-		<!-- 구인구직 5가지 출력 -->
-		<!-- 구인구직 끝-->
-		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<div class="container" style="margin-bottom: 60px;">
+		<a href="/jobSearchList.do?reqPage=1" style="padding-left: 20px;text-decoration: none;font-weight: bold;float: right;margin-right: 10em;">더보기</a>
+	    <c:forEach items="${joblist }" var="a" varStatus="i" begin="0" end="2">
+	     <div class="content" style="margin: 30px auto auto auto;">
+	         <div class="status">모집중</div>
+	         <div class="cpName"><a href="companyInfo.do?companyNo=${a.companyNo }">${a.companyName }</a></div>	
+	         <div class="title-job">
+	         <c:if test="${not empty sessionScope.m }">
+	             <a href="/announceView.do?announceNo=${a.announceNo}&memberNo=${sessionScope.m.memberNo }<%-- &memberNo=${sessionScope.m.memberNo } --%>">${a.announceTitle }</a>	
+	         </c:if>
+	         <c:if test="${empty sessionScope.m }">
+	             <a href="/announceView.do?announceNo=${a.announceNo}&memberNo=0<%-- &memberNo=${sessionScope.m.memberNo } --%>">${a.announceTitle }</a>	
+	         </c:if>
+	         </div>
+	         <div class="info">
+	             <div class="humanInfo">
+	                 <span>경력</span> 
+	                 <c:if test="${a.career eq 1}">
+	                 	<span>신입</span>
+	                 </c:if>
+	                 <c:if test="${a.career eq 2}">
+	                 	<span>경력</span>
+	                 </c:if>
+	                 <br>
+	                 <span>학력</span> 
+	                 <c:if test="${a.school eq 1}">
+	                  <span>초등학교 졸업</span>
+	                 </c:if>
+	                 <c:if test="${a.school eq 2}">
+	                  <span>중학교 졸업</span>
+	                 </c:if>
+	                 <c:if test="${a.school eq 3}">
+	                  <span>고등학교 졸업</span>
+	                 </c:if>
+	                 <c:if test="${a.school eq 4}">
+	                  <span>대학교 졸업 이상</span>
+	                 </c:if>
+	             </div>
+	             <div class="workInfo">
+	                 <span>|</span>
+	                 <c:if test="${a.workForm eq 1}">
+	                 	<span>정규직</span>
+	                 </c:if>
+	                 <c:if test="${a.workForm eq 2}">
+	                 	<span>계약직</span>
+	                 </c:if>
+	                 <c:if test="${a.workForm eq 3}">
+	                 	<span>아르바이트</span>
+	                 </c:if>
+	                 <c:if test="${a.workForm eq 4}">
+	                 	<span>인턴</span>
+	                 </c:if>
+	                 <c:if test="${a.workForm eq 5}">
+	                 	<span>프리랜서</span>
+	                 </c:if>
+	                 <br>
+	                 <span>|</span>
+	                 <c:if test="${a.category eq 1}">
+	                 <span>IT 개발</span>	                            	
+	                 </c:if>
+	                 <c:if test="${a.category eq 2}">
+	                 <span>웹 디자인</span>	                            	
+	                 </c:if>
+	                 <c:if test="${a.category eq 3}">
+	                 <span>프로젝트 기획</span>	                            	
+	                 </c:if>
+	             </div>
+	         </div>
+	         <div class="mainFooter">
+	             <div class="tech">
+	                 <span>${a.skills }</span>
+	             </div>
+	             <div class="subInfo">
+	                 <span><c:if test="${a.workPlace eq 1 }">
+	                 	서울
+	                 </c:if>
+	                 <c:if test="${a.workPlace eq 2 }">
+	                 	경기
+	                 </c:if>
+	                 <c:if test="${a.workPlace eq 3 }">
+	                 	인천
+	                 </c:if>
+	                 <c:if test="${a.workPlace eq 4 }">
+	                 	강원
+	                 </c:if>
+	                 <c:if test="${a.workPlace eq 5 }">
+	                 	충남
+	                 </c:if>
+	                 <c:if test="${a.workPlace eq 6 }">
+	                 	충북
+	                 </c:if>
+	                 <c:if test="${a.workPlace eq 7 }">
+	                 	경북
+	                 </c:if>
+	                 <c:if test="${a.workPlace eq 8 }">
+	                 	부산
+	                 </c:if>
+	                 <c:if test="${a.workPlace eq 9 }">
+	                 	경남
+	                 </c:if>
+	                 <c:if test="${a.workPlace eq 10 }">
+	                 	전북
+	                 </c:if>
+	                 <c:if test="${a.workPlace eq 11 }">
+	                 	전남
+	                 </c:if>
+	                 <c:if test="${a.workPlace eq 12 }">
+	                 	제주
+	                 </c:if></span> <span style="margin-left: 20px;">등록일자 ${a.writeDate }</span>
+	             </div>
+	             <div class="situation">
+	                 <div class="date">마감 <span>7</span>일 전</div>		<!-- 7 -> 마감일-현재일 이거 어캐하지 -->
+	                 <div class="apply">총 <span>2</span>명 지원</div>		<!-- 2 -> 지원한 이력서 갯수 count  흠  -->
+	             </div>
+	         </div>
+	     </div>
+	    </c:forEach>		
 	</div>
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
@@ -257,6 +353,7 @@
 		</div>
 	</div>
 	<div class="container" style="margin-bottom: 50px;">
+	<!-- 게시판 3가지 출력 -->
 		<div class="cate3Box">
 			<div>
 				
@@ -281,44 +378,53 @@
 				
 				<div class="BoardList" >
 					<div>
-					<p class="title" style="background-color: #fff;">비회원 QNA</p>
-					<a href="/shareList.do?reqPage=1&type=2" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
+					<p class="title" style="background-color: #fff;">개발지식공유</p>
+					<a href="/shareList.do?reqPage=1&type=1" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
 					</div>
-					<c:forEach items="${nonQnaList }" var="nq">
+					<c:forEach items="${shlist }" var="sh" begin="0" end="4">
 						<c:choose>
-							<c:when test="${fn:length(nq.qnaTitle) > 16}">
-								<c:set var="subTitle" value="${fn:substring(nq.qnaTitle,0,16)}"/>
-								<a href="#" class="newBoard"><span>${subTitle }...</span></a>
+							<c:when test="${fn:length(sh.boardTitle) > 16}">
+								<c:set var="subTitle" value="${fn:substring(sh.boardTitle,0,16)}"/>
+								<a href="/shareBoardView.do?boardNo=${sh.boardNo }" class="newBoard"><span>${subTitle }...</span></a>
 							</c:when>
 							<c:otherwise>
-								<span class="newTitle-2">${nq.qnaTitle }</span>
+								<a href="/shareBoardView.do?boardNo=${sh.boardNo }" class="newBoard"><span class="newTitle-2">${sh.boardTitle }</span></a>
 							</c:otherwise>
 						</c:choose>
-						<span class="newBoardDate">${nq.regDate }</span><br>
+						<c:set var="subTitle" value="${fn:substring(sh.regDate,0,10)}"/>
+						<span class="newBoardDate">${subTitle }</span><br>
 					</c:forEach>
 				</div>
 				
 				<div class="BoardList" >
 					<div>
-					<p class="title" style="background-color: #fff">개발지식공유</p>
-					<a href="/adminCounsel.do?type=2" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
+					<p class="title" style="background-color: #fff">비회원 Q&A 리스트</p>
+					<a href="/nonMember_CounselList.do" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
 					</div>
-					<c:forEach items="${qnaList }" var="q">
+					<c:forEach items="${adlist }" var="q" begin="0" end="4">
 						<c:choose>
 							<c:when test="${fn:length(q.qnaTitle) > 16}">
 								<c:set var="subTitle" value="${fn:substring(q.qnaTitle,0,16)}"/>
-								<a href="#" class="newBoard"><span>${subTitle }...</span></a>
+								<a href="#" class="newBoard board-link"><span>${subTitle }...</span></a>
 							</c:when>
 							<c:otherwise>
-								<span class="newTitle">${q.qnaTitle }</span>
+								<a href="#" class="newBoard board-link"><span class="newTitle-2">${q.qnaTitle }</span></a>
 							</c:otherwise>
 						</c:choose>
 						<span class="newBoardDate">${q.regDate }</span><br>
 					</c:forEach>
 				</div>
-				
 			</div>
 		</div>
+		<!-- 게시판 3가지 출력 끝 -->
 	</div>
+	<!-- main세션 끝-->
+	<script type="text/javascript">
+		$(".board-link").click(function(){
+			if(confirm("비밀번호를 입력하셔야 합니다. Q&A페이지로 이동할까요?")){
+				location.href="/nonMember_CounselList.do";
+			}
+		});
+	</script>
 </body>
 </html>

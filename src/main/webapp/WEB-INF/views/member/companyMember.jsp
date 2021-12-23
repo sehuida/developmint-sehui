@@ -91,11 +91,9 @@
 					  	
 					  var valid = response.data[0].valid;
 					  if(valid == "01"){
-						  console.log(memberVal);
-						  console.log(comNo);
 						  $.ajax({
 							 url : "/addCompany.do",
-							 data : {memberId : memberVal , comNo : comNo},
+							 data : {memberId : memberVal , comNo : comNo },
 							 type : "post",
 							 success : function(data){
 								 if(data == 1){
@@ -105,11 +103,17 @@
 					                      }).then(function(){
 					                    	 window.location = "/mypage.do"; 
 					                      });
-								 }else{
+								 }else if(data == 0){
 					                    swal({
 					                        title: '귀사는 저희 페이지에 연동되어있지 않습니다.',
 					                        icon: 'error'
 					                      });							 
+								 }else if(data == 2){
+					                    swal({
+					                        title: '기업인증은 한명만 가능합니다.',
+					                        text: '귀사명의로 인증받은 계정이 존재합니다.',
+					                        icon: 'error'
+					                      });										 
 								 }
 							 }
 						  });
