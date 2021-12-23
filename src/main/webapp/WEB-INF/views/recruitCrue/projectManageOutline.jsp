@@ -61,9 +61,6 @@
                     <li class="flexLi" style="border-bottom: 3px dashed #90d1b4;">
                         <a href="/enterMyProject.do?projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" class="subNaviAtag" ><img src="/resources/img/recruitTeamProject/recruitPage/powerOn.png" class="subNaviImg"><span style="cursor: pointer; font-weight: 900">프로젝트 개요</span></a>
                     </li>
-                    <li class="flexLi">
-                        <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/calendar.png" class="subNaviImg"><span style="cursor: pointer;">캘린더</span></a>
-                    </li>
                     <li class="flexCLi" style="cursor: pointer;">
 	                    <div class="flexSuperSubBox">
 	                          <img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg"><span>과업 관리</span>
@@ -74,9 +71,6 @@
                             <li><a href="#"><span>Bug</span></a></li>
                             <li><a href="#"><span>Hold</span></a></li>
                         </ul>
-                    </li>
-                    <li class="flexLi">
-                        <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/board.png" class="subNaviImg"><span style="cursor: pointer;">보드</span></a>
                     </li>
                     <c:forEach items="${scList}" var="sl">
                     	<li class="flexLi">
