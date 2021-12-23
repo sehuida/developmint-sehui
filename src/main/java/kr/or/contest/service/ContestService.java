@@ -139,6 +139,13 @@ public class ContestService {
 	public int deleteContest(int contestNo) {
 		return dao.deleteContest(contestNo);
 	}
+
+	public int duplicationCheckCon(String memberId, int contestNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);
+		map.put("contestNo", contestNo);
+		return dao.duplicationCheckCon(map);
+	}
 }
 
 

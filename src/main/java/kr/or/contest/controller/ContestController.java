@@ -231,6 +231,14 @@ public class ContestController {
 			return "common/msg";
 		}
 	
+	//공모전 중복 체크
+		@ResponseBody
+		@RequestMapping(value="/duplicationCheckCon.do")
+		public int duplicationCheckCon(String memberId, int contestNo) {
+			int result = service.duplicationCheckCon(memberId, contestNo);
+			System.out.println(result);
+			return result;
+		}
 }
 
 
