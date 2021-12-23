@@ -18,6 +18,7 @@ import kr.or.gosu.service.GosuService;
 import kr.or.gosu.vo.Gosu;
 import kr.or.jobSearch.service.JobSearchService;
 import kr.or.projectTeam.model.service.ProjectTeamService;
+import kr.or.projectTeam.model.vo.projectTeamMainPageData;
 import kr.or.qna.service.QnaService;
 import kr.or.qna.vo.NonQna;
 import kr.or.share.model.service.ShareService;
@@ -64,9 +65,10 @@ public class mainController {
 		int reqPage = 1;
 		int type = 1;
 		ShareBoardPage sbp = shService.shareBoardList(reqPage,type);
-		//팀프로젝트에서 불러오기
 		//구인구직 가지고오기
 		AnnouncePageData apd = jobService.selectAllAnnounce(reqPage);
+		//팀프로젝트에서 불러오기
+		projectTeamMainPageData ptmpd = ptsService.mainProjectTeamPageData();
 		
 		model.addAttribute("gosuList",g);
 		model.addAttribute("conlist",list);
@@ -74,6 +76,8 @@ public class mainController {
 		model.addAttribute("adlist",adlist);
 		model.addAttribute("shlist",sbp.getList());
 		model.addAttribute("joblist",apd.getList());
+		model.addAttribute("ptlist", ptmpd.getList());
+		model.addAttribute("pdLangList", ptmpd.getPdLangList());
 		return "common/main";
 	}
 	

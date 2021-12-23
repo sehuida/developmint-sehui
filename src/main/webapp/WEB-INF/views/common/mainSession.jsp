@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <!-- Add the slick-theme.css if you want default styling -->
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<link rel="stylesheet" href="/resources/css/projectTeam/recruitMember.css">
 </head>
 <style>
 	* Make the image fully responsive */
@@ -83,9 +84,57 @@
 			<p>프로젝트 팀장은 당신을 찾고있습니다! 필요한 언어를 선택하여 팀원으로 참가하세요.</p>
 		</div>
 	</div>
-	<div class="container" style="min-width: 1800px;">
-		<!-- 인기순 프로젝트 리스트 출력 -->
-		
+	<div class="container" style="min-width: 1800px;margin-bottom: 20px;">
+		<!-- 최신순 프로젝트 리스트 8개 출력 -->
+		<c:forEach items="${ptlist }" var="pt" varStatus="mi">
+			<div class="contentFlexBox">
+			    <div class="imgBox">
+			    	<c:choose>
+			    		<c:when test="${pt.writerImgPath eq null}">
+			    			<img class="myInfoImg" src="/resources/img/member/user.png">
+			    		</c:when>
+			    		<c:otherwise>
+			    			<img class="myInfoImg" src="/resources/upload/member/${pt.writerImgPath }">
+			    		</c:otherwise>
+			    	</c:choose> 
+		     	</div>
+				<a href="/selectOneNotice.do?projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" class="clickRecruitTeamTag">
+					<div class="contentBox">
+					    <div class="textFlexBox1">
+					        <div class="textContent">
+					            <p class="contentText">${pt.RTitle }</p>
+					        </div>
+					        <div class="dateType">
+					            <b>작성일 : </b><span><b>${pt.RStartDate }</b></span>
+					        </div>
+					    </div>
+					    <div class="textFlexBox2">
+					        <div></div>
+					        <div class="dateType">
+					            <b>마감일 : </b><span><b>${pt.REndDate }</b></span>
+					        </div>
+					    </div>
+					    <div class="bottomFlexBox">
+					        <div class="subImgBox">
+					         <c:forEach items="${pdLangList }" var="lI"  varStatus="i">
+					         	<c:if test="${pt.projectNo eq lI.projectNo }">
+					         		<img class="langImg" src="${lI.langImg }">
+					            	</c:if>
+					         </c:forEach>
+					        </div>
+					        <div class="countBox">
+					            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/bubble-chat.png">
+					            <span class="countText">${pt.commentCount }</span>
+					            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
+					            <span class="countText">${pt.viewCount }</span>
+					            <img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png" style="position: relative; top: 3px;">
+					            <span class="countText">${pt.dibCount }</span>
+					        </div>
+					    </div>
+					</div>
+				</a>	
+			</div>
+		</c:forEach>
 		<!-- 인기순 프로젝트 리스트 출력  끝 -->
 	</div>
 	<!-- 공모전 -->
@@ -95,7 +144,7 @@
 			<p>상금이 걸린 공모전에 참가해보세요! 당신의 재능을 첨부하면 됩니다.</p>
 		</div>
 	</div>
-	<div class="container" style="margin-top: 0;;margin-bottom: 20px;style="min-width: 1800px;"">
+	<div class="container" style="margin-top: 0;margin-bottom: 30px;min-width: 1800px;"">
 		<div  style="margin-top: 100px;">
 			<span class="subEngTitel">HOT</span> <span class="subTitel">인기 공모전</span><a href="/allContestList.do?reqPage=1&type=0" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
 		</div>
