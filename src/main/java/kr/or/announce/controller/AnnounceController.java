@@ -24,6 +24,9 @@ public class AnnounceController {
 	public String announceManage(Model model, int memberNo) {
 		/* ArrayList<Announce> list = service.selectAllannounce(memberNo); */
 		Announce announce = service.selectAllannounce(memberNo);
+		int count = service.selectAnnounceCount(announce.getAnnounceNo());
+		System.out.println("count : " +count);
+		model.addAttribute("count", count);
 		System.out.println("announce : " +announce);
 		model.addAttribute("a", announce);
 		return "jobSearch/announceManage";
