@@ -222,9 +222,9 @@ input:focus, textarea:focus {
 												<th colspan="2"
 													style="text-align: left; font-size: 30px; width: 150px;"><c:if
 														test="${empty gtl.memberImg }">
-														<img src="/resources/img/gosu/g_img_basic.png">
+														<img src="/resources/img/gosu/g_img_basic.png" style="margin-bottom: 5px;">
 													</c:if> <c:if test="${not empty gtl.memberImg }">
-														<img src="/resources/upload/member/${gtl.memberImg}">
+														<img src="/resources/upload/member/${gtl.memberImg}" style="margin-bottom: 5px;">
 													</c:if> <c:choose>
 														<c:when test="${sessionScope.m.memberType ne 2}">
 															<span style="color: rgb(78, 205, 196);">고수</span>
