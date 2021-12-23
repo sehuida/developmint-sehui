@@ -106,9 +106,16 @@ public class AnnounceController {
 	@RequestMapping(value="/insertApplication.do")
 	public String insertApplication(Application app, Model model) {
 		System.out.println("app : "+app);
-		model.addAttribute("text","지원완료되었습니다.");
-		model.addAttribute("loc","jobSearchList.do?reqPage=1");
-		model.addAttribute("icon","success");
+		int result = service.insertApplication(app);
+		if(result > 0) {
+			model.addAttribute("title","지원완료되었습니다.");
+			model.addAttribute("loc","jobSearchList.do?reqPage=1");
+			model.addAttribute("icon","success");
+		} else {
+			model.addAttribute("title","지원신청 에러발생 삐융삐융");
+			model.addAttribute("loc","jobSearchList.do?reqPage=1");
+			model.addAttribute("icon","fail");
+		}
 		return "member/swalMsg";
 	}
 	

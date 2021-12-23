@@ -9,4 +9,5 @@ public class Application {
 	private int resumeNo;
 	private int memberNo;
 	private int status;
+	private String applyDate;
 }

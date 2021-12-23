@@ -237,7 +237,14 @@ b {
 								style="color: #999999; font-style: normal; margin-left: 15px; font-size: 12px;">${com.writeDate }</i>
 						</div>
 						<div class="announceTitle">
+						
+						<c:if test="${not empty sessionScope.m }">
 							<a href="/announceView.do?announceNo=${com.announceNo }&memberNo=${sessionScope.m.memberNo }">${com.announceTitle }</a>
+	                    </c:if>
+	                    <c:if test="${empty sessionScope.m }">
+							<a href="/announceView.do?announceNo=${com.announceNo }&memberNo=0">${com.announceTitle }</a>
+	                    </c:if>
+	                    
 						</div>
 
 						<ul class="resumeInfo1">
