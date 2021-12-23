@@ -359,16 +359,22 @@ public class MemberController {
 	@RequestMapping(value="/addCompany.do")
 	public String addCompnay(Member m,HttpSession session) {
 		int result = service.addCompany(m);
-		if(result>0) {
+		if(result==1) {
 			return "1";
-		}else {
+		}else if(result==0){
 			return "0";
+		}else {
+			return "2";
 		}
 	}
 	@RequestMapping(value="/mypageCom.do")
 	public String mypageCom(@SessionAttribute Member m,Model model) {
 		int announceNo = service.announceNo(m.getComNo());
-		model.addAttribute("announceNo",announceNo);
+		if(announceNo == 0) {
+			model.addAttribute("announceNo",0);			
+		}else {
+			model.addAttribute("announceNo",announceNo);	
+		}
 		return "member/mypageCom";
 	}
 	@RequestMapping(value="/mypageGosu.do")

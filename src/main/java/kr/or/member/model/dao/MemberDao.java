@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.company.vo.Company;
 import kr.or.contest.vo.Contest;
 import kr.or.contest.vo.ContestList;
 import kr.or.contest.vo.ContestMember;
@@ -88,7 +89,7 @@ public class MemberDao {
 		return sqlSession.update("member.addCompnay",m);
 	}
 
-	public int checkCompany(Member m) {
+	public Company checkCompany(Member m) {
 		return sqlSession.selectOne("member.checkCompany",m);
 	}
 
@@ -151,6 +152,10 @@ public class MemberDao {
 
 	public int announceNo(int comNo) {
 		return sqlSession.selectOne("member.announceNo",comNo);
+	}
+
+	public Member existCompany(Member m) {
+		return sqlSession.selectOne("member.existCompany",m);
 	}
 
 }
