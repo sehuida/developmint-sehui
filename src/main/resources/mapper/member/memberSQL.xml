@@ -198,7 +198,7 @@
 	    m.filepath as profiles,
 	    member_grade as memberGrade,
 	    (select count(*) from likes lk where s.board_no=lk.board_no) as likes
-	from share_board s left join member m using (member_no) where member_no=#{memberNo} order by 1 desc)sb)shb where rnum between #{start} and #{end}	
+	from share_board s left join member m using (member_no) where member_no=#{memberNo} order by 2 desc)sb)shb where rnum between #{start} and #{end}	
   </select>
   <select id="boardCount" parameterType="_int" resultType="_int">
   	select count(*) from share_board where member_no=#{memberNo}
