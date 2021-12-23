@@ -17,7 +17,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	
 <script>
-
+	var result = false
 	$(function(){
 		$(".flexCLi").click(function(){
             $(".s-sub-menu").slideToggle("slow")
@@ -54,7 +54,29 @@
 		        $(".rBox_Leftnavi_left").css("opacity", "0.5"); 
 	    	}
 	    }
+		
+		$("#taskStartDate").change(function(){
+            var birthReg = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
+            var birthValue = $("#taskStartDate").val();
+            if(birthReg.test(birthValue)){
+                $("#dateChk").text("정상입니다.");
+                $("#dateChk").css("color", "blue");
+                result = true;
+            }else {
+                $("#dateChk").text("일자는 하이픈("-") 포함 10자리로 기입해주시기 바랍니다.(YYYY-MM-DD)");
+                $("#dateChk").css("color", "red");
+                result = false;
+            }
+        });
+		
     });
+	
+	function checkValue(){
+        if(!(result)){
+             alert("입력값을 확인하세요!");
+             return false;
+         }
+    }
 	
 </script>
 
@@ -68,9 +90,6 @@
                     <li class="flexLi">
                         <a href="/enterMyProject.do?projectNo=${projectNo}&memberNo=${sessionScope.m.memberNo}" class="subNaviAtag" ><img src="/resources/img/recruitTeamProject/recruitPage/powerOn.png" class="subNaviImg"><span style="cursor: pointer;">프로젝트 개요</span></a>
                     </li>
-                    <li class="flexLi">
-                        <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/calendar.png" class="subNaviImg"><span style="cursor: pointer;">캘린더</span></a>
-                    </li>
                     <li class="flexCLi" style="border-bottom: 3px dashed #90d1b4; cursor: pointer;">
 	                    <div class="flexSuperSubBox">
 	                            <img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg"><span style="font-weight: 900">과업 관리</span>
@@ -81,9 +100,6 @@
                             <li><a href="#"><span>Bug</span></a></li>
                             <li><a href="#"><span>Hold</span></a></li>
                         </ul>
-                    </li>
-                    <li class="flexLi">
-                        <a href="#" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/board.png" class="subNaviImg"><span style="cursor: pointer;">보드</span></a>
                     </li>
                     <c:forEach items="${scList}" var="sl">
                     	<li class="flexLi">
@@ -132,26 +148,56 @@
                 <div class="taskBox">
                     <div class="taskWrap">
                         <p class="taskContentTitle">Meeting</p>
-                        <a data-bs-toggle="modal" href="#addMIssue" style="text-decoration: none;">
-                            <div class="taskMeeting" >
-                                <div class="leftTaskSite">
-                                    <p class="taskNo">M-1</p>
-                                    <p class="taskTitle">주간 회의</p>
-                                </div>
-                                <div class="rightTaskSite">
-                                    <span class="badge rounded-pill bg-primary" id="lowLabel">low</span>
-                                    <span class="badge rounded-pill bg-primary" id="mediumLabel">medium</span>
-                                    <span class="badge rounded-pill bg-primary" id="urgencyLabel">urgency</span>
-                                    <span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
-                                    <span class="badge rounded-pill bg-primary" id="ongoingLabel">진행 중</span>
-                                    <span class="badge rounded-pill bg-primary" id="todoLabel">해야 할 일</span>
-                                    <img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
-                                    <a href="#" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
-                                </div>
-                            </div>
-                        </a>
+                        <div class="titleLine" style="width: 100%; margin-top: 10px;"></div>
+                        <c:forEach items="${ptk}" var="ptk">
+	                        <a data-bs-toggle="modal" href="# ${ptk.taskNo}" style="text-decoration: none;">
+	                            <div class="taskMeeting">
+	                                <div class="leftTaskSite">
+	                                    <p class="taskNo">${ptk.taskNo}</p>
+	                                    <p class="taskTitle">${ptk.taskTitle}</p>
+	                                </div>
+	                                <div class="rightTaskSite">
+	                                	<c:choose>
+	                                		<c:when test="${ptk.priority eq 1}">
+			                                    <span class="badge rounded-pill bg-primary" id="lowLabel">low</span>
+	                                		</c:when>
+	                                		<c:when test="${ptk.priority eq 2}">
+			                                    <span class="badge rounded-pill bg-primary" id="mediumLabel">medium</span>
+	                                		</c:when>
+	                                		<c:when test="${ptk.priority eq 3}">
+			                                    <span class="badge rounded-pill bg-primary" id="urgencyLabel">urgency</span>
+	                                		</c:when>
+	                                	</c:choose>
+	                                	<c:choose>
+	                                		<c:when test="${ptk.processSort eq 1}">
+	                                			<span class="badge rounded-pill bg-primary" id="todoLabel">해야 할 일</span>
+	                                		</c:when>
+	                                		<c:when test="${ptk.processSort eq 2}">
+	                                			<span class="badge rounded-pill bg-primary" id="ongoingLabel">진행 중</span>
+	                                		</c:when>
+	                                		<c:when test="${ptk.processSort eq 3}">
+	                                			<span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
+	                                		</c:when>
+	                                	</c:choose>
+	                                	<c:forEach items="ptm" var="ptm">
+		                                	<c:if test="${ptm.memberImg eq ptk.memberNo}">
+		                                		<c:choose>
+			                                		<c:when test="${ptm.memberImg eq null}">
+			                                			<img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+			                                		</c:when>
+			                                		<c:otherwise>
+			                                			<img src="/resources/upload/member/${ptm.memberImg }" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+			                                		</c:otherwise>
+			                                	</c:choose>
+		                                	</c:if>
+	                                	</c:forEach>
+	                                    <a href="#" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+	                                </div>
+	                            </div>
+	                        </a>
+                        </c:forEach>
                         <div>
-                            <a data-bs-toggle="modal" href="#addMIssue" style="text-decoration: none;"><p class="addIssue">+ 이슈 만들기</p></a>
+                            <a data-bs-toggle="modal" href="#addMIssue" style="text-decoration: none;"><p class="addIssue" style="margin-left: 35px;">+ 이슈 만들기</p></a>
                         </div>
                         <div id = "pageNavi">${pageNavi }</div>
                     </div>
@@ -342,14 +388,20 @@
         <div class="modal-dialog  modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
-                    <form action="/addIssue.do" method="post">
-                        <p style="font-size: 25px; font-weight: bold; color: #90d1b4; margin-bottom: 10px;">Meeting 이슈 만들기</p>
+                    <form action="/addIssue.do" method="post" onsubmit="return checkValue();">
+                        <p style="font-size: 25px; font-weight: bold; color: #90d1b4; margin-bottom: 10px;" name="">Meeting 이슈 만들기</p>
                         <div class="form-group" style="margin-bottom: 15px;">
                             <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">제목 입력</label>
-                            <input type="text" class="form-control" placeholder="제목을 입력해주세요" id="inputDefault" name="shortcutAddr" >
+                            <input type="text" class="form-control" placeholder="제목을 입력해주세요" id="inputDefault" name="issueTitle"  maxlength="30" required="required">
+                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">과업 시작 일자</label>
+                            <input type="text" class="form-control" placeholder="시작일을 입력해주세요(YYYY-MM-DD)" id="taskStartDate" name="taskStartDate" maxlength="10" required="required">
+                            <span id="dateChk"></span>
                         </div>
                         <div style="text-align: right; padding-top: 10px;">
-                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">생성</button>
+                        	<input type="hidden" name="taskType" value=1> 
+                        	<input type="hidden" name="projectNo" value="${projectNo}"> 
+                        	<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}"> 
+                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;" onclick="return checkValue();">생성</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
                         </div>
                     </form>

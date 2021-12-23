@@ -269,7 +269,7 @@
 						<div class="modal-dialog  modal-dialog-centered">
 							<div class="modal-content">
 								<div class="modal-body">
-									<form action="/insertContestMember.do" method="post">
+									<form action="/insertContestMember.do" method="post" class="insertBtn">
 										<p style="font-size: 25px; font-weight: bold">공모전 신청</p>
 										<p style="font-size: 22px;">${list.contest.contestTitle }</p>
 										<div style="border: 1px solid #d9d9d9; padding: 20px; margin-bottom: 20px;">
@@ -281,7 +281,7 @@
 											<input type="text" class="form-control" name="cmGit">
 										</div>
 										<div style="text-align: right; ">
-											<button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">신청</button>
+											<button type="button" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">신청</button>
 											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
 										</div>
 										<input type="hidden" name="contestNo" value="${list.contest.contestNo }">
@@ -673,12 +673,30 @@
 			location.href="/loginFrm.do";
 		})
 		
-		//깃주소 입력 안하면 신청 안됨
+		//깃주소 입력 안하면 신청 안됨 + 중복 지원 막기
 		$(".contesteEnrollBtn").click(function(){
 			if($('input[name=cmGit]').val() == ""){
 				alert("깃주소를 입력해주세요.");
 				return false;
 			}
+			var memberId = '${sessionScope.m.memberId}';
+			var contestNo = '${list.contest.contestNo}';
+			$.ajax({
+				url : "/duplicationCheckCon.do",
+				type : 'post',
+				data : {memberId:memberId, contestNo:contestNo},
+				success : function(data){
+					if(data > 0){
+						alert("이미 지원하신 공모전 입니다");
+						return false;
+					}else if(data == 0){
+						$(".insertBtn").submit();
+					}
+				}
+				
+			});
+			
+			
 		})
 		
 		//공모전 삭제
@@ -696,6 +714,7 @@
 	 			  }
 	 			});
 		});
+
 
 	</script>
 </body>

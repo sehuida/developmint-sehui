@@ -95,5 +95,9 @@ public class ContestDao {
 	public int deleteContest(int contestNo) {
 		return sqlSession.delete("contest.deleteContest",contestNo);
 	}
+
+	public int duplicationCheckCon(Map<String, Object> map) {
+		return sqlSession.selectOne("contest.duplicationCheckCon",map);
+	}
 	
 }
