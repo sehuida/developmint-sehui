@@ -63,7 +63,7 @@
                     </li>
                     <li class="flexCLi" style="cursor: pointer;">
 	                    <div class="flexSuperSubBox">
-	                          <img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg"><span>과업 관리</span>
+	                          <img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg" style="margin-left: 5px;"><span>과업 관리</span>
 	                    </div>
 	                    <ul class="s-sub-menu">
                             <li><a href="/enterProjectTaskM.do?projectNo=${pt.projectNo}&reqPage=1"><span style="cursor: pointer;">Meeting</span></a></li>

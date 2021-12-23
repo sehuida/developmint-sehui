@@ -3,6 +3,7 @@ package kr.or.projectTeam.model.vo;
 import lombok.Data;
 
 @Data
+
 public class ProjectTask {
 	private String taskNo;
 	private int projectNo;
@@ -19,4 +20,5 @@ public class ProjectTask {
 	private String endDate;
 	private int processSort;
 	private int memberNo;
+	private String memberId;
 }
