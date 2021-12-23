@@ -214,4 +214,8 @@
 		select count(*) from application where announce_no = #{announceNo}
 	</select>
 	
+	<select id="selectAllAnnounceCount" resultType="_int">
+		select count(*) from announcement
+	</select>
+	
 </mapper>

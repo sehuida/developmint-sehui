@@ -21,7 +21,9 @@ public class JobSearchController {
 	@RequestMapping(value="/jobSearchList.do")
 	public String jobSearchList(Model model, int reqPage) {
 		AnnouncePageData apd = service.selectAllAnnounce(reqPage);
+		int count = service.selectAllAnnounceCount();	//전체 구인글 리스트 수
 		System.out.println(apd.getList());
+		model.addAttribute("count",count);
 		model.addAttribute("list",apd.getList());
 		model.addAttribute("pageNavi",apd.getPageNavi());
 		model.addAttribute("start",apd.getStart());

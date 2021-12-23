@@ -68,5 +68,9 @@ public class JobSearchService {
 			return apd;
 		}
 
+	public int selectAllAnnounceCount() {
+		return dao.selectAllAnnounceCount();
+	}
+
 	
 }
