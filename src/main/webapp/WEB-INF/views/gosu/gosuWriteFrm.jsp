@@ -350,7 +350,8 @@
 
 						<div>
 							<p>
-								<textarea name="gosuExplain" id="gosuExplain"></textarea>
+								<textarea name="gosuExplain" id="gosuExplain"
+								></textarea>
 							</p>
 
 						</div>
