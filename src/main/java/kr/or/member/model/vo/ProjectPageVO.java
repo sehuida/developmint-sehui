@@ -13,4 +13,5 @@ public class ProjectPageVO {
 	private String recruitTitle;
 	private String endDate;
 	private int entryCount;
+	private int projectStatus;
 }
