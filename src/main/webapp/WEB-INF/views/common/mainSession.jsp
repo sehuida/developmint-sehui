@@ -85,8 +85,10 @@
 	</div>
 	<div class="container">
 		<!-- 인기순 프로젝트 리스트 출력 -->
+		
 		<!-- 인기순 프로젝트 리스트 출력  끝 -->
 	</div>
+	<!-- 공모전 -->
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
 			<h3 class="text-primary"><a href="/contestMain.do" class="de-non">공모전</a></h3>
@@ -94,7 +96,6 @@
 		</div>
 	</div>
 	<div class="container" style="margin-top: 0;;margin-bottom: 20px;">
-		<!-- 구인구직 4가지 출력 -->
 		<div  style="margin-top: 100px;">
 			<span class="subEngTitel">HOT</span> <span class="subTitel">인기 공모전</span><a href="/allContestList.do?reqPage=1&type=0" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
 		</div>
@@ -146,8 +147,9 @@
 			</div>
 			</c:forEach>
 		</div>	
-		<!-- 구인구직 끝-->
 	</div>
+	<!-- 공모전 -->
+	<!-- 고수의 노하우 -->
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
 			<h3 class="text-primary"><a href="/gosuMain.do" class="de-non">'고수'의 노하우</a></h3>
@@ -217,17 +219,18 @@
 			</button>
 		</div>
 		</c:forEach>
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
 	</div>
+	<!-- 고수 소개 얼굴만 최신 등록 5명 출력 끝 -->
+	<!-- 구인구직 -->
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
 			<h3 class="text-primary"><a href="/jobSearchList.do?reqPage=1" class="de-non">구인구직</a></h3>
 			<p>인재를 구하고, 세상을 지배하세요!</p>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" style="margin-bottom: 60px;">
 		<c:forEach items="${joblist }" var="a" varStatus="i">
-		<div class="content">
+		<div class="content" style="margin: 30px auto auto auto;">
 		    <div class="status">모집중</div>
 		    <div class="cpName"><a href="companyInfo.do?companyNo=${a.companyNo }">${a.companyName }</a></div>	
 		    <div class="title-job">
