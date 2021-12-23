@@ -75,6 +75,7 @@
 	</div>
 	</header>
 	<!-- Carousel 끝 -->
+	<!-- main세션 -->
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
 			<h3><a href="/recruitTeamMember_mainPage.do?reqPage=1" class="de-non">팀 프로젝트 모집</a></h3>
@@ -182,8 +183,6 @@
 								src="/resources/upload/member/${g.gosuImg }"
 								style="border-radius: 50%; width: 200px; height: 200px;"></td>
 						</c:if>
-
-
 						<td style="width: 600px;"><a href="/gosuContent.do?gNo=${g.ggsouNo}" class="gtitle">${g.gosuTitle }</a></td>
 					</tr>
 					<tr>
@@ -239,15 +238,6 @@
 	<div class="container">
 		<!-- 인기순 프로젝트 리스트 출력 -->
 		<!-- 인기순 프로젝트 리스트 출력  끝 -->
-		
-		<!-- 개발지식 공유 리스트 1-5까지 리스트 출력 -->
-		<!-- 개발지식 공유 리스트 1-5까지 리스트 출력  끝-->
-		
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
-		
-		<!-- 구인구직 5가지 출력 -->
-		<!-- 구인구직 끝-->
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	</div>
 	<div class="topLangNavi">
@@ -257,6 +247,7 @@
 		</div>
 	</div>
 	<div class="container" style="margin-bottom: 50px;">
+	<!-- 게시판 3가지 출력 -->
 		<div class="cate3Box">
 			<div>
 				
@@ -316,9 +307,10 @@
 						<span class="newBoardDate">${q.regDate }</span><br>
 					</c:forEach>
 				</div>
-				
 			</div>
 		</div>
+		<!-- 게시판 3가지 출력 끝 -->
 	</div>
+	<!-- main세션 끝-->
 </body>
 </html>
