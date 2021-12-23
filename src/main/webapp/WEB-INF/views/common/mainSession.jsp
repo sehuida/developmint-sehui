@@ -106,7 +106,7 @@
 	<div class="container" style="margin-top: 0;;margin-bottom: 20px;">
 		<!-- 구인구직 4가지 출력 -->
 		<div  style="margin-top: 100px;">
-			<span class="subEngTitel">HOT</span> <span class="subTitel">인기 공모전</span>
+			<span class="subEngTitel">HOT</span> <span class="subTitel">인기 공모전</span><a href="/allContestList.do?reqPage=1&type=0" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
 		</div>
 		<%-- 인기 공모전 리스트 --%>
 		<div class="newContestBox">
@@ -169,7 +169,7 @@
 		<c:forEach items="${gosuList }" var="g" begin="0" end="4">
 		<div class="gosu">
 			<button type="button" class="card border-primary mb-3"
-				style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+				style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;margin: auto;">
 				<table>
 					<tr>
 						<c:if test="${empty g.gosuImg }">
@@ -272,36 +272,37 @@
 				
 				<div class="BoardList" >
 					<div>
-					<p class="title" style="background-color: #fff;">비회원 QNA</p>
-					<a href="/shareList.do?reqPage=1&type=2" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
+					<p class="title" style="background-color: #fff;">개발지식공유</p>
+					<a href="/shareList.do?reqPage=1&type=1" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
 					</div>
-					<c:forEach items="${nonQnaList }" var="nq">
+					<c:forEach items="${shlist }" var="sh">
 						<c:choose>
-							<c:when test="${fn:length(nq.qnaTitle) > 16}">
-								<c:set var="subTitle" value="${fn:substring(nq.qnaTitle,0,16)}"/>
-								<a href="#" class="newBoard"><span>${subTitle }...</span></a>
+							<c:when test="${fn:length(sh.boardTitle) > 13}">
+								<c:set var="subTitle" value="${fn:substring(sh.boardTitle,0,13)}"/>
+								<a href="/shareBoardView.do?boardNo=${sh.boardNo }" class="newBoard"><span>${subTitle }...</span></a>
 							</c:when>
 							<c:otherwise>
-								<span class="newTitle-2">${nq.qnaTitle }</span>
+								<a href="/shareBoardView.do?boardNo=${sh.boardNo }" class="newBoard"><span class="newTitle-2">${sh.boardTitle }</span></a>
 							</c:otherwise>
 						</c:choose>
-						<span class="newBoardDate">${nq.regDate }</span><br>
+						<c:set var="subTitle" value="${fn:substring(sh.regDate,0,10)}"/>
+						<span class="newBoardDate">${subTitle }</span><br>
 					</c:forEach>
 				</div>
 				
 				<div class="BoardList" >
 					<div>
-					<p class="title" style="background-color: #fff">개발지식공유</p>
-					<a href="/adminCounsel.do?type=2" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
+					<p class="title" style="background-color: #fff">비회원 Q&A 리스트</p>
+					<a href="/nonMember_CounselList.do" class="moreTag"><p class="title" style="background-color: #fff">더보기<i class="bi bi-chevron-right" style="font-size:15px;"></i></p></a>
 					</div>
-					<c:forEach items="${qnaList }" var="q">
+					<c:forEach items="${adlist }" var="q" begin="0" end="4">
 						<c:choose>
 							<c:when test="${fn:length(q.qnaTitle) > 16}">
 								<c:set var="subTitle" value="${fn:substring(q.qnaTitle,0,16)}"/>
-								<a href="#" class="newBoard"><span>${subTitle }...</span></a>
+								<a href="#" class="newBoard board-link"><span>${subTitle }...</span></a>
 							</c:when>
 							<c:otherwise>
-								<span class="newTitle">${q.qnaTitle }</span>
+								<a href="#" class="newBoard board-link"><span class="newTitle-2">${q.qnaTitle }</span></a>
 							</c:otherwise>
 						</c:choose>
 						<span class="newBoardDate">${q.regDate }</span><br>
@@ -312,5 +313,12 @@
 		<!-- 게시판 3가지 출력 끝 -->
 	</div>
 	<!-- main세션 끝-->
+	<script type="text/javascript">
+		$(".board-link").click(function(){
+			if(confirm("비밀번호를 입력하셔야 합니다. Q&A페이지로 이동할까요?")){
+				location.href="/nonMember_CounselList.do";
+			}
+		});
+	</script>
 </body>
 </html>

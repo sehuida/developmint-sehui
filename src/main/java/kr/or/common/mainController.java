@@ -16,6 +16,10 @@ import kr.or.contest.vo.ContestList;
 import kr.or.gosu.service.GosuService;
 import kr.or.gosu.vo.Gosu;
 import kr.or.projectTeam.model.service.ProjectTeamService;
+import kr.or.qna.service.QnaService;
+import kr.or.qna.vo.NonQna;
+import kr.or.share.model.service.ShareService;
+import kr.or.share.model.vo.ShareBoardPage;
 
 @Controller
 public class mainController {
@@ -32,6 +36,12 @@ public class mainController {
 	@Autowired
 	private AdminService adminService;
 	
+	@Autowired
+	private QnaService qnaService;
+	
+	@Autowired
+	private ShareService shService;
+	
 	@RequestMapping(value="/main.do")
 	public String main(Model model) {
 		//고수에서 불러오기
@@ -43,13 +53,19 @@ public class mainController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String sToday = today.format(formatter);
 		TotalData td = adminService.totaldata(sToday);
+		//qna에서 불러오기
+		ArrayList<NonQna> adlist = qnaService.counselList2();
+		//개발지식공유에서 불러오기
+		int reqPage = 1;
+		int type = 1;
+		ShareBoardPage sbp = shService.shareBoardList(reqPage,type);
+		//팀프로젝트에서 불러오기
+		
 		model.addAttribute("gosuList",g);
 		model.addAttribute("conlist",list);
 		model.addAttribute("noticeList", td.getNoticeList());
-		model.addAttribute("nonQnaList", td.getNonQnaList());
-		//개발지식공유에서 불러오기
-		
-		//팀프로젝트에서 불러오기
+		model.addAttribute("adlist",adlist);
+		model.addAttribute("shlist",sbp.getList());
 		return "common/main";
 	}
 	
