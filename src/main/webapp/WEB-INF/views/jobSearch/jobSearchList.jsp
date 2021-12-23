@@ -218,7 +218,7 @@
         <div class="jobSearchListMain">
             <div class="mainHeader">
                 <h2>채용정보</h2>
-                <p>12개의 구인글</p>
+                <p>${count }개의 구인글</p>
             </div>
             <div class="mainCenter">
                 <select>

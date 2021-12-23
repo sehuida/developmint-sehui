@@ -114,6 +114,10 @@ public class AnnounceService {
 		return dao.insertApplication(app);
 	}
 
+	public int selectAnnounceCount(int announceNo) {
+		return dao.selectAnnounceCount(announceNo);
+	}
+
 	/*
 	 * public int selectResumeNo(int announceNo) { return
 	 * dao.selectResumeNo(announceNo); }

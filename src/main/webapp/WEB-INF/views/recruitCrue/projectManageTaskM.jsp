@@ -11,6 +11,9 @@
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="/resources/summernote/summernote-lite.js"></script>
+	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 	<link rel="stylesheet" href="/resources/css/projectTeam/projectManageDefault.css">
 	<link rel="stylesheet" href="/resources/css/projectTeam/projectManageOutline.css">
     <link rel="stylesheet" href="/resources/css/projectTeam/projectManageTask.css">
@@ -97,7 +100,7 @@
                     </li>
                     <li class="flexCLi" style="border-bottom: 3px dashed #90d1b4; cursor: pointer;">
 	                    <div class="flexSuperSubBox">
-	                            <img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg"><span style="font-weight: 900">과업 관리</span>
+	                            <img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg" style="margin-left: 5px;"><span style="font-weight: 900;">과업 관리</span>
 	                    </div>
 	                    <ul class="s-sub-menu">
                             <li><a href="/enterProjectTaskM.do?projectNo=${projectNo}&reqPage=1"><span style="cursor: pointer; color: #90d1b4; font-weight: 900;">Meeting</span></a></li>
@@ -155,7 +158,7 @@
                         <p class="taskContentTitle">Meeting</p>
                         <div class="titleLine" style="width: 100%; margin-top: 10px;"></div>
                         <c:forEach items="${ptk}" var="ptk">
-	                        <a data-bs-toggle="modal" href="# ${ptk.taskNo}" style="text-decoration: none;">
+	                        <a data-bs-toggle="modal" href="#/${ptk.taskNo}" style="text-decoration: none;">
 	                            <div class="taskMeeting">
 	                                <div class="leftTaskSite">
 	                                    <p class="taskNo">${ptk.taskNo}</p>
@@ -196,7 +199,7 @@
 			                                	</c:choose>
 		                                	</c:if> 
 	                                	</c:forEach>
-	                                    <a href="#" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+	                                    <a href="/deleteTask.do?taskNo=${ptk.taskNo}&taskType=1" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
 	                                </div>
 	                            </div>
 	                        </a>
@@ -237,15 +240,16 @@
         </div>
     </div>
     
-    <div class="modal fade" id="M-1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <c:forEach items="${ptk}" var="ptk">
+    	<div class="modal fade" id="/${ptk.taskNo }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="max-width: 100%; width: auto; display: table;">
             <div class="modal-content">
                 <div class="modal-body">
                     <form action="/updateIssue.do" method="post">
                         <div class="modalTitleFlexBox">
                             <div class="modalLeftSite" style="margin-top: 10px;">
-                                <p class="taskSubTitle">과업관리 / T-1</p>
-                                <p style="font-size: 25px; font-weight: bold; color: #90d1b4; ">데이터베이스 설계</p>
+                                <p class="taskSubTitle">과업관리 / ${ptk.taskNo}</p>
+                                <p style="font-size: 25px; font-weight: bold; color: #90d1b4; ">${ptk.taskTitle}</p>
                             </div>
                             <div class="modalRightSite" style="margin-right: 20px;">
                                 <a href="Javascript Void:(0);" data-bs-dismiss="modal" style="text-decoration: none;"><p style="font-size: 25px;">X</p></a>
@@ -264,7 +268,7 @@
                                     </div>
                                     <div style="display: flex;">
                                         <img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 10px; margin-right: 15px;">
-                                        <p class="taskInfoText">MemberId</p>
+                                        <p class="taskInfoText">${ptk.memberId}</p>
                                     </div>
                                 </div>
                                 <div class="infoFlexArea">
@@ -272,10 +276,24 @@
                                         <p class="taskInfoText">우선 순위</p>
                                     </div>
                                     <div class="form-group">
-                                        <select class="form-select" id="exampleSelect1">
-                                            <option>medium</option>
-                                            <option>urgency</option>
-                                            <option>low</option>
+                                        <select class="form-select" id="exampleSelect1" name="selectPriority">
+                                        	<c:choose>
+                                        		<c:when test="${ptk.priority eq 1}">
+                                        			<option value=1>low</option>
+		                                            <option value=3>urgency</option>
+		                                            <option value=2>medium</option>
+                                        		</c:when>
+                                        		<c:when test="${ptk.priority eq 2}">
+                                        			<option value=3>medium</option>
+		                                            <option value=1>low</option>
+		                                            <option value=3>urgency</option>
+                                        		</c:when>
+                                        		<c:when test="${ptk.priority eq 3}">
+                                        			<option value=3>urgency</option>
+		                                            <option value=2>medium</option>
+		                                            <option value=1>low</option>
+                                        		</c:when>
+                                        	</c:choose>
                                         </select>
                                     </div>
                                 </div>
@@ -284,11 +302,33 @@
                                         <p class="taskInfoText">진행분류</p>
                                     </div>
                                     <div class="form-group">
-                                        <select class="form-select" id="exampleSelect1">
-                                            <option>해야 할 일</option>
-                                            <option>진행 중</option>
-                                            <option>완료</option>
-                                            <option>보류</option>
+                                        <select class="form-select" id="exampleSelect1" name="selectProcessSort">
+                                        	<c:choose>
+                                        		<c:when test="${ptk.processSort eq 1}">
+                                        			<option value=1>해야 할 일</option>
+		                                            <option value=2>진행 중</option>
+		                                            <option value=3>완료</option>
+		                                            <option value=4>보류</option>
+                                        		</c:when>
+                                        		<c:when test="${ptk.processSort eq 2}">
+		                                            <option value=2>진행 중</option>
+                                        			<option value=1>해야 할 일</option>
+		                                            <option value=3>완료</option>
+		                                            <option value=4>보류</option>
+                                        		</c:when>
+                                        		<c:when test="${ptk.processSort eq 3}">
+		                                            <option value=3>완료</option>
+                                        			<option value=1>해야 할 일</option>
+		                                            <option value=2>진행 중</option>
+		                                            <option value=4>보류</option>
+                                        		</c:when>
+                                        		<c:when test="${ptk.processSort eq 4}">
+		                                            <option value=4>보류</option>
+                                        			<option value=1>해야 할 일</option>
+		                                            <option value=2>진행 중</option>
+		                                            <option value=3>완료</option>
+                                        		</c:when>
+                                        	</c:choose>
                                         </select>
                                     </div>
                                 </div>
@@ -306,19 +346,50 @@
                             <a data-bs-toggle="modal" href="#" style="text-decoration: none;">
                                 <div class="taskMeeting" style="border: 1px solid #90d1b4; width: 800px;">
                                     <div class="leftTaskSite">
-                                        <p class="taskNo">M-1</p>
-                                        <p class="taskTitle">주간 회의</p>
-                                    </div>
-                                    <div class="rightTaskSite">
-                                        <span class="badge rounded-pill bg-primary" id="lowLabel">low</span>
-                                        <span class="badge rounded-pill bg-primary" id="mediumLabel">medium</span>
-                                        <span class="badge rounded-pill bg-primary" id="urgencyLabel">urgency</span>
-                                        <span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
-                                        <span class="badge rounded-pill bg-primary" id="ongoingLabel">진행 중</span>
-                                        <span class="badge rounded-pill bg-primary" id="todoLabel">해야 할 일</span>
-                                        <img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
-                                        <a href="#" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
-                                    </div>
+                                    	<c:forEach items="${ptk}" var="ptkk">
+                                    		<c:if test="${ptkk.taskNo eq ptk.connectIssue}">
+	                                    			<p class="taskNo">${ptkk.taskNo}</p>
+			                                        <p class="taskTitle">${ptkk.taskNo}</p>
+			                                    </div>
+			                                    <div class="rightTaskSite">
+			                                    	<c:choose>
+				                                		<c:when test="${ptkk.priority eq 1}">
+						                                    <span class="badge rounded-pill bg-primary" id="lowLabel">low</span>
+				                                		</c:when>
+				                                		<c:when test="${ptkk.priority eq 2}">
+						                                    <span class="badge rounded-pill bg-primary" id="mediumLabel">medium</span>
+				                                		</c:when>
+				                                		<c:when test="${ptkk.priority eq 3}">
+						                                    <span class="badge rounded-pill bg-primary" id="urgencyLabel">urgency</span>
+				                                		</c:when>
+				                                	</c:choose>
+				                                	<c:choose>
+				                                		<c:when test="${ptkk.processSort eq 1}">
+				                                			<span class="badge rounded-pill bg-primary" id="todoLabel">해야 할 일</span>
+				                                		</c:when>
+				                                		<c:when test="${ptkk.processSort eq 2}">
+				                                			<span class="badge rounded-pill bg-primary" id="ongoingLabel">진행 중</span>
+				                                		</c:when>
+				                                		<c:when test="${ptkk.processSort eq 3}">
+				                                			<span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
+				                                		</c:when>
+				                                	</c:choose>
+				                                	<c:forEach items="${ptm }" var="ptm">
+					                                	<c:if test="${ptm.memberNo eq ptkk.memberNo}">
+					                                		<c:choose>
+						                                		<c:when test="${ptm.memberNo eq null}">
+						                                			<img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+						                                		</c:when>
+						                                		<c:otherwise>
+						                                			<img src="/resources/upload/member/${ptm.memberImg }" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+						                                		</c:otherwise>
+						                                	</c:choose>
+					                                	</c:if> 
+				                                	</c:forEach>
+			                                        <a href="#" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+			                                    </div>
+                                    		</c:if>
+                                    	</c:forEach>
                                 </div>
                                 <a data-bs-toggle="modal" href="#linkIssue" style="text-decoration: none;"><p>+ 이슈 등록하기</p></a>
                             </a>
@@ -343,7 +414,8 @@
             </div>
         </div>
     </div>
-
+    </c:forEach>
+    
     <div class="modal fade" id="linkIssue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog  modal-dialog-centered">
             <div class="modal-content">
@@ -415,8 +487,57 @@
             </div>
         </div>
     </div>
-    
+    <script>
+	$(function(){
+		 
+		$("#summernote").summernote({
+			lang : "ko-KR",
+			focus: false,
+			placeholder: '자세한 설명을 입력해주세요.',
+			toolbar:[ 
+						['fontname', ['fontname']],
+						['fontsize', ['fontsize']], 
+						['style', ['bold', 'italic', 'underline','strikethrough', 'clear']], 
+						['color', ['forecolor','color']], 
+						['table', ['table']], 
+						['para', ['ul', 'ol', 'paragraph']], 
+						['height', ['height']], 
+						['insert',['picture','link']], 
+						['view', ['fullscreen', 'codeview', 'help']] 
+					], 
+			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'], 
+			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+			callbacks:{
+				onImageUpload : function(files){
+ 					uploadImage(files[0], this);
+ 				}
+			}
+		});
+	});
+	
+	function uploadImage(file, editor){
+		data = new FormData();
+		data.append("file",file);
+		var fileData = $("input[name=files]").val();
+		$.ajax({
+			url : "/rUploadImage.do",
+			type :"post",		//file전송을 위해 ajax를 할떄는 type을 post로 해줘야한다
+			data : data,
+			enctype : 'multipart/form-data',
+			processData : false,
+			contentType : false,
+			success : function(data){
+				$(editor).summernote("insertImage",data);
+				
+			}
+		});
+	}
+	
+	
+	</script>
+	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	
 	
 </body>
 </html>

@@ -958,7 +958,8 @@
  			t.start_date as startDate,
  			t.complete_date as completeDate,
  			t.process_sort as processSort,
- 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo
+ 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+ 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
  		from task t
  		where t.project_no = #{projectNo} and t.task_no like '%M%'
  		order by t.task_no desc

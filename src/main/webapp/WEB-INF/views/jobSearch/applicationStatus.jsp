@@ -31,14 +31,14 @@
 			</div>
 			<br><br>
 			<p id="unprocessed">입사 지원 수 : <span style="color: rgb(78, 205, 196);">${count }</span> 건</p>
-			<c:forEach items="${list }" var="a" varStatus="i">
+			<%-- <c:forEach items="${list }" var="a" varStatus="i">
 			<!-- table로 구성해도 될라나 -->
 				<div class="applyResume">
 					<div class="resumeTitle">
 						${a.resumeTitle }
 					</div>
 					<div class="memberName">
-						<%-- ${a.memberName } --%> 이슬기
+						${a.memberName } 이슬기
 					</div>
 					<div class="applyDate">
 						${a.applyDate }
@@ -55,7 +55,27 @@
 						</c:if> 
 					</div>
 				</div>
-			</c:forEach>
+			</c:forEach> --%>
+			
+			<style>
+				.memberBox{
+					width: 250px;
+					height: 250px;
+					padding: 20px;
+					border: 1px solid gray;
+					display: inline-block;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+				.okNo{
+					text-align: center;
+				}
+				.resumeTitle{
+					width: 208px;
+					text-overflow: ellipsis;
+				}
+			</style>
 			
 			<!-- 수현누나꺼 가져온거 화면 다시구성해야해 -->
 			<c:choose>
@@ -63,15 +83,15 @@
 				<div class="certiBox">
 					<c:forEach items="${list }" var="a" varStatus="i">
 						<div class="memberBox">
-							<div class="imgBox">
-								<p> <%-- ${a.memberName } --%>이슬기<p>
-							</div>
+							
+								${a.resumeTitle }
+							
 							<div class="infoBox">
-								<div class="certiBtn"><button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#certiModal${i.index }">인증 사진 확인</button></div>
+								<div class="resumeTitle" data-bs-toggle="modal" data-bs-target="#certiModal${i.index }">${a.resumeTitle }</div>
 								 <span class="infoTitle"><i class="bi bi-person-fill" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>회원이름 : </span><span>${memlist[i.index].memberName }</span><br>
 								 <span class="infoTitle"><i class="bi bi-envelope" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>이메일 : </span><span>${memlist[i.index].email }</span><br>
 							</div>
-							<div>
+							<div class="okNo">
 								<button class="btn btn-primary enrollBtn" style="margin-top: 20px; margin-right: 5px;">인증</button><button class="btn btn-secondary noEnrollBtn"  style="margin-top: 20px; margin-left: 5px;">반려</button>
 							</div>
 						</div>
@@ -98,7 +118,7 @@
 		</c:choose>
 			
 			
-			<div id="pageNavi">${pageNavi }</div>
+			<%-- <div id="pageNavi">${pageNavi }</div> --%>
 		</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

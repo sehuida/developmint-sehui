@@ -29,6 +29,10 @@ public class JobSearchDao {
 	public int selectTotalCount() {
 		return sqlSession.selectOne("announce.announceTotalCount");
 	}
+
+	public int selectAllAnnounceCount() {
+		return sqlSession.selectOne("announce.selectAllAnnounceCount");
+	}
 	
 	
 	
