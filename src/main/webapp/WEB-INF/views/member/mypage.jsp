@@ -84,6 +84,11 @@
 					<a class="pageLists" href="/mycontestPage.do?reqPage=1&memberId=${sessionScope.m.memberId }">공모전 신청내역</a>
 					<a href="/mycontestPage.do?reqPage=1&memberId=${sessionScope.m.memberId }"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
 				</div>
+				<div>
+					<img src="/resources/img/member/qa.png">
+					<a class="pageLists" href="/myCounsel.do">내 문의 내역</a>
+					<a href="/myCounsel.do"><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
+				</div>
 			</div>
 			<div class="page-bottom">
 				<a href="/certification.do" class="btn btn-primary btn-sm">회사인증</a>
