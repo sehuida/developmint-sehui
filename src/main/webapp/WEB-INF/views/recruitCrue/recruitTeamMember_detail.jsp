@@ -249,7 +249,7 @@
 		                </div>
 		                <div class="commentContent">
 		                    <div class="list-group">
-		                        <a class="list-group-item list-group-item-action flex-column align-items-start active">
+		                        <a class="list-group-item list-group-item-action flex-column align-items-start active" style="background-color: rgba(144, 209, 180, 0.5); border: none; color: black;">
 		                            <p class="mb-1">${cl.commentContent }</p>
 		                        </a>
 		                    </div>

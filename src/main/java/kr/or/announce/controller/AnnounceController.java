@@ -12,6 +12,7 @@ import kr.or.announce.vo.Announce;
 import kr.or.announce.vo.AnnounceList;
 import kr.or.announce.vo.AnnounceListPageData;
 import kr.or.announce.vo.AnnounceView;
+import kr.or.announce.vo.Application;
 import kr.or.resume.vo.Resume;
 
 @Controller
@@ -92,13 +93,23 @@ public class AnnounceController {
 	public String announceView(int announceNo, int memberNo, Model model) {
 		AnnounceView announce = service.selectAnnounceView(announceNo);
 		/* int resumeNo = service.selectResumeNo(announceNo); */
-		Resume r = service.selectCeoResume(memberNo);
+		if(memberNo != 0) {
+			Resume r = service.selectCeoResume(memberNo);
+			model.addAttribute("r", r);
+			System.out.println("r : "+r);
+		}
 		System.out.println("view : "+announce);
-		System.out.println("r : "+r);
 		model.addAttribute("a", announce);
-		model.addAttribute("r", r);
 		return "jobSearch/announceView";
 	}
 	
+	@RequestMapping(value="/insertApplication.do")
+	public String insertApplication(Application app, Model model) {
+		System.out.println("app : "+app);
+		model.addAttribute("text","지원완료되었습니다.");
+		model.addAttribute("loc","jobSearchList.do?reqPage=1");
+		model.addAttribute("icon","success");
+		return "member/swalMsg";
+	}
 	
 }
