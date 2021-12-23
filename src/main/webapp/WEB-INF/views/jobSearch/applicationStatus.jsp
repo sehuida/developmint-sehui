@@ -43,8 +43,61 @@
 					<div class="applyDate">
 						${a.applyDate }
 					</div>
+					<div class="status">
+						<c:if test="${a.status eq 1 }">
+							지원중
+						</c:if> 
+						<c:if test="${a.status eq 2 }">
+							서류합격
+						</c:if> 
+						<c:if test="${a.status eq 3 }">
+							탈락
+						</c:if> 
+					</div>
 				</div>
 			</c:forEach>
+			
+			<!-- 수현누나꺼 가져온거 화면 다시구성해야해 -->
+			<c:choose>
+			<c:when test="${not empty list }">
+				<div class="certiBox">
+					<c:forEach items="${list }" var="a" varStatus="i">
+						<div class="memberBox">
+							<div class="imgBox">
+								<p> <%-- ${a.memberName } --%>이슬기<p>
+							</div>
+							<div class="infoBox">
+								<div class="certiBtn"><button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#certiModal${i.index }">인증 사진 확인</button></div>
+								 <span class="infoTitle"><i class="bi bi-person-fill" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>회원이름 : </span><span>${memlist[i.index].memberName }</span><br>
+								 <span class="infoTitle"><i class="bi bi-envelope" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>이메일 : </span><span>${memlist[i.index].email }</span><br>
+							</div>
+							<div>
+								<button class="btn btn-primary enrollBtn" style="margin-top: 20px; margin-right: 5px;">인증</button><button class="btn btn-secondary noEnrollBtn"  style="margin-top: 20px; margin-left: 5px;">반려</button>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+				<div id="pageNavi" style="text-align: center; margin-top:50px;"  >${pageNavi }</div>
+				
+				<!-- 내용보기 Modal -->
+				<c:forEach items="${list }" var="c" varStatus="i">
+				<div class="modal fade" id="certiModal${i.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content" style="border-radius: 0.3rem;">
+				    </div>
+				  </div>
+				</div>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<div class="noList">
+					<p><i class="bi bi-chat-square-dots" style="color: #4ECDC4; font-size: 35px;"></i></p>
+					<p>회사 인증을 요청한 회원이 없습니다.</p>
+				</div>
+			</c:otherwise>
+		</c:choose>
+			
+			
 			<div id="pageNavi">${pageNavi }</div>
 		</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

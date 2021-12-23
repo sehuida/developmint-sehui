@@ -87,7 +87,7 @@
 			<p><i class="bi bi-trophy" style="color:#4ECDC4"></i> 1등 시상금</p><input type="text" name="contestPrize" class="form-control prize" style="width: 960px;" placeholder="숫자만 입력해주세요"><span id="won">만원</span>
 			<p><i class="bi bi-envelope" style="color:#4ECDC4"></i> 담당자 이메일</p><input type="email" name="email" class="form-control" style="width:1000px;">
 			<p><i class="bi bi-telephone" style="color:#4ECDC4"></i> 담당자 전화번호</p><input type="text" name="phone" class="form-control" placeholder="010-XXXX-XXXX" style="width:1000px;">
-			<p><i class="bi bi-chat-square-quote" style="color:#4ECDC4"></i> 공모명</p><input type="text" name="contestTitle" class="form-control" style="width:1000px;">
+			<p><i class="bi bi-chat-square-quote" style="color:#4ECDC4"></i> 공모명</p><input type="text" id="contestTitle" name="contestTitle" class="form-control" style="width:1000px;">
 			<p><i class="bi bi-pencil-square" style="color:#4ECDC4"></i> 공모요강</p>
 			<textarea id="contestContent" name="contestContent" class="form-control" style="width:1000px; height: 600px;resize: none;"></textarea>
 			<p><i class="bi bi-card-image" style="color:#4ECDC4"></i> 포스터 이미지</p>
@@ -106,7 +106,6 @@
 	//글자수 제한
 	$('#contestContent').keydown(function(){
 		 var length = $("#contestContent").val().length;
-		console.log(length);
 
 		 if($(this).val().length > 1000) {
 			swal({
@@ -116,6 +115,22 @@
 			  buttons: true,
 			})
         $(this).val($(this).val().substring(0, 1000));
+			
+		 }
+
+	 })
+	 
+	 $('#contestTitle').keydown(function(){
+		 var length = $("#contestTitle").val().length;
+			console.log(length);
+		 if($(this).val().length > 36) {
+			swal({
+			  title: "글자수 초과",
+			  text: "초과 입력 할 수 없습니다. 초과된 내용은 자동으로 삭제됩니다.",
+			  icon: "warning",
+			  buttons: true,
+			})
+        $(this).val($(this).val().substring(0, 36));
 			
 		 }
 

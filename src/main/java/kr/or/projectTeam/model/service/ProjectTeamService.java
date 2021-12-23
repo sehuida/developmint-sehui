@@ -790,6 +790,29 @@ public class ProjectTeamService {
 		int result = dao.addIssueToday(map);
 		return result;
 	}
+	
+	public projectTeamMainPageData mainProjectTeamPageData() {
+		
+		// 무시
+		int numPerPage = 0;
+		int end = 0;
+		int start = 0;
+		String pageNavi = null;
+		ArrayList<String> langList = null; 
+		ArrayList<DevelopLanguage> developLangList = null;
+		// 무시
+		
+		ArrayList<ProjectTeam> list = dao.selectMainProjectList();
+		ArrayList<projectDevLanguage> pdLangList = dao.selectAllprojectLangList();
+		
+		// 컨트롤러 아래 요렇게만 가져가서 하구, 변수명은 사용하기 편한걸로 바꿔서 사용해도됭 (모집중&최신순 8개만 나오는 리스트 (개수는 수정 가능))
+//		projectTeamMainPageData ptmpd = service.mainProjectTeamPageData();
+//		model.addAttribute("list", ptmpd.getList());
+//		model.addAttribute("pdLangList", ptmpd.getPdLangList());
+		
+		projectTeamMainPageData ptmpd = new projectTeamMainPageData(list, pageNavi, start, pdLangList, developLangList, langList);
+		return ptmpd;
+	}
 
 	
 	

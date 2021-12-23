@@ -110,11 +110,11 @@
                     	<li class="flexLi">
                     		<c:choose>
                     			<c:when test="${sl.linkName ne null}">
-				                    <a href="${sl.linkAddr}" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg"><span style="cursor: pointer;">${sl.linkName}</span></a>
+				                    <a href="${sl.linkAddr}" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg" style="width: 25px;"><span style="cursor: pointer; font-size: 13px;">${sl.linkName}</span></a>
 				                    <a href="/deleteShortcut.do?shortcutNo=${sl.shortcutNo}&projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" style="position: relative; top: 10px; text-decoration: none; margin-left: 30px;">X</a>
                     			</c:when>
                     			<c:otherwise>
-	                    			<a href="${sl.linkAddr}" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg"><span style="cursor: pointer;">${sl.linkAddr}</span></a>
+	                    			<a href="${sl.linkAddr}" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg" style="width: 25px;"><span style="cursor: pointer; font-size: 13px;">${sl.linkAddr}</span></a>
 	                    			<a href="/deleteShortcut.do?shortcutNo=${sl.shortcutNo}&projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" style="position: relative; top: 8px; text-decoration: none; margin-left: 30px;">X</a>
                     			</c:otherwise>
                     		</c:choose>
@@ -184,7 +184,7 @@
 	                                			<span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
 	                                		</c:when>
 	                                	</c:choose>
-	                                	<c:forEach items="ptm" var="ptm">
+	                                	<c:forEach items="${ptm }" var="ptm">
 		                                	<c:if test="${ptm.memberNo eq ptk.memberNo}">
 		                                		<c:choose>
 			                                		<c:when test="${ptm.memberNo eq null}">
@@ -194,7 +194,7 @@
 			                                			<img src="/resources/upload/member/${ptm.memberImg }" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
 			                                		</c:otherwise>
 			                                	</c:choose>
-		                                	</c:if>
+		                                	</c:if> 
 	                                	</c:forEach>
 	                                    <a href="#" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
 	                                </div>
@@ -221,8 +221,9 @@
                         <div class="form-group" style="margin-bottom: 15px;">
                             <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">웹 주소</label>
                             <input type="text" class="form-control" placeholder="웹 주소를 넣어주세요" id="inputDefault" name="shortcutAddr" >
+                            <span style="color: red; font-size: 14px;">주의! 직접 입력하는 경우, 주소앞에 <b>http://</b> 또는 <b>https://</b> 를 붙여주세요!</span>
                             <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">바로가기 이름</label>
-                            <input type="text" class="form-control" placeholder="바로가기 이름을 입력해주세요" id="inputDefault" name="shortcutName">
+                            <input type="text" class="form-control" placeholder="바로가기 이름을 입력해주세요" id="inputDefault" name="shortcutName" maxlength="10">
                         </div>
                         <div style="text-align: right; padding-top: 10px;">
                         	<input type="hidden" name="projectNo" value="${projectNo}">

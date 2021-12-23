@@ -61,8 +61,6 @@ input:focus, textarea:focus {
 	padding: 20px;
 	overflow: auto;
 }
-.talk-one img{
-}
 .talk-one p *{
 	background-color:transparent !important;
 }
@@ -150,6 +148,10 @@ input:focus, textarea:focus {
 #underhover:hover{
 	text-decoration: underline;
 }
+
+.widthwidth{
+	width: 100%;
+}
 </style>
 </head>
 <body>
@@ -191,7 +193,12 @@ input:focus, textarea:focus {
 					</div>
 				</c:when>
 				<c:otherwise>
+				<div>
+							<div style="text-align: right;"><button type="button" id="widthBtn"
+												class="btn btn-primary" style="width: 100px;font-weight: 900;">전체보기</button></div>
+						</div>
 					<div class="talk-wrap">
+						
 						<c:forEach items="${grplist }" var="gtl" varStatus="i">
 							<c:choose>
 								<c:when test="${gtl.memberNo eq sessionScope.m.memberNo }">
@@ -444,6 +451,13 @@ input:focus, textarea:focus {
 	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
+	$(".talk-one").click(function() {
+		var idx = $(".talk-one").index(this);
+		$(".talk-one").eq(idx).toggleClass("widthwidth");
+	});
+	$("#widthBtn").click(function() {
+		$(".talk-one").toggleClass("widthwidth");
+	});
 	$("#talkContent").summernote(
 			{
 				height : 500,
