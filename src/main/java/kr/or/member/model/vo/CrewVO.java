@@ -9,4 +9,5 @@ public class CrewVO {
 	private String applyDate;
 	private int entryStatus;
 	private String recruitTitle;
+	private int projectStatus;
 }

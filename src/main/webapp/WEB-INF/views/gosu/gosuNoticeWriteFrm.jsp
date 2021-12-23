@@ -103,7 +103,6 @@ input:focus, textarea:focus {
 }
 #g-btn-submit{
 	min-width :1200px;
-	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
 	
 }
 </style>
@@ -128,7 +127,9 @@ input:focus, textarea:focus {
 			enctype="multipart/form-data">
 			<input type="hidden" name="writeId"
 				value="${sessionScope.m.memberId }">
-			<div class="g-content g-center">
+				<div style="padding:40px;">
+			<div class="g-content g-center" style="
+	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;">
 				<div>
 					<table>
 						<tr>
@@ -150,13 +151,14 @@ input:focus, textarea:focus {
 						</tr>
 						
 						<tr>
-							<td colspan="2"><textarea cols="100" rows="30" name="gnoticeContent" id="gnoticeContent"
+							<td colspan="2" style="padding-bottom: 100px;"><textarea cols="100" rows="30" name="gnoticeContent" id="gnoticeContent"
 									></textarea></td>
 							
 						</tr>
 						
 					</table>
 				</div>
+			</div>
 			</div>
 			<div class="g-center" >
 				<a href="/gosuNoticeList.do" class="btn btn-info"
