@@ -80,7 +80,7 @@ public class MemberController {
 				return "member/swalMsg";				
 			}
 			session.setAttribute("m", m);
-			return "common/main";
+			return "redirect:/main.do";
 		}else {
 			model.addAttribute("title", "로그인 실패");
 			model.addAttribute("msg", "입력 정보를 확인해주세요.");
@@ -109,7 +109,7 @@ public class MemberController {
 	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "common/main";
+		return "redirect:/main.do";
 	}
 	@RequestMapping(value="/joinFrm.do")
 	public String joinFrm() {

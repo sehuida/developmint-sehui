@@ -103,7 +103,7 @@
 	font-size: 30px;
 	font-weight: 900;
 }
-.gtitle:hover {
+.gtitle:hover, .underhover:hover {
 	color: #78c2ad;
 }
 
@@ -531,10 +531,10 @@ animation: motion 0.3s linear 0s infinite alternate;
 						<div style="margin-top: 20px;">
 						<c:choose>
 							<c:when test="${ngl.ggsouNo eq 0}">
-								<a href="" class="gtitle underhover" style="color: black;" >${ngl.gosuId }</a>
+								<a href="" class="gtitle underhover" style="font-size:15px;" >${ngl.gosuId }</a>
 							</c:when>
 							<c:otherwise>
-								<a  href="/gosuContent.do?gNo=${ngl.ggsouNo}" class="gtitle">${ngl.gosuId }</a>						
+								<a  href="/gosuContent.do?gNo=${ngl.ggsouNo}" class="gtitle underhover"  style="font-size:15px;">${ngl.gosuId }</a>						
 							</c:otherwise>
 						</c:choose>
 						</div>
