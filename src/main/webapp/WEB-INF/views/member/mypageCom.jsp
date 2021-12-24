@@ -78,7 +78,7 @@
 	}
 	.pageLists:hover{
 		color:#78c2ad;
-	}
+	}							
 </style>
 </head>
 <body>
@@ -130,9 +130,15 @@
 					<a class="pageLists" href="/announceManage.do?memberNo=${sessionScope.m.memberNo }">구인공고보기</a>
 					<a href="/announceManage.do?memberNo=${sessionScope.m.memberNo } "><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
 				</div>
+				<div>
+					<img src="/resources/img/member/condo.png">
+					<a class="pageLists" href="/updateCompanyFrm.do?comNo=${sessionScope.m.comNo }">기업 정보 수정</a>
+					<a href="/updateCompanyFrm.do?comNo=${sessionScope.m.comNo } "><img src="/resources/img/member/right-arrow.png" style="width: 20px; height:20px;" class="arrow"></a>
+				</div>
 			</div>
 			<div class="page-bottom">
 				<a href="/companyMember.do" class="btn btn-info btn-sm">기업변경 하기</a>
+				<a href="/rollbackCompany.do?memberId=${sessionScope.m.memberId }" class="btn btn-outline-danger btn-sm">회사인증 취소</a>
 			</div>
 		</div>
 	 </div>	 

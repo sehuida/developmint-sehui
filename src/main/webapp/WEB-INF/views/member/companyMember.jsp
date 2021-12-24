@@ -123,7 +123,7 @@
 					  }else{
                           swal({
                               title: "입력하신 정보가 조회되지 않습니다.",
-                              text: "기입하신 정보를 다시 확인해주세요",
+                              text: "입력	하신 정보를 다시 확인해주세요",
                               icon: "error", //"info,success,warning,error" 중 택1
                               button: "돌아가기",
                               })						  

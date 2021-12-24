@@ -60,7 +60,7 @@
 			  <div class="update-middle">
 			    <form action="/addCompanyInfo.do" method="post" enctype="multipart/form-data">
 				  <div class="update-top">
-					<label for="formFile" class="form-label" style="border-radius: 40%; overflow: hidden;" data-bs-toggle="tooltip" data-bs-placement="top" title="회사로고 추가"><img src="/resources/img/member/profile.png" id="pic" style="width: 80px; height:80px;"></label>
+					<label for="formFile" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top" title="회사로고 추가"><img src="/resources/img/member/profile.png" id="pic" style="width: 80px; max-height:80px;"></label>
 		    		<input class="form-control" type="file" id="formFile" name="files" style="display: none;" accept=".gif, .jpg, .jpeg, .png">
 		    		<button type="button" class="btn btn-danger proDel" style="display:none;">로고 삭제</button>		  
 				  </div><!--update-top 끝나는 지점  -->
@@ -81,7 +81,7 @@
 					  <span class="expResult"></span>
 					</div>
 					<div class="form-group">
-					  <label class="col-form-label mt-4" for="category">카테고리</label>
+					  <label class="col-form-label mt-4" for="category">업종</label>
 					  <input type="text" class="form-control" name="category" id="category" placeholder="구체적으로 적어주세요"><br>
 					</div>
 					<div class="form-group">
@@ -96,7 +96,7 @@
 		              </div>
 		            </div>
 					<div class="form-group">
-					  <label class="col-form-label mt-4" for="content">하는 일</label>
+					  <label class="col-form-label mt-4" for="content">사업 내용</label>
 					  <textarea class="form-control" name="content" id="content" placeholder="구체적으로 적어주세요" rows="4"></textarea><br>
 					</div>
 					<div class="form-group">
@@ -156,6 +156,7 @@
 				reader.onload = function(e){ //e 에 읽어온 파일 정보가 들어있음
 					$("#pic").attr("src", e.target.result); //읽어온 경로를 img태그의 src속성에 설정
 					$(".proDel").css('display','block');
+					$("#pic").css("width","300px");
 				}
 			} 
 		}
@@ -164,6 +165,7 @@
 				$("#filepath").val("");
 				$(this).css('display','none');
 				$("#pic").attr("src", "/resources/img/member/profile.png ");
+				$("#pic").css("width","80px");
 			});
 		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
 		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
