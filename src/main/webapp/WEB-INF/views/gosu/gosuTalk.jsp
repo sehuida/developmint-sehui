@@ -14,10 +14,6 @@
 	text-decoration: none;
 }
 
-.note-editable {
-	max-width: 918px;
-	min-width: 918px;
-}
 
 .container {
 	min-width: 1200px;
@@ -100,6 +96,7 @@ input:focus, textarea:focus {
 	padding: 40px;
 	padding-left: 60px;
 	padding-right: 60px;
+	width: 1100px;
 }
 
 .talk-sub table th, .talk-sub table td {
@@ -307,7 +304,7 @@ input:focus, textarea:focus {
 						<c:choose>
 							<c:when test="${not empty greview}">
 								<div
-									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 50px;">
+									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 200px;">
 									<div>
 										<span
 											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">작성된
@@ -315,7 +312,7 @@ input:focus, textarea:focus {
 										<table>
 											<tr>
 												<td
-													style="font-weight: 900; font-size: 20px; padding-bottom: 5px;">${greview.writer }</td>
+													style="font-weight: 900; font-size: 20px; padding-bottom: 5px;" class="text-info">${greview.writer }</td>
 												<td style="width: 800px;"><span
 													style="float: left; font-weight: 900; font-size: 25px; margin-left: 30px;">${greview.reviewNum}
 														점</span>
@@ -341,7 +338,7 @@ input:focus, textarea:focus {
 											</tr>
 											<tr>
 												<td colspan="3"
-													style="width: 800px; text-align: center; border-radius:20px;  padding: 50px;">${greview.reviewContentBr }</td>
+													style="width: 800px; text-align: center; border-radius:20px;  padding: 50px; box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2pX;">${greview.reviewContentBr }</td>
 
 											</tr>
 										</table>

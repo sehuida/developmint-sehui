@@ -13,9 +13,6 @@
 .container * {
 	text-decoration: none;
 }
-.note-editable{
-	width: 918px;
-}
 .note-modal-footer{
 	height: 60px !important;
 }
@@ -99,6 +96,7 @@ input:focus, textarea:focus {
 	padding: 40px;
 	padding-left: 60px;
 	padding-right: 60px;
+	width: 1100px;
 }
 
 .talk-sub table th, .talk-sub table td {
@@ -289,10 +287,10 @@ input:focus, textarea:focus {
 										<table>
 											<tr>
 												<td
-													style="text-align: right; color: gray; font-size: small;">${grrOne.requestReviewDate }</td>
+													style="text-align: left; color: gray; font-size: small;padding-left: 50px;"><span style="font-weight: 900; font-size: 20px;" class="text-info">${grrOne.memberId }</span>&nbsp;&nbsp;&nbsp; ${grrOne.requestReviewDate }</td>
 											</tr>
 											<tr>
-												<td><p
+												<td ><p
 														style="width: 800px; text-align: center; padding: 20px; border-radius:20px;  margin: 20px; box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;">${grrOne.requestReviewContentBr }</p></td>
 											</tr>
 										
