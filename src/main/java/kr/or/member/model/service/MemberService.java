@@ -466,5 +466,17 @@ public class MemberService {
 	public int insertCompany(Company com) {
 		return dao.insertCompnay(com);
 	}
+
+	public Company selectCompany(String comNo) {
+		return dao.selectOneMember(comNo);
+	}
+
+	public int updateCompany(Company com) {
+		return dao.updateCompany(com);
+	}
+
+	public int rollbackCompnay(String memberId) {
+		return dao.rollbackCompany(memberId);
+	}
 	
 }

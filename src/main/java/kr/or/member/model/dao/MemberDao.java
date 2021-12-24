@@ -162,4 +162,16 @@ public class MemberDao {
 		return sqlSession.insert("member.addCompany",com);
 	}
 
+	public Company selectOneMember(String comNo) {
+		return sqlSession.selectOne("member.selectCompany",comNo);
+	}
+
+	public int updateCompany(Company com) {
+		return sqlSession.update("member.updateCompany",com);
+	}
+
+	public int rollbackCompany(String memberId) {
+		return sqlSession.update("member.rollbackCom",memberId);
+	}
+
 }
