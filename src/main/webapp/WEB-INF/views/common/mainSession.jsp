@@ -16,6 +16,7 @@
 <!-- Add the slick-theme.css if you want default styling -->
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <link rel="stylesheet" href="/resources/css/projectTeam/recruitMember.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
 	* Make the image fully responsive */
@@ -87,7 +88,7 @@
 	<!-- main세션 -->
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
-			<h3><a href="/recruitTeamMember_mainPage.do?reqPage=1" class="de-non">팀 프로젝트 모집</a></h3>
+			<h3><a href="/recruitTeamMember_mainPage.do?reqPage=1" class="de-non subEngTitel">팀 프로젝트 모집</a></h3>
 			<p style="padding: 0;margin: 0;">프로젝트 팀장이 될수도, 팀원이 될 수 있어요. </p>
 			<p>프로젝트 팀장은 당신을 찾고있습니다! 필요한 언어를 선택하여 팀원으로 참가하세요.</p>
 		</div>
@@ -138,7 +139,7 @@
 	<!-- 공모전 -->
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
-			<h3 class="text-primary"><a href="/contestMain.do" class="de-non">공모전</a></h3>
+			<h3 class="text-primary"><a href="/contestMain.do" class="de-non subEngTitel">공모전</a></h3>
 			<p>상금이 걸린 공모전에 참가해보세요! 당신의 재능을 첨부하면 됩니다.</p>
 		</div>
 	</div>
@@ -199,7 +200,7 @@
 	<!-- 고수의 노하우 -->
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
-			<h3 class="text-primary"><a href="/gosuMain.do" class="de-non">'고수'의 노하우</a></h3>
+			<h3 class="text-primary"><a href="/gosuMain.do" class="de-non subEngTitel">'고수'의 노하우</a></h3>
 			<p>개발 고수와 매칭하여 고수의 노하우를 물어보세요!</p>
 		</div>
 	</div>
@@ -271,7 +272,7 @@
 	<!-- 구인구직 -->
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
-			<h3 class="text-primary"><a href="/jobSearchList.do?reqPage=1" class="de-non">구인구직</a></h3>
+			<h3 class="text-primary"><a href="/jobSearchList.do?reqPage=1" class="de-non subEngTitel">구인구직</a></h3>
 			<p>인재를 구하고, 세상을 지배하세요!</p>
 		</div>
 	</div>
@@ -395,7 +396,7 @@
 	</div>
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
-			<h3 class="text-primary" ><a href="/shareList.do?reqPage=1&type=1" class="de-non">게시판</a></h3>
+			<h3 class="text-primary" ><a href="/shareList.do?reqPage=1&type=1" class="de-non subEngTitel">게시판</a></h3>
 			<p>각 게시판에 들어가서 게시물들을 확인하고 찾아보고 작성해 보세요!!!</p>
 		</div>
 	</div>
@@ -468,9 +469,19 @@
 	<!-- main세션 끝-->
 	<script type="text/javascript">
 		$(".board-link").click(function(){
-			if(confirm("비밀번호를 입력하셔야 합니다. Q&A페이지로 이동할까요?")){
-				location.href="/nonMember_CounselList.do";
-			}
+			
+			swal({
+	 			  title: "차단회원 신고처리",
+	 			  text: "비밀번호를 입력하셔야 합니다. Q&A페이지로 이동할까요??",
+	 			  icon: "warning",
+	 			  buttons: true,
+	 			  dangerMode: true,
+	 			})
+	 			.then((willDelete) => {
+	 			  if (willDelete) {
+	 				 location.href="/nonMember_CounselList.do";	
+	 			  }
+	 			});
 		});
 	</script>
 </body>
