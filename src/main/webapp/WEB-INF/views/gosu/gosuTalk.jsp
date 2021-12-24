@@ -39,6 +39,7 @@ input:focus, textarea:focus {
 	margin-top: 50px;
 	margin-bottom: 50px;
 	background-color: rgb(250, 250, 250);
+	box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);
 }
 
 .g-feedback h3 {
@@ -66,7 +67,7 @@ input:focus, textarea:focus {
 .talk-one tr:last-child td:last-child {
 	padding: 20px;
 	background-color: white;
-	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 }
 
 .talk-me tr:last-child td:last-child {
@@ -181,6 +182,11 @@ input:focus, textarea:focus {
 .widthwidth {
 	width: 100%;
 }
+
+.upbtn:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
 </style>
 </head>
 <body>
@@ -208,8 +214,8 @@ input:focus, textarea:focus {
 
 		<c:choose>
 			<c:when test="${gfOne.feedbackNum eq 1}">
-				<div class="talk-sub">
-					<div style="text-align: center;">
+				<div class="talk-sub" style="margin-bottom: 100px;">
+					<div style="text-align: center;box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">
 						<img src="/resources/img/member/user.png"
 							style="border-radius: 50%; width: 70px; margin-bottom: 30px;">
 						<h2 style="font-weight: 900; color: #cacaca;">대화를 시작해보세요!</h2>
@@ -220,8 +226,8 @@ input:focus, textarea:focus {
 			<c:otherwise>
 				<div>
 					<div style="text-align: right;">
-						<button type="button" id="widthBtn" class="btn btn-primary"
-							style="width: 100px; font-weight: 900;">전체보기</button>
+						<button type="button" id="widthBtn" class="btn btn-primary upbtn"
+							style="width: 100px; font-weight: 900;box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">전체보기</button>
 					</div>
 				</div>
 				<div class="talk-wrap">
@@ -427,7 +433,7 @@ input:focus, textarea:focus {
 											<tr>
 												<td><textarea cols="70" id="reviewContent"  class="form-control"></textarea></td>
 												<td><button type="button" id="reviewSendAjax"
-														class="btn btn-primary"
+														class="btn btn-primary upbtn"
 														style="font-weight: 900; padding: 10px; margin-left: 10px;">리뷰
 														작성</button></td>
 												<input type="hidden" value=${gfOne.ggosuNo } id="gfGgosuNo">
@@ -453,7 +459,7 @@ input:focus, textarea:focus {
 				<br>
 				<div class="talk-sub">
 
-					<div>
+					<div style="margin-bottom: 200px; box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);" >
 						<table>
 							<tr>
 								<th colspan="2">첨부파일 &nbsp;&nbsp;&nbsp;&nbsp; <input  class="form-control" style="width: 300px;display: inline-block;"
@@ -469,19 +475,19 @@ input:focus, textarea:focus {
 									<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
 										<c:if test="${fn:length(gtList) >= 10}">
 											<td style="text-align: center;">
-												<button type="button" id="talkStopAjax" class="btn btn-info"
+												<button type="button" id="talkStopAjax" class="btn btn-info upbtn"
 													style="width: 200px;">피드백 마치기</button>
 											</td>
 										</c:if>
 										<td style="text-align: center;">
 											<button type="button" id="talkBtnAjax"
-												class="btn btn-primary" style="width: 200px;">전송</button>
+												class="btn btn-primary upbtn" style="width: 200px;box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">전송</button>
 										</td>
 									</c:when>
 									<c:otherwise>
 										<td colspan="2">
 											<button type="button" id="talkBtnAjax"
-												class="btn btn-primary">전송</button>
+												class="btn btn-primary upbtn">전송</button>
 										</td>
 									</c:otherwise>
 								</c:choose>

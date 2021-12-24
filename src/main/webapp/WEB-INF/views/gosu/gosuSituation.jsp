@@ -57,8 +57,12 @@
 	padding-left: 20px;
 	padding-right: 20px;
 	margin: 70px;
-	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 	background-color: white;
+}
+.container>div>div>div table a:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
 }
 
 .container>div>div {
@@ -68,7 +72,7 @@
 
 .container>div>div>div table img {
 	border-radius: 50%;
-	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 	height: 80px;
 	width: 80px;
 }
@@ -184,13 +188,13 @@
 									<td colspan="2"><c:choose>
 											<c:when test="${gtl.feedbackNum eq 3 }">
 												<a
-													style="margin-top: 0; font-weight: 900; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;"
+													style="margin-top: 0; font-weight: 900; box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);"
 													href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
 													class="btn btn-outline-primary">자세히 보기</a>
 											</c:when>
 											<c:otherwise>
 												<a
-													style="margin-top: 0; font-weight: 900; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;"
+													style="margin-top: 0; font-weight: 900; box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);"
 													href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
 													class="btn btn-primary">자세히 보기</a>
 											</c:otherwise>
@@ -266,13 +270,13 @@
 											<c:when test="${gtl.feedbackNum eq 3 }">
 												<a href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
 													class="btn btn-outline-secondary"
-													style="font-weight: 900; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">자세히
+													style="font-weight: 900; box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);">자세히
 													보기</a>
 											</c:when>
 											<c:otherwise>
 												<a href="/gosuTalk.do?fbNo=${gtl.feedbackNo }"
 													class="btn btn-secondary"
-													style="font-weight: 900; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">자세히
+													style="font-weight: 900; box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%)">자세히
 													보기</a>
 											</c:otherwise>
 										</c:choose></td>
@@ -455,13 +459,13 @@
 									<c:when test="${grl.requestProjectSubNum eq 3 }">
 										<a href="/gosuProject.do?rpsNo=${grl.requestProjectSubNo }"
 											class="btn btn-outline-info"
-											style="font-weight: 900; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">자세히
+											style="font-weight: 900; box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);">자세히
 											보기</a>
 									</c:when>
 									<c:otherwise>
 										<a href="/gosuProject.do?rpsNo=${grl.requestProjectSubNo }"
 											class="btn btn-info"
-											style="font-weight: 900; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">자세히
+											style="font-weight: 900; box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);">자세히
 											보기</a>
 									</c:otherwise>
 								</c:choose></td>

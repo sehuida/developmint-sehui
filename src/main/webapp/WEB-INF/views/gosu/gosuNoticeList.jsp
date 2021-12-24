@@ -120,12 +120,17 @@ ul#gallery>a>li dd {
 }
 
 .gosu-write {
-	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 	padding: 40px;
 	text-align: center;
 	justify-content: right;
 	background-color: white;
 }
+.upbtn:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
+
 
 .gosu-write a {
 	margin-top: 20px;
@@ -190,8 +195,8 @@ ul#gallery>a>li dd {
 					<h5 style="font-size: 15px; color: #3c3c3c;">
 						고수님만의 노하우를<br> 알려주세요!
 					</h5>
-					<a href="/gosuNoticeWriteFrm.do" class="btn btn-primary form-control" style="
-		box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;"
+					<a href="/gosuNoticeWriteFrm.do" class="btn btn-primary form-control upbtn" style="
+		box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);"
 					>노하우
 						작성하기</a>
 				</div>

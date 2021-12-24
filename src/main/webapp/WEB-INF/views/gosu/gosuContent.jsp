@@ -62,6 +62,7 @@
 
 .gosu-photos ul li img {
 	width: 120px;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 }
 
 .container>div>div>div {
@@ -104,8 +105,13 @@
 	width: 200px;
 }
 
+.g-photo-one {
+	padding:10px;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+}
 .g-photo-one img {
 	height: 200px;
+	
 }
 
 .g-photo-one .g-b {
@@ -272,6 +278,16 @@
 
 .bigPicture img {
 	width: 600px;
+}
+
+
+.upbtn>button {
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+}
+
+.upbtn:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
 }
 </style>
 <meta charset="UTF-8">
@@ -521,7 +537,7 @@
 							<br>
 						</div>
 						<div class="hrm-btn-wrap">
-							<a id="hrm-close" class="btn btn-outline-success">확인</a>
+							<a id="hrm-close" class="btn btn-outline-success upbtn">확인</a>
 						</div>
 					</div>
 				</div>
@@ -531,7 +547,7 @@
 			<c:if test="${sessionScope.m.memberNo ne gosu.gsouNo}">
 				<div style="display: flex; justify-content: center;">
 					<a href="/gosuFeedback.do?ggNo=${gosu.ggsouNo }"
-						class="btn btn-primary"
+						class="btn btn-primary upbtn"
 						style="width: 200px; margin: 100px; padding: 10px;"><b>피드백
 							신청하기</b> </a>
 				</div>
