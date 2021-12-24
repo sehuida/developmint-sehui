@@ -15,4 +15,6 @@ public class Member {
 	private String filepath;
 	private int memberGrade;
 	private String comNo;
+	//사업자번호용
+	private String businessNo;
 }

@@ -58,7 +58,6 @@
 			var comNo = $("#comNo").val();
 			var manager = $("#managerName").val();
 			var openDate = $("#openDate").val();
-
 			if(comNo==""||manager==""||openDate==""){
                 swal({
                     title: "정보를 전부 입력해 주셔야 합니다.",
@@ -93,7 +92,7 @@
 					  if(valid == "01"){
 						  $.ajax({
 							 url : "/addCompany.do",
-							 data : {memberId : memberVal , comNo : comNo },
+							 data : {memberId : memberVal , businessNo : comNo },
 							 type : "post",
 							 success : function(data){
 								 if(data == 1){
