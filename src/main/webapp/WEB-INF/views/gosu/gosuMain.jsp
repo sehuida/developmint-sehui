@@ -103,12 +103,15 @@
 	font-size: 30px;
 	font-weight: 900;
 }
-.gtitle:hover, .underhover:hover ,.underhover2:hover {
+
+.gtitle:hover, .underhover:hover, .underhover2:hover {
 	color: #78c2ad;
 }
-.underhover:hover{
+
+.underhover:hover {
 	cursor: pointer;
 }
+
 .gosu-person>h3, .gosu-notice>h3, .gosu-status>h3 {
 	font-size: 30px;
 	font-weight: 900;
@@ -199,7 +202,7 @@ ul#gallery>a>li:hover img {
 	transition: background-color 0.6s ease;
 }
 
-.container .active,.container .dot:hover {
+.container .active, .container .dot:hover {
 	background-color: rgb(78, 205, 196);
 }
 
@@ -221,7 +224,8 @@ ul#gallery>a>li:hover img {
 
 @
 -webkit-keyframes fade {
-	from {opacity: .4}
+	from {opacity: .4
+}
 
 to {
 	opacity: 1
@@ -302,12 +306,11 @@ to {
 }
 
 .gosu-write {
-
 	padding: 40px;
 	text-align: center;
 	justify-content: right;
 	background-color: white;
-		box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
+	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
 }
 
 .gosu-write a {
@@ -342,57 +345,69 @@ to {
 	display: block;
 	font-size: 13px;
 }
-.gosuIntro{
+
+.gosuIntro {
 	height: 100px;
 	position: fixed;
 	left: 0;
 	margin-left: 40px;
 	z-index: 1000;
-	
 }
-.gosuIntro div a{
-	color:#78c2ad;
+
+.gosuIntro div a {
+	color: #78c2ad;
 	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
 	padding: 5px;
 }
-.gosuIntro div a:hover{
-	color:#367463;
+
+.gosuIntro div a:hover {
+	color: #367463;
 }
-.gosuIntro div{
-font-weight: 900;
-animation: motion 0.3s linear 0s infinite alternate;
+
+.gosuIntro div {
+	font-weight: 900;
+	animation: motion 0.3s linear 0s infinite alternate;
 	height: 50px;
 	font-size: small;
-	
-
 }
 
-@keyframes motion 
-{ 0% {margin-top: 0px;}
-100%{margin-top:5px;}}
+@
+keyframes motion { 0% {
+	margin-top: 0px;
+}
+100
+%
+{
+margin-top
+:
+5px;
+}
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
 		<div class="gosuIntro">
-			<div><a href="/gosuIntro.do" >고수의 페이지가 어떤 곳인지 궁금하다면?</a></div>
+			<div>
+				<a href="/gosuIntro.do">고수의 페이지가 어떤 곳인지 궁금하다면?</a>
+			</div>
 		</div>
 		<c:if test="${sessionScope.m.memberType eq 2}">
 			<div class="gosu-mail">
-				<a href="/gosuRequestList.do?reqPage=1">
-				<c:if test="${ requestCount ne 0 }">
-				<span>${ requestCount}</span>
-				</c:if>
-				요청서</a>
+				<a href="/gosuRequestList.do?reqPage=1"> <c:if
+						test="${ requestCount ne 0 }">
+						<span>${ requestCount}</span>
+					</c:if> 요청서
+				</a>
 			</div>
 		</c:if>
 		<c:if test="${sessionScope.m.memberType eq 1}">
 			<div class="gosu-mail">
-				<a href="/gosuRequestCostList.do?reqPage=1">
-				<c:if test="${ costCount ne 0 }">
-				<span>${ costCount}</span>
-				</c:if>
-				견적서</a>
+				<a href="/gosuRequestCostList.do?reqPage=1"> <c:if
+						test="${ costCount ne 0 }">
+						<span>${ costCount}</span>
+					</c:if> 견적서
+				</a>
 			</div>
 		</c:if>
 		<h1>
@@ -409,8 +424,8 @@ animation: motion 0.3s linear 0s infinite alternate;
 						고수에게<br>개발을 요청하세요!
 					</h5>
 					<a href="/gosuRequest.do" class="btn btn-primary form-control"
-						style="
-		box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">요청서 작성하기</a>
+						style="box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">요청서
+						작성하기</a>
 				</div>
 			</div>
 		</c:if>
@@ -423,78 +438,81 @@ animation: motion 0.3s linear 0s infinite alternate;
 			<c:if test="${i%j eq 0 }">
 				<div class="gosu-wrap">
 			</c:if>
-			<div class="gosu">
-				<button type="button" class="card border-primary mb-3"
-					style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
-					<table>
-						<tr>
-							<c:if test="${empty g.gosuImg }">
-								<td rowspan="4" class="gosu_img"
-									style="padding: 40px; text-align: center;"><img
-									src="/resources/img/gosu/g_img_basic.png"
-									style="border-radius: 50%; width: 200px; height: 200px;"></td>
-							</c:if>
-							<c:if test="${not empty g.gosuImg }">
-								<td rowspan="4" style="padding: 40px; text-align: center;"><img
-									src="/resources/upload/member/${g.gosuImg }"
-									style="border-radius: 50%; width: 200px; height: 200px;"></td>
-							</c:if>
+			<a href="/gosuContent.do?gNo=${g.ggsouNo}">
+				<div class="gosu">
+					<button type="button" class="card border-primary mb-3"
+						style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
+						<table>
+							<tr>
+								<c:if test="${empty g.gosuImg }">
+									<td rowspan="4" class="gosu_img"
+										style="padding: 40px; text-align: center;"><img
+										src="/resources/img/gosu/g_img_basic.png"
+										style="border-radius: 50%; width: 200px; height: 200px;"></td>
+								</c:if>
+								<c:if test="${not empty g.gosuImg }">
+									<td rowspan="4" style="padding: 40px; text-align: center;"><img
+										src="/resources/upload/member/${g.gosuImg }"
+										style="border-radius: 50%; width: 200px; height: 200px;"></td>
+								</c:if>
 
 
-							<td style="width: 600px;"><a
-								href="/gosuContent.do?gNo=${g.ggsouNo}" class="gtitle">${g.gosuTitle }</a></td>
-						</tr>
-						<tr>
-							<td><hr></td>
-						</tr>
-						<tr>
+								<td style="width: 600px;"><a
+									href="/gosuContent.do?gNo=${g.ggsouNo}" class="gtitle">${g.gosuTitle }</a></td>
+							</tr>
+							<tr>
+								<td><hr></td>
+							</tr>
+							<tr>
 
-							<td>
-								<li><b>한줄소개</b>&nbsp;&nbsp;${g.gosuSelf }</li>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<li><b>비용</b>&nbsp;&nbsp;<b style="color:red;"> ${g.gosuCost }</b>&nbsp;원</li>
-							</td>
-						</tr>
-						<tr>
-							<td style="text-align: center; font-weight: bold;"><span
-								style="color: rgb(78, 205, 196);">고수</span>&nbsp;&nbsp;${g.gosuId }</td>
-							<td><c:if test="${empty g.reviewAvg  }">
-									<span style="color: gray; font-size: small;">아직 등록된 리뷰가
-										없습니다.</span>
-								</c:if> <c:if test="${not empty g.reviewAvg }">
-									<span>${g.reviewAvg } 점 &nbsp;&nbsp;</span>
-									<c:choose>
-										<c:when test="${g.reviewAvg eq 5}">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-										</c:when>
-										<c:when test="${g.reviewAvg >= 4}">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-										</c:when>
+								<td>
+									<li><b>한줄소개</b>&nbsp;&nbsp;${g.gosuSelf }</li>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<li><b>비용</b>&nbsp;&nbsp;<b style="color: red;">
+											${g.gosuCost }</b>&nbsp;원</li>
+								</td>
+							</tr>
+							<tr>
+								<td style="text-align: center; font-weight: bold;"><span
+									style="color: rgb(78, 205, 196);">고수</span>&nbsp;&nbsp;${g.gosuId }</td>
+								<td><c:if test="${empty g.reviewAvg  }">
+										<span style="color: gray; font-size: small;">아직 등록된 리뷰가
+											없습니다.</span>
+									</c:if> <c:if test="${not empty g.reviewAvg }">
+										<span>${g.reviewAvg } 점 &nbsp;&nbsp;</span>
+										<c:choose>
+											<c:when test="${g.reviewAvg eq 5}">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+											</c:when>
+											<c:when test="${g.reviewAvg >= 4}">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+											</c:when>
 
-										<c:when test="${g.reviewAvg >= 3}">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-										</c:when>
-										<c:when test="${g.reviewAvg >= 2}">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
-										</c:when>
-										<c:when test="${g.reviewAvg >= 1}">
-											<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
-										</c:when>
+											<c:when test="${g.reviewAvg >= 3}">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+											</c:when>
+											<c:when test="${g.reviewAvg >= 2}">
+												<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+											</c:when>
+											<c:when test="${g.reviewAvg >= 1}">
+												<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+											</c:when>
 
 
-									</c:choose>
+										</c:choose>
 									
 									(${g.reviewCount }) 
 
 
 								</c:if></td>
-						</tr>
-					</table>
-				</button>
-			</div>
+							</tr>
+						</table>
+					</button>
+				</div>
+			</a>
 			<c:if test="${i%j eq j-1 }">
 	</div>
 	</c:if>
@@ -502,8 +520,8 @@ animation: motion 0.3s linear 0s infinite alternate;
 	</c:forEach>
 	<c:if test="${fn:length(gList) % 2!=0}">
 		<c:if test="${fn:length(gList) == i}">
-			</div>
-		</c:if>
+	</div>
+	</c:if>
 	</c:if>
 	<div style="text-align: center">
 		<span class="dot" onclick="currentSlide(1); "></span> <span
@@ -522,6 +540,16 @@ animation: motion 0.3s linear 0s infinite alternate;
 				style="display: flex; justify-content: space-between; margin-top: 50px;">
 
 				<c:forEach items="${newGosuList }" var="ngl" varStatus="i">
+
+					<c:choose>
+						<c:when test="${ngl.ggsouNo eq 0}">
+							<a class="underhover">
+						</c:when>
+						<c:otherwise>
+							<a href="/gosuContent.do?gNo=${ngl.ggsouNo}">
+						</c:otherwise>
+					</c:choose>
+
 					<div class="gosu-one">
 						<c:if test="${empty ngl.gosuImg }">
 							<img src="/resources/img/member/user.png"
@@ -533,17 +561,18 @@ animation: motion 0.3s linear 0s infinite alternate;
 						</c:if>
 
 						<div style="margin-top: 20px;">
-						<c:choose>
-							<c:when test="${ngl.ggsouNo eq 0}">
-								<a class="gtitle underhover" style="font-size:15px;" >${ngl.gosuId }</a>
-							</c:when>
-							<c:otherwise>
-								<a  href="/gosuContent.do?gNo=${ngl.ggsouNo}" class="gtitle underhover2"  style="font-size:15px;">${ngl.gosuId }</a>						
-							</c:otherwise>
-						</c:choose>
+							<c:choose>
+								<c:when test="${ngl.ggsouNo eq 0}">
+									<a class="gtitle underhover" style="font-size: 15px;">${ngl.gosuId }</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/gosuContent.do?gNo=${ngl.ggsouNo}"
+										class="gtitle underhover2" style="font-size: 15px;">${ngl.gosuId }</a>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</div>
-
+					</a>
 				</c:forEach>
 			</div>
 		</div>
@@ -685,7 +714,7 @@ animation: motion 0.3s linear 0s infinite alternate;
 												<c:if test="${grpsl.requestProjectSubNum eq 1 }">
 													<span style="color: red; padding-right: 0;">개발 진행</span>
 												</c:if> <c:if test="${grpsl.requestProjectSubNum eq 3 }">
-													<span style="color: gray;padding-right: 0; ">진행 완료</span>
+													<span style="color: gray; padding-right: 0;">진행 완료</span>
 												</c:if>
 											</th>
 										</tr>
@@ -718,13 +747,13 @@ animation: motion 0.3s linear 0s infinite alternate;
 	</div>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
-	 $(".underhover").click(function(){
-		 swal({
+		$(".underhover").click(function() {
+			swal({
 				title : '',
 				text : "고수님께서 소개글을 작성하지 않았습니다!",
 				icon : ''
 			});
-	 });
+		});
 		var slideIndex2 = 1;
 		showSlides2(slideIndex2);
 

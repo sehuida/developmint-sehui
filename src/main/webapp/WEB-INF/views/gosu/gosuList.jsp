@@ -229,6 +229,7 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${gList }" var="g" varStatus="i">
+						<a href="/gosuContent.do?gNo=${g.ggsouNo}">
 						<div class="gosu">
 							<button type="button" class="card border-primary mb-3"
 								style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
@@ -301,6 +302,7 @@
 								</table>
 							</button>
 						</div>
+						</a>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>

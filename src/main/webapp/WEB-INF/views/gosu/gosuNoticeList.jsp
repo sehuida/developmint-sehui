@@ -120,7 +120,7 @@ ul#gallery>a>li dd {
 }
 
 .gosu-write {
-		box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
+	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
 	padding: 40px;
 	text-align: center;
 	justify-content: right;
