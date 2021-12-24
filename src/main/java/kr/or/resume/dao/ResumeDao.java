@@ -79,13 +79,13 @@ public class ResumeDao {
 		return (ArrayList<Announce>)list;
 	}
 	
-	public ArrayList<ApplicationCompany> selectAllAnnounce(int memberNo) {
+	public ArrayList<ApplicationCompany> selectAllAnnounce(HashMap<String, Object> map) {
 		/*
 		 * HashMap<String, Object> map = new HashMap<String, Object>();
 		 * map.put("memberNo", memberNo); map.put("announceNo", announceNo);
 		 */
 		 
-		List list = sqlSession.selectList("resume.selectAllAnnounce", memberNo);
+		List list = sqlSession.selectList("resume.selectAllAnnounce", map);
 		return (ArrayList<ApplicationCompany>)list;
 	}
 

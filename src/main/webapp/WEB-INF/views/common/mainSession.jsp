@@ -94,55 +94,45 @@
 	</div>
 	<div class="container" style="margin-bottom: 20px;">
 		<!-- 최신순 프로젝트 리스트 8개 출력 -->
-		<c:forEach items="${ptlist }" var="pt" varStatus="mi">
-			<div class="contentFlexBox">
-			    <div class="imgBox">
-			    	<c:choose>
-			    		<c:when test="${pt.writerImgPath eq null}">
-			    			<img class="myInfoImg" src="/resources/img/member/user.png">
-			    		</c:when>
-			    		<c:otherwise>
-			    			<img class="myInfoImg" src="/resources/upload/member/${pt.writerImgPath }">
-			    		</c:otherwise>
-			    	</c:choose> 
-		     	</div>
-				<a href="/selectOneNotice.do?projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" class="clickRecruitTeamTag">
-					<div class="contentBox">
-					    <div class="textFlexBox1">
-					        <div class="textContent">
-					            <p class="contentText">${pt.RTitle }</p>
-					        </div>
-					        <div class="dateType">
-					            <b>작성일 : </b><span><b>${pt.RStartDate }</b></span>
-					        </div>
-					    </div>
-					    <div class="textFlexBox2">
-					        <div></div>
-					        <div class="dateType">
-					            <b>마감일 : </b><span><b>${pt.REndDate }</b></span>
-					        </div>
-					    </div>
-					    <div class="bottomFlexBox">
-					        <div class="subImgBox">
-					         <c:forEach items="${pdLangList }" var="lI"  varStatus="i">
-					         	<c:if test="${pt.projectNo eq lI.projectNo }">
-					         		<img class="langImg" src="${lI.langImg }">
-					            	</c:if>
-					         </c:forEach>
-					        </div>
-					        <div class="countBox">
-					            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/bubble-chat.png">
-					            <span class="countText">${pt.commentCount }</span>
-					            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
-					            <span class="countText">${pt.viewCount }</span>
-					            <img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png" style="position: relative; top: 3px;">
-					            <span class="countText">${pt.dibCount }</span>
-					        </div>
-					    </div>
-					</div>
-				</a>	
+			<div  style="margin: 30px auto;">
+				<span class="subEngTitel">NEW</span> <span class="subTitel">최신 모집순</span><a href="/recruitTeamMember_mainPage.do?reqPage=1" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
 			</div>
-		</c:forEach>
+			<div class="wrapPoject_wrap">
+			<c:forEach items="${ptlist }" var="pt" varStatus="mi">
+				<a href="/selectOneNotice.do?projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" style="text-decoration: none;">
+				<ul class="wrapPoject">
+					<li class="pojrect_item">
+						<c:choose>
+							<c:when test="${fn:length(pt.RTitle) > 10}">
+								<c:set var="subTitle" value="${fn:substring(pt.RTitle,0,10)}"/>
+								<h1>${subTitle }...</h1>
+							</c:when>
+							<c:otherwise>
+								<h1>${pt.RTitle }</h1>
+							</c:otherwise>
+						</c:choose>
+				        <ul class="subImgBox">
+				         <c:forEach items="${pdLangList }" var="lI"  varStatus="i">
+				         	<c:if test="${pt.projectNo eq lI.projectNo }">
+				         		<li>
+					         		<img class="langImg" src="${lI.langImg }">
+						         	<p id="lnagName">${lI.langName }</p>
+				         		</li>
+				            	</c:if>
+				         </c:forEach>
+				        </ul>
+				        <div class="countBox text-muted">
+				            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/bubble-chat.png">
+				            <span class="countText">${pt.commentCount }</span>
+				            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
+				            <span class="countText">${pt.viewCount }</span>
+				            <img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png" style="position: relative; top: 3px;">
+				            <span class="countText ">${pt.dibCount }</span>
+				        </div>
+					</li>
+				</ul></a>
+			</c:forEach>
+			</div>
 		<!-- 인기순 프로젝트 리스트 출력  끝 -->
 	</div>
 	<!-- 공모전 -->
@@ -163,7 +153,7 @@
 				<%--공모전 이미지 --%>
 				<div class="contestImgBox" >
 					<div class="front item">
-							<img src="/resources/img/contest/${hc.contestImg }">
+						<img src="/resources/img/contest/${hc.contestImg }">
 					</div>
 					<div class="back item">
 						<div class="contestBack" style="background-image: url(/resources/img/contest/${hc.contestImg }) ">
