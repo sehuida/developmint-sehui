@@ -51,6 +51,7 @@
 				<c:choose>
 					<c:when test="${sessionScope.m.filepath eq null }">
 						<label for="formFile" class="form-label" style="border-radius: 40%; overflow: hidden;" data-bs-toggle="tooltip" data-bs-placement="top" title="프로필사진 추가"><img src="/resources/img/member/profile.png" id="pic" style="width: 80px; height:80px;"></label>
+						<button type="button" class="btn btn-danger proDel" style="display:none;">프로필 삭제</button>
 					</c:when>
 					<c:otherwise>
 						<label for="formFile" class="form-label" style="border-radius: 40%; overflow: hidden;" data-bs-toggle="tooltip" data-bs-placement="top" title="프로필 변경"><img src="/resources/upload/member/${sessionScope.m.filepath }" id="pic" style="width: 100px; height:100px;"></label>
@@ -172,6 +173,7 @@
 				//경로를 다 읽어오면 실행할 함수 설정
 				reader.onload = function(e){ //e 에 읽어온 파일 정보가 들어있음
 					$("#pic").attr("src", e.target.result); //읽어온 경로를 img태그의 src속성에 설정
+					$(".proDel").css('display','block');
 				}
 			} 
 		}
@@ -191,8 +193,7 @@
 					        icon: 'success'
 					      }).then(function(){
 					    	  window.location = "/updateInfoFrm.do";
-	                      });						
-						
+	                      });
 					}
 				}
 			});

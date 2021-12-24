@@ -145,7 +145,6 @@
 				return;
 			}
 			loadImg(this);
-			console.log(1);
 		});
 		
 		function loadImg(obj){
