@@ -48,7 +48,7 @@
 .gosu-content-wrap {
 	width: 1200px;
 	padding: 50px;
-	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 }
 
 .gosu {
@@ -278,6 +278,15 @@
 	left: 84px;
 	display: none;
 }
+
+.upbtn>button {
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+}
+
+.upbtn:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
 </style>
 <body>
 
@@ -297,7 +306,7 @@
 				<input type="hidden" name="gsouNo"
 					value="${sessionScope.m.memberNo }">
 			</div>
-			<div style="display: flex; justify-content: center;">
+			<div style="display: flex; justify-content: center;margin-bottom: 200px;">
 				<div class="gosu-content-wrap">
 					<div class="gosu">
 						<table>
@@ -417,8 +426,8 @@
 
 					</div>
 					<div style="display: flex; justify-content: center;">
-						<button type="submit" class="btn btn-primary"
-							style="width: 200px; margin: 100px; padding: 10px;">작성하기</button>
+						<button type="submit" class="btn btn-primary upbtn"
+							style="width: 200px; margin-top: 140px; padding: 10px;">작성하기</button>
 					</div>
 				</div>
 				<div class="hrm-wrap" style="display: none;">
@@ -437,8 +446,8 @@
 							<br>
 						</div>
 						<div class="hrm-btn-wrap">
-							<a id="hrm-close" class="btn btn-outline-success">취소</a> <a
-								id="gProjectArr" class="btn btn-primary"
+							<a id="hrm-close" class="btn btn-outline-success upbtn">취소</a> <a
+								id="gProjectArr" class="btn btn-primary upbtn"
 								onclick="gProjectArr();">확인</a>
 						</div>
 					</div>
@@ -663,7 +672,7 @@
 						processData : false,
 						contentType : false,
 						success : function(data) {
-							$(".g-photo-one").first().append("<div style='text-align:center;'><button  class='delPJ' type='button'style='width:80px; border-radius:20px; background-color:#66a593; color:white;' >삭제</button></div>");
+							$(".g-photo-one").first().append("<div style='text-align:center;'><button  class='delPJ upbtn' type='button'style='width:80px; border-radius:20px; background-color:#66a593; color:white;' >삭제</button></div>");
 							$(".g-photo-one")
 									.first()
 									.append(

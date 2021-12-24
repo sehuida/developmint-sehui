@@ -45,9 +45,22 @@
 }
 
 .gosu>button {
-	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 }
 
+.gosu:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
+
+.upbtn:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
+btn-primary:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
 .gosu table {
 	width: 100%;
 }
@@ -104,13 +117,12 @@
 }
 
 .gosu-write {
-		box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
+		box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 	padding: 40px;
 	text-align: center;
 	justify-content: right;
 	background-color: white;
 }
-
 .gosu-write a {
 	margin-top: 20px;
 	padding: 10px;
@@ -201,7 +213,7 @@
 					<h5 style="font-size: 15px; color: #3c3c3c;">
 						고수님의 능력을<br> 마음껏 펼쳐주세요!
 					</h5>
-					<a href="/gosuWriteFrm.do" class="btn btn-primary form-control" style="
+					<a href="/gosuWriteFrm.do" class="btn btn-primary form-control upbtn" style="
 		box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;"
 						>작성하기</a>
 				</div>

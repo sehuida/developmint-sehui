@@ -60,13 +60,14 @@ input:focus, textarea:focus {
 
 .g-one-tbl {
 	width: 70%;
-	border: 3px solid #78c2ad;
-	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
    
 }
 
 .g-one-tbl:hover {
 	border: 3px solid rgb(235, 242, 235);
+	
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
 }
 
 .g-one-tbl th {
@@ -128,18 +129,18 @@ input:focus, textarea:focus {
 											<tr>
 												<th rowspan="2" style="padding-bottom: 0;padding-top: 0;"><c:if
 														test="${empty mrl.requestWriterImg }">
-														<img src="/resources/img/gosu/g_img_basic.png">
+														<img src="/resources/img/gosu/g_img_basic.png" style="box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);padding:10px;">
 													</c:if> <c:if test="${not empty mrl.requestWriterImg }">
 														<img
-															src="/resources/upload/member/${mrl.requestWriterImg }">
+															src="/resources/upload/member/${mrl.requestWriterImg }"style="box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);padding:10px;">
 													</c:if></th>
-												<th style="height:18px;padding-bottom: 0;"><span style="color: rgb(78, 205, 196); padding: 0;font-size: 20px;">${mrl.requestWriterId }</span></th>
-												<td style="text-align: right;padding-bottom: 0;">${mrl.requsetDate}</td>
+												<th style="height:18px;padding-bottom: 0;"><span style="color: rgb(78, 205, 196); padding: 0;font-size: 15px;">${mrl.requestWriterId }</span></th>
+												<td style="text-align: right;padding-bottom: 0;font-size: 10px;color: gray;">${mrl.requsetDate}</td>
 											</tr>
 											<tr>
 												<td colspan="2" style="padding-top: 0;">
 													
-													<p style=" border: 3px solid rgb(223, 245, 235);border-radius: 30px;margin: 0;">${mrl.requestContent7Plus}</p></td>
+													<p style=" border: 3px solid #78c2ad;border-radius: 30px;margin: 0;">${mrl.requestContent7Plus}</p></td>
 											</tr>
 										
 										</table>

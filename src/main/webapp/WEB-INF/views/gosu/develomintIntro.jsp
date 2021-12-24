@@ -110,6 +110,14 @@ html, body {
 	
 }
 
+.upbtn>button {
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+}
+
+.upbtn:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
 @keyframes motion 
 { 0% {margin-top: 0px;}
 100%{margin-top:10px;}}
@@ -147,7 +155,8 @@ html, body {
 		</div>
 		<div class="g-between g-box">
 			<div style="text-align: center; margin-top: 200px;">
-				<img style="width: 60%;" src="/resources/upload/member/취업사진_1.jpg">
+				<img style="width: 60%;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);" src="/resources/upload/member/취업사진_1.jpg">
 			</div>
 			<div style="width: 50%; margin-top: 200px;padding:20px;">
 				<h2>대표이사 김진호</h2>
@@ -170,7 +179,8 @@ html, body {
 				실수와 실패가 줄어드는 것이<br> 자신만의 노하우가 생기는 과정입니다.<br>
 			</div>
 			<div style="line-height: 362px; margin-top: 300px;">
-				<img style="border-radius: 50%;"
+				<img style="border-radius: 50%;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);"
 					src="/resources/upload/member/yoon.jpg">
 			</div>
 		</div>
@@ -193,14 +203,17 @@ html, body {
 				<div class="line" style="width: 12rem;"></div>
 				<br> <br> <br> <br> <br> <br>
 				<c:if test="${empty sessionScope.m }">
-					<a href="/joinFrm.do" class="btn btn-success"
-						style="width: 150px; font-size: 20px; font-weight: 900;">회원가입</a>
+					<a href="/joinFrm.do" class="btn btn-success upbtn"
+						style="width: 150px; font-size: 20px; font-weight: 900; margin:20px;">회원가입</a>
 				</c:if>
 				<c:if test="${not empty sessionScope.m }">
-					<a href="/logout.do" class="btn btn-success"
-						style="width: 150px; font-size: 20px; font-weight: 900;">로그아웃</a>
+					<a href="/logout.do" class="btn btn-success upbtn"
+						style="width: 150px; font-size: 20px; font-weight: 900; margin:20px;">로그아웃</a>
 
 				</c:if>
+				
+					<a href="/logout.do" class="btn btn-outline-success upbtn"
+						style="width: 150px; font-size: 20px; font-weight: 900;margin:20px;">Develomint</a>
 			</div>
 
 		</div>
