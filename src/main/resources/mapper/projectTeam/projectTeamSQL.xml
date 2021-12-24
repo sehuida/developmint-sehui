@@ -806,8 +806,6 @@
 						t.task_content as taskContent,
 						t.priority as priority,
 						t.connect_issue as connectIssue,
-						t.reference_link as referLink,
-						t.reference_link_name as linkName,
 						t.start_date as startDate,
 						t.complete_date as completeDate,
 						t.process_sort as processSort
@@ -830,8 +828,6 @@
 						t.task_content as taskContent,
 						t.priority as priority,
 						t.connect_issue as connectIssue,
-						t.reference_link as referLink,
-						t.reference_link_name as linkName,
 						t.start_date as startDate,
 						t.complete_date as completeDate,
 						t.process_sort as processSort
@@ -933,8 +929,6 @@
  			task_content as taskContent,
  			priority as priority,
  			connect_issue as connectIssue,
- 			reference_link as referLink,
- 			reference_link_name as linkName,
  			start_date as startDate,
  			complete_date as completeDate,
  			process_sort as processSort
@@ -1045,11 +1039,34 @@
  		select 
 				task_shortcut_no as taskShortcutNo,
 				project_no as projectNo,
-				task_no as taskNo
+				task_no as taskNo,
 				ts_link_addr as tsLinkAddr,
 				ts_link_name as tsLinkName
 			from task_shortcuts
-			where project_no = #{projectNo} and task_no like = '%M%'
+			where project_no = #{projectNo} and task_no like '%M%'
  </select>
+ 
+ <update id="taskDateUpdate" parameterType="ptk">
+ 		update task set process_sort = 2 where task_no like #{taskNo}
+ </update>
+ 
+  <update id="updateCompleteIssue" parameterType="ptk">
+ 		update task set 
+ 			task_content = #{modalcontent},
+ 			team_member_no = (select team_member_no from project_team_member where member_no = (select member_no from member where member_id = #{selectCharUser}) and project_no=#{projectNo}),
+ 			complete_date = to_char(sysdate,'yyyy-mm-dd'),
+ 			priority = #{selectPriority},
+ 			process_sort = #{selectProcessSort}
+ 		where task_no like #{taskNo}
+ </update>
+ 
+ <update id="updateIssue" parameterType="ptk">
+ 		update task set 
+ 			task_content = #{modalcontent},
+ 			team_member_no = (select team_member_no from project_team_member where member_no = (select member_no from member where member_id = #{selectCharUser}) and project_no=#{projectNo}),
+ 			priority = #{selectPriority},
+ 			process_sort = #{selectProcessSort}
+ 		where task_no like #{taskNo}
+ </update>
  
 </mapper>

@@ -125,10 +125,10 @@
 	<insert id="insertContestComment" parameterType="cm">
 		<choose>
 			<when test="commentType == 1">
-				insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate,'yyyy-mm-dd'), #{boardNo}, #{boardType}, #{commentType}, null)	
+				insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(SYSDATE,'MM-DD HH24:MI'), #{boardNo}, #{boardType}, #{commentType}, null)	
 			</when>
 			<otherwise>
-				insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate,'yyyy-mm-dd'), #{boardNo}, #{boardType}, #{commentType}, #{commentRef})			
+				insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(SYSDATE,'MM-DD HH24:MI'), #{boardNo}, #{boardType}, #{commentType}, #{commentRef})			
 			</otherwise>
 		</choose>
   	</insert>
