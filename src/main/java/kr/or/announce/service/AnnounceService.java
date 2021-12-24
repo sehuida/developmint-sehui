@@ -118,6 +118,14 @@ public class AnnounceService {
 		return dao.selectAnnounceCount(announceNo);
 	}
 
+	public int selectAllAnnounceCount(int memberNo) {
+		return dao.selectAllAnnounceCount(memberNo);
+	}
+
+	public int selectComNo(int memberNo) {
+		return dao.selectComNo(memberNo);
+	}
+
 	/*
 	 * public int selectResumeNo(int announceNo) { return
 	 * dao.selectResumeNo(announceNo); }

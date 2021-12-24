@@ -369,7 +369,7 @@
 						<em>회사명</em>
 						<br><br>
 						<b>회사명</b>
-						<input type="text" class="textInput" id="companyTitle" name="companyName" placeholder="회사명 입력">
+						<input type="text" class="textInput" id="companyTitle" name="companyName" value="${comName }" readonly>
 					</div>
 					
 		

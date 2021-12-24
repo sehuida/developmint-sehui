@@ -40,7 +40,14 @@ public class JobSearchController {
 	
 	
 	@RequestMapping(value="/announceFrm.do")
-	public String announceFrm() {
+	public String announceFrm(int comNo, Model model) {
+		String comName = service.selectComName(comNo);
+		if(comName != null) {
+			model.addAttribute("comName", comName);
+			System.out.println(comName);
+		} else {
+			
+		}
 		return "jobSearch/announceFrm";
 	}
 	

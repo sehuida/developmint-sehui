@@ -119,6 +119,15 @@ public class ResumeController {
 		return "resume/resumeView";
 	}
 	
+	@RequestMapping(value="/rView.do")
+	public String rView(int resumeNo, Model model) {
+		Resume resume = service.selectResume(resumeNo);
+		Member m = service.selectOneMember(resume.getMemberNo());
+		model.addAttribute("r", resume);
+		model.addAttribute("m", m);
+		return "resume/rView";
+	}
+	
 	@RequestMapping(value="/deleteResume.do")
 	public String deleteResume(int resumeNo, Resume r, Model model, int memberNo) {
 		int result = service.deleteResume(resumeNo);

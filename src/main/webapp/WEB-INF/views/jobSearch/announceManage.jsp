@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <style>
 	.contain{
@@ -174,6 +175,24 @@
 
     
 </style>
+<script>
+	$(function(){
+		$(".resumeBtn").click(function(e){
+			var count = $(".announceCount").val();
+			console.log(count);
+			if($(".announceCount").val() >= 3) {
+				alert("구인공고는 1개만 작성이 가능합니다.");
+				e.preventDefault();
+				console.log(count);
+			}
+			if($(".comNo").val() == 0) {
+				alert("회사인증이 완료된 회원만 구인공고 작성이 가능합니다.");
+				e.preventDefault();
+				console.log(count);
+			}
+		});
+	});
+</script>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="contain">
@@ -274,7 +293,7 @@
 					</ul>
 				<div class="message">
 					<a href="applicationStatus.do?announceNo=${a.announceNo }&reqPage=1"><button class="companyMessage">지원신청 회원 목록</button></a>		<!-- 일반회원이 지원신청을 했을 경우 count증가하고 이력서 열람할 수 있도록 하기 -> 서류합격? 버튼 누를 시 웹소켓으로 쪽지 보내기 -->
-					<span class="requestCount">${count }</span>		<!-- r.requestCount 	VO에 카운트 가져오는 변수 추가해야 할듯 어떻게 가져올지 생각 -->
+					<span class="requestCount">${count }</span> <!-- 지원신청 회원목록 뱃지 카운트 -->
 				</div>
 				<div class="update">
 					<a href="/updateAnnounceFrm.do?announceNo=${a.announceNo }"><button class="updateAnnounce">수정하기</button></a>
@@ -285,7 +304,9 @@
 		</c:otherwise>
 	</c:choose>
 		<div class="resume">
-			<a href="announceFrm.do"><button class="resumeBtn">구인공고 작성하기</button></a>
+			<a href="announceFrm.do?comNo=${comNo }"><button class="resumeBtn">구인공고 작성하기</button></a>
+			<input type="hidden" name="announceCount" value="${announceCount }" class="announceCount">
+			<input type="hidden" name="comNo" value="${comNo }" class="comNo">
 		</div>
 		<div class="resumeExplain">
 			<p>구인공고를 등록해보세요.</p>

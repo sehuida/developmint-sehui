@@ -28,39 +28,39 @@
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid" style="margin-left: 300px;">
+  <div class="container-fluid" style="padding-left: 300px;">
     <a class="navbar-brand mx-auto" href="/"><img src="/resources/img/logo/Develomint_logo.png" style="height: 50px"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarColor01" style="min-width: 1000px;">
+    <div class="collapse navbar-collapse" id="navbarColor01" >
       <ul class="navbar-nav me-auto" style="font-size: 18px;margin-left: 20px;font-weight: bold;">
         <li class="nav-item">
-          <a class="nav-link " href="/recruitTeamMember_mainPage.do?reqPage=1">팀원모집
+          <a class="nav-link " href="/recruitTeamMember_mainPage.do?reqPage=1" style="width: 88px;">팀원모집
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/shareList.do?reqPage=1&type=1" >개발지식공유</a>
+          <a class="nav-link " href="/shareList.do?reqPage=1&type=1" style="width: 124px;">개발지식공유</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/jobSearchList.do?reqPage=1">구인구직</a>
+          <a class="nav-link " href="/jobSearchList.do?reqPage=1" style="width: 88px;">구인구직</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/gosuMain.do">'고수'의 노하우</a>
+          <a class="nav-link " href="/gosuMain.do" style="width: 138px;">'고수'의 노하우</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/contestMain.do">공모전</a>
+          <a class="nav-link " href="/contestMain.do" style="width: 70px;">공모전</a>
         </li>
       </ul>
-       <ul class="navbar-nav float-end me-3">
+       <ul class="navbar-nav float-end me-3" style="text-align: left;">
     	<c:choose>
 			<c:when test="${empty sessionScope.m }">
-				<li class="nav-item">
+				<li class="nav-item" style="width: 85px;">
 					<a type="button" class="btn btn-secondary btn-lg" href="/loginFrm.do" style="font-size: medium;font-weight: bold;">로그인</a>
 		        </li>
-				<li class="nav-item">
+				<li class="nav-item"  style="width: 100px;">
 					<a type="button" class="btn btn-link btn-lg join-link-text" href="/joinFrm.do" style="font-size: medium;font-weight: bold;">회원가입</a>
 		        </li>
 			</c:when>
@@ -83,7 +83,7 @@
 						<c:choose>
 							<c:when test="${not empty sessionScope.m }">
 					      	<jsp:include page="/WEB-INF/views/dm/alarm.jsp"/>
-								<li class="nav-item dropdown float-end me-5">
+								<li class="nav-item dropdown float-end me-5" style="width: 165px;">
 						          <a class="nav-link dropdown-toggle active margin-right" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 						          	<c:choose>
 										<c:when test="${sessionScope.m.filepath eq null }">

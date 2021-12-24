@@ -248,7 +248,7 @@
 												</div>
 												<div style="border: 1px solid #d9d9d9; padding: 20px; padding-left: 25px; margin-bottom: 20px; border-top: none; border-radius: 10px; border: 1px solid #eaf0fa; padding-top: 35px; box-shadow: 0 2px 14px 0 rgb(0 0 0 / 10%);">
 													<span style="font-size: 12px; color: #999999;">${r.writeDate }</span>
-													<p><a href="/resumeView.do?resumeNo=${r.resumeNo }" target="_blank" style="font-weight: bold; text-decoration: none; color: black; text-overflow: ellipsis;">${r.resumeTitle }</a></p>
+													<p><a href="/rView.do?resumeNo=${r.resumeNo }" target="_blank" style="font-weight: bold; text-decoration: none; color: black; text-overflow: ellipsis;">${r.resumeTitle }</a></p>
 												</div>
 												<p class="desc" style="font-size:12px; color: #999999;"> 제출서류는 90일까지 지원기업에게 제공됩니다.<br>제출에 동의할 경우에만 [입사지원] 버튼을 클릭해 주세요.<br> 동의하지 않을 경우 입사지원이 불가능합니다.</p>
 												<p class="desc" style="font-size:12px; color: #999999;"> 만료(응시 시작일로부터 3년)된 인 ∙ 적성검사 포함 시 입사지원이 불가능하며, 입사지원 후 제출된 인 ∙ 적성검사는 만료 여부와 관계없이 입사지원서 열람 기준 내 인사담당자가 확인할 수 있습니다.</p>
