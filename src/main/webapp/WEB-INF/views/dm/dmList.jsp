@@ -16,8 +16,15 @@
 	table td,tr{
 		text-align: center;
 	}
+	table tr{
+		vertical-align: middle;
+	}
 	table th{
 		width: 150px;
+	}
+	.modal-btns{
+		display: flex;
+		justify-content: space-between;
 	}
 </style>
 </head>
@@ -60,10 +67,15 @@
 							      	<p><span>발신자</span> : ${dm.sender }</p>
 							      	<textarea rows="3" style="width:100%" class="form-control dmContent"></textarea>
 						      	</div>
-						      	<div style="text-align: right;">
-						      		<button type="button" class="btn btn-secondary send" style="width: 100px;">답장</button>
-						        	<button type="button" class="btn btn-primary " id="cancel" style="width: 100px;" data-bs-dismiss="modal">취소</button>					        	
-								</div>
+						      	<div class="modal-btns">
+							      	<div>
+							      		<span class="text-danger text_cnt" >(0 / 100)</span>
+							      	</div>						      	
+							      	<div>
+							      		<button type="button" class="btn btn-secondary send" style="width: 100px;">답장</button>
+							        	<button type="button" class="btn btn-primary " id="cancel" style="width: 100px;" data-bs-dismiss="modal">취소</button>					        	
+									</div>
+						      	</div>
 								<input type="hidden" id="receiver" value="${dm.sender }">
 								<input type="hidden" id="sender" value="${sessionScope.m.memberId }">
 					      </div>
@@ -105,6 +117,24 @@
 	</div>	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
+		$(function(){
+			//글자수 check
+			$(".dmContent").on('keyup change paste', function() {
+				var dmContent = $(".dmContent").val();
+		        $('.text_cnt').html("("+$(this).val().length+" / 100)");
+		        
+		        if($(this).val().length > 100) {
+		        	swal({
+		                title: '글자수는 100자 제한입니다!',
+		                icon: 'error',
+		                button: '돌아가기'
+		              })
+			        $(this).val($(this).val().substring(0, 100));
+		            $('.text_cnt').html("(100 / 100)");	
+		        }
+		    });
+		});
+		
 		$(".send").click(function () {
 			//선택자를 가져오고 그중에 this가 몇번쨰인지 확인하는거!
 			//$(this).index(); 아님!!!
@@ -112,6 +142,7 @@
 			var receiver = $("#receiver").val();
 			var dmContent = $(".dmContent").eq(index).val();
 			var sender = $("#sender").val();
+			
 			$.ajax({
 				url : "/sendDm.do",
 				data : {receiver:receiver,dmContent:dmContent,sender:sender},
@@ -149,6 +180,7 @@
 			});
 		});
 		$("#cancel").click(function(){
+			$('.text_cnt').html("(0 / 100)");
 			location.reload();
 		});
 		//메시지 삭제하기
