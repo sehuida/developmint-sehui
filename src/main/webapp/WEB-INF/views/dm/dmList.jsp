@@ -34,7 +34,7 @@
 		<h4 style="font-weight: bold; margin-left: 100px; margin-bottom: 50px; margin-top: 50px; margin-right:">쪽지함<i class="bi bi-chat-dots" style="margin-left:10px;"></i></h4>
 		<div class="dmWrap">
 			<p class="text-muted">받은 쪽지함</p>
-			<table class="table table-hover">
+			<table class="table table-hover receivePosts">
 				<tr class="table-primary">
 					<th>번호</th><th>보낸사람</th><th style="width: 500px; text-align: left;">내용</th><th>날짜</th><th>읽음여부</th><th>삭제하기</th>
 				</tr>
@@ -82,12 +82,12 @@
 						  </div>
 					  </div>
 					</div><!-- 답장하기 modal 종료 -->
-					</c:if>				
+					</c:if>
 				</c:forEach>
 			</table>
 			<hr>
 			<p class="text-muted">보낸 쪽지함</p>
-			<table class="table table-hover">
+			<table class="table table-hover sendPosts">
 				<tr class="table-primary">
 					<th>번호</th><th>받는사람</th><th style="width: 500px; text-align: left;">내용</th><th>날짜</th><th>읽음여부</th><th>삭제하기</th>
 				</tr>
@@ -133,6 +133,15 @@
 		            $('.text_cnt').html("(100 / 100)");	
 		        }
 		    });
+			//tr 개수 체크해서 1개면 append로 추가하기!!!!!
+			var rpVal = $(".receivePosts tr").length;
+			var spVal = $(".sendPosts tr").length;
+			if(rpVal==1){
+				$(".receivePosts tr:first").after("<tr class='table-light'><td colspan='6' style='height:100px; font-size:20px;'>보낸 쪽지가 없습니다!</td></tr>");
+			}
+			if(spVal==1){
+				$(".sendPosts tr:first").after("<tr class='table-light'><td colspan='6' style='height:100px; font-size:20px;'>받은 쪽지가 없습니다!</td></tr>");
+			}
 		});
 		
 		$(".send").click(function () {
