@@ -372,6 +372,18 @@ public class ProjectTeamDao {
 		List<TaskShortcuts> list = sqlSession.selectList("projectTeam.taskMShortcutList");
 		return (ArrayList<TaskShortcuts>) list;
 	}
+
+	public int taskDateUpdate(ProjectTask ptk) {
+		return sqlSession.update("projectTeam.taskDateUpdate", ptk);
+	}
+
+	public int updateCompleteIssue(Map<String, Object> map) {
+		return sqlSession.update("projectTeam.updateCompleteIssue", map);
+	}
+
+	public int updateIssue(Map<String, Object> map) {
+		return sqlSession.update("projectTeam.updateIssue", map);
+	}
 	
 	
 	

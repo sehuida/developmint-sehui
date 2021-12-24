@@ -819,7 +819,30 @@ public class ProjectTeamService {
 		ArrayList<TaskShortcuts> list= dao.taskMShortcutList(projectNo);
 		return list;
 	}
+	
+	@Transactional
+	public int updateIssue(String taskNo, int projectNo, int taskType, String modalcontent, String selectCharUser,
+			int selectPriority, int selectProcessSort) {
+		int result = 0;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("projectNo", projectNo);
+		map.put("taskNo", taskNo);
+		map.put("taskType", taskType);
+		map.put("modalcontent", modalcontent);
+		map.put("selectCharUser", selectCharUser);
+		map.put("selectPriority", selectPriority);
+		map.put("selectProcessSort", selectProcessSort);
+		if(selectProcessSort == 3) {
+			result = dao.updateCompleteIssue(map);
+		} else {
+			result = dao.updateIssue(map);
+		}
+		return result;
+	}
 
-	
-	
+	public int taskDateUpdate(ProjectTask projectTask) {
+		int result = dao.taskDateUpdate(projectTask);
+		return result;
+	}
+
 }

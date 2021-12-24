@@ -658,6 +658,21 @@ public class ProjectTeamController {
 		  	ArrayList<projectDevLanguage> pdLangList = service.selectAllprojectLangList();
 		  	ArrayList<DevelopLanguage> dlList = service.selectAllDevelopLang();
 		  	ArrayList<Shortcuts> scList = service.shortcutList(projectNo);
+		  	
+		  	ArrayList<ProjectTask> allPtk = service.projectTaskList(projectNo);
+		  	for(int i = 0; i < allPtk.size(); i++) {
+		  		int compare = today.compareTo(allPtk.get(i).getStartDate());
+		  		if(compare <= 0 && allPtk.get(i).getProcessSort() == 1) {
+		  			int updateResult = service.taskDateUpdate(allPtk.get(i));
+		  			if(updateResult < 0) {
+		  				model.addAttribute("title", "과업 업데이트 실패");
+		  			  model.addAttribute("loc","enterMyProject.do?projectNo="+projectNo+"&memberNo="+memberNo);
+		  			  model.addAttribute("icon", "warning");
+		  			  return "member/swalMsg";
+		  			}
+		  		}
+		  	}
+		  	
 		  	model.addAttribute("pt", pt);
 			model.addAttribute("memberList", memberList);
 			model.addAttribute("recentTask", recentTask);
@@ -797,6 +812,7 @@ public class ProjectTeamController {
 		  	ArrayList<ProjectTask> allPtk = service.projectTaskList(projectNo);
 		  	ArrayList<Shortcuts> scList = service.shortcutList(projectNo);
 		  	ArrayList<TaskShortcuts> tscList = service.taskMShortcutList(projectNo);
+		  	
 		  	model.addAttribute("ptk", ptvd.getTasklist());
 		  	model.addAttribute("ptkk", ptvd.getTasklist());
 			model.addAttribute("projectNo", projectNo);
@@ -806,6 +822,7 @@ public class ProjectTeamController {
 			model.addAttribute("ptmGet0", ptvd.getPtmList().get(0));
 			model.addAttribute("scList", scList);
 			model.addAttribute("allPtk", allPtk);
+			model.addAttribute("tscList", tscList);
 			return "recruitCrue/projectManageTaskM";
 		}
 	  
@@ -898,6 +915,30 @@ public class ProjectTeamController {
 		   }
 		   return "member/swalMsg"; 
 		 }
+	  
+	@RequestMapping(value="/updateIssue.do")
+	  public String updateIssue(Model model, String taskNo, int projectNo,int taskType, String modalcontent, String selectCharUser, int selectPriority, int selectProcessSort) {
+		int result = service.updateIssue(taskNo, projectNo, taskType, modalcontent, selectCharUser, selectPriority, selectProcessSort);
+		  if(result > 0) { 
+			  model.addAttribute("title", "프로젝트 변경 성공!");
+			  model.addAttribute("msg", "변경하신 프로젝트 내용이 반영되었습니다.");
+			  model.addAttribute("icon", "success");
+		  } else {
+			  model.addAttribute("title", "프로젝트 변경 실패");
+			  model.addAttribute("msg", "시스템 오류로 수정 실패하였습니다.");
+			  model.addAttribute("icon", "warning");
+		  }
+		  if(taskType == 1) {
+			  model.addAttribute("loc","/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage=1");
+		  } else if(taskType == 2) {
+			  model.addAttribute("loc","/enterProjectTaskT.do?projectNo="+projectNo+"&reqPage=1");
+		  } else if(taskType == 3) {
+			  model.addAttribute("loc","/enterProjectTaskB.do?projectNo="+projectNo+"&reqPage=1");
+		  } else {
+			  model.addAttribute("loc","/enterProjectTaskH.do?projectNo="+projectNo+"&reqPage=1");
+		  }
+		  return "member/swalMsg"; 
+	  }
 	  
 	  
 }
