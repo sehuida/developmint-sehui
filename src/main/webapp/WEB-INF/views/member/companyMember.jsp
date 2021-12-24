@@ -48,7 +48,9 @@
 					</div>
 				    <div class="checkBtn">
 				      <button type="button" class="btn btn-primary" id="checkBtn">정보변경</button>
-				    </div>		
+				    </div>
+				    <br>		
+					<p class="text-danger">* 기업고객 사칭시 관련법에 의거 처벌받으실 수 있습니다.</p>
 			</div>
 		</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
@@ -88,7 +90,7 @@
 					
 					$.ajax(settings).done(function (response) {
 					  var valid = response.data[0].valid;
-					  console.log(valid);
+					  console.log(comNo);
 					  if(valid == "01"){
 						  $.ajax({
 							 url : "/addCompany.do",
@@ -98,9 +100,10 @@
 								 if(data == 1){
 					                    swal({
 					                        title: '기업인증완료!',
+					                        text: '다시 로그인해 주세요!',
 					                        icon: 'success'
 					                      }).then(function(){
-					                    	 window.location = "/mypage.do"; 
+					                    	 window.location = "/logout.do"; 
 					                      });
 								 }else if(data == 0){
 					                    swal({
