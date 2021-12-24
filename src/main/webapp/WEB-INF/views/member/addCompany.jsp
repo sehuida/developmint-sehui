@@ -55,7 +55,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
-		  <h4 style="text-align: center; font-family: NotoBold">계정설정</h4>
+		  <h4 style="text-align: center; font-family: NotoBold">회사등록</h4>
 			<div class="update-wrap">
 			  <div class="update-middle">
 			    <form action="/addCompanyInfo.do" method="post" enctype="multipart/form-data">
@@ -256,14 +256,15 @@
 			var addVal = $("#address").val();
 			var conVal = $("#content").val();
 			var ceoVal = $("#ceo").val();
+			var fileVal = $("#formFile").val();
 			
-			if(comVal != '' && cateVal != '' && addVal != '' && conVal !='' && ceoVal != ''){
+			if(comVal != '' && cateVal != '' && addVal != '' && conVal !='' && ceoVal != '' && fileVal != ''){
 				if(openChk==true&&empChk==true&&bnumChk==true){
 					$("form").submit();
 				}else{
 					 swal({
 						   title: "등록실패",
-						   text: "입력값을 전부 입력해주세요.",
+						   text: "입력값을 전부 입력해주세요.(회사로고 포함)",
 						   icon: "warning", //"info,success,warning,error" 중 택1
 						   button: "돌아가기",
 						})

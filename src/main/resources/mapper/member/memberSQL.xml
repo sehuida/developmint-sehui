@@ -98,7 +98,7 @@
  	update member set com_no=#{comNo}, member_type=3 where member_id = #{memberId}
   </update>
   <select id="checkCompany" parameterType="m" resultType="com">
-  	select company_no as companyNo from company where business_no=#{comNo}
+  	select company_no as companyNo from company where business_no=#{businessNo}
   </select>
   <update id="delProfile" parameterType="m">
   	update member set filepath = '' where member_id = #{memberId}

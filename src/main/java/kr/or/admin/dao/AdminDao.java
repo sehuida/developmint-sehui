@@ -305,6 +305,19 @@ public class AdminDao {
 	public int countList5(Map<String, Object> map2) {
 		return sqlSession.selectOne("admin.countList5", map2);
 	}
+
+	public ArrayList<Company> affiliatesList(Map<String, Object> map) {
+		List<Company> list = sqlSession.selectList("admin.affiliatesList",map);
+		return (ArrayList<Company>)list;
+	}
+
+	public int totalCompanyCount() {
+		return sqlSession.selectOne("admin.totalCompanyCount");
+	}
+
+	public int chkCompanyDel(int companyNo) {
+		return sqlSession.delete("admin.chkCompanyDel",companyNo);
+	}
 	
 
 

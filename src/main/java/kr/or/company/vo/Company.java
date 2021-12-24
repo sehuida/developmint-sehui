@@ -12,7 +12,6 @@ public class Company {
 	private String ceo;
 	private String address;
 	private String content;
-	private int businessNo;
+	private String businessNo;
 	private String filePath;
-
 }
