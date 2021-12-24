@@ -116,7 +116,8 @@ html, body {
 }
 .g-img{
 	width: 300px;
-	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
+	
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 	margin:50px;
 	border-radius: 30px;
 

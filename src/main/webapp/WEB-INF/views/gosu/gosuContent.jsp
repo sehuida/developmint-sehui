@@ -61,7 +61,8 @@
 }
 
 .gosu-photos ul li img {
-	width: 120px;
+	width: 100px;
+	height: 100px;
 }
 
 .container>div>div>div {
@@ -104,8 +105,13 @@
 	width: 200px;
 }
 
+.g-photo-one {
+	padding:10px;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+}
 .g-photo-one img {
 	height: 200px;
+	
 }
 
 .g-photo-one .g-b {
@@ -273,6 +279,16 @@
 .bigPicture img {
 	width: 600px;
 }
+
+
+.upbtn>button {
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+}
+
+.upbtn:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -294,28 +310,28 @@
 
 							<c:if test="${empty gosu.gosuImg }">
 								<th rowspan="6" style="padding: 40px; padding-right: 100px;"><img
-									src="/resources/img/gosu/g_img_basic.png" style="width: 250px;"></th>
+									src="/resources/img/gosu/g_img_basic.png" style="width: 250px; box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);"></th>
 							</c:if>
 							<c:if test="${not empty gosu.gosuImg }">
 								<th rowspan="6" style="padding: 40px; padding-right: 100px;"><img
 									src="/resources/upload/member/${gosu.gosuImg }"
-									style="width: 250px; height: 250px;"></th>
+									style="width: 250px; height: 250px; box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);"></th>
 							</c:if>
 						</tr>
 						<tr>
 							<td><span>고수</span> ${gosu.gosuId }</td>
 						</tr>
 						<tr>
-							<td style="font-size: 25px;">${gosu.gosuTitle }</td>
+							<td style="font-size: 25px;	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);padding:10px;">${gosu.gosuTitle }</td>
 						</tr>
 						<tr>
 							<td><hr></td>
 						</tr>
 						<tr>
-							<td>한 줄 소개</td>
+							<td style="color: gray;">한 줄 소개</td>
 						</tr>
 						<tr>
-							<td style="font-size: 25px;">${gosu.gosuSelf }</td>
+							<td style="font-size: 20px;">${gosu.gosuSelf }</td>
 						</tr>
 					</table>
 				</div>
@@ -333,7 +349,8 @@
 						<ul>
 							<c:forEach items="${gphotoList }" var="gph" varStatus="i">
 
-								<li><a><img src="${gph.photoFilepath }"></a></li>
+								<li style="
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);height: 120px;line-height: 120px;"><a><img src="${gph.photoFilepath }"></a></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -407,10 +424,11 @@
 														<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
 													</c:if></li>
 												<li>${grl.reviewDate }</li>
+											
 											</ul>
 											<br>
-											<div style="display: flex; justify-content: center;">
-												<p>${grl.reviewContentBr }</p>
+											<div>
+												<p style="padding:5px;padding-left: 50px;padding-right: 30px;">${grl.reviewContent}</p>
 											</div>
 										</div>
 									</c:forEach>
@@ -444,8 +462,8 @@
 												<li style="color: gray;">${grl.requestReviewDate }</li>
 											</ul>
 											<br>
-											<div style="display: flex; justify-content: center;">
-												<p>${grl.requestReviewContentBr }</p>
+											<div >
+												<p style="padding:5px;padding-left: 50px;padding-right: 30px;"> ${grl.requestReviewContent }</p>
 											</div>
 										</div>
 									</c:forEach>
@@ -521,7 +539,7 @@
 							<br>
 						</div>
 						<div class="hrm-btn-wrap">
-							<a id="hrm-close" class="btn btn-outline-success">확인</a>
+							<a id="hrm-close" class="btn btn-outline-success upbtn">확인</a>
 						</div>
 					</div>
 				</div>
@@ -531,7 +549,7 @@
 			<c:if test="${sessionScope.m.memberNo ne gosu.gsouNo}">
 				<div style="display: flex; justify-content: center;">
 					<a href="/gosuFeedback.do?ggNo=${gosu.ggsouNo }"
-						class="btn btn-primary"
+						class="btn btn-primary upbtn"
 						style="width: 200px; margin: 100px; padding: 10px;"><b>피드백
 							신청하기</b> </a>
 				</div>
@@ -551,7 +569,8 @@
 			function showImage(fileCallPath){
 			    
 			    $(".bigPictureWrapper").css("display","flex").show();
-			    
+			    $('body').css("overflow", "hidden");
+			    $('.bigPicture').css("overflow", "scroll");
 			    $(".bigPicture")
 			    .html("<img src='"+fileCallPath+"' >")
 			    .animate({width:'100%', height: '100%'}, 0);
@@ -563,12 +582,14 @@
 			    setTimeout(function(){
 			      $('.bigPictureWrapper').hide();
 			    }, 10);
+			    $('body').css("overflow", "scroll");
 			  });//end bigWrapperClick event
 			$(".bigPictureWrapper").on("click", function(e){
 			    $(".bigPicture").animate({width:'0%', height: '0%'}, 0);
 			    setTimeout(function(){
 			      $('.bigPictureWrapper').hide();
 			    }, 10);
+			    $('body').css("overflow", "scroll");
 			  });
 		});
 		$("#hrm-close").click(function() {

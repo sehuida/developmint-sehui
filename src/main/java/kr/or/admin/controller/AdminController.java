@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.admin.service.AdminService;
+import kr.or.admin.vo.CompanyListData;
 import kr.or.admin.vo.TotalBoard;
 import kr.or.admin.vo.TotalData;
 import kr.or.admin.vo.TotalMember;
@@ -343,7 +344,34 @@ public class AdminController {
 		public String addCompany() {
 			return "member/addCompany";
 		}
-
+		
+		//제휴회사 목록 페이지로 이동
+		@RequestMapping(value="/affiliatesList.do")
+		public String affiliatesList(Model model, int reqPage){
+			CompanyListData cld = service.affiliatesList(reqPage);
+			model.addAttribute("companyList", cld.getCompanyList());
+			model.addAttribute("start", cld.getStart());
+			model.addAttribute("pageNavi", cld.getPageNavi());
+			return "admin/affiliatesList";
+		}
+		
+		//제휴회사 삭제
+		@RequestMapping(value="chkCompanyDel.do")
+		public String chkCompanyDel(Model model, String companyNo) {
+			boolean result = service.chkCompanyDel(companyNo);
+			if(result) {
+				model.addAttribute("title","회사 삭제 성공");
+				model.addAttribute("msg","선택한 회사를 삭제하였습니다.");
+				model.addAttribute("icon","success");
+			
+			}else {
+				model.addAttribute("title","회사 삭제 실패");
+				model.addAttribute("msg","회사 삭제에 실패하였습니다. 관리자에게 문의해주세요.");
+				model.addAttribute("icon","error");
+			}
+			model.addAttribute("loc","/affiliatesList.do?reqPage=1");
+			return "member/swalMsg";
+		}
 
 }
 

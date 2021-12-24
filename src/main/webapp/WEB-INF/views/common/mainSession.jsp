@@ -8,15 +8,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" href="/resources/css/default.css">
 <link rel="stylesheet" href="/resources/css/main/main.css">
+<link rel="stylesheet" href="/resources/css/projectTeam/recruitMember.css">
 <link rel="stylesheet" href="/resources/css/projectTeam/recruitMember.css">
 <!-- Add the slick-theme.css if you want default styling -->
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <!-- Add the slick-theme.css if you want default styling -->
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-<link rel="stylesheet" href="/resources/css/projectTeam/recruitMember.css">
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
 	* Make the image fully responsive */
@@ -95,47 +95,47 @@
 	</div>
 	<div class="container" style="margin-bottom: 50px;">
 		<!-- 최신순 프로젝트 리스트 8개 출력 -->
-			<div  style="margin: 30px auto;">
-				<span class="subEngTitel">NEW</span> <span class="subTitel">최신 모집순</span><a href="/recruitTeamMember_mainPage.do?reqPage=1" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
-			</div>
-			<div class="wrapPoject_wrap">
-			<c:forEach items="${ptlist }" var="pt" varStatus="mi">
-				<a href="/selectOneNotice.do?projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" style="text-decoration: none;">
-				<ul class="wrapPoject">
-					<li class="pojrect_item">
-						<c:choose>
-							<c:when test="${fn:length(pt.RTitle) > 10}">
-								<c:set var="subTitle" value="${fn:substring(pt.RTitle,0,10)}"/>
-								<h1>${subTitle }...</h1>
-							</c:when>
-							<c:otherwise>
-								<h1>${pt.RTitle }</h1>
-							</c:otherwise>
-						</c:choose>
-				        <ul class="subImgBox">
-				         <c:forEach items="${pdLangList }" var="lI"  varStatus="i">
-				         	<c:if test="${pt.projectNo eq lI.projectNo }">
-				         		<li>
-					         		<img class="langImg" src="${lI.langImg }">
-						         	<p id="lnagName">${lI.langName }</p>
-				         		</li>
-				            	</c:if>
-				         </c:forEach>
-				        </ul>
-				        <div class="countBox text-muted">
-				            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/bubble-chat.png">
-				            <span class="countText">${pt.commentCount }</span>
-				            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
-				            <span class="countText">${pt.viewCount }</span>
-				            <img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png" style="position: relative; top: 3px;">
-				            <span class="countText ">${pt.dibCount }</span>
-				        </div>
-					</li>
-				</ul></a>
-			</c:forEach>
-			</div>
-		<!-- 인기순 프로젝트 리스트 출력  끝 -->
+		<div  style="margin: 30px auto;">
+			<span class="subEngTitel">NEW</span> <span class="subTitel">최신 모집순</span><a href="/recruitTeamMember_mainPage.do?reqPage=1" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
+		</div>
+		<div class="wrapPoject_wrap">
+		<c:forEach items="${ptlist }" var="pt" varStatus="mi">
+			<a href="/selectOneNotice.do?projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" style="text-decoration: none;">
+			<ul class="wrapPoject">
+				<li class="pojrect_item">
+					<c:choose>
+						<c:when test="${fn:length(pt.RTitle) > 10}">
+							<c:set var="subTitle" value="${fn:substring(pt.RTitle,0,10)}"/>
+							<h1>${subTitle }...</h1>
+						</c:when>
+						<c:otherwise>
+							<h1>${pt.RTitle }</h1>
+						</c:otherwise>
+					</c:choose>
+			        <ul class="subImgBox">
+			         <c:forEach items="${pdLangList }" var="lI"  varStatus="i">
+			         	<c:if test="${pt.projectNo eq lI.projectNo }">
+			         		<li>
+				         		<img class="langImg" src="${lI.langImg }">
+					         	<p id="lnagName">${lI.langName }</p>
+			         		</li>
+			            	</c:if>
+			         </c:forEach>
+			        </ul>
+			        <div class="countBox text-muted">
+			            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/bubble-chat.png">
+			            <span class="countText">${pt.commentCount }</span>
+			            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
+			            <span class="countText">${pt.viewCount }</span>
+			            <img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png" style="position: relative; top: 3px;">
+			            <span class="countText ">${pt.dibCount }</span>
+			        </div>
+				</li>
+			</ul></a>
+		</c:forEach>
+		</div>
 	</div>
+	<!-- 인기순 프로젝트 리스트 출력  끝 -->
 	<!-- 공모전 -->
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
@@ -179,7 +179,7 @@
 						</div>
 					</div>
 				</div>
-				<%--공모전 제목(제목이 16글자가 넘어가면 뒤에는 ...으로 표시 --%>
+				<%--공모전 제목 --%>
 				<c:choose>
 					<c:when test="${fn:length(hc.contestTitle) > 15}">
 						<c:set var="subTitle" value="${fn:substring(hc.contestTitle,0,15)}"/>
@@ -204,71 +204,58 @@
 			<p>개발 고수와 매칭하여 고수의 노하우를 물어보세요!</p>
 		</div>
 	</div>
-	<div class="container" >
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
-		<c:forEach items="${gosuList }" var="g" begin="0" end="4">
-		<div class="gosu">
-			<button type="button" class="card border-primary mb-3"
-				style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;margin: auto;">
-				<table>
-					<tr>
-						<c:if test="${empty g.gosuImg }">
-							<td rowspan="4" class="gosu_img"
-								style="padding: 40px; text-align: center;"><img
-								src="/resources/img/gosu/g_img_basic.png"
-								style="border-radius: 50%; width: 200px; height: 200px;"></td>
-						</c:if>
-						<c:if test="${not empty g.gosuImg }">
-							<td rowspan="4" style="padding: 40px; text-align: center;"><img
-								src="/resources/upload/member/${g.gosuImg }"
-								style="border-radius: 50%; width: 200px; height: 200px;"></td>
-						</c:if>
-						<td style="width: 600px;"><a href="/gosuContent.do?gNo=${g.ggsouNo}" class="gtitle">${g.gosuTitle }</a></td>
-					</tr>
-					<tr>
-						<td><hr></td>
-					</tr>
-					<tr>
-						<td><li><b>한줄소개</b>&nbsp;&nbsp;${g.gosuSelf }</li></td>
-					</tr>
-					<tr>
-						<td><li><b>비용</b>&nbsp;&nbsp;<b style="color: red;">${g.gosuCost }</b>&nbsp;원</li></td>
-					</tr>
-					<tr>
-						<td style="text-align: center; font-weight: bold;">
-						<span style="color: rgb(78, 205, 196);">고수</span>&nbsp;&nbsp;${g.gosuId }</td>
-						<td><c:if test="${empty g.reviewAvg  }">
-								<span style="color: gray; font-size: small;">아직 등록된 리뷰가 없습니다.</span>
-							</c:if>
-							<c:if test="${not empty g.reviewAvg }">
-								<span>${g.reviewAvg } 점 &nbsp;&nbsp;</span>
-									<c:choose>
-										<c:when test="${g.reviewAvg eq 5}">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-										</c:when>
-										<c:when test="${g.reviewAvg >= 4}">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-										</c:when>
-										<c:when test="${g.reviewAvg >= 3}">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-										</c:when>
-										<c:when test="${g.reviewAvg >= 2}">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
-										</c:when>
-										<c:when test="${g.reviewAvg >= 1}">
-											<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
-										</c:when>
-									</c:choose>
-									(${g.reviewCount }) 
-							</c:if>
-						</td>
-					</tr>
-				</table>
-			</button>
+	<div class="container" style="margin-bottom: 50px;">
+	<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
+		<div style="margin: 30px auto;">
+			<span class="subEngTitel">新</span> <span class="subTitel">고수들</span><a href="/allContestList.do?reqPage=1&type=0" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
 		</div>
-		</c:forEach>
-	</div>
+		<div class="gosuContents mt-3">
+			<c:forEach items="${gosuList }" var="g" begin="0" end="4">
+			<div class="card" style="width:400px;margin: 10px;height: 600px;">
+				<c:if test="${empty g.gosuImg }">
+			  		<img class="card-img-top" src="/resources/img/gosu/g_img_basic.png" alt="Card image" style="width:100%">
+			  	</c:if>
+			  	<c:if test="${not empty g.gosuImg }">
+			  		<img class="card-img-top" src="/resources/upload/member/${g.gosuImg }" alt="Card image" style="width:100%;height: 250px;">
+		  		</c:if>
+			  <div class="card-body">
+			  	<%-- <a href="/gosuContent.do?gNo=${g.ggsouNo}" class="card-title">${g.gosuTitle }</a> --%>
+			    <h4 class="card-title">${g.gosuTitle }</h4>
+			    <p class="card-text"><span style="color: rgb(78, 205, 196);">고수</span>&nbsp;&nbsp;${g.gosuId }</p>
+			    <p class="card-text">${g.gosuSelf }</p>
+			    <p class="card-text">
+			    	<c:if test="${empty g.reviewAvg  }">
+						<span style="color: gray; font-size: small;">아직 등록된 리뷰가 없습니다.</span>
+					</c:if>
+					<c:if test="${not empty g.reviewAvg }">
+						<span>${g.reviewAvg } 점 &nbsp;&nbsp;</span>
+							<c:choose>
+								<c:when test="${g.reviewAvg eq 5}">
+									<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+								</c:when>
+								<c:when test="${g.reviewAvg >= 4}">
+									<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+								</c:when>
+								<c:when test="${g.reviewAvg >= 3}">
+									<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+								</c:when>
+								<c:when test="${g.reviewAvg >= 2}">
+									<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+								</c:when>
+								<c:when test="${g.reviewAvg >= 1}">
+									<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+								</c:when>
+							</c:choose>
+							(${g.reviewCount }) 
+					</c:if>
+			    </p>
+			    <a href="/gosuContent.do?gNo=${g.ggsouNo}" class="btn btn-primary " style="font-weight: bold;">프로필보기</a>
+			  </div>
+			</div>
+			</c:forEach>
+		</div>
 	<!-- 고수 소개 얼굴만 최신 등록 5명 출력 끝 -->
+	</div>
 	<!-- 구인구직 -->
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
@@ -393,6 +380,7 @@
 	         </div>
 	     </div>
 	    </c:forEach>		
+	    <!-- 구인구직 끝-->
 	</div>
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
@@ -469,10 +457,9 @@
 	<!-- main세션 끝-->
 	<script type="text/javascript">
 		$(".board-link").click(function(){
-			
 			swal({
-	 			  title: "차단회원 신고처리",
-	 			  text: "비밀번호를 입력하셔야 합니다. Q&A페이지로 이동할까요??",
+	 			  title: "비회원 리스트 안내",
+	 			  text: "해당 비밀번호를 입력하셔야 합니다. Q&A페이지로 이동할까요??",
 	 			  icon: "warning",
 	 			  buttons: true,
 	 			  dangerMode: true,

@@ -102,9 +102,8 @@ input[type="checkbox"] {
 	-moz-appearance: none;
 	appearance: none;
 	background: white;
-	outline: 0;
-	height: 10px;
-	width: 10px;
+	height: 15px;
+		width: 15px;
 	border: 1px solid gray;
 	margin-right: 20px;
 }
@@ -112,6 +111,7 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked {
 	background: #78c2ad;
 	border: 1px solid #78c2ad;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 }
 
 .g-div>ul>label>li, .g-seq {
@@ -151,6 +151,14 @@ input[type="checkbox"]:checked {
 	float: left;
 	margin: 40px;
 	text-align: center;
+}
+.upbtn {
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+}
+
+.upbtn:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
 }
 
 .g-seq {
@@ -360,9 +368,9 @@ input[type="checkbox"]:checked {
 						<div id="btn_gallery">
 							<div class="g-msg"></div>
 							<a href="#"
-								class="btn_gallery_prev off btn btn-outline-success g-btn">이전</a>
-							<a href="#" class="btn_gallery_next btn btn-primary g-btn">다음</a>
-							<button type="submit" class="btn_submit btn btn-info  g-btn g-b"
+								class="btn_gallery_prev off btn btn-outline-success g-btn upbtn">이전</a>
+							<a href="#" class="btn_gallery_next btn btn-primary g-btn upbtn">다음</a>
+							<button type="submit" class="btn_submit btn btn-info  g-btn g-b upbtn"
 								style="display: none;">완료</button>
 						</div>
 					</ul>

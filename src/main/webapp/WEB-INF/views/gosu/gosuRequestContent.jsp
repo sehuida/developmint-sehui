@@ -112,6 +112,11 @@ input:focus, textarea:focus {
 	font-size: 30px;
 	font-weight: 900;
 }
+
+.upbtn:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
 </style>
 
 
@@ -123,7 +128,7 @@ input:focus, textarea:focus {
 			요청서
 		</h3>
 		<div class="request">
-			<div class="card border-primary mb-3">
+			<div style="box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);">
 				<ul style="padding: 0;">
 					<li>
 						<h3>어떤 플랫폼을 원하시나요?</h3> ${grOne.requestContent1Br} <br>
@@ -161,11 +166,11 @@ input:focus, textarea:focus {
 		
 		</div>
 		<div class="g-center">
-			<a class="btn btn-info"
+			<a class="btn btn-info upbtn"
 				style="width: 200px; margin: 100px; padding: 10px; font-weight: 900;"
 				onclick="history.back();">뒤로가기</a> 
 				<c:if test="${empty grcOne }">
-				<a class="btn btn-primary"
+				<a class="btn btn-primary upbtn"
 				id="costSendModal"
 				style="width: 200px; margin: 100px; padding: 10px; font-weight: 900;">견적보내기</a>
 				</c:if>
@@ -190,8 +195,8 @@ input:focus, textarea:focus {
 				</div>
 				<div class="hrm-btn-wrap">
 
-					<a id="costSendAjax" class="btn btn-success">확인</a> <a
-						id="hrm-close" class="btn btn-outline-success">취소</a>
+					<a id="costSendAjax" class="btn btn-success upbtn">확인</a> <a
+						id="hrm-close" class="btn btn-outline-success upbtn">취소</a>
 				</div>
 			</div>
 		</div>

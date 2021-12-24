@@ -105,6 +105,16 @@ input:focus, textarea:focus {
 	display: block;
 	font-size: 13px;
 }
+
+
+.upbtn {
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+}
+
+.upbtn:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -119,38 +129,38 @@ input:focus, textarea:focus {
 			<input type="hidden" name="writeId"
 				value="${sessionScope.m.memberId }"> <input type="hidden"
 				name="gnoticeNo" value="${gNotice.gnoticeNo }">
-			<div class="g-content g-center">
+			<div class="g-content g-center" style="	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);padding-top:50px;padding-bottom:50px;">
 				<div>
 					<table>
 						<tr>
 							<th>첨부파일 <span style="color: red;">* </span></th>
 							<td id="g-td1"><img style="width: 800px;"
 								src="${gNotice.gnoticePhoto}">
-							<button type="button" id="g-photo-del" class="btn btn-primary"
+							<button type="button" id="g-photo-del" class="btn btn-primary upbtn"
 									style="margin-bottom: 50%;">X</button>
 								<span id="photo-empty"><input type="hidden"
 									name="gnoticePhoto" value="${gNotice.gnoticePhoto}"></span></td>
-							<td id="g-td2" style="display: none;"><input type="file"
+							<td id="g-td2" style="display: none;"><input type="file" class="form-control"
 								name="files" style="width: 100%;"></td>
 						</tr>
 						<tr>
 							<th>제목 <span style="color: red;">* </span></th>
 							<td><input type="text" name="gnoticeTitle"
-								value="${gNotice.gnoticeTitle}" style="width: 100%;"></td>
+								value="${gNotice.gnoticeTitle}" style="width: 100%;" class="form-control"></td>
 						</tr>
 						<tr>
 							<th>내용 <span style="color: red;"> * </span></th>
-							<td><textarea cols="100" rows="30" name="gnoticeContent" id="gnoticeContent">${gNotice.gnoticeContent}</textarea></td>
+							<td><textarea cols="100" rows="30" name="gnoticeContent" id="gnoticeContent" >${gNotice.gnoticeContent}</textarea></td>
 						</tr>
 
 					</table>
 				</div>
 			</div>
 			<div class="g-center">
-				<a class="btn btn-info"
+				<a class="btn btn-info upbtn"
 					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
 					onclick="history.back();">취소</a>
-				<button type="submit" class="btn btn-primary"
+				<button type="submit" class="btn btn-primary upbtn"
 					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">확인</button>
 			</div>
 		</form>
