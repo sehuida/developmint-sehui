@@ -196,7 +196,7 @@ b {
 		<div class="companyInfoHeader">
 			<div class="companyImg">
 				<!-- 공고 1개만 가능하면 걍 두고 여러개 가능하면 forEach로 여러개 해줘야댐 -->
-				${com.filepath }
+				<img alt="" src="/resources/upload/company/${com.filepath }"> 
 			</div>
 			<div class="companyTitle">
 				<p id="companyName">${com.companyName }</p>
