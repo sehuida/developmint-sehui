@@ -78,10 +78,38 @@
 			$("#taskStartDate").val('');
 		});
 		
-		$(".modalIssueBtn").click(function(e){
-			e.stopPropagation();
-			e.stopPropagtion();
+		$(".modalIssueText").click(function(){
+			$(this).next().slideToggle("slow");
 		});
+		
+		$("button[name=cancelBtn1]").click(function(){
+			$(this).parent().parent().parent().hide();
+		});
+		
+		$(".modalLinkText").click(function(){
+			$(this).next().slideToggle("slow");
+		});
+		
+		$("button[name=cancelBtn2]").click(function(){
+			$(this).parent().parent().parent().hide();
+		});
+		
+		$("button[name=modalUpdateBtn]").click(function(){
+			$(this).parent().hide();
+			$(this).parent().prev().show();
+			$(this).parent().prev().prev().find("div.viewContent").hide();
+			$(this).parent().prev().prev().find("div.modalcontentBox").show();
+		});
+		$("button[name=cancelBtn3]").click(function(){
+			$(this).parent().hide();
+			$(this).parent().next().show();
+			$(this).parent().prev().find("div.viewContent").show();
+			$(this).parent().prev().find("div.modalcontentBox").hide();
+		});
+		
+		$(".modal").on("hidden.bs.modal", function(){
+			location.reload();
+	    });
 		
     });
 	
@@ -196,11 +224,11 @@
 	                                	<c:forEach items="${ptm }" var="ptm">
 		                                	<c:if test="${ptm.memberNo eq ptk.memberNo}">
 		                                		<c:choose>
-			                                		<c:when test="${ptm.memberNo eq null}">
-			                                			<img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 9px;">
+			                                		<c:when test="${ptm.memberImg eq null}">
+			                                			<img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 9px; margin-left: 5px;">
 			                                		</c:when>
 			                                		<c:otherwise>
-			                                			<img src="/resources/upload/member/${ptm.memberImg }" style="width: 40px; height: 40px; position: relative; bottom: 9px;">
+			                                			<img src="/resources/upload/member/${ptm.memberImg }" style="width: 40px; height: 40px; position: relative; bottom: 9px; margin-left: 5px;">
 			                                		</c:otherwise>
 			                                	</c:choose>
 		                                	</c:if> 
@@ -247,17 +275,20 @@
     </div>
     
     <c:forEach items="${ptk}" var="ptk">
-    	<div class="modal fade" id="${ptk.taskNo }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" z-index: 1050;>
+    	<div class="modal fade" id="${ptk.taskNo }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="max-width: 1200px; width: 1200px; display: table;">
             <div class="modal-content">
                 <div class="modal-body" >
                     <form action="/updateIssue.do" method="post">
+                    	<input type="hidden" name="taskType" value=1>
+                    	<input type="hidden" name="taskNo" value="${ptk.taskNo }">
+                    	<input type="hidden" name="projectNo" value=${ptk.projectNo }>
                         <div class="modalTitleFlexBox">
-                            <div class="modalLeftSite" style="margin-top: 10px;">
+                            <div class="modalLeftSite" style="margin-top: 30px; margin-left: 20px;">
                                 <p class="taskSubTitle">과업관리 / ${ptk.taskNo}</p>
                                 <p style="font-size: 25px; font-weight: bold; color: #90d1b4; ">${ptk.taskTitle}</p>
                             </div>
-                            <div class="modalRightSite" style="margin-right: 20px;">
+                            <div class="modalRightSite" style="margin-right: 30px; margin-top: 20px;">
                                 <a href="Javascript Void:(0);" data-bs-dismiss="modal" style="text-decoration: none;"><p style="font-size: 30px;">X</p></a>
                             </div>
                         </div>
@@ -265,16 +296,42 @@
                         <div class="modalFlexBox">
                             <div class="form-group" style="margin-bottom: 15px; width: 700px;">
                                 <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4; ">설명</label>
-                                <textarea class="form-control" id="summernote" rows="8" name="modalcontent"></textarea>
+                                <div class="viewContent">
+                                	<c:choose>
+										<c:when test="${ptk.taskContent ne null}">
+											<div class="card border-success mb-3">
+											  <div class="card-body">
+											    <p class="card-text">${ptk.taskContent}</p>
+											  </div>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="card border-success mb-3" style="height: 400px;">
+											  <div class="card-body">
+											    <p class="card-text"><p class="text-info">아래 글 입력 버튼을 눌러 글을 작성해주세요.</p></p>
+											  </div>
+											</div>
+										</c:otherwise>                                	
+                                	</c:choose>
+                                </div>
+                                <div class="modalcontentBox" style="display: none;">
+                                	<textarea class="form-control" id="summernote" rows="8" name="modalcontent" >${ptk.taskContent}</textarea>
+                                </div>
                             </div>
                             <div class="taskInfoBox">
                                 <div class="infoFlexArea">
                                     <div>
                                         <p class="taskInfoText">담당자</p>
                                     </div>
-                                    <div style="display: flex;">
-                                        <img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 10px; margin-right: 15px;">
-                                        <p class="taskInfoText">${ptk.memberId}</p>
+                                    <div class="form-group">
+                                        <select class="form-select" id="exampleSelect1" name="selectCharUser" >
+                                        		<option>${ptk.memberId}</option>
+                                        	<c:forEach items="${ptm}" var="ptm">
+                                        		<c:if test="${ptk.memberId ne ptm.memberId}">
+                                        			<option>${ptm.memberId}</option>
+                                        		</c:if>
+                                        	</c:forEach>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="infoFlexArea">
@@ -318,19 +375,14 @@
                                         		</c:when>
                                         		<c:when test="${ptk.processSort eq 2}">
 		                                            <option value=2>진행 중</option>
-                                        			<option value=1>해야 할 일</option>
 		                                            <option value=3>완료</option>
 		                                            <option value=4>보류</option>
                                         		</c:when>
                                         		<c:when test="${ptk.processSort eq 3}">
 		                                            <option value=3>완료</option>
-                                        			<option value=1>해야 할 일</option>
-		                                            <option value=2>진행 중</option>
-		                                            <option value=4>보류</option>
                                         		</c:when>
                                         		<c:when test="${ptk.processSort eq 4}">
 		                                            <option value=4>보류</option>
-                                        			<option value=1>해야 할 일</option>
 		                                            <option value=2>진행 중</option>
 		                                            <option value=3>완료</option>
                                         		</c:when>
@@ -340,9 +392,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="text-align: left; padding-top: 5px; margin-left: 20px;">
+                        <div style="text-align: left; padding-top: 5px; margin-left: 20px; display: none;" >
                             <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px; margin-right: 10px">저장</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
+                            <button type="button" class="btn btn-secondary" style="width: 100px;" name="cancelBtn3">취소</button>
+                        </div>
+                        <div style="text-align: left; padding-top: 5px; margin-left: 20px;">
+                        	<c:choose>
+                        		<c:when test="${ptk.taskContent ne null}">
+                        			<button type="button" class="btn btn-primary contesteEnrollBtn" style="width: 100px; margin-right: 10px" name="modalUpdateBtn">수정</button>
+                        		</c:when>
+                        		<c:otherwise>
+                        			<button type="button" class="btn btn-primary contesteEnrollBtn" style="width: 100px; margin-right: 10px" name="modalUpdateBtn">글 입력</button>
+                        		</c:otherwise>
+                        	</c:choose>
                         </div>
                     </form>
                     <div class="titleLine" style="width: 100%; margin-top: 20px;"></div>
@@ -351,7 +413,7 @@
                         <div class="issueForm">
                         <c:forEach items="${allP}" var="allP">
                             <c:if test="${allP.taskNo eq ptk.connectIssue}">
-                            <a data-bs-toggle="modal" href="#${ptkk.taskNo}" style="text-decoration: none;">
+                            <a data-bs-toggle="modal" href="#${ptk.taskNo}" style="text-decoration: none;">
                                 <div class="taskMeeting" style="border: 1px solid #90d1b4; width: 800px;">
                                     <div class="leftTaskSite">
 	                                    			<p class="taskNo">${allP.taskNo}</p>
@@ -392,7 +454,7 @@
 						                                	</c:choose>
 					                                	</c:if> 
 				                                	</c:forEach>
-			                                        <a href="/deleteConnectIssue.do?taskNo=${ptk.taskNo}&connectIssue=${${ptk.connectIssue}}" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+			                                        <a href="/deleteConnectIssue.do?taskNo=${ptk.taskNo}&connectIssue=$${ptk.connectIssue}" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
 			                                    </div>
 		                                	</div>
 		                           		 </a>
@@ -401,76 +463,70 @@
                        		 </div>
                     	</div>
                     <c:if test="${ptk.connectIssue eq null}">
-	                    <a data-bs-toggle="modal" href="#${ptkk.taskNo}issue" style="text-decoration: none;" class="modalIssueBtn"><p>+ 이슈 등록하기</p></a>
+	                    <p class="modalIssueText">+ 이슈 등록하기</p>
+	                    <div class="refIssueForm">
+	                    <div class="modalLine"></div>
+		                    <form action="/addIssue.do" method="post">
+		                        <div class="form-group">
+		                            <label for="exampleSelect1" class="form-label mt-4" style="font-weight: bold; color: #90d1b4;">등록할 이슈(최근 15개)</label>
+		                            <select class="form-select" id="exampleSelect1" name="connectIssue" style="width: 300px;">
+		                            <c:forEach items="${allPtk}" var="allP" end="15">
+		                            	<c:if test="${ptk.taskNo ne allP.taskNo }">
+		                            		<option value="${allP.taskNo}">${allP.taskNo}<span>${allP.taskTitle}</span></option>
+		                            	</c:if>
+		                            </c:forEach>
+		                            </select>
+		                        </div>
+		                        <div style="text-align: left; padding-top: 10px;">
+		                        	<input type="hidden" name="taskNo" value="${ptk.taskNo}">
+		                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">연결</button>
+		                            <button type="button" class="btn btn-secondary" style="width: 100px;" name="cancelBtn1">취소</button>
+		                        </div>
+		                    </form>
+	                    </div>
                     </c:if>
                     <div class="bottomLinkBox" style="margin-bottom: 50px; margin-top: 30px;">
                         <p class="modalBottomTitle">참고 링크</p>
                         <div class="issueForm">
-                        	<c:if test="${ptk.referLink ne null}">
+                        <c:forEach items="${tscList}" var="tsc">
+                        	<c:if test="${tsc.taskNo eq ptk.taskNo}">
 	                            <div class="taskMeeting" style="border: 1px solid #90d1b4; width: 800px;">
 	                                <div class="leftTaskSite">
-	                                    <p class="taskNo">${ptk.linkName}</p>
-	                                    <p class="taskTitle" style="margin-left: 35px;">${ptk.referLink}</p>
+	                                	<c:choose>
+			                    			<c:when test="${tsc.tsLinkName ne null}">
+							                    <a href="${tsc.tsLinkAddr}"><p class="taskNo">${tsc.tsLinkName}</p><p class="taskTitle" style="margin-left: 35px;">${tsc.tsLinkAddr}</p></a>
+			                    			</c:when>
+			                    			<c:otherwise>
+				                    			<a href="${tsc.tsLinkAddr}"><p class="taskNo">참고링크</p><p class="taskTitle" style="margin-left: 35px;">${tsc.tsLinkAddr}</p></a>
+			                    			</c:otherwise>
+			                    		</c:choose>
 	                                </div>
 	                                <div class="rightTaskSite">
 	                                    <a href="#" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
 	                                </div>
 	                            </div>
                         	</c:if>
+                        </c:forEach>
                         </div>
-                       <a data-bs-toggle="modal" href="#${ptkk.taskNo}link" style="text-decoration: none;"><p>+ 링크 등록하기</p></a>
+                      	<p class="modalLinkText">+ 링크 등록하기</p>
+                      	<div class="refLinkForm">
+                      		<div class="modalLine"></div>
+                      		<form action="/addIssue.do" method="post">
+		                        <div class="form-group" style="margin-bottom: 15px;">
+		                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">바로가기 이름</label>
+		                            <input type="text" class="form-control" placeholder="바로가기 이름을 입력해주세요" id="inputDefault" name="shortcutName" maxlength="10">
+		                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">웹 주소</label>
+		                            <input type="text" class="form-control" placeholder="웹 주소를 넣어주세요" id="inputDefault" name="shortcutAddr" >
+		                            <span style="color: red; font-size: 14px;">주의! 직접 입력하는 경우, 주소앞에 <b>http://</b> 또는 <b>https://</b> 를 붙여주세요!</span>
+		                        </div>
+		                        <div style="text-align: left; padding-top: 10px;">
+		                        	<input type="hidden" name="taskNo" value="${ptk.taskNo}">
+		                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">생성</button>
+		                            <button type="button" class="btn btn-secondary" style="width: 100px;" name="cancelBtn2">취소</button>
+		                        </div>
+		                    </form>
+                      	</div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="modal fade" id="${ptkk.taskNo}issue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" z-index: 1060;>
-        <div class="modal-dialog  modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <form action="/addIssue.do" method="post">
-                        <p style="font-size: 25px; font-weight: bold; color: #90d1b4; margin-bottom: 10px;">이슈 연결하기</p>
-                        <div class="form-group">
-                            <label for="exampleSelect1" class="form-label mt-4" style="font-weight: bold; color: #90d1b4;">등록 이슈(최근 15개)</label>
-                            <select class="form-select" id="exampleSelect1" name="connectIssue">
-                            <c:forEach items="allPtk" var="allP" end="15">
-                            	<c:if test="${ptk.taskNo ne allP.taskNo }">
-                            		<option value="${allP.taskNo}">${allP.taskNo}<span>${allP.taskTitle}</span></option>
-                            	</c:if>
-                            </c:forEach>
-                            </select>
-                        </div>
-                        <div style="text-align: right; padding-top: 10px;">
-                        	<input type="hidden" name="taskNo" value="${ptkk.taskNo}">
-                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">연결</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="${ptkk.taskNo}link" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <form action="/addIssue.do" method="post">
-                        <p style="font-size: 25px; font-weight: bold; color: #90d1b4; margin-bottom: 10px;">참고링크 만들기</p>
-                        <div class="form-group" style="margin-bottom: 15px;">
-                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">웹 주소</label>
-                            <input type="text" class="form-control" placeholder="웹 주소를 넣어주세요" id="inputDefault" name="shortcutAddr" >
-                            <span style="color: red; font-size: 14px;">주의! 직접 입력하는 경우, 주소앞에 <b>http://</b> 또는 <b>https://</b> 를 붙여주세요!</span>
-                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">바로가기 이름</label>
-                            <input type="text" class="form-control" placeholder="바로가기 이름을 입력해주세요" id="inputDefault" name="shortcutName" maxlength="10">
-                        </div>
-                        <div style="text-align: right; padding-top: 10px;">
-                        	<input type="hidden" name="taskNo" value="${ptkk.taskNo}">
-                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">생성</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -482,7 +538,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <form action="/addIssue.do" method="post" onsubmit="return checkValue();">
-                        <p style="font-size: 25px; font-weight: bold; color: #90d1b4; margin-bottom: 10px;" name="">Meeting 이슈 만들기</p>
+                        <p style="font-size: 25px; font-weight: bold; color: #90d1b4; margin-bottom: 10px;" name="">이슈 만들기</p>
                         <div class="form-group" style="margin-bottom: 15px;">
                             <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">제목 입력</label>
                             <input type="text" class="form-control" placeholder="제목을 입력해주세요" id="inputDefault" name="issueTitle"  maxlength="30" required="required">
