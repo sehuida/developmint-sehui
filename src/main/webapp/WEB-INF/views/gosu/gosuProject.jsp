@@ -157,16 +157,7 @@ input:focus, textarea:focus {
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-		<c:if test="${sessionScope.m.memberType eq 2}">
-			<div class="gosu-mail">
-				<a href="/gosuRequestList.do?reqPage=1">요청서</a>
-			</div>
-		</c:if>
-		<c:if test="${sessionScope.m.memberType eq 1}">
-			<div class="gosu-mail">
-				<a href="/gosuRequestCostList.do?reqPage=1">견적서</a>
-			</div>
-		</c:if>
+		
 
 		<div class="g-msg">
 			<c:if test="${sessionScope.m.memberType eq 1 }">
@@ -290,7 +281,7 @@ input:focus, textarea:focus {
 						<c:choose>
 							<c:when test="${not empty grrOne}">
 								<div
-									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
+									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 200px;">
 									<div>
 										<span
 											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">후기</span>
@@ -302,15 +293,9 @@ input:focus, textarea:focus {
 											</tr>
 											<tr>
 												<td><p
-														style="width: 800px; text-align: center; padding: 20px; border: 1px solid gray; margin: 20px; box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;">${grrOne.requestReviewContentBr }</p></td>
+														style="width: 800px; text-align: center; padding: 20px; border-radius:20px;  margin: 20px; box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;">${grrOne.requestReviewContentBr }</p></td>
 											</tr>
-											<tr>
-												<td style="text-align: right;"><button
-														id="requestReviewAjax" type="button"
-														class="btn btn-primary"
-														style="font-weight: 900; padding: 10px; margin-left: 10px;"
-														onclick="history.back();">뒤로가기</button></td>
-											</tr>
+										
 										</table>
 									</div>
 								</div>
@@ -328,7 +313,7 @@ input:focus, textarea:focus {
 						<c:choose>
 							<c:when test="${not empty grrOne}">
 								<div
-									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
+									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 200px;">
 									<div>
 										<span
 											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">작성한
@@ -340,22 +325,16 @@ input:focus, textarea:focus {
 											</tr>
 											<tr>
 												<td><p
-														style="width: 800px; padding: 20px; border: 1px solid gray; margin: 20px; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">${grrOne.requestReviewContentBr }</p></td>
+														style="width: 800px; padding: 20px; border-radius:20px;  margin: 20px; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">${grrOne.requestReviewContentBr }</p></td>
 											</tr>
-											<tr>
-												<td style="text-align: right;"><button
-														id="requestReviewAjax" type="button"
-														class="btn btn-primary"
-														style="font-weight: 900; padding: 10px; margin-left: 10px;"
-														onclick="history.back();">뒤로가기</button></td>
-											</tr>
+									
 										</table>
 									</div>
 								</div>
 							</c:when>
 							<c:otherwise>
 								<div
-									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
+									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 200px;">
 									<div>
 										<h2 style="font-weight: 900; width: 100%; text-align: center;">고수님께서
 											개발을 완료하셨습니다!</h2>
@@ -367,7 +346,7 @@ input:focus, textarea:focus {
 												<td>진행 과정과 받은 작품에 대해 꼼꼼하게 후기를 남겨주세요!</td>
 											</tr>
 											<tr>
-												<td><textarea cols="70" rows="10"
+												<td><textarea cols="70" rows="10"  class="form-control"
 														id="requestReviewContent" placeholder="내용을 입력해주세요."
 														style="padding: 20px;"></textarea></td>
 												<input type="hidden" value="${grpsOne.requestProjectSubNo}"
@@ -378,7 +357,7 @@ input:focus, textarea:focus {
 
 											</tr>
 											<tr>
-												<td style="text-align: right;"><button
+												<td style="text-align: right;padding-top: 20px;"><button
 														id="requestReviewAjax" type="button"
 														class="btn btn-primary"
 														style="font-weight: 900; padding: 10px; margin-left: 10px;">후기
@@ -406,7 +385,7 @@ input:focus, textarea:focus {
 					<div>
 						<table>
 							<tr>
-								<th colspan="2">첨부파일 &nbsp;&nbsp;&nbsp;&nbsp; <input
+								<th colspan="2">첨부파일 &nbsp;&nbsp;&nbsp;&nbsp; <input class="form-control" style="width: 300px;display: inline-block;"
 									type="file" id="talkFile"></th>
 
 							</tr>

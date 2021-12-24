@@ -82,7 +82,7 @@ input:focus, textarea:focus {
 }
 
 .g-content th {
-	background-color: rgb(209, 209, 209);
+	background-color: rgb(245, 	245, 245);
 }
 
 .gosu-mail {
@@ -111,16 +111,7 @@ input:focus, textarea:focus {
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-		<c:if test="${sessionScope.m.memberType eq 2}">
-			<div class="gosu-mail">
-				<a href="/gosuRequestList.do?reqPage=1">요청서</a>
-			</div>
-		</c:if>
-		<c:if test="${sessionScope.m.memberType eq 1}">
-			<div class="gosu-mail">
-				<a href="/gosuRequestCostList.do?reqPage=1">견적서</a>
-			</div>
-		</c:if>
+		
 		<h3>
 			<span style="color: rgb(78, 205, 196);">고수</span>에게 피드백 신청하기
 		</h3>
@@ -202,15 +193,15 @@ input:focus, textarea:focus {
 		</div>
 		<div class="g-content">
 			<div>
-				<table border="1">
+				<table>
 					<tr>
 						<th>제목 <span style="color: red;">* </span></th>
-						<td><input type="text" style="width: 100%;"
+						<td><input type="text" style="width: 100%;" class="form-control" placeholder=" * 제목을 적어주세요!"
 							id="gosuFeedbackTitle"></td>
 					</tr>
 					<tr>
 						<th>내용 <span style="color: red;"> * </span></th>
-						<td><textarea cols="100" rows="30" id="gosuFeedbackContent"
+						<td><textarea cols="100" rows="30" id="gosuFeedbackContent" class="form-control" 
 								placeholder=" * 피드백 받고 싶은 내용에 대해 자세하게 적어주세요!
                         
                         "></textarea></td>

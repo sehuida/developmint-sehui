@@ -273,7 +273,7 @@
 			}else{
 				 swal({
 					   title: "등록실패",
-					   text: "값을 전부입력해주세요.",
+					   text: "값을 전부입력해주세요!",
 					   icon: "error", //"info,success,warning,error" 중 택1
 					   button: "돌아가기",
 					})

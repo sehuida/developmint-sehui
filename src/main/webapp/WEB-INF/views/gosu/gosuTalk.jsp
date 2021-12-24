@@ -21,6 +21,7 @@
 
 .container {
 	min-width: 1200px;
+	margin-bottom: 100px;
 }
 
 input:focus, textarea:focus {
@@ -188,16 +189,7 @@ input:focus, textarea:focus {
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-		<c:if test="${sessionScope.m.memberType eq 2}">
-			<div class="gosu-mail">
-				<a href="/gosuRequestList.do?reqPage=1">요청서</a>
-			</div>
-		</c:if>
-		<c:if test="${sessionScope.m.memberType eq 1}">
-			<div class="gosu-mail">
-				<a href="/gosuRequestCostList.do?reqPage=1">견적서</a>
-			</div>
-		</c:if>
+		
 		<h3>
 			<c:choose>
 				<c:when test="${sessionScope.m.memberId ne gfOne.memberId}">
@@ -349,15 +341,11 @@ input:focus, textarea:focus {
 											</tr>
 											<tr>
 												<td colspan="3"
-													style="width: 800px; text-align: center; border: 1px solid #78c2ad; padding: 50px;">${greview.reviewContentBr }</td>
+													style="width: 800px; text-align: center; border-radius:20px;  padding: 50px;">${greview.reviewContentBr }</td>
 
 											</tr>
 										</table>
-										<div style="text-align: center;">
-											<button type="button" class="btn btn-primary"
-												style="font-weight: 900; padding: 10px; margin: 50px;"
-												onclick="history.back();">뒤로가기</button>
-										</div>
+										
 									</div>
 							</c:when>
 							<c:otherwise>
@@ -373,7 +361,7 @@ input:focus, textarea:focus {
 						<c:choose>
 							<c:when test="${not empty greview}">
 								<div
-									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 50px;">
+									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 200px;">
 									<div>
 										<span
 											style="font-size: 30px; font-weight: 900; color: rgb(78, 205, 196);">작성한
@@ -404,22 +392,18 @@ input:focus, textarea:focus {
 												<td>${greview.reviewDate }</td>
 
 											</tr>
-											<tr>
+											<tr style=" ">
 												<td colspan="2"
-													style="width: 800px; border: 1px solid #78c2ad; padding: 50px; box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2pX;">${greview.reviewContentBr }</td>
+													style="width: 800px;padding: 50px;border-radius:20px; box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2pX;">${greview.reviewContentBr }</td>
 
 											</tr>
 										</table>
-										<div style="text-align: center;">
-											<button type="button" class="btn btn-primary"
-												style="font-weight: 900; padding: 10px; margin: 50px;"
-												onclick="history.back();">뒤로가기</button>
-										</div>
+									
 									</div>
 							</c:when>
 							<c:otherwise>
 								<div
-									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 100px;">
+									style="display: flex; justify-content: center; margin-top: 100px; margin-bottom: 200px;">
 									<div>
 										<h2 style="font-weight: 900; width: 100%; text-align: center;">고수님께서
 											완료한 피드백입니다!</h2>
@@ -444,7 +428,7 @@ input:focus, textarea:focus {
 												</td>
 											</tr>
 											<tr>
-												<td><textarea cols="70" id="reviewContent"></textarea></td>
+												<td><textarea cols="70" id="reviewContent"  class="form-control"></textarea></td>
 												<td><button type="button" id="reviewSendAjax"
 														class="btn btn-primary"
 														style="font-weight: 900; padding: 10px; margin-left: 10px;">리뷰
@@ -475,7 +459,7 @@ input:focus, textarea:focus {
 					<div>
 						<table>
 							<tr>
-								<th colspan="2">첨부파일 &nbsp;&nbsp;&nbsp;&nbsp; <input
+								<th colspan="2">첨부파일 &nbsp;&nbsp;&nbsp;&nbsp; <input  class="form-control" style="width: 300px;display: inline-block;"
 									type="file" id="talkFile"></th>
 
 							</tr>

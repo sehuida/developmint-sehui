@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.announce.vo.Announce;
 import kr.or.announce.vo.ApplicationCompany;
+import kr.or.announce.vo.ApplicationCompanyPageData;
 import kr.or.member.model.vo.Member;
 import kr.or.resume.service.ResumeService;
 import kr.or.resume.vo.Resume;
@@ -98,15 +99,18 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="/applicationCompany.do")
-	public String applicationCompany(int memberNo, Model model) {
-		ArrayList<ApplicationCompany> list = service.selectAllAnnounce(memberNo);
+	public String applicationCompany(int memberNo, int reqPage, Model model) {
+		ApplicationCompanyPageData acpd = service.selectAllAnnounce(memberNo, reqPage);
+		/* ArrayList<ApplicationCompany> list = service.selectAllAnnounce(memberNo); */
 		int count = service.applicationCount(memberNo);
 		/* 이력서 내용 가져와야 할ㄹ 것 같은데 */
 		/* ArrayList<Resume> resumeList = service.select */
 		model.addAttribute("count", count);
-		model.addAttribute("list", list);
+		model.addAttribute("list", acpd.getList());
+		model.addAttribute("pageNavi", acpd.getPageNavi());
+		model.addAttribute("start", acpd.getStart());
 		System.out.println("count : "+ count);
-		System.out.println("list : "+ list);
+		System.out.println("list : "+ acpd.getList());
 		return "resume/applicationCompany";
 	}
 	
