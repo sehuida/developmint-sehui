@@ -787,6 +787,11 @@ public class GosuService {
 	}
 
 
+	@Transactional
+	public int insertGNComment(Comment cm) {
+		return dao.insertGNComment(cm);
+	}
+
 
 
 }

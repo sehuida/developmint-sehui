@@ -514,18 +514,6 @@ public class GosuController {
 		return "member/swalMsg";
 	}
 
-	@RequestMapping(value = "/gosuNoticeContent.do")
-	public String gosuNoticeContent(int gnn, Model model) {
-		GosuNotice gNotice = service.selectGosuNoticeOne(gnn);
-		Gosu gosuWriteList = service.selectgosuWriteList(gNotice.getWriteId());
-		ArrayList<Comment> commentList = service.selectGosuNoticeCommentList(gnn);
-		model.addAttribute("gNotice", gNotice);
-		model.addAttribute("gosuWriteList", gosuWriteList);
-		model.addAttribute("commentList", commentList);
-
-		return "gosu/gosuNoticeContent";
-	}
-
 	@RequestMapping(value = "/gosuRequest.do")
 	public String gosuRequest(Model model) {
 		GosuRequestCount grc = service.selectGosuCountRequestCount();
@@ -894,7 +882,34 @@ public class GosuController {
 		GosuRequest grcOne = service.gosuMemberRequestAjax(grc);
 		return grcOne;
 	}
+	
+	//댓글등록
+	@RequestMapping(value="/insertGNComment.do")
+	public String insertGNComment(Comment cm, Model model) {
+		int result = service.insertGNComment(cm);
+		if(result>0) {
+			return "redirect:/gosuNoticeContent.do?gnn="+cm.getBoardNo();
+		}else {
+			model.addAttribute("msg","댓글등록 실패");
+			model.addAttribute("loc","/gosuNoticeContent.do?gnn="+cm.getBoardNo());
+			return "common/msg";
+		}
+		
+	}
 
+	@RequestMapping(value = "/gosuNoticeContent.do")
+	public String gosuNoticeContent(int gnn, Model model) {
+		GosuNotice gNotice = service.selectGosuNoticeOne(gnn);
+		Gosu gosuWriteList = service.selectgosuWriteList(gNotice.getWriteId());
+		ArrayList<Comment> commentList = service.selectGosuNoticeCommentList(gnn);
+		model.addAttribute("gNotice", gNotice);
+		model.addAttribute("gosuWriteList", gosuWriteList);
+		model.addAttribute("commentList", commentList);
+
+		return "gosu/gosuNoticeContent";
+	}
+
+	
 	@RequestMapping(value = "/develomintIntro.do")
 	public String develomintIntro() {
 		return "gosu/develomintIntro";

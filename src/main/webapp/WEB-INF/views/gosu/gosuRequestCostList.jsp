@@ -70,7 +70,7 @@ input:focus, textarea:focus {
     transform: scale(1.03);
 }
 
-.upbtn>button {
+.upbtn {
 	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 }
 
@@ -221,10 +221,6 @@ input:focus, textarea:focus {
 	border-radius: 30px;
 }
 
-}
-.g-req-box ul {
-	
-}
 
 .g-req-box li {
 	padding: 10px;
@@ -358,7 +354,7 @@ input:focus, textarea:focus {
 
 				</div>
 				<div class="req-btn-wrap">
-					<a id="req-close" class="btn btn-outline-success">확인</a>
+					<a id="req-close" class="btn btn-outline-success upbtn">확인</a>
 				</div>
 			</div>
 		</div>

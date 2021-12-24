@@ -360,6 +360,9 @@ public class GosuDao {
 		return sqlSession.selectOne("gosu.selectGosuRequestListCount",memberNo);
 	}
 
+	public int insertGNComment(Comment cm) {
+		return sqlSession.insert("gosu.insertGNComment",cm);
+	}
 
 
 }

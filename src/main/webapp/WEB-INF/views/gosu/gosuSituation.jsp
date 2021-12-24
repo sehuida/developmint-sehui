@@ -207,8 +207,8 @@
 			</c:when>
 			<c:otherwise>
 				<span
-					style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">아직
-					신청한 내역이 없습니다!</span>
+					style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">
+					신청한 내역이 없습니다.</span>
 			</c:otherwise>
 			</c:choose>
 		</div>
@@ -289,8 +289,8 @@
 			<c:otherwise>
 
 				<span
-					style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">아직
-					신청받은 내역이 없습니다!</span>
+					style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">
+					신청받은 내역이 없습니다.</span>
 			</c:otherwise>
 			</c:choose>
 	</div>
@@ -329,8 +329,8 @@
 		<c:otherwise>
 			<div class="g-margin">
 				<span
-					style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">아직
-					작성하신 리뷰가 없습니다!!</span>
+					style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">
+					작성하신 리뷰가 없습니다.</span>
 			</div>
 		</c:otherwise>
 	</c:choose>
@@ -360,8 +360,8 @@
 			<c:otherwise>
 				<div class="g-margin">
 					<span
-						style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">아직
-						작성하신 후기가 없습니다!</span>
+						style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">
+						작성하신 후기가 없습니다.</span>
 				</div>
 			</c:otherwise>
 		</c:choose>
@@ -376,12 +376,12 @@
 					<c:when test="${sessionScope.m.memberType eq 1}">
 						<span
 							style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">요청서를
-							작성해보세요!!</span>
+							작성해보세요.</span>
 					</c:when>
 					<c:when test="${sessionScope.m.memberType eq 2}">
 						<span
 							style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">상단의
-							요청서 버튼을 눌러 견적서를 보내보세요!</span>
+							요청서 버튼을 눌러 견적서를 보내보세요.</span>
 					</c:when>
 					<c:otherwise>
 						<span
