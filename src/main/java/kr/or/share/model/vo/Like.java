@@ -7,4 +7,5 @@ public class Like {
 	private int likeNo;
 	private int boardNo;
 	private int memberNo;
+	private String boardWriter;
 }

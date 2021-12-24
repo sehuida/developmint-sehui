@@ -150,4 +150,10 @@
    <delete id="deleteLike" parameterType="lk">
    		delete from likes where board_no=#{boardNo} and member_no=#{memberNo}
    </delete>
+   <update id="addLikePoints" parameterType="lk">
+   		update member set member_grade = member_grade+1 where member_id=#{boardWriter}
+   </update>
+   <update id="minusLikePoints" parameterType="lk">
+   update member set member_grade = member_grade-1 where member_id=#{boardWriter}
+   </update>
 </mapper>
