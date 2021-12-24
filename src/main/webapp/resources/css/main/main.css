@@ -506,3 +506,7 @@ overflow: hidden;
     bottom: 2rem;
     right: 1.5rem;
 }
+.wrapPoject_wrap a:hover {
+	-webkit-transform: scale(1.02);
+    transform: scale(1.02);
+}
