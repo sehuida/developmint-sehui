@@ -338,8 +338,11 @@ public class AdminController {
 			return "common/msg";
 		}
 		
-		
-		
+		//제휴회사 등록 페이지로 이동
+		@RequestMapping(value="/addCompany2.do")
+		public String addCompany() {
+			return "member/addCompany";
+		}
 
 
 }
