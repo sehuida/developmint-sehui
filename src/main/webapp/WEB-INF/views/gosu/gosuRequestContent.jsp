@@ -128,7 +128,7 @@ input:focus, textarea:focus {
 			요청서
 		</h3>
 		<div class="request">
-			<div class="card border-primary mb-3" style="box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);">
+			<div style="box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);">
 				<ul style="padding: 0;">
 					<li>
 						<h3>어떤 플랫폼을 원하시나요?</h3> ${grOne.requestContent1Br} <br>

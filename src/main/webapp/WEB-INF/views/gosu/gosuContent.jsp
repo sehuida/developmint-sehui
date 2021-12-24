@@ -61,8 +61,8 @@
 }
 
 .gosu-photos ul li img {
-	width: 120px;
-	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+	width: 100px;
+	height: 100px;
 }
 
 .container>div>div>div {
@@ -310,28 +310,28 @@
 
 							<c:if test="${empty gosu.gosuImg }">
 								<th rowspan="6" style="padding: 40px; padding-right: 100px;"><img
-									src="/resources/img/gosu/g_img_basic.png" style="width: 250px;"></th>
+									src="/resources/img/gosu/g_img_basic.png" style="width: 250px; box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);"></th>
 							</c:if>
 							<c:if test="${not empty gosu.gosuImg }">
 								<th rowspan="6" style="padding: 40px; padding-right: 100px;"><img
 									src="/resources/upload/member/${gosu.gosuImg }"
-									style="width: 250px; height: 250px;"></th>
+									style="width: 250px; height: 250px; box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);"></th>
 							</c:if>
 						</tr>
 						<tr>
 							<td><span>고수</span> ${gosu.gosuId }</td>
 						</tr>
 						<tr>
-							<td style="font-size: 25px;">${gosu.gosuTitle }</td>
+							<td style="font-size: 25px;	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);padding:10px;">${gosu.gosuTitle }</td>
 						</tr>
 						<tr>
 							<td><hr></td>
 						</tr>
 						<tr>
-							<td>한 줄 소개</td>
+							<td style="color: gray;">한 줄 소개</td>
 						</tr>
 						<tr>
-							<td style="font-size: 25px;">${gosu.gosuSelf }</td>
+							<td style="font-size: 20px;">${gosu.gosuSelf }</td>
 						</tr>
 					</table>
 				</div>
@@ -349,7 +349,8 @@
 						<ul>
 							<c:forEach items="${gphotoList }" var="gph" varStatus="i">
 
-								<li><a><img src="${gph.photoFilepath }"></a></li>
+								<li style="
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);height: 120px;line-height: 120px;"><a><img src="${gph.photoFilepath }"></a></li>
 							</c:forEach>
 						</ul>
 					</div>
