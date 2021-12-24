@@ -28,7 +28,7 @@
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid" style="margin-left: 300px;">
+  <div class="container-fluid" style="padding-left: 300px;">
     <a class="navbar-brand mx-auto" href="/"><img src="/resources/img/logo/Develomint_logo.png" style="height: 50px"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
