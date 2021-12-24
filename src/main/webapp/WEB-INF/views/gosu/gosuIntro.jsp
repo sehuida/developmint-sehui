@@ -74,7 +74,11 @@
 }
 
 .container-fluid{
-	margin-left: 0 !important;
+	padding-left: 0 !important;
+}
+.bg-light{
+	background-color: white !important;
+	--bs-bg-opacity :0 !important;
 }
 
 
@@ -165,7 +169,7 @@ html, body {
 				</ul>
 			</div>
 			<div><br><br><br>
-					<img class="g-img" src="/resources/img/gosu/gosu_img1.JPG">
+					<img class="g-img" src="/resources/img/gosu/gosu_img1.PNG">
 			</div>
 
 		</div>
