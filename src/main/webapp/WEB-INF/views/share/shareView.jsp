@@ -94,6 +94,10 @@
 	.recommentForm{
 		display: none;
 	}
+	.modal-btns{
+		display: flex;
+		justify-content: space-between;
+	}
 </style>
 </head>
 <body>
@@ -159,10 +163,15 @@
 							      	<p><span>수신자</span> : ${sv.memberId }</p>
 							      	<textarea rows="3" style="width:100%" class="form-control" id="dmContent"></textarea>
 						      	</div>
-						      	<div style="text-align: right;">
-						      		<button type="button" class="btn btn-secondary" id="send" style="width: 100px;">전송</button>
-						        	<button type="button" class="btn btn-primary " id="cancel" style="width: 100px;" data-bs-dismiss="modal">취소</button>					        	
-								</div>
+						      	<div class="modal-btns">
+							      	<div>
+							      		<span class="text-danger text_cnt" >(0 / 100)</span>
+							      	</div>						      	
+							      	<div>
+							      		<button type="button" class="btn btn-secondary send" style="width: 100px;">전송</button>
+							        	<button type="button" class="btn btn-primary " id="cancel" style="width: 100px;" data-bs-dismiss="modal">취소</button>					        	
+									</div>
+						      	</div>
 								<input type="hidden" id="receiver" value="${sv.memberId }">
 								<input type="hidden" id="sender" value="${sessionScope.m.memberId }">
 					      </div>
@@ -175,7 +184,7 @@
 				${sv.boardContent }
 			</div>
 			<div class="likeBtn">
-			  <c:if test="${not empty sessionScope.m }">
+			  <c:if test="${sessionScope.m.memberId ne sv.memberId }">
 				  <button type="button" class="btn btn-primary likesBtn"><i class="bi bi-hand-thumbs-up-fill"></i>좋아요</button>			  
 			  </c:if>
 			  <c:if test="${sessionScope.m.memberId eq sv.memberId}">
@@ -489,10 +498,11 @@
 		var memberNo = '${sessionScope.m.memberNo}';
 		var boardNo = '${sv.boardNo }';
 		var likeVal = Number($(".likeIcon").html());
+		var boardWriter = '${sv.memberId}';
 		$.ajax({
 			type: "POST",
 			url : "/shareLike.do",
-			data : {memberNo:memberNo , boardNo:boardNo},
+			data : {memberNo:memberNo , boardNo:boardNo ,boardWriter:boardWriter },
 			success : function(data){
 				if(data==2){
 					//하트 채운하트
@@ -528,6 +538,21 @@
 				}
 			});			
 		}
+		//쪽지 글자수 check
+		$("#dmContent").on('keyup change paste', function() {
+			var dmContent = $("#dmContent").val();
+	        $('.text_cnt').html("("+$(this).val().length+" / 100)");
+	        
+	        if($(this).val().length > 100) {
+	        	swal({
+	                title: '글자수는 100자 제한입니다!',
+	                icon: 'error',
+	                button: '돌아가기'
+	              })
+		        $(this).val($(this).val().substring(0, 100));
+	            $('.text_cnt').html("(100 / 100)");	
+	        }
+	    });
 	});
 	$("#send").click(function () {
 		

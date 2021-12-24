@@ -104,7 +104,7 @@
 }
 
 .gosu-write {
-	border: 1px solid rgb(190, 190, 190);
+		box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
 	padding: 40px;
 	text-align: center;
 	justify-content: right;
@@ -157,35 +157,29 @@
 	display: flex;
 	justify-content: center;
 }
+.op-st:focus{outline:none;}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-		<c:if test="${sessionScope.m.memberType eq 2}">
-			<div class="gosu-mail">
-				<a href="/gosuRequestList.do?reqPage=1">요청서</a>
-			</div>
-		</c:if>
-		<c:if test="${sessionScope.m.memberType eq 1}">
-			<div class="gosu-mail">
-				<a href="/gosuRequestCostList.do?reqPage=1">견적서</a>
-			</div>
-		</c:if>
+		
 		<h3>
 			<span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다
 		</h3>
 		<div class="g-msg">
 			고수에게 피드백을 신청해보세요!<br> 당신의 작품을 평가해줍니다. 마음껏 질문하세요!
 		</div>
+
+	
 		<div class="gosu-search">
-			<input type="text" id="search-content" placeholder="내용을 입력해주세요">
-			<select name="type">
-				<option value="" selected disabled hidden>선택</option>
-				<option value="title">제목</option>
-				<option value="content">내용</option>
+			<input type="text" id="search-content" placeholder="내용을 입력해주세요" class="form-control">
+			<select name="type" class="nav-link dropdown-toggle op-st" style="border:1px solid #78c2ad;border-radius: 10px;">
+				<option class="dropdown-item" value="" selected disabled hidden>선택</option>
+				<option class="dropdown-item" value="title" style="color:#78c2ad;">제목</option>
+				<option class="dropdown-item" value="content" style="color:#78c2ad;">내용</option>
 			</select>
-			<button type="button" class="btn btn-primary"
-				style="padding: 15px; margin-left: 5px; margin-bottom: 5px; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;"
+			<button type="button" class="btn btn-primary form-control" 
+				style="padding: 7px; margin-left: 15px; width: 50px;"
 				onclick="getSearchList();">검색</button>
 		</div>
 		<c:if test="${sessionScope.m.memberType eq 2}">
@@ -203,12 +197,13 @@
 				if (itest == 0) {
 			%>
 			<div class="gosu-write-wrap">
-				<div class="gosu-write">
-					<h5 style="font-size: small; color: gray;">
+				<div class="gosu-write card border-light mb-3">
+					<h5 style="font-size: 15px; color: #3c3c3c;">
 						고수님의 능력을<br> 마음껏 펼쳐주세요!
 					</h5>
-					<a href="/gosuWriteFrm.do" class="btn btn-primary"
-						style="font-weight: bold;">작성하기</a>
+					<a href="/gosuWriteFrm.do" class="btn btn-primary form-control" style="
+		box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;"
+						>작성하기</a>
 				</div>
 			</div>
 			<%
@@ -234,6 +229,7 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${gList }" var="g" varStatus="i">
+						<a href="/gosuContent.do?gNo=${g.ggsouNo}">
 						<div class="gosu">
 							<button type="button" class="card border-primary mb-3"
 								style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;">
@@ -306,6 +302,7 @@
 								</table>
 							</button>
 						</div>
+						</a>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>

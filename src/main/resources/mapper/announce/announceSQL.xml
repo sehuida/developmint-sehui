@@ -169,8 +169,11 @@
 	</select>
 	
 	<select id="selectApplyAnnounce" parameterType="map" resultType="al">
-		select * from
-		(select rownum as rnum , r.*
+	 select * from
+		(select rownum as rnum , rrr.*
+		from (
+select * from
+		(select r.*
 		from (
         select
             app_no as appNo,
@@ -182,8 +185,9 @@
             resume_no as resumeNo
         from application a
         join resume re using(resume_no)
-        order by 1 desc )r)rr
-        where rnum between #{start} and #{end} and (status = 1 or status = 2) and announceNo = #{announceNo}
+        order by status)r)rr)rrr
+        where (status = 1 or status = 2) and announceNo = #{announceNo})
+        where rnum between #{start} and #{end}
 	</select>
 	
 	<select id="selectApplyAnnounceCount" parameterType="_int" resultType="_int">
@@ -236,4 +240,12 @@
 		from company
 		where company_no = #{companyNo}
 	</select>
+	
+	<update id="okAnnounce" parameterType="al">
+		update application set status = 2 where app_no = #{appNo} and member_no = #{memberNo}
+	</update>
+	
+	<update id="noAnnounce" parameterType="map">
+		update application set status = 3 where app_no = #{appNo} and member_no = #{memberNo}
+	</update>
 </mapper>

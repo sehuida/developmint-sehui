@@ -223,4 +223,7 @@
   		com_no as comNo
   from member where member_type= 3 and com_no=#{comNo}
   </select>
+  <insert id="addCompany" parameterType="com">
+  	insert into company values(company_seq.nextval,#{companyName},#{openDate},#{employee},#{category},#{ceo},#{address},#{content},#{businessNo},#{filePath})
+  </insert>
 </mapper>

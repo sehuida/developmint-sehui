@@ -160,22 +160,16 @@
 			var typeVal = $("#boardType").val();
 			var titleVal = $("#boardTitle").val();
 			var contentVal = $("#boardContent").val();
-			
-			
-			console.log(typeVal);
-			console.log(titleVal);
-			console.log(contentVal);
-			console.log(contentVal.length);
-			
+			console.log(contentVal);						
 			if(typeVal==""||titleVal==""||contentVal.length==0){
 				 swal({
 					   title: "등록실패",
 					   text: "입력값을  다시 확인해주세요.",
 					   icon: "warning", //"info,success,warning,error" 중 택1
-					   button: "돌아가기",
+					   button: "돌아가기"
 					})
 				 return false;				
-			}else{
+			} else{				
 				$("form").submit();
 			}
 		});

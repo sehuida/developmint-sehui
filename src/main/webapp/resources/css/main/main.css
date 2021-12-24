@@ -432,3 +432,81 @@ overflow: hidden;
 	top: -4px;
 	cursor: pointer;
 }
+
+
+/*----프로젝트*/
+.wrapPoject_wrap{
+	margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+}
+.wrapPoject{
+	display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    list-style: none;
+}
+.pojrect_item{
+	width: 15rem;
+    height: 15rem;
+    margin: 0.625rem;
+    padding: 1.5rem;
+    background: #fff;
+    box-shadow: 0 5px 25px rgb(0 0 0 / 15%);
+    border-radius: 1.5rem;
+    position: relative;
+    cursor: pointer;
+    transition: -webkit-transform .2s ease-in;
+    transition: transform .2s ease-in;
+    transition: transform .2s ease-in,-webkit-transform .2s ease-in;
+}
+.pojrect_item h1{
+	font-size: 1.1rem;
+    font-weight: 800;
+    width: 100%;
+    text-align: center;
+    margin: 1.2rem 0 0;
+    padding: 0;
+    line-height: 1.265;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    word-break: break-all;
+}
+.pojrect_item ul{
+	margin: 0.5rem 0 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+}
+.pojrect_item ul li{
+	display: flex;
+    flex-direction: column;
+    margin-top: 0.75rem;
+    padding: 5px;
+}
+.pojrect_item ul li img {
+    width: 45px;
+    height: 45px;
+}
+.pojrect_item>ul>li>p{
+	margin: 0;
+    text-align: center;
+    font-size: 12px;
+}
+.countBox{
+	display: flex;
+    /* font-size: .75rem; */
+    position: absolute;
+    bottom: 2rem;
+    right: 1.5rem;
+}
+.wrapPoject_wrap a:hover {
+	-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
