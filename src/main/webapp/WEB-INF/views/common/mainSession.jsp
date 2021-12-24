@@ -94,6 +94,9 @@
 	</div>
 	<div class="container" style="margin-bottom: 20px;">
 		<!-- 최신순 프로젝트 리스트 8개 출력 -->
+			<div  style="margin: 30px auto;">
+				<span class="subEngTitel">NEW</span> <span class="subTitel">최신 모집순</span><a href="/recruitTeamMember_mainPage.do?reqPage=1" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
+			</div>
 			<div class="wrapPoject_wrap">
 			<c:forEach items="${ptlist }" var="pt" varStatus="mi">
 				<a href="/selectOneNotice.do?projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" style="text-decoration: none;">
