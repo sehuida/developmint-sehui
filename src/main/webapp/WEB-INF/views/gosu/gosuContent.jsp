@@ -423,10 +423,11 @@
 														<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
 													</c:if></li>
 												<li>${grl.reviewDate }</li>
+											
 											</ul>
 											<br>
-											<div style="display: flex; justify-content: center;">
-												<p>${grl.reviewContentBr }</p>
+											<div>
+												<p style="padding:5px;padding-left: 50px;padding-right: 30px;">${grl.reviewContent}</p>
 											</div>
 										</div>
 									</c:forEach>
@@ -460,8 +461,8 @@
 												<li style="color: gray;">${grl.requestReviewDate }</li>
 											</ul>
 											<br>
-											<div style="display: flex; justify-content: center;">
-												<p>${grl.requestReviewContentBr }</p>
+											<div >
+												<p style="padding:5px;padding-left: 50px;padding-right: 30px;"> ${grl.requestReviewContent }</p>
 											</div>
 										</div>
 									</c:forEach>
@@ -567,7 +568,8 @@
 			function showImage(fileCallPath){
 			    
 			    $(".bigPictureWrapper").css("display","flex").show();
-			    
+			    $('body').css("overflow", "hidden");
+			    $('.bigPicture').css("overflow", "scroll");
 			    $(".bigPicture")
 			    .html("<img src='"+fileCallPath+"' >")
 			    .animate({width:'100%', height: '100%'}, 0);
@@ -579,12 +581,14 @@
 			    setTimeout(function(){
 			      $('.bigPictureWrapper').hide();
 			    }, 10);
+			    $('body').css("overflow", "scroll");
 			  });//end bigWrapperClick event
 			$(".bigPictureWrapper").on("click", function(e){
 			    $(".bigPicture").animate({width:'0%', height: '0%'}, 0);
 			    setTimeout(function(){
 			      $('.bigPictureWrapper').hide();
 			    }, 10);
+			    $('body').css("overflow", "scroll");
 			  });
 		});
 		$("#hrm-close").click(function() {
