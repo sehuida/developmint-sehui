@@ -126,6 +126,14 @@ public class AnnounceService {
 		return dao.selectComNo(memberNo);
 	}
 
+	public int okAnnounce(AnnounceList al) {
+		return dao.okAnnounce(al);
+	}
+
+	public int noAnnounce(int memberNo, int appNo) {
+		return dao.noAnnounce(memberNo, appNo);
+	}
+
 	/*
 	 * public int selectResumeNo(int announceNo) { return
 	 * dao.selectResumeNo(announceNo); }

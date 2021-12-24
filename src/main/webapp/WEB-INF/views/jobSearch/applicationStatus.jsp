@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
 	.applyResume{
@@ -22,7 +25,67 @@
 		justify-content: center;
 		margin: 50px 0px;
 	}
+	.memberBox{
+			width: 300px;
+			height: 250px;
+			padding: 20px 30px;
+			border: 1px solid gray;
+			display: inline-block;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.okNo{
+			text-align: center;
+		}
+		.resumeTitle{
+			width: 208px;
+			text-overflow: ellipsis;
+			font-size: 18px;
+		}
 </style>
+<script>
+$(function(){
+	
+
+	//합격 클릭 시
+	$(".enrollBtn").click(function(){
+		var index = $(".enrollBtn").index(this);
+		swal({
+			title: "이력서 합격",
+			text: "선택한 이력서를 합격하시겠습니까?",
+			icon: "success",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+				$(".enrollForm").eq(index).submit();	
+			}
+		});
+	})
+
+	//탈락 클릭 시
+	$(".noEnrollBtn").click(function(){
+		var index = $(".noEnrollBtn").index(this);
+		var memberNo = $("[name=memberNo]").eq(index).val();
+		var appNo = $("[name=appNo]").eq(index).val();
+		var announceNo = $("[name=announceNo]").eq(index).val();
+		swal({
+			title: "이력서 탈락",
+			text: "선택한 이력서를 탈락 처리하시겠습니까?",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+				location.href="/noAnnounce.do?memberNo="+memberNo+"&appNo="+appNo+"&announceNo="+announceNo;	
+			}
+		});
+	})
+});
+</script>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="container" style="margin-top:50px;margin-bottom:100px;">
@@ -57,27 +120,6 @@
 				</div>
 			</c:forEach> --%>
 			
-			<style>
-				.memberBox{
-					width: 300px;
-					height: 250px;
-					padding: 20px 30px;
-					border: 1px solid gray;
-					display: inline-block;
-					overflow: hidden;
-					text-overflow: ellipsis;
-					white-space: nowrap;
-				}
-				.okNo{
-					text-align: center;
-				}
-				.resumeTitle{
-					width: 208px;
-					text-overflow: ellipsis;
-					font-size: 18px;
-				}
-			</style>
-			
 			<!-- 수현누나꺼 가져온거 화면 다시구성해야해 -->
 			<c:choose>
 			<c:when test="${not empty list }">
@@ -88,23 +130,31 @@
 								<a href="/rView.do?resumeNo=${a.resumeNo }" target="_blank"><strong class="resumeTitle">${a.resumeTitle }</strong></a>
 							
 							<div class="infoBox">
-								 <span class="infoTitle"><i class="bi bi-person-fill" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>회원이름 : </span><span>${memlist[i.index].memberName }</span><br>
-								 <span class="infoTitle"><i class="bi bi-envelope" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>이메일 : </span><span>${memlist[i.index].email }</span><br>
-								 <span class="infoTitle"><i class="bi bi-app" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>상태 : </span><span>
-								 <c:if test="${a.status eq 1 }">
-								 	지원중
-								 </c:if>
-								 <c:if test="${a.status eq 2 }">
-								 	합격
-								 </c:if>
-								 <c:if test="${a.status eq 3 }">
-								 	탈락
-								 </c:if>
-								 </span><br>
+								<form action="/okAnnounce.do" class="enrollForm">
+									 <span class="infoTitle"><i class="bi bi-person-fill" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>회원이름 : </span><span>${memlist[i.index].memberName }</span><br>
+									 <span class="infoTitle"><i class="bi bi-envelope" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>이메일 : </span><span>${memlist[i.index].email }</span><br>
+									 <span class="infoTitle"><i class="bi bi-app" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>상태 : </span><span>
+									 <c:if test="${a.status eq 1 }">
+									 	지원중
+									 </c:if>
+									 <c:if test="${a.status eq 2 }">
+									 	합격
+									 </c:if>
+									 <c:if test="${a.status eq 3 }">
+									 	탈락
+									 </c:if>
+									 </span><br>
+									 <input type="hidden" name="memberNo" value="${a.memberNo }">
+									 <input type="hidden" name="announceNo" value="${a.announceNo }">
+									 <input type="hidden" name="appNo" value="${a.appNo }">
+								 </form>
+								 
 							</div>
-							<div class="okNo">
-								<button class="btn btn-primary enrollBtn" style="margin-top: 20px; margin-right: 5px;">서류합격</button><button class="btn btn-secondary noEnrollBtn"  style="margin-top: 20px; margin-left: 5px;">탈락</button>
-							</div>
+							<c:if test="${a.status eq 1 }">
+								<div class="okNo">
+									<button class="btn btn-primary enrollBtn" style="margin-top: 20px; margin-right: 5px;">서류합격</button><button class="btn btn-secondary noEnrollBtn"  style="margin-top: 20px; margin-left: 5px;">탈락</button>
+								</div>
+							</c:if>
 						</div>
 					</c:forEach>
 				</div>
