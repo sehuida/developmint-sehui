@@ -66,7 +66,7 @@
       //정규표현식을 이용해서 형식에 맞게 check해줌
 
       //비밀번호
-      $("#memberPw").on("keyup", function(){
+      $("#memberPw").on("keyup change paste", function(){
             var pwReg = /^[a-zA-Z0-9]{8,}$/;
             var pwVal = $("#memberPw").val();
             var reVal = $("#memberPwRe").val();
@@ -124,7 +124,7 @@
           }
       });
       //이름
-      $("#memberName").on("keyup", function(){
+      $("#memberName").on("keyup change paste", function(){
             var nameReg = /^[가-힣]{2,6}$/;
             var nameVal = $("#memberName").val();
 
@@ -145,7 +145,7 @@
             }
           });
       //전화번호 중복체크
-      $("#phone").on("keyup", function(){
+      $("#phone").on("keyup change paste", function(){
         var phoneReg = /^010-([0-9]{4})-([0-9]{4})$/;
         var phoneVal = $("#phone").val();
 

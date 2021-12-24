@@ -302,11 +302,12 @@ to {
 }
 
 .gosu-write {
-	border: 1px solid rgb(190, 190, 190);
+
 	padding: 40px;
 	text-align: center;
 	justify-content: right;
 	background-color: white;
+		box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
 }
 
 .gosu-write a {
@@ -402,13 +403,14 @@ animation: motion 0.3s linear 0s infinite alternate;
 			고수를 찾아보세요!
 		</div>
 		<c:if test="${sessionScope.m.memberType eq 1}">
-			<div class="gosu-write-wrap">
-				<div class="gosu-write">
-					<h5 style="font-size: small; color: gray;">
+			<div class="gosu-write-wrap ">
+				<div class="gosu-write card border-light mb-3">
+					<h5 style="font-size: 15px; color: #3c3c3c;">
 						고수에게<br>개발을 요청하세요!
 					</h5>
-					<a href="/gosuRequest.do" class="btn btn-primary"
-						style="font-weight: bold;">요청서 작성하기</a>
+					<a href="/gosuRequest.do" class="btn btn-primary form-control"
+						style="
+		box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">요청서 작성하기</a>
 				</div>
 			</div>
 		</c:if>
