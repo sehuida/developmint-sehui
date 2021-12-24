@@ -158,4 +158,8 @@ public class MemberDao {
 		return sqlSession.selectOne("member.existCompany",m);
 	}
 
+	public int insertCompnay(Company com) {
+		return sqlSession.insert("member.addCompany",com);
+	}
+
 }

@@ -25,6 +25,7 @@ import kr.or.projectTeam.model.vo.ProjectTeamMember;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeComment;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeViewData;
 import kr.or.projectTeam.model.vo.Shortcuts;
+import kr.or.projectTeam.model.vo.TaskShortcuts;
 import kr.or.projectTeam.model.vo.UseDevelopLanguage;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
 import kr.or.projectTeam.model.vo.projectTeamMainPageData;
@@ -812,6 +813,11 @@ public class ProjectTeamService {
 		
 		projectTeamMainPageData ptmpd = new projectTeamMainPageData(list, pageNavi, start, pdLangList, developLangList, langList);
 		return ptmpd;
+	}
+
+	public ArrayList<TaskShortcuts> taskMShortcutList(int projectNo) {
+		ArrayList<TaskShortcuts> list= dao.taskMShortcutList(projectNo);
+		return list;
 	}
 
 	

@@ -462,5 +462,9 @@ public class MemberService {
 	public int announceNo(String comNo) {
 		return dao.announceNo(Integer.parseInt(comNo));
 	}
+	@Transactional
+	public int insertCompany(Company com) {
+		return dao.insertCompnay(com);
+	}
 	
 }

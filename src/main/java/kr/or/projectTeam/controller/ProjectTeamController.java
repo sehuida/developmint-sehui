@@ -46,6 +46,7 @@ import kr.or.projectTeam.model.vo.ProjectTeamMember;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeComment;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeViewData;
 import kr.or.projectTeam.model.vo.Shortcuts;
+import kr.or.projectTeam.model.vo.TaskShortcuts;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
 import kr.or.projectTeam.model.vo.projectTeamMainPageData;
 
@@ -793,14 +794,18 @@ public class ProjectTeamController {
 	  @RequestMapping(value="/enterProjectTaskM.do")
 		public String enterProjectTaskM(Model model, int projectNo, int reqPage) {
 		  	ProjectTaskViewData ptvd = service.enterProjectTaskM(projectNo, reqPage);
+		  	ArrayList<ProjectTask> allPtk = service.projectTaskList(projectNo);
 		  	ArrayList<Shortcuts> scList = service.shortcutList(projectNo);
+		  	ArrayList<TaskShortcuts> tscList = service.taskMShortcutList(projectNo);
 		  	model.addAttribute("ptk", ptvd.getTasklist());
+		  	model.addAttribute("ptkk", ptvd.getTasklist());
 			model.addAttribute("projectNo", projectNo);
 			model.addAttribute("pageNavi", ptvd.getPageNavi());
 			model.addAttribute("start", ptvd.getStart());
 			model.addAttribute("ptm", ptvd.getPtmList());
 			model.addAttribute("ptmGet0", ptvd.getPtmList().get(0));
 			model.addAttribute("scList", scList);
+			model.addAttribute("allPtk", allPtk);
 			return "recruitCrue/projectManageTaskM";
 		}
 	  
