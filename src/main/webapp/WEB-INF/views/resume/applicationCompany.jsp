@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Develomints 지원현황</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 </head>
 <style>
 	em{
@@ -16,13 +17,12 @@
 		color: #373f57;
 	}
 	.tabWrap {
-	    display: block;
-	    padding: 50px 20px 10px 0;
+		padding-left: 0px;
+	    display: inline-block;
 	    font-size: 20px;
 	    font-weight: bold;
 	    letter-spacing: -1px;
 	    line-height: 27px;
-	    margin-bottom: 30px;
 		list-style: none;
 	}
 	.tab{
@@ -51,9 +51,11 @@
 	}
 	.status{
 		overflow: hidden;
+		display: inline-block;
 	}
 	.stbtn{
 		float: left;
+		padding-top: 30px;
 	}
 	.listStatus{
 	}
@@ -76,25 +78,39 @@
 	#pageNavi{
     	display: flex;
     	justify-content: center;
-    	margin: 50px 0px;
+    	margin: 80px 0px;
+    }
+    .corp>a{
+    	text-decoration: none;
+    }
+    .announceTitle>a{
+    	text-decoration: none;
+    	color: #444444;
+    	font-size: 20px;
+    }
+    .accordion-body>a{
+    	padding: 5px 20px;
+    	text-decoration: none;
+		color: #444444;    	
     }
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 		<div class="container">
-			<em>입사지원 현황</em>
-			<ul class="tabWrap">
-        		<li class="select"><a href="#" class="tab">전체<span class="badge">${count }</span></a></li>
-    		</ul>
+			<div><em>입사지원 현황</em></div>
+			
     		
     		<div class="status">
 	            <div class="stbtn">
 	            	<button type="button" class="btn"><em>지원완료</em><span class="num">1</span></button>
 	            </div>
-	            <div class="stbtn">
+<!-- 	            <div class="stbtn">
 	            	<button type="button" class="btn"><em>최종발표</em><span class="num">0</span></button>
-	            </div>
-        	</div>
+	            </div> -->        	
+	        </div>
+	        <ul class="tabWrap">
+        		<li class="select"><a href="#" class="tab">전체<span class="badge">${count }</span></a></li>
+    		</ul>
         	
         	<hr>
         	
@@ -110,7 +126,7 @@
 						            <div class="date left">${a.applyDate }</div>
 						            <div class="summary left">
 						                <strong class="corp">
-			                            	<a href="#">${a.companyName }</a>
+			                            	<a href="/companyInfo.do?companyNo=${a.companyNo }">${a.companyName }</a>
 			                            </strong>
 			                			<div class="recruit">
 			                            	<span class="category">
@@ -127,10 +143,20 @@
 			                			</div>
 			            			</div>
 			            			<div class="announceTitle left">
-			            				<span>${a.announceTitle }</span>
+			            				<a href="/announceView.do?announceNo=${a.announceNo }&memberNo=${a.memberNo }"><span>${a.announceTitle }</span></a>
 			            			</div>
 			                        <div class="status left">
-			                    		<em class="appStatus">지원완료</em>
+			                    		
+			                    			<c:if test="${a.status eq 1 }">
+			                    				<em class="appStatus">지원완료	</em>
+			                    			</c:if>
+			                    			<c:if test="${a.status eq 2 }">
+			                    				<em class="appStatus" style="color: #4876ef;">서류합격</em>
+			                    			</c:if>
+			                    			<c:if test="${a.status eq 3 }">
+			                    				<em class="appStatus" style="color: red;">탈락</em>
+			                    			</c:if>
+			                    		
 			                        </div>
 						            <div class="btn" style="width: 180px;">
 				      					<div class="accordion" id="accordionExample" style="width: 180px; justify-content: center;">
@@ -147,10 +173,42 @@
 												<!-- 토글나오는애 -->
 										    	<div id="collapse${i.index }" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample" 
 										    	style="background-color: rgb(250, 250, 250);">
-											      	<div class="accordion-body">
-											        	<strong>이력서 정보 넣기</strong>
+											      	<div class="accordion-body" style="padding: 20px 200px;">
+											        	<span>지원한 이력서 : </span><a href="/resumeView.do?resumeNo=${a.resumeNo }" style="width: 300px; text-overflow: ellipsis; display: inline-block;"><strong >${a.resumeTitle }</strong></a>
+											        	<span style="margin-left: 50px;">경력 : 
+											        	<c:if test="${a.career eq 1 }">
+											        		신입
+											        	</c:if> 
+											        	<c:if test="${a.career eq 2 }">
+											        		경력
+											        	</c:if> 
+											        	</span>
+											        	<span style="margin-left: 150px;">희망연봉 : 
+											        		<c:if test="${a.money eq 1 }">
+											        			회사내규에 따름
+											        		</c:if>
+											        		<c:if test="${a.money eq 2 }">
+											        			2000만 ~ 2400만
+											        		</c:if>
+											        		<c:if test="${a.money eq 3 }">
+											        			2400만 ~ 2800만
+											        		</c:if>
+											        		<c:if test="${a.money eq 4 }">
+											        			2800만 ~ 3200만
+											        		</c:if>
+											        		<c:if test="${a.money eq 5 }">
+											        			3200만 ~ 3600만
+											        		</c:if>
+											        		<c:if test="${a.money eq 6 }">
+											        			3600만 ~ 4000만
+											        		</c:if>
+											        		<c:if test="${a.money eq 7 }">
+											        			4000만 이상
+											        		</c:if>
+											        	</span>
 											      	</div>
 										    	</div>
+										    	<br>
 						        <hr>
 			            	</div>
     					</form>

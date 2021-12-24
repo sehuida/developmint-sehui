@@ -249,13 +249,23 @@
 	select * from
 		(select rownum as rnum , r.*
 		from (
-	select 
+	select
+		announce_no as announceNo,
+        company_no as companyNo,
+        resume_no as resumeNo,
+        resume_title as resumeTitle,
+        r.career,
+        r.money,
+        status,
+        an.member_no as memberNo,
 	    company_name as companyName,
 	    announce_title as announceTitle,
-	    category,
+	    an.category,
 	    apply_date as applyDate
-	    from announcement
+	    from announcement an
     join application a using(announce_no)
+    join company c using(company_name)
+    join resume r using(resume_no)
     where a.member_no = #{memberNo}
     order by 1 desc )r)rr 
 	where rnum between #{start} and #{end}
