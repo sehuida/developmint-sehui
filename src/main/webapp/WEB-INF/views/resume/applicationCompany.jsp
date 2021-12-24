@@ -73,7 +73,11 @@
 	.announceTitle{
 		text-overflow:ellipsis;
 	}
-	
+	#pageNavi{
+    	display: flex;
+    	justify-content: center;
+    	margin: 50px 0px;
+    }
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -151,6 +155,7 @@
 			            	</div>
     					</form>
         			</c:forEach>
+        			<div id="pageNavi">${pageNavi }</div>
         		</c:otherwise>
         	</c:choose>
         	

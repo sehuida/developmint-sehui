@@ -245,8 +245,10 @@
 		where member_no = #{memberNo}
 	</select>
 	
-	<select id="selectAllAnnounce" parameterType="_int" resultType="ac">
-	<!-- <foreach collection="list" item="list" open="(" close=")" separator=","> -->
+	<select id="selectAllAnnounce" parameterType="map" resultType="ac">
+	select * from
+		(select rownum as rnum , r.*
+		from (
 	select 
 	    company_name as companyName,
 	    announce_title as announceTitle,
@@ -255,7 +257,8 @@
 	    from announcement
     join application a using(announce_no)
     where a.member_no = #{memberNo}
-	<!-- </foreach> -->
+    order by 1 desc )r)rr 
+	where rnum between #{start} and #{end}
 	</select>
 	
 	<delete id="deleteApplycation" parameterType="_int">

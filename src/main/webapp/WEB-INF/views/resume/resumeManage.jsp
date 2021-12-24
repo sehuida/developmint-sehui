@@ -482,7 +482,7 @@
 								</li>               
 							</ul>
 						<div class="message">
-							<a href="applicationCompany.do?memberNo=${sessionScope.m.memberNo }"><button class="companyMessage">지원한 회사 목록</button></a>		<!-- 웹소켓으로 기업이 이력서 확인 후 합격이면 쪽지 날라가게 만들기 -->
+							<a href="applicationCompany.do?memberNo=${sessionScope.m.memberNo }&reqPage=1"><button class="companyMessage">지원한 회사 목록</button></a>		<!-- 웹소켓으로 기업이 이력서 확인 후 합격이면 쪽지 날라가게 만들기 -->
 							<span class="requestCount">${appCount }</span>
 						</div>
 						<div class="update">

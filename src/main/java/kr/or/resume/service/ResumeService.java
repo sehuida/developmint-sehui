@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.or.announce.vo.Announce;
 import kr.or.announce.vo.AnnouncePageData;
 import kr.or.announce.vo.ApplicationCompany;
+import kr.or.announce.vo.ApplicationCompanyPageData;
 import kr.or.member.model.vo.Member;
 import kr.or.resume.dao.ResumeDao;
 import kr.or.resume.vo.Resume;
@@ -118,9 +119,56 @@ public class ResumeService {
 	}
 
 	/* 지원한 회사 리스트 가져오기 */
-	 public ArrayList<ApplicationCompany> selectAllAnnounce(int memberNo) {
-		 ArrayList<ApplicationCompany> list = dao.selectAllAnnounce(memberNo);
-		 return list; 
+	 public ApplicationCompanyPageData selectAllAnnounce(int memberNo, int reqPage) {
+		 int numPerPage = 5;
+			int end = reqPage * numPerPage;
+			int start = end - numPerPage + 1;
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("start", start);
+			map.put("end", end);
+			map.put("memberNo", memberNo);
+			ArrayList<ApplicationCompany> list = dao.selectAllAnnounce(map);
+			
+			int totalCount = dao.applicationCount(memberNo);
+			int totalPage = 0;
+			if(totalCount % numPerPage == 0) {
+				totalPage = totalCount / numPerPage;
+			} else {
+				totalPage = totalCount / numPerPage + 1;
+			}
+			
+			int pageNaviSize = 5;
+			int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
+			String pageNavi = "<ul class='pagination pagination-lg'>";
+			if(pageNo != 1) {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/applicationCompany.do?memberNo="+memberNo+"&reqPage="+(pageNo-1)+"'>";
+				pageNavi += "&lt;</a></li>";
+			}// 페이지 숫자
+			for(int i=0; i < pageNaviSize; i++) {
+				if(pageNo == reqPage) {
+					pageNavi += "<li class='page-item active'>";
+					pageNavi += "<a class = 'page-link' href='/applicationCompany.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
+					pageNavi += pageNo + "</a></li>";
+				} else {
+					pageNavi += "<li class='page-item'>";
+					pageNavi += "<a class = 'page-link' href='/applicationCompany.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
+					pageNavi += pageNo + "</a></li>";
+				}
+				pageNo++;
+				if(pageNo > totalPage) {
+					break;
+				}
+			}
+			// 다음 버튼
+			if(pageNo <= totalPage) {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/applicationCompany.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>";
+				pageNavi += "&gt;</a></li>";
+			}
+			pageNavi += "</ul>";
+			ApplicationCompanyPageData acpd = new ApplicationCompanyPageData(list, pageNavi, start);
+			return acpd;
 	 }
 	 
 	public int deleteResume(int resumeNo) {
