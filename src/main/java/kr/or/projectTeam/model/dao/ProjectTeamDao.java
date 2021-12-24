@@ -368,8 +368,8 @@ public class ProjectTeamDao {
 		return (ArrayList<ProjectTeam>) list;
 	}
 
-	public ArrayList<TaskShortcuts> taskMShortcutList(int projectNo) {
-		List<TaskShortcuts> list = sqlSession.selectList("projectTeam.taskMShortcutList");
+	public ArrayList<TaskShortcuts> taskShortcutList(int projectNo) {
+		List<TaskShortcuts> list = sqlSession.selectList("projectTeam.taskShortcutList", projectNo);
 		return (ArrayList<TaskShortcuts>) list;
 	}
 
@@ -384,10 +384,36 @@ public class ProjectTeamDao {
 	public int updateIssue(Map<String, Object> map) {
 		return sqlSession.update("projectTeam.updateIssue", map);
 	}
-	
-	
-	
-	
 
+	public int connectIssue(Map<String, Object> map) {
+		return sqlSession.update("projectTeam.connectIssue", map);
+	}
+
+	public int deleteConnectIssue(String taskNo) {
+		return sqlSession.update("projectTeam.deleteConnectIssue", taskNo);
+	}
+
+	public int connectLink(Map<String, Object> map) {
+		return sqlSession.insert("projectTeam.connectLink", map);
+	}
+
+	public int deleteConnectLink(int taskShortcutNo) {
+		return sqlSession.delete("projectTeam.deleteConnectLink", taskShortcutNo);
+	}
+
+	public int deleteTask(String taskNo) {
+		return sqlSession.delete("projectTeam.deleteTask", taskNo);
+	}
+
+	public ArrayList<ProjectTask> selectAllTaskMSelectList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int selectCheckTotalSelectCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	
 }

@@ -38,12 +38,15 @@ public class CompanyController {
 		String companyName = service.selectCompanyName(boardNo);
 		int result = service.insertCompanyComment(cm);
 		if(result>0) {
-			model.addAttribute("msg","댓글등록 완료");	
+			model.addAttribute("title","댓글등록 성공");
+			model.addAttribute("icon","success");
 		}else {
-			model.addAttribute("msg","댓글등록 실패");
+			model.addAttribute("title","댓글등록 실패");
+			model.addAttribute("icon","error");
 		}
 		model.addAttribute("loc","/companyInfo.do?companyNo="+boardNo);
-		return "common/msg";
+		
+		return "member/swalMsg";
 	}
 	
 	//댓글수정
@@ -52,12 +55,14 @@ public class CompanyController {
 		String companyName = service.selectCompanyName(boardNo);
 		int result = service.updateCompanyComment(cm);
 		if(result>0) {
-			model.addAttribute("msg","댓글수정 완료");	
+			model.addAttribute("title","댓글수정 성공");
+			model.addAttribute("icon","success");
 		}else {
-			model.addAttribute("msg","댓글수정 실패");
+			model.addAttribute("title","댓글수정 실패");
+			model.addAttribute("icon","error");
 		}
 		model.addAttribute("loc","/companyInfo.do?companyNo="+boardNo);
-		return "common/msg";
+		return "member/swalMsg";
 	}
 		
 	//댓글삭제
@@ -66,11 +71,13 @@ public class CompanyController {
 		String companyName = service.selectCompanyName(boardNo);
 		int result = service.deleteCompanyComment(cm);
 		if(result>0) {
-			model.addAttribute("msg","댓글삭제 완료");	
+			model.addAttribute("title","댓글삭제 성공");
+			model.addAttribute("icon","success");
 		}else {
-			model.addAttribute("msg","댓글삭제 실패");
+			model.addAttribute("title","댓글삭제 실패");
+			model.addAttribute("icon","error");
 		}
 		model.addAttribute("loc","/companyInfo.do?companyNo="+boardNo);
-		return "common/msg";
+		return "member/swalMsg";
 	}
 }

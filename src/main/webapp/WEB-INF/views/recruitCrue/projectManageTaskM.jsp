@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -26,6 +27,43 @@
 		$(".flexCLi").click(function(){
             $(".s-sub-menu").slideToggle("slow")
         });
+		
+		var viewValue = $(".clickCssKeeper").val();
+	    var checkValue = $(".checkCssKeeper").val();
+	    var pageProjectNo = $(".pageProjectNo").val();
+	    
+	    $(".rBox_Leftnavi_left").click(function(){
+	    	if($(".navi_checkbox").is(":checked")){
+				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=1&checkValue=2&projectNo="+pageProjectNo;
+			} else {
+				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=1&checkValue=1&projectNo="+pageProjectNo;
+			}
+	    });
+	    
+		$(".rBox_Leftnavi_middle").click(function(){
+			if($(".navi_checkbox").is(":checked")){
+				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=2&checkValue=2&projectNo="+pageProjectNo;
+			} else {
+				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=2&checkValue=1&projectNo="+pageProjectNo;
+			}
+		 });
+		
+		$(".rBox_Leftnavi_right").click(function(){
+			if($(".navi_checkbox").is(":checked")){
+				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=3&checkValue=2&projectNo="+pageProjectNo;
+			} else {
+				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=3&checkValue=1&projectNo="+pageProjectNo;
+			}
+		 });
+		
+		
+		$(".navi_checkbox").change(function(){
+			if($(".navi_checkbox").is(":checked")){
+				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=1&checkValue=2&projectNo="+pageProjectNo;
+			} else {
+				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=1&checkValue=1&projectNo="+pageProjectNo;
+			}
+		});
 		
 		if(checkValue == 1){
 	    	$(".navi_checkbox").prop("checked", false);
@@ -111,6 +149,36 @@
 			location.reload();
 	    });
 		
+		
+		$("button[name=connectIssueBtn]").click(function(){
+			var connectIssue = $(this).parent().prev().find("select.form-select").val();
+			var taskNo = $(this).prev().val();
+			var projectNo = $(".ajaxProjectNo").val();
+			$.ajax({
+				url : "/connectIssue.do",
+				type : "post",
+				data : {connectIssue : connectIssue, taskNo : taskNo},
+				success : function(data){
+					if(data =='-1'){
+						swal({
+		          			   title: "이슈연결에 실패 했습니다.",
+		          			   icon: "warning", //"info,success,warning,error" 중 택1
+		          			   button: "돌아가기"
+		          		});
+					}else{
+						swal({
+		          			   title: "이슈연결에 성공 했습니다.",
+		          			   icon: "success", //"info,success,warning,error" 중 택1
+		          			   button: "확인"
+		          		});
+						/* location.href="/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage=1"; */
+						$('#'+data).modal('hide');
+					}
+				}
+			});
+		});
+		
+		
     });
 	
 	function checkValue(){
@@ -125,6 +193,20 @@
 </head>
 <body>
 	<div class="container" id="projectContainer">
+	
+		<c:choose>
+           	<c:when test="${empty viewValue }">
+           		<input type="hidden" class="checkCssKeeper" value="1">
+           		<input type="hidden" class="clickCssKeeper" value="1">
+           	</c:when>
+           	<c:otherwise>
+           		<input type="hidden" class="checkCssKeeper" value="${checkValue }">
+           		<input type="hidden" class="clickCssKeeper" value="${viewValue }">
+           	</c:otherwise>
+        </c:choose>
+        
+        <input type="hidden" class="pageProjectNo" value="${projectNo}">
+		
         <div class="main">
         <div class="main-left-box">
                 <h2>${ptmGet0.projectName}</h2>
@@ -147,12 +229,24 @@
                     	<li class="flexLi">
                     		<c:choose>
                     			<c:when test="${sl.linkName ne null}">
-				                    <a href="${sl.linkAddr}" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg" style="width: 25px;"><span style="cursor: pointer; font-size: 13px;">${sl.linkName}</span></a>
-				                    <a href="/deleteShortcut.do?shortcutNo=${sl.shortcutNo}&projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" style="position: relative; top: 10px; text-decoration: none; margin-left: 30px;">X</a>
+                    				<div style="display: flex; justify-content: space-between">
+                    					<div>
+						                    <a href="${sl.linkAddr}" class="subNaviAtag" target="_blank"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg" style="width: 30px; position: relative; bottom: 3px; margin-right: 10px; margin-left: 5px;"><span style="cursor: pointer; font-size: 13px;">${sl.linkName}</span></a>
+                    					</div>
+                    					<div>
+						                    <a href="/deleteShortcut.do?shortcutNo=${sl.shortcutNo}&projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" style="text-decoration: none; margin-left: 30px;">X</a>
+                    					</div>
+                    				</div>
                     			</c:when>
                     			<c:otherwise>
-	                    			<a href="${sl.linkAddr}" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg" style="width: 25px;"><span style="cursor: pointer; font-size: 13px;">${sl.linkAddr}</span></a>
-	                    			<a href="/deleteShortcut.do?shortcutNo=${sl.shortcutNo}&projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" style="position: relative; top: 8px; text-decoration: none; margin-left: 30px;">X</a>
+                    				<div style="display: flex; justify-content: space-between">
+                    					<div>
+			                    			<a href="${sl.linkAddr}" class="subNaviAtag" target="_blank"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg" style="width: 30px; position: relative; bottom: 3px; margin-right: 10px; margin-left: 5px;"><span style="cursor: pointer; font-size: 13px;">${sl.linkAddr}</span></a>
+                    					</div>
+                    					<div>
+			                    			<a href="/deleteShortcut.do?shortcutNo=${sl.shortcutNo}&projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" style="text-decoration: none; margin-left: 30px;">X</a>
+                    					</div>
+                    				</div>
                     			</c:otherwise>
                     		</c:choose>
 	                    </li>
@@ -233,7 +327,7 @@
 			                                	</c:choose>
 		                                	</c:if> 
 	                                	</c:forEach>
-	                                    <a href="/deleteTask.do?taskNo=${ptk.taskNo}&taskType=1" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 3px;"></a>
+	                                    <a href="/deleteTask.do?taskNo=${ptk.taskNo}&projectNo=${projectNo}&taskType=1" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 3px;"></a>
 	                                </div>
 	                        	</a>
 	                        </div>
@@ -411,53 +505,51 @@
                     <div class="bottomLinkBox" style="margin-top: 45px;">
                         <p class="modalBottomTitle">참고 이슈</p>
                         <div class="issueForm">
-                        <c:forEach items="${allP}" var="allP">
+                        <c:forEach items="${allPtk}" var="allP">
                             <c:if test="${allP.taskNo eq ptk.connectIssue}">
-                            <a data-bs-toggle="modal" href="#${ptk.taskNo}" style="text-decoration: none;">
                                 <div class="taskMeeting" style="border: 1px solid #90d1b4; width: 800px;">
-                                    <div class="leftTaskSite">
-	                                    			<p class="taskNo">${allP.taskNo}</p>
-			                                        <p class="taskTitle">${allP.taskTitle}</p>
-			                                    </div>
-			                                    <div class="rightTaskSite">
-			                                    	<c:choose>
-				                                		<c:when test="${allP.priority eq 1}">
-						                                    <span class="badge rounded-pill bg-primary" id="lowLabel">low</span>
-				                                		</c:when>
-				                                		<c:when test="${allP.priority eq 2}">
-						                                    <span class="badge rounded-pill bg-primary" id="mediumLabel">medium</span>
-				                                		</c:when>
-				                                		<c:when test="${allP.priority eq 3}">
-						                                    <span class="badge rounded-pill bg-primary" id="urgencyLabel">urgency</span>
-				                                		</c:when>
-				                                	</c:choose>
-				                                	<c:choose>
-				                                		<c:when test="${allP.processSort eq 1}">
-				                                			<span class="badge rounded-pill bg-primary" id="todoLabel">해야 할 일</span>
-				                                		</c:when>
-				                                		<c:when test="${allP.processSort eq 2}">
-				                                			<span class="badge rounded-pill bg-primary" id="ongoingLabel">진행 중</span>
-				                                		</c:when>
-				                                		<c:when test="${allP.processSort eq 3}">
-				                                			<span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
-				                                		</c:when>
-				                                	</c:choose>
-				                                	<c:forEach items="${ptm }" var="ptm">
-					                                	<c:if test="${ptm.memberNo eq allP.memberNo}">
-					                                		<c:choose>
-						                                		<c:when test="${ptm.memberImg eq null}">
-						                                			<img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
-						                                		</c:when>
-						                                		<c:otherwise>
-						                                			<img src="/resources/upload/member/${ptm.memberImg }" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
-						                                		</c:otherwise>
-						                                	</c:choose>
-					                                	</c:if> 
-				                                	</c:forEach>
-			                                        <a href="/deleteConnectIssue.do?taskNo=${ptk.taskNo}&connectIssue=$${ptk.connectIssue}" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
-			                                    </div>
-		                                	</div>
-		                           		 </a>
+		                                   <div class="leftTaskSite">
+		                              			<p class="taskNo">${allP.taskNo}</p>
+		                                      	<p class="taskTitle">${allP.taskTitle}</p>
+		                                   </div>
+		                                    <div class="rightTaskSite">
+		                                    	<c:choose>
+			                                		<c:when test="${allP.priority eq 1}">
+					                                    <span class="badge rounded-pill bg-primary" id="lowLabel">low</span>
+			                                		</c:when>
+			                                		<c:when test="${allP.priority eq 2}">
+					                                    <span class="badge rounded-pill bg-primary" id="mediumLabel">medium</span>
+			                                		</c:when>
+			                                		<c:when test="${allP.priority eq 3}">
+					                                    <span class="badge rounded-pill bg-primary" id="urgencyLabel">urgency</span>
+			                                		</c:when>
+			                                	</c:choose>
+			                                	<c:choose>
+			                                		<c:when test="${allP.processSort eq 1}">
+			                                			<span class="badge rounded-pill bg-primary" id="todoLabel">해야 할 일</span>
+			                                		</c:when>
+			                                		<c:when test="${allP.processSort eq 2}">
+			                                			<span class="badge rounded-pill bg-primary" id="ongoingLabel">진행 중</span>
+			                                		</c:when>
+			                                		<c:when test="${allP.processSort eq 3}">
+			                                			<span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
+			                                		</c:when>
+			                                	</c:choose>
+			                                	<c:forEach items="${ptm}" var="ptm">
+				                                	<c:if test="${ptm.memberNo eq allP.memberNo}">
+				                                		<c:choose>
+					                                		<c:when test="${ptm.memberImg eq null}">
+					                                			<img src="/resources/img/recruitTeamProject/common/user.png" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+					                                		</c:when>
+					                                		<c:otherwise>
+					                                			<img src="/resources/upload/member/${ptm.memberImg }" style="width: 40px; height: 40px; position: relative; bottom: 7px;">
+					                                		</c:otherwise>
+					                                	</c:choose>
+				                                	</c:if> 
+			                                	</c:forEach>
+		                                        <a href="/deleteConnectIssue.do?taskNo=${ptk.taskNo}&projectNo=${projectNo}&taskType=1" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+		                                    </div>
+	                                	</div>
                                		</c:if>
                                	</c:forEach>
                        		 </div>
@@ -466,20 +558,20 @@
 	                    <p class="modalIssueText">+ 이슈 등록하기</p>
 	                    <div class="refIssueForm">
 	                    <div class="modalLine"></div>
-		                    <form action="/addIssue.do" method="post">
+		                    <form action="/connectIssue.do" method="post">
 		                        <div class="form-group">
 		                            <label for="exampleSelect1" class="form-label mt-4" style="font-weight: bold; color: #90d1b4;">등록할 이슈(최근 15개)</label>
 		                            <select class="form-select" id="exampleSelect1" name="connectIssue" style="width: 300px;">
-		                            <c:forEach items="${allPtk}" var="allP" end="15">
-		                            	<c:if test="${ptk.taskNo ne allP.taskNo }">
-		                            		<option value="${allP.taskNo}">${allP.taskNo}<span>${allP.taskTitle}</span></option>
-		                            	</c:if>
-		                            </c:forEach>
+			                            <c:forEach items="${allPtk}" var="allP" end="15">
+			                            	<c:if test="${ptk.taskNo ne allP.taskNo }">
+			                            		<option value="${allP.taskNo}">${allP.taskNo}<span>${allP.taskTitle}</span></option>
+			                            	</c:if>
+			                            </c:forEach>
 		                            </select>
 		                        </div>
 		                        <div style="text-align: left; padding-top: 10px;">
 		                        	<input type="hidden" name="taskNo" value="${ptk.taskNo}">
-		                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">연결</button>
+		                            <button type="button" class="btn btn-primary contesteEnrollBtn" style="width: 100px;" name="connectIssueBtn">연결</button>
 		                            <button type="button" class="btn btn-secondary" style="width: 100px;" name="cancelBtn1">취소</button>
 		                        </div>
 		                    </form>
@@ -490,42 +582,50 @@
                         <div class="issueForm">
                         <c:forEach items="${tscList}" var="tsc">
                         	<c:if test="${tsc.taskNo eq ptk.taskNo}">
-	                            <div class="taskMeeting" style="border: 1px solid #90d1b4; width: 800px;">
-	                                <div class="leftTaskSite">
-	                                	<c:choose>
-			                    			<c:when test="${tsc.tsLinkName ne null}">
-							                    <a href="${tsc.tsLinkAddr}"><p class="taskNo">${tsc.tsLinkName}</p><p class="taskTitle" style="margin-left: 35px;">${tsc.tsLinkAddr}</p></a>
-			                    			</c:when>
-			                    			<c:otherwise>
-				                    			<a href="${tsc.tsLinkAddr}"><p class="taskNo">참고링크</p><p class="taskTitle" style="margin-left: 35px;">${tsc.tsLinkAddr}</p></a>
-			                    			</c:otherwise>
-			                    		</c:choose>
-	                                </div>
+                        		<a href="${tsc.tsLinkAddr}" style="display: block; text-decoration: none;" target="_blank">
+		                            <div class="taskMeeting" style="border: 1px solid #90d1b4;">
+		                                <div class="leftTaskSite">
+		                                	<c:choose>
+				                    			<c:when test="${tsc.tsLinkName ne null}">
+								                    	<p class="taskNo">${tsc.tsLinkName}</p>
+								                    	<p class="taskTitle" style="margin-left: 35px;">${tsc.tsLinkAddr}</p>
+				                    			</c:when>
+				                    			<c:otherwise>
+					                    				<p class="taskNo">참고링크</p>
+					                    				<p class="taskTitle" style="margin-left: 35px;">${tsc.tsLinkAddr}</p>
+				                    			</c:otherwise>
+				                    		</c:choose>
+		                                </div>
+	                                </a>
 	                                <div class="rightTaskSite">
-	                                    <a href="#" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+	                                    <a href="/deleteConnectLink.do?taskShortcutNo=${tsc.taskShortcutNo}&projectNo=${projectNo}&taskType=1" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
 	                                </div>
 	                            </div>
                         	</c:if>
                         </c:forEach>
                         </div>
-                      	<p class="modalLinkText">+ 링크 등록하기</p>
-                      	<div class="refLinkForm">
-                      		<div class="modalLine"></div>
-                      		<form action="/addIssue.do" method="post">
-		                        <div class="form-group" style="margin-bottom: 15px;">
-		                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">바로가기 이름</label>
-		                            <input type="text" class="form-control" placeholder="바로가기 이름을 입력해주세요" id="inputDefault" name="shortcutName" maxlength="10">
-		                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">웹 주소</label>
-		                            <input type="text" class="form-control" placeholder="웹 주소를 넣어주세요" id="inputDefault" name="shortcutAddr" >
-		                            <span style="color: red; font-size: 14px;">주의! 직접 입력하는 경우, 주소앞에 <b>http://</b> 또는 <b>https://</b> 를 붙여주세요!</span>
-		                        </div>
-		                        <div style="text-align: left; padding-top: 10px;">
-		                        	<input type="hidden" name="taskNo" value="${ptk.taskNo}">
-		                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">생성</button>
-		                            <button type="button" class="btn btn-secondary" style="width: 100px;" name="cancelBtn2">취소</button>
-		                        </div>
-		                    </form>
-                      	</div>
+                        <c:if test="${fn:length(tscList) ne 3}">
+	                      	<p class="modalLinkText">+ 링크 등록하기</p>
+	                      	<div class="refLinkForm">
+	                      		<div class="modalLine"></div>
+	                      		<form action="/connectLink.do" method="post">
+			                        <div class="form-group" style="margin-bottom: 15px;">
+			                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">바로가기 이름</label>
+			                            <input type="text" class="form-control" placeholder="바로가기 이름을 입력해주세요" id="inputDefault" name="shortcutName" maxlength="10">
+			                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">웹 주소</label>
+			                            <input type="text" class="form-control" placeholder="웹 주소를 넣어주세요" id="inputDefault" name="shortcutAddr" required="required">
+			                            <span style="color: red; font-size: 14px;">주의! 직접 입력하는 경우, 주소앞에 <b>http://</b> 또는 <b>https://</b> 를 붙여주세요!</span>
+			                        </div>
+			                        <div style="text-align: left; padding-top: 10px;">
+			                        	<input type="hidden" name="taskNo" value="${ptk.taskNo}">
+			                        	<input type="hidden" name="projectNo" value="${projectNo}">
+			                        	<input type="hidden" name="taskType" value=1>
+			                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">생성</button>
+			                            <button type="button" class="btn btn-secondary" style="width: 100px;" name="cancelBtn2">취소</button>
+			                        </div>
+			                    </form>
+	                      	</div>
+                        </c:if>
                     </div>
                 </div>
             </div>

@@ -921,20 +921,22 @@
  
  <select id="projectTaskList" parameterType="_int" resultType="ptk">
  		select
- 			task_no as taskNo,
- 			project_no as projectNo,
- 			team_member_no as teamMemberNo,
- 			task_sort as taskSort,
- 			task_title as taskTitle,
- 			task_content as taskContent,
- 			priority as priority,
- 			connect_issue as connectIssue,
- 			start_date as startDate,
- 			complete_date as completeDate,
- 			process_sort as processSort
- 		from task 
- 		where project_no = #{projectNo}
- 		order by task_no desc
+ 			t.task_no as taskNo,
+ 			t.project_no as projectNo,
+ 			t.team_member_no as teamMemberNo,
+ 			t.task_sort as taskSort,
+ 			t.task_title as taskTitle,
+ 			t.task_content as taskContent,
+ 			t.priority as priority,
+ 			t.connect_issue as connectIssue,
+ 			t.start_date as startDate,
+ 			t.complete_date as completeDate,
+ 			t.process_sort as processSort,
+ 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+ 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no and ptmm.project_no=#{projectNo})) as memberId
+ 		from task t
+ 		where t.project_no = #{projectNo}
+ 		order by t.task_no desc
  </select>
  
  <select id="selectAllTaskMList" parameterType="_int" resultType="ptk">
@@ -1035,7 +1037,7 @@
 						where rnum between 1 and 8
  </select>
  
- <select id="taskMShortcutList" parameterType="_int" resultType="tsc">
+ <select id="taskShortcutList" parameterType="_int" resultType="tsc">
  		select 
 				task_shortcut_no as taskShortcutNo,
 				project_no as projectNo,
@@ -1043,30 +1045,55 @@
 				ts_link_addr as tsLinkAddr,
 				ts_link_name as tsLinkName
 			from task_shortcuts
-			where project_no = #{projectNo} and task_no like '%M%'
+			where project_no = #{projectNo}
  </select>
  
  <update id="taskDateUpdate" parameterType="ptk">
- 		update task set process_sort = 2 where task_no like #{taskNo}
+ 		update task set process_sort = 2 where task_no = #{taskNo}
  </update>
  
-  <update id="updateCompleteIssue" parameterType="ptk">
+  <update id="updateCompleteIssue" parameterType="map">
  		update task set 
  			task_content = #{modalcontent},
  			team_member_no = (select team_member_no from project_team_member where member_no = (select member_no from member where member_id = #{selectCharUser}) and project_no=#{projectNo}),
  			complete_date = to_char(sysdate,'yyyy-mm-dd'),
  			priority = #{selectPriority},
  			process_sort = #{selectProcessSort}
- 		where task_no like #{taskNo}
+ 		where task_no = #{taskNo}
  </update>
  
- <update id="updateIssue" parameterType="ptk">
+ <update id="updateIssue" parameterType="map">
  		update task set 
  			task_content = #{modalcontent},
  			team_member_no = (select team_member_no from project_team_member where member_no = (select member_no from member where member_id = #{selectCharUser}) and project_no=#{projectNo}),
  			priority = #{selectPriority},
  			process_sort = #{selectProcessSort}
- 		where task_no like #{taskNo}
+ 		where task_no = #{taskNo}
  </update>
+ 
+ <update id="connectIssue" parameterType="map">
+ 		update task set 
+ 			connect_issue = #{connectIssue}
+ 		where task_no = #{taskNo}
+ </update>
+ 
+ <update id="deleteConnectIssue" parameterType="String">
+ 		update task set 
+ 			connect_issue = null
+ 		where task_no = #{taskNo}
+ </update>
+ 
+ <insert id="connectLink" parameterType="map">
+ 		insert into task_shortcuts values(ts_shortcut_seq.nextval, #{projectNo}, #{taskNo}, #{shortcutAddr}, #{shortcutName})
+ </insert>
+ 
+ <delete id="deleteConnectLink" parameterType="_int">
+ 		delete from task_shortcuts where task_shortcut_no = #{taskShortcutNo}
+ </delete>
+ 
+ <delete id="deleteTask" parameterType="String">
+ 		delete from task where task_no = #{taskNo}
+ </delete>
+ 
  
 </mapper>

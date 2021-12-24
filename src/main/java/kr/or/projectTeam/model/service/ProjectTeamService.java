@@ -815,8 +815,8 @@ public class ProjectTeamService {
 		return ptmpd;
 	}
 
-	public ArrayList<TaskShortcuts> taskMShortcutList(int projectNo) {
-		ArrayList<TaskShortcuts> list= dao.taskMShortcutList(projectNo);
+	public ArrayList<TaskShortcuts> taskShortcutList(int projectNo) {
+		ArrayList<TaskShortcuts> list= dao.taskShortcutList(projectNo);
 		return list;
 	}
 	
@@ -843,6 +843,95 @@ public class ProjectTeamService {
 	public int taskDateUpdate(ProjectTask projectTask) {
 		int result = dao.taskDateUpdate(projectTask);
 		return result;
+	}
+
+	public int connectIssue(String taskNo, String connectIssue) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("taskNo", taskNo);
+		map.put("connectIssue", connectIssue);
+		int result = dao.connectIssue(map);
+		return result;
+	}
+
+	public int deleteConnectIssue(String taskNo) {
+		int result = dao.deleteConnectIssue(taskNo);
+		return result;
+	}
+
+	public int connectLink(String taskNo, String shortcutName, String shortcutAddr, int projectNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("taskNo", taskNo);
+		map.put("shortcutName", shortcutName);
+		map.put("shortcutAddr", shortcutAddr);
+		map.put("projectNo", projectNo);
+		int result = dao.connectLink(map);
+		return result;
+	}
+
+	public int deleteConnectLink(int taskShortcutNo) {
+		int result = dao.deleteConnectLink(taskShortcutNo);
+		return result;
+	}
+
+	public int deleteTask(String taskNo) {
+		int result = dao.deleteTask(taskNo);
+		return result;
+	}
+
+	public ProjectTaskViewData enterProjectTaskSelectM(int projectNo, int reqPage, int viewValue, int checkValue) {
+		int numPerPage = 5;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("viewValue", viewValue);
+		map.put("checkValue", checkValue);
+		map.put("projectNo", projectNo);
+		ArrayList<ProjectTask> tasklist = dao.selectAllTaskMSelectList(map);
+		ArrayList<ProjectTeamMember> ptmList = dao.selectTeamMember(projectNo);
+		
+		int totalCount = dao.selectCheckTotalSelectCount(map);
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		} else {
+			totalPage = totalCount / numPerPage + 1;
+		}
+		
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
+		String pageNavi = "<ul class='pagination pagination-lg'>";
+		if(pageNo != 1) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+(pageNo-1)+"&viewValue="+viewValue+"&checkValue="+checkValue+"'>";
+			pageNavi += "&lt;</a></li>";
+		}// 페이지 숫자
+		for(int i=0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='page-item active'>";
+				pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+viewValue+"&checkValue="+checkValue+"'>";
+				pageNavi += pageNo + "</a></li>";
+			} else {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+viewValue+"&checkValue="+checkValue+"'>";
+				pageNavi += pageNo + "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음 버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+viewValue+"&checkValue="+checkValue+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		
+		ProjectTaskViewData ptvd = new ProjectTaskViewData(tasklist, pageNavi, start, ptmList);
+		return ptvd;
 	}
 
 }

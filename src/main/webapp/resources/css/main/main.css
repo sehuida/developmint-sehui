@@ -506,7 +506,29 @@ overflow: hidden;
     bottom: 2rem;
     right: 1.5rem;
 }
+.wrapPoject_wrap a{
+	transition: .3s;
+}
 .wrapPoject_wrap a:hover {
 	-webkit-transform: scale(1.03);
     transform: scale(1.03);
+}
+.gosuContents{
+	display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+}
+.card-body{
+	display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-between;
+}
+.card{
+    transition: .3s;
+}
+.card:hover {
+	transform: translateY(-10px);
+    box-shadow: 0 24px 21px -15px hsl(0deg 0% 75% / 80%);
 }

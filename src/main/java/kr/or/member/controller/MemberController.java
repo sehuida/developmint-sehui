@@ -510,5 +510,94 @@ public class MemberController {
 		}
 		return "member/swalMsg";		
 	}
+	@RequestMapping(value="/updateCompanyFrm.do")
+	public String updateCompnayFrm(String comNo,Model model) {
+		Company com = service.selectCompany(comNo);
+		model.addAttribute("com",com);
+		return "member/updateComFrm";
+	}
+	@RequestMapping(value="/rollbackCompany.do")
+	public String rollbackCompany(String memberId,Model model) {
+		int result = service.rollbackCompnay(memberId);
+		if(result>0) {
+			model.addAttribute("title", "변경성공");
+			model.addAttribute("msg", "인증취소후, 일반회원으로 변경되었습니다. 다시 로그인하세요.");
+			model.addAttribute("loc", "/logout.do");
+			model.addAttribute("icon", "success");
+		} else {
+			model.addAttribute("title", "변경실패");
+			model.addAttribute("msg", "회사정보수정에 실패하셨습니다.");
+			model.addAttribute("loc", "/mypageCom.do");
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";
+	}
+	@RequestMapping(value="/updateCompany.do")
+	public String updateCompany(Company com,HttpServletRequest request, MultipartFile files, Model model, int status,String oldFilePath) {
+		if (!files.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/company/");
+			// 사용자가 올린 파일명
+			String filename = files.getOriginalFilename();
+			// 올린 파일명에서 확장자 앞까지 자르기
+			String onlyFilename = filename.substring(0, filename.indexOf("."));
+			// 올린 파일명에서 확장자 부분 자르기
+			String extention = filename.substring(filename.indexOf("."));
 
+			// 실제 업로드할 파일명
+			String filepath = null;
+			// 중복 파일 뒤에 붙여줄 숫자
+			int count = 0;
+			// 중복된 파일이 없을 때까지 반복(파일명 중복시 숫자 붙이는 코드)
+			while (true) {
+				if (count == 0) {
+					filepath = onlyFilename + extention;
+				} else {
+					filepath = onlyFilename + "_" + count + extention;
+				}
+				// 파일 경로안에 중복된 파일이 있는지 체크
+				File checkFile = new File(savePath + filepath);
+				if (!checkFile.exists()) {
+					break;
+				}
+				count++;
+			}
+
+			// 중복처리가 끝나면 파일 업로드
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = files.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			// 중복처리된 파일 이름 넣어주기
+			com.setFilePath(filepath);
+			// 1이면 로고 수정을 안한상태!
+			if(status == 1) {
+				com.setFilePath(oldFilePath);
+			}
+
+		}
+		int result = service.updateCompany(com);
+
+		if (result > 0) {
+			model.addAttribute("title", "수정성공");
+			model.addAttribute("msg", "정보 수정이 완료되었습니다.");
+			model.addAttribute("loc", "/mypageCom.do");
+			model.addAttribute("icon", "success");
+		} else {
+			model.addAttribute("title", "수정실패");
+			model.addAttribute("msg", "정보수정에 실패하셨습니다.");
+			model.addAttribute("loc", "/mypageCom.do");
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";			
+	}
 }
