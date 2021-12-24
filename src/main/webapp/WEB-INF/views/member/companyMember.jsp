@@ -58,7 +58,7 @@
 			var comNo = $("#comNo").val();
 			var manager = $("#managerName").val();
 			var openDate = $("#openDate").val();
-			
+
 			if(comNo==""||manager==""||openDate==""){
                 swal({
                     title: "정보를 전부 입력해 주셔야 합니다.",
@@ -86,10 +86,10 @@
 					    ]
 					  }),
 					};
-
+					
 					$.ajax(settings).done(function (response) {
-					  	
 					  var valid = response.data[0].valid;
+					  console.log(valid);
 					  if(valid == "01"){
 						  $.ajax({
 							 url : "/addCompany.do",
@@ -106,6 +106,7 @@
 								 }else if(data == 0){
 					                    swal({
 					                        title: '귀사는 저희 페이지에 연동되어있지 않습니다.',
+					                        text: '제휴 문의 : develeomints@gmail.com',
 					                        icon: 'error'
 					                      });							 
 								 }else if(data == 2){
