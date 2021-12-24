@@ -104,6 +104,13 @@
 				<a href="/blockedMember.do?reqPage=1"><span>차단 회원 관리</span></a>
 				<a href="/blockedMember.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
+			
+			<p class="title">회사관리</p>
+			<div id="cate">
+				<i class="bi bi-building" style="color:#4ECDC4;"></i>
+				<a href="/addCompany2.do"><span>제휴 회사 등록</span></a>
+				<a href="/addCompany2.do" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
+			</div>
 			<div id="cate">
 				<i class="bi bi-briefcase" style="color:#4ECDC4;"></i>
 				<a href="/companyEnroll.do?reqPage=1"><span>회사 인증 처리</span></a>

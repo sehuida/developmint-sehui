@@ -63,6 +63,9 @@
 .clickBtn{
 	text-align: center;
 }
+
+
+
 .commentBox{
 	margin-top:30px;
 	border: 1px solid #d9d9d9;
@@ -70,24 +73,27 @@
 	display: flex;
 	align-items: center;
 }
+
 .userInfoBox{
-	width: 80px;
+	text-align: center;
 }
 .userInfoBox>p{
-	text-align: center;
 	margin-top: 5px;
 	font-size: 19px;
 	font-weight: bold;
 	margin-bottom: 0px;
 }
 .textBox{
+	flex-grow: 25;
 	margin-left: 20px;
 	margin-right: 20px;
 }
 .textBox>textarea{
-	width: 1020px;
 	height: 100px;
 	resize: none;
+}
+.commentBtn{
+	flex-grow: 1;
 }
 .comentListBox{
 	margin-top:30px;
@@ -205,6 +211,7 @@
 	justify-content: space-between;
 	align-items: center; 
 }
+
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -318,7 +325,7 @@
 								<img src="/resources/img/member/user.png" style="width: 60px; height:60px; margin-left:10px;">				
 							</c:when>
 							<c:otherwise>
-								<img src="/resources/upload/member/${sessionScope.m.filepath }" style="width: 60px; height:60px; margin-left:10px;">
+								<img src="/resources/upload/member/${sessionScope.m.filepath }" style="width: 60px; height:60px; margin-left:10px; border-radius: 50%">
 							</c:otherwise>
 						</c:choose>
 						<p>${sessionScope.m.memberId }</p>
@@ -326,14 +333,12 @@
 					<div class="textBox" >
 						<textarea class="form-control textareaBox" name="commentContent"></textarea>
 					</div>
-					<div>
-						<input type="submit" value="등록" class="btn btn-outline-primary commentBtn" style="height: 100px; width: 100px; font-weight: bold">
-					</div>
+					<input type="submit" value="등록" class="btn btn-outline-primary commentBtn" style="font-weight: bold; height: 100px;" >
 				</div>
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+				<input type="hidden" name="commentType" value="1">
 				<input type="hidden" name="boardNo" value="${list.contest.contestNo }">
 				<input type="hidden" name="boardType" value="1">
-				<input type="hidden" name="commentType" value="1">
 			</form>
 		</c:if>
 		<%---------------------------------------------------------------------------- --%>

@@ -25,7 +25,7 @@
   }
 </style>
 <body>
-	<header style="min-width: 1800px;">
+	<header style="min-width: 1800px;max-width: 1800px;">
 	<!-- Carousel -->
 	<div id="demo" class="carousel slide" data-bs-ride="carousel">
 
