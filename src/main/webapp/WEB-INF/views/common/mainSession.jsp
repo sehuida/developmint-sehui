@@ -204,71 +204,58 @@
 			<p>개발 고수와 매칭하여 고수의 노하우를 물어보세요!</p>
 		</div>
 	</div>
-	<div class="container" >
-		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
-		<c:forEach items="${gosuList }" var="g" begin="0" end="4">
-		<div class="gosu">
-			<button type="button" class="card border-primary mb-3"
-				style="border-width: 5px; max-width: 1800rem; border-radius: 50px; padding: 30px; width: 90%;margin: auto;">
-				<table>
-					<tr>
-						<c:if test="${empty g.gosuImg }">
-							<td rowspan="4" class="gosu_img"
-								style="padding: 40px; text-align: center;"><img
-								src="/resources/img/gosu/g_img_basic.png"
-								style="border-radius: 50%; width: 200px; height: 200px;"></td>
-						</c:if>
-						<c:if test="${not empty g.gosuImg }">
-							<td rowspan="4" style="padding: 40px; text-align: center;"><img
-								src="/resources/upload/member/${g.gosuImg }"
-								style="border-radius: 50%; width: 200px; height: 200px;"></td>
-						</c:if>
-						<td style="width: 600px;"><a href="/gosuContent.do?gNo=${g.ggsouNo}" class="gtitle">${g.gosuTitle }</a></td>
-					</tr>
-					<tr>
-						<td><hr></td>
-					</tr>
-					<tr>
-						<td><li><b>한줄소개</b>&nbsp;&nbsp;${g.gosuSelf }</li></td>
-					</tr>
-					<tr>
-						<td><li><b>비용</b>&nbsp;&nbsp;<b style="color: red;">${g.gosuCost }</b>&nbsp;원</li></td>
-					</tr>
-					<tr>
-						<td style="text-align: center; font-weight: bold;">
-						<span style="color: rgb(78, 205, 196);">고수</span>&nbsp;&nbsp;${g.gosuId }</td>
-						<td><c:if test="${empty g.reviewAvg  }">
-								<span style="color: gray; font-size: small;">아직 등록된 리뷰가 없습니다.</span>
-							</c:if>
-							<c:if test="${not empty g.reviewAvg }">
-								<span>${g.reviewAvg } 점 &nbsp;&nbsp;</span>
-									<c:choose>
-										<c:when test="${g.reviewAvg eq 5}">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-										</c:when>
-										<c:when test="${g.reviewAvg >= 4}">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-										</c:when>
-										<c:when test="${g.reviewAvg >= 3}">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-										</c:when>
-										<c:when test="${g.reviewAvg >= 2}">
-											<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
-										</c:when>
-										<c:when test="${g.reviewAvg >= 1}">
-											<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
-										</c:when>
-									</c:choose>
-									(${g.reviewCount }) 
-							</c:if>
-						</td>
-					</tr>
-				</table>
-			</button>
+	<div class="container" style="margin-bottom: 50px;">
+	<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
+		<div style="margin: 30px auto;">
+			<span class="subEngTitel">HOT</span> <span class="subTitel">인기 공모전</span><a href="/allContestList.do?reqPage=1&type=0" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
 		</div>
-		</c:forEach>
-	</div>
+		<div class="gosuContents mt-3">
+			<c:forEach items="${gosuList }" var="g" begin="0" end="4">
+			<div class="card" style="width:400px;margin: 10px;height: 600px;">
+				<c:if test="${empty g.gosuImg }">
+			  		<img class="card-img-top" src="/resources/img/gosu/g_img_basic.png" alt="Card image" style="width:100%">
+			  	</c:if>
+			  	<c:if test="${not empty g.gosuImg }">
+			  		<img class="card-img-top" src="/resources/upload/member/${g.gosuImg }" alt="Card image" style="width:100%;height: 250px;">
+		  		</c:if>
+			  <div class="card-body">
+			  	<%-- <a href="/gosuContent.do?gNo=${g.ggsouNo}" class="card-title">${g.gosuTitle }</a> --%>
+			    <h4 class="card-title">${g.gosuTitle }</h4>
+			    <p class="card-text"><span style="color: rgb(78, 205, 196);">고수</span>&nbsp;&nbsp;${g.gosuId }</p>
+			    <p class="card-text">${g.gosuSelf }</p>
+			    <p class="card-text">
+			    	<c:if test="${empty g.reviewAvg  }">
+						<span style="color: gray; font-size: small;">아직 등록된 리뷰가 없습니다.</span>
+					</c:if>
+					<c:if test="${not empty g.reviewAvg }">
+						<span>${g.reviewAvg } 점 &nbsp;&nbsp;</span>
+							<c:choose>
+								<c:when test="${g.reviewAvg eq 5}">
+									<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+								</c:when>
+								<c:when test="${g.reviewAvg >= 4}">
+									<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+								</c:when>
+								<c:when test="${g.reviewAvg >= 3}">
+									<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+								</c:when>
+								<c:when test="${g.reviewAvg >= 2}">
+									<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+								</c:when>
+								<c:when test="${g.reviewAvg >= 1}">
+									<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+								</c:when>
+							</c:choose>
+							(${g.reviewCount }) 
+					</c:if>
+			    </p>
+			    <a href="/gosuContent.do?gNo=${g.ggsouNo}" class="btn btn-primary " style="font-weight: bold;">프로필보기</a>
+			  </div>
+			</div>
+			</c:forEach>
+		</div>
 	<!-- 고수 소개 얼굴만 최신 등록 5명 출력 끝 -->
+	</div>
 	<!-- 구인구직 -->
 	<div class="topLangNavi">
 		<div class="container-fluid mt-3 languageNavi">
