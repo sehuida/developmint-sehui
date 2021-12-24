@@ -29,7 +29,7 @@
  		ws.send(JSON.stringify(data));
  	}
 </script>
-<div style="display: flex;align-items: center; ">
+<div style="display: flex;align-items: center; width: 200px;padding-left: 40px;">
 	<a href="/dmList.do" style="text-decoration: none">
 		<span class="text-muted">읽지않은 쪽지:</span><span id="dmCount" class="badge rounded-pill bg-danger" style="margin-right: 20px; margin-left: 5px;"></span>	
 	</a>
