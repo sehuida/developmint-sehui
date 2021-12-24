@@ -85,11 +85,12 @@
 					<c:forEach items="${list }" var="a" varStatus="i">
 						<div class="memberBox">
 							
-								<strong class="resumeTitle">${a.resumeTitle }</strong>
+								<a href="/resumeView.do?resumeNo=${a.resumeNo }"></a><strong class="resumeTitle">${a.resumeTitle }</strong>
 							
 							<div class="infoBox">
 								 <span class="infoTitle"><i class="bi bi-person-fill" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>회원이름 : </span><span>${memlist[i.index].memberName }</span><br>
 								 <span class="infoTitle"><i class="bi bi-envelope" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>이메일 : </span><span>${memlist[i.index].email }</span><br>
+								 <span class="infoTitle"><i class="bi bi-app" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>상태 : </span><span>지원중</span><br>
 							</div>
 							<div class="okNo">
 								<button class="btn btn-primary enrollBtn" style="margin-top: 20px; margin-right: 5px;">서류합격</button><button class="btn btn-secondary noEnrollBtn"  style="margin-top: 20px; margin-left: 5px;">탈락</button>

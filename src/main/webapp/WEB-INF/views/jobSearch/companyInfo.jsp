@@ -379,7 +379,7 @@ b {
 						<li>${com.category }</li>
 						<li>${com.ceo }</li>
 						<li><a href="#" style="text-decoration: none; color: #222222;">http://www.homepage.co.kr</a></li>
-						<li>내용내용</li>
+						<li>${com.content }</li>
 						<li id="address">${com.address }</li>
 						<div id="map" style="width:500px;height:400px; margin-top: 30px;"></div>
 					</ul>

@@ -178,7 +178,8 @@
             announce_no as announceNo,
             a.member_no as memberNo,
             resume_title as resumeTitle,
-            apply_date as applyDate
+            apply_date as applyDate,
+            resume_no as resumeNo
         from application a
         join resume re using(resume_no)
         order by 1 desc )r)rr
