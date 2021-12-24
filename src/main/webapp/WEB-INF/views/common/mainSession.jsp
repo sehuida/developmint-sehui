@@ -92,7 +92,7 @@
 			<p>프로젝트 팀장은 당신을 찾고있습니다! 필요한 언어를 선택하여 팀원으로 참가하세요.</p>
 		</div>
 	</div>
-	<div class="container" style="margin-bottom: 20px;">
+	<div class="container" style="margin-bottom: 50px;">
 		<!-- 최신순 프로젝트 리스트 8개 출력 -->
 			<div  style="margin: 30px auto;">
 				<span class="subEngTitel">NEW</span> <span class="subTitel">최신 모집순</span><a href="/recruitTeamMember_mainPage.do?reqPage=1" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
@@ -143,7 +143,7 @@
 		</div>
 	</div>
 	<div class="container" style="margin-top: 0;margin-bottom: 30px;">
-		<div  style="margin-top: 100px;">
+		<div  style="margin-top: 70px;">
 			<span class="subEngTitel">HOT</span> <span class="subTitel">인기 공모전</span><a href="/allContestList.do?reqPage=1&type=0" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
 		</div>
 		<%-- 인기 공모전 리스트 --%>
