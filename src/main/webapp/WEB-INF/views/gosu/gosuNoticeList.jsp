@@ -120,7 +120,7 @@ ul#gallery>a>li dd {
 }
 
 .gosu-write {
-	border: 1px solid rgb(190, 190, 190);
+	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
 	padding: 40px;
 	text-align: center;
 	justify-content: right;
@@ -176,21 +176,23 @@ ul#gallery>a>li dd {
 			<input type="text" id="search-content" placeholder="내용을 입력해주세요" class="form-control">
 			<select name="type" class="nav-link dropdown-toggle op-st" style="border:1px solid #78c2ad;border-radius: 10px;">
 				<option  class="dropdown-item" value="" selected disabled hidden>선택</option>
-				<option class="dropdown-item" value="title">제목</option>
-				<option class="dropdown-item" value="content">내용</option>
+				<option class="dropdown-item" value="title" style="color:#78c2ad;">제목</option>
+				<option class="dropdown-item" value="content" style="color:#78c2ad;">내용</option>
 			</select>
-			<button type="button" class="btn btn-primary"
-				style="padding: 7px; margin-left: 15px;  box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;"
+			<button type="button" class="btn btn-primary form-control"
+				style="padding: 7px; margin-left: 15px; width: 50px;"
 				onclick="getSearchList();">검색</button>
 
 		</div>
 		<c:if test="${sessionScope.m.memberType eq 2}">
 			<div class="gosu-write-wrap">
-				<div class="gosu-write">
-					<h5 style="font-size: small; color: gray;">
+				<div class="gosu-write card border-light mb-3">
+					<h5 style="font-size: 15px; color: #3c3c3c;">
 						고수님만의 노하우를<br> 알려주세요!
 					</h5>
-					<a href="/gosuNoticeWriteFrm.do" class="btn btn-primary">노하우
+					<a href="/gosuNoticeWriteFrm.do" class="btn btn-primary form-control" style="
+		box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;"
+					>노하우
 						작성하기</a>
 				</div>
 			</div>

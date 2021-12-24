@@ -14,6 +14,13 @@
     margin-bottom: 40px;
     border-bottom: 1px solid rgb(78, 205, 196);
 }
+
+.modalLine{
+    width: 800px;
+    margin-top: 5px;
+    border-bottom: 1px solid rgb(78, 205, 196);
+}
+
 .taskWrap{
     width: 800px;
     background-color: rgb(241, 235, 235);
@@ -199,6 +206,25 @@
 	color: #90d1b4;
 }
 
+
+.refIssueForm{
+	display: none;
+}
+
+.refLinkForm{
+	display: none;
+	width: 400px;
+}
+
+.modalIssueText{
+	color: #90d1b4;
+	cursor: pointer;
+}
+
+.modalLinkText{
+	color: #90d1b4;
+	cursor: pointer;
+}
 
 
 

@@ -51,6 +51,7 @@
 	}
 	.infoType{
 		float: left;
+		margin-right: 100px;
 	}
 	.infoType>pre, .info>pre{
 		color: rgb(51, 51, 51);
@@ -181,6 +182,12 @@
 	.schoolMajorData{
 		display: none;
 	}
+	.memberImg{
+		float: left;
+		display: inline-block;
+		margin-left: 50px;
+		margin-right: 20px;
+	}
 </style>
 </head>
 <script>
@@ -260,22 +267,32 @@
 		<div class="contain">
 			<em>기본정보</em>
 			<div class="grayBox">
-				<h3 id="name">${sessionScope.m.memberName}</h3>
+				<h3 id="name" style="margin-left: 45px;">${sessionScope.m.memberName}</h3>
+				<div class="memberImg">
+					<c:choose>
+						<c:when test="${sessionScope.m.filepath eq null }">
+							<img src="/resources/img/member/user.png" style="width: 100px;height: 100px;border-radius: 30px;margin-right: 50px;">				
+						</c:when>
+						<c:otherwise>
+							<img src="/resources/upload/member/${sessionScope.m.filepath }" style="width: 100px;height: 100px;border-radius: 30px;margin-right: 50px;">
+						</c:otherwise>
+					</c:choose>
+				</div>
 				<div class="infoType">
-					<pre>
-		아이디
-		이메일
-		휴대폰
-		나중에 디자인바꾸자
-					</pre>
+					<p style="font-style: normal;">
+						<span><img alt="" src="/resources/img/favicon.ico" style="width: 17px; height: 17px;"> </span><span style="color: black;">아이디 : </span><br>
+						<span><img alt="" src="/resources/img/resume/mail.PNG" style="width: 17px; height: 17px;"> </span><span style="color: black;">이메일 : </span><br>
+						<span><img alt="" src="/resources/img/resume/phone.PNG" style="width: 17px; height: 17px;"> </span><span style="color: black;">휴대폰 : </span><br>
+						
+					</p>
 				</div>
 				<div class="info">
 					<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">		<!-- 멤버번호 가져오기 위해서 히든으로 전송 -->
-					<pre>
-${sessionScope.m.memberId}
-${sessionScope.m.email}
-${sessionScope.m.phone}
-					</pre>
+					<p>
+						<span style="color: black;">${sessionScope.m.memberId}</span><br>
+						<span style="color: black;">${sessionScope.m.email}</span><br>
+						<span style="color: black;">${sessionScope.m.phone}</span><br>
+					</p>
 				</div>
 			</div>
 			<em>이력서 제목</em>
