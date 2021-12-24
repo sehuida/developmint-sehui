@@ -19,6 +19,7 @@ import kr.or.projectTeam.model.vo.ProjectTeam;
 import kr.or.projectTeam.model.vo.ProjectTeamMember;
 import kr.or.projectTeam.model.vo.ProjectTeamNoticeComment;
 import kr.or.projectTeam.model.vo.Shortcuts;
+import kr.or.projectTeam.model.vo.TaskShortcuts;
 import kr.or.projectTeam.model.vo.UseDevelopLanguage;
 import kr.or.projectTeam.model.vo.projectDevLanguage;
 
@@ -365,6 +366,11 @@ public class ProjectTeamDao {
 	public ArrayList<ProjectTeam> selectMainProjectList() {
 		List<ProjectTeam> list = sqlSession.selectList("projectTeam.selectMainProjectList");
 		return (ArrayList<ProjectTeam>) list;
+	}
+
+	public ArrayList<TaskShortcuts> taskMShortcutList(int projectNo) {
+		List<TaskShortcuts> list = sqlSession.selectList("projectTeam.taskMShortcutList");
+		return (ArrayList<TaskShortcuts>) list;
 	}
 	
 	

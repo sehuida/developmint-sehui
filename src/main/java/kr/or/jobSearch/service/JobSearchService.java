@@ -72,5 +72,9 @@ public class JobSearchService {
 		return dao.selectAllAnnounceCount();
 	}
 
+	public String selectComName(int comNo) {
+		return dao.selectComName(comNo);
+	}
+
 	
 }

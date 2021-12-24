@@ -219,4 +219,21 @@
 		select count(*) from announcement
 	</select>
 	
+	<select id="selectAnnounceManageCount" parameterType="_int" resultType="_int">
+		select count(*) from announcement where member_no = #{memberNo}
+	</select>
+	
+	<select id="selectComNo" parameterType="_int" resultType="_int">
+		select
+			NVL(com_no, '0') as comNo
+		from member
+		where member_no = #{memberNo}
+	</select>
+	
+	<select id="selectComName" parameterType="_int" resultType="string">
+		select
+			company_name as companyName
+		from company
+		where company_no = #{companyNo}
+	</select>
 </mapper>
