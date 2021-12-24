@@ -92,4 +92,12 @@ public class ShareDao {
 	public int removeLike(Like lk) {
 		return sqlSession.delete("share.deleteLike",lk);
 	}
+
+	public int plusLikePoints(Like lk) {
+		return sqlSession.update("share.addLikePoints",lk);
+	}
+
+	public int minusLikePoints(Like lk) {
+		return sqlSession.update("share.minusLikePoints",lk);
+	}
 }

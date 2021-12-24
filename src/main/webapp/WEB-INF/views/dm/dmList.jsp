@@ -91,27 +91,27 @@
 				<tr class="table-primary">
 					<th>번호</th><th>받는사람</th><th style="width: 500px; text-align: left;">내용</th><th>날짜</th><th>읽음여부</th><th>삭제하기</th>
 				</tr>
-				<c:forEach items="${list }" var="dm">
-					<c:if test="${dm.sender eq sessionScope.m.memberId}">
-						<tr>
-							<td>${dm.dmNo }</td>
-							<td>${dm.receiver }</td>
-							<td style="text-align: left">${dm.dmContent }</td>
-							<td>${dm.dmTime }</td>
-							<c:choose>
-								<c:when test="${dm.readStatus == 'Y' }">
-									<td class="text-info">읽음</td>								
-								</c:when>
-								<c:otherwise>
-									<td class="text-danger">읽지않음</td>
-								</c:otherwise>							
-							</c:choose>
-							<td>
-								<a href="javascript:void(0)" class="btn btn-danger delmsg" onclick="deleteMsg(this,'${dm.dmNo}')">삭제</a>
-							</td>
-						</tr>
-					</c:if>
-				</c:forEach>
+					<c:forEach items="${list }" var="dm">
+						<c:if test="${dm.sender eq sessionScope.m.memberId}">
+							<tr>
+								<td>${dm.dmNo }</td>
+								<td>${dm.receiver }</td>
+								<td style="text-align: left">${dm.dmContent }</td>
+								<td>${dm.dmTime }</td>
+								<c:choose>
+									<c:when test="${dm.readStatus == 'Y' }">
+										<td class="text-info">읽음</td>								
+									</c:when>
+									<c:otherwise>
+										<td class="text-danger">읽지않음</td>
+									</c:otherwise>							
+								</c:choose>
+								<td>
+									<a href="javascript:void(0)" class="btn btn-danger delmsg" onclick="deleteMsg(this,'${dm.dmNo}')">삭제</a>
+								</td>
+							</tr>
+						</c:if>
+					</c:forEach>		
 			</table>		
 		</div><!-- dmWrap -->
 	</div>	
