@@ -226,4 +226,24 @@
   <insert id="addCompany" parameterType="com">
   	insert into company values(company_seq.nextval,#{companyName},#{openDate},#{employee},#{category},#{ceo},#{address},#{content},#{businessNo},#{filePath})
   </insert>
+  <select id="selectCompany" parameterType="string" resultType="com">
+  	select
+  		company_no as companyNo,
+  		company_name as companyName,
+  		open_date as openDate,
+  		employee,
+  		category,
+  		ceo,
+  		address,
+  		content,
+  		business_no as businessNo,
+  		filepath
+  	from company where company_no = #{comNo}
+  </select>
+  <update id="updateCompany" parameterType="com">
+  	update company set  employee=#{employee} , category=#{category}, ceo=#{ceo} , content=#{content} where company_no=#{companyNo}
+  </update>
+  <update id="rollbackCom" parameterType="string">
+ 	update member set member_type = 1 , com_no='' where member_id=#{memberId}
+  </update>
 </mapper>
