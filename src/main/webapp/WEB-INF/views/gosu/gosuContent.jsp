@@ -291,7 +291,7 @@
 }
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Develomint</title>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>

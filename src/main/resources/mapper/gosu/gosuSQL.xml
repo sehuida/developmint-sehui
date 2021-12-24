@@ -1231,4 +1231,8 @@
 			</otherwise>
 		</choose>
   	</insert>
+  		<!-- 공모전 댓글 신고하기 -->
+  	<insert id="reportContestComment" parameterType="rp">
+  		insert into report values(report_seq.nextval, #{reporterId}, #{reportReason}, #{reportEtc}, #{commentNo}, #{commentId}, to_char(sysdate,'yyyy-mm-dd'), #{reportStatus}, #{commentContent},null )
+  	</insert>
 </mapper>

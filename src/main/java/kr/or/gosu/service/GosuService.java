@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.comment.vo.Comment;
+import kr.or.comment.vo.Report;
 import kr.or.gosu.dao.GosuDao;
 import kr.or.gosu.vo.Gosu;
 import kr.or.gosu.vo.GosuFeedback;
@@ -790,6 +791,12 @@ public class GosuService {
 	@Transactional
 	public int insertGNComment(Comment cm) {
 		return dao.insertGNComment(cm);
+	}
+
+
+	@Transactional
+	public int reportContestComment(Report rp) {
+		return dao.reportContestComment(rp);
 	}
 
 

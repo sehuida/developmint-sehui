@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Develomint 소개</title>
 </head>
 <style>
 .container * {

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Develomint</title>
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
@@ -57,17 +57,19 @@ input:focus, textarea:focus {
 	border-radius: 50%;
 	width: 150px;height: 150px;
 	padding: 0;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 }
 
 .g-one-tbl {
 	width: 90%;
 	margin-bottom: 50px;
-	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+	border: 3px solid rgb(235, 242, 235);
 }
 
 .g-one-tbl:hover {
 -webkit-transform: scale(1.03);
     transform: scale(1.03);
+   
 }
 
 .upbtn {

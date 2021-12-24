@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Develomint</title>
 </head>
 <style>
 .container * {
@@ -15,7 +15,7 @@
 
 .container {
 	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-bottom: 100px;
 	min-width: 1200px;
 }
 
@@ -618,14 +618,14 @@
 		<c:choose>
 			<%--댓글이 있는경우 --%>
 			
-			<c:when test="${not empty list.commentList }">
+			<c:when test="${not empty commentList }">
 			<div style="margin-bottom: 20px; margin-top: 20px;">
 				<span style="font-weight: 900;">댓글을 작성할 때는 타인을 존중하고 
 				<a id="community-guide">커뮤니티 가이드</a>
 				를 준수해야 합니다.
 				</span>
 			</div>
-				<c:forEach items="${list.commentList }" var="cl" varStatus="i">
+				<c:forEach items="${commentList }" var="cl" varStatus="i">
 					<c:if test="${cl.commentType eq 1 }">
 						<div class="comentListBox">
 							<div class="comentView">
@@ -663,7 +663,7 @@
 															<textarea class="form-control reText" name="commentContent">${cl.commentContent }</textarea>
 															<input type="hidden" value="${cl.commentNo }" name="commentNo"> 
 															<div style="text-align: right;">
-																<button type="button" class="btn btn-primary updateCm">수정</button>
+																<button type="submit" class="btn btn-primary updateCm">수정</button>
 																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 															</div>
 														</div>
@@ -691,7 +691,7 @@
 										  <div class="modal-dialog  modal-dialog-centered">
 										    <div class="modal-content">
 										      <div class="modal-body">
-										      	<form action="/reportComment.do" method="post" class="reportBox">
+										      	<form action="/reportGNComment.do" method="post" class="reportBox">
 											      	<p class="Modaltitle">신고 하기</p>
 											      	<div style="border-bottom:1px solid #d9d9d9; padding:5px; margin-bottom: 30px; padding-bottom: 10px;">
 											      		<p>신고는 반대 의견을 표시하는 기능이 아닙니다.</p>
@@ -739,7 +739,7 @@
 		
 								<%--대댓글 작성 창 --%>
 								<c:if test="${cl.commentType eq 1 }">
-								<form action="/insertContestComment.do" method="post">
+								<form action="/insertGNComment.do" method="post">
 									<div class="recomentBox">
 										<textarea class="form-control reText textareaBox txbox2" name="commentContent"></textarea>
 										<c:choose>
@@ -762,7 +762,7 @@
 							
 		<%---------------------------------------------------------------------------- --%>
 							<%--대댓글 리스트 --%>
-							<c:forEach items="${list.commentList }" var="rl" varStatus="j">
+							<c:forEach items="${commentList }" var="rl" varStatus="j">
 								<c:if test="${rl.commentType eq 2 && cl.commentNo eq rl.commentRef}">
 									<div class="reComentView" style="margin-top: 10px;">
 									<i class="bi bi-arrow-return-right" style="margin-left:50px; color:#4ECDC4;"></i>
@@ -801,7 +801,7 @@
 													      	<textarea class="form-control reText textareaBox" name="commentContent">${rl.commentContent }</textarea>
 													      	<input type="hidden" value="${rl.commentNo }" name="commentNo">
 													      	<div style="text-align: right; ">
-														      	<button type="submit" class="btn btn-primary">수정</button>
+														      	<button type="submit" class="btn btn-primary  updateCm">수정</button>
 														        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 													        </div>
 													      </div>
@@ -826,7 +826,7 @@
 											  <div class="modal-dialog  modal-dialog-centered">
 											    <div class="modal-content">
 											      <div class="modal-body">
-												      <form action="/reportComment.do" method="post" class="reportBox">
+												      <form action="/reportGNComment.do" method="post" class="reportBox">
 													      	<p class="Modaltitle">신고 하기</p>
 													      	<div style="border-bottom:1px solid #d9d9d9; padding:5px; margin-bottom: 10px; padding-bottom: 10px;">
 													      		<p>신고는 반대 의견을 표시하는 기능이 아닙니다.</p>
@@ -1012,9 +1012,11 @@
 		//댓글 수정
 		$(".updateCm").click(function(){
 			var index = $(".updateCm").index(this);
+			console.log("idx " +index);
 			var commentNo = $(this).parent().prev().val();
 			var commentContent = $(this).parent().prev().prev().val();
 			console.log(commentNo);
+			console.log(commentContent);
 			 $.ajax({
 				url : "/updateContestComment.do",
 				data : {commentNo : commentNo, commentContent:commentContent},

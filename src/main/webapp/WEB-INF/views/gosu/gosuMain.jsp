@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>고수의 노하우</title>
 </head>
 <style>
 .container * {

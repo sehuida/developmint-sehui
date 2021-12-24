@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.comment.vo.Comment;
+import kr.or.comment.vo.Report;
 import kr.or.gosu.vo.Gosu;
 import kr.or.gosu.vo.GosuFeedback;
 import kr.or.gosu.vo.GosuNotice;
@@ -362,6 +363,10 @@ public class GosuDao {
 
 	public int insertGNComment(Comment cm) {
 		return sqlSession.insert("gosu.insertGNComment",cm);
+	}
+
+	public int reportContestComment(Report rp) {
+		return sqlSession.insert("gosu.reportContestComment",rp);
 	}
 
 

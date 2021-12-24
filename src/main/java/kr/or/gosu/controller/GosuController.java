@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.comment.vo.Comment;
+import kr.or.comment.vo.Report;
 import kr.or.gosu.service.GosuService;
 import kr.or.gosu.vo.Gosu;
 import kr.or.gosu.vo.GosuFeedback;
@@ -896,7 +897,24 @@ public class GosuController {
 		}
 		
 	}
-
+	@RequestMapping(value="/reportGNComment.do")
+	public String reportComment(Report rp, Model model, int contestNo) {
+		int result = service.reportContestComment(rp);
+		if(result>0) {
+			model.addAttribute("title","댓글 신고 성공");
+			model.addAttribute("msg","해당 댓글을 신고하였습니다.");
+			model.addAttribute("icon","success");
+		
+		}else {
+			model.addAttribute("title","댓글 신고 실패");
+			model.addAttribute("msg","해당 댓글 신고에 실패하였습니다. 관리자에게 문의해주세요.");
+			model.addAttribute("icon","error");
+		}
+		model.addAttribute("loc","/gosuNoticeContent.do?gnn="+contestNo);
+		return "member/swalMsg";
+		
+	}
+	
 	@RequestMapping(value = "/gosuNoticeContent.do")
 	public String gosuNoticeContent(int gnn, Model model) {
 		GosuNotice gNotice = service.selectGosuNoticeOne(gnn);
