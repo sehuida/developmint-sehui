@@ -124,16 +124,7 @@
 
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-		<c:if test="${sessionScope.m.memberType eq 2}">
-			<div class="gosu-mail">
-				<a href="/gosuRequestList.do?reqPage=1">요청서</a>
-			</div>
-		</c:if>
-		<c:if test="${sessionScope.m.memberType eq 1}">
-			<div class="gosu-mail">
-				<a href="/gosuRequestCostList.do?reqPage=1">견적서</a>
-			</div>
-		</c:if>
+		
 		<h1>나의 현황</h1>
 		<hr>
 		<p style="margin-bottom: 100px; color: gray;">신청하신 전체 내역을 확인하실 수

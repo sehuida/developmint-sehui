@@ -176,12 +176,12 @@ input:focus, textarea:focus {
 					<br> <span>질문자에게 보낼 내용</span>
 					<p style="margin-left: 40px;">질문자에게 고수님만의 능력을 어필해보세요!</p>
 					<div class="g-style">
-						<textarea rows="5" cols="100" id="contentSend"></textarea>
+						<textarea rows="5" cols="100" id="contentSend" class="form-control" placeholder=" 내용을 입력하세요."></textarea>
 
 					</div>
 					<br> <span>견적비용</span>
 					<div class="g-style">
-						<input type="text" name="cost" id="costSend" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');" placeholder="숫자만 입력하세요.">&nbsp;&nbsp;
+						<input type="text" class="form-control" name="cost" id="costSend" onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');" placeholder=" 숫자만 입력하세요.">&nbsp;&nbsp;
 						원 <input type="hidden" value="${grOne.requestNo }"
 							id="requestNoSend"> <input type="hidden"
 							value="${sessionScope.m.memberNo }" id="gosuNoSend">

@@ -93,7 +93,11 @@ html, body {
 	margin-left: 1400px;
 }
 .container-fluid{
-	margin-left: 0 !important;
+	padding-left: 0 !important;
+}
+.bg-light{
+	background-color: white !important;
+	--bs-bg-opacity :0 !important;
 }
 .down-img {
 	text-align: center;
