@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
+import kr.or.company.vo.Company;
 import kr.or.gosu.vo.GosuNotice;
 import kr.or.member.model.service.MailSender;
 import kr.or.member.model.service.MemberService;
@@ -442,6 +443,72 @@ public class MemberController {
 		model.addAttribute("pageNavi",bpg.getPageNavi());
 		model.addAttribute("start",bpg.getStart());
 		return "member/myBoardPage";
+	}
+	//회사 정보 등록
+	@RequestMapping("/addCompanyInfo.do")
+	public String adadCompanyInfo(Company com,HttpServletRequest request, MultipartFile files, Model model) {
+		if (!files.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/company/");
+			// 사용자가 올린 파일명
+			String filename = files.getOriginalFilename();
+			// 올린 파일명에서 확장자 앞까지 자르기
+			String onlyFilename = filename.substring(0, filename.indexOf("."));
+			// 올린 파일명에서 확장자 부분 자르기
+			String extention = filename.substring(filename.indexOf("."));
+
+			// 실제 업로드할 파일명
+			String filepath = null;
+			// 중복 파일 뒤에 붙여줄 숫자
+			int count = 0;
+			// 중복된 파일이 없을 때까지 반복(파일명 중복시 숫자 붙이는 코드)
+			while (true) {
+				if (count == 0) {
+					filepath = onlyFilename + extention;
+				} else {
+					filepath = onlyFilename + "_" + count + extention;
+				}
+				// 파일 경로안에 중복된 파일이 있는지 체크
+				File checkFile = new File(savePath + filepath);
+				if (!checkFile.exists()) {
+					break;
+				}
+				count++;
+			}
+
+			// 중복처리가 끝나면 파일 업로드
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = files.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			// 중복처리된 파일 이름 넣어주기
+			com.setFilePath(filepath);
+
+		}
+
+		int result = service.insertCompany(com);
+
+		if (result > 0) {
+			model.addAttribute("title", "등록성공");
+			model.addAttribute("msg", "제휴회사 등록 완료");
+			model.addAttribute("loc", "/adminPage.do");
+			model.addAttribute("icon", "success");
+		} else {
+			model.addAttribute("title", "등록실패");
+			model.addAttribute("msg", "등록에 실패하셨습니다.");
+			model.addAttribute("loc", "/adminPage.do");
+			model.addAttribute("icon", "warning");
+		}
+		return "member/swalMsg";		
 	}
 
 }

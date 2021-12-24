@@ -283,16 +283,7 @@
 
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-		<c:if test="${sessionScope.m.memberType eq 2}">
-			<div class="gosu-mail">
-				<a href="/gosuRequestList.do?reqPage=1">요청서</a>
-			</div>
-		</c:if>
-		<c:if test="${sessionScope.m.memberType eq 1}">
-			<div class="gosu-mail">
-				<a href="/gosuRequestCostList.do?reqPage=1">견적서</a>
-			</div>
-		</c:if>
+		
 		<h4>
 			&gt; &nbsp;<span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다!
 		</h4>
@@ -327,7 +318,7 @@
 										style="color: red;">* </span></span></td>
 							</tr>
 							<tr>
-								<td style="font-size: 25px;"><input type="text" placeholder="제목 입력"
+								<td style="font-size: 20px;"><input type="text" placeholder="제목 입력"  class="form-control" 
 									name="gosuTitle"></td>
 							</tr>
 							<tr>
@@ -340,7 +331,7 @@
 								<td>한 줄 소개 <span style="color: red;">* </span></td>
 							</tr>
 							<tr>
-								<td style="font-size: 25px;"><input type="text" placeholder="한 줄 소개 입력"
+								<td style="font-size: 20px;"><input type="text" placeholder="한 줄 소개 입력"  class="form-control" 
 									name="gosuSelf"></td>
 							</tr>
 							<tr>
@@ -355,8 +346,8 @@
 
 
 						<div>
-							<p>
-								<textarea name="gosuExplain" id="gosuExplain"
+							<p> 
+								<textarea name="gosuExplain" id="gosuExplain"  class="form-control" 
 								></textarea>
 							</p>
 
@@ -375,7 +366,7 @@
 						</h4>
 
 						<div style="overflow: hidden;">
-							<input type="file" name="photoFilepath" multiple>
+							<input type="file" name="photoFilepath" style="width: 300px;"  class="form-control"  multiple>
 						</div>
 
 					</div>
@@ -387,7 +378,7 @@
 						</h4>
 						<div>
 							<p>
-								<textarea name="gosuAct" id="gosuAct"></textarea>
+								<textarea name="gosuAct"  class="form-control"  id="gosuAct"></textarea>
 							</p>
 						</div>
 						<div>
@@ -415,8 +406,8 @@
 					<div class="gosu-feedback">
 
 						<h4>
-							피드백 비용 <span style="color: red; margin-right: 100px;">* </span> <input
-								type="text" name="gosuCost" style="width: 400px;" placeholder="비용 입력"
+							피드백 비용 <span style="color: red; margin-right: 100px;">* </span> <input   class="form-control"  
+								type="text" name="gosuCost" style="width: 400px; font-size: 20px;display: inline-block;" placeholder="비용 입력"
 								onKeyup="this.value=this.value.replace(/[^-0-9]/g,'');">
 								<span>&nbsp; &nbsp;원</span>
 						</h4>
@@ -433,15 +424,15 @@
 				<div class="hrm-wrap" style="display: none;">
 					<div id="hrm-modal">
 						<h3 style="color: white;">프로젝트 추가하기</h3>
-						<div class="hrm-content">
-							<b style="color:#78c2ad;" >메인사진</b> <input type="file" class="gprojectFilepath"
-								id="gprojectFilepath" accept="image/*"style="margin-bottom: 25px;" ><br>
+						<div class="hrm-content" style="margin-top: 50px;">
+							<b style="color:#78c2ad; margin-right: 20px;" >메인사진</b> <input type="file" class="gprojectFilepath form-control"
+								id="gprojectFilepath"  accept="image/*"style="margin-bottom: 25px;width:300px;margin-right:380px; display: inline-block;" ><br>
 							<div id="gimage_container" style='margin-bottom:25px;'></div>
 
-							<b>제목</b><input type="text" class="gprojectTitle"
+							<b>제목</b><input type="text" class="gprojectTitle form-control"  style="display: inline-block; width:600px; "
 								id="gprojectTitle" placeholder="프로젝트 제목 입력"><br> <b
 								style="float: left;">내용</b>
-							<textarea cols="80" class="gprojectContent" id="gprojectContent"
+							<textarea cols="80" class="gprojectContent form-control"    id="gprojectContent" style="width:600px; "
 								placeholder="프로젝트 내용 입력"></textarea>
 							<br>
 						</div>

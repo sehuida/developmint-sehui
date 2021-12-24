@@ -43,7 +43,7 @@
 	var nameChk = true;
 	var phoneChk = true;
 	
-    $("#memberName").on("keyup", function(){
+    $("#memberName").on("keyup change paste", function(){
         var nameReg = /^[가-힣]{2,6}$/;
         var nameVal = $("#memberName").val();
 
@@ -64,7 +64,7 @@
         }
       });
   //전화번호 중복체크
-  $("#phone").on("keyup", function(){
+  $("#phone").on("keyup change paste", function(){
     var phoneReg = /^010-([0-9]{4})-([0-9]{4})$/;
     var phoneVal = $("#phone").val();
 

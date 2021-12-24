@@ -280,16 +280,6 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-		<c:if test="${sessionScope.m.memberType eq 2}">
-			<div class="gosu-mail">
-				<a href="/gosuRequestList.do?reqPage=1">요청서</a>
-			</div>
-		</c:if>
-		<c:if test="${sessionScope.m.memberType eq 1}">
-			<div class="gosu-mail">
-				<a href="/gosuRequestCostList.do?reqPage=1">견적서</a>
-			</div>
-		</c:if>
 		<h4>
 			&gt; &nbsp;<span style="color: rgb(78, 205, 196);">고수</span>를 소개합니다!
 		</h4>

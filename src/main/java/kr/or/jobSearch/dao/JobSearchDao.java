@@ -33,6 +33,10 @@ public class JobSearchDao {
 	public int selectAllAnnounceCount() {
 		return sqlSession.selectOne("announce.selectAllAnnounceCount");
 	}
+
+	public String selectComName(int comNo) {
+		return sqlSession.selectOne("announce.selectComName", comNo);
+	}
 	
 	
 	

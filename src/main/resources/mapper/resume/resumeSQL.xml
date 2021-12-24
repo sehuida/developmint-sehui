@@ -245,17 +245,30 @@
 		where member_no = #{memberNo}
 	</select>
 	
-	<select id="selectAllAnnounce" parameterType="_int" resultType="ac">
-	<!-- <foreach collection="list" item="list" open="(" close=")" separator=","> -->
-	select 
+	<select id="selectAllAnnounce" parameterType="map" resultType="ac">
+	select * from
+		(select rownum as rnum , r.*
+		from (
+	select
+		announce_no as announceNo,
+        company_no as companyNo,
+        resume_no as resumeNo,
+        resume_title as resumeTitle,
+        r.career,
+        r.money,
+        status,
+        an.member_no as memberNo,
 	    company_name as companyName,
 	    announce_title as announceTitle,
-	    category,
+	    an.category,
 	    apply_date as applyDate
-	    from announcement
+	    from announcement an
     join application a using(announce_no)
+    join company c using(company_name)
+    join resume r using(resume_no)
     where a.member_no = #{memberNo}
-	<!-- </foreach> -->
+    order by 1 desc )r)rr 
+	where rnum between #{start} and #{end}
 	</select>
 	
 	<delete id="deleteApplycation" parameterType="_int">

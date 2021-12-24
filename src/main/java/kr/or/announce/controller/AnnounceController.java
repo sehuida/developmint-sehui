@@ -24,9 +24,21 @@ public class AnnounceController {
 	public String announceManage(Model model, int memberNo) {
 		/* ArrayList<Announce> list = service.selectAllannounce(memberNo); */
 		Announce announce = service.selectAllannounce(memberNo);
-		int count = service.selectAnnounceCount(announce.getAnnounceNo());
-		System.out.println("count : " +count);
-		model.addAttribute("count", count);
+		int comNo = service.selectComNo(memberNo);
+		if(comNo != 0) {
+			System.out.println("comNo : " +comNo);
+			model.addAttribute("comNo", comNo);
+		} else {
+			model.addAttribute("comNo", 0);
+		}
+		int announceCount = service.selectAllAnnounceCount(memberNo);
+		if(announce != null) {
+			int count = service.selectAnnounceCount(announce.getAnnounceNo());
+			System.out.println("count : " +count);
+			model.addAttribute("count", count);
+		}
+		System.out.println("announceCount : " +announceCount);
+		model.addAttribute("announceCount", announceCount);
 		System.out.println("announce : " +announce);
 		model.addAttribute("a", announce);
 		return "jobSearch/announceManage";
@@ -120,6 +132,30 @@ public class AnnounceController {
 			model.addAttribute("icon","fail");
 		}
 		return "member/swalMsg";
+	}
+	
+	@RequestMapping(value="/okAnnounce.do")
+	public String okAnnounce(AnnounceList al, Model model) {
+		int result = service.okAnnounce(al);
+		if(result>0) {
+			model.addAttribute("msg","합격처리 완료 되었습니다.");
+		}else {
+			model.addAttribute("msg","합격처리 실패");
+		}
+		model.addAttribute("loc","/applicationStatus.do?announceNo="+al.getAnnounceNo()+"&reqPage=1");
+		return "common/msg";
+	}
+	
+	@RequestMapping(value="//noAnnounce.do")
+	public String okAnnounce(int memberNo, int appNo, int announceNo, Model model) {
+		int result = service.noAnnounce(memberNo, appNo);
+		if(result>0) {
+			model.addAttribute("msg","탈락처리 완료 되었습니다.");
+		}else {
+			model.addAttribute("msg","탈락처리 실패");
+		}
+		model.addAttribute("loc","/applicationStatus.do?announceNo="+announceNo+"&reqPage=1");
+		return "common/msg";
 	}
 	
 }

@@ -76,6 +76,25 @@ public class AnnounceDao {
 		return sqlSession.selectOne("announce.selectAnnounceCount", announceNo);
 	}
 
+	public int selectAllAnnounceCount(int memberNo) {
+		return sqlSession.selectOne("announce.selectAnnounceManageCount", memberNo);
+	}
+
+	public int selectComNo(int memberNo) {
+		return sqlSession.selectOne("announce.selectComNo",memberNo);
+	}
+
+	public int okAnnounce(AnnounceList al) {
+		return sqlSession.update("announce.okAnnounce", al);
+	}
+
+	public int noAnnounce(int memberNo, int appNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("appNo", appNo);
+		return sqlSession.update("announce.noAnnounce", map);
+	}
+
 	/*
 	 * public int selectResumeNo(int announceNo) { return
 	 * sqlSession.selectOne("announce.selectResumeNo", announceNo); }

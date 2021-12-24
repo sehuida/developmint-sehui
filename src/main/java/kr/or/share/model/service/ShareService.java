@@ -191,11 +191,13 @@ public class ShareService {
 			//좋아요 안눌렀을때
 			result = dao.addLike(lk);
 			result += 1;
+			int points = dao.plusLikePoints(lk);
 			//좋아요 눌리면 return값 2
 		}else {
 			//좋아요 이미 눌렀을때
 			result = dao.removeLike(lk);
 			//좋아요 지워지면 return 값 1
+			int points = dao.minusLikePoints(lk);
 		}
 		return result;
 	}

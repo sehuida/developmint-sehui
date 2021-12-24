@@ -23,58 +23,66 @@
     width: 100%;
     height: 100%;
   }
+  body {
+    position: relative;
+    max-width: 2560px;
+    min-width: 1240px;
+    margin: 0 auto;
+}
 </style>
 <body>
-	<header style="min-width: 1800px;max-width: 1800px;">
-	<!-- Carousel -->
-	<div id="demo" class="carousel slide" data-bs-ride="carousel">
-
-		<!-- Indicators/dots -->
-		<div class="carousel-indicators">
-			<button type="button" data-bs-target="#demo" data-bs-slide-to="0"
-				class="active"></button>
-			<button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-			<button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-		</div>
-
-		<!-- The slideshow/carousel -->
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img src="/resources/img/main/4.png" alt="Los Angeles" class="d-block"
-					style="width:100%;max-height: 80vh;">
-				<div class="carousel-caption">
-					<h4 class="text-black" style="font-weight: bold;">프로젝트에 지원하여 팀원으로 함께하세요!</h4>
-					<p><a href="/recruitTeamMember_mainPage.do?reqPage=1" class="btn btn-my">팀원모집</a></p>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<img src="/resources/img/main/1.png" alt="Chicago" class="d-block h-50"
-					style="width: 100%;max-height: 80vh;">
-				<div class="carousel-caption">
-					<h4 class="text-white" style="font-weight: bold;">고수와 함께 개발을 해보세요!</h4>
-					<p><a href="/gosuMain.do" class="btn btn-my2">'고수'의 노하우</a></p>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<img src="/resources/img/main/3.png" alt="New York" class="d-block h-50" 
-				style="width: 100%;max-height: 80vh;">
-				<div class="carousel-caption">
-					<h4 class="text-white" style="font-weight: bold;">지원하고, 구해보세요!</h4>
-					<p><a href="jobSearchList.do?reqPage=1" class="btn btn-my3">구인구직</a></p>
-				</div>
-			</div>
-		</div>
-		<!-- Left and right controls/icons -->
-		<button class="carousel-control-prev" type="button"
-			data-bs-target="#demo" data-bs-slide="prev">
-			<span class="carousel-control-prev-icon"></span>
-		</button>
-		<button class="carousel-control-next" type="button"
-			data-bs-target="#demo" data-bs-slide="next">
-			<span class="carousel-control-next-icon"></span>
-		</button>
+	<div style="display: flex; justify-content: center;width: 1800px;">
 	</div>
-	</header>
+		<header >
+		<!-- Carousel -->
+		<div id="demo" class="carousel slide fixation" data-bs-ride="carousel">
+	
+			<!-- Indicators/dots -->
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+				<button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+				<button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+			</div>
+	
+			<!-- The slideshow/carousel -->
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="/resources/img/main/4.png" alt="Los Angeles" class="d-block"
+						style="width:100%;max-height: 80vh;">
+					<div class="carousel-caption">
+						<h4 class="text-black" style="font-weight: bold;">프로젝트에 지원하여 팀원으로 함께하세요!</h4>
+						<p><a href="/recruitTeamMember_mainPage.do?reqPage=1" class="btn btn-my">팀원모집</a></p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="/resources/img/main/1.png" alt="Chicago" class="d-block h-50"
+						style="width: 100%;max-height: 80vh;">
+					<div class="carousel-caption">
+						<h4 class="text-white" style="font-weight: bold;">고수와 함께 개발을 해보세요!</h4>
+						<p><a href="/gosuMain.do" class="btn btn-my2">'고수'의 노하우</a></p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img src="/resources/img/main/3.png" alt="New York" class="d-block h-50" 
+					style="width: 100%;max-height: 80vh;">
+					<div class="carousel-caption">
+						<h4 class="text-white" style="font-weight: bold;">지원하고, 구해보세요!</h4>
+						<p><a href="jobSearchList.do?reqPage=1" class="btn btn-my3">구인구직</a></p>
+					</div>
+				</div>
+			</div>
+			<!-- Left and right controls/icons -->
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#demo" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon"></span>
+			</button>
+			<button class="carousel-control-next" type="button"
+				data-bs-target="#demo" data-bs-slide="next">
+				<span class="carousel-control-next-icon"></span>
+			</button>
+		</div>
+		</header>
+	
 	<!-- Carousel 끝 -->
 	<!-- main세션 -->
 	<div class="topLangNavi">
@@ -84,57 +92,47 @@
 			<p>프로젝트 팀장은 당신을 찾고있습니다! 필요한 언어를 선택하여 팀원으로 참가하세요.</p>
 		</div>
 	</div>
-	<div class="container" style="min-width: 1800px;margin-bottom: 20px;">
+	<div class="container" style="margin-bottom: 50px;">
 		<!-- 최신순 프로젝트 리스트 8개 출력 -->
-		<c:forEach items="${ptlist }" var="pt" varStatus="mi">
-			<div class="contentFlexBox">
-			    <div class="imgBox">
-			    	<c:choose>
-			    		<c:when test="${pt.writerImgPath eq null}">
-			    			<img class="myInfoImg" src="/resources/img/member/user.png">
-			    		</c:when>
-			    		<c:otherwise>
-			    			<img class="myInfoImg" src="/resources/upload/member/${pt.writerImgPath }">
-			    		</c:otherwise>
-			    	</c:choose> 
-		     	</div>
-				<a href="/selectOneNotice.do?projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" class="clickRecruitTeamTag">
-					<div class="contentBox">
-					    <div class="textFlexBox1">
-					        <div class="textContent">
-					            <p class="contentText">${pt.RTitle }</p>
-					        </div>
-					        <div class="dateType">
-					            <b>작성일 : </b><span><b>${pt.RStartDate }</b></span>
-					        </div>
-					    </div>
-					    <div class="textFlexBox2">
-					        <div></div>
-					        <div class="dateType">
-					            <b>마감일 : </b><span><b>${pt.REndDate }</b></span>
-					        </div>
-					    </div>
-					    <div class="bottomFlexBox">
-					        <div class="subImgBox">
-					         <c:forEach items="${pdLangList }" var="lI"  varStatus="i">
-					         	<c:if test="${pt.projectNo eq lI.projectNo }">
-					         		<img class="langImg" src="${lI.langImg }">
-					            	</c:if>
-					         </c:forEach>
-					        </div>
-					        <div class="countBox">
-					            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/bubble-chat.png">
-					            <span class="countText">${pt.commentCount }</span>
-					            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
-					            <span class="countText">${pt.viewCount }</span>
-					            <img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png" style="position: relative; top: 3px;">
-					            <span class="countText">${pt.dibCount }</span>
-					        </div>
-					    </div>
-					</div>
-				</a>	
+			<div  style="margin: 30px auto;">
+				<span class="subEngTitel">NEW</span> <span class="subTitel">최신 모집순</span><a href="/recruitTeamMember_mainPage.do?reqPage=1" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
 			</div>
-		</c:forEach>
+			<div class="wrapPoject_wrap">
+			<c:forEach items="${ptlist }" var="pt" varStatus="mi">
+				<a href="/selectOneNotice.do?projectNo=${pt.projectNo }&memberNo=${sessionScope.m.memberNo}" style="text-decoration: none;">
+				<ul class="wrapPoject">
+					<li class="pojrect_item">
+						<c:choose>
+							<c:when test="${fn:length(pt.RTitle) > 10}">
+								<c:set var="subTitle" value="${fn:substring(pt.RTitle,0,10)}"/>
+								<h1>${subTitle }...</h1>
+							</c:when>
+							<c:otherwise>
+								<h1>${pt.RTitle }</h1>
+							</c:otherwise>
+						</c:choose>
+				        <ul class="subImgBox">
+				         <c:forEach items="${pdLangList }" var="lI"  varStatus="i">
+				         	<c:if test="${pt.projectNo eq lI.projectNo }">
+				         		<li>
+					         		<img class="langImg" src="${lI.langImg }">
+						         	<p id="lnagName">${lI.langName }</p>
+				         		</li>
+				            	</c:if>
+				         </c:forEach>
+				        </ul>
+				        <div class="countBox text-muted">
+				            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/bubble-chat.png">
+				            <span class="countText">${pt.commentCount }</span>
+				            <img class="countImg" src="/resources/img/recruitTeamProject/recruitPage/eye.png">
+				            <span class="countText">${pt.viewCount }</span>
+				            <img class="countImg" src="/resources/img/recruitTeamProject/common/full_hart.png" style="position: relative; top: 3px;">
+				            <span class="countText ">${pt.dibCount }</span>
+				        </div>
+					</li>
+				</ul></a>
+			</c:forEach>
+			</div>
 		<!-- 인기순 프로젝트 리스트 출력  끝 -->
 	</div>
 	<!-- 공모전 -->
@@ -144,18 +142,18 @@
 			<p>상금이 걸린 공모전에 참가해보세요! 당신의 재능을 첨부하면 됩니다.</p>
 		</div>
 	</div>
-	<div class="container" style="margin-top: 0;margin-bottom: 30px;min-width: 1800px;"">
-		<div  style="margin-top: 100px;">
+	<div class="container" style="margin-top: 0;margin-bottom: 30px;">
+		<div  style="margin-top: 70px;">
 			<span class="subEngTitel">HOT</span> <span class="subTitel">인기 공모전</span><a href="/allContestList.do?reqPage=1&type=0" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
 		</div>
 		<%-- 인기 공모전 리스트 --%>
-		<div class="newContestBox">
+		<div class="newContestBox" style="">
 			<c:forEach var="hc" items="${conlist.hotContest }">
 			<div>
 				<%--공모전 이미지 --%>
 				<div class="contestImgBox" >
 					<div class="front item">
-							<img src="/resources/img/contest/${hc.contestImg }">
+						<img src="/resources/img/contest/${hc.contestImg }">
 					</div>
 					<div class="back item">
 						<div class="contestBack" style="background-image: url(/resources/img/contest/${hc.contestImg }) ">
@@ -205,7 +203,7 @@
 			<p>개발 고수와 매칭하여 고수의 노하우를 물어보세요!</p>
 		</div>
 	</div>
-	<div class="container" style="min-width: 1800px;">
+	<div class="container" >
 		<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
 		<c:forEach items="${gosuList }" var="g" begin="0" end="4">
 		<div class="gosu">
@@ -277,7 +275,7 @@
 			<p>인재를 구하고, 세상을 지배하세요!</p>
 		</div>
 	</div>
-	<div class="container" style="margin-bottom: 60px;min-width: 1800px;">
+	<div class="container" style="margin-bottom: 60px;">
 		<a href="/jobSearchList.do?reqPage=1" style="padding-left: 20px;text-decoration: none;font-weight: bold;float: right;margin-right: 10em;">더보기</a>
 	    <c:forEach items="${joblist }" var="a" varStatus="i" begin="0" end="2">
 	     <div class="content" style="margin: 30px auto auto auto;">
@@ -401,7 +399,7 @@
 			<p>각 게시판에 들어가서 게시물들을 확인하고 찾아보고 작성해 보세요!!!</p>
 		</div>
 	</div>
-	<div class="container" style="margin-bottom: 50px;min-width: 1800px;">
+	<div class="container" style="margin-bottom: 50px;">
 	<!-- 게시판 3가지 출력 -->
 		<div class="cate3Box">
 			<div>
