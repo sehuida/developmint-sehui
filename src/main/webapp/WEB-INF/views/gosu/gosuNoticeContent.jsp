@@ -220,6 +220,16 @@
 	align-items: center;
 	margin-top: 20px;
 }
+
+.upbtn {
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+}
+
+.upbtn:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
+
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -270,26 +280,26 @@
 		<div class="g-center">
 			<c:if test="${sessionScope.m.memberId ne gNotice.writeId}">
 				<c:if test="${not empty sessionScope.m }">
-					<a id="feedbackListAjax" class="btn btn-info"
+					<a id="feedbackListAjax" class="btn btn-info upbtn"
 						style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">피드백
 						신청하기</a>
 				</c:if>
 				<c:if test="${empty sessionScope.m }">
-					<a id="feedbackListAjax" class="btn btn-info"
+					<a id="feedbackListAjax" class="btn btn-info upbtn"
 						style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">고수 보러가기</a>
 				</c:if>
 				
-				<a class="btn btn-primary"
+				<a class="btn btn-primary upbtn"
 					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
 					onclick="history.back();">뒤로가기</a>
 			</c:if>
 			<c:if test="${sessionScope.m.memberId eq gNotice.writeId}">
 				<a href="/noticeContentUpdateFrm.do?gnn=${gNotice.gnoticeNo }"
-					class="btn btn-info"
+					class="btn btn-info upbtn"
 					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
 					id="commentUpdate">수정하기</a>
 				<a href="/noticeContentdelete.do?gnn=${gNotice.gnoticeNo }"
-					class="btn btn-primary"
+					class="btn btn-primary upbtn"
 					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
 					id="commentDelete">삭제하기</a>
 			</c:if>

@@ -61,13 +61,22 @@ input:focus, textarea:focus {
 
 .g-one-tbl {
 	width: 90%;
-	border: 1px solid rgb(211, 211, 211);
 	margin-bottom: 50px;
-	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 }
 
 .g-one-tbl:hover {
-	border: 1px solid black;
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
+
+.upbtn>button {
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+}
+
+.upbtn:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
 }
 
 .g-one-tbl th {
@@ -281,11 +290,11 @@ input:focus, textarea:focus {
 											<td style="display: flex; justify-content: right;">
 												<button type="button"
 													onclick="gosuRequestAjax(${mrcl.costNo});"
-													class="btn btn-info"
+													class="btn btn-info upbtn"
 													style="width: 150px; margin-right: 15px;">보낸 요청서</button>
 												<button type="button"
 													onclick="gosuProjectJSPAjax(${mrcl.costNo});"
-													class="btn btn-primary" style="width: 150px;">진행하기</button>
+													class="btn btn-primary upbtn" style="width: 150px;">진행하기</button>
 											</td>
 										</tr>
 									</table>
@@ -316,8 +325,8 @@ input:focus, textarea:focus {
 							</tr>
 							<tr>
 								<th>내용</th>
-								<td><textarea id="contentSend" disabled
-										style="text-align: center; font-size: 15px; padding: 10px; width: 100%; border: none;"></textarea></td>
+								<td><textarea id="contentSend" disabled  class="form-control"
+										></textarea></td>
 							</tr>
 							<tr>
 								<th>견적비용</th>
@@ -336,8 +345,8 @@ input:focus, textarea:focus {
 				</div>
 				<div class="hrm-btn-wrap">
 
-					<a id="projectCostAjax" class="btn btn-success">결제 진행</a> <a
-						id="hrm-close" class="btn btn-outline-success">취소</a>
+					<a id="projectCostAjax" class="btn btn-success upbtn">결제 진행</a> <a
+						id="hrm-close" class="btn btn-outline-success upbtn">취소</a>
 				</div>
 			</div>
 		</div>

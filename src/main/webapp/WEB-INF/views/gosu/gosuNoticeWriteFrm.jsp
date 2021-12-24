@@ -39,7 +39,6 @@
 	font-weight: bold;
 	margin-top: 40px;
 	margin-bottom: 40px;
-	margin-bottom: 50px;
 }
 
 .g-center {
@@ -108,13 +107,20 @@ input:focus, textarea:focus {
 #g-btn-submit {
 	min-width: 1200px;
 }
+
+
+.upbtn:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
+
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
 		
 		<h4>
-			&gt; &nbsp;<span style="color: rgb(78, 205, 196);">고수</span>의 게시판
+			&gt; &nbsp;<span style="color: rgb(78, 205, 196);font-weight: 900;">고수</span>의 게시판
 			작성하기
 		</h4>
 		<form action="/gosuNoticeWrite.do" method="post" id="g-btn-submit"
@@ -123,11 +129,11 @@ input:focus, textarea:focus {
 				value="${sessionScope.m.memberId }">
 			<div style="padding: 100px;">
 				<div class="g-content g-center"
-					style="box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;">
+					style="box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);">
 					<div>
 						<table>
 							<tr>
-								<th style="padding-top: 100px; padding-bottom: 50px;">첨부파일
+								<th style="padding-top: 50px; padding-bottom: 50px;">첨부파일
 									<span style="color: red;">* </span>
 								</th>
 								<td style="padding-top: 100px; padding-bottom: 50px;"><input class="form-control"
@@ -163,9 +169,9 @@ input:focus, textarea:focus {
 				</div>
 			</div>
 			<div class="g-center">
-				<a href="/gosuNoticeList.do" class="btn btn-info"
+				<a href="/gosuNoticeList.do" class="btn btn-info upbtn"
 					style="width: 200px; margin: 70px; padding: 10px; font-weight: bold;">취소</a>
-				<button type="submit" class="btn btn-primary"
+				<button type="submit" class="btn btn-primary upbtn"
 					style="width: 200px; margin: 70px; padding: 10px; font-weight: bold;">확인</button>
 			</div>
 		</form>

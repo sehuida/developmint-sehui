@@ -62,9 +62,13 @@
 }
 
 .gosu>button {
-	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 }
-
+.gosu>button:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
+	
 .gosu img {
 	text-align: center;
 	width: 200px;
@@ -126,9 +130,13 @@
 .gosu-one img {
 	width: 225px;
 	height: 225px;
-	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 }
 
+.gosu-one img:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
 .gosu button:hover {
 	background-color: rgb(223, 245, 235);
 }
@@ -164,9 +172,13 @@ ul#gallery>a>li {
 	height: 300px;
 	margin: 40px;
 	overflow: hidden;
-	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 }
 
+ul#gallery>a>li:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
 ul#gallery>a>li::after {
 	box-sizing: border-box;
 	position: absolute;
@@ -178,13 +190,13 @@ ul#gallery>a>li::after {
 	padding-top: 80px;
 	transform: translate(-50%, -50%);
 	text-align: center;
-	transition: 0.8s;
+	transition: 0.4s;
 }
 
 ul#gallery>a>li>img {
 	width: 100%;
 	height: 100%;
-	transition: 0.6s ease-in-out;
+	transition: 0.4s ease-in-out;
 }
 
 ul#gallery>a>li:hover img {
@@ -296,9 +308,13 @@ to {
 }
 
 .g-sc-tbl {
-	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 }
 
+.g-sc-tbl:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
 .gosu-write-wrap {
 	position: fixed;
 	z-index: 1000;
@@ -310,9 +326,13 @@ to {
 	text-align: center;
 	justify-content: right;
 	background-color: white;
-	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 }
 
+.upbtn:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
 .gosu-write a {
 	margin-top: 20px;
 	padding: 10px;
@@ -356,10 +376,14 @@ to {
 
 .gosuIntro div a {
 	color: #78c2ad;
-	box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 	padding: 5px;
 }
 
+.gosuIntro div a:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
 .gosuIntro div a:hover {
 	color: #367463;
 }
@@ -371,18 +395,9 @@ to {
 	font-size: small;
 }
 
-@
-keyframes motion { 0% {
-	margin-top: 0px;
-}
-100
-%
-{
-margin-top
-:
-5px;
-}
-}
+@keyframes motion { 0% {
+	margin-top: 0px;}
+100%{margin-top:5px;}}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -423,7 +438,7 @@ margin-top
 					<h5 style="font-size: 15px; color: #3c3c3c;">
 						고수에게<br>개발을 요청하세요!
 					</h5>
-					<a href="/gosuRequest.do" class="btn btn-primary form-control"
+					<a href="/gosuRequest.do" class="btn btn-primary form-control upbtn"
 						style="box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">요청서
 						작성하기</a>
 				</div>

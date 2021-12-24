@@ -38,7 +38,6 @@ input:focus, textarea:focus {
 	padding: 30px;
 	margin-top: 50px;
 	margin-bottom: 50px;
-	background-color: rgb(250, 250, 250);
 }
 
 .g-feedback h3 {
@@ -65,7 +64,7 @@ input:focus, textarea:focus {
 .talk-one tr:last-child td:last-child {
 	padding: 20px;
 	background-color: white;
-	box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 }
 
 .talk-me tr:last-child td:last-child {
@@ -150,6 +149,11 @@ input:focus, textarea:focus {
 .widthwidth{
 	width: 100%;
 }
+
+.upbtn:hover {
+-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
 </style>
 </head>
 <body>
@@ -171,8 +175,8 @@ input:focus, textarea:focus {
 
 			<c:choose>
 				<c:when test="${empty grplist }">
-					<div class="talk-sub">
-						<div style="text-align: center;">
+					<div class="talk-sub" >
+						<div style="text-align: center;box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">
 							<img src="/resources/img/member/user.png"
 								style="border-radius: 50%; width: 70px; margin-bottom: 30px;">
 							<h2 style="font-weight: 900; color: #cacaca; ">대화를
@@ -184,9 +188,10 @@ input:focus, textarea:focus {
 				<c:otherwise>
 				<div>
 							<div style="text-align: right;"><button type="button" id="widthBtn"
-												class="btn btn-primary" style="width: 100px;font-weight: 900;">전체보기</button></div>
+												class="btn btn-primary upbtn" style="width: 100px;box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">전체보기</button></div>
 						</div>
-					<div class="talk-wrap">
+					<div class="talk-wrap" style="
+	box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">
 						
 						<c:forEach items="${grplist }" var="gtl" varStatus="i">
 							<c:choose>
@@ -291,7 +296,7 @@ input:focus, textarea:focus {
 											</tr>
 											<tr>
 												<td ><p
-														style="width: 800px; text-align: center; padding: 20px; border-radius:20px;  margin: 20px; box-shadow: rgba(0, 0, 0, 0.4) 2PX 2PX 2PX 2PX;">${grrOne.requestReviewContentBr }</p></td>
+														style="width: 800px; text-align: center; padding: 20px; border-radius:20px;  margin: 20px; box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">${grrOne.requestReviewContentBr }</p></td>
 											</tr>
 										
 										</table>
@@ -323,7 +328,7 @@ input:focus, textarea:focus {
 											</tr>
 											<tr>
 												<td><p
-														style="width: 800px; padding: 20px; border-radius:20px;  margin: 20px; box-shadow: rgba(0, 0, 0, 0.4) 1PX 1PX 1PX 1PX;">${grrOne.requestReviewContentBr }</p></td>
+														style="width: 800px; padding: 20px; border-radius:20px;  margin: 20px; box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">${grrOne.requestReviewContentBr }</p></td>
 											</tr>
 									
 										</table>
@@ -346,7 +351,7 @@ input:focus, textarea:focus {
 											<tr>
 												<td><textarea cols="70" rows="10"  class="form-control"
 														id="requestReviewContent" placeholder="내용을 입력해주세요."
-														style="padding: 20px;"></textarea></td>
+														style="padding: 20px;box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);"></textarea></td>
 												<input type="hidden" value="${grpsOne.requestProjectSubNo}"
 													id="grequestProjectSubNo">
 												<input type="hidden" value="${sessionScope.m.memberId}"
@@ -357,7 +362,7 @@ input:focus, textarea:focus {
 											<tr>
 												<td style="text-align: right;padding-top: 20px;"><button
 														id="requestReviewAjax" type="button"
-														class="btn btn-primary"
+														class="btn btn-primary upbtn"
 														style="font-weight: 900; padding: 10px; margin-left: 10px;">후기
 														작성</button></td>
 											</tr>
@@ -378,9 +383,9 @@ input:focus, textarea:focus {
 				<br>
 				<br>
 				<br>
-				<div class="talk-sub">
+				<div class="talk-sub" style="margin-bottom: 200px;">
 
-					<div>
+					<div style="box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">
 						<table>
 							<tr>
 								<th colspan="2">첨부파일 &nbsp;&nbsp;&nbsp;&nbsp; <input class="form-control" style="width: 300px;display: inline-block;"
@@ -397,17 +402,17 @@ input:focus, textarea:focus {
 										<td style="text-align: center;"><c:if
 												test="${fn:length(grplist) >= 10}">
 												<button type="button" id="talkStopAjax" class="btn btn-info"
-													style="width: 200px;">개발 완료</button>
+													style="width: 200px; upbtn">개발 완료</button>
 											</c:if></td>
 										<td style="text-align: center;">
 											<button type="button" id="talkBtnAjax"
-												class="btn btn-primary" style="width: 200px;">전송</button>
+												class="btn btn-primary upbtn" style="width: 200px;box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">전송</button>
 										</td>
 									</c:when>
 									<c:otherwise>
 										<td colspan="2">
-											<button type="button" id="talkBtnAjax"
-												class="btn btn-primary">전송</button>
+											<button type="button" id="talkBtnAjax" 
+												class="btn btn-primary upbtn">전송</button>
 										</td>
 									</c:otherwise>
 								</c:choose>
