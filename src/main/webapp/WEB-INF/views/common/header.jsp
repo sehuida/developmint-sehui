@@ -34,33 +34,33 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarColor01" style="min-width: 1000px;">
+    <div class="collapse navbar-collapse" id="navbarColor01" >
       <ul class="navbar-nav me-auto" style="font-size: 18px;margin-left: 20px;font-weight: bold;">
         <li class="nav-item">
-          <a class="nav-link " href="/recruitTeamMember_mainPage.do?reqPage=1">팀원모집
+          <a class="nav-link " href="/recruitTeamMember_mainPage.do?reqPage=1" style="width: 88px;">팀원모집
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/shareList.do?reqPage=1&type=1" >개발지식공유</a>
+          <a class="nav-link " href="/shareList.do?reqPage=1&type=1" style="width: 124px;">개발지식공유</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/jobSearchList.do?reqPage=1">구인구직</a>
+          <a class="nav-link " href="/jobSearchList.do?reqPage=1" style="width: 88px;">구인구직</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/gosuMain.do">'고수'의 노하우</a>
+          <a class="nav-link " href="/gosuMain.do" style="width: 138px;">'고수'의 노하우</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/contestMain.do">공모전</a>
+          <a class="nav-link " href="/contestMain.do" style="width: 70px;">공모전</a>
         </li>
       </ul>
-       <ul class="navbar-nav float-end me-3">
+       <ul class="navbar-nav float-end me-3" style="text-align: left;">
     	<c:choose>
 			<c:when test="${empty sessionScope.m }">
-				<li class="nav-item">
+				<li class="nav-item" style="width: 85px;">
 					<a type="button" class="btn btn-secondary btn-lg" href="/loginFrm.do" style="font-size: medium;font-weight: bold;">로그인</a>
 		        </li>
-				<li class="nav-item">
+				<li class="nav-item"  style="width: 100px;">
 					<a type="button" class="btn btn-link btn-lg join-link-text" href="/joinFrm.do" style="font-size: medium;font-weight: bold;">회원가입</a>
 		        </li>
 			</c:when>
@@ -70,7 +70,7 @@
 						<jsp:include page="/WEB-INF/views/dm/alarm.jsp"/>
 						<li class="nav-item dropdown float-end me-5">
 				          <a class="nav-link dropdown-toggle active margin-right" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="padding: 0;">
-				          <img src="/resources/upload/member/${sessionScope.m.filepath }" style="width: 40px;height: 40px;border-radius: 30px;margin-right: 10px;"></i> 
+				          <img src=sssionScope.m.filepath }" style="width: 40px;height: 40px;border-radius: 30px;margin-right: 10px;"></i> 
 				          ${sessionScope.m.memberId } 님</a>
 				          <div class="dropdown-menu">
 				            <a class="dropdown-item" href="/adminPage.do">관리자 페이지</a>
@@ -83,7 +83,7 @@
 						<c:choose>
 							<c:when test="${not empty sessionScope.m }">
 					      	<jsp:include page="/WEB-INF/views/dm/alarm.jsp"/>
-								<li class="nav-item dropdown float-end me-5">
+								<li class="nav-item dropdown float-end me-5" style="width: 165px;">
 						          <a class="nav-link dropdown-toggle active margin-right" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 						          	<c:choose>
 										<c:when test="${sessionScope.m.filepath eq null }">
