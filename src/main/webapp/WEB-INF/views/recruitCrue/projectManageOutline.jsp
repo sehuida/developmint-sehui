@@ -76,12 +76,24 @@
                     	<li class="flexLi">
                     		<c:choose>
                     			<c:when test="${sl.linkName ne null}">
-				                    <a href="${sl.linkAddr}" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg" style="width: 25px;"><span style="cursor: pointer; font-size: 13px;">${sl.linkName}</span></a>
-				                    <a href="/deleteShortcut.do?shortcutNo=${sl.shortcutNo}&projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" style="position: relative; top: 5px; text-decoration: none; margin-left: 30px;">X</a>
+                    				<div style="display: flex; justify-content: space-between">
+                    					<div>
+						                    <a href="${sl.linkAddr}" class="subNaviAtag" target="_blank"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg" style="width: 30px; position: relative; bottom: 3px; margin-right: 10px; margin-left: 5px;"><span style="cursor: pointer; font-size: 13px;">${sl.linkName}</span></a>
+                    					</div>
+                    					<div>
+						                    <a href="/deleteShortcut.do?shortcutNo=${sl.shortcutNo}&projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" style="text-decoration: none; margin-left: 30px;">X</a>
+                    					</div>
+                    				</div>
                     			</c:when>
                     			<c:otherwise>
-	                    			<a href="${sl.linkAddr}" class="subNaviAtag"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg" style="width: 25px;"><span style="cursor: pointer;">${sl.linkAddr}</span></a>
-	                    			<a href="/deleteShortcut.do?shortcutNo=${sl.shortcutNo}&projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" style="position: relative; top: 5px; text-decoration: none; margin-left: 30px;">X</a>
+                    				<div style="display: flex; justify-content: space-between">
+                    					<div>
+			                    			<a href="${sl.linkAddr}" class="subNaviAtag" target="_blank"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg" style="width: 30px; position: relative; bottom: 3px; margin-right: 10px; margin-left: 5px;"><span style="cursor: pointer; font-size: 13px;">${sl.linkAddr}</span></a>
+                    					</div>
+                    					<div>
+			                    			<a href="/deleteShortcut.do?shortcutNo=${sl.shortcutNo}&projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" style="text-decoration: none; margin-left: 30px;">X</a>
+                    					</div>
+                    				</div>
                     			</c:otherwise>
                     		</c:choose>
 	                    </li>

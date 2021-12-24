@@ -6,7 +6,7 @@ import lombok.Data;
 public class TaskShortcuts {
 	private int taskShortcutNo;
 	private int projectNo;
-	private int taskNo;
+	private String taskNo;
 	private String tsLinkAddr;
 	private String tsLinkName;
 }
