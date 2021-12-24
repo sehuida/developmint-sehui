@@ -207,7 +207,7 @@
 	<div class="container" style="margin-bottom: 50px;">
 	<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
 		<div style="margin: 30px auto;">
-			<span class="subEngTitel">HOT</span> <span class="subTitel">인기 공모전</span><a href="/allContestList.do?reqPage=1&type=0" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
+			<span class="subEngTitel">新</span> <span class="subTitel">고수들</span><a href="/allContestList.do?reqPage=1&type=0" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
 		</div>
 		<div class="gosuContents mt-3">
 			<c:forEach items="${gosuList }" var="g" begin="0" end="4">
