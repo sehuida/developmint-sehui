@@ -59,9 +59,9 @@
 			
 			<style>
 				.memberBox{
-					width: 250px;
+					width: 300px;
 					height: 250px;
-					padding: 20px;
+					padding: 20px 30px;
 					border: 1px solid gray;
 					display: inline-block;
 					overflow: hidden;
@@ -74,6 +74,7 @@
 				.resumeTitle{
 					width: 208px;
 					text-overflow: ellipsis;
+					font-size: 18px;
 				}
 			</style>
 			
@@ -84,35 +85,24 @@
 					<c:forEach items="${list }" var="a" varStatus="i">
 						<div class="memberBox">
 							
-								${a.resumeTitle }
+								<strong class="resumeTitle">${a.resumeTitle }</strong>
 							
 							<div class="infoBox">
-								<div class="resumeTitle" data-bs-toggle="modal" data-bs-target="#certiModal${i.index }">${a.resumeTitle }</div>
 								 <span class="infoTitle"><i class="bi bi-person-fill" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>회원이름 : </span><span>${memlist[i.index].memberName }</span><br>
 								 <span class="infoTitle"><i class="bi bi-envelope" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>이메일 : </span><span>${memlist[i.index].email }</span><br>
 							</div>
 							<div class="okNo">
-								<button class="btn btn-primary enrollBtn" style="margin-top: 20px; margin-right: 5px;">인증</button><button class="btn btn-secondary noEnrollBtn"  style="margin-top: 20px; margin-left: 5px;">반려</button>
+								<button class="btn btn-primary enrollBtn" style="margin-top: 20px; margin-right: 5px;">서류합격</button><button class="btn btn-secondary noEnrollBtn"  style="margin-top: 20px; margin-left: 5px;">탈락</button>
 							</div>
 						</div>
 					</c:forEach>
 				</div>
 				<div id="pageNavi" style="text-align: center; margin-top:50px;"  >${pageNavi }</div>
-				
-				<!-- 내용보기 Modal -->
-				<c:forEach items="${list }" var="c" varStatus="i">
-				<div class="modal fade" id="certiModal${i.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				  <div class="modal-dialog">
-				    <div class="modal-content" style="border-radius: 0.3rem;">
-				    </div>
-				  </div>
-				</div>
-				</c:forEach>
 			</c:when>
 			<c:otherwise>
 				<div class="noList">
 					<p><i class="bi bi-chat-square-dots" style="color: #4ECDC4; font-size: 35px;"></i></p>
-					<p>회사 인증을 요청한 회원이 없습니다.</p>
+					<p>지원한 이력서가 없습니다.</p>
 				</div>
 			</c:otherwise>
 		</c:choose>
