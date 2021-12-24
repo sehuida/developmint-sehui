@@ -112,6 +112,11 @@
 				<a href="/addCompany2.do" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
 			</div>
 			<div id="cate">
+				<i class="bi bi-files" style="color:#4ECDC4;"></i>
+				<a href="/affiliatesList.do?reqPage=1"><span>제휴 회사 목록</span></a>
+				<a href="/affiliatesList.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>
+			</div>
+			<div id="cate">
 				<i class="bi bi-briefcase" style="color:#4ECDC4;"></i>
 				<a href="/companyEnroll.do?reqPage=1"><span>회사 인증 처리</span></a>
 				<a href="/companyEnroll.do?reqPage=1" class="cateAtag"><i class="bi bi-chevron-right" style="color:#4ECDC4;"></i></a>

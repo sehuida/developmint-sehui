@@ -555,7 +555,15 @@
 	<select id="companyList" resultType="com">
 		select
 			company_no as companyNo,
-			company_name as companyName
+			company_name as companyName,
+			open_date as openDate,
+			employee,
+			category,
+			ceo,
+			address,
+			content,
+			business_no as businessNo,
+			filepath
 		from company
 	</select>
 	
@@ -741,6 +749,7 @@
 		</choose>
 	</delete>
 	
+	<!-- 선택한 게시물 5일간 작성 수  -->
 	<select id="countList5" parameterType="map" resultType="_int">
 		select count(*) 
 		from 
@@ -764,6 +773,34 @@
 		</choose>
 	</select>
 	
+	<!-- 제휴 회사 목록  -->
+	<select id="affiliatesList" parameterType="map" resultType="com">
+		select cc.* 
+		from(select rownum as rnum, c.*
+		from(select
+			company_no as companyNo,
+			company_name as companyName,
+			open_date as openDate,
+			employee,
+			category,
+			ceo,
+			address,
+			content,
+			filepath
+		from company
+		order by company_no desc)c)cc
+		where rnum BETWEEN #{start} and #{end}
+	</select>
+	
+	<!-- 제휴회사 수 -->
+	<select id="totalCompanyCount" resultType="_int">
+		select count(*) from company
+	</select>
+	
+	<!-- 선택한 제휴회사 삭제 -->
+	<delete id="chkCompanyDel" parameterType="_int">
+		delete from company where company_no = ${value}
+	</delete>
 </mapper>
 
 
