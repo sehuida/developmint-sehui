@@ -617,7 +617,7 @@
 													      	<textarea class="form-control reText textareaBox" name="commentContent">${rl.commentContent }</textarea>
 													      	<input type="hidden" value="${rl.commentNo }" name="commentNo">
 													      	<div style="text-align: right; ">
-														      	<button type="submit" class="btn btn-primary">수정</button>
+														      	<button type="submit" class="btn btn-primary updateCm">수정</button>
 														        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 													        </div>
 													      </div>
