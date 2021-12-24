@@ -33,6 +33,9 @@
 .atag:hover{
 	color: #4ECDC4;
 }
+.tblTr>td{
+	line-height: 40px;
+}
 </style>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -49,9 +52,9 @@
 				<th><input type="checkbox" id="checkAll" class="form-check-input" style="zoom: 1.2;"></th>
 				<th>No.</th>
 				<th>회사명</th>
+				<th>회사로고</th>
 				<th>대표자</th>
 				<th>창립일</th>
-				<th>카테고리</th>
 				<th>주소</th>
 			</tr>
 			<c:forEach items="${companyList }" var="c" varStatus="i">
@@ -59,9 +62,19 @@
 					<td><input type="checkbox" class="form-check-input chk" style="zoom: 1.2;" onclick="setBgcolor(this)" value="${c.companyNo }"></td>
 					<td>${start + i.index }</td>
 					<td><a href="/companyInfo.do?companyNo=${c.companyNo }" class="atag">${c.companyName }</a></td>
+					<td>
+						<c:choose>
+							<c:when test="${c.filePath == null}">
+								<i class="bi bi-question-circle" style="height: 40px;"></i>
+							</c:when>
+							<c:otherwise>
+								<img src="/resources/upload/company/${c.filePath}" width="150px;" height="40px;">						
+							</c:otherwise>
+						</c:choose>
+						
+					</td>
 					<td>${c.ceo }</td>
 					<td>${c.openDate}</td>
-					<td>${c.category }</td>
 					<td>${c.address }</td>
 				</tr>
 			</c:forEach>

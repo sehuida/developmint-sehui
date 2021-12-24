@@ -786,7 +786,7 @@
 			ceo,
 			address,
 			content,
-			filepath
+			filePath
 		from company
 		order by company_no desc)c)cc
 		where rnum BETWEEN #{start} and #{end}
