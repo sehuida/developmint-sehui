@@ -129,38 +129,29 @@ public class ContestController {
 	public String insertContestComment(Comment cm, Model model) {
 		int result = service.insertContestComment(cm);
 		if(result>0) {
-			model.addAttribute("msg","댓글등록 완료");	
+			return "redirect:/contestView.do?contestNo="+cm.getBoardNo();
 		}else {
 			model.addAttribute("msg","댓글등록 실패");
+			model.addAttribute("loc","/contestView.do?contestNo="+cm.getBoardNo());
+			return "common/msg";
 		}
-		model.addAttribute("loc","/contestView.do?contestNo="+cm.getBoardNo());
-		return "common/msg";
+		
 	}
 	
 	//댓글수정
+	@ResponseBody
 	@RequestMapping(value="/updateContestComment.do")
-	public String updateContestComment(Comment cm, Model model) {
+	public int updateContestComment(Comment cm, Model model) {
 		int result = service.updateContestComment(cm);
-		if(result>0) {
-			model.addAttribute("msg","댓글수정 완료");	
-		}else {
-			model.addAttribute("msg","댓글수정 실패");
-		}
-		model.addAttribute("loc","/contestView.do?contestNo="+cm.getBoardNo());
-		return "common/msg";
+		return result;
 	}
 	
 	//댓글삭제
+	@ResponseBody
 	@RequestMapping(value="/deleteContestComment.do")	
-	public String deleteContestComment(Comment cm, Model model) {
+	public int deleteContestComment(Comment cm, Model model) {
 		int result = service.deleteContestComment(cm);
-		if(result>0) {
-			model.addAttribute("msg","댓글삭제 완료");	
-		}else {
-			model.addAttribute("msg","댓글삭제 실패");
-		}
-		model.addAttribute("loc","/contestView.do?contestNo="+cm.getBoardNo());
-		return "common/msg";
+		return result;
 	}
 
 	//댓글신고
@@ -168,12 +159,18 @@ public class ContestController {
 	public String reportComment(Report rp, Model model, int contestNo) {
 		int result = service.reportContestComment(rp);
 		if(result>0) {
-			model.addAttribute("msg","댓글신고 완료");	
+			model.addAttribute("title","댓글 신고 성공");
+			model.addAttribute("msg","해당 댓글을 신고하였습니다.");
+			model.addAttribute("icon","success");
+		
 		}else {
-			model.addAttribute("msg","댓글신고 실패");
+			model.addAttribute("title","댓글 신고 실패");
+			model.addAttribute("msg","해당 댓글 신고에 실패하였습니다. 관리자에게 문의해주세요.");
+			model.addAttribute("icon","error");
 		}
 		model.addAttribute("loc","/contestView.do?contestNo="+contestNo);
-		return "common/msg";
+		return "member/swalMsg";
+		
 	}
 	
 	//공모신청
