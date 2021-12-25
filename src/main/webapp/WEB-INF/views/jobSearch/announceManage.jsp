@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Develomint</title>
-<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>here</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/></title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <style>
@@ -181,7 +181,7 @@
 		$(".resumeBtn").click(function(e){
 			var count = $(".announceCount").val();
 			console.log(count);
-			if($(".announceCount").val() >= 3) {
+			if($(".announceCount").val() >= 1) {
 				alert("구인공고는 1개만 작성이 가능합니다.");
 				e.preventDefault();
 				console.log(count);
@@ -236,7 +236,7 @@
 					</div>
 				</div>
 					<div class="announceTitle">
-						<em>${a.announceTitle }</em>	<!-- r.resumeTitle -->
+						<a href="/announceView.do?announceNo=${a.announceNo }&memberNo=${a.memberNo }" style="color: black; text-decoration: none;"><em>${a.announceTitle }</em></a>
 					</div>
 					<ul class="announceInfo1">
 		            	<li class="career">
@@ -260,7 +260,17 @@
 								<img src="resources/img/resume/income.PNG">					
 							</div>
 							<div class="announceInfoData">
-								<span><fmt:formatNumber value="${a.money}" pattern="#,###"/> &#8361;</span>	<!-- r.resumeMoney -->
+								<span>
+								<c:choose>
+									<c:when test="${a.money eq 0 }">
+										회사내규에 따름
+									</c:when>
+									<c:otherwise>
+										<fmt:formatNumber value="${a.money}" pattern="#,###"/> &#8361;
+									</c:otherwise>
+								</c:choose>
+								
+								</span>	<!-- r.resumeMoney -->
 							</div>
 						</li>  
 					</ul>

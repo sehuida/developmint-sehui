@@ -107,7 +107,7 @@
 		width: 260px;
 		float: left;
 		text-align: center;
-		line-height: 120px;
+		line-height: 100px;
 	}
 	.infoData{
 		float: left;
@@ -116,7 +116,7 @@
 	.left{
 		float: left;
 		overflow: hidden;
-		margin-right: 130px;
+		margin-right: 80px;
 	}
 	.left>div, .right>div{
 		margin-bottom: 10px;
@@ -358,7 +358,16 @@
 							</i>
 							 급여
 						</span>
-						<span><fmt:formatNumber value="${a.money}" pattern="#,###"/> &#8361;</span>
+						<span>
+							<c:choose>
+								<c:when test="${a.money eq 0 }">
+									회사내규에 따름
+								</c:when>
+								<c:otherwise>
+									<fmt:formatNumber value="${a.money}" pattern="#,###"/> &#8361;
+								</c:otherwise>
+							</c:choose>
+						</span>
 					</li>
 				</ul>
 			</div>

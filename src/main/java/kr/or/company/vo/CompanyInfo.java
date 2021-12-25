@@ -22,4 +22,7 @@ public class CompanyInfo {
 	private String writeDate;
 	private int announceNo;
 
+	public String getcontentBr() {
+		return content.replaceAll("\r\n", "<br>");
+	}
 }

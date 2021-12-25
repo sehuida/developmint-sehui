@@ -451,10 +451,10 @@
 						</div>
 						<div class="schoolInput">
 							<select class="selectInput" id="school" name="school">	
-								<option value=1>초졸</option>
-								<option value=2>중졸</option>
-								<option value=3>고졸</option>
-								<option value=4 selected="">대졸이상</option>
+								<option value=1>초졸 이상</option>
+								<option value=2>중졸 이상</option>
+								<option value=3>고졸 이상</option>
+								<option value=4 selected="">대졸 이상</option>
 								<option value=5>학력무관</option>
 							</select>
 						</div>		

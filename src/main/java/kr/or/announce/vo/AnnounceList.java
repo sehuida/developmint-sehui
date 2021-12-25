@@ -11,4 +11,6 @@ public class AnnounceList {
 	private String resumeTitle;
 	private String applyDate;
 	private int resumeNo;
+	private String memberName;
+	private String email;
 }

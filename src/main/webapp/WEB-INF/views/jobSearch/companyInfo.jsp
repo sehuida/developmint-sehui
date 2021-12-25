@@ -53,7 +53,6 @@
 	color: rgb(78, 205, 196);
 	font-weight: 900;
 }
-
 .announce>p {
 	font-size: 11px;
 	margin-left: 30px;
@@ -590,21 +589,30 @@ b {
 						</ul>
 					</div>
 					<b>기업개요</b>
+					<div style="overflow: hidden;">
 					<ul class="info info1">
 						<li>업종</li>
 						<li>대표자명</li>
 						<li>홈페이지</li>
-						<li>사업내용</li>
-						<li>기업주소</li>
+						<!-- <li>사업내용</li>
+						<li>기업주소</li> -->
 					</ul>
 					<ul class="info info2">
 						<li>${com.category }</li>
 						<li>${com.ceo }</li>
 						<li><a href="#" style="text-decoration: none; color: #222222;">http://www.homepage.co.kr</a></li>
-						<li>${com.content }</li>
-						<li id="address">${com.address }</li>
-						<div id="map" style="width:500px;height:400px; margin-top: 30px;"></div>
+						<%-- <li>${com.content }</li> --%>
+						<%-- <li id="address">${com.address }</li>
+						<div id="map" style="width:500px;height:400px; margin-top: 30px;"></div> --%>
 					</ul>
+					</div>
+					<div class="saup" style="padding-left: 32px; overflow: hidden;">
+						<p style="color: #888888; float:left;">사업내용</p><p style="padding-left:62px; float:left;">${com.contentBr }</p>
+					</div>
+					<div class="saup" style="padding-left: 32px; margin-top: 28px;">
+						<span style="color: #888888;">기업주소</span><span id="address" style="padding-left:62px;">${com.address }</span>
+						<div id="map" style="width:500px;height:400px; margin-top: 30px; margin-left: 120px;"></div>
+					</div>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -612,199 +620,6 @@ b {
 		<br><br>
 		<hr>
 		<p>회사에 대한 댓글을 남겨주세요!</p> 
-		<%--댓글 입력 창(로그인했을 때 띄우기) --%>
-		<%-- <c:if test="${not empty sessionScope.m.memberId }">
-			<form action="/insertCompanyComment.do" method="post">
-				<div class="commentBox">
-					<div class="userInfoBox">
-						<c:choose>
-							<c:when test="${sessionScope.m.filepath eq null }">
-								<img src="/resources/img/member/user.png" style="width: 60px; height:60px;">				
-							</c:when>
-							<c:otherwise>
-								<img src="/resources/upload/member/${sessionScope.m.filepath }" style="width: 60px; height:60px; margin-left:10px;">
-							</c:otherwise>
-						</c:choose>
-						<p>${sessionScope.m.memberId }</p>
-					</div>
-					<div class="textBox" >
-						<textarea class="form-control textareaBox" name="commentContent"></textarea>
-					</div>
-					<div>
-						<input type="submit" value="등록" class="btn btn-outline-primary commentBtn" style="height: 100px; width: 100px; font-weight: bold">
-					</div>
-				</div>
-				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-				<input type="hidden" name="boardNo" value="${com.companyNo }">
-				<input type="hidden" name="boardType" value="4">
-				<input type="hidden" name="commentType" value="1">
-			</form>
-		</c:if>
-		
-		
-		댓글리스트
-		<div class=comentListBox>
-			<c:choose>
-			댓글이 있는경우
-			<c:when test="${not empty commentList }">
-				<c:forEach items="${commentList }" var="cl" varStatus="i">
-					<div style="margin-bottom: 20px;">
-						<c:if test="${cl.commentType eq 1 }">
-							<div class="comentView">
-								<div class="commentImgBox">
-									<c:choose>
-										<c:when test="${cl.memberImg eq null }">
-											<img src="/resources/img/member/user.png" style="width: 60px; height:60px;">				
-										</c:when>
-										<c:otherwise>
-											<img src="/resources/upload/member/${cl.memberImg }" style="width: 60px; height:60px; border-radius: 50%">
-										</c:otherwise>
-									</c:choose>
-								</div>
-								<div class="iddate">
-									<p>${cl.memberId }</p>
-									<p>${cl.regDate }</p>
-									로그인했을 때만 보여주기
-									<c:if test="${not empty sessionScope.m }">
-										내가 쓴 댓글일 경우만 보여주기
-										<c:if test="${cl.memberId eq sessionScope.m.memberId }">
-										댓글 수정 
-											<a href="#" data-bs-toggle="modal" data-bs-target="#updateComment${i.index }">수정</a>
-												
-												댓글 수정  Modal
-												<div class="modal fade" id="updateComment${i.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-												  <div class="modal-dialog  modal-dialog-centered">
-												    <div class="modal-content">
-												      <div class="modal-body">
-												      	<form action="/updateCompanyComment.do" method="post">
-												      	<textarea class="form-control reText" name="commentContent">${cl.commentContent }</textarea>
-												      	<input type="hidden" value="${cl.commentNo }" name="commentNo">
-												      	<input type="hidden" value="${cl.boardNo }" name="boardNo">
-												      	<div style="text-align: right; ">
-												      	<button type="submit" class="btn btn-primary">수정</button>
-												        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-												        </div>
-												        </form>
-												      </div>
-												    </div>
-												  </div>
-												</div>
-											
-											댓글 삭제
-											<form action="/deleteCompanyComment.do" method="post" class="delForm" style="display: inline;">
-												<a href="javascript:void(0);" class="delComment">삭제</a>
-												<input type="hidden" value="${cl.commentNo }" name="commentNo">
-												<input type="hidden" value="${cl.boardNo }" name="boardNo">
-											</form>
-										</c:if>
-									</c:if>
-								</div>
-								<span>
-									${cl.commentContent }
-									<a href="javascript:void(0)" class="reComentBtn"><i class="bi bi-chat-dots-fill" style="font-size: 20px"></i></a>
-								</span>
-							</div>
-							
-							
-		--------------------------------------------------------------------------
-		
-							대댓글 작성 창
-							<form action="/insertCompanyComment.do" method="post">
-								<div class="recomentBox">
-									<textarea class="form-control reText textareaBox" name="commentContent"></textarea>
-									<c:choose>
-										<c:when test="${not empty sessionScope.m }">
-											<input type="submit" value="등록" class="btn btn-outline-primary" style="height: 100px; width: 80px; font-weight: bold; margin-left:10px; margin-right: 10px">
-										</c:when>
-										<c:otherwise>
-											<input type="button" value="등록" class="btn btn-outline-primary noMember" style="height: 100px; width: 80px; font-weight: bold; margin-left:10px; margin-right: 10px">
-										</c:otherwise>
-									</c:choose>
-									<input type="reset" value="취소" class="btn btn-outline-secondary cancelBtn" style="height: 100px; width: 80px; font-weight: bold">
-									<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-									<input type="hidden" name="boardNo" value="${com.companyNo }">
-									<input type="hidden" name="boardType" value="4">
-									<input type="hidden" name="commentType" value="2">
-									<input type="hidden" name="commentRef" value="${cl.commentNo }">
-								</div>
-							</form>
-							</c:if>
-							
-		--------------------------------------------------------------------------
-							대댓글 리스트
-							<c:forEach items="${commentList }" var="rl" varStatus="j">
-								<c:if test="${rl.commentType eq 2 && cl.commentNo eq rl.commentRef}">
-									<div class="reComentView">
-									<i class="bi bi-arrow-return-right" style="margin-left:50px; color:#4ECDC4;"></i>
-										
-										<div class="recommentImgBox">
-											<c:choose>
-												<c:when test="${rl.memberImg eq null }">
-													<img src="/resources/img/member/user.png" style="width: 60px; height:60px;">				
-												</c:when>
-												<c:otherwise>
-													<img src="/resources/upload/member/${rl.memberImg }" style="width: 60px; height:60px; border-radius: 50%">
-												</c:otherwise>
-											</c:choose>
-										</div>
-										<div class="iddate">
-											<p>${rl.memberId }</p>
-											<p>${rl.regDate }</p>
-											<!-- 로그인했을 때만 보여주기 -->
-											<c:if test="${not empty sessionScope.m }">
-												<!-- 내가 쓴 댓글일 경우만 보여주기 -->
-												<c:if test="${rl.memberId eq sessionScope.m.memberId }">
-												<!-- 댓글 수정  -->
-													<a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#updateReComment${j.index }" class="updateBtn">수정</a>
-													
-													<!-- 댓글 수정  Modal -->
-													<div class="modal fade" id="updateReComment${j.index }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-													  <div class="modal-dialog  modal-dialog-centered">
-													    <div class="modal-content">
-													      <div class="modal-body">
-													      	<form action="/updateCompanyComment.do" method="post">
-													      	<textarea class="form-control reText textareaBox" name="commentContent">${rl.commentContent }</textarea>
-													      	<input type="hidden" value="${rl.commentNo }" name="commentNo">
-													      	<input type="hidden" value="${rl.boardNo }" name="boardNo">
-													      	<div style="text-align: right; ">
-													      	<button type="submit" class="btn btn-primary">수정</button>
-													        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-													        </div>
-													        </form>
-													      </div>
-													    </div>
-													  </div>
-													</div>
-													
-													<!-- 댓글 삭제 -->
-													<form action="/deleteCompanyComment.do" method="post" class="delForm" style="display: inline;">
-														<a href="javascript:void(0);" class="delComment">삭제</a>
-														<input type="hidden" value="${rl.commentNo }" name="commentNo">
-													    <input type="hidden" value="${rl.boardNo }" name="boardNo">
-													</form>
-												</c:if>
-											</c:if>
-										</div>
-										<span>
-										${rl.commentContent }
-										</span>
-										
-									</div>
-								</c:if>
-							</c:forEach>
-						</div>
-				</c:forEach>	
-			</c:when>
-			댓글이 없는경우
-			<c:otherwise>
-				<div style="text-align: center">
-					<p><i class="bi bi-chat-square-dots" style="font-size: 35px; display:inline-block; color:#4ECDC4;"></i></p>
-					<p style="font-weight: bold">등록된 댓글이 없습니다. 댓글을 남겨보세요!</p>
-				</div>
-			</c:otherwise>
-			</c:choose>
-		</div> --%>
-		
 		
 		
 		<%--댓글 입력 창(로그인했을 때 띄우기) 댓글 등록할 때 SQL에서 등록일 to_char(SYSDATE,'MM-DD HH24:MI') 이걸로 넣어주세용--%>
@@ -1355,6 +1170,18 @@ b {
 	    } 
 	});    
 	
+	
+	//커뮤니티 가이드
+	$("#community-guide").click(function() {
+
+		$(".community-wrap").css("display", "flex");
+
+	});
+	$("#community-close").click(function() {
+
+		$(".community-wrap").css("display", "none");
+
+	});
 </script>
 </body>
 </html>
