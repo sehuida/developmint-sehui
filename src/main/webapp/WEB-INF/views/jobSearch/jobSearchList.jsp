@@ -267,6 +267,9 @@
 	                            <c:if test="${a.career eq 2}">
 	                            	<span>경력</span>
 	                            </c:if>
+	                            <c:if test="${a.career eq 3}">
+	                            	<span>경력무관</span>
+	                            </c:if>
 	                            <br>
 	                            <span>학력</span> 
 	                            <c:if test="${a.school eq 1}">
@@ -280,6 +283,9 @@
 	                            </c:if>
 	                            <c:if test="${a.school eq 4}">
 		                            <span>대학교 졸업 이상</span>
+	                            </c:if>
+	                            <c:if test="${a.school eq 5}">
+		                            <span>학력무관</span>
 	                            </c:if>
 	                        </div>
 	                        <div class="workInfo">
