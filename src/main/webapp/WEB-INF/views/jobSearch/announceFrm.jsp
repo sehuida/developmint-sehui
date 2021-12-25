@@ -523,7 +523,7 @@
 							<b>관련기술</b>
 						</div>
 						<input type="text" class="textInput" id="skills" style="width: 810px; margin-left: 0px;" name="skills" placeholder="추가할 기술명을 입력하세요."><br>
-						<t style="font-size: 13px; margin-left: 30px; color: rgb(108,108,108);">기술명을 입력한 후, 엔터키를 눌러 추가해 주세요.</t>
+						<t style="font-size: 13px; margin-left: 30px; color: rgb(108,108,108);"><!-- 기술명을 입력한 후, 엔터키를 눌러 추가해 주세요. --></t>
 					</div>
 					
 					<!-- 이전, 다음버튼 -->
