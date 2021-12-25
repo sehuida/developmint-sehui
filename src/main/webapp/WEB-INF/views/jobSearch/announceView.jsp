@@ -107,7 +107,7 @@
 		width: 260px;
 		float: left;
 		text-align: center;
-		line-height: 120px;
+		line-height: 100px;
 	}
 	.infoData{
 		float: left;
@@ -116,7 +116,7 @@
 	.left{
 		float: left;
 		overflow: hidden;
-		margin-right: 130px;
+		margin-right: 80px;
 	}
 	.left>div, .right>div{
 		margin-bottom: 10px;

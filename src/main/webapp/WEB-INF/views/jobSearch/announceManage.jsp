@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Develomint</title>
-<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>here</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/></title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <style>
@@ -181,7 +181,7 @@
 		$(".resumeBtn").click(function(e){
 			var count = $(".announceCount").val();
 			console.log(count);
-			if($(".announceCount").val() >= 3) {
+			if($(".announceCount").val() >= 1) {
 				alert("구인공고는 1개만 작성이 가능합니다.");
 				e.preventDefault();
 				console.log(count);
@@ -236,7 +236,7 @@
 					</div>
 				</div>
 					<div class="announceTitle">
-						<em>${a.announceTitle }</em>	<!-- r.resumeTitle -->
+						<a href="/announceView.do?announceNo=${a.announceNo }&memberNo=${a.memberNo }" style="color: black; text-decoration: none;"><em>${a.announceTitle }</em></a>
 					</div>
 					<ul class="announceInfo1">
 		            	<li class="career">
