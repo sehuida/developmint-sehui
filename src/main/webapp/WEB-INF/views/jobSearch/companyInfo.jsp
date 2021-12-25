@@ -1170,6 +1170,18 @@ b {
 	    } 
 	});    
 	
+	
+	//커뮤니티 가이드
+	$("#community-guide").click(function() {
+
+		$(".community-wrap").css("display", "flex");
+
+	});
+	$("#community-close").click(function() {
+
+		$(".community-wrap").css("display", "none");
+
+	});
 </script>
 </body>
 </html>

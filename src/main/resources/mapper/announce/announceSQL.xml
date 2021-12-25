@@ -186,7 +186,7 @@ select * from
         from application a
         join resume re using(resume_no)
         order by status)r)rr)rrr
-        where (status = 1 or status = 2) and announceNo = #{announceNo})
+        where (status = 1 or status = 2 or status = 3) and announceNo = #{announceNo})
         where rnum between #{start} and #{end}
 	</select>
 	
