@@ -67,9 +67,9 @@
 	                    </div>
 	                    <ul class="s-sub-menu">
                             <li><a href="/enterProjectTaskM.do?projectNo=${pt.projectNo}&reqPage=1"><span style="cursor: pointer;">Meeting</span></a></li>
-                            <li><a href="#"><span>Task</span></a></li>
-                            <li><a href="#"><span>Bug</span></a></li>
-                            <li><a href="#"><span>Hold</span></a></li>
+                            <li><a href="/enterProjectTaskT.do?projectNo=${pt.projectNo}&reqPage=1"><span style="cursor: pointer;">Task</span></a></li>
+                            <li><a href="/enterProjectTaskB.do?projectNo=${pt.projectNo}&reqPage=1"><span style="cursor: pointer;">Bug</span></a></li>
+                            <li><a href="/enterProjectTaskH.do?projectNo=${pt.projectNo}&reqPage=1"><span style="cursor: pointer;">Hold</span></a></li>
                         </ul>
                     </li>
                     <c:forEach items="${scList}" var="sl">

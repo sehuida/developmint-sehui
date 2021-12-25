@@ -164,6 +164,9 @@
 .rBox_Leftnavi_right{
 	opacity: 0.5;
 }
+.rBox_Leftnavi_first{
+	opacity: 1;
+}
 
 
 #navi_button{

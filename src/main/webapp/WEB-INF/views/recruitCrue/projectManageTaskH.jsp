@@ -8,7 +8,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <meta charset="UTF-8">
-<title>Project Task Manager_Meeting</title>
+<title>Project Task Manager_Hold</title>
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	
@@ -33,93 +33,18 @@
 	    var pageProjectNo = $(".pageProjectNo").val();
 	    var pageTeamMemberNo = $(".pageTeamMemberNo").val();
 	    
-	    $(".rBox_Leftnavi_left").click(function(){
-	    	if($(".navi_checkbox").is(":checked")){
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=1&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
-			} else {
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=1&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
-			}
-	    });
-	    
-		$(".rBox_Leftnavi_middle").click(function(){
-			if($(".navi_checkbox").is(":checked")){
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=2&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
-			} else {
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=2&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
-			}
-		 });
-		
-		$(".rBox_Leftnavi_right").click(function(){
-			if($(".navi_checkbox").is(":checked")){
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=3&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
-			} else {
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=3&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
-			}
-		 });
-		$(".rBox_Leftnavi_first").click(function(){
-			if($(".navi_checkbox").is(":checked")){
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=4&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
-			} else {
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=4&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
-			}
-		 });
-		
-		
 		$(".navi_checkbox").change(function(){
 			if($(".navi_checkbox").is(":checked")){
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=1&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskHSelect.do?reqPage=1checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			} else {
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=1&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskHSelect.do?reqPage=1checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			}
 		});
 		
 		if(checkValue == 1){
 	    	$(".navi_checkbox").prop("checked", false);
-	    	if(viewValue == 1){
-	    		$(".rBox_Leftnavi_right").css("opacity", "0.5");
-	    		$(".rBox_Leftnavi_middle").css("opacity", "0.5");
-		        $(".rBox_Leftnavi_left").css("opacity", "1"); 
-		        $(".rBox_Leftnavi_first").css("opacity", "0.5"); 
-	    	}else if(viewValue == 2){
-	    		$(".rBox_Leftnavi_right").css("opacity", "0.5");
-	    		$(".rBox_Leftnavi_middle").css("opacity", "1");
-		        $(".rBox_Leftnavi_left").css("opacity", "0.5"); 
-		        $(".rBox_Leftnavi_first").css("opacity", "0.5"); 
-	    	}else if(viewValue == 3){
-	    		$(".rBox_Leftnavi_right").css("opacity", "1");
-	    		$(".rBox_Leftnavi_middle").css("opacity", "0.5");
-		        $(".rBox_Leftnavi_left").css("opacity", "0.5"); 
-		        $(".rBox_Leftnavi_first").css("opacity", "0.5"); 
-	    	}
-	    	else if(viewValue == 4){
-	    		$(".rBox_Leftnavi_right").css("opacity", "0.5");
-	    		$(".rBox_Leftnavi_middle").css("opacity", "0.5");
-		        $(".rBox_Leftnavi_left").css("opacity", "0.5"); 
-		        $(".rBox_Leftnavi_first").css("opacity", "1"); 
-	    	}
 	    } else if(checkValue == 2){
 	    	$(".navi_checkbox").prop("checked", true);
-	    	if(viewValue == 1){
-	    		$(".rBox_Leftnavi_right").css("opacity", "0.5");
-	    		$(".rBox_Leftnavi_middle").css("opacity", "0.5");
-		        $(".rBox_Leftnavi_left").css("opacity", "1"); 
-		        $(".rBox_Leftnavi_first").css("opacity", "0.5");
-	    	}else if(viewValue == 2){
-	    		$(".rBox_Leftnavi_right").css("opacity", "0.5");
-	    		$(".rBox_Leftnavi_middle").css("opacity", "1");
-		        $(".rBox_Leftnavi_left").css("opacity", "0.5"); 
-		        $(".rBox_Leftnavi_first").css("opacity", "0.5");
-	    	}else if(viewValue == 3){
-	    		$(".rBox_Leftnavi_right").css("opacity", "1");
-	    		$(".rBox_Leftnavi_middle").css("opacity", "0.5");
-		        $(".rBox_Leftnavi_left").css("opacity", "0.5");
-		        $(".rBox_Leftnavi_first").css("opacity", "0.5");
-	    	}else if(viewValue == 4){
-	    		$(".rBox_Leftnavi_right").css("opacity", "0.5");
-	    		$(".rBox_Leftnavi_middle").css("opacity", "0.5");
-		        $(".rBox_Leftnavi_left").css("opacity", "0.5"); 
-		        $(".rBox_Leftnavi_first").css("opacity", "1"); 
-	    	}
 	    }
 		
 		$("#taskStartDate").change(function(){
@@ -250,10 +175,10 @@
 	                            <img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg" style="margin-left: 5px;"><span style="font-weight: 900;">과업 관리</span>
 	                    </div>
 	                    <ul class="s-sub-menu">
-                            <li><a href="/enterProjectTaskM.do?projectNo=${projectNo}&reqPage=1"><span style="cursor: pointer; color: #90d1b4; font-weight: 900;">Meeting</span></a></li>
+                            <li><a href="/enterProjectTaskM.do?projectNo=${projectNo}&reqPage=1"><span style="cursor: pointer;">Meeting</span></a></li>
                             <li><a href="/enterProjectTaskT.do?projectNo=${projectNo}&reqPage=1"><span style="cursor: pointer;">Task</span></a></li>
                             <li><a href="/enterProjectTaskB.do?projectNo=${projectNo}&reqPage=1"><span style="cursor: pointer;">Bug</span></a></li>
-                            <li><a href="/enterProjectTaskH.do?projectNo=${projectNo}&reqPage=1"><span style="cursor: pointer;">Hold</span></a></li>
+                            <li><a href="/enterProjectTaskH.do?projectNo=${projectNo}&reqPage=1"><span style="cursor: pointer; color: #90d1b4; font-weight: 900;">Hold</span></a></li>
                         </ul>
                     </li>
                     <c:forEach items="${scList}" var="sl">
@@ -294,7 +219,7 @@
                 <div class="titleLine"></div>
                 <div class="rBox_navi">
                     <div id="left_site">
-                    	<div class="rBox_Leftnavi_first">
+                    	<!-- <div class="rBox_Leftnavi_first">
                     		<img class="rBox_navi_icon" src="/resources/img/recruitTeamProject/common/all.png">
                             <span class="navi_left_font">전체보기</span>
                         </div>
@@ -309,7 +234,7 @@
                         <div class="rBox_Leftnavi_right">
                         	<img class="rBox_navi_icon" src="/resources/img/recruitTeamProject/common/process.png">
                             <span class="navi_left_font">진행 중</span>
-                        </div>
+                        </div> -->
                     </div>
                     <div id="right_site">
                         <input type="checkbox" class="navi_checkbox">
@@ -318,7 +243,7 @@
                 </div>
                 <div class="taskBox">
                     <div class="taskWrap">
-                        <p class="taskContentTitle">Meeting</p>
+                        <p class="taskContentTitle">Hold</p>
                         <div class="titleLine" style="width: 100%; margin-top: 10px;"></div>
                         <c:forEach items="${ptk}" var="ptk">
                         <div class="taskMeeting">
@@ -349,6 +274,9 @@
 	                                		<c:when test="${ptk.processSort eq 3}">
 	                                			<span class="badge rounded-pill bg-primary" id="completeLabel">완료</span>
 	                                		</c:when>
+	                                		<c:when test="${ptk.processSort eq 4}">
+	                                			<span class="badge rounded-pill bg-primary" id="holdLabel">보류</span>
+	                                		</c:when>
 	                                	</c:choose>
 	                                	<c:forEach items="${ptm }" var="ptm">
 		                                	<c:if test="${ptm.memberNo eq ptk.memberNo}">
@@ -362,14 +290,11 @@
 			                                	</c:choose>
 		                                	</c:if> 
 	                                	</c:forEach>
-	                                    <a href="/deleteTask.do?taskNo=${ptk.taskNo}&projectNo=${projectNo}&taskType=1" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 3px;"></a>
+	                                    <a href="/deleteTask.do?taskNo=${ptk.taskNo}&projectNo=${projectNo}&taskType=4" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 3px;"></a>
 	                                </div>
 	                        	</a>
 	                        </div>
                         </c:forEach>
-                        <div>
-                            <a data-bs-toggle="modal" href="#addTaskIssue" style="text-decoration: none;" class="addClick"><p class="addIssue" style="margin-left: 35px;">+ 이슈 만들기</p></a>
-                        </div>
                         <div id = "pageNavi">${pageNavi }</div>
                     </div>
                 </div>
@@ -409,7 +334,7 @@
             <div class="modal-content">
                 <div class="modal-body" >
                     <form action="/updateIssue.do" method="post">
-                    	<input type="hidden" name="taskType" value=1>
+                    	<input type="hidden" name="taskType" value=4>
                     	<input type="hidden" name="taskNo" value="${ptk.taskNo }">
                     	<input type="hidden" name="projectNo" value=${ptk.projectNo }>
                         <div class="modalTitleFlexBox">
@@ -582,7 +507,7 @@
 					                                	</c:choose>
 				                                	</c:if> 
 			                                	</c:forEach>
-		                                        <a href="/deleteConnectIssue.do?taskNo=${ptk.taskNo}&projectNo=${projectNo}&taskType=1" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+		                                        <a href="/deleteConnectIssue.do?taskNo=${ptk.taskNo}&projectNo=${projectNo}&taskType=4" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
 		                                    </div>
 	                                	</div>
                                		</c:if>
@@ -633,7 +558,7 @@
 		                                </div>
 	                                </a>
 	                                <div class="rightTaskSite">
-	                                    <a href="/deleteConnectLink.do?taskShortcutNo=${tsc.taskShortcutNo}&projectNo=${projectNo}&taskType=1" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+	                                    <a href="/deleteConnectLink.do?taskShortcutNo=${tsc.taskShortcutNo}&projectNo=${projectNo}&taskType=4" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
 	                                </div>
 	                            </div>
                         	</c:if>
@@ -654,7 +579,7 @@
 			                        <div style="text-align: left; padding-top: 10px;">
 			                        	<input type="hidden" name="taskNo" value="${ptk.taskNo}">
 			                        	<input type="hidden" name="projectNo" value="${projectNo}">
-			                        	<input type="hidden" name="taskType" value=1>
+			                        	<input type="hidden" name="taskType" value=4>
 			                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">생성</button>
 			                            <button type="button" class="btn btn-secondary" style="width: 100px;" name="cancelBtn2">취소</button>
 			                        </div>
@@ -668,31 +593,6 @@
     </div>
     </c:forEach>
 
-    <div class="modal fade" id="addTaskIssue" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <form action="/addIssue.do" method="post" onsubmit="return checkValue();">
-                        <p style="font-size: 25px; font-weight: bold; color: #90d1b4; margin-bottom: 10px;" name="">이슈 만들기</p>
-                        <div class="form-group" style="margin-bottom: 15px;">
-                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">제목 입력</label>
-                            <input type="text" class="form-control" placeholder="제목을 입력해주세요" id="inputDefault" name="issueTitle"  maxlength="30" required="required">
-                            <label class="col-form-label mt-4" for="inputDefault" style="font-weight: bold; color: #90d1b4;">과업 시작 일자</label>
-                            <input type="text" class="form-control" placeholder="시작일을 입력해주세요(YYYY-MM-DD)" id="taskStartDate" name="taskStartDate" maxlength="10" required="required">
-                            <span id="dateChk" style="font-size: 15px;"></span>
-                        </div>
-                        <div style="text-align: right; padding-top: 10px;">
-                        	<input type="hidden" name="taskType" value=1> 
-                        	<input type="hidden" name="projectNo" value="${projectNo}"> 
-                        	<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}"> 
-                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;" onclick="return checkValue();">생성</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     <script>
 	$(function(){
 		 

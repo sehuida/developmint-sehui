@@ -791,13 +791,13 @@ public class ProjectTeamController {
 		  return "member/swalMsg"; 
 	  }
 	  
-	  @RequestMapping(value="/enterProjectTask.do")
-		public String enterProjectTask(Model model, int projectNo) {
-			 ArrayList<ProjectTask> ptk = service.projectTaskList(projectNo);
-			 model.addAttribute("ptk", ptk);
-			 model.addAttribute("projectNo", projectNo);
-			return "recruitCrue/projectManageTask";
-		}
+		/*
+		 * @RequestMapping(value="/enterProjectTask.do") public String
+		 * enterProjectTask(Model model, int projectNo) { ArrayList<ProjectTask> ptk =
+		 * service.projectTaskList(projectNo); model.addAttribute("ptk", ptk);
+		 * model.addAttribute("projectNo", projectNo); return
+		 * "recruitCrue/projectManageTask"; }
+		 */
 	  
 	  @RequestMapping(value="/enterProjectTaskM.do")
 		public String enterProjectTaskM(Model model, int projectNo, int reqPage) {
@@ -825,8 +825,14 @@ public class ProjectTeamController {
 		   if(compare > 0) {
 			   	model.addAttribute("title", "이슈 등록 실패");
 				model.addAttribute("msg", "시작일은 오늘날짜 이전으로 설정할 수 없습니다. ");
-				model.addAttribute("loc","/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage=1");
 				model.addAttribute("icon", "warning");
+				if(taskType == 1) {
+					  model.addAttribute("loc","/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage=1");
+			  } else if(taskType == 2) {
+					  model.addAttribute("loc","/enterProjectTaskT.do?projectNo="+projectNo+"&reqPage=1");
+			  } else if(taskType == 3) {
+					  model.addAttribute("loc","/enterProjectTaskB.do?projectNo="+projectNo+"&reqPage=1");
+			  }
 		   } else if (compare == 0) {
 			   int result = service.addIssueToday(projectNo, memberNo, taskType, issueTitle, taskStartDate); 
 			     if(result > 0) { 
@@ -862,7 +868,7 @@ public class ProjectTeamController {
 				  model.addAttribute("loc","/enterProjectTaskT.do?projectNo="+projectNo+"&reqPage=1");
 			  } else if(taskType == 3) {
 				  model.addAttribute("loc","/enterProjectTaskB.do?projectNo="+projectNo+"&reqPage=1");
-			  }
+			  } 
 		   }
 		   return "member/swalMsg"; 
 		 }
@@ -999,9 +1005,9 @@ public class ProjectTeamController {
 	  }
 	
 	@RequestMapping(value="/enterTaskMSelect.do")
-	public String enterTaskMSelect(Model model, int reqPage, int viewValue, int checkValue, int projectNo) {
+	public String enterTaskMSelect(Model model, int reqPage, int viewValue, int checkValue, int projectNo, int teamMemberNo) {
 		
-		ProjectTaskViewData ptvd = service.enterProjectTaskSelectM(projectNo, reqPage, viewValue, checkValue);
+		ProjectTaskViewData ptvd = service.enterProjectTaskSelectM(projectNo, reqPage, viewValue, checkValue, teamMemberNo);
 	  	ArrayList<ProjectTask> allPtk = service.projectTaskList(projectNo);
 	  	ArrayList<Shortcuts> scList = service.shortcutList(projectNo);
 	  	ArrayList<TaskShortcuts> tscList = service.taskShortcutList(projectNo);
@@ -1020,5 +1026,134 @@ public class ProjectTeamController {
 		model.addAttribute("checkValue", checkValue);
 		return "recruitCrue/projectManageTaskM";
 	}
+	
+	@RequestMapping(value="/enterProjectTaskT.do")
+	public String enterProjectTaskT(Model model, int projectNo, int reqPage) {
+	  	ProjectTaskViewData ptvd = service.enterProjectTaskT(projectNo, reqPage);
+	  	ArrayList<ProjectTask> allPtk = service.projectTaskList(projectNo);
+	  	ArrayList<Shortcuts> scList = service.shortcutList(projectNo);
+	  	ArrayList<TaskShortcuts> tscList = service.taskShortcutList(projectNo);
+	  	
+	  	model.addAttribute("ptk", ptvd.getTasklist());
+	  	model.addAttribute("ptkk", ptvd.getTasklist());
+		model.addAttribute("projectNo", projectNo);
+		model.addAttribute("pageNavi", ptvd.getPageNavi());
+		model.addAttribute("start", ptvd.getStart());
+		model.addAttribute("ptm", ptvd.getPtmList());
+		model.addAttribute("ptmGet0", ptvd.getPtmList().get(0));
+		model.addAttribute("scList", scList);
+		model.addAttribute("allPtk", allPtk);
+		model.addAttribute("tscList", tscList);
+		return "recruitCrue/projectManageTaskT";
+	}
+	
+	@RequestMapping(value="/enterTaskTSelect.do")
+	public String enterTaskTSelect(Model model, int reqPage, int viewValue, int checkValue, int projectNo, int teamMemberNo) {
+		
+		ProjectTaskViewData ptvd = service.enterProjectTaskSelectT(projectNo, reqPage, viewValue, checkValue, teamMemberNo);
+	  	ArrayList<ProjectTask> allPtk = service.projectTaskList(projectNo);
+	  	ArrayList<Shortcuts> scList = service.shortcutList(projectNo);
+	  	ArrayList<TaskShortcuts> tscList = service.taskShortcutList(projectNo);
+	  	
+	  	model.addAttribute("ptk", ptvd.getTasklist());
+	  	model.addAttribute("ptkk", ptvd.getTasklist());
+		model.addAttribute("projectNo", projectNo);
+		model.addAttribute("pageNavi", ptvd.getPageNavi());
+		model.addAttribute("start", ptvd.getStart());
+		model.addAttribute("ptm", ptvd.getPtmList());
+		model.addAttribute("ptmGet0", ptvd.getPtmList().get(0));
+		model.addAttribute("scList", scList);
+		model.addAttribute("allPtk", allPtk);
+		model.addAttribute("tscList", tscList);
+		model.addAttribute("viewValue", viewValue);
+		model.addAttribute("checkValue", checkValue);
+		return "recruitCrue/projectManageTaskT";
+	}
+	
+	@RequestMapping(value="/enterProjectTaskB.do")
+	public String enterProjectTaskB(Model model, int projectNo, int reqPage) {
+	  	ProjectTaskViewData ptvd = service.enterProjectTaskB(projectNo, reqPage);
+	  	ArrayList<ProjectTask> allPtk = service.projectTaskList(projectNo);
+	  	ArrayList<Shortcuts> scList = service.shortcutList(projectNo);
+	  	ArrayList<TaskShortcuts> tscList = service.taskShortcutList(projectNo);
+	  	
+	  	model.addAttribute("ptk", ptvd.getTasklist());
+	  	model.addAttribute("ptkk", ptvd.getTasklist());
+		model.addAttribute("projectNo", projectNo);
+		model.addAttribute("pageNavi", ptvd.getPageNavi());
+		model.addAttribute("start", ptvd.getStart());
+		model.addAttribute("ptm", ptvd.getPtmList());
+		model.addAttribute("ptmGet0", ptvd.getPtmList().get(0));
+		model.addAttribute("scList", scList);
+		model.addAttribute("allPtk", allPtk);
+		model.addAttribute("tscList", tscList);
+		return "recruitCrue/projectManageTaskB";
+	}
+	
+	@RequestMapping(value="/enterTaskBSelect.do")
+	public String enterTaskBSelect(Model model, int reqPage, int viewValue, int checkValue, int projectNo, int teamMemberNo) {
+		
+		ProjectTaskViewData ptvd = service.enterProjectTaskSelectB(projectNo, reqPage, viewValue, checkValue, teamMemberNo);
+	  	ArrayList<ProjectTask> allPtk = service.projectTaskList(projectNo);
+	  	ArrayList<Shortcuts> scList = service.shortcutList(projectNo);
+	  	ArrayList<TaskShortcuts> tscList = service.taskShortcutList(projectNo);
+	  	
+	  	model.addAttribute("ptk", ptvd.getTasklist());
+	  	model.addAttribute("ptkk", ptvd.getTasklist());
+		model.addAttribute("projectNo", projectNo);
+		model.addAttribute("pageNavi", ptvd.getPageNavi());
+		model.addAttribute("start", ptvd.getStart());
+		model.addAttribute("ptm", ptvd.getPtmList());
+		model.addAttribute("ptmGet0", ptvd.getPtmList().get(0));
+		model.addAttribute("scList", scList);
+		model.addAttribute("allPtk", allPtk);
+		model.addAttribute("tscList", tscList);
+		model.addAttribute("viewValue", viewValue);
+		model.addAttribute("checkValue", checkValue);
+		return "recruitCrue/projectManageTaskB";
+	}
+	
+	@RequestMapping(value="/enterProjectTaskH.do")
+	public String enterProjectTaskH(Model model, int projectNo, int reqPage) {
+	  	ProjectTaskViewData ptvd = service.enterProjectTaskH(projectNo, reqPage);
+	  	ArrayList<ProjectTask> allPtk = service.projectTaskList(projectNo);
+	  	ArrayList<Shortcuts> scList = service.shortcutList(projectNo);
+	  	ArrayList<TaskShortcuts> tscList = service.taskShortcutList(projectNo);
+	  	
+	  	model.addAttribute("ptk", ptvd.getTasklist());
+	  	model.addAttribute("ptkk", ptvd.getTasklist());
+		model.addAttribute("projectNo", projectNo);
+		model.addAttribute("pageNavi", ptvd.getPageNavi());
+		model.addAttribute("start", ptvd.getStart());
+		model.addAttribute("ptm", ptvd.getPtmList());
+		model.addAttribute("ptmGet0", ptvd.getPtmList().get(0));
+		model.addAttribute("scList", scList);
+		model.addAttribute("allPtk", allPtk);
+		model.addAttribute("tscList", tscList);
+		return "recruitCrue/projectManageTaskH";
+	}
+	
+	@RequestMapping(value="/enterTaskHSelect.do")
+	public String enterTaskHSelect(Model model, int reqPage, int checkValue, int projectNo, int teamMemberNo) {
+		
+		ProjectTaskViewData ptvd = service.enterProjectTaskSelectH(projectNo, reqPage, checkValue, teamMemberNo);
+	  	ArrayList<ProjectTask> allPtk = service.projectTaskList(projectNo);
+	  	ArrayList<Shortcuts> scList = service.shortcutList(projectNo);
+	  	ArrayList<TaskShortcuts> tscList = service.taskShortcutList(projectNo);
+	  	
+	  	model.addAttribute("ptk", ptvd.getTasklist());
+	  	model.addAttribute("ptkk", ptvd.getTasklist());
+		model.addAttribute("projectNo", projectNo);
+		model.addAttribute("pageNavi", ptvd.getPageNavi());
+		model.addAttribute("start", ptvd.getStart());
+		model.addAttribute("ptm", ptvd.getPtmList());
+		model.addAttribute("ptmGet0", ptvd.getPtmList().get(0));
+		model.addAttribute("scList", scList);
+		model.addAttribute("allPtk", allPtk);
+		model.addAttribute("tscList", tscList);
+		model.addAttribute("checkValue", checkValue);
+		return "recruitCrue/projectManageTaskH";
+	}
+  
 	  
 }
