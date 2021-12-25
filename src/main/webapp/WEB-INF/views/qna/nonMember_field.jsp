@@ -44,16 +44,28 @@
 				</div>
 				<div class="qna-contents answer" style="padding: 20px 0 0 0;border-bottom: none;">
 					<!-- 불러온 글제목 -->
-					<h4 style="font-weight: bold;border-bottom: 1px solid #ddd;">${nq.qnaTitle}(답변) > ${nq.type }</h4>
-					<!-- 작성일, 읽은 수(테이블 컬럼 추가 해야함) -->
-					<span>답변일 : ${nq.answerDate } </span>
-					<div class="contents-box">
-						<!-- 이미지 있으면 이미지 출력, 내용잇으면 내용 출력 -->
-						${nq.qnaAnswer }
-					</div>
-					<div class="qna_comment text-danger" style="margin: 30px 0 30px 0;">
-						<small>※ 대부분의 질문은 FAQ 통해 답변을 얻으실 가능성이 높습니다. <a href="/faq.do">바로가기</a></small>
-					</div>
+					<h4 style="font-weight: bold;border-bottom: 1px solid #ddd;"> RE : ${nq.qnaTitle} < ${nq.type }</h4>
+					<c:choose>
+						<c:when test="${not empty nq.qnaAnswer }">
+							<span>답변일 : ${nq.answerDate } </span>
+							<div class="contents-box">
+								<!-- 이미지 있으면 이미지 출력, 내용잇으면 내용 출력 -->
+								${nq.qnaAnswer }
+							</div>
+							<div class="qna_comment text-danger" style="margin: 30px 0 30px 0;">
+								<small>※ 대부분의 질문은 FAQ 통해 답변을 얻으실 가능성이 높습니다. <a href="/faq.do">바로가기</a></small>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div style="padding: 20px; text-align: center; margin-top: 20px;">
+								<img src="/resources/img/member/user.png" style="border-radius: 50%; width: 70px; margin-top: 70px;">
+								<h2 style="color: gray; font-size: 20px; font-weight: 900; line-height: 100px;">현재 작성된 답변이 없습니다.</h2>
+							</div>
+							<div class="qna_comment text-danger" style="margin: 30px 0 30px 0;">
+								<small>※ 대부분의 질문은 FAQ 통해 답변을 얻으실 가능성이 높습니다. <a href="/faq.do">바로가기</a></small>
+							</div>
+						</c:otherwise>
+					</c:choose>
 					<a href="/nonMember_CounselList.do" class="btn btn-outline-primary">목록보기</a>
 				</div>
 			</div>
