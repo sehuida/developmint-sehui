@@ -34,20 +34,29 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
+			margin-right: 50px;
+			margin-bottom: 50px;
 		}
 		.okNo{
 			text-align: center;
+			padding-top: 20px;
 		}
 		.resumeTitle{
 			width: 208px;
 			text-overflow: ellipsis;
 			font-size: 18px;
 		}
+		.certiBox{
+			margin-top: 60px;
+			margin-bottom: 80px;
+			padding-left: 150px;
+		}
+		.enrollForm{
+			margin-top: 10px;
+		}
 </style>
 <script>
 $(function(){
-	
-
 	//합격 클릭 시
 	$(".enrollBtn").click(function(){
 		var index = $(".enrollBtn").index(this);
@@ -131,17 +140,17 @@ $(function(){
 							
 							<div class="infoBox">
 								<form action="/okAnnounce.do" class="enrollForm">
-									 <span class="infoTitle"><i class="bi bi-person-fill" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>회원이름 : </span><span>${memlist[i.index].memberName }</span><br>
-									 <span class="infoTitle"><i class="bi bi-envelope" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>이메일 : </span><span>${memlist[i.index].email }</span><br>
+									 <span class="infoTitle"><i class="bi bi-person-fill" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>회원이름 : </span><span>${a.memberName }</span><br>
+									 <span class="infoTitle"><i class="bi bi-envelope" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>이메일 : </span><span>${a.email }</span><br>
 									 <span class="infoTitle"><i class="bi bi-app" style="font-size: 20px; color: #898989; margin-right: 5px;"></i>상태 : </span><span>
 									 <c:if test="${a.status eq 1 }">
-									 	지원중
+									 	<span>지원중</span>
 									 </c:if>
 									 <c:if test="${a.status eq 2 }">
-									 	합격
+									 	<span style="color: #4876ef;">합격</span>
 									 </c:if>
 									 <c:if test="${a.status eq 3 }">
-									 	탈락
+									 	<span style="color: red">탈락</span>
 									 </c:if>
 									 </span><br>
 									 <input type="hidden" name="memberNo" value="${a.memberNo }">
@@ -150,11 +159,23 @@ $(function(){
 								 </form>
 								 
 							</div>
-							<c:if test="${a.status eq 1 }">
-								<div class="okNo">
-									<button class="btn btn-primary enrollBtn" style="margin-top: 20px; margin-right: 5px;">서류합격</button><button class="btn btn-secondary noEnrollBtn"  style="margin-top: 20px; margin-left: 5px;">탈락</button>
-								</div>
-							</c:if>
+							<c:choose>
+								<c:when test="${a.status eq 1 }">
+									<div class="okNo">
+										<button class="btn btn-primary enrollBtn" style="margin-top: 20px; margin-right: 5px;">서류합격</button><button class="btn btn-secondary noEnrollBtn"  style="margin-top: 20px; margin-left: 5px;">탈락</button>
+									</div>
+								</c:when>
+								<c:when test="${a.status eq 2 }">
+									<div class="okNo">
+										<!-- 합격 -->
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="okNo">
+										<!-- 탈락 -->
+									</div>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</c:forEach>
 				</div>

@@ -63,7 +63,6 @@ public class AnnounceController {
 		AnnounceListPageData apd = service.selectApplyAnnounce(announceNo, reqPage);
 		System.out.println("status : "+apd);
 		System.out.println("list : "+apd.getList());
-		/* String memberName = service.selectMemberName(apd.getList()); */
 		model.addAttribute("list", apd.getList());
 		model.addAttribute("pageNavi", apd.getPageNavi());
 		model.addAttribute("start", apd.getStart());
