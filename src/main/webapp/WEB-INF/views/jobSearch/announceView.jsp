@@ -358,7 +358,16 @@
 							</i>
 							 급여
 						</span>
-						<span><fmt:formatNumber value="${a.money}" pattern="#,###"/> &#8361;</span>
+						<span>
+							<c:choose>
+								<c:when test="${a.money eq 0 }">
+									회사내규에 따름
+								</c:when>
+								<c:otherwise>
+									<fmt:formatNumber value="${a.money}" pattern="#,###"/> &#8361;
+								</c:otherwise>
+							</c:choose>
+						</span>
 					</li>
 				</ul>
 			</div>

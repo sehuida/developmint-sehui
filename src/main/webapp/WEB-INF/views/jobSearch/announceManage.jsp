@@ -260,7 +260,17 @@
 								<img src="resources/img/resume/income.PNG">					
 							</div>
 							<div class="announceInfoData">
-								<span><fmt:formatNumber value="${a.money}" pattern="#,###"/> &#8361;</span>	<!-- r.resumeMoney -->
+								<span>
+								<c:choose>
+									<c:when test="${a.money eq 0 }">
+										회사내규에 따름
+									</c:when>
+									<c:otherwise>
+										<fmt:formatNumber value="${a.money}" pattern="#,###"/> &#8361;
+									</c:otherwise>
+								</c:choose>
+								
+								</span>	<!-- r.resumeMoney -->
 							</div>
 						</li>  
 					</ul>

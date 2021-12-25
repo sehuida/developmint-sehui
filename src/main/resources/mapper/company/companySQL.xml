@@ -16,7 +16,7 @@
 			ceo,
 			address,
 			content,
-			business_no as businessNo,
+			
 			filepath,
 			write_date as writeDate,
 			announce_no as announceNo
