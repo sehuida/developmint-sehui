@@ -455,6 +455,7 @@
 								<option value=2>중졸</option>
 								<option value=3>고졸</option>
 								<option value=4 selected="">대졸이상</option>
+								<option value=5>학력무관</option>
 							</select>
 						</div>		
 					</div>
