@@ -22,4 +22,10 @@ public class Announce {
 	private int military;
 	private String writeDate;
 	private String career;
+	
+	public String getAnnounceContentBr() {
+		return announceContent.replaceAll("\r\n", "<br>");
+	}
 }
+
+	

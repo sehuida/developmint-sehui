@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기업소개</title>
+<title>Develomint</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b0b0a9f222f0ab356e278f15c5fdc64&libraries=services"></script>
 </head>
 <style>

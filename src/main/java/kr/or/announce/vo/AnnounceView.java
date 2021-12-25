@@ -28,4 +28,10 @@ public class AnnounceView {
 	private String address;
 	private String content;
 	private String filepath;
+	
+	public String getAnnounceContentBr() {
+		return announceContent.replaceAll("\r\n", "<br>");
+	}
 }
+
+

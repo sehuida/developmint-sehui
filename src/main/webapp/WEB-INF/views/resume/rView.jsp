@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Develomint</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 </head>
 <style>
 	.contain{

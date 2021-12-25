@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>구인구직게시판</title>
+<title>Develomint</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <style>

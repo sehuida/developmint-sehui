@@ -133,6 +133,11 @@ public class GosuController {
 		model.addAttribute("gphotoList", gptList);
 		model.addAttribute("greviewList", grList);
 		model.addAttribute("grrList", grrList);
+		System.out.println(gosu);
+		System.out.println(gprList);
+		System.out.println(gptList);
+		System.out.println(grList);
+		System.out.println(grrList);
 		return "gosu/gosuContent";
 	}
 

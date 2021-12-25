@@ -6,7 +6,8 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-<title>이력서 작성하기</title>
+<title>Develomint</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <style>
 	.contain{
 		width: 1200px;

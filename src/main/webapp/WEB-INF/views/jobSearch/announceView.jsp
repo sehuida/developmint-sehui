@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Develomint</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 </head>
 <style>
 	.contain{
@@ -157,7 +158,7 @@
 	<div class="contain">
 		<div class="header">
 			<div class="logo">
-				${a.filepath }
+				<img alt="" src="/resources/upload/company/${a.filepath }">
 			</div>
 			<div class="announceTitle">
 				<p>${a.announceTitle }</p>
@@ -373,7 +374,7 @@
 			<div class="infoDiv">
 				<em><span style="color: rgb(78, 205, 196); font-size: 18px;">●</span> 주요업무</em>	
 				<div class="infoContent">
-					<p>${a.announceContent }</p>
+					<p>${a.announceContentBr }</p>
 				</div>
 			</div>
 			
@@ -457,7 +458,7 @@
 				<div class="infoContent">
 					<div class="comInfo">
 						<div class="infoLogo">
-							${a.filepath }
+							<img alt="" src="/resources/upload/company/${a.filepath }" style="width: 200px;">
 						</div>
 						<div class="infoData">
 								<div class="title">
