@@ -542,7 +542,7 @@
 						<em>급여</em>
 						<br><br>
 						<b>급여</b>
-						<input type="text" class="smallTextInput" name="money" placeholder="급여 입력">
+						<input type="text" class="smallTextInput" name="money" placeholder="급여 입력(숫자만 입력헤주세요.)">
 					</div>
 					
 					<div class="grayBox">
