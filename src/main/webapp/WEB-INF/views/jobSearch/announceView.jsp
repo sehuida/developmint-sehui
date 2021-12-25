@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Develomint</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <style>
 	.contain{
@@ -150,10 +151,14 @@
 		margin-bottom: 10px;
 	}
 </style>
-<script>
-	
-</script>
 <body>
+<script>
+	$(function(){
+		$("#noNormalMember").click(function(){
+			alert("일반회원만 지원이 가능합니다.");
+		});
+	});
+</script>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="contain">
 		<div class="header">
@@ -168,7 +173,11 @@
 					<c:when test="${empty sessionScope.m }">
 						<a href="/loginFrm.do"><button class="loginBtn">지원하기</button></a>
 					</c:when>
+					<c:when test="${sessionScope.m.memberType eq 3 or sessionScope.m.memberType eq 9 }">
+						<button class="loginBtn" id="noNormalMember">지원하기</button>
+					</c:when>
 					<c:otherwise>
+					
 						<button data-bs-toggle="modal" data-bs-target="#contestMember">지원하기</button>
 						<!-- 모달버튼// 사용법 자세히모름 수현누나 물어보기 -->
 						<!-- modal내용 등록 -->
@@ -458,7 +467,7 @@
 			<div class="infoDiv">
 				<em><span style="color: rgb(78, 205, 196); font-size: 18px;">●</span> 유의사항</em>	
 				<div class="infoContent">
-					<p>ㆍ입사지원 서류에 허위사실이 발견될 경우, 채용확정 이후라도 채용이 취소될 수 있습니다. css는 나중에 할게요</p>
+					<p>ㆍ입사지원 서류에 허위사실이 발견될 경우, 채용확정 이후라도 채용이 취소될 수 있습니다.</p>
 				</div>
 			</div>
 			

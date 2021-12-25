@@ -8,7 +8,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <meta charset="UTF-8">
-<title>Project Task Manager_Meeting</title>
+<title>Project Task Manager_Task</title>
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	
@@ -35,41 +35,41 @@
 	    
 	    $(".rBox_Leftnavi_left").click(function(){
 	    	if($(".navi_checkbox").is(":checked")){
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=1&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskTSelect.do?reqPage=1&viewValue=1&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			} else {
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=1&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskTSelect.do?reqPage=1&viewValue=1&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			}
 	    });
 	    
 		$(".rBox_Leftnavi_middle").click(function(){
 			if($(".navi_checkbox").is(":checked")){
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=2&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskTSelect.do?reqPage=1&viewValue=2&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			} else {
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=2&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskTSelect.do?reqPage=1&viewValue=2&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			}
 		 });
 		
 		$(".rBox_Leftnavi_right").click(function(){
 			if($(".navi_checkbox").is(":checked")){
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=3&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskTSelect.do?reqPage=1&viewValue=3&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			} else {
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=3&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskTSelect.do?reqPage=1&viewValue=3&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			}
 		 });
 		$(".rBox_Leftnavi_first").click(function(){
 			if($(".navi_checkbox").is(":checked")){
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=4&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskTSelect.do?reqPage=1&viewValue=4&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			} else {
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=4&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskTSelect.do?reqPage=1&viewValue=4&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			}
 		 });
 		
 		
 		$(".navi_checkbox").change(function(){
 			if($(".navi_checkbox").is(":checked")){
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=1&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskTSelect.do?reqPage=1&viewValue=1&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			} else {
-				location.href="/enterTaskMSelect.do?reqPage=1&viewValue=1&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskTSelect.do?reqPage=1&viewValue=1&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			}
 		});
 		
@@ -250,8 +250,8 @@
 	                            <img src="/resources/img/recruitTeamProject/common/makefg (8).png" class="subNaviImg" style="margin-left: 5px;"><span style="font-weight: 900;">과업 관리</span>
 	                    </div>
 	                    <ul class="s-sub-menu">
-                            <li><a href="/enterProjectTaskM.do?projectNo=${projectNo}&reqPage=1"><span style="cursor: pointer; color: #90d1b4; font-weight: 900;">Meeting</span></a></li>
-                            <li><a href="/enterProjectTaskT.do?projectNo=${projectNo}&reqPage=1"><span style="cursor: pointer;">Task</span></a></li>
+                            <li><a href="/enterProjectTaskM.do?projectNo=${projectNo}&reqPage=1"><span style="cursor: pointer;">Meeting</span></a></li>
+                            <li><a href="/enterProjectTaskT.do?projectNo=${projectNo}&reqPage=1"><span style="cursor: pointer; color: #90d1b4; font-weight: 900;">Task</span></a></li>
                             <li><a href="/enterProjectTaskB.do?projectNo=${projectNo}&reqPage=1"><span style="cursor: pointer;">Bug</span></a></li>
                             <li><a href="/enterProjectTaskH.do?projectNo=${projectNo}&reqPage=1"><span style="cursor: pointer;">Hold</span></a></li>
                         </ul>
@@ -318,7 +318,7 @@
                 </div>
                 <div class="taskBox">
                     <div class="taskWrap">
-                        <p class="taskContentTitle">Meeting</p>
+                        <p class="taskContentTitle">Task</p>
                         <div class="titleLine" style="width: 100%; margin-top: 10px;"></div>
                         <c:forEach items="${ptk}" var="ptk">
                         <div class="taskMeeting">
@@ -362,7 +362,7 @@
 			                                	</c:choose>
 		                                	</c:if> 
 	                                	</c:forEach>
-	                                    <a href="/deleteTask.do?taskNo=${ptk.taskNo}&projectNo=${projectNo}&taskType=1" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 3px;"></a>
+	                                    <a href="/deleteTask.do?taskNo=${ptk.taskNo}&projectNo=${projectNo}&taskType=2" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 3px;"></a>
 	                                </div>
 	                        	</a>
 	                        </div>
@@ -409,7 +409,7 @@
             <div class="modal-content">
                 <div class="modal-body" >
                     <form action="/updateIssue.do" method="post">
-                    	<input type="hidden" name="taskType" value=1>
+                    	<input type="hidden" name="taskType" value=2>
                     	<input type="hidden" name="taskNo" value="${ptk.taskNo }">
                     	<input type="hidden" name="projectNo" value=${ptk.projectNo }>
                         <div class="modalTitleFlexBox">
@@ -582,7 +582,7 @@
 					                                	</c:choose>
 				                                	</c:if> 
 			                                	</c:forEach>
-		                                        <a href="/deleteConnectIssue.do?taskNo=${ptk.taskNo}&projectNo=${projectNo}&taskType=1" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+		                                        <a href="/deleteConnectIssue.do?taskNo=${ptk.taskNo}&projectNo=${projectNo}&taskType=2" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
 		                                    </div>
 	                                	</div>
                                		</c:if>
@@ -633,7 +633,7 @@
 		                                </div>
 	                                </a>
 	                                <div class="rightTaskSite">
-	                                    <a href="/deleteConnectLink.do?taskShortcutNo=${tsc.taskShortcutNo}&projectNo=${projectNo}&taskType=1" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
+	                                    <a href="/deleteConnectLink.do?taskShortcutNo=${tsc.taskShortcutNo}&projectNo=${projectNo}&taskType=2" class="hoverImg"><img src="/resources/img/recruitTeamProject/common/delete.png" style="width: 30px; height: 30px; position: relative; bottom: 7px;"></a>
 	                                </div>
 	                            </div>
                         	</c:if>
@@ -654,7 +654,7 @@
 			                        <div style="text-align: left; padding-top: 10px;">
 			                        	<input type="hidden" name="taskNo" value="${ptk.taskNo}">
 			                        	<input type="hidden" name="projectNo" value="${projectNo}">
-			                        	<input type="hidden" name="taskType" value=1>
+			                        	<input type="hidden" name="taskType" value=2>
 			                            <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">생성</button>
 			                            <button type="button" class="btn btn-secondary" style="width: 100px;" name="cancelBtn2">취소</button>
 			                        </div>
@@ -682,7 +682,7 @@
                             <span id="dateChk" style="font-size: 15px;"></span>
                         </div>
                         <div style="text-align: right; padding-top: 10px;">
-                        	<input type="hidden" name="taskType" value=1> 
+                        	<input type="hidden" name="taskType" value=2> 
                         	<input type="hidden" name="projectNo" value="${projectNo}"> 
                         	<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}"> 
                             <button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;" onclick="return checkValue();">생성</button>

@@ -406,14 +406,68 @@ public class ProjectTeamDao {
 	}
 
 	public ArrayList<ProjectTask> selectAllTaskMSelectList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		List<ProjectTask> list = sqlSession.selectList("projectTeam.selectAllTaskMSelectList", map);
+		return (ArrayList<ProjectTask>) list;
 	}
 
 	public int selectCheckTotalSelectCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("projectTeam.selectCheckTotalSelectCount", map);
 	}
+
+	public ArrayList<ProjectTask> enterProjectTaskT(int projectNo) {
+		List<ProjectTask> list = sqlSession.selectList("projectTeam.selectAllTaskTList", projectNo);
+		return (ArrayList<ProjectTask>) list;
+	}
+
+	public int selectTaskTTotalCount(int projectNo) {
+		return sqlSession.selectOne("projectTeam.selectTaskTTotalCount", projectNo);
+	}
+
+	public int selectCheckTotalCountT(Map<String, Object> map) {
+		return sqlSession.selectOne("projectTeam.selectCheckTotalCountT", map);
+	}
+
+	public ArrayList<ProjectTask> selectAllTaskTSelectList(Map<String, Object> map) {
+		List<ProjectTask> list = sqlSession.selectList("projectTeam.selectAllTaskTSelectList", map);
+		return (ArrayList<ProjectTask>) list;
+	}
+
+	public ArrayList<ProjectTask> enterProjectTaskB(int projectNo) {
+		List<ProjectTask> list = sqlSession.selectList("projectTeam.enterProjectTaskB", projectNo);
+		return (ArrayList<ProjectTask>) list;
+	}
+
+	public int selectTaskBTotalCount(int projectNo) {
+		return sqlSession.selectOne("projectTeam.selectTaskBTotalCount", projectNo);
+	}
+
+	public ArrayList<ProjectTask> selectAllTaskBSelectList(Map<String, Object> map) {
+		List<ProjectTask> list = sqlSession.selectList("projectTeam.selectAllTaskBSelectList", map);
+		return (ArrayList<ProjectTask>) list;
+	}
+
+	public int selectCheckTotalCountB(Map<String, Object> map) {
+		return sqlSession.selectOne("projectTeam.selectCheckTotalCountB", map);
+	}
+
+	public ArrayList<ProjectTask> enterProjectTaskH(int projectNo) {
+		List<ProjectTask> list = sqlSession.selectList("projectTeam.enterProjectTaskH", projectNo);
+		return (ArrayList<ProjectTask>) list;
+	}
+
+	public int selectTaskHTotalCount(int projectNo) {
+		return sqlSession.selectOne("projectTeam.selectTaskHTotalCount", projectNo);
+	}
+
+	public ArrayList<ProjectTask> selectAllTaskHList(Map<String, Object> map) {
+		List<ProjectTask> list = sqlSession.selectList("projectTeam.selectAllTaskHList", map);
+		return (ArrayList<ProjectTask>) list;
+	}
+
+	public int selectCheckTotalCountH(Map<String, Object> map) {
+		return sqlSession.selectOne("projectTeam.selectCheckTotalCountH", map);
+	}
+
 	
 	
 }

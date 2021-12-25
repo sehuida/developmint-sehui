@@ -182,11 +182,14 @@ select * from
             a.member_no as memberNo,
             resume_title as resumeTitle,
             apply_date as applyDate,
-            resume_no as resumeNo
+            resume_no as resumeNo,
+            m.member_name as memberName,
+            email
         from application a
         join resume re using(resume_no)
+        join member m on(a.member_no = m.member_no)
         order by status)r)rr)rrr
-        where (status = 1 or status = 2) and announceNo = #{announceNo})
+        where (status = 1 or status = 2 or status = 3) and announceNo = #{announceNo})
         where rnum between #{start} and #{end}
 	</select>
 	

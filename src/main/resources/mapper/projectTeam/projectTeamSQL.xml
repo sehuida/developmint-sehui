@@ -955,12 +955,12 @@
  			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
  			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
  		from task t
- 		where t.project_no = #{projectNo} and t.task_no like '%M%'
+ 		where t.project_no = #{projectNo} and t.task_no like '%M%' and not t.process_sort = 4
  		order by t.task_no desc
  </select>
  
  <select id="selectTaskMTotalCount" parameterType="_int" resultType="_int">
- 		select count(*) from task where project_no = #{projectNo} and task_no like '%M%'
+ 		select count(*) from task where project_no = #{projectNo} and task_no like '%M%' and not(process_sort = 4)
  </select>
  
  <select id="selectTeamMember" parameterType="_int" resultType="pfm">
@@ -1095,5 +1095,461 @@
  		delete from task where task_no = #{taskNo}
  </delete>
  
+ <select id="selectAllTaskMSelectList" parameterType="map" resultType="ptk">
+ 	<choose>
+ 		<when test="checkValue == 1">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		<choose>
+			 			<when test="viewValue == 1">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 1 and not t.process_sort = 4
+			 			</when>
+			 			<when test="viewValue == 2">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 3 and not t.process_sort = 4
+			 			</when>
+			 			<when test="viewValue == 3">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 2 and not t.process_sort = 4
+			 			</when>
+			 			<when test="viewValue == 4">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and not t.process_sort = 4
+			 			</when>
+			 		</choose>
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+	  	<when test="checkValue == 2">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		<choose>
+			 			<when test="viewValue == 1">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 1 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 2">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 3 and t.team_member_no = #{teamMemberNo} and not not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 3">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 2 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 4">
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 			</when>
+			 		</choose>
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+  	</choose>
+ </select>
+ 
+ <select id="selectCheckTotalSelectCount" parameterType="map" resultType="_int">
+ 	<choose>
+ 		<when test="checkValue == 1">
+ 			select count(*) from task where project_no = #{projectNo} and task_no like '%M%'
+ 				<choose>
+ 					<when test="viewValue == 1">
+ 						and process_sort = 1
+ 					</when>
+ 					<when test="viewValue == 2">
+ 						and process_sort = 3
+ 					</when>
+ 					<when test="viewValue == 3">
+ 						and process_sort = 2
+ 					</when>
+ 				</choose>
+ 		</when>
+ 		<when test="checkValue == 2">
+ 			select count(*) from task where project_no = #{projectNo} and task_no like '%M%' and team_member_no = #{teamMemberNo}
+ 				<choose>
+ 					<when test="viewValue == 1">
+ 						and process_sort = 1
+ 					</when>
+ 					<when test="viewValue == 2">
+ 						and process_sort = 3
+ 					</when>
+ 					<when test="viewValue == 3">
+ 						and process_sort = 2
+ 					</when>
+ 				</choose>
+ 		</when>
+ 	</choose>
+ </select>
+ 
+ <select id="selectAllTaskTList" parameterType="_int" resultType="ptk">
+ 		select
+ 			t.task_no as taskNo,
+ 			t.project_no as projectNo,
+ 			t.team_member_no as teamMemberNo,
+ 			t.task_sort as taskSort,
+ 			t.task_title as taskTitle,
+ 			t.task_content as taskContent,
+ 			t.priority as priority,
+ 			t.connect_issue as connectIssue,
+ 			t.start_date as startDate,
+ 			t.complete_date as completeDate,
+ 			t.process_sort as processSort,
+ 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+ 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+ 		from task t
+ 		where t.project_no = #{projectNo} and t.task_no like '%T%' and not(t.process_sort = 4)
+ 		order by t.task_no desc
+ </select>
+ 
+  <select id="selectTaskTTotalCount" parameterType="_int" resultType="_int">
+ 		select count(*) from task where project_no = #{projectNo} and task_no like '%T%' and not(process_sort = 4)
+ </select>
+ 
+ <select id="selectCheckTotalCountT" parameterType="map" resultType="_int">
+ 	<choose>
+ 		<when test="checkValue == 1">
+ 			select count(*) from task where project_no = #{projectNo} and task_no like '%T%'
+ 				<choose>
+ 					<when test="viewValue == 1">
+ 						and process_sort = 1
+ 					</when>
+ 					<when test="viewValue == 2">
+ 						and process_sort = 3
+ 					</when>
+ 					<when test="viewValue == 3">
+ 						and process_sort = 2
+ 					</when>
+ 				</choose>
+ 		</when>
+ 		<when test="checkValue == 2">
+ 			select count(*) from task where project_no = #{projectNo} and task_no like '%T%' and team_member_no = #{teamMemberNo}
+ 				<choose>
+ 					<when test="viewValue == 1">
+ 						and process_sort = 1
+ 					</when>
+ 					<when test="viewValue == 2">
+ 						and process_sort = 3
+ 					</when>
+ 					<when test="viewValue == 3">
+ 						and process_sort = 2
+ 					</when>
+ 				</choose>
+ 		</when>
+ 	</choose>
+ </select>
+ 
+ <select id=" selectAllTaskTSelectList" parameterType="map" resultType="ptk">
+ 	<choose>
+ 		<when test="checkValue == 1">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		<choose>
+			 			<when test="viewValue == 1">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and t.process_sort = 1 and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 2">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and t.process_sort = 3 and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 3">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and t.process_sort = 2 and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 4">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and not(t.process_sort = 4)
+			 			</when>
+			 		</choose>
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+	  	<when test="checkValue == 2">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		<choose>
+			 			<when test="viewValue == 1">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and t.process_sort = 1 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 2">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and t.process_sort = 3 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 3">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and t.process_sort = 2 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 4">
+			 				where t.project_no = #{projectNo} and t.task_no like '%T%' and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 			</when>
+			 		</choose>
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+  	</choose>
+ </select>
+ 
+ <select id="enterProjectTaskB" parameterType="_int" resultType="ptk">
+ 		select
+ 			t.task_no as taskNo,
+ 			t.project_no as projectNo,
+ 			t.team_member_no as teamMemberNo,
+ 			t.task_sort as taskSort,
+ 			t.task_title as taskTitle,
+ 			t.task_content as taskContent,
+ 			t.priority as priority,
+ 			t.connect_issue as connectIssue,
+ 			t.start_date as startDate,
+ 			t.complete_date as completeDate,
+ 			t.process_sort as processSort,
+ 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+ 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+ 		from task t
+ 		where t.project_no = #{projectNo} and t.task_no like '%B%' and not(t.process_sort = 4)
+ 		order by t.task_no desc
+ </select>
+ 
+ <select id="selectTaskBTotalCount" parameterType="_int" resultType="_int">
+ 		select count(*) from task where project_no = #{projectNo} and task_no like '%B%' and not(process_sort = 4)
+ </select>
+ 
+ <select id=" selectAllTaskBSelectList" parameterType="map" resultType="ptk">
+ 	<choose>
+ 		<when test="checkValue == 1">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		<choose>
+			 			<when test="viewValue == 1">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 1 and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 2">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 3 and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 3">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 2 and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 4">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and not(t.process_sort = 4)
+			 			</when>
+			 		</choose>
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+	  	<when test="checkValue == 2">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		<choose>
+			 			<when test="viewValue == 1">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 1 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 2">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 3 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 3">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 2 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 			</when>
+			 			<when test="viewValue == 4">
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 			</when>
+			 		</choose>
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+  	</choose>
+ </select>
+ 
+ <select id="selectCheckTotalCountB" parameterType="map" resultType="_int">
+ 	<choose>
+ 		<when test="checkValue == 1">
+ 			select count(*) from task where project_no = #{projectNo} and task_no like '%B%'
+ 				<choose>
+ 					<when test="viewValue == 1">
+ 						and process_sort = 1
+ 					</when>
+ 					<when test="viewValue == 2">
+ 						and process_sort = 3
+ 					</when>
+ 					<when test="viewValue == 3">
+ 						and process_sort = 2
+ 					</when>
+ 				</choose>
+ 		</when>
+ 		<when test="checkValue == 2">
+ 			select count(*) from task where project_no = #{projectNo} and task_no like '%B%' and team_member_no = #{teamMemberNo}
+ 				<choose>
+ 					<when test="viewValue == 1">
+ 						and process_sort = 1
+ 					</when>
+ 					<when test="viewValue == 2">
+ 						and process_sort = 3
+ 					</when>
+ 					<when test="viewValue == 3">
+ 						and process_sort = 2
+ 					</when>
+ 				</choose>
+ 		</when>
+ 	</choose>
+ </select>
+ 
+ <select id="enterProjectTaskH" parameterType="_int" resultType="ptk">
+ 		select
+ 			t.task_no as taskNo,
+ 			t.project_no as projectNo,
+ 			t.team_member_no as teamMemberNo,
+ 			t.task_sort as taskSort,
+ 			t.task_title as taskTitle,
+ 			t.task_content as taskContent,
+ 			t.priority as priority,
+ 			t.connect_issue as connectIssue,
+ 			t.start_date as startDate,
+ 			t.complete_date as completeDate,
+ 			t.process_sort as processSort,
+ 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+ 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+ 		from task t
+ 		where t.project_no = #{projectNo} and t.process_sort = 4
+ 		order by t.task_no desc
+ </select>
+ 
+ <select id="selectTaskHTotalCount" parameterType="_int" resultType="_int">
+ 		select count(*) from task where project_no = #{projectNo} and process_sort = 4
+ </select>
+
+<select id=" selectAllTaskHList" parameterType="map" resultType="ptk">
+ 	<choose>
+ 		<when test="checkValue == 1">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		where t.project_no = #{projectNo} and t.process_sort = 4
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+	  	<when test="checkValue == 2">
+  			select * from (
+	  			select rownum as rnum, a.* from
+		            (select
+						t.task_no as taskNo,
+			 			t.project_no as projectNo,
+			 			t.team_member_no as teamMemberNo,
+			 			t.task_sort as taskSort,
+			 			t.task_title as taskTitle,
+			 			t.task_content as taskContent,
+			 			t.priority as priority,
+			 			t.connect_issue as connectIssue,
+			 			t.start_date as startDate,
+			 			t.complete_date as completeDate,
+			 			t.process_sort as processSort,
+			 			(select member_no from project_team_member ptm where ptm.team_member_no = t.team_member_no and ptm.project_no= #{projectNo}) as memberNo,
+			 			(select member_id from member where member_no = (select member_no from project_team_member ptmm where ptmm.team_member_no = t.team_member_no)) as memberId
+			 		from task t
+			 		where t.project_no = #{projectNo} and t.process_sort = 4 and t.team_member_no = #{teamMemberNo}
+	       			order by t.task_no DESC) a)
+				where rnum between #{start} and #{end}
+	  	</when>
+  	</choose>
+ </select>
+ 
+ <select id=" selectCheckTotalCountH" parameterType="map" resultType="_int">
+ 	<choose>
+ 		<when test="checkValue == 1">
+ 			select count(*) from task where project_no = #{projectNo} and process_sort = 4
+ 		</when>
+ 		<when test="checkValue == 2">
+ 			select count(*) from task where project_no = #{projectNo} and process_sort = 4 and team_member_no = #{teamMemberNo}
+ 		</when>
+ 	</choose>
+ </select>
+
  
 </mapper>

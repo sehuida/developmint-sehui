@@ -878,8 +878,8 @@ public class ProjectTeamService {
 		return result;
 	}
 
-	public ProjectTaskViewData enterProjectTaskSelectM(int projectNo, int reqPage, int viewValue, int checkValue) {
-		int numPerPage = 5;
+	public ProjectTaskViewData enterProjectTaskSelectM(int projectNo, int reqPage, int viewValue, int checkValue, int teamMemberNo) {
+		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -888,6 +888,7 @@ public class ProjectTeamService {
 		map.put("viewValue", viewValue);
 		map.put("checkValue", checkValue);
 		map.put("projectNo", projectNo);
+		map.put("teamMemberNo", teamMemberNo);
 		ArrayList<ProjectTask> tasklist = dao.selectAllTaskMSelectList(map);
 		ArrayList<ProjectTeamMember> ptmList = dao.selectTeamMember(projectNo);
 		
@@ -901,20 +902,20 @@ public class ProjectTeamService {
 		
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
-		String pageNavi = "<ul class='pagination pagination-lg'>";
+		String pageNavi = "<ul class='pagination'>";
 		if(pageNo != 1) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+(pageNo-1)+"&viewValue="+viewValue+"&checkValue="+checkValue+"'>";
+			pageNavi += "<a class = 'page-link' href='/enterTaskMSelect.do?reqPage="+(pageNo-1)+"&viewValue="+viewValue+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
 			pageNavi += "&lt;</a></li>";
 		}// 페이지 숫자
 		for(int i=0; i < pageNaviSize; i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li class='page-item active'>";
-				pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+viewValue+"&checkValue="+checkValue+"'>";
+				pageNavi += "<a class = 'page-link' href='/enterTaskMSelect.do?reqPage="+(pageNo)+"&viewValue="+viewValue+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
 				pageNavi += pageNo + "</a></li>";
 			} else {
 				pageNavi += "<li class='page-item'>";
-				pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+viewValue+"&checkValue="+checkValue+"'>";
+				pageNavi += "<a class = 'page-link' href='/enterTaskMSelect.do?reqPage="+(pageNo)+"&viewValue="+viewValue+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
 				pageNavi += pageNo + "</a></li>";
 			}
 			pageNo++;
@@ -925,7 +926,343 @@ public class ProjectTeamService {
 		// 다음 버튼
 		if(pageNo <= totalPage) {
 			pageNavi += "<li class='page-item'>";
-			pageNavi += "<a class = 'page-link' href='/recruitTeamMember_mainSelectPage.do?reqPage="+pageNo+"&viewValue="+viewValue+"&checkValue="+checkValue+"'>";
+			pageNavi += "<a class = 'page-link' href='/enterTaskMSelect.do?reqPage="+(pageNo)+"&viewValue="+viewValue+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		
+		ProjectTaskViewData ptvd = new ProjectTaskViewData(tasklist, pageNavi, start, ptmList);
+		return ptvd;
+	}
+
+	public ProjectTaskViewData enterProjectTaskT(int projectNo, int reqPage) {
+		int numPerPage = 10;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("projectNo", projectNo);
+		ArrayList<ProjectTask> tasklist = dao.enterProjectTaskT(projectNo);
+		ArrayList<ProjectTeamMember> ptmList = dao.selectTeamMember(projectNo);
+		
+		int totalCount = dao.selectTaskTTotalCount(projectNo);
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		} else {
+			totalPage = totalCount / numPerPage + 1;
+		}
+		
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
+		String pageNavi = "<ul class='pagination'>";
+		if(pageNo != 1) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage="+(pageNo-1)+"'>";
+			pageNavi += "&lt;</a></li>";
+		}// 페이지 숫자
+		for(int i=0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='page-item active'>";
+				pageNavi += "<a class = 'page-link' href='/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			} else {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음 버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/enterProjectTaskM.do?projectNo="+projectNo+"&reqPage="+pageNo+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		
+		ProjectTaskViewData ptvd = new ProjectTaskViewData(tasklist, pageNavi, start, ptmList);
+		return ptvd;
+	}
+
+	public ProjectTaskViewData enterProjectTaskSelectT(int projectNo, int reqPage, int viewValue, int checkValue,
+			int teamMemberNo) {
+		
+			int numPerPage = 10;
+			int end = reqPage * numPerPage;
+			int start = end - numPerPage + 1;
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("start", start);
+			map.put("end", end);
+			map.put("viewValue", viewValue);
+			map.put("checkValue", checkValue);
+			map.put("projectNo", projectNo);
+			map.put("teamMemberNo", teamMemberNo);
+			ArrayList<ProjectTask> tasklist = dao.selectAllTaskTSelectList(map);
+			ArrayList<ProjectTeamMember> ptmList = dao.selectTeamMember(projectNo);
+			
+			int totalCount = dao.selectCheckTotalCountT(map);
+			int totalPage = 0;
+			if(totalCount % numPerPage == 0) {
+				totalPage = totalCount / numPerPage;
+			} else {
+				totalPage = totalCount / numPerPage + 1;
+			}
+			
+			int pageNaviSize = 5;
+			int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
+			String pageNavi = "<ul class='pagination'>";
+			if(pageNo != 1) {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/enterTaskTSelect.do?reqPage="+(pageNo-1)+"&viewValue="+viewValue+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
+				pageNavi += "&lt;</a></li>";
+			}// 페이지 숫자
+			for(int i=0; i < pageNaviSize; i++) {
+				if(pageNo == reqPage) {
+					pageNavi += "<li class='page-item active'>";
+					pageNavi += "<a class = 'page-link' href='/enterTaskTSelect.do?reqPage="+(pageNo)+"&viewValue="+viewValue+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
+					pageNavi += pageNo + "</a></li>";
+				} else {
+					pageNavi += "<li class='page-item'>";
+					pageNavi += "<a class = 'page-link' href='/enterTaskTSelect.do?reqPage="+(pageNo)+"&viewValue="+viewValue+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
+					pageNavi += pageNo + "</a></li>";
+				}
+				pageNo++;
+				if(pageNo > totalPage) {
+					break;
+				}
+			}
+			// 다음 버튼
+			if(pageNo <= totalPage) {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/enterTaskTSelect.do?reqPage="+(pageNo)+"&viewValue="+viewValue+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
+				pageNavi += "&gt;</a></li>";
+			}
+			pageNavi += "</ul>";
+			
+			ProjectTaskViewData ptvd = new ProjectTaskViewData(tasklist, pageNavi, start, ptmList);
+			return ptvd;
+	}
+
+	public ProjectTaskViewData enterProjectTaskB(int projectNo, int reqPage) {
+		int numPerPage = 10;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("projectNo", projectNo);
+		ArrayList<ProjectTask> tasklist = dao.enterProjectTaskB(projectNo);
+		ArrayList<ProjectTeamMember> ptmList = dao.selectTeamMember(projectNo);
+		
+		int totalCount = dao.selectTaskBTotalCount(projectNo);
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		} else {
+			totalPage = totalCount / numPerPage + 1;
+		}
+		
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
+		String pageNavi = "<ul class='pagination'>";
+		if(pageNo != 1) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/enterProjectTaskB.do?projectNo="+projectNo+"&reqPage="+(pageNo-1)+"'>";
+			pageNavi += "&lt;</a></li>";
+		}// 페이지 숫자
+		for(int i=0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='page-item active'>";
+				pageNavi += "<a class = 'page-link' href='/enterProjectTaskB.do?projectNo="+projectNo+"&reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			} else {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/enterProjectTaskB.do?projectNo="+projectNo+"&reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음 버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/enterProjectTaskB.do?projectNo="+projectNo+"&reqPage="+pageNo+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		
+		ProjectTaskViewData ptvd = new ProjectTaskViewData(tasklist, pageNavi, start, ptmList);
+		return ptvd;
+	}
+
+	public ProjectTaskViewData enterProjectTaskSelectB(int projectNo, int reqPage, int viewValue, int checkValue,
+			int teamMemberNo) {
+		
+			int numPerPage = 10;
+			int end = reqPage * numPerPage;
+			int start = end - numPerPage + 1;
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("start", start);
+			map.put("end", end);
+			map.put("viewValue", viewValue);
+			map.put("checkValue", checkValue);
+			map.put("projectNo", projectNo);
+			map.put("teamMemberNo", teamMemberNo);
+			ArrayList<ProjectTask> tasklist = dao.selectAllTaskBSelectList(map);
+			ArrayList<ProjectTeamMember> ptmList = dao.selectTeamMember(projectNo);
+			
+			int totalCount = dao.selectCheckTotalCountB(map);
+			int totalPage = 0;
+			if(totalCount % numPerPage == 0) {
+				totalPage = totalCount / numPerPage;
+			} else {
+				totalPage = totalCount / numPerPage + 1;
+			}
+			
+			int pageNaviSize = 5;
+			int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
+			String pageNavi = "<ul class='pagination'>";
+			if(pageNo != 1) {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/enterTaskBSelect.do?reqPage="+(pageNo-1)+"&viewValue="+viewValue+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
+				pageNavi += "&lt;</a></li>";
+			}// 페이지 숫자
+			for(int i=0; i < pageNaviSize; i++) {
+				if(pageNo == reqPage) {
+					pageNavi += "<li class='page-item active'>";
+					pageNavi += "<a class = 'page-link' href='/enterTaskBSelect.do?reqPage="+(pageNo)+"&viewValue="+viewValue+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
+					pageNavi += pageNo + "</a></li>";
+				} else {
+					pageNavi += "<li class='page-item'>";
+					pageNavi += "<a class = 'page-link' href='/enterTaskBSelect.do?reqPage="+(pageNo)+"&viewValue="+viewValue+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
+					pageNavi += pageNo + "</a></li>";
+				}
+				pageNo++;
+				if(pageNo > totalPage) {
+					break;
+				}
+			}
+			// 다음 버튼
+			if(pageNo <= totalPage) {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/enterTaskBSelect.do?reqPage="+(pageNo)+"&viewValue="+viewValue+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
+				pageNavi += "&gt;</a></li>";
+			}
+			pageNavi += "</ul>";
+			
+			ProjectTaskViewData ptvd = new ProjectTaskViewData(tasklist, pageNavi, start, ptmList);
+			return ptvd;
+	}
+
+	public ProjectTaskViewData enterProjectTaskH(int projectNo, int reqPage) {
+		int numPerPage = 10;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("projectNo", projectNo);
+		ArrayList<ProjectTask> tasklist = dao.enterProjectTaskH(projectNo);
+		ArrayList<ProjectTeamMember> ptmList = dao.selectTeamMember(projectNo);
+		
+		int totalCount = dao.selectTaskHTotalCount(projectNo);
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		} else {
+			totalPage = totalCount / numPerPage + 1;
+		}
+		
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
+		String pageNavi = "<ul class='pagination'>";
+		if(pageNo != 1) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/enterProjectTaskH.do?projectNo="+projectNo+"&reqPage="+(pageNo-1)+"'>";
+			pageNavi += "&lt;</a></li>";
+		}// 페이지 숫자
+		for(int i=0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='page-item active'>";
+				pageNavi += "<a class = 'page-link' href='/enterProjectTaskH.do?projectNo="+projectNo+"&reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			} else {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/enterProjectTaskH.do?projectNo="+projectNo+"&reqPage="+pageNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음 버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/enterProjectTaskH.do?projectNo="+projectNo+"&reqPage="+pageNo+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		
+		ProjectTaskViewData ptvd = new ProjectTaskViewData(tasklist, pageNavi, start, ptmList);
+		return ptvd;
+	}
+
+	public ProjectTaskViewData enterProjectTaskSelectH(int projectNo, int reqPage, int checkValue, int teamMemberNo) {
+		int numPerPage = 10;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("checkValue", checkValue);
+		map.put("projectNo", projectNo);
+		map.put("teamMemberNo", teamMemberNo);
+		ArrayList<ProjectTask> tasklist = dao.selectAllTaskHList(map);
+		ArrayList<ProjectTeamMember> ptmList = dao.selectTeamMember(projectNo);
+		
+		int totalCount = dao.selectCheckTotalCountH(map);
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		} else {
+			totalPage = totalCount / numPerPage + 1;
+		}
+		
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1) / pageNaviSize) * pageNaviSize + 1;
+		String pageNavi = "<ul class='pagination'>";
+		if(pageNo != 1) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/enterTaskHSelect.do?reqPage="+(pageNo-1)+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
+			pageNavi += "&lt;</a></li>";
+		}// 페이지 숫자
+		for(int i=0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='page-item active'>";
+				pageNavi += "<a class = 'page-link' href='/enterTaskHSelect.do?reqPage="+(pageNo)+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			} else {
+				pageNavi += "<li class='page-item'>";
+				pageNavi += "<a class = 'page-link' href='/enterTaskHSelect.do?reqPage="+(pageNo)+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
+				pageNavi += pageNo + "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		// 다음 버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li class='page-item'>";
+			pageNavi += "<a class = 'page-link' href='/enterTaskHSelect.do?reqPage="+(pageNo)+"&checkValue="+checkValue+"&projectNo="+projectNo+"&teamMemberNo="+teamMemberNo+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
