@@ -129,12 +129,12 @@
 						    <c:choose>
 						    	<c:when test="${not empty sessionScope.m }">
 								    <div class="form-group" >
-								    	<label scope="row" style="display: block;">사진</label>
+								    	<label scope="row" style="display: block;">사진</label><small class="text-danger">파일을 여러개 올리실 경우 한번에 선택해 주세요!</small>
 								    	<div class="div-flex">
 									    	<ul class="file_show div-flex" id="file_show" style="list-style-type: none;padding: 0;display: inline-block;">
 																									</ul>
 											<button type="button" class="btn-file" onclick="$('#Filedata').click();">파일 선택</button>
-											<span id="file_message" style="display: none;color: red;font-weight: bold;"></span>
+											<span id="file_message" style="color: red;font-weight: bold;"></span>
 								    	</div>
 								    </div>
 								    <!-- <div class="form-group">
@@ -170,7 +170,7 @@
 						</c:choose>
 					</div>
 				</div>
-				<input type="file" name="Filedata" id="Filedata" class="input_file" onchange="loadImg(this);" style="display: none !important;" multiple>
+				<input type="file" name="Filedata" id="Filedata" class="input_file" onchange="loadImg(this);" style="display: none !important;" multiple accept=".gif, .jpg, .jpeg, .png">
 			</form>
 			<%-- <form action="upload_form.do" id="upload_form" name="upload_form" method="post" enctype="multipart/form-data">
 				<!-- <input type="file" id="Filedata" class="input_file" onchange="uploadImage();" style="display: none !important;" /> -->
@@ -359,7 +359,7 @@
 				reader.onload=function(e){
 					/* $("#img-view").attr("src",e.target.result); */
 					var image_tag = "<li><img style=\"width: 65px;height: 65px;\" src=\"" + e.target.result + "\" /><a class=\"del-image\" href=\"javascript:void(0);\"><i class=\"bi bi-x-circle-fill\"></i></a></li>";
-					files.value += (files.value != "") ? "," + e.target.result : e.target.result;
+					/* files.value += (files.value != "") ? "," + e.target.result : e.target.result; */
 					$("#file_show").append(image_tag);
 				}
 			}else{
@@ -376,6 +376,37 @@
 				$("#file_message").text(message).show();
 			}
 		} */
+		
+		$("#Filedata").change(function(){
+			var fileVal = $(this).val();
+			var pathPoint = fileVal.lastIndexOf('.');
+			var filePoint = fileVal.substring(pathPoint+1, this.length);
+			var fileType = filePoint.toLowerCase();
+			var fileSize = 10 * 1024 * 1024; //10메가
+			if(fileType == 'jpg' || fileType == 'png' || fileType == 'jpeg' || fileType == 'gif'){
+			var uploadFileSize = this.files[0].size;
+				if(uploadFileSize > fileSize){
+					swal({
+				        title: '사진 용량이 큽니다',
+				        text: '로고는 사진 20mb미만 파일만 업로드 가능합니다.',
+				        icon: 'warning'
+				      })
+					$("#filepath").val("");
+					return;
+				}
+			}else if(fileVal == ""){
+				$("#filepath").val("");
+				return;
+			}else{
+				swal({
+			        title: '확장자를 확인해주세요!',
+			        text: '첨부파일은 이미지 파일만 가능합니다.',
+			        icon: 'warning'
+			      })
+				$("#filepath").val("");
+				return;
+			}
+		});
 		
 	</script>
 </body>

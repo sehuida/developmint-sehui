@@ -272,7 +272,7 @@
 		<div style="margin: 30px auto;">
 			<span class="subEngTitel">새로 등록</span> <span class="subTitel">된 공고문</span><a href="/jobSearchList.do?reqPage=1" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
 		</div>
-		<section class="vertical-center slider" style="width: 1000px;margin: 20px auto;">
+		<section class="vertical-center slider" style="width: 1200px;margin: 20px auto;">
 			<c:forEach items="${joblist }" var="a" varStatus="i" begin="0" end="3">
 			<div class="content" style="margin: 30px auto auto auto;border: 1px solid #ddd;width: 100%;">
 			   <div class="status">모집중</div>
