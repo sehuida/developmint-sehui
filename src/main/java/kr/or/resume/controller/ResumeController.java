@@ -36,6 +36,7 @@ public class ResumeController {
 			int count = service.selectResumeCount(memberNo);			
 			model.addAttribute("count", count);
 		}
+		System.out.println(rpd.getList());
 		model.addAttribute("appCount", appCount);
 		model.addAttribute("list", rpd.getList());
 		model.addAttribute("pageNavi", rpd.getPageNavi());
@@ -53,6 +54,7 @@ public class ResumeController {
 	@RequestMapping(value="/updateCeoResume.do")
 	public String updateCeoResume(Resume r, int memberNo, Model model) {
 		int result = service.updateCeoResume(r);
+		System.out.println(memberNo);
 		if(result > 0) {
 			model.addAttribute("msg","이력서 수정완료");
 			model.addAttribute("loc", "/resumeManage.do?memberNo="+memberNo+"&reqPage=1");
@@ -127,7 +129,7 @@ public class ResumeController {
 	}
 	
 	@RequestMapping(value="/deleteResume.do")
-	public String deleteResume(int resumeNo, Resume r, Model model, int memberNo) {
+	public String deleteResume(int resumeNo, Model model, int memberNo) {
 		int result = service.deleteResume(resumeNo);
 		if(result > 0) {
 			model.addAttribute("msg","이력서가 삭제되었습니다.");

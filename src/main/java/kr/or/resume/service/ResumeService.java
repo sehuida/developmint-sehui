@@ -172,12 +172,8 @@ public class ResumeService {
 	 
 	public int deleteResume(int resumeNo) {
 		int deleteApplication = dao.deleteApplycation(resumeNo);
-		if(deleteApplication > 0) {
 			int deleteResume = dao.deleteResume(resumeNo);
 			return deleteResume;
-		} else {
-			return 0;
-		}
 	}
 
 	public int applicationCount(int memberNo) {
