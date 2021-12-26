@@ -35,7 +35,7 @@
 		<div class="area">
 			<!-- 상단 로케이션 -->
 			<div class="nav-sub" style="margin-top: 30px;"><a href="/" class="text-hover">홈</a><span> > </span><a href="/noticehome.do" class="text-hover">고객센터</a></div>
-			<div class="title"><h2 style="color: #78c2ad;">CS Center</h2></div>
+			<div class="title" style=""><h2 style="color: #78c2ad;font-weight: bold;">CS Center</h2></div>
 			<!-- 고객센터메뉴 -->
 			<div class="cs_menu">
 				<div class="cs_center">
