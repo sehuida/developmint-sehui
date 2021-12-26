@@ -31,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 
+import kr.or.comment.vo.Report;
 import kr.or.member.model.vo.Member;
 import kr.or.projectTeam.model.service.ProjectTeamService;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
@@ -268,7 +269,7 @@ public class ProjectTeamController {
 			  result = service.insertComment(commentContent, boardNo, memberId, boardType); 
 		  }else {
 			  if(checkMemberNo != memberNo) {
-				  entryNo = service.searchEntryNo(boardNo, memberId);
+				  entryNo = service.searchEntryNo(boardNo, memberNo);
 				  result = service.insertComment(commentContent, boardNo, memberId, boardType, entryNo);
 			  } else {
 				  result = service.insertComment(commentContent, boardNo, memberId, boardType); 
@@ -280,6 +281,7 @@ public class ProjectTeamController {
 			  if(boardType == 3) {
 				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
 			  } else {
+				  entryNo = service.searchEntryNo(boardNo, memberNo);
 				  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+boardNo+"&memberNo="+memberNo+"&entryNo="+entryNo);
 			  }
 			  model.addAttribute("icon", "success");
@@ -289,6 +291,7 @@ public class ProjectTeamController {
 			  if(boardType == 3) {
 				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
 			  } else {
+				  entryNo = service.searchEntryNo(boardNo, memberNo);
 				  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+boardNo+"&memberNo="+memberNo+"&entryNo="+entryNo);
 			  }
 			  model.addAttribute("icon", "warning");
@@ -296,65 +299,37 @@ public class ProjectTeamController {
 		  return "member/swalMsg"; 
 	  }
 	  
+	  @ResponseBody
 	  @RequestMapping(value="/deleteComment.do") 
-	  public String deleteComment(Model model, int commentNo, int projectNo, int memberNo, int boardCheckKey) {
+	  public int deleteComment(Model model, int commentNo) {
 		  int result = service.deleteComment(commentNo); 
-		  if(boardCheckKey == 1) {
-			  if(result > 0) { 
-				  model.addAttribute("title", "댓글 삭제 성공");
-				  model.addAttribute("msg", "댓글 삭제 완료되었습니다.");
-				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
-				  model.addAttribute("icon", "success");
-			  } else {
-				  model.addAttribute("title", "댓글 삭제 실패");
-				  model.addAttribute("msg", "댓글 삭제 실패하였습니다.");
-				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
-				  model.addAttribute("icon", "warning");
-			  }
-		  } else {
-			  if(result > 0) { 
-				  model.addAttribute("title", "댓글 삭제 성공");
-				  model.addAttribute("msg", "댓글 삭제 완료되었습니다.");
-				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
-				  model.addAttribute("icon", "success");
-			  } else {
-				  model.addAttribute("title", "댓글 삭제 실패");
-				  model.addAttribute("msg", "댓글 삭제 실패하였습니다.");
-				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
-				  model.addAttribute("icon", "warning");
-			  }
-		  }
-		  return "member/swalMsg"; 
+		  return result; 
 	  }
 	  
+	  @ResponseBody
 	  @RequestMapping(value="/updateComment.do") 
-	  public String updateComment(Model model, int commentNo, int projectNo, int memberNo, String commentContent) {
+	  public int updateComment(Model model, int commentNo, String commentContent) {
 		  int result = service.updateComment(commentNo, commentContent); 
-		  if(result > 0) { 
-			  model.addAttribute("title", "댓글 수정 성공");
-			  model.addAttribute("msg", "댓글 수정 완료되었습니다.");
-			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
-			  model.addAttribute("icon", "success");
-		  } else {
-			  model.addAttribute("title", "댓글 수정 실패");
-			  model.addAttribute("msg", "댓글 수정 실패하였습니다.");
-			  model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
-			  model.addAttribute("icon", "warning");
-		  }
-		  return "member/swalMsg"; 
+		  return result; 
 	  }
 	  
 	  @RequestMapping(value="/reCommentInsert.do")   
 	  public String reCommentInsert(Model model, String commentContent, int boardNo, String memberId, int memberNo, int commentNo, int boardType) {
-		  int result = service.reCommentInsert(commentContent, boardNo, memberId, commentNo, boardType); 
+		  int result = 0;
+		  if(boardType == 3) {
+			  result = service.reCommentInsert(commentContent, boardNo, memberId, commentNo, boardType); 
+		  } else {
+			  int entryNo = service.searchEntryNo(boardNo, memberNo);
+			  result = service.reCommentInsert(commentContent, boardNo, memberId, commentNo, boardType, entryNo); 
+		  }
 		  if(result > 0) { 
 			  model.addAttribute("title", "대댓글 등록 성공");
 			  model.addAttribute("msg", "대댓글 등록 완료되었습니다.");
 			  if(boardType == 3) {
 				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
 			  } else {
-				  int entryNo = service.searchEntryNo(boardNo, memberId);
-				  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+boardNo+"&memberNo=$"+memberNo+"&entryNo="+entryNo);
+				  int entryNo = service.searchEntryNo(boardNo, memberNo);
+				  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+boardNo+"&memberNo="+memberNo+"&entryNo="+entryNo);
 			  }
 			  model.addAttribute("icon", "success");
 		  } else {
@@ -363,8 +338,8 @@ public class ProjectTeamController {
 			  if(boardType == 3) {
 				  model.addAttribute("loc","/selectOneNotice.do?projectNo="+boardNo+"&memberNo="+memberNo);
 			  } else {
-				  int entryNo = service.searchEntryNo(boardNo, memberId);
-				  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+boardNo+"&memberNo=$"+memberNo+"&entryNo="+entryNo);
+				  int entryNo = service.searchEntryNo(boardNo, memberNo);
+				  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+boardNo+"&memberNo="+memberNo+"&entryNo="+entryNo);
 			  }
 			  model.addAttribute("icon", "warning");
 		  }
@@ -1162,6 +1137,29 @@ public class ProjectTeamController {
 		model.addAttribute("checkValue", checkValue);
 		return "recruitCrue/projectManageTaskH";
 	}
+	
+	//댓글신고
+		@RequestMapping(value="/reportProjectNoticeComment.do")
+		public String reportComment(Report rp, Model model, int projectNo, int memberNo, int boardType) {
+			int result = service.reportProjectNoticeComment(rp);
+			if(result>0) {
+				model.addAttribute("title","댓글 신고 성공");
+				model.addAttribute("msg","해당 댓글을 신고하였습니다.");
+				model.addAttribute("icon","success");
+			
+			}else {
+				model.addAttribute("title","댓글 신고 실패");
+				model.addAttribute("msg","해당 댓글 신고에 실패하였습니다. 관리자에게 문의해주세요.");
+				model.addAttribute("icon","error");
+			}
+			if(boardType == 1) {
+				model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
+			} else {
+				model.addAttribute("loc","/manageEntry.do?memberNo="+memberNo+"&projectNo="+projectNo+"&reqPage=1&viewValue=1");
+			}
+			return "member/swalMsg";
+			
+		}
   
 	  
 }
