@@ -56,6 +56,7 @@ input:focus, textarea:focus {
 .g-one-tbl img {
 	border-radius: 50%;
 	width: 150px;
+	height: 150px;
 }
 
 .g-one-tbl {
