@@ -328,8 +328,6 @@ btn-primary:hover {
 
 			var searchContent = $("input[id=search-content]").val();
 			var type = $("select[name=type]").val();
-			console.log(searchContent);
-			console.log(type);
 
 			location.href = "/gosuList2.do?reqPage=1&keyword=" + searchContent
 					+ "&type=" + type;

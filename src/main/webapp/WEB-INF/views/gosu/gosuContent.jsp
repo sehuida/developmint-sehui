@@ -540,7 +540,7 @@
 				</div>
 			<c:if test="${not empty gnList }">
 			<div>
-				<h4>고수가 작성한 노하우</h4>
+				<h4><span class="text-success">${gosu.gosuId }</span>&nbsp;님이 작성한 노하우</h4>
 				<table
 					style="box-shadow: 0px 0 15px 0px rgb(0 0 0/ 15%); width: 100%">
 
@@ -559,6 +559,7 @@
 					</c:forEach>
 				</table>
 			</div>
+				</c:if>
 			<div class="gosu-feedback">
 
 					<h4>
@@ -568,7 +569,7 @@
 					</h4>
 
 				</div>
-		</c:if>
+	
 			</div>
 			
 		</div>
@@ -640,7 +641,6 @@
 					, success : function(data) {
 						$("#gprojectTitle").empty();
 						$("#gprojectContent").empty();
-						console.log(data);
 						$("#gprojectTitle").append(data.gprojectContent);
 						$("#gprojectContent").append(data.gprojectTitleBr);
 						$("#gprojectFilepath").attr("src", data.gprojectFilepath);

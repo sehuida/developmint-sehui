@@ -22,7 +22,6 @@ public class AnnounceService {
 	private AnnounceDao dao;
 
 	public int insertAnnounce(Announce a) {
-		System.out.println("여기 announceService");
 		return dao.insertAnnounce(a);
 	}
 
@@ -45,7 +44,6 @@ public class AnnounceService {
 	public int deleteAnnounce(int announceNo) {
 		int appResult = dao.deleteApplication(announceNo);
 		if(appResult > 0) {
-			System.out.println("deleteAnnounce Dao 여기 성공");
 			return dao.deleteAnnounce(announceNo);
 		} else {
 			return 0;

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.announce.vo.Announce;
 import kr.or.announce.vo.AnnouncePageData;
+import kr.or.announce.vo.SearchAnnouncePageData;
 import kr.or.jobSearch.service.JobSearchService;
 import kr.or.resume.vo.Resume;
 
@@ -22,7 +23,6 @@ public class JobSearchController {
 	public String jobSearchList(Model model, int reqPage) {
 		AnnouncePageData apd = service.selectAllAnnounce(reqPage);
 		int count = service.selectAllAnnounceCount();	//전체 구인글 리스트 수
-		System.out.println(apd.getList());
 		model.addAttribute("count",count);
 		model.addAttribute("list",apd.getList());
 		model.addAttribute("pageNavi",apd.getPageNavi());
@@ -44,11 +44,20 @@ public class JobSearchController {
 		String comName = service.selectComName(comNo);
 		if(comName != null) {
 			model.addAttribute("comName", comName);
-			System.out.println(comName);
 		} else {
 			
 		}
 		return "jobSearch/announceFrm";
+	}
+	
+	@RequestMapping(value="/searchAnnounce.do")
+	public String searchAnnounce(int reqPage, String keyword, int placeType, int workType, Model model) {
+		SearchAnnouncePageData sapd = service.selectSearchAnnouncePageData(reqPage, keyword, placeType, workType);
+		model.addAttribute("count",sapd.getCount());
+		model.addAttribute("list",sapd.getList());
+		model.addAttribute("pageNavi",sapd.getPageNavi());
+		model.addAttribute("start",sapd.getStart());
+		return "jobSearch/searchAnnounce";
 	}
 	
 }

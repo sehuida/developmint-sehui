@@ -235,7 +235,6 @@ input:focus, textarea:focus {
 			var IMP = window.IMP;
 			IMP.init('imp37172515');
 			var cost = $("#gfCost").val();
-			console.log(cost);
 			var mId = $("#mId").val();
 			var gfTitle = $("#gfTitle").val();
 			IMP.request_pay({
@@ -263,7 +262,6 @@ input:focus, textarea:focus {
 							"gosuFeedbackContent" : gosuFeedbackContent
 						},
 						success : function(data) {
-							console.log(data);
 							location.href = "/gosuTalk.do?fbNo=" + data;
 						}
 					});

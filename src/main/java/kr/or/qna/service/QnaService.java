@@ -135,6 +135,10 @@ public class QnaService {
 		return dao.nonSearchList(map);
 	}
 
+	public ProjectTeamFileVO boardFileDown(int fileNo) {
+		return dao.boardFileList(fileNo);
+	}
+
 
 	
 

@@ -227,10 +227,7 @@ input:focus, textarea:focus {
 			var gnoticeTitle = $("input[name=gnoticeTitle]").val();
 			var files = $("input[name=files]").val();
 			var gnoticePhoto = $("input[name=gnoticePhoto]").val();
-			console.log("gnoticeContent : " + gnoticeContent);
-			console.log("gnoticeTitle : " + gnoticeTitle);
-			console.log("files : " + files);
-			console.log("gnoticePhoto : " + gnoticePhoto);
+		
 			if (gnoticeContent == "" || gnoticeTitle == "") {
 				swal({
 					title : '수정실패',

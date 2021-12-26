@@ -501,7 +501,7 @@ input:focus, textarea:focus {
 			var requestProjectSubNo = $("#requestProjectSubNo").val();
 			var form = new FormData();
 			var files = $("#talkFile")[0].files[0];
-			console.log(files);
+			
 			form.append("talkFile", files);
 			form.append("talkContent", talkContent);
 			form.append("writerNo", writerNo);
@@ -523,7 +523,6 @@ input:focus, textarea:focus {
 				data : form,
 				success : function(data) {
 					if (data > 0) {
-						console.log("등록성공");
 						location.reload();
 					} else {
 
@@ -554,9 +553,7 @@ input:focus, textarea:focus {
 			var requestReviewContent = $("#requestReviewContent").val();
 			var requestProjectSubNo = $("#grequestProjectSubNo").val();
 			var requestMemberId = $("#requestMemberId").val();
-			console.log(requestReviewContent);
-			console.log(requestProjectSubNo);
-			console.log(requestMemberId);
+	
 			if (requestReviewContent == "") {
 				swal({
 					title : '실패',

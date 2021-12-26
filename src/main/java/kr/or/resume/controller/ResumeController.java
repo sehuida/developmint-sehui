@@ -52,7 +52,6 @@ public class ResumeController {
 	
 	@RequestMapping(value="/updateCeoResume.do")
 	public String updateCeoResume(Resume r, int memberNo, Model model) {
-		System.out.println(r);
 		int result = service.updateCeoResume(r);
 		if(result > 0) {
 			model.addAttribute("msg","이력서 수정완료");
@@ -60,7 +59,6 @@ public class ResumeController {
 		} else {
 			model.addAttribute("msg","이력서 수정실패");
 		}
-		System.out.println(r);
 		return "common/msg";
 	}
 	
@@ -83,7 +81,6 @@ public class ResumeController {
 	@ResponseBody
 	public Resume ceoResume(int resumeNo, int memberNo) {
 		Resume resume = service.resetCeoResume(resumeNo, memberNo);
-		System.out.println(resume);
 		return resume;
 	}
 	
@@ -92,7 +89,6 @@ public class ResumeController {
 		int ceoResume = r.getCeoResume();
 		Resume resume = service.selectCeoResume(ceoResume, r.getMemberNo());
 		Member m = service.selectOneMember(resume.getMemberNo());
-		System.out.println("resumeView 확인 r : " + resume);
 		model.addAttribute("r", resume);
 		model.addAttribute("m", m);		
 		return "resume/ceoResumeView";
@@ -109,8 +105,6 @@ public class ResumeController {
 		model.addAttribute("list", acpd.getList());
 		model.addAttribute("pageNavi", acpd.getPageNavi());
 		model.addAttribute("start", acpd.getStart());
-		System.out.println("count : "+ count);
-		System.out.println("list : "+ acpd.getList());
 		return "resume/applicationCompany";
 	}
 	

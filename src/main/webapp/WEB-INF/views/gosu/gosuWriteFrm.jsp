@@ -600,7 +600,6 @@
 										aImg.src = e.target.result;
 										var html = "";
 										var div = $(".g-photo-wrap");
-										console.log("div : " + div);
 										html += "<div class='g-photo-one'><dl>";
 										html += "<dt id='gimg' ><img></dt>";
 										html += "<dd><b class='g-b' style='font-size: 19px;'></b></dd>";
@@ -641,9 +640,9 @@
 		
 		function gProjectArr() {
 			var gprojectTitle = $("#gprojectTitle").val();
-			console.log(gprojectTitle);
+		
 			var gprojectContent = $("#gprojectContent").val();
-			console.log(gprojectContent);
+		
 
 			var gprojectFilepath = $("#gprojectFilepath");
 			if (gprojectTitle == "" || gprojectContent == ""
@@ -660,7 +659,7 @@
 
 			var form = new FormData();
 			var files = $("#gprojectFilepath")[0].files[0];
-			console.log(files);
+			
 			form.append("gprojectFilepath", files);
 			form.append("gprojectContent", gprojectContent);
 			form.append("gprojectTitle", gprojectTitle);
@@ -696,11 +695,11 @@
 					});
 
 			var gb = $(".g-photo-one").first().find(".g-b");
-			console.log(gb);
+	
 			gb.append(gprojectTitle);
 
 			var gp = $(".g-photo-one").first().find(".g-p");
-			console.log(gp);
+
 			gp.append(gprojectContent);
 
 			$('body').css("overflow", "scroll");

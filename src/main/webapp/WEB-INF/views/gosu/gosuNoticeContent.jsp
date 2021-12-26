@@ -15,7 +15,7 @@
 
 .container {
 	margin-top: 50px;
-	margin-bottom: 100px;
+	margin-bottom: 200px;
 	min-width: 1200px;
 }
 
@@ -556,7 +556,7 @@
 
 		</div>
 		
-
+<hr style="margin-top: 50px;margin-bottom: 50px;width: 100%">
 
 <%---------------------------------------------------------------------------- --%>
 		<%--댓글창 --%>
@@ -939,7 +939,6 @@
 		//댓글 글자수 제한
    		 $('.textareaBox').keydown(function(){
    			 var length = $(".textareaBox").val().length;
-  			console.log(length);
   			 if($(this).val().length > 64) {
   				swal({
   	 			  title: "글자수 초과",
@@ -994,11 +993,10 @@
 		//댓글 수정
 		$(".updateCm").click(function(){
 			var index = $(".updateCm").index(this);
-			console.log("idx " +index);
+
 			var commentNo = $(this).parent().prev().val();
 			var commentContent = $(this).parent().prev().prev().val();
-			console.log(commentNo);
-			console.log(commentContent);
+		
 			 $.ajax({
 				url : "/updateContestComment.do",
 				data : {commentNo : commentNo, commentContent:commentContent},
