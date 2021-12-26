@@ -209,6 +209,8 @@
 			// 등록 이미지 삭제
 			$('body').on('click', '.del-image', function() {
 				$(this).parents('li').remove();
+				$(".btn-file").removeClass("disabled");
+				$(".btn-file").attr("onclick","$('#Filedata').click();");
 			});
 		}); 
 		
@@ -359,8 +361,10 @@
 				reader.onload=function(e){
 					/* $("#img-view").attr("src",e.target.result); */
 					var image_tag = "<li><img style=\"width: 65px;height: 65px;\" src=\"" + e.target.result + "\" /><a class=\"del-image\" href=\"javascript:void(0);\"><i class=\"bi bi-x-circle-fill\"></i></a></li>";
-					/* files.value += (files.value != "") ? "," + e.target.result : e.target.result; */
+					files.value += (files.value != "") ? "," + e.target.result : e.target.result;
 					$("#file_show").append(image_tag);
+					$(".btn-file").addClass("disabled");
+					$(".btn-file").removeAttr("onclick");
 				}
 			}else{
 				$("#img-view").attr("src","");
