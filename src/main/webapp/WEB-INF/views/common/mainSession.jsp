@@ -435,7 +435,7 @@
 								<a href="/noticeView.do?noticeNo=${n.noticeNo }" class="newBoard"><span>${subTitle }...</span></a>
 							</c:when>
 							<c:otherwise>
-								<span class="newTitle">${n.noticeTitle }</span>
+								<a href="/noticeView.do?noticeNo=${n.noticeNo }" class="newBoard"><span class="newTitle-2">${n.noticeTitle }</span></a>
 							</c:otherwise>
 						</c:choose>
 						<span class="newBoardDate">${n.regDate }</span><br>
