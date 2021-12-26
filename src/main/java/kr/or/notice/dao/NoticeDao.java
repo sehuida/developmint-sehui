@@ -70,4 +70,9 @@ public class NoticeDao {
 		return sqlsession.update("notice.noticeCountUp", noticeNo);
 	}
 
+	public ArrayList<Notice> noticeList() {
+		List<Notice> nlist = sqlsession.selectList("notice.noticeList");
+		return (ArrayList<Notice>)nlist;
+	}
+
 }

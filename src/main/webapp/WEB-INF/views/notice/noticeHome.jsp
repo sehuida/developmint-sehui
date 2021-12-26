@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,23 @@
 <link rel="stylesheet" href="/resources/css/notice/noticeList.css">
 <link rel="stylesheet" href="/resources/css/notice/noticeHome.css">
 </head>
+<style>
+	.cs_notice ul li a:before {
+    content: "-";
+    padding-right: 5px;
+}
+.cs_notice ul{
+	list-style : none;
+	padding: 0;
+	margin-top: 30px;
+}
+.cs_notice ul li a{
+	text-decoration: none;
+}
+.muted-h:hover{
+	color: #78c2ad;
+}
+</style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container" style="margin-bottom: 50px;">
@@ -63,7 +81,13 @@
 				<h3 class="title_cs font-mss">Notice <span>공지사항</span></h3>
 				<div class="cs_notice">
 					<!-- ul리스트 출력 -->
-					
+					<ul>
+						<c:forEach items="${nlist }" var="n" varStatus="i">
+							<li class="text-muted">
+								<a href="noticeView.do?noticeNo=${n.noticeNo }" class="text-muted muted-h">${n.noticeTitle }</a>	
+							</li>
+						</c:forEach>
+					</ul>
 				</div>
 			</div>
 			<!-- //공지사항 & 이용방법 -->

@@ -52,7 +52,9 @@ public class NoticeController {
 	}
 
 	@RequestMapping(value = "/noticehome.do")
-	public String nHome() {
+	public String nHome(Model model) {
+		ArrayList<Notice> noticeList = service.noticeList();
+		model.addAttribute("nlist",noticeList);
 		return "notice/noticeHome";
 	}
 
