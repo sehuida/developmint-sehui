@@ -249,7 +249,7 @@ public class GosuController {
 			model.addAttribute("icon", "success");
 		}
 
-		model.addAttribute("loc", "/");
+		model.addAttribute("loc", "/gosuMain.do");
 		return "member/swalMsg";
 	}
 
