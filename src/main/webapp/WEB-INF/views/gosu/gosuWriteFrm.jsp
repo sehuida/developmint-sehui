@@ -553,7 +553,7 @@
 					var gosuTitle = $("input[name=gosuTitle]").val();
 					var gosuSelf = $("input[name=gosuSelf]").val();
 
-					if (photoFilepath == null || gprojectFilepath == null
+					if (photoFilepath == "" || gprojectFilepath == ""
 							|| gprojectTitle == "" || gprojectContent == ""
 							|| gosuCost == "" || gosuAct.lenght == 0
 							|| gosuTitle == "" || gosuExplain.lenght == 0
