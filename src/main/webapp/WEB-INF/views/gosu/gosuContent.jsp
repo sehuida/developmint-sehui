@@ -106,12 +106,12 @@
 }
 
 .g-photo-one {
-	padding:10px;
-	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+	padding: 10px;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0/ 15%);
 }
+
 .g-photo-one img {
 	height: 200px;
-	
 }
 
 .g-photo-one .g-b {
@@ -280,14 +280,13 @@
 	width: 600px;
 }
 
-
 .upbtn>button {
-	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+	box-shadow: 0px 0 15px 0px rgb(0 0 0/ 15%);
 }
 
 .upbtn:hover {
--webkit-transform: scale(1.03);
-    transform: scale(1.03);
+	-webkit-transform: scale(1.03);
+	transform: scale(1.03);
 }
 </style>
 <meta charset="UTF-8">
@@ -310,25 +309,27 @@
 
 							<c:if test="${empty gosu.gosuImg }">
 								<th rowspan="6" style="padding: 40px; padding-right: 100px;"><img
-									src="/resources/img/gosu/g_img_basic.png" style="width: 250px; box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);"></th>
+									src="/resources/img/gosu/g_img_basic.png"
+									style="width: 250px; box-shadow: 0px 0 15px 0px rgb(0 0 0/ 15%);"></th>
 							</c:if>
 							<c:if test="${not empty gosu.gosuImg }">
 								<th rowspan="6" style="padding: 40px; padding-right: 100px;"><img
 									src="/resources/upload/member/${gosu.gosuImg }"
-									style="width: 250px; height: 250px; box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);"></th>
+									style="width: 250px; height: 250px; box-shadow: 0px 0 15px 0px rgb(0 0 0/ 15%);"></th>
 							</c:if>
 						</tr>
 						<tr>
 							<td><span>고수</span> ${gosu.gosuId }</td>
 						</tr>
 						<tr>
-							<td style="font-size: 25px;	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);padding:10px;">${gosu.gosuTitle }</td>
+							<td
+								style="font-size: 25px; box-shadow: 0px 0 15px 0px rgb(0 0 0/ 15%); padding: 10px;">${gosu.gosuTitle }</td>
 						</tr>
 						<tr>
 							<td><hr></td>
 						</tr>
 						<tr>
-							<td style="color: gray;">한 줄 소개</td>
+							<td style="color: rgb(78, 205, 196);">한 줄 소개</td>
 						</tr>
 						<tr>
 							<td style="font-size: 20px;">${gosu.gosuSelf }</td>
@@ -349,8 +350,9 @@
 						<ul>
 							<c:forEach items="${gphotoList }" var="gph" varStatus="i">
 
-								<li style="
-	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);height: 120px;line-height: 120px;"><a><img src="${gph.photoFilepath }"></a></li>
+								<li
+									style="box-shadow: 0px 0 15px 0px rgb(0 0 0/ 15%); height: 120px; line-height: 120px;"><a><img
+										src="${gph.photoFilepath }"></a></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -373,8 +375,7 @@
 												<td rowspan="3" style="font-size: 40px; font-weight: bold;">${grAVG.reviewAvg }점</td>
 											</tr>
 											<tr>
-												<td>
-												<c:choose>
+												<td><c:choose>
 														<c:when test="${grAVG.reviewAvg eq 5}">
 															<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
 														</c:when>
@@ -409,10 +410,9 @@
 										<div class="review-one">
 											<ul>
 												<li>${grl.writer }</li>
-												<li>
-													
-													<span style="float: left;font-size: small;margin-right: 5px;">${grl.reviewNum} 점</span>
-												<c:if test="${grl.reviewNum eq 1 }">
+												<li><span
+													style="float: left; font-size: small; margin-right: 5px;">${grl.reviewNum}
+														점</span> <c:if test="${grl.reviewNum eq 1 }">
 														<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
 													</c:if> <c:if test="${grl.reviewNum eq 2 }">
 														<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
@@ -424,11 +424,12 @@
 														<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
 													</c:if></li>
 												<li>${grl.reviewDate }</li>
-											
+
 											</ul>
 											<br>
 											<div>
-												<p style="padding:5px;padding-left: 50px;padding-right: 30px;">${grl.reviewContent}</p>
+												<p
+													style="padding: 5px; padding-left: 50px; padding-right: 30px;">${grl.reviewContent}</p>
 											</div>
 										</div>
 									</c:forEach>
@@ -462,8 +463,10 @@
 												<li style="color: gray;">${grl.requestReviewDate }</li>
 											</ul>
 											<br>
-											<div >
-												<p style="padding:5px;padding-left: 50px;padding-right: 30px;"> ${grl.requestReviewContent }</p>
+											<div>
+												<p
+													style="padding: 5px; padding-left: 50px; padding-right: 30px;">
+													${grl.requestReviewContent }</p>
 											</div>
 										</div>
 									</c:forEach>
@@ -485,7 +488,7 @@
 				<div class="gosu-project">
 					<h4>프로젝트</h4>
 					<div class="g-photo-wrap">
-					<c:forEach items="${gprojectList }" var="gpr" varStatus="i">
+						<c:forEach items="${gprojectList }" var="gpr" varStatus="i">
 							<div class="g-photo-one">
 								<button type="button" id="gProject"
 									onclick="pAjax(${gpr.gprojectNo});">
@@ -506,15 +509,7 @@
 					</div>
 
 				</div>
-				<div class="gosu-feedback">
-
-					<h4>
-						<span style="margin-right: 100px;">피드백 비용 </span> <span
-							style="color: red; font-size: 40px;">${gosu.gosuCost }
-							&nbsp; &nbsp;</span>원
-					</h4>
-
-				</div>
+				
 				<div class="hrm-wrap" style="display: none; margin: 0;">
 					<div id="hrm-modal">
 						<h3 style="color: white;">프로젝트</h3>
@@ -543,18 +538,57 @@
 						</div>
 					</div>
 				</div>
+			<c:if test="${not empty gnList }">
+			<div>
+				<h4>고수가 작성한 노하우</h4>
+				<table
+					style="box-shadow: 0px 0 15px 0px rgb(0 0 0/ 15%); width: 100%">
+
+					<c:forEach items="${gnList }" var="gnl" varStatus="i">
+						
+						<tr>
+							<th
+								style="text-align: center; padding: 20px;width:150px; font-size: 25px; font-weight: 900; "
+								class="text-primary">${i.count }</th>
+							<td style="text-align: center; padding: 20px;"><img
+								src="${gnl.gnoticePhoto }"
+								style="width: 100px; height: 100px; border-radius: 20px;"></td>
+							<td style="padding: 20px; font-size: 20px;"><a href="/gosuNoticeContent.do?gnn=${gnl.gnoticeNo }">${gnl.gnoticeTitlePlus }</a></td>
+						</tr>
+						
+					</c:forEach>
+				</table>
 			</div>
+			<div class="gosu-feedback">
+
+					<h4>
+						<span style="margin-right: 100px;">피드백 비용 </span> <span
+							style="color: red; font-size: 40px;">${gosu.gosuCost }
+							&nbsp; &nbsp;</span>원
+					</h4>
+
+				</div>
+		</c:if>
+			</div>
+			
 		</div>
-		<c:if test="${not empty sessionScope.m.memberNo }">
-			<c:if test="${sessionScope.m.memberNo ne gosu.gsouNo}">
-				<div style="display: flex; justify-content: center;">
+		
+		<div
+			style="display: flex; justify-content: center; margin-bottom: 100px;">
+			<c:if test="${not empty sessionScope.m.memberNo }">
+				<c:if test="${sessionScope.m.memberNo ne gosu.gsouNo}">
 					<a href="/gosuFeedback.do?ggNo=${gosu.ggsouNo }"
 						class="btn btn-primary upbtn"
 						style="width: 200px; margin: 100px; padding: 10px;"><b>피드백
 							신청하기</b> </a>
-				</div>
+
+				</c:if>
+
 			</c:if>
-		</c:if>
+			<a class="btn btn-info upbtn"
+				style="width: 200px; margin: 100px; padding: 10px;"
+				onclick="history.back();">뒤로가기</a>
+		</div>
 		<div class='bigPictureWrapper'>
 			<div class='bigPicture'></div>
 		</div>

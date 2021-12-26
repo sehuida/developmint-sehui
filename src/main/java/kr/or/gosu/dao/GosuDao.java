@@ -369,5 +369,10 @@ public class GosuDao {
 		return sqlSession.insert("gosu.reportContestComment",rp);
 	}
 
+	public ArrayList<GosuNotice> selectGosuNoticeListSelf(String gosuId) {
+		List<GosuNotice> list = sqlSession.selectList("gosu.selectGosuNoticeListSelf",gosuId);
+		return (ArrayList<GosuNotice>)list;
+	}
+
 
 }

@@ -128,16 +128,13 @@ public class GosuController {
 			model.addAttribute("grrCount", grrCount);
 
 		}
+		ArrayList<GosuNotice> gnList = service.selectGosuNoticeListSelf(gosu.getGosuId());		
 		model.addAttribute("gosu", gosu);
 		model.addAttribute("gprojectList", gprList);
 		model.addAttribute("gphotoList", gptList);
 		model.addAttribute("greviewList", grList);
 		model.addAttribute("grrList", grrList);
-		System.out.println(gosu);
-		System.out.println(gprList);
-		System.out.println(gptList);
-		System.out.println(grList);
-		System.out.println(grrList);
+		model.addAttribute("gnList", gnList);
 		return "gosu/gosuContent";
 	}
 

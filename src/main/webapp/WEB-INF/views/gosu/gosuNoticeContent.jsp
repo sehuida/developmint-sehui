@@ -488,9 +488,6 @@
 		<h4>
 			&gt; &nbsp;<span style="color: rgb(78, 205, 196);">고수</span>의 게시판
 		</h4>
-		<div style="text-align: right; margin-top: 50px;">
-			<span>${gNotice.gnoticeDate}</span>
-		</div>
 		<div class="g-center">
 			<div class="g-img">
 				<img src="${gNotice.gnoticePhoto}">
@@ -530,17 +527,18 @@
 		</div>
 		<div class="g-center">
 			<c:if test="${sessionScope.m.memberId ne gNotice.writeId}">
-				<c:if test="${not empty sessionScope.m }">
-					<a id="feedbackListAjax" class="btn btn-info upbtn"
-						style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">피드백
-						신청하기</a>
-				</c:if>
-				<c:if test="${empty sessionScope.m }">
-					<a id="feedbackListAjax" class="btn btn-info upbtn"
+			
+					<c:if test="${empty gosuWriteList}">
+					<a class="btn btn-info upbtn underhover"
 						style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">고수
 						보러가기</a>
-				</c:if>
-
+					</c:if>
+					<c:if test="${not empty gosuWriteList}">
+					<a href="/gosuContent.do?gNo=${gosuWriteList.ggsouNo}" class="btn btn-info upbtn "
+						style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;">고수
+						보러가기</a>
+					</c:if>
+					
 				<a class="btn btn-primary upbtn"
 					style="width: 200px; margin: 100px; padding: 10px; font-weight: bold;"
 					onclick="history.back();">뒤로가기</a>
@@ -558,28 +556,6 @@
 
 		</div>
 		
-	
-
-	<div class="hrm-wrap" style="display: none; margin: 0;">
-		<div id="hrm-modal">
-			<div class="hrm-content">
-				<br>
-				<div class="g-style">
-
-					<c:if test="${not empty gosuWriteList}">
-						<a class="btn btn-success" style="font-size: 30px;"
-							href="/gosuContent.do?gNo=${gosuWriteList.ggsouNo}">${gosuWriteList.gosuTitle }</a>
-					</c:if>
-					<c:if test="${empty gosuWriteList}">
-						<span style="font-size: 30px;">아직 고수님께서 소개글을 등록하지 않았네요!</span>
-					</c:if>
-				</div>
-			</div>
-			<div class="hrm-btn-wrap">
-				<a id="hrm-close" class="btn btn-outline-success">취소</a>
-			</div>
-		</div>
-	</div>
 
 
 <%---------------------------------------------------------------------------- --%>
@@ -928,7 +904,13 @@
 	</div>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
-		
+	$(".underhover").click(function() {
+		swal({
+			title : '',
+			text : "고수님께서 소개글을 작성하지 않았습니다!",
+			icon : ''
+		});
+	});
 
 		$("#feedbackListAjax").click(function() {
 
