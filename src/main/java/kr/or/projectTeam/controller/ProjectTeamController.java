@@ -815,6 +815,7 @@ public class ProjectTeamController {
 			model.addAttribute("ptmGet0", ptvd.getPtmList().get(0));
 			model.addAttribute("scList", scList);
 			model.addAttribute("allPtk", allPtk);
+			model.addAttribute("allPtkk", allPtk);
 			model.addAttribute("tscList", tscList);
 			return "recruitCrue/projectManageTaskM";
 		}
@@ -1022,6 +1023,7 @@ public class ProjectTeamController {
 		model.addAttribute("scList", scList);
 		model.addAttribute("allPtk", allPtk);
 		model.addAttribute("tscList", tscList);
+		model.addAttribute("allPtkk", allPtk);
 		model.addAttribute("viewValue", viewValue);
 		model.addAttribute("checkValue", checkValue);
 		return "recruitCrue/projectManageTaskM";
@@ -1043,6 +1045,7 @@ public class ProjectTeamController {
 		model.addAttribute("ptmGet0", ptvd.getPtmList().get(0));
 		model.addAttribute("scList", scList);
 		model.addAttribute("allPtk", allPtk);
+		model.addAttribute("allPtkk", allPtk);
 		model.addAttribute("tscList", tscList);
 		return "recruitCrue/projectManageTaskT";
 	}
@@ -1065,6 +1068,7 @@ public class ProjectTeamController {
 		model.addAttribute("scList", scList);
 		model.addAttribute("allPtk", allPtk);
 		model.addAttribute("tscList", tscList);
+		model.addAttribute("allPtkk", allPtk);
 		model.addAttribute("viewValue", viewValue);
 		model.addAttribute("checkValue", checkValue);
 		return "recruitCrue/projectManageTaskT";
@@ -1086,6 +1090,7 @@ public class ProjectTeamController {
 		model.addAttribute("ptmGet0", ptvd.getPtmList().get(0));
 		model.addAttribute("scList", scList);
 		model.addAttribute("allPtk", allPtk);
+		model.addAttribute("allPtkk", allPtk);
 		model.addAttribute("tscList", tscList);
 		return "recruitCrue/projectManageTaskB";
 	}
@@ -1106,6 +1111,7 @@ public class ProjectTeamController {
 		model.addAttribute("ptm", ptvd.getPtmList());
 		model.addAttribute("ptmGet0", ptvd.getPtmList().get(0));
 		model.addAttribute("scList", scList);
+		model.addAttribute("allPtkk", allPtk);
 		model.addAttribute("allPtk", allPtk);
 		model.addAttribute("tscList", tscList);
 		model.addAttribute("viewValue", viewValue);
@@ -1128,6 +1134,7 @@ public class ProjectTeamController {
 		model.addAttribute("ptm", ptvd.getPtmList());
 		model.addAttribute("ptmGet0", ptvd.getPtmList().get(0));
 		model.addAttribute("scList", scList);
+		model.addAttribute("allPtkk", allPtk);
 		model.addAttribute("allPtk", allPtk);
 		model.addAttribute("tscList", tscList);
 		return "recruitCrue/projectManageTaskH";
@@ -1149,6 +1156,7 @@ public class ProjectTeamController {
 		model.addAttribute("ptm", ptvd.getPtmList());
 		model.addAttribute("ptmGet0", ptvd.getPtmList().get(0));
 		model.addAttribute("scList", scList);
+		model.addAttribute("allPtkk", allPtk);
 		model.addAttribute("allPtk", allPtk);
 		model.addAttribute("tscList", tscList);
 		model.addAttribute("checkValue", checkValue);
