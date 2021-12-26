@@ -256,9 +256,9 @@ $(function(){
                 </select>
                 <select name="work_type" class="work_type">
                     <option value="0">직업 선택</option>
-                    <option value="1">웹 개발</option>
-                    <option value="2">디자인</option>
-                    <option value="3">기획</option>
+                    <option value="1">IT 개발</option>
+                    <option value="2">웹 디자인</option>
+                    <option value="3">프로젝트 기획</option>
                 </select>
                 <input type="text" placeholder="검색 " class="search" name="keyword"><img id="searchImg" src="/resources/img/jobSearch/dot.PNG">
                 
