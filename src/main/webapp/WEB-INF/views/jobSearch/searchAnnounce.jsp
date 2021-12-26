@@ -262,9 +262,14 @@ $(function(){
                 </select>
                 <input type="text" placeholder="검색 " class="search" name="keyword"><img id="searchImg" src="/resources/img/jobSearch/dot.PNG">
                 
+                <c:choose>
+	                <c:when test="${empty list }">
+	                	검색된 이력서가 없습니다.
+	                </c:when>
+	                <c:otherwise>
+	                
+	                
                 <c:forEach items="${list }" var="a" varStatus="i">
-                
-                
 	                <div class="content">
 	                    <div class="status">모집중</div>
 	                    <div class="cpName"><a href="companyInfo.do?companyNo=${a.companyNo }">${a.companyName }</a></div>	
@@ -385,6 +390,8 @@ $(function(){
 	                    </div>
 	                </div>
                 </c:forEach>
+                </c:otherwise>
+                </c:choose>
                 <br>
                 <div id="pageNavi" style="padding: 0px;">${pageNavi }</div>
             </div>
