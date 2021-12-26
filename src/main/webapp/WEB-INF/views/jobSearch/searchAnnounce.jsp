@@ -236,7 +236,7 @@ $(function(){
         <div class="jobSearchListMain">
             <div class="mainHeader">
                 <h2>채용정보</h2>
-                <p>${count }개의 구인글</p>
+                <%-- <p>${count }개의 구인글</p> --%>
             </div>
             <div class="mainCenter">
                 <select name="place_type" class="place_type">
@@ -256,9 +256,9 @@ $(function(){
                 </select>
                 <select name="work_type" class="work_type">
                     <option value="0">직업 선택</option>
-                    <option value="1">웹 개발</option>
-                    <option value="2">디자인</option>
-                    <option value="3">기획</option>
+                    <option value="1">IT 개발</option>
+                    <option value="2">웹 디자인</option>
+                    <option value="3">프로젝트 기획</option>
                 </select>
                 <input type="text" placeholder="검색 " class="search" name="keyword"><img id="searchImg" src="/resources/img/jobSearch/dot.PNG">
                 
@@ -393,10 +393,11 @@ $(function(){
                 </c:otherwise>
                 </c:choose>
                 <br>
-                <div id="pageNavi" style="padding: 0px;">${pageNavi }</div>
+                <%-- <div id="pageNavi" style="padding: 0px;">${pageNavi }</div> --%>
             </div>
         </div>
     </div>
+    <br><br><br><br><br><br><br><br><br>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
