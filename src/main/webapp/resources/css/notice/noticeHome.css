@@ -15,7 +15,7 @@ ul, li{
 }
 .center_tap3 ul li{
 	display: table-cell;
-    width: 9%;
+    width: 5%;
     margin: -1px 0 0 0;
     border-bottom: 1px solid #ddd;
     border-left: 1px solid #ddd;
@@ -59,4 +59,8 @@ ul, li{
 .mypage_type a:hover {
 	background-color: #92cebd;
 	color: #fff;
+}
+.font-mss{
+	font-size: x-large;
+	font-weight: bold;
 }
