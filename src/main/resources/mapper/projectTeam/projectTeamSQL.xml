@@ -713,7 +713,7 @@
   		select 
   			entry_no
   		from project_entry
-  		where project_no = #{boardNo} and member_no = (select member_no from member where member_id = #{memberId})
+  		where project_no = #{boardNo} and member_no = #{memberNo}
   </select>
   
   <delete id="cancelApplyProject" parameterType="map">
@@ -1550,6 +1550,13 @@
  		</when>
  	</choose>
  </select>
+ 
+ <!-- 팀 모집 게시글 댓글 신고하기 -->
+  	<insert id="reportProjectNoticeComment" parameterType="rp">
+  		insert into report values(report_seq.nextval, #{reporterId}, #{reportReason}, #{reportEtc}, #{commentNo}, #{commentId}, to_char(sysdate,'yyyy-mm-dd'), #{reportStatus}, #{commentContent},null )
+  	</insert>
+ 
+ 
 
  
 </mapper>

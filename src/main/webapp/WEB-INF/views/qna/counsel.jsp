@@ -15,7 +15,7 @@
 	<div class="container" style="margin-bottom: 50px;max-width: 1591px;min-width: 1591px;">
 		<div class="area">
 			<div class="nav-sub" style="margin-top: 30px;"><a href="/" class="text-hover">홈</a><span> > </span><a href="/noticehome.do" class="text-hover">고객센터</a><span> > </span><span>1:1 Q&A</span></div>
-			<div class="title"><h2 style="color: #78c2ad;">CS Center</h2></div>
+			<div class="title"><h2 style="color: #78c2ad;font-weight: bold;">CS Center</h2></div>
 			<div class="center_tap">
 				<ul style="margin-bottom: 0;">
 					<li><span class="">Tel. 2163-8560</span><br><span class="last-span">평일 9:00~18:00(점심 12:00~13:00)</span></li>
@@ -114,7 +114,7 @@
 									<label for="memberId" class="form-label mt-4" scope="row" >작성자</label>
 									<div class="form-group">
 										<input type="text" class="n-input form-control" id="memberId" name="memberId" value="${sessionScope.m.memberId }" readonly>
-										<small id="emailHelp" class="form-text text-muted">답변확인은 <a href="" style="display: inline-block;">공지사항</a> > <a href="" style="display: inline-block;">내 Q & A</a>로 확인하실수 있습니다.</small>
+										<small id="emailHelp" class="form-text text-muted">답변확인은 <a href="/mypage.do" style="display: inline-block;">마이페이지</a> > <a href="/myCounsel.do" style="display: inline-block;">내 Q & A</a>로 확인하실수 있습니다.</small>
 									</div>
 								</c:otherwise>
 							</c:choose>

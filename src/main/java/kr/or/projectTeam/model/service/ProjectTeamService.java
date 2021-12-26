@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.comment.vo.Report;
 import kr.or.projectTeam.model.dao.ProjectTeamDao;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectEntry;
@@ -515,10 +516,10 @@ public class ProjectTeamService {
 		return ptavd;
 	}
 
-	public int searchEntryNo(int boardNo, String memberId) {
+	public int searchEntryNo(int boardNo, int memberNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("boardNo", boardNo);
-		map.put("memberId", memberId);
+		map.put("memberNo", memberNo);
 		int entryNo = dao.searchEntryNo(map);
 		return entryNo;
 	}
@@ -1269,6 +1270,22 @@ public class ProjectTeamService {
 		
 		ProjectTaskViewData ptvd = new ProjectTaskViewData(tasklist, pageNavi, start, ptmList);
 		return ptvd;
+	}
+
+	public int reportProjectNoticeComment(Report rp) {
+		return dao.reportProjectNoticeComment(rp);
+	}
+
+	public int reCommentInsert(String commentContent, int boardNo, String memberId, int commentNo, int boardType,
+			int entryNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("commentContent", commentContent);
+		map.put("boardNo", entryNo);
+		map.put("memberId", memberId);
+		map.put("commentNo", commentNo);
+		map.put("boardType", boardType);
+		int result = dao.reCommentInsert(map);
+		return result;
 	}
 
 }

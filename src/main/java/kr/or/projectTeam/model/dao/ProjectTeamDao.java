@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.comment.vo.Report;
 import kr.or.projectTeam.model.vo.DevelopLanguage;
 import kr.or.projectTeam.model.vo.ProjectEntry;
 import kr.or.projectTeam.model.vo.ProjectReview;
@@ -466,6 +467,10 @@ public class ProjectTeamDao {
 
 	public int selectCheckTotalCountH(Map<String, Object> map) {
 		return sqlSession.selectOne("projectTeam.selectCheckTotalCountH", map);
+	}
+
+	public int reportProjectNoticeComment(Report rp) {
+		return sqlSession.insert("projectTeam.reportProjectNoticeComment",rp);
 	}
 
 	
