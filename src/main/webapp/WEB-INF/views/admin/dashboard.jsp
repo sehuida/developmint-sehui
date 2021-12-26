@@ -9,6 +9,7 @@
 <title>DeveloMint DashBoard</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
 .container {
@@ -333,10 +334,10 @@
 						<c:choose>
 							<c:when test="${fn:length(q.qnaTitle) > 16}">
 								<c:set var="subTitle" value="${fn:substring(q.qnaTitle,0,16)}"/>
-								<a href="#" class="newBoard"><span>${subTitle }...</span></a>
+								<a href="javascript:void(0);" onclick="qnaAtag()" class="newBoard"><span>${subTitle }...</span></a>
 							</c:when>
 							<c:otherwise>
-								<span class="newTitle">${q.qnaTitle }</span>
+								<span class="newTitle"><a href="javascript:void(0);" onclick="qnaAtag()" class="newBoard">${q.qnaTitle }</a></span>
 							</c:otherwise>
 						</c:choose>
 						<span class="newBoardDate">${q.regDate }</span><br>
@@ -352,10 +353,10 @@
 						<c:choose>
 							<c:when test="${fn:length(nq.qnaTitle) > 16}">
 								<c:set var="subTitle" value="${fn:substring(nq.qnaTitle,0,16)}"/>
-								<a href="#" class="newBoard"><span>${subTitle }...</span></a>
+								<a href="javascript:void(0);" onclick="nqnaAtag()" class="newBoard"><span>${subTitle }...</span></a>
 							</c:when>
 							<c:otherwise>
-								<span class="newTitle">${nq.qnaTitle }</span>
+								<span class="newTitle"><a href="javascript:void(0);" onclick="nqnaAtag()" class="newBoard">${nq.qnaTitle }</a></span>
 							</c:otherwise>
 						</c:choose>
 						<span class="newBoardDate">${nq.regDate }</span><br>
@@ -457,6 +458,36 @@
 		 });
 		
 	 })
+	 
+	 function qnaAtag(){
+		 swal({
+			  title: "회원 QNA 게시판 이동",
+			  text: "해당 내용은 회원 QNA게시판에서 확인 가능합니다. 이동하시겠습니까?",
+			  icon: "info",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+				  location.href="/adminCounsel.do?type=1";	
+			  }
+			});
+	 }
+	 
+	 function nqnaAtag(){
+		 swal({
+			  title: "비회원 QNA 게시판 이동",
+			  text: "해당 내용은 비회원 QNA게시판에서 확인 가능합니다. 이동하시겠습니까?",
+			  icon: "info",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+				  location.href="/adminCounsel.do?type=2";	
+			  }
+			});
+	 }
 	
 	 </script>
 </body>
