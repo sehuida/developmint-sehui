@@ -15,7 +15,7 @@
 
 .container {
 	margin-top: 50px;
-	margin-bottom: 100px;
+	margin-bottom: 200px;
 	min-width: 1200px;
 }
 
@@ -556,7 +556,7 @@
 
 		</div>
 		
-
+<hr style="margin-top: 50px;margin-bottom: 50px;width: 100%">
 
 <%---------------------------------------------------------------------------- --%>
 		<%--댓글창 --%>
