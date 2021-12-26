@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.announce.vo.Announce;
+import kr.or.announce.vo.SearchAnnounce;
 
 @Repository
 public class JobSearchDao {
@@ -36,6 +37,15 @@ public class JobSearchDao {
 
 	public String selectComName(int comNo) {
 		return sqlSession.selectOne("announce.selectComName", comNo);
+	}
+
+	public ArrayList<SearchAnnounce> selectSearchAllAnnounce(HashMap<String, Object> map) {
+		List<SearchAnnounce> list = sqlSession.selectList("announce.selectSearchAnnounce", map);
+		return (ArrayList<SearchAnnounce>)list;
+	}
+
+	public int selectSearchAllAnnounceCount() {
+		return sqlSession.selectOne("announce.selectAnnounceTotalCount");
 	}
 	
 	

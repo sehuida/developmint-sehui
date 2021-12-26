@@ -34,7 +34,6 @@ public class ResumeDao {
 	}
 
 	public int insertResume(Resume r) {
-		System.out.println("여기 resumeDao");
 		/*
 		 * HashMap<String, Object> map = new HashMap<String, Object>(); map.put("r", r);
 		 * map.put("memberNo", memberNo);
@@ -62,7 +61,6 @@ public class ResumeDao {
 	}
 
 	public int updateCeoResume(Resume r) {
-		System.out.println("여기 dao resume : " + r);
 		return sqlSession.update("resume.updateResume", r);
 	}
 

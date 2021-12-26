@@ -27,7 +27,6 @@ public class AnnounceDao {
 	 */
 	
 	public int insertAnnounce(Announce a) {
-		System.out.println("여기 announceDao");
 		return sqlSession.insert("announce.insertAnnounce", a);
 	}
 

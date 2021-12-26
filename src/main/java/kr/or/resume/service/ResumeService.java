@@ -78,7 +78,6 @@ public class ResumeService {
 	}
 
 	public int insertResume(Resume r) {
-		System.out.println("여기 resumeService");
 		return dao.insertResume(r);
 	}
 
