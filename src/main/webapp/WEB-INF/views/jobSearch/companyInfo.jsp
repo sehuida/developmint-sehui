@@ -485,6 +485,10 @@ b {
 										<!-- 2 -> 경력 -->
 										<span>경력</span>
 									</c:if>
+									<c:if test="${com.career eq 3 }">
+										<!-- 3 -> 경력무관 -->
+										<span>경력무관</span>
+									</c:if>
 								</div>
 							</li>
 							<li class="money">
