@@ -7,15 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 부트스트랩 js -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 스위트알람 js -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- 각 css 링크 경로 -->
 <link rel="stylesheet" href="/resources/css/default.css">
 <link rel="stylesheet" href="/resources/css/main/main.css">
 <link rel="stylesheet" href="/resources/css/projectTeam/recruitMember.css">
 <link rel="stylesheet" href="/resources/css/projectTeam/recruitMember.css">
-<!-- Add the slick-theme.css if you want default styling -->
+<!-- slick CDN -->
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-<!-- Add the slick-theme.css if you want default styling -->
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
@@ -34,6 +36,19 @@
 }
 .slick-prev:before, .slick-next:before {
     color: black;
+}
+#gotop_lick {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 66px;
+    height: 65px;
+    z-index: 99;
+    background: ;
+}
+#gotop_lick .on {
+  position: absolute;
+  bottom: 350px;
 }
 </style>
 <body>
@@ -212,7 +227,7 @@
 	<div class="container" style="margin-bottom: 50px;">
 	<!-- 고수 소개 얼굴만 최신 등록 5명 출력 -->
 		<div style="margin: 30px auto;">
-			<span class="subEngTitel">新</span> <span class="subTitel">고수들</span><a href="/allContestList.do?reqPage=1&type=0" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
+			<span class="subEngTitel">新</span> <span class="subTitel">고수들</span><a href="/gosuMain.do" style="padding-left: 20px;text-decoration: none;font-weight: bold;">더보기</a>
 		</div>
 		<div class="gosuContents mt-3">
 			<c:forEach items="${gosuList }" var="g" begin="0" end="4">
@@ -456,10 +471,10 @@
 						<c:choose>
 							<c:when test="${fn:length(q.qnaTitle) > 16}">
 								<c:set var="subTitle" value="${fn:substring(q.qnaTitle,0,16)}"/>
-								<a href="#" class="newBoard board-link"><span>${subTitle }...</span></a>
+								<a href="javascript:void(0);" class="newBoard board-link"><span>${subTitle }...</span></a>
 							</c:when>
 							<c:otherwise>
-								<a href="#" class="newBoard board-link"><span class="newTitle-2">${q.qnaTitle }</span></a>
+								<a href="javascript:void(0);" class="newBoard board-link"><span class="newTitle-2">${q.qnaTitle }</span></a>
 							</c:otherwise>
 						</c:choose>
 						<span class="newBoardDate">${q.regDate }</span><br>
@@ -468,10 +483,12 @@
 			</div>
 		</div>
 		<!-- 게시판 3가지 출력 끝 -->
+		<a href="javascript:void(0);" id="gotop_lick" class="text-secondary"><i class="bi bi-chevron-double-up" style="font-size: 3em;"></i></a>
 	</div>
 	<!-- main세션 끝-->
 	<script type="text/javascript">
 		$(".board-link").click(function(){
+			
 			swal({
 	 			  title: "비회원 리스트 안내",
 	 			  text: "해당 비밀번호를 입력하셔야 합니다. Q&A페이지로 이동할까요??",
@@ -494,6 +511,11 @@
 		        slidesToScroll: 1,
 		        centerMode: true,
 		      });
+			 
+			 $('#gotop_lick').bind('click', function() {
+				    $('html, body').animate({scrollTop: '0'}, 300);
+			  });
+			 
 		 });
 	</script>
 </body>
