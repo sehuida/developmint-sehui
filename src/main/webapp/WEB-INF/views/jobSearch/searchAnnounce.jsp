@@ -236,7 +236,7 @@ $(function(){
         <div class="jobSearchListMain">
             <div class="mainHeader">
                 <h2>채용정보</h2>
-                <p>${count }개의 구인글</p>
+                <%-- <p>${count }개의 구인글</p> --%>
             </div>
             <div class="mainCenter">
                 <select name="place_type" class="place_type">
@@ -393,10 +393,11 @@ $(function(){
                 </c:otherwise>
                 </c:choose>
                 <br>
-                <div id="pageNavi" style="padding: 0px;">${pageNavi }</div>
+                <%-- <div id="pageNavi" style="padding: 0px;">${pageNavi }</div> --%>
             </div>
         </div>
     </div>
+    <br><br><br><br><br><br><br><br><br>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

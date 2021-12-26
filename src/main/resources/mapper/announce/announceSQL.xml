@@ -280,11 +280,164 @@ select * from
 		
 		<trim prefix="WHERE" prefixOverrides="AND">
 			<choose>
+				<when test="placeType == 0 and workType == 0">
+					AND announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 1 and workType == 0">
+					AND work_place = 1 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 2 and workType == 0">
+					AND work_place = 2 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 3 and workType == 0">
+					AND work_place = 3 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 4 and workType == 0">
+					AND work_place = 4 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 5 and workType == 0">
+					AND work_place = 5 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 6 and workType == 0">
+					AND work_place = 6 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 7 and workType == 0">
+					AND work_place = 7 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 8 and workType == 0">
+					AND work_place = 8 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 9 and workType == 0">
+					AND work_place = 9 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 10 and workType == 0">
+					AND work_place = 10 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 11 and workType == 0">
+					AND work_place = 11 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 12 and workType == 0">
+					AND work_place = 12 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				
+				<when test="placeType == 0 and workType == 1">
+					AND a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
 				<when test="placeType == 1 and workType == 1">
-					AND work_place LIKE '%서울%' and work_form LIKE '%IT 개발%'
+					AND work_place = 1 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
 				</when>
 				<when test="placeType == 2 and workType == 1">
-					AND work_place LIKE '%경기%' and work_form LIKE '%IT 개발%'
+					AND work_place = 2 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 3 and workType == 1">
+					AND work_place = 3 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 4 and workType == 1">
+					AND work_place = 4 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 5 and workType == 1">
+					AND work_place = 5 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 6 and workType == 1">
+					AND work_place = 6 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 7 and workType == 1">
+					AND work_place = 7 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 8 and workType == 1">
+					AND work_place = 8 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 9 and workType == 1">
+					AND work_place = 9 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 10 and workType == 1">
+					AND work_place = 10 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 11 and workType == 1">
+					AND work_place = 11 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 12 and workType == 1">
+					AND work_place = 12 and a.category = 1 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				
+				<when test="placeType == 0 and workType == 2">
+					AND a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 1 and workType == 2">
+					AND work_place = 1 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 2 and workType == 2">
+					AND work_place = 2 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 3 and workType == 2">
+					AND work_place = 3 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 4 and workType == 2">
+					AND work_place = 4 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 5 and workType == 2">
+					AND work_place = 5 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 6 and workType == 2">
+					AND work_place = 6 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 7 and workType == 2">
+					AND work_place = 7 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 8 and workType == 2">
+					AND work_place = 8 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 9 and workType == 2">
+					AND work_place = 9 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 10 and workType == 2">
+					AND work_place = 10 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 11 and workType == 2">
+					AND work_place = 11 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 12 and workType == 2">
+					AND work_place = 12 and a.category = 2 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				
+				<when test="placeType == 0 and workType == 3">
+					AND a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 1 and workType == 3">
+					AND work_place = 1 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 2 and workType == 3">
+					AND work_place = 2 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 3 and workType == 3">
+					AND work_place = 3 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 4 and workType == 3">
+					AND work_place = 4 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 5 and workType == 3">
+					AND work_place = 5 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 6 and workType == 3">
+					AND work_place = 6 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 7 and workType == 3">
+					AND work_place = 7 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 8 and workType == 3">
+					AND work_place = 8 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 9 and workType == 3">
+					AND work_place = 9 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 10 and workType == 3">
+					AND work_place = 10 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 11 and workType == 3">
+					AND work_place = 11 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
+				</when>
+				<when test="placeType == 12 and workType == 3">
+					AND work_place = 12 and a.category = 3 and announce_title LIKE '%'||#{keyword}||'%' or company_name LIKE '%'||#{keyword}||'%'
 				</when>
 			</choose>
 		</trim>

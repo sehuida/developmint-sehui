@@ -53,6 +53,7 @@ public class JobSearchController {
 	@RequestMapping(value="/searchAnnounce.do")
 	public String searchAnnounce(int reqPage, String keyword, int placeType, int workType, Model model) {
 		SearchAnnouncePageData sapd = service.selectSearchAnnouncePageData(reqPage, keyword, placeType, workType);
+		System.out.println(sapd.getList());
 		model.addAttribute("count",sapd.getCount());
 		model.addAttribute("list",sapd.getList());
 		model.addAttribute("pageNavi",sapd.getPageNavi());
