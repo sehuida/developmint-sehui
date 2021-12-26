@@ -279,4 +279,15 @@
 			</otherwise>
 		</choose>
 	</select>
+	
+	<!-- 관리자 파일다운로드 -->
+	<select id="selectBoardFileDown" parameterType="_int" resultType="pfv">
+		select file_no as fileNo, 
+		    member_no as memberNo, 
+		    board_type as boardType,
+		    board_no as boardNo, 
+		    file_name as fileName,
+		    file_path as filePath
+		from attachment where BOARD_TYPE=6 and file_no = #{fileNo }
+	</select>
 </mapper>

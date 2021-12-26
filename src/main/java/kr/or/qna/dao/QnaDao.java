@@ -108,6 +108,12 @@ public class QnaDao {
 	}
 
 
+	public ProjectTeamFileVO boardFileList(int fileNo) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("qna.selectBoardFileDown",fileNo);
+	}
+
+
 
 
 	

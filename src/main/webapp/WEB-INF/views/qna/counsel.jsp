@@ -14,7 +14,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container" style="margin-bottom: 50px;max-width: 1591px;min-width: 1591px;">
 		<div class="area">
-			<div class="nav-sub" style="margin-top: 30px;"><a href="/" class="text-hover">홈</a><span> > </span>고객센터<!-- <a href="/noticehome.do" class="text-hover">고객센터</a> --><span> > </span><span>공지사항</span></div>
+			<div class="nav-sub" style="margin-top: 30px;"><a href="/" class="text-hover">홈</a><span> > </span><a href="/noticehome.do" class="text-hover">고객센터</a><span> > </span><span>1:1 Q&A</span></div>
 			<div class="title"><h2 style="color: #78c2ad;">CS Center</h2></div>
 			<div class="center_tap">
 				<ul style="margin-bottom: 0;">
