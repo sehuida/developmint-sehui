@@ -116,4 +116,16 @@
 	<update id="noticeCountUp" parameterType="_int">
 		update notice set read_count = read_count+1 where "notice_no" = #{noticeNo}
 	</update>
+	
+	<!-- 고객센터 home list 출력 -->
+	<select id="noticeList" resultType="n">
+		SELECT NN.* FROM 
+		(SELECT ROWNUM AS RNUM, N.* FROM
+			(SELECT 
+				"notice_no" as noticeNo, 
+				"notice_title" as noticeTitle, 
+				"reg_date" as regDate
+			FROM notice  ORDER BY "notice_no" DESC)N)NN 
+		WHERE RNUM BETWEEN 1 and 7
+	</select>
 </mapper>

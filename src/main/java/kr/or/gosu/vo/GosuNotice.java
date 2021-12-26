@@ -19,4 +19,10 @@ public class GosuNotice {
 	public String getGnoticeContentBr(){
 		return gnoticeContent.replaceAll("\r\n", "<br>");
 	}
+	public String getGnoticeTitlePlus(){
+		 if(gnoticeTitle.length() >= 35){
+			 return gnoticeTitle.substring(0,32)+"...";
+		};
+		return gnoticeTitle;
+	}
 }

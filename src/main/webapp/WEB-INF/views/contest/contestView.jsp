@@ -494,7 +494,9 @@
 									</div>
 									<span>
 										${cl.commentContent }
+										<c:if test="${not empty sessionScope.m }">
 										<a href="javascript:void(0)" class="reComentBtn"><i class="bi bi-chat-dots-fill" style="font-size: 20px"></i></a>
+										</c:if>
 									</span>
 									
 									<%--로그인했을 때만 신고버튼 보여주기 --%>
@@ -554,7 +556,7 @@
 		<%---------------------------------------------------------------------------- --%>
 		
 								<%--대댓글 작성 창 --%>
-								<c:if test="${cl.commentType eq 1 }">
+								<c:if test="${not empty sessionScope.m and cl.commentType eq 1 }">
 								<form action="/insertContestComment.do" method="post">
 									<div class="recomentBox">
 										<textarea class="form-control reText textareaBox txbox2" name="commentContent"></textarea>

@@ -107,5 +107,10 @@ public class NoticeService {
 		return rlist;
 	}
 
+	public ArrayList<Notice> noticeList() {
+		ArrayList<Notice> nlist = dao.noticeList();
+		return nlist;
+	}
+
 	
 }

@@ -8,6 +8,7 @@
 <title>Develomint</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <link rel="stylesheet" href="/resources/css/notice/noticeList.css">
+<link rel="stylesheet" href="/resources/css/notice/noticeHome.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -22,33 +23,36 @@
 					<li><a href="/faq.do" class="text-hover">자주묻는질문<br><span class="last-span">자주묻는질문</span></a></li>
 				</ul>
 			</div>
-			<div class="right_contents section_contents">
+			<div class="contents">
 				<h3 class="title_cs font-mss">FAQ <span>자주 묻는 질문</span></h3>
 				<!-- 탭버튼 -->
-				<ul class="mypage_type">
-	                <li><a href="/faq.do?category=12">주문 결제</a></li>
-					<li><a href="/faq.do?category=11">배송 안내</a></li>
-					<li><a href="/faq.do?category=10">주문취소</a></li>
-					<li><a href="/faq.do?category=8">교환</a></li>
-					<li><a href="/faq.do?category=9">환불</a></li>
-					<li><a href="/faq.do?category=13">상품 관련</a></li>
-					<li><a href="/faq.do?category=14">포인트 · 적립금</a></li>
-					<li><a href="/faq.do?category=17">이벤트</a></li>
-					<li><a href="/faq.do?category=15">회원 관련</a></li>
-					<li><a href="/faq.do?category=21">무탠픽업</a></li>
-					<li><a href="/faq.do?category=16">기타</a></li>
-	            </ul>
+				<div class="center_tap3">
+					<ul class="mypage_type">
+		                <li><a href="/faq.do?category=8">로그인관련</a></li>
+						<li><a href="/faq.do?category=9">고수 안내</a></li>
+						<li><a href="/faq.do?category=10">환불관련</a></li>
+						<li><a href="/faq.do?category=11">공모전관련</a></li>
+						<li><a href="/faq.do?category=12">구인잡관련</a></li>
+						<li><a href="/faq.do?category=13">커뮤니티관련</a></li>
+						<li><a href="/faq.do?category=14">고수관련</a></li>
+						<li><a href="/faq.do?category=15">팀프로젝트 관련</a></li>
+						<li><a href="/faq.do?category=40">기타 문의</a></li>
+						<li><a href="/faq.do?category=22">신고</a></li>
+						<li><a href="/faq.do?category=21">기능/작동 오류</a></li>
+						<li><a href="/faq.do?category=20">이벤트</a></li>
+		            </ul>
+				</div>
 				<!-- //탭버튼 -->
 				<!-- 콘텐츠 -->
-				<table class="table_basic">
+				<table class="table table-primary">
 				   <colgroup>
 					   <col width="8%">
 					   <col width="">
 				   </colgroup>
 				   <thead>
-					   <tr>
-						   <th scope="col">번호</th>
-						   <th scope="col">내용</th>
+					   <tr class="table-primary">
+						   <th scope="row">번호</th>
+						   <th scope="row" style="text-align: center;">내용</th>
 					   </tr>
 				   </thead>
 				   <tbody>
