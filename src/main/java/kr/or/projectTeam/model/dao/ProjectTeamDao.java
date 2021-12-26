@@ -473,6 +473,12 @@ public class ProjectTeamDao {
 		return sqlSession.insert("projectTeam.reportProjectNoticeComment",rp);
 	}
 
+	public int deleteZeroTeam(Integer projectNo) {
+		return sqlSession.delete("projectTeam.deleteZeroTeam",projectNo);
+	}
+
+	
+
 	
 	
 }

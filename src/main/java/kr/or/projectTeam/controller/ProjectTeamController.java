@@ -186,10 +186,10 @@ public class ProjectTeamController {
 	
 	@RequestMapping(value="/selectOneNotice.do")
 	public String selectOneNotice(Model model, Integer projectNo, Integer memberNo) {
-		int result1 = service.updateStatus();
-		if(result1 > 0) {
-			int result2 = service.projectStartProcess();
-		}
+		/*
+		 * int result1 = service.updateStatus(); if(result1 > 0) { int result2 =
+		 * service.projectStartProcess(); }
+		 */
 		if(memberNo == null) {
 			memberNo = -1;
 		}

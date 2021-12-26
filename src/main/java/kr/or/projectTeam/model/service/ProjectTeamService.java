@@ -481,8 +481,11 @@ public class ProjectTeamService {
 			ArrayList<ProjectEntry> startProjectListFinalList = dao.startProjectListFinal(map);
 			if(updateEntryResult > 0) {
 				result = dao.insertTeamMember(startProjectListFinalList);
+				for(int i = 0; i < startProjectList.size(); i++) {
+					int deleteZeroTeam = dao.deleteZeroTeam(startProjectList.get(i));
+				}
 			}
-		}
+		} 
 		return result;
 	}
 
