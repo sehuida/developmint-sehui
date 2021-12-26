@@ -40,17 +40,18 @@
 				<!-- 탭버튼 -->
 				<div class="center_tap3">
 					<ul class="mypage_type">
-		                <li><a href="/faq.do?category=9">결제 관련</a></li>
-						<li><a href="/faq.do?category=14">고수 안내</a></li>
-						<li><a href="/faq.do?category=11">공모전 관련</a></li>
-						<li><a href="/faq.do?category=12">구인잡 관련</a></li>
-						<li><a href="/faq.do?category=13">커뮤니티 관련</a></li>
-						<li><a href="/faq.do?category=40">기타문의</a></li>
-						<li><a href="/faq.do?category=14">포인트 · 적립</a></li>
-						<li><a href="/faq.do?category=20">이벤트</a></li>
-						<li><a href="/faq.do?category=8">회원 관련</a></li>
+		                <li><a href="/faq.do?category=8">로그인관련</a></li>
+						<li><a href="/faq.do?category=9">고수 안내</a></li>
 						<li><a href="/faq.do?category=10">환불관련</a></li>
-						<li><a href="/faq.do?category=40">기타</a></li>
+						<li><a href="/faq.do?category=11">공모전관련</a></li>
+						<li><a href="/faq.do?category=12">구인잡관련</a></li>
+						<li><a href="/faq.do?category=13">커뮤니티관련</a></li>
+						<li><a href="/faq.do?category=14">고수관련</a></li>
+						<li><a href="/faq.do?category=15">팀프로젝트 관련</a></li>
+						<li><a href="/faq.do?category=40">기타 문의</a></li>
+						<li><a href="/faq.do?category=22">신고</a></li>
+						<li><a href="/faq.do?category=21">기능/작동 오류</a></li>
+						<li><a href="/faq.do?category=20">이벤트</a></li>
 		            </ul>
 				</div>
 				<!-- //탭버튼 -->
