@@ -105,8 +105,8 @@ public class ResumeService {
 		return dao.selectCeoResume(ceoResume, memberNo);
 	}
 
-	public int updateCeoResume(Resume r) {
-		return dao.updateCeoResume(r);
+	public int updateResume(Resume r) {
+		return dao.updateResume(r);
 	}
 
 	public Member selectOneMember(int memberNo) {

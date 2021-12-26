@@ -241,7 +241,10 @@
 </script>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<form action="updateCeoResume.do" method="post">
+	<form action="/updateResume.do" method="post">
+		<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">		<!-- 멤버번호 가져오기 위해서 히든으로 전송 -->
+		<input type="hidden" name="resumeNo" value="${r.resumeNo }">		
+		<input type="hidden" name="ceoResume" value="${r.ceoResume }">
 		<div class="contain">
 			<em>기본정보</em>
 			<div class="grayBox">
@@ -265,7 +268,7 @@
 					</p>
 				</div>
 				<div class="info">
-					<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">		<!-- 멤버번호 가져오기 위해서 히든으로 전송 -->
+							
 					<p>
 						<span style="color: black;">${sessionScope.m.memberId}</span><br>
 						<span style="color: black;">${sessionScope.m.email}</span><br>
@@ -316,7 +319,7 @@
 							<b>재학기간<span>*</span></b>
 						</div>
 						<div class="schoolDateInput">
-							<input type="month" class="dateInput firstDateInput" name="schoolStart"> ~ <input type="month" class="dateInput maxDate" name="schoolEnd">				
+							<input type="month" class="dateInput firstDateInput" name="schoolStart" value="${r.schoolStart }"> ~ <input type="month" class="dateInput maxDate" name="schoolEnd" value="${r.schoolEnd }">				
 						</div>
 					</div>
 					<div class="schoolLocalData">
@@ -324,7 +327,7 @@
 							<b>지역<span>*</span></b>
 						</div>
 						<div class="schoolLocalInput">
-							<input type="text" class="smallTextInput" name="schoolLocal" placeholder="지역 선택">					
+							<input type="text" class="smallTextInput" name="schoolLocal" value="${r.schoolLocal }">					
 						</div>
 					</div>
 					<div class="schoolMajorData">		<!-- if value=4(대학생일 경우에만) 전공등록 input이 나오도록 -->
@@ -390,7 +393,7 @@
 							<b>활동기간</b>
 						</div>
 						<div class="activityDateInput">
-							<input type="month" class="dateInput firstDateInput" name="activityStart"> ~ <input type="month" class="dateInput" name="activityEnd">				
+							<input type="month" class="dateInput firstDateInput" name="activityStart" value="${r.activityStart }"> ~ <input type="month" class="dateInput" name="activityEnd" value="${r.activityEnd }">				
 						</div>
 					</div>
 					<div class="activityContentData">
@@ -398,7 +401,7 @@
 							<b>활동내용</b>
 						</div>
 						<div class="activityContentInput">
-							<input type="text" class="textInput" name="activityContent" placeholder="활동내용 입력">					
+							<input type="text" class="textInput" name="activityContent" value="${r.activityContent }">					
 						</div>
 					</div>
 					
@@ -412,7 +415,7 @@
 							<b>자격증명</b>
 						</div>
 						<div class="certiNameInput">
-							<input type="text" class="smallTextInput" name="certiName" placeholder="자격증명 입력">
+							<input type="text" class="smallTextInput" name="certiName" value="${r.certiName }">
 						</div>
 					</div>
 					<div class="certiIssueData">
@@ -420,7 +423,7 @@
 							<b>발행처</b>
 						</div>
 						<div class="certiIssueInput">
-							<input type="text" class="smallTextInput" name="certiIssue" placeholder="발행처/기관 입력">					
+							<input type="text" class="smallTextInput" name="certiIssue" value="${r.certiIssue }">					
 						</div>
 					</div>
 					<div class="certiPassData">
@@ -441,7 +444,7 @@
 							<b>취득일</b>
 						</div>
 						<div class="certiDateInput">
-							<input type="month" class="dateInput firstDateInput" name="certiDate">			
+							<input type="month" class="dateInput firstDateInput" name="certiDate" value="${r.certiDate }">			
 						</div>
 					</div>
 				</div>
@@ -455,7 +458,7 @@
 					<b>보유기술</b>
 				</div>
 				<div class="mytechInput">
-					<input type="text" class="textInput" name="mytech" placeholder="보유기술 입력 (ex. 문서작성능력, 비즈니스영어, java등) ///나중에 바꾸기">
+					<input type="text" class="textInput" name="mytech" value="${r.myTech }">
 				</div>
 			</div>
 			
@@ -542,7 +545,7 @@
 						<b>근무 지역<span>*</span></b>
 					</div>
 					<div class="workPlaceInput">
-						<input type="text" class="textInput" name="workPlace" placeholder="근무지역 (나중에 바꾸기)">
+						<input type="text" class="textInput" name="workPlace" value="${r.workPlace }">
 					</div>
 				</div>
 			</div>

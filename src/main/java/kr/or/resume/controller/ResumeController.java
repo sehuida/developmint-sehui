@@ -47,20 +47,22 @@ public class ResumeController {
 	@RequestMapping(value="/updateResumeFrm.do")
 	public String updateResume(Resume resume, int memberNo, Model model) {
 		Resume r = service.selectCeoResume(resume.getCeoResume(), memberNo);
+		System.out.println(memberNo);
+		System.out.println(r);
 		model.addAttribute("r", r);
 		return "resume/updateResumeFrm";
 	}
 	
-	@RequestMapping(value="/updateCeoResume.do")
+	@RequestMapping(value="/updateResume.do")
 	public String updateCeoResume(Resume r, int memberNo, Model model) {
-		int result = service.updateCeoResume(r);
-		System.out.println(memberNo);
+		int resumeNo = r.getResumeNo();
+		int result = service.updateResume(r);
 		if(result > 0) {
 			model.addAttribute("msg","이력서 수정완료");
-			model.addAttribute("loc", "/resumeManage.do?memberNo="+memberNo+"&reqPage=1");
 		} else {
 			model.addAttribute("msg","이력서 수정실패");
 		}
+		model.addAttribute("loc", "/resumeManage.do?memberNo="+memberNo+"&reqPage=1");
 		return "common/msg";
 	}
 	

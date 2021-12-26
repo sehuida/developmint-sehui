@@ -60,7 +60,7 @@ public class ResumeDao {
 		return sqlSession.selectOne("resume.selectCeoResume", map);
 	}
 
-	public int updateCeoResume(Resume r) {
+	public int updateResume(Resume r) {
 		return sqlSession.update("resume.updateResume", r);
 	}
 
