@@ -89,7 +89,7 @@ html, body {
 .down-wrap {
 	position: fixed;
 	z-index: 1000;
-	margin-top: 20%;
+	margin-top: 5%;
 	margin-left: 1400px;
 }
 .container-fluid{
@@ -113,7 +113,11 @@ html, body {
 .upbtn>button {
 	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 }
+#g-up-img:hover{
 
+-webkit-transform: scale(1.5);
+    transform: scale(1.5);
+}
 .upbtn:hover {
 -webkit-transform: scale(1.03);
     transform: scale(1.03);
@@ -127,32 +131,34 @@ html, body {
 
 		<div class="g-box">
 			<%@include file="/WEB-INF/views/common/header.jsp"%>
-
-			<h1 style="text-align: center; margin-top: 150px;"><br>
+			<div class="back-img">
+			</div>
+			<h1 style="text-align: center; margin-top: 200px;"><br>
 				<span
-					style="color: rgb(78, 205, 196); font-size: 80px; font-weight: 900;">Develomint</span>
+					style="color: rgb(78, 205, 196); font-size: 150px; font-weight: 900;">Develomint</span>
 			</h1>
 			<div style="margin-top: 150px;">
 				<h3
-					style="text-align: center; width: 100%;  font-size: 40px;">당신만의
-					커뮤니티</h3>
+					style="text-align: center; width: 100%;  font-size: 40px;color:#c5c5c5;box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);">Company introduction</h3>
 				<div class="line" style="width: 15rem;"></div>
 			</div>
 			<div class="down-wrap">
-				<div class="down-img">
-					<img src="/resources/img/gosu/downdown.png">
+				<div class="down-img" >
+					<img src="/resources/img/gosu/downdown.png"id="g-down-img">
 				</div>
-				<div class="down-img" style="display: none;">
-					<img src="/resources/img/gosu/downdown2.png">
+				<div class="down-img" style="display: none;" >
+					<img src="/resources/img/gosu/downdown2.png"id="g-up-img">
 				</div>
 			</div>
 		</div>
+		<%-- 
 		<div class="g-box">
 			<br> <br> <br> <br> <br> <br>
 			<h1 style="font-size: 50px; line-height: 90px; margin-top: 200px;">
 				더 특별한 일상을 만드는 것,<br> 그것이 디벨로민트를 시작하는 이유입니다.
 			</h1>
 		</div>
+		--%>
 		<div class="g-between g-box">
 			<div style="text-align: center; margin-top: 200px;">
 				<img style="width: 60%;
@@ -231,7 +237,7 @@ html, body {
 					event = window.event;
 				//휠에 대한 정보 얻기 파이어폭스 외 IE/Chrome/Opera = wheelDelta
 				if (event.wheelDelta) {
-					delta = event.wheelDelta / 120;
+					delta = event.wheelDelta / 50;
 					//평균 50~120 사이로 요소의 인식높이에 따라 다름(한 화면(height100%)기준일떄는 120
 					if (window.opera)
 						delta = -delta;
@@ -273,7 +279,7 @@ html, body {
 					scrollTop : moveTop + 'px'
 
 				}, {
-					duration : 300,
+					duration : 100,
 					complete : function() {
 						console.log("여기여기");
 					}
@@ -281,6 +287,13 @@ html, body {
 
 			});
 		});
+			
+			$(function(){
+				 $('#g-up-img').bind('click', function() {
+					    $('html, body').animate({scrollTop: '0'}, 300);
+				  });
+				
+			});
 	</script>
 </body>
 </html>

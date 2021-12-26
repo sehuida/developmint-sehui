@@ -100,7 +100,7 @@ html, body {
 .down-wrap {
 	position: fixed;
 	z-index: 1000;
-		margin-top: 20%;
+		margin-top: 25%;
 	margin-left: 1400px;
 }
 
@@ -121,6 +121,12 @@ html, body {
 	margin:50px;
 	border-radius: 30px;
 
+}
+
+#g-up-img:hover{
+
+-webkit-transform: scale(1.5);
+    transform: scale(1.5);
 }
 @keyframes motion 
 { 0% {margin-top: 0px;}
@@ -145,7 +151,7 @@ html, body {
 					<img src="/resources/img/gosu/downdown.png">
 				</div>
 				<div class="down-img" style="display: none;">
-					<img src="/resources/img/gosu/downdown2.png">
+					<img src="/resources/img/gosu/downdown2.png" id="g-up-img">
 				</div>
 			</div>
 		</div>
@@ -296,6 +302,13 @@ html, body {
 		</div>
 	</div>
 	<script>
+	
+	$(function(){
+		 $('#g-up-img').bind('click', function() {
+			    $('html, body').animate({scrollTop: '0'}, 300);
+		  });
+		
+	})
 		$(".g-box").each(function() {
 
 			// 개별적으로 Wheel 이벤트 적용 mousewheel(IE/chrome/opera) DOMMouseScroll(FF)
@@ -307,7 +320,7 @@ html, body {
 					event = window.event;
 				//휠에 대한 정보 얻기 파이어폭스 외 IE/Chrome/Opera = wheelDelta
 				if (event.wheelDelta) {
-					delta = event.wheelDelta / 120;
+					delta = event.wheelDelta / 50;
 					//평균 50~120 사이로 요소의 인식높이에 따라 다름(한 화면(height100%)기준일떄는 120
 					if (window.opera)
 						delta = -delta;
@@ -349,7 +362,7 @@ html, body {
 					scrollTop : moveTop + 'px'
 
 				}, {
-					duration : 300,
+					duration : 100,
 					complete : function() {
 						console.log("여기여기");
 					}
