@@ -366,14 +366,12 @@ input:focus, textarea:focus {
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
 		function gosuRequestAjax(costNo){
-			console.log("costNo : "+costNo);
 			$.ajax({
 				url : "/gosuMemberRequestAjax.do",
 				data : {
 					"costNo" : costNo
 				},
 				success : function(data) {
-					console.log(data);
 					$(".g-req-box").empty();
 					var html="";
 					html+="<ul style='padding: 0;'>";
@@ -408,7 +406,6 @@ input:focus, textarea:focus {
 					"costNo" : costNo
 				},
 				success : function(data) {
-					console.log(data);
 					$("#costSend").val(data.cost);
 					$("#contentSend").val(data.costContentBr);
 					$("#gosuIdSend").val(data.gosuId);
@@ -429,15 +426,12 @@ input:focus, textarea:focus {
 			var gfTitle = $("#ggcostContent").val();
 			var mId = $("#ggmemberId").val();
 			 var cost = $("#costSend").val();
-			 console.log("글자 길이 : "+gfTitle.length);
 			 if(gfTitle.length >= 10){
 				    gfTitle = gfTitle.substr(0,10)+"...";
 			};
-			console.log("글자 길이 : "+gfTitle.length);
 
 			var IMP = window.IMP;
 			  IMP.init('imp37172515');
-			  console.log(cost);
 			IMP.request_pay({
 			    pg : 'kakao', 
 			    pay_method : 'card',
@@ -460,7 +454,6 @@ input:focus, textarea:focus {
 							"costNo" : costNo,
 							}
 						, success : function(data) {
-							console.log(data); 
 							swal({
 					            title: '성공',
 					            text: '개발을 진행하세요',

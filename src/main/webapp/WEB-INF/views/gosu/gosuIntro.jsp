@@ -330,9 +330,7 @@ html, body {
 				var moveTop = null;
 				// 마우스휠을 위에서 아래로
 				if (delta < 0) {
-					console.log("next : "+$(this).next().length);
 					if ($(this).next().length == 0) {
-						console.log("확인확인");
 						$(".down-img").eq(0).css("display","none");
 						$(".down-img").eq(1).css("display","flex");
 						moveTop = 0;
@@ -343,7 +341,6 @@ html, body {
 						$(".down-img").eq(0).css("display","flex");
 						$(".down-img").eq(1).css("display","none");
 						moveTop = $(this).next().offset().top;
-						console.log(moveTop);
 					}
 					
 					// 마우스휠을 아래에서 위로
@@ -364,7 +361,6 @@ html, body {
 				}, {
 					duration : 100,
 					complete : function() {
-						console.log("여기여기");
 					}
 				});
 

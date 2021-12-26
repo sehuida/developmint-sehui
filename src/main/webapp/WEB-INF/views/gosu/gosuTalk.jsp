@@ -572,7 +572,7 @@ input:focus, textarea:focus {
 
 			var form = new FormData();
 			var files = $("#talkFile")[0].files[0];
-			console.log(files);
+		
 			form.append("talkFile", files);
 			form.append("talkContent", talkContent);
 			form.append("writer", writer);
@@ -594,7 +594,6 @@ input:focus, textarea:focus {
 				data : form,
 				success : function(data) {
 					if (data > 0) {
-						console.log("등록성공");
 						location.reload();
 					} else {
 
@@ -626,10 +625,7 @@ input:focus, textarea:focus {
 			var writer = $("#writer").val();
 			var reviewContent = $("#reviewContent").val();
 			var ggosuNo = $("#gfGgosuNo").val();
-			console.log(reviewNum);
-			console.log(writer);
-			console.log(reviewContent);
-			console.log(ggosuNo);
+		
 			if (reviewNum == null || reviewContent == "") {
 				swal({
 					title : '실패',

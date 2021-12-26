@@ -235,7 +235,6 @@ input:focus, textarea:focus {
 					"memberId" : memberId
 				},
 				success : function(data) {
-					console.log(data);
 					if (data > 0) {
 						swal({
 					        title: '성공',

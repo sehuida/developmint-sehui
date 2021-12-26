@@ -641,7 +641,6 @@
 					, success : function(data) {
 						$("#gprojectTitle").empty();
 						$("#gprojectContent").empty();
-						console.log(data);
 						$("#gprojectTitle").append(data.gprojectContent);
 						$("#gprojectContent").append(data.gprojectTitleBr);
 						$("#gprojectFilepath").attr("src", data.gprojectFilepath);

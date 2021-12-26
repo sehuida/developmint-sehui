@@ -75,7 +75,6 @@ public class GosuController {
 		ArrayList<Gosu> newGosu = service.selectNewGosuList();
 		int gosuCount = service.selectGosuCount();
 		if (m != null) {
-			System.out.println("getId : " + m.getMemberId());
 			ArrayList<GosuFeedback> gf = service.selectGosuFeedbackList(m.getMemberId());
 			ArrayList<GosuFeedback> gf2 = service.selectGosuFeedbackList2(m.getMemberId());
 			if (m.getMemberType() == 1) {
@@ -289,8 +288,6 @@ public class GosuController {
 		}
 		try {
 
-			System.out.println(path + filepath);
-
 			FileOutputStream fos = new FileOutputStream(new File(path + filepath));
 			BufferedOutputStream bos = new BufferedOutputStream(fos);
 			// 파일 업로드
@@ -304,9 +301,6 @@ public class GosuController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(file.getOriginalFilename());
-		System.out.println("path : " + path);
-		System.out.println("filepath : " + filepath);
 
 		GosuProject g = new GosuProject();
 		g.setGprojectContent(gprojectTitle);
@@ -318,16 +312,14 @@ public class GosuController {
 
 	@RequestMapping(value = "/gosuSituation.do")
 	public String gosuSituation(@SessionAttribute Member m, Model model) {
-		System.out.println("getId : " + m.getMemberId());
 		ArrayList<GosuFeedback> gf = service.selectGosuFeedbackList(m.getMemberId());
 		ArrayList<GosuFeedback> gf2 = service.selectGosuFeedbackList2(m.getMemberId());
 		if (m.getMemberType() == 1) {
 			ArrayList<GosuRequestProjectSub> grpsList = service.selectGosuRequestProjectSubList(m.getMemberNo());
 			model.addAttribute("grpsList", grpsList);
-			System.out.println(grpsList);
+	
 		} else if (m.getMemberType() == 2) {
 			ArrayList<GosuRequestProjectSub> grpsList = service.selectGosuRequestProjectSubList2(m.getMemberNo());
-			System.out.println(grpsList);
 			model.addAttribute("grpsList", grpsList);
 		}
 		ArrayList<GosuReview> grList = service.selectMemberReviewList(m.getMemberId());
@@ -397,9 +389,6 @@ public class GosuController {
 	public int gosuTalkInsert(MultipartHttpServletRequest req, HttpSession session, HttpServletRequest request,
 			String talkContent, String writer, @RequestParam(required = false, defaultValue = "0") int feedbackNo,
 			Model model) {
-		System.out.println("talkContent : " + talkContent);
-		System.out.println("writer : " + writer);
-		System.out.println("feedbackNo : " + feedbackNo);
 		GosuTalk gt = new GosuTalk();
 		gt.setFeedbackNo(feedbackNo);
 		gt.setTalkContent(talkContent);
@@ -637,9 +626,7 @@ public class GosuController {
 	public int talkBtnProjectAjax(MultipartHttpServletRequest req, HttpSession session, HttpServletRequest request,
 			String talkContent, int writerNo,
 			@RequestParam(required = false, defaultValue = "0") int requestProjectSubNo, Model model) {
-		System.out.println("talkContent : " + talkContent);
-		System.out.println("writerNo : " + writerNo);
-		System.out.println("requestProjectSubNo : " + requestProjectSubNo);
+	
 		GosuRequestProject grp = new GosuRequestProject();
 		grp.setMemberNo(writerNo);
 		grp.setRequestProjectSubNo(requestProjectSubNo);
@@ -702,9 +689,7 @@ public class GosuController {
 	public int requestReviewAjax(int requestProjectSubNo, String requestMemberId, String requestReviewContent,
 			Model model) {
 		GosuRequestReview grr = new GosuRequestReview();
-		System.out.println("requestProjectSubNo : " + requestProjectSubNo);
-		System.out.println("requestMemberId : " + requestMemberId);
-		System.out.println("requestReviewContent : " + requestReviewContent);
+		
 		grr.setRequestProjectSubNo(requestProjectSubNo);
 		grr.setMemberId(requestMemberId);
 		grr.setRequestReviewContent(requestReviewContent);
@@ -819,11 +804,10 @@ public class GosuController {
 			throws Exception {
 		try {
 			String path = req.getSession().getServletContext().getRealPath(filePath); // 경로에 접근할 때 역슬래시('\') 사용
-			System.out.println(path);
+		
 			File file = new File(path);
 			response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로
 																								// 쓰이는지를 알려주는 헤더
-			System.out.println("filename = " + file.getName());
 			FileInputStream fileInputStream = new FileInputStream(path); // 파일 읽어오기
 			OutputStream out = response.getOutputStream();
 
@@ -877,8 +861,7 @@ public class GosuController {
 	@ResponseBody
 	@RequestMapping(value = "/gosuMemberRequestAjax.do")
 	public GosuRequest gosuMemberRequestAjax(int costNo, @SessionAttribute(required = false) Member m) {
-		System.out.println("costNo : " + costNo);
-		System.out.println("mId : " + m.getMemberId());
+	
 		GosuRequestCost grc = new GosuRequestCost();
 		grc.setCostNo(costNo);
 		grc.setMemberId(m.getMemberId());
