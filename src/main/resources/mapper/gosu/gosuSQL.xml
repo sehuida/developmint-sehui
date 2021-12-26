@@ -138,13 +138,14 @@
 		select * from (select
 		rownum as rnum , r.* from (select
 		m.member_no as gosuNo,
-		m.member_id as gosuId,
+		m.member_id as
+		gosuId,
 		m.filepath as gosuImg,
 		g.ggosu_no as ggsouNo
-        from member m
-        LEFT JOIN gosu g
-        ON m.member_no = g.gosu_no
-        where
+		from member m
+		LEFT JOIN gosu g
+		ON m.member_no = g.gosu_no
+		where
 		m.member_type=2 order by 1
 		desc )r)rr where rnum between 1
 		and 4
@@ -395,11 +396,12 @@
 		where member_no
 		= pro.member_no) as
 		memberImg,
-        (select ggosu_no from gosu
+		(select ggosu_no from gosu
 		where gosu_no
 		= pro.member_no) as
 		ggosuNo
-		from(select * from
+		from(select
+		* from
 		gosu_request_project
 		where
 		REQUEST_PROJECT_SUB_NO=#{rpsNo})pro
@@ -1224,15 +1226,38 @@
 	<insert id="insertGNComment" parameterType="cm">
 		<choose>
 			<when test="commentType == 1">
-				insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(SYSDATE,'MM-DD HH24:MI'), #{boardNo}, #{boardType}, #{commentType}, null)	
+				insert into comments values(comments_seq.nextval,
+				#{memberId}, #{commentContent}, to_char(SYSDATE,'MM-DD HH24:MI'),
+				#{boardNo}, #{boardType}, #{commentType}, null)
 			</when>
 			<otherwise>
-				insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(SYSDATE,'MM-DD HH24:MI'), #{boardNo}, #{boardType}, #{commentType}, #{commentRef})			
+				insert into comments values(comments_seq.nextval,
+				#{memberId}, #{commentContent}, to_char(SYSDATE,'MM-DD HH24:MI'),
+				#{boardNo}, #{boardType}, #{commentType}, #{commentRef})
 			</otherwise>
 		</choose>
-  	</insert>
-  		<!-- 공모전 댓글 신고하기 -->
-  	<insert id="reportContestComment" parameterType="rp">
-  		insert into report values(report_seq.nextval, #{reporterId}, #{reportReason}, #{reportEtc}, #{commentNo}, #{commentId}, to_char(sysdate,'yyyy-mm-dd'), #{reportStatus}, #{commentContent},null )
-  	</insert>
+	</insert>
+	<!-- 공모전 댓글 신고하기 -->
+	<insert id="reportContestComment" parameterType="rp">
+		insert into report values(report_seq.nextval, #{reporterId},
+		#{reportReason}, #{reportEtc}, #{commentNo}, #{commentId},
+		to_char(sysdate,'yyyy-mm-dd'), #{reportStatus}, #{commentContent},null
+		)
+	</insert>
+
+	<select id="selectGosuNoticeListSelf" parameterType="string"
+		resultType="gn">
+		select 
+		gnotice_no as gnoticeNo,
+		member_id as writeId,
+		gnotice_title as gnoticeTitle,
+		gnotice_content as gnoticeContent,
+		gnotice_photo as gnoticePhoto,
+		gnotice_date as gnoticeDate
+		from gosu_notice where member_id IN
+		(select m.member_id
+		from gosu gosu
+		left join member m
+		on gosu.gosu_no= m.member_no) and member_id = #{memberId}
+	</select>
 </mapper>

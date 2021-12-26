@@ -800,5 +800,11 @@ public class GosuService {
 	}
 
 
+	public ArrayList<GosuNotice> selectGosuNoticeListSelf(String gosuId) {
+		ArrayList<GosuNotice> list = dao.selectGosuNoticeListSelf(gosuId);
+		return list;
+	}
+
+
 
 }
