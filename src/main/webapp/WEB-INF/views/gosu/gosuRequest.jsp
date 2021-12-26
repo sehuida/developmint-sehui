@@ -516,9 +516,8 @@ input[type="checkbox"]:checked {
 					$('#btn-submit').submit(function() {
 						$(".g-msg").empty();
 						var html = "";
-						console.log($("input[name=requestContent7]").val());
 						if ($("input[name=requestContent7]").val()=="") {
-							console.log(gCount);
+						
 							html += "내용을 입력해주세요";
 							$(".g-msg").append(html);
 							$(".g-msg").css("color", "red");

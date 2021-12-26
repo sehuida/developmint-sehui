@@ -363,7 +363,7 @@
 					var aTag = '<p style="font-weight: bold;">첨부파일 조회<small id="emailHelp" class="form-text text-danger">(용량이 많을수록, 시간이 소요됩니다. )</small></span><p>';
 					if(data.length != 0){
 						for(var i =0;i<data.length;i++){
-							aTag += '<a href="/boardFileDownload?fileNo='+data[i].fileNo+'">'+data[i].fileName+'</a><br>';
+							aTag += '<a href="/boardFileDownload.do?fileNo='+data[i].fileNo+'">'+data[i].fileName+'</a><br>';
 						}
 						$(".qnafile").eq(index).append(aTag);
 					};

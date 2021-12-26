@@ -234,8 +234,7 @@ ul#gallery>a>li dd {
 
 			var searchContent = $("input[id=search-content]").val();
 			var type = $("select[name=type]").val();
-			console.log(searchContent);
-			console.log(type);
+
 			
 			location.href = "/gosuNoticeList2.do?reqPage=1&keyword=" + searchContent
 					+ "&type=" + type;
