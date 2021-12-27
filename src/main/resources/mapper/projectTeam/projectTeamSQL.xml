@@ -428,7 +428,7 @@
   </update>
   
   <insert id="insertComment" parameterType="map">
-  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'yyyy-mm-dd hh24:mi'), #{boardNo}, #{boardType}, 1, null)
+  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'mm-dd hh24:mi'), #{boardNo}, #{boardType}, 1, null)
   </insert>
   
   <delete id="deleteComment" parameterType="_int">
@@ -440,7 +440,7 @@
   </update>
   
   <insert id="reCommentInsert" parameterType="map">
-  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'yyyy-mm-dd hh24:mi'), #{boardNo}, #{boardType}, 2, #{commentNo})
+  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'mm-dd hh24:mi'), #{boardNo}, #{boardType}, 2, #{commentNo})
   </insert>
   
   <delete id="deleteDibCount">
@@ -749,7 +749,7 @@
   </insert>
   
   <insert id="insertApplyComment" parameterType="map">
-  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'yyyy-mm-dd hh24:mi'), #{entryNo}, #{boardType}, 1, null)
+  		insert into comments values(comments_seq.nextval, #{memberId}, #{commentContent}, to_char(sysdate, 'mm-dd hh24:mi'), #{entryNo}, #{boardType}, 1, null)
   </insert>
   
   <select id="applyCheckValue" parameterType="map" resultType="_int">
