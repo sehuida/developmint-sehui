@@ -92,7 +92,14 @@
 			</div>
 			<div class="page-bottom">
 				<a href="/certification.do" class="btn btn-primary btn-sm">회사인증</a>
-				<a href="/companyMember.do" class="btn btn-info btn-sm">기업고객 전환</a>
+				<c:choose>
+					<c:when test="${empty sessionScope.m.comNo }">
+						<a href="/companyMember.do" class="btn btn-info btn-sm">기업고객 전환</a>					
+					</c:when>
+					<c:otherwise>
+						<a href="/rollbackCompany.do?memberId=${sessionScope.m.memberId }" class="btn btn-outline-danger btn-sm">회사인증 취소</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	 </div>	 

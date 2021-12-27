@@ -34,6 +34,7 @@ import kr.or.member.model.vo.GosuNoticePage;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MyProjectPage;
 import kr.or.member.model.vo.ProjectLikesPage;
+import kr.or.projectTeam.model.service.ProjectTeamService;
 
 @Controller
 public class MemberController {
@@ -410,8 +411,16 @@ public class MemberController {
 		model.addAttribute("start",ctp.getStart());
 		return "member/mycontestPage";
 	}
+	@Autowired
+	private ProjectTeamService ptService;
+	
+
 	@RequestMapping(value="/crewList.do")
 	public String crewList(Member m,Model model,int reqPage,int type) {
+		int result1 = ptService.updateStatus();
+		if(result1 > 0) {
+			int result2 = ptService.projectStartProcess();
+		}
 		if(type==0) {
 			//팀원 신청한 내역
 			CrewListPage clp = service.crewList(m, reqPage);

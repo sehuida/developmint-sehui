@@ -129,11 +129,11 @@
 				        text: '로고는 사진 20mb미만 파일만 업로드 가능합니다.',
 				        icon: 'warning'
 				      })
-					$("#filepath").val("");
+					$("#formFile").val("");
 					return;
 				}
 			}else if(fileVal == ""){
-				$("#filepath").val("");
+				$("#formFile").val("");
 				return;
 			}else{
 				swal({
@@ -141,7 +141,7 @@
 			        text: '첨부파일은 이미지 파일만 가능합니다.',
 			        icon: 'warning'
 			      })
-				$("#filepath").val("");
+				$("#formFile").val("");
 				return;
 			}
 			loadImg(this);
@@ -162,7 +162,7 @@
 		}
 		//삭제 눌렀을때 동작하는 버튼
 		$(".proDel").click(function(){
-				$("#filepath").val("");
+				$("#formFile").val("");
 				$(this).css('display','none');
 				$("#pic").attr("src", "/resources/img/member/profile.png ");
 				$("#pic").css("width","80px");
