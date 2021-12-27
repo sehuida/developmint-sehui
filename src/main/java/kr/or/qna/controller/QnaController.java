@@ -56,6 +56,8 @@ public class QnaController {
 		if(category >= 7) {
 			model.addAttribute("category", category);
 		}
+		ArrayList<Faq> list = service.selectFaqlist(category);
+		model.addAttribute("list", list);
 		return "faq/faq";
 	}
 	

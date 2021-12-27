@@ -14,14 +14,24 @@
 <style>
 	.faq_a{
 		display: none;
+		overflow: hidden;
+	}
+	.faq_q{
+		overflow: hidden;
+	}
+	.index{
+		display: flex;
+		justify-content: center;
+		float: left;
 	}
 </style>
 <body>
 <script>
-(function(){
+$(function(){
 	
 	$(".faq_q").click(function(){
-		$(".faq_a").css("display","block");
+		$(this).next().toggle();
+		/* $(".faq_a").css("display","block"); */
 	});
 });
 </script>
@@ -58,264 +68,352 @@
 				</div>
 				<!-- //탭버튼 -->
 				<!-- 콘텐츠 -->
-				<table class="table table-primary">
+				
+				<div class="t" style="background-color: rgb(78, 205, 196); color: white; font-weight: 900; font-size: 16px;  padding: 8px;">
+					<span>번호</span><span style="width: 1100px; margin-left: 700px;">내용</span>
+				</div>
+				<div class="d">
+				<!-- 로그인관련 -->
+					<c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 7 }">
+					   		<div class="faq_q" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+						   		<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px; font-weight: 900;">${i.count }</p>
+						   		<p style="background-color: white; color: black; display: inline-block; margin-bottom: 0px; font-weight: 900;">${c.faqQ }</p>
+					   		</div>
+					   		<div class="faq_a" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+				   				<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px;">답변</p>
+				   				<p style="background-color: white; color: black; width: 1100px; display:inline-block; margin-bottom: 0px;">${c.faqA }</p>
+				   			</div>
+				   		</c:if>
+				   </c:forEach>
+				   <!-- 고수안내 -->
+					<c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 8 }">
+					   		<div class="faq_q" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+						   		<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px; font-weight: 900;">${i.count }</p>
+						   		<p style="background-color: white; color: black; display: inline-block; margin-bottom: 0px; font-weight: 900;">${c.faqQ }</p>
+					   		</div>
+					   		<div class="faq_a" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+				   				<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px;">답변</p>
+				   				<p style="background-color: white; color: black; width: 1100px; display:inline-block; margin-bottom: 0px;">${c.faqA }</p>
+				   			</div>
+				   		</c:if>
+				   </c:forEach>
+				   <!-- 환불관련 -->
+					<c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 9 }">
+					   		<div class="faq_q" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+						   		<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px; font-weight: 900;">${i.count }</p>
+						   		<p style="background-color: white; color: black; display: inline-block; margin-bottom: 0px; font-weight: 900;">${c.faqQ }</p>
+					   		</div>
+					   		<div class="faq_a" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+				   				<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px;">답변</p>
+				   				<p style="background-color: white; color: black; width: 1100px; display:inline-block; margin-bottom: 0px;">${c.faqA }</p>
+				   			</div>
+				   		</c:if>
+				   </c:forEach>
+				   <!-- 공모전관련 -->
+					<c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 10 }">
+					   		<div class="faq_q" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+						   		<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px; font-weight: 900;">${i.count }</p>
+						   		<p style="background-color: white; color: black; display: inline-block; margin-bottom: 0px; font-weight: 900;">${c.faqQ }</p>
+					   		</div>
+					   		<div class="faq_a" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+				   				<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px;">답변</p>
+				   				<p style="background-color: white; color: black; width: 1100px; display:inline-block; margin-bottom: 0px;">${c.faqA }</p>
+				   			</div>
+				   		</c:if>
+				   </c:forEach>
+				   <!-- 구인잡관련 -->
+					<c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 11 }">
+					   		<div class="faq_q" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+						   		<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px; font-weight: 900;">${i.count }</p>
+						   		<p style="background-color: white; color: black; display: inline-block; margin-bottom: 0px; font-weight: 900;">${c.faqQ }</p>
+					   		</div>
+					   		<div class="faq_a" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+				   				<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px;">답변</p>
+				   				<p style="background-color: white; color: black; width: 1100px; display:inline-block; margin-bottom: 0px;">${c.faqA }</p>
+				   			</div>
+				   		</c:if>
+				   </c:forEach>
+				   <!-- 커뮤니티관련 -->
+					<c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 12 }">
+					   		<div class="faq_q" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+						   		<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px; font-weight: 900;">${i.count }</p>
+						   		<p style="background-color: white; color: black; display: inline-block; margin-bottom: 0px; font-weight: 900;">${c.faqQ }</p>
+					   		</div>
+					   		<div class="faq_a" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+				   				<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px;">답변</p>
+				   				<p style="background-color: white; color: black; width: 1100px; display:inline-block; margin-bottom: 0px;">${c.faqA }</p>
+				   			</div>
+				   		</c:if>
+				   </c:forEach>
+				   <!-- 고수관련 -->
+					<c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 13 }">
+					   		<div class="faq_q" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+						   		<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px; font-weight: 900;">${i.count }</p>
+						   		<p style="background-color: white; color: black; display: inline-block; margin-bottom: 0px; font-weight: 900;">${c.faqQ }</p>
+					   		</div>
+					   		<div class="faq_a" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+				   				<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px;">답변</p>
+				   				<p style="background-color: white; color: black; width: 1100px; display:inline-block; margin-bottom: 0px;">${c.faqA }</p>
+				   			</div>
+				   		</c:if>
+				   </c:forEach>
+				   <!-- 팀프로젝트관련 -->
+					<c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 14 }">
+					   		<div class="faq_q" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+						   		<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px; font-weight: 900;">${i.count }</p>
+						   		<p style="background-color: white; color: black; display: inline-block; margin-bottom: 0px; font-weight: 900;">${c.faqQ }</p>
+					   		</div>
+					   		<div class="faq_a" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+				   				<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px;">답변</p>
+				   				<p style="background-color: white; color: black; width: 1100px; display:inline-block; margin-bottom: 0px;">${c.faqA }</p>
+				   			</div>
+				   		</c:if>
+				   </c:forEach>
+				   <!-- 기타문의 -->
+					<c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 40 }">
+					   		<div class="faq_q" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+						   		<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px; font-weight: 900;">${i.count }</p>
+						   		<p style="background-color: white; color: black; display: inline-block; margin-bottom: 0px; font-weight: 900;">${c.faqQ }</p>
+					   		</div>
+					   		<div class="faq_a" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+				   				<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px;">답변</p>
+				   				<p style="background-color: white; color: black; width: 1100px; display:inline-block; margin-bottom: 0px;">${c.faqA }</p>
+				   			</div>
+				   		</c:if>
+				   </c:forEach>
+				   <!-- 신고 -->
+					<c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 22 }">
+					   		<div class="faq_q" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+						   		<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px; font-weight: 900;">${i.count }</p>
+						   		<p style="background-color: white; color: black; display: inline-block; margin-bottom: 0px; font-weight: 900;">${c.faqQ }</p>
+					   		</div>
+					   		<div class="faq_a" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+				   				<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px;">답변</p>
+				   				<p style="background-color: white; color: black; width: 1100px; display:inline-block; margin-bottom: 0px;">${c.faqA }</p>
+				   			</div>
+				   		</c:if>
+				   </c:forEach>
+				   <!-- 기능/작동 오류 -->
+					<c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 21 }">
+					   		<div class="faq_q" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+						   		<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px; font-weight: 900;">${i.count }</p>
+						   		<p style="background-color: white; color: black; display: inline-block; margin-bottom: 0px; font-weight: 900;">${c.faqQ }</p>
+					   		</div>
+					   		<div class="faq_a" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+				   				<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px;">답변</p>
+				   				<p style="background-color: white; color: black; width: 1100px; display:inline-block; margin-bottom: 0px;">${c.faqA }</p>
+				   			</div>
+				   		</c:if>
+				   </c:forEach>
+				   <!-- 이벤트 -->
+					<c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 20 }">
+					   		<div class="faq_q" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+						   		<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px; font-weight: 900;">${i.count }</p>
+						   		<p style="background-color: white; color: black; display: inline-block; margin-bottom: 0px; font-weight: 900;">${c.faqQ }</p>
+					   		</div>
+					   		<div class="faq_a" style="padding: 8px 10px; border-bottom: 1px solid rgb(78, 205, 196);">
+				   				<p class="index" style="background-color: white; color: black; text-align: center; width: 100px; margin-bottom: 0px;">답변</p>
+				   				<p style="background-color: white; color: black; width: 1100px; display:inline-block; margin-bottom: 0px;">${c.faqA }</p>
+				   			</div>
+				   		</c:if>
+				   </c:forEach>
+				</div>
+				
+				
+				<%-- <table class="table table-primary">
 				   <colgroup>
 					   <col width="8%">
 					   <col width="">
 				   </colgroup>
 				   <thead>
 					   <tr class="table-primary">
-						   <th scope="row">번호</th>
-						   <th scope="row" style="text-align: center;">내용</th>
+						   <th>번호</th>
+						   <th style="text-align: center;">내용</th>
 					   </tr>
 				   </thead>
 				   <tbody>
 				   
 				   <!-- 로그인관련 -->
-				   <c:if test="${category eq 7 }">
-				   		<tr>
-					   		<td style="background-color: white; color: black; text-align: center;">1</td>
-					   		<td class="faq_q" style="background-color: white; color: black;">아이디/비밀번호가 기억나지 않아요.</td>
-				   		</tr>
-				   		<tr class="faq_a">
-				   			<td style="background-color: white; color: black; text-align: center;">답변</td>
-				   			<td style="background-color: white; color: black;"><p>아이디/비밀번호가 기억나지 않으신다면, 로그인페이지의 아이디/비밀번호 찾기를 통해 확인하실 수 있습니다.</p></td>
-				   		</tr>
-				   		<tr>
-					   		<td style="background-color: white; color: black; text-align: center;">2</td>
-					   		<td style="background-color: white; color: black;">2</td>
-				   		</tr>
-				   		<tr>
-					   		<td style="background-color: white; color: black; text-align: center;">3</td>
-					   		<td style="background-color: white; color: black;">3</td>
-				   		</tr>
-				   		<tr>
-					   		<td style="background-color: white; color: black; text-align: center;">4</td>
-					   		<td style="background-color: white; color: black;">4</td>
-				   		</tr>
-				   </c:if>
+				   <c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 7 }">
+					   		<tr class="faq_q">
+						   		<th style="background-color: white; color: black; text-align: center;">${i.count }</th>
+						   		<th style="background-color: white; color: black;">${c.faqQ }</th>
+					   		</tr>
+					   		<tr class="faq_a">
+				   				<th style="background-color: white; color: black; text-align: center;">답변</th>
+				   				<th style="background-color: white; color: black; width: 1100px;">${c.faqA }</th>
+				   			</tr>
+				   		</c:if>
+				   </c:forEach>
 				   
 				   <!-- 고수 안내 -->
-				   <c:if test="${category eq 8 }">
-				   		<tr>
-					   		<td>ㅎㅇ</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">ㅎㅇ</td>
-				   		</tr>
-				   		<tr>
-					   		<td>2</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">2</td>
-				   		</tr>
-				   		<tr>
-					   		<td>3</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">3</td>
-				   		</tr>
-				   		<tr>
-					   		<td>4</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">4</td>
-				   		</tr>
-				   </c:if>
+				   <c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 8 }">
+					   		<tr class="faq_q">
+						   		<th style="background-color: white; color: black; text-align: center;">${i.count }</th>
+						   		<th style="background-color: white; color: black;">${c.faqQ }</th>
+					   		</tr>
+					   		<tr class="faq_a">
+				   				<th style="background-color: white; color: black; text-align: center;">답변</th>
+				   				<th style="background-color: white; color: black;"><p>${c.faqA }</p></th>
+				   			</tr>
+				   		</c:if>
+				   </c:forEach>
 				   
 				   <!-- 환불관련 -->
-				   <c:if test="${category eq 9 }">
-				   		<tr>
-					   		<td>ㅎㅇ</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">ㅎㅇ</td>
+				   <c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 9 }">
+					   		<tr class="faq_q">
+						   		<td style="background-color: white; color: black; text-align: center;">${i.count }</td>
+						   		<td style="background-color: white; color: black;">${c.faqQ }</td>
+					   		</tr>
+					   		<tr class="faq_a">
+				   			<td style="background-color: white; color: black; text-align: center;">답변</td>
+				   			<td style="background-color: white; color: black;"><p>${c.faqA }</p></td>
 				   		</tr>
-				   		<tr>
-					   		<td>2</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">2</td>
-				   		</tr>
-				   		<tr>
-					   		<td>3</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">3</td>
-				   		</tr>
-				   		<tr>
-					   		<td>4</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">4</td>
-				   		</tr>
-				   </c:if>
+				   		</c:if>
+				   </c:forEach>
 				   
 				   <!-- 공모전관련 -->
-				   <c:if test="${category eq 10 }">
-				   		<tr>
-					   		<td>ㅎㅇ</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">ㅎㅇ</td>
+				   <c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 10 }">
+					   		<tr class="faq_q">
+						   		<td style="background-color: white; color: black; text-align: center;">${i.count }</td>
+						   		<td style="background-color: white; color: black;">${c.faqQ }</td>
+					   		</tr>
+					   		<tr class="faq_a">
+				   			<td style="background-color: white; color: black; text-align: center;">답변</td>
+				   			<td style="background-color: white; color: black;"><p>${c.faqA }</p></td>
 				   		</tr>
-				   		<tr>
-					   		<td>2</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">2</td>
-				   		</tr>
-				   		<tr>
-					   		<td>3</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">3</td>
-				   		</tr>
-				   		<tr>
-					   		<td>4</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">4</td>
-				   		</tr>
-				   </c:if>
+				   		</c:if>
+				   </c:forEach>
 				   
 				   <!-- 구인잡관련 -->
-				   <c:if test="${category eq 11 }">
-				   		<tr>
-					   		<td>ㅎㅇ</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">ㅎㅇ</td>
+				   <c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 11 }">
+					   		<tr class="faq_q">
+						   		<td style="background-color: white; color: black; text-align: center;">${i.count }</td>
+						   		<td style="background-color: white; color: black;">${c.faqQ }</td>
+					   		</tr>
+					   		<tr class="faq_a">
+				   			<td style="background-color: white; color: black; text-align: center;">답변</td>
+				   			<td style="background-color: white; color: black;"><p>${c.faqA }</p></td>
 				   		</tr>
-				   		<tr>
-					   		<td>2</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">2</td>
-				   		</tr>
-				   		<tr>
-					   		<td>3</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">3</td>
-				   		</tr>
-				   		<tr>
-					   		<td>4</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">4</td>
-				   		</tr>
-				   </c:if>
+				   		</c:if>
+				   </c:forEach>
 				   
 				   <!-- 커뮤니티관련 -->
-				   <c:if test="${category eq 12 }">
-				   		<tr>
-					   		<td>ㅎㅇ</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">ㅎㅇ</td>
+				   <c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 12 }">
+					   		<tr class="faq_q">
+						   		<td style="background-color: white; color: black; text-align: center;">${i.count }</td>
+						   		<td style="background-color: white; color: black;">${c.faqQ }</td>
+					   		</tr>
+					   		<tr class="faq_a">
+				   			<td style="background-color: white; color: black; text-align: center;">답변</td>
+				   			<td style="background-color: white; color: black;"><p>${c.faqA }</p></td>
 				   		</tr>
-				   		<tr>
-					   		<td>2</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">2</td>
-				   		</tr>
-				   		<tr>
-					   		<td>3</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">3</td>
-				   		</tr>
-				   		<tr>
-					   		<td>4</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">4</td>
-				   		</tr>
-				   </c:if>
+				   		</c:if>
+				   </c:forEach>
 				   
 				   <!-- 고수관련 -->
-				   <c:if test="${category eq 13 }">
-				   		<tr>
-					   		<td>ㅎㅇ</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">ㅎㅇ</td>
+				   <c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 13 }">
+					   		<tr class="faq_q">
+						   		<td style="background-color: white; color: black; text-align: center;">${i.count }</td>
+						   		<td style="background-color: white; color: black;">${c.faqQ }</td>
+					   		</tr>
+					   		<tr class="faq_a">
+				   			<td style="background-color: white; color: black; text-align: center;">답변</td>
+				   			<td style="background-color: white; color: black;"><p>${c.faqA }</p></td>
 				   		</tr>
-				   		<tr>
-					   		<td>2</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">2</td>
-				   		</tr>
-				   		<tr>
-					   		<td>3</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">3</td>
-				   		</tr>
-				   		<tr>
-					   		<td>4</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">4</td>
-				   		</tr>
-				   </c:if>
+				   		</c:if>
+				   </c:forEach>
 				   
 				   <!-- 팀프로젝트 관련 -->
-				   <c:if test="${category eq 14 }">
-				   		<tr>
-					   		<td>ㅎㅇ</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">ㅎㅇ</td>
+				   <c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 14 }">
+					   		<tr class="faq_q">
+						   		<td style="background-color: white; color: black; text-align: center;">${i.count }</td>
+						   		<td style="background-color: white; color: black;">${c.faqQ }</td>
+					   		</tr>
+					   		<tr class="faq_a">
+				   			<td style="background-color: white; color: black; text-align: center;">답변</td>
+				   			<td style="background-color: white; color: black;"><p>${c.faqA }</p></td>
 				   		</tr>
-				   		<tr>
-					   		<td>2</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">2</td>
-				   		</tr>
-				   		<tr>
-					   		<td>3</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">3</td>
-				   		</tr>
-				   		<tr>
-					   		<td>4</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">4</td>
-				   		</tr>
-				   </c:if>
+				   		</c:if>
+				   </c:forEach>
 				   
 				   <!-- 기타 문의 -->
-				   <c:if test="${category eq 40 }">
-				   		<tr>
-					   		<td>ㅎㅇ</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">ㅎㅇ</td>
+				   <c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 40 }">
+					   		<tr class="faq_q">
+						   		<td style="background-color: white; color: black; text-align: center;">${i.count }</td>
+						   		<td style="background-color: white; color: black;">${c.faqQ }</td>
+					   		</tr>
+					   		<tr class="faq_a">
+				   			<td style="background-color: white; color: black; text-align: center;">답변</td>
+				   			<td style="background-color: white; color: black;"><p>${c.faqA }</p></td>
 				   		</tr>
-				   		<tr>
-					   		<td>2</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">2</td>
-				   		</tr>
-				   		<tr>
-					   		<td>3</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">3</td>
-				   		</tr>
-				   		<tr>
-					   		<td>4</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">4</td>
-				   		</tr>
-				   </c:if>
+				   		</c:if>
+				   </c:forEach>
 				   
 				   <!-- 신고 -->
-				   <c:if test="${category eq 22 }">
-				   		<tr>
-					   		<td>ㅎㅇ</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">ㅎㅇ</td>
+				   <c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 22 }">
+					   		<tr class="faq_q">
+						   		<td style="background-color: white; color: black; text-align: center;">${i.count }</td>
+						   		<td style="background-color: white; color: black;">${c.faqQ }</td>
+					   		</tr>
+					   		<tr class="faq_a">
+				   			<td style="background-color: white; color: black; text-align: center;">답변</td>
+				   			<td style="background-color: white; color: black;"><p>${c.faqA }</p></td>
 				   		</tr>
-				   		<tr>
-					   		<td>2</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">2</td>
-				   		</tr>
-				   		<tr>
-					   		<td>3</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">3</td>
-				   		</tr>
-				   		<tr>
-					   		<td>4</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">4</td>
-				   		</tr>
-				   </c:if>
+				   		</c:if>
+				   </c:forEach>
 				   
 				   <!-- 기능/작동 오류 -->
-				   <c:if test="${category eq 21 }">
-				   		<tr>
-					   		<td>ㅎㅇ</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">ㅎㅇ</td>
+				   <c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 21 }">
+					   		<tr class="faq_q">
+						   		<td style="background-color: white; color: black; text-align: center;">${i.count }</td>
+						   		<td style="background-color: white; color: black;">${c.faqQ }</td>
+					   		</tr>
+					   		<tr class="faq_a">
+				   			<td style="background-color: white; color: black; text-align: center;">답변</td>
+				   			<td style="background-color: white; color: black;"><p>${c.faqA }</p></td>
 				   		</tr>
-				   		<tr>
-					   		<td>2</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">2</td>
-				   		</tr>
-				   		<tr>
-					   		<td>3</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">3</td>
-				   		</tr>
-				   		<tr>
-					   		<td>4</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">4</td>
-				   		</tr>
-				   </c:if>
+				   		</c:if>
+				   </c:forEach>
 				   
 				   <!-- 이벤트 -->
-				   <c:if test="${category eq 20 }">
-				   		<tr>
-					   		<td>ㅎㅇ</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">ㅎㅇ</td>
+				   <c:forEach items="${list }" var="c" varStatus="i">
+				   		<c:if test="${category eq 20 }">
+					   		<tr class="faq_q">
+						   		<td style="background-color: white; color: black; text-align: center;">${i.count }</td>
+						   		<td style="background-color: white; color: black;">${c.faqQ }</td>
+					   		</tr>
+					   		<tr class="faq_a">
+				   			<td style="background-color: white; color: black; text-align: center;">답변</td>
+				   			<td style="background-color: white; color: black;"><p>${c.faqA }</p></td>
 				   		</tr>
-				   		<tr>
-					   		<td>2</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">2</td>
-				   		</tr>
-				   		<tr>
-					   		<td>3</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">3</td>
-				   		</tr>
-				   		<tr>
-					   		<td>4</td>
-					   		<td style="background-color: rgb(250, 250, 250); color: black;">4</td>
-				   		</tr>
-				   </c:if>
+				   		</c:if>
+				   </c:forEach>
 				   </tbody>
-			  	</table>
+			  	</table> --%>
 			</div>
 		</div>
 	</div>
