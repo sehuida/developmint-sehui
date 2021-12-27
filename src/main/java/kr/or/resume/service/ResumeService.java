@@ -105,8 +105,8 @@ public class ResumeService {
 		return dao.selectCeoResume(ceoResume, memberNo);
 	}
 
-	public int updateCeoResume(Resume r) {
-		return dao.updateCeoResume(r);
+	public int updateResume(Resume r) {
+		return dao.updateResume(r);
 	}
 
 	public Member selectOneMember(int memberNo) {
@@ -172,12 +172,8 @@ public class ResumeService {
 	 
 	public int deleteResume(int resumeNo) {
 		int deleteApplication = dao.deleteApplycation(resumeNo);
-		if(deleteApplication > 0) {
 			int deleteResume = dao.deleteResume(resumeNo);
 			return deleteResume;
-		} else {
-			return 0;
-		}
 	}
 
 	public int applicationCount(int memberNo) {

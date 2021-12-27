@@ -637,7 +637,7 @@
 								</li>                       
 							</ul>
 							<div class="deleteBtn">
-								<a href="/deleteResume.do?resumeNo=${rs.resumeNo }">삭제하기</a>
+								<a href="/deleteResume.do?resumeNo=${rs.resumeNo }&memberNo=${rs.memberNo }">삭제하기</a>
 							</div>
 						</div>
 					<%-- </c:if> --%>
