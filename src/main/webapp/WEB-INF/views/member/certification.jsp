@@ -8,6 +8,7 @@
 <title>Develomints</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <link rel="stylesheet" href="/resources/css/member/certification.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -43,10 +44,10 @@
 					<form action="/certificationWrite.do" method="post" enctype="multipart/form-data">
 					    <div class="form-group">
 					      <label for="formFile" class="form-label mt-4 text-info">* 빛이 반사되지 않는곳에서 사진을 찍으면 승인 될 확률이 높습니다.</label>
-					      <input class="form-control" type="file" id="formFile" name="files" multiple> 
+					      <input class="form-control" type="file" id="formFile" name="files" accept=".gif, .jpg, .jpeg, .png"> 
 					      <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 					    </div>
-					    <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="사진은 한장만 첨부가능">인증하기</button>
+					    <button type="submit" class="btn btn-primary certiBtn" data-bs-toggle="tooltip" data-bs-placement="top" title="사진은 한장만 첨부가능">인증하기</button>
 					</form>
 				</div>
 			</div>
@@ -61,6 +62,51 @@
 		var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
   		return new bootstrap.Popover(popoverTriggerEl)
 		})
+	</script>
+	<script type="text/javascript">
+		$(".certiBtn").on("click",function(){
+			var fileVal = $("#formFile").val();
+			
+			if(fileVal == ''){
+				swal({
+			        title: '사진을 확인해주세요!',
+			        text: '사진을 넣으셔야 제출 가능합니다.',
+			        icon: 'warning'
+			      })
+				return false;	
+			}
+		});
+		//사진 업로드시 확장자 제한 
+		$("#formFile").change(function(){
+			var fileVal = $(this).val();
+			var pathPoint = fileVal.lastIndexOf('.');
+			var filePoint = fileVal.substring(pathPoint+1, this.length);
+			var fileType = filePoint.toLowerCase();
+			var fileSize = 10 * 1024 * 1024; //10메가
+			if(fileType == 'jpg' || fileType == 'png' || fileType == 'jpeg' || fileType == 'gif'){
+			var uploadFileSize = this.files[0].size;
+				if(uploadFileSize > fileSize){
+					swal({
+				        title: '사진 용량이 큽니다',
+				        text: '20mb미만 파일만 업로드 가능합니다.',
+				        icon: 'warning'
+				      })
+					$("#formFile").val("");
+					return;
+				}
+			}else if(fileVal == ""){
+				$("#formFile").val("");
+				return;
+			}else{
+				swal({
+			        title: '확장자를 확인해주세요!',
+			        text: '첨부파일은 이미지 파일만 가능합니다.',
+			        icon: 'warning'
+			      })
+				$("#formFile").val("");
+				return;
+			}
+		});
 	</script>
 </body>
 </html>

@@ -32,7 +32,10 @@
 	    	
 	        if($(".language_icon_disabled").length == 0 ){
 	        	var url = "/recruitTeamMember_mainSelectPage.do?reqPage=1&viewValue="+viewValue+"&checkValue="+checkValue;
-	 	        $(".languageList").css("background-color", "#90d1b44f");
+	        	$(".languageList").css("outline", "none");
+		    	$(".languageList").css("border", "#9ecaed");
+		    	$(".languageList").css("border-radius", "7px");
+		    	$(".languageList").css("box-shadow", "0 0 10px #9ecaed");
 	            $(".language_icon").addClass("language_icon_disabled");
 	            $(this).toggleClass("language_icon_disabled");
 	            
@@ -77,7 +80,12 @@
 	    });
 	
 	    if( arr.length != 0){
-	    	$(".languageList").css("background-color", "#90d1b44f");
+	    	$(".languageList").css("outline", "none");
+	    	$(".languageList").css("border", "#9ecaed");
+	    	$(".languageList").css("border-radius", "7px");
+	    	$(".languageList").css("box-shadow", "0 0 10px #9ecaed");
+	    	/* $(".languageList").css("border-bottom", "3px solid #ABF200"); */
+	    	/* $(".languageList").css("background-color", "#90d1b44f"); */
 	    	$(".language_icon").addClass("language_icon_disabled");
 	    	for(var i = 0; i < $(".language_icon").length; i++){	    		
 	    		for(var j=0;j<arr.length;j++){
