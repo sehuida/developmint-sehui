@@ -557,7 +557,12 @@
 		</div>
 		
 <hr style="margin-top: 50px;margin-bottom: 50px;width: 100%">
-
+	<div style="margin-bottom: 20px; margin-top: 20px;">
+				<span style="font-weight: 900;">댓글을 작성할 때는 타인을 존중하고 
+				<a id="community-guide">커뮤니티 가이드</a>
+				를 준수해야 합니다.
+				</span>
+			</div>
 <%---------------------------------------------------------------------------- --%>
 		<%--댓글창 --%>
 		
@@ -595,12 +600,7 @@
 			<%--댓글이 있는경우 --%>
 			
 			<c:when test="${not empty commentList }">
-			<div style="margin-bottom: 20px; margin-top: 20px;">
-				<span style="font-weight: 900;">댓글을 작성할 때는 타인을 존중하고 
-				<a id="community-guide">커뮤니티 가이드</a>
-				를 준수해야 합니다.
-				</span>
-			</div>
+		
 				<c:forEach items="${commentList }" var="cl" varStatus="i">
 					<c:if test="${cl.commentType eq 1 }">
 						<div class="comentListBox">
