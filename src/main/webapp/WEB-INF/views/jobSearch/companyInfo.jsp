@@ -627,7 +627,7 @@ b {
 		
 		
 		<%--댓글 입력 창(로그인했을 때 띄우기) 댓글 등록할 때 SQL에서 등록일 to_char(SYSDATE,'MM-DD HH24:MI') 이걸로 넣어주세용--%>
-		<c:if test="${not empty sessionScope.m.memberId }">
+		<c:if test="${not empty sessionScope.m.memberId and sessionScope.m.comNo eq com.companyNo }">
 			<form action="/insertCompanyComment.do" method="post">
 				<div class="commentBox">
 					<div class="userInfoBox">
@@ -790,7 +790,7 @@ b {
 		<%---------------------------------------------------------------------------- --%>
 		
 								<%--대댓글 작성 창 --%>
-								<c:if test="${not empty sessionScope.m and cl.commentType eq 1 }">
+								<c:if test="${not empty sessionScope.m and cl.commentType eq 1 and sessionScope.m.comNo eq com.companyNo } }">
 								<form action="/insertCompanyComment.do" method="post">
 									<div class="recomentBox">
 										<textarea class="form-control reText textareaBox txbox2" name="commentContent"></textarea>
