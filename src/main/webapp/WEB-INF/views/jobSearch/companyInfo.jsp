@@ -790,7 +790,7 @@ b {
 		<%---------------------------------------------------------------------------- --%>
 		
 								<%--대댓글 작성 창 --%>
-								<c:if test="${not empty sessionScope.m and cl.commentType eq 1 and sessionScope.m.comNo eq com.companyNo } }">
+								<c:if test="${not empty sessionScope.m and cl.commentType eq 1 and sessionScope.m.comNo eq com.companyNo }">
 								<form action="/insertCompanyComment.do" method="post">
 									<div class="recomentBox">
 										<textarea class="form-control reText textareaBox txbox2" name="commentContent"></textarea>
