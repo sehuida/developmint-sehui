@@ -126,10 +126,10 @@
                                 <label class="col-form-label col-form-label-lg mt-4" for="inputLarge" >프로젝트 이름</label>
                                 <c:choose>
                                 	<c:when test="${sessionScope.m.memberId eq pt.projectReader}">
-                                		<input class="form-control form-control-lg" type="text" placeholder="${pt.projectName}" id="inputLarge" name="projectName">
+                                		<input class="form-control form-control-lg" type="text" value="${pt.projectName}" id="inputLarge" name="projectName">
                                 	</c:when>
                                 	<c:otherwise>
-                                		<input class="form-control form-control-lg" type="text" placeholder="${pt.projectName}" id="inputLarge" readonly="readonly">
+                                		<input class="form-control form-control-lg" type="text" value="${pt.projectName}" id="inputLarge" readonly="readonly">
                                 	</c:otherwise>
                                 </c:choose>
                             </div>
@@ -137,10 +137,10 @@
                                 <label class="col-form-label col-form-label-lg mt-4" for="inputLarge" >프로젝트 목표</label>
                                 <c:choose>
                                 	<c:when test="${sessionScope.m.memberId eq pt.projectReader}">
-                                		<input class="form-control form-control-lg" type="text" placeholder="${pt.projectGoal}" id="inputLarge" name="projectGoal">
+                                		<input class="form-control form-control-lg" type="text" value="${pt.projectGoal}" id="inputLarge" name="projectGoal">
                                 	</c:when>
                                 	<c:otherwise>
-                                		<input class="form-control form-control-lg" type="text" placeholder="${pt.projectGoal}" id="inputLarge" readonly="readonly">
+                                		<input class="form-control form-control-lg" type="text" value="${pt.projectGoal}" id="inputLarge" readonly="readonly">
                                 	</c:otherwise>
                                 </c:choose>
                             </div>

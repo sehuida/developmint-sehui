@@ -1152,16 +1152,16 @@
 			 		from task t
 			 		<choose>
 			 			<when test="viewValue == 1">
-			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 1 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 1 and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
 			 			</when>
 			 			<when test="viewValue == 2">
-			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 3 and t.team_member_no = #{teamMemberNo} and not not(t.process_sort = 4)
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 3 and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
 			 			</when>
 			 			<when test="viewValue == 3">
-			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 2 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.process_sort = 2 and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
 			 			</when>
 			 			<when test="viewValue == 4">
-			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 				where t.project_no = #{projectNo} and t.task_no like '%M%' and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
 			 			</when>
 			 		</choose>
 	       			order by t.task_no DESC) a)
@@ -1260,7 +1260,7 @@
  	</choose>
  </select>
  
- <select id=" selectAllTaskTSelectList" parameterType="map" resultType="ptk">
+ <select id="selectAllTaskTSelectList" parameterType="map" resultType="ptk">
  	<choose>
  		<when test="checkValue == 1">
   			select * from (
@@ -1359,7 +1359,7 @@
  		select count(*) from task where project_no = #{projectNo} and task_no like '%B%' and not(process_sort = 4)
  </select>
  
- <select id=" selectAllTaskBSelectList" parameterType="map" resultType="ptk">
+ <select id="selectAllTaskBSelectList" parameterType="map" resultType="ptk">
  	<choose>
  		<when test="checkValue == 1">
   			select * from (
@@ -1381,16 +1381,16 @@
 			 		from task t
 			 		<choose>
 			 			<when test="viewValue == 1">
-			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 1 and not(t.process_sort = 4)
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 1 and not t.process_sort = 4
 			 			</when>
 			 			<when test="viewValue == 2">
-			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 3 and not(t.process_sort = 4)
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 3 and not t.process_sort = 4
 			 			</when>
 			 			<when test="viewValue == 3">
-			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 2 and not(t.process_sort = 4)
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 2 and not t.process_sort = 4
 			 			</when>
 			 			<when test="viewValue == 4">
-			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and not(t.process_sort = 4)
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and not t.process_sort = 4
 			 			</when>
 			 		</choose>
 	       			order by t.task_no DESC) a)
@@ -1416,16 +1416,16 @@
 			 		from task t
 			 		<choose>
 			 			<when test="viewValue == 1">
-			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 1 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 1 and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
 			 			</when>
 			 			<when test="viewValue == 2">
-			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 3 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 3 and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
 			 			</when>
 			 			<when test="viewValue == 3">
-			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 2 and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.process_sort = 2 and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
 			 			</when>
 			 			<when test="viewValue == 4">
-			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.team_member_no = #{teamMemberNo} and not(t.process_sort = 4)
+			 				where t.project_no = #{projectNo} and t.task_no like '%B%' and t.team_member_no = #{teamMemberNo} and not t.process_sort = 4
 			 			</when>
 			 		</choose>
 	       			order by t.task_no DESC) a)
@@ -1491,7 +1491,7 @@
  		select count(*) from task where project_no = #{projectNo} and process_sort = 4
  </select>
 
-<select id=" selectAllTaskHList" parameterType="map" resultType="ptk">
+<select id="selectAllTaskHList" parameterType="map" resultType="ptk">
  	<choose>
  		<when test="checkValue == 1">
   			select * from (
