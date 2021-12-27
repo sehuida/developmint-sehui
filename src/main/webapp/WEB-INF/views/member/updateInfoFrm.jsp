@@ -111,11 +111,11 @@
 				        text: '프로필은 사진 20mb미만 파일만 업로드 가능합니다.',
 				        icon: 'warning'
 				      })
-					$("#filepath").val("");
+					$("#formFile").val("");
 					return;
 				}
 			}else if(fileVal == ""){
-				$("#filepath").val("");
+				$("#formFile").val("");
 				return;
 			}else{
 				swal({
@@ -123,7 +123,7 @@
 			        text: '첨부파일은 이미지 파일만 가능합니다.',
 			        icon: 'warning'
 			      })
-				$("#filepath").val("");
+				$("#formFile").val("");
 				return;
 			}
 			
