@@ -35,9 +35,9 @@
 	    
 		$(".navi_checkbox").change(function(){
 			if($(".navi_checkbox").is(":checked")){
-				location.href="/enterTaskHSelect.do?reqPage=1checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskHSelect.do?reqPage=1&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			} else {
-				location.href="/enterTaskHSelect.do?reqPage=1checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskHSelect.do?reqPage=1&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			}
 		});
 		

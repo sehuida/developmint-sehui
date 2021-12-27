@@ -18,6 +18,7 @@
     
 }
 
+
 .rListBox{
 	margin-top: 100px;
 }
@@ -30,6 +31,7 @@
 
 .language_icon_disabled{
     opacity: 0.4;
+    /* border-bottom: 3px solid #ABF200; */
 }
 .languageItem{
     display: flex;
@@ -123,6 +125,16 @@
     height: 150px;
 }
 
+
+.contentBox:hover {
+    -webkit-transform:scale(1.05);
+    -moz-transform:scale(1.05);
+    -ms-transform:scale(1.05);   
+    -o-transform:scale(1.05);
+    transform:scale(1.05);
+    transition: all 0.3s ease-in-out;
+}
+
 .contentFlexBox{
     display: flex;
     justify-content: center;
@@ -132,6 +144,7 @@
 .contentBox{
     width: 600px;
     border: 2px solid #90d1b4;
+    border-radius: 20px;
     margin-right: 120px;
 }
 .textFlexBox1{

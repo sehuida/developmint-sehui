@@ -78,7 +78,7 @@
 	</delete>
 	<!-- 업데이트 -->
 	<update id="updateNoticeNo" parameterType="n">
-		update notice set "notice_title"=#{noticeTitle}, "notice_content"=#{noticeContent},"filename"=#{filename},"filepath"=#{filepath} where "notice_no"=#{noticeNo}
+		update notice set "pin"=#{pin},"notice_title"=#{noticeTitle}, "notice_content"=#{noticeContent},"filename"=#{filename},"filepath"=#{filepath} where "notice_no"=#{noticeNo}
 	</update>
 	<!--rnum  -->
 	<select id="selectRnum" parameterType="_int" resultType="rn">

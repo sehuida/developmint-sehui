@@ -41,8 +41,17 @@
 						<fieldset>
 						<label class="col-form-label mt-4" for="noticeTitle"><i class="bi bi-toggles" style="font-size: 1.2em;"></i> 상단게시물 고정유무<span style="color: #f3969a;font-size: ">*</span></label>
 					    <div class="form-check form-switch">
-				        	<input class="form-check-input" type="checkbox" id="pin" name="pin" value="1">
-				        	<label class="form-check-label" for="pin">상단게시물 고정</label>
+					    	<c:choose>
+					    		<c:when test="${n.pin eq 1}">
+					    			<input class="form-check-input" type="checkbox" id="pin" name="pin" >
+				        			<label class="form-check-label" for="pin">상단게시물 고정</label>
+					    		</c:when>
+					    		<c:otherwise>
+					    			<input class="form-check-input" type="checkbox" id="pin" name="pin" checked>
+				        			<label class="form-check-label" for="pin">상단게시물 고정</label>
+					    		</c:otherwise>
+					    	</c:choose>
+				        	
 				      	</div>
 						<div class="form-group">
 						  <label class="col-form-label mt-4" for="noticeWriter"><i class="bi bi-hand-index" style="font-size: 1.2em;"></i> 작성자<span style="color: #f3969a;">*</span></label>

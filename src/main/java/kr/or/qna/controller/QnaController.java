@@ -52,7 +52,12 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value="/faq.do")
-	public String tofaq() {
+	public String tofaq(int category, Model model) {
+		if(category >= 7) {
+			model.addAttribute("category", category);
+		}
+		ArrayList<Faq> list = service.selectFaqlist(category);
+		model.addAttribute("list", list);
 		return "faq/faq";
 	}
 	

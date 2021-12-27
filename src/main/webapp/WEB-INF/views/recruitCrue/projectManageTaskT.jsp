@@ -67,9 +67,9 @@
 		
 		$(".navi_checkbox").change(function(){
 			if($(".navi_checkbox").is(":checked")){
-				location.href="/enterTaskTSelect.do?reqPage=1&viewValue=1&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskTSelect.do?reqPage=1&viewValue=4&checkValue=2&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			} else {
-				location.href="/enterTaskTSelect.do?reqPage=1&viewValue=1&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
+				location.href="/enterTaskTSelect.do?reqPage=1&viewValue=4&checkValue=1&projectNo="+pageProjectNo+"&teamMemberNo="+pageTeamMemberNo;
 			}
 		});
 		
