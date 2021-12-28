@@ -38,18 +38,18 @@
 					<ol class="breadcrumb projectSelect">
 						<c:choose>
 							<c:when test="${type eq 0}">
-								 <li class="breadcrumb-item actives">신청한 프로젝트</li>
-								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=1">내 프로젝트</a></li>
+								 <li class="breadcrumb-item actives">신청 프로젝트</li>
+								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=1">개설 프로젝트</a></li>
 								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=2">찜한내역</a></li>							
 							</c:when>
 							<c:when test="${type eq 1 }">
-								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=0">신청한 내역</a></li>
-								 <li class="breadcrumb-item actives">개설한 프로젝트</li>
+								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=0">신청 프로젝트</a></li>
+								 <li class="breadcrumb-item actives">개설 프로젝트</li>
 								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=2">찜한내역</a></li>							
 							</c:when>
 							<c:when test="${type eq 2 }">
-								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=0">신청한 내역</a></li>
-								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=1">내 프로젝트</a></li>
+								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=0">신청 프로젝트</a></li>
+								 <li class="breadcrumb-item"><a href="/crewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1&type=1">개설 프로젝트</a></li>
 								 <li class="breadcrumb-item actives">찜한내역</li>							
 							</c:when>						
 						</c:choose>
