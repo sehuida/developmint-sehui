@@ -505,9 +505,18 @@
 					<c:choose>
 						<c:when test="${empty greviewList }">
 							<div class="g-margin">
-					<span
+							<c:if test="${ggosuNoEmpty eq 0 }">
+							<span
+						style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;color:blue;">
+						소개글을 작성하지 않으셨네요!<br>
+						소개귿을 작성하고 피드백을 통해 리뷰를 받으세요!</span>
+							</c:if>
+							<c:if test="${ggosuNoEmpty ne 0 }">
+							<span
 						style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">
 						작성된 리뷰가 없습니다.</span>
+							</c:if>
+					
 				</div>
 						</c:when>
 						<c:otherwise>

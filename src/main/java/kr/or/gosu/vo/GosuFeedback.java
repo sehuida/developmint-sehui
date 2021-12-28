@@ -35,5 +35,18 @@ public class GosuFeedback {
 		;
 		return feedbackTitle;
 	}
+	public String getMemberIdPlus() {
+		if (memberId.length() > 6) {
+			return memberId.substring(0, 4) + "..";
+		}
+		;
+		return memberId;
+	}	public String getGosuIdPlus() {
+		if (gosuId.length() > 6) {
+			return gosuId.substring(0, 4) + "..";
+		}
+		;
+		return gosuId;
+	}
 
 }

@@ -323,7 +323,7 @@ public class GosuController {
 			model.addAttribute("grpsList", grpsList);
 			
 			int ggosuNo = service.selectMyGgosuNo(m.getMemberNo());
-			
+			model.addAttribute("ggosuNoEmpty",ggosuNo);
 			ArrayList<GosuReview> grList2 = service.selectGosuReviewList(ggosuNo);
 			if (!grList2.isEmpty()) {
 				GosuReview grAVG = service.selectReviewCountAVG(ggosuNo);
