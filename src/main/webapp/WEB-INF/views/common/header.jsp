@@ -22,9 +22,106 @@
 	display: flex;
     align-items: center;
 	}
-	.container-fluid{
-	
+	.nav-item{
+		margin: auto 12px;
 	}
+	.navigation {
+  width: 100%;
+  /* border-bottom: 3px solid #ccd7d7; */
+  font-family: "Pathway Gothic One", sans-serif;
+  font-size: 22px;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  max-width: 1150px;
+  margin: 0 auto;
+  padding-left: 0;
+}
+
+.menu__item {
+  display: inline-block;
+  white-space: nowrap;
+}
+@media screen and (max-width: 480px) {
+  .menu__item:nth-child(n+3) {
+    display: none;
+  }
+  .menu__item:nth-child(2) .menu__link {
+    border-right: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .menu__item:nth-child(n+4) {
+    display: none;
+  }
+  .menu__item:nth-child(3) .menu__link {
+    border-right: 0;
+  }
+}
+@media screen and (max-width: 992px) {
+  .menu__item:nth-child(n+5) {
+    display: none;
+  }
+  .menu__item:nth-child(4) .menu__link {
+    border-right: 0;
+  }
+}
+.menu__item:last-child .menu__link {
+  border-right: 0;
+}
+
+.menu__link {
+  display: block;
+  padding: 6px 30px 3px;
+  /* border-right: 2px dotted #ccd7d7; */
+}
+.menu__link:hover .menu__first-word, .menu__link:focus .menu__first-word {
+  transform: translate3d(0, -105%, 0);
+}
+.menu__link:hover .menu__second-word, .menu__link:focus .menu__second-word {
+  transform: translate3d(0, 105%, 0);
+}
+@media screen and (min-width: 768px) {
+  .menu__link {
+    padding: 6px 40px 3px;
+  }
+}
+
+.menu__title {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.menu__first-word,
+.menu__second-word {
+  display: inline-block;
+  position: relative;
+  transition: transform 0.3s;
+}
+.menu__first-word::before,
+.menu__second-word::before {
+  position: absolute;
+  content: attr(data-hover);
+}
+
+.menu__first-word {
+  color: rgba(0, 0, 0, 0.3);
+}
+.menu__first-word::before {
+  top: 105%;
+  color: #626262;
+}
+
+.menu__second-word {
+  color: rgba(0, 0, 0, 0.3);
+}
+.menu__second-word::before {
+  bottom: 105%;
+  color: #4ecdc4;
+  font-weight: bold;
+}
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,24 +131,42 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarColor01" >
-      <ul class="navbar-nav me-auto" style="font-size: 18px;margin-left: 20px;font-weight: bold;">
-        <li class="nav-item">
-          <a class="nav-link " href="/recruitTeamMember_mainPage.do?reqPage=1" style="width: 88px;">팀원모집
-            <span class="visually-hidden">(current)</span>
+    <div class="collapse navbar-collapse navigation" id="navbarColor01" >
+      <ul class="navbar-nav me-auto menu" style="font-size: 18px;margin-left: 30px;font-weight: bold;">
+        <li class="nav-item menu__item">
+          <a class="nav-link menu__link" href="/recruitTeamMember_mainPage.do?reqPage=1" style="width: 88px;">
+	          <span class="menu__title">
+	          	<span class="menu__first-word" data-hover="팀원">팀원</span><span class="menu__second-word" data-hover="모집">모집</span>
+	          </span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link " href="/shareList.do?reqPage=1&type=1" style="width: 124px;">개발지식공유</a>
+        <li class="nav-item menu__item">
+         	<a class="nav-link menu__link" href="/shareList.do?reqPage=1&type=1" style="width: 124px;">
+     	    	<span class="menu__title">
+	          		<span class="menu__first-word" data-hover="개발지식">개발지식</span><span class="menu__second-word" data-hover="공유">공유</span>
+	          	</span >
+        	</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link " href="/jobSearchList.do?reqPage=1" style="width: 88px;">구인구직</a>
+        <li class="nav-item menu__item">
+         	<a class="nav-link menu__link" href="/jobSearchList.do?reqPage=1" style="width: 88px;">
+				<span class="menu__title">
+	          		<span class="menu__first-word" data-hover="구인">구인</span><span class="menu__second-word" data-hover="구직">구직</span>
+	          	</span >			
+			</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link " href="/gosuMain.do" style="width: 138px;">'고수'의 노하우</a>
+        <li class="nav-item menu__item">
+          <a class="nav-link menu__link" href="/gosuMain.do" style="width: 150px;">
+          	<span class="menu__title">
+	          		<span class="menu__second-word" data-hover="'고수'">'고수'</span><span class="menu__first-word" data-hover="의 노하우">의 노하우</span>
+	        </span >
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link " href="/contestMain.do" style="width: 70px;">공모전</a>
+        <li class="nav-item menu__item">
+          <a class="nav-link menu__link" href="/contestMain.do" style="width: 70px;">
+			<span class="menu__title">
+	          		<span class="menu__second-word" data-hover="공모">공모</span><span class="menu__first-word" data-hover="전">전</span>
+	        </span >
+		  </a>
         </li>
       </ul>
        <ul class="navbar-nav float-end me-3" style="text-align: left;">
