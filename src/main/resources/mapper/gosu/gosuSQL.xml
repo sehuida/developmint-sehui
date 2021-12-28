@@ -195,7 +195,7 @@
 		gosu_feedback where FEEDBACK_NO = #{fbNo}
 	</select>
 	<select id="selectGosuFeedbackList" resultType="gf">
-		select 
+		select DISTINCT
 		f.FEEDBACK_NO as feedbackNo,
 		f.GGOSU_NO as ggosuNo,
 		f.FEEDBACK_CONTENT as
@@ -451,7 +451,7 @@
 	</select>
 	<select id="selectGosuRequestProjectSubList" resultType="grps"
 		parameterType="_int">
-		 select
+		 select DISTINCT
 		(select member_id from member where member_no =
 		request.request_writer_no) AS
 		requestWriterId,
