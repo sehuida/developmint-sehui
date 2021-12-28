@@ -148,7 +148,7 @@ $(function(){
 									 <!-- 쪽지 -->
 									 <input type="hidden" class="receiver" value="${a.memberId }">
 									 <input type="hidden" class="sender" value="admin">
-									 <input type="hidden" class="dmContent" value="[구인구직] 합격하신 입사지원서가 있습니다. 마이페이지에서 확인하세요.">
+									 <input type="hidden" class="dmContent" value="[구인구직] 합격하신 입사지원서가 있습니다. 마이페이지 > 입사신청 내역에서 확인하세요.">
 								 </form>
 								 
 							</div>
