@@ -68,7 +68,7 @@ input:focus, textarea:focus {
 }
 
 .talk-me tr:last-child td:last-child {
-	background-color: rgb(183, 223, 205);
+	background-color:#d0f0f7;
 }
 
 .talk-one table th img {
@@ -188,7 +188,7 @@ input:focus, textarea:focus {
 				<c:otherwise>
 				<div>
 							<div style="text-align: right;"><button type="button" id="widthBtn"
-												class="btn btn-primary upbtn" style="width: 100px;box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">전체보기</button></div>
+												class="btn btn-info upbtn" style="width: 100px;box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">전체보기</button></div>
 						</div>
 					<div class="talk-wrap" style="
 	box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">
@@ -401,18 +401,18 @@ input:focus, textarea:focus {
 									<c:when test="${sessionScope.m.memberType eq 2}">
 										<td style="text-align: center;"><c:if
 												test="${fn:length(grplist) >= 10}">
-												<button type="button" id="talkStopAjax" class="btn btn-info"
+												<button type="button" id="talkStopAjax" class="btn btn-primary upbtn"
 													style="width: 200px; upbtn">개발 완료</button>
 											</c:if></td>
 										<td style="text-align: center;">
 											<button type="button" id="talkBtnAjax"
-												class="btn btn-primary upbtn" style="width: 200px;box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">전송</button>
+												class="btn btn-info upbtn" style="width: 200px;box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">전송</button>
 										</td>
 									</c:when>
 									<c:otherwise>
 										<td colspan="2">
 											<button type="button" id="talkBtnAjax" 
-												class="btn btn-primary upbtn">전송</button>
+												class="btn btn-info upbtn">전송</button>
 										</td>
 									</c:otherwise>
 								</c:choose>

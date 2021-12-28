@@ -31,27 +31,29 @@
 	color: rgb(78, 205, 196);
 	margin-top: 100px;
 	margin-bottom: 100px;
-	font-size: 40px;
+	font-size: 30px;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+	padding:20px;
 }
 
-.container>div>div>div table td {
+.con1>div>div>div table td {
 	padding: 10px;
 	text-align: center;
 }
 
-.container>div>div>div table td>span {
+.con1>div>div>div table td>span {
 	display: block;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
-.container>div>div>div table a {
+.con1>div>div>div table a {
 	margin-top: 20px;
 	width: 200px;
 	margin-bottom: 20px;
 }
 
-.container>div>div>div {
+.con1>div>div>div {
 	border: 1px solid rgb(160, 160, 160);
 	width: 400px;
 	padding-left: 20px;
@@ -60,7 +62,7 @@
 	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 	background-color: white;
 }
-.container>div>div>div table a:hover {
+.con1>div>div>div table a:hover {
 -webkit-transform: scale(1.03);
     transform: scale(1.03);
 }
@@ -134,7 +136,7 @@
 		<p style="margin-bottom: 100px; color: gray;">신청하신 전체 내역을 확인하실 수
 			있습니다.</p>
 		<div class="g-sa-wrap">
-			<h4>신청한 내역</h4>
+			<h4>신청한 피드백 내역</h4>
 			<div class="g-margin">
 				<c:choose>
 					<c:when test="${not empty gosuTalkList }">
@@ -222,7 +224,7 @@
 		</div>
 
 		<c:if test="${sessionScope.m.memberType eq 2}">
-			<h4>신청받은 내역</h4>
+			<h4>신청받은 피드백 내역</h4>
 			<div class="g-margin">
 				<c:choose>
 					<c:when test="${not empty gosuTalkList2 }">
@@ -303,7 +305,7 @@
 			</c:choose>
 	</div>
 	</c:if>
-	<h4>작성한 리뷰</h4>
+	<h4>작성한 피드백 리뷰</h4>
 
 	<c:choose>
 		<c:when test="${not empty grList }">
@@ -344,7 +346,7 @@
 	</c:choose>
 
 	<c:if test="${sessionScope.m.memberType eq 1 }">
-		<h4>작성한 후기</h4>
+		<h4>작성한 개발 요청 후기</h4>
 
 		<c:choose>
 			<c:when test="${not empty grrList }">
@@ -376,7 +378,9 @@
 
 
 	</c:if>
-	<h4>요청서를 통한 고수 매칭</h4>
+	<hr style="margin-top: 100px;margin-bottom: 100px;">
+	
+	<h4 class="text-info">요청서를 통한 고수 매칭</h4>
 	<div class="g-margin">
 		<c:choose>
 			<c:when test="${empty grpsList }">
@@ -495,6 +499,140 @@
 	</c:choose>
 
 	</div>
+		<c:if test="${sessionScope.m.memberType eq 2 }">
+			<hr style="margin-bottom: 100px;margin-top: 100px;">
+				<h4 class="text-success">피드백으로 받은 리뷰</h4>
+					<c:choose>
+						<c:when test="${empty greviewList }">
+							<div class="g-margin">
+							<c:if test="${ggosuNoEmpty eq 0 }">
+							<span
+						style="font-size: 30px;font-weight:900; width:100%; text-align:center; margin-top: 50px; margin-bottom: 50px;" class="text-danger">
+						소개 글을 작성하지 않으셨네요!<br>
+						소개 글을 작성하고 피드백을 통해 리뷰를 받으세요!</span>
+							</c:if>
+							<c:if test="${ggosuNoEmpty ne 0 }">
+							<span
+						style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">
+						작성된 리뷰가 없습니다.</span>
+							</c:if>
+					
+				</div>
+						</c:when>
+						<c:otherwise>
+
+							<div >
+							<div style="width: 100%;margin: 0;padding: 50px;"">
+								<div class="review-avg" style="">
+									<table>
+										<tr>
+											<td rowspan="3" style="font-size: 40px; font-weight: bold;">${grAVG.reviewAvg }점</td>
+										</tr>
+										<tr>
+											<td><c:choose>
+													<c:when test="${grAVG.reviewAvg eq 5}">
+														<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+													</c:when>
+													<c:when test="${grAVG.reviewAvg eq 4}">
+														<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+													</c:when>
+
+													<c:when test="${grAVG.reviewAvg eq 3}">
+														<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+													</c:when>
+													<c:when test="${grAVG.reviewAvg eq 2}">
+														<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+													</c:when>
+													<c:when test="${grAVG.reviewAvg eq 1}">
+														<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+													</c:when>
+
+
+												</c:choose></td>
+										</tr>
+										<tr>
+											<td style="font-size: small;">${grAVG.reviewCount }개의리뷰</td>
+										</tr>
+									</table>
+								</div>
+
+
+								<hr>
+
+								<c:forEach items="${greviewList }" var="grl" varStatus="i">
+									<div class="review-one">
+										<ul>
+											<li>${grl.writer }</li>
+											<li><span
+												style="float: left; font-size: small; margin-right: 5px;">${grl.reviewNum}
+													점</span> <c:if test="${grl.reviewNum eq 1 }">
+													<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
+												</c:if> <c:if test="${grl.reviewNum eq 2 }">
+													<span style="color: #ffd400;">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+												</c:if> <c:if test="${grl.reviewNum eq 3 }">
+													<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+												</c:if> <c:if test="${grl.reviewNum eq 4 }">
+													<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+												</c:if> <c:if test="${grl.reviewNum eq 5 }">
+													<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+												</c:if></li>
+											<li>${grl.reviewDate }</li>
+
+										</ul>
+										<br>
+										<div>
+											<p
+												style="padding: 5px; padding-left: 50px; padding-right: 30px;">${grl.reviewContent}</p>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+</div>
+						</c:otherwise>
+					</c:choose>
+
+
+
+				<h4 class="text-success">개발 진행으로 받은 후기</h4>
+				<c:choose>
+					<c:when test="${empty grrList2 }">
+						<div class="g-margin">
+					<span
+						style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">
+						작성된 후기가 없습니다.</span>
+				</div>
+						</c:when>
+					<c:otherwise>
+						<div>
+							<div style="width: 100%;margin: 0;padding: 50px;">
+								<div class="review-avg">
+									<span style="font-size: 30px; font-weight: bold;">${grrCount}개의
+										후기</span>
+								</div>
+								<hr>
+								<c:forEach items="${grrList2 }" var="grl" varStatus="i">
+									<div class="review-one">
+										<ul>
+											<li style="font-weight: 900;">${grl.memberId }</li>
+											<li style="color: gray;">${grl.requestReviewDate }</li>
+										</ul>
+										<br>
+										<div>
+											<p
+												style="padding: 5px; padding-left: 50px; padding-right: 30px;">
+												${grl.requestReviewContent }</p>
+										</div>
+									</div>
+								</c:forEach>
+
+							</div>
+
+					</div>
+					</c:otherwise>
+				</c:choose>
+
+			
+		</c:if>
 	</div>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>

@@ -8,6 +8,7 @@
 <title>Develomint</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b0b0a9f222f0ab356e278f15c5fdc64&libraries=services"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
 .contain {
@@ -743,7 +744,7 @@ b {
 										  <div class="modal-dialog  modal-dialog-centered">
 										    <div class="modal-content">
 										      <div class="modal-body">
-										      	<form action="/reportComment.do" method="post" class="reportBox">
+										      	<form action="/reportCompanyComment.do" method="post" class="reportBox">
 											      	<p class="Modaltitle">신고 하기</p>
 											      	<div style="border-bottom:1px solid #d9d9d9; padding:5px; margin-bottom: 30px; padding-bottom: 10px;">
 											      		<p>신고는 반대 의견을 표시하는 기능이 아닙니다.</p>
@@ -886,7 +887,7 @@ b {
 											  <div class="modal-dialog  modal-dialog-centered">
 											    <div class="modal-content">
 											      <div class="modal-body">
-												      <form action="/reportComment.do" method="post" class="reportBox">
+												      <form action="/reportCompanyComment.do" method="post" class="reportBox">
 													      	<p class="Modaltitle">신고 하기</p>
 													      	<div style="border-bottom:1px solid #d9d9d9; padding:5px; margin-bottom: 10px; padding-bottom: 10px;">
 													      		<p>신고는 반대 의견을 표시하는 기능이 아닙니다.</p>
@@ -1111,26 +1112,156 @@ b {
 
 	</style>
 <script>
-	$(".reComentBtn").click(function(){
-		var index = $(".reComentBtn").index(this);
-		$(".recomentBox").eq(index).toggle();
-	});
-	$(".reComentBtn").trigger('click');
+//댓글 글자수 제한
+	 $('.textareaBox').keydown(function(){
+		 var length = $(".textareaBox").val().length;
+		console.log(length);
+		 if($(this).val().length > 64) {
+			swal({
+			  title: "글자수 초과",
+			  text: "초과 입력 할 수 없습니다. 초과된 내용은 자동으로 삭제됩니다.",
+			  icon: "warning",
+			  buttons: true,
+			})
+        $(this).val($(this).val().substring(0, 64));
+		 }
+	 })
+	 
+	 //댓글 입력 안하면 전송 안되게
+	 $(".commentBtn").click(function(){
+		 if($('.txbox').val() == ""){
+			swal({
+			  title: "댓글 미입력",
+			  text: "댓글을 입력해주세요",
+			  icon: "warning",
+			  buttons: true,
+			})
+			return false;
+		}
+	 })
+	 //대댓글 입력 안하면 전송 안되게
+	 $(".commentBtn2").click(function(){
+		var index = $(".commentBtn2").index(this);
+		 if($('.txbox2').eq(index).val() == ""){
+			swal({
+			  title: "댓글 미입력",
+			  text: "댓글을 입력해주세요",
+			  icon: "warning",
+			  buttons: true,
+			})
+			return false;
+		}
+	 })
 	
-	//대댓글창 취소 클릭시 닫히기
-	$(".cancelBtn").click(function(){
-		var index = $(".cancelBtn").index(this);
-		$(".recomentBox").eq(index).css("display","none");
-	});
-	
-	//댓글삭제 confirm창 띄우고 ok하면 submit
-	$(".delComment").click(function(){
-		var result = confirm('댓글을 삭제하시겠습니까?');
-		var index = $(".delComment").index(this);
-		if(result){
-			$(".delForm").eq(index).submit();
+
+//대댓글 창 토글
+$(".reComentBtn").click(function(){
+	var index = $(".reComentBtn").index(this);
+	$(".recomentBox").eq(index).toggle();
+});
+$(".reComentBtn").trigger('click');
+
+//대댓글창 취소 클릭시 닫히기
+$(".cancelBtn").click(function(){
+	var index = $(".cancelBtn").index(this);
+	$(".recomentBox").eq(index).css("display","none");
+});
+
+//댓글 수정
+$(".updateCm").click(function(){
+	var index = $(".updateCm").index(this);
+	var commentNo = $(this).parent().prev().val();
+	var commentContent = $(this).parent().prev().prev().val();
+	console.log(commentNo);
+	 $.ajax({
+		url : "/updateCompanyComment.do",
+		data : {commentNo : commentNo, commentContent:commentContent},
+		success : function(data) {
+			location.reload();
 		}
 	});
+		
+});
+
+//댓글삭제 
+$(".delComment").click(function(){
+	var index = $(".delComment").index(this);
+	var commentNo = $(this).next().val();
+	swal({
+		  title: "댓글 삭제",
+		  text: "댓글을 삭제하시겠습니까?",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			 $.ajax({
+				url : "/deleteCompanyComment.do",
+				data : {commentNo : commentNo},
+				success : function(data) {
+					location.reload();
+				}
+			});
+		  }
+		});
+		
+});
+
+//신고 기타버튼 선택 시 textarea 작성가능
+$("input[name=reportReason]").change(function(){
+	var radioValue = $(this).val();
+	if(radioValue == 7){
+		$(".etc" ).attr('readonly', false);
+	}else{
+		$(".etc" ).attr('readonly', true);
+	}	
+});
+
+//신고 기타칸 글자수 제한
+$('.etc').keydown(function(){
+var index = $(".etc").index(this);
+var length = $(".etc").eq(index).val().length;
+if(length > 64) {
+		swal({
+			  title: "글자수 초과",
+			  text: "초과 입력 할 수 없습니다. 초과된 내용은 자동으로 삭제됩니다.",
+			  icon: "warning",
+			  buttons: true,
+			})
+       $(this).val($(this).val().substring(0, 64));
+	 }
+});
+
+//신고버튼 누르면 confirm창 띄우고 ok하면 submit
+$(".reportBtn").click(function(){
+	var index = $(".reportBtn").index(this);
+	var radioCheck = $('input[name=reportReason]').is(":checked");
+	if(!radioCheck){
+		alert("신고사유를 체크해주세요.");
+		return;
+	}
+	
+		
+	swal({
+		  title: "댓글 신고",
+		  text: "허위신고일 경우 신고자가 불이익을 받을 수 있습니다. 신고하시겠습니까?",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			 $(".reportBox").eq(index).submit();
+		  }
+	});
+})
+
+//로그인 안하면 댓글 작성 안됨
+$(".noMember").click(function(){
+	alert("로그인 후 작성이 가능합니다.");
+	location.href="/loginFrm.do";
+})
 
 
 	/* 카카오맵 API */

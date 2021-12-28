@@ -113,7 +113,14 @@
 							<td><i class="bi bi-suit-heart-fill" style="color: #4ecdc4"></i>${sv.likes }</td>
 							<td><i class="bi bi-eyeglasses" style="color: #4ecdc4"></i>${sv.readCount }</td>
 							<td>
-								<img src="/resources/upload/member/${sv.profiles }" style="width: 30px; height: 30px; border-radius: 30px;">
+								<c:choose>
+									<c:when test="${sv.profiles ne null}">
+										<img src="/resources/upload/member/${sv.profiles }" style="width: 30px; height: 30px; border-radius: 30px;">									
+									</c:when>
+									<c:otherwise>
+										<img src="/resources/img/member/user.png" style="width: 30px; height: 30px; border-radius: 30px;">
+									</c:otherwise>
+								</c:choose>
 								<span>${sv.memberId }</span>
 								<c:choose>
 									<c:when test="${sv.memberGrade >=1 && sv.memberGrade <= 20 }">

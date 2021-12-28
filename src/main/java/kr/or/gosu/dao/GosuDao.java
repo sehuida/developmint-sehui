@@ -374,5 +374,18 @@ public class GosuDao {
 		return (ArrayList<GosuNotice>)list;
 	}
 
+	public int selectMyGgosuNo(int memberNo) {
+		return sqlSession.selectOne("gosu.selectMyGgosuNo",memberNo);
+	}
+
+	public ArrayList<GosuRequestReview> selectGosuRequestReviewList2(int memberNo) {
+		List<GosuRequestReview> list = sqlSession.selectList("gosu.selectGosuRequestReviewList2",memberNo);
+		return (ArrayList<GosuRequestReview>)list;
+	}
+
+	public int selectGrrCount2(int memberNo) {
+		return sqlSession.selectOne("gosu.selectGrrCount2",memberNo);
+	}
+
 
 }

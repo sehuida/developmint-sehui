@@ -806,5 +806,23 @@ public class GosuService {
 	}
 
 
+	public int selectMyGgosuNo(int memberNo) {
+		int ggosuNo= dao.selectMyGgosuNo(memberNo);
+		return ggosuNo;
+	}
+
+
+	public ArrayList<GosuRequestReview> selectGosuRequestReviewList2(int memberNo) {
+		ArrayList<GosuRequestReview> list = dao.selectGosuRequestReviewList2(memberNo);
+		return list;
+	}
+
+
+	public int selectGrrCount2(int memberNo) {
+		int grrCount= dao.selectGrrCount2(memberNo);
+		return grrCount;
+	}
+
+
 
 }

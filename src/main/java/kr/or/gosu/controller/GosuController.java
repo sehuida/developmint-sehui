@@ -321,9 +321,25 @@ public class GosuController {
 		} else if (m.getMemberType() == 2) {
 			ArrayList<GosuRequestProjectSub> grpsList = service.selectGosuRequestProjectSubList2(m.getMemberNo());
 			model.addAttribute("grpsList", grpsList);
+			
+			int ggosuNo = service.selectMyGgosuNo(m.getMemberNo());
+			model.addAttribute("ggosuNoEmpty",ggosuNo);
+			ArrayList<GosuReview> grList2 = service.selectGosuReviewList(ggosuNo);
+			if (!grList2.isEmpty()) {
+				GosuReview grAVG = service.selectReviewCountAVG(ggosuNo);
+				model.addAttribute("grAVG", grAVG);
+				model.addAttribute("greviewList",grList2);
+			}
+			ArrayList<GosuRequestReview> grrList2 = service.selectGosuRequestReviewList2(m.getMemberNo());
+			if (!grrList2.isEmpty()) {
+				int grrCount = service.selectGrrCount2(m.getMemberNo());
+				model.addAttribute("grrCount", grrCount);
+				model.addAttribute("grrList2",grrList2);
+			}
 		}
 		ArrayList<GosuReview> grList = service.selectMemberReviewList(m.getMemberId());
 		ArrayList<GosuRequestReview> grrList = service.selectMemberRequestReviewList(m.getMemberId());
+		
 		model.addAttribute("gosuTalkList", gf);
 		model.addAttribute("gosuTalkList2", gf2);
 		model.addAttribute("grList", grList);
