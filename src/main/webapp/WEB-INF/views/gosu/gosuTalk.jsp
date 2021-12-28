@@ -206,10 +206,17 @@ input:focus, textarea:focus {
 		</h3>
 
 
-		<div class="g-feedback" style="margin-bottom: 100px;">
+		<div class="g-feedback" >
 
 			<h3>Q. &nbsp;${gfOne.feedbackTitle }</h3>
-			<span>${gfOne.feedbackContentBr }</span>
+			<span>${gfOne.feedbackContentBr }</span><br>
+		<c:if test="${sessionScope.m.memberId eq gfOne.memberId}">
+		<div style="margin-top:50px;">
+		<span style="font-size: 20px;font-weight: 900;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+">결제한 비용  <span style="color:red;">${gfOne.gosuCost }</span>원 </span>
+		</div>
+		</c:if>
 		</div>
 
 		<c:choose>

@@ -884,7 +884,16 @@ public class GosuController {
 		GosuRequest grcOne = service.gosuMemberRequestAjax(grc);
 		return grcOne;
 	}
+	@ResponseBody
+	@RequestMapping(value = "/gosuMemberRequestAjax2.do")
+	public GosuRequest gosuMemberRequestAjax2(int costNo,String memberId) {
 	
+		GosuRequestCost grc = new GosuRequestCost();
+		grc.setCostNo(costNo);
+		grc.setMemberId(memberId);
+		GosuRequest grcOne = service.gosuMemberRequestAjax(grc);
+		return grcOne;
+	}
 	//댓글등록
 	@RequestMapping(value="/insertGNComment.do")
 	public String insertGNComment(Comment cm, Model model) {

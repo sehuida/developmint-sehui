@@ -32,7 +32,6 @@
 	margin-top: 100px;
 	margin-bottom: 100px;
 	font-size: 30px;
-	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
 	padding:20px;
 }
 
@@ -123,6 +122,10 @@
 	display: flex;
 	margin: 0 auto;
 	width: 1080px;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+}
+.g-margin>span{
+	padding-left: 30px;
 }
 </style>
 </head>
@@ -507,7 +510,7 @@
 							<div class="g-margin">
 							<c:if test="${ggosuNoEmpty eq 0 }">
 							<span
-						style="font-size: 30px;font-weight:900; width:100%; text-align:center; margin-top: 50px; margin-bottom: 50px;" class="text-danger">
+						style="font-size: 30px;font-weight:900; width:100%; text-align:center;padding-left:0; margin-top: 50px; margin-bottom: 50px;" class="text-danger">
 						소개 글을 작성하지 않으셨네요!<br>
 						소개 글을 작성하고 피드백을 통해 리뷰를 받으세요!</span>
 							</c:if>
@@ -521,9 +524,9 @@
 						</c:when>
 						<c:otherwise>
 
-							<div >
-							<div style="width: 100%;margin: 0;padding: 50px;"">
-								<div class="review-avg" style="">
+							<div style="display: flex;justify-content: center;">
+							<div style="width: 1080px;margin: 0;padding: 40px;"">
+								<div class="review-avg" >
 									<table>
 										<tr>
 											<td rowspan="3" style="font-size: 40px; font-weight: bold;">${grAVG.reviewAvg }점</td>
@@ -603,8 +606,8 @@
 				</div>
 						</c:when>
 					<c:otherwise>
-						<div>
-							<div style="width: 100%;margin: 0;padding: 50px;">
+						<div style="display: flex;justify-content: center;">
+							<div style="width: 1080px;margin: 0;padding: 40px;">
 								<div class="review-avg">
 									<span style="font-size: 30px; font-weight: bold;">${grrCount}개의
 										후기</span>
@@ -635,6 +638,7 @@
 		</c:if>
 	</div>
 	</div>
+
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>
