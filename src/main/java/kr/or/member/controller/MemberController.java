@@ -269,12 +269,15 @@ public class MemberController {
 		}
 		int result = service.insertCertification(file);
 		if(result>0) {
-			model.addAttribute("msg", "등록성공");
+			model.addAttribute("title", "제출성공");
+			model.addAttribute("loc", "/main.do");
+			model.addAttribute("icon", "success");
 		}else {
-			model.addAttribute("msg","등록실패");		
+			model.addAttribute("title", "제출실패");
+			model.addAttribute("loc", "/main.do");
+			model.addAttribute("icon", "warning");	
 		}
-		model.addAttribute("loc", "/");
-		return "common/msg";
+		return "member/swalMsg";
 	}
 	
 	@ResponseBody
