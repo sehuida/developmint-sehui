@@ -47,7 +47,6 @@
     }
 	
 </script>
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="projectContainer">
 		<div class="main">
             <div class="returnPage">
@@ -131,7 +130,7 @@
 	                            <p class="titleText">모집설명</p>
 	                        </div>
 	                        <div class="form-group">
-	                            <textarea class="form-control" id="summernote" rows="3" name="rContent" >${pt.RContent }</textarea>
+	                            <textarea class="form-control" id="summernote" rows="8" name="rContent">${pt.RContent}</textarea>
 	                        </div>
 	                    </div>
 	                    <div class="finalLine"></div>
