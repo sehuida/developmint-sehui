@@ -71,6 +71,9 @@
 						  </fieldset>
 						</div>			     	
 			     	</c:if>
+			     	<c:if test="${sessionScope.m.kakao eq 1 }">
+			     		<input class="form-control" name="memberId" id="memberId" type="hidden" value="${sessionScope.m.memberId }" readonly="">
+			     	</c:if>
 					<div class="form-group">
 					  <label class="col-form-label mt-4" for="email">이메일</label>
 					  <input type="text" class="form-control" name="email" id="email" value="${sessionScope.m.email }" readonly="">

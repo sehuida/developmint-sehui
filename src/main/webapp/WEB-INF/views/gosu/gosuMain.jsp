@@ -736,12 +736,12 @@ to {
 										<tr class="card-header">
 											<c:if test="${sessionScope.m.memberType eq 1 }">
 
-												<th style="color: #78c2ad;">고수</th>
+												<th class="text-info">고수</th>
 												<td style="width: 197px;"><span>${grpsl.gosuIdPlus }</span></td>
 											</c:if>
 											<c:if test="${sessionScope.m.memberType eq 2 }">
 
-												<th style="color: #78c2ad; width: 150px;">질문자</th>
+												<th class="text-info"style=" width: 150px;">질문자</th>
 												<td style="width: 177px;"><span>${grpsl.requestWriterIdPlus }</span></td>
 											</c:if>
 

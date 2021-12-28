@@ -55,12 +55,14 @@ public class ResumeController {
 		int resumeNo = r.getResumeNo();
 		int result = service.updateResume(r);
 		if(result > 0) {
-			model.addAttribute("msg","이력서 수정완료");
+			model.addAttribute("title","이력서 수정완료");
+			model.addAttribute("icon", "success");
 		} else {
-			model.addAttribute("msg","이력서 수정실패");
+			model.addAttribute("title","이력서 수정실패");
+			model.addAttribute("icon", "fail");
 		}
 		model.addAttribute("loc", "/resumeManage.do?memberNo="+memberNo+"&reqPage=1");
-		return "common/msg";
+		return "member/swalMsg";
 	}
 	
 	@RequestMapping(value="/insertResume.do")
@@ -131,12 +133,14 @@ public class ResumeController {
 	public String deleteResume(int resumeNo, Model model, int memberNo) {
 		int result = service.deleteResume(resumeNo);
 		if(result > 0) {
-			model.addAttribute("msg","이력서가 삭제되었습니다.");
+			model.addAttribute("title","이력서가 삭제되었습니다.");
+			model.addAttribute("icon", "success");
 		} else {
-			model.addAttribute("msg","이력서 삭제 에러");			
+			model.addAttribute("title","이력서 삭제 에러");			
+			model.addAttribute("icon", "fail");
 		}
 		model.addAttribute("loc","/resumeManage.do?memberNo="+memberNo+"&reqPage=1");
-		return "common/msg";
+		return "member/swalMsg";
 	}
 	
 	/*

@@ -236,6 +236,8 @@
 			$(this).parent().siblings("label").find("span").css("color","#888");
 		});
 		
+		var ta = $("#ta").val();
+		$(".selfIntroContentTextarea").html(ta);
 
 	});
 </script>
@@ -385,7 +387,7 @@
 							<b>기관/장소</b>
 						</div>
 						<div class="activityNameInput">
-							<input type="text" class="smallTextInput" name="activityPlace" placeholder="기관/장소 입력">
+							<input type="text" class="smallTextInput" name="activityPlace" placeholder="${r.activityPlace }">
 						</div>
 					</div>
 					<div class="activityDateData">
@@ -458,7 +460,7 @@
 					<b>보유기술</b>
 				</div>
 				<div class="mytechInput">
-					<input type="text" class="textInput" name="mytech" value="${r.myTech }">
+					<input type="text" class="textInput" name="myTech" value="${r.myTech }">
 				</div>
 			</div>
 			
@@ -502,6 +504,7 @@
 	                </div>
 	               
 	                <div class="selfIntroContent">
+	                	<input type="hidden" id="ta" value="${r.selfintroContent }">
 	                    <textarea cols="80" rows="10" name="selfintroContent" class="selfIntroContentTextarea" value="${r.selfintroContent }"></textarea>
 	                </div>
 	                

@@ -82,7 +82,7 @@
 				<label style="margin-right:20px; font-weight: bold"><input type="checkbox" name="contestQualify" value="일반인" class="form-check-input" style="margin-right:5px;">일반인</label> 
 				<label style="font-weight: bold"><input type="checkbox" name="contestQualify" value="제한없음" class="form-check-input" style="margin-right:5px;">제한없음</label>
 			</div>
-			<p><i class="bi bi-building" style="color:#4ECDC4"></i> 주최사</p><input type="text" name="contestHost" class="form-control" style="width:1000px;">
+			<p><i class="bi bi-building" style="color:#4ECDC4"></i> 주최사</p><input type="text" id = "contestHost" name="contestHost" class="form-control" style="width:1000px;">
 			<p><i class="bi bi-calendar-week" style="color:#4ECDC4"></i> 공모마감</p><input type="date" class="form-control" id="mindate" min="" name="contestDeadline" style="width: 1000px; height: 38px;">
 			<p><i class="bi bi-trophy" style="color:#4ECDC4"></i> 1등 시상금</p><input type="text" name="contestPrize" class="form-control prize" style="width: 960px;" placeholder="숫자만 입력해주세요"><span id="won">만원</span>
 			<p><i class="bi bi-envelope" style="color:#4ECDC4"></i> 담당자 이메일</p><input type="email" name="email" class="form-control" style="width:1000px;">
@@ -122,6 +122,21 @@
 	 
 	 $('#contestTitle').keydown(function(){
 		 var length = $("#contestTitle").val().length;
+		 if($(this).val().length > 36) {
+			swal({
+			  title: "글자수 초과",
+			  text: "초과 입력 할 수 없습니다. 초과된 내용은 자동으로 삭제됩니다.",
+			  icon: "warning",
+			  buttons: true,
+			})
+        $(this).val($(this).val().substring(0, 36));
+			
+		 }
+
+	 })
+	 
+	 $('#contestHost').keydown(function(){
+		 var length = $("#contestHost").val().length;
 		 if($(this).val().length > 36) {
 			swal({
 			  title: "글자수 초과",
