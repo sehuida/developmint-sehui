@@ -55,11 +55,40 @@
 			$(this).parent().parent().parent(".updateReCommentTextBox").hide();
 		});
 		
+		$("#send").click(function () {
+			
+			var receiver = $("#receiver").val();
+			var dmContent = $("#dmContent").val();
+			var sender = $("#sender").val();
+			$.ajax({
+				url : "/sendDm.do",
+				data : {receiver:receiver,dmContent:dmContent,sender:sender},
+				success : function(data) {
+					if(data == 1){
+						dmCount(receiver);
+						swal({
+							  title: "전송완료",
+							  icon: "success",
+							  button: "닫기",
+							}).then(function(){
+								location.reload();							
+							});
+					}else{
+						console.log("실패");
+					}
+				}
+			});
+		});
+		
+		
 	});
 	
 </script>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<input type="hidden" id="receiver" value="${pe.memberId }">
+	<input type="hidden" id="sender" value="${sessionScope.m.memberId }">
+	<input type="hidden" id="dmContent" value="지원타이틀 : ${pe.ambition} - 최종선발 되셨습니다, 지원하신 프로젝트가 모집마감되면 프로젝트가 시작되오니 참고해주시기 바랍니다.">
 	<div class="container" id="projectContainer">
 		<div class="main">
 			<input type="hidden" id="entryStatus" name="entryStatus" value="${pe.entryStatus }">
@@ -137,7 +166,7 @@
 		                        		<a href="/deleteTeamMember.do?entryNo=${pe.entryNo }&memberNo=${pe.memberNo}&projectNo=${pe.projectNo}"><button type="button" class="btn btn-primary">탈락</button></a>
                     				</c:when>
                     				<c:otherwise>
-                    					<a href="/selectFinalTeamMember.do?entryNo=${pe.entryNo }&memberNo=${pe.memberNo}&projectNo=${pe.projectNo}&viewValue=1&pageTransValue=${pe.availableNum }"><button type="button" class="btn btn-primary">최종선발</button></a>
+                    					<a href="/selectFinalTeamMember.do?entryNo=${pe.entryNo }&memberNo=${pe.memberNo}&projectNo=${pe.projectNo}&viewValue=1&pageTransValue=${pe.availableNum }"><button type="button" class="btn btn-primary" id="send">최종선발</button></a>
 		                        		<a href="/returnTeamMember.do?entryNo=${pe.entryNo }&memberNo=${pe.memberNo}&projectNo=${pe.projectNo}&viewValue=1&pageTransValue=${pe.availableNum }"><button type="button" class="btn btn-primary">대기인원 전환</button></a>
                     				</c:otherwise>
                     			</c:choose>

@@ -268,12 +268,12 @@ public class ProjectTeamController {
 		  if(boardType == 3) {
 			  result = service.insertComment(commentContent, boardNo, memberId, boardType); 
 		  }else {
-			  if(checkMemberNo != memberNo) {
 				  entryNo = service.searchEntryNo(boardNo, memberNo);
 				  result = service.insertComment(commentContent, boardNo, memberId, boardType, entryNo);
-			  } else {
-				  result = service.insertComment(commentContent, boardNo, memberId, boardType); 
-			  }
+					/*
+					 * if(checkMemberNo != memberNo) { } else { result =
+					 * service.insertComment(commentContent, boardNo, memberId, boardType); }
+					 */
 		  }
 		  if(result > 0) { 
 			  model.addAttribute("title", "댓글 등록 성공");
