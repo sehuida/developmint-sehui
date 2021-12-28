@@ -9,6 +9,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <link rel="stylesheet" href="/resources/css/notice/noticeList.css">
 <link rel="stylesheet" href="/resources/css/notice/qnalist.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -281,10 +282,23 @@
 					return false;
 			}
 			
-			if(confirm("작성하시겠습니까?")){
+			/* if(confirm("작성하시겠습니까?")){
 				$("form").attr("action", "/counsel_save1.do");
 				f1.submit();
-			}
+			} */
+			swal({
+	 			  title: "문의 작성",
+	 			  text: "Q&A문의를 작성하시겠습니까?",
+	 			  icon: "warning",
+	 			  buttons: true,
+	 			  dangerMode: true,
+	 			})
+	 			.then((willDelete) => {
+	 			  if (willDelete) {
+	 				 $("form").attr("action", "/counsel_save1.do");
+	 				f1.submit();
+	 			  }
+	 			});
 		}
 		
 		/* 회원일경우 */
@@ -323,10 +337,23 @@
 			var contents = qa_msg + file_contents;
 			$('#f1 [name=qnaContent]').val(contents);  */
 			
-			if(confirm("작성하시겠습니까?")){
+			/* if(confirm("작성하시겠습니까?")){
 				$("form").attr("action", "/counsel_save2.do");
 				f1.submit();
-			}
+			} */
+			swal({
+	 			  title: "문의 작성",
+	 			  text: "Q&A문의를 작성하시겠습니까?",
+	 			  icon: "warning",
+	 			  buttons: true,
+	 			  dangerMode: true,
+	 			})
+	 			.then((willDelete) => {
+	 			  if (willDelete) {
+	 				 $("form").attr("action", "/counsel_save2.do");
+	 				f1.submit();
+	 			  }
+	 			});
 			
 		}
 		
