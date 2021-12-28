@@ -482,7 +482,7 @@
 					<b>보유기술</b>
 				</div>
 				<div class="mytechInput">
-					<input type="text" class="textInput" name="mytech" placeholder="보유기술 입력 (ex. 문서작성능력, 비즈니스영어, java등) ///나중에 바꾸기">
+					<input type="text" class="textInput" name="mytech" placeholder="보유기술 입력 (ex. 문서작성능력, 비즈니스영어, java등)">
 				</div>
 			</div>
 			
@@ -569,7 +569,7 @@
 						<b>근무 지역<span>*</span></b>
 					</div>
 					<div class="workPlaceInput">
-						<input type="text" class="textInput" id="workPlace" name="workPlace" placeholder="근무지역 (나중에 바꾸기)">
+						<input type="text" class="textInput" id="workPlace" name="workPlace" placeholder="근무지역">
 					</div>
 				</div>
 			</div>
