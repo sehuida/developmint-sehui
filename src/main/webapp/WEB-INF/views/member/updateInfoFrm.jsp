@@ -63,12 +63,14 @@
 			  </div><!--update-top 끝나는 지점  -->
 			  <div class="update-middle">
 			    <form action="/updateMyInfo.do" method="post">
-					<div class="form-group">
-					  <fieldset>
-					    <label class="form-label mt-4" for="memberId">아이디</label>
-					    <input class="form-control" name="memberId" id="memberId" type="text" value="${sessionScope.m.memberId }" readonly="">
-					  </fieldset>
-					</div>
+			     	<c:if test="${sessionScope.m.kakao ne 1 }">
+						<div class="form-group">
+						  <fieldset>
+						    <label class="form-label mt-4" for="memberId">아이디</label>
+						    <input class="form-control" name="memberId" id="memberId" type="text" value="${sessionScope.m.memberId }" readonly="">
+						  </fieldset>
+						</div>			     	
+			     	</c:if>
 					<div class="form-group">
 					  <label class="col-form-label mt-4" for="email">이메일</label>
 					  <input type="text" class="form-control" name="email" id="email" value="${sessionScope.m.email }" readonly="">
@@ -84,7 +86,9 @@
 					  <span class="expResult"></span>
 					</div>
 					<div class="form-group pageBtn"  style="margin-top: 30px;">
-						<a href="/changePwFrm.do">비밀번호 변경하기</a>
+						<c:if test="${sessionScope.m.kakao ne 1 }">
+							<a href="/changePwFrm.do">비밀번호 변경하기</a>						
+						</c:if>
 						<button type="submit" class="btn btn-primary" id="joinBtn">정보변경</button>
 						<c:if test="${sessionScope.m.memberType ne 2 }">
 							<button type="button" class="btn btn-danger resgin">회원탈퇴</button>		  											
