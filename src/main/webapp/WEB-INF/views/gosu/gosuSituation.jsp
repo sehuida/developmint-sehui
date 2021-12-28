@@ -507,9 +507,9 @@
 							<div class="g-margin">
 							<c:if test="${ggosuNoEmpty eq 0 }">
 							<span
-						style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;color:blue;">
-						소개글을 작성하지 않으셨네요!<br>
-						소개귿을 작성하고 피드백을 통해 리뷰를 받으세요!</span>
+						style="font-size: 30px;font-weight:900; width:100%; text-align:center; margin-top: 50px; margin-bottom: 50px;" class="text-danger">
+						소개 글을 작성하지 않으셨네요!<br>
+						소개 글을 작성하고 피드백을 통해 리뷰를 받으세요!</span>
 							</c:if>
 							<c:if test="${ggosuNoEmpty ne 0 }">
 							<span
