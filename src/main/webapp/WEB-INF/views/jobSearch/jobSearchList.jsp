@@ -379,7 +379,7 @@ $(function(){
 	                        <div class="situation">
 	                        
 	                            <div class="date">마감 <span>${a.dDay }</span>일 전</div>		<!-- 7 -> 마감일-현재일 이거 어캐하지 -->
-	                            <div class="apply">총 <span>${a.count }</span>명 지원</div>	<!-- 2 -> 지원한 이력서 갯수 count  흠  -->
+	                            <div class="apply">총 <span>${a.count1 }</span>명 지원</div>	<!-- 2 -> 지원한 이력서 갯수 count  흠  -->
 	                        </div>
 	                    </div>
 	                </div>

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Announce {
 	private int dDay;
-	private int count;
+	private int count1;
 	private int announceNo;
 	private int memberNo;
 	private int companyNo;

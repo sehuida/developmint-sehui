@@ -142,6 +142,7 @@
 		from (
 		select
 			ceil(TO_DATE(end_date) - sysdate) as dDay,
+			(select count(*) from application where announce_no = a.announce_no) as count1,
 			announce_no as announceNo,
 			member_no as memberNo,
 			company_no as companyNo,
