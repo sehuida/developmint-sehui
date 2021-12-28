@@ -12,6 +12,7 @@ import kr.or.announce.vo.Announce;
 import kr.or.announce.vo.AnnounceList;
 import kr.or.announce.vo.AnnounceView;
 import kr.or.announce.vo.Application;
+import kr.or.comment.vo.Report;
 import kr.or.resume.vo.Resume;
 
 @Repository
@@ -103,6 +104,10 @@ public class AnnounceDao {
 		map.put("announceNo",announceNo);
 		map.put("memberNo",memberNo);
 		return sqlSession.selectOne("announce.selectApplication",map);
+	}
+
+	public int reportCompanyComment(Report rp) {
+		return sqlSession.insert("announce.reportCompanyComment",rp);
 	}
 
 	/*
