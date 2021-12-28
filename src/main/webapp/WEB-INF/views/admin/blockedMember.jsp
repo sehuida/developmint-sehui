@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>DeveloMint 차단회원 관리</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
 .container {
@@ -253,13 +254,26 @@ span{
 			
 			var checkBoxCheck = $('.chk').is(":checked");
 			if(!checkBoxCheck){
-				alert("차단해제할 회원을 선택해주세요.");
+				swal({
+					  title: "회원 미선택",
+					  text: "차단 해제할 회원을 선택해주세요.",
+					  icon: "warning",
+					  buttons: true,
+					})
 				return;
 			}
-			var checkConfirm = confirm("선택한 회원을 차단해제 하시겠습니까?");
-			if(checkConfirm){
-				location.href="/cancelBlocked.do?memberId="+memberId.join("/");
-			}
+			swal({
+				  title: "차단 해제",
+				  text: "선택한 회원을 차단해제 하시겠습니까?",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true,
+				})
+				.then((willDelete) => {
+				  if (willDelete) {
+					  location.href="/cancelBlocked.do?memberId="+memberId.join("/");
+				  }
+				});
 		 });
 	</script>
 </body>
