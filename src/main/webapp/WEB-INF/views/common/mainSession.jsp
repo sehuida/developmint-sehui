@@ -68,7 +68,7 @@
 			<!-- The slideshow/carousel -->
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="/resources/img/main/4.png" alt="Los Angeles" class="d-block"
+					<img src="/resources/img/main/4.png" alt="Los Angeles" class="d-block w-100 h-50"
 						style="width:100%;max-height: 80vh;">
 					<div class="carousel-caption">
 						<h4 class="text-black" style="font-weight: bold;">프로젝트에 지원하여 팀원으로 함께하세요!</h4>
@@ -76,7 +76,7 @@
 					</div>
 				</div>
 				<div class="carousel-item">
-					<img src="/resources/img/main/1.png" alt="Chicago" class="d-block h-50"
+					<img src="/resources/img/main/1.png" alt="Chicago" class="d-block h-50 w-100"
 						style="width: 100%;max-height: 80vh;">
 					<div class="carousel-caption">
 						<h4 class="text-white" style="font-weight: bold;">고수와 함께 개발을 해보세요!</h4>
@@ -84,7 +84,7 @@
 					</div>
 				</div>
 				<div class="carousel-item">
-					<img src="/resources/img/main/3.png" alt="New York" class="d-block h-50" 
+					<img src="/resources/img/main/3.png" alt="New York" class="d-block h-50 w-100" 
 					style="width: 100%;max-height: 80vh;">
 					<div class="carousel-caption">
 						<h4 class="text-white" style="font-weight: bold;">지원하고, 구해보세요!</h4>
