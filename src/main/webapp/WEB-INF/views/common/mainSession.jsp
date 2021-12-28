@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="/resources/css/default.css">
 <link rel="stylesheet" href="/resources/css/main/main.css">
 <link rel="stylesheet" href="/resources/css/projectTeam/recruitMember.css">
-<link rel="stylesheet" href="/resources/css/projectTeam/recruitMember.css">
 <!-- slick CDN -->
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
@@ -240,9 +239,10 @@
 		  		</c:if>
 			  <div class="card-body">
 			  	<%-- <a href="/gosuContent.do?gNo=${g.ggsouNo}" class="card-title">${g.gosuTitle }</a> --%>
-			    <h4 class="card-title">${g.gosuTitle }</h4>
+			    <h4 class="card-title" style="font-weight: 900;text-align: center;height: 28px;overflow: hidden;">${g.gosuTitle }</h4>
 			    <p class="card-text"><span style="color: rgb(78, 205, 196);">고수</span>&nbsp;&nbsp;${g.gosuId }</p>
-			    <p class="card-text">${g.gosuSelf }</p>
+			    <p class="card-text" style="height: 120px;
+overflow: hidden;">${g.gosuSelf }</p>
 			    <p class="card-text">
 			    	<c:if test="${empty g.reviewAvg  }">
 						<span style="color: gray; font-size: small;">아직 등록된 리뷰가 없습니다.</span>
@@ -403,7 +403,7 @@
 			           </c:if></span>
 			       </div>
 			       <div class="situation">
-			           <div class="date">D - <span>7</span> 일 전</div>		<!-- 7 -> 마감일-현재일 이거 어캐하지 -->
+			           <div class="date">D - <span>${a.dDay }</span> 일 전</div>		<!-- 7 -> 마감일-현재일 이거 어캐하지 -->
 			           <div class="apply">총 <span>2</span> 명 지원</div>		<!-- 2 -> 지원한 이력서 갯수 count  흠  -->
 			        </div>
 			    </div>

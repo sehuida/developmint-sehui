@@ -36,7 +36,6 @@ public class ResumeController {
 			int count = service.selectResumeCount(memberNo);			
 			model.addAttribute("count", count);
 		}
-		System.out.println(rpd.getList());
 		model.addAttribute("appCount", appCount);
 		model.addAttribute("list", rpd.getList());
 		model.addAttribute("pageNavi", rpd.getPageNavi());
@@ -47,8 +46,6 @@ public class ResumeController {
 	@RequestMapping(value="/updateResumeFrm.do")
 	public String updateResume(Resume resume, int memberNo, Model model) {
 		Resume r = service.selectCeoResume(resume.getCeoResume(), memberNo);
-		System.out.println(memberNo);
-		System.out.println(r);
 		model.addAttribute("r", r);
 		return "resume/updateResumeFrm";
 	}

@@ -379,7 +379,8 @@ $(function(){
 	                            </c:if></span> <span style="margin-left: 20px;">등록일자 ${a.writeDate }</span>
 	                        </div>
 	                        <div class="situation">
-	                            <div class="date">마감 <span>7</span>일 전</div>		<!-- 7 -> 마감일-현재일 이거 어캐하지 -->
+	                        
+	                            <div class="date">마감 <span>${a.dDay }</span>일 전</div>		<!-- 7 -> 마감일-현재일 이거 어캐하지 -->
 	                            <div class="apply">총 <span>2</span>명 지원</div>		<!-- 2 -> 지원한 이력서 갯수 count  흠  -->
 	                        </div>
 	                    </div>
