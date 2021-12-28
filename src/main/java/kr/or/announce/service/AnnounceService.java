@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.announce.dao.AnnounceDao;
 import kr.or.announce.vo.Announce;
@@ -12,6 +13,7 @@ import kr.or.announce.vo.AnnounceList;
 import kr.or.announce.vo.AnnounceListPageData;
 import kr.or.announce.vo.AnnounceView;
 import kr.or.announce.vo.Application;
+import kr.or.comment.vo.Report;
 import kr.or.resume.vo.Resume;
 import kr.or.resume.vo.ResumePageData;
 
@@ -138,6 +140,11 @@ public class AnnounceService {
 
 	public int selectApplication(int announceNo, int memberNo) {
 		return dao.selectApplication(announceNo,memberNo);
+	}
+
+	@Transactional
+	public int reportCompanyComment(Report rp) {
+		return dao.reportCompanyComment(rp);
 	}
 
 	/*

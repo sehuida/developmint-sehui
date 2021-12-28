@@ -13,6 +13,7 @@ import kr.or.announce.vo.AnnounceList;
 import kr.or.announce.vo.AnnounceListPageData;
 import kr.or.announce.vo.AnnounceView;
 import kr.or.announce.vo.Application;
+import kr.or.comment.vo.Report;
 import kr.or.resume.vo.Resume;
 
 @Controller
@@ -152,5 +153,26 @@ public class AnnounceController {
 		model.addAttribute("loc","/applicationStatus.do?announceNo="+announceNo+"&reqPage=1");
 		return "common/msg";
 	}
+	
+	
+	 //댓글신고
+	 
+	 @RequestMapping(value="/reportCompanyComment.do") 
+	 public String reportComment(Report rp, Model model, int contestNo) { 
+		 int result = service.reportCompanyComment(rp); 
+		 if(result>0) {
+			 model.addAttribute("title","댓글 신고 성공");
+			 model.addAttribute("msg","해당 댓글을 신고하였습니다.");
+			 model.addAttribute("icon","success");
+		 } else {
+			 model.addAttribute("title","댓글 신고 실패");
+			 model.addAttribute("msg","해당 댓글 신고에 실패하였습니다. 관리자에게 문의해주세요.");
+			 model.addAttribute("icon","error"); 
+		}
+		model.addAttribute("loc","/companyInfo.do?companyNo="+contestNo); 
+		return "member/swalMsg";
+	 
+	 }
+	 
 	
 }

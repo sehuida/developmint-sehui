@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.comment.vo.Comment;
 import kr.or.company.service.CompanyService;
@@ -62,8 +63,18 @@ public class CompanyController {
 		model.addAttribute("loc","/companyInfo.do?companyNo="+boardNo);
 		return "member/swalMsg";
 	}
-		
+	
+	
 	//댓글삭제
+		@ResponseBody
+		@RequestMapping(value="/deleteCompanyComment.do")	
+		public int deleteCompanyComment(Comment cm, Model model) {
+			int result = service.deleteCompanyComment(cm);
+			return result;
+		}
+			
+			
+	/*//댓글삭제
 	@RequestMapping(value="/deleteCompanyComment.do")	
 	public String deleteCompanyComment(Comment cm, int boardNo, Model model) {
 		String companyName = service.selectCompanyName(boardNo);
@@ -77,5 +88,5 @@ public class CompanyController {
 		}
 		model.addAttribute("loc","/companyInfo.do?companyNo="+boardNo);
 		return "member/swalMsg";
-	}
+	}*/
 }

@@ -71,6 +71,7 @@ public class MemberController {
 	}
 	@RequestMapping(value="/kakaoJoin.do")
 	public String kakaoJoin(Member member,HttpSession session) {
+		System.out.println(member.getKakao());
 		int result = service.kakaoInsertMember(member);
 		if(result>0) {
 			Member m = service.selectOneMember(member);

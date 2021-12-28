@@ -12,7 +12,8 @@
   		member_type as memberType,
   		filepath,
   		member_grade as memberGrade,
-  		com_no as comNo
+  		com_no as comNo,
+  		kakao
   	from member where member_id=#{memberId} and member_pw=#{memberPw}
   </select>
   <select id="checkPhone" parameterType="string" resultType="m">
