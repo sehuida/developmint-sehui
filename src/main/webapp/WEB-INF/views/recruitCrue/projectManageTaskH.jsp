@@ -196,7 +196,7 @@
                     			<c:when test="${sl.linkName ne null}">
                     				<div style="display: flex; justify-content: space-between">
                     					<div>
-						                    <a href="${sl.linkAddr}" class="subNaviAtag" target="_blank"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg" style="width: 30px; position: relative; bottom: 3px; margin-right: 10px; margin-left: 5px;"><span style="cursor: pointer; font-size: 13px;">${sl.linkName}</span></a>
+						                    <a href="${sl.linkAddr}" class="subNaviAtag" target="_blank"><img src="/resources/img/recruitTeamProject/common/link.png" class="subNaviImg" style="width: 25px; position: relative; bottom: 3px; margin-right: 10px; margin-left: 5px;"><span style="cursor: pointer; font-size: 13px;">${sl.linkName}</span></a>
                     					</div>
                     					<div>
 						                    <a href="/deleteShortcut.do?shortcutNo=${sl.shortcutNo}&projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" style="text-decoration: none; margin-left: 30px;">X</a>
@@ -206,7 +206,7 @@
                     			<c:otherwise>
                     				<div style="display: flex; justify-content: space-between">
                     					<div>
-			                    			<a href="${sl.linkAddr}" class="subNaviAtag" target="_blank"><img src="/resources/img/recruitTeamProject/common/foreign.png" class="subNaviImg" style="width: 30px; position: relative; bottom: 3px; margin-right: 10px; margin-left: 5px;"><span style="cursor: pointer; font-size: 13px;">${sl.linkAddr}</span></a>
+			                    			<a href="${sl.linkAddr}" class="subNaviAtag" target="_blank"><img src="/resources/img/recruitTeamProject/common/link.png" class="subNaviImg" style="width: 25px; position: relative; bottom: 3px; margin-right: 10px; margin-left: 5px;"><span style="cursor: pointer; font-size: 13px;">${sl.linkAddr}</span></a>
                     					</div>
                     					<div>
 			                    			<a href="/deleteShortcut.do?shortcutNo=${sl.shortcutNo}&projectNo=${pt.projectNo}&memberNo=${sessionScope.m.memberNo}" style="text-decoration: none; margin-left: 30px;">X</a>
