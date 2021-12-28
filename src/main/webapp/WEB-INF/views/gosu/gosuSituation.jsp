@@ -519,20 +519,18 @@
 						style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">
 						작성된 리뷰가 없습니다.</span>
 							</c:if>
-					
-				</div>
+						</div>
 						</c:when>
 						<c:otherwise>
-
 							<div style="display: flex;justify-content: center;">
-							<div style="width: 1080px;margin: 0;padding: 40px;"">
+							<div style="width: 1080px;margin: 0;padding: 40px;">
 								<div class="review-avg" >
 									<table>
-										<tr>
-											<td rowspan="3" style="font-size: 40px; font-weight: bold;">${grAVG.reviewAvg }점</td>
+										<tr style="width: 100px;">
+											<td rowspan="3" style="font-size: 40px; font-weight: bold;"><span style="color:red;">${grAVG.reviewAvg }<span style="color:black;">&nbsp;점</span> </span></td>
 										</tr>
 										<tr>
-											<td><c:choose>
+											<td  style="padding-bottom: 0;"><c:choose>
 													<c:when test="${grAVG.reviewAvg eq 5}">
 														<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
 													</c:when>
@@ -549,25 +547,21 @@
 													<c:when test="${grAVG.reviewAvg eq 1}">
 														<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
 													</c:when>
-
-
-												</c:choose></td>
+												</c:choose>
+											</td>
 										</tr>
 										<tr>
-											<td style="font-size: small;">${grAVG.reviewCount }개의리뷰</td>
+											<td style="font-size: small;text-align: left;padding-top: 0;">${grAVG.reviewCount } 개의 리뷰</td>
 										</tr>
 									</table>
 								</div>
-
-
 								<hr>
-
 								<c:forEach items="${greviewList }" var="grl" varStatus="i">
 									<div class="review-one">
 										<ul>
-											<li>${grl.writer }</li>
+											<li class="text-info" style="font-weight: 900;">${grl.writer }</li>
 											<li><span
-												style="float: left; font-size: small; margin-right: 5px;">${grl.reviewNum}
+												style="float: left; font-size: small; margin-right: 5px;line-height: 25px;">${grl.reviewNum}
 													점</span> <c:if test="${grl.reviewNum eq 1 }">
 													<span style="color: #ffd400;">&#9733;&#9734;&#9734;&#9734;&#9734;</span>
 												</c:if> <c:if test="${grl.reviewNum eq 2 }">
@@ -579,7 +573,7 @@
 												</c:if> <c:if test="${grl.reviewNum eq 5 }">
 													<span style="color: #ffd400;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
 												</c:if></li>
-											<li>${grl.reviewDate }</li>
+											<li style="color: gray;">${grl.reviewDate }</li>
 
 										</ul>
 										<br>
@@ -609,14 +603,14 @@
 						<div style="display: flex;justify-content: center;">
 							<div style="width: 1080px;margin: 0;padding: 40px;">
 								<div class="review-avg">
-									<span style="font-size: 30px; font-weight: bold;">${grrCount}개의
+									<span style="font-size: 30px; font-weight: bold;padding-left: 20px;"><span style="color:blue;">${grrCount}</span>&nbsp;개의
 										후기</span>
 								</div>
 								<hr>
 								<c:forEach items="${grrList2 }" var="grl" varStatus="i">
 									<div class="review-one">
 										<ul>
-											<li style="font-weight: 900;">${grl.memberId }</li>
+											<li class="text-info" style="font-weight: 900;">${grl.memberId }</li>
 											<li style="color: gray;">${grl.requestReviewDate }</li>
 										</ul>
 										<br>
