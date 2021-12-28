@@ -56,7 +56,6 @@
 		});
 		
 		$("#send").click(function () {
-			
 			var receiver = $("#receiver").val();
 			var dmContent = $("#dmContent").val();
 			var sender = $("#sender").val();
@@ -67,7 +66,7 @@
 					if(data == 1){
 						dmCount(receiver);
 						swal({
-							  title: "전송완료",
+							  title: "지원자 합격 전송완료",
 							  icon: "success",
 							  button: "닫기",
 							}).then(function(){

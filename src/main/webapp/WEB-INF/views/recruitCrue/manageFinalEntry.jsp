@@ -6,6 +6,7 @@
 <head>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <link rel="stylesheet" href="/resources/css/projectTeam/manageEntry.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>Manage Entry</title>
@@ -42,6 +43,30 @@
         
         $(".return_img").click(function(){
 			history.back();
+		});
+        
+        $("#send").click(function () {
+			var sender = $(this).next().val();
+			var receiver = $(this).next().next().val();
+			var dmContent = $(this).next().next().next().val();
+			$.ajax({
+				url : "/sendDm.do",
+				data : {receiver:receiver,dmContent:dmContent,sender:sender},
+				success : function(data) {
+					if(data == 1){
+						dmCount(receiver);
+						swal({
+							  title: "지원자 합격 전송완료",
+							  icon: "success",
+							  button: "닫기",
+							}).then(function(){
+								location.reload();							
+							});
+					}else{
+						console.log("실패");
+					}
+				}
+			});
 		});
         
     });
@@ -146,7 +171,10 @@
 	                            </a>
 	                        </div>
 	                        <div class="btnBox">
-	                            <a href="/selectFinalTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}&viewValue=${viewValue}&pageTransValue=${availableNum }"><button type="button" class="btn btn-primary">최종선발</button></a>
+	                            <a href="/selectFinalTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}&viewValue=${viewValue}&pageTransValue=${availableNum }"><button type="button" class="btn btn-primary" id="send">최종선발</button></a>
+	                            <input type="hidden" id="sender" value="${sessionScope.m.memberId }">
+	                            <input type="hidden" id="receiver" value="${el.memberId }">
+	                            <input type="hidden" id="dmContent" value="지원타이틀 : ${el.ambition} - 최종선발 되셨습니다, 지원하신 프로젝트가 모집마감되면 프로젝트가 시작되오니 참고해주시기 바랍니다.">
 	                        	<a href="/returnTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}&viewValue=${viewValue}&pageTransValue=${availableNum }"><button type="button" class="btn btn-secondary" style="margin-right: 40px;">대기인원 전환</button></a>
 	                        </div>
                     	</c:if>
