@@ -14,13 +14,14 @@
   <jsp:include page="/WEB-INF/views/common/header.jsp"/>
   <div class="container" style="margin-top: 60px; margin-bottom: 50px;">
     <div class="joinwrap"> 
-      <form action="/join.do" method="post">
+      <form action="/kakaoJoin.do" method="post">
         <fieldset>
           <div id="join-l">
             <img src="/resources/img/logo/Develomint_logo.png" id="joinlogo">
           </div>
           <input type="hidden" name="memberId" value="${memberId }">
           <input type="hidden" name="memberPw" value="${memberPw }">
+          <input type="hidden" name="kakao" value=1>
           <div class="form-group">
             <label class="col-form-label mt-4" for="memberName">이름</label>
             <input type="text" class="form-control" placeholder="이름입력" id="memberName" name="memberName">

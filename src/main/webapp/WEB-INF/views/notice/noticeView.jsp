@@ -8,6 +8,7 @@
 <title>Develomint</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <link rel="stylesheet" href="/resources/css/notice/noticeList.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -19,7 +20,7 @@
 				<ul>
 					<li><span class="">Tel. 2163-8560</span><br><span class="last-span">평일 9:20~18:30(점심 12:20~13:30)</span></li>
 					<li><a href="/n_counsel.do" class="text-hover">1:1 Q&A<br><span class="last-span">질문 전 FAQ(자주 묻는 질문)을 먼저 확인해 주세요.</span></a></li>
-					<li><a href="/faq.do" class="text-hover">자주묻는질문<br><span class="last-span">자주묻는질문</span></a></li>
+					<li><a href="/faq.do?category=7" class="text-hover">자주묻는질문<br><span class="last-span">자주묻는질문</span></a></li>
 				</ul>
 			</div>
 			<div class="contents" style="padding: 20px;">
@@ -74,9 +75,21 @@
 		} */
 	
 		function deleteNoticeNo(obj,noticeNo){
-			if(confirm("게시글을 삭제하시겠습니까?")){
+			/* if(confirm("게시글을 삭제하시겠습니까?")){
 				location.href="/deleteNoticeNo.do?noticeNo="+${n.noticeNo };
-			}
+			} */
+			swal({
+	 			  title: "게시글 삭제",
+	 			  text: "게시글을 삭제하시겠습니까?",
+	 			  icon: "warning",
+	 			  buttons: true,
+	 			  dangerMode: true,
+	 			})
+	 			.then((willDelete) => {
+	 			  if (willDelete) {
+	 				 location.href="/deleteNoticeNo.do?noticeNo="+${n.noticeNo };
+	 			  }
+	 			});
 		}
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

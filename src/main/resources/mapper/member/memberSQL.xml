@@ -12,7 +12,8 @@
   		member_type as memberType,
   		filepath,
   		member_grade as memberGrade,
-  		com_no as comNo
+  		com_no as comNo,
+  		kakao
   	from member where member_id=#{memberId} and member_pw=#{memberPw}
   </select>
   <select id="checkPhone" parameterType="string" resultType="m">
@@ -58,7 +59,10 @@
   	from member where email = #{email}
   </select>
   <insert id="insertMember" parameterType="m">
-  	insert into member values(member_seq.nextval,#{memberName},#{phone},#{memberId},#{memberPw},#{email},1,to_char(sysdate,'yyyy-mm-dd'),'',10,'')
+  	insert into member values(member_seq.nextval,#{memberName},#{phone},#{memberId},#{memberPw},#{email},1,to_char(sysdate,'yyyy-mm-dd'),'',10,'','')
+  </insert>
+  <insert id="kakaoinsertMember" parameterType="m">
+    insert into member values(member_seq.nextval,#{memberName},#{phone},#{memberId},#{memberPw},#{email},1,to_char(sysdate,'yyyy-mm-dd'),'',10,'',#{kakao})
   </insert> 
   <select id="findId" parameterType="string" resultType="string">
   	select member_id as memberId from member where email = #{email}

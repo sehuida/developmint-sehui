@@ -112,12 +112,17 @@ public class AdminController {
 		public String chkChangeLevel(Model model, String memberId, String level) {
 			boolean result = service.chkChangeLevel(memberId, level);
 			if(result) {
-				model.addAttribute("msg","변경성공");
+				model.addAttribute("title","변경 성공");
+				model.addAttribute("msg","회원 등급이 변경되었습니다.");
+				model.addAttribute("icon","success");
+			
 			}else {
-				model.addAttribute("msg","변경실패");
+				model.addAttribute("title","변경 실패");
+				model.addAttribute("msg","회원 등급 변경에 실패하였습니다. 관리자에게 문의해주세요.");
+				model.addAttribute("icon","error");
 			}
 			model.addAttribute("loc","/allMemberList.do?reqPage=1&type=0&list=1");
-			return "common/msg";
+			return "member/swalMsg";
 		}
 		
 		//선택회원 신고 횟수
@@ -133,12 +138,17 @@ public class AdminController {
 		public String canselReport(Model model, int reportNo) {
 			int result = service.canselReport(reportNo);
 			if(result>0) {
-				model.addAttribute("msg","신고 반려되었습니다.");
+				model.addAttribute("title","신고 반려");
+				model.addAttribute("msg","신고 반려처리 되었습니다.");
+				model.addAttribute("icon","success");
+			
 			}else {
-				model.addAttribute("msg","처리 실패하였습니다.");
+				model.addAttribute("title","반려 실패");
+				model.addAttribute("msg","처리 실패하였습니다. 관리자에게 문의해주세요.");
+				model.addAttribute("icon","error");
 			}
 			model.addAttribute("loc","/reportMember.do?reqPage=1");
-			return "common/msg";
+			return "member/swalMsg";
 		}
 
 		//신고 처리
@@ -146,12 +156,17 @@ public class AdminController {
 		public String reportInsert(Model model, int reportNo, String memberId) {
 			int result = service.reportInsert(reportNo, memberId);
 			if(result>0) {
-				model.addAttribute("msg","신고 처리되었습니다.");
+				model.addAttribute("title","신고 처리");
+				model.addAttribute("msg","신고 처리 되었습니다.");
+				model.addAttribute("icon","success");
+			
 			}else {
-				model.addAttribute("msg","처리 실패하였습니다.");
+				model.addAttribute("title","신고 처리 실패");
+				model.addAttribute("msg","처리 실패하였습니다. 관리자에게 문의해주세요.");
+				model.addAttribute("icon","error");
 			}
 			model.addAttribute("loc","/reportMember.do?reqPage=1");
-			return "common/msg";
+			return "member/swalMsg";
 		}
 		
 		//허위 신고 처리
@@ -159,12 +174,17 @@ public class AdminController {
 		public String falseReport(Model model, int reportNo, String memberId) {
 			int result = service.falseReport(reportNo, memberId);
 			if(result>0) {
-				model.addAttribute("msg","허위신고로 처리되었습니다.");
+				model.addAttribute("title","허위 신고 처리");
+				model.addAttribute("msg","허위 신고로 처리 되었습니다.");
+				model.addAttribute("icon","success");
+			
 			}else {
-				model.addAttribute("msg","처리 실패하였습니다.");
+				model.addAttribute("title","처리 실패");
+				model.addAttribute("msg","처리 실패하였습니다. 관리자에게 문의해주세요.");
+				model.addAttribute("icon","error");
 			}
 			model.addAttribute("loc","/reportMember.do?reqPage=1");
-			return "common/msg";
+			return "member/swalMsg";
 		}
 		
 		//선택회원 신고 리스트
@@ -180,12 +200,17 @@ public class AdminController {
 		public String cancelBlocked(String memberId, Model model) {
 			boolean result = service.cancelBlocked(memberId);
 			if(result) {
-				model.addAttribute("msg","차단 해제 되었습니다.");
+				model.addAttribute("title","차단 해제");
+				model.addAttribute("msg","선택한 회원의 차단이 해제되었습니다.");
+				model.addAttribute("icon","success");
+			
 			}else {
-				model.addAttribute("msg","차단 해제 실패");
+				model.addAttribute("title","차단 해제 실패");
+				model.addAttribute("msg","차단 해제에 실패하였습니다. 관리자에게 문의해주세요.");
+				model.addAttribute("icon","error");
 			}
 			model.addAttribute("loc","/blockedMember.do?reqPage=1");
-			return "common/msg";
+			return "member/swalMsg";
 		}
 		
 		//공모전 등록 내역으로 가기
@@ -211,12 +236,17 @@ public class AdminController {
 		public String contestOK(int contestNo, Model model) {
 			int result = service.contestOK(contestNo);
 			if(result>0) {
-				model.addAttribute("msg","공모 승인 되었습니다.");
+				model.addAttribute("title","공모 승인");
+				model.addAttribute("msg","해당 공모전이 승인되었습니다. 공모전 게시판에 등록됩니다.");
+				model.addAttribute("icon","success");
+			
 			}else {
-				model.addAttribute("msg","공모 승인 실패");
+				model.addAttribute("title","처리 실패");
+				model.addAttribute("msg","처리 실패하였습니다. 관리자에게 문의해주세요.");
+				model.addAttribute("icon","error");
 			}
 			model.addAttribute("loc","/contestEnrollList.do?reqPage=1");
-			return "common/msg";
+			return "member/swalMsg";
 		}
 		
 		
@@ -225,12 +255,17 @@ public class AdminController {
 		public String contestNO(int contestNo, Model model) {
 			int result = service.contestNO(contestNo);
 			if(result>0) {
-				model.addAttribute("msg","공모 반려 되었습니다.");
+				model.addAttribute("title","공모 반려");
+				model.addAttribute("msg","해당 공모전이 반려되었습니다.");
+				model.addAttribute("icon","success");
+			
 			}else {
-				model.addAttribute("msg","공모 반려 실패");
+				model.addAttribute("title","처리 실패");
+				model.addAttribute("msg","처리 실패하였습니다. 관리자에게 문의해주세요.");
+				model.addAttribute("icon","error");
 			}
 			model.addAttribute("loc","/contestEnrollList.do?reqPage=1");
-			return "common/msg";
+			return "member/swalMsg";
 		}
 
 		//공모전 신청 회원 보기
@@ -260,12 +295,17 @@ public class AdminController {
 		public String MemberEnrollContest(String memberId, int status, int contestNo, String date, String email,  Model model) {
 			boolean result = service.MemberEnrollContest(memberId,status,contestNo,email);
 			if(result) {
-				model.addAttribute("msg","처리 완료 되었습니다.");
+				model.addAttribute("title","처리 완료");
+				model.addAttribute("msg","처리가 완료되었습니다.");
+				model.addAttribute("icon","success");
+			
 			}else {
-				model.addAttribute("msg","처리 실패");
+				model.addAttribute("title","처리 실패");
+				model.addAttribute("msg","처리 실패하였습니다. 관리자에게 문의해주세요.");
+				model.addAttribute("icon","error");
 			}
 			model.addAttribute("loc","/contestEnrollMember.do?reqPage=1&date="+date);
-			return "common/msg";
+			return "member/swalMsg";
 		}
 		
 		//회사 인증 처리 페이지로 이동
@@ -286,12 +326,17 @@ public class AdminController {
 		public String enrollMemberCompany(Model model, int companyNo, int memberNo) {
 			int result = service.enrollMemberCompany(companyNo,memberNo);
 			if(result>0) {
-				model.addAttribute("msg","처리 완료 되었습니다.");
+				model.addAttribute("title","회사 인증");
+				model.addAttribute("msg","선택 회사로 인증되었습니다.");
+				model.addAttribute("icon","success");
+			
 			}else {
-				model.addAttribute("msg","처리 실패");
+				model.addAttribute("title","처리 실패");
+				model.addAttribute("msg","처리 실패하였습니다. 관리자에게 문의해주세요.");
+				model.addAttribute("icon","error");
 			}
 			model.addAttribute("loc","/companyEnroll.do?reqPage=1");
-			return "common/msg";
+			return "member/swalMsg";
 		}
 		
 		//회사 인증 반려
@@ -299,12 +344,17 @@ public class AdminController {
 		public String noEnrollMemberCompany(Model model, int memberNo) {
 			int result = service.noEnrollMemberCompany(memberNo);
 			if(result>0) {
-				model.addAttribute("msg","처리 완료 되었습니다.");
+				model.addAttribute("title","회사 인증 반려");
+				model.addAttribute("msg","회사 인증이 반려처리 되었습니다.");
+				model.addAttribute("icon","success");
+			
 			}else {
-				model.addAttribute("msg","처리 실패");
+				model.addAttribute("title","처리 실패");
+				model.addAttribute("msg","처리 실패하였습니다. 관리자에게 문의해주세요.");
+				model.addAttribute("icon","error");
 			}
 			model.addAttribute("loc","/companyEnroll.do?reqPage=1");
-			return "common/msg";
+			return "member/swalMsg";
 		}
 		
 		//전체게시판조회 페이지로 이동
@@ -331,12 +381,17 @@ public class AdminController {
 		public String postSeleteDelete(Model model, int type, int boardNo) {
 			int result = service.postSeleteDelete(type, boardNo);
 			if(result>0) {
-				model.addAttribute("msg","삭제 완료 되었습니다.");
+				model.addAttribute("title","게시물 삭제");
+				model.addAttribute("msg","선택한 게시물이 삭제되었습니다.");
+				model.addAttribute("icon","success");
+			
 			}else {
-				model.addAttribute("msg","삭제 실패");
+				model.addAttribute("title","처리 실패");
+				model.addAttribute("msg","처리 실패하였습니다. 관리자에게 문의해주세요.");
+				model.addAttribute("icon","error");
 			}
 			model.addAttribute("loc","/allBoardList.do?reqPage=1&type="+type);
-			return "common/msg";
+			return "member/swalMsg";
 		}
 		
 		//제휴회사 등록 페이지로 이동

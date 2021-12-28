@@ -69,6 +69,16 @@ public class MemberController {
 		}
 		return "common/main";
 	}
+	@RequestMapping(value="/kakaoJoin.do")
+	public String kakaoJoin(Member member,HttpSession session) {
+		System.out.println(member.getKakao());
+		int result = service.kakaoInsertMember(member);
+		if(result>0) {
+			Member m = service.selectOneMember(member);
+			session.setAttribute("m", m);
+		}
+		return "common/main";
+	}
 	
 	@RequestMapping(value="/login.do")
 	public String loginFrm(Member member,HttpSession session,Model model) {
@@ -269,12 +279,15 @@ public class MemberController {
 		}
 		int result = service.insertCertification(file);
 		if(result>0) {
-			model.addAttribute("msg", "등록성공");
+			model.addAttribute("title", "제출성공");
+			model.addAttribute("loc", "/main.do");
+			model.addAttribute("icon", "success");
 		}else {
-			model.addAttribute("msg","등록실패");		
+			model.addAttribute("title", "제출실패");
+			model.addAttribute("loc", "/main.do");
+			model.addAttribute("icon", "warning");	
 		}
-		model.addAttribute("loc", "/");
-		return "common/msg";
+		return "member/swalMsg";
 	}
 	
 	@ResponseBody

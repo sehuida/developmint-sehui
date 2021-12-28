@@ -20,7 +20,7 @@
 				<ul style="margin-bottom: 0;">
 					<li><span class="">Tel. 2163-8560</span><br><span class="last-span">평일 9:00~18:00(점심 12:00~13:00)</span></li>
 					<li><a href="/n_counsel.do" class="text-hover">1:1 Q&A<br><span class="last-span">질문 전 FAQ(자주 묻는 질문)을 먼저 확인해 주세요.</span></a></li>
-					<li><a href="/faq.do" class="text-hover">자주묻는질문<br><span class="last-span">자주묻는질문</span></a></li>
+					<li><a href="/faq.do?category=7" class="text-hover">자주묻는질문<br><span class="last-span">자주묻는질문</span></a></li>
 				</ul>
 			</div>
 			<div class="contents" style="padding: 20px;">
@@ -62,7 +62,7 @@
 								<h2 style="color: gray; font-size: 20px; font-weight: 900; line-height: 100px;">현재 작성된 답변이 없습니다.</h2>
 							</div>
 							<div class="qna_comment text-danger" style="margin: 30px 0 30px 0;">
-								<small>※ 대부분의 질문은 FAQ 통해 답변을 얻으실 가능성이 높습니다. <a href="/faq.do">바로가기</a></small>
+								<small>※ 대부분의 질문은 FAQ 통해 답변을 얻으실 가능성이 높습니다. <a href="/faq.do?category=7">바로가기</a></small>
 							</div>
 						</c:otherwise>
 					</c:choose>

@@ -128,13 +128,18 @@ public class NoticeController {
 		int result = service.insertNotice(n);
 
 		if (result > 0) {
-			model.addAttribute("msg", "공지등록 성공");
+			model.addAttribute("title", "공지등록 성공");
+			model.addAttribute("msg", "공지게시판을 확인해주세요.");
+			model.addAttribute("loc", "/noticeList.do?reqPage=1");
+			model.addAttribute("icon", "success");
 		} else {
+			model.addAttribute("title", "공지등록 실패");
 			model.addAttribute("msg", "공지등록 실패");
+			model.addAttribute("loc", "/noticeList.do?reqPage=1");
+			model.addAttribute("icon", "warning");
 		}
 
-		model.addAttribute("loc", "/noticeList.do?reqPage=1");
-		return "common/msg";
+		return "member/swalMsg";
 	}
 
 	
@@ -249,12 +254,17 @@ public class NoticeController {
 	public String deleteNotice(int noticeNo, Model model) {
 		int result = service.deleteNoticeNo(noticeNo);
 		if (result > 0) {
-			model.addAttribute("msg", "삭제가 완료되었습니다.");
+			model.addAttribute("title", "삭제 완료!");
+			model.addAttribute("msg", "공지사항 게시판으로 이동합니다.");
+			model.addAttribute("loc", "/noticeList.do?reqPage=1");
+			model.addAttribute("icon", "success");
 		} else {
+			model.addAttribute("title", "삭제 실패");
 			model.addAttribute("msg", "삭제실패~ 에러발생~~개발자 문의바람~~");
+			model.addAttribute("loc", "/noticeList.do?reqPage=1");
+			model.addAttribute("icon", "warning");
 		}
-		model.addAttribute("loc", "/noticeList.do?reqPage=1");
-		return "common/msg";
+		return "member/swalMsg";
 	}
 
 	@RequestMapping(value = "/updateNoticeFrm.do")
@@ -326,12 +336,17 @@ public class NoticeController {
 
 		}
 		int result = service.updateNoticeNo(n);
-		model.addAttribute("loc", "/noticeView.do?noticeNo=" + n.getNoticeNo());
 		if (result > 0) {
-			model.addAttribute("msg", "수정이 완료되었습니다.");
+			model.addAttribute("title", "수정 완료!");
+			model.addAttribute("msg", "공지사항 게시판으로 이동합니다.");
+			model.addAttribute("loc", "/noticeView.do?noticeNo=" + n.getNoticeNo());
+			model.addAttribute("icon", "success");
 		} else {
+			model.addAttribute("title", "삭제 실패");
 			model.addAttribute("msg", "삭제실패~ 에러발생~~개발자 문의바람~~");
+			model.addAttribute("loc", "/noticeView.do?noticeNo=" + n.getNoticeNo());
+			model.addAttribute("icon", "warning");
 		}
-		return "common/msg";
+		return "member/swalMsg";
 	}
 }

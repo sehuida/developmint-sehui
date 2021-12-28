@@ -30,7 +30,7 @@
 				<ul>
 					<li><span class="">Tel. 2163-8560</span><br><span class="last-span">평일 9:20~18:30(점심 12:20~13:30)</span></li>
 					<li><a href="/n_counsel.do" class="text-hover">1:1 Q&A<br><span class="last-span">질문 전 FAQ(자주 묻는 질문)을 먼저 확인해 주세요.</span></a></li>
-					<li><a href="/faq.do" class="text-hover">자주묻는질문<br><span class="last-span">자주묻는질문</span></a></li>
+					<li><a href="/faq.do?category=7" class="text-hover">자주묻는질문<br><span class="last-span">자주묻는질문</span></a></li>
 				</ul>
 			</div>
 			<c:if test="${sessionScope.m.memberType eq 9 }">
@@ -185,17 +185,7 @@
 		}); */
 		
 		$("#nWriteBtn").click(function(){
-			 if($("#noticeTitle").val()!=""&&$("#noticeContent").val()!=""){
-				 swal({
-					   title: "수정성공!",
-					   text: "공지사항이 수정되었습니다.",
-					   icon: "success", //"info,success,warning,error" 중 택1
-					   button: "둘러보기",
-					})
-				 .then((value) => {
-				 	$("form").submit();			 
-				 });
-			 }else{
+			 if($("#noticeTitle").val()==""||$("#noticeContent").val()==""){
 				 swal({
 					   title: "수정실패",
 					   text: "입력값을  다시 확인해주세요.",
