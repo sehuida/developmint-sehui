@@ -72,6 +72,20 @@ $(function(){
 				$(".enrollForm").eq(index).submit();	
 			}
 		});
+		
+		var receiver = $(".receiver").eq(index).val();
+		var dmContent = $(".dmContent").eq(index).val();
+		var sender = $(".sender").eq(index).val();
+		
+		$.ajax({
+				url : "/sendDm.do",
+				data : {receiver:receiver,dmContent:dmContent,sender:sender},
+				success : function(data) {
+					if(data == 1){
+						dmCount(receiver);
+					}
+				}
+			});
 	})
 
 	//탈락 클릭 시
@@ -103,33 +117,7 @@ $(function(){
 			</div>
 			<br><br>
 			<p id="unprocessed">입사 지원 수 : <span style="color: rgb(78, 205, 196);">${count }</span> 건</p>
-			<%-- <c:forEach items="${list }" var="a" varStatus="i">
-			<!-- table로 구성해도 될라나 -->
-				<div class="applyResume">
-					<div class="resumeTitle">
-						${a.resumeTitle }
-					</div>
-					<div class="memberName">
-						${a.memberName } 이슬기
-					</div>
-					<div class="applyDate">
-						${a.applyDate }
-					</div>
-					<div class="status">
-						<c:if test="${a.status eq 1 }">
-							지원중
-						</c:if> 
-						<c:if test="${a.status eq 2 }">
-							서류합격
-						</c:if> 
-						<c:if test="${a.status eq 3 }">
-							탈락
-						</c:if> 
-					</div>
-				</div>
-			</c:forEach> --%>
 			
-			<!-- 수현누나꺼 가져온거 화면 다시구성해야해 -->
 			<c:choose>
 			<c:when test="${not empty list }">
 				<div class="certiBox">
@@ -156,6 +144,11 @@ $(function(){
 									 <input type="hidden" name="memberNo" value="${a.memberNo }">
 									 <input type="hidden" name="announceNo" value="${a.announceNo }">
 									 <input type="hidden" name="appNo" value="${a.appNo }">
+									 
+									 <!-- 쪽지 -->
+									 <input type="hidden" class="receiver" value="${a.memberId }">
+									 <input type="hidden" class="sender" value="admin">
+									 <input type="hidden" class="dmContent" value="[구인구직] 합격하신 입사지원서가 있습니다. 마이페이지에서 확인하세요.">
 								 </form>
 								 
 							</div>

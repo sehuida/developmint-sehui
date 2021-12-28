@@ -94,6 +94,10 @@ public class AnnounceDao {
 		return sqlSession.update("announce.noAnnounce", map);
 	}
 
+	public String selectMemberId(int memberNo) {
+		return sqlSession.selectOne("announce.selectMemberId", memberNo);
+	}
+
 	/*
 	 * public int selectResumeNo(int announceNo) { return
 	 * sqlSession.selectOne("announce.selectResumeNo", announceNo); }

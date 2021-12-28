@@ -132,6 +132,10 @@ public class AnnounceService {
 		return dao.noAnnounce(memberNo, appNo);
 	}
 
+	public String selectMemberId(int memberNo) {
+		return dao.selectMemberId(memberNo);
+	}
+
 	/*
 	 * public int selectResumeNo(int announceNo) { return
 	 * dao.selectResumeNo(announceNo); }

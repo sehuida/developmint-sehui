@@ -184,6 +184,7 @@ select * from
             apply_date as applyDate,
             resume_no as resumeNo,
             m.member_name as memberName,
+            m.member_id as memberId,
             email
         from application a
         join resume re using(resume_no)
@@ -446,4 +447,9 @@ select * from
 	<select id="selectAnnounceTotalCount" resultType="_int">
 		select count(*) from announcement
 	</select>
+	
+	<select id="selectMemberId" parameterType="_int" resultType="string">
+		select member_id from member where member_no = #{memberNo}
+	</select>
+	
 </mapper>
