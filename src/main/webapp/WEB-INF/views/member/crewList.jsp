@@ -65,7 +65,7 @@
 								<tr>
 									<td>${start+i.index }</td>
 									<td>
-										<a href="/selectOneNotice.do?projectNo=${crew.projectNo }&memberNo=${session.m.memberNo}">${crew.recruitTitle }</a>
+										<a href="/selectOneNotice.do?projectNo=${crew.projectNo }&memberNo=${sessionScope.m.memberNo}">${crew.recruitTitle }</a>
 									</td>
 									<td>${crew.applyDate }</td>
 									<c:choose>
