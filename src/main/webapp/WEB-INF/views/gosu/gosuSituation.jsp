@@ -65,7 +65,7 @@
     transform: scale(1.03);
 }
 
-.container>div>div {
+.con1>div>div {
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -127,7 +127,7 @@
 <body>
 
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
-	<div class="container">
+	<div class="container con1">
 		
 		<h1>나의 현황</h1>
 		<hr>
@@ -161,7 +161,15 @@
 									</c:if>
 									<c:if test="${gtl.feedbackNum eq 3 }">
 										<td style="text-align: left; padding-top: 20px;"><b
-											style="color: gray;">진행 완료</b></td>
+											style="color: gray;">진행 완료 &nbsp;&nbsp;
+											
+										<c:if test="${gtl.reviewNum eq 1 }">
+										<span style="color:red;">리뷰 작성 필요</span>
+										</c:if>
+										<c:if test="${gtl.reviewNum eq 2 }">
+										리뷰 작성 완료
+										</c:if>	
+											</b></td>
 									</c:if>
 
 									<td style="padding-right: 0;">${gtl.feedbackDate }</td>
@@ -413,7 +421,16 @@
 							</c:if>
 							<c:if test="${grl.requestProjectSubNum eq 3 }">
 								<td style="text-align: left; padding-top: 20px;"><b
-									style="color: gray;">진행 완료</b></td>
+									style="color: gray;">진행 완료 &nbsp;&nbsp;
+										<c:if test="${sessionScope.m.memberType eq 1 }">
+										<c:if test="${grl.reviewNum eq 1 }">
+										<span style="color:red;">후기 작성 필요</span>
+										</c:if>
+										<c:if test="${grl.reviewNum eq 2 }">
+										후기 작성 완료
+										</c:if>	
+									</c:if>
+									</b></td>
 							</c:if>
 							<td style="padding-top: 20px;">${grl.requestProjectSubDate }</td>
 						</tr>

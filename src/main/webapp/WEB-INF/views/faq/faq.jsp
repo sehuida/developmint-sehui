@@ -58,7 +58,7 @@ $(function(){
 						<li><a href="/faq.do?category=10">공모전관련</a></li>
 						<li><a href="/faq.do?category=11">구인잡관련</a></li>
 						<li><a href="/faq.do?category=12">커뮤니티관련</a></li>
-						<li><a href="/faq.do?category=13">고수관련</a></li>
+						<li><a href="/faq.do?category=13">이용안내</a></li>
 						<li><a href="/faq.do?category=14">팀프로젝트 관련</a></li>
 						<li><a href="/faq.do?category=40">기타 문의</a></li>
 						<li><a href="/faq.do?category=22">신고</a></li>
