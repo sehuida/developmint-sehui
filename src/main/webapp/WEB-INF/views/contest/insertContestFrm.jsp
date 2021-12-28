@@ -86,7 +86,7 @@
 			<p><i class="bi bi-calendar-week" style="color:#4ECDC4"></i> 공모마감</p><input type="date" class="form-control" id="mindate" min="" name="contestDeadline" style="width: 1000px; height: 38px;">
 			<p><i class="bi bi-trophy" style="color:#4ECDC4"></i> 1등 시상금</p><input type="text" name="contestPrize" class="form-control prize" style="width: 960px;" placeholder="숫자만 입력해주세요"><span id="won">만원</span>
 			<p><i class="bi bi-envelope" style="color:#4ECDC4"></i> 담당자 이메일</p><input type="email" name="email" class="form-control" style="width:1000px;">
-			<p><i class="bi bi-telephone" style="color:#4ECDC4"></i> 담당자 전화번호</p><input type="text" name="phone" class="form-control" placeholder="010-XXXX-XXXX" style="width:1000px;">
+			<p><i class="bi bi-telephone" style="color:#4ECDC4"></i> 담당자 전화번호</p><input type="text" name="phone" class="form-control" placeholder="ex) 010-XXXX-XXXX" style="width:1000px;">
 			<p><i class="bi bi-chat-square-quote" style="color:#4ECDC4"></i> 공모명</p><input type="text" id="contestTitle" name="contestTitle" class="form-control" style="width:1000px;">
 			<p><i class="bi bi-pencil-square" style="color:#4ECDC4"></i> 공모요강</p>
 			<textarea id="contestContent" name="contestContent" class="form-control" style="width:1000px; height: 600px;resize: none;"></textarea>
@@ -190,7 +190,7 @@
 		}
 		
 		//전화번호 유효성 검사
-		var phoneCheck = /^([0-9]{3})-([0-9]{3,4})-([0-9]{4})$/;
+		var phoneCheck = /^([0-9]{2,3})-([0-9]{3,4})-([0-9]{4})$/;
 		if(!phoneCheck.test($('input[name=phone]').val())){
 			alert("전화번호를 올바르게 입력해주세요.");
 			return;

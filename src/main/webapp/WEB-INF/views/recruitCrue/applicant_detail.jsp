@@ -17,12 +17,18 @@
 		var entryStatus = $("#entryStatus").val();
 		var memberNo = $("#memberNo").val();
 		var projectNo = $("#projectNo").val();
+		var applicantMemberNo = $("#applicantMemberNo").val()
+		var prsentMemberNo = $("#prsentMemberNo").val()
 		
 		$(".return_img").click(function(){
-			if(entryStatus != 1){
-				location.href="/manageEntry.do?memberNo="+memberNo+"&projectNo="+projectNo+"&reqPage=1&viewValue=1";
+			if(prsentMemberNo != applicantMemberNo){
+				if(entryStatus != 1){
+					location.href="/manageEntry.do?memberNo="+memberNo+"&projectNo="+projectNo+"&reqPage=1&viewValue=1";
+				} else{
+					location.href="/manageFinalEntryFrm.do?memberNo="+memberNo+"&projectNo="+projectNo+"&viewValue=1";
+				}
 			} else {
-				location.href="/manageFinalEntryFrm.do?memberNo="+memberNo+"&projectNo="+projectNo+"&viewValue=1";
+				location.href="/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+prsentMemberNo;
 			}
 		});
 		
@@ -59,6 +65,8 @@
 			<input type="hidden" id="entryStatus" name="entryStatus" value="${pe.entryStatus }">
 			<input type="hidden" id="projectNo" name="projectNo" value="${projectNo }">
 			<input type="hidden" id="memberNo" name="memberNo" value="${memberNo }">
+			<input type="hidden" id="applicantMemberNo" name="applicantMemberNo" value="${pe.memberNo}">
+			<input type="hidden" id="prsentMemberNo" name="prsentMemberNo" value="${sessionScope.m.memberNo}">
             <div class="returnPage">
                 <img class="return_img" src="/resources/img/recruitTeamProject/writePage/left.png">
             </div>
@@ -448,6 +456,12 @@
 					</c:when>
 					<%--댓글이 없는경우 --%>
 						<c:otherwise>
+							<div style="margin-bottom: 20px; margin-top: 20px;">
+								<span style="font-weight: 900;">댓글을 작성할 때는 타인을 존중하고 
+								<a id="community-guide">커뮤니티 가이드</a>
+								를 준수해야 합니다.
+								</span>
+							</div>
 							<div style="padding: 20px; text-align: center; border: 1px solid #d9d9d9; margin-top: 20px;">
 								<img src="/resources/img/member/user.png" style="border-radius: 50%; width: 70px; margin-top: 70px;">
 								<h2 style="color: gray; font-size: 20px; font-weight: 900; line-height: 100px;">작성된 댓글이 없습니다.</h2>
