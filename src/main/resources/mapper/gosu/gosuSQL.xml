@@ -183,16 +183,20 @@
 	<select id="selectFeedbackOne" parameterType="_int"
 		resultType="gf">
 		select
-		FEEDBACK_NO as feedbackNo,
-		GGOSU_NO as ggosuNo,
-		FEEDBACK_CONTENT as feedbackContent,
-		FEEDBACK_TITLE as feedbackTitle,
-		FEEDBACK_DATE as feedbackDate,
-		FEEDBACK_NUM as feedbackNum,
-		MEMBER_ID as
-		memberId
+		fd.FEEDBACK_NO as feedbackNo,
+		fd.GGOSU_NO as ggosuNo,
+		fd.FEEDBACK_CONTENT as feedbackContent,
+		fd.FEEDBACK_TITLE as feedbackTitle,
+		fd.FEEDBACK_DATE as feedbackDate,
+		fd.FEEDBACK_NUM as feedbackNum,
+		fd.MEMBER_ID as
+		memberId,
+        g.gosu_cost gosuCost
 		from
-		gosu_feedback where FEEDBACK_NO = #{fbNo}
+		gosu_feedback fd
+        LEFT JOIN gosu g
+        ON fd.ggosu_no = g.ggosu_no
+		where FEEDBACK_NO = #{fbNo}
 	</select>
 	<select id="selectGosuFeedbackList" resultType="gf">
 		select DISTINCT
@@ -437,7 +441,8 @@
 		cost.gosu_no) as gosuId,
 		(select filepath
 		from member where member_no =
-		cost.gosu_no) as gosuImg
+		cost.gosu_no) as gosuImg,
+		cost.cost as cost
 		from
 		gosu_request_project_sub sub
 		LEFT JOIN

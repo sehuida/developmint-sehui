@@ -15,7 +15,7 @@ public class GosuFeedback {
 	private String gosuImg;
 	private String memberImg;
 	private int reviewNum;//1일경우 리뷰 없음 ,2일 경우 리뷰 있음
-
+	private int gosuCost;
 	public String getFeedbackContentBr() {
 		return feedbackContent.replaceAll("\r\n", "<br>");
 	}
