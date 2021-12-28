@@ -55,10 +55,10 @@
                 <img class="return_img" src="/resources/img/recruitTeamProject/writePage/left.png">
             </div>
             <div class="main_content">
-	            <form action="/updateApplyForm.do?memberNo=${memberNo }&projectNo=${pe.projectNo}&entry=${pe.entryNo}" method="post" enctype="multipart/form-data" onsubmit="return checkValue();">
+	            <form action="/updateApplyForm.do?sessionMemberNo=${sessionScope.m.memberNo}&projectNo=${pe.projectNo}&entryNo=${pe.entryNo}" method="post" enctype="multipart/form-data" onsubmit="return checkValue();">
 		            <div class="writeBox">
 	                    <div class="form-group">
-	                        <input class="form-control form-control-lg" type="text" id="inputLarge" name="rTitle" maxlength="30" value="${pe.ambition}">
+	                        <input class="form-control form-control-lg" type="text" id="inputLarge" name="ambition" maxlength="30" value="${pe.ambition}">
 	                    </div>
 	                    <div class="writeLine">
 	                        <div class="titleFlexBox">
@@ -93,12 +93,12 @@
 	                            <p class="titleText">지원사유</p>
 	                        </div>
 	                        <div class="form-group">
-	                            <textarea class="form-control" id="summernote" rows="3" name="rContent" >${pe.applyContent }</textarea>
+	                            <textarea class="form-control" id="summernote" rows="3" name="applyContent" >${pe.applyContent }</textarea>
 	                        </div>
 	                    </div>
 	                    <div class="finalLine"></div>
 	                    <div class="submitBtnBox">
-	                    	<input type="hidden" name="memberNo" value="${memberNo }">
+	                    	<input type="hidden" name="memberNo" value="${pe.memberNo}">
 	                    	<input type="hidden" name="projectNo" value="${projectNo }">
 	                        <button type="submit" class="btn btn-primary btn-lg" onclick="return checkValue();">수정</button>
 	                    </div>
