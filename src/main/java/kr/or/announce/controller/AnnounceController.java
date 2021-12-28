@@ -97,6 +97,14 @@ public class AnnounceController {
 	@RequestMapping(value="/announceView.do")
 	public String announceView(int announceNo, int memberNo, Model model) {
 		AnnounceView announce = service.selectAnnounceView(announceNo);
+		int ap = service.selectApplication(announceNo,memberNo);
+		if(ap > 0) {
+			//지원한 내역이 있을때
+			model.addAttribute("ap",1);
+		}else {
+			//지원한 내역이 없을때
+			model.addAttribute("ap",0);
+		}
 		/* int resumeNo = service.selectResumeNo(announceNo); */
 		if(memberNo != 0) {
 			Resume r = service.selectCeoResume(memberNo);

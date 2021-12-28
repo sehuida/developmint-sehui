@@ -177,8 +177,13 @@
 						<button class="loginBtn" id="noNormalMember">지원하기</button>
 					</c:when>
 					<c:otherwise>
-					
-						<button data-bs-toggle="modal" data-bs-target="#contestMember">지원하기</button>
+						
+						<c:if test="${ap eq 0 }">
+							<button data-bs-toggle="modal" data-bs-target="#contestMember">지원하기</button>						
+						</c:if>
+						<c:if test="${ap eq 1 }">
+							<button class="btn btn-outline-info">지원완료</button>
+						</c:if>
 						<!-- 모달버튼// 사용법 자세히모름 수현누나 물어보기 -->
 						<!-- modal내용 등록 -->
 						<div class="modal fade" id="contestMember" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

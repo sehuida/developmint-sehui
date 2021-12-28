@@ -98,6 +98,13 @@ public class AnnounceDao {
 		return sqlSession.selectOne("announce.selectMemberId", memberNo);
 	}
 
+	public int selectApplication(int announceNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("announceNo",announceNo);
+		map.put("memberNo",memberNo);
+		return sqlSession.selectOne("announce.selectApplication",map);
+	}
+
 	/*
 	 * public int selectResumeNo(int announceNo) { return
 	 * sqlSession.selectOne("announce.selectResumeNo", announceNo); }

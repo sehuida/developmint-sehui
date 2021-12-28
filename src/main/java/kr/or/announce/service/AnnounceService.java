@@ -136,6 +136,10 @@ public class AnnounceService {
 		return dao.selectMemberId(memberNo);
 	}
 
+	public int selectApplication(int announceNo, int memberNo) {
+		return dao.selectApplication(announceNo,memberNo);
+	}
+
 	/*
 	 * public int selectResumeNo(int announceNo) { return
 	 * dao.selectResumeNo(announceNo); }
