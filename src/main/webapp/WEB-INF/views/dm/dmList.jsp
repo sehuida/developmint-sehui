@@ -76,7 +76,7 @@
 							        	<button type="button" class="btn btn-primary cancel" style="width: 100px;" data-bs-dismiss="modal">취소</button>					        	
 									</div>
 						      	</div>
-								<input type="hidden" id="receiver" value="${dm.sender }">
+								<input type="hidden" class="receiver" value="${dm.sender }">
 								<input type="hidden" id="sender" value="${sessionScope.m.memberId }">
 					      </div>
 						  </div>
@@ -154,7 +154,7 @@
 			//선택자를 가져오고 그중에 this가 몇번쨰인지 확인하는거!
 			//$(this).index(); 아님!!!
 			var index = $(".send").index(this);
-			var receiver = $("#receiver").val();
+			var receiver = $(".receiver").eq(index).val();
 			var dmContent = $(".dmContent").eq(index).val();
 			var sender = $("#sender").val();
 			
