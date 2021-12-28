@@ -10,7 +10,7 @@ public class GosuRequestReview {
 	private String requestReviewContent;
 	private String requestReviewDate;
 	private String gosuId;
-
+	private String gosuNo;
 	public String getRequestReviewContentBr(){
 		return requestReviewContent.replaceAll(",", "<br>");
 	}
