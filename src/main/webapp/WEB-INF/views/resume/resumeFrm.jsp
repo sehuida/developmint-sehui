@@ -482,7 +482,7 @@
 					<b>보유기술</b>
 				</div>
 				<div class="mytechInput">
-					<input type="text" class="textInput" name="mytech" placeholder="보유기술 입력 (ex. 문서작성능력, 비즈니스영어, java등)">
+					<input type="text" class="textInput" name="myTech" placeholder="보유기술 입력 (ex. 문서작성능력, 비즈니스영어, java등)">
 				</div>
 			</div>
 			
