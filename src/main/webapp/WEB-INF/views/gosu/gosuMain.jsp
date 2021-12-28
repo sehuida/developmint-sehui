@@ -642,7 +642,7 @@ to {
 										</tr>
 										<tr class="card-header">
 											<th style="color: #78c2ad;">고수</th>
-											<td style="width: 197px;">${gtl.gosuId }</td>
+											<td style="width: 197px;">${gtl.gosuIdPlus }</td>
 										</tr>
 										<tr>
 											<th>내용</th>
@@ -680,7 +680,7 @@ to {
 											</tr>
 											<tr class="card-header">
 												<th style="color: #78c2ad; width: 150px;">질문자</th>
-												<td style="width: 177px;">${gtl.memberId }</td>
+												<td style="width: 177px;">${gtl.memberIdPlus }</td>
 											</tr>
 											<tr>
 												<th>내용</th>
@@ -737,12 +737,12 @@ to {
 											<c:if test="${sessionScope.m.memberType eq 1 }">
 
 												<th style="color: #78c2ad;">고수</th>
-												<td style="width: 197px;"><span>${grpsl.gosuId }</span></td>
+												<td style="width: 197px;"><span>${grpsl.gosuIdPlus }</span></td>
 											</c:if>
 											<c:if test="${sessionScope.m.memberType eq 2 }">
 
 												<th style="color: #78c2ad; width: 150px;">질문자</th>
-												<td style="width: 177px;"><span>${grpsl.requestWriterId }</span></td>
+												<td style="width: 177px;"><span>${grpsl.requestWriterIdPlus }</span></td>
 											</c:if>
 
 										</tr>

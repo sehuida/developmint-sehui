@@ -1286,5 +1286,45 @@
 		WHERE NOT EXISTS (select ggosu_no from gosu where gosu_no=#{memberNo})
 		AND ROWNUM = 1
 	</select>
+	<select id="selectGosuRequestReviewList2" parameterType="_int"
+		resultType="grreview">
+	select DISTINCT
+		grr.REQUEST_REVIEW_NO as requestReviewNo,
+		grr.REQUEST_PROJECT_SUB_NO as requestProjectSubNo,
+		grr.REQUEST_MEMBER_ID as
+		memberId,
+		grr.REQUEST_REVIEW_CONTENT as
+		requestReviewContent,
+		grr.REQUEST_REVIEW_DATE as requestReviewDate,
+        cost.gosu_no as gosuNo
+		from
+		gosu_request_review grr
+		LEFT JOIN gosu_Request_project_sub sub
+		ON
+		grr.REQUEST_PROJECT_SUB_NO = sub.REQUEST_PROJECT_SUB_NO
+		LEFT JOIN
+		gosu_request_COST cost
+		ON sub.cost_no = cost.cost_no
+		LEFT JOIN member gosu
+		ON cost.gosu_no = gosu.member_no
+        where cost.gosu_no = #{memberNo}
+	</select>
+	
+	<select id="selectGrrCount2" parameterType="_int"
+		resultType="_int">
+	select count(*)
+		from
+		gosu_request_review grr
+		LEFT JOIN gosu_Request_project_sub sub
+		ON
+		grr.REQUEST_PROJECT_SUB_NO = sub.REQUEST_PROJECT_SUB_NO
+		LEFT JOIN
+		gosu_request_COST cost
+		ON sub.cost_no = cost.cost_no
+		LEFT JOIN member gosu
+		ON cost.gosu_no = gosu.member_no
+        where cost.gosu_no = #{memberNo}
+	</select>
+	
 
 </mapper>

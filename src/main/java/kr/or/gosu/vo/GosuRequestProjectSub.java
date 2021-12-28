@@ -16,4 +16,19 @@ public class GosuRequestProjectSub {
 
 	private int reviewNum;//1일경우 리뷰 없음 ,2일 경우 리뷰 있음
 	
+	public String getRequestWriterIdPlus() {
+		if (requestWriterId.length() > 6) {
+			return requestWriterId.substring(0, 4) + "..";
+		}
+		;
+		return requestWriterId;
+	}
+	public String getGosuIdPlus() {
+		if (gosuId.length() > 6) {
+			return gosuId.substring(0, 4) + "..";
+		}
+		;
+		return gosuId;
+	}
+	
 }

@@ -45,12 +45,7 @@ public class AnnounceService {
 
 	public int deleteAnnounce(int announceNo) {
 		int appResult = dao.deleteApplication(announceNo);
-		if(appResult > 0) {
 			return dao.deleteAnnounce(announceNo);
-		} else {
-			return 0;
-		}
-		
 	}
 
 	public AnnounceListPageData selectApplyAnnounce(int announceNo, int reqPage) {

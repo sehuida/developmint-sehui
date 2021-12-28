@@ -305,7 +305,7 @@
 			</c:choose>
 	</div>
 	</c:if>
-	<h4>작성한 리뷰</h4>
+	<h4>작성한 피드백 리뷰</h4>
 
 	<c:choose>
 		<c:when test="${not empty grList }">
@@ -346,7 +346,7 @@
 	</c:choose>
 
 	<c:if test="${sessionScope.m.memberType eq 1 }">
-		<h4>작성한 후기</h4>
+		<h4>작성한 개발 요청 후기</h4>
 
 		<c:choose>
 			<c:when test="${not empty grrList }">
@@ -505,9 +505,18 @@
 					<c:choose>
 						<c:when test="${empty greviewList }">
 							<div class="g-margin">
-					<span
+							<c:if test="${ggosuNoEmpty eq 0 }">
+							<span
+						style="font-size: 30px;font-weight:900; width:100%; text-align:center; margin-top: 50px; margin-bottom: 50px;" class="text-danger">
+						소개 글을 작성하지 않으셨네요!<br>
+						소개 글을 작성하고 피드백을 통해 리뷰를 받으세요!</span>
+							</c:if>
+							<c:if test="${ggosuNoEmpty ne 0 }">
+							<span
 						style="font-size: 20px; margin-top: 50px; margin-bottom: 50px;">
 						작성된 리뷰가 없습니다.</span>
+							</c:if>
+					
 				</div>
 						</c:when>
 						<c:otherwise>

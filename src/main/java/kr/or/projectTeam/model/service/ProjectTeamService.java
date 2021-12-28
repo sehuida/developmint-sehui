@@ -542,9 +542,8 @@ public class ProjectTeamService {
 	}
 	
 	@Transactional
-	public int updateApplyForm(ProjectEntry pe, int memberNo, ArrayList<String> langList, int projectNo) {
+	public int updateApplyForm(ProjectEntry pe, ArrayList<String> langList, int projectNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("memberNo", memberNo);
 		map.put("projectNo", projectNo);
 		map.put("pe", pe);
 		map.put("langList", langList);
