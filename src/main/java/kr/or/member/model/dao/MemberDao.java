@@ -174,4 +174,8 @@ public class MemberDao {
 		return sqlSession.update("member.rollbackCom",memberId);
 	}
 
+	public int kakaoInsertMember(Member member) {
+		return sqlSession.insert("member.kakaoinsertMember",member);
+	}
+
 }

@@ -478,5 +478,10 @@ public class MemberService {
 	public int rollbackCompnay(String memberId) {
 		return dao.rollbackCompany(memberId);
 	}
+	@Transactional
+	public int kakaoInsertMember(Member member) {
+		int result = dao.kakaoInsertMember(member);
+		return result;
+	}
 	
 }

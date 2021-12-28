@@ -154,17 +154,7 @@
 		}); */
 		
 		$("#nWriteBtn").click(function(){
-			 if($("#noticeTitle").val()!=""&&$("#noticeContent").val()!=""){
-				 swal({
-					   title: "등록성공!",
-					   text: "공지사항이 등록되었습니다.",
-					   icon: "success", //"info,success,warning,error" 중 택1
-					   button: "둘러보기",
-					})
-				 .then((value) => {
-				 	$("form").submit();			 
-				 });
-			 }else{
+			 if($("#noticeTitle").val()==""||$("#noticeContent").val()==""){
 				 swal({
 					   title: "등록실패",
 					   text: "입력값을  다시 확인해주세요.",
