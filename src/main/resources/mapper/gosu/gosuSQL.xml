@@ -198,7 +198,8 @@
 		select DISTINCT
 		f.FEEDBACK_NO as feedbackNo,
 		f.GGOSU_NO as ggosuNo,
-		f.FEEDBACK_CONTENT as
+		f.FEEDBACK_CONTENT
+		as
 		feedbackContent,
 		f.FEEDBACK_TITLE as feedbackTitle,
 		f.FEEDBACK_DATE as
@@ -207,8 +208,10 @@
 		f.MEMBER_ID as memberId,
 		nvl2(gr.REVIEW_CONTENT,'2','1') as reviewNum
 		from gosu_feedback f
-		left join gosu_review gr
-		on f.ggosu_no = gr.ggosu_no where MEMBER_ID = #{memberId}
+		left
+		join gosu_review gr
+		on f.ggosu_no = gr.ggosu_no where MEMBER_ID =
+		#{memberId}
 	</select>
 
 	<insert id="insertGosuTalk" parameterType="gt">
@@ -451,7 +454,7 @@
 	</select>
 	<select id="selectGosuRequestProjectSubList" resultType="grps"
 		parameterType="_int">
-		 select DISTINCT
+		select DISTINCT
 		(select member_id from member where member_no =
 		request.request_writer_no) AS
 		requestWriterId,
@@ -484,8 +487,8 @@
 		gosu_request_COST cost
 		ON
 		sub.cost_no = cost.cost_no
-        LEFT JOIN gosu_request_review gr
-        ON sub.REQUEST_PROJECT_SUB_NO  =gr.REQUEST_PROJECT_SUB_NO 
+		LEFT JOIN gosu_request_review gr
+		ON sub.REQUEST_PROJECT_SUB_NO =gr.REQUEST_PROJECT_SUB_NO
 		WHERE
 		request.request_writer_no =#{memberNo}
 
@@ -1263,12 +1266,25 @@
 		gnotice_content as gnoticeContent,
 		gnotice_photo as gnoticePhoto,
 		gnotice_date as gnoticeDate
-		from gosu_notice where member_id IN
+		from
+		gosu_notice where member_id IN
 		(select
 		m.member_id
 		from gosu gosu
-		left join member m
+		left
+		join member m
 		on gosu.gosu_no=
 		m.member_no) and member_id = #{memberId}
 	</select>
+
+	<select id="selectMyGgosuNo" parameterType="_int"
+		resultType="_int">
+		select ggosu_no from gosu where gosu_no=#{memberNo}
+		UNION ALL
+		SELECT nvl(null,0) AS ggosu_no
+		FROM gosu
+		WHERE NOT EXISTS (select ggosu_no from gosu where gosu_no=#{memberNo})
+		AND ROWNUM = 1
+	</select>
+
 </mapper>

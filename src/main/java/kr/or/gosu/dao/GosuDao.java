@@ -374,5 +374,9 @@ public class GosuDao {
 		return (ArrayList<GosuNotice>)list;
 	}
 
+	public int selectMyGgosuNo(int memberNo) {
+		return sqlSession.selectOne("gosu.selectMyGgosuNo",memberNo);
+	}
+
 
 }
