@@ -460,7 +460,10 @@
 			<div class="infoDiv">
 				<em><span style="color: rgb(78, 205, 196); font-size: 18px;">●</span> 접수기간 및 방법</em>	
 				<div class="infoContent">
-					<p><p>AnnounceView에 마감날짜 추가해서 가져와야할듯 겁나기찬네</p></p>
+					<p style="margin-bottom: 13px;">ㆍ 접수기간 : <strong>${a.endDate }</strong> 까지</p>
+					<p style="margin-bottom: 13px;">ㆍ 접수방법	: 디벨로민트 입사지원</p>
+					<p style="margin-bottom: 13px;">ㆍ 이력서양식	:	디벨로민트 온라인 이력서</p>
+					
 				</div>
 			</div>
 			
