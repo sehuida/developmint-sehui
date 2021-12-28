@@ -102,14 +102,18 @@ public class ContestController {
 		int result = service.insertContest(c);
 		
 		if(result>0) {
+			model.addAttribute("title","공모전 등록 성공.");
 			model.addAttribute("msg","관리자 승인 후 등록됩니다.");
+			model.addAttribute("icon","success");
+		
 		}else {
-			model.addAttribute("msg", "등록실패");
+			model.addAttribute("title","공모전 등록 실패");
+			model.addAttribute("msg","공모전 등록에 실패하였습니다. 관리자에게 문의해주세요.");
+			model.addAttribute("icon","error");
 		}
 
-		model.addAttribute("msg","관리자 승인 후 등록됩니다.");
 		model.addAttribute("loc","/contestMain.do");
-		return "common/msg";
+		return "member/swalMsg";
 	}
 	
 	//공모전 상세페이지로 이동

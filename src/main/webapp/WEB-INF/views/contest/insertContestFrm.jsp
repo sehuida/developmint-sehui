@@ -122,7 +122,6 @@
 	 
 	 $('#contestTitle').keydown(function(){
 		 var length = $("#contestTitle").val().length;
-			console.log(length);
 		 if($(this).val().length > 36) {
 			swal({
 			  title: "글자수 초과",
@@ -156,57 +155,124 @@
 	$(".submitBtn").click(function(){
 		var radioCheck = $('input[name=contestType]').is(":checked");
 		if(!radioCheck){
-			alert("공모유형을 체크해주세요.");
+			swal({
+				  title: "미입력 항목이 있습니다.",
+				  text: "공모유형을 체크해주세요.",
+				  icon: "warning",
+				  buttons: true,
+				})
 			return;
 		}
 		var checkBoxCheck = $('input[name=contestQualify]').is(":checked");
 		if(!checkBoxCheck){
-			alert("공모자격을 체크해주세요.");
+			swal({
+				  title: "미입력 항목이 있습니다.",
+				  text: "참가자격을 체크해주세요.",
+				  icon: "warning",
+				  buttons: true,
+				})
 			return;
 		}
 		if($('input[name=contestHost]').val() == ""){
-			alert("주최사를 입력해주세요.");
+			swal({
+				  title: "미입력 항목이 있습니다.",
+				  text: "주최사를 입력해주세요.",
+				  icon: "warning",
+				  buttons: true,
+				})
 			return;
 		}
 		if($('input[name=contestDeadline]').val() == ""){
-			alert("공모 마감 날짜를 입력해주세요.");
+			swal({
+				  title: "미입력 항목이 있습니다.",
+				  text: "공모 마감 날짜를 선택해주세요.",
+				  icon: "warning",
+				  buttons: true,
+				})
 			return;
 		}
 		if($('input[name=contestPrize]').val() == ""){
-			alert("시상금을 입력해주세요.");
+			swal({
+				  title: "미입력 항목이 있습니다.",
+				  text: "시상금을 입력해주세요.",
+				  icon: "warning",
+				  buttons: true,
+				})
 			return;
 		}
 		
 		//1등 시상금 유효성검사
 		var numCheck = /^[0-9]*$/;
 		if(!numCheck.test($('input[name=contestPrize]').val())){
-			alert("시상금은 숫자만 입력가능합니다.");
+			swal({
+				  title: "잘못 입력하셨습니다.",
+				  text: "시상금은 숫자만 입력 가능합니다.",
+				  icon: "warning",
+				  buttons: true,
+				})
+			return;
+		}
+		
+		//이메일 유효성검사
+		var emailReg = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/;
+		if(!emailReg.test($('input[name=email]').val())){
+			swal({
+				  title: "잘못 입력하셨습니다.",
+				  text: "이메일을 올바른 형태로 입력해주세요.",
+				  icon: "warning",
+				  buttons: true,
+				})
 			return;
 		}
 		
 		if($('input[name=email]').val() == ""){
-			alert("담당자 이메일을 입력해주세요.");
+			swal({
+				  title: "미입력 항목이 있습니다.",
+				  text: "담당자 이메일을 입력해주세요.",
+				  icon: "warning",
+				  buttons: true,
+				})
 			return;
 		}
 		
 		//전화번호 유효성 검사
 		var phoneCheck = /^([0-9]{2,3})-([0-9]{3,4})-([0-9]{4})$/;
 		if(!phoneCheck.test($('input[name=phone]').val())){
-			alert("전화번호를 올바르게 입력해주세요.");
+			swal({
+				  title: "잘못 입력하셨습니다.",
+				  text: "전화번호를 올바르게 입력해주세요.",
+				  icon: "warning",
+				  buttons: true,
+				})
 			return;
 		}
 		
 		if($('input[name=contestTitle]').val() == ""){
-			alert("공모명을 입력해주세요.");
+			swal({
+				  title: "미입력 항목이 있습니다.",
+				  text: "공모명을 입력해주세요.",
+				  icon: "warning",
+				  buttons: true,
+				})
 			return;
 		}
 		
 		if($('input[name=contestContent]').val() == ""){
-			alert("공모요강을 입력해주세요.");
+			swal({
+				  title: "미입력 항목이 있습니다.",
+				  text: "공모요강을 입력해주세요.",
+				  icon: "warning",
+				  buttons: true,
+				})
 			return;
 		}
 		if($('input[name=files]').val() == ""){
-			alert("공모전 포스터를 등록해주세요.");
+			swal({
+				  title: "포스터 미등록",
+				  text: "공모전 포스터를 등록해주세요.",
+				  icon: "warning",
+				  buttons: true,
+				})
 			return;
 		}
 		
