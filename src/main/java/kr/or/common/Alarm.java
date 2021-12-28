@@ -28,7 +28,7 @@ public class Alarm extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(WebSocketSession session,TextMessage message) throws Exception{
 		JsonParser parser = new JsonParser();
-		System.out.println(message.getPayload());
+		//System.out.println(message.getPayload());
 		JsonElement element = parser.parse(message.getPayload());
 		String type = element.getAsJsonObject().get("type").getAsString();
 		String memberId = element.getAsJsonObject().get("memberId").getAsString();
