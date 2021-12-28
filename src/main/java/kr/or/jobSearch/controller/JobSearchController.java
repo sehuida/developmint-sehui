@@ -23,7 +23,6 @@ public class JobSearchController {
 	public String jobSearchList(Model model, int reqPage) {
 		AnnouncePageData apd = service.selectAllAnnounce(reqPage);
 		int count = service.selectAllAnnounceCount();	//전체 구인글 리스트 수
-		System.out.println(apd);
 		model.addAttribute("count",count);
 		model.addAttribute("list",apd.getList());
 		model.addAttribute("pageNavi",apd.getPageNavi());
