@@ -65,7 +65,7 @@
     transform: scale(1.03);
 }
 
-.container>div>div {
+.container:nth-of-type(2)>div>div {
 	display: flex;
 	flex-wrap: wrap;
 }
