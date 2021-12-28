@@ -7,8 +7,8 @@
  	var ws;
  	var memberId = '${sessionScope.m.memberId}';
  	$(function(){
- 		//ws = new WebSocket("ws://khdsa1.iptime.org:18080/alarm.do");
- 		ws = new WebSocket("ws://localhost:80/alarm.do");
+ 		ws = new WebSocket("ws://khdsa1.iptime.org:18080/alarm.do");
+ 		//ws = new WebSocket("ws://localhost:80/alarm.do");
  		ws.onopen = dmStart;
  		ws.onmessage = dmMsg;
  		ws.onclose = dmEnd;
