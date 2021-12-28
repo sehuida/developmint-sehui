@@ -121,10 +121,12 @@ public class ProjectTeamController {
 			model.addAttribute("dlList", dlList);
 			return "recruitCrue/recruitNotice_writeForm";
 		} else {
-			model.addAttribute("msg","로그인 후 이용가능합니다.");	
+			model.addAttribute("title", "로그인 요청");
+			model.addAttribute("msg", "로그인 후 작성이 가능합니다.");
+			model.addAttribute("icon", "warning");	
 		}
 		model.addAttribute("loc","/");
-		return "common/msg";
+		return "member/swalMsg";
 	}
 	
 	@RequestMapping(value="/rUploadImage.do")
@@ -176,12 +178,16 @@ public class ProjectTeamController {
 		
 		int result = service.writeRecruitTeam(pt, memberNo, langList);
 		if(result > 0) {
+			model.addAttribute("title", "등록 성공");
 			model.addAttribute("msg", "모집공고 등록 완료되었습니다.");
+			model.addAttribute("icon", "success");
 		} else {
+			model.addAttribute("title", "등록 실패");
 			model.addAttribute("msg", "모집공고 작성 오류[고객센터에 문의 부탁드립니다.]");
+			model.addAttribute("icon", "warning");
 		}
 		model.addAttribute("loc","/recruitTeamMember_mainPage.do?reqPage=1");
-		return "common/msg";
+		return "member/swalMsg";
 	}
 	
 	@RequestMapping(value="/selectOneNotice.do")
@@ -1140,7 +1146,7 @@ public class ProjectTeamController {
 	
 	//댓글신고
 		@RequestMapping(value="/reportProjectNoticeComment.do")
-		public String reportComment(Report rp, Model model, int projectNo, int memberNo, int boardType) {
+		public String reportComment(Report rp, Model model, int projectNo, int memberNo, int boardType, int applicantMemberNo) {
 			int result = service.reportProjectNoticeComment(rp);
 			if(result>0) {
 				model.addAttribute("title","댓글 신고 성공");
@@ -1155,7 +1161,8 @@ public class ProjectTeamController {
 			if(boardType == 1) {
 				model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
 			} else {
-				model.addAttribute("loc","/manageEntry.do?memberNo="+memberNo+"&projectNo="+projectNo+"&reqPage=1&viewValue=1");
+				int entryNo = service.searchEntryNo(projectNo, applicantMemberNo);
+				model.addAttribute("loc","/selectOneApplicant.do?projectNo="+projectNo+"&memberNo="+memberNo+"&entryNo="+entryNo);
 			}
 			return "member/swalMsg";
 			
