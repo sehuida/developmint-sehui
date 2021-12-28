@@ -7,6 +7,7 @@
 <title>공모전 신청 회원</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
 .container {
@@ -234,10 +235,18 @@
 							for(var i = 0; i<data.length; i++){
 								memberId.push(data[i].memberId);
 							}
-						var checkConfirm = confirm("전체 회원을 승인하시겠습니까?");
-						if(checkConfirm){
-							location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=2&contestNo="+contestNo+"&date=${date}&email="+email;	
-						}
+						swal({
+				 			  title: "전체 회원 승인",
+				 			  text: "전체 회원을 승인하시겠습니까?",
+				 			  icon: "warning",
+				 			  buttons: true,
+				 			  dangerMode: true,
+				 			})
+				 			.then((willDelete) => {
+				 			  if (willDelete) {
+				 				 location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=2&contestNo="+contestNo+"&date=${date}&email="+email;
+				 			  }
+				 			});
 					})	
 					
 					//선택회원 승인
@@ -253,13 +262,26 @@
 						});
 						var checkBoxCheck = $('.chk').is(":checked");
 						if(!checkBoxCheck){
-							alert("승인할 회원을 선택해주세요.");
+							swal({
+					 			  title: "회원 선택",
+					 			  text: "승인할 회원을 선택해주세요.",
+					 			  icon: "info",
+					 			  buttons: true
+					 			})
 							return;
 						}
-						var checkConfirm = confirm("선택 회원을 승인하시겠습니까?");
-						if(checkConfirm){
-							location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=2&contestNo="+contestNo+"&date=${date}&email="+email;
-						}
+						swal({
+				 			  title: "선택 회원 승인",
+				 			  text: "선택한 회원을 승인하시겠습니까?",
+				 			  icon: "warning",
+				 			  buttons: true,
+				 			  dangerMode: true,
+				 			})
+				 			.then((willDelete) => {
+				 			  if (willDelete) {
+				 				 location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=2&contestNo="+contestNo+"&date=${date}&email="+email;
+				 			  }
+				 			});
 					})	
 					
 					//선택회원 반려
@@ -274,24 +296,31 @@
 						});
 						var checkBoxCheck = $('.chk').is(":checked");
 						if(!checkBoxCheck){
-							alert("반려할 회원을 선택해주세요.");
+							swal({
+					 			  title: "회원 반려",
+					 			  text: "반려할 회원을 선택해주세요.",
+					 			  icon: "info",
+					 			  buttons: true
+					 			})
 							return;
 						}
-						var checkConfirm = confirm("선택 회원을 반려하시겠습니까?");
-						if(checkConfirm){
-							location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=3&contestNo="+contestNo+"&date=${date}";
-						}
-						
-						
-						
+						swal({
+				 			  title: "선택 회원 반려",
+				 			  text: "선택한 회원을 반려하시겠습니까?",
+				 			  icon: "warning",
+				 			  buttons: true,
+				 			  dangerMode: true,
+				 			})
+				 			.then((willDelete) => {
+				 			  if (willDelete) {
+				 				 location.href="/MemberEnrollContest.do?memberId="+memberId.join("/")+"&status=3&contestNo="+contestNo+"&date=${date}";
+				 			  }
+				 			});
 					})	
 					
 				}
 			}
 		});
-		
-		
-		
 	});
 	</script>
 </body>

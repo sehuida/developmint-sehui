@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>DeveloMint 전체 회원 조회</title>
 <link rel="shortcut icon" type="image/x-icon" href="/resources/img/favicon.ico"/>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
 .container {
@@ -210,13 +211,27 @@
 		});
 		var checkBoxCheck = $('.chk').is(":checked");
 		if(!checkBoxCheck){
-			alert("등급을 변경할 회원을 선택해주세요.");
+			swal({
+				  title: "회원 미선택",
+				  text: "등급 변경할 회원을 선택해주세요.",
+				  icon: "warning",
+				  buttons: true,
+				})
 			return;
 		}
-		var checkConfirm = confirm("선택한 회원의 등급을 변경하시겠습니까?");
-		if(checkConfirm){
-			location.href="/chkChangeLevel.do?memberId="+memberId.join("/")+"&level="+level.join("/");	
-		}
+		swal({
+			  title: "회원 등급 변경",
+			  text: "선택한 회원의 등급을 변경하시겠습니까?",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+				  location.href="/chkChangeLevel.do?memberId="+memberId.join("/")+"&level="+level.join("/");
+			  }
+			});
+		
 	 });
 	 
 	 //체크박스 선택시 색바꾸기

@@ -18,6 +18,7 @@
 	}
 	.faq_q{
 		overflow: hidden;
+		cursor: pointer;
 	}
 	.index{
 		display: flex;

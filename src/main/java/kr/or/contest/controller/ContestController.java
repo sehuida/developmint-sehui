@@ -182,12 +182,17 @@ public class ContestController {
 	public String insertContestMember(ContestMember conmem, Model model) {
 		int result = service.insertContestMember(conmem);
 		if(result>0) {
-			model.addAttribute("msg","공모전 신청 완료");	
+			model.addAttribute("title","공모 신청");
+			model.addAttribute("msg","공모신청이 완료되었습니다.");
+			model.addAttribute("icon","success");
+		
 		}else {
-			model.addAttribute("msg","공모전 신청 실패");
+			model.addAttribute("title","처리 실패");
+			model.addAttribute("msg","처리 실패하였습니다. 관리자에게 문의해주세요.");
+			model.addAttribute("icon","error");
 		}
 		model.addAttribute("loc","/contestView.do?contestNo="+conmem.getContestNo());
-		return "common/msg";
+		return "member/swalMsg";
 	}
 	
 	//공모전 전체보기
@@ -219,17 +224,22 @@ public class ContestController {
 		return new Gson().toJson(list);
 	}
 	
-	//공모신청
+	//공모삭제
 		@RequestMapping(value="/deleteContest.do")
 		public String deleteContest(int contestNo, Model model) {
 			int result = service.deleteContest(contestNo);
 			if(result>0) {
-				model.addAttribute("msg","공모전 삭제 완료");	
+				model.addAttribute("title","공모 삭제");
+				model.addAttribute("msg","공모전이 삭제되었습니다.");
+				model.addAttribute("icon","success");
+			
 			}else {
-				model.addAttribute("msg","공모전 삭제 실패");
+				model.addAttribute("title","처리 실패");
+				model.addAttribute("msg","처리 실패하였습니다. 관리자에게 문의해주세요.");
+				model.addAttribute("icon","error");
 			}
 			model.addAttribute("loc","/contestMain.do");
-			return "common/msg";
+			return "member/swalMsg";
 		}
 	
 	//공모전 중복 체크
