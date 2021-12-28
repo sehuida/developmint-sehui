@@ -13,6 +13,7 @@ public class GosuRequestProjectSub {
 	private String gosuId;
 	private String requestWriterImg;
 	private String gosuImg;
-	
+
+	private int reviewNum;//1일경우 리뷰 없음 ,2일 경우 리뷰 있음
 	
 }

@@ -928,7 +928,12 @@
 				data : {memberId:memberId, contestNo:contestNo},
 				success : function(data){
 					if(data > 0){
-						alert("이미 지원하신 공모전 입니다");
+						swal({
+				 			  title: "중복 지원",
+				 			  text: "이미 지원하신 공모전 입니다",
+				 			  icon: "warning",
+				 			  buttons: true,
+				 			})
 						return false;
 					}else if(data == 0){
 						$(".insertBtn").submit();

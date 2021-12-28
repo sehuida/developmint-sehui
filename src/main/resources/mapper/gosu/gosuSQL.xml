@@ -143,7 +143,8 @@
 		m.filepath as gosuImg,
 		g.ggosu_no as ggsouNo
 		from member m
-		LEFT JOIN gosu g
+		LEFT
+		JOIN gosu g
 		ON m.member_no = g.gosu_no
 		where
 		m.member_type=2 order by 1
@@ -194,18 +195,20 @@
 		gosu_feedback where FEEDBACK_NO = #{fbNo}
 	</select>
 	<select id="selectGosuFeedbackList" resultType="gf">
-		select
-		FEEDBACK_NO as feedbackNo,
-		GGOSU_NO as ggosuNo,
-		FEEDBACK_CONTENT as
+		select DISTINCT
+		f.FEEDBACK_NO as feedbackNo,
+		f.GGOSU_NO as ggosuNo,
+		f.FEEDBACK_CONTENT as
 		feedbackContent,
-		FEEDBACK_TITLE as feedbackTitle,
-		FEEDBACK_DATE as
+		f.FEEDBACK_TITLE as feedbackTitle,
+		f.FEEDBACK_DATE as
 		feedbackDate,
-		FEEDBACK_NUM as feedbackNum,
-		MEMBER_ID as memberId
-		from
-		gosu_feedback where MEMBER_ID = #{memberId}
+		f.FEEDBACK_NUM as feedbackNum,
+		f.MEMBER_ID as memberId,
+		nvl2(gr.REVIEW_CONTENT,'2','1') as reviewNum
+		from gosu_feedback f
+		left join gosu_review gr
+		on f.ggosu_no = gr.ggosu_no where MEMBER_ID = #{memberId}
 	</select>
 
 	<insert id="insertGosuTalk" parameterType="gt">
@@ -398,7 +401,8 @@
 		memberImg,
 		(select ggosu_no from gosu
 		where gosu_no
-		= pro.member_no) as
+		=
+		pro.member_no) as
 		ggosuNo
 		from(select
 		* from
@@ -447,7 +451,7 @@
 	</select>
 	<select id="selectGosuRequestProjectSubList" resultType="grps"
 		parameterType="_int">
-		select
+		 select DISTINCT
 		(select member_id from member where member_no =
 		request.request_writer_no) AS
 		requestWriterId,
@@ -468,7 +472,8 @@
 		cost.gosu_no) as gosuId,
 		(select filepath
 		from member where member_no =
-		cost.gosu_no) as gosuImg
+		cost.gosu_no) as gosuImg,
+		nvl2(gr.request_REVIEW_CONTENT,'2','1') as reviewNum
 		from
 		gosu_request_project_sub sub
 		LEFT JOIN
@@ -479,6 +484,8 @@
 		gosu_request_COST cost
 		ON
 		sub.cost_no = cost.cost_no
+        LEFT JOIN gosu_request_review gr
+        ON sub.REQUEST_PROJECT_SUB_NO  =gr.REQUEST_PROJECT_SUB_NO 
 		WHERE
 		request.request_writer_no =#{memberNo}
 
@@ -1239,15 +1246,17 @@
 	</insert>
 	<!-- 공모전 댓글 신고하기 -->
 	<insert id="reportContestComment" parameterType="rp">
-		insert into report values(report_seq.nextval, #{reporterId},
-		#{reportReason}, #{reportEtc}, #{commentNo}, #{commentId},
+		insert into
+		report values(report_seq.nextval, #{reporterId},
+		#{reportReason},
+		#{reportEtc}, #{commentNo}, #{commentId},
 		to_char(sysdate,'yyyy-mm-dd'), #{reportStatus}, #{commentContent},null
 		)
 	</insert>
 
 	<select id="selectGosuNoticeListSelf" parameterType="string"
 		resultType="gn">
-		select 
+		select
 		gnotice_no as gnoticeNo,
 		member_id as writeId,
 		gnotice_title as gnoticeTitle,
@@ -1255,9 +1264,11 @@
 		gnotice_photo as gnoticePhoto,
 		gnotice_date as gnoticeDate
 		from gosu_notice where member_id IN
-		(select m.member_id
+		(select
+		m.member_id
 		from gosu gosu
 		left join member m
-		on gosu.gosu_no= m.member_no) and member_id = #{memberId}
+		on gosu.gosu_no=
+		m.member_no) and member_id = #{memberId}
 	</select>
 </mapper>

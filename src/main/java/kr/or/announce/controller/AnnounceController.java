@@ -141,7 +141,7 @@ public class AnnounceController {
 		return "common/msg";
 	}
 	
-	@RequestMapping(value="//noAnnounce.do")
+	@RequestMapping(value="/noAnnounce.do")
 	public String okAnnounce(int memberNo, int appNo, int announceNo, Model model) {
 		int result = service.noAnnounce(memberNo, appNo);
 		if(result>0) {

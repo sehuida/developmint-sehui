@@ -27,7 +27,6 @@ public class JobSearchService {
 			map.put("start", start);
 			map.put("end", end);
 			ArrayList<Announce> list = dao.selectJobSearchList(map);
-			
 			int totalCount = dao.selectTotalCount();
 			int totalPage = 0;
 			if(totalCount % numPerPage == 0) {

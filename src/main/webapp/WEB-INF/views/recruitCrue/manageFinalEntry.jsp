@@ -45,10 +45,12 @@
 			history.back();
 		});
         
-        $("#send").click(function () {
+        $(".send").click(function () {
 			var sender = $(this).next().val();
 			var receiver = $(this).next().next().val();
 			var dmContent = $(this).next().next().next().val();
+			var loc = $(this).prev().val();
+
 			$.ajax({
 				url : "/sendDm.do",
 				data : {receiver:receiver,dmContent:dmContent,sender:sender},
@@ -60,13 +62,14 @@
 							  icon: "success",
 							  button: "닫기",
 							}).then(function(){
-								location.reload();							
+								window.location = loc;						
 							});
 					}else{
 						console.log("실패");
 					}
 				}
 			});
+
 		});
         
     });
@@ -171,7 +174,7 @@
 	                            </a>
 	                        </div>
 	                        <div class="btnBox">
-	                            <a href="/selectFinalTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}&viewValue=${viewValue}&pageTransValue=${availableNum }"><button type="button" class="btn btn-primary" id="send">최종선발</button></a>
+								<input type="hidden" value="/selectFinalTeamMember.do?entryNo=${el.entryNo }&memberNo=${el.memberNo}&projectNo=${el.projectNo}&viewValue=${viewValue}&pageTransValue=${availableNum }"><button type="button" class="btn btn-primary send" >최종선발</button>
 	                            <input type="hidden" id="sender" value="${sessionScope.m.memberId }">
 	                            <input type="hidden" id="receiver" value="${el.memberId }">
 	                            <input type="hidden" id="dmContent" value="지원타이틀 : ${el.ambition} - 최종선발 되셨습니다, 지원하신 프로젝트가 모집마감되면 프로젝트가 시작되오니 참고해주시기 바랍니다.">

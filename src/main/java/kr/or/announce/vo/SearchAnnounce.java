@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class SearchAnnounce {
+	private int dDay;
+	private int count;
 	private int announceNo;
 	private int memberNo;
 	private int companyNo;
@@ -29,5 +31,13 @@ public class SearchAnnounce {
 	
 	public String getAnnounceContentBr() {
 		return announceContent.replaceAll("\r\n", "<br>");
+	}
+
+	public int getdDay() {
+		return dDay;
+	}
+
+	public void setdDay(int dDay) {
+		this.dDay = dDay;
 	}
 }

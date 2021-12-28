@@ -104,7 +104,9 @@
 					</c:choose>			
 				</div>
 				<div>
-					<a href="#" data-bs-toggle="modal" data-bs-target="#reportComment" class="reply">쪽지보내기</a><img style="width: 35px; height: 35px;" src="/resources/img/shareBoard/paper-plane.png">
+					<c:if test="${not empty sessionScope.m }">
+						<a href="#" data-bs-toggle="modal" data-bs-target="#reportComment" class="reply">쪽지보내기</a><img style="width: 35px; height: 35px;" src="/resources/img/shareBoard/paper-plane.png">					
+					</c:if>
 					<!-- 쪽지보내기 modal -->
 					<div class="modal fade" id="reportComment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					  <div class="modal-dialog  modal-dialog-centered">
@@ -120,7 +122,7 @@
 							      		<span class="text-danger text_cnt" >(0 / 100)</span>
 							      	</div>						      	
 							      	<div>
-							      		<button type="button" class="btn btn-secondary send" style="width: 100px;">전송</button>
+							      		<button type="button" class="btn btn-secondary" id="send"style="width: 100px;">전송</button>
 							        	<button type="button" class="btn btn-primary " id="cancel" style="width: 100px;" data-bs-dismiss="modal">취소</button>					        	
 									</div>
 						      	</div>
