@@ -157,7 +157,28 @@
 		$("#noNormalMember").click(function(){
 			alert("일반회원만 지원이 가능합니다.");
 		});
+		
 	});
+	
+		$(".companyEnrollBtn").click(function(){
+			/* 쪽지 */
+			var receiver = $(".receiver").eq(index).val();
+			var dmContent = $(".dmContent").eq(index).val();
+			var sender = $(".sender").eq(index).val();
+			console.log(receiver);
+			console.log(dmContent);
+			console.log(sender);
+			$.ajax({
+				url : "/sendDm.do",
+				data : {receiver:receiver,dmContent:dmContent,sender:sender},
+				success : function(data) {
+					if(data == 1){
+						dmCount(receiver);
+					}
+				}
+			});
+			
+		});
 </script>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="contain">
@@ -184,7 +205,6 @@
 						<c:if test="${ap eq 1 }">
 							<button class="btn btn-outline-info">지원완료</button>
 						</c:if>
-						<!-- 모달버튼// 사용법 자세히모름 수현누나 물어보기 -->
 						<!-- modal내용 등록 -->
 						<div class="modal fade" id="contestMember" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog  modal-dialog-centered">
@@ -268,13 +288,18 @@
 												<p class="desc" style="font-size:12px; color: #999999;"> 제출서류는 90일까지 지원기업에게 제공됩니다.<br>제출에 동의할 경우에만 [입사지원] 버튼을 클릭해 주세요.<br> 동의하지 않을 경우 입사지원이 불가능합니다.</p>
 												<p class="desc" style="font-size:12px; color: #999999;"> 만료(응시 시작일로부터 3년)된 인 ∙ 적성검사 포함 시 입사지원이 불가능하며, 입사지원 후 제출된 인 ∙ 적성검사는 만료 여부와 관계없이 입사지원서 열람 기준 내 인사담당자가 확인할 수 있습니다.</p>
 												<div style="text-align: right; ">
-													<button type="submit" class="btn btn-primary contesteEnrollBtn" style="width: 100px;">지원하기</button>
+													<button type="submit" class="btn btn-primary companyEnrollBtn" style="width: 100px;">지원하기</button>
 													<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px;">취소</button>
 												</div>
 												<input type="hidden" name="announceNo" value="${a.announceNo }">
 												<input type="hidden" name="resumeNo" value="${r.resumeNo }">
 												<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 												<input type="hidden" name="status" value="1">
+												
+												 <!-- 쪽지 -->
+												 <input type="hidden" class="receiver" value="${a.memberId }">
+												 <input type="hidden" class="sender" value="admin">
+												 <input type="hidden" class="dmContent" value="[구인구직] 기업에 입사지원한 이력서가 있습니다. 지원신청 회원목록에서 입사신청 내역을 확인하세요.">
 											</form>
 										</div>
 									</div>

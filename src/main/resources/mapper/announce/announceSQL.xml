@@ -82,6 +82,7 @@
 			announce_no as announceNo,
 			member_no as memberNo,
 			company_no as companyNo,
+			member_id as memberId,
 			company_name as companyName,
 			a.category,
 			fields,
@@ -102,9 +103,10 @@
 			c.ceo,
 			c.address,
 			c.content,
-			filepath
+			c.filepath
 		from announcement a
 		join company c using(company_name)
+		join member using(member_no)
 		where announce_no = #{announceNo}
 	</select>
 	
