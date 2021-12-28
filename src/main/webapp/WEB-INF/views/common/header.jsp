@@ -23,7 +23,7 @@
     align-items: center;
 	}
 	.nav-item{
-		margin: auto 12px;
+		
 	}
 	.navigation {
   width: 100%;
@@ -43,6 +43,7 @@
 .menu__item {
   display: inline-block;
   white-space: nowrap;
+  margin: auto 12px;
 }
 @media screen and (max-width: 480px) {
   .menu__item:nth-child(n+3) {
