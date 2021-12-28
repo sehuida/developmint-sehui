@@ -69,6 +69,15 @@ public class MemberController {
 		}
 		return "common/main";
 	}
+	@RequestMapping(value="/kakaoJoin.do")
+	public String kakaoJoin(Member member,HttpSession session) {
+		int result = service.kakaoInsertMember(member);
+		if(result>0) {
+			Member m = service.selectOneMember(member);
+			session.setAttribute("m", m);
+		}
+		return "common/main";
+	}
 	
 	@RequestMapping(value="/login.do")
 	public String loginFrm(Member member,HttpSession session,Model model) {

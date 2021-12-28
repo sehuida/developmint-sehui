@@ -17,4 +17,6 @@ public class Member {
 	private String comNo;
 	//사업자번호용
 	private String businessNo;
+	//카카오회원확인용
+	private int kakao;
 }
