@@ -345,6 +345,9 @@
 		    }
 		});
 		
+		var ta = $("#ta").val();
+		$(".announContentTextarea").html(ta);
+		
 	});
 </script>
 <body>
@@ -521,6 +524,7 @@
 							파트너가 알아야 할 유의사항(필수 사항, 전문 경험 등)도 함께 작성해 주세요.
 						</p>
 			            <div class="announContent">
+			            	<input type="hidden" id="ta" value="${a.announceContent }">
 			                <textarea cols="120" rows="30" name="announceContent" class="announContentTextarea" value="${a.announceContent }"></textarea>
 			        	</div>  
 			    	</div>
@@ -532,7 +536,7 @@
 						<div class="workform">
 							<b>관련기술</b>
 						</div>
-						<input type="text" class="textInput" id="skills" style="width: 810px; margin-left: 0px;" name="skills" placeholder="추가할 기술명을 입력하세요."><br>
+						<input type="text" class="textInput" id="skills" style="width: 810px; margin-left: 0px;" name="skills" value="${a.skills }"><br>
 						<t style="font-size: 13px; margin-left: 30px; color: rgb(108,108,108);"><!-- 기술명을 입력한 후, 엔터키를 눌러 추가해 주세요. --></t>
 					</div>
 					
@@ -552,7 +556,7 @@
 						<em>급여</em>
 						<br><br>
 						<b>급여</b>
-						<input type="text" class="smallTextInput" name="money" placeholder="급여 입력">
+						<input type="text" class="smallTextInput" name="money" value="${a.money }">
 					</div>
 					
 					<div class="grayBox">
@@ -589,7 +593,7 @@
 								<b>마감일</b>
 							</div>
 							<div class="endDateInput">
-								<input type="date" class="dateInput" id="endDate" name="endDate">				
+								<input type="date" class="dateInput" id="endDate" name="endDate" value="${a.endDate }">				
 							</div>
 						</div>
 					</div>
