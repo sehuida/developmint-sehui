@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class Announce {
 	private int dDay;
+	private int count;
 	private int announceNo;
 	private int memberNo;
 	private int companyNo;
@@ -23,7 +24,6 @@ public class Announce {
 	private int military;
 	private String writeDate;
 	private String career;
-	
 	
 	
 	public String getAnnounceContentBr() {
