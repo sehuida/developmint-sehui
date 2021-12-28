@@ -73,6 +73,7 @@ $(function(){
 			}
 		});
 		
+		/* 쪽지 */
 		var receiver = $(".receiver").eq(index).val();
 		var dmContent = $(".dmContent").eq(index).val();
 		var sender = $(".sender").eq(index).val();
