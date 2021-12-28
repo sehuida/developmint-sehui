@@ -622,7 +622,7 @@ to {
 					보기</a>
 			</div>
 			<div class="g-status-border">
-				<h4 style="margin-top: 40px;">신청한 내역</h4>
+				<h4 style="margin-top: 40px;">신청한 <span class="text-success">피드백</span> 내역</h4>
 				<div class="g-statusContent">
 					<c:choose>
 						<c:when test="${not empty gosuTalkList }">
@@ -660,7 +660,7 @@ to {
 				</div>
 
 				<c:if test="${sessionScope.m.memberType eq 2}">
-					<h4>신청받은 내역</h4>
+					<h4>신청받은 <span class="text-success">피드백</span> 내역</h4>
 					<div class="g-statusContent">
 						<c:choose>
 							<c:when test="${not empty gosuTalkList2 }">

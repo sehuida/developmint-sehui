@@ -806,5 +806,11 @@ public class GosuService {
 	}
 
 
+	public int selectMyGgosuNo(int memberNo) {
+		int ggosuNo= dao.selectMyGgosuNo(memberNo);
+		return ggosuNo;
+	}
+
+
 
 }
