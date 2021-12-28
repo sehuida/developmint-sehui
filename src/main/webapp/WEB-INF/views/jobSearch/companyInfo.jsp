@@ -625,7 +625,12 @@ b {
 		<hr>
 		<p>회사에 대한 댓글을 남겨주세요!</p> 
 		
-		
+		<div style="margin-bottom: 20px; margin-top: 20px;">
+				<span style="font-weight: 900;">댓글을 작성할 때는 타인을 존중하고 
+				<a id="community-guide">커뮤니티 가이드</a>
+				를 준수해야 합니다.
+				</span>
+			</div>
 		<%--댓글 입력 창(로그인했을 때 띄우기) 댓글 등록할 때 SQL에서 등록일 to_char(SYSDATE,'MM-DD HH24:MI') 이걸로 넣어주세용--%>
 		<c:if test="${not empty sessionScope.m.memberId and sessionScope.m.comNo eq com.companyNo }">
 			<form action="/insertCompanyComment.do" method="post">
@@ -660,12 +665,7 @@ b {
 			<%--댓글이 있는경우 --%>
 			
 			<c:when test="${not empty commentList }">
-			<div style="margin-bottom: 20px; margin-top: 20px;">
-				<span style="font-weight: 900;">댓글을 작성할 때는 타인을 존중하고 
-				<a id="community-guide">커뮤니티 가이드</a>
-				를 준수해야 합니다.
-				</span>
-			</div>
+			
 				<c:forEach items="${commentList }" var="cl" varStatus="i">
 					<c:if test="${cl.commentType eq 1 }">
 						<div class=comentListBox>

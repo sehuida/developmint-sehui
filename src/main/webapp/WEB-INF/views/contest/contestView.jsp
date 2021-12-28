@@ -345,7 +345,7 @@
 		</div>
 		<%---------------------------------------------------------------------------- --%>
 		<%--공모 요강 --%>
-		<div class="contestContentBox">
+		<div class="contestContentBox" style="margin-bottom: 20px;">
 			<p><i class="bi bi-check2" style="color:#4ECDC4;"></i> 공모요강</p>
 			<div id="conBox">
 				<p>${list.contest.contestContentBr }</p>
@@ -398,6 +398,10 @@
 				</c:choose>
 			</div>
 		</div>
+		<span style="font-weight: 900;">댓글을 작성할 때는 타인을 존중하고 
+			<a id="community-guide">커뮤니티 가이드</a>
+			를 준수해야 합니다.
+		</span>
 		<%---------------------------------------------------------------------------- --%>
 		<%--댓글창 --%>
 		
@@ -436,10 +440,7 @@
 			
 			<c:when test="${not empty list.commentList }">
 			<div style="margin-bottom: 20px; margin-top: 20px;">
-				<span style="font-weight: 900;">댓글을 작성할 때는 타인을 존중하고 
-				<a id="community-guide">커뮤니티 가이드</a>
-				를 준수해야 합니다.
-				</span>
+				
 			</div>
 				<c:forEach items="${list.commentList }" var="cl" varStatus="i">
 					<c:if test="${cl.commentType eq 1 }">

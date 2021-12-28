@@ -177,8 +177,13 @@
 						<button class="loginBtn" id="noNormalMember">지원하기</button>
 					</c:when>
 					<c:otherwise>
-					
-						<button data-bs-toggle="modal" data-bs-target="#contestMember">지원하기</button>
+						
+						<c:if test="${ap eq 0 }">
+							<button data-bs-toggle="modal" data-bs-target="#contestMember">지원하기</button>						
+						</c:if>
+						<c:if test="${ap eq 1 }">
+							<button class="btn btn-outline-info">지원완료</button>
+						</c:if>
 						<!-- 모달버튼// 사용법 자세히모름 수현누나 물어보기 -->
 						<!-- modal내용 등록 -->
 						<div class="modal fade" id="contestMember" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -460,7 +465,10 @@
 			<div class="infoDiv">
 				<em><span style="color: rgb(78, 205, 196); font-size: 18px;">●</span> 접수기간 및 방법</em>	
 				<div class="infoContent">
-					<p><p>AnnounceView에 마감날짜 추가해서 가져와야할듯 겁나기찬네</p></p>
+					<p style="margin-bottom: 13px;">ㆍ 접수기간 : <strong>${a.endDate }</strong> 까지</p>
+					<p style="margin-bottom: 13px;">ㆍ 접수방법	: 디벨로민트 입사지원</p>
+					<p style="margin-bottom: 13px;">ㆍ 이력서양식	:	디벨로민트 온라인 이력서</p>
+					
 				</div>
 			</div>
 			
