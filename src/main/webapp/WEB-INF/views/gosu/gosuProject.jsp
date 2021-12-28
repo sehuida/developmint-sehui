@@ -38,7 +38,6 @@ input:focus, textarea:focus {
 	display: flex;
 	flex-direction: column;
 	padding: 30px;
-	margin-top: 50px;
 	margin-bottom: 50px;
 }
 
@@ -259,8 +258,7 @@ input:focus, textarea:focus {
 			<div style="text-align: right;">
 				<button type="button" onclick="gosuRequestAjax(${grpsOne.costNo});"
 					class="btn btn-secondary upbtn"
-					style="width: 100px; margin-bottom: 20px;">요청서
-				</button>
+					style="width: 100px; margin-bottom: 20px;">요청서</button>
 			</div>
 
 			<c:choose>
@@ -281,6 +279,9 @@ input:focus, textarea:focus {
 							<button type="button" id="widthBtn" class="btn btn-info upbtn"
 								style="width: 100px; box-shadow: 0px 0 15px 0px rgb(0 0 0/ 15%);">전체보기</button>
 						</div>
+					</div>
+					<div style="margin-top: 50px; margin-bottom: 10px;">
+						<span style="color: gray;">* 창을 클릭하면 해당 창의 크기를 키울 수 있어요.</span>
 					</div>
 					<div class="talk-wrap"
 						style="box-shadow: 0px 0 15px 0px rgb(0 0 0/ 15%);">
@@ -542,7 +543,8 @@ input:focus, textarea:focus {
 				</div>
 			</div>
 		</div>
-		<input type="hidden" value="${grpsOne.requestWriterId }" id="grpsRequestWriterId">
+		<input type="hidden" value="${grpsOne.requestWriterId }"
+			id="grpsRequestWriterId">
 	</div>
 
 	<script src="/resources/summernote/summernote-lite.js"></script>

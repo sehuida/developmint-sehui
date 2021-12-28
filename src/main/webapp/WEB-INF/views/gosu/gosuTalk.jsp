@@ -36,7 +36,6 @@ input:focus, textarea:focus {
 	display: flex;
 	flex-direction: column;
 	padding: 30px;
-	margin-top: 50px;
 	margin-bottom: 50px;
 	background-color: rgb(250, 250, 250);
 	box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);
@@ -206,7 +205,7 @@ input:focus, textarea:focus {
 		</h3>
 
 
-		<div class="g-feedback" >
+		<div class="g-feedback" style="margin-bottom: 30px;">
 
 			<h3>Q. &nbsp;${gfOne.feedbackTitle }</h3>
 			<span>${gfOne.feedbackContentBr }</span><br>
@@ -237,7 +236,11 @@ input:focus, textarea:focus {
 							style="width: 100px; font-weight: 900;box-shadow:  0px 0 15px 0px rgb(0 0 0 / 15%);">전체보기</button>
 					</div>
 				</div>
-				<div class="talk-wrap">
+				<div style="margin-top: 50px;margin-bottom: 10px;">
+						<span style="color: gray;
+	">* 창을 클릭하면 해당 창의 크기를 키울 수 있어요.</span></div>
+				<div class="talk-wrap" >
+				
 					<c:forEach items="${gtList }" var="gtl" varStatus="i">
 						<c:choose>
 							<c:when test="${gtl.writer eq sessionScope.m.memberId }">
