@@ -73,7 +73,7 @@
 							      	</div>						      	
 							      	<div>
 							      		<button type="button" class="btn btn-secondary send" style="width: 100px;">답장</button>
-							        	<button type="button" class="btn btn-primary " id="cancel" style="width: 100px;" data-bs-dismiss="modal">취소</button>					        	
+							        	<button type="button" class="btn btn-primary cancel" style="width: 100px;" data-bs-dismiss="modal">취소</button>					        	
 									</div>
 						      	</div>
 								<input type="hidden" id="receiver" value="${dm.sender }">
@@ -142,6 +142,12 @@
 			if(spVal==1){
 				$(".sendPosts tr:first").after("<tr class='table-light'><td colspan='6' style='height:100px; font-size:20px;'>받은 쪽지가 없습니다!</td></tr>");
 			}
+			
+			$(".cancel").click(function(){
+				var index = $(".cancel").index(this);
+				$('.text_cnt').eq(index).html("(0 / 100)");
+				location.reload();
+			});
 		});
 		
 		$(".send").click(function () {
@@ -187,10 +193,6 @@
 					}
 				}
 			});
-		});
-		$("#cancel").click(function(){
-			$('.text_cnt').html("(0 / 100)");
-			location.reload();
 		});
 		//메시지 삭제하기
 		function deleteMsg(obj,dmNo){
