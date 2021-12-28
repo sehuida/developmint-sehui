@@ -86,14 +86,13 @@
 							    	<select class="form-select" id="category" name="category" required>
 								      	<option value="">문의유형 선택</option>
 										<option value="7">로그인관련</option>
-										<option value="8">계정관련</option>
-										<option value="9">결제관련</option>
-										<option value="10">환불관련</option>
-										<option value="11">공모전관련</option>
-										<option value="12">구인잡관련</option>
-										<option value="13">커뮤니티관련</option>
-										<option value="14">고수관련</option>
-										<option value="15">팀프로젝트 관련</option>
+										<option value="8">고수관련</option>
+										<option value="9">환불관련</option>
+										<option value="10">공모전관련</option>
+										<option value="11">구인잡관련</option>
+										<option value="12">커뮤니티관련</option>
+										<option value="13">이용안내</option>
+										<option value="14">팀프로젝트 관련</option>
 										<option value="40">기타 문의</option>
 										<option value="22">신고</option>
 										<option value="21">기능/작동 오류</option>

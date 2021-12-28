@@ -16,27 +16,24 @@
 						로그인관련
 					</c:when>
 					<c:when test="${category eq 8}">
-						계정관련
+						고수안내
 					</c:when>
 					<c:when test="${category eq 9}">
-						결제관련
-					</c:when>
-					<c:when test="${category eq 10}">
 						환불관련
 					</c:when>
-					<c:when test="${category eq 11}">
+					<c:when test="${category eq 10}">
 						공모전관련
 					</c:when>
-					<c:when test="${category eq 12}">
+					<c:when test="${category eq 11}">
 						구인잡관련
 					</c:when>
-					<c:when test="${category eq 13}">
+					<c:when test="${category eq 12}">
 						커뮤니티관련
 					</c:when>
-					<c:when test="${category eq 14}">
-						고수관련
+					<c:when test="${category eq 13}">
+						이용안내
 					</c:when>
-					<c:when test="${category eq 15}">
+					<c:when test="${category eq 14}">
 						팀프로젝트관련
 					</c:when>
 					<c:when test="${category eq 40}">
