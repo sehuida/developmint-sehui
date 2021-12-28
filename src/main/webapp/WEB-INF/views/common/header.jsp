@@ -29,7 +29,7 @@
   width: 100%;
   /* border-bottom: 3px solid #ccd7d7; */
   font-family: "Pathway Gothic One", sans-serif;
-  font-size: 22px;
+  /* font-size: 22px; */
 }
 
 .menu {
