@@ -424,7 +424,7 @@
   </delete>
   
   <update id="updateStatus" parameterType="String">
-  		update project set project_status = 2 where recruit_end_date like #{today}
+  		update project set project_status = 2 where project_status = 1 and recruit_end_date like #{today}
   </update>
   
   <insert id="insertComment" parameterType="map">
