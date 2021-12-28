@@ -229,7 +229,7 @@
 												          <span aria-hidden="true"></span>
 												        </button>
 												      </div>
-												    	<form action="/updateCounsel.do" method="post">
+												    	<form action="/updateCounsel.do" method="post" id="updateCounsel">
 											      		<div class="modal-body">
 															<p style="font-size: 25px; font-weight: bold">답변보내기</p>
 															<p style="font-size: 22px;">${q.type } > ${q.qnaTitle }</p>
@@ -257,10 +257,17 @@
 																</c:otherwise>
 															</c:choose>
 												      	</div>
-													      <div class="modal-footer">
-													        <button type="submit" class="btn btn-primary btn_yes">작성하기</button>
-													        <button type="button" class="btn btn-secondary btn_no" data-bs-dismiss="modal">취소하기</button>
-													      </div>
+												      	<div class="modal-footer">
+												       		<button type="button" class="btn btn-primary btn_yes">작성하기</button>
+												        	<button type="button" class="btn btn-secondary btn_no" data-bs-dismiss="modal">취소하기</button>
+												     	</div>
+												     	<c:if test="${type eq 1}">
+													     	<div style="display: none">
+																<input type="hidden" class="receiver" value="${q.memberId }">
+																<input type="hidden" class="sender" value="admin">
+																<input type="hidden" class="dmContent" value="[알림] 문의하신 1:1 Q&A에 대한 답변이 되었습니다. 답변을 확인하세요.">
+															</div>
+												     	</c:if>
 														</form>
 												    </div>
 												  </div>
@@ -370,6 +377,31 @@
 				}
 			}); 
 		}
+		
+		$(".btn_yes").click(function(){
+			if(${type eq 1}){
+				var index = $(".reportBtn").index(this);
+				var receiver = $(".receiver").eq(index).val();
+				var dmContent = $(".dmContent").eq(index).val();
+				var sender = $(".sender").eq(index).val();
+				
+				console.log(receiver);
+				console.log(dmContent);
+				console.log(sender);
+				
+				
+				 $.ajax({
+						url : "/sendDm.do",
+						data : {receiver:receiver,dmContent:dmContent,sender:sender},
+						success : function(data) {
+							if(data == 1){
+								dmCount(receiver);
+							}
+						}
+				}); 
+			}
+			$("#updateCounsel").submit();
+		})
 	</script>
 </body>
 </html>
