@@ -390,18 +390,10 @@ public class ProjectTeamController {
 		public String insertApplyProjectFrm(int memberNo, Model model, int projectNo, int writeReviewCheck) {
 			ArrayList<DevelopLanguage> dlList = service.selectAllDevelopLang();
 			if(memberNo > 0) {
-				if(writeReviewCheck > 0) {
-					model.addAttribute("title", "후기 미작성 회원 지원불가");
-					model.addAttribute("msg", "이전 완료한 프로젝트 후기를 작성해야 지원이 가능합니다.");
-					model.addAttribute("loc","/selectOneNotice.do?projectNo="+projectNo+"&memberNo="+memberNo);
-					model.addAttribute("icon", "warning");
-					return "member/swalMsg";
-				} else {
-					model.addAttribute("memberNo", memberNo);
-					model.addAttribute("dlList", dlList);
-					model.addAttribute("projectNo", projectNo);
-					return "recruitCrue/applyTeam_writeForm";
-				}
+				model.addAttribute("memberNo", memberNo);
+				model.addAttribute("dlList", dlList);
+				model.addAttribute("projectNo", projectNo);
+				return "recruitCrue/applyTeam_writeForm";
 			} else {
 				model.addAttribute("title", "비회원 서비스 이용 불가");
 				model.addAttribute("msg", "로그인 후 이용이 가능합니다.");
@@ -605,19 +597,18 @@ public class ProjectTeamController {
 		}
 	  
 	  @RequestMapping(value="/updateApplyForm.do") 
-	  public String updateApplyForm(HttpServletRequest request, Model model, ProjectEntry pe, int memberNo, String[] chk, int projectNo, int entryNo) { 
+	  public String updateApplyForm(HttpServletRequest request, Model model, ProjectEntry pe, String[] chk, int projectNo, int entryNo, int sessionMemberNo) { 
 		  ArrayList<String> langList = new ArrayList<String>(Arrays.asList(chk));
-	  
-		  int result = service.updateApplyForm(pe, memberNo, langList, projectNo); 
+		  int result = service.updateApplyForm(pe, langList, projectNo); 
 		  if(result > 0) { 
 			  model.addAttribute("title", "수정 성공!");
 			  model.addAttribute("msg", "수정 완료되었습니다.");
-			  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+projectNo+"&memberNo="+memberNo+"&entryNo="+entryNo);
+			  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+projectNo+"&memberNo="+sessionMemberNo+"&entryNo="+entryNo);
 			  model.addAttribute("icon", "success");
 		  } else {
 			  model.addAttribute("title", "수정 실패");
 			  model.addAttribute("msg", "수정 실패하였습니다.");
-			  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+projectNo+"&memberNo="+memberNo+"&entryNo="+entryNo);
+			  model.addAttribute("loc","/selectOneApplicant.do?projectNo="+projectNo+"&memberNo="+sessionMemberNo+"&entryNo="+entryNo);
 			  model.addAttribute("icon", "warning");
 		  }
 		  return "member/swalMsg"; 
@@ -693,20 +684,6 @@ public class ProjectTeamController {
 	  
 	  @RequestMapping(value="/endProject.do")
 	  public String endProject(Model model, Integer[] memberNo, Integer[] teamMemberNo, Integer[] reviewPoint, String[] reviewContent, int backMemberNo, int backProjectNo, String sessionMemberId, String projectReader) {
-		  
-		  for(int i = 0; i < teamMemberNo.length; i++) {
-			  System.out.println("팀넘버 :"+teamMemberNo[i]);
-		  }
-		  for(int i = 0; i < reviewPoint.length; i++) {
-			  System.out.println("점수 :"+reviewPoint[i]);
-		  }
-		  for(int i = 0; i < reviewContent.length; i++) {
-			  System.out.println("리뷰글 :"+reviewContent[i]);
-		  }
-		  for(int i = 0; i < memberNo.length; i++) {
-			  System.out.println("멤버번호 :"+memberNo[i]);
-		  }
-		  
 		  int result = 0;
 		  ArrayList<ProjectReview> reviewlist = new ArrayList<ProjectReview>();
 		  for(int i=0;i<teamMemberNo.length;i++) {

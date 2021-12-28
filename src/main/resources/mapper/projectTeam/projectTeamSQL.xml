@@ -386,7 +386,7 @@
             (select count(*) from project_entry where project_no=#{projectNo} and member_no=#{memberNo}) as myApplyValue,
             (select count(*) from project_review where project_no in
             	((select pp.project_no from project pp where pp.project_status = 3 and pp.project_no in ((select pm.project_no from project_team_member pm where pm.member_no=#{memberNo})))) 
-            and review_writer = null) as writeReviewCheck
+            and not review_writer = #{memberNo}) as writeReviewCheck
 	from project p 
 	where project_no = #{projectNo}
   </select>
@@ -725,14 +725,11 @@
   </delete>
   
   <update id="updateApplyData" parameterType="map">
-	  		update project_entry set 
-		  		ambition = #{pe.ambition}, 
-		  		apply_content = #{pe.applyContent}, 
-  			where entryNo = #{pe.entryNo}
+	  		update project_entry set ambition = #{pe.ambition}, apply_content = #{pe.applyContent} where entry_No = #{pe.entryNo}
   </update>
   
   <delete id="deleteApplyLangList" parameterType="map">
-  		delete from use_develop_language where project_no = #{projectNo} and #{pe.memberNo}
+  		delete from use_develop_language where project_no = #{projectNo} and member_no = #{pe.memberNo}
   </delete>
   
    <insert id="insertApplyLangList" parameterType="map">
