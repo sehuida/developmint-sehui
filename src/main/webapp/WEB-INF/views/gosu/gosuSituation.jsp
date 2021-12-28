@@ -31,7 +31,9 @@
 	color: rgb(78, 205, 196);
 	margin-top: 100px;
 	margin-bottom: 100px;
-	font-size: 40px;
+	font-size: 30px;
+	box-shadow: 0px 0 15px 0px rgb(0 0 0 / 15%);
+	padding:20px;
 }
 
 .con1>div>div>div table td {
