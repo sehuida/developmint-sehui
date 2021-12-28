@@ -62,7 +62,7 @@
 								<h2 style="color: gray; font-size: 20px; font-weight: 900; line-height: 100px;">현재 작성된 답변이 없습니다.</h2>
 							</div>
 							<div class="qna_comment text-danger" style="margin: 30px 0 30px 0;">
-								<small>※ 대부분의 질문은 FAQ 통해 답변을 얻으실 가능성이 높습니다. <a href="/faq.do">바로가기</a></small>
+								<small>※ 대부분의 질문은 FAQ 통해 답변을 얻으실 가능성이 높습니다. <a href="/faq.do?category=7">바로가기</a></small>
 							</div>
 						</c:otherwise>
 					</c:choose>

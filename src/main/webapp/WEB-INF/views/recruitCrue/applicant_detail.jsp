@@ -206,7 +206,7 @@
 					<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 					<input type="hidden" name="commentType" value="1">
 					<input type="hidden" name="boardNo" value="${pe.projectNo}">
-					<input type="hidden" name="boardType" value="5">
+					<input type="hidden" name="boardType" value=5>
 				</form>
 			</c:if>
 			<%---------------------------------------------------------------------------- --%>
@@ -327,6 +327,8 @@
 															<input type="hidden" name="commentId" value="${cl.memberId }">
 															<input type="hidden" name="projectNo" value="${pe.projectNo}">
 															<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+															<input type="hidden" name="boardType" value=2>
+															<input type="hidden" name="applicantMemberNo" value="${pe.memberNo}">
 												        </form>
 												      </div>
 													  </div>
@@ -354,7 +356,7 @@
 												<input type="reset" value="취소" class="btn btn-outline-secondary cancelBtn" style="height: 100px; width: 80px; font-weight: bold">
 												<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 												<input type="hidden" name="boardNo" value="${pe.projectNo}">
-												<input type="hidden" name="boardType" value="5">
+												<input type="hidden" name="boardType" value=5>
 												<input type="hidden" name="commentType" value="2">
 												<input type="hidden" name="commentNo" value="${cl.commentNo}">
 												<input type="hidden" name="memberNo" value="${pe.memberNo}">
@@ -468,7 +470,8 @@
 																	<input type="hidden" name="commentId" value="${cl.memberId }">
 																	<input type="hidden" name="projectNo" value="${projectNo}">
 																	<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
-																	<input type="hidden" name="boardType" value="2">
+																	<input type="hidden" name="boardType" value=2>
+																	<input type="hidden" name="applicantMemberNo" value="${pe.memberNo}">
 													        	</form>
 													      	</div>
 														  </div>
