@@ -268,13 +268,13 @@
 	                       	<td>${r.schoolName }</td>
 	                      	<td>
 								<c:if test="${r.major eq 1 }">
-									정보통신공학과
+									전기/전자/정보통신공학
 								</c:if>
 								<c:if test="${r.major eq 2 }">
-									컴퓨터공학과
+									컴퓨터/시스템공학
 								</c:if>
 								<c:if test="${r.major eq 3 }">
-									외 공학계열
+									공학계열
 								</c:if>
 								<c:if test="${r.major eq 0 }">
 									-
@@ -390,7 +390,7 @@
 		</c:if>
 		<div class="selectBtn">
 			<input type="button" onclick="history.go(-1)" class="backBtn" value="돌아가기">
-			<a href="updateResumeFrm.do?ceoResume=${r.ceoResume }"><button class="updateResume">수정하기</button></a>
+			<a href="updateResumeFrm.do?memberNo=${sessionScope.m.memberNo }&ceoResume=1"><button class="updateResume">수정하기</button></a>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
