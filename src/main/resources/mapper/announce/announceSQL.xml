@@ -160,7 +160,7 @@
 			career
 		from announcement a
 		join company c using(company_name)
-		order by 1 desc )r)rr 
+		order by write_date desc )r)rr 
 		where rnum between #{start} and
 		#{end}
 		

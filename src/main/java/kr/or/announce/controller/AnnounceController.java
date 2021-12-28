@@ -44,13 +44,16 @@ public class AnnounceController {
 	@RequestMapping(value="/insertAnnounce.do")
 	public String insertAnnounce(Announce a, int memberNo, Model model) {
 		int result = service.insertAnnounce(a);
-		if(result != 0) {
-			model.addAttribute("msg","구인공고 등록성공");
+		if(result > 0) {
+			model.addAttribute("title","구인공고 등록성공");
+			model.addAttribute("icon","success");
 		} else {
-			model.addAttribute("msg","구인공고 등록실패");			
+			model.addAttribute("title","구인공고 등록실패");			
+			model.addAttribute("icon","fail");
 		}
-		model.addAttribute("loc","/announceManage.do?memberNo="+memberNo);
-		return "common/msg";
+			model.addAttribute("loc","jobSearchList.do?reqPage=1");
+		return "member/swalMsg";
+		
 	}
 	
 	@RequestMapping(value="/applicationStatus.do")
@@ -74,25 +77,29 @@ public class AnnounceController {
 	public String updateAnnounce(Model model, Announce a) {
 		int result = service.updateAnnounce(a);
 		if(result > 0) {
-			model.addAttribute("msg","구인공고 수정완료");
+			model.addAttribute("title","구인공고 수정성공");
+			model.addAttribute("icon","success");
 		} else {
-			model.addAttribute("msg","구인공고 수정실패");
+			model.addAttribute("title","구인공고 수정실패");			
+			model.addAttribute("icon","fail");
 		}
 		model.addAttribute("loc", "/announceManage.do?memberNo="+a.getMemberNo());
-		return "common/msg";
+		return "member/swalMsg";
 		
 	}
 	
 	@RequestMapping(value="/deleteAnnounce.do")
-	public String deleteAnnounce(Announce a, Model model) {
-		int result = service.deleteAnnounce(a.getAnnounceNo());
+	public String deleteAnnounce(int announceNo, Model model) {
+		int result = service.deleteAnnounce(announceNo);
 		if(result > 0) {
-			model.addAttribute("msg","구인공고가 삭제되었습니다.");
+			model.addAttribute("title","구인공고가 삭제되었습니다.");
+			model.addAttribute("icon","success");
 		} else {
-			model.addAttribute("msg","구인공고 삭제 에러");			
+			model.addAttribute("title","구인공고 삭제 에러");	
+			model.addAttribute("icon","fail");
 		}
-		model.addAttribute("loc","/announceManage.do?memberNo="+a.getMemberNo());
-		return "common/msg";
+		model.addAttribute("loc","/announceManage.do?memberNo="+announceNo);
+		return "member/swalMsg";
 	}
 	
 	@RequestMapping(value="/announceView.do")
@@ -134,24 +141,28 @@ public class AnnounceController {
 	public String okAnnounce(AnnounceList al, Model model) {
 		int result = service.okAnnounce(al);
 		if(result>0) {
-			model.addAttribute("msg","합격처리 완료 되었습니다.");
+			model.addAttribute("title","합격처리 완료 되었습니다.");
+			model.addAttribute("icon","success");
 		}else {
-			model.addAttribute("msg","합격처리 실패");
+			model.addAttribute("title","합격처리 실패");
+			model.addAttribute("icon","fail");
 		}
 		model.addAttribute("loc","/applicationStatus.do?announceNo="+al.getAnnounceNo()+"&reqPage=1");
-		return "common/msg";
+		return "member/swalMsg";
 	}
 	
 	@RequestMapping(value="/noAnnounce.do")
 	public String okAnnounce(int memberNo, int appNo, int announceNo, Model model) {
 		int result = service.noAnnounce(memberNo, appNo);
 		if(result>0) {
-			model.addAttribute("msg","탈락처리 완료 되었습니다.");
+			model.addAttribute("title","탈락처리 완료 되었습니다.");
+			model.addAttribute("icon","success");
 		}else {
-			model.addAttribute("msg","탈락처리 실패");
+			model.addAttribute("title","탈락처리 실패");
+			model.addAttribute("icon","fail");
 		}
 		model.addAttribute("loc","/applicationStatus.do?announceNo="+announceNo+"&reqPage=1");
-		return "common/msg";
+		return "member/swalMsg";
 	}
 	
 	
