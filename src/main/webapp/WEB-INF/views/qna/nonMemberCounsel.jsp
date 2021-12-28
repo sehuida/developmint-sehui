@@ -110,8 +110,8 @@
 								<td>
 									<form action="/searchPw.do" method="post" class="searchPw" id="searchPw" >
 										<a href="javascript:void(0);" class="btn btn-outline-dark pwChk" id="pwChk" onclick="pwChkList('${nq.nonQnaNo}','${i.index }');return false;">비밀번호 입력</a>
-										<input value="${nq.nonQnaNo}" type="hidden" name="nonQnaNo"> 
-										<input type="hidden" name="qnaPw" id="qnaPw">
+										<input value="${nq.nonQnaNo}" type="hidden" name="nonQnaNo" class="nonQnaNo"> 
+										<input type="hidden" name="qnaPw" class="qnaPw">
 									</form>
 								</td>
 							</tr>
@@ -193,11 +193,11 @@
 							swal("Oh noes!", "비밀번호를 입력해주세요!", "error");
 							return false;
 						}
-						$("#qnaPw").eq(index).val(qnaPw);
-						//console.log(qnaPw);
-						//console.log($("#qnaPw").eq(index).val());
-						$("#qnaPw").val(qnaPw);
-						$(".searchPw").eq(index).submit();
+						console.log(qnaPw);
+						console.log(no);
+						$(".qnaPw").eq(index).val(qnaPw);
+						console.log($(".qnaPw").eq(index).val());
+						$(".searchPw").eq(index).submit(); 
 					});
 			}
 	</script>
