@@ -352,7 +352,7 @@
 				<%--로그인 됐으면 신청가능 / 로그인 안됐으면 로그인페이지로 이동 --%>
 				<c:choose>
 				<c:when test="${not empty sessionScope.m }">
-					<c:if test="${list.contest.contestDeadline > today }">
+					<c:if test="${list.contest.contestDeadline >= today }">
 					<%--공모 신청 버튼 --%>
 					<div class="clickBtn">
 						<button class="btn btn-primary btn-lg btn-block loginClick" style="margin-top:20px; width: 300px; " data-bs-toggle="modal" data-bs-target="#contestMember">공모 신청</button>
@@ -388,7 +388,7 @@
 					</c:if>
 				</c:when>
 				<c:otherwise>
-					<c:if test="${list.contest.contestDeadline > today }">
+					<c:if test="${list.contest.contestDeadline >= today}">
 						<div class="clickBtn">
 							<a href="/loginFrm.do" class="btn btn-primary btn-lg btn-block" style="margin-top:20px; width: 300px; ">공모 신청</a>
 						</div>

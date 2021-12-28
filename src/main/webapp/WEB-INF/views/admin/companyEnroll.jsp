@@ -174,7 +174,12 @@
 		$(".enrollBtn").click(function(){
 			var index = $(".enrollBtn").index(this);
 			if($('.selectForm option:selected').eq(index).val() == 'no'){
-				alert("회사를 선택해주세요.");
+				swal({
+		 			  title: "회사 선택",
+		 			  text: "인증할 회사를 선택해주세요.",
+		 			  icon: "info",
+		 			  buttons: true
+		 			})
 				return;
 			}
 			swal({
