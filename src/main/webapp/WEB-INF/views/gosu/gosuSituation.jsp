@@ -305,7 +305,7 @@
 			</c:choose>
 	</div>
 	</c:if>
-	<h4>작성한 리뷰</h4>
+	<h4>작성한 피드백 리뷰</h4>
 
 	<c:choose>
 		<c:when test="${not empty grList }">
@@ -346,7 +346,7 @@
 	</c:choose>
 
 	<c:if test="${sessionScope.m.memberType eq 1 }">
-		<h4>작성한 후기</h4>
+		<h4>작성한 개발 요청 후기</h4>
 
 		<c:choose>
 			<c:when test="${not empty grrList }">
