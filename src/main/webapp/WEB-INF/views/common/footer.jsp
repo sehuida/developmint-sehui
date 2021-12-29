@@ -155,7 +155,7 @@
 						<li ><a href="/recruitTeamMember_mainPage.do?reqPage=1" style="color:black;">팀프로젝트 팀원모집</a></li>
 						<li><a href="/gosuMain.do" style="color:black;">'고수'의 노하우</a></li>
 						<li><a href="/shareList.do?reqPage=1&type=1" style="color:black;">개발지식공유</a></li>
-						<li><a href="/jobSearchList.do" style="color:black;">구인구직</a></li>
+						<li><a href="/jobSearchList.do?reqPage=1" style="color:black;">구인구직</a></li>
 						<li><a href="/contestMain.do" style="color:black;">공모전</a></li>
 					</ul>
 					<a href="/"><img src="/resources/img/logo/Develomint_logo.png"></a><br>
