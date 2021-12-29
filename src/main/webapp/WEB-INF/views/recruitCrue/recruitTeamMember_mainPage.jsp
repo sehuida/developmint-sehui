@@ -180,7 +180,7 @@
                             </div>
                             <div id="right_site">
                                 <input type="checkbox" class="navi_checkbox">
-                                <span class="navi_right_font">모집중인 글만 보기</span>
+                                <span class="navi_right_font">모집 중인 글만 보기</span>
                                 <c:if test="${sessionScope.m.memberNo ne null }">
                                 	<a href="/recruitNotice_writeForm.do?memberNo=${m.memberNo }"><button type="button" class="btn btn-success" id="navi_button">글 쓰기</button></a>
                                 </c:if>
@@ -208,18 +208,18 @@
 			                                            <p class="contentText">${pt.RTitle }</p>
 			                                        </div>
 			                                        <div class="dateType">
-			                                            <b>작성일 : </b><span><b>${pt.RStartDate }</b></span>
+			                                            <b class="dataTitleText">작성일 : </b><span class="dateFont"><b>${pt.RStartDate }</b></span>
 			                                        </div>
 			                                    </div>
 			                                    <div class="textFlexBox2">
 			                                        <div></div>
 			                                        <div class="dateType">
-			                                            <b>마감일 : </b><span><b>${pt.REndDate }</b></span>
+			                                            <b class="dataTitleText">마감일 : </b><span class="dateFont"><b>${pt.REndDate }</b></span>
 			                                        </div>
 			                                    </div>
 			                                    <div class="bottomFlexBox">
 			                                        <div class="subImgBox">
-				                                        <c:forEach items="${pdLangList }" var="lI"  varStatus="i">
+				                                        <c:forEach items="${pdLangList}" var="lI"  varStatus="i">
 				                                        	<c:if test="${pt.projectNo eq lI.projectNo }">
 				                                        		<img class="langImg" src="${lI.langImg }">
 				                                           	</c:if>
@@ -257,13 +257,13 @@
 			                                            <p class="contentText" style="text-align: center;">모집마감</p>
 			                                        </div>
 			                                        <div class="dateType">
-			                                            <b>작성일 : </b><span><b>${pt.RStartDate }</b></span>
+			                                            <b class="dataTitleText">작성일 : </b><span class="dateFont"><b>${pt.RStartDate }</b></span>
 			                                        </div>
 			                                    </div>
 			                                    <div class="textFlexBox2">
 			                                        <div></div>
 			                                        <div class="dateType">
-			                                            <b>마감일 : </b><span><b>${pt.REndDate }</b></span>
+			                                            <b class="dataTitleText">마감일 : </b><span class="dateFont"><b>${pt.REndDate }</b></span>
 			                                        </div>
 			                                    </div>
 			                                    <div class="bottomFlexBox">

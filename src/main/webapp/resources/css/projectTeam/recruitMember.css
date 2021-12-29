@@ -68,7 +68,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 1200px;
 }
 
 #left_site{
@@ -76,20 +75,28 @@
     cursor: pointer;
 }
 
+#right_site{
+	margin-right: 45px;
+}
+
+.dateFont{
+	color: black;
+}
+
 .rBox_Leftnavi_right{
     margin-left: 10px;
     opacity: 0.5;
 }
 .rBox_navi_icon{
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     margin-right: 10px;
 }
 
 .navi_left_font{
     position: relative;
     top: 8px;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 900;
 }
 
@@ -175,6 +182,15 @@
 .contentText{
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #609b8a;
+}
+
+.dateType{
+	font-size: 15px;
+}
+
+.dataTitleText{
+	color: #609b8a;
 }
 
 .subImgBox{
@@ -217,6 +233,8 @@
     position: relative;
     top: 5px;
     margin-left: 5px;
+    color: black;
+    font-weight: 900;
 }
 
 

@@ -145,8 +145,8 @@
 				                        </c:choose>
                     				</c:when>
                     				<c:otherwise>
-                    					<a href="updateRecruitFrm.do?memberNo=${pt.projectWriterMemberNo }&projectNo=${pt.projectNo}"><button type="button" class="btn btn-primary" disabled="disabled">수정</button></a>
-				                        <a href="deleteRecruit.do?memberNo=${pt.projectWriterMemberNo }&projectNo=${pt.projectNo}"> <button type="button" class="btn btn-primary" disabled="disabled">삭제</button></a>
+                    					<button type="button" class="btn btn-primary" disabled="disabled">수정</button>
+				                        <button type="button" class="btn btn-primary" disabled="disabled">삭제</button>
 				                        <button type="button" class="btn btn-primary" disabled="disabled">지원자 관리</button>
                     				</c:otherwise>
                     			</c:choose>
