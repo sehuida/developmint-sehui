@@ -21,7 +21,7 @@ public class Gosu {
 	private String gosuImg;
 	private Double reviewAvg;
 	private int reviewCount;
-	
+	//푸쉬테스트
 	//검색필터
 	private String type;
 	private String keyword;
